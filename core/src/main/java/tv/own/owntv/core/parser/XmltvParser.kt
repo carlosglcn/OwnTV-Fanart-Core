@@ -260,6 +260,7 @@ object XmltvParser {
         var inRating = false
         private var lengthMin: Int? = null
         private var episode: String? = null
+        private var imageUrl: String? = null
 
         suspend fun start(parser: XmlPullParser) {
             when (parser.name) {
@@ -267,6 +268,7 @@ object XmltvParser {
                     val list = categories ?: ArrayList<String>(2).also { categories = it }
                     if (list.size < EpgDetails.MAX_CATEGORIES * 2) list.add(readText(parser))
                 }
+                "icon" -> if (imageUrl == null) imageUrl = XmltvDetailRules.imageUrl(parser.getAttributeValue(null, "src"))
                 "date" -> if (year == null) year = XmltvDetailRules.year(readText(parser))
                 "rating" -> if (rating == null) {
                     inRating = true
@@ -288,10 +290,10 @@ object XmltvParser {
         }
 
         fun result(): EpgDetails =
-            if (categories == null && year == null && rating == null && lengthMin == null && episode == null) {
+            if (categories == null && year == null && rating == null && lengthMin == null && episode == null && imageUrl == null) {
                 EpgDetails.NONE
             } else {
-                EpgDetails(categories?.let(XmltvDetailRules::categories), year, rating, lengthMin, episode)
+                EpgDetails(categories?.let(XmltvDetailRules::categories), year, rating, lengthMin, episode, imageUrl)
             }
     }
 

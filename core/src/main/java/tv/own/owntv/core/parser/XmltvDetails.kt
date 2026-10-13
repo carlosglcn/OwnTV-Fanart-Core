@@ -14,6 +14,8 @@ data class EpgDetails(
     val rating: String? = null,
     val lengthMin: Int? = null,
     val episode: String? = null,
+    /** The programme's own picture — XMLTV `<programme><icon src>` (glcn fork). Usually landscape fanart. */
+    val imageUrl: String? = null,
 ) {
     /** The categories as a list, in feed order. */
     val categoryList: List<String>
@@ -47,6 +49,11 @@ internal object XmltvDetailRules {
     }
 
     /** `<length units="minutes|seconds|hours">95</length>` → minutes; nothing below one minute. */
+    fun imageUrl(src: String?): String? {
+        val s = src?.trim()?.takeIf { it.isNotEmpty() } ?: return null
+        return s.takeIf { it.startsWith("http://", true) || it.startsWith("https://", true) }
+    }
+
     fun lengthMinutes(value: String?, units: String?): Int? {
         val n = value?.trim()?.toIntOrNull()?.takeIf { it > 0 } ?: return null
         val minutes = when (units?.trim()?.lowercase()) {
