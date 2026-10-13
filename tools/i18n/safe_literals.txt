@@ -534,6 +534,7 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `epg_programmes` ADD COLUMN `categories` TEXT
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `epg_programmes` ADD COLUMN `contentHash` INTEGER NOT NULL DEFAULT 0
 1	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `epg_programmes` ADD COLUMN `episode` TEXT
+1	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `epg_programmes` ADD COLUMN `imageUrl` TEXT
 1	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `epg_programmes` ADD COLUMN `lengthMin` INTEGER
 1	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `epg_programmes` ADD COLUMN `rating` TEXT
 1	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `epg_programmes` ADD COLUMN `year` INTEGER
@@ -1053,7 +1054,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	DELETE FROM epg_programmes WHERE startMs > :after
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	DELETE FROM epg_programmes WHERE stopMs < :before
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	FROM epg_programmes WHERE startMs > :from - 86400000 AND startMs < :to AND stopMs > :from
-3	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	NULL AS categories, NULL AS year, NULL AS rating, NULL AS lengthMin, NULL AS episode
+2	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	NULL AS categories, NULL AS year, NULL AS rating, NULL AS lengthMin, NULL AS episode, NULL AS imageUrl
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT (MAX(stopMs) - MIN(startMs)) / 86400000 FROM epg_programmes WHERE epgChannelId = :epgChannelId
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT * FROM epg_programmes WHERE epgChannelId = :epgChannelId AND startMs <= :now AND stopMs > :now ORDER BY startMs DESC LIMIT 1
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT * FROM epg_programmes WHERE epgChannelId = :epgChannelId AND stopMs <= :now ORDER BY stopMs DESC LIMIT 1
@@ -1072,6 +1073,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT epgChannelId, iconUrl FROM epg_channels WHERE sourceId IN (:sourceIds) AND iconUrl IS NOT NULL AND iconUrl != ''
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT id, epgChannelId, startMs, contentHash FROM epg_programmes WHERE sourceId = :sourceId AND epgChannelId = :epgChannelId
 3	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT id, sourceId, epgChannelId, startMs, stopMs, title, NULL AS description, 0 AS contentHash,
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	categories, year, rating, lengthMin, episode, imageUrl
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	(:type = 'LIVE' AND itemId NOT IN (SELECT id FROM channels)) OR
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	(:type = 'MOVIE' AND itemId NOT IN (SELECT id FROM movies)) OR
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	(:type = 'SERIES' AND itemId NOT IN (SELECT id FROM series))
@@ -2321,6 +2323,8 @@
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	S${season + 1}
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	S${season + 1} E${episode + 1}
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	hours
+1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	http://
+1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	https://
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	onscreen
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	seconds
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	xmltv_ns
@@ -2341,7 +2345,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	http://
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	http://xmlpull.org/v1/doc/features.html#relaxed
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	https://
-1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	icon
+2	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	icon
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	id
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	length
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	parse end channels=$channels programmes=$programmes skipped=${metrics.skippedProgrammes}
@@ -2352,7 +2356,7 @@
 2	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	programme
 2	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	programmeFilterHit=${metrics.programmeFilterHit} programmeFilterMiss=${metrics.programmeFilterMiss}
 2	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	rating
-1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	src
+2	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	src
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	start
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	stop
 2	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	system
