@@ -1490,6 +1490,7 @@
     <string name="settings_live_layout_stage">Escenario</string>
     <string name="settings_live_layout_stage_description">Pulsa a la izquierda para abrir las categorías. La lista de canales y la vista previa ocupan todo el ancho.</string>
     <string name="settings_live_layout_separate_description">Categorías, lista de canales y vista previa una al lado de la otra.</string>
+    <string name="settings_live_layout_cinematic_description">La imagen del programa seleccionado detrás de la vista previa y los canales como fila de tarjetas con imagen y lo que viene después.</string>
     <string name="settings_search_keywords_live_layout">diseño tv directo canales categorías panel paneles escenario</string>
     <string name="settings_panel_width_live_sheet">Panel de categorías</string>
     <string name="settings_panel_width_live_sheet_hint">Qué ancho ocupan las categorías al abrirse sobre la lista con la izquierda. No cuenta en el 100 %%.</string>

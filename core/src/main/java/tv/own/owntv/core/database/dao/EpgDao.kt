@@ -132,7 +132,7 @@ interface EpgDao {
     /** Lightweight rows for several Home On Now channels at once. */
     @Query(
         "SELECT id, sourceId, epgChannelId, startMs, stopMs, title, NULL AS description, 0 AS contentHash, " +
-            "NULL AS categories, NULL AS year, NULL AS rating, NULL AS lengthMin, NULL AS episode, imageUrl " +
+            "categories, year, rating, lengthMin, episode, imageUrl " +
             "FROM epg_programmes WHERE epgChannelId IN (:epgKeys) " +
             "AND startMs > :from - 86400000 AND stopMs > :from AND startMs < :to ORDER BY epgChannelId ASC, startMs ASC",
     )

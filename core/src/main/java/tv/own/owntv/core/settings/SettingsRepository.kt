@@ -1369,7 +1369,8 @@ class SettingsRepository(private val context: Context, private val localeStore: 
      * Live TV layout. STAGE (default for everyone, updates included) opens the categories as a sheet
      * with Left; SEPARATE keeps a category column on screen beside the channel list and preview.
      */
-    enum class LiveLayout { STAGE, SEPARATE }
+    // CINEMATIC (glcn fork): the focused programme's artwork behind a hero, channels as a row of cards.
+    enum class LiveLayout { STAGE, SEPARATE, CINEMATIC }
     val liveLayout: Flow<LiveLayout> = prefsFlow { prefs ->
         prefs[Keys.LIVE_LAYOUT]?.let { runCatching { LiveLayout.valueOf(it) }.getOrNull() } ?: LiveLayout.STAGE
     }
