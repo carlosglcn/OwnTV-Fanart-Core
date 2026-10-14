@@ -457,4 +457,6 @@
     <string name="content_season_specials">Especiales</string>
     <!-- glcn -->
     <string name="glcn_remove_from_continue">Quitar de Seguir viendo</string>
+    <string name="glcn_sports_now">Deportes ahora</string>
+    <string name="glcn_sports_none">Ahora no hay deporte en emisión</string>
 </resources>

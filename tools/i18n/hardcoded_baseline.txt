@@ -189,6 +189,54 @@
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	subrip
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	subtitles failed
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	vtt
+2	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	\0
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	(en directo)
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	)
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	\\b(
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	\\p{M}+
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	acb
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	atletismo
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	automovilismo
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	baloncesto
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	balonmano
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	basket
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	boxeo
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	champions
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	ciclismo
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	conference league
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	copa del rey
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	dardos
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	deport
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	directo
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	en directo
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	esqui
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	euroleague
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	euroliga
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	europa league
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	f1
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	formula 1
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	futbol
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	golf
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	hd
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	hipica
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	laliga
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	liga de campeones
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	live
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	motociclismo
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	motogp
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	motor
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	natacion
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	nba
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	nfl
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	padel
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	rugby
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	snooker
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	sport
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	tenis
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	ufc
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	voleibol
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	wwe
+3	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	|
 1	core/src/main/java/tv/own/owntv/core/metadata/MetadataBudget.kt	day_count
 1	core/src/main/java/tv/own/owntv/core/metadata/MetadataBudget.kt	day_start
 1	core/src/main/java/tv/own/owntv/core/metadata/MetadataBudget.kt	hour_count

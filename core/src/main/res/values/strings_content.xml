@@ -825,4 +825,6 @@
     <string name="content_season_specials">Specials</string>
     <!-- glcn -->
     <string name="glcn_remove_from_continue">Remove from Keep watching</string>
+    <string name="glcn_sports_now">Sports now</string>
+    <string name="glcn_sports_none">Nothing sporty on air right now</string>
 </resources>
