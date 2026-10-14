@@ -41,8 +41,8 @@ internal object EmbyBridge {
             .build()
     }
 
-    private const val AUTH =
-        "MediaBrowser Client=\"OwnTV\", Device=\"OwnTV\", DeviceId=\"owntv-glcn\", Version=\"1.0\""
+    private const val AUTH_FIELDS =
+        "Client=\"OwnTV\", Device=\"OwnTV\", DeviceId=\"owntv-glcn\", Version=\"1.0\""
 
     private const val FIELDS = "ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,Container,Genres"
 
@@ -103,9 +103,12 @@ internal object EmbyBridge {
     suspend fun login(t: Target, api: String): Session = withContext(Dispatchers.IO) {
         val body = JSONObject().put("Username", t.user).put("Pw", t.password).toString()
             .toRequestBody("application/json".toMediaType())
-        val req = Request.Builder().url("$api/Users/AuthenticateByName")
-            .header("X-Emby-Authorization", AUTH)
-            .header("Authorization", AUTH)
+        // Emby reads X-Emby-Authorization ("Emby …"), Jellyfin reads Authorization ("MediaBrowser …");
+        // the same client fields also go in the query string, which older Emby builds read instead.
+        val query = "X-Emby-Client=OwnTV&X-Emby-Device-Name=OwnTV&X-Emby-Device-Id=owntv-glcn&X-Emby-Client-Version=1.0"
+        val req = Request.Builder().url("$api/Users/AuthenticateByName?$query")
+            .header("X-Emby-Authorization", "Emby $AUTH_FIELDS")
+            .header("Authorization", "MediaBrowser $AUTH_FIELDS")
             .post(body)
             .build()
         client.newCall(req).execute().use { r ->

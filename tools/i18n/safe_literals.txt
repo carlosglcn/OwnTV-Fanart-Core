@@ -3460,7 +3460,6 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTINF:-1 type="movie" tvg-logo="
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTINF:-1 type="series" tvg-logo="
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTM3U
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$api/Users/AuthenticateByName
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$scheme://$hostPart$port$path
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$title ($year)
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${s.api}/Items/$id/Images/Primary?maxWidth=500&api_key=${s.token}
@@ -3484,7 +3483,6 @@
 5	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Id
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IndexNumber
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Items
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	MediaBrowser Client="OwnTV", Device="OwnTV", DeviceId="owntv-glcn", Version="1.0"
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Movie
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Name
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ParentIndexNumber

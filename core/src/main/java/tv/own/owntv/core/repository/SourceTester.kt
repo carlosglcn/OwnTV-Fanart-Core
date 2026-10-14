@@ -108,8 +108,11 @@ class SourceTester(
         if (!source.url.startsWith("http", ignoreCase = true)) return SourceTestResult.Ok()
         // glcn: an Emby/Jellyfin server link — "reachable" means signing in works.
         tv.own.owntv.core.sync.EmbyBridge.parse(source.url)?.let { target ->
+            // A link with a user and no playlist file is meant as a server: say plainly when it does not
+            // answer as one, instead of falling through to the playlist check and reporting a bad login.
             val api = runCatching { tv.own.owntv.core.sync.EmbyBridge.detect(target) }.getOrNull()
-            if (api != null) {
+                ?: return SourceTestResult.Unreachable("Emby/Jellyfin no responde en ${target.root}")
+            run {
                 return try {
                     tv.own.owntv.core.sync.EmbyBridge.login(target, api)
                     SourceTestResult.Ok()
