@@ -823,4 +823,6 @@
     <string name="content_episode_details">Episode details</string>
     <!-- Translators: Name of a series' season 0: the specials, extras and one-off episodes outside the numbered seasons. -->
     <string name="content_season_specials">Specials</string>
+    <!-- glcn -->
+    <string name="glcn_remove_from_continue">Remove from Keep watching</string>
 </resources>

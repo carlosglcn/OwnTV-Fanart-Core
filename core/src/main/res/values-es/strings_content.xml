@@ -455,4 +455,6 @@
     <string name="content_play_from_start">Reproducir desde el inicio</string>
     <string name="content_episode_details">Detalles del episodio</string>
     <string name="content_season_specials">Especiales</string>
+    <!-- glcn -->
+    <string name="glcn_remove_from_continue">Quitar de Seguir viendo</string>
 </resources>
