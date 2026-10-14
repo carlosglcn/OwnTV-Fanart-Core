@@ -3465,7 +3465,6 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${s.api}/Items/$id/Images/Primary?maxWidth=500&api_key=${s.token}
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${s.api}/Users/${s.userId}/Items?Recursive=true&IncludeItemTypes=$kind&Fields=$FIELDS
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${s.api}/Videos/${it.getString("Id")}/stream
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${t.root}$prefix
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${t.root}$prefix/System/Info/Public
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	%s S%02dE%02d %s
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	&SortBy=$sort&IsMissing=false&StartIndex=$start&Limit=$PAGE

@@ -89,12 +89,17 @@ internal object EmbyBridge {
      */
     suspend fun detect(t: Target): String? = withContext(Dispatchers.IO) {
         for (prefix in listOf("/emby", "")) {
-            val ok = runCatching {
+            val api = runCatching {
                 client.newCall(Request.Builder().url("${t.root}$prefix/System/Info/Public").get().build()).execute().use { r ->
-                    r.isSuccessful && JSONObject(r.body?.string().orEmpty()).has("Id")
+                    // Where the request really ended up: a reverse proxy often answers http:// with a
+                    // redirect to https://, and the sign-in (a POST) must go straight there — a
+                    // redirected POST arrives as a GET and the server refuses it.
+                    if (r.isSuccessful && JSONObject(r.body?.string().orEmpty()).has("Id")) {
+                        r.request.url.toString().substringBefore("?").removeSuffix("/System/Info/Public")
+                    } else null
                 }
-            }.getOrDefault(false)
-            if (ok) return@withContext "${t.root}$prefix"
+            }.getOrNull()
+            if (api != null) return@withContext api
         }
         null
     }

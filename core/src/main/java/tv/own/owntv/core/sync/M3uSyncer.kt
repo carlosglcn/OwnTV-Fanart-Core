@@ -450,9 +450,13 @@ internal class M3uSyncer(
             }
             // glcn: "http://user:password@nas:8096" is an Emby/Jellyfin server, read as a playlist.
             val embyText = if (isLocal) null else EmbyBridge.parse(s.url)?.let { target ->
-                EmbyBridge.detect(target)?.let { api ->
-                    Log.i(TAG, "M3U source ${s.id} is an Emby/Jellyfin server")
-                    EmbyBridge.playlist(EmbyBridge.login(target, api))
+                // A link with a user and no playlist file is a server link: if no server answers, fail
+                // the sync loudly rather than "complete" it with an empty library.
+                val api = EmbyBridge.detect(target)
+                    ?: throw java.io.IOException("Emby/Jellyfin no responde en ${target.root}")
+                Log.i(TAG, "M3U source ${s.id} is an Emby/Jellyfin server at $api")
+                EmbyBridge.playlist(EmbyBridge.login(target, api)).also { text ->
+                    Log.i(TAG, "Emby playlist entries=${text.lineSequence().count { it.startsWith("#EXTINF") }}")
                 }
             }
             val header = when {
