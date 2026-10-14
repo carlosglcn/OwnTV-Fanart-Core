@@ -37,6 +37,8 @@ data class M3uEntry(
      *  [tv.own.owntv.core.player.ManifestType]. Independent of [drm]: an unprotected entry may declare
      *  one too. Null when the entry says nothing, which is the overwhelming majority. */
     val manifestType: tv.own.owntv.core.player.ManifestType? = null,
+    /** glcn: the `glcn-*` attributes (plot, backdrop, year, rating…) the Emby bridge writes. */
+    val extra: Map<String, String> = emptyMap(),
 ) {
     /** Tagged as series content — per-episode entries like "Show S01E05" grouped into shows. */
     val isSeries: Boolean get() = type == "series" || tvgType == "series"
@@ -111,6 +113,7 @@ class M3uParser {
                         catchup = attrs.attr("catchup") ?: attrs.attr("catchup-type"),
                         catchupSource = attrs.attr("catchup-source"),
                         catchupDays = attrs.attr("catchup-days")?.toIntOrNull(),
+                        extra = attrs.filterKeys { it.startsWith("glcn-") },
                     )
                 }
 
@@ -164,6 +167,7 @@ class M3uParser {
                                     manifestType = pendingKodiProps?.let {
                                         tv.own.owntv.core.player.ManifestType.fromKodiProps(it)
                                     },
+                                    extra = p.extra,
                                 ),
                             )
                         } finally {
@@ -215,6 +219,7 @@ class M3uParser {
         val catchup: String?,
         val catchupSource: String?,
         val catchupDays: Int?,
+        val extra: Map<String, String> = emptyMap(),
     )
 
     private data class ParseMetrics(

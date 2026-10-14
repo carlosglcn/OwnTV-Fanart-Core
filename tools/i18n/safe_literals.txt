@@ -3455,7 +3455,6 @@
 1	log	core/src/main/java/tv/own/owntv/core/sync/CatalogPriority.kt	pagesLeft=${row.lastPage - row.nextPage + 1}
 1	log	core/src/main/java/tv/own/owntv/core/sync/CatalogPriority.kt	priority category sourceId=${row.sourceId} type=${row.mediaType} cat=${row.categoryRemoteId}
 4	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	\0
-2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	" group-title="
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	",
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTINF:-1 type="movie" tvg-logo="
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTINF:-1 type="series" tvg-logo="
@@ -3487,7 +3486,6 @@
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ParentIndexNumber
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Películas
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,Container,Genres
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Pw
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Series
 1	log	core/src/main/java/tv/own/owntv/core/sync/ImportFinalizer.kt	ImportFinalizer

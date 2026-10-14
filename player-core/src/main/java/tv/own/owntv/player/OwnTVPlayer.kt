@@ -569,6 +569,10 @@ class OwnTVPlayer(
         set(value) {
             currentUrlField = value
             refreshActive()
+            // glcn: an Emby stream reports start / progress / stop to its server.
+            runCatching {
+                tv.own.owntv.core.emby.EmbyPlayback.onUrlChanged(value, { _position.value }, { _isPlaying.value })
+            }
         }
     /** P6 — stable engine-pin key of the loaded item (see [MediaMeta.contentKey]); null = key on the URL. */
     private var currentContentKey: String? = null
@@ -1679,7 +1683,7 @@ class OwnTVPlayer(
             // Exo owns this VOD as an engine (fallback/preferred): re-list previously downloaded subs
             // (§9), same as mpv's FILE_LOADED hook. Re-fires after each side-load re-prepare, but the
             // restore path no-ops when there's nothing new to attach.
-            if (item.exoVodFallback && !isLiveContent) onVodFileLoaded?.invoke()
+            if (item.exoVodFallback && !isLiveContent) { onVodFileLoaded?.invoke(); attachEmbySubtitles() }
         }
         override fun onCues(cues: List<androidx.media3.common.text.Cue>) { _exoCues.value = cues }
         override fun onAudioTracks(tracks: List<TrackOption>) {
@@ -4533,6 +4537,17 @@ class OwnTVPlayer(
         }
     }
 
+    /** glcn: list an Emby item's external subtitle files (.srt beside the video) in the Subtitles menu. */
+    private fun attachEmbySubtitles() {
+        val url = currentUrl ?: return
+        if (!tv.own.owntv.core.emby.EmbyPlayback.isEmbyUrl(url)) return
+        scope.launch {
+            val subs = kotlinx.coroutines.withContext(Dispatchers.IO) { tv.own.owntv.core.emby.EmbyPlayback.subtitles(url) }
+            if (subs.isEmpty() || currentUrl != url) return@launch
+            restoreExternalSubtitles(subs.map { ExternalSub(it.url, it.title, it.lang, ExternalSubtitleSource.LOCAL) })
+        }
+    }
+
     fun addExternalSubtitle(
         path: String,
         title: String,
@@ -4774,7 +4789,7 @@ class OwnTVPlayer(
                 _subCount.value = _subTrackList.value.size
                 // Re-list previously downloaded subtitles for a VOD item (subtitle plan §9). Fires after
                 // the fresh track list is built so restoreExternalSubtitles appends onto it.
-                if (!isLiveContent) onVodFileLoaded?.invoke()
+                if (!isLiveContent) { onVodFileLoaded?.invoke(); attachEmbySubtitles() }
                 // Fast-zap safety net: a trimmed probe can miss the audio PMT on a sparse stream, leaving
                 // a video-only load. If that happens, re-probe fully (once) so the channel plays with sound.
                 if (usedTrimmedProbe && !item.forceFullProbe && _audioTrackList.value.isEmpty()) {

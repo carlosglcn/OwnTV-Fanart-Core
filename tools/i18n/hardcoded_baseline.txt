@@ -151,6 +151,44 @@
 1	core/src/main/java/tv/own/owntv/core/database/entity/UserDataEntities.kt	custom_category_members
 1	core/src/main/java/tv/own/owntv/core/database/entity/UserDataEntities.kt	itemId
 2	core/src/main/java/tv/own/owntv/core/database/entity/UserDataEntities.kt	mediaType
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	$path failed
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	$path → HTTP ${r.code}
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	$title (Emby)
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${ref.api}$path
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${ref.api}/Items/${ref.itemId}/PlaybackInfo?api_key=${ref.token}
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${ref.api}/Videos/${ref.itemId}/$sourceId/Subtitles/$index/Stream.$ext?api_key=${ref.token}
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	/Sessions/Playing
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	/Sessions/Playing/Progress
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	/Sessions/Playing/Stopped
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	CanSeek
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Codec
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	DirectPlay
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	DisplayTitle
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Emby $index
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Emby Client="OwnTV", Device="OwnTV", DeviceId="owntv-glcn", Version="1.0", Token="${ref.token}"
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	EmbyPlayback
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Id
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Index
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	IsExternal
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	IsPaused
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	ItemId
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Language
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	MediaSources
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	MediaStreams
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	PlayMethod
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	PositionTicks
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Subtitle
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Type
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	X-Emby-Authorization
+2	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	X-Emby-Token
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	^(https?://.+?)/Videos/([0-9A-Za-z]+)/stream[^?]*\\?(?:.*&)?api_key=([^&]+)
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	application/json
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	ass
+4	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	srt
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	ssa
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	subrip
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	subtitles failed
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	vtt
 1	core/src/main/java/tv/own/owntv/core/metadata/MetadataBudget.kt	day_count
 1	core/src/main/java/tv/own/owntv/core/metadata/MetadataBudget.kt	day_start
 1	core/src/main/java/tv/own/owntv/core/metadata/MetadataBudget.kt	hour_count
@@ -196,6 +234,7 @@
 1	core/src/main/java/tv/own/owntv/core/network/DnsConfig.kt	https://dns.google/dns-query
 1	core/src/main/java/tv/own/owntv/core/network/DnsConfig.kt	https://dns.quad9.net/dns-query
 1	core/src/main/java/tv/own/owntv/core/network/HttpClient.kt	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36
+1	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	glcn-
 1	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	'
 1	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	${base(s)}/timeshift/${s.username}/${s.password}/$durationMinutes/${fmt.format(java.util.Date(startMs))}/$streamId.$ext
 1	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	allowed_output_formats
@@ -251,11 +290,20 @@
 1	core/src/main/java/tv/own/owntv/core/subtitles/OpenSubtitlesClient.kt	$method ${pathAndQuery.substringBefore('?')} via $base -> ${e.javaClass.simpleName}: ${e.message}
 1	core/src/main/java/tv/own/owntv/core/subtitles/OpenSubtitlesClient.kt	$method ${pathAndQuery.substringBefore('?')} via $base -> HTTP ${resp.code}
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$api/Users/AuthenticateByName?$query
+1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${s.api}/Items/${it.getString("Id")}/Images/Backdrop?maxWidth=1280&api_key=${s.token}
+1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	%.1f
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	/System/Info/Public
+1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	="
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	?
+1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	BackdropImageTags
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Client="OwnTV", Device="OwnTV", DeviceId="owntv-glcn", Version="1.0"
+1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	CommunityRating
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Emby $AUTH_FIELDS
+2	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Id
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	MediaBrowser $AUTH_FIELDS
+3	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Overview
+1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,Container,Genres,Overview,CommunityRating,BackdropImageTags
+1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Series
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	SeriesId
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	SeriesName
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	SeriesSortName,ParentIndexNumber,IndexNumber
@@ -270,12 +318,25 @@
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	[
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	[$host]
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	application/json
+1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-backdrop
+2	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-plot
+1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-rating
+1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-series-backdrop
+1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-series-plot
+1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-year
+2	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	group-title="
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	http
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	https
 1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	#EXTINF
 1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	Emby playlist entries=${text.lineSequence().count { it.startsWith("#EXTINF") }}
 1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	Emby/Jellyfin no responde en ${target.root}
 1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	M3U source ${s.id} is an Emby/Jellyfin server at $api
+1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	glcn-backdrop
+2	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	glcn-plot
+1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	glcn-rating
+1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	glcn-series-backdrop
+1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	glcn-series-plot
+1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	glcn-year
 1	core/src/main/java/tv/own/owntv/core/sync/work/TrendingRefreshWorker.kt	Playlist
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	${Build.MANUFACTURER} ${Build.MODEL} · Android ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	--- live diagnostics leading up to the crash ---

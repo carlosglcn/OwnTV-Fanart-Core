@@ -44,7 +44,7 @@ internal object EmbyBridge {
     private const val AUTH_FIELDS =
         "Client=\"OwnTV\", Device=\"OwnTV\", DeviceId=\"owntv-glcn\", Version=\"1.0\""
 
-    private const val FIELDS = "ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,Container,Genres"
+    private const val FIELDS = "ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,Container,Genres,Overview,CommunityRating,BackdropImageTags"
 
     /**
      * `http(s)://user[:password]@host[:port][/path]` with no file name in the path → a possible server.
@@ -150,10 +150,19 @@ internal object EmbyBridge {
     /** The whole library as M3U text. */
     suspend fun playlist(s: Session): String = withContext(Dispatchers.IO) {
         fun image(id: String) = "${s.api}/Items/$id/Images/Primary?maxWidth=500&api_key=${s.token}"
+        fun backdrop(it: JSONObject): String? =
+            if ((it.optJSONArray("BackdropImageTags")?.length() ?: 0) > 0) {
+                "${s.api}/Items/${it.getString("Id")}/Images/Backdrop?maxWidth=1280&api_key=${s.token}"
+            } else null
         fun stream(it: JSONObject): String {
             val container = it.optString("Container").substringBefore(',').takeIf { c -> c.isNotBlank() }
             return "${s.api}/Videos/${it.getString("Id")}/stream" +
                 (container?.let { c -> ".$c" } ?: "") + "?static=true&api_key=${s.token}"
+        }
+        /** ` key="value"` for the glcn-* details; nothing when the server has no value. */
+        fun StringBuilder.extra(key: String, value: String?): StringBuilder {
+            if (!value.isNullOrBlank()) append(' ').append(key).append("=\"").append(attr(value)).append('"')
+            return this
         }
         val sb = StringBuilder("#EXTM3U\n")
         for (m in items(s, "Movie")) {
@@ -161,10 +170,17 @@ internal object EmbyBridge {
             val year = m.optInt("ProductionYear", 0)
             val label = if (year > 0) "$title ($year)" else title
             val group = m.optJSONArray("Genres")?.optString(0)?.takeIf { it.isNotBlank() } ?: MOVIES_GROUP
-            sb.append("#EXTINF:-1 type=\"movie\" tvg-logo=\"").append(attr(image(m.getString("Id"))))
-                .append("\" group-title=\"").append(attr(group)).append("\",").append(line(label)).append('\n')
+            val rating = m.optDouble("CommunityRating", Double.NaN).takeIf { !it.isNaN() && it > 0 }
+            sb.append("#EXTINF:-1 type=\"movie\" tvg-logo=\"").append(attr(image(m.getString("Id")))).append('"')
+                .extra("glcn-plot", m.optString("Overview"))
+                .extra("glcn-backdrop", backdrop(m))
+                .extra("glcn-year", year.takeIf { it > 0 }?.toString())
+                .extra("glcn-rating", rating?.let { String.format(java.util.Locale.ROOT, "%.1f", it) })
+                .append(" group-title=\"").append(attr(group)).append("\",").append(line(label)).append('\n')
                 .append(stream(m)).append('\n')
         }
+        // The shows themselves, for their synopsis and backdrop.
+        val shows = runCatching { items(s, "Series") }.getOrDefault(emptyList()).associateBy { it.optString("Id") }
         for (e in items(s, "Episode")) {
             if (!e.has("ParentIndexNumber") || !e.has("IndexNumber")) continue
             val show = e.optString("SeriesName").ifBlank { SERIES_GROUP }
@@ -172,9 +188,14 @@ internal object EmbyBridge {
                 java.util.Locale.ROOT, "%s S%02dE%02d %s",
                 show, e.getInt("ParentIndexNumber"), e.getInt("IndexNumber"), e.optString("Name"),
             ).trim()
-            val logo = e.optString("SeriesId").takeIf { it.isNotBlank() }?.let(::image) ?: image(e.getString("Id"))
-            sb.append("#EXTINF:-1 type=\"series\" tvg-logo=\"").append(attr(logo))
-                .append("\" group-title=\"").append(SERIES_GROUP).append("\",").append(line(label)).append('\n')
+            val seriesId = e.optString("SeriesId").takeIf { it.isNotBlank() }
+            val series = seriesId?.let { shows[it] }
+            val logo = seriesId?.let(::image) ?: image(e.getString("Id"))
+            sb.append("#EXTINF:-1 type=\"series\" tvg-logo=\"").append(attr(logo)).append('"')
+                .extra("glcn-plot", e.optString("Overview"))
+                .extra("glcn-series-plot", series?.optString("Overview"))
+                .extra("glcn-series-backdrop", series?.let(::backdrop))
+                .append(" group-title=\"").append(SERIES_GROUP).append("\",").append(line(label)).append('\n')
                 .append(stream(e)).append('\n')
         }
         sb.toString()

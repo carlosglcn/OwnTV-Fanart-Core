@@ -246,6 +246,11 @@ internal class M3uSyncer(
                         httpHeaders = StreamHeaders.encode(entry.headers),
                         drmConfig = DrmConfig.encode(entry.drm),
                         manifestType = ManifestType.encode(entry.manifestType),
+                        // glcn: details the Emby bridge carries in glcn-* attributes.
+                        plot = entry.extra["glcn-plot"],
+                        backdropUrl = entry.extra["glcn-backdrop"],
+                        year = entry.extra["glcn-year"]?.toIntOrNull(),
+                        rating = entry.extra["glcn-rating"]?.toDoubleOrNull(),
                     )
                 }
                 movies.forEach { seenMovieKeys.add(it.remoteId!!) }
@@ -299,6 +304,7 @@ internal class M3uSyncer(
                             httpHeaders = ep.httpHeaders,
                             drmConfig = ep.drmConfig,
                             manifestType = ep.manifestType,
+                            plot = ep.plot,
                         )
                     },
                 )
@@ -336,6 +342,8 @@ internal class M3uSyncer(
                         posterUrl = show.logo,
                         remoteId = key,
                         sortOrder = show.order,
+                        plot = show.plot,
+                        backdropUrl = show.backdrop,
                     )
                     // The series hash folds in the episode list: a playlist that only adds S01E06
                     // must count as changed even though the show row itself is identical.
@@ -414,7 +422,10 @@ internal class M3uSyncer(
                         e.groupTitle?.let { queueCategory(MediaType.SERIES, it) }
                         val parsed = parseM3uEpisode(e.name)
                         val show = seriesAccumulator.getOrPut(parsed.show.lowercase()) {
-                            M3uShowAccumulator(name = parsed.show, logo = e.logo, group = e.groupTitle, order = order++)
+                            M3uShowAccumulator(
+                                name = parsed.show, logo = e.logo, group = e.groupTitle, order = order++,
+                                plot = e.extra["glcn-series-plot"], backdrop = e.extra["glcn-series-backdrop"],
+                            )
                         }
                         val episode = if (parsed.episode > 0) parsed.episode else show.episodes.count { it.season == parsed.season } + 1
                         show.episodes.add(
@@ -426,6 +437,7 @@ internal class M3uSyncer(
                                 httpHeaders = StreamHeaders.encode(e.headers),
                                 drmConfig = DrmConfig.encode(e.drm),
                                 manifestType = ManifestType.encode(e.manifestType),
+                                plot = e.extra["glcn-plot"],
                             ),
                         )
                         pendingEpisodeRows++
@@ -543,6 +555,8 @@ internal class M3uSyncer(
         val logo: String?,
         val group: String?,
         val order: Int,
+        val plot: String? = null,
+        val backdrop: String? = null,
     ) {
         val episodes = ArrayList<M3uEpisodeRow>()
     }
@@ -555,6 +569,7 @@ internal class M3uSyncer(
         val httpHeaders: String? = null,
         val drmConfig: String? = null,
         val manifestType: String? = null,
+        val plot: String? = null,
     )
 
     internal data class ParsedM3uEpisode(val show: String, val season: Int, val episode: Int, val title: String?)
@@ -690,7 +705,8 @@ internal class M3uSyncer(
                 val base = Objects.hash(ep.season, ep.episode, ep.title, ep.streamUrl)
                 val withHeaders = if (ep.httpHeaders == null) base else Objects.hash(base, ep.httpHeaders)
                 val withDrm = if (ep.drmConfig == null) withHeaders else Objects.hash(withHeaders, ep.drmConfig)
-                31 * acc + if (ep.manifestType == null) withDrm else Objects.hash(withDrm, ep.manifestType)
+                val withManifest = if (ep.manifestType == null) withDrm else Objects.hash(withDrm, ep.manifestType)
+                31 * acc + if (ep.plot == null) withManifest else Objects.hash(withManifest, ep.plot)
             }
     }
 }
