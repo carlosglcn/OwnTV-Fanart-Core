@@ -103,7 +103,8 @@ class M3uParser {
                         name = displayName(line, attrs),
                         logo = attrs.attr("tvg-logo"),
                         groupTitle = attrs.attr("group-title"),
-                        tvgId = attrs.attr("tvg-id"),
+                        // glcn: decoded and repaired, so it matches the guide's id ("M&#43; CLÃSICOS" → "M+ CLÁSICOS").
+                        tvgId = attrs.attr("tvg-id")?.let(M3uText::repairId),
                         tvgChno = attrs.attr("tvg-chno")?.toIntOrNull(),
                         type = attrs.attr("type"),
                         tvgType = attrs.attr("tvg-type"),

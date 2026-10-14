@@ -2318,6 +2318,21 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	url-tvg
 2	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	vod
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	x-tvg-url
+1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	\0
+1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	"
+1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	#
+1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	#X
+1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	#x
+1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	&
+1	regex	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	&(#[0-9]{1,7}|#[xX][0-9a-fA-F]{1,6}|amp|lt|gt|quot|apos|nbsp);
+1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	<
+1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	>
+1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	amp
+1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	apos
+1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	gt
+1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	lt
+1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	nbsp
+1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uText.kt	quot
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	$s $v
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	E${episode + 1}
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	S${season + 1}
