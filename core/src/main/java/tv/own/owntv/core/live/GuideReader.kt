@@ -211,6 +211,10 @@ class GuideReader(
     suspend fun description(programmeId: Long): String? =
         withContext(Dispatchers.IO) { runCatching { epgDao.programmeDescription(programmeId) }.getOrNull() }
 
+    /** glcn: one programme in full (its picture included), fetched when it is opened. */
+    suspend fun programme(programmeId: Long): EpgProgrammeEntity? =
+        withContext(Dispatchers.IO) { runCatching { epgDao.programmeById(programmeId) }.getOrNull() }
+
 }
 
 /** The guide id this channel really reads from: a manual match wins over the channel's own. */

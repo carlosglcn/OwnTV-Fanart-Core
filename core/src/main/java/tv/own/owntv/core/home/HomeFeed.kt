@@ -90,6 +90,8 @@ sealed interface HeroItem {
     data class LiveHero(
         val channel: ChannelEntity,
         val watchedAt: Long,
+        /** glcn: what is on the channel when Home was read — its title and picture (XMLTV <icon>). */
+        val now: tv.own.owntv.core.database.entity.EpgProgrammeEntity? = null,
     ) : HeroItem {
         override val sourceId: Long = channel.sourceId
         override val httpHeaders: String? = channel.httpHeaders
@@ -250,7 +252,7 @@ class HomeFeedReader(
                 else seriesDao.snapshotFavoritesManual(profileId, ContentOrderEntity.FAV_CONTEXT, seriesIds.toList(), FAVORITE_VOD_ROW_LIMIT)
                     .filterNot { CustomizeKeys.series(it) in hidden.series.hiddenItems || (it.categoryId != null && it.categoryId in hidden.seriesCats) }
             }
-            val heroItems = buildHeroItems(items, liveWithTs, config)
+            val heroItems = withLiveNow(profileId, buildHeroItems(items, liveWithTs, config))
             // The two guide slices read different channel sets and never depend on each other.
             val recentGuideAsync = async {
                 if (HomeRow.RECENT_CHANNELS in config.visibleOrder && config.recentLiveMode == HomeLiveRowMode.ON_NOW) {
@@ -465,6 +467,27 @@ class HomeFeedReader(
             candidate.resolve()?.let { result += it }
         }
         return result
+    }
+
+    /** glcn: the programme on now for each live hero card, so the card can show its picture and title. */
+    private suspend fun withLiveNow(profileId: Long, items: List<HeroItem>): List<HeroItem> {
+        val live = items.filterIsInstance<HeroItem.LiveHero>().map { it.channel }
+        if (live.isEmpty()) return items
+        val now = System.currentTimeMillis()
+        val found = runCatching {
+            guide.slice(
+                channels = live,
+                cust = customize.observe(profileId, MediaType.LIVE).first(),
+                globalShiftMinutes = settings.epgOffsetMinutes.first(),
+                from = now,
+                to = now + 1,
+            )
+        }.getOrNull() ?: return items
+        return items.map { item ->
+            if (item is HeroItem.LiveHero) {
+                item.copy(now = found[item.channel.id]?.firstOrNull { now in it.startMs until it.stopMs })
+            } else item
+        }
     }
 
     /** A live rail in "On now" mode: six hours of guide for the channels it is about to draw. */
