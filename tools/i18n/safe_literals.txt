@@ -1054,7 +1054,8 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	DELETE FROM epg_programmes WHERE startMs > :after
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	DELETE FROM epg_programmes WHERE stopMs < :before
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	FROM epg_programmes WHERE startMs > :from - 86400000 AND startMs < :to AND stopMs > :from
-2	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	NULL AS categories, NULL AS year, NULL AS rating, NULL AS lengthMin, NULL AS episode, NULL AS imageUrl
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	NULL AS categories, NULL AS year, NULL AS rating, NULL AS lengthMin, NULL AS episode, NULL AS imageUrl
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	NULL AS categories, NULL AS year, NULL AS rating, NULL AS lengthMin, NULL AS episode, imageUrl
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT (MAX(stopMs) - MIN(startMs)) / 86400000 FROM epg_programmes WHERE epgChannelId = :epgChannelId
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT * FROM epg_programmes WHERE epgChannelId = :epgChannelId AND startMs <= :now AND stopMs > :now ORDER BY startMs DESC LIMIT 1
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT * FROM epg_programmes WHERE epgChannelId = :epgChannelId AND stopMs <= :now ORDER BY stopMs DESC LIMIT 1
@@ -3453,6 +3454,45 @@
 1	log	core/src/main/java/tv/own/owntv/core/sync/CatalogPriority.kt	CatalogPriority
 1	log	core/src/main/java/tv/own/owntv/core/sync/CatalogPriority.kt	pagesLeft=${row.lastPage - row.nextPage + 1}
 1	log	core/src/main/java/tv/own/owntv/core/sync/CatalogPriority.kt	priority category sourceId=${row.sourceId} type=${row.mediaType} cat=${row.categoryRemoteId}
+4	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	\0
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	" group-title="
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	",
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTINF:-1 type="movie" tvg-logo="
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTINF:-1 type="series" tvg-logo="
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTM3U
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$api/Users/AuthenticateByName
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$scheme://$hostPart$port$path
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$title ($year)
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${s.api}/Items/$id/Images/Primary?maxWidth=500&api_key=${s.token}
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${s.api}/Users/${s.userId}/Items?Recursive=true&IncludeItemTypes=$kind&Fields=$FIELDS
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${s.api}/Videos/${it.getString("Id")}/stream
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${t.root}$prefix
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${t.root}$prefix/System/Info/Public
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	%s S%02dE%02d %s
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	&SortBy=$sort&IsMissing=false&StartIndex=$start&Limit=$PAGE
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	.$c
+1	url	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	/emby
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	:${uri.port}
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	?static=true&api_key=${s.token}
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	AccessToken
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Authorization
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Container
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Emby: HTTP ${r.code}
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Emby: usuario o contraseña incorrectos
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Episode
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Genres
+5	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Id
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IndexNumber
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Items
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	MediaBrowser Client="OwnTV", Device="OwnTV", DeviceId="owntv-glcn", Version="1.0"
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Movie
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Name
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ParentIndexNumber
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Películas
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,Container,Genres
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Pw
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Series
 1	log	core/src/main/java/tv/own/owntv/core/sync/ImportFinalizer.kt	ImportFinalizer
 1	log	core/src/main/java/tv/own/owntv/core/sync/ImportFinalizer.kt	Metadata eviction: cache=$cache matches=$matches
 1	log	core/src/main/java/tv/own/owntv/core/sync/ImportFinalizer.kt	Unable to register the portal guide for sourceId=${source.id}

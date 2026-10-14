@@ -448,10 +448,17 @@ internal class M3uSyncer(
                     }
                 }
             }
-            val header = if (isLocal) {
-                openLocalPlaylist(s.url).use { input -> m3u.parse(input, onEntry) }
-            } else {
-                http.get(s.url, s.userAgent, reportBytes) { input -> m3u.parse(input, onEntry) }
+            // glcn: "http://user:password@nas:8096" is an Emby/Jellyfin server, read as a playlist.
+            val embyText = if (isLocal) null else EmbyBridge.parse(s.url)?.let { target ->
+                EmbyBridge.detect(target)?.let { api ->
+                    Log.i(TAG, "M3U source ${s.id} is an Emby/Jellyfin server")
+                    EmbyBridge.playlist(EmbyBridge.login(target, api))
+                }
+            }
+            val header = when {
+                isLocal -> openLocalPlaylist(s.url).use { input -> m3u.parse(input, onEntry) }
+                embyText != null -> embyText.byteInputStream(Charsets.UTF_8).use { input -> m3u.parse(input, onEntry) }
+                else -> http.get(s.url, s.userAgent, reportBytes) { input -> m3u.parse(input, onEntry) }
             }
             if (buffer.isNotEmpty()) {
                 flushChannels()

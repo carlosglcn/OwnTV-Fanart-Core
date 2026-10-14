@@ -106,6 +106,20 @@ class SourceTester(
     private suspend fun testM3u(source: SourceEntity): SourceTestResult {
         // A local-file playlist has no host; if the sync could read it, there is nothing to reach.
         if (!source.url.startsWith("http", ignoreCase = true)) return SourceTestResult.Ok()
+        // glcn: an Emby/Jellyfin server link — "reachable" means signing in works.
+        tv.own.owntv.core.sync.EmbyBridge.parse(source.url)?.let { target ->
+            val api = runCatching { tv.own.owntv.core.sync.EmbyBridge.detect(target) }.getOrNull()
+            if (api != null) {
+                return try {
+                    tv.own.owntv.core.sync.EmbyBridge.login(target, api)
+                    SourceTestResult.Ok()
+                } catch (e: tv.own.owntv.core.sync.EmbyBridge.AuthFailed) {
+                    SourceTestResult.AuthFailed
+                } catch (e: Exception) {
+                    classify(e)
+                }
+            }
+        }
         // A `get.php` link to an Xtream panel is added as Xtream (SourceImporter.m3u), so test an
         // unsaved one as Xtream — the panel may refuse the M3U export while the account is fine. A saved
         // M3U row still syncs through get.php, so it keeps the plain test that says whether that works.
