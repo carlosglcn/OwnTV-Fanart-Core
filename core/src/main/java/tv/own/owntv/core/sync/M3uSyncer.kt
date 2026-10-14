@@ -197,7 +197,9 @@ internal class M3uSyncer(
                         name = entry.name,
                         logoUrl = entry.logo,
                         streamUrl = entry.streamUrl,
-                        epgChannelId = entry.tvgId,
+                        // glcn: stored lower-case. SQLite LOWER() folds ASCII only, so an id like
+                        // "M+ CLÁSICOS HD" was "m+ clÁsicos hd" in the guide filter and its programmes were dropped.
+                        epgChannelId = entry.tvgId?.lowercase(),
                         number = entry.tvgChno,
                         remoteId = stableKey(channelKeyCounters, entry.name, group),
                         sortOrder = item.order,

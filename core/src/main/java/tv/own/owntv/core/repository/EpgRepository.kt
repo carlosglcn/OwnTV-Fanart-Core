@@ -124,7 +124,8 @@ class EpgRepository(
     private suspend fun neededEpgIds(): Set<String>? {
         val ids = HashSet<String>()
         try {
-            channelDao.allEpgChannelIds().forEach { ids.add(it) } // already lower+trim from SQL
+            // glcn: lower-cased again here — SQL LOWER() leaves non-ASCII capitals ("Á", "Ó") as they are.
+            channelDao.allEpgChannelIds().forEach { ids.add(it.trim().lowercase()) }
         } catch (c: CancellationException) {
             throw c
         } catch (e: NoProgrammesInWindowException) {

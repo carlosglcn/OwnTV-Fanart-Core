@@ -83,7 +83,7 @@ internal class XtreamSyncer(
                         ChannelEntity(
                             sourceId = s.id, categoryId = catMap[categoryId], name = name,
                             logoUrl = icon, streamUrl = xtream.liveUrl(s, streamId),
-                            epgChannelId = epgChannelId, number = num, remoteId = streamId,
+                            epgChannelId = epgChannelId?.lowercase(), number = num, remoteId = streamId,
                             sortOrder = order++,
                             catchup = archive, catchupDays = archiveDays,
                             // Stored, never tuned — the last-resort retry only. See the field's KDoc for

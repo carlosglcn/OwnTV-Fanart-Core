@@ -133,7 +133,7 @@ internal class StalkerSyncer(
                             // which is the key the portal's guide (`get_epg_info`) is written under,
                             // so a portal with no XMLTV still resolves now/next, the Guide and
                             // catch-up. A user's manual EPG match still wins over both at read time.
-                            epgChannelId = ch.xmltvId ?: ch.id,
+                            epgChannelId = (ch.xmltvId ?: ch.id).lowercase(),
                             number = ch.number?.toIntOrNull(),
                             remoteId = ch.id,
                             sortOrder = order++,
