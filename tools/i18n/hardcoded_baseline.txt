@@ -357,9 +357,12 @@
 3	player-core/src/main/java/tv/own/owntv/player/LiveStreamQuirks.kt	.ts
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	#00000000
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	#FFFFFFFF
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	,
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	demuxer
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	file-format
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	force
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpeg2video
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpeg4
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	playback failed — retrying once as ${HttpClient.FALLBACK_USER_AGENT}
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	sub-align-x
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	sub-ass-override
@@ -367,6 +370,8 @@
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	sub-color
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	sub-pos
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	track-list/$i/selected
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	video/mp4v-es
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	video/mpeg2
 1	player-core/src/main/java/tv/own/owntv/player/PlayerDiagnostics.kt	\0
 1	player-core/src/main/java/tv/own/owntv/player/PlayerDiagnostics.kt	429
 1	player-core/src/main/java/tv/own/owntv/player/PlayerDiagnostics.kt	458

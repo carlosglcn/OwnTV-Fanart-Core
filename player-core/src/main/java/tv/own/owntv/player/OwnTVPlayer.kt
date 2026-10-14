@@ -226,12 +226,35 @@ class OwnTVPlayer(
         internal const val HWDEC_CODECS = "h264,vc1,hevc,vp8,vp9,av1,prores,prores_raw,ffv1,dpx,apv,mpeg2video,mpeg4"
 
         /**
+         * glcn: [HWDEC_CODECS] trimmed to what this device can really decode in hardware. Phones (a
+         * Pixel, for one) have no MPEG-2 decoder at all, so an SD satellite channel asked MediaCodec
+         * for one, got "failed to start", and played sound over a black picture until the ladder gave
+         * up. Without a hardware decoder mpeg2video/mpeg4 now go straight to mpv's software decoder,
+         * which handles SD MPEG-2 with ease.
+         */
+        internal val hwdecCodecs: String by lazy {
+            fun hasHw(mime: String) = runCatching {
+                regularCodecInfos().any { info ->
+                    !info.isEncoder && info.supportedTypes.any { it.equals(mime, ignoreCase = true) } &&
+                        (android.os.Build.VERSION.SDK_INT < 29 || info.isHardwareAccelerated)
+                }
+            }.getOrDefault(true)
+            HWDEC_CODECS.split(',').filter { codec ->
+                when (codec) {
+                    "mpeg2video" -> hasHw("video/mpeg2")
+                    "mpeg4" -> hasHw("video/mp4v-es")
+                    else -> true
+                }
+            }.joinToString(",")
+        }
+
+        /**
          * Whether [HWDEC_CODECS] lets mpv hardware-decode [videoCodec] (mpv's `video-codec`). Null when
          * unknown. A definite false means the direct path cannot engage however often it is retried.
          */
         internal fun hwdecCovers(videoCodec: String?): Boolean? {
             val name = ffmpegCodecName(videoCodec) ?: return null
-            return name in HWDEC_CODECS.split(',')
+            return name in hwdecCodecs.split(',')
         }
 
         /**
@@ -2534,7 +2557,7 @@ class OwnTVPlayer(
             setOptionString("vo", if (useDirect()) "mediacodec_embed" else "gpu")
             setOptionString("gpu-context", "android")
             setOptionString("hwdec", if (useDirect()) "mediacodec" else "no")
-            setOptionString("hwdec-codecs", HWDEC_CODECS)
+            setOptionString("hwdec-codecs", hwdecCodecs)
             setOptionString("ao", "audiotrack")
             // Surround sound (opt-in, default off): decode Dolby/DTS to MULTICHANNEL LPCM (5.1/7.1) over HDMI. The
             // AudioTrack stays a normal PCM track, so getTimestamp() keeps mpv's audio clock alive and the
