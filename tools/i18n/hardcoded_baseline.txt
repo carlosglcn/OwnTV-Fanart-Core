@@ -195,9 +195,15 @@
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	subrip
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	subtitles failed
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	vtt
+2	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\0
+1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\\S\\s+(-|–|vs\\.?|v)\\s+\\S
+1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\\b(cine|pelicula|peliculas|film|movie)\\b
+1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\\b(estreno|premiere|stream premiere)\\b
+1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\\b(informativo|informativos|noticias|news|telediario|tiempo|magazine|tertulia|debate|concurso|teletienda|tarot|late night)\\b
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	live:${channel.id}:${programme.startMs}
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	movie:${movie.id}
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	series:${series.id}
+1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	|
 3	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	\0
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	(en directo)
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	)
@@ -268,10 +274,14 @@
 8	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\0
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	%.1f
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	[^a-z0-9]+
+1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\b(cine|pelicula|peliculas|film|movie|movies|serie|series|drama|comedia|comedy|thriller|terror|horror|accion|action|animacion|animation|ciencia ficcion|sci fi|fantasia|fantasy|western|suspense|romance|aventura|adventure|crimen|crime|policiaca|misterio|mystery|documental|documentary)\\b
+1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\b(deporte|deportes|sport|sports|futbol|football|soccer|baloncesto|basket|tenis|tennis|motor|ciclismo|golf|noticias|news|informativo|informativos|telediario|magazine|tertulia|debate|talk|concurso|quiz|game show|reality|entretenimiento|tiempo|weather|tarot|teletienda|infocomercial|musica|music)\\b
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\p{M}+
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\s*[\\(\\[][^)\\]]*[\\)\\]]
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\s+(T\\d+(\\s*E\\d+)?|S\\d+\\s*E\\d+|Temporada\\s+\\d+|Ep\\.?\\s*\\d+|Episodio\\s+\\d+)\\b.*$
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	^\\s*\\(?(EN\\s+)?DIRECTO\\)?\\s*[:\\-]?\\s*
+1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	directo
+1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	en directo
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	glcn_programme_info
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	w780
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	·
@@ -423,6 +433,8 @@
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	--- live diagnostics leading up to the crash ---
 1	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	no decoder on this device for the video track (audio plays, no picture)
 4	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	\0
+1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	-
+2	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	?
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	body="$failureText"
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder failed before first frame (${error.errorCodeName}) — rebuilding the decoder and retrying once
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder rebuild failed: ${it.message}
@@ -434,6 +446,8 @@
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	provider refused the default User-Agent — retrying as ${HttpClient.FALLBACK_USER_AGENT}
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	reclaim
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	stream didn't open — trying the ${alt.substringBefore('?').substringAfterLast('.')} form of this channel
+1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	subtitle on: track $id ${sel.group.getFormat(sel.trackIndex).sampleMimeType ?: "?"}
+1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	subtitle track $tId: ${f.sampleMimeType ?: f.codecs ?: "?"} lang=${lang ?: "-"} supported=${group.isTrackSupported(i)}
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	trying alternate format: ${HttpClient.redactUrl(alt)}
 4	player-core/src/main/java/tv/own/owntv/player/LiveStreamQuirks.kt	.m3u8
 3	player-core/src/main/java/tv/own/owntv/player/LiveStreamQuirks.kt	.ts
