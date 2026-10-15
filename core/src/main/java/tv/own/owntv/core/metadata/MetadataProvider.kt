@@ -32,6 +32,8 @@ data class MetadataSearchResult(
     val posterPath: String?,
     /** TMDB popularity — used as a tiebreak when several titles match. */
     val popularity: Double,
+    /** glcn: TMDB relative backdrop path — the wide picture, for guide programmes that only have a poster. */
+    val backdropPath: String? = null,
 )
 
 /**

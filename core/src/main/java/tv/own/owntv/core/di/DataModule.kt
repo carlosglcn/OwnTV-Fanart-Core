@@ -125,6 +125,8 @@ val dataModule = module {
     single<tv.own.owntv.core.metadata.MetadataProvider> {
         tv.own.owntv.core.metadata.TmdbProvider(get(), get(), get(), get())
     }
+    // glcn: a wide TMDB picture for guide programmes whose own is a poster.
+    single { tv.own.owntv.core.metadata.ProgrammeArtResolver(androidContext(), get(), get(), get()) }
     // provider, metadataDao, settings, overrideStore — the on-demand resolve + cache orchestrator (plan §7, §11.2 U5b).
     single { tv.own.owntv.core.metadata.MetadataRepository(get(), get(), get(), get(), get()) }
     single { tv.own.owntv.core.metadata.OriginalLanguageLookup(get(), get(), get()) }

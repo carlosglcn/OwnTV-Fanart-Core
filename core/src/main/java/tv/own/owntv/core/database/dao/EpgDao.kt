@@ -130,6 +130,10 @@ interface EpgDao {
     suspend fun programmeSummariesForChannel(epgKey: String, from: Long, to: Long): List<EpgProgrammeEntity>
 
     /** Lightweight rows for several Home On Now channels at once. */
+    /** glcn: the title of a programme that uses this picture (the art resolver's key). */
+    @Query("SELECT title FROM epg_programmes WHERE imageUrl = :url LIMIT 1")
+    suspend fun titleForImage(url: String): String?
+
     @Query(
         "SELECT id, sourceId, epgChannelId, startMs, stopMs, title, NULL AS description, 0 AS contentHash, " +
             "categories, year, rating, lengthMin, episode, imageUrl " +
