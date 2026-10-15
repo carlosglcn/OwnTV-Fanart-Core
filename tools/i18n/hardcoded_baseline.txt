@@ -338,6 +338,7 @@
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	focus_highlight_width
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_anim_style
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_dialogue_boost
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_home_backdrop
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_mpv_passthrough
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_season_mode
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_startup_sound

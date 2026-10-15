@@ -501,6 +501,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val AMBIENT_GLOW_ENABLED = booleanPreferencesKey("ambient_glow_enabled")
         val AMBIENT_GLOW_PULSE = booleanPreferencesKey("ambient_glow_pulse")
         val GLCN_SEASON_MODE = intPreferencesKey("glcn_season_mode")
+        val GLCN_HOME_BACKDROP = intPreferencesKey("glcn_home_backdrop")
         val GLCN_DIALOGUE_BOOST = booleanPreferencesKey("glcn_dialogue_boost")
         val GLCN_MPV_PASSTHROUGH = booleanPreferencesKey("glcn_mpv_passthrough")
         val GLCN_ANIM_STYLE = intPreferencesKey("glcn_anim_style")
@@ -907,6 +908,10 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     /** glcn: a short chime as the app opens (the season's own while a seasonal theme is on). */
     val startupSound: Flow<Boolean> = prefsFlow { it[Keys.GLCN_STARTUP_SOUND] ?: false }
     suspend fun setStartupSound(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_STARTUP_SOUND] = on } }
+
+    /** glcn: Home's background — 0 classic (top corner), 1 cinema (full screen, rows below), 2 panel (full screen, info at the side). */
+    val homeBackdropStyle: Flow<Int> = prefsFlow { it[Keys.GLCN_HOME_BACKDROP] ?: 0 }
+    suspend fun setHomeBackdropStyle(style: Int) { context.dataStore.edit { it[Keys.GLCN_HOME_BACKDROP] = style.coerceIn(0, 2) } }
 
     /** glcn: seasonal touches — 0 off, 1 details only, 2 details and small animations. */
     val seasonMode: Flow<Int> = prefsFlow { it[Keys.GLCN_SEASON_MODE] ?: 0 }

@@ -502,4 +502,9 @@
     <string name="glcn_ui_sounds_normal">Normales</string>
     <string name="glcn_startup_sound_title">Sonido al abrir</string>
     <string name="glcn_startup_sound_desc">Un breve sonido al abrir la app — el de la temporada si hay un tema de temporada activo</string>
+    <string name="glcn_home_backdrop_title">Fondo de Inicio</string>
+    <string name="glcn_home_backdrop_desc">Clásico: la imagen arriba a la derecha. Cine: la imagen a pantalla completa con su título y las filas abajo. Panel: la imagen detrás de todo y los detalles en un panel lateral</string>
+    <string name="glcn_home_backdrop_classic">Clásico</string>
+    <string name="glcn_home_backdrop_cinema">Cine</string>
+    <string name="glcn_home_backdrop_panel">Panel</string>
 </resources>
