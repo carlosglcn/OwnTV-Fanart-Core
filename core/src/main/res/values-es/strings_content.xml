@@ -488,4 +488,18 @@
     <string name="glcn_season_desc">Pequeños detalles en Inicio por Halloween, Navidad, Nochevieja, Carnaval y San Valentín</string>
     <string name="glcn_season_details">Solo detalles</string>
     <string name="glcn_season_animated">Con animaciones</string>
+    <string name="glcn_dialogue_title">Diálogos más claros</string>
+    <string name="glcn_dialogue_desc">Adelanta las voces y suaviza los graves — como el realce de diálogos de Kodi. Solo con sonido decodificado (no con paso directo)</string>
+    <string name="glcn_mpv_passthrough_title">Paso directo con MPV (experimental)</string>
+    <string name="glcn_mpv_passthrough_desc">NVIDIA SHIELD: las películas en MPV envían Dolby y DTS sin tocar al receptor, como Kodi. Requiere Paso directo y Sonido envolvente activados</string>
+    <string name="glcn_anim_style_title">Estilo de animación</string>
+    <string name="glcn_anim_style_desc">Completo: zoom, destello y fondo en movimiento en la tarjeta seleccionada. Sutil: solo la inclinación tipo Apple TV</string>
+    <string name="glcn_anim_style_full">Completo</string>
+    <string name="glcn_anim_style_subtle">Sutil</string>
+    <string name="glcn_ui_sounds_title">Sonidos de menú</string>
+    <string name="glcn_ui_sounds_desc">Un tic suave al moverte y un clic al pulsar OK y Atrás. En silencio mientras algo se reproduce</string>
+    <string name="glcn_ui_sounds_soft">Suaves</string>
+    <string name="glcn_ui_sounds_normal">Normales</string>
+    <string name="glcn_startup_sound_title">Sonido al abrir</string>
+    <string name="glcn_startup_sound_desc">Un breve sonido al abrir la app — el de la temporada si hay un tema de temporada activo</string>
 </resources>

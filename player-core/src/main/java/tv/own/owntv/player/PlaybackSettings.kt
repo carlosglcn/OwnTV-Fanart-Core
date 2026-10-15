@@ -71,6 +71,9 @@ data class PlaybackSettings(
     val tunneledPlayback: Boolean,
     /** D-M5 — keep CPU and Wi-Fi awake while ExoPlayer plays. */
     val backgroundPlayback: Boolean,
+    /** glcn — clearer speech on mpv, and Dolby/DTS bitstream from mpv (experimental). */
+    val dialogueBoost: Boolean = false,
+    val mpvPassthrough: Boolean = false,
 ) {
     companion object {
         @Volatile private var shared: Pair<SettingsRepository, StateFlow<PlaybackSettings?>>? = null
@@ -100,6 +103,7 @@ data class PlaybackSettings(
                 s.audioPassthrough, s.nightMode, s.volumeLevelling,
                 s.maxVideoHeight, s.mobileDataMaxVideoHeight, s.tunneledPlayback, s.backgroundPlayback,
                 s.softwareDecodeAbove1080p,
+                s.dialogueBoost, s.mpvPassthrough,
             )
             return combine(sources) { v ->
                 PlaybackSettings(
@@ -137,6 +141,8 @@ data class PlaybackSettings(
                     tunneledPlayback = v[31] as Boolean,
                     backgroundPlayback = v[32] as Boolean,
                     softwareDecodeAbove1080p = v[33] as Boolean,
+                    dialogueBoost = v[34] as Boolean,
+                    mpvPassthrough = v[35] as Boolean,
                 )
             }.stateIn(CoroutineScope(SupervisorJob() + Dispatchers.Default), SharingStarted.Eagerly, null)
         }

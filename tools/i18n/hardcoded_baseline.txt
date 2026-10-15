@@ -336,7 +336,12 @@
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	dns_port
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	focus_highlight_color
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	focus_highlight_width
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_anim_style
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_dialogue_boost
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_mpv_passthrough
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_season_mode
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_startup_sound
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_ui_sounds
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	live_latency_reset_416
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	sub_bg_opacity
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	sub_color
@@ -439,6 +444,9 @@
 1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🥂
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	${Build.MANUFACTURER} ${Build.MODEL} · Android ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	--- live diagnostics leading up to the crash ---
+1	player-core/src/main/java/tv/own/owntv/player/AudioDynamics.kt	equalizer=f=110:t=q:w=1.0:g=-3
+1	player-core/src/main/java/tv/own/owntv/player/AudioDynamics.kt	equalizer=f=1200:t=q:w=1.4:g=2
+1	player-core/src/main/java/tv/own/owntv/player/AudioDynamics.kt	equalizer=f=2600:t=q:w=1.1:g=5
 1	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	no decoder on this device for the video track (audio plays, no picture)
 4	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	\0
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	-
@@ -459,10 +467,15 @@
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	trying alternate format: ${HttpClient.redactUrl(alt)}
 4	player-core/src/main/java/tv/own/owntv/player/LiveStreamQuirks.kt	.m3u8
 3	player-core/src/main/java/tv/own/owntv/player/LiveStreamQuirks.kt	.ts
+2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	\0
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	#00000000
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	#FFFFFFFF
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	,
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	.m3u8
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	NVIDIA
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	ac3,eac3,dts,dts-hd,truehd
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audio-spdif
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audio-spdif=${it.ifEmpty { "off" }}
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	auto
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	demuxer
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	failed to create hw uploader|can't find video conversion
@@ -474,6 +487,7 @@
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpegts
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpv live open timed out after ${openingMs}ms on the full probe — retrying with the fast probe
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	no
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	off
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	playback failed — retrying once as ${HttpClient.FALLBACK_USER_AGENT}
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	software-decoded video can't use the direct surface
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	sub-align-x
@@ -488,3 +502,22 @@
 1	player-core/src/main/java/tv/own/owntv/player/PlayerDiagnostics.kt	\0
 1	player-core/src/main/java/tv/own/owntv/player/PlayerDiagnostics.kt	429
 1	player-core/src/main/java/tv/own/owntv/player/PlayerDiagnostics.kt	458
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	aac
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	ac3
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	comentario
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	comment
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	dts
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	dtshd
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	dtsma
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	dtsx
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	eac3
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	ec3
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	flac
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	joc
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	mlp
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	mp2
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	mp3
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	mpeg
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	opus
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	pcm
+1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	truehd

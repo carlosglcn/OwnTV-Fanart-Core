@@ -14,9 +14,37 @@ internal object TrackMemory {
 
     /** The audio track to switch to, or null when none matches or a matching one is already playing. */
     fun audioToSelect(tracks: List<TrackOption>, lang: String?): TrackOption? {
-        if (lang.isNullOrBlank()) return null
-        if (tracks.any { it.selected && subtitleLanguageMatches(lang, it.lang) }) return null
-        return tracks.firstOrNull { subtitleLanguageMatches(lang, it.lang) }
+        // glcn: like Kodi, the best sound in the wanted language — a film's TrueHD/Atmos over the AC3
+        // copy beside it. Without a remembered language, the language of the track the file chose.
+        val want = lang?.takeIf { it.isNotBlank() } ?: tracks.firstOrNull { it.selected }?.lang
+        val candidates = if (want.isNullOrBlank()) {
+            if (tracks.any { it.lang != null }) return null else tracks
+        } else tracks.filter { subtitleLanguageMatches(want, it.lang) }
+        val best = candidates.filterNot(::isCommentary).maxWithOrNull(compareBy<TrackOption> { audioRank(it.codec) }.thenBy { -it.typeIndex })
+            ?: return null
+        val current = tracks.firstOrNull { it.selected }
+        if (current != null && current.mpvId == best.mpvId) return null
+        if (current != null && candidates.any { it.mpvId == current.mpvId } && audioRank(current.codec) >= audioRank(best.codec)) return null
+        return best
+    }
+
+    private fun isCommentary(t: TrackOption): Boolean =
+        t.label.contains("comment", ignoreCase = true) || t.label.contains("comentario", ignoreCase = true)
+
+    /** How good an audio codec sounds, roughly as Kodi ranks its default stream. */
+    fun audioRank(codec: String?): Int {
+        val c = codec?.lowercase()?.filter { it.isLetterOrDigit() } ?: return 0
+        return when {
+            c.contains("truehd") || c.contains("mlp") -> 7
+            c.contains("dtshd") || c.contains("dtsma") || c.contains("dtsx") -> 6
+            c.contains("eac3") || c.contains("ec3") || c.contains("joc") -> 5
+            c.contains("flac") || c.startsWith("pcm") -> 5
+            c.contains("dts") -> 4
+            c.contains("ac3") -> 3
+            c.contains("opus") || c.contains("aac") -> 2
+            c.contains("mp3") || c.contains("mp2") || c.contains("mpeg") -> 1
+            else -> 0
+        }
     }
 
     sealed interface SubtitleAction {

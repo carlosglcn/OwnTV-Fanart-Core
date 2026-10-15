@@ -856,4 +856,18 @@
     <string name="glcn_season_desc">Small touches on Home for Halloween, Christmas, New Year\'s Eve, Carnival and Valentine\'s</string>
     <string name="glcn_season_details">Details</string>
     <string name="glcn_season_animated">Animated</string>
+    <string name="glcn_dialogue_title">Clearer dialogue</string>
+    <string name="glcn_dialogue_desc">Brings voices forward and tames the boom — like Kodi\'s dialogue boost. Decoded sound only (not with passthrough)</string>
+    <string name="glcn_mpv_passthrough_title">Passthrough with MPV (experimental)</string>
+    <string name="glcn_mpv_passthrough_desc">NVIDIA SHIELD: films on MPV send Dolby and DTS untouched to the receiver, as Kodi does. Needs Passthrough and Surround sound on</string>
+    <string name="glcn_anim_style_title">Animation style</string>
+    <string name="glcn_anim_style_desc">Full: zoom, light and a moving backdrop on the focused card. Subtle: only the Apple TV-style lean</string>
+    <string name="glcn_anim_style_full">Full</string>
+    <string name="glcn_anim_style_subtle">Subtle</string>
+    <string name="glcn_ui_sounds_title">Menu sounds</string>
+    <string name="glcn_ui_sounds_desc">A soft tick as you move, a click on OK and Back. Silent while anything plays</string>
+    <string name="glcn_ui_sounds_soft">Soft</string>
+    <string name="glcn_ui_sounds_normal">Normal</string>
+    <string name="glcn_startup_sound_title">Opening sound</string>
+    <string name="glcn_startup_sound_desc">A short chime when the app opens — the season\'s own with a seasonal theme on</string>
 </resources>

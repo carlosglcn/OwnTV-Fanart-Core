@@ -821,6 +821,16 @@ class OwnTVPlayer(
             "stereo"
         }
 
+    /** glcn: mpv `audio-spdif` — the codecs to bitstream, or "" for none. Only on NVIDIA hardware, only
+     *  when the user opted in, passthrough is allowed and no audio filter needs the decoded sound. */
+    private fun mpvSpdifValue(): String {
+        val p = playbackSettings.value ?: return ""
+        val nvidia = android.os.Build.MANUFACTURER.equals("NVIDIA", ignoreCase = true)
+        val ok = nvidia && p.mpvPassthrough && !p.dialogueBoost && multichannelAllowed() &&
+            AudioDynamics.passthroughAllowed(p.audioPassthrough, p.nightMode, p.volumeLevelling)
+        return if (ok) "ac3,eac3,dts,dts-hd,truehd" else ""
+    }
+
     /** The `audio-channels` this mpv instance was last given; a write re-inits audio, so only a change is written. */
     @Volatile private var appliedAudioChannels: String? = null
 
@@ -1180,7 +1190,7 @@ class OwnTVPlayer(
             }
             .launchIn(scope)
         // N9/N10 on mpv — live, on the file playing now (the filter chain is rebuilt in place).
-        playbackSettings.field { AudioDynamics.mpvFilter(it.nightMode, it.volumeLevelling) }.onEach { af ->
+        playbackSettings.field { AudioDynamics.mpvFilter(it.nightMode, it.volumeLevelling, it.dialogueBoost) }.onEach { af ->
             mpvAudioFilter = af
             if (initialized) applyMpvAudioFilter()
         }.launchIn(scope)
@@ -2577,6 +2587,12 @@ class OwnTVPlayer(
             appliedAudioChannels = audioChannelsValue().also {
                 setOptionString("audio-channels", it)
                 android.util.Log.i(TAG, "audio-channels=$it")
+            }
+            // glcn: opt-in bitstream from mpv where the clock problem above does not exist (NVIDIA SHIELD,
+            // which Kodi bitstreams on the same way): Dolby and DTS reach the receiver untouched.
+            mpvSpdifValue().let {
+                setOptionString("audio-spdif", it)
+                android.util.Log.i(TAG, "audio-spdif=${it.ifEmpty { "off" }}")
             }
             // Compatibility for multichannel: some HALs choke on Float / 44.1 kHz 5.1 PCM (mis-sized buffer
             // → 2× drain, #25). Pin the universally-safe 16-bit/48 kHz output whenever multichannel is

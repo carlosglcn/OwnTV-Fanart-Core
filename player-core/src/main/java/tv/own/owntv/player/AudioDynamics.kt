@@ -146,9 +146,16 @@ class AudioDynamics(private val sampleRate: Int, private val channels: Int) {
          * class's threshold, ratio, attack, release and make-up; `alimiter` then keeps the result under
          * full scale, as [CEILING] does here. Order as in [process]: levelling first, then the compressor.
          */
-        fun mpvFilter(night: Boolean, levelling: Boolean): String {
-            if (!night && !levelling) return ""
+        fun mpvFilter(night: Boolean, levelling: Boolean, dialogue: Boolean = false): String {
+            if (!night && !levelling && !dialogue) return ""
             val chain = buildList {
+                // glcn: clearer speech — the voice band a little forward, the boom a little back. Works on
+                // any channel layout (an EQ per channel), so stereo and 5.1 alike.
+                if (dialogue) {
+                    add("equalizer=f=2600:t=q:w=1.1:g=5")
+                    add("equalizer=f=1200:t=q:w=1.4:g=2")
+                    add("equalizer=f=110:t=q:w=1.0:g=-3")
+                }
                 if (levelling) add("dynaudnorm=f=250:g=15:p=0.95:m=${fmt(LEVEL_MAX.toDouble())}:r=${fmt(TARGET_RMS)}")
                 if (night) add(
                     "acompressor=threshold=${fmt(NIGHT_THRESHOLD.toDouble())}:ratio=${NIGHT_RATIO.toInt()}" +

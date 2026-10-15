@@ -29,6 +29,15 @@ class TrackMemoryTest {
         assertNull(TrackMemory.audioToSelect(tracks, null))
     }
 
+    @Test fun theBestSoundInTheLanguageWins() {
+        fun a(id: Int, lang: String, codec: String, selected: Boolean = false, label: String = "") =
+            TrackOption(label = label, mpvId = id, selected = selected, lang = lang, codec = codec)
+        val film = listOf(a(1, "spa", "ac3", selected = true), a(2, "spa", "truehd"), a(3, "eng", "truehd"), a(4, "spa", "eac3", label = "Comentario"))
+        assertEquals(2, TrackMemory.audioToSelect(film, null)?.mpvId)
+        assertEquals(3, TrackMemory.audioToSelect(film, "en")?.mpvId)
+        assertNull(TrackMemory.audioToSelect(listOf(a(1, "spa", "truehd", selected = true), a(2, "spa", "ac3")), null))
+    }
+
     @Test fun subtitlesOffOnlyActsWhenOneIsOn() {
         val on = listOf(t(1, "eng", selected = true))
         val off = listOf(t(1, "eng"))

@@ -501,6 +501,11 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val AMBIENT_GLOW_ENABLED = booleanPreferencesKey("ambient_glow_enabled")
         val AMBIENT_GLOW_PULSE = booleanPreferencesKey("ambient_glow_pulse")
         val GLCN_SEASON_MODE = intPreferencesKey("glcn_season_mode")
+        val GLCN_DIALOGUE_BOOST = booleanPreferencesKey("glcn_dialogue_boost")
+        val GLCN_MPV_PASSTHROUGH = booleanPreferencesKey("glcn_mpv_passthrough")
+        val GLCN_ANIM_STYLE = intPreferencesKey("glcn_anim_style")
+        val GLCN_UI_SOUNDS = intPreferencesKey("glcn_ui_sounds")
+        val GLCN_STARTUP_SOUND = booleanPreferencesKey("glcn_startup_sound")
         val RESUME_LAST_CHANNEL = booleanPreferencesKey("resume_last_channel")
         val LAST_LIVE_CATEGORY = stringPreferencesKey("last_live_category")
         val RECENT_SEARCHES = stringPreferencesKey("recent_searches")
@@ -882,6 +887,26 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     suspend fun setAmbientGlowEnabled(enabled: Boolean) {
         context.dataStore.edit { it[Keys.AMBIENT_GLOW_ENABLED] = enabled }
     }
+
+    /** glcn: clearer speech — a gentle lift of the voice band on mpv (films and channels decoded here). */
+    val dialogueBoost: Flow<Boolean> = prefsFlow { it[Keys.GLCN_DIALOGUE_BOOST] ?: false }
+    suspend fun setDialogueBoost(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_DIALOGUE_BOOST] = on } }
+
+    /** glcn: Dolby/DTS sent untouched to the receiver from mpv too (experimental; NVIDIA SHIELD). */
+    val mpvPassthrough: Flow<Boolean> = prefsFlow { it[Keys.GLCN_MPV_PASSTHROUGH] ?: false }
+    suspend fun setMpvPassthrough(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_MPV_PASSTHROUGH] = on } }
+
+    /** glcn: how much the focused card moves — 0 full (zoom, light, tilt, drifting backdrop), 1 subtle (Apple TV-like). */
+    val animStyle: Flow<Int> = prefsFlow { it[Keys.GLCN_ANIM_STYLE] ?: 0 }
+    suspend fun setAnimStyle(style: Int) { context.dataStore.edit { it[Keys.GLCN_ANIM_STYLE] = style.coerceIn(0, 1) } }
+
+    /** glcn: menu sounds — 0 off, 1 soft, 2 normal. */
+    val uiSounds: Flow<Int> = prefsFlow { it[Keys.GLCN_UI_SOUNDS] ?: 0 }
+    suspend fun setUiSounds(level: Int) { context.dataStore.edit { it[Keys.GLCN_UI_SOUNDS] = level.coerceIn(0, 2) } }
+
+    /** glcn: a short chime as the app opens (the season's own while a seasonal theme is on). */
+    val startupSound: Flow<Boolean> = prefsFlow { it[Keys.GLCN_STARTUP_SOUND] ?: false }
+    suspend fun setStartupSound(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_STARTUP_SOUND] = on } }
 
     /** glcn: seasonal touches — 0 off, 1 details only, 2 details and small animations. */
     val seasonMode: Flow<Int> = prefsFlow { it[Keys.GLCN_SEASON_MODE] ?: 0 }
