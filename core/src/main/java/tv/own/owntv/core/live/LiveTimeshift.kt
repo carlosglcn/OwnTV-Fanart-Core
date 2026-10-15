@@ -156,6 +156,21 @@ class LiveTimeshift(
     }
 
     /**
+     * glcn: "Go to live" while the picture comes from the saved copy (a pause, a rewind into it). The
+     * channel's stream never stopped, so re-tuning it finds the same copy at the same point and the
+     * button looked broken: the copy itself is re-opened at its newest picture. False when the picture
+     * is not from the copy (live, or the provider's archive) — the caller re-tunes as before.
+     */
+    fun goLiveOnCopy(): Boolean {
+        val l = local ?: return false
+        if (archiveBaseWall != null || _offsetSec.value == null) return false
+        clear()
+        localSettleUntil = nowMs() + LOCAL_SETTLE_MS
+        l.seek(null)
+        return true
+    }
+
+    /**
      * A provider archive is never asked for less than [CatchupJumps.MIN_OFFSET_SEC] behind live: one 30 s
      * rewind, floored to the current minute, asked the panel for a recording not yet written — a stream
      * that starts with no picture (#229). Inside that last minute a step back lands on the minimum and a

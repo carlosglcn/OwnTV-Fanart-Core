@@ -2773,6 +2773,7 @@ class LivePreviewEngine(
     private fun applySubtitleTrack(id: Int) {
         val p = player ?: return
         val sel = tune.textSelections.firstOrNull { it.id == id } ?: return
+        LiveDiagnosticsLog.event("subtitle on: track $id ${sel.group.getFormat(sel.trackIndex).sampleMimeType ?: "?"}")
         p.trackSelectionParameters = p.trackSelectionParameters.buildUpon()
             .setOverrideForType(androidx.media3.common.TrackSelectionOverride(sel.group, listOf(sel.trackIndex)))
             .setTrackTypeDisabled(androidx.media3.common.C.TRACK_TYPE_TEXT, false)
@@ -2837,6 +2838,9 @@ class LivePreviewEngine(
                 androidx.media3.common.C.TRACK_TYPE_TEXT -> for (i in 0 until group.length) {
                     val f = group.getTrackFormat(i)
                     val lang = f.language?.takeIf { it.isNotBlank() && it != "und" }
+                    // glcn: which subtitle formats a channel carries, and whether ExoPlayer can draw them
+                    // (DVB bitmaps yes, teletext no) — the support report is how a blank one is explained.
+                    LiveDiagnosticsLog.event("subtitle track $tId: ${f.sampleMimeType ?: f.codecs ?: "?"} lang=${lang ?: "-"} supported=${group.isTrackSupported(i)}")
                     text.add(
                         TrackOption(
                             label = f.label.orEmpty(),
@@ -2845,6 +2849,7 @@ class LivePreviewEngine(
                             lang = lang,
                             typeIndex = tId,
                             labelKind = TrackLabelKind.SUBTITLE,
+                            codec = f.sampleMimeType,
                         ),
                     )
                     tSel.add(TextSel(tId, group.mediaTrackGroup, i)); tId++
