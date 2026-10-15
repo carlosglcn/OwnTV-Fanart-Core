@@ -43,6 +43,13 @@ class ProgrammeArtResolver(
     /** TMDB's average rating for the programme called [title]; null for none. */
     suspend fun ratingFor(title: String): Double? = infoFor(title)?.rating
 
+    /**
+     * The rating for a guide programme, asked only when it may be a film or a series: sport, news,
+     * talk and quiz shows are never looked up, so the hourly allowance goes to what TMDB can rate.
+     */
+    suspend fun ratingFor(title: String, categories: String?): Double? =
+        if (worthRating(title, categories)) infoFor(title)?.rating else null
+
     suspend fun infoFor(title: String): Info? = withContext(Dispatchers.IO) {
         if (!runCatching { settings.metadataConfig().enabled }.getOrDefault(false)) return@withContext null
         val query = clean(title)
@@ -122,6 +129,22 @@ class ProgrammeArtResolver(
             .lowercase()
             .replace(Regex("[^a-z0-9]+"), " ")
             .trim()
+
+        private val FILM_CATS = Regex("""\b(cine|pelicula|peliculas|film|movie|movies|serie|series|drama|comedia|comedy|thriller|terror|horror|accion|action|animacion|animation|ciencia ficcion|sci fi|fantasia|fantasy|western|suspense|romance|aventura|adventure|crimen|crime|policiaca|misterio|mystery|documental|documentary)\b""")
+        private val NOT_FILM = Regex("""\b(deporte|deportes|sport|sports|futbol|football|soccer|baloncesto|basket|tenis|tennis|motor|ciclismo|golf|noticias|news|informativo|informativos|telediario|magazine|tertulia|debate|talk|concurso|quiz|game show|reality|entretenimiento|tiempo|weather|tarot|teletienda|infocomercial|musica|music)\b""")
+
+        /** Whether a guide programme may be a film or a series TMDB can rate. */
+        fun worthRating(title: String, categories: String?): Boolean {
+            val cats = categories?.let(::fold).orEmpty()
+            val t = fold(title)
+            if (cats.isNotEmpty()) {
+                if (FILM_CATS.containsMatchIn(cats)) return !NOT_FILM.containsMatchIn(t)
+                if (NOT_FILM.containsMatchIn(cats)) return false
+            }
+            if (NOT_FILM.containsMatchIn(t)) return false
+            if (t.startsWith("directo") || t.contains(" en directo")) return false
+            return true
+        }
 
         /** "7,4" in Spanish, "7.4" in English. */
         fun format(rating: Double): String = String.format(java.util.Locale.getDefault(), "%.1f", rating)
