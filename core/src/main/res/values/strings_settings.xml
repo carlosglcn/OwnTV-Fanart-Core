@@ -2628,7 +2628,7 @@
     <!-- Translators: Colour name of an app icon: charcoal, like the flip boards in old railway stations and airports. -->
     <string name="app_icon_board">Station Board</string>
     <!-- Translators: Colour name of an app icon, the default: a cream white, like an eggshell. -->
-    <string name="app_icon_eggshell">Eggshell</string>
+    <string name="app_icon_eggshell">Fanart</string>
     <!-- Translators: Colour name of an app icon: an olive green. -->
     <string name="app_icon_olive">Olive</string>
     <!-- Translators: Colour name of an app icon: a cream card with an olive-green play button. -->

@@ -30,7 +30,7 @@ enum class AppIcon(
     COBALT("Cobalt", R.string.app_icon_cobalt, R.drawable.owntv_mark_cobalt, R.drawable.owntv_mark_small_cobalt, R.drawable.owntv_banner_cobalt, 0xFF8AAAFF, 0xFF3558C8),
     TOMATO("Tomato", R.string.app_icon_tomato, R.drawable.owntv_mark_tomato, R.drawable.owntv_mark_small_tomato, R.drawable.owntv_banner_tomato, 0xFFFF9C84, 0xFFC4412C),
     BOARD("Board", R.string.app_icon_board, R.drawable.owntv_mark_board, R.drawable.owntv_mark_small_board, R.drawable.owntv_banner_board, 0xFF52DBC8, 0xFF13806F),
-    EGGSHELL("", R.string.app_icon_eggshell, R.drawable.owntv_mark_eggshell, R.drawable.owntv_mark_small_eggshell, R.drawable.owntv_banner_eggshell, 0xFF86D3DB, 0xFF17616C),
+    EGGSHELL("", R.string.app_icon_eggshell, R.drawable.glcn_mark, R.drawable.glcn_mark, R.drawable.owntv_banner_eggshell, 0xFF86D3DB, 0xFF17616C),
     OLIVE("Olive", R.string.app_icon_olive, R.drawable.owntv_mark_olive, R.drawable.owntv_mark_small_olive, R.drawable.owntv_banner_olive, 0xFFA5CC4E, 0xFF5E7F1B),
     OLIVE_CREAM("OliveCream", R.string.app_icon_olive_cream, R.drawable.owntv_mark_olive_cream, R.drawable.owntv_mark_small_olive_cream, R.drawable.owntv_banner_olive_cream, 0xFFA5CC4E, 0xFF5E7F1B),
 

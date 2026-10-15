@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- glcn: OwnTV Fanart icon background — deep indigo night (tools/glcn/render_icon.py). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient android:angle="270" android:startColor="#FF221C4A" android:endColor="#FF0C0C1C" />
+</shape>

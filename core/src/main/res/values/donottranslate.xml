@@ -5,7 +5,7 @@
   from translation export. Keep them here, not in strings*.xml.
 -->
 <resources>
-    <string name="app_name" translatable="false">OwnTV glcn</string>
+    <string name="app_name" translatable="false">OwnTV Fanart</string>
     <string name="brand_own" translatable="false">Own</string>
     <string name="brand_tv" translatable="false">TV</string>
     <string name="settings_player_exoplayer" translatable="false">ExoPlayer</string>
