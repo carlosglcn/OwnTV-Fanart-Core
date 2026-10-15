@@ -356,14 +356,39 @@ class HomeFeedReader(
                     val from = maxOf(t, cal.timeInMillis)
                     val to = cal.timeInMillis + 3 * 3_600_000L
                     if (from >= to) return@runCatching emptyList()
+                    val shift = shiftAsync.await()
                     val byId = channels.associateBy { it.id }
-                    guide.slice(channels, hidden.live, shiftAsync.await(), from, to)
+                    fun window(rows: List<EpgProgrammeEntity>) =
+                        rows.filter { it.startMs in from until to && it.stopMs - it.startMs >= 20 * 60_000L }
+                    // The user's own channels: their evening, with a series' back-to-back episodes once.
+                    val mine = guide.slice(channels, hidden.live, shift, from, to).flatMap { (id, rows) ->
+                        val ch = byId[id] ?: return@flatMap emptyList()
+                        window(rows)
+                            .distinctBy { tv.own.owntv.core.metadata.ProgrammeArtResolver.fold(tv.own.owntv.core.metadata.ProgrammeArtResolver.clean(it.title)) }
+                            .take(2).map { TonightItem(ch, it) }
+                    }
+                    // Every other channel: only the evening's highlights — a live match, a premiere, a film.
+                    val others = runCatching {
+                        channelDao.allForSources(liveIds.toList(), 5_000)
+                            .filter { it.id !in byId && !isChannelHidden(it, hidden) }
+                    }.getOrDefault(emptyList())
+                    val othersById = others.associateBy { it.id }
+                    val highlights = if (others.isEmpty()) emptyList() else guide.slice(others, hidden.live, shift, from, to)
                         .flatMap { (id, rows) ->
-                            val ch = byId[id] ?: return@flatMap emptyList()
-                            rows.filter { it.startMs in from until to && it.stopMs - it.startMs >= 20 * 60_000L }
-                                .take(2).map { TonightItem(ch, it) }
+                            val ch = othersById[id] ?: return@flatMap emptyList()
+                            window(rows).filter { tonightRank(it) <= 2 }.take(1).map { TonightItem(ch, it) }
                         }
-                        .sortedWith(compareBy<TonightItem> { it.programme.startMs }.thenBy { it.programme.imageUrl.isNullOrBlank() })
+                        .sortedWith(compareBy<TonightItem> { tonightRank(it.programme) }.thenBy { it.programme.startMs })
+                        .take(TONIGHT_HIGHLIGHTS)
+                    (mine + highlights)
+                        // The same programme on an HD and an SD copy of a channel shows once.
+                        .distinctBy { tv.own.owntv.core.metadata.ProgrammeArtResolver.fold(it.programme.title) + "|" + it.programme.startMs }
+                        .sortedWith(
+                            // Highlights first, then the evening in order, news and talk last.
+                            compareBy<TonightItem> { tonightRank(it.programme).let { r -> if (r <= 2) 0 else if (r == 3) 1 else 2 } }
+                                .thenBy { it.programme.startMs }
+                                .thenBy { it.programme.imageUrl.isNullOrBlank() },
+                        )
                         .take(TONIGHT_LIMIT)
                 }.getOrDefault(emptyList())
             }
@@ -699,3 +724,28 @@ private const val RECENT_VOD_ROW_LIMIT = 30
 private const val SPORTS_ROW_LIMIT = 20
 private const val TONIGHT_LIMIT = 24
 private const val GENRE_ROWS = 4
+
+private val TONIGHT_PREMIERE = Regex("""\b(estreno|premiere|stream premiere)\b""")
+private val TONIGHT_FILM = Regex("""\b(cine|pelicula|peliculas|film|movie)\b""")
+private val TONIGHT_LOW = Regex("""\b(informativo|informativos|noticias|news|telediario|tiempo|magazine|tertulia|debate|concurso|teletienda|tarot|late night)\b""")
+private const val TONIGHT_HIGHLIGHTS = 10
+
+/**
+ * glcn: how "Tonight" weighs a programme: 0 a live match, 1 a premiere, 2 a film, 3 a series or
+ * anything else, 4 news, talk and quiz shows.
+ */
+internal fun tonightRank(p: EpgProgrammeEntity): Int {
+    val title = tv.own.owntv.core.metadata.ProgrammeArtResolver.fold(p.title)
+    val f = title + " " + (p.categories?.let(tv.own.owntv.core.metadata.ProgrammeArtResolver::fold) ?: "")
+    val match = tv.own.owntv.core.live.SportsNow.isLive(p) || TONIGHT_MATCH.containsMatchIn(p.title)
+    return when {
+        tv.own.owntv.core.live.SportsNow.isSport(p) && match -> 0
+        TONIGHT_PREMIERE.containsMatchIn(f) -> 1
+        TONIGHT_FILM.containsMatchIn(f) -> 2
+        TONIGHT_LOW.containsMatchIn(f) -> 4
+        else -> 3
+    }
+}
+
+/** "Real Madrid - Barcelona", "Lakers vs Celtics". */
+private val TONIGHT_MATCH = Regex("""\S\s+(-|–|vs\.?|v)\s+\S""", RegexOption.IGNORE_CASE)
