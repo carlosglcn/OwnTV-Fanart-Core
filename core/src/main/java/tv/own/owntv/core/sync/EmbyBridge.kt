@@ -44,7 +44,7 @@ internal object EmbyBridge {
     private const val AUTH_FIELDS =
         "Client=\"OwnTV\", Device=\"OwnTV\", DeviceId=\"owntv-glcn\", Version=\"1.0\""
 
-    private const val FIELDS = "ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,Container,Genres,Overview,CommunityRating,BackdropImageTags,DateCreated"
+    private const val FIELDS = "ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,Container,Genres,Overview,CommunityRating,BackdropImageTags,DateCreated,ProviderIds"
 
     /**
      * `http(s)://user[:password]@host[:port][/path]` with no file name in the path → a possible server.
@@ -175,6 +175,10 @@ internal object EmbyBridge {
         }
         val sb = StringBuilder("#EXTM3U\n")
         for (m in items(s, "Movie")) {
+            // A file the library could not identify — no year and no IMDb/TMDB id — is not a film:
+            // calibration clips ("100% Blanco", "5% Gris"), samples, home videos. Left out.
+            val ids = m.optJSONObject("ProviderIds")
+            if (!m.has("ProductionYear") && (ids == null || ids.length() == 0)) continue
             val title = m.optString("Name")
             val year = m.optInt("ProductionYear", 0)
             val label = if (year > 0) "$title ($year)" else title

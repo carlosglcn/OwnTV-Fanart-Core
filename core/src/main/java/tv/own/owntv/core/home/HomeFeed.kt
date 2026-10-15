@@ -344,7 +344,9 @@ class HomeFeedReader(
             val tonightAsync = async {
                 if (HomeRow.TONIGHT !in config.visibleOrder) emptyList()
                 else runCatching {
-                    val channels = favLive.ifEmpty { live }.take(60)
+                    // Favourites and the recently watched together: either alone is often too few
+                    // channels with a guide for the evening to show anything.
+                    val channels = (favLive + live).distinctBy { it.id }.take(80)
                     if (channels.isEmpty()) return@runCatching emptyList()
                     val t = System.currentTimeMillis()
                     val cal = java.util.Calendar.getInstance().apply {
