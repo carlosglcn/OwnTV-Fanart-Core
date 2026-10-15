@@ -370,7 +370,7 @@ class HomeFeedReader(
                     // Every other channel: only the evening's highlights — a live match, a premiere, a film.
                     val others = runCatching {
                         channelDao.allForSources(liveIds.toList(), 5_000)
-                            .filter { it.id !in byId && !isChannelHidden(it, hidden) }
+                            .filter { it.id !in byId && !isChannelHidden(it, hidden) && TONIGHT_CHANNEL.containsMatchIn(it.name) }
                     }.getOrDefault(emptyList())
                     val othersById = others.associateBy { it.id }
                     val highlights = if (others.isEmpty()) emptyList() else guide.slice(others, hidden.live, shift, from, to)
@@ -729,6 +729,11 @@ private val TONIGHT_PREMIERE = Regex("""\b(estreno|premiere|stream premiere)\b""
 private val TONIGHT_FILM = Regex("""\b(cine|pelicula|peliculas|film|movie)\b""")
 private val TONIGHT_LOW = Regex("""\b(informativo|informativos|noticias|news|telediario|tiempo|magazine|tertulia|debate|concurso|teletienda|tarot|late night)\b""")
 private const val TONIGHT_HIGHLIGHTS = 10
+
+/** Channels worth scanning for the evening's highlights — sport and film channels — so Home stays quick. */
+private val TONIGHT_CHANNEL = Regex(
+    """(?i)(deport|sport|liga|futbol|fútbol|champions|dazn|eurosport|gol|f1|motor|cine|cinema|movie|film|estreno|accion|acción|comedia|drama|xtrm|hollywood|tcm|paramount|amc|axn|tnt|fox|syfy|scifi|calle 13|cosmo|dark|warner|star|clan)""",
+)
 
 /**
  * glcn: how "Tonight" weighs a programme: 0 a live match, 1 a premiere, 2 a film, 3 a series or

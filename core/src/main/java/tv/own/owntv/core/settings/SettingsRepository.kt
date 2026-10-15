@@ -500,6 +500,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val ANIMATION_LEVEL = stringPreferencesKey("animation_level")
         val AMBIENT_GLOW_ENABLED = booleanPreferencesKey("ambient_glow_enabled")
         val AMBIENT_GLOW_PULSE = booleanPreferencesKey("ambient_glow_pulse")
+        val GLCN_SEASON_MODE = intPreferencesKey("glcn_season_mode")
         val RESUME_LAST_CHANNEL = booleanPreferencesKey("resume_last_channel")
         val LAST_LIVE_CATEGORY = stringPreferencesKey("last_live_category")
         val RECENT_SEARCHES = stringPreferencesKey("recent_searches")
@@ -880,6 +881,13 @@ class SettingsRepository(private val context: Context, private val localeStore: 
 
     suspend fun setAmbientGlowEnabled(enabled: Boolean) {
         context.dataStore.edit { it[Keys.AMBIENT_GLOW_ENABLED] = enabled }
+    }
+
+    /** glcn: seasonal touches — 0 off, 1 details only, 2 details and small animations. */
+    val seasonMode: Flow<Int> = prefsFlow { it[Keys.GLCN_SEASON_MODE] ?: 0 }
+
+    suspend fun setSeasonMode(mode: Int) {
+        context.dataStore.edit { it[Keys.GLCN_SEASON_MODE] = mode.coerceIn(0, 2) }
     }
 
     val ambientGlowPulse: Flow<Boolean> = prefsFlow { it[Keys.AMBIENT_GLOW_PULSE] ?: true }

@@ -484,4 +484,8 @@
     <string name="glcn_recent_series_description">Series nuevas o con episodios nuevos</string>
     <string name="glcn_reminder_channel">Recordatorios de programas</string>
     <string name="glcn_reminder_starts">Empieza ahora en %1$s</string>
+    <string name="glcn_season_title">Temas de temporada</string>
+    <string name="glcn_season_desc">Pequeños detalles en Inicio por Halloween, Navidad, Nochevieja, Carnaval y San Valentín</string>
+    <string name="glcn_season_details">Solo detalles</string>
+    <string name="glcn_season_animated">Con animaciones</string>
 </resources>

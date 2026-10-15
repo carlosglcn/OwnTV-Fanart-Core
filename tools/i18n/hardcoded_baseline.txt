@@ -196,6 +196,7 @@
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	subtitles failed
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	vtt
 2	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\0
+1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	(?i)(deport|sport|liga|futbol|fútbol|champions|dazn|eurosport|gol|f1|motor|cine|cinema|movie|film|estreno|accion|acción|comedia|drama|xtrm|hollywood|tcm|paramount|amc|axn|tnt|fox|syfy|scifi|calle 13|cosmo|dark|warner|star|clan)
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\\S\\s+(-|–|vs\\.?|v)\\s+\\S
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\\b(cine|pelicula|peliculas|film|movie)\\b
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\\b(estreno|premiere|stream premiere)\\b
@@ -334,6 +335,7 @@
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	dns_port
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	focus_highlight_color
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	focus_highlight_width
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_season_mode
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	live_latency_reset_416
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	sub_bg_opacity
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	sub_color
@@ -429,6 +431,11 @@
 1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	glcn-series-plot
 1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	glcn-year
 1	core/src/main/java/tv/own/owntv/core/sync/work/TrendingRefreshWorker.kt	Playlist
+1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	❤️
+1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🎃
+1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🎄
+1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🎭
+1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🥂
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	${Build.MANUFACTURER} ${Build.MODEL} · Android ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	--- live diagnostics leading up to the crash ---
 1	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	no decoder on this device for the video track (audio plays, no picture)

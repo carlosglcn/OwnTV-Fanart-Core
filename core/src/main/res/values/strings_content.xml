@@ -852,4 +852,8 @@
     <string name="glcn_recent_series_description">Shows with new episodes or just added</string>
     <string name="glcn_reminder_channel">Programme reminders</string>
     <string name="glcn_reminder_starts">Starting now on %1$s</string>
+    <string name="glcn_season_title">Seasonal themes</string>
+    <string name="glcn_season_desc">Small touches on Home for Halloween, Christmas, New Year\'s Eve, Carnival and Valentine\'s</string>
+    <string name="glcn_season_details">Details</string>
+    <string name="glcn_season_animated">Animated</string>
 </resources>
