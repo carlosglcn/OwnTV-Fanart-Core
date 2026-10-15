@@ -459,4 +459,11 @@
     <string name="glcn_remove_from_continue">Quitar de Seguir viendo</string>
     <string name="glcn_sports_now">Deportes ahora</string>
     <string name="glcn_sports_none">Ahora no hay deporte en emisión</string>
+    <string name="glcn_sports_now_description">Canales con deporte en emisión ahora</string>
+    <string name="glcn_recent_movies">Películas añadidas recientemente</string>
+    <string name="glcn_recent_movies_description">Lo último que ha llegado a tus bibliotecas</string>
+    <string name="glcn_recent_series">Series añadidas recientemente</string>
+    <string name="glcn_recent_series_description">Series nuevas o con episodios nuevos</string>
+    <string name="glcn_reminder_channel">Recordatorios de programas</string>
+    <string name="glcn_reminder_starts">Empieza ahora en %1$s</string>
 </resources>

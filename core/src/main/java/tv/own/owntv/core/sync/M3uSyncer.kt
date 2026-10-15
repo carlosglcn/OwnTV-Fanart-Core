@@ -251,6 +251,7 @@ internal class M3uSyncer(
                         backdropUrl = entry.extra["glcn-backdrop"],
                         year = entry.extra["glcn-year"]?.toIntOrNull(),
                         rating = entry.extra["glcn-rating"]?.toDoubleOrNull(),
+                        addedAt = entry.extra["glcn-added"]?.toLongOrNull(),
                     )
                 }
                 movies.forEach { seenMovieKeys.add(it.remoteId!!) }
@@ -344,6 +345,8 @@ internal class M3uSyncer(
                         sortOrder = show.order,
                         plot = show.plot,
                         backdropUrl = show.backdrop,
+                        // glcn: the newest episode's arrival, so a new episode brings the show forward.
+                        addedAt = show.addedAt,
                     )
                     // The series hash folds in the episode list: a playlist that only adds S01E06
                     // must count as changed even though the show row itself is identical.
@@ -427,6 +430,7 @@ internal class M3uSyncer(
                                 plot = e.extra["glcn-series-plot"], backdrop = e.extra["glcn-series-backdrop"],
                             )
                         }
+                        e.extra["glcn-added"]?.toLongOrNull()?.let { a -> if ((show.addedAt ?: 0L) < a) show.addedAt = a }
                         val episode = if (parsed.episode > 0) parsed.episode else show.episodes.count { it.season == parsed.season } + 1
                         show.episodes.add(
                             M3uEpisodeRow(
@@ -559,6 +563,7 @@ internal class M3uSyncer(
         val backdrop: String? = null,
     ) {
         val episodes = ArrayList<M3uEpisodeRow>()
+        var addedAt: Long? = null
     }
 
     private data class M3uEpisodeRow(

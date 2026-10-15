@@ -158,7 +158,26 @@ data class HomeFeed(
     val config: HomeConfig = HomeConfig(),
     val recentGuide: GuideSliceState = GuideSliceState(),
     val favoriteGuide: GuideSliceState = GuideSliceState(),
-)
+    /** glcn: channels showing sport right now, live events first. */
+    val sportsNow: List<tv.own.owntv.core.live.SportsNow.Entry> = emptyList(),
+    /** glcn: newest arrivals, for playlists that say when an item arrived (Emby, Xtream). */
+    val recentMovies: List<MovieEntity> = emptyList(),
+    val recentSeries: List<SeriesEntity> = emptyList(),
+) {
+    /** glcn: [sportsNow] in the shape the "On now" live rails draw. */
+    val sportsGuide: GuideSliceState
+        get() {
+            if (sportsNow.isEmpty()) return GuideSliceState()
+            val now = System.currentTimeMillis()
+            return GuideSliceState(
+                channels = sportsNow.map { it.channel },
+                programmes = sportsNow.associate { it.channel.id to listOf(it.programme) },
+                windowStart = sportsNow.minOf { it.programme.startMs },
+                windowEnd = sportsNow.maxOf { it.programme.stopMs },
+                now = now,
+            )
+        }
+}
 
 /**
  * Building Home's rails.
@@ -252,6 +271,28 @@ class HomeFeedReader(
                 else seriesDao.snapshotFavoritesManual(profileId, ContentOrderEntity.FAV_CONTEXT, seriesIds.toList(), FAVORITE_VOD_ROW_LIMIT)
                     .filterNot { CustomizeKeys.series(it) in hidden.series.hiddenItems || (it.categoryId != null && it.categoryId in hidden.seriesCats) }
             }
+            // glcn rows.
+            val sportsAsync = async {
+                if (HomeRow.SPORTS_NOW !in config.visibleOrder || liveIds.isEmpty()) emptyList()
+                else runCatching {
+                    tv.own.owntv.core.live.SportsNow(channelDao, guide)
+                        .find(liveIds.toList(), hidden.live, settings.epgOffsetMinutes.first())
+                        .filterNot { isChannelHidden(it.channel, hidden) }
+                        .take(SPORTS_ROW_LIMIT)
+                }.getOrDefault(emptyList())
+            }
+            val recentMoviesAsync = async {
+                if (HomeRow.RECENT_MOVIES !in config.visibleOrder || movieIds.isEmpty()) emptyList()
+                else movieDao.recentlyAdded(movieIds.toList(), RECENT_VOD_ROW_LIMIT * 2)
+                    .filterNot { CustomizeKeys.movie(it) in hidden.movie.hiddenItems || (it.categoryId != null && it.categoryId in hidden.movieCats) }
+                    .take(RECENT_VOD_ROW_LIMIT)
+            }
+            val recentSeriesAsync = async {
+                if (HomeRow.RECENT_SERIES !in config.visibleOrder || seriesIds.isEmpty()) emptyList()
+                else seriesDao.recentlyAdded(seriesIds.toList(), RECENT_VOD_ROW_LIMIT * 2)
+                    .filterNot { CustomizeKeys.series(it) in hidden.series.hiddenItems || (it.categoryId != null && it.categoryId in hidden.seriesCats) }
+                    .take(RECENT_VOD_ROW_LIMIT)
+            }
             val heroItems = withLiveNow(profileId, buildHeroItems(items, liveWithTs, config))
             // The two guide slices read different channel sets and never depend on each other.
             val recentGuideAsync = async {
@@ -283,6 +324,9 @@ class HomeFeedReader(
                 config = config,
                 recentGuide = recentGuideAsync.await(),
                 favoriteGuide = favoriteGuideAsync.await(),
+                sportsNow = sportsAsync.await(),
+                recentMovies = recentMoviesAsync.await(),
+                recentSeries = recentSeriesAsync.await(),
             )
         }
     }
@@ -525,3 +569,5 @@ private const val SLICE_WINDOW_MS = 360 * 60_000L
 private const val HALF_HOUR_MS = 30 * 60_000L
 private const val RECENT_LIVE_ROW_LIMIT = 20
 private const val FAVORITE_VOD_ROW_LIMIT = 50
+private const val RECENT_VOD_ROW_LIMIT = 30
+private const val SPORTS_ROW_LIMIT = 20

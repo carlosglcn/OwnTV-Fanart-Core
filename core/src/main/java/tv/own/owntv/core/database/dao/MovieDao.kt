@@ -41,6 +41,10 @@ interface MovieDao {
     @Query("SELECT * FROM movies WHERE id = :id")
     suspend fun getById(id: Long): MovieEntity?
 
+    /** glcn: Home's "Recently added" — only items whose playlist says when they arrived. */
+    @Query("SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND addedAt IS NOT NULL ORDER BY addedAt DESC, id DESC LIMIT :limit")
+    suspend fun recentlyAdded(sourceIds: List<Long>, limit: Int): List<MovieEntity>
+
     @Query("SELECT * FROM movies WHERE id IN (:ids)")
     suspend fun getByIds(ids: List<Long>): List<MovieEntity>
 

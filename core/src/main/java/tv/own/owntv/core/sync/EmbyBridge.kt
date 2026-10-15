@@ -44,7 +44,7 @@ internal object EmbyBridge {
     private const val AUTH_FIELDS =
         "Client=\"OwnTV\", Device=\"OwnTV\", DeviceId=\"owntv-glcn\", Version=\"1.0\""
 
-    private const val FIELDS = "ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,Container,Genres,Overview,CommunityRating,BackdropImageTags"
+    private const val FIELDS = "ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,Container,Genres,Overview,CommunityRating,BackdropImageTags,DateCreated"
 
     /**
      * `http(s)://user[:password]@host[:port][/path]` with no file name in the path → a possible server.
@@ -164,6 +164,15 @@ internal object EmbyBridge {
             if (!value.isNullOrBlank()) append(' ').append(key).append("=\"").append(attr(value)).append('"')
             return this
         }
+        /** When the item reached the library, as epoch ms — what "Recently added" sorts by. */
+        fun added(it: JSONObject): String? {
+            val raw = it.optString("DateCreated").takeIf { d -> d.length >= 19 } ?: return null
+            return runCatching {
+                java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", java.util.Locale.ROOT)
+                    .apply { timeZone = java.util.TimeZone.getTimeZone("UTC") }
+                    .parse(raw.substring(0, 19))?.time?.toString()
+            }.getOrNull()
+        }
         val sb = StringBuilder("#EXTM3U\n")
         for (m in items(s, "Movie")) {
             val title = m.optString("Name")
@@ -176,6 +185,7 @@ internal object EmbyBridge {
                 .extra("glcn-backdrop", backdrop(m))
                 .extra("glcn-year", year.takeIf { it > 0 }?.toString())
                 .extra("glcn-rating", rating?.let { String.format(java.util.Locale.ROOT, "%.1f", it) })
+                .extra("glcn-added", added(m))
                 .append(" group-title=\"").append(attr(group)).append("\",").append(line(label)).append('\n')
                 .append(stream(m)).append('\n')
         }
@@ -195,6 +205,7 @@ internal object EmbyBridge {
                 .extra("glcn-plot", e.optString("Overview"))
                 .extra("glcn-series-plot", series?.optString("Overview"))
                 .extra("glcn-series-backdrop", series?.let(::backdrop))
+                .extra("glcn-added", added(e))
                 .append(" group-title=\"").append(SERIES_GROUP).append("\",").append(line(label)).append('\n')
                 .append(stream(e)).append('\n')
         }

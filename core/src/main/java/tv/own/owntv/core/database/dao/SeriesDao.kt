@@ -147,6 +147,10 @@ interface SeriesDao {
 
     // Date added / last modification (newest first). NULLs sort lowest in SQLite, so unknown
     // dates land last and fall through to sortOrder DESC (reverse playlist order).
+    /** glcn: Home's "Recently added" — only shows whose playlist says when they (or an episode) arrived. */
+    @Query("SELECT * FROM series WHERE sourceId IN (:sourceIds) AND addedAt IS NOT NULL ORDER BY addedAt DESC, id DESC LIMIT :limit")
+    suspend fun recentlyAdded(sourceIds: List<Long>, limit: Int): List<SeriesEntity>
+
     @Query("SELECT * FROM series WHERE sourceId IN (:sourceIds) ORDER BY addedAt DESC, sortOrder DESC, id DESC")
     fun pagingAllDateAdded(sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
 

@@ -827,4 +827,11 @@
     <string name="glcn_remove_from_continue">Remove from Keep watching</string>
     <string name="glcn_sports_now">Sports now</string>
     <string name="glcn_sports_none">Nothing sporty on air right now</string>
+    <string name="glcn_sports_now_description">Channels showing sport right now</string>
+    <string name="glcn_recent_movies">Recently added movies</string>
+    <string name="glcn_recent_movies_description">The newest movies in your libraries</string>
+    <string name="glcn_recent_series">Recently added series</string>
+    <string name="glcn_recent_series_description">Shows with new episodes or just added</string>
+    <string name="glcn_reminder_channel">Programme reminders</string>
+    <string name="glcn_reminder_starts">Starting now on %1$s</string>
 </resources>

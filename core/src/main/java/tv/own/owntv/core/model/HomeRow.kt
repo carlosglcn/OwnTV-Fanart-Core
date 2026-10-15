@@ -13,7 +13,11 @@ enum class HomeRow {
     FAVORITE_MOVIES,
     FAVORITE_SERIES,
     CONTINUE_MOVIES,
-    CONTINUE_SERIES;
+    CONTINUE_SERIES,
+    // glcn
+    SPORTS_NOW,
+    RECENT_MOVIES,
+    RECENT_SERIES;
 
     val implemented: Boolean get() = true
 }
