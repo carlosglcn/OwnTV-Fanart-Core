@@ -157,6 +157,7 @@
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	$path → HTTP ${r.code}
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	$title (Emby)
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${ref.api}$path
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${ref.api}/Items/${ref.itemId}/Images/Primary?maxWidth=$maxWidth&api_key=${ref.token}
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${ref.api}/Items/${ref.itemId}/PlaybackInfo?api_key=${ref.token}
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${ref.api}/Videos/${ref.itemId}/$sourceId/Subtitles/$index/Stream.$ext?api_key=${ref.token}
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	/Sessions/Playing

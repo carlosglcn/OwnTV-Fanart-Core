@@ -48,6 +48,12 @@ object EmbyPlayback {
         return Ref(m.groupValues[1], m.groupValues[2], m.groupValues[3])
     }
 
+    /** glcn: the item's own picture on the server (an episode's still), from its stream URL; null otherwise. */
+    fun imageFor(streamUrl: String?, maxWidth: Int = 480): String? {
+        val ref = parse(streamUrl) ?: return null
+        return "${ref.api}/Items/${ref.itemId}/Images/Primary?maxWidth=$maxWidth&api_key=${ref.token}"
+    }
+
     /** True for a stream served by an Emby/Jellyfin server through the M3U bridge. */
     fun isEmbyUrl(url: String?): Boolean = parse(url) != null
 

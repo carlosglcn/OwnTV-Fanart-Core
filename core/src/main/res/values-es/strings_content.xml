@@ -459,6 +459,10 @@
     <string name="glcn_remove_from_continue">Quitar de Seguir viendo</string>
     <string name="glcn_sports_now">Deportes ahora</string>
     <string name="glcn_sports_none">Ahora no hay deporte en emisión</string>
+    <string name="glcn_screensaver_name">OwnTV glcn · Fanart</string>
+    <string name="glcn_widget_sports_name">OwnTV · Deportes ahora</string>
+    <string name="glcn_widget_empty">Ahora no hay deporte en emisión</string>
+    <string name="glcn_widget_updated">Actualizado %1$s</string>
     <string name="glcn_sports_now_description">Canales con deporte en emisión ahora</string>
     <string name="glcn_recent_movies">Películas añadidas recientemente</string>
     <string name="glcn_recent_movies_description">Lo último que ha llegado a tus bibliotecas</string>
