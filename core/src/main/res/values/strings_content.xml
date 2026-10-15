@@ -827,6 +827,17 @@
     <string name="glcn_remove_from_continue">Remove from Keep watching</string>
     <string name="glcn_sports_now">Sports now</string>
     <string name="glcn_sports_none">Nothing sporty on air right now</string>
+    <string name="glcn_featured">Featured</string>
+    <string name="glcn_featured_description">A billboard with matches on now, your favourites on air and the newest films</string>
+    <string name="glcn_tonight">Tonight</string>
+    <string name="glcn_tonight_description">What your channels show between 21:00 and midnight</string>
+    <string name="glcn_genres">Films by genre</string>
+    <string name="glcn_genres_description">Rows of films from your biggest genres</string>
+    <string name="glcn_live_badge">LIVE</string>
+    <string name="glcn_watch_now">Watch now</string>
+    <string name="glcn_greeting_morning">Good morning</string>
+    <string name="glcn_greeting_afternoon">Good afternoon</string>
+    <string name="glcn_greeting_evening">Good evening</string>
     <string name="glcn_screensaver_name">OwnTV glcn · Fanart</string>
     <string name="glcn_widget_sports_name">OwnTV · Sports now</string>
     <string name="glcn_widget_empty">No sport on air right now</string>

@@ -459,6 +459,17 @@
     <string name="glcn_remove_from_continue">Quitar de Seguir viendo</string>
     <string name="glcn_sports_now">Deportes ahora</string>
     <string name="glcn_sports_none">Ahora no hay deporte en emisión</string>
+    <string name="glcn_featured">Destacado</string>
+    <string name="glcn_featured_description">Un cartel con los partidos en directo, lo que emiten tus favoritos y lo último en películas</string>
+    <string name="glcn_tonight">Esta noche</string>
+    <string name="glcn_tonight_description">Lo que emiten tus canales entre las 21:00 y las 00:00</string>
+    <string name="glcn_genres">Películas por género</string>
+    <string name="glcn_genres_description">Filas de películas de tus géneros con más títulos</string>
+    <string name="glcn_live_badge">EN DIRECTO</string>
+    <string name="glcn_watch_now">Ver ahora</string>
+    <string name="glcn_greeting_morning">Buenos días</string>
+    <string name="glcn_greeting_afternoon">Buenas tardes</string>
+    <string name="glcn_greeting_evening">Buenas noches</string>
     <string name="glcn_screensaver_name">OwnTV glcn · Fanart</string>
     <string name="glcn_widget_sports_name">OwnTV · Deportes ahora</string>
     <string name="glcn_widget_empty">Ahora no hay deporte en emisión</string>

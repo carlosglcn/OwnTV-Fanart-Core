@@ -129,6 +129,37 @@ sealed interface TrendingHomeItem {
     ) : TrendingHomeItem
 }
 
+/** glcn: one slide of Home's featured billboard. */
+@Immutable
+sealed interface FeaturedItem {
+    val art: String
+    val key: String
+
+    /** On air now: a match, or what a favourite channel is showing. */
+    data class Live(val channel: ChannelEntity, val programme: EpgProgrammeEntity, val isLiveEvent: Boolean) : FeaturedItem {
+        override val art: String get() = programme.imageUrl.orEmpty()
+        override val key: String get() = "live:${channel.id}:${programme.startMs}"
+    }
+
+    data class Movie(val movie: MovieEntity) : FeaturedItem {
+        override val art: String get() = movie.backdropUrl.orEmpty()
+        override val key: String get() = "movie:${movie.id}"
+    }
+
+    data class Series(val series: SeriesEntity) : FeaturedItem {
+        override val art: String get() = series.backdropUrl.orEmpty()
+        override val key: String get() = "series:${series.id}"
+    }
+}
+
+/** glcn: a programme later tonight on one of the user's channels. */
+@Immutable
+data class TonightItem(val channel: ChannelEntity, val programme: EpgProgrammeEntity)
+
+/** glcn: one genre row of films. */
+@Immutable
+data class GenreRow(val categoryId: Long, val name: String, val movies: List<MovieEntity>)
+
 /** The guide behind a live rail in "On now" mode: the channels, and their programmes in the window. */
 @Immutable
 data class GuideSliceState(
@@ -163,6 +194,11 @@ data class HomeFeed(
     /** glcn: newest arrivals, for playlists that say when an item arrived (Emby, Xtream). */
     val recentMovies: List<MovieEntity> = emptyList(),
     val recentSeries: List<SeriesEntity> = emptyList(),
+    val featured: List<FeaturedItem> = emptyList(),
+    val tonight: List<TonightItem> = emptyList(),
+    val genres: List<GenreRow> = emptyList(),
+    /** The active profile's name, for the greeting. */
+    val profileName: String? = null,
 ) {
     /** glcn: [sportsNow] in the shape the "On now" live rails draw. */
     val sportsGuide: GuideSliceState
@@ -273,7 +309,7 @@ class HomeFeedReader(
             }
             // glcn rows.
             val sportsAsync = async {
-                if (HomeRow.SPORTS_NOW !in config.visibleOrder || liveIds.isEmpty()) emptyList()
+                if ((HomeRow.SPORTS_NOW !in config.visibleOrder && HomeRow.FEATURED !in config.visibleOrder) || liveIds.isEmpty()) emptyList()
                 else runCatching {
                     tv.own.owntv.core.live.SportsNow(channelDao, guide)
                         .find(liveIds.toList(), hidden.live, settings.epgOffsetMinutes.first())
@@ -282,17 +318,70 @@ class HomeFeedReader(
                 }.getOrDefault(emptyList())
             }
             val recentMoviesAsync = async {
-                if (HomeRow.RECENT_MOVIES !in config.visibleOrder || movieIds.isEmpty()) emptyList()
+                if ((HomeRow.RECENT_MOVIES !in config.visibleOrder && HomeRow.FEATURED !in config.visibleOrder) || movieIds.isEmpty()) emptyList()
                 else movieDao.recentlyAdded(movieIds.toList(), RECENT_VOD_ROW_LIMIT * 2)
                     .filterNot { CustomizeKeys.movie(it) in hidden.movie.hiddenItems || (it.categoryId != null && it.categoryId in hidden.movieCats) }
                     .take(RECENT_VOD_ROW_LIMIT)
             }
             val recentSeriesAsync = async {
-                if (HomeRow.RECENT_SERIES !in config.visibleOrder || seriesIds.isEmpty()) emptyList()
+                if ((HomeRow.RECENT_SERIES !in config.visibleOrder && HomeRow.FEATURED !in config.visibleOrder) || seriesIds.isEmpty()) emptyList()
                 else seriesDao.recentlyAdded(seriesIds.toList(), RECENT_VOD_ROW_LIMIT * 2)
                     .filterNot { CustomizeKeys.series(it) in hidden.series.hiddenItems || (it.categoryId != null && it.categoryId in hidden.seriesCats) }
                     .take(RECENT_VOD_ROW_LIMIT)
             }
+            val shiftAsync = async { settings.epgOffsetMinutes.first() }
+            // glcn: what the favourite channels are showing now, for the billboard.
+            val favNowAsync = async {
+                if (HomeRow.FEATURED !in config.visibleOrder || favLive.isEmpty()) emptyMap()
+                else runCatching {
+                    val t = System.currentTimeMillis()
+                    guide.slice(favLive.take(60), hidden.live, shiftAsync.await(), t, t + 1)
+                        .mapNotNull { (id, rows) -> rows.firstOrNull { t in it.startMs until it.stopMs }?.let { id to it } }
+                        .toMap()
+                }.getOrDefault(emptyMap())
+            }
+            // glcn: tonight's programmes (21:00–24:00) on the favourite channels, else the recent ones.
+            val tonightAsync = async {
+                if (HomeRow.TONIGHT !in config.visibleOrder) emptyList()
+                else runCatching {
+                    val channels = favLive.ifEmpty { live }.take(60)
+                    if (channels.isEmpty()) return@runCatching emptyList()
+                    val t = System.currentTimeMillis()
+                    val cal = java.util.Calendar.getInstance().apply {
+                        timeInMillis = t; set(java.util.Calendar.HOUR_OF_DAY, 21)
+                        set(java.util.Calendar.MINUTE, 0); set(java.util.Calendar.SECOND, 0); set(java.util.Calendar.MILLISECOND, 0)
+                    }
+                    val from = maxOf(t, cal.timeInMillis)
+                    val to = cal.timeInMillis + 3 * 3_600_000L
+                    if (from >= to) return@runCatching emptyList()
+                    val byId = channels.associateBy { it.id }
+                    guide.slice(channels, hidden.live, shiftAsync.await(), from, to)
+                        .flatMap { (id, rows) ->
+                            val ch = byId[id] ?: return@flatMap emptyList()
+                            rows.filter { it.startMs in from until to && it.stopMs - it.startMs >= 20 * 60_000L }
+                                .take(2).map { TonightItem(ch, it) }
+                        }
+                        .sortedWith(compareBy<TonightItem> { it.programme.startMs }.thenBy { it.programme.imageUrl.isNullOrBlank() })
+                        .take(TONIGHT_LIMIT)
+                }.getOrDefault(emptyList())
+            }
+            // glcn: the biggest film genres (Emby's genres are its categories).
+            val genresAsync = async {
+                if (HomeRow.GENRES !in config.visibleOrder || movieIds.isEmpty()) emptyList()
+                else runCatching {
+                    val names = categoryDao.observe(movieIds.toList(), MediaType.MOVIE).first().associate { it.id to it.name }
+                    movieDao.biggestCategories(movieIds.toList(), 12)
+                        .filter { it.categoryId !in hidden.movieCats && it.count >= 4 }
+                        .take(GENRE_ROWS)
+                        .mapNotNull { c ->
+                            val name = names[c.categoryId] ?: return@mapNotNull null
+                            val movies = movieDao.inCategory(c.categoryId, 24)
+                                .filterNot { CustomizeKeys.movie(it) in hidden.movie.hiddenItems }
+                            if (movies.size < 4) null else GenreRow(c.categoryId, name, movies)
+                        }
+                }.getOrDefault(emptyList())
+            }
+            val profileNameAsync = async { runCatching { profileDao.getById(profileId)?.name }.getOrNull() }
             val heroItems = withLiveNow(profileId, buildHeroItems(items, liveWithTs, config))
             // The two guide slices read different channel sets and never depend on each other.
             val recentGuideAsync = async {
@@ -327,8 +416,43 @@ class HomeFeedReader(
                 sportsNow = sportsAsync.await(),
                 recentMovies = recentMoviesAsync.await(),
                 recentSeries = recentSeriesAsync.await(),
+                featured = buildFeatured(
+                    sports = sportsAsync.await(),
+                    favourites = favLive,
+                    favNow = favNowAsync.await(),
+                    movies = recentMoviesAsync.await(),
+                    series = recentSeriesAsync.await(),
+                    enabled = HomeRow.FEATURED in config.visibleOrder,
+                ),
+                tonight = tonightAsync.await(),
+                genres = genresAsync.await(),
+                profileName = profileNameAsync.await(),
             )
         }
+    }
+
+    /** glcn: the billboard's slides — live matches, then favourites on air, then the newest films and shows. */
+    private fun buildFeatured(
+        sports: List<tv.own.owntv.core.live.SportsNow.Entry>,
+        favourites: List<ChannelEntity>,
+        favNow: Map<Long, EpgProgrammeEntity>,
+        movies: List<MovieEntity>,
+        series: List<SeriesEntity>,
+        enabled: Boolean,
+    ): List<FeaturedItem> {
+        if (!enabled) return emptyList()
+        val out = ArrayList<FeaturedItem>()
+        val seen = HashSet<Long>()
+        sports.filter { !it.programme.imageUrl.isNullOrBlank() }.take(3).forEach {
+            if (seen.add(it.channel.id)) out += FeaturedItem.Live(it.channel, it.programme, tv.own.owntv.core.live.SportsNow.isLive(it.programme))
+        }
+        favourites.mapNotNull { ch -> favNow[ch.id]?.takeIf { !it.imageUrl.isNullOrBlank() }?.let { ch to it } }
+            .filter { (ch, _) -> ch.id !in seen }
+            .take(3)
+            .forEach { (ch, p) -> seen += ch.id; out += FeaturedItem.Live(ch, p, tv.own.owntv.core.live.SportsNow.isLive(p)) }
+        movies.filter { !it.backdropUrl.isNullOrBlank() }.take(2).forEach { out += FeaturedItem.Movie(it) }
+        series.filter { !it.backdropUrl.isNullOrBlank() }.take(2).forEach { out += FeaturedItem.Series(it) }
+        return out
     }
 
     /** This profile's hide customizations across all three sections, with category keys resolved to ids. */
@@ -571,3 +695,5 @@ private const val RECENT_LIVE_ROW_LIMIT = 20
 private const val FAVORITE_VOD_ROW_LIMIT = 50
 private const val RECENT_VOD_ROW_LIMIT = 30
 private const val SPORTS_ROW_LIMIT = 20
+private const val TONIGHT_LIMIT = 24
+private const val GENRE_ROWS = 4

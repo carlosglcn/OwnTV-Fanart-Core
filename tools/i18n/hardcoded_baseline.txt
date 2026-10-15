@@ -140,7 +140,9 @@
 1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	WHERE s.sourceId IN (:sourceIds) AND s.name LIKE '%' || :query || '%'
 1	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	FROM epg_programmes WHERE epgChannelId = :epgKey
 1	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	FROM epg_programmes WHERE epgChannelId IN (:epgKeys)
+1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY (addedAt IS NULL), addedAt DESC, sortOrder LIMIT :limit
 1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND addedAt IS NOT NULL ORDER BY addedAt DESC, id DESC LIMIT :limit
+1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT categoryId AS categoryId, COUNT(*) AS count FROM movies WHERE sourceId IN (:sourceIds) AND categoryId IS NOT NULL GROUP BY categoryId ORDER BY count DESC LIMIT :limit
 1	core/src/main/java/tv/own/owntv/core/database/dao/PlaybackPrefsDao.kt	DELETE FROM playback_prefs WHERE zoomMode IS NULL AND volumeBoost IS NULL AND audioDelayMs IS NULL
 1	core/src/main/java/tv/own/owntv/core/database/dao/PlaybackPrefsDao.kt	UPDATE playback_prefs SET audioDelayMs = NULL
 1	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds) AND addedAt IS NOT NULL ORDER BY addedAt DESC, id DESC LIMIT :limit
@@ -192,6 +194,9 @@
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	subrip
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	subtitles failed
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	vtt
+1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	live:${channel.id}:${programme.startMs}
+1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	movie:${movie.id}
+1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	series:${series.id}
 2	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	\0
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	(en directo)
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	)

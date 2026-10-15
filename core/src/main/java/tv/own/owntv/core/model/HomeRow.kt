@@ -17,7 +17,10 @@ enum class HomeRow {
     // glcn
     SPORTS_NOW,
     RECENT_MOVIES,
-    RECENT_SERIES;
+    RECENT_SERIES,
+    FEATURED,
+    TONIGHT,
+    GENRES;
 
     val implemented: Boolean get() = true
 }
@@ -47,7 +50,7 @@ enum class HeroKind {
 
 @Immutable
 data class HomeConfig(
-    val order: List<HomeRow> = HomeRow.entries.toList(),
+    val order: List<HomeRow> = mergeOrder(emptyList()),
     val hidden: Set<HomeRow> = setOf(HomeRow.RECENT_CHANNELS),
     val heroIncludeLive: Boolean = true,
     val heroIncludeMovies: Boolean = true,
@@ -114,7 +117,17 @@ data class HomeConfig(
 
 fun mergeOrder(stored: List<HomeRow>): List<HomeRow> {
     val result = LinkedHashSet<HomeRow>()
+    // glcn: the featured billboard opens Home; "Tonight" sits beside the live rows.
+    if (HomeRow.FEATURED !in stored) result += HomeRow.FEATURED
     stored.forEach { result += it }
+    if (HomeRow.TONIGHT !in result) {
+        val anchor = listOf(HomeRow.SPORTS_NOW, HomeRow.FAVORITE_CHANNELS).firstOrNull { it in result }
+        if (anchor != null) {
+            val list = result.toMutableList()
+            list.add(list.indexOf(anchor) + 1, HomeRow.TONIGHT)
+            result.clear(); result += list
+        }
+    }
     HomeRow.entries.forEachIndexed { index, row ->
         if (row !in result) {
             val current = result.toMutableList()

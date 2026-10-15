@@ -41,6 +41,14 @@ interface MovieDao {
     @Query("SELECT * FROM movies WHERE id = :id")
     suspend fun getById(id: Long): MovieEntity?
 
+    /** glcn: Home's genre rows — the biggest movie categories of these playlists. */
+    @Query("SELECT categoryId AS categoryId, COUNT(*) AS count FROM movies WHERE sourceId IN (:sourceIds) AND categoryId IS NOT NULL GROUP BY categoryId ORDER BY count DESC LIMIT :limit")
+    suspend fun biggestCategories(sourceIds: List<Long>, limit: Int): List<GlcnCategoryCount>
+
+    /** glcn: one genre row — newest first where the playlist says when items arrived. */
+    @Query("SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY (addedAt IS NULL), addedAt DESC, sortOrder LIMIT :limit")
+    suspend fun inCategory(categoryId: Long, limit: Int): List<MovieEntity>
+
     /** glcn: Home's "Recently added" — only items whose playlist says when they arrived. */
     @Query("SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND addedAt IS NOT NULL ORDER BY addedAt DESC, id DESC LIMIT :limit")
     suspend fun recentlyAdded(sourceIds: List<Long>, limit: Int): List<MovieEntity>
@@ -331,3 +339,6 @@ interface MovieDao {
     )
     suspend fun unwatchedFavorites(profileId: Long, sourceIds: List<Long>, limit: Int): List<MovieEntity>
 }
+
+/** glcn: a category id with its item count. */
+data class GlcnCategoryCount(val categoryId: Long, val count: Int)
