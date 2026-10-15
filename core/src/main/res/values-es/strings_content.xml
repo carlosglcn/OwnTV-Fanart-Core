@@ -524,4 +524,6 @@
     <string name="glcn_remote_engine">Cambiar motor (EXO / MPV)</string>
     <string name="glcn_remote_next_audio">Siguiente pista de audio</string>
     <string name="glcn_remote_subtitles">Subtítulos sí / no</string>
+    <string name="glcn_about_license">© 2026 OwnTV (ahXN00) · cambios © 2026 carlosglcn · Licencia GPLv3</string>
+    <string name="glcn_about_community">Comunidad de OwnTV en Telegram (proyecto original)</string>
 </resources>
