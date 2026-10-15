@@ -504,6 +504,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_HOME_BACKDROP = intPreferencesKey("glcn_home_backdrop")
         val GLCN_ZAP_PANEL = intPreferencesKey("glcn_zap_panel")
         val GLCN_REMOTE_V2 = booleanPreferencesKey("glcn_remote_v2")
+        val GLCN_ICON_V1 = booleanPreferencesKey("glcn_icon_v1")
         val GLCN_DIALOGUE_BOOST = booleanPreferencesKey("glcn_dialogue_boost")
         val GLCN_MPV_PASSTHROUGH = booleanPreferencesKey("glcn_mpv_passthrough")
         val GLCN_ANIM_STYLE = intPreferencesKey("glcn_anim_style")
@@ -1226,6 +1227,23 @@ class SettingsRepository(private val context: Context, private val localeStore: 
 
     /** The icon and logo colour the user chose. It reaches the launcher on the next restart. */
     val appIcon: Flow<AppIcon> = prefsFlow { prefs -> AppIcon.fromStored(prefs[Keys.APP_ICON]) }
+
+    /**
+     * glcn: once, put the OwnTV Fanart icon (the default) on a device that had picked another colour of
+     * the old icon. True when it switched, so the caller can apply it to the launcher.
+     */
+    suspend fun takeGlcnIconOnce(): Boolean {
+        var switched = false
+        context.dataStore.edit { prefs ->
+            if (prefs[Keys.GLCN_ICON_V1] == true) return@edit
+            prefs[Keys.GLCN_ICON_V1] = true
+            if (AppIcon.fromStored(prefs[Keys.APP_ICON]) != AppIcon.DEFAULT) {
+                prefs[Keys.APP_ICON] = AppIcon.DEFAULT.name
+                switched = true
+            }
+        }
+        return switched
+    }
 
     suspend fun setAppIcon(icon: AppIcon) {
         context.dataStore.edit { it[Keys.APP_ICON] = icon.name }

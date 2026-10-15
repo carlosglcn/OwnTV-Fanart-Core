@@ -20,12 +20,12 @@ def vgrad(w, h, stops):
         for x in range(w): px[x, y] = c
     return im
 
-def scene(w, h):
+def scene(w, h, sun=(0.66, 0.58), sun_r=0.17):
     """Sunset fanart: sky gradient, a glowing sun, two mountain ridges."""
     sky = vgrad(w, h, [(0, (40, 30, 92, 255)), (0.45, (214, 76, 120, 255)), (0.75, (255, 150, 84, 255)), (1, (255, 196, 110, 255))])
     glow = Image.new('RGBA', (w, h), (0, 0, 0, 0))
     g = ImageDraw.Draw(glow)
-    cx, cy, r = int(w * 0.66), int(h * 0.58), int(w * 0.17)
+    cx, cy, r = int(w * sun[0]), int(h * sun[1]), int(w * sun_r)
     g.ellipse([cx - r * 2, cy - r * 2, cx + r * 2, cy + r * 2], fill=(255, 210, 140, 110))
     glow = glow.filter(ImageFilter.GaussianBlur(r * 0.6))
     sky.alpha_composite(glow)
@@ -44,28 +44,37 @@ def play(d, cx, cy, size, fill):
     pts = [(cx - size * 0.38, cy - size * 0.5), (cx - size * 0.38, cy + size * 0.5), (cx + size * 0.5, cy)]
     d.polygon(pts, fill=fill)
 
+def rounded_triangle_mask(size, pts, radius):
+    """A play triangle with soft corners: draw big, blur, threshold."""
+    m = Image.new('L', size, 0)
+    ImageDraw.Draw(m).polygon(pts, fill=255)
+    m = m.filter(ImageFilter.GaussianBlur(radius))
+    return m.point(lambda v: 255 if v > 128 else 0).filter(ImageFilter.GaussianBlur(2))
+
 def foreground():
+    """The play mark, large, with the fanart sunset inside it and a cream rim."""
     im = Image.new('RGBA', (S, S), (0, 0, 0, 0))
-    # Safe zone is the middle 66/108: the frame sits inside it.
-    fw, fh = int(S * 0.60), int(S * 0.46)
-    x0, y0 = (S - fw) // 2, (S - fh) // 2
-    # Soft shadow under the frame.
+    c = S / 2
+    h = S * 0.50           # triangle height (inside the 66/108 safe zone)
+    w = h * 0.92
+    cx = c + w * 0.10      # optical centre of a play mark sits a little right
+    pts = [(cx - w / 2, c - h / 2), (cx - w / 2, c + h / 2), (cx + w / 2, c)]
+    rim = rounded_triangle_mask((S, S), [(x + (x - cx) * 0.10, y + (y - c) * 0.10) for x, y in pts], 40)
+    inner = rounded_triangle_mask((S, S), pts, 40)
+    # Soft shadow.
     sh = Image.new('RGBA', (S, S), (0, 0, 0, 0))
-    ImageDraw.Draw(sh).rounded_rectangle([x0, y0 + 40, x0 + fw, y0 + fh + 40], 90, fill=(0, 0, 0, 120))
-    im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(50)))
-    # The frame: warm cream border.
-    ImageDraw.Draw(im).rounded_rectangle([x0, y0, x0 + fw, y0 + fh], 96, fill=(250, 238, 214, 255))
-    b = int(S * 0.028)
-    iw, ih = fw - 2 * b, fh - 2 * b
-    pic = scene(iw, ih)
-    im.paste(pic, (x0 + b, y0 + b), rounded_mask(iw, ih, 70))
-    # Play mark in a soft disc, a little left of the sun.
-    d = ImageDraw.Draw(im)
-    cx, cy, pr = S // 2 - int(S * 0.04), S // 2, int(S * 0.085)
-    disc = Image.new('RGBA', (S, S), (0, 0, 0, 0))
-    ImageDraw.Draw(disc).ellipse([cx - pr, cy - pr, cx + pr, cy + pr], fill=(255, 255, 255, 70))
-    im.alpha_composite(disc)
-    play(d, cx + int(pr * 0.12), cy, pr * 1.05, (255, 255, 255, 245))
+    sh.putalpha(rim.point(lambda v: v * 0.5))
+    sh = sh.filter(ImageFilter.GaussianBlur(40))
+    shifted = Image.new('RGBA', (S, S), (0, 0, 0, 0)); shifted.paste(sh, (0, 36), sh)
+    im.alpha_composite(shifted)
+    # Cream rim.
+    cream = Image.new('RGBA', (S, S), (250, 238, 214, 255))
+    im.paste(cream, (0, 0), rim)
+    # Sunset inside.
+    x0, y0 = int(cx - w / 2), int(c - h / 2)
+    pic = scene(int(w), int(h), sun=(0.42, 0.56), sun_r=0.15)
+    canvas = Image.new('RGBA', (S, S), (0, 0, 0, 0)); canvas.paste(pic, (x0, y0))
+    im.paste(canvas, (0, 0), inner)
     return im
 
 def write_fg(img):
