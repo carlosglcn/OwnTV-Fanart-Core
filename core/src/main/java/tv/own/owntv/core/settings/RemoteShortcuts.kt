@@ -29,6 +29,17 @@ enum class RemoteShortcutAction {
     OPEN_AUDIO_CONTROLS,
     OPEN_ASPECT_CONTROLS,
     TOGGLE_PLAYBACK_INFO,
+    // glcn: for remotes without CH± (the SHIELD's): a live channel up/down in the player (a page in lists),
+    // the channel list or guide over the picture, and one-touch toggles.
+    CHANNEL_NEXT,
+    CHANNEL_PREVIOUS,
+    OPEN_CHANNEL_LIST,
+    TOGGLE_FAVORITE,
+    RECORD,
+    SLEEP_TIMER,
+    TOGGLE_ENGINE,
+    NEXT_AUDIO_TRACK,
+    TOGGLE_SUBTITLES,
 }
 
 enum class RemoteShortcutPress { SHORT, LONG }
@@ -44,6 +55,22 @@ data class RemoteShortcutBinding(
 object RemoteShortcutBindings {
     private const val SEPARATOR = '|'
 
+    /**
+     * glcn: the SHIELD remote's free buttons, for a remote without CH±. ≡: channel list / guide.
+     * ⏪ ⏩: previous / next channel on live TV (a page in lists; a seek on films), held: the channel
+     * watched before / back to live. ⏯: play-pause, held: favourite.
+     */
+    val glcnSet: List<RemoteShortcutBinding> = listOf(
+        RemoteShortcutBinding(KeyEvent.KEYCODE_MENU, RemoteShortcutPress.SHORT, RemoteShortcutAction.OPEN_CHANNEL_LIST),
+        RemoteShortcutBinding(KeyEvent.KEYCODE_MENU, RemoteShortcutPress.LONG, RemoteShortcutAction.OPEN_GUIDE),
+        RemoteShortcutBinding(KeyEvent.KEYCODE_MEDIA_REWIND, RemoteShortcutPress.SHORT, RemoteShortcutAction.CHANNEL_PREVIOUS),
+        RemoteShortcutBinding(KeyEvent.KEYCODE_MEDIA_REWIND, RemoteShortcutPress.LONG, RemoteShortcutAction.PREVIOUS_CHANNEL),
+        RemoteShortcutBinding(KeyEvent.KEYCODE_MEDIA_FAST_FORWARD, RemoteShortcutPress.SHORT, RemoteShortcutAction.CHANNEL_NEXT),
+        RemoteShortcutBinding(KeyEvent.KEYCODE_MEDIA_FAST_FORWARD, RemoteShortcutPress.LONG, RemoteShortcutAction.RETURN_TO_LIVE),
+        RemoteShortcutBinding(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, RemoteShortcutPress.SHORT, RemoteShortcutAction.PLAY_PAUSE),
+        RemoteShortcutBinding(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, RemoteShortcutPress.LONG, RemoteShortcutAction.TOGGLE_FAVORITE),
+    )
+
     val defaults: List<RemoteShortcutBinding> = listOf(
         RemoteShortcutBinding(KeyEvent.KEYCODE_CHANNEL_UP, RemoteShortcutPress.SHORT, RemoteShortcutAction.PAGE_TOWARD_FIRST),
         RemoteShortcutBinding(KeyEvent.KEYCODE_CHANNEL_DOWN, RemoteShortcutPress.SHORT, RemoteShortcutAction.PAGE_TOWARD_LAST),
@@ -56,6 +83,19 @@ object RemoteShortcutBindings {
         // The remote's own "last channel" key, where it has one. Factory default only: a list the user
         // has edited is theirs, so it is not merged in — they can assign it in Remote shortcuts.
         RemoteShortcutBinding(KeyEvent.KEYCODE_LAST_CHANNEL, RemoteShortcutPress.SHORT, RemoteShortcutAction.PREVIOUS_CHANNEL),
+    ).let(::withGlcn)
+
+    /** [list] with the [glcnSet] laid over it (same button and press → the glcn action). */
+    fun withGlcn(list: List<RemoteShortcutBinding>): List<RemoteShortcutBinding> {
+        val ids = glcnSet.map { it.id }.toSet()
+        return list.filterNot { it.id in ids } + glcnSet
+    }
+
+    /** Live-TV actions: on anything else the button keeps its normal job (a seek on a film). */
+    val liveOnly: Set<RemoteShortcutAction> = setOf(
+        RemoteShortcutAction.CHANNEL_NEXT, RemoteShortcutAction.CHANNEL_PREVIOUS, RemoteShortcutAction.PREVIOUS_CHANNEL,
+        RemoteShortcutAction.RETURN_TO_LIVE, RemoteShortcutAction.OPEN_CHANNEL_LIST, RemoteShortcutAction.TOGGLE_FAVORITE,
+        RemoteShortcutAction.RECORD,
     )
 
     fun encode(bindings: Collection<RemoteShortcutBinding>): Set<String> =

@@ -503,6 +503,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_SEASON_MODE = intPreferencesKey("glcn_season_mode")
         val GLCN_HOME_BACKDROP = intPreferencesKey("glcn_home_backdrop")
         val GLCN_ZAP_PANEL = intPreferencesKey("glcn_zap_panel")
+        val GLCN_REMOTE_V2 = booleanPreferencesKey("glcn_remote_v2")
         val GLCN_DIALOGUE_BOOST = booleanPreferencesKey("glcn_dialogue_boost")
         val GLCN_MPV_PASSTHROUGH = booleanPreferencesKey("glcn_mpv_passthrough")
         val GLCN_ANIM_STYLE = intPreferencesKey("glcn_anim_style")
@@ -2040,6 +2041,18 @@ class SettingsRepository(private val context: Context, private val localeStore: 
             RemoteShortcutBindings.decode(raw)
         } else {
             RemoteShortcutBindings.defaults
+        }
+    }
+
+    /** glcn: once, lay the SHIELD-remote set over shortcuts the user already has (see [RemoteShortcutBindings.glcnSet]). */
+    suspend fun applyGlcnRemoteDefaultsOnce() {
+        context.dataStore.edit { prefs ->
+            if (prefs[Keys.GLCN_REMOTE_V2] == true) return@edit
+            prefs[Keys.GLCN_REMOTE_V2] = true
+            if (Keys.REMOTE_SHORTCUT_BINDINGS in prefs) {
+                val current = RemoteShortcutBindings.decode(prefs[Keys.REMOTE_SHORTCUT_BINDINGS].orEmpty())
+                prefs[Keys.REMOTE_SHORTCUT_BINDINGS] = RemoteShortcutBindings.encode(RemoteShortcutBindings.withGlcn(current))
+            }
         }
     }
 

@@ -884,4 +884,12 @@
     <string name="glcn_zap_panel_preview">Picture</string>
     <string name="glcn_zap_panel_schedule">Schedule</string>
     <string name="glcn_zap_schedule_title">Coming up on %1$s</string>
+    <string name="glcn_remote_channel_next">Next channel (a page in lists)</string>
+    <string name="glcn_remote_channel_previous">Previous channel (a page in lists)</string>
+    <string name="glcn_remote_channel_list">Channel list over the picture</string>
+    <string name="glcn_remote_favorite">Add or remove favourite</string>
+    <string name="glcn_remote_record">Record what is on</string>
+    <string name="glcn_remote_engine">Switch engine (EXO / MPV)</string>
+    <string name="glcn_remote_next_audio">Next audio track</string>
+    <string name="glcn_remote_subtitles">Subtitles on / off</string>
 </resources>

@@ -516,4 +516,12 @@
     <string name="glcn_zap_panel_preview">Imagen</string>
     <string name="glcn_zap_panel_schedule">Programación</string>
     <string name="glcn_zap_schedule_title">Próximamente en %1$s</string>
+    <string name="glcn_remote_channel_next">Canal siguiente (una página en listas)</string>
+    <string name="glcn_remote_channel_previous">Canal anterior (una página en listas)</string>
+    <string name="glcn_remote_channel_list">Lista de canales sobre la imagen</string>
+    <string name="glcn_remote_favorite">Añadir o quitar favorito</string>
+    <string name="glcn_remote_record">Grabar lo que se emite</string>
+    <string name="glcn_remote_engine">Cambiar motor (EXO / MPV)</string>
+    <string name="glcn_remote_next_audio">Siguiente pista de audio</string>
+    <string name="glcn_remote_subtitles">Subtítulos sí / no</string>
 </resources>
