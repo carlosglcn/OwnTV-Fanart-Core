@@ -51,7 +51,7 @@ enum class HeroKind {
 @Immutable
 data class HomeConfig(
     val order: List<HomeRow> = mergeOrder(emptyList()),
-    val hidden: Set<HomeRow> = setOf(HomeRow.RECENT_CHANNELS),
+    val hidden: Set<HomeRow> = setOf(HomeRow.RECENT_CHANNELS, HomeRow.GENRES),
     val heroIncludeLive: Boolean = true,
     val heroIncludeMovies: Boolean = true,
     val heroIncludeSeries: Boolean = true,
@@ -79,6 +79,7 @@ data class HomeConfig(
         put("recentLiveMode", recentLiveMode.name)
         put("favoriteLiveMode", favoriteLiveMode.name)
         put("trendingStyle", trendingStyle.name)
+        put("glcnGenresDefault", true)
     }
 
     companion object {
@@ -86,8 +87,10 @@ data class HomeConfig(
             if (raw.isNullOrBlank()) return HomeConfig()
             val obj = runCatching { JSONObject(raw) }.getOrNull() ?: return HomeConfig()
             val storedOrder = obj.optJSONArray("order").toHomeRows()
-            val hidden = if (obj.has("hidden")) obj.optJSONArray("hidden").toHomeRows().toSet()
-                else HomeConfig().hidden
+            val hidden = (if (obj.has("hidden")) obj.optJSONArray("hidden").toHomeRows().toSet()
+                else HomeConfig().hidden)
+                // glcn: the genre rows start hidden; a config saved before they existed hides them too.
+                .let { if (!obj.has("glcnGenresDefault")) it + HomeRow.GENRES else it }
             return HomeConfig(
                 order = mergeOrder(storedOrder),
                 hidden = hidden,
