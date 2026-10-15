@@ -875,12 +875,12 @@
     <string name="glcn_home_backdrop_classic">Classic</string>
     <string name="glcn_home_backdrop_cinema">Cinema</string>
     <string name="glcn_home_backdrop_panel">Panel</string>
-    <string name="glcn_about_fork">OwnTV Fanart is a modified, unofficial version of OwnTV, the app created by ahXN00. It adds the picture-led design, the guide's fanart and other changes, maintained by Carlos (carlosglcn) since October 2026. Report problems with this version on its own GitHub, not to the original author.</string>
+    <string name="glcn_about_fork">OwnTV Fanart is a modified, unofficial version of OwnTV, the app created by ahXN00. It adds the picture-led design, the guide\'s fanart and other changes, maintained by Carlos (carlosglcn) since October 2026. Report problems with this version on its own GitHub, not to the original author.</string>
     <string name="glcn_about_original">Original project</string>
     <string name="glcn_about_this">This version</string>
     <string name="glcn_about_by">by %1$s</string>
     <string name="glcn_zap_panel_title">Beside the channel list</string>
-    <string name="glcn_zap_panel_desc">What shows next to the channel list over the player: the programme's picture, or the channel's coming schedule</string>
+    <string name="glcn_zap_panel_desc">What shows next to the channel list over the player: the programme\'s picture, or the channel\'s coming schedule</string>
     <string name="glcn_zap_panel_preview">Picture</string>
     <string name="glcn_zap_panel_schedule">Schedule</string>
     <string name="glcn_zap_schedule_title">Coming up on %1$s</string>

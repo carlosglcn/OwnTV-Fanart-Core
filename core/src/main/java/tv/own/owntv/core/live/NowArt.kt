@@ -28,4 +28,15 @@ class NowArt(
             rows.firstOrNull { at in it.startMs until it.stopMs }?.let { id to it }
         }.toMap()
     }
+
+    /** glcn: what is on [channel] now and what follows — with descriptions — for Home's info panels. */
+    suspend fun nowAndNext(channel: ChannelEntity, at: Long = System.currentTimeMillis()): Pair<EpgProgrammeEntity?, EpgProgrammeEntity?> {
+        val pid = settings.activeProfileId.first()
+        val cust = customize.observe(pid, MediaType.LIVE).first()
+        val shift = settings.epgOffsetMinutes.first()
+        val rows = guide.slice(listOf(channel), cust, shift, at, at + 8 * 3_600_000L)[channel.id].orEmpty().sortedBy { it.startMs }
+        val now = rows.firstOrNull { at in it.startMs until it.stopMs }
+        val next = rows.firstOrNull { it.startMs >= (now?.stopMs ?: at) }
+        return now to next
+    }
 }
