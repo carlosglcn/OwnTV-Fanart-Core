@@ -316,6 +316,19 @@ object LiveStreamQuirks {
      * Keyed by the **whole URL**: a broken mux belongs to one feed, and its healthy neighbours on the same
      * panel must keep the accurate path. Session-only.
      */
+    // glcn: a live host whose extensionless URLs turned out to be raw MPEG-TS. Those get the fast
+    // trimmed probe like a `.ts` URL; the full 5 MB probe takes ~10 s of real time on a 4 Mb/s SD
+    // channel and ran into the live open timeout.
+    private val rawTsHosts: MutableSet<String> = java.util.Collections.synchronizedSet(HashSet())
+    fun rememberRawTsHost(url: String) { rawTsHosts += hostKey(url) }
+    fun isRawTsHost(url: String): Boolean = hostKey(url) in rawTsHosts
+
+    // glcn: a live stream whose video only decodes in software on this device (an MPEG-2 SD channel on
+    // a phone with no MPEG-2 hardware decoder). Its next open starts on the software path straight away.
+    private val softwareStreams: MutableSet<String> = java.util.Collections.synchronizedSet(HashSet())
+    fun rememberNeedsSoftware(url: String) { softwareStreams += url }
+    fun needsSoftware(url: String): Boolean = url in softwareStreams
+
     fun rememberNeedsTolerantDemux(url: String) { tolerantDemuxStreams += url }
 
     fun needsTolerantDemux(url: String): Boolean = url in tolerantDemuxStreams

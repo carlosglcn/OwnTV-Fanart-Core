@@ -506,6 +506,8 @@ class OwnTVPlayer(
         const val DECODE_CHECK_MS = 4_000L         // wait before verifying video decode actually produces frames
         /** mpv giving up on the video output for a load ("Could not initialize video chain"). */
         val VIDEO_CHAIN_FAILED_RX = Regex("could not initialize video chain", RegexOption.IGNORE_CASE)
+        /** glcn: mpv's words for "software frames, direct-surface output". */
+        val SOFTWARE_ON_DIRECT_RX = Regex("failed to create hw uploader|can't find video conversion", RegexOption.IGNORE_CASE)
         /** FFmpeg's first probe on the copy path: it asks for the surface format, is refused (copy has no
          *  surface by design) and carries on in buffer mode. Not a failure there — only on the direct path. */
         val COPY_PROBE_NOISE_RX = Regex("both surface and native_window are null", RegexOption.IGNORE_CASE)
@@ -854,7 +856,8 @@ class OwnTVPlayer(
         // the redirect is a live-endpoint behaviour, and a catch-up `.ts` from the same host is still raw.
         val effectiveHls = lower.substringBefore('?').endsWith(".m3u8") ||
             (isLiveContent && LiveStreamQuirks.isKnownHlsHost(url))
-        val rawTs = (lower.contains(".ts") || lower.contains("/timeshift/")) && !effectiveHls
+        val rawTs = (lower.contains(".ts") || lower.contains("/timeshift/") ||
+            (isLiveContent && LiveStreamQuirks.isRawTsHost(url))) && !effectiveHls
         // Make FFmpeg RECONNECT when a live server closes the HTTP connection (some drop the socket every
         // few seconds; without this mpv hits EOF → the app reconnects → a black/decoder-churn loop). NOT for
         // VOD/catch-up (isLiveContent=false) — those have a real end and must be allowed to finish.
@@ -1419,6 +1422,9 @@ class OwnTVPlayer(
             // No picture is coming on this load: run the decode check now rather than at its 4 s mark (#229).
             // Only once this load's file is open — a late line from the previous load must not cut the
             // next one's wait short before its decoder has even been chosen.
+            // glcn: the decoder hands out software frames the direct surface cannot show (MPEG-2 on a
+            // phone without an MPEG-2 hardware decoder).
+            if (SOFTWARE_ON_DIRECT_RX.containsMatchIn(t)) load.softwareFramesOnDirect = true
             if (load.fileLoaded && VIDEO_CHAIN_FAILED_RX.containsMatchIn(t)) videoChainFailed.complete(Unit)
             // "Failed to open / loading failed" is the CONSEQUENCE — don't let it overwrite a more specific
             // cause already captured for this load (e.g. "HTTP error 400", an SSL error, a codec message).
@@ -2980,7 +2986,10 @@ class OwnTVPlayer(
             // and only starts in software on a panel already caught failing this session
             // ([tryArchiveSoftwareRescue] does the catching). Everything else follows the user's
             // hardware-decoding setting. (Software renders via GL, broken on the emulator, so skip it there.)
-            val wantSoftware = isArchive && !glUnsupported && LiveStreamQuirks.archiveNeedsSoftware(url)
+            val wantSoftware = !glUnsupported && (
+                (isArchive && LiveStreamQuirks.archiveNeedsSoftware(url)) ||
+                    (isLive && LiveStreamQuirks.needsSoftware(url))
+                )
             // A catch-up archive opens on the copy path — hardware decode, frames drawn through GL — instead
             // of the direct surface. On the TCL the direct decoder froze on an archive's first frame in about
             // one open in four (#229) and took mpv's core lock with it, so nothing could reset or retry; the
@@ -3343,6 +3352,19 @@ class OwnTVPlayer(
                             // END_FILE ladder, which already owns `item.triedAltFormat`; flipping the format
                             // here too made the two paths take turns and doubled the requests a refusing
                             // panel saw.
+                            // glcn: a full probe of an extensionless live stream can take longer than the
+                            // whole budget on its own. Once, retry with the fast raw-TS probe.
+                            val timedOutUrl = currentUrl
+                            if (timedOutUrl != null && !usedTrimmedProbe && !item.triedFastProbe &&
+                                !timedOutUrl.lowercase().substringBefore('?').endsWith(".m3u8") &&
+                                !LiveStreamQuirks.isKnownHlsHost(timedOutUrl)
+                            ) {
+                                item.triedFastProbe = true
+                                LiveStreamQuirks.rememberRawTsHost(timedOutUrl)
+                                LiveDiagnosticsLog.event("mpv live open timed out after ${openingMs}ms on the full probe — retrying with the fast probe")
+                                loadUrl(timedOutUrl, currentMetaSnapshot(), isLiveContent, 0L, resetRetries = false)
+                                return@launch
+                            }
                             LiveDiagnosticsLog.event("mpv live open timed out after ${openingMs}ms — surfacing error")
                             load.expectingPlayback = false
                             _isPlaying.value = false
@@ -4787,6 +4809,18 @@ class OwnTVPlayer(
                     )
                 }
                 markActiveFile(true)
+                // glcn: an extensionless live URL that is really raw MPEG-TS — later tunes on this host
+                // use the fast probe.
+                if (isLiveContent) currentUrl?.let { u ->
+                    val fmt = runCatching { mpv?.getPropertyString("file-format") }.getOrNull()?.lowercase().orEmpty()
+                    if ("mpegts" in fmt && !u.lowercase().substringBefore('?').endsWith(".m3u8") &&
+                        !LiveStreamQuirks.isKnownHlsHost(u) && !LiveStreamQuirks.isRawTsHost(u)
+                    ) {
+                        LiveStreamQuirks.rememberRawTsHost(u)
+                        LiveDiagnosticsLog.event("host serves raw MPEG-TS — fast probe from now on")
+                    }
+                }
+                markActiveFile(true)
                 // The new file opened successfully — cancel any pending error and clear a stale one.
                 // This callback runs on mpv's event thread (not main), so sync reads are safe here.
                 load.expectingPlayback = false
@@ -5015,6 +5049,10 @@ class OwnTVPlayer(
                             // A catch-up archive skips the retry ladder: the hardware decoder not engaging
                             // on a mid-GOP stream repeats identically on every retry.
                             if (tryArchiveSoftwareRescue("direct decoder never engaged on archive")) return@mpvAsync
+                            if (load.softwareFramesOnDirect && trySoftwareRescue("software-decoded video can't use the direct surface")) {
+                                if (isLiveContent) currentUrl?.let { LiveStreamQuirks.rememberNeedsSoftware(it) }
+                                return@mpvAsync
+                            }
                             // A codec mpv is not allowed to hardware-decode (outside HWDEC_CODECS) fails the
                             // direct path identically on every retry, and the copy rung is hardware too —
                             // straight to software.
@@ -5372,6 +5410,8 @@ internal data class LoadState(
     /** Last warn/error-level mpv log line (e.g. "ffmpeg: http: HTTP error 400"). Snapshotted into the
      *  error info when one surfaces, so the HUD can show the real cause. */
     @field:Volatile var lastMpvError: String? = null,
+    /** glcn: mpv said its decoder output can't reach the direct surface (software frames). */
+    @field:Volatile var softwareFramesOnDirect: Boolean = false,
     /** Broken-timestamp detection. Touched from mpv's log thread. */
     @field:Volatile var brokenPtsHits: Int = 0,
     @field:Volatile var brokenPtsHandled: Boolean = false,
@@ -5392,6 +5432,8 @@ internal data class ItemState(
     /** Silent auto-retry budget for a load that fails to start (cold-boot decoder-busy, a provider 5xx,
      *  the surface-timing race). Counts up across retries with backoff, then the error UI takes over. */
     @field:Volatile var autoRetries: Int = 0,
+    /** glcn: a live full-probe open timed out and was retried once with the fast probe. */
+    @field:Volatile var triedFastProbe: Boolean = false,
     /** Set when the user hits "Cancel" on the next-episode countdown card - suppresses the automatic
      *  end-of-file advance for the CURRENT item only. */
     var autoNextCancelled: Boolean = false,

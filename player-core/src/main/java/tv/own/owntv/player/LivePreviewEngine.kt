@@ -226,6 +226,10 @@ class LivePreviewEngine(
     // without that decoder) — the VM hands such a stream to mpv (FFmpeg decodes everything) so it isn't silent.
     private val _audioUnsupported = MutableStateFlow(false)
     val audioUnsupported: StateFlow<Boolean> = _audioUnsupported.asStateFlow()
+    /** glcn: a video track exists but this device has no decoder ExoPlayer can use for it (MPEG-2 on a
+     *  phone): sound with a black picture, so the watchdog hands the channel to mpv. */
+    private val _videoUnsupported = MutableStateFlow(false)
+    val videoUnsupported: StateFlow<Boolean> = _videoUnsupported.asStateFlow()
     // One-shot per load: audio/position is progressing normally and a video track exists, but ExoPlayer has
     // never rendered a single frame of it — the "audio plays, no picture" case the freeze/frame watchdogs
     // below can't see (they only catch a freeze AFTER frames were once seen, or a total position stall).
@@ -1525,7 +1529,7 @@ class LivePreviewEngine(
         mainHandler.removeCallbacks(audioOnlyConfirmation)
         _audioCount.value = 0
         _subCount.value = 0
-        _subtitleOn.value = false; _cues.value = emptyList(); _audioUnsupported.value = false
+        _subtitleOn.value = false; _cues.value = emptyList(); _audioUnsupported.value = false; _videoUnsupported.value = false
         _noVideoDetected.value = false
         _audioOnlyMedia.value = false // re-decided from this stream's own track list
         _videoHeight.value = null; _videoAspect.value = null; _videoSize.value = null; _streamChips.value = emptyList(); _videoFps.value = null
@@ -1816,7 +1820,7 @@ class LivePreviewEngine(
         frameCounter.set(0); tune.lastFrameCount = 0; tune.everRendered = false; tune.lastProgressPos = -1L; tune.frozenChecks = 0
         tune.audioTrackList = emptyList(); tune.audioSelections = emptyList(); _audioCount.value = 0
         tune.textTrackList = emptyList(); tune.textSelections = emptyList(); _subCount.value = 0
-        _subtitleOn.value = false; _cues.value = emptyList(); _audioUnsupported.value = false
+        _subtitleOn.value = false; _cues.value = emptyList(); _audioUnsupported.value = false; _videoUnsupported.value = false
         _noVideoDetected.value = false; tune.noVideoTriggered = false; tune.readySinceMs = 0L
         _audioOnlyMedia.value = false // re-decided from this stream's own track list
         mainHandler.removeCallbacks(audioOnlyConfirmation)
@@ -2866,6 +2870,9 @@ class LivePreviewEngine(
         }
         // Audio exists but ExoPlayer can decode none of it → the VM will route this stream to mpv.
         _audioUnsupported.value = audio.isNotEmpty() && !ExoAudioGate.anyPlayableAudio(tracks)
+        val videoGroups = tracks.groups.filter { it.type == androidx.media3.common.C.TRACK_TYPE_VIDEO }
+        _videoUnsupported.value = videoGroups.isNotEmpty() &&
+            videoGroups.none { g -> (0 until g.length).any { g.isTrackSupported(it, true) } }
     }
 
     /**

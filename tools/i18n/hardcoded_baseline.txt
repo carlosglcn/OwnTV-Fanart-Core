@@ -395,6 +395,7 @@
 1	core/src/main/java/tv/own/owntv/core/sync/work/TrendingRefreshWorker.kt	Playlist
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	${Build.MANUFACTURER} ${Build.MODEL} · Android ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	--- live diagnostics leading up to the crash ---
+1	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	no decoder on this device for the video track (audio plays, no picture)
 4	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	\0
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	body="$failureText"
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder failed before first frame (${error.errorCodeName}) — rebuilding the decoder and retrying once
@@ -413,12 +414,18 @@
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	#00000000
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	#FFFFFFFF
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	,
+2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	.m3u8
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	demuxer
-1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	file-format
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	failed to create hw uploader|can't find video conversion
+2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	file-format
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	force
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	host serves raw MPEG-TS — fast probe from now on
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpeg2video
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpeg4
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpegts
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpv live open timed out after ${openingMs}ms on the full probe — retrying with the fast probe
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	playback failed — retrying once as ${HttpClient.FALLBACK_USER_AGENT}
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	software-decoded video can't use the direct surface
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	sub-align-x
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	sub-ass-override
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	sub-back-color

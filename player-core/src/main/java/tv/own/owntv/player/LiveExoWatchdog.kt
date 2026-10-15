@@ -125,6 +125,10 @@ class LiveExoWatchdog(
             handOver("no decodable audio track")
             return@coroutineScope
         }
+        if (engine.videoUnsupported.value) {
+            handOver("no decoder on this device for the video track (audio plays, no picture)")
+            return@coroutineScope
+        }
         watchAfterFirstFrame(channelName)
     }
 
