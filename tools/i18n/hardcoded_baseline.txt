@@ -198,11 +198,12 @@
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	live:${channel.id}:${programme.startMs}
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	movie:${movie.id}
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	series:${series.id}
-2	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	\0
+3	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	\0
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	(en directo)
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	)
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	\\b(
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	\\p{M}+
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	^\\s*[\\(\\[]?\\s*(EN\\s+)?DIRECTO\\s*[\\)\\]]?\\s*[:\\-·|]?\\s*
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	acb
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	atletismo
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	automovilismo
@@ -285,6 +286,7 @@
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	search type=$type
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	tv details id=$tmdbId
 2	core/src/main/java/tv/own/owntv/core/model/HomeRow.kt	glcnGenresDefault
+2	core/src/main/java/tv/own/owntv/core/model/HomeRow.kt	glcnLayoutV2
 3	core/src/main/java/tv/own/owntv/core/network/DnsConfig.kt	\0
 1	core/src/main/java/tv/own/owntv/core/network/DnsConfig.kt	${dohUrl.trimEnd('/')}?name=$hostname&type=$type
 1	core/src/main/java/tv/own/owntv/core/network/DnsConfig.kt	A
@@ -434,6 +436,7 @@
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	#FFFFFFFF
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	,
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	.m3u8
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	auto
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	demuxer
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	failed to create hw uploader|can't find video conversion
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	file-format
@@ -443,6 +446,7 @@
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpeg4
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpegts
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpv live open timed out after ${openingMs}ms on the full probe — retrying with the fast probe
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	no
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	playback failed — retrying once as ${HttpClient.FALLBACK_USER_AGENT}
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	software-decoded video can't use the direct surface
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	sub-align-x
@@ -451,6 +455,7 @@
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	sub-color
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	sub-pos
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	track-list/$i/selected
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	vid
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	video/mp4v-es
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	video/mpeg2
 1	player-core/src/main/java/tv/own/owntv/player/PlayerDiagnostics.kt	\0

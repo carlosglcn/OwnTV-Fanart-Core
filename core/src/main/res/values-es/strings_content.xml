@@ -459,6 +459,9 @@
     <string name="glcn_remove_from_continue">Quitar de Seguir viendo</string>
     <string name="glcn_sports_now">Deportes ahora</string>
     <string name="glcn_sports_none">Ahora no hay deporte en emisión</string>
+    <string name="glcn_auto_favorites">Favoritos</string>
+    <string name="glcn_auto_recent">Recientes</string>
+    <string name="glcn_auto_all">Todos los canales</string>
     <string name="glcn_featured">Destacado</string>
     <string name="glcn_featured_description">Un cartel con los partidos en directo, lo que emiten tus favoritos y lo último en películas</string>
     <string name="glcn_tonight">Esta noche</string>

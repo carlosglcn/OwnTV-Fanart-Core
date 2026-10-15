@@ -827,6 +827,9 @@
     <string name="glcn_remove_from_continue">Remove from Keep watching</string>
     <string name="glcn_sports_now">Sports now</string>
     <string name="glcn_sports_none">Nothing sporty on air right now</string>
+    <string name="glcn_auto_favorites">Favourites</string>
+    <string name="glcn_auto_recent">Recent</string>
+    <string name="glcn_auto_all">All channels</string>
     <string name="glcn_featured">Featured</string>
     <string name="glcn_featured_description">A billboard with matches on now, your favourites on air and the newest films</string>
     <string name="glcn_tonight">Tonight</string>

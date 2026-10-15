@@ -63,6 +63,11 @@ class SportsNow(
             return WORD_RE.containsMatchIn(fold(p.title))
         }
 
+        private val LIVE_PREFIX = Regex("""^\s*[\(\[]?\s*(EN\s+)?DIRECTO\s*[\)\]]?\s*[:\-·|]?\s*""", RegexOption.IGNORE_CASE)
+
+        /** glcn: the title without its leading "DIRECTO" — the card already says so with its badge. */
+        fun displayTitle(title: String): String = title.replace(LIVE_PREFIX, "").ifBlank { title }
+
         fun isLive(p: EpgProgrammeEntity): Boolean {
             val t = fold(p.title)
             return t.startsWith("directo") || t.startsWith("(en directo)") || t.contains(" en directo") || t.startsWith("live")

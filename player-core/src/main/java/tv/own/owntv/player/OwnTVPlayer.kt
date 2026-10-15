@@ -1108,6 +1108,9 @@ class OwnTVPlayer(
         try {
             // A document has no path for mpv to open, so it is handed an already-open descriptor
             // instead. Everything else passes through untouched.
+            // glcn: sound only (the car, the screen off): no video decoder at all for the new file, so a
+            // channel whose picture this device cannot decode still plays its sound.
+            setPropertyString("vid", if (_audioOnly.value) "no" else "auto")
             command(arrayOf("loadfile", contentFds.playable(url)))
             markActiveFile(true)
         } catch (t: Throwable) {
@@ -5041,6 +5044,8 @@ class OwnTVPlayer(
                         // The direct surface can only display hardware frames. If the direct decoder
                         // didn't engage (cold-boot decoder-busy, etc.), retry direct a few times (it
                         // usually frees within seconds), then fall back to software decode, then error.
+                        // glcn: with sound only there is no video decoder by design — nothing to rescue.
+                        if (_audioOnly.value) return@mpvAsync
                         if (_directRender.value && (hw.isEmpty() || hw == "no")) {
                             val pos = if (isLiveContent) 0L else _position.value
                             // If the codec list says no hardware decoder covers this codec at this size,

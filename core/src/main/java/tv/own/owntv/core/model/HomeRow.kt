@@ -50,12 +50,12 @@ enum class HeroKind {
 
 @Immutable
 data class HomeConfig(
-    val order: List<HomeRow> = mergeOrder(emptyList()),
-    val hidden: Set<HomeRow> = setOf(HomeRow.RECENT_CHANNELS, HomeRow.GENRES),
-    val heroIncludeLive: Boolean = true,
+    val order: List<HomeRow> = GLCN_ORDER,
+    val hidden: Set<HomeRow> = setOf(HomeRow.GENRES),
+    val heroIncludeLive: Boolean = false,
     val heroIncludeMovies: Boolean = true,
     val heroIncludeSeries: Boolean = true,
-    val recentLiveMode: HomeLiveRowMode = HomeLiveRowMode.CARDS,
+    val recentLiveMode: HomeLiveRowMode = HomeLiveRowMode.ON_NOW,
     val favoriteLiveMode: HomeLiveRowMode = HomeLiveRowMode.ON_NOW,
     val trendingStyle: HomeTrendingStyle = HomeTrendingStyle.HERO,
 ) {
@@ -80,12 +80,29 @@ data class HomeConfig(
         put("favoriteLiveMode", favoriteLiveMode.name)
         put("trendingStyle", trendingStyle.name)
         put("glcnGenresDefault", true)
+        put("glcnLayoutV2", true)
     }
 
     companion object {
         fun fromJson(raw: String?): HomeConfig {
             if (raw.isNullOrBlank()) return HomeConfig()
             val obj = runCatching { JSONObject(raw) }.getOrNull() ?: return HomeConfig()
+            // glcn: the agreed Home layout, applied once over whatever was saved before it existed —
+            // Featured, Keep watching (films and series only), Recent channels as pictures, Sports now,
+            // Tonight, then the newest films and series. Changed afterwards in Settings, it stays changed.
+            if (!obj.has("glcnLayoutV2")) {
+                val old = fromJsonInner(obj)
+                return old.copy(
+                    order = GLCN_ORDER,
+                    hidden = (old.hidden - HomeRow.RECENT_CHANNELS - HomeRow.FEATURED - HomeRow.SPORTS_NOW - HomeRow.TONIGHT) + HomeRow.GENRES,
+                    heroIncludeLive = false,
+                    recentLiveMode = HomeLiveRowMode.ON_NOW,
+                )
+            }
+            return fromJsonInner(obj)
+        }
+
+        private fun fromJsonInner(obj: JSONObject): HomeConfig {
             val storedOrder = obj.optJSONArray("order").toHomeRows()
             val hidden = (if (obj.has("hidden")) obj.optJSONArray("hidden").toHomeRows().toSet()
                 else HomeConfig().hidden)
@@ -151,3 +168,12 @@ private fun JSONArray?.toHomeRows(): List<HomeRow> {
     }
     return out
 }
+
+/** glcn: Home's default order. */
+val GLCN_ORDER: List<HomeRow> = mergeOrder(
+    listOf(
+        HomeRow.TRENDING, HomeRow.FEATURED, HomeRow.HERO, HomeRow.RECENT_CHANNELS, HomeRow.SPORTS_NOW,
+        HomeRow.TONIGHT, HomeRow.RECENT_MOVIES, HomeRow.RECENT_SERIES, HomeRow.FAVORITE_CHANNELS,
+        HomeRow.CONTINUE_MOVIES, HomeRow.CONTINUE_SERIES, HomeRow.FAVORITE_MOVIES, HomeRow.FAVORITE_SERIES, HomeRow.GENRES,
+    ),
+)
