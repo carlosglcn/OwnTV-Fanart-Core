@@ -265,14 +265,15 @@
 1	core/src/main/java/tv/own/owntv/core/metadata/MetadataRepository.kt	$TYPE_TV:$lang:$tvId:s${season}e$episode
 1	core/src/main/java/tv/own/owntv/core/metadata/OwnTVClientId.kt	\0
 1	core/src/main/java/tv/own/owntv/core/metadata/OwnTVClientId.kt	%02x
-6	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\0
+8	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\0
+1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	%.1f
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	[^a-z0-9]+
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\p{M}+
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\s*[\\(\\[][^)\\]]*[\\)\\]]
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\s+(T\\d+(\\s*E\\d+)?|S\\d+\\s*E\\d+|Temporada\\s+\\d+|Ep\\.?\\s*\\d+|Episodio\\s+\\d+)\\b.*$
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	^\\s*\\(?(EN\\s+)?DIRECTO\\)?\\s*[:\\-]?\\s*
-1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	glcn_programme_art
-2	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	w780
+1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	glcn_programme_info
+1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	w780
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	·
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	&api_key=
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	,
@@ -285,6 +286,8 @@
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	profile_path
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	search type=$type
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	tv details id=$tmdbId
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_average
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_count
 2	core/src/main/java/tv/own/owntv/core/model/HomeRow.kt	glcnGenresDefault
 2	core/src/main/java/tv/own/owntv/core/model/HomeRow.kt	glcnLayoutV2
 3	core/src/main/java/tv/own/owntv/core/network/DnsConfig.kt	\0

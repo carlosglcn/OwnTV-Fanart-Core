@@ -372,6 +372,7 @@ class TmdbProvider(
                 posterPath = o.optString("poster_path").takeIf { it.isNotBlank() && it != "null" },
                 popularity = o.optDouble("popularity", 0.0),
                 backdropPath = o.optString("backdrop_path").takeIf { it.isNotBlank() && it != "null" },
+                voteAverage = o.optDouble("vote_average", 0.0).takeIf { it > 0.0 && o.optInt("vote_count", 0) >= 20 },
             )
         }
         // TMDB already sorts by relevance; keep its order but drop obvious empties.

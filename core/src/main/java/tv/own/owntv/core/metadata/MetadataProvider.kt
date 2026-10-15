@@ -34,6 +34,8 @@ data class MetadataSearchResult(
     val popularity: Double,
     /** glcn: TMDB relative backdrop path — the wide picture, for guide programmes that only have a poster. */
     val backdropPath: String? = null,
+    /** glcn: TMDB's average vote (0–10), shown beside a guide programme; null when TMDB has none. */
+    val voteAverage: Double? = null,
 )
 
 /**
