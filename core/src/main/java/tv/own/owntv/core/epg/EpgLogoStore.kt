@@ -52,7 +52,10 @@ object EpgLogoStore {
                 epgDao.observeChannelIcons(sourceIds.toList()).collectLatest { rows ->
                     // Several enabled feeds can carry the same channel: first one wins, which is stable
                     // because the DAO returns rows in source order.
-                    icons = rows.associate { it.epgChannelId to it.iconUrl }
+                    // glcn: keyed lowercase, as the lookups are — a feed id like "Ten" never matched.
+                    val map = LinkedHashMap<String, String>()
+                    rows.forEach { r -> map.putIfAbsent(r.epgChannelId.trim().lowercase(), r.iconUrl) }
+                    icons = map
                 }
             }
         }

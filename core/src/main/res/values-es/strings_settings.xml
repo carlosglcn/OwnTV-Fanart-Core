@@ -833,7 +833,7 @@
     <string name="settings_epg_sources_save_sync">Guardar y sincronizar</string>
     <string name="settings_epg_sources_fill_playlist">Rellenar desde una lista de reproducción</string>
     <string name="settings_epg_sources_none_playlist">Ninguna de tus playlists proporciona una URL de EPG.</string>
-    <string name="settings_epg_sources_use_logos">Usar los logotipos de channels de esta guide</string>
+    <string name="settings_epg_sources_use_logos">Usar los logotipos de los canales de esta guía</string>
     <string name="settings_epg_sources_logos_description">Muestra los logotipos de esta fuente XMLTV en lugar de los de tu lista de reproducción. Los canales para los que esta fuente no tenga logotipo conservarán el de la lista de reproducción.</string>
     <string name="settings_epg_sources_name">Nombre</string>
     <string name="settings_epg_sources_url">URL XMLTV</string>
