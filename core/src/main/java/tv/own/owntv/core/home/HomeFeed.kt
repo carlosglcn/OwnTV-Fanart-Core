@@ -313,7 +313,7 @@ class HomeFeedReader(
                 else runCatching {
                     tv.own.owntv.core.live.SportsNow(channelDao, guide)
                         .find(liveIds.toList(), hidden.live, settings.epgOffsetMinutes.first())
-                        .filterNot { isChannelHidden(it.channel, hidden) }
+                        .filterNot { isChannelHidden(it.channel, hidden) || isBarChannel(it.channel) }
                         .take(SPORTS_ROW_LIMIT)
                 }.getOrDefault(emptyList())
             }
@@ -335,7 +335,7 @@ class HomeFeedReader(
                 if (HomeRow.FEATURED !in config.visibleOrder || favLive.isEmpty()) emptyMap()
                 else runCatching {
                     val t = System.currentTimeMillis()
-                    guide.slice(favLive.take(60), hidden.live, shiftAsync.await(), t, t + 1)
+                    guide.slice(favLive.filterNot(::isBarChannel).take(60), hidden.live, shiftAsync.await(), t, t + 1)
                         .mapNotNull { (id, rows) -> rows.firstOrNull { t in it.startMs until it.stopMs }?.let { id to it } }
                         .toMap()
                 }.getOrDefault(emptyMap())
@@ -346,7 +346,7 @@ class HomeFeedReader(
                 else runCatching {
                     // Favourites and the recently watched together: either alone is often too few
                     // channels with a guide for the evening to show anything.
-                    val channels = (favLive + live).distinctBy { it.id }.take(80)
+                    val channels = (favLive + live).distinctBy { it.id }.filterNot(::isBarChannel).take(80)
                     if (channels.isEmpty()) return@runCatching emptyList()
                     val t = System.currentTimeMillis()
                     val cal = java.util.Calendar.getInstance().apply {
@@ -370,7 +370,7 @@ class HomeFeedReader(
                     // Every other channel: only the evening's highlights — a live match, a premiere, a film.
                     val others = runCatching {
                         channelDao.allForSources(liveIds.toList(), 5_000)
-                            .filter { it.id !in byId && !isChannelHidden(it, hidden) && TONIGHT_CHANNEL.containsMatchIn(it.name) }
+                            .filter { it.id !in byId && !isChannelHidden(it, hidden) && !isBarChannel(it) && TONIGHT_CHANNEL.containsMatchIn(it.name) }
                     }.getOrDefault(emptyList())
                     val othersById = others.associateBy { it.id }
                     val highlights = if (others.isEmpty()) emptyList() else guide.slice(others, hidden.live, shift, from, to)
@@ -754,3 +754,11 @@ internal fun tonightRank(p: EpgProgrammeEntity): Int {
 
 /** "Real Madrid - Barcelona", "Lakers vs Celtics". */
 private val TONIGHT_MATCH = Regex("""\S\s+(-|–|vs\.?|v)\s+\S""", RegexOption.IGNORE_CASE)
+
+/**
+ * glcn: the bar/pub feeds of a playlist ("M+ LALIGA BAR", "VAMOS BAR") — the same matches as the home
+ * channels, licensed for venues. Home never suggests them: not in Featured, Sports now or Tonight.
+ */
+private val BAR_CHANNEL = Regex("""(?i)(^|[^\p{L}])bar([^\p{L}]|$)""")
+
+internal fun isBarChannel(ch: ChannelEntity): Boolean = BAR_CHANNEL.containsMatchIn(ch.name)

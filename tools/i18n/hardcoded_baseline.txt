@@ -196,6 +196,7 @@
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	subtitles failed
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	vtt
 2	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\0
+1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	(?i)(^|[^\\p{L}])bar([^\\p{L}]|$)
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	(?i)(deport|sport|liga|futbol|fútbol|champions|dazn|eurosport|gol|f1|motor|cine|cinema|movie|film|estreno|accion|acción|comedia|drama|xtrm|hollywood|tcm|paramount|amc|axn|tnt|fox|syfy|scifi|calle 13|cosmo|dark|warner|star|clan)
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\\S\\s+(-|–|vs\\.?|v)\\s+\\S
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\\b(cine|pelicula|peliculas|film|movie)\\b
