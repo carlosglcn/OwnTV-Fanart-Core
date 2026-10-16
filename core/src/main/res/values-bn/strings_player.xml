@@ -115,8 +115,6 @@
     <string name="player_error_image_format">এই ফাইলের ফরম্যাটে ছবিভিত্তিক সাবটাইটেল পাওয়া যায় না।</string>
     <string name="player_error_image_show">এই ফাইলের ছবিভিত্তিক সাবটাইটেল দেখানো যায়নি।</string>
     <string name="player_external_could_not_open">এই স্ট্রিমটি খোলা যায়নি।</string>
-    <string name="player_external_play_with">যে অ্যাপ দিয়ে চালাবেন</string>
-    <string name="player_external_play_with_item">“<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>” চালান…</string>
     <string name="player_external_not_found">কোনো বাহ্যিক প্লেয়ার পাওয়া যায়নি — VLC অথবা MX Player ইনস্টল করুন।</string>
     <string name="player_error_audio_no_video">অডিও চলছে, কিন্তু এই ডিভাইসে ভিডিও দেখানো যায়নি।</string>
     <string name="player_error_file_corrupt">এই ভিডিওর ফাইলটি ত্রুটিপূর্ণ অথবা নষ্ট এবং এটি চালানো যায় না।</string>

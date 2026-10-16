@@ -241,6 +241,8 @@
     <string name="content_downloads_unknown_size">—</string>
     <string name="content_downloads_group_downloading">A transferir</string>
     <string name="content_downloads_group_on_tv">Nesta TV</string>
+    <string name="content_downloads_group_on_phone">Neste telemóvel</string>
+    <string name="content_downloads_ready_short">Pronto</string>
     <string name="content_downloads_ready">Pronto a ver</string>
     <string name="content_downloads_paused">Em pausa</string>
     <string name="content_downloads_file_missing">Ficheiro em falta: já não está na unidade</string>
@@ -455,4 +457,6 @@
     <string name="content_play_from_start">Reproduzir desde o início</string>
     <string name="content_episode_details">Detalhes do episódio</string>
     <string name="content_season_specials">Especiais</string>
+    <string name="content_poster_size">Tamanho dos cartazes</string>
+    <string name="content_vod_more_in">Mais em <xliff:g id="category">%1$s</xliff:g></string>
 </resources>

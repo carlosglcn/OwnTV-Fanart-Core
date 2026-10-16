@@ -446,6 +446,10 @@
     <string name="content_downloads_group_downloading">Downloading</string>
     <!-- Translators: Downloads screen: heading over finished downloads stored on this TV. Shown in capitals. -->
     <string name="content_downloads_group_on_tv">On this TV</string>
+    <!-- Translators: Downloads screen on a phone: heading over finished downloads stored on this phone. Shown in capitals. -->
+    <string name="content_downloads_group_on_phone">On this phone</string>
+    <!-- Translators: Downloads screen on a phone: short status beside a finished download, after a check mark. Keep it to one short word. -->
+    <string name="content_downloads_ready_short">Ready</string>
     <!-- Translators: Downloads screen: a finished download that can be played. -->
     <string name="content_downloads_ready">Ready to watch</string>
     <!-- Translators: Downloads screen: a download the user paused. -->
@@ -896,4 +900,8 @@
     <string name="glcn_remote_subtitles">Subtitles on / off</string>
     <string name="glcn_about_license">© 2026 OwnTV (ahXN00) · changes © 2026 carlosglcn · GPLv3 licence</string>
     <string name="glcn_about_community">OwnTV community on Telegram (original project)</string>
+    <!-- Translators: Heading above the poster-size slider in the Movies / Series sort sheet. Shown in capitals by the style. -->
+    <string name="content_poster_size">Poster size</string>
+    <!-- Translators: Small heading on a movie's page above more posters from the same category: "More in Disney+ Kids Movies". Shown in capitals by the style. -->
+    <string name="content_vod_more_in">More in <xliff:g id="category">%1$s</xliff:g></string>
 </resources>

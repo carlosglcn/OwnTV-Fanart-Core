@@ -2900,6 +2900,15 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         oldPicture?.takeIf { it.isNotBlank() }?.let { runCatching { java.io.File(it).delete() } }
     }
 
+    /**
+     * The phone app's start for a new user (owner, 2026-10-14): the Stage background and glass on every surface
+     * at [alphaPct]. Written only on a fresh install — no profile yet and neither glass nor background ever set —
+     * so an existing install keeps whatever it has. The TV uses [applyStageDefaults].
+     */
+    suspend fun applyPhoneStageDefaults(allSurfacesBits: Int, alphaPct: Int) {
+        context.dataStore.edit { phoneStageDefaults(it, allSurfacesBits, alphaPct) }
+    }
+
     /** v4.1.6 only: force live latency to Balanced exactly once, including existing custom choices. */
     suspend fun migrateLiveLatency416() {
         context.dataStore.edit { prefs ->
@@ -3080,12 +3089,12 @@ class SettingsRepository(private val context: Context, private val localeStore: 
      * Reset (Glass & background): Stage colours, glass on every surface, opacity 50%. The picture file
      * is kept so Background › Picture can return to it.
      */
-    suspend fun resetGlassAndBackground(allSurfacesBits: Int) {
+    suspend fun resetGlassAndBackground(allSurfacesBits: Int, alphaPct: Int = GLASS_ALPHA_DEFAULT_PCT) {
         context.dataStore.edit {
             it[Keys.BG_STYLE] = tv.own.owntv.core.theme.BackgroundStyle.STAGE.name
             it.remove(Keys.BG_LOOK); it.remove(Keys.BG_DIM); it.remove(Keys.BG_BLUR); it.remove(Keys.BG_ACCENT_LIGHT)
             it[Keys.GLASS_SCOPE] = allSurfacesBits
-            it[Keys.GLASS_ALPHA] = GLASS_ALPHA_DEFAULT_PCT
+            it[Keys.GLASS_ALPHA] = alphaPct
             it[Keys.GLASS_PRESET] = tv.own.owntv.core.theme.GlassPreset.CUSTOM.name
         }
     }
@@ -3489,6 +3498,16 @@ class SettingsRepository(private val context: Context, private val localeStore: 
             prefs.remove(Keys.BG_LOOK); prefs.remove(Keys.BG_DIM); prefs.remove(Keys.BG_BLUR); prefs.remove(Keys.BG_ACCENT_LIGHT)
             if (update && prefs[Keys.VOD_LAYOUT] == null) prefs[Keys.VOD_LAYOUT] = VodLayout.SEPARATE.name
             prefs[Keys.STAGE_DEFAULTS_APPLIED] = true
+        }
+
+        /** The writes of [applyPhoneStageDefaults]; nothing at all unless this is a fresh install. */
+        internal fun phoneStageDefaults(prefs: MutablePreferences, allSurfacesBits: Int, alphaPct: Int) {
+            val fresh = prefs[Keys.ACTIVE_PROFILE] == null && prefs[Keys.GLASS_SCOPE] == null && prefs[Keys.BG_STYLE] == null
+            if (!fresh) return
+            prefs[Keys.GLASS_SCOPE] = allSurfacesBits
+            prefs[Keys.GLASS_ALPHA] = alphaPct
+            prefs[Keys.GLASS_PRESET] = tv.own.owntv.core.theme.GlassPreset.CUSTOM.name
+            prefs[Keys.BG_STYLE] = tv.own.owntv.core.theme.BackgroundStyle.STAGE.name
         }
 
         private val CUSTOMIZE_PIN_HASH_REGEX = Regex("^[0-9a-fA-F]{16}:[0-9a-fA-F]{64}$")

@@ -115,8 +115,6 @@
     <string name="player_error_image_format">Bildbaserade undertexter är inte tillgängliga för den här filens format.</string>
     <string name="player_error_image_show">Det gick inte att visa bildbaserade undertexter för den här filen.</string>
     <string name="player_external_could_not_open">Det gick inte att öppna den här strömmen.</string>
-    <string name="player_external_play_with">Spela upp med</string>
-    <string name="player_external_play_with_item">Spela upp ”<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>” med…</string>
     <string name="player_external_not_found">Ingen extern spelare hittades – installera VLC eller MX Player.</string>
     <string name="player_error_audio_no_video">Ljudet spelas upp, men videon kunde inte visas på den här enheten.</string>
     <string name="player_error_file_corrupt">Videofilen är felaktig eller skadad och kan inte spelas upp.</string>

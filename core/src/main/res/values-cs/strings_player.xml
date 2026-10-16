@@ -115,8 +115,6 @@
     <string name="player_error_image_format">Obrazové titulky nejsou pro formát tohoto souboru dostupné.</string>
     <string name="player_error_image_show">Obrazové titulky pro tento soubor se nepodařilo zobrazit.</string>
     <string name="player_external_could_not_open">Tento stream se nepodařilo otevřít.</string>
-    <string name="player_external_play_with">Přehrát pomocí</string>
-    <string name="player_external_play_with_item">Přehrát „<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>“ pomocí…</string>
     <string name="player_external_not_found">Nebyl nalezen žádný externí přehrávač — nainstalujte VLC nebo MX Player.</string>
     <string name="player_error_audio_no_video">Zvuk se přehrává, ale video se na tomto zařízení nepodařilo vykreslit.</string>
     <string name="player_error_file_corrupt">Soubor tohoto videa je poškozený nebo má nesprávnou strukturu a nelze ho přehrát.</string>

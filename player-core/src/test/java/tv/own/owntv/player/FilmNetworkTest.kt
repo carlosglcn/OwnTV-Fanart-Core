@@ -47,4 +47,24 @@ class FilmNetworkTest {
         }
         assertNull(FilmNetwork.nextReconnect(used, at, pos, budget = 3))
     }
+
+    @Test
+    fun `Auto keeps mpv's 1 s resume wait, a chosen buffer waits longer`() {
+        assertEquals(1, FilmNetwork.mpvResumeWaitSecs(0))
+        assertEquals(SmartBuffer.FILM_RESUME_WAIT_SECS, FilmNetwork.mpvResumeWaitSecs(120))
+        assertEquals(3, SmartBuffer.FILM_RESUME_WAIT_SECS)
+    }
+
+    @Test
+    fun `Auto seconds still feed both engines exactly as before`() {
+        // The byte side of Auto lives in SmartBufferTest; the seconds side must not move either.
+        val mid = PlayerBudget("128MiB", "32MiB", readaheadSecs = "30", cacheSecs = "60", lowSpec = false)
+        assertEquals(60, FilmNetwork.bufferSecs(0, mid))
+        assertEquals("30", FilmNetwork.readaheadSecs(0, mid))
+    }
+
+    @Test
+    fun `the new film ceiling defaults to no raise`() {
+        assertEquals(0L, lowSpec.filmCeilingBytes)
+    }
 }

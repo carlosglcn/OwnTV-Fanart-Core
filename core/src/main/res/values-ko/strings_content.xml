@@ -225,6 +225,8 @@
     <string name="content_downloads_unknown_size">—</string>
     <string name="content_downloads_group_downloading">다운로드 중</string>
     <string name="content_downloads_group_on_tv">이 TV에 저장됨</string>
+    <string name="content_downloads_group_on_phone">이 휴대폰에 저장됨</string>
+    <string name="content_downloads_ready_short">준비됨</string>
     <string name="content_downloads_ready">시청 가능</string>
     <string name="content_downloads_paused">일시중지됨</string>
     <string name="content_downloads_file_missing">파일 없음: 더 이상 드라이브에 없습니다</string>
@@ -417,4 +419,6 @@
     <string name="content_play_from_start">처음부터 재생</string>
     <string name="content_episode_details">에피소드 세부정보</string>
     <string name="content_season_specials">스페셜</string>
+    <string name="content_poster_size">포스터 크기</string>
+    <string name="content_vod_more_in"><xliff:g id="category">%1$s</xliff:g>의 다른 작품</string>
 </resources>

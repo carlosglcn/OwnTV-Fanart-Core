@@ -46,4 +46,25 @@ class StageDefaultsTest {
         assertNull(prefs[Keys.VOD_LAYOUT])
         assertEquals("DOCKED", prefs[Keys.NAV_STYLE])
     }
+
+    @Test
+    fun `a fresh phone install starts on Stage with glass on at the given opacity`() {
+        val prefs = mutablePreferencesOf()
+        SettingsRepository.phoneStageDefaults(prefs, allSurfacesBits = 0b111, alphaPct = 51)
+        assertEquals(0b111, prefs[Keys.GLASS_SCOPE])
+        assertEquals(51, prefs[Keys.GLASS_ALPHA])
+        assertEquals("STAGE", prefs[Keys.BG_STYLE])
+        assertNull(prefs[Keys.NAV_STYLE])
+    }
+
+    @Test
+    fun `an existing phone install keeps its own look`() {
+        val withProfile = mutablePreferencesOf(Keys.ACTIVE_PROFILE to 1L)
+        SettingsRepository.phoneStageDefaults(withProfile, allSurfacesBits = 1, alphaPct = 51)
+        assertNull(withProfile[Keys.GLASS_SCOPE])
+        val glassOff = mutablePreferencesOf(Keys.GLASS_SCOPE to 0)
+        SettingsRepository.phoneStageDefaults(glassOff, allSurfacesBits = 1, alphaPct = 51)
+        assertEquals(0, glassOff[Keys.GLASS_SCOPE])
+        assertNull(glassOff[Keys.BG_STYLE])
+    }
 }

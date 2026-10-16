@@ -63,6 +63,16 @@ object TimeshiftRules {
 
     fun reconnectDelayMs(attempt: Int): Long = (1_000L shl (attempt - 1).coerceIn(0, 3))
 
+    /**
+     * The device has no network (the provider's name cannot be looked up, or there is no route), as
+     * opposed to a provider that drops the stream. Such a failure does not spend the reconnect budget:
+     * the buffer waits the outage out, as the live engines do, instead of giving the channel up.
+     */
+    fun isOffline(error: Throwable): Boolean = generateSequence(error) { it.cause }.take(8).any {
+        it is java.net.UnknownHostException || it is java.net.NoRouteToHostException ||
+            (it is java.net.SocketException && it.message?.contains("ENETUNREACH") == true)
+    }
+
     /** A parked buffer (the user left the channel) is kept this long for a "Resume from buffer" (decision 25). */
     const val PARKED_GRACE_MS = 5 * 60_000L
 

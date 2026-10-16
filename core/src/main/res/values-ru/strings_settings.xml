@@ -1398,13 +1398,18 @@
     <string name="more_fav_movies_series">Фильмы и сериалы</string>
     <string name="more_fav_empty_title">Избранного пока нет</string>
     <string name="more_fav_empty_body">Удерживайте OK на канале, фильме или сериале и выберите «Добавить в избранное».</string>
+    <string name="more_fav_empty_body_mobile">Нажмите и удерживайте канал, фильм или сериал и выберите «Добавить в избранное».</string>
     <string name="more_history_empty">Вы ещё ничего не смотрели</string>
     <string name="more_backup_never_title">Резервной копии ещё нет</string>
     <string name="more_backup_never_body"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> и все настройки хранятся только на этом телевизоре.</string>
+    <string name="more_backup_never_body_mobile"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> и все настройки хранятся только на этом телефоне.</string>
     <string name="more_backup_now">Создать копию</string>
     <string name="more_backup_now_body">Сохранить файл на этом телевизоре или отправить его удалённо на другое устройство</string>
+    <string name="more_backup_now_body_mobile">Сохранить файл на этом телефоне или отправить его на другое устройство</string>
     <string name="more_backup_file_tv">Файл на этом ТВ</string>
+    <string name="more_backup_file_tv_mobile">Файл на этом телефоне</string>
     <string name="more_restore_body">Из файла на этом телевизоре или удалённо с другого устройства</string>
+    <string name="more_restore_body_mobile">Из файла на этом телефоне или удалённо с другого устройства</string>
     <string name="more_backup_included">Что входит</string>
     <string name="more_about_up_to_date">Актуальная версия</string>
     <string name="more_about_checked">Проверено <xliff:g id="value">%1$s</xliff:g></string>
@@ -1426,7 +1431,9 @@
     <string name="more_sync_unpair">Отвязать</string>
     <string name="more_about_license">GPLv3 · бесплатно и с открытым кодом</string>
     <string name="more_about_description">Ваш собственный IPTV-плеер для Android TV. Он не предоставляет каналов или контента; вы добавляете собственные легальные источники.</string>
+    <string name="more_about_description_mobile">Ваш собственный IPTV-плеер для Android. Он не предоставляет каналов или контента; вы добавляете собственные легальные источники.</string>
     <string name="more_about_scan">Отсканируйте телефоном.</string>
+    <string name="more_about_scan_mobile">Отсканируйте или нажмите, чтобы открыть</string>
     <plurals name="more_playlist_count">
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> плейлист</item>
         <item quantity="few"><xliff:g id="count">%1$d</xliff:g> плейлиста</item>
@@ -1451,6 +1458,18 @@
         <item quantity="many"><xliff:g id="count">%1$d</xliff:g> языков</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> языков</item>
     </plurals>
+    <plurals name="more_settings_pinned_count">
+        <item quantity="one">Закреплено: <xliff:g id="count">%1$d</xliff:g></item>
+        <item quantity="few">Закреплено: <xliff:g id="count">%1$d</xliff:g></item>
+        <item quantity="many">Закреплено: <xliff:g id="count">%1$d</xliff:g></item>
+        <item quantity="other">Закреплено: <xliff:g id="count">%1$d</xliff:g></item>
+    </plurals>
+    <plurals name="more_downloads_running_count">
+        <item quantity="one">Загружается: <xliff:g id="count">%1$d</xliff:g></item>
+        <item quantity="few">Загружается: <xliff:g id="count">%1$d</xliff:g></item>
+        <item quantity="many">Загружается: <xliff:g id="count">%1$d</xliff:g></item>
+        <item quantity="other">Загружается: <xliff:g id="count">%1$d</xliff:g></item>
+    </plurals>
     <string name="settings_backup_location">Расположение</string>
     <string name="settings_multiview">Мультиэкран</string>
     <string name="settings_multiview_description">Смотрите несколько прямых эфиров одновременно. Сколько именно — вы решаете каждый раз, но не больше этого числа: каждое окно занимает одно подключение провайдера.</string>
@@ -1462,6 +1481,7 @@
     <string name="settings_multiview_use_anyway">Всё равно использовать</string>
     <string name="settings_app_icon">Значок приложения</string>
     <string name="settings_app_icon_summary">Цвет значка и логотипа OwnTV</string>
+    <string name="settings_app_icon_sheet_mobile">Как OwnTV выглядит на главном экране. Приложение перезапустится один раз.</string>
     <string name="settings_brand_accent">Логотип в цвете акцента</string>
     <string name="app_icon_petrol">Петроль</string>
     <string name="app_icon_sunflower">Подсолнух</string>
@@ -1785,6 +1805,8 @@
     <string name="settings_bg_picture">Картинка</string>
     <string name="settings_bg_plain">Простой</string>
     <string name="settings_line_bg_picture_none">Выберите картинку с этого телевизора или через Remote</string>
+    <string name="settings_line_bg_picture_none_mobile">Выберите картинку с этого телефона</string>
+    <string name="settings_bg_picture_from_phone"><xliff:g id="file" example="sunset.jpg">%1$s</xliff:g> · с этого телефона</string>
     <string name="settings_bg_change">Изменить</string>
     <string name="settings_bg_none">Нет</string>
     <string name="settings_bg_look">Вид картинки</string>
@@ -1805,9 +1827,92 @@
     <string name="settings_line_bg_accent_light">Ваш акцентный цвет светится в углу</string>
     <string name="settings_glass_section">Стекло</string>
     <string name="settings_line_glass_switch">Панель меню, шторки, меню и окна матовые</string>
+    <string name="settings_line_glass_switch_mobile">Панели, шторки, меню и окна матовые</string>
     <string name="settings_help_glass_chrome">Делает матовыми плавающие части: панель меню, шторки категорий, меню, окна и кнопки вверху. Списки и постеры остаются плоскими.</string>
     <string name="settings_glass_opacity">Плотность стекла</string>
     <string name="settings_line_glass_opacity">Чем меньше, тем больше видно фон</string>
     <string name="settings_line_glass_reset">Цвета Stage, стекло включено, <xliff:g id="percent" example="56%">%1$s</xliff:g></string>
     <string name="settings_bg_preview_note">Прямой эфир с этим фоном. Изменения видны по ходу перемещения.</string>
+    <string name="settings_root_hint_mobile">Удерживайте строку, чтобы закрепить её в «Быстрые»</string>
+    <string name="settings_card_layout_mobile">Навигация, Главная, списки, меню</string>
+    <string name="settings_card_watching_mobile">Перемотка, продолжение, мини-плеер, запись</string>
+    <string name="settings_line_live_preview_mobile">Воспроизводить выбранный канал вверху Прямого эфира</string>
+    <string name="settings_line_hw_mobile">Использовать декодер телефона</string>
+    <string name="settings_line_surround_mobile">5.1 и 7.1 в том виде, как их получает телефон</string>
+    <string name="settings_line_passthrough_mobile">Без декодирования на подключённый ресивер</string>
+    <string name="settings_line_navigation_mobile">Панель внизу: подписи, скрытие при прокрутке, пункты</string>
+    <string name="settings_vod_view_mobile">Вид Фильмов и Сериалов</string>
+    <string name="settings_line_vod_view_mobile">Как открывается категория</string>
+    <string name="settings_guide_size_mobile">Размер Программы передач</string>
+    <string name="settings_line_guide_size_mobile">Сколько времени сетка показывает за раз</string>
+    <string name="settings_line_download_folder_mobile">Куда сохраняются фильмы, серии и записи</string>
+    <string name="settings_browsing_value_both">Оба</string>
+    <plurals name="settings_home_rows_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> ряд</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> ряда</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> рядов</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> рядов</item>
+    </plurals>
+    <plurals name="settings_customize_hidden_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> скрыт</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> скрыто</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> скрыто</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> скрыто</item>
+    </plurals>
+    <string name="settings_catchup_timezone_label">Часовой пояс</string>
+    <string name="settings_help_add_from_phone_mobile">Откройте адрес или отсканируйте код в браузере любого устройства в той же сети Wi-Fi — компьютера, планшета или телевизора, — заполните там плейлист и отправьте его сюда. Гораздо быстрее, чем вводить URL на телефоне.</string>
+    <string name="settings_line_add_type_here_mobile">Xtream, M3U или Stalker</string>
+    <string name="setup_local_file_hint_mobile">.m3u или .m3u8 на этом телефоне</string>
+    <plurals name="settings_sources_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> источник</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> источника</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> источников</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> источников</item>
+    </plurals>
+    <string name="settings_sources_status_default">По умолчанию</string>
+    <string name="settings_epg_sources_addresses_note">Адреса показываются без имени пользователя и пароля.</string>
+    <plurals name="settings_customize_categories_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> категория</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> категории</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> категорий</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> категорий</item>
+    </plurals>
+    <string name="settings_customize_hold_note_mobile">Удерживайте строку: Переименовать · Переместить · Скрыть · или начните диапазон, чтобы изменить сразу несколько.</string>
+    <string name="settings_line_quick_channel_numbers_mobile">Введите номер, чтобы переключить канал</string>
+    <string name="settings_line_playlists_mobile">Добавить, синхронизировать заново или удалить M3U / Xtream / Stalker</string>
+    <string name="settings_line_accent_mobile">Окрашивает кнопки, выделения и панели повсюду</string>
+    <string name="settings_line_glass_bg_mobile">Матовые панели и листы, фоновое изображение</string>
+    <string name="settings_line_popup_size_mobile">Масштабировать листы и меню, не меняя текст</string>
+    <string name="settings_line_animations_mobile">Выключено — быстрее на старых телефонах</string>
+    <string name="settings_line_vod_buffer_mobile">Насколько вперёд загружаются фильмы и архив</string>
+    <string name="settings_line_vod_timeout_mobile">Сколько ждать молчащий сервер</string>
+    <string name="settings_line_vod_reconnects_mobile">Сколько раз переоткрывается потерянный поток</string>
+    <string name="settings_line_sw_decode_mobile">Выше 1080p программно, если аппаратный декодер не справился</string>
+    <string name="settings_line_rec_mobile_data_mobile">Выкл.: запись на мобильных данных пропускается</string>
+    <string name="settings_line_pip_mobile">Уменьшать видео в окно при выходе из приложения</string>
+    <string name="settings_line_pip_size_mobile">Насколько большим открывается плавающее окно</string>
+    <string name="settings_line_pip_snap_mobile">Окно прилипает к ближайшему краю</string>
+    <string name="settings_line_audio_screen_off_mobile">Не декодировать видео, которое никто не видит</string>
+    <string name="settings_line_audio_per_channel_mobile">В следующий раз откроется так же</string>
+    <string name="settings_line_seek_step_mobile">Насколько перематывает одно касание назад или вперёд</string>
+    <string name="settings_line_rewind_step_mobile">Насколько перематывает одно касание на live-канале</string>
+    <string name="settings_line_gesture_mobile">Насколько свайп меняет громкость, яркость или позицию</string>
+    <string name="settings_line_rec_watching_mobile">Кнопка записи в плеере</string>
+    <string name="settings_line_rec_pre_roll_mobile">Начинать раньше указанного начала</string>
+    <string name="settings_line_rec_post_roll_mobile">Продолжать после указанного конца</string>
+    <string name="settings_line_sub_lang_mobile">Автоматически выбирать эту дорожку субтитров</string>
+    <string name="settings_line_sub_style_mobile">Размер, шрифт, цвет, положение, фон</string>
+    <string name="settings_customize_short_mobile">Настроить</string>
+    <plurals name="settings_epg_line_programmes">
+        <item quantity="one"><xliff:g id="count">%1$s</xliff:g> передача</item>
+        <item quantity="few"><xliff:g id="count">%1$s</xliff:g> передачи</item>
+        <item quantity="many"><xliff:g id="count">%1$s</xliff:g> передач</item>
+        <item quantity="other"><xliff:g id="count">%1$s</xliff:g> передач</item>
+    </plurals>
+    <plurals name="settings_epg_line_catchup">
+        <item quantity="one">архив на <xliff:g id="count">%1$s</xliff:g></item>
+        <item quantity="few">архив на <xliff:g id="count">%1$s</xliff:g></item>
+        <item quantity="many">архив на <xliff:g id="count">%1$s</xliff:g></item>
+        <item quantity="other">архив на <xliff:g id="count">%1$s</xliff:g></item>
+    </plurals>
 </resources>

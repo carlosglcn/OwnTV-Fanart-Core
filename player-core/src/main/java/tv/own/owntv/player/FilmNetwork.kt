@@ -8,10 +8,14 @@ import tv.own.owntv.core.player.PlayerBudget
  * Films only: live has its own latency, pre-buffer and "Give up after" settings and its own reconnect
  * rules. Every "Auto" (0) is exactly what the engines did before these settings existed.
  *
- * **The buffer is seconds, never memory.** Each engine's byte ceiling stays the device tier's
- * ([PlayerBudget]), so a longer buffer cannot cost more memory than today — on a 2 GB television
- * (48 MiB) a 4K film fills the ceiling long before the seconds run out. That is why the setting reads
- * "up to", and why nothing here needs a separate low-memory clamp.
+ * **The buffer is seconds first, memory second.** Auto keeps each engine's byte cap exactly the device
+ * tier's ([PlayerBudget]). A chosen buffer used to stop at that same cap, so on a 2 GB television (48 MiB
+ * on mpv, 16 MiB on ExoPlayer) a 4K film filled it after a few seconds whatever was picked. Now the cap
+ * grows with the chosen seconds ([SmartBuffer]) — from the stream's bitrate where it is known — but never
+ * past the device's film ceiling ([PlayerBudget.filmCeilingBytes]). The setting still reads "up to":
+ * a very high-bitrate film on a small TV reaches that ceiling before the seconds run out.
+ *
+ * The low-memory trim ([OwnTVPlayer.onTrimMemory]) still wins over all of this until the next load.
  */
 internal object FilmNetwork {
 
@@ -30,6 +34,17 @@ internal object FilmNetwork {
         if (userSecs > 0) userSecs.toString() else budget.readaheadSecs
 
     fun mpvTimeoutSecs(userSecs: Int): Int = if (userSecs > 0) userSecs else MPV_AUTO_TIMEOUT_SECS
+
+    /** mpv's resume wait (`cache-pause-wait`) on Auto: the 1 s films always had. */
+    const val MPV_AUTO_RESUME_WAIT_SECS = 1
+
+    /**
+     * How many seconds mpv refills after a film underruns before playing on. A chosen buffer waits
+     * [SmartBuffer.FILM_RESUME_WAIT_SECS], so a slow line plays in longer runs instead of stop-start
+     * stutter; Auto keeps the old 1 s.
+     */
+    fun mpvResumeWaitSecs(userSecs: Int): Int =
+        if (userSecs > 0) SmartBuffer.FILM_RESUME_WAIT_SECS else MPV_AUTO_RESUME_WAIT_SECS
 
     /**
      * Whether a film that dropped at [posMs] may be reopened, as the new count of attempts used — or

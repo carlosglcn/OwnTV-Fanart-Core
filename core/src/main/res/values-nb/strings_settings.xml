@@ -1354,13 +1354,18 @@
     <string name="more_fav_movies_series">Filmer og serier</string>
     <string name="more_fav_empty_title">Ingen favoritter ennå</string>
     <string name="more_fav_empty_body">Hold inne OK på en kanal, film eller serie og velg «Legg til i Favoritter».</string>
+    <string name="more_fav_empty_body_mobile">Hold fingeren på en kanal, film eller serie og velg «Legg til i Favoritter».</string>
     <string name="more_history_empty">Ingenting sett ennå</string>
     <string name="more_backup_never_title">Aldri sikkerhetskopiert</string>
     <string name="more_backup_never_body"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> og alle tilpasninger finnes bare på denne TV-en.</string>
+    <string name="more_backup_never_body_mobile"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> og alle tilpasninger finnes bare på denne telefonen.</string>
     <string name="more_backup_now">Sikkerhetskopier nå</string>
     <string name="more_backup_now_body">Lagre en fil på denne TV-en, eller send den eksternt til en annen enhet</string>
+    <string name="more_backup_now_body_mobile">Lagre en fil på denne telefonen, eller send den til en annen enhet</string>
     <string name="more_backup_file_tv">Fil på denne TV-en</string>
+    <string name="more_backup_file_tv_mobile">Fil på denne telefonen</string>
     <string name="more_restore_body">Fra en fil på denne TV-en, eller eksternt fra en annen enhet</string>
+    <string name="more_restore_body_mobile">Fra en fil på denne telefonen, eller eksternt fra en annen enhet</string>
     <string name="more_backup_included">Hva som er med</string>
     <string name="more_about_up_to_date">Oppdatert</string>
     <string name="more_about_checked">Sjekket <xliff:g id="value">%1$s</xliff:g></string>
@@ -1382,7 +1387,9 @@
     <string name="more_sync_unpair">Fjern sammenkobling</string>
     <string name="more_about_license">GPLv3 · gratis og åpen kildekode</string>
     <string name="more_about_description">Din egen IPTV-spiller for Android TV. Den leverer ingen kanaler eller innhold; du legger til dine egne lovlig tilgjengelige kilder.</string>
+    <string name="more_about_description_mobile">Din egen IPTV-spiller for Android. Den leverer ingen kanaler eller innhold; du legger til dine egne lovlig tilgjengelige kilder.</string>
     <string name="more_about_scan">Skann med telefonen.</string>
+    <string name="more_about_scan_mobile">Skann, eller trykk for å åpne</string>
     <plurals name="more_playlist_count">
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> spilleliste</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> spillelister</item>
@@ -1399,6 +1406,14 @@
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> språk</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> språk</item>
     </plurals>
+    <plurals name="more_settings_pinned_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> festet</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> festet</item>
+    </plurals>
+    <plurals name="more_downloads_running_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> pågår</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> pågår</item>
+    </plurals>
     <string name="settings_backup_location">Plassering</string>
     <string name="settings_multiview">Multivisning</string>
     <string name="settings_multiview_description">Se flere direktekanaler samtidig. Du bestemmer hvor mange hver gang, opp til denne grensen – hver rute bruker én av leverandørens tilkoblinger.</string>
@@ -1410,6 +1425,7 @@
     <string name="settings_multiview_use_anyway">Bruk likevel</string>
     <string name="settings_app_icon">Appikon</string>
     <string name="settings_app_icon_summary">Farge på OwnTV-ikonet og -logoen</string>
+    <string name="settings_app_icon_sheet_mobile">Hvordan OwnTV vises på startskjermen din. Appen starter på nytt én gang.</string>
     <string name="settings_brand_accent">Logo i aksentfarge</string>
     <string name="app_icon_petrol">Petrol</string>
     <string name="app_icon_sunflower">Solsikke</string>
@@ -1719,6 +1735,8 @@
     <string name="settings_bg_picture">Bilde</string>
     <string name="settings_bg_plain">Ensfarget</string>
     <string name="settings_line_bg_picture_none">Velg et bilde fra denne TV-en eller via Remote</string>
+    <string name="settings_line_bg_picture_none_mobile">Velg et bilde fra denne telefonen</string>
+    <string name="settings_bg_picture_from_phone"><xliff:g id="file" example="sunset.jpg">%1$s</xliff:g> · fra denne telefonen</string>
     <string name="settings_bg_change">Endre</string>
     <string name="settings_bg_none">Ingen</string>
     <string name="settings_bg_look">Bildeuttrykk</string>
@@ -1739,9 +1757,80 @@
     <string name="settings_line_bg_accent_light">Aksentfargen din lyser i hjørnet</string>
     <string name="settings_glass_section">Glass</string>
     <string name="settings_line_glass_switch">Linje, paneler, menyer og popup-vinduer er matte</string>
+    <string name="settings_line_glass_switch_mobile">Linjer, paneler, menyer og popup-vinduer er matte</string>
     <string name="settings_help_glass_chrome">Gjør de svevende delene matte: linjen, kategoripanelene, menyer, popup-vinduer og knappene øverst. Lister og plakater forblir flate.</string>
     <string name="settings_glass_opacity">Glassets dekkevne</string>
     <string name="settings_line_glass_opacity">Lavere viser mer av bakgrunnen</string>
     <string name="settings_line_glass_reset">Stage-farger, glass på, <xliff:g id="percent" example="56%">%1$s</xliff:g></string>
     <string name="settings_bg_preview_note">Direkte-TV med denne bakgrunnen. Endringer vises mens du beveger deg.</string>
+    <string name="settings_root_hint_mobile">Hold på en rad for å feste den til Hurtig</string>
+    <string name="settings_card_layout_mobile">Navigasjon, Hjem, lister, menyer</string>
+    <string name="settings_card_watching_mobile">Hopp, gjenoppta, miniavspiller, opptak</string>
+    <string name="settings_line_live_preview_mobile">Spill av den valgte kanalen øverst i Direkte-TV</string>
+    <string name="settings_line_hw_mobile">Bruk telefonens egen dekoder</string>
+    <string name="settings_line_surround_mobile">5.1 og 7.1 slik telefonen får dem</string>
+    <string name="settings_line_passthrough_mobile">Udekodet til en tilkoblet mottaker</string>
+    <string name="settings_line_navigation_mobile">Linjen nederst: etiketter, skjul ved rulling, elementer</string>
+    <string name="settings_vod_view_mobile">Visning for Filmer og Serier</string>
+    <string name="settings_line_vod_view_mobile">Hvordan en kategori åpnes</string>
+    <string name="settings_guide_size_mobile">Størrelse på programoversikten</string>
+    <string name="settings_line_guide_size_mobile">Hvor mye tid rutenettet viser om gangen</string>
+    <string name="settings_line_download_folder_mobile">Hvor filmer, episoder og opptak lagres</string>
+    <string name="settings_browsing_value_both">Begge</string>
+    <plurals name="settings_home_rows_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> rad</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> rader</item>
+    </plurals>
+    <plurals name="settings_customize_hidden_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> skjult</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> skjulte</item>
+    </plurals>
+    <string name="settings_catchup_timezone_label">Tidssone</string>
+    <string name="settings_help_add_from_phone_mobile">Åpne adressen eller skann koden i en nettleser på en hvilken som helst enhet på samme Wi-Fi – datamaskin, nettbrett eller TV – fyll ut spillelisten der, og send den hit. Mye raskere enn å skrive en URL på en telefon.</string>
+    <string name="settings_line_add_type_here_mobile">Xtream, M3U eller Stalker</string>
+    <string name="setup_local_file_hint_mobile">.m3u eller .m3u8 på denne telefonen</string>
+    <plurals name="settings_sources_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> kilde</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> kilder</item>
+    </plurals>
+    <string name="settings_sources_status_default">Standard</string>
+    <string name="settings_epg_sources_addresses_note">Adresser vises uten brukernavn og passord.</string>
+    <plurals name="settings_customize_categories_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> kategori</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> kategorier</item>
+    </plurals>
+    <string name="settings_customize_hold_note_mobile">Hold på en rad: Gi nytt navn · Flytt · Skjul · eller start et utvalg for å endre mange samtidig.</string>
+    <string name="settings_line_quick_channel_numbers_mobile">Tast et nummer for å bytte kanal</string>
+    <string name="settings_line_playlists_mobile">Legg til, synkroniser på nytt eller fjern M3U / Xtream / Stalker</string>
+    <string name="settings_line_accent_mobile">Farger knapper, markeringer og linjer overalt</string>
+    <string name="settings_line_glass_bg_mobile">Frostede linjer og paneler, bakgrunnsbilde</string>
+    <string name="settings_line_popup_size_mobile">Skaler paneler og menyer uten å endre teksten</string>
+    <string name="settings_line_animations_mobile">Av føles raskere på eldre telefoner</string>
+    <string name="settings_line_vod_buffer_mobile">Hvor langt frem filmer og catch-up lastes</string>
+    <string name="settings_line_vod_timeout_mobile">Hvor lenge det ventes på en stille server</string>
+    <string name="settings_line_vod_reconnects_mobile">Hvor mange ganger en tapt strøm åpnes på nytt</string>
+    <string name="settings_line_sw_decode_mobile">Over 1080p i programvare når maskinvaredekoderen svikter</string>
+    <string name="settings_line_rec_mobile_data_mobile">Av: et opptak på mobildata hoppes over</string>
+    <string name="settings_line_pip_mobile">Krymp videoen til et vindu når du forlater appen</string>
+    <string name="settings_line_pip_size_mobile">Hvor stort det flytende vinduet starter</string>
+    <string name="settings_line_pip_snap_mobile">Vinduet legger seg mot nærmeste kant</string>
+    <string name="settings_line_audio_screen_off_mobile">Slutt å dekode video ingen ser</string>
+    <string name="settings_line_audio_per_channel_mobile">Åpnes slik neste gang</string>
+    <string name="settings_line_seek_step_mobile">Hvor langt ett trykk tilbake eller frem hopper</string>
+    <string name="settings_line_rewind_step_mobile">Hvor langt ett trykk hopper på en direktekanal</string>
+    <string name="settings_line_gesture_mobile">Hvor mye et sveip endrer volum, lysstyrke eller posisjon</string>
+    <string name="settings_line_rec_watching_mobile">En opptaksknapp i avspilleren</string>
+    <string name="settings_line_rec_pre_roll_mobile">Start før oppgitt start</string>
+    <string name="settings_line_rec_post_roll_mobile">Fortsett etter oppgitt slutt</string>
+    <string name="settings_line_sub_lang_mobile">Velg dette undertekstsporet automatisk</string>
+    <string name="settings_line_sub_style_mobile">Størrelse, skrift, farge, plassering, bakgrunn</string>
+    <string name="settings_customize_short_mobile">Tilpass</string>
+    <plurals name="settings_epg_line_programmes">
+        <item quantity="one"><xliff:g id="count">%1$s</xliff:g> program</item>
+        <item quantity="other"><xliff:g id="count">%1$s</xliff:g> programmer</item>
+    </plurals>
+    <plurals name="settings_epg_line_catchup">
+        <item quantity="one">catch-up på <xliff:g id="count">%1$s</xliff:g></item>
+        <item quantity="other">catch-up på <xliff:g id="count">%1$s</xliff:g></item>
+    </plurals>
 </resources>

@@ -311,6 +311,8 @@
     <string name="content_remove_from_category">Kendu kategoria honetatik</string>
     <string name="content_downloads_group_downloading">Deskargatzen</string>
     <string name="content_downloads_group_on_tv">Telebista honetan</string>
+    <string name="content_downloads_group_on_phone">Telefono honetan</string>
+    <string name="content_downloads_ready_short">Prest</string>
     <string name="content_downloads_ready">Ikusteko prest</string>
     <string name="content_downloads_paused">Pausatuta</string>
     <string name="content_downloads_starts_after">Ilaran · <xliff:g id="title">%1$s</xliff:g> amaitu ondoren hasiko da</string>
@@ -399,4 +401,6 @@
     <string name="content_play_from_start">Erreproduzitu hasieratik</string>
     <string name="content_episode_details">Atalaren xehetasunak</string>
     <string name="content_season_specials">Bereziak</string>
+    <string name="content_poster_size">Posterren tamaina</string>
+    <string name="content_vod_more_in">Gehiago hemen: <xliff:g id="category">%1$s</xliff:g></string>
 </resources>

@@ -260,10 +260,15 @@
     <string name="setup_key_previous_step">이전 단계</string>
     <string name="setup_welcome_title">OwnTV에 오신 것을 환영합니다</string>
     <string name="setup_welcome_sub">나만의 IPTV 플레이어입니다. 시작할 언어를 고르세요. 나중에 설정에서 바꿀 수 있습니다.</string>
+    <plurals name="setup_languages_all">
+        <item quantity="other">전체 <xliff:g id="count">%1$d</xliff:g>개 언어</item>
+    </plurals>
     <string name="setup_display_sub">이 TV에서 인터페이스와 글자의 크기입니다. 아래 행이 바로 따라 바뀝니다.</string>
+    <string name="setup_display_sub_mobile">이 휴대폰에서 인터페이스와 글자의 크기입니다. 아래 행이 바로 따라 바뀝니다.</string>
     <string name="setup_line_zoom">화면의 모든 요소</string>
     <string name="setup_line_font">글자만</string>
     <string name="setup_line_app_icon">TV 홈 화면에서 OwnTV가 표시되는 모습</string>
+    <string name="setup_line_app_icon_mobile">홈 화면에서 OwnTV가 표시되는 모습</string>
     <string name="setup_restore_card_line">파일에서 또는 다른 기기에서 원격으로</string>
     <string name="setup_device_appear">동기화 모드가 켜진 기기가 여기에 표시됩니다</string>
     <string name="setup_device_address_hint">또는 다른 기기의 주소 입력</string>

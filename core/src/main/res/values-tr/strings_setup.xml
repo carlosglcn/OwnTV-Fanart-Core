@@ -263,10 +263,16 @@
     <string name="setup_key_previous_step">Önceki adım</string>
     <string name="setup_welcome_title">OwnTV’ye hoş geldiniz</string>
     <string name="setup_welcome_sub">Kendi IPTV oynatıcınız. Başlamak için bir dil seçin; daha sonra Ayarlar’dan değiştirebilirsiniz.</string>
+    <plurals name="setup_languages_all">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> dil</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> dilin tümü</item>
+    </plurals>
     <string name="setup_display_sub">Bu TV’de arayüzün ve metnin ne kadar büyük olduğu. Aşağıdaki satır siz ayarladıkça değişir.</string>
+    <string name="setup_display_sub_mobile">Bu telefonda arayüzün ve metnin ne kadar büyük olduğu. Aşağıdaki satır siz ayarladıkça değişir.</string>
     <string name="setup_line_zoom">Ekrandaki her şey</string>
     <string name="setup_line_font">Yalnızca metin</string>
     <string name="setup_line_app_icon">OwnTV’nin TV’nin ana ekranında nasıl göründüğü</string>
+    <string name="setup_line_app_icon_mobile">OwnTV’nin ana ekranınızda nasıl göründüğü</string>
     <string name="setup_restore_card_line">Bir dosyadan veya uzaktan başka bir cihazdan</string>
     <string name="setup_device_appear">Eşitleme modu açık olan cihazlar burada görünür</string>
     <string name="setup_device_address_hint">veya diğer cihazın adresini yazın</string>

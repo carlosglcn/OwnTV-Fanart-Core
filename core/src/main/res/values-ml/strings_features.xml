@@ -19,6 +19,7 @@
     <string name="profiles_create">സൃഷ്ടിക്കുക</string>
     <string name="profiles_save">സംരക്ഷിക്കുക</string>
     <string name="profiles_gate_title">ആരാണ് കാണുന്നത്?</string>
+    <string name="profiles_gate_subtitle">ഓരോ പ്രൊഫൈലും സ്വന്തം പ്രിയപ്പെട്ടവയും ചരിത്രവും സൂക്ഷിക്കുന്നു</string>
     <string name="profiles_wrong_pin">തെറ്റായ PIN — വീണ്ടും ശ്രമിക്കുക</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — PIN നൽകുക</string>
     <string name="profiles_kids_badge">കുട്ടികൾ</string>

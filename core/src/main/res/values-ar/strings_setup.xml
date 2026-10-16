@@ -275,10 +275,20 @@
     <string name="setup_key_previous_step">الخطوة السابقة</string>
     <string name="setup_welcome_title">مرحبًا بك في OwnTV</string>
     <string name="setup_welcome_sub">مشغّل IPTV الخاص بك. اختر لغة للبدء، ويمكنك تغييرها لاحقًا من الإعدادات.</string>
+    <plurals name="setup_languages_all">
+        <item quantity="zero">جميع اللغات (<xliff:g id="count">%1$d</xliff:g>)</item>
+        <item quantity="one">جميع اللغات (<xliff:g id="count">%1$d</xliff:g>)</item>
+        <item quantity="two">جميع اللغات (<xliff:g id="count">%1$d</xliff:g>)</item>
+        <item quantity="few">جميع اللغات (<xliff:g id="count">%1$d</xliff:g>)</item>
+        <item quantity="many">جميع اللغات (<xliff:g id="count">%1$d</xliff:g>)</item>
+        <item quantity="other">جميع اللغات (<xliff:g id="count">%1$d</xliff:g>)</item>
+    </plurals>
     <string name="setup_display_sub">حجم الواجهة ونصها على هذا التلفاز. يتغيّر الصف أدناه أثناء الضبط.</string>
+    <string name="setup_display_sub_mobile">حجم الواجهة ونصها على هذا الهاتف. يتغيّر الصف أدناه أثناء الضبط.</string>
     <string name="setup_line_zoom">كل ما على الشاشة</string>
     <string name="setup_line_font">النص فقط</string>
     <string name="setup_line_app_icon">طريقة ظهور OwnTV على الشاشة الرئيسية للتلفاز</string>
+    <string name="setup_line_app_icon_mobile">طريقة ظهور OwnTV على شاشتك الرئيسية</string>
     <string name="setup_restore_card_line">من ملف، أو عن بُعد من جهاز آخر</string>
     <string name="setup_device_appear">تظهر هنا الأجهزة التي فُعّل فيها وضع المزامنة</string>
     <string name="setup_device_address_hint">أو اكتب عنوان الجهاز الآخر</string>

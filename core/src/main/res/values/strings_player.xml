@@ -202,10 +202,6 @@
     <string name="player_error_image_show">Couldn\'t show image subtitles for this file.</string>
     <!-- Translators: Toast when an external player cannot open the stream URL. -->
     <string name="player_external_could_not_open">Could not open this stream.</string>
-    <!-- Translators: Android Intent chooser title when multiple external players can handle the stream. -->
-    <string name="player_external_play_with">Play with</string>
-    <!-- Translators: Android Intent chooser title with channel/programme context. "channel" is the channel name, "programme" is the programme title. The middle dot is a visual separator. -->
-    <string name="player_external_play_with_item">Play \u201c<xliff:g id="channel">%1$s</xliff:g> \u00b7 <xliff:g id="programme">%2$s</xliff:g>\u201d with\u2026</string>
     <!-- Translators: Toast when no external player app is installed. "VLC" and "MX Player" are brand names. -->
     <string name="player_external_not_found">No external player found \u2014 install VLC or MX Player.</string>
     <!-- Translators: Error when audio plays but video cannot be rendered on this device. -->

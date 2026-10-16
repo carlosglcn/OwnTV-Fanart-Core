@@ -517,14 +517,23 @@
     <string name="setup_welcome_title">Welcome to OwnTV</string>
     <!-- Translators: Text under Welcome to OwnTV. -->
     <string name="setup_welcome_sub">Your own IPTV player. Choose a language to begin — you can change it later in Settings.</string>
+    <!-- Translators: First-run Welcome step, the Language row's line: how many languages the app offers. -->
+    <plurals name="setup_languages_all">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> language</item>
+        <item quantity="other">All <xliff:g id="count">%1$d</xliff:g> languages</item>
+    </plurals>
     <!-- Translators: Text under the display size step's title. -->
     <string name="setup_display_sub">How big the interface and its text are on this TV. The row below changes as you go.</string>
+    <!-- Translators: Phone version of setup_display_sub: first-run Display step, under the title. -->
+    <string name="setup_display_sub_mobile">How big the interface and its text are on this phone. The row below changes as you go.</string>
     <!-- Translators: Line under UI zoom in setup. -->
     <string name="setup_line_zoom">Everything on screen</string>
     <!-- Translators: Line under Font size in setup. -->
     <string name="setup_line_font">Text only</string>
     <!-- Translators: Line under App icon in setup. -->
     <string name="setup_line_app_icon">How OwnTV appears on the TV’s home screen</string>
+    <!-- Translators: Phone version of setup_line_app_icon: the App icon row's line on the first-run Display step. -->
+    <string name="setup_line_app_icon_mobile">How OwnTV appears on your home screen</string>
     <!-- Translators: Line on the Restore a backup card in setup. -->
     <string name="setup_restore_card_line">From a file, or by Remote from another device</string>
     <!-- Translators: Line under Searching the network in setup. -->

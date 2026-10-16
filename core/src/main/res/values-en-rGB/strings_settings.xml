@@ -141,7 +141,9 @@
     <string name="settings_reminder_lead_description">How long before the programme starts the reminder comes.</string>
     <string name="more_fav_empty_title">No favourites yet</string>
     <string name="more_fav_empty_body">Hold OK on a channel, film or show and choose Add to Favourites.</string>
+    <string name="more_fav_empty_body_mobile">Touch and hold a channel, film or show and choose Add to Favourites.</string>
     <string name="more_backup_never_body"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> and every customisation live only on this TV.</string>
+    <string name="more_backup_never_body_mobile"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> and every customisation live only on this phone.</string>
     <plurals name="more_count_favorites">
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> favourite</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> favourites</item>

@@ -266,10 +266,17 @@
     <string name="setup_key_previous_step">Étape précédente</string>
     <string name="setup_welcome_title">Bienvenue dans OwnTV</string>
     <string name="setup_welcome_sub">Votre propre lecteur IPTV. Choisissez une langue pour commencer — vous pourrez la changer plus tard dans les Réglages.</string>
+    <plurals name="setup_languages_all">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> langue</item>
+        <item quantity="many">Les <xliff:g id="count">%1$d</xliff:g> langues</item>
+        <item quantity="other">Les <xliff:g id="count">%1$d</xliff:g> langues</item>
+    </plurals>
     <string name="setup_display_sub">La taille de l’interface et de son texte sur ce téléviseur. La rangée ci-dessous change au fur et à mesure.</string>
+    <string name="setup_display_sub_mobile">La taille de l’interface et de son texte sur ce téléphone. La rangée ci-dessous change au fur et à mesure.</string>
     <string name="setup_line_zoom">Tout l’écran</string>
     <string name="setup_line_font">Texte uniquement</string>
     <string name="setup_line_app_icon">L’apparence d’OwnTV sur l’écran d’accueil du téléviseur</string>
+    <string name="setup_line_app_icon_mobile">L’apparence d’OwnTV sur votre écran d’accueil</string>
     <string name="setup_restore_card_line">Depuis un fichier, ou à distance depuis un autre appareil</string>
     <string name="setup_device_appear">Les appareils avec le mode Sync activé apparaissent ici</string>
     <string name="setup_device_address_hint">ou saisissez l’adresse de l’autre appareil</string>

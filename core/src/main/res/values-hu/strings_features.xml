@@ -19,6 +19,7 @@
     <string name="profiles_create">Létrehozás</string>
     <string name="profiles_save">Mentés</string>
     <string name="profiles_gate_title">Ki néz most?</string>
+    <string name="profiles_gate_subtitle">Minden profil saját kedvenceket és előzményeket tárol</string>
     <string name="profiles_wrong_pin">Hibás PIN-kód — próbáld újra</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — add meg a PIN-kódot</string>
     <string name="profiles_kids_badge">GYEREK</string>

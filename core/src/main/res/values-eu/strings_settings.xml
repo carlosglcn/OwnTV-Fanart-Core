@@ -1314,6 +1314,7 @@
     <string name="settings_multiview_use_anyway">Erabili hala ere</string>
     <string name="settings_app_icon">Aplikazioaren ikonoa</string>
     <string name="settings_app_icon_summary">OwnTVren ikonoaren eta logoaren kolorea</string>
+    <string name="settings_app_icon_sheet_mobile">Nola agertzen den OwnTV hasierako pantailan. Aplikazioa behin berrabiaraziko da.</string>
     <string name="app_icon_petrol">Petrolioa</string>
     <string name="app_icon_sunflower">Eguzkilorea</string>
     <string name="app_icon_cobalt">Kobaltoa</string>
@@ -1325,4 +1326,92 @@
     <string name="app_icon_restart_title">OwnTV berrabiarazi?</string>
     <string name="app_icon_restart_message">Ikono eta logo berri bat aukeratu duzu. OwnTV berrabiarazi ondoren izango dute eragina.</string>
     <string name="app_icon_restart_now">Berrabiarazi orain</string>
+    <string name="more_backup_never_body_mobile"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> eta pertsonalizazio guztiak telefono honetan bakarrik daude.</string>
+    <string name="more_backup_now_body_mobile">Gorde fitxategi bat telefono honetan, edo bidali beste gailu batera</string>
+    <string name="more_backup_file_tv_mobile">Fitxategia telefono honetan</string>
+    <string name="more_restore_body_mobile">Telefono honetako fitxategi batetik, edo urrunetik beste gailu batetik</string>
+    <string name="more_about_description_mobile">Zure IPTV erreproduzitzaile propioa Androiderako. Ez du katerik edo edukirik ematen; zuk zeure iturri legezkoak gehitzen dituzu.</string>
+    <string name="more_about_scan_mobile">Eskaneatu, edo sakatu irekitzeko</string>
+    <plurals name="more_settings_pinned_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> ainguratuta</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> ainguratuta</item>
+    </plurals>
+    <plurals name="more_downloads_running_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> martxan</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> martxan</item>
+    </plurals>
+    <string name="more_fav_empty_body_mobile">Eduki sakatuta kate, film edo serie bat eta aukeratu “Gehitu gogokoetara”.</string>
+    <string name="settings_root_hint_mobile">Eutsi sakatuta errenkada bat Azkarrean ainguratzeko</string>
+    <string name="settings_card_layout_mobile">Nabigazioa, Hasiera, zerrendak, menuak</string>
+    <string name="settings_card_watching_mobile">Saltoak, berrekitea, mini erreproduzigailua, grabazioa</string>
+    <string name="settings_line_live_preview_mobile">Erreproduzitu aukeratutako katea Zuzeneko telebistaren goialdean</string>
+    <string name="settings_line_hw_mobile">Erabili telefonoaren deskodetzailea</string>
+    <string name="settings_line_surround_mobile">5.1 eta 7.1, telefonoak jasotzen dituen bezala</string>
+    <string name="settings_line_passthrough_mobile">Deskodetu gabe konektatutako hargailu batera</string>
+    <string name="settings_line_navigation_mobile">Beheko barra: etiketak, ezkutatu korritzean, elementuak</string>
+    <string name="settings_vod_view_mobile">Filmen eta Telesailen ikuspegia</string>
+    <string name="settings_line_vod_view_mobile">Kategoria bat nola irekitzen den</string>
+    <string name="settings_guide_size_mobile">Gidaren tamaina</string>
+    <string name="settings_line_guide_size_mobile">Saretak aldi berean zenbat denbora erakusten duen</string>
+    <string name="settings_line_download_folder_mobile">Filmak, atalak eta grabazioak nora doazen</string>
+    <string name="settings_browsing_value_both">Biak</string>
+    <plurals name="settings_home_rows_count">
+        <item quantity="one">Errenkada <xliff:g id="count">%1$d</xliff:g></item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> errenkada</item>
+    </plurals>
+    <plurals name="settings_customize_hidden_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> ezkutuan</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> ezkutuan</item>
+    </plurals>
+    <string name="settings_catchup_timezone_label">Ordu-zona</string>
+    <string name="settings_help_add_from_phone_mobile">Ireki helbidea edo eskaneatu kodea Wi-Fi bereko edozein gailuren arakatzailean —ordenagailua, tableta edo telebista—, bete han zure erreprodukzio-zerrenda eta bidali hona. Telefonoan URL bat idaztea baino askoz azkarragoa.</string>
+    <string name="settings_line_add_type_here_mobile">Xtream, M3U edo Stalker</string>
+    <string name="setup_local_file_hint_mobile">.m3u edo .m3u8 telefono honetan</string>
+    <plurals name="settings_sources_count">
+        <item quantity="one">Iturburu <xliff:g id="count">%1$d</xliff:g></item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> iturburu</item>
+    </plurals>
+    <string name="settings_sources_status_default">Lehenetsia</string>
+    <string name="settings_epg_sources_addresses_note">Helbideak erabiltzaile-izenik eta pasahitzik gabe erakusten dira.</string>
+    <plurals name="settings_customize_categories_count">
+        <item quantity="one">Kategoria <xliff:g id="count">%1$d</xliff:g></item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> kategoria</item>
+    </plurals>
+    <string name="settings_customize_hold_note_mobile">Eutsi sakatuta errenkada bat: Aldatu izena · Mugitu · Ezkutatu · edo hasi tarte bat asko batera aldatzeko.</string>
+    <string name="settings_line_quick_channel_numbers_mobile">Idatzi zenbaki bat katea aldatzeko</string>
+    <string name="settings_line_playlists_mobile">Gehitu, berriro sinkronizatu edo kendu M3U / Xtream / Stalker</string>
+    <string name="settings_line_accent_mobile">Botoiak, nabarmentzeak eta barrak koloreztatzen ditu nonahi</string>
+    <string name="settings_line_glass_bg_mobile">Barra eta panel izoztuak, atzeko irudia</string>
+    <string name="settings_line_popup_size_mobile">Eskalatu panelak eta menuak testua aldatu gabe</string>
+    <string name="settings_line_animations_mobile">Desaktibatuta arinagoa da telefono zaharretan</string>
+    <string name="settings_line_vod_buffer_mobile">Filmak eta atzera ikustekoa zenbat aurrez kargatzen diren</string>
+    <string name="settings_line_vod_timeout_mobile">Zerbitzari isil baten zain zenbat itxaron</string>
+    <string name="settings_line_vod_reconnects_mobile">Galdutako jario bat zenbat aldiz irekitzen den berriro</string>
+    <string name="settings_line_sw_decode_mobile">1080p-tik gora softwarez hardware-deskodetzaileak huts egitean</string>
+    <string name="settings_line_rec_mobile_data_mobile">Desaktibatuta: datu mugikorretan dagoen grabazioa saltatzen da</string>
+    <string name="settings_line_pip_mobile">Txikitu bideoa leiho batera aplikaziotik irtetean</string>
+    <string name="settings_line_pip_size_mobile">Leiho mugikorra zein tamainatan hasten den</string>
+    <string name="settings_line_pip_snap_mobile">Leihoa ertzik hurbilenean kokatzen da</string>
+    <string name="settings_line_audio_screen_off_mobile">Utzi inork ikusten ez duen bideoa deskodetzeari</string>
+    <string name="settings_line_audio_per_channel_mobile">Hurrengoan horrela irekiko da</string>
+    <string name="settings_line_seek_step_mobile">Atzera edo aurrera ukitze batek zenbat salto egiten duen</string>
+    <string name="settings_line_rewind_step_mobile">Zuzeneko kate batean ukitze batek zenbat salto egiten duen</string>
+    <string name="settings_line_gesture_mobile">Irristatze batek bolumena, distira edo posizioa zenbat aldatzen duen</string>
+    <string name="settings_line_rec_watching_mobile">Grabatzeko botoi bat erreproduzigailuan</string>
+    <string name="settings_line_rec_pre_roll_mobile">Hasi adierazitako hasiera baino lehen</string>
+    <string name="settings_line_rec_post_roll_mobile">Jarraitu adierazitako amaieraren ondoren</string>
+    <string name="settings_line_sub_lang_mobile">Hautatu automatikoki azpititulu-pista hau</string>
+    <string name="settings_line_sub_style_mobile">Tamaina, letra-tipoa, kolorea, posizioa, atzealdea</string>
+    <string name="settings_customize_short_mobile">Pertsonalizatu</string>
+    <plurals name="settings_epg_line_programmes">
+        <item quantity="one">Saio <xliff:g id="count">%1$s</xliff:g></item>
+        <item quantity="other"><xliff:g id="count">%1$s</xliff:g> saio</item>
+    </plurals>
+    <plurals name="settings_epg_line_catchup">
+        <item quantity="one">atzera ikusi <xliff:g id="count">%1$s</xliff:g> katetan</item>
+        <item quantity="other">atzera ikusi <xliff:g id="count">%1$s</xliff:g> katetan</item>
+    </plurals>
+    <string name="settings_line_bg_picture_none_mobile">Aukeratu irudi bat telefono honetatik</string>
+    <string name="settings_bg_picture_from_phone"><xliff:g id="file" example="sunset.jpg">%1$s</xliff:g> · telefono honetatik</string>
+    <string name="settings_line_glass_switch_mobile">Barrak, panelak, menuak eta leiho gainerakorrak izoztuta daude</string>
 </resources>

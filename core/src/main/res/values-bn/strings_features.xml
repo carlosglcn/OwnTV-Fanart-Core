@@ -19,6 +19,7 @@
     <string name="profiles_create">তৈরি করুন</string>
     <string name="profiles_save">সংরক্ষণ করুন</string>
     <string name="profiles_gate_title">কে দেখছেন?</string>
+    <string name="profiles_gate_subtitle">প্রতিটি প্রোফাইল নিজের পছন্দের তালিকা ও ইতিহাস রাখে</string>
     <string name="profiles_wrong_pin">ভুল PIN — আবার চেষ্টা করুন</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — PIN লিখুন</string>
     <string name="profiles_kids_badge">শিশুদের</string>

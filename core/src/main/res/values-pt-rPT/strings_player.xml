@@ -115,8 +115,6 @@
     <string name="player_error_image_format">As legendas de imagem não estão disponíveis para o formato deste ficheiro.</string>
     <string name="player_error_image_show">Não foi possível apresentar as legendas de imagem deste ficheiro.</string>
     <string name="player_external_could_not_open">Não foi possível abrir esta transmissão.</string>
-    <string name="player_external_play_with">Reproduzir com</string>
-    <string name="player_external_play_with_item">Reproduzir “<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>” com…</string>
     <string name="player_external_not_found">Não foi encontrado nenhum leitor externo — instale o VLC ou o MX Player.</string>
     <string name="player_error_audio_no_video">O áudio está a ser reproduzido, mas não foi possível apresentar o vídeo neste dispositivo.</string>
     <string name="player_error_file_corrupt">O ficheiro deste vídeo está malformado ou danificado e não pode ser reproduzido.</string>

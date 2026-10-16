@@ -4,6 +4,7 @@ import android.os.SystemClock
 import androidx.media3.datasource.DataSource
 import androidx.media3.datasource.DataSpec
 import androidx.media3.datasource.TransferListener
+import java.util.concurrent.atomic.AtomicLong
 
 /**
  * Live network throughput (bits/sec): bytes since [bitsPerSecond] was last read, divided by time since
@@ -38,8 +39,23 @@ class ThroughputTracker : TransferListener {
     @Volatile var lastBytesAtMs = 0L
         private set
 
+    /**
+     * Network bytes since [resetPassive], counted whether or not tracking is enabled. Kept apart from the
+     * overlay's count on purpose: [bitsPerSecond] reads-and-clears its own bytes and [reset] runs whenever
+     * the overlay opens, and neither touches this one — so the film buffer sizing ([SmartBuffer]) and the
+     * stream-info overlay can both read without stealing from each other.
+     */
+    private val passive = AtomicLong(0L)
+    val passiveBytes: Long get() = passive.get()
+
+    /** Start a new passive count (one per item). Leaves the overlay's counters alone. */
+    fun resetPassive() = passive.set(0L)
+
     override fun onBytesTransferred(source: DataSource, dataSpec: DataSpec, isNetwork: Boolean, bytesTransferred: Int) {
-        if (isNetwork) lastBytesAtMs = SystemClock.elapsedRealtime()
+        if (isNetwork) {
+            lastBytesAtMs = SystemClock.elapsedRealtime()
+            passive.addAndGet(bytesTransferred.toLong())
+        }
         if (!enabled) return
         everTransferred = true
         synchronized(this) { pendingBytes += bytesTransferred; totalBytes += bytesTransferred }

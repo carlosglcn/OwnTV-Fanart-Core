@@ -233,6 +233,8 @@
     <string name="content_downloads_unknown_size">—</string>
     <string name="content_downloads_group_downloading">İndiriliyor</string>
     <string name="content_downloads_group_on_tv">Bu TV’de</string>
+    <string name="content_downloads_group_on_phone">Bu telefonda</string>
+    <string name="content_downloads_ready_short">Hazır</string>
     <string name="content_downloads_ready">İzlemeye hazır</string>
     <string name="content_downloads_paused">Duraklatıldı</string>
     <string name="content_downloads_file_missing">Dosya yok: artık sürücüde değil</string>
@@ -436,4 +438,6 @@
     <string name="content_play_from_start">Baştan oynat</string>
     <string name="content_episode_details">Bölüm ayrıntıları</string>
     <string name="content_season_specials">Özel bölümler</string>
+    <string name="content_poster_size">Afiş boyutu</string>
+    <string name="content_vod_more_in"><xliff:g id="category">%1$s</xliff:g> kategorisinde daha fazlası</string>
 </resources>

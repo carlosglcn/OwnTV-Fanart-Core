@@ -115,8 +115,6 @@
     <string name="player_error_image_format">이 파일 형식에서는 이미지 자막을 사용할 수 없습니다.</string>
     <string name="player_error_image_show">이 파일의 이미지 자막을 표시하지 못했습니다.</string>
     <string name="player_external_could_not_open">이 스트림을 열지 못했습니다.</string>
-    <string name="player_external_play_with">재생 앱 선택</string>
-    <string name="player_external_play_with_item">“<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>” 재생 앱 선택…</string>
     <string name="player_external_not_found">외부 플레이어를 찾을 수 없습니다. VLC 또는 MX Player를 설치하세요.</string>
     <string name="player_error_audio_no_video">오디오는 재생 중이지만 이 기기에서 영상을 표시하지 못했습니다.</string>
     <string name="player_error_file_corrupt">이 동영상 파일은 형식이 잘못되었거나 손상되어 재생할 수 없습니다.</string>

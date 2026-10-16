@@ -115,8 +115,6 @@
     <string name="player_error_image_format">Bildbasierte Untertitel sind für das Format dieser Datei nicht verfügbar.</string>
     <string name="player_error_image_show">Bildbasierte Untertitel konnten für diese Datei nicht angezeigt werden.</string>
     <string name="player_external_could_not_open">Dieser Stream konnte nicht geöffnet werden.</string>
-    <string name="player_external_play_with">Wiedergeben mit</string>
-    <string name="player_external_play_with_item">„<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>“ wiedergeben mit…</string>
     <string name="player_external_not_found">Kein externer Player gefunden – installiere VLC oder MX Player.</string>
     <string name="player_error_audio_no_video">Der Ton wird wiedergegeben, aber das Bild konnte auf diesem Gerät nicht dargestellt werden.</string>
     <string name="player_error_file_corrupt">Die Datei dieses Videos ist fehlerhaft oder beschädigt und kann nicht wiedergegeben werden.</string>

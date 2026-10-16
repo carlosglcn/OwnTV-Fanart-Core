@@ -39,6 +39,8 @@
     <string name="profiles_save">Save</string>
     <!-- Translators: Heading on the profile gate / lock screen. -->
     <string name="profiles_gate_title">Who\'s watching?</string>
+    <!-- Translators: Line under Who's watching? on the profile picker. -->
+    <string name="profiles_gate_subtitle">Each profile keeps its own favorites and history</string>
     <!-- Translators: Error text on the PIN entry screen when the wrong PIN is entered. -->
     <string name="profiles_wrong_pin">Wrong PIN \u2014 try again</string>
     <!-- Translators: PIN entry prompt. "name" is the profile name. -->

@@ -1354,13 +1354,18 @@
     <string name="more_fav_movies_series">Films en series</string>
     <string name="more_fav_empty_title">Nog geen favorieten</string>
     <string name="more_fav_empty_body">Houd OK ingedrukt op een zender, film of serie en kies ‘Toevoegen aan favorieten’.</string>
+    <string name="more_fav_empty_body_mobile">Houd een zender, film of serie ingedrukt en kies ‘Toevoegen aan favorieten’.</string>
     <string name="more_history_empty">Nog niets bekeken</string>
     <string name="more_backup_never_title">Nog nooit een back-up gemaakt</string>
     <string name="more_backup_never_body"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> en alle aanpassingen staan alleen op deze tv.</string>
+    <string name="more_backup_never_body_mobile"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> en alle aanpassingen staan alleen op deze telefoon.</string>
     <string name="more_backup_now">Nu back-up maken</string>
     <string name="more_backup_now_body">Sla een bestand op deze tv op, of stuur het op afstand naar een ander apparaat</string>
+    <string name="more_backup_now_body_mobile">Sla een bestand op deze telefoon op, of stuur het naar een ander apparaat</string>
     <string name="more_backup_file_tv">Bestand op deze tv</string>
+    <string name="more_backup_file_tv_mobile">Bestand op deze telefoon</string>
     <string name="more_restore_body">Uit een bestand op deze tv, of op afstand vanaf een ander apparaat</string>
+    <string name="more_restore_body_mobile">Uit een bestand op deze telefoon, of op afstand vanaf een ander apparaat</string>
     <string name="more_backup_included">Wat erin zit</string>
     <string name="more_about_up_to_date">Up-to-date</string>
     <string name="more_about_checked">Gecontroleerd <xliff:g id="value">%1$s</xliff:g></string>
@@ -1382,7 +1387,9 @@
     <string name="more_sync_unpair">Ontkoppelen</string>
     <string name="more_about_license">GPLv3 · gratis en open source</string>
     <string name="more_about_description">Je eigen IPTV-speler voor Android TV. Hij levert geen zenders of inhoud; je gebruikt je eigen legaal toegankelijke bronnen.</string>
+    <string name="more_about_description_mobile">Je eigen IPTV-speler voor Android. Hij levert geen zenders of inhoud; je gebruikt je eigen legaal toegankelijke bronnen.</string>
     <string name="more_about_scan">Scan met je telefoon.</string>
+    <string name="more_about_scan_mobile">Scan, of tik om te openen</string>
     <plurals name="more_playlist_count">
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> playlist</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> playlists</item>
@@ -1399,6 +1406,14 @@
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> taal</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> talen</item>
     </plurals>
+    <plurals name="more_settings_pinned_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> vastgezet</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> vastgezet</item>
+    </plurals>
+    <plurals name="more_downloads_running_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> bezig</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> bezig</item>
+    </plurals>
     <string name="settings_backup_location">Locatie</string>
     <string name="settings_multiview">Multiview</string>
     <string name="settings_multiview_description">Kijk naar meerdere livekanalen tegelijk. Je bepaalt elke keer hoeveel, tot deze limiet — elke tegel gebruikt een verbinding van je provider.</string>
@@ -1410,6 +1425,7 @@
     <string name="settings_multiview_use_anyway">Toch gebruiken</string>
     <string name="settings_app_icon">App-pictogram</string>
     <string name="settings_app_icon_summary">Kleur van het OwnTV-pictogram en -logo</string>
+    <string name="settings_app_icon_sheet_mobile">Hoe OwnTV op je startscherm verschijnt. De app start één keer opnieuw.</string>
     <string name="settings_brand_accent">Logo in accentkleur</string>
     <string name="app_icon_petrol">Petrol</string>
     <string name="app_icon_sunflower">Zonnebloem</string>
@@ -1719,6 +1735,8 @@
     <string name="settings_bg_picture">Afbeelding</string>
     <string name="settings_bg_plain">Effen</string>
     <string name="settings_line_bg_picture_none">Kies een afbeelding van deze tv of via Remote</string>
+    <string name="settings_line_bg_picture_none_mobile">Kies een afbeelding van deze telefoon</string>
+    <string name="settings_bg_picture_from_phone"><xliff:g id="file" example="sunset.jpg">%1$s</xliff:g> · van deze telefoon</string>
     <string name="settings_bg_change">Wijzigen</string>
     <string name="settings_bg_none">Geen</string>
     <string name="settings_bg_look">Beeldstijl</string>
@@ -1739,9 +1757,80 @@
     <string name="settings_line_bg_accent_light">Je accentkleur gloeit in de hoek</string>
     <string name="settings_glass_section">Glas</string>
     <string name="settings_line_glass_switch">Balk, panelen, menu’s en pop-ups zijn mat</string>
+    <string name="settings_line_glass_switch_mobile">Balken, panelen, menu’s en pop-ups zijn mat</string>
     <string name="settings_help_glass_chrome">Maakt de zwevende delen mat: de balk, de categoriepanelen, menu’s, pop-ups en de knoppen bovenaan. Lijsten en posters blijven vlak.</string>
     <string name="settings_glass_opacity">Glasdekking</string>
     <string name="settings_line_glass_opacity">Lager toont meer van de achtergrond</string>
     <string name="settings_line_glass_reset">Stage-kleuren, glas aan, <xliff:g id="percent" example="56%">%1$s</xliff:g></string>
     <string name="settings_bg_preview_note">Live tv met deze achtergrond. Wijzigingen zie je terwijl je beweegt.</string>
+    <string name="settings_root_hint_mobile">Houd een rij ingedrukt om die in Snel te zetten</string>
+    <string name="settings_card_layout_mobile">Navigatie, Start, lijsten, menu’s</string>
+    <string name="settings_card_watching_mobile">Spoelen, hervatten, minispeler, opnemen</string>
+    <string name="settings_line_live_preview_mobile">Het gekozen kanaal bovenaan Live-tv afspelen</string>
+    <string name="settings_line_hw_mobile">De eigen decoder van de telefoon gebruiken</string>
+    <string name="settings_line_surround_mobile">5.1 en 7.1 zoals de telefoon ze krijgt</string>
+    <string name="settings_line_passthrough_mobile">Ongedecodeerd naar een aangesloten receiver</string>
+    <string name="settings_line_navigation_mobile">De balk onderaan: labels, verbergen tijdens scrollen, onderdelen</string>
+    <string name="settings_vod_view_mobile">Weergave van Films en Series</string>
+    <string name="settings_line_vod_view_mobile">Hoe een categorie opent</string>
+    <string name="settings_guide_size_mobile">Grootte van de Tv-gids</string>
+    <string name="settings_line_guide_size_mobile">Hoeveel tijd het raster tegelijk toont</string>
+    <string name="settings_line_download_folder_mobile">Waar films, afleveringen en opnames heen gaan</string>
+    <string name="settings_browsing_value_both">Beide</string>
+    <plurals name="settings_home_rows_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> rij</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> rijen</item>
+    </plurals>
+    <plurals name="settings_customize_hidden_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> verborgen</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> verborgen</item>
+    </plurals>
+    <string name="settings_catchup_timezone_label">Tijdzone</string>
+    <string name="settings_help_add_from_phone_mobile">Open het adres of scan de code in een browser op een willekeurig apparaat op hetzelfde wifi-netwerk — een computer, tablet of tv —, vul daar je playlist in en stuur hem hierheen. Veel sneller dan een URL typen op een telefoon.</string>
+    <string name="settings_line_add_type_here_mobile">Xtream, M3U of Stalker</string>
+    <string name="setup_local_file_hint_mobile">.m3u of .m3u8 op deze telefoon</string>
+    <plurals name="settings_sources_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> bron</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> bronnen</item>
+    </plurals>
+    <string name="settings_sources_status_default">Standaard</string>
+    <string name="settings_epg_sources_addresses_note">Adressen worden getoond zonder gebruikersnaam en wachtwoord.</string>
+    <plurals name="settings_customize_categories_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> categorie</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> categorieën</item>
+    </plurals>
+    <string name="settings_customize_hold_note_mobile">Houd een rij ingedrukt: Naam wijzigen · Verplaatsen · Verbergen · of begin een reeks om er veel tegelijk te wijzigen.</string>
+    <string name="settings_line_quick_channel_numbers_mobile">Typ een nummer om te zappen</string>
+    <string name="settings_line_playlists_mobile">M3U / Xtream / Stalker toevoegen, opnieuw synchroniseren of verwijderen</string>
+    <string name="settings_line_accent_mobile">Kleurt knoppen, markeringen en balken overal</string>
+    <string name="settings_line_glass_bg_mobile">Matglazen balken en panelen, achtergrondafbeelding</string>
+    <string name="settings_line_popup_size_mobile">Panelen en menu’s schalen zonder hun tekst te veranderen</string>
+    <string name="settings_line_animations_mobile">Uit voelt sneller op oudere telefoons</string>
+    <string name="settings_line_vod_buffer_mobile">Hoe ver films en terugkijken vooruit worden geladen</string>
+    <string name="settings_line_vod_timeout_mobile">Hoe lang op een stille server wordt gewacht</string>
+    <string name="settings_line_vod_reconnects_mobile">Hoe vaak een verloren stream opnieuw wordt geopend</string>
+    <string name="settings_line_sw_decode_mobile">Boven 1080p in software als de hardwaredecoder faalt</string>
+    <string name="settings_line_rec_mobile_data_mobile">Uit: een opname op mobiele data wordt overgeslagen</string>
+    <string name="settings_line_pip_mobile">Video verkleinen tot een venster als je de app verlaat</string>
+    <string name="settings_line_pip_size_mobile">Hoe groot het zwevende venster begint</string>
+    <string name="settings_line_pip_snap_mobile">Het venster zet zich vast aan de dichtstbijzijnde rand</string>
+    <string name="settings_line_audio_screen_off_mobile">Geen video decoderen die niemand ziet</string>
+    <string name="settings_line_audio_per_channel_mobile">Opent de volgende keer zo</string>
+    <string name="settings_line_seek_step_mobile">Hoe ver één tik terug of vooruit springt</string>
+    <string name="settings_line_rewind_step_mobile">Hoe ver één tik springt op een live kanaal</string>
+    <string name="settings_line_gesture_mobile">Hoe ver een veeg volume, helderheid of positie verandert</string>
+    <string name="settings_line_rec_watching_mobile">Een opnameknop in de speler</string>
+    <string name="settings_line_rec_pre_roll_mobile">Beginnen vóór de aangegeven start</string>
+    <string name="settings_line_rec_post_roll_mobile">Doorgaan na het aangegeven einde</string>
+    <string name="settings_line_sub_lang_mobile">Deze ondertitelspoor automatisch kiezen</string>
+    <string name="settings_line_sub_style_mobile">Grootte, lettertype, kleur, positie, achtergrond</string>
+    <string name="settings_customize_short_mobile">Aanpassen</string>
+    <plurals name="settings_epg_line_programmes">
+        <item quantity="one"><xliff:g id="count">%1$s</xliff:g> programma</item>
+        <item quantity="other"><xliff:g id="count">%1$s</xliff:g> programma’s</item>
+    </plurals>
+    <plurals name="settings_epg_line_catchup">
+        <item quantity="one">terugkijken op <xliff:g id="count">%1$s</xliff:g></item>
+        <item quantity="other">terugkijken op <xliff:g id="count">%1$s</xliff:g></item>
+    </plurals>
 </resources>

@@ -115,8 +115,6 @@
     <string name="player_error_image_format">Beeldondertiteling is niet beschikbaar voor de indeling van dit bestand.</string>
     <string name="player_error_image_show">Kan de beeldondertiteling voor dit bestand niet weergeven.</string>
     <string name="player_external_could_not_open">Kan deze stream niet openen.</string>
-    <string name="player_external_play_with">Afspelen met</string>
-    <string name="player_external_play_with_item">“<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>” afspelen met…</string>
     <string name="player_external_not_found">Geen externe speler gevonden — installeer VLC of MX Player.</string>
     <string name="player_error_audio_no_video">De audio wordt afgespeeld, maar de video kan niet op dit apparaat worden weergegeven.</string>
     <string name="player_error_file_corrupt">Het bestand van deze video is ongeldig of beschadigd en kan niet worden afgespeeld.</string>

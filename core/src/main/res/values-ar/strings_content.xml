@@ -265,6 +265,8 @@
     <string name="content_downloads_unknown_size">—</string>
     <string name="content_downloads_group_downloading">جارٍ التنزيل</string>
     <string name="content_downloads_group_on_tv">على هذا التلفزيون</string>
+    <string name="content_downloads_group_on_phone">على هذا الهاتف</string>
+    <string name="content_downloads_ready_short">جاهز</string>
     <string name="content_downloads_ready">جاهز للمشاهدة</string>
     <string name="content_downloads_paused">متوقف مؤقتًا</string>
     <string name="content_downloads_file_missing">الملف مفقود: لم يعد موجودًا على محرك الأقراص</string>
@@ -512,4 +514,6 @@
     <string name="content_play_from_start">التشغيل من البداية</string>
     <string name="content_episode_details">تفاصيل الحلقة</string>
     <string name="content_season_specials">حلقات خاصة</string>
+    <string name="content_poster_size">حجم الملصقات</string>
+    <string name="content_vod_more_in">المزيد في <xliff:g id="category">%1$s</xliff:g></string>
 </resources>

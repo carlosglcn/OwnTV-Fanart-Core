@@ -115,8 +115,6 @@
     <string name="player_error_image_format">Los subtítulos basados en imágenes no están disponibles para el formato de este archivo.</string>
     <string name="player_error_image_show">No se pudieron mostrar los subtítulos basados en imágenes de este archivo.</string>
     <string name="player_external_could_not_open">No se pudo abrir esta transmisión.</string>
-    <string name="player_external_play_with">Reproducir con</string>
-    <string name="player_external_play_with_item">Reproducir “<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>” con…</string>
     <string name="player_external_not_found">No se encontró ningún reproductor externo; instala VLC o MX Player.</string>
     <string name="player_error_audio_no_video">El audio se está reproduciendo, pero el video no se pudo mostrar en este dispositivo.</string>
     <string name="player_error_file_corrupt">El archivo de este video está dañado o tiene un formato incorrecto y no se puede reproducir.</string>

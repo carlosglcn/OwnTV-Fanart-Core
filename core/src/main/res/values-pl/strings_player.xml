@@ -115,8 +115,6 @@
     <string name="player_error_image_format">Napisy graficzne nie są dostępne dla formatu tego pliku.</string>
     <string name="player_error_image_show">Nie udało się wyświetlić napisów graficznych dla tego pliku.</string>
     <string name="player_external_could_not_open">Nie udało się otworzyć tego strumienia.</string>
-    <string name="player_external_play_with">Odtwórz za pomocą</string>
-    <string name="player_external_play_with_item">Odtwórz „<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>” za pomocą…</string>
     <string name="player_external_not_found">Nie znaleziono odtwarzacza zewnętrznego — zainstaluj VLC lub MX Player.</string>
     <string name="player_error_audio_no_video">Dźwięk jest odtwarzany, ale na tym urządzeniu nie udało się wyświetlić obrazu.</string>
     <string name="player_error_file_corrupt">Plik tego materiału wideo jest nieprawidłowy lub uszkodzony i nie można go odtworzyć.</string>

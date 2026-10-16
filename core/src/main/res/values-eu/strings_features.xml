@@ -19,6 +19,7 @@
     <string name="profiles_create">Sortu</string>
     <string name="profiles_save">Gorde</string>
     <string name="profiles_gate_title">Nor ari da ikusten?</string>
+    <string name="profiles_gate_subtitle">Profil bakoitzak bere gogokoak eta historia gordetzen ditu</string>
     <string name="profiles_wrong_pin">PIN okerra — saiatu berriro</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — idatzi PINa</string>
     <string name="profiles_kids_badge">HAURRAK</string>

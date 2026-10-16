@@ -54,22 +54,13 @@ class ExternalPlayerLauncher(private val context: Context) {
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION)
             if (mime != null) intent.setDataAndType(uri, mime) else intent.data = uri
             applyHeaders(intent, url, userAgent, httpHeaders)
+            // VLC and MX Player show this as the name of what is playing, instead of the URL.
+            (if (title != null && subtitle != null) "$title · $subtitle" else title)?.let { intent.putExtra("title", it) }
 
-            val targets = context.packageManager.queryIntentActivities(intent, 0)
-            if (targets.isEmpty()) continue
-            return if (targets.size == 1) {
-                startActivity(intent)
-            } else {
-                val chooserTitle = if (title != null && subtitle != null) {
-                    localized.getString(tv.own.owntv.core.R.string.player_external_play_with_item, title, subtitle)
-                } else {
-                    title ?: localized.getString(tv.own.owntv.core.R.string.player_external_play_with)
-                }
-                startActivity(
-                    Intent.createChooser(intent, chooserTitle)
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
-                )
-            }
+            if (context.packageManager.queryIntentActivities(intent, 0).isEmpty()) continue
+            // The intent itself, never Intent.createChooser: only the system's own "Open with" window
+            // offers Just once / Always, so a user can make one player the default (owner, 2026-10-15).
+            return startActivity(intent)
         }
         toast(localized.getString(tv.own.owntv.core.R.string.player_external_not_found))
         return false

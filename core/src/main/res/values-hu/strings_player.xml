@@ -101,8 +101,6 @@
     <string name="player_error_image_format">A képalapú feliratok nem érhetők el ennek a fájlnak a formátumához.</string>
     <string name="player_error_image_show">A képalapú feliratokat nem sikerült megjeleníteni ehhez a fájlhoz.</string>
     <string name="player_external_could_not_open">Ezt az adatfolyamot nem sikerült megnyitni.</string>
-    <string name="player_external_play_with">Lejátszás ezzel</string>
-    <string name="player_external_play_with_item">„<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>” lejátszása ezzel…</string>
     <string name="player_external_not_found">Nem található külső lejátszó — telepítsd a VLC-t vagy az MX Playert.</string>
     <string name="player_error_audio_no_video">A hang szól, de a képet nem sikerült megjeleníteni ezen az eszközön.</string>
     <string name="player_error_file_corrupt">Ennek a videónak a fájlja hibás vagy sérült, ezért nem játszható le.</string>

@@ -19,6 +19,7 @@
     <string name="profiles_create">Создать</string>
     <string name="profiles_save">Сохранить</string>
     <string name="profiles_gate_title">Кто смотрит?</string>
+    <string name="profiles_gate_subtitle">У каждого профиля своё избранное и своя история</string>
     <string name="profiles_wrong_pin">Неверный PIN — попробуйте ещё раз</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — введите PIN</string>
     <string name="profiles_kids_badge">ДЕТСКИЙ</string>

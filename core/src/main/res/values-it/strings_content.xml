@@ -241,6 +241,8 @@
     <string name="content_downloads_unknown_size">—</string>
     <string name="content_downloads_group_downloading">In download</string>
     <string name="content_downloads_group_on_tv">Su questa TV</string>
+    <string name="content_downloads_group_on_phone">Su questo telefono</string>
+    <string name="content_downloads_ready_short">Pronto</string>
     <string name="content_downloads_ready">Pronto da guardare</string>
     <string name="content_downloads_paused">In pausa</string>
     <string name="content_downloads_file_missing">File mancante: non è più sull\'unità</string>
@@ -455,4 +457,6 @@
     <string name="content_play_from_start">Riproduci dall\'inizio</string>
     <string name="content_episode_details">Dettagli episodio</string>
     <string name="content_season_specials">Speciali</string>
+    <string name="content_poster_size">Dimensione locandine</string>
+    <string name="content_vod_more_in">Altro in <xliff:g id="category">%1$s</xliff:g></string>
 </resources>

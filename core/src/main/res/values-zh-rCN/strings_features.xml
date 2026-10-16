@@ -19,6 +19,7 @@
     <string name="profiles_create">创建</string>
     <string name="profiles_save">保存</string>
     <string name="profiles_gate_title">谁在观看？</string>
+    <string name="profiles_gate_subtitle">每个个人资料都有自己的收藏和历史记录</string>
     <string name="profiles_wrong_pin">PIN 错误——请重试</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g>——请输入 PIN</string>
     <string name="profiles_kids_badge">儿童</string>

@@ -249,6 +249,8 @@
     <string name="content_downloads_unknown_size">—</string>
     <string name="content_downloads_group_downloading">Загружается</string>
     <string name="content_downloads_group_on_tv">На этом телевизоре</string>
+    <string name="content_downloads_group_on_phone">На этом телефоне</string>
+    <string name="content_downloads_ready_short">Готово</string>
     <string name="content_downloads_ready">Можно смотреть</string>
     <string name="content_downloads_paused">Приостановлено</string>
     <string name="content_downloads_file_missing">Файл отсутствует: его больше нет на накопителе</string>
@@ -474,4 +476,6 @@
     <string name="content_play_from_start">Смотреть сначала</string>
     <string name="content_episode_details">Сведения о серии</string>
     <string name="content_season_specials">Спецвыпуски</string>
+    <string name="content_poster_size">Размер постеров</string>
+    <string name="content_vod_more_in">Ещё в категории «<xliff:g id="category">%1$s</xliff:g>»</string>
 </resources>

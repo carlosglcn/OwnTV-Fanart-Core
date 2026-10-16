@@ -115,8 +115,6 @@
     <string name="player_error_image_format">Görsel tabanlı altyazılar bu dosyanın biçiminde kullanılamaz.</string>
     <string name="player_error_image_show">Bu dosyanın görsel tabanlı altyazıları gösterilemedi.</string>
     <string name="player_external_could_not_open">Bu akış açılamadı.</string>
-    <string name="player_external_play_with">Şununla oynat</string>
-    <string name="player_external_play_with_item">“<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>” içeriğini şununla oynat…</string>
     <string name="player_external_not_found">Harici oynatıcı bulunamadı — VLC veya MX Player yükleyin.</string>
     <string name="player_error_audio_no_video">Ses oynatılıyor ancak video bu cihazda görüntülenemedi.</string>
     <string name="player_error_file_corrupt">Bu videonun dosyası hatalı biçimlendirilmiş veya bozuk olduğundan oynatılamıyor.</string>

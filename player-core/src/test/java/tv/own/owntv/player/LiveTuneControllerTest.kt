@@ -26,6 +26,8 @@ class LiveTuneControllerTest {
 
     private class FakeEngines : LiveEngines {
         val log = mutableListOf<String>()
+        /** Stream opens and mpv releases in the order they happened, for the session-ordering tests. */
+        val order = mutableListOf<String>()
         override var exoUrl: String? = null
         override var exoIsHls = false
         override var exoFailed = false
@@ -42,6 +44,7 @@ class LiveTuneControllerTest {
         override fun exoPlay(url: String, muted: Boolean, request: LiveRequest) {
             exoUrl = url
             log += "exo:$url"
+            order += "exo-open"
         }
         override fun exoSetMuted(muted: Boolean) { log += if (muted) "exo-mute" else "exo-unmute" }
         override fun exoStop() { exoUrl = null }
@@ -66,8 +69,14 @@ class LiveTuneControllerTest {
             mpvHasStream = true
             log += "mpv:$url"
         }
-        override fun mpvStop() { mpvHasStream = false }
-        override suspend fun mpvStopAndAwaitRelease() { mpvHasStream = false }
+        override fun mpvStop() {
+            if (mpvHasStream) order += "mpv-stop"
+            mpvHasStream = false
+        }
+        override suspend fun mpvStopAndAwaitRelease() {
+            if (mpvHasStream) order += "mpv-released"
+            mpvHasStream = false
+        }
         override fun mpvAbandon(reason: String) { log += "mpv-abandon" }
         override suspend fun awaitMpvOutcome(timeoutMs: Long): MpvOutcome? {
             val d = CompletableDeferred<MpvOutcome>().also { mpvWatch = it }
@@ -334,5 +343,30 @@ class LiveTuneControllerTest {
         c.tune(channel(11))
         runCurrent()
         assertEquals(listOf("exo:${channel(11).streamUrl}", "exo-unmute"), engines.log)
+    }
+
+    @Test
+    fun `on a one-session panel ExoPlayer opens only after mpv has released the previous channel`() = runTest {
+        LiveStreamQuirks.clearForTest()
+        try {
+            val engines = FakeEngines().apply { mpvHasStream = true } // the previous channel plays on mpv
+            LiveStreamQuirks.rememberSessionLimit(channel(20).streamUrl)
+            val c = controller(engines, FakeHost(this))
+            c.tune(channel(20))
+            runCurrent()
+            assertEquals(listOf("mpv-released", "exo-open"), engines.order)
+        } finally {
+            LiveStreamQuirks.clearForTest()
+        }
+    }
+
+    @Test
+    fun `on other panels the handover from mpv keeps its asynchronous stop`() = runTest {
+        LiveStreamQuirks.clearForTest()
+        val engines = FakeEngines().apply { mpvHasStream = true }
+        val c = controller(engines, FakeHost(this))
+        c.tune(channel(21))
+        runCurrent()
+        assertEquals(listOf("mpv-stop", "exo-open"), engines.order)
     }
 }

@@ -1332,13 +1332,18 @@
     <string name="more_fav_movies_series">映画とシリーズ</string>
     <string name="more_fav_empty_title">お気に入りはまだありません</string>
     <string name="more_fav_empty_body">チャンネル、映画、番組で OK を長押しし、「お気に入りに追加」を選びます。</string>
+    <string name="more_fav_empty_body_mobile">チャンネル、映画、番組を長押しし、「お気に入りに追加」を選びます。</string>
     <string name="more_history_empty">まだ視聴履歴はありません</string>
     <string name="more_backup_never_title">バックアップしたことがありません</string>
     <string name="more_backup_never_body"><xliff:g id="playlists">%1$s</xliff:g>、<xliff:g id="favorites">%2$s</xliff:g>、<xliff:g id="history">%3$s</xliff:g> とすべてのカスタマイズは、このテレビにしかありません。</string>
+    <string name="more_backup_never_body_mobile"><xliff:g id="playlists">%1$s</xliff:g>、<xliff:g id="favorites">%2$s</xliff:g>、<xliff:g id="history">%3$s</xliff:g> とすべてのカスタマイズは、このスマートフォンにしかありません。</string>
     <string name="more_backup_now">今すぐバックアップ</string>
     <string name="more_backup_now_body">このテレビにファイルを保存するか、リモートで別の機器に送ります</string>
+    <string name="more_backup_now_body_mobile">このスマートフォンにファイルを保存するか、別の機器に送ります</string>
     <string name="more_backup_file_tv">このテレビに保存</string>
+    <string name="more_backup_file_tv_mobile">このスマートフォンに保存</string>
     <string name="more_restore_body">このテレビのファイルから、または別のデバイスからリモートで</string>
+    <string name="more_restore_body_mobile">このスマートフォンのファイルから、または別のデバイスからリモートで</string>
     <string name="more_backup_included">含まれるもの</string>
     <string name="more_about_up_to_date">最新</string>
     <string name="more_about_checked">確認日時: <xliff:g id="value">%1$s</xliff:g></string>
@@ -1360,7 +1365,9 @@
     <string name="more_sync_unpair">ペアリング解除</string>
     <string name="more_about_license">GPLv3 · 無料のオープンソース</string>
     <string name="more_about_description">Android TV 向けのあなた専用 IPTV プレーヤー。チャンネルやコンテンツは提供しません。合法的に利用できるソースをご自身で追加してください。</string>
+    <string name="more_about_description_mobile">Android 向けのあなた専用 IPTV プレーヤー。チャンネルやコンテンツは提供しません。合法的に利用できるソースをご自身で追加してください。</string>
     <string name="more_about_scan">スマートフォンでスキャンしてください。</string>
+    <string name="more_about_scan_mobile">スキャンするか、タップして開きます</string>
     <plurals name="more_playlist_count">
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> 件のプレイリスト</item>
     </plurals>
@@ -1373,6 +1380,12 @@
     <plurals name="more_about_languages">
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> 言語</item>
     </plurals>
+    <plurals name="more_settings_pinned_count">
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> 件をピン留め</item>
+    </plurals>
+    <plurals name="more_downloads_running_count">
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> 件ダウンロード中</item>
+    </plurals>
     <string name="settings_backup_location">保存先</string>
     <string name="settings_multiview">マルチビュー</string>
     <string name="settings_multiview_description">複数のライブチャンネルを同時に視聴できます。いくつ並べるかは毎回あなたが決められ、この上限までです。各画面はプロバイダーの接続を 1 つ使います。</string>
@@ -1384,6 +1397,7 @@
     <string name="settings_multiview_use_anyway">それでも使う</string>
     <string name="settings_app_icon">アプリアイコン</string>
     <string name="settings_app_icon_summary">OwnTVのアイコンとロゴの色</string>
+    <string name="settings_app_icon_sheet_mobile">ホーム画面での OwnTV の見え方。アプリが一度再起動します。</string>
     <string name="settings_brand_accent">アクセントカラーのロゴ</string>
     <string name="app_icon_petrol">ペトロール</string>
     <string name="app_icon_sunflower">ひまわり</string>
@@ -1686,6 +1700,8 @@
     <string name="settings_bg_picture">画像</string>
     <string name="settings_bg_plain">無地</string>
     <string name="settings_line_bg_picture_none">このテレビまたは Remote で画像を選択</string>
+    <string name="settings_line_bg_picture_none_mobile">このスマートフォンから画像を選択</string>
+    <string name="settings_bg_picture_from_phone"><xliff:g id="file" example="sunset.jpg">%1$s</xliff:g> · このスマートフォンから</string>
     <string name="settings_bg_change">変更</string>
     <string name="settings_bg_none">なし</string>
     <string name="settings_bg_look">画像の見え方</string>
@@ -1706,9 +1722,74 @@
     <string name="settings_line_bg_accent_light">アクセントカラーが隅で光ります</string>
     <string name="settings_glass_section">ガラス</string>
     <string name="settings_line_glass_switch">メニューバー、シート、メニュー、ポップアップがすりガラスになります</string>
+    <string name="settings_line_glass_switch_mobile">バー、シート、メニュー、ポップアップがすりガラスになります</string>
     <string name="settings_help_glass_chrome">浮いている部分をすりガラスにします：メニューバー、カテゴリーシート、メニュー、ポップアップ、上部のボタン。リストとポスターはフラットのままです。</string>
     <string name="settings_glass_opacity">ガラスの不透明度</string>
     <string name="settings_line_glass_opacity">低いほど背景がよく見えます</string>
     <string name="settings_line_glass_reset">Stage の色、ガラスオン、<xliff:g id="percent" example="56%">%1$s</xliff:g></string>
     <string name="settings_bg_preview_note">この背景のライブ TV。動かすと変更がすぐ表示されます。</string>
+    <string name="settings_root_hint_mobile">行を長押しするとクイックに固定できます</string>
+    <string name="settings_card_layout_mobile">ナビゲーション、ホーム、一覧、メニュー</string>
+    <string name="settings_card_watching_mobile">スキップ、再開、ミニプレーヤー、録画</string>
+    <string name="settings_line_live_preview_mobile">選んだチャンネルをライブTVの上部で再生</string>
+    <string name="settings_line_hw_mobile">スマートフォン本体のデコーダーを使う</string>
+    <string name="settings_line_surround_mobile">スマートフォンが受け取るままの 5.1 / 7.1</string>
+    <string name="settings_line_passthrough_mobile">デコードせずに接続中のレシーバーへ</string>
+    <string name="settings_line_navigation_mobile">下部のバー：ラベル、スクロール中は隠す、項目</string>
+    <string name="settings_vod_view_mobile">映画と番組の表示</string>
+    <string name="settings_line_vod_view_mobile">カテゴリの開き方</string>
+    <string name="settings_guide_size_mobile">番組表のサイズ</string>
+    <string name="settings_line_guide_size_mobile">グリッドに一度に表示する時間</string>
+    <string name="settings_line_download_folder_mobile">映画、エピソード、録画の保存先</string>
+    <string name="settings_browsing_value_both">両方</string>
+    <plurals name="settings_home_rows_count">
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> 行</item>
+    </plurals>
+    <plurals name="settings_customize_hidden_count">
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> 件非表示</item>
+    </plurals>
+    <string name="settings_catchup_timezone_label">タイムゾーン</string>
+    <string name="settings_help_add_from_phone_mobile">同じ Wi-Fi の任意の機器（パソコン、タブレット、テレビ）のブラウザーでアドレスを開くかコードを読み取り、プレイリストを入力してここに送信します。スマートフォンで URL を入力するよりずっと速いです。</string>
+    <string name="settings_line_add_type_here_mobile">Xtream、M3U、Stalker</string>
+    <string name="setup_local_file_hint_mobile">このスマートフォン上の .m3u または .m3u8</string>
+    <plurals name="settings_sources_count">
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> 件のソース</item>
+    </plurals>
+    <string name="settings_sources_status_default">デフォルト</string>
+    <string name="settings_epg_sources_addresses_note">アドレスはユーザー名とパスワードを除いて表示されます。</string>
+    <plurals name="settings_customize_categories_count">
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> カテゴリ</item>
+    </plurals>
+    <string name="settings_customize_hold_note_mobile">行を長押し：名前を変更・移動・非表示・または範囲を指定してまとめて変更。</string>
+    <string name="settings_line_quick_channel_numbers_mobile">番号を入力してチャンネルを切り替え</string>
+    <string name="settings_line_playlists_mobile">M3U / Xtream / Stalker を追加・再同期・削除</string>
+    <string name="settings_line_accent_mobile">ボタン、ハイライト、バーをすべて色付け</string>
+    <string name="settings_line_glass_bg_mobile">すりガラスのバーとシート、背景画像</string>
+    <string name="settings_line_popup_size_mobile">文字を変えずにシートとメニューを拡大縮小</string>
+    <string name="settings_line_animations_mobile">オフにすると古いスマートフォンでも軽快</string>
+    <string name="settings_line_vod_buffer_mobile">映画と見逃し配信をどこまで先読みするか</string>
+    <string name="settings_line_vod_timeout_mobile">応答のないサーバーをどれだけ待つか</string>
+    <string name="settings_line_vod_reconnects_mobile">途切れた配信を何回開き直すか</string>
+    <string name="settings_line_sw_decode_mobile">ハードウェアデコーダーが失敗したら 1080p 超をソフトウェアで</string>
+    <string name="settings_line_rec_mobile_data_mobile">オフ：モバイルデータ中の録画はスキップ</string>
+    <string name="settings_line_pip_mobile">アプリを離れると動画を小さなウィンドウに</string>
+    <string name="settings_line_pip_size_mobile">フローティングウィンドウの初期サイズ</string>
+    <string name="settings_line_pip_snap_mobile">ウィンドウを最も近い端に寄せる</string>
+    <string name="settings_line_audio_screen_off_mobile">誰も見ていない映像はデコードしない</string>
+    <string name="settings_line_audio_per_channel_mobile">次回もこの状態で開く</string>
+    <string name="settings_line_seek_step_mobile">戻る・進むの 1 タップで飛ぶ長さ</string>
+    <string name="settings_line_rewind_step_mobile">ライブチャンネルで 1 タップで飛ぶ長さ</string>
+    <string name="settings_line_gesture_mobile">スワイプで音量・明るさ・位置がどれだけ変わるか</string>
+    <string name="settings_line_rec_watching_mobile">プレーヤーに録画ボタンを表示</string>
+    <string name="settings_line_rec_pre_roll_mobile">予定の開始より前に始める</string>
+    <string name="settings_line_rec_post_roll_mobile">予定の終了後も続ける</string>
+    <string name="settings_line_sub_lang_mobile">この字幕トラックを自動で選択</string>
+    <string name="settings_line_sub_style_mobile">サイズ、フォント、色、位置、背景</string>
+    <string name="settings_customize_short_mobile">カスタマイズ</string>
+    <plurals name="settings_epg_line_programmes">
+        <item quantity="other"><xliff:g id="count">%1$s</xliff:g> 番組</item>
+    </plurals>
+    <plurals name="settings_epg_line_catchup">
+        <item quantity="other"><xliff:g id="count">%1$s</xliff:g> チャンネルで見逃し配信</item>
+    </plurals>
 </resources>

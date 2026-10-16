@@ -48,4 +48,14 @@ class TimeshiftRulesTest {
     fun `reconnect waits double up to eight seconds`() {
         assertEquals(listOf(1_000L, 2_000L, 4_000L, 8_000L, 8_000L), (1..5).map { TimeshiftRules.reconnectDelayMs(it) })
     }
+
+    @Test
+    fun `no network waits the outage out, a provider that drops the stream spends the budget`() {
+        assertTrue(TimeshiftRules.isOffline(java.net.UnknownHostException("cf.example")))
+        assertTrue(TimeshiftRules.isOffline(java.io.IOException("call failed", java.net.NoRouteToHostException())))
+        assertTrue(TimeshiftRules.isOffline(java.net.ConnectException("connect failed: ENETUNREACH (Network is unreachable)")))
+        assertFalse(TimeshiftRules.isOffline(java.net.SocketException("Software caused connection abort")))
+        assertFalse(TimeshiftRules.isOffline(java.net.ConnectException("Connection refused")))
+        assertFalse(TimeshiftRules.isOffline(java.io.IOException("unexpected end of stream")))
+    }
 }

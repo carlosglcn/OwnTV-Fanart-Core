@@ -1354,13 +1354,18 @@
     <string name="more_fav_movies_series">সিনেমা ও সিরিজ</string>
     <string name="more_fav_empty_title">এখনও কোনো প্রিয় নেই</string>
     <string name="more_fav_empty_body">কোনো চ্যানেল, সিনেমা বা শো-তে OK চেপে ধরে রাখুন এবং “পছন্দেরগুলোতে যোগ করুন” বেছে নিন।</string>
+    <string name="more_fav_empty_body_mobile">কোনো চ্যানেল, সিনেমা বা শো-তে স্পর্শ করে ধরে রাখুন এবং “পছন্দেরগুলোতে যোগ করুন” বেছে নিন।</string>
     <string name="more_history_empty">এখনও কিছু দেখা হয়নি</string>
     <string name="more_backup_never_title">কখনও ব্যাকআপ নেওয়া হয়নি</string>
     <string name="more_backup_never_body"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> এবং প্রতিটি কাস্টমাইজেশন কেবল এই টিভিতেই আছে।</string>
+    <string name="more_backup_never_body_mobile"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> এবং প্রতিটি কাস্টমাইজেশন কেবল এই ফোনেই আছে।</string>
     <string name="more_backup_now">এখনই ব্যাকআপ নিন</string>
     <string name="more_backup_now_body">এই টিভিতে একটি ফাইল সংরক্ষণ করুন, বা দূর থেকে অন্য ডিভাইসে পাঠান</string>
+    <string name="more_backup_now_body_mobile">এই ফোনে একটি ফাইল সংরক্ষণ করুন, বা অন্য ডিভাইসে পাঠান</string>
     <string name="more_backup_file_tv">এই টিভিতে ফাইল</string>
+    <string name="more_backup_file_tv_mobile">এই ফোনে ফাইল</string>
     <string name="more_restore_body">এই টিভির একটি ফাইল থেকে, অথবা অন্য ডিভাইস থেকে রিমোটে</string>
+    <string name="more_restore_body_mobile">এই ফোনের একটি ফাইল থেকে, অথবা অন্য ডিভাইস থেকে রিমোটে</string>
     <string name="more_backup_included">যা অন্তর্ভুক্ত</string>
     <string name="more_about_up_to_date">আপ টু ডেট</string>
     <string name="more_about_checked">যাচাই করা হয়েছে <xliff:g id="value">%1$s</xliff:g></string>
@@ -1382,7 +1387,9 @@
     <string name="more_sync_unpair">আনপেয়ার</string>
     <string name="more_about_license">GPLv3 · ফ্রি ও ওপেন সোর্স</string>
     <string name="more_about_description">Android TV-এর জন্য আপনার নিজের IPTV প্লেয়ার। এতে কোনো চ্যানেল বা কনটেন্ট থাকে না; আপনি আপনার নিজের আইনসম্মত উৎস যোগ করেন।</string>
+    <string name="more_about_description_mobile">Android-এর জন্য আপনার নিজের IPTV প্লেয়ার। এতে কোনো চ্যানেল বা কনটেন্ট থাকে না; আপনি আপনার নিজের আইনসম্মত উৎস যোগ করেন।</string>
     <string name="more_about_scan">আপনার ফোন দিয়ে স্ক্যান করুন।</string>
+    <string name="more_about_scan_mobile">স্ক্যান করুন, বা খুলতে ট্যাপ করুন</string>
     <plurals name="more_playlist_count">
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g>টি প্লেলিস্ট</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g>টি প্লেলিস্ট</item>
@@ -1399,6 +1406,14 @@
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g>টি ভাষা</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g>টি ভাষা</item>
     </plurals>
+    <plurals name="more_settings_pinned_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> পিন করা</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> পিন করা</item>
+    </plurals>
+    <plurals name="more_downloads_running_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> চলছে</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> চলছে</item>
+    </plurals>
     <string name="settings_backup_location">অবস্থান</string>
     <string name="settings_multiview">মাল্টিভিউ</string>
     <string name="settings_multiview_description">একসঙ্গে একাধিক লাইভ চ্যানেল দেখুন। প্রতিবার আপনি ঠিক করেন কতগুলি, এই সীমা পর্যন্ত — প্রতিটি টাইল আপনার সরবরাহকারীর একটি সংযোগ ব্যবহার করে।</string>
@@ -1410,6 +1425,7 @@
     <string name="settings_multiview_use_anyway">তবুও ব্যবহার করুন</string>
     <string name="settings_app_icon">অ্যাপ আইকন</string>
     <string name="settings_app_icon_summary">OwnTV আইকন ও লোগোর রং</string>
+    <string name="settings_app_icon_sheet_mobile">আপনার হোম স্ক্রিনে OwnTV কেমন দেখায়। অ্যাপটি একবার রিস্টার্ট হয়।</string>
     <string name="settings_brand_accent">অ্যাকসেন্ট রঙের লোগো</string>
     <string name="app_icon_petrol">পেট্রোল</string>
     <string name="app_icon_sunflower">সূর্যমুখী</string>
@@ -1719,6 +1735,8 @@
     <string name="settings_bg_picture">ছবি</string>
     <string name="settings_bg_plain">সাধারণ</string>
     <string name="settings_line_bg_picture_none">এই টিভি থেকে বা Remote দিয়ে একটি ছবি বেছে নিন</string>
+    <string name="settings_line_bg_picture_none_mobile">এই ফোন থেকে একটি ছবি বেছে নিন</string>
+    <string name="settings_bg_picture_from_phone"><xliff:g id="file" example="sunset.jpg">%1$s</xliff:g> · এই ফোন থেকে</string>
     <string name="settings_bg_change">বদলান</string>
     <string name="settings_bg_none">কোনোটি নয়</string>
     <string name="settings_bg_look">ছবির রূপ</string>
@@ -1739,9 +1757,80 @@
     <string name="settings_line_bg_accent_light">আপনার অ্যাকসেন্ট রং কোণে জ্বলে</string>
     <string name="settings_glass_section">গ্লাস</string>
     <string name="settings_line_glass_switch">বার, প্যানেল, মেনু ও পপ-আপ ঘষা কাচের মতো</string>
+    <string name="settings_line_glass_switch_mobile">বার, প্যানেল, মেনু ও পপ-আপ ঘষা কাচের মতো</string>
     <string name="settings_help_glass_chrome">ভাসমান অংশগুলো ঘষা কাচের মতো করে: বার, বিভাগের প্যানেল, মেনু, পপ-আপ আর ওপরের বোতামগুলো। তালিকা আর পোস্টার সমতল থাকে।</string>
     <string name="settings_glass_opacity">গ্লাসের অস্বচ্ছতা</string>
     <string name="settings_line_glass_opacity">কম করলে ব্যাকগ্রাউন্ড বেশি দেখা যায়</string>
     <string name="settings_line_glass_reset">Stage রং, গ্লাস চালু, <xliff:g id="percent" example="56%">%1$s</xliff:g></string>
     <string name="settings_bg_preview_note">এই ব্যাকগ্রাউন্ডসহ লাইভ টিভি। নড়াচড়ার সঙ্গে সঙ্গে বদল দেখা যায়।</string>
+    <string name="settings_root_hint_mobile">দ্রুততে পিন করতে একটি সারি চেপে ধরুন</string>
+    <string name="settings_card_layout_mobile">নেভিগেশন, হোম, তালিকা, মেনু</string>
+    <string name="settings_card_watching_mobile">স্কিপ, রিজিউম, মিনি-প্লেয়ার, রেকর্ডিং</string>
+    <string name="settings_line_live_preview_mobile">বেছে নেওয়া চ্যানেলটি লাইভ টিভির উপরে চালান</string>
+    <string name="settings_line_hw_mobile">ফোনের নিজস্ব ডিকোডার ব্যবহার করুন</string>
+    <string name="settings_line_surround_mobile">ফোন যেভাবে পায় সেভাবে 5.1 ও 7.1</string>
+    <string name="settings_line_passthrough_mobile">ডিকোড না করে সংযুক্ত রিসিভারে</string>
+    <string name="settings_line_navigation_mobile">নিচের বার: লেবেল, স্ক্রোল করার সময় লুকান, আইটেম</string>
+    <string name="settings_vod_view_mobile">সিনেমা ও সিরিজের ভিউ</string>
+    <string name="settings_line_vod_view_mobile">একটি বিভাগ কীভাবে খোলে</string>
+    <string name="settings_guide_size_mobile">অনুষ্ঠান নির্দেশিকার আকার</string>
+    <string name="settings_line_guide_size_mobile">গ্রিড একবারে কতটা সময় দেখায়</string>
+    <string name="settings_line_download_folder_mobile">সিনেমা, পর্ব ও রেকর্ডিং কোথায় যায়</string>
+    <string name="settings_browsing_value_both">দুটোই</string>
+    <plurals name="settings_home_rows_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g>টি সারি</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g>টি সারি</item>
+    </plurals>
+    <plurals name="settings_customize_hidden_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g>টি লুকানো</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g>টি লুকানো</item>
+    </plurals>
+    <string name="settings_catchup_timezone_label">সময় অঞ্চল</string>
+    <string name="settings_help_add_from_phone_mobile">একই ওয়াই-ফাইয়ের যেকোনো ডিভাইসের — কম্পিউটার, ট্যাবলেট বা টিভি — ব্রাউজারে ঠিকানা খুলুন বা কোড স্ক্যান করুন, সেখানে প্লেলিস্ট পূরণ করে এখানে পাঠান। ফোনে URL লেখার চেয়ে অনেক দ্রুত।</string>
+    <string name="settings_line_add_type_here_mobile">Xtream, M3U বা Stalker</string>
+    <string name="setup_local_file_hint_mobile">এই ফোনে .m3u বা .m3u8</string>
+    <plurals name="settings_sources_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g>টি উৎস</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g>টি উৎস</item>
+    </plurals>
+    <string name="settings_sources_status_default">ডিফল্ট</string>
+    <string name="settings_epg_sources_addresses_note">ঠিকানাগুলো ব্যবহারকারীর নাম ও পাসওয়ার্ড ছাড়া দেখানো হয়।</string>
+    <plurals name="settings_customize_categories_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g>টি বিভাগ</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g>টি বিভাগ</item>
+    </plurals>
+    <string name="settings_customize_hold_note_mobile">একটি সারি চেপে ধরুন: নাম পরিবর্তন · সরান · লুকান · অথবা একসঙ্গে অনেকগুলো বদলাতে একটি পরিসর শুরু করুন।</string>
+    <string name="settings_line_quick_channel_numbers_mobile">চ্যানেল বদলাতে একটি নম্বর লিখুন</string>
+    <string name="settings_line_playlists_mobile">M3U / Xtream / Stalker যোগ, পুনরায় সিঙ্ক বা সরান</string>
+    <string name="settings_line_accent_mobile">সব জায়গায় বোতাম, হাইলাইট ও বার রাঙায়</string>
+    <string name="settings_line_glass_bg_mobile">ঝাপসা বার ও শিট, ব্যাকগ্রাউন্ড ছবি</string>
+    <string name="settings_line_popup_size_mobile">লেখা না বদলে শিট ও মেনুর আকার বদলান</string>
+    <string name="settings_line_animations_mobile">বন্ধ রাখলে পুরোনো ফোনে দ্রুত লাগে</string>
+    <string name="settings_line_vod_buffer_mobile">সিনেমা ও ক্যাচ-আপ কতটা আগে লোড হয়</string>
+    <string name="settings_line_vod_timeout_mobile">নীরব সার্ভারের জন্য কতক্ষণ অপেক্ষা</string>
+    <string name="settings_line_vod_reconnects_mobile">হারানো স্ট্রিম কতবার আবার খোলা হয়</string>
+    <string name="settings_line_sw_decode_mobile">হার্ডওয়্যার ডিকোডার ব্যর্থ হলে 1080p-এর ওপরে সফটওয়্যারে</string>
+    <string name="settings_line_rec_mobile_data_mobile">বন্ধ: মোবাইল ডেটায় পড়া রেকর্ডিং বাদ যায়</string>
+    <string name="settings_line_pip_mobile">অ্যাপ ছাড়লে ভিডিও একটি উইন্ডোতে ছোট করুন</string>
+    <string name="settings_line_pip_size_mobile">ভাসমান উইন্ডো কত বড় শুরু হয়</string>
+    <string name="settings_line_pip_snap_mobile">উইন্ডো নিকটতম প্রান্তে বসে যায়</string>
+    <string name="settings_line_audio_screen_off_mobile">কেউ দেখছে না এমন ভিডিও ডিকোড বন্ধ করুন</string>
+    <string name="settings_line_audio_per_channel_mobile">পরের বার এভাবেই খোলে</string>
+    <string name="settings_line_seek_step_mobile">পিছনে বা সামনে এক ট্যাপে কতটা লাফায়</string>
+    <string name="settings_line_rewind_step_mobile">লাইভ চ্যানেলে এক ট্যাপে কতটা লাফায়</string>
+    <string name="settings_line_gesture_mobile">সোয়াইপে ভলিউম, উজ্জ্বলতা বা অবস্থান কতটা বদলায়</string>
+    <string name="settings_line_rec_watching_mobile">প্লেয়ারে একটি রেকর্ড বোতাম</string>
+    <string name="settings_line_rec_pre_roll_mobile">ঘোষিত শুরুর আগে শুরু করুন</string>
+    <string name="settings_line_rec_post_roll_mobile">ঘোষিত শেষের পরেও চালিয়ে যান</string>
+    <string name="settings_line_sub_lang_mobile">এই সাবটাইটেল ট্র্যাক নিজে থেকে বেছে নিন</string>
+    <string name="settings_line_sub_style_mobile">আকার, ফন্ট, রং, অবস্থান, পটভূমি</string>
+    <string name="settings_customize_short_mobile">কাস্টমাইজ করুন</string>
+    <plurals name="settings_epg_line_programmes">
+        <item quantity="one"><xliff:g id="count">%1$s</xliff:g>টি অনুষ্ঠান</item>
+        <item quantity="other"><xliff:g id="count">%1$s</xliff:g>টি অনুষ্ঠান</item>
+    </plurals>
+    <plurals name="settings_epg_line_catchup">
+        <item quantity="one"><xliff:g id="count">%1$s</xliff:g>টিতে ক্যাচ-আপ</item>
+        <item quantity="other"><xliff:g id="count">%1$s</xliff:g>টিতে ক্যাচ-আপ</item>
+    </plurals>
 </resources>

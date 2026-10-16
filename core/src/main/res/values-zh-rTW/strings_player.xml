@@ -115,8 +115,6 @@
     <string name="player_error_image_format">此檔案的格式不支援圖像型字幕。</string>
     <string name="player_error_image_show">無法顯示此檔案的圖像型字幕。</string>
     <string name="player_external_could_not_open">無法開啟此串流。</string>
-    <string name="player_external_play_with">播放方式</string>
-    <string name="player_external_play_with_item">播放「<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>」的方式…</string>
     <string name="player_external_not_found">找不到外部播放器——請安裝 VLC 或 MX Player。</string>
     <string name="player_error_audio_no_video">音訊正在播放，但此裝置無法呈現視訊。</string>
     <string name="player_error_file_corrupt">此影片的檔案格式有誤或已損毀，因此無法播放。</string>

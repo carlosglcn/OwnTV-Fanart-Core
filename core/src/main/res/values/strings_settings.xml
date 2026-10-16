@@ -2514,20 +2514,30 @@
     <string name="more_fav_empty_title">No favorites yet</string>
     <!-- Translators: More › Favorites, empty: how to add something. {L} is the existing "Add to Favorites" menu label. -->
     <string name="more_fav_empty_body">Hold OK on a channel, film or show and choose Add to Favorites.</string>
+    <!-- Translators: Phone version of more_fav_empty_body: More › Favourites with nothing starred yet. On a phone you touch and hold an item. -->
+    <string name="more_fav_empty_body_mobile">Touch and hold a channel, film or show and choose Add to Favorites.</string>
     <!-- Translators: More › History: nothing has been watched yet. -->
     <string name="more_history_empty">Nothing watched yet</string>
     <!-- Translators: More › Backup & Restore: warning card when no backup has ever been made on this device. -->
     <string name="more_backup_never_title">Never backed up</string>
     <!-- Translators: More › Backup & Restore, warning card: what would be lost. "playlists", "favorites" and "history" are counted phrases, e.g. "3 playlists", "5 favorites", "209 history items". -->
     <string name="more_backup_never_body"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> and every customization live only on this TV.</string>
+    <!-- Translators: Phone version of more_backup_never_body: the backup warning on More › Backup & Restore. %1$s playlists, %2$s favorites and %3$s history items are counted phrases. -->
+    <string name="more_backup_never_body_mobile"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> and every customization live only on this phone.</string>
     <!-- Translators: More › Backup & Restore: tile that makes a backup. -->
     <string name="more_backup_now">Back up now</string>
     <!-- Translators: More › Backup & Restore: line under Back up now. -->
     <string name="more_backup_now_body">Save a file on this TV, or send it by Remote to another device</string>
+    <!-- Translators: Phone version of more_backup_now_body: line under Back up now on More › Backup & Restore. -->
+    <string name="more_backup_now_body_mobile">Save a file on this phone, or send it to another device</string>
     <!-- Translators: More › Backup & Restore: button that saves the backup as a file on this TV. -->
     <string name="more_backup_file_tv">File on this TV</string>
+    <!-- Translators: Phone version of more_backup_file_tv: button that saves the backup as a file on the phone. -->
+    <string name="more_backup_file_tv_mobile">File on this phone</string>
     <!-- Translators: More › Backup & Restore: line under Restore. -->
     <string name="more_restore_body">From a file on this TV, or by Remote from another device</string>
+    <!-- Translators: Phone version of more_restore_body: line under Restore on More › Backup & Restore. -->
+    <string name="more_restore_body_mobile">From a file on this phone, or by Remote from another device</string>
     <!-- Translators: More › Backup & Restore: heading over the list of what a backup contains. Shown in capitals by the style. -->
     <string name="more_backup_included">What\'s included</string>
     <!-- Translators: More › About: tag beside the version after a check found no newer version. Shown in capitals by the style. -->
@@ -2570,8 +2580,12 @@
     <string name="more_about_license">GPLv3 · free and open source</string>
     <!-- Translators: More › About: what the app is. -->
     <string name="more_about_description">Your own IPTV player for Android TV. It provides no channels or content; you bring your own legally accessible sources.</string>
+    <!-- Translators: Phone version of more_about_description: the paragraph on More › About. -->
+    <string name="more_about_description_mobile">Your own IPTV player for Android. It provides no channels or content; you bring your own legally accessible sources.</string>
     <!-- Translators: More › About, Telegram card: hint under the link. -->
     <string name="more_about_scan">Scan with your phone.</string>
+    <!-- Translators: Phone version of more_about_scan: under the Telegram QR code; the card can also be tapped to open the link. -->
+    <string name="more_about_scan_mobile">Scan, or tap to open</string>
     <!-- Translators: More menu, under the profile name: how many playlists there are, e.g. "All playlists · 3 playlists". -->
     <plurals name="more_playlist_count">
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> playlist</item>
@@ -2591,6 +2605,16 @@
     <plurals name="more_about_languages">
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> language</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> languages</item>
+    </plurals>
+    <!-- Translators: Value on the More page's Settings row: how many settings are pinned to Quick. -->
+    <plurals name="more_settings_pinned_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> pinned</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> pinned</item>
+    </plurals>
+    <!-- Translators: Value on the More page's Downloads row: how many downloads are running now. -->
+    <plurals name="more_downloads_running_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> running</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> running</item>
     </plurals>
     <!-- Translators: Label for where the last backup file was written. -->
     <string name="settings_backup_location">Location</string>
@@ -2615,6 +2639,8 @@
     <string name="settings_app_icon">App icon</string>
     <!-- Translators: Subtitle under the App icon setting. -->
     <string name="settings_app_icon_summary">Color of the OwnTV icon and logo</string>
+    <!-- Translators: Settings › App › App icon sheet, under its title (phone). Choosing a new icon restarts the app once. -->
+    <string name="settings_app_icon_sheet_mobile">How OwnTV appears on your home screen. The app restarts once.</string>
     <!-- Translators: Settings, App group row: the app logo play triangle follows the accent color. -->
     <string name="settings_brand_accent">Accent-colored logo</string>
     <!-- Translators: Colour name of an app icon: a dark blue-green, like petrol. -->
@@ -3214,6 +3240,10 @@
     <string name="settings_bg_plain">Plain</string>
     <!-- Translators: Line under Picture when none is chosen. -->
     <string name="settings_line_bg_picture_none">Choose a picture from this TV or by Remote</string>
+    <!-- Translators: Phone version of settings_line_bg_picture_none: Glass & background › Picture with no picture chosen yet. -->
+    <string name="settings_line_bg_picture_none_mobile">Choose a picture from this phone</string>
+    <!-- Translators: Glass & background › Picture, line under the row: the chosen picture's file name, then where it came from. -->
+    <string name="settings_bg_picture_from_phone"><xliff:g id="file" example="sunset.jpg">%1$s</xliff:g> · from this phone</string>
     <!-- Translators: Value of the Picture row when one is set: OK opens the picker. -->
     <string name="settings_bg_change">Change</string>
     <!-- Translators: Value of the Picture row when none is set. -->
@@ -3254,6 +3284,8 @@
     <string name="settings_glass_section">Glass</string>
     <!-- Translators: Line under Glass. -->
     <string name="settings_line_glass_switch">Rail, sheets, menus and popups are frosted</string>
+    <!-- Translators: Phone version of settings_line_glass_switch: the phone has bars at the top and bottom instead of the TV's rail. -->
+    <string name="settings_line_glass_switch_mobile">Bars, sheets, menus and popups are frosted</string>
     <!-- Translators: Panel text for Glass and Glass opacity. -->
     <string name="settings_help_glass_chrome">Frosts the floating parts: the rail, the category sheets, menus, popups and the pills at the top. Lists and posters stay flat.</string>
     <!-- Translators: Row title: how solid the glass is. -->
@@ -3264,4 +3296,126 @@
     <string name="settings_line_glass_reset">Stage colors, glass on, <xliff:g id="percent" example="56%">%1$s</xliff:g></string>
     <!-- Translators: Note under the live preview of Live TV. -->
     <string name="settings_bg_preview_note">Live TV with this background. Changes show as you move.</string>
+    <!-- Translators: Phone version of more_settings_pin_hint: line under the Settings title on a phone (touch: hold a row). -->
+    <string name="settings_root_hint_mobile">Hold a row to pin it to Quick</string>
+    <!-- Translators: Phone version of settings_card_layout: what the Layout group holds on a phone (no panels there). -->
+    <string name="settings_card_layout_mobile">Navigation, Home, lists, menus</string>
+    <!-- Translators: Phone version of settings_card_watching: what the Watching & recording group holds on a phone. -->
+    <string name="settings_card_watching_mobile">Skip, resume, mini-player, recording</string>
+    <!-- Translators: Phone version of settings_line_live_preview: line under the Live preview setting. The preview sits at the top of the Live TV list. -->
+    <string name="settings_line_live_preview_mobile">Play the chosen channel at the top of Live TV</string>
+    <!-- Translators: Phone version of settings_line_hw: line under Hardware decoding. -->
+    <string name="settings_line_hw_mobile">Use the phone’s own decoder</string>
+    <!-- Translators: Phone version of settings_line_surround: line under Surround sound. -->
+    <string name="settings_line_surround_mobile">5.1 and 7.1 as the phone gets them</string>
+    <!-- Translators: Phone version of settings_line_passthrough: line under the passthrough setting (sound sent undecoded to a receiver or soundbar). -->
+    <string name="settings_line_passthrough_mobile">Undecoded to a connected receiver</string>
+    <!-- Translators: Line under the Navigation setting on a phone: the bottom bar's options. -->
+    <string name="settings_line_navigation_mobile">The bar at the bottom: labels, hide while scrolling, items</string>
+    <!-- Translators: Settings row on a phone: whether a Movies or Series category opens as a poster grid or a list. -->
+    <string name="settings_vod_view_mobile">Movies &amp; Series view</string>
+    <!-- Translators: Line under the Movies & Series view setting. -->
+    <string name="settings_line_vod_view_mobile">How a category opens</string>
+    <!-- Translators: Settings row on a phone: how wide the TV Guide grid's time scale is. -->
+    <string name="settings_guide_size_mobile">TV Guide size</string>
+    <!-- Translators: Line under the TV Guide size setting. -->
+    <string name="settings_line_guide_size_mobile">How much time the grid shows at once</string>
+    <!-- Translators: Line under the Download folder setting on a phone. -->
+    <string name="settings_line_download_folder_mobile">Where films, episodes and recordings go</string>
+    <!-- Translators: Phone version of settings_help_add_from_phone: the Remote sheet when adding a playlist on a phone. -->
+    <string name="settings_help_add_from_phone_mobile">Open the address or scan the code in a browser on any device on the same Wi-Fi — a computer, a tablet or a TV — fill in your playlist there and send it here. Much faster than typing a URL on a phone.</string>
+    <!-- Translators: Phone version of settings_line_add_type_here: line under "Type it here" when adding a playlist. -->
+    <string name="settings_line_add_type_here_mobile">Xtream, M3U or Stalker</string>
+    <!-- Translators: Phone version of settings_line_local_file: under "Choose a local file…" in the add form. -->
+    <string name="setup_local_file_hint_mobile">.m3u or .m3u8 on this phone</string>
+    <!-- Translators: Settings › Playlists, crumb under the title: how many playlists there are, e.g. “3 sources”. -->
+    <plurals name="settings_sources_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> source</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> sources</item>
+    </plurals>
+    <!-- Translators: Settings › Playlists, at the end of the row of the default playlist (the one Home and Live TV open on). One short word. -->
+    <string name="settings_sources_status_default">Default</string>
+    <!-- Translators: Note at the bottom of Settings › EPG sources: guide addresses never show the account's user name and password. -->
+    <string name="settings_epg_sources_addresses_note">Addresses are shown without the user name and password.</string>
+    <!-- Translators: Settings › Customize, crumb under the title: how many categories the open section has, e.g. “24 categories”. -->
+    <plurals name="settings_customize_categories_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> category</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> categories</item>
+    </plurals>
+    <!-- Translators: Settings › Customize, note under the categories on a phone: what holding a row offers. -->
+    <string name="settings_customize_hold_note_mobile">Hold a row: Rename · Move · Hide · or start a span to change many at once.</string>
+    <!-- Translators: Heading in the Catch-up sheet above the time zone choices (the phone's own, or a UTC offset). Shown in capitals by the style. -->
+    <string name="settings_catchup_timezone_label">Time zone</string>
+    <!-- Translators: Value of the Browsing & lists setting when every section remembers both its last category and its last item. One short word. -->
+    <string name="settings_browsing_value_both">Both</string>
+    <!-- Translators: Value of the Home screen setting: how many rows Home shows, e.g. “6 rows”. -->
+    <plurals name="settings_home_rows_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> row</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> rows</item>
+    </plurals>
+    <!-- Translators: Value of the Customize setting: how many categories and items are hidden, e.g. “12 hidden”. -->
+    <plurals name="settings_customize_hidden_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> hidden</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> hidden</item>
+    </plurals>
+    <!-- Translators: Phone version of settings_line_quick_channel_numbers: line under Channel numbers in Quick (typing a channel number tunes to it). -->
+    <string name="settings_line_quick_channel_numbers_mobile">Type a number to tune</string>
+    <!-- Translators: Line under the Playlists setting on a phone. -->
+    <string name="settings_line_playlists_mobile">Add, re-sync or remove M3U / Xtream / Stalker</string>
+    <!-- Translators: Phone version of settings_line_accent: line under Accent color. -->
+    <string name="settings_line_accent_mobile">Tints buttons, highlights and bars everywhere</string>
+    <!-- Translators: Phone version of settings_line_glass_bg: line under Glass & background. -->
+    <string name="settings_line_glass_bg_mobile">Frosted bars and sheets, background picture</string>
+    <!-- Translators: Phone version of settings_line_popup_size: line under Popup size. -->
+    <string name="settings_line_popup_size_mobile">Scale sheets and menus without changing their text</string>
+    <!-- Translators: Phone version of settings_line_animations: line under Animations. -->
+    <string name="settings_line_animations_mobile">Off feels snappier on older phones</string>
+    <!-- Translators: Line under Film buffer on a phone. -->
+    <string name="settings_line_vod_buffer_mobile">How far ahead films and catch-up are loaded</string>
+    <!-- Translators: Line under Network timeout on a phone. -->
+    <string name="settings_line_vod_timeout_mobile">How long to wait on a silent server</string>
+    <!-- Translators: Line under Reconnect attempts on a phone. -->
+    <string name="settings_line_vod_reconnects_mobile">How many times a lost stream is reopened</string>
+    <!-- Translators: Short line under Software decoding above 1080p on a phone. -->
+    <string name="settings_line_sw_decode_mobile">Above 1080p in software when the hardware decoder fails</string>
+    <!-- Translators: Short line under Record on mobile data. -->
+    <string name="settings_line_rec_mobile_data_mobile">Off: a recording that falls on mobile data is skipped</string>
+    <!-- Translators: Short line under Picture-in-Picture. -->
+    <string name="settings_line_pip_mobile">Shrink the video into a window when you leave the app</string>
+    <!-- Translators: Short line under Window size (the floating window). -->
+    <string name="settings_line_pip_size_mobile">How large the floating window starts</string>
+    <!-- Translators: Short line under Snap to edges (the floating window). -->
+    <string name="settings_line_pip_snap_mobile">The window settles against the nearest edge</string>
+    <!-- Translators: Short line under Sound only when the screen turns off. -->
+    <string name="settings_line_audio_screen_off_mobile">Stop decoding video nobody can see</string>
+    <!-- Translators: Short line under Remember sound only per channel. -->
+    <string name="settings_line_audio_per_channel_mobile">Opens that way next time</string>
+    <!-- Translators: Phone version of settings_line_seek_step: line under Seek step. -->
+    <string name="settings_line_seek_step_mobile">How far one tap of rewind or forward jumps</string>
+    <!-- Translators: Phone version of settings_line_rewind_step: line under Live rewind step. -->
+    <string name="settings_line_rewind_step_mobile">How far one tap jumps on a live channel</string>
+    <!-- Translators: Short line under Gesture sensitivity. -->
+    <string name="settings_line_gesture_mobile">How far a swipe changes volume, brightness or position</string>
+    <!-- Translators: Phone version of settings_line_rec_watching: line under Record what I’m watching. -->
+    <string name="settings_line_rec_watching_mobile">A record button in the player</string>
+    <!-- Translators: Line under Start early (recording). -->
+    <string name="settings_line_rec_pre_roll_mobile">Begin before the listed start</string>
+    <!-- Translators: Line under Keep going after the end (recording). -->
+    <string name="settings_line_rec_post_roll_mobile">Carry on past the listed end</string>
+    <!-- Translators: Line under Preferred subtitle language on a phone. -->
+    <string name="settings_line_sub_lang_mobile">Auto-select this subtitle track</string>
+    <!-- Translators: Line under Subtitle appearance on a phone. -->
+    <string name="settings_line_sub_style_mobile">Size, font, color, position, background</string>
+    <!-- Translators: Title of the Settings › Customize page on a phone. One short word. -->
+    <string name="settings_customize_short_mobile">Customize</string>
+    <!-- Translators: Settings › EPG sources, a feed’s line: how many programs its guide holds, e.g. “9,076 programs”. The number is already formatted. -->
+    <plurals name="settings_epg_line_programmes">
+        <item quantity="one"><xliff:g id="count">%1$s</xliff:g> program</item>
+        <item quantity="other"><xliff:g id="count">%1$s</xliff:g> programs</item>
+    </plurals>
+    <!-- Translators: Settings › EPG sources, a feed’s line: how many channels can be replayed, e.g. “catch-up on 1,404”. The number is already formatted. -->
+    <plurals name="settings_epg_line_catchup">
+        <item quantity="one">catch-up on <xliff:g id="count">%1$s</xliff:g></item>
+        <item quantity="other">catch-up on <xliff:g id="count">%1$s</xliff:g></item>
+    </plurals>
 </resources>

@@ -221,6 +221,9 @@ class LiveTuneController(
     /** The channel the preview pane last asked ExoPlayer for (see [expectPromotion]). */
     private var previewedChannelId: Long? = null
 
+    /** The pane's last [preview] and its mute, to open it again directly when its saved copy is lost. */
+    private var lastPreview: Pair<ChannelEntity, Boolean>? = null
+
     /**
      * The user is opening [channel] full screen. When ExoPlayer is already previewing it, say so at once,
      * before the full-screen player is first drawn: it then shows ExoPlayer's surface from the start
@@ -266,6 +269,7 @@ class LiveTuneController(
      * stays silent and [previewBlockedSingleSession] says why.
      */
     fun preview(channel: ChannelEntity, muted: Boolean) {
+        lastPreview = channel to muted
         if (_liveOnExo.value) {
             if (current != null) return
             // An [expectPromotion] no tune followed (an external player, a refused channel): the pane is
@@ -518,16 +522,26 @@ class LiveTuneController(
 
     private fun localUrl(): String? = ts?.takeIf { !it.isClosed }?.let { TimeshiftServer.urlFor(it, tsFromIndex) }
 
-    /** The copy could not reconnect: the channel is lost, said on screen like any other give-up. */
+    /**
+     * The copy could not reconnect (an outage longer than its reconnect budget): the channel is opened again
+     * instead. Giving up here left the engine on the copy's closed loopback address, and its own "network
+     * restored" retry asked that address for ever (404) — "Reconnecting…" that never ended. A fresh tune
+     * starts a new copy when the provider answers, or plays the channel directly when it does not, and the
+     * live engines' own outage handling takes it from there.
+     */
     private fun onTimeshiftLost(why: String) {
+        val lostKey = ts?.channelKey
         val channel = current
         clearTimeshift()
-        if (channel == null || (!isStillExo(channel) && !isStillMpv(channel))) return
-        val detail = "the connection was lost ($why)"
-        engineLog("'${channel.name}' — giving up: $detail")
-        host.recordLadderEvent(_liveOnExo.value, PlayerFailureReason.LIVE_NO_FALLBACK, "'${channel.name}': $detail")
-        cancelLadderJobs()
-        abandon(channel, detail)
+        if (channel != null && (isStillExo(channel) || isStillMpv(channel))) {
+            engineLog("'${channel.name}' — its saved copy lost the connection ($why); opening it again")
+            tune(channel)
+            return
+        }
+        // The pane was showing the copy (Back from full screen keeps it saving): preview it directly.
+        val pane = lastPreview?.takeIf { timeshiftKey(it.first) == lostKey && TimeshiftServer.isLocal(engines.exoUrl) } ?: return
+        engineLog("'${pane.first.name}' — the pane's saved copy lost the connection ($why); previewing it directly")
+        preview(pane.first, pane.second)
     }
 
     private fun timeshiftKey(channel: ChannelEntity): String = "${channel.sourceId}:${channel.id}"
@@ -541,7 +555,15 @@ class LiveTuneController(
     private suspend fun startOnExo(channel: ChannelEntity, source: SourceEntity?, resolved: String? = null) {
         mpvOutcomeJob?.cancel() // ExoPlayer owns the channel now
         _liveOnExo.value = true
-        engines.mpvStop() // mpv lets go of the connection and the decoder before ExoPlayer claims either
+        if (engines.mpvHasStream && singleSessionPanel(channel, source)) {
+            // mpv's stop is asynchronous: on a one-connection panel ExoPlayer opening while mpv still holds
+            // the previous channel's socket is the app competing with itself for the only session (458).
+            // Wait for mpv to let go first; bounded by mpv's release timeout, and only on such a panel.
+            engines.mpvStopAndAwaitRelease()
+            if (!isCurrent(channel)) return // zapped on while mpv released
+        } else {
+            engines.mpvStop() // mpv lets go of the connection and the decoder before ExoPlayer claims either
+        }
         val local = localUrl()
         if (local != null) {
             // The same address is not the same picture after a pause: "live" then means re-opening it.
@@ -862,6 +884,11 @@ class LiveTuneController(
     private fun isStillExo(channel: ChannelEntity): Boolean = _liveOnExo.value && isCurrent(channel)
 
     private fun isStillMpv(channel: ChannelEntity): Boolean = !_liveOnExo.value && isCurrent(channel)
+
+    /** The panel allows one stream at a time: it said so at sync (`max_connections = 1`) or was caught
+     *  refusing a second session this run. */
+    private fun singleSessionPanel(channel: ChannelEntity, source: SourceEntity?): Boolean =
+        source?.maxConnections == 1 || LiveStreamQuirks.isSingleSession(channel.streamUrl)
 
     private fun blockedBySingleSession(url: String, channel: ChannelEntity): Boolean {
         val blocked = (engines.mpvHasStream && LiveStreamQuirks.isSingleSession(url)) ||

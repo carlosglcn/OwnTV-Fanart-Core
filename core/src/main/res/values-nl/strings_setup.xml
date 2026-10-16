@@ -263,10 +263,16 @@
     <string name="setup_key_previous_step">Vorige stap</string>
     <string name="setup_welcome_title">Welkom bij OwnTV</string>
     <string name="setup_welcome_sub">Je eigen IPTV-speler. Kies een taal om te beginnen — je kunt die later wijzigen in Instellingen.</string>
+    <plurals name="setup_languages_all">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> taal</item>
+        <item quantity="other">Alle <xliff:g id="count">%1$d</xliff:g> talen</item>
+    </plurals>
     <string name="setup_display_sub">Hoe groot de interface en de tekst op deze tv zijn. De rij hieronder verandert mee.</string>
+    <string name="setup_display_sub_mobile">Hoe groot de interface en de tekst op deze telefoon zijn. De rij hieronder verandert mee.</string>
     <string name="setup_line_zoom">Alles op het scherm</string>
     <string name="setup_line_font">Alleen tekst</string>
     <string name="setup_line_app_icon">Hoe OwnTV op het startscherm van de tv verschijnt</string>
+    <string name="setup_line_app_icon_mobile">Hoe OwnTV op je startscherm verschijnt</string>
     <string name="setup_restore_card_line">Uit een bestand, of op afstand vanaf een ander apparaat</string>
     <string name="setup_device_appear">Apparaten met Sync-modus aan verschijnen hier</string>
     <string name="setup_device_address_hint">of typ het adres van het andere apparaat</string>

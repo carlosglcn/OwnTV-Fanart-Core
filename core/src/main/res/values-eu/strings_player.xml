@@ -98,8 +98,6 @@
     <string name="player_error_image_format">Irudi-azpitituluak ez daude erabilgarri fitxategi honen formaturako.</string>
     <string name="player_error_image_show">Ezin izan dira fitxategi honen irudi-azpitituluak erakutsi.</string>
     <string name="player_external_could_not_open">Ezin izan da jario hau ireki.</string>
-    <string name="player_external_play_with">Erreproduzitu honekin</string>
-    <string name="player_external_play_with_item">Erreproduzitu “<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>” honekin…</string>
     <string name="player_external_not_found">Ez da kanpoko erreproduzigailurik aurkitu — instalatu VLC edo MX Player.</string>
     <string name="player_error_audio_no_video">Audioa erreproduzitzen ari da, baina bideoa ezin izan da gailu honetan errendatu.</string>
     <string name="player_error_file_corrupt">Bideo honen fitxategia gaizki osatuta edo hondatuta dago eta ezin da erreproduzitu.</string>

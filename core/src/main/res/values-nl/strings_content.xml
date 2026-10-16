@@ -233,6 +233,8 @@
     <string name="content_downloads_unknown_size">—</string>
     <string name="content_downloads_group_downloading">Bezig met downloaden</string>
     <string name="content_downloads_group_on_tv">Op deze tv</string>
+    <string name="content_downloads_group_on_phone">Op deze telefoon</string>
+    <string name="content_downloads_ready_short">Klaar</string>
     <string name="content_downloads_ready">Klaar om te kijken</string>
     <string name="content_downloads_paused">Gepauzeerd</string>
     <string name="content_downloads_file_missing">Bestand ontbreekt: het staat niet meer op de schijf</string>
@@ -436,4 +438,6 @@
     <string name="content_play_from_start">Vanaf het begin afspelen</string>
     <string name="content_episode_details">Afleveringsdetails</string>
     <string name="content_season_specials">Specials</string>
+    <string name="content_poster_size">Postergrootte</string>
+    <string name="content_vod_more_in">Meer in <xliff:g id="category">%1$s</xliff:g></string>
 </resources>

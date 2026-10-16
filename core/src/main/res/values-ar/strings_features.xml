@@ -19,6 +19,7 @@
     <string name="profiles_create">إنشاء</string>
     <string name="profiles_save">حفظ</string>
     <string name="profiles_gate_title">من يشاهد الآن؟</string>
+    <string name="profiles_gate_subtitle">يحتفظ كل ملف شخصي بمفضلاته وسجله الخاص</string>
     <string name="profiles_wrong_pin">PIN غير صحيح — حاول مجددًا</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — أدخل PIN</string>
     <string name="profiles_kids_badge">أطفال</string>

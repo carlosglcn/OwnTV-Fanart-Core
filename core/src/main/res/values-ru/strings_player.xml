@@ -115,8 +115,6 @@
     <string name="player_error_image_format">Графические субтитры недоступны для формата этого файла.</string>
     <string name="player_error_image_show">Не удалось показать графические субтитры для этого файла.</string>
     <string name="player_external_could_not_open">Не удалось открыть этот поток.</string>
-    <string name="player_external_play_with">Воспроизвести с помощью</string>
-    <string name="player_external_play_with_item">Воспроизвести «<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>» с помощью…</string>
     <string name="player_external_not_found">Внешний плеер не найден — установите VLC или MX Player.</string>
     <string name="player_error_audio_no_video">Звук воспроизводится, но видео не удалось отобразить на этом устройстве.</string>
     <string name="player_error_file_corrupt">Файл этого видео имеет неверную структуру или повреждён и не может быть воспроизведён.</string>

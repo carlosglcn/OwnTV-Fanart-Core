@@ -1332,13 +1332,18 @@
     <string name="more_fav_movies_series">영화 및 시리즈</string>
     <string name="more_fav_empty_title">아직 즐겨찾기가 없습니다</string>
     <string name="more_fav_empty_body">채널, 영화 또는 시리즈에서 OK를 길게 누르고 “즐겨찾기에 추가”을(를) 선택하세요.</string>
+    <string name="more_fav_empty_body_mobile">채널, 영화 또는 시리즈를 길게 누르고 “즐겨찾기에 추가”을(를) 선택하세요.</string>
     <string name="more_history_empty">아직 시청한 항목이 없습니다</string>
     <string name="more_backup_never_title">백업한 적 없음</string>
     <string name="more_backup_never_body"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> 및 모든 사용자 설정이 이 TV에만 있습니다.</string>
+    <string name="more_backup_never_body_mobile"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> 및 모든 사용자 설정이 이 휴대폰에만 있습니다.</string>
     <string name="more_backup_now">지금 백업</string>
     <string name="more_backup_now_body">이 TV에 파일을 저장하거나 원격으로 다른 기기에 보내기</string>
+    <string name="more_backup_now_body_mobile">이 휴대폰에 파일을 저장하거나 다른 기기에 보내기</string>
     <string name="more_backup_file_tv">이 TV에 파일로</string>
+    <string name="more_backup_file_tv_mobile">이 휴대폰에 파일로</string>
     <string name="more_restore_body">이 TV의 파일에서, 또는 다른 기기에서 원격으로</string>
+    <string name="more_restore_body_mobile">이 휴대폰의 파일에서, 또는 다른 기기에서 원격으로</string>
     <string name="more_backup_included">포함 항목</string>
     <string name="more_about_up_to_date">최신 버전</string>
     <string name="more_about_checked">확인함: <xliff:g id="value">%1$s</xliff:g></string>
@@ -1360,7 +1365,9 @@
     <string name="more_sync_unpair">페어링 해제</string>
     <string name="more_about_license">GPLv3 · 무료 오픈 소스</string>
     <string name="more_about_description">Android TV용 나만의 IPTV 플레이어입니다. 채널이나 콘텐츠는 제공하지 않으며, 합법적으로 이용 가능한 소스를 직접 추가합니다.</string>
+    <string name="more_about_description_mobile">Android용 나만의 IPTV 플레이어입니다. 채널이나 콘텐츠는 제공하지 않으며, 합법적으로 이용 가능한 소스를 직접 추가합니다.</string>
     <string name="more_about_scan">휴대폰으로 스캔하세요.</string>
+    <string name="more_about_scan_mobile">스캔하거나 탭하여 열기</string>
     <plurals name="more_playlist_count">
         <item quantity="other">재생목록 <xliff:g id="count">%1$d</xliff:g>개</item>
     </plurals>
@@ -1373,6 +1380,12 @@
     <plurals name="more_about_languages">
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g>개 언어</item>
     </plurals>
+    <plurals name="more_settings_pinned_count">
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g>개 고정됨</item>
+    </plurals>
+    <plurals name="more_downloads_running_count">
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g>개 진행 중</item>
+    </plurals>
     <string name="settings_backup_location">위치</string>
     <string name="settings_multiview">멀티뷰</string>
     <string name="settings_multiview_description">여러 라이브 채널을 동시에 시청합니다. 몇 개를 볼지는 매번 직접 정하며, 이 한도까지 가능합니다. 각 화면은 공급자의 연결을 하나씩 사용합니다.</string>
@@ -1384,6 +1397,7 @@
     <string name="settings_multiview_use_anyway">그래도 사용</string>
     <string name="settings_app_icon">앱 아이콘</string>
     <string name="settings_app_icon_summary">OwnTV 아이콘 및 로고 색상</string>
+    <string name="settings_app_icon_sheet_mobile">홈 화면에서 OwnTV가 표시되는 모습. 앱이 한 번 다시 시작됩니다.</string>
     <string name="settings_brand_accent">강조 색상 로고</string>
     <string name="app_icon_petrol">페트롤</string>
     <string name="app_icon_sunflower">해바라기</string>
@@ -1686,6 +1700,8 @@
     <string name="settings_bg_picture">사진</string>
     <string name="settings_bg_plain">단색</string>
     <string name="settings_line_bg_picture_none">이 TV에서 또는 Remote로 사진 선택</string>
+    <string name="settings_line_bg_picture_none_mobile">이 휴대폰에서 사진 선택</string>
+    <string name="settings_bg_picture_from_phone"><xliff:g id="file" example="sunset.jpg">%1$s</xliff:g> · 이 휴대폰에서</string>
     <string name="settings_bg_change">변경</string>
     <string name="settings_bg_none">없음</string>
     <string name="settings_bg_look">사진 모습</string>
@@ -1706,9 +1722,74 @@
     <string name="settings_line_bg_accent_light">강조색이 모서리에서 빛납니다</string>
     <string name="settings_glass_section">유리</string>
     <string name="settings_line_glass_switch">메뉴 바, 시트, 메뉴, 팝업이 반투명 유리가 됩니다</string>
+    <string name="settings_line_glass_switch_mobile">바, 시트, 메뉴, 팝업이 반투명 유리가 됩니다</string>
     <string name="settings_help_glass_chrome">떠 있는 부분을 반투명 유리로 만듭니다: 메뉴 바, 카테고리 시트, 메뉴, 팝업, 위쪽 버튼. 목록과 포스터는 평평하게 유지됩니다.</string>
     <string name="settings_glass_opacity">유리 불투명도</string>
     <string name="settings_line_glass_opacity">낮을수록 배경이 더 많이 보입니다</string>
     <string name="settings_line_glass_reset">Stage 색상, 유리 켜짐, <xliff:g id="percent" example="56%">%1$s</xliff:g></string>
     <string name="settings_bg_preview_note">이 배경의 실시간 TV. 움직이면 바로 변경이 보입니다.</string>
+    <string name="settings_root_hint_mobile">행을 길게 눌러 빠른 설정에 고정하세요</string>
+    <string name="settings_card_layout_mobile">탐색, 홈, 목록, 메뉴</string>
+    <string name="settings_card_watching_mobile">건너뛰기, 이어보기, 미니 플레이어, 녹화</string>
+    <string name="settings_line_live_preview_mobile">선택한 채널을 실시간 TV 위쪽에서 재생</string>
+    <string name="settings_line_hw_mobile">휴대폰 자체 디코더 사용</string>
+    <string name="settings_line_surround_mobile">휴대폰이 받는 그대로 5.1 및 7.1</string>
+    <string name="settings_line_passthrough_mobile">디코딩 없이 연결된 리시버로</string>
+    <string name="settings_line_navigation_mobile">하단 바: 라벨, 스크롤할 때 숨기기, 항목</string>
+    <string name="settings_vod_view_mobile">영화 및 시리즈 보기</string>
+    <string name="settings_line_vod_view_mobile">카테고리가 열리는 방식</string>
+    <string name="settings_guide_size_mobile">편성표 크기</string>
+    <string name="settings_line_guide_size_mobile">그리드에 한 번에 표시되는 시간</string>
+    <string name="settings_line_download_folder_mobile">영화, 에피소드, 녹화가 저장되는 위치</string>
+    <string name="settings_browsing_value_both">둘 다</string>
+    <plurals name="settings_home_rows_count">
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g>개 행</item>
+    </plurals>
+    <plurals name="settings_customize_hidden_count">
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g>개 숨겨짐</item>
+    </plurals>
+    <string name="settings_catchup_timezone_label">시간대</string>
+    <string name="settings_help_add_from_phone_mobile">같은 Wi-Fi에 있는 아무 기기(컴퓨터, 태블릿 또는 TV)의 브라우저에서 주소를 열거나 코드를 스캔하고, 재생목록을 작성해 이곳으로 보내세요. 휴대폰으로 URL을 입력하는 것보다 훨씬 빠릅니다.</string>
+    <string name="settings_line_add_type_here_mobile">Xtream, M3U 또는 Stalker</string>
+    <string name="setup_local_file_hint_mobile">이 휴대폰의 .m3u 또는 .m3u8</string>
+    <plurals name="settings_sources_count">
+        <item quantity="other">소스 <xliff:g id="count">%1$d</xliff:g>개</item>
+    </plurals>
+    <string name="settings_sources_status_default">기본값</string>
+    <string name="settings_epg_sources_addresses_note">주소는 사용자 이름과 비밀번호 없이 표시됩니다.</string>
+    <plurals name="settings_customize_categories_count">
+        <item quantity="other">카테고리 <xliff:g id="count">%1$d</xliff:g>개</item>
+    </plurals>
+    <string name="settings_customize_hold_note_mobile">행을 길게 누르기: 이름 변경 · 이동 · 숨기기 · 또는 범위를 시작해 여러 개를 한 번에 변경</string>
+    <string name="settings_line_quick_channel_numbers_mobile">번호를 입력해 채널 전환</string>
+    <string name="settings_line_playlists_mobile">M3U / Xtream / Stalker 추가, 다시 동기화 또는 삭제</string>
+    <string name="settings_line_accent_mobile">모든 곳의 버튼, 강조, 바에 색을 입힘</string>
+    <string name="settings_line_glass_bg_mobile">반투명 바와 시트, 배경 사진</string>
+    <string name="settings_line_popup_size_mobile">글자는 그대로 두고 시트와 메뉴 크기 조절</string>
+    <string name="settings_line_animations_mobile">끄면 오래된 휴대폰에서 더 빠르게 느껴짐</string>
+    <string name="settings_line_vod_buffer_mobile">영화와 다시보기를 얼마나 미리 불러올지</string>
+    <string name="settings_line_vod_timeout_mobile">응답 없는 서버를 얼마나 기다릴지</string>
+    <string name="settings_line_vod_reconnects_mobile">끊긴 스트림을 몇 번 다시 열지</string>
+    <string name="settings_line_sw_decode_mobile">하드웨어 디코더가 실패하면 1080p 초과는 소프트웨어로</string>
+    <string name="settings_line_rec_mobile_data_mobile">끄기: 모바일 데이터에 걸린 녹화는 건너뜀</string>
+    <string name="settings_line_pip_mobile">앱을 나가면 동영상을 작은 창으로 축소</string>
+    <string name="settings_line_pip_size_mobile">플로팅 창의 처음 크기</string>
+    <string name="settings_line_pip_snap_mobile">창이 가장 가까운 가장자리에 붙음</string>
+    <string name="settings_line_audio_screen_off_mobile">아무도 보지 않는 영상은 디코딩 중지</string>
+    <string name="settings_line_audio_per_channel_mobile">다음에도 이렇게 열림</string>
+    <string name="settings_line_seek_step_mobile">뒤로나 앞으로 한 번 탭할 때 이동 폭</string>
+    <string name="settings_line_rewind_step_mobile">실시간 채널에서 한 번 탭할 때 이동 폭</string>
+    <string name="settings_line_gesture_mobile">스와이프가 음량, 밝기, 위치를 얼마나 바꾸는지</string>
+    <string name="settings_line_rec_watching_mobile">플레이어에 녹화 버튼 표시</string>
+    <string name="settings_line_rec_pre_roll_mobile">예정된 시작보다 먼저 시작</string>
+    <string name="settings_line_rec_post_roll_mobile">예정된 종료 후에도 계속</string>
+    <string name="settings_line_sub_lang_mobile">이 자막 트랙을 자동 선택</string>
+    <string name="settings_line_sub_style_mobile">크기, 글꼴, 색상, 위치, 배경</string>
+    <string name="settings_customize_short_mobile">맞춤 설정</string>
+    <plurals name="settings_epg_line_programmes">
+        <item quantity="other">프로그램 <xliff:g id="count">%1$s</xliff:g>개</item>
+    </plurals>
+    <plurals name="settings_epg_line_catchup">
+        <item quantity="other"><xliff:g id="count">%1$s</xliff:g>개 채널 다시보기</item>
+    </plurals>
 </resources>

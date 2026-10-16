@@ -263,10 +263,16 @@
     <string name="setup_key_previous_step">Előző lépés</string>
     <string name="setup_welcome_title">Üdvözöl az OwnTV</string>
     <string name="setup_welcome_sub">A saját IPTV-lejátszód. Kezdéshez válassz nyelvet – később a Beállításokban módosíthatod.</string>
+    <plurals name="setup_languages_all">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> nyelv</item>
+        <item quantity="other">Mind a <xliff:g id="count">%1$d</xliff:g> nyelv</item>
+    </plurals>
     <string name="setup_display_sub">Mekkora a felület és a szöveg ezen a tévén. Az alábbi sor menet közben változik.</string>
+    <string name="setup_display_sub_mobile">Mekkora a felület és a szöveg ezen a telefonon. Az alábbi sor menet közben változik.</string>
     <string name="setup_line_zoom">Minden a képernyőn</string>
     <string name="setup_line_font">Csak a szöveg</string>
     <string name="setup_line_app_icon">Így jelenik meg az OwnTV a tévé kezdőképernyőjén</string>
+    <string name="setup_line_app_icon_mobile">Így jelenik meg az OwnTV a kezdőképernyődön</string>
     <string name="setup_restore_card_line">Fájlból vagy távolról egy másik eszközről</string>
     <string name="setup_device_appear">Az aktív szinkronizálási módú eszközök itt jelennek meg</string>
     <string name="setup_device_address_hint">vagy írd be a másik eszköz címét</string>

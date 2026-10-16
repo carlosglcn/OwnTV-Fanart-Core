@@ -35,6 +35,8 @@ class LiveTuneControllerTimeshiftTest {
 
     private val provider = ServerSocket(0)
     @Volatile private var open = true
+    /** An outage: the provider drops every connection at once, so a copy spends its reconnect budget. */
+    @Volatile private var outage = false
     private val dir = Files.createTempDirectory("ts-controller").toFile()
     private val manager = TimeshiftManager(OkHttpClient(), { dir })
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
@@ -43,6 +45,7 @@ class LiveTuneControllerTimeshiftTest {
         thread(isDaemon = true) {
             while (open) {
                 val s = runCatching { provider.accept() }.getOrNull() ?: break
+                if (outage) { runCatching { s.close() }; continue }
                 thread(isDaemon = true) {
                     runCatching {
                         s.use {
@@ -50,7 +53,7 @@ class LiveTuneControllerTimeshiftTest {
                             while (r.readLine()?.isNotEmpty() == true) {}
                             val out = it.getOutputStream()
                             out.write("HTTP/1.1 200 OK\r\nConnection: close\r\n\r\n".toByteArray())
-                            while (open) {
+                            while (open && !outage) {
                                 out.write(nullPacket)
                                 out.flush()
                                 Thread.sleep(1)
@@ -209,6 +212,57 @@ class LiveTuneControllerTimeshiftTest {
         val (c, engines) = comeBack(tv.own.owntv.core.settings.SettingsRepository.ResumeMode.AUTO, first = 30)
         assertNull(c.localTimeshift.value!!.resumeAtWallMs)
         assertFalse("opened inside the copy, not at its live edge", engines.log.last { it.startsWith("exo:") }.contains("/live."))
+    }
+
+    /** Reads the copy at [url] as a player would: without a reader a copy parks itself after 4 s and stops saving. */
+    private fun readLikeAPlayer(url: String) = thread(isDaemon = true) {
+        runCatching {
+            (java.net.URL(url).openConnection() as java.net.HttpURLConnection).inputStream.use { input ->
+                val buffer = ByteArray(8192)
+                while (input.read(buffer) >= 0) Unit
+            }
+        }
+    }
+
+    /** Waits out a copy's whole reconnect budget (1 + 2 + 4 + 8 + 8 s) and then some. */
+    private suspend fun awaitGiveUp(engines: Engines, what: (List<String>) -> Boolean) {
+        repeat(800) { if (what(engines.log.toList())) return; delay(50) }
+    }
+
+    @Test
+    fun `a copy that loses the connection opens the channel again instead of giving up`() = runBlocking {
+        val engines = Engines()
+        val c = LiveTuneController(scope, engines, Host())
+        val ch = channel(40)
+        c.tune(ch)
+        awaitLog(engines) { log -> log.any { it.startsWith("exo:") } }
+        engines.exoWatch!!.complete(null)
+        readLikeAPlayer(engines.exoUrl!!)
+        outage = true
+        // Re-tuned during the outage: the new copy is refused, so the channel plays directly.
+        awaitGiveUp(engines) { log -> log.contains("exo:${ch.streamUrl}") }
+        assertTrue("re-opened on its direct address: ${engines.log}", engines.log.contains("exo:${ch.streamUrl}"))
+        assertFalse("never given up on screen", engines.log.contains("exo-abandon"))
+        assertNull(c.localTimeshift.value)
+    }
+
+    @Test
+    fun `a pane showing a copy that loses the connection previews the channel directly`() = runBlocking {
+        val engines = Engines()
+        val c = LiveTuneController(scope, engines, Host())
+        val ch = channel(50)
+        c.tune(ch)
+        awaitLog(engines) { log -> log.any { it.startsWith("exo:") } }
+        engines.exoWatch!!.complete(null)
+        // Back from full screen: the pane keeps showing (and saving) the copy.
+        c.detach()
+        c.preview(ch, muted = true)
+        assertNotNull(c.localTimeshift.value)
+        readLikeAPlayer(engines.exoUrl!!)
+        outage = true
+        awaitGiveUp(engines) { log -> log.contains("exo:${ch.streamUrl}") }
+        assertTrue("previewed on its direct address: ${engines.log}", engines.log.contains("exo:${ch.streamUrl}"))
+        assertNull(c.localTimeshift.value)
     }
 
     private companion object {

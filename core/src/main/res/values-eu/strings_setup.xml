@@ -257,4 +257,10 @@
     <string name="setup_hls_provider_does_not_advertise">Zure hornitzaileak ez du HLS iragartzen.</string>
     <string name="setup_hide_new_categories">Ezkutatu kategoria berriak lehenespenez</string>
     <string name="setup_hide_new_categories_description">Profil osoan: etorkizuneko sinkronizazioetan agertzen diren kategoriak ezkutatuta hasten dira. Ikusi edonoiz Pertsonalizatu atalean.</string>
+    <string name="setup_display_sub_mobile">Interfazea eta haren testua zein handiak diren telefono honetan. Beheko errenkada aldatu egiten da doitu ahala.</string>
+    <string name="setup_line_app_icon_mobile">Nola agertzen den OwnTV hasierako pantailan</string>
+    <plurals name="setup_languages_all">
+        <item quantity="one">Hizkuntza <xliff:g id="count">%1$d</xliff:g></item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> hizkuntza guztiak</item>
+    </plurals>
 </resources>

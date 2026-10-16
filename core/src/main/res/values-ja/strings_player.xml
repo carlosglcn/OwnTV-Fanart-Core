@@ -115,8 +115,6 @@
     <string name="player_error_image_format">このファイル形式では、画像形式の字幕を利用できません。</string>
     <string name="player_error_image_show">このファイルの画像形式の字幕を表示できませんでした。</string>
     <string name="player_external_could_not_open">このストリームを開けませんでした。</string>
-    <string name="player_external_play_with">再生に使用するアプリ</string>
-    <string name="player_external_play_with_item">「<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>」を再生するアプリ…</string>
     <string name="player_external_not_found">外部プレーヤーが見つかりません — VLCまたはMX Playerをインストールしてください。</string>
     <string name="player_error_audio_no_video">音声は再生されていますが、このデバイスでは映像を表示できませんでした。</string>
     <string name="player_error_file_corrupt">このビデオのファイルは形式が不正か破損しているため、再生できません。</string>

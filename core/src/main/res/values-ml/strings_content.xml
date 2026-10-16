@@ -233,6 +233,8 @@
     <string name="content_downloads_unknown_size">—</string>
     <string name="content_downloads_group_downloading">ഡൗൺലോഡ് ചെയ്യുന്നു</string>
     <string name="content_downloads_group_on_tv">ഈ ടിവിയിൽ</string>
+    <string name="content_downloads_group_on_phone">ഈ ഫോണിൽ</string>
+    <string name="content_downloads_ready_short">തയ്യാർ</string>
     <string name="content_downloads_ready">കാണാൻ തയ്യാർ</string>
     <string name="content_downloads_paused">താൽക്കാലികമായി നിർത്തി</string>
     <string name="content_downloads_file_missing">ഫയൽ കാണുന്നില്ല: ഇത് ഇനി ഡ്രൈവിൽ ഇല്ല</string>
@@ -436,4 +438,6 @@
     <string name="content_play_from_start">ആദ്യം മുതൽ പ്ലേ ചെയ്യുക</string>
     <string name="content_episode_details">എപ്പിസോഡ് വിശദാംശങ്ങൾ</string>
     <string name="content_season_specials">പ്രത്യേക എപ്പിസോഡുകൾ</string>
+    <string name="content_poster_size">പോസ്റ്റർ വലുപ്പം</string>
+    <string name="content_vod_more_in"><xliff:g id="category">%1$s</xliff:g>-ൽ കൂടുതൽ</string>
 </resources>

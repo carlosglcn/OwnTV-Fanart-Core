@@ -233,6 +233,8 @@
     <string name="content_downloads_unknown_size">—</string>
     <string name="content_downloads_group_downloading">Laddar ned</string>
     <string name="content_downloads_group_on_tv">På den här tv:n</string>
+    <string name="content_downloads_group_on_phone">På den här telefonen</string>
+    <string name="content_downloads_ready_short">Klar</string>
     <string name="content_downloads_ready">Klar att titta</string>
     <string name="content_downloads_paused">Pausad</string>
     <string name="content_downloads_file_missing">Filen saknas: den finns inte längre på enheten</string>
@@ -436,4 +438,6 @@
     <string name="content_play_from_start">Spela från början</string>
     <string name="content_episode_details">Avsnittsdetaljer</string>
     <string name="content_season_specials">Specialavsnitt</string>
+    <string name="content_poster_size">Storlek på omslagsbilder</string>
+    <string name="content_vod_more_in">Mer i <xliff:g id="category">%1$s</xliff:g></string>
 </resources>

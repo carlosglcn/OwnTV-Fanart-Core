@@ -249,6 +249,8 @@
     <string name="content_downloads_unknown_size">—</string>
     <string name="content_downloads_group_downloading">Stahování</string>
     <string name="content_downloads_group_on_tv">V této televizi</string>
+    <string name="content_downloads_group_on_phone">V tomto telefonu</string>
+    <string name="content_downloads_ready_short">Připraveno</string>
     <string name="content_downloads_ready">Připraveno ke sledování</string>
     <string name="content_downloads_paused">Pozastaveno</string>
     <string name="content_downloads_file_missing">Soubor chybí: na disku už není</string>
@@ -474,4 +476,6 @@
     <string name="content_play_from_start">Přehrát od začátku</string>
     <string name="content_episode_details">Podrobnosti epizody</string>
     <string name="content_season_specials">Speciály</string>
+    <string name="content_poster_size">Velikost plakátů</string>
+    <string name="content_vod_more_in">Další v kategorii <xliff:g id="category">%1$s</xliff:g></string>
 </resources>

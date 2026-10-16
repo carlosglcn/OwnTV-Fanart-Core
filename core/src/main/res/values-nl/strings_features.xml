@@ -19,6 +19,7 @@
     <string name="profiles_create">Aanmaken</string>
     <string name="profiles_save">Opslaan</string>
     <string name="profiles_gate_title">Wie kijkt er?</string>
+    <string name="profiles_gate_subtitle">Elk profiel heeft eigen favorieten en een eigen geschiedenis</string>
     <string name="profiles_wrong_pin">Onjuiste PIN — probeer het opnieuw</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — voer PIN in</string>
     <string name="profiles_kids_badge">KINDEREN</string>

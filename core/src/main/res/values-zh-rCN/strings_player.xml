@@ -115,8 +115,6 @@
     <string name="player_error_image_format">此文件的格式不支持图像字幕。</string>
     <string name="player_error_image_show">无法显示此文件的图像字幕。</string>
     <string name="player_external_could_not_open">无法打开此流媒体。</string>
-    <string name="player_external_play_with">播放方式</string>
-    <string name="player_external_play_with_item">使用以下应用播放“<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>”…</string>
     <string name="player_external_not_found">未找到外部播放器——请安装 VLC 或 MX Player。</string>
     <string name="player_error_audio_no_video">音频正在播放，但此设备无法渲染视频。</string>
     <string name="player_error_file_corrupt">此视频文件格式异常或已损坏，无法播放。</string>

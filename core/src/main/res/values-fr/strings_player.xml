@@ -115,8 +115,6 @@
     <string name="player_error_image_format">Les sous-titres graphiques ne sont pas disponibles pour le format de ce fichier.</string>
     <string name="player_error_image_show">Impossible d’afficher les sous-titres graphiques de ce fichier.</string>
     <string name="player_external_could_not_open">Impossible d’ouvrir ce flux.</string>
-    <string name="player_external_play_with">Lire avec</string>
-    <string name="player_external_play_with_item">Lire « <xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g> » avec…</string>
     <string name="player_external_not_found">Aucun lecteur externe trouvé — installez VLC ou MX Player.</string>
     <string name="player_error_audio_no_video">Le son est lu, mais la vidéo n’a pas pu être affichée sur cet appareil.</string>
     <string name="player_error_file_corrupt">Le fichier de cette vidéo est mal formé ou corrompu et ne peut pas être lu.</string>

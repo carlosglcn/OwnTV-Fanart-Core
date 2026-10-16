@@ -225,6 +225,8 @@
     <string name="content_downloads_unknown_size">—</string>
     <string name="content_downloads_group_downloading">Letöltés alatt</string>
     <string name="content_downloads_group_on_tv">Ezen a tévén</string>
+    <string name="content_downloads_group_on_phone">Ezen a telefonon</string>
+    <string name="content_downloads_ready_short">Kész</string>
     <string name="content_downloads_ready">Megtekinthető</string>
     <string name="content_downloads_paused">Szüneteltetve</string>
     <string name="content_downloads_file_missing">Hiányzó fájl: már nincs a meghajtón</string>
@@ -428,4 +430,6 @@
     <string name="content_play_from_start">Lejátszás az elejéről</string>
     <string name="content_episode_details">Epizód részletei</string>
     <string name="content_season_specials">Különkiadások</string>
+    <string name="content_poster_size">Poszterméret</string>
+    <string name="content_vod_more_in">Továbbiak itt: <xliff:g id="category">%1$s</xliff:g></string>
 </resources>

@@ -225,6 +225,8 @@
     <string name="content_downloads_unknown_size">—</string>
     <string name="content_downloads_group_downloading">下載中</string>
     <string name="content_downloads_group_on_tv">已存於這台電視</string>
+    <string name="content_downloads_group_on_phone">已存於這支手機</string>
+    <string name="content_downloads_ready_short">就緒</string>
     <string name="content_downloads_ready">可以觀看</string>
     <string name="content_downloads_paused">已暫停</string>
     <string name="content_downloads_file_missing">檔案遺失：它已不在磁碟機上</string>
@@ -417,4 +419,6 @@
     <string name="content_play_from_start">從頭播放</string>
     <string name="content_episode_details">單集詳細資料</string>
     <string name="content_season_specials">特別篇</string>
+    <string name="content_poster_size">海報大小</string>
+    <string name="content_vod_more_in"><xliff:g id="category">%1$s</xliff:g> 中的更多內容</string>
 </resources>

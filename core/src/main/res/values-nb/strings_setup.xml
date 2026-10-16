@@ -263,10 +263,16 @@
     <string name="setup_key_previous_step">Forrige trinn</string>
     <string name="setup_welcome_title">Velkommen til OwnTV</string>
     <string name="setup_welcome_sub">Din egen IPTV-spiller. Velg et språk for å begynne – du kan endre det senere i Innstillinger.</string>
+    <plurals name="setup_languages_all">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> språk</item>
+        <item quantity="other">Alle <xliff:g id="count">%1$d</xliff:g> språk</item>
+    </plurals>
     <string name="setup_display_sub">Hvor stort grensesnittet og teksten er på denne TV-en. Raden nedenfor endres underveis.</string>
+    <string name="setup_display_sub_mobile">Hvor stort grensesnittet og teksten er på denne telefonen. Raden nedenfor endres underveis.</string>
     <string name="setup_line_zoom">Alt på skjermen</string>
     <string name="setup_line_font">Bare tekst</string>
     <string name="setup_line_app_icon">Hvordan OwnTV vises på TV-ens startskjerm</string>
+    <string name="setup_line_app_icon_mobile">Hvordan OwnTV vises på startskjermen din</string>
     <string name="setup_restore_card_line">Fra en fil, eller eksternt fra en annen enhet</string>
     <string name="setup_device_appear">Enheter med synkroniseringsmodus på vises her</string>
     <string name="setup_device_address_hint">eller skriv inn adressen til den andre enheten</string>

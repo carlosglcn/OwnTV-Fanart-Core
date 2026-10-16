@@ -263,10 +263,16 @@
     <string name="setup_key_previous_step">আগের ধাপ</string>
     <string name="setup_welcome_title">OwnTV-তে স্বাগতম</string>
     <string name="setup_welcome_sub">আপনার নিজের IPTV প্লেয়ার। শুরু করতে একটি ভাষা বাছুন — পরে সেটিংসে বদলাতে পারবেন।</string>
+    <plurals name="setup_languages_all">
+        <item quantity="one">সব <xliff:g id="count">%1$d</xliff:g>টি ভাষা</item>
+        <item quantity="other">সব <xliff:g id="count">%1$d</xliff:g>টি ভাষা</item>
+    </plurals>
     <string name="setup_display_sub">এই টিভিতে ইন্টারফেস ও তার লেখা কত বড়। নিচের সারিটি সঙ্গে সঙ্গে বদলায়।</string>
+    <string name="setup_display_sub_mobile">এই ফোনে ইন্টারফেস ও তার লেখা কত বড়। নিচের সারিটি সঙ্গে সঙ্গে বদলায়।</string>
     <string name="setup_line_zoom">স্ক্রিনের সবকিছু</string>
     <string name="setup_line_font">শুধু লেখা</string>
     <string name="setup_line_app_icon">টিভির হোম স্ক্রিনে OwnTV কেমন দেখায়</string>
+    <string name="setup_line_app_icon_mobile">আপনার হোম স্ক্রিনে OwnTV কেমন দেখায়</string>
     <string name="setup_restore_card_line">ফাইল থেকে, বা অন্য ডিভাইস থেকে দূর থেকে</string>
     <string name="setup_device_appear">সিঙ্ক মোড চালু থাকা ডিভাইস এখানে দেখাবে</string>
     <string name="setup_device_address_hint">অথবা অন্য ডিভাইসের ঠিকানা লিখুন</string>

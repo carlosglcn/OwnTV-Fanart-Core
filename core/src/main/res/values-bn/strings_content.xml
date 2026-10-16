@@ -233,6 +233,8 @@
     <string name="content_downloads_unknown_size">—</string>
     <string name="content_downloads_group_downloading">ডাউনলোড হচ্ছে</string>
     <string name="content_downloads_group_on_tv">এই টিভিতে</string>
+    <string name="content_downloads_group_on_phone">এই ফোনে</string>
+    <string name="content_downloads_ready_short">প্রস্তুত</string>
     <string name="content_downloads_ready">দেখার জন্য প্রস্তুত</string>
     <string name="content_downloads_paused">বিরতি দেওয়া হয়েছে</string>
     <string name="content_downloads_file_missing">ফাইল নেই: এটি আর ড্রাইভে নেই</string>
@@ -436,4 +438,6 @@
     <string name="content_play_from_start">শুরু থেকে চালান</string>
     <string name="content_episode_details">পর্বের বিবরণ</string>
     <string name="content_season_specials">বিশেষ পর্ব</string>
+    <string name="content_poster_size">পোস্টারের আকার</string>
+    <string name="content_vod_more_in"><xliff:g id="category">%1$s</xliff:g>-এ আরও</string>
 </resources>

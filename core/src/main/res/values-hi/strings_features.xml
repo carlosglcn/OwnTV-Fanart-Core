@@ -19,6 +19,7 @@
     <string name="profiles_create">बनाएँ</string>
     <string name="profiles_save">सेव करें</string>
     <string name="profiles_gate_title">कौन देख रहा है?</string>
+    <string name="profiles_gate_subtitle">हर प्रोफ़ाइल अपने पसंदीदा और इतिहास अलग रखती है</string>
     <string name="profiles_wrong_pin">गलत PIN — फिर से कोशिश करें</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — PIN दर्ज करें</string>
     <string name="profiles_kids_badge">बच्चे</string>

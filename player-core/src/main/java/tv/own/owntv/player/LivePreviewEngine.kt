@@ -773,13 +773,17 @@ class LivePreviewEngine(
     private var videoRenderer: Renderer? = null
     // The first rendered frame of a load is also the answer to "how long did this tune take?", so it is
     // logged with the elapsed time since play(). It is the number the Happy Eyeballs measurement reads.
+    private val firstFrameGate = FirstFrameGate()
     private val frameListener = VideoFrameMetadataListener { _, _, _, _ ->
         frameCounter.incrementAndGet()
-        // Latched on the tune, not on the counter: the counter is reset again by the surface-reset and
-        // decoder-rebuild paths within one tune, which logged the same tune twice.
-        if (!tune.firstFrameLogged && tune.playStartedMs > 0L) {
-            tune.firstFrameLogged = true
-            LiveDiagnosticsLog.event("first frame after ${android.os.SystemClock.elapsedRealtime() - tune.playStartedMs}ms")
+        // Latched per tune by the gate, not on the counter: the counter is reset again by the surface-reset
+        // and decoder-rebuild paths within one tune, which logged the same tune twice. The gate also skips
+        // the previous channel's frames that still arrive right after play() on the reused player.
+        firstFrameGate.take()?.let { t ->
+            val now = android.os.SystemClock.elapsedRealtime()
+            // A CH+/− press that led here adds the whole wait the user saw, including the app's zap delay.
+            val sincePress = ZapTiming.sincePress(t.pressAtMs, now)
+            LiveDiagnosticsLog.event("first frame after ${now - t.startedMs}ms${ZapTiming.pressSuffix(sincePress)}")
         }
     }
     private var fpsAttempts = 0
@@ -996,6 +1000,10 @@ class LivePreviewEngine(
         p.setMediaSource(mediaSourceFor(url))
         p.prepare()
         p.playWhenReady = true
+        // Delivered on the playback thread after it has applied the source above (it handles commands in
+        // order), so only frames rendered from here on can be this tune's first frame.
+        val gen = firstFrameGate.current
+        runCatching { p.createMessage { _, _ -> firstFrameGate.open(gen) }.send() }
         armOpenWatchdog()
     }
 
@@ -1493,6 +1501,8 @@ class LivePreviewEngine(
         // THE reset. Everything a new channel must not inherit from the previous one lives in
         // [TuneState], so forgetting it is one assignment that cannot be partially done.
         tune = TuneState(playStartedMs = android.os.SystemClock.elapsedRealtime())
+        // The CH+/− press that caused this tune (if any) is claimed now, so only this tune is timed from it.
+        firstFrameGate.arm(tune.playStartedMs, ZapTiming.shared.claim(tune.playStartedMs))
         deadlineMisses.set(0); deadlineArmed = false
         cancelPrepareOnSurface() // the previous channel's held prepare
         _stalledSinceMs.value = null
@@ -3840,9 +3850,8 @@ internal data class TuneState(
     /** `SystemClock.elapsedRealtime()` of the last forward position move. */
     var lastProgressWallMs: Long = 0L,
     var frozenChecks: Int = 0,
-    /** elapsedRealtime of the last play() call, and whether its first frame has been timed. */
+    /** elapsedRealtime of the last play() call. Its first frame is timed by [FirstFrameGate]. */
     @field:Volatile var playStartedMs: Long = 0L,
-    @field:Volatile var firstFrameLogged: Boolean = false,
 )
 
 /**

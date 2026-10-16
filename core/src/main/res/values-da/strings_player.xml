@@ -115,8 +115,6 @@
     <string name="player_error_image_format">Billedbaserede undertekster er ikke tilgængelige for denne fils format.</string>
     <string name="player_error_image_show">Kunne ikke vise billedbaserede undertekster for denne fil.</string>
     <string name="player_external_could_not_open">Kunne ikke åbne denne stream.</string>
-    <string name="player_external_play_with">Afspil med</string>
-    <string name="player_external_play_with_item">Afspil “<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>” med…</string>
     <string name="player_external_not_found">Ingen ekstern afspiller fundet — installér VLC eller MX Player.</string>
     <string name="player_error_audio_no_video">Lyden afspilles, men videoen kunne ikke gengives på denne enhed.</string>
     <string name="player_error_file_corrupt">Denne videos fil er ugyldig eller beskadiget og kan ikke afspilles.</string>

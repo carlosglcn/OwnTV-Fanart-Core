@@ -260,10 +260,15 @@
     <string name="setup_key_previous_step">上一步</string>
     <string name="setup_welcome_title">歡迎使用 OwnTV</string>
     <string name="setup_welcome_sub">你自己的 IPTV 播放器。請先選擇語言，之後可在設定中變更。</string>
+    <plurals name="setup_languages_all">
+        <item quantity="other">全部 <xliff:g id="count">%1$d</xliff:g> 種語言</item>
+    </plurals>
     <string name="setup_display_sub">介面與文字在這台電視上的大小。下方這一列會隨之變化。</string>
+    <string name="setup_display_sub_mobile">介面與文字在這支手機上的大小。下方這一列會隨之變化。</string>
     <string name="setup_line_zoom">畫面上的所有內容</string>
     <string name="setup_line_font">僅文字</string>
     <string name="setup_line_app_icon">OwnTV 在電視主畫面上的樣子</string>
+    <string name="setup_line_app_icon_mobile">OwnTV 在主畫面上的樣子</string>
     <string name="setup_restore_card_line">從檔案還原，或從另一台裝置遠端傳送</string>
     <string name="setup_device_appear">開啟同步模式的裝置會顯示在這裡</string>
     <string name="setup_device_address_hint">或輸入另一台裝置的位址</string>

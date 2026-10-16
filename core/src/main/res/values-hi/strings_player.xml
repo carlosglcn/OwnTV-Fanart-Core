@@ -115,8 +115,6 @@
     <string name="player_error_image_format">इस फ़ाइल के फ़ॉर्मैट के लिए चित्र-आधारित सबटाइटल उपलब्ध नहीं हैं।</string>
     <string name="player_error_image_show">इस फ़ाइल के चित्र-आधारित सबटाइटल नहीं दिखाए जा सके।</string>
     <string name="player_external_could_not_open">यह स्ट्रीम नहीं खोली जा सकी।</string>
-    <string name="player_external_play_with">इससे चलाएँ</string>
-    <string name="player_external_play_with_item">“<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>” को इससे चलाएँ…</string>
     <string name="player_external_not_found">कोई बाहरी प्लेयर नहीं मिला — VLC या MX प्लेयर इंस्टॉल करें।</string>
     <string name="player_error_audio_no_video">ऑडियो चल रहा है, लेकिन इस डिवाइस पर वीडियो रेंडर नहीं किया जा सका।</string>
     <string name="player_error_file_corrupt">इस वीडियो की फ़ाइल विकृत या खराब है और इसे चलाया नहीं जा सकता।</string>

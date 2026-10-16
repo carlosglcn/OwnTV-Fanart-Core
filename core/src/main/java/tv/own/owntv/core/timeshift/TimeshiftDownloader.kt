@@ -89,6 +89,7 @@ class TimeshiftDownloader(
         while (true) {
             currentCoroutineContext().ensureActive()
             val attemptStart = clock()
+            var offline = false
             val why = try {
                 attempt()
                 "the stream ended"
@@ -100,6 +101,7 @@ class TimeshiftDownloader(
             } catch (e: Failure) {
                 e.why
             } catch (e: Exception) {
+                offline = TimeshiftRules.isOffline(e)
                 e.message ?: e.javaClass.simpleName
             }
             // A parked buffer's call is cancelled under it: that is the end asked for, not a failure.
@@ -107,6 +109,13 @@ class TimeshiftDownloader(
             if (!started) {
                 log("timeshift: first connection failed — $why")
                 return Result.Refused(why)
+            }
+            if (offline) {
+                session.endPiece(durationMs = null)
+                session.markGap()
+                log("timeshift: no network ($why) — waiting")
+                delay(TimeshiftRules.reconnectDelayMs(TimeshiftRules.MAX_RECONNECTS))
+                continue
             }
             // Earned back by a long run of good downloading, as the live engines' reconnect budget is.
             if (clock() - attemptStart >= TimeshiftRules.HEALTHY_MS) failures = 0

@@ -9,6 +9,13 @@
 > in one bolded line of its own (e.g. **Database v46 · Backup v24 · Breaking**). The detail — what,
 > why, files and verification — belongs in the commit message, never here.
 
+## Unreleased
+
+### 🐛 Fixes
+
+- **📡 Pause and rewind live TV: a channel comes back by itself after a network outage**
+- **▶️ External player picker offers Always again, so one player can be the default**
+
 ## core-1.0.67 — 2026-10-12
 
 **Database v48**

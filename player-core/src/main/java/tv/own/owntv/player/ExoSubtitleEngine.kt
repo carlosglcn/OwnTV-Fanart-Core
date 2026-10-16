@@ -365,7 +365,13 @@ class ExoSubtitleEngine(
         firstFrameSeen = false
         hasVideoTrack = true
         undecodableAudioReported = false
+        // The outgoing item's bitrate first (it needs the old player and the old passive count), then a
+        // fresh passive count for this one.
+        rememberFilmBitrate()
         throughputTracker.reset(); fileBitrate.restart(); fpsSample.resetAll(); dropsBaseline = currentDroppedFrames(player)
+        throughputTracker.resetPassive()
+        itemStartPosMs = positionMs.coerceAtLeast(0)
+        seekedThisItem = false
         audioWatchdog.reset()
         noVideoWatchdog.disarm()
         // Nothing to wait for while Audio Mode is on — the video track is deselected on purpose.
@@ -389,7 +395,7 @@ class ExoSubtitleEngine(
         // The audio sink's capabilities are baked in at construction too, so the same rule applies: a
         // cached player built before the session latched to stereo would keep the sink that failed.
         val wantStereo = !AudioOutputPolicy.allowsMultichannel(surroundMode)
-        val wantNetwork = filmBufferSecs to filmTimeoutSecs
+        val wantNetwork = NetworkBuild(filmBufferSecs, filmTimeoutSecs, filmTargetBytes())
         val wantPassthrough = passthroughAllowed
         if (player != null && (builtForSoftware != softwarePreferred || builtForStereo != wantStereo || builtForNetwork != wantNetwork || builtForPassthrough != wantPassthrough)) {
             android.util.Log.i(TAG, "rebuilding ExoPlayer for ${if (softwarePreferred) "software" else "hardware"} decode, ${if (wantStereo) "stereo" else "device"} audio")
@@ -576,8 +582,61 @@ class ExoSubtitleEngine(
     private var builtForStereo = false
     private var builtForPassthrough = true
 
-    /** The (buffer, timeout) the cached player was built with. See the rebuild check in `start`. */
-    private var builtForNetwork = 0 to 0
+    /** What the cached player's network side was built with. See the rebuild check in `start`. */
+    private var builtForNetwork = NetworkBuild(0, 0, 0)
+
+    /** The buffer seconds, timeout and byte target baked into a built player; any change rebuilds it. */
+    private data class NetworkBuild(val bufferSecs: Int, val timeoutSecs: Int, val targetBytes: Int)
+
+    /** Bitrate of the most recent film on this engine, the best guess for sizing the next build — the
+     *  player is built before the new item has loaded, so its own bitrate can't be known yet. */
+    private var lastFilmBitrateBps: Long? = null
+
+    /** Where the current item started, so the passive byte count can be read as media bitrate. */
+    private var itemStartPosMs = 0L
+
+    /** A seek happened during the current item, so its passive byte count no longer measures its bitrate. */
+    private var seekedThisItem = false
+
+    /** The app's Java heap class in MiB, which bounds ExoPlayer's film buffer ([SmartBuffer.exoHeapCapBytes]). */
+    private val heapClassMb: Int by lazy {
+        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as? android.app.ActivityManager
+        val largeHeap = context.applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_LARGE_HEAP != 0
+        when {
+            am == null -> 0
+            largeHeap -> am.largeMemoryClass
+            else -> am.memoryClass
+        }
+    }
+
+    /**
+     * Remember the current item's bitrate for [filmTargetBytes]. A declared bitrate (container or
+     * manifest) is exact; files that declare none fall back to the passive count — network bytes over the
+     * media they bought — which never touches the stream-info overlay's own counter.
+     */
+    private fun rememberFilmBitrate() {
+        val p = player ?: return
+        // Format.NO_VALUE is -1, so "> 0" drops both "not declared" and nonsense.
+        val declared = listOfNotNull(p.videoFormat?.bitrate, p.audioFormat?.bitrate)
+            .filter { it > 0 }
+            .sumOf { it.toLong() }
+        // After a seek the passive count includes bytes for media that was thrown away, and the buffered
+        // span no longer starts at itemStartPosMs, so the ratio would be wrong: rely on the declared rate.
+        val measured = if (seekedThisItem) null
+            else SmartBuffer.mediaBitrateBps(throughputTracker.passiveBytes, p.bufferedPosition - itemStartPosMs)
+        val bps = SmartBuffer.plausibleBps(declared.takeIf { it > 0 }) ?: measured ?: return
+        val previous = lastFilmBitrateBps
+        // The guess feeds the rebuild key, so only a real change (more than a quarter) replaces it:
+        // a few percent of drift between films must not rebuild the player every time.
+        if (previous == null || bps !in (previous * 3 / 4)..(previous * 5 / 4)) lastFilmBitrateBps = bps
+    }
+
+    /** The byte target for the next build: the tier's (today's value) on Auto, otherwise sized from the
+     *  chosen Film buffer by [SmartBuffer], within the device's film ceiling and the Java-heap cap. */
+    private fun filmTargetBytes(): Int {
+        val tierSecs = budget.cacheSecs.toIntOrNull() ?: (BASE_BUFFER_MS / 1000)
+        return SmartBuffer.exoTargetBytes(filmBufferSecs, budget, targetBufferBytes(tierSecs * 1000), tierSecs, lastFilmBitrateBps, heapClassMb)
+    }
 
     private fun build(): ExoPlayer {
         // OkHttp for the stream itself, wrapped in DefaultDataSource so file:// URIs (side-loaded
@@ -600,18 +659,22 @@ class ExoSubtitleEngine(
         applyRequestHeaders()
         val dataSource = androidx.media3.datasource.DefaultDataSource.Factory(context, http)
         // Match mpv's buffering depth so stability doesn't drop after the handoff (Dev refinement #3).
-        val tierBufferMs = (budget.cacheSecs.toIntOrNull() ?: 30) * 1000
-        // N18 — the film buffer the user chose, or the tier's. The byte target below stays the TIER's:
-        // it scales with the duration it is given, and a longer buffer must never mean more memory.
+        // N18 — the film buffer the user chose, or the tier's. The byte target below follows the same
+        // choice (see [filmTargetBytes]): on Auto it is the tier's, exactly as before; a chosen buffer
+        // may grow it up to the device's film ceiling and the heap cap, so it is no longer fixed at 16/48 MiB.
         val maxBufferMs = FilmNetwork.bufferSecs(filmBufferSecs, budget) * 1000
         val minBufferMs = (maxBufferMs / 2).coerceIn(15_000, maxBufferMs)
+        val builtTargetBytes = filmTargetBytes()
+        android.util.Log.i(TAG, "film_buffer max=${maxBufferMs}ms bytes=$builtTargetBytes bitrateHint=${lastFilmBitrateBps ?: -1} heapClassMb=$heapClassMb")
         val loadControl = DefaultLoadControl.Builder()
             .setBufferDurationsMs(minBufferMs, maxBufferMs, 2_500, 5_000)
             // Durations alone are not a memory bound: at 120 s (the top RAM tier) a 4K stream can ask the
             // allocator for hundreds of MB before the duration target is met, and a TV app dies long
             // before that. Media3's own default is derived from the duration, so scale with the same
-            // tier instead of leaving it uncapped.
-            .setTargetBufferBytes(targetBufferBytes(tierBufferMs))
+            // tier instead of leaving it uncapped — and a chosen Film buffer never past the device's
+            // film ceiling ([PlayerBudget.filmCeilingBytes]) or a quarter of the Java heap, where
+            // ExoPlayer keeps its buffer ([SmartBuffer.exoHeapCapBytes]).
+            .setTargetBufferBytes(builtTargetBytes)
             .build()
         val trackSelector = DefaultTrackSelector(context).apply {
             // Settings → Video player → Preferred audio / subtitle language. These reached mpv only
@@ -729,7 +792,10 @@ class ExoSubtitleEngine(
     fun pause() { player?.pause() }
     fun togglePlayPause() { player?.let { if (it.isPlaying) it.pause() else it.play() } }
 
-    fun seekTo(positionMs: Long) { player?.seekTo(positionMs.coerceAtLeast(0)); emitPositionDuration() }
+    fun seekTo(positionMs: Long) {
+        seekedThisItem = true
+        player?.seekTo(positionMs.coerceAtLeast(0)); emitPositionDuration()
+    }
 
     /** A D-pad step. Snaps to the nearest keyframe, as mpv's relative seeks do: an exact seek decodes
      *  from the previous keyframe up to the target, a multi-second freeze per press on 4K HEVC. Put
@@ -737,6 +803,7 @@ class ExoSubtitleEngine(
      *  the passthrough re-prime (which must not jump) never inherits the snap. */
     fun seekBy(deltaMs: Long) {
         val p = player ?: return
+        seekedThisItem = true
         p.setSeekParameters(SeekParameters.CLOSEST_SYNC)
         p.seekTo((p.currentPosition + deltaMs).coerceAtLeast(0))
         p.setSeekParameters(SeekParameters.EXACT)
@@ -890,6 +957,7 @@ class ExoSubtitleEngine(
         // when the app decodes the audio itself the plain override above is already correct.
         if (audioWatchdog.passthrough) {
             android.util.Log.i(TAG, "passthrough audio: re-priming the output after the track change")
+            seekedThisItem = true // the re-prime flushes the buffer too
             runCatching { p.seekTo(p.currentPosition) }
         }
     }
@@ -1145,6 +1213,7 @@ class ExoSubtitleEngine(
     /** Stop and free the ExoPlayer (the handoff back to mpv, or stop()). Keeps the instance? No —
      *  fully release so we never hold a second decoder/connection while mpv plays. */
     fun stop() {
+        rememberFilmBitrate() // before the release below takes the formats with it
         surface = null
         noVideoWatchdog.disarm()
         callbacks.onCues(emptyList())

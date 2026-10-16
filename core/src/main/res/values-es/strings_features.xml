@@ -19,6 +19,7 @@
     <string name="profiles_create">Crear</string>
     <string name="profiles_save">Guardar</string>
     <string name="profiles_gate_title">¿Quién está viendo?</string>
+    <string name="profiles_gate_subtitle">Cada perfil tiene sus propios favoritos e historial</string>
     <string name="profiles_wrong_pin">PIN incorrecto; inténtalo de nuevo</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — introduce el PIN</string>
     <string name="profiles_kids_badge">INFANTIL</string>

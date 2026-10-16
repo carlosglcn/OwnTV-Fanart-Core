@@ -19,6 +19,7 @@
     <string name="profiles_create">Opprett</string>
     <string name="profiles_save">Lagre</string>
     <string name="profiles_gate_title">Hvem ser på?</string>
+    <string name="profiles_gate_subtitle">Hver profil har sine egne favoritter og sin egen historikk</string>
     <string name="profiles_wrong_pin">Feil PIN – prøv igjen</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> – angi PIN</string>
     <string name="profiles_kids_badge">BARN</string>

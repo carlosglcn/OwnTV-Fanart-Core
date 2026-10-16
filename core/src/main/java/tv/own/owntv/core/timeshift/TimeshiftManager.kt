@@ -192,8 +192,10 @@ class TimeshiftManager(
                     is TimeshiftDownloader.Result.Refused -> outcome.why
                     is TimeshiftDownloader.Result.Unsupported -> outcome.why
                 }
-                _gaveUp.tryEmit(buffer.session.token to why)
+                // Closed before it is announced: the controller opens the channel again at once, and [open]
+                // must not hand that tune this dying buffer as the channel's running one.
                 closeBuffer(buffer)
+                _gaveUp.tryEmit(buffer.session.token to why)
             }
         }
     }

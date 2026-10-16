@@ -115,8 +115,6 @@
     <string name="player_error_image_format">الترجمات الصورية غير متاحة مع تنسيق هذا الملف.</string>
     <string name="player_error_image_show">تعذّر عرض الترجمات الصورية لهذا الملف.</string>
     <string name="player_external_could_not_open">تعذّر فتح هذا البث.</string>
-    <string name="player_external_play_with">تشغيل باستخدام</string>
-    <string name="player_external_play_with_item">تشغيل «<xliff:g id="channel">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g>» باستخدام…</string>
     <string name="player_external_not_found">لم يتم العثور على مشغّل خارجي — ثبّت VLC أو MX Player.</string>
     <string name="player_error_audio_no_video">يجري تشغيل الصوت، ولكن تعذّر عرض الفيديو على هذا الجهاز.</string>
     <string name="player_error_file_corrupt">ملف هذا الفيديو غير صالح أو تالف ولا يمكن تشغيله.</string>
