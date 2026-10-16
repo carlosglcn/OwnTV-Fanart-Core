@@ -1262,8 +1262,9 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     /**
      * Where the navigation rail sits. FLOATING floats over the content and always hides itself; DOCKED
      * (the default, owner 2026-10-02: Docked · Compact · Fit) stays on screen and the content makes room for it.
+     * TOP (glcn) lays the sections out as a bar along the top, beside the clock.
      */
-    enum class NavStyle { FLOATING, DOCKED }
+    enum class NavStyle { FLOATING, DOCKED, TOP }
 
     /** What the rail shows: icons only, + names, + counts, + a details line under each name. */
     enum class NavSize { COMPACT, NORMAL, WIDE, EXTRA_WIDE }

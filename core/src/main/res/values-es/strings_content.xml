@@ -513,6 +513,8 @@
     <string name="glcn_about_by">por %1$s</string>
     <string name="glcn_zap_panel_title">Junto a la lista de canales</string>
     <string name="glcn_zap_panel_desc">Qué se muestra al lado de la lista de canales sobre el reproductor: la imagen del programa o la programación siguiente del canal</string>
+    <string name="glcn_nav_top">Barra superior</string>
+    <string name="glcn_nav_top_desc">Las secciones en una barra arriba, junto al reloj; se llega con ▲ desde la primera fila</string>
     <string name="glcn_zap_panel_preview">Imagen</string>
     <string name="glcn_zap_panel_schedule">Programación</string>
     <string name="glcn_zap_schedule_title">Próximamente en %1$s</string>

@@ -881,6 +881,8 @@
     <string name="glcn_about_by">by %1$s</string>
     <string name="glcn_zap_panel_title">Beside the channel list</string>
     <string name="glcn_zap_panel_desc">What shows next to the channel list over the player: the programme\'s picture, or the channel\'s coming schedule</string>
+    <string name="glcn_nav_top">Top bar</string>
+    <string name="glcn_nav_top_desc">The sections in a bar along the top, next to the clock; ▲ from the first row reaches it</string>
     <string name="glcn_zap_panel_preview">Picture</string>
     <string name="glcn_zap_panel_schedule">Schedule</string>
     <string name="glcn_zap_schedule_title">Coming up on %1$s</string>
