@@ -2574,6 +2574,17 @@ class LivePreviewEngine(
             .build()
     }
 
+    /**
+     * glcn: "Go to live" on whatever ExoPlayer holds — the newest moment of a live stream (or of a saved
+     * copy re-opened at its edge), playing. A paused live stream otherwise resumes where it was paused.
+     */
+    fun goLiveEdge() {
+        val p = player ?: return
+        LiveDiagnosticsLog.event("go live: live=${p.isCurrentMediaItemLive} pos=${p.currentPosition} playing=${p.isPlaying}")
+        if (p.isCurrentMediaItemLive || p.isCurrentMediaItemDynamic) runCatching { p.seekToDefaultPosition() }
+        p.playWhenReady = true
+    }
+
     // --- PlaybackEngine controls (full-screen HUD) ---
     override fun togglePlayPause() {
         val p = player ?: return
