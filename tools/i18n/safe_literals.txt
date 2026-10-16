@@ -1951,11 +1951,6 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	movie
 4	uri	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	name
 1	protocol	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	open
-1	protocol	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntv
-1	protocol	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntv://open/live
-1	protocol	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntv://play/episode
-1	protocol	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntv://play/live
-1	protocol	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntv://play/movie
 1	protocol	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	play
 4	uri	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	remoteId
 2	uri	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	season
@@ -2746,13 +2741,11 @@
 1	technical	core/src/main/java/tv/own/owntv/core/recording/RecordingRules.kt	yyyy-MM-dd HH-mm
 1	log	core/src/main/java/tv/own/owntv/core/recording/RecordingScheduler.kt	RecordingScheduler
 1	log	core/src/main/java/tv/own/owntv/core/recording/RecordingScheduler.kt	could not arm recording alarm id=$id: ${it.message}
-1	protocol	core/src/main/java/tv/own/owntv/core/recording/RecordingScheduler.kt	owntv://recording/$id
 1	technical	core/src/main/java/tv/own/owntv/core/recording/RecordingWorker.kt	owntv-recordings
 1	protocol	core/src/main/java/tv/own/owntv/core/reminder/ReminderReceivers.kt	android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED
 1	protocol	core/src/main/java/tv/own/owntv/core/reminder/ReminderReceivers.kt	tv.own.owntv.core.action.REMINDER_DUE
 1	log	core/src/main/java/tv/own/owntv/core/reminder/ReminderScheduler.kt	ReminderScheduler
 1	log	core/src/main/java/tv/own/owntv/core/reminder/ReminderScheduler.kt	could not arm reminder alarm id=$id: ${it.message}
-1	uri	core/src/main/java/tv/own/owntv/core/reminder/ReminderScheduler.kt	owntv://reminder/$id
 1	compiler	core/src/main/java/tv/own/owntv/core/repository/ActiveSources.kt	OPT_IN_USAGE
 1	technical	core/src/main/java/tv/own/owntv/core/repository/EpgCacheFiles.kt	.xmltv
 1	technical	core/src/main/java/tv/own/owntv/core/repository/EpgCacheFiles.kt	.xmltv.tmp

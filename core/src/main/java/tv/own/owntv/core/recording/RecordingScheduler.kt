@@ -107,7 +107,7 @@ class RecordingScheduler(
             action = RecordingAlarmReceiver.ACTION_RECORDING_DUE
             // In the data, not an extra: PendingIntent equality ignores extras, so two recordings
             // would otherwise collapse into one alarm.
-            data = "owntv://recording/$id".toUri()
+            data = "owntvfanart://recording/$id".toUri()
         }
         val flags = PendingIntent.FLAG_UPDATE_CURRENT or
             if (mutable) PendingIntent.FLAG_MUTABLE else PendingIntent.FLAG_IMMUTABLE

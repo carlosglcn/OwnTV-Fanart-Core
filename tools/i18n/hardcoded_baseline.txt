@@ -206,6 +206,11 @@
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	movie:${movie.id}
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	series:${series.id}
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	|
+1	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntvfanart
+1	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntvfanart://open/live
+1	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntvfanart://play/episode
+1	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntvfanart://play/live
+1	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntvfanart://play/movie
 2	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	\0
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	(?i)(uhd|fhd|hd|4k)
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	(en directo)
@@ -328,6 +333,8 @@
 2	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	m3u8
 1	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	ts
 1	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	user_output_formats
+1	core/src/main/java/tv/own/owntv/core/recording/RecordingScheduler.kt	owntvfanart://recording/$id
+1	core/src/main/java/tv/own/owntv/core/reminder/ReminderScheduler.kt	owntvfanart://reminder/$id
 1	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	Emby/Jellyfin no responde en ${target.root}
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	auto_frame_rate_reset_416
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	dns_doh_url

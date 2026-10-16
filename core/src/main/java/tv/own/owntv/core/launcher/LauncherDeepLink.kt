@@ -11,7 +11,7 @@ sealed interface LauncherDeepLink {
     fun toUri(): Uri
 
     data object OpenLiveSection : LauncherDeepLink {
-        override fun toUri(): Uri = Uri.parse("owntv://open/live")
+        override fun toUri(): Uri = Uri.parse("owntvfanart://open/live")
     }
 
     data class Movie(
@@ -20,7 +20,7 @@ sealed interface LauncherDeepLink {
         val name: String? = null,
         val itemId: Long? = null,
     ) : LauncherDeepLink {
-        override fun toUri(): Uri = Uri.parse("owntv://play/movie").buildUpon()
+        override fun toUri(): Uri = Uri.parse("owntvfanart://play/movie").buildUpon()
             .appendOptionalQueryParameter("sourceId", sourceId?.toString())
             .appendOptionalQueryParameter("remoteId", remoteId)
             .appendOptionalQueryParameter("name", name)
@@ -38,7 +38,7 @@ sealed interface LauncherDeepLink {
         val seriesItemId: Long? = null,
         val episodeItemId: Long? = null,
     ) : LauncherDeepLink {
-        override fun toUri(): Uri = Uri.parse("owntv://play/episode").buildUpon()
+        override fun toUri(): Uri = Uri.parse("owntvfanart://play/episode").buildUpon()
             .appendOptionalQueryParameter("seriesSourceId", seriesSourceId?.toString())
             .appendOptionalQueryParameter("seriesRemoteId", seriesRemoteId)
             .appendOptionalQueryParameter("seriesName", seriesName)
@@ -56,7 +56,7 @@ sealed interface LauncherDeepLink {
         val name: String? = null,
         val itemId: Long? = null,
     ) : LauncherDeepLink {
-        override fun toUri(): Uri = Uri.parse("owntv://play/live").buildUpon()
+        override fun toUri(): Uri = Uri.parse("owntvfanart://play/live").buildUpon()
             .appendOptionalQueryParameter("sourceId", sourceId?.toString())
             .appendOptionalQueryParameter("remoteId", remoteId)
             .appendOptionalQueryParameter("name", name)
@@ -66,7 +66,7 @@ sealed interface LauncherDeepLink {
 
     companion object {
         fun parse(uri: Uri?): LauncherDeepLink? {
-            if (uri == null || uri.scheme != "owntv") return null
+            if (uri == null || uri.scheme != "owntvfanart") return null
             return when (uri.host) {
                 "open" -> when (uri.pathSegments.firstOrNull()) {
                     "live" -> OpenLiveSection

@@ -61,7 +61,7 @@ class ReminderScheduler(
         val intent = Intent(context, ReminderAlarmReceiver::class.java).apply {
             action = ReminderAlarmReceiver.ACTION_REMINDER_DUE
             // In the data, not an extra: PendingIntent equality ignores extras.
-            data = "owntv://reminder/$id".toUri()
+            data = "owntvfanart://reminder/$id".toUri()
         }
         return runCatching {
             PendingIntent.getBroadcast(context, id.toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
