@@ -38,7 +38,10 @@ class SportsNow(
             if (isSport(p)) Entry(ch, p) else null
         }
             // One row per programme: the same match on an HD and an SD copy shows once.
-            .distinctBy { it.programme.title.lowercase() + "|" + it.programme.startMs + "|" + it.channel.name.lowercase().replace(" hd", "") }
+            // glcn: one card per event — the same match on an HD and an SD channel, or on two channels of the
+            // same family ("M+DEPORTESHD", "M+ DEPORTES"), shows once, on its HD channel.
+            .sortedByDescending { Regex("(?i)(uhd|fhd|hd|4k)").containsMatchIn(it.channel.name) }
+            .distinctBy { it.programme.title.lowercase().trim() + "|" + it.programme.startMs }
             .sortedWith(compareByDescending<Entry> { isLive(it.programme) }.thenBy { it.programme.startMs })
     }
 
