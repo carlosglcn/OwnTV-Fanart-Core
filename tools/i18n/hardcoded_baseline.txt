@@ -206,7 +206,8 @@
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	movie:${movie.id}
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	series:${series.id}
 1	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	|
-3	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	\0
+2	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	\0
+1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	(?i)(uhd|fhd|hd|4k)
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	(en directo)
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	)
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	\\b(
@@ -235,7 +236,6 @@
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	formula 1
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	futbol
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	golf
-1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	hd
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	hipica
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	laliga
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	liga de campeones
@@ -254,7 +254,7 @@
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	ufc
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	voleibol
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	wwe
-3	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	|
+2	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	|
 1	core/src/main/java/tv/own/owntv/core/metadata/MetadataBudget.kt	day_count
 1	core/src/main/java/tv/own/owntv/core/metadata/MetadataBudget.kt	day_start
 1	core/src/main/java/tv/own/owntv/core/metadata/MetadataBudget.kt	hour_count
@@ -459,6 +459,7 @@
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder failed before first frame (${error.errorCodeName}) — rebuilding the decoder and retrying once
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder rebuild failed: ${it.message}
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	default User-Agent refused — retrying once as ${HttpClient.FALLBACK_USER_AGENT}
+1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	go live: live=${p.isCurrentMediaItemLive} pos=${p.currentPosition} playing=${p.isPlaying}
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	html
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	insufficient resource
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	insufficientresources
