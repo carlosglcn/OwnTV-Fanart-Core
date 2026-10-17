@@ -562,4 +562,6 @@
     <string name="content_poster_size">Tamaño de los carteles</string>
     <string name="content_vod_more_in">Más en <xliff:g id="category">%1$s</xliff:g></string>
     <string name="glcn_start_time">Arranque del canal</string>
+    <string name="glcn_safe_area_title">Margen de pantalla</string>
+    <string name="glcn_safe_area_desc">Encoge toda la interfaz dentro de la pantalla, para teles que recortan los bordes (overscan). Desactivado de serie.</string>
 </resources>

@@ -507,6 +507,8 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_AUTO_SKIP_INTRO = booleanPreferencesKey("glcn_auto_skip_intro")
         val GLCN_STYLE = stringPreferencesKey("glcn_style")
         val GLCN_REMOTE_V2 = booleanPreferencesKey("glcn_remote_v2")
+        val GLCN_REMOTE_V3 = booleanPreferencesKey("glcn_remote_v3")
+        val GLCN_SAFE_AREA = intPreferencesKey("glcn_safe_area")
         val GLCN_ICON_V1 = booleanPreferencesKey("glcn_icon_v1")
         val GLCN_DIALOGUE_BOOST = booleanPreferencesKey("glcn_dialogue_boost")
         val GLCN_MPV_PASSTHROUGH = booleanPreferencesKey("glcn_mpv_passthrough")
@@ -2102,6 +2104,33 @@ class SettingsRepository(private val context: Context, private val localeStore: 
             }
         }
     }
+
+    /**
+     * glcn: once, move the guide off a held ≡ (the SHIELD keeps that press for its own quick settings) to a
+     * held ⏯, where the earlier set had the favourite. Only where those two still hold what we set.
+     */
+    suspend fun applyGlcnRemoteV3Once() {
+        context.dataStore.edit { prefs ->
+            if (prefs[Keys.GLCN_REMOTE_V3] == true) return@edit
+            prefs[Keys.GLCN_REMOTE_V3] = true
+            if (Keys.REMOTE_SHORTCUT_BINDINGS !in prefs) return@edit
+            val menu = android.view.KeyEvent.KEYCODE_MENU
+            val play = android.view.KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE
+            val current = RemoteShortcutBindings.decode(prefs[Keys.REMOTE_SHORTCUT_BINDINGS].orEmpty())
+            val moved = current
+                .filterNot { it.keyCode == menu && it.press == RemoteShortcutPress.LONG && it.action == RemoteShortcutAction.OPEN_GUIDE }
+                .map {
+                    if (it.keyCode == play && it.press == RemoteShortcutPress.LONG && it.action == RemoteShortcutAction.TOGGLE_FAVORITE) {
+                        it.copy(action = RemoteShortcutAction.OPEN_GUIDE)
+                    } else it
+                }
+            prefs[Keys.REMOTE_SHORTCUT_BINDINGS] = RemoteShortcutBindings.encode(moved)
+        }
+    }
+
+    /** glcn: a margin around the whole interface, in percent of the screen, for a TV that crops its edges. */
+    val glcnSafeArea: Flow<Int> = prefsFlow { (it[Keys.GLCN_SAFE_AREA] ?: 0).coerceIn(0, 8) }
+    suspend fun setGlcnSafeArea(percent: Int) { context.dataStore.edit { it[Keys.GLCN_SAFE_AREA] = percent.coerceIn(0, 8) } }
 
     suspend fun setRemoteShortcutBinding(binding: RemoteShortcutBinding) {
         context.dataStore.edit { prefs ->

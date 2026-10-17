@@ -351,6 +351,8 @@
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_icon_v1
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_mpv_passthrough
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_remote_v2
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_remote_v3
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_safe_area
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_season_mode
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_startup_sound
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_style

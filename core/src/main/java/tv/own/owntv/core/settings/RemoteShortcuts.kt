@@ -58,17 +58,17 @@ object RemoteShortcutBindings {
     /**
      * glcn: the SHIELD remote's free buttons, for a remote without CH±. ≡: channel list / guide.
      * ⏪ ⏩: previous / next channel on live TV (a page in lists; a seek on films), held: the channel
-     * watched before / back to live. ⏯: play-pause, held: favourite.
+     * watched before / back to live. ⏯: play-pause, held: the guide.
      */
     val glcnSet: List<RemoteShortcutBinding> = listOf(
         RemoteShortcutBinding(KeyEvent.KEYCODE_MENU, RemoteShortcutPress.SHORT, RemoteShortcutAction.OPEN_CHANNEL_LIST),
-        RemoteShortcutBinding(KeyEvent.KEYCODE_MENU, RemoteShortcutPress.LONG, RemoteShortcutAction.OPEN_GUIDE),
         RemoteShortcutBinding(KeyEvent.KEYCODE_MEDIA_REWIND, RemoteShortcutPress.SHORT, RemoteShortcutAction.CHANNEL_PREVIOUS),
         RemoteShortcutBinding(KeyEvent.KEYCODE_MEDIA_REWIND, RemoteShortcutPress.LONG, RemoteShortcutAction.PREVIOUS_CHANNEL),
         RemoteShortcutBinding(KeyEvent.KEYCODE_MEDIA_FAST_FORWARD, RemoteShortcutPress.SHORT, RemoteShortcutAction.CHANNEL_NEXT),
         RemoteShortcutBinding(KeyEvent.KEYCODE_MEDIA_FAST_FORWARD, RemoteShortcutPress.LONG, RemoteShortcutAction.RETURN_TO_LIVE),
         RemoteShortcutBinding(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, RemoteShortcutPress.SHORT, RemoteShortcutAction.PLAY_PAUSE),
-        RemoteShortcutBinding(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, RemoteShortcutPress.LONG, RemoteShortcutAction.TOGGLE_FAVORITE),
+        // Held ≡ is the SHIELD's own quick settings — the app never receives it — so the guide is a held ⏯.
+        RemoteShortcutBinding(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, RemoteShortcutPress.LONG, RemoteShortcutAction.OPEN_GUIDE),
     )
 
     val defaults: List<RemoteShortcutBinding> = listOf(
