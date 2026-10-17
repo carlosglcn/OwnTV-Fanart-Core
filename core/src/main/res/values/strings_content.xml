@@ -885,6 +885,9 @@
     <string name="glcn_about_by">by %1$s</string>
     <string name="glcn_zap_panel_title">Beside the channel list</string>
     <string name="glcn_zap_panel_desc">What shows next to the channel list over the player: the programme\'s picture, or the channel\'s coming schedule</string>
+    <string name="glcn_skip_intro">Skip intro</string>
+    <string name="glcn_auto_skip_title">Skip intros by themselves</string>
+    <string name="glcn_auto_skip_desc">Series: once a series knows where its intro ends (the first time you skip it), later episodes jump it without asking</string>
     <string name="glcn_zap_view_list">List</string>
     <string name="glcn_zap_view_next">View</string>
     <string name="glcn_fanart_group">Fanart</string>

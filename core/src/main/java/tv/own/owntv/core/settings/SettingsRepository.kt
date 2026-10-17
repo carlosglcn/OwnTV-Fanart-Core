@@ -504,6 +504,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_HOME_BACKDROP = intPreferencesKey("glcn_home_backdrop")
         val GLCN_ZAP_PANEL = intPreferencesKey("glcn_zap_panel")
         val GLCN_BACK_TO_WINDOW = booleanPreferencesKey("glcn_back_to_window")
+        val GLCN_AUTO_SKIP_INTRO = booleanPreferencesKey("glcn_auto_skip_intro")
         val GLCN_REMOTE_V2 = booleanPreferencesKey("glcn_remote_v2")
         val GLCN_ICON_V1 = booleanPreferencesKey("glcn_icon_v1")
         val GLCN_DIALOGUE_BOOST = booleanPreferencesKey("glcn_dialogue_boost")
@@ -918,6 +919,9 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     /** glcn: Back on a live channel full screen leaves it playing in the small window (off: it stops). */
     val backToWindow: Flow<Boolean> = prefsFlow { it[Keys.GLCN_BACK_TO_WINDOW] ?: false }
     suspend fun setBackToWindow(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_BACK_TO_WINDOW] = on } }
+    /** glcn: series jump their intro by themselves once its end has been learned. */
+    val autoSkipIntro: Flow<Boolean> = prefsFlow { it[Keys.GLCN_AUTO_SKIP_INTRO] ?: false }
+    suspend fun setAutoSkipIntro(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_AUTO_SKIP_INTRO] = on } }
     suspend fun setZapPanel(mode: Int) { context.dataStore.edit { it[Keys.GLCN_ZAP_PANEL] = mode.coerceIn(0, 2) } }
 
     /** glcn: Home's background — 0 classic (top corner), 1 cinema (full screen, rows below), 2 panel (full screen, info at the side). */

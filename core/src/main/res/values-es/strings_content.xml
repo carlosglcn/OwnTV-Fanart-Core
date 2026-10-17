@@ -515,6 +515,9 @@
     <string name="glcn_about_by">por %1$s</string>
     <string name="glcn_zap_panel_title">Junto a la lista de canales</string>
     <string name="glcn_zap_panel_desc">Qué se muestra al lado de la lista de canales sobre el reproductor: la imagen del programa o la programación siguiente del canal</string>
+    <string name="glcn_skip_intro">Saltar intro</string>
+    <string name="glcn_auto_skip_title">Saltar intros solas</string>
+    <string name="glcn_auto_skip_desc">Series: cuando una serie ya sabe dónde acaba su intro (la primera vez que la saltas), los siguientes episodios la saltan sin preguntar</string>
     <string name="glcn_zap_view_list">Lista</string>
     <string name="glcn_zap_view_next">Vista</string>
     <string name="glcn_fanart_group">Fanart</string>
