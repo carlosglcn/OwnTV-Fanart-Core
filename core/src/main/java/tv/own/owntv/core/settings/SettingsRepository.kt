@@ -508,6 +508,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_STYLE = stringPreferencesKey("glcn_style")
         val GLCN_REMOTE_V2 = booleanPreferencesKey("glcn_remote_v2")
         val GLCN_REMOTE_V3 = booleanPreferencesKey("glcn_remote_v3")
+        val GLCN_UI_SOUNDS_DEFAULT_V2 = booleanPreferencesKey("glcn_ui_sounds_default_v2")
         val GLCN_SAFE_AREA = intPreferencesKey("glcn_safe_area")
         val GLCN_ICON_V1 = booleanPreferencesKey("glcn_icon_v1")
         val GLCN_DIALOGUE_BOOST = booleanPreferencesKey("glcn_dialogue_boost")
@@ -910,7 +911,20 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     suspend fun setAnimStyle(style: Int) { context.dataStore.edit { it[Keys.GLCN_ANIM_STYLE] = style.coerceIn(0, 1) } }
 
     /** glcn: menu sounds — 0 off, 1 soft, 2 normal. */
-    val uiSounds: Flow<Int> = prefsFlow { it[Keys.GLCN_UI_SOUNDS] ?: 0 }
+    /** glcn: Soft by default on a new install (see [keepUiSoundsForExistingOnce]). */
+    val uiSounds: Flow<Int> = prefsFlow { it[Keys.GLCN_UI_SOUNDS] ?: 1 }
+
+    /**
+     * glcn: menu sounds became Soft by default. An install that already had a profile, and never chose,
+     * was silent and stays so — written once, so the new default only reaches new installs.
+     */
+    suspend fun keepUiSoundsForExistingOnce() {
+        context.dataStore.edit { prefs ->
+            if (prefs[Keys.GLCN_UI_SOUNDS_DEFAULT_V2] == true) return@edit
+            prefs[Keys.GLCN_UI_SOUNDS_DEFAULT_V2] = true
+            if (Keys.GLCN_UI_SOUNDS !in prefs && Keys.ACTIVE_PROFILE in prefs) prefs[Keys.GLCN_UI_SOUNDS] = 0
+        }
+    }
     suspend fun setUiSounds(level: Int) { context.dataStore.edit { it[Keys.GLCN_UI_SOUNDS] = level.coerceIn(0, 2) } }
 
     /** glcn: a short chime as the app opens (the season's own while a seasonal theme is on). */
