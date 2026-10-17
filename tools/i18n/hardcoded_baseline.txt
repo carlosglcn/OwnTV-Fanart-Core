@@ -353,6 +353,7 @@
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_remote_v2
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_season_mode
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_startup_sound
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_style
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_ui_sounds
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_zap_panel
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	live_latency_reset_416
@@ -450,6 +451,14 @@
 1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	glcn-series-plot
 1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	glcn-year
 1	core/src/main/java/tv/own/owntv/core/sync/work/TrendingRefreshWorker.kt	Playlist
+1	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#2A7DE1
+1	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#76B900
+1	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#8AB4F8
+1	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#C4562E
+1	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#E0312B
+1	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#FF2E9A
+1	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#FF8A5B
+1	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#FFFFFF
 1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	❤️
 1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🎃
 1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🎄

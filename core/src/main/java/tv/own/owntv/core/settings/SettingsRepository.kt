@@ -505,6 +505,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_ZAP_PANEL = intPreferencesKey("glcn_zap_panel")
         val GLCN_BACK_TO_WINDOW = booleanPreferencesKey("glcn_back_to_window")
         val GLCN_AUTO_SKIP_INTRO = booleanPreferencesKey("glcn_auto_skip_intro")
+        val GLCN_STYLE = stringPreferencesKey("glcn_style")
         val GLCN_REMOTE_V2 = booleanPreferencesKey("glcn_remote_v2")
         val GLCN_ICON_V1 = booleanPreferencesKey("glcn_icon_v1")
         val GLCN_DIALOGUE_BOOST = booleanPreferencesKey("glcn_dialogue_boost")
@@ -922,6 +923,25 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     /** glcn: series jump their intro by themselves once its end has been learned. */
     val autoSkipIntro: Flow<Boolean> = prefsFlow { it[Keys.GLCN_AUTO_SKIP_INTRO] ?: false }
     suspend fun setAutoSkipIntro(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_AUTO_SKIP_INTRO] = on } }
+
+    /** glcn: the ready-made style in use (its page tones), or null for the user's own choices. */
+    val glcnStyle: Flow<tv.own.owntv.core.theme.GlcnStyle?> = prefsFlow { tv.own.owntv.core.theme.GlcnStyle.of(it[Keys.GLCN_STYLE]) }
+
+    /** glcn: apply a ready-made style — its theme, its accent and (glass styles) the translucent surfaces;
+     *  null goes back to the user's own choices, keeping what they are now. */
+    suspend fun applyGlcnStyle(style: tv.own.owntv.core.theme.GlcnStyle?) {
+        context.dataStore.edit { p ->
+            if (style == null) { p.remove(Keys.GLCN_STYLE); return@edit }
+            val wasGlass = tv.own.owntv.core.theme.GlcnStyle.of(p[Keys.GLCN_STYLE])?.glass == true
+            p[Keys.GLCN_STYLE] = style.name
+            p[Keys.THEME_MODE] = (if (style.light) ThemeMode.LIGHT else ThemeMode.DARK).name
+            p[Keys.ACCENT_CUSTOM] = style.accentHex
+            when {
+                style.glass -> p[Keys.GLASS_SCOPE] = tv.own.owntv.core.theme.GlassSurface.entries.fold(0) { acc, s -> acc or (1 shl s.ordinal) }
+                wasGlass -> p[Keys.GLASS_SCOPE] = 0
+            }
+        }
+    }
     suspend fun setZapPanel(mode: Int) { context.dataStore.edit { it[Keys.GLCN_ZAP_PANEL] = mode.coerceIn(0, 2) } }
 
     /** glcn: Home's background — 0 classic (top corner), 1 cinema (full screen, rows below), 2 panel (full screen, info at the side). */

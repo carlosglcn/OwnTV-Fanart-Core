@@ -885,6 +885,27 @@
     <string name="glcn_about_by">by %1$s</string>
     <string name="glcn_zap_panel_title">Beside the channel list</string>
     <string name="glcn_zap_panel_desc">What shows next to the channel list over the player: the programme\'s picture, or the channel\'s coming schedule</string>
+    <string name="glcn_setup_style_title">Choose your style</string>
+    <string name="glcn_setup_home_title">How do you want Home?</string>
+    <string name="glcn_setup_home_sub">The same rows, three ways to show them. You can change it later in Settings › Fanart</string>
+    <string name="glcn_setup_home_classic">The featured billboard on top and the rows under it</string>
+    <string name="glcn_setup_home_cinema">The picture of what you point at fills the screen, with its details; the rows below</string>
+    <string name="glcn_setup_home_panel">The rows on the left and a fixed panel on the right with what you point at</string>
+    <string name="glcn_style_atardecer" translatable="false">Atardecer</string>
+    <string name="glcn_style_estudio" translatable="false">Estudio</string>
+    <string name="glcn_style_vitrina" translatable="false">Vitrina</string>
+    <string name="glcn_style_pulso" translatable="false">Pulso</string>
+    <string name="glcn_style_neon" translatable="false">Neón</string>
+    <string name="glcn_style_nieve" translatable="false">Nieve</string>
+    <string name="glcn_style_papel" translatable="false">Papel</string>
+    <string name="glcn_style_arena" translatable="false">Arena</string>
+    <string name="glcn_style_title">Style</string>
+    <string name="glcn_style_desc">Colours, page and accent chosen to match. ✦ Glass styles look their best on a stronger device; elsewhere they show without blur</string>
+    <string name="glcn_style_kind_dark">Dark</string>
+    <string name="glcn_style_kind_light">Light</string>
+    <string name="glcn_style_kind_glass">✦ Glass · stronger devices</string>
+    <string name="glcn_style_none">None — my own settings</string>
+    <string name="glcn_style_none_desc">Theme and accent as set in Appearance</string>
     <string name="glcn_skip_intro">Skip intro</string>
     <string name="glcn_auto_skip_title">Skip intros by themselves</string>
     <string name="glcn_auto_skip_desc">Series: once a series knows where its intro ends (the first time you skip it), later episodes jump it without asking</string>
