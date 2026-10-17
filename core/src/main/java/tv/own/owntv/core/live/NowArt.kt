@@ -35,7 +35,12 @@ class NowArt(
         val cust = customize.observe(pid, MediaType.LIVE).first()
         val shift = settings.epgOffsetMinutes.first()
         val rows = guide.slice(listOf(channel), cust, shift, at, at + 8 * 3_600_000L)[channel.id].orEmpty().sortedBy { it.startMs }
-        val now = rows.firstOrNull { at in it.startMs until it.stopMs }
+        // glcn: the guide's window leaves synopses out (they are read one at a time); the programme on air
+        // is the one shown in full, so its synopsis is read here.
+        val now = rows.firstOrNull { at in it.startMs until it.stopMs }?.let { p ->
+            if (!p.description.isNullOrBlank()) p
+            else p.copy(description = runCatching { guide.description(p.id) }.getOrNull())
+        }
         val next = rows.firstOrNull { it.startMs >= (now?.stopMs ?: at) }
         return now to next
     }

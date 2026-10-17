@@ -515,6 +515,10 @@
     <string name="glcn_about_by">por %1$s</string>
     <string name="glcn_zap_panel_title">Junto a la lista de canales</string>
     <string name="glcn_zap_panel_desc">Qué se muestra al lado de la lista de canales sobre el reproductor: la imagen del programa o la programación siguiente del canal</string>
+    <string name="glcn_back_title">Atrás en el reproductor</string>
+    <string name="glcn_back_desc">Con un canal en directo: Parar sale del reproductor; Ventana deja el canal en una ventana pequeña mientras navegas</string>
+    <string name="glcn_back_stop">Parar</string>
+    <string name="glcn_back_window">Ventana</string>
     <string name="glcn_nav_top">Barra superior</string>
     <string name="glcn_nav_top_desc">Las secciones en una barra arriba, junto al reloj; se llega con ▲ desde la primera fila</string>
     <string name="glcn_zap_panel_preview">Imagen</string>

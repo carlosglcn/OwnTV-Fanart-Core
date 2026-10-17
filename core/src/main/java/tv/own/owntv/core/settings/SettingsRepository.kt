@@ -503,6 +503,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_SEASON_MODE = intPreferencesKey("glcn_season_mode")
         val GLCN_HOME_BACKDROP = intPreferencesKey("glcn_home_backdrop")
         val GLCN_ZAP_PANEL = intPreferencesKey("glcn_zap_panel")
+        val GLCN_BACK_TO_WINDOW = booleanPreferencesKey("glcn_back_to_window")
         val GLCN_REMOTE_V2 = booleanPreferencesKey("glcn_remote_v2")
         val GLCN_ICON_V1 = booleanPreferencesKey("glcn_icon_v1")
         val GLCN_DIALOGUE_BOOST = booleanPreferencesKey("glcn_dialogue_boost")
@@ -914,6 +915,9 @@ class SettingsRepository(private val context: Context, private val localeStore: 
 
     /** glcn: beside the channel list over the player — 0 the programme's picture, 1 the channel's coming schedule. */
     val zapPanel: Flow<Int> = prefsFlow { it[Keys.GLCN_ZAP_PANEL] ?: 0 }
+    /** glcn: Back on a live channel full screen leaves it playing in the small window (off: it stops). */
+    val backToWindow: Flow<Boolean> = prefsFlow { it[Keys.GLCN_BACK_TO_WINDOW] ?: false }
+    suspend fun setBackToWindow(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_BACK_TO_WINDOW] = on } }
     suspend fun setZapPanel(mode: Int) { context.dataStore.edit { it[Keys.GLCN_ZAP_PANEL] = mode.coerceIn(0, 1) } }
 
     /** glcn: Home's background — 0 classic (top corner), 1 cinema (full screen, rows below), 2 panel (full screen, info at the side). */
