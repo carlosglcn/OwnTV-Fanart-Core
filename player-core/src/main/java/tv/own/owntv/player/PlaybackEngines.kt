@@ -1,7 +1,18 @@
 package tv.own.owntv.player
 
+import android.app.ActivityManager
 import android.content.ComponentCallbacks2
+import android.os.Build
+import android.util.Log
 import androidx.media3.common.util.UnstableApi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 
 /**
  * Every playback engine an app holds, so the app's lifecycle reaches all of them from one call
@@ -26,9 +37,46 @@ class PlaybackEngines(
     /** How hard the OS is squeezing, from an `onTrimMemory` level. */
     enum class Pressure { NONE, LOW, CRITICAL }
 
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+
+    init {
+        // From Android 14 the RUNNING_* trim levels are no longer delivered, so the only pressure
+        // signal left is asking. Polled only while something plays; older Android keeps the callback.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            scope.launch {
+                combine(player.isPlaying, livePreview.isPlaying, pool.inUse) { a, b, c -> a || b || c }
+                    .distinctUntilChanged()
+                    .collectLatest { playing -> if (playing) pollMemory() }
+            }
+        }
+    }
+
+    private suspend fun pollMemory() {
+        val am = player.appContext.getSystemService(ActivityManager::class.java) ?: return
+        val info = ActivityManager.MemoryInfo()
+        var applied = Pressure.NONE
+        Log.i(TAG, "memory poll on")
+        try {
+            while (true) {
+                am.getMemoryInfo(info)
+                val pressure = pressureOf(info.lowMemory, info.availMem, info.threshold)
+                // Once per pressure episode: act when it rises, re-arm when it is over.
+                if (pressure > applied) {
+                    Log.i(TAG, "memory pressure $pressure avail=${info.availMem shr 20}MiB threshold=${info.threshold shr 20}MiB")
+                    applyPressure(pressure)
+                }
+                applied = if (pressure == Pressure.NONE) Pressure.NONE else maxOf(applied, pressure)
+                delay(MEMORY_POLL_MS)
+            }
+        } finally {
+            Log.i(TAG, "memory poll off")
+        }
+    }
+
     /** Forward `Application.onTrimMemory`. Levels that only mean "the UI is hidden" are ignored. */
-    fun onTrimMemory(level: Int) {
-        val pressure = pressureOf(level)
+    fun onTrimMemory(level: Int) = applyPressure(pressureOf(level))
+
+    private fun applyPressure(pressure: Pressure) {
         if (pressure == Pressure.NONE) return
         player.onTrimMemory()
         if (pressure == Pressure.CRITICAL) {
@@ -65,5 +113,19 @@ class PlaybackEngines(
             ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW -> Pressure.LOW
             else -> Pressure.NONE
         }
+
+        /**
+         * The Android 14+ form, from `ActivityManager.MemoryInfo`: at or below the kill threshold
+         * (`lowMemory`) is CRITICAL, within one more threshold of it is LOW — the same two steps the
+         * trim levels gave.
+         */
+        fun pressureOf(lowMemory: Boolean, availMem: Long, threshold: Long): Pressure = when {
+            lowMemory || availMem <= threshold -> Pressure.CRITICAL
+            availMem <= threshold * 2 -> Pressure.LOW
+            else -> Pressure.NONE
+        }
+
+        private const val MEMORY_POLL_MS = 5_000L
+        private const val TAG = "OwnTV-Memory"
     }
 }

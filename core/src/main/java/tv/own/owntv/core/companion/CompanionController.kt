@@ -51,9 +51,6 @@ class CompanionController(context: Context, localeStore: LocaleStore) {
     private val _images = MutableSharedFlow<File>(extraBufferCapacity = 4)
     val images: SharedFlow<File> = _images.asSharedFlow()
 
-    /** TMDB API keys handed over from the remote device in [startForTmdbKey] mode. */
-    private val _tmdbKeys = MutableSharedFlow<String>(extraBufferCapacity = 4)
-    val tmdbKeys: SharedFlow<String> = _tmdbKeys.asSharedFlow()
     private val _tmdbConfigs = MutableSharedFlow<CompanionServiceConfig>(extraBufferCapacity = 4)
     val tmdbConfigs: SharedFlow<CompanionServiceConfig> = _tmdbConfigs.asSharedFlow()
     private val _openSubtitlesConfigs = MutableSharedFlow<CompanionServiceConfig>(extraBufferCapacity = 4)
@@ -111,8 +108,6 @@ class CompanionController(context: Context, localeStore: LocaleStore) {
     /** Starts the companion server in image-upload mode: the remote device sends a background image, emitted on [images]. */
     fun startForImageUpload(port: Int) = startInternal(port, CompanionMode.IMAGE_UPLOAD)
 
-    /** Starts the companion server in TMDB-key mode: the remote device sends an API key, emitted on [tmdbKeys]. */
-    fun startForTmdbKey(port: Int) = startInternal(port, CompanionMode.TMDB_KEY)
     fun startForTmdbConfig(port: Int) = startInternal(port, CompanionMode.TMDB_CONFIG)
     fun startForOpenSubtitlesConfig(port: Int) = startInternal(port, CompanionMode.OPEN_SUBTITLES_CONFIG)
 
@@ -147,8 +142,6 @@ class CompanionController(context: Context, localeStore: LocaleStore) {
                 },
                 onBackup = ::onBackupUploaded,
                 onImage = ::onImageUploaded,
-                // Never logged, at any level: it is the user's own credential.
-                onTmdbKey = { key -> _tmdbKeys.tryEmit(key) },
                 onServiceConfig = { config ->
                     when (mode) {
                         CompanionMode.TMDB_CONFIG -> _tmdbConfigs.tryEmit(config)

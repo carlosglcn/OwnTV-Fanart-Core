@@ -91,25 +91,25 @@ import tv.own.owntv.core.database.dao.SubtitleDao
         UserDataTombstoneEntity::class,
         DownloadEntity::class,
         // Live recordings and the standing rules that create them (v39). Never synced, never
-        // backed up — D6.
+        // backed up.
         RecordingEntity::class,
-        // Stalker outstanding-page plan (N1b)
+        // Stalker outstanding pages
         CatalogBackfillEntity::class,
         RecordingRuleEntity::class,
-        // Programme reminders (v47, Stage G2). Never synced, never backed up — they last hours or days.
+        // Programme reminders (v47). Never synced, never backed up — they last hours or days.
         tv.own.owntv.core.database.entity.ReminderEntity::class,
         // Android TV home-screen bookkeeping
         TvProviderProgramEntity::class,
         // EPG
         EpgChannelEntity::class,
         EpgProgrammeEntity::class,
-        // TMDB metadata enrichment cache (plan §7)
+        // TMDB metadata enrichment cache
         MetadataCacheEntity::class,
         MetadataMatchEntity::class,
         // Source-scoped, locally matched TMDB Trending showcase cache (v30).
         TrendingSnapshotEntity::class,
         TrendingItemEntity::class,
-        // External subtitles (OpenSubtitles / local files) — subtitle plan Phase 2
+        // External subtitles (OpenSubtitles / local files)
         SubtitleCacheEntity::class,
         SubtitleSelectionEntity::class,
         SubtitleTimingEntity::class,
@@ -120,7 +120,7 @@ import tv.own.owntv.core.database.dao.SubtitleDao
         SeriesFtsEntity::class,
         EpisodeFtsEntity::class,
     ],
-    version = 49, // v49 (glcn fork): epg_programmes.imageUrl (XMLTV programme <icon>). v7: content_order (Move). v8: contentHash + browse/unique indexes. v9: EPG contentHash + natural key. v10: TMDB metadata cache. v11: movies/series rating-sort indexes. v12: metadata_cache trailerKey. v13: metadata_cache logoPath. v14: sources.mac (Stalker portal). v15: external-subtitle cache/selection/timing tables. v16: subtitle_link (downloaded-sub ↔ content). v17: sources.syncLive/Movies/Series (skip-sync enabledScope). v18: series.episodesSyncedAt (episode-cache freshness, S8). v19: epg_channels.iconUrl (XMLTV channel logos). v20: channels (sourceId, number) index for direct tune. v21: series.addedAt + date-added sort indexes. v22: series_sort_order (per-series season/episode order). v23: sources.hlsSupported and sources.preferHls. v24: custom_category_members (user custom categories, #87). v25: sources.livePrerollSecs (per-playlist "Pre-buffer"). v26: channels.catchupType + channels.httpHeaders (M3U catch-up styles + per-channel HTTP headers). v27: sources.maxConnections (Xtream session limit read at sync). v28: movies.httpHeaders + episodes.httpHeaders (per-item M3U HTTP headers). v29: optional Stalker serial/device IDs/signature. v30: source-scoped Now Trending snapshots. v31: indexed provider-title metadata and persistent Trending attempt state. v32: playback_prefs (per-item zoom + volume, keyed by the P6 stable content key). v33: channels/movies/episodes drmConfig (M3U Widevine/ClearKey licence details, #115). v34: sources.liveEnginePreference + sources.liveLatencyMode/liveLatencyCustomSecs (per-playlist Live TV engine and Live latency). v35: playback_prefs.audioDelayMs (per-item A/V-sync memory). v36: user_data_tombstones (deleted favorites/history/resume/memberships, so local sync propagates a deletion instead of undoing it). v37: episodes.airDateMs + metadata_cache.airDate (when an episode first aired — the provider's date, with TMDB's as the fallback) profiles.avatarPath (a picture of the user's own instead of a drawn tile). v38: sources.importPortalEpg (whether a Stalker portal's own guide may be imported). v39: recordings + recording_rules (live recording and its standing "record every showing" rules; never synced, never backed up). v40: sources.maxConnectionsProbedAt (when the app measured how many streams the provider really allows, for the providers that never say). v41: epg_channels.normName/normId (the matcher's normalized forms, stored at sync instead of recomputed per keystroke) and an epg_programmes (startMs, stopMs) index for time-bounded guide reads. v42: catalog_backfill (the Stalker VOD pages setup deliberately did not fetch, drained in the background — plan N1b). v43: channels/movies/episodes manifestType (the container an M3U entry declares via #KODIPROP:…manifest_type) and channels.directSource (the Xtream panel’s own URL, kept as a last-resort retry only). v44: playback_quirks (what a stream needs, shared by all profiles), playback_prefs.sourceId/audioLang/subtitleLang, and five per-playlist overrides on sources (catch-up zone/offset, VOD engine, tune timeout, Referer). v45: metadata_cache.originalLanguage (TMDB's original language, for the "Original language" audio choice). v46: playback_quirks.softwareDecode dropped (never written). v47: epg_programmes details (categories, year, rating, lengthMin, episode — the XMLTV details line) and programme_reminders (Stage G2). v48: downloads.reason/httpCode (why a download failed, waits or was paused).
+    version = 50, // v50 (glcn fork + upstream v49): sources.serverTimeZone and channels.catchupCorrectionMin (upstream), after our v49 epg_programmes.imageUrl. // v49 (glcn fork): epg_programmes.imageUrl (XMLTV programme <icon>). v7: content_order (Move). v8: contentHash + browse/unique indexes. v9: EPG contentHash + natural key. v10: TMDB metadata cache. v11: movies/series rating-sort indexes. v12: metadata_cache trailerKey. v13: metadata_cache logoPath. v14: sources.mac (Stalker portal). v15: external-subtitle cache/selection/timing tables. v16: subtitle_link (downloaded-sub ↔ content). v17: sources.syncLive/Movies/Series (skip-sync enabledScope). v18: series.episodesSyncedAt (episode-cache freshness, S8). v19: epg_channels.iconUrl (XMLTV channel logos). v20: channels (sourceId, number) index for direct tune. v21: series.addedAt + date-added sort indexes. v22: series_sort_order (per-series season/episode order). v23: sources.hlsSupported and sources.preferHls. v24: custom_category_members (user custom categories, #87). v25: sources.livePrerollSecs (per-playlist "Pre-buffer"). v26: channels.catchupType + channels.httpHeaders (M3U catch-up styles + per-channel HTTP headers). v27: sources.maxConnections (Xtream session limit read at sync). v28: movies.httpHeaders + episodes.httpHeaders (per-item M3U HTTP headers). v29: optional Stalker serial/device IDs/signature. v30: source-scoped Now Trending snapshots. v31: indexed provider-title metadata and persistent Trending attempt state. v32: playback_prefs (per-item zoom + volume, keyed by the P6 stable content key). v33: channels/movies/episodes drmConfig (M3U Widevine/ClearKey licence details, #115). v34: sources.liveEnginePreference + sources.liveLatencyMode/liveLatencyCustomSecs (per-playlist Live TV engine and Live latency). v35: playback_prefs.audioDelayMs (per-item A/V-sync memory). v36: user_data_tombstones (deleted favorites/history/resume/memberships, so local sync propagates a deletion instead of undoing it). v37: episodes.airDateMs + metadata_cache.airDate (when an episode first aired — the provider's date, with TMDB's as the fallback) profiles.avatarPath (a picture of the user's own instead of a drawn tile). v38: sources.importPortalEpg (whether a Stalker portal's own guide may be imported). v39: recordings + recording_rules (live recording and its standing "record every showing" rules; never synced, never backed up). v40: sources.maxConnectionsProbedAt (when the app measured how many streams the provider really allows, for the providers that never say). v41: epg_channels.normName/normId (the matcher's normalized forms, stored at sync instead of recomputed per keystroke) and an epg_programmes (startMs, stopMs) index for time-bounded guide reads. v42: catalog_backfill (the Stalker VOD pages setup deliberately did not fetch, drained in the background — plan N1b). v43: channels/movies/episodes manifestType (the container an M3U entry declares via #KODIPROP:…manifest_type) and channels.directSource (the Xtream panel’s own URL, kept as a last-resort retry only). v44: playback_quirks (what a stream needs, shared by all profiles), playback_prefs.sourceId/audioLang/subtitleLang, and five per-playlist overrides on sources (catch-up zone/offset, VOD engine, tune timeout, Referer). v45: metadata_cache.originalLanguage (TMDB's original language, for the "Original language" audio choice). v46: playback_quirks.softwareDecode dropped (never written). v47: epg_programmes details (categories, year, rating, lengthMin, episode — the XMLTV details line) and programme_reminders (Stage G2). v48: downloads.reason/httpCode (why a download failed, waits or was paused).
 
     exportSchema = true,
 )
@@ -272,7 +272,7 @@ abstract class OwnTVDatabase : RoomDatabase() {
         }
 
         /**
-         * v7 → v8: incremental sync (PR #40) — `contentHash` on channels/movies/series plus the
+         * v7 → v8: incremental sync — `contentHash` on channels/movies/series plus the
          * browse composite indexes and the unique `(sourceId, remoteId)` movie/series indexes.
          * Everything is guarded so both v3.2.0-lineage and main-dev DBs (which already have the
          * indexes) migrate cleanly.
@@ -309,10 +309,10 @@ abstract class OwnTVDatabase : RoomDatabase() {
         }
 
         /**
-         * v8 → v9: incremental EPG sync (PR #40) — `contentHash` on programmes plus the natural-key
+         * v8 → v9: incremental EPG sync — `contentHash` on programmes plus the natural-key
          * unique index.
          *
-         * D1 rewrite (body only; the resulting schema is unchanged and still matches the committed
+         * Rewritten (body only; the resulting schema is unchanged and still matches the committed
          * 9.json): the original ran a row-wise de-dup
          * (`DELETE ... WHERE id NOT IN (SELECT MIN(id) ... GROUP BY ...)`) — a full unindexed
          * self-scan of the largest table, synchronously on first open after upgrade (multi-second
@@ -337,7 +337,7 @@ abstract class OwnTVDatabase : RoomDatabase() {
         }
 
         /**
-         * v9 → v10: TMDB metadata enrichment cache (plan §7). Two additive, purely-cache tables; no
+         * v9 → v10: TMDB metadata enrichment cache. Two additive, purely-cache tables; no
          * existing table is touched, so this is a safe additive migration.
          */
         val MIGRATION_9_10 = object : androidx.room.migration.Migration(9, 10) {
@@ -391,7 +391,7 @@ abstract class OwnTVDatabase : RoomDatabase() {
         }
 
         /**
-         * v11 → v12: nullable `trailerKey` on the metadata_cache table (in-app YouTube trailers, plan §7.3).
+         * v11 → v12: nullable `trailerKey` on the metadata_cache table (in-app YouTube trailers).
          * Additive column on a pure cache table; existing rows get NULL and simply re-fetch on next refresh.
          */
         val MIGRATION_11_12 = object : androidx.room.migration.Migration(11, 12) {
@@ -429,7 +429,7 @@ abstract class OwnTVDatabase : RoomDatabase() {
         }
 
         /**
-         * v14 → v15: external subtitles (subtitle plan Phase 2). Three additive tables — a device-wide
+         * v14 → v15: external subtitles. Three additive tables — a device-wide
          * `subtitle_cache` of downloaded/imported files, per-profile `subtitle_selection`, and
          * per-subtitle `subtitle_timing`. No existing table is touched, so all user data is preserved.
          *
@@ -490,7 +490,7 @@ abstract class OwnTVDatabase : RoomDatabase() {
 
         /**
          * v15 → v16: `subtitle_link` — ties each downloaded subtitle to the movie/episode it was
-         * fetched for (subtitle plan §11), so a title's subtitles re-list on replay and the
+         * fetched for, so a title's subtitles re-list on replay and the
          * "Delete subtitles" surfaces can browse by Movies/Series. Additive.
          */
         val MIGRATION_15_16 = object : androidx.room.migration.Migration(15, 16) {
@@ -539,7 +539,7 @@ abstract class OwnTVDatabase : RoomDatabase() {
         /**
          * v18: `series.episodesSyncedAt` — when this show's episode list was last fetched.
          * Existing rows default to 0 ("never"), so every already-cached show refreshes its episodes
-         * once on next open, which is exactly what an upgrading user needs: the shows frozen by S8
+         * once on next open, which is exactly what an upgrading user needs: the shows whose episode list never refreshed
          * pick up their missing episodes without deleting and re-adding the playlist.
          */
         val MIGRATION_17_18 = object : androidx.room.migration.Migration(17, 18) {
@@ -664,8 +664,8 @@ abstract class OwnTVDatabase : RoomDatabase() {
         }
 
         /**
-         * v23 → v24: `custom_category_members` — the user-created custom combined categories (issue
-         * #87). Membership rows per (profileId, mediaType, contextKey="custom:<uuid>", itemId),
+         * v23 → v24: `custom_category_members` — the user-created custom combined categories.
+         * Membership rows per (profileId, mediaType, contextKey="custom:<uuid>", itemId),
          * modeled exactly on `content_order`: the same position semantics, the same unique index,
          * the same volatile itemId (content is clear-then-insert every sync, so rows are snapshotted
          * with stable keys and re-attached by UserDataResolver). The category definitions themselves
@@ -682,7 +682,7 @@ abstract class OwnTVDatabase : RoomDatabase() {
 
         /**
          * v24 → v25: `sources.livePrerollSecs` — the per-playlist "Pre-buffer" override
-         * (F07). `-1` (the default) means "follow the global setting", so every existing row keeps
+         * `-1` (the default) means "follow the global setting", so every existing row keeps
          * exactly today's behaviour. Additive, one column, no data rewrite.
          */
         val MIGRATION_24_25 = object : androidx.room.migration.Migration(24, 25) {
@@ -696,9 +696,9 @@ abstract class OwnTVDatabase : RoomDatabase() {
 
         /**
          * v25 → v26: two nullable `channels` columns for the M3U playback gaps —
-         * `catchupType` (the `catchup="append"`/`shift`/… style, previously parsed and thrown away,
-         * F17) and `httpHeaders` (per-channel `#EXTVLCOPT`/`#EXTHTTP`/`#KODIPROP` request headers,
-         * F16). Both null on every existing row, so behaviour is unchanged until the playlist is
+         * `catchupType` (the `catchup="append"`/`shift`/… style, previously parsed and thrown away)
+         * and `httpHeaders` (per-channel `#EXTVLCOPT`/`#EXTHTTP`/`#KODIPROP` request headers).
+         * Both null on every existing row, so behaviour is unchanged until the playlist is
          * re-synced and the values are actually populated.
          *
          * Additive only — no rewrite of the (potentially 100k-row) channels table.
@@ -717,7 +717,7 @@ abstract class OwnTVDatabase : RoomDatabase() {
 
         /**
          * v26 → v27: `sources.maxConnections` — how many simultaneous streams the provider allows,
-         * read from Xtream's `user_info.max_connections` at sync (F30). `0` on every existing row,
+         * read from Xtream's `user_info.max_connections` at sync. `0` on every existing row,
          * which means "unknown" and behaves exactly as before until the playlist is re-synced.
          *
          * Additive, and the `sources` table has a handful of rows.
@@ -884,7 +884,7 @@ abstract class OwnTVDatabase : RoomDatabase() {
 
         /**
          * v32 → v33: `drmConfig` on `channels`, `movies` and `episodes` — the Widevine/ClearKey licence
-         * details an M3U entry declares through `#KODIPROP:inputstream.adaptive.license_*` (#115),
+         * details an M3U entry declares through `#KODIPROP:inputstream.adaptive.license_*`,
          * stored as the small JSON blob [tv.own.owntv.core.drm.DrmConfig] writes.
          *
          * NULL on every existing row, and a NULL row plays exactly as it did before, so an upgraded
@@ -974,18 +974,18 @@ abstract class OwnTVDatabase : RoomDatabase() {
         }
 
         /**
-         * v38 → v39: `recordings` and `recording_rules` — live recording (Plan D, Feature A).
+         * v38 → v39: `recordings` and `recording_rules` — live recording.
          *
          * Two new empty tables and nothing else. No existing table is altered, no existing row is
-         * rewritten, and an app whose owner never records simply never writes to either — which is
+         * rewritten, and an app whose user never records simply never writes to either — which is
          * what makes this the cheapest shape a migration can have.
          *
          * Both are created in **one** version on purpose. The rules table has no code reading it
          * until series recording arrives, but a schema is not code: giving it a version of its own
-         * later would mean a second fingerprint change in the middle of a feature the owner is
-         * testing, for a table that was always going to exist.
+         * later would mean a second fingerprint change in the middle of a feature still being
+         * tested, for a table that was always going to exist.
          *
-         * Neither table is reached by local sync, tombstones or backup (D6). A recording is a file on
+         * Neither table is reached by local sync, tombstones or backup. A recording is a file on
          * one device; a row describing a file that is not there is worse than no row at all.
          *
          * `sourceId` is deliberately *not* a foreign key — removing a playlist must not cascade away
@@ -1157,7 +1157,7 @@ abstract class OwnTVDatabase : RoomDatabase() {
         }
 
         /**
-         * v42 — `catalog_backfill`: the Stalker VOD pages setup deliberately did not fetch (plan N1b).
+         * v42 — `catalog_backfill`: the Stalker VOD pages setup deliberately did not fetch.
          *
          * Pure `CREATE TABLE IF NOT EXISTS`; nothing existing is touched and there is nothing to
          * backfill. An upgrading device simply has an empty plan, which reads as "no catalogue is
@@ -1225,6 +1225,25 @@ abstract class OwnTVDatabase : RoomDatabase() {
         }
 
         /**
+         * v49 → v50: `sources.serverTimeZone`, the zone an Xtream panel reports
+         * for itself, which catch-up's Automatic time zone uses; and `channels.catchupCorrectionMin`,
+         * an M3U playlist's `catchup-correction`. Both empty on every existing row — null and 0 build
+         * exactly the URLs they built before — and filled at the next sync. Additive only, no table
+         * rewrite. Last hop, so it carries [healSchema] (standing rule).
+         */
+        val MIGRATION_49_50 = object : androidx.room.migration.Migration(49, 50) {
+            override fun migrate(connection: SQLiteConnection) {
+                if (!hasColumn(connection, "sources", "serverTimeZone")) {
+                    connection.execSQL("ALTER TABLE `sources` ADD COLUMN `serverTimeZone` TEXT")
+                }
+                if (!hasColumn(connection, "channels", "catchupCorrectionMin")) {
+                    connection.execSQL("ALTER TABLE `channels` ADD COLUMN `catchupCorrectionMin` INTEGER NOT NULL DEFAULT 0")
+                }
+                healSchema(connection)
+            }
+        }
+
+        /**
          * v47 → v48: why a download failed, waits or was paused — two nullable columns on downloads.
          * An existing row reads null for both, which is exactly "nothing to explain": a download that
          * failed before this version keeps its plain "Failed" until it is retried.
@@ -1244,9 +1263,9 @@ abstract class OwnTVDatabase : RoomDatabase() {
         }
 
         /**
-         * v46 → v47 (Stage P3): the XMLTV details line on epg_programmes (G1) — five nullable columns,
+         * v46 → v47: the XMLTV details line on epg_programmes — five nullable columns,
          * filled from the next guide sync on (the content hash includes them, so existing rows are
-         * rewritten rather than skipped as unchanged) — and programme_reminders (G2), a new table.
+         * rewritten rather than skipped as unchanged) — and programme_reminders, a new table.
          * Nothing existing is touched.
          */
         val MIGRATION_46_47 = object : androidx.room.migration.Migration(46, 47) {
@@ -1292,7 +1311,7 @@ abstract class OwnTVDatabase : RoomDatabase() {
         }
 
         /**
-         * v44 → v45: nullable `originalLanguage` on metadata_cache (N14, "Original language" audio). The
+         * v44 → v45: nullable `originalLanguage` on metadata_cache ("Original language" audio). The
          * cache is disposable; a row from before this version reads null and is re-fetched on play.
          */
         val MIGRATION_44_45 = object : androidx.room.migration.Migration(44, 45) {
@@ -1302,7 +1321,7 @@ abstract class OwnTVDatabase : RoomDatabase() {
         }
 
         /**
-         * v43 → v44: per-stream memory and per-playlist settings (plan P5). Additive only — one new
+         * v43 → v44: per-stream memory and per-playlist settings. Additive only — one new
          * table, new nullable columns, indexes — so an upgraded install behaves exactly as before:
          * an absent quirk row or a null column means "follow the settings". Moving the existing
          * pins, audio-only marks and audio delays into `playback_quirks` is a separate, idempotent
@@ -1465,6 +1484,7 @@ abstract class OwnTVDatabase : RoomDatabase() {
             MIGRATION_46_47,
             MIGRATION_47_48,
             MIGRATION_48_49,
+            MIGRATION_49_50,
         )
 
         /**
@@ -1602,7 +1622,7 @@ abstract class OwnTVDatabase : RoomDatabase() {
         }
 
         /**
-         * ST4: the cheap drift probe that gates the heal on the app-open path. One `sqlite_master`
+         * The cheap drift probe that gates the heal on the app-open path. One `sqlite_master`
          * count answers "is anything missing?"; on a healthy database — the normal case — that is a
          * single index lookup instead of ~30 `CREATE INDEX IF NOT EXISTS` statements landing on
          * whichever thread issues the first query, at exactly the moment the first grid wants data.

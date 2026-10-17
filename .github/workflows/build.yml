@@ -65,7 +65,7 @@ jobs:
         run: ./gradlew :core:lintDebug :player-core:lintDebug --stacktrace
 
       # Compiles the instrumentation APKs so a broken androidTest source set fails here rather than
-      # silently rotting — that is exactly how Plan 1 Phase 5's breakage went unnoticed for a phase.
+      # silently rotting, unnoticed until someone next runs it.
       - name: Compile instrumentation tests
         if: always()
         run: ./gradlew :core:assembleDebugAndroidTest :player-core:assembleDebugAndroidTest

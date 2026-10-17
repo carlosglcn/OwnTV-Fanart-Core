@@ -3,7 +3,7 @@ package tv.own.owntv.core.player
 import java.util.Locale
 
 /**
- * The languages offered for "Preferred audio / subtitle language" (N14), shared by both apps.
+ * The languages offered for "Preferred audio / subtitle language", shared by both apps.
  *
  * Codes are ISO 639-2/T, the form stream tracks are tagged with. The list is the app's locale
  * catalogue (`tools/i18n/locales.json`) plus languages common on IPTV that the app itself is not

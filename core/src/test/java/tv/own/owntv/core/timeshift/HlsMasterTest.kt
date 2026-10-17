@@ -4,7 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
 
-/** P16a — which HLS variant a timeshift buffer saves. */
+/** Which HLS variant a timeshift buffer saves. */
 class HlsMasterTest {
 
     private val master = """

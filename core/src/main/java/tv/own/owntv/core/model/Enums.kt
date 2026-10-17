@@ -94,17 +94,17 @@ enum class RecordingStatus { SCHEDULED, RECORDING, COMPLETED, FAILED, MISSED, CA
 enum class RecordingFailure {
     NONE,
 
-    /** Free space reached the reserve floor (D2/D8). Whatever was captured is kept and playable. */
+    /** Free space reached the reserve floor. Whatever was captured is kept and playable. */
     NO_SPACE,
 
     /**
      * The playlist had no connection left — either the provider refused, or the app's own budget
-     * said so before asking (D10/D11). On a one-connection account this is the ordinary outcome of
+     * said so before asking. On a one-connection account this is the ordinary outcome of
      * recording while watching, not a fault.
      */
     NO_CONNECTION,
 
-    /** Another recording already held the budget when this one was due (D10). */
+    /** Another recording already held the budget when this one was due. */
     CLASH,
 
     /** The network went away and did not come back inside the programme's window. */
@@ -133,7 +133,7 @@ enum class RecordingFailure {
     ENCRYPTED,
 
     /**
-     * The channel declares DRM — a Widevine or ClearKey licence in its playlist entry (#115).
+     * The channel declares DRM — a Widevine or ClearKey licence in its playlist entry.
      *
      * Distinct from [ENCRYPTED], which is HLS transport encryption (`#EXT-X-KEY`, usually plain
      * AES-128) discovered *in* the playlist. This one is declared by the playlist itself and is known
@@ -142,7 +142,7 @@ enum class RecordingFailure {
      * Refused for the same reason as [ENCRYPTED] and one more: the CDM decrypts only *into a secure
      * decoder for immediate display*, so there is no point at which this app could obtain the frames
      * to write down. Attempting it would spend the account's connection for the whole programme and
-     * produce a file that cannot play — the outcome §1.5 exists to prevent.
+     * produce a file that cannot play — the outcome this refusal exists to prevent.
      */
     DRM_PROTECTED,
 

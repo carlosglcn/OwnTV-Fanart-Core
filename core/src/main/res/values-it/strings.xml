@@ -24,9 +24,6 @@
     <string name="common_title">Titolo</string>
     <string name="common_search_hint">Cerca…</string>
     <string name="common_search">Ricerca</string>
-    <string name="common_weather_fahrenheit"><xliff:g id="temperature">%1$d</xliff:g>°F</string>
-    <string name="common_weather_celsius"><xliff:g id="temperature">%1$d</xliff:g>°C</string>
-    <string name="common_weather_city"><xliff:g id="temperature">%1$s</xliff:g> · <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_nav_search">Ricerca</string>
     <string name="common_nav_home">Home</string>
     <string name="common_nav_live_tv">TV in diretta</string>
@@ -41,8 +38,6 @@
     <string name="common_nav_settings">Impostazioni</string>
     <string name="shell_no_source">Nessuna fonte</string>
     <string name="shell_now_playing">In riproduzione</string>
-    <string name="common_something_went_wrong">Si è verificato un problema</string>
-    <string name="common_move_instructions">▲/▼ per spostare · OK per salvare · Indietro per annullare</string>
     <string name="common_number_grouped"><xliff:g id="count">%1$,d</xliff:g></string>
     <string name="common_percent"><xliff:g id="percent">%1$d</xliff:g>%%</string>
     <string name="common_timestamp_minutes"><xliff:g id="minutes">%1$d</xliff:g>:<xliff:g id="seconds">%2$02d</xliff:g></string>

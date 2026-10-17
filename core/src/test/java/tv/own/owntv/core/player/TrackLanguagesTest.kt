@@ -6,7 +6,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.util.Locale
 
-/** N14: the shared preferred-language list and the "Original language" choice. */
+/** The shared preferred-language list and the "Original language" choice. */
 class TrackLanguagesTest {
 
     @Test

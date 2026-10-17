@@ -41,6 +41,8 @@ class LiveTimeshiftTest {
     private class Harness(
         val playback: FakePlayback = FakePlayback(),
         val loadSucceeds: Boolean = true,
+        /** The instant the opened archive really starts at, given the one asked for. */
+        val effectiveStart: (Long) -> Long = { it },
     ) {
         val scope = CoroutineScope(Dispatchers.Default)
         var now = 1_000_000_000L
@@ -52,7 +54,7 @@ class LiveTimeshiftTest {
             playback = playback,
             loadArchive = { _, startMs, offsetSec ->
                 loads += startMs to offsetSec
-                loadSucceeds
+                if (loadSucceeds) effectiveStart(startMs) else null
             },
             onLiveEdge = { liveEdgeRequests++ },
             nowMs = { now },
@@ -156,6 +158,38 @@ class LiveTimeshiftTest {
         h.await("the counters") { h.timeshift.offsetSec.value == 300 }
         assertEquals(startMs + 300_000, h.timeshift.watchingWallMs.value)
         h.stop()
+    }
+
+    /**
+     * An Xtream archive starts on the minute, up to 59 s before the instant asked for. Both counters
+     * must be measured from where it really starts, or "behind live" and the HUD clock are a minute off.
+     */
+    @Test
+    fun `the counters are measured from where the archive really starts`() {
+        val h = Harness(effectiveStart = { it - Math.floorMod(it, 60_000L) })
+        h.now = 1_000_000_010_000L // hh:mm:50
+        h.timeshift.beginAt(channel, 600)
+        h.await("the archive to load") { h.loads.isNotEmpty() }
+        val floored = h.loads.single().first - 50_000L
+        // Ten minutes asked for, ten minutes and fifty seconds served: that is what the picture shows.
+        h.await("the counters") { h.timeshift.offsetSec.value == 650 }
+        assertEquals(floored, h.timeshift.watchingWallMs.value)
+        h.playback.positionMs = 50_000
+        h.await("the counters to follow") { h.timeshift.offsetSec.value == 600 }
+        assertEquals(floored + 50_000, h.timeshift.watchingWallMs.value)
+        h.stop()
+    }
+
+    /** Which archives start on the minute: Xtream, and an M3U `xc` channel unless a template wins. */
+    @Test
+    fun `xtream archives start on the minute`() {
+        val xtream = tv.own.owntv.core.model.SourceType.XTREAM
+        val m3u = tv.own.owntv.core.model.SourceType.M3U
+        assertTrue(LiveArchiveUrls.startsOnTheMinute(xtream, null, null))
+        assertTrue(LiveArchiveUrls.startsOnTheMinute(m3u, " XC ", null))
+        assertFalse(LiveArchiveUrls.startsOnTheMinute(m3u, "xc", "?utc={utc}"))
+        assertFalse(LiveArchiveUrls.startsOnTheMinute(m3u, "shift", null))
+        assertFalse(LiveArchiveUrls.startsOnTheMinute(tv.own.owntv.core.model.SourceType.STALKER, null, null))
     }
 
     @Test

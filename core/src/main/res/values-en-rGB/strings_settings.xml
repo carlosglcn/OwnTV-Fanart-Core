@@ -25,35 +25,14 @@
     <string name="settings_subtitle_customize_description">Turn this on, then change only what you want — anything left on Default keeps the stock look, including the colours and placement broadcasters embed in Live TV subtitles.</string>
     <string name="settings_subtitle_color_short">Colour</string>
     <string name="settings_subtitle_color_description">Text colour — a preset, the picker, or a hex code.</string>
-    <string name="settings_glass_preset_title">Appearance preset</string>
-    <string name="settings_glass_preset_clear">Clear</string>
-    <string name="settings_glass_preset_balanced">Balanced</string>
-    <string name="settings_glass_preset_tinted">Tinted</string>
-    <string name="settings_glass_preset_custom">Custom</string>
-    <string name="settings_glass_preset_clear_description">More wallpaper colour with moderate frost.</string>
-    <string name="settings_glass_preset_balanced_description">Recommended clarity, depth and readability.</string>
-    <string name="settings_glass_preset_tinted_description">Stronger surface colour for busy or bright backgrounds.</string>
-    <string name="settings_glass_preset_custom_description">Use your saved transparency and blur / frost values.</string>
     <string name="settings_ambient_glow">Ambient glow</string>
     <string name="settings_ambient_glow_description">Adds setup-style radiance to the solid interface</string>
     <string name="settings_ambient_glow_dialog_description">Adds a soft accent aura to the non-glass interface. Slow pulse gently breathes when animations are enabled.</string>
     <string name="settings_ambient_glow_effect">Glow</string>
     <string name="settings_ambient_glow_pulse">Slow pulse</string>
-    <string name="settings_glass_preset_ultra_clear">Ultra Clear</string>
-    <string name="settings_glass_preset_opaque">Opaque</string>
-    <string name="settings_glass_preset_ultra_clear_description">Maximum wallpaper detail with light frost.</string>
-    <string name="settings_glass_preset_opaque_description">Maximum panel density with the strongest frost.</string>
-    <string name="settings_glass_highlight_title">Highlight strength</string>
-    <string name="settings_glass_highlight_description">Adjust the focused glass light and rim.</string>
     <string name="settings_glass_live_preview">Live preview</string>
-    <string name="settings_glass_full_transparency_title">Allow full transparency</string>
-    <string name="settings_glass_full_transparency_description">Disables the automatic readability floor for the clearest possible glass.</string>
-    <string name="settings_glass_depth_title">Depth &amp; shadows</string>
-    <string name="settings_glass_depth_description">Enables focus-travel lighting, subtle parallax and depth movement.</string>
     <string name="settings_selection_highlight_description">Colour and thickness of the ring around the selected item</string>
-    <string name="settings_nav_bar_customization">Navigation bar customisation</string>
     <string name="local_sync_title">Local sync</string>
-    <string name="local_sync_description">Share your data with your other device over Wi-Fi</string>
     <string name="local_sync_host_hint">On your other device, turn Sync mode on too, then tap Connect and pick this one.</string>
     <string name="local_sync_qr_description">QR code with this device\'s address</string>
     <string name="local_sync_pin_is">PIN: <xliff:g id="pin">%1$s</xliff:g></string>
@@ -108,8 +87,6 @@
     <string name="local_sync_error_bad_payload">What arrived could not be read. If you used a password, check it is the same on both devices.</string>
     <string name="local_sync_error_unknown">Something went wrong. Try again.</string>
     <string name="local_sync_mode">Sync mode</string>
-    <string name="local_sync_mode_description">Lets your other devices find this one. Stays on while this screen is open.</string>
-    <string name="local_sync_mode_pill">Sync mode on</string>
     <string name="local_sync_connect">Connect</string>
     <string name="local_sync_connect_description">Find another device that has Sync mode on</string>
     <string name="local_sync_last_synced">Last synced: <xliff:g id="when">%1$s</xliff:g></string>
@@ -131,7 +108,6 @@
     <string name="app_icon_restart_message">You chose a new icon and logo. They take effect after OwnTV restarts.</string>
     <string name="app_icon_restart_now">Restart now</string>
     <string name="settings_audio_passthrough_description">On: Dolby and DTS go undecoded to the TV, soundbar or receiver when it says it can play them (ExoPlayer). Off: the app decodes them, still as surround where Surround sound allows. mpv always decodes. Not used while Night mode or Volume levelling is on.</string>
-    <string name="settings_audio_passthrough_description_mobile">On: Dolby and DTS go undecoded to a connected TV or receiver when it says it can play them (ExoPlayer). Off: the app decodes them, still as surround where Surround sound allows. mpv always decodes. Not used while Night mode or Volume levelling is on.</string>
     <string name="settings_volume_leveling">Volume levelling</string>
     <string name="settings_volume_leveling_description">Brings every channel and film slowly to the same loudness, so switching does not jump in volume.</string>
     <string name="settings_max_video_quality_description">The highest picture played when a channel or film offers several. Saves bandwidth and eases the decoder.</string>
@@ -154,7 +130,7 @@
     <string name="settings_help_focus">The ring drawn around whatever has focus. Pick its colour and thickness so it stays easy to follow from the sofa.</string>
     <string name="settings_help_epg_sources">Add an XMLTV guide feed by its link, refresh it, or remove it. Feeds fill the TV Guide and the programme lines in Live TV.</string>
     <string name="settings_help_guide_days">How many days of programmemes the guide stores ahead. Fewer days make guide refreshes faster and the database smaller.</string>
-    <string name="settings_help_catchup">Catch-up plays programmemes from your provider’s archive. Most providers run it on your TV’s own clock; choose a fixed UTC offset if catch-up starts at the wrong time. This is also where you choose which player catch-up uses.</string>
+    <string name="settings_help_catchup_timezone">Catch-up plays programmes from your provider’s archive. Automatic uses the time zone your provider reports, or your TV’s own clock if it reports none; choose a fixed UTC offset if catch-up still starts at the wrong time. This is also where you choose which player catch-up uses.</string>
     <string name="settings_help_profiles">Each viewer keeps their own favourites, watch history, resume points and Home rows. Kids mode shows only the categories you allow; a PIN stops anyone else from opening the profile.</string>
     <string name="settings_profile_add_line">A viewer with their own favourites, history and settings</string>
     <string name="settings_help_startup">What OwnTV shows when it starts: Home, the channel you watched last, your favourites, or a channel you pick.</string>

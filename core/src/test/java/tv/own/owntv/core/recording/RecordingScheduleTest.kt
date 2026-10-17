@@ -8,7 +8,7 @@ import org.junit.Test
 import tv.own.owntv.core.database.entity.RecordingEntity
 import tv.own.owntv.core.model.RecordingStatus
 
-/** Pre-roll and post-roll arithmetic, and which recordings get in each other's way (D10). */
+/** Pre-roll and post-roll arithmetic, and which recordings get in each other's way. */
 class RecordingScheduleTest {
 
     private val minute = 60_000L
@@ -146,7 +146,7 @@ class RecordingScheduleTest {
 
     @Test
     fun `a different playlist is not a clash — each has its own connections`() {
-        // Two playlists with one connection each can record two programmes at once (D10).
+        // Two playlists with one connection each can record two programmes at once.
         val clashes = RecordingSchedule.clashesAmong(listOf(row(1, sourceId = 2)), sourceId = 1, startMs = nine, stopMs = ten)
         assertTrue(clashes.isEmpty())
     }

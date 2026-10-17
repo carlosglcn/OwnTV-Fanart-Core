@@ -19,7 +19,7 @@ import tv.own.owntv.core.settings.SubtitleStyle
 import tv.own.owntv.core.theme.AppFontFamily
 
 /**
- * Every setting the playback engines and the live tuner read, as one value (S15).
+ * Every setting the playback engines and the live tuner read, as one value.
  *
  * The engines used to subscribe to each setting separately — some thirty DataStore pipelines — and
  * each started on a hard-coded default until its own first read landed. A tune that began in that
@@ -57,19 +57,19 @@ data class PlaybackSettings(
     val autoFrameRate: Boolean,
     val liveEnginePreference: EnginePreference,
     val liveTuneTimeoutSecs: Int,
-    /** N18 — films only; 0 = Auto for the first two. See [FilmNetwork]. */
+    /** Films only; 0 = Auto for the first two. See [FilmNetwork]. */
     val vodBufferSecs: Int,
     val vodNetworkTimeoutSecs: Int,
     val vodReconnects: Int,
-    /** P14 — N8 passthrough (ExoPlayer), N9 night mode, N10 volume levelling. See [AudioDynamics]. */
+    /** Passthrough (ExoPlayer), night mode, volume levelling. See [AudioDynamics]. */
     val audioPassthrough: Boolean,
     val nightMode: Boolean,
     val volumeLevelling: Boolean,
-    /** P15 — N11 quality limits (0 = none; see [VideoQuality.cap]) and N19 tunneled playback. */
+    /** Quality limits (0 = none; see [VideoQuality.cap]) and tunneled playback. */
     val maxVideoHeight: Int,
     val mobileDataMaxVideoHeight: Int,
     val tunneledPlayback: Boolean,
-    /** D-M5 — keep CPU and Wi-Fi awake while ExoPlayer plays. */
+    /** Keep CPU and Wi-Fi awake while ExoPlayer plays. */
     val backgroundPlayback: Boolean,
     /** glcn — clearer speech on mpv, and Dolby/DTS bitstream from mpv (experimental). */
     val dialogueBoost: Boolean = false,

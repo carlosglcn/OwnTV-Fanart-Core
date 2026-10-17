@@ -18,9 +18,7 @@
     <string name="settings_movies_keep_watching_description">عرض بطاقات استئناف الأفلام في الصف البارز.</string>
     <string name="settings_series_keep_watching">المسلسلات في متابعة المشاهدة</string>
     <string name="settings_series_keep_watching_description">عرض بطاقات استئناف الحلقات في الصف البارز.</string>
-    <!-- Translators: Toggle label for playing the highlighted Home item's video in the hero row. -->
     <string name="settings_hero_preview">تشغيل الفيديو في الصف البارز</string>
-    <!-- Translators: Description of the hero-row video preview toggle. -->
     <string name="settings_hero_preview_description">تشغيل معاينة فيديو العنصر المحدّد بعد لحظة. أوقفه لتوفير الطاقة والذاكرة أثناء تصفّح الشاشة الرئيسية.</string>
     <string name="settings_android_tv_home">الشاشة الرئيسية لـ Android TV</string>
     <string name="settings_android_tv_home_description">عرض متابعة المشاهدة والقنوات المباشرة الحديثة على الشاشة الرئيسية للتلفزيون.</string>
@@ -30,11 +28,8 @@
     <string name="settings_done_check">تم ✓</string>
     <string name="settings_mode"><xliff:g id="mode">%1$s</xliff:g></string>
     <string name="settings_hidden">مخفي</string>
-    <string name="settings_nav_dynamic_description">ديناميكي — تتكيف الأيقونات مع ما توفره قائمة التشغيل النشطة. تظهر الشاشة الرئيسية والإعدادات دائمًا.</string>
-    <string name="settings_nav_static_description">ثابت — اختر يدويًا الأيقونات التي تظهر أدناه.</string>
     <string name="settings_static">ثابت</string>
     <string name="settings_dynamic">ديناميكي</string>
-    <string name="settings_http_proxy">وكيل HTTP</string>
     <string name="settings_use_proxy">استخدام الوكيل</string>
     <string name="settings_proxy_description">إرسال كل حركة بيانات OwnTV والتشغيل عبر وكيل HTTP.</string>
     <string name="settings_host">المضيف</string>
@@ -102,8 +97,6 @@
     <string name="settings_show_weather_description">عرض حالة الطقس الحالية في الشريط العلوي.</string>
     <string name="settings_custom_location">موقع مخصص</string>
     <string name="settings_custom_location_description">تجاوز المدينة المستخدمة للطقس. اترك الحقل فارغًا للكشف التلقائي، أو أدخل مدينة (مثل لندن) أو \"lat,lon\" (مثل 51.5,-0.12). يفيد ذلك عند استخدام VPN، حيث قد يحدد الكشف التلقائي مدينة الخادم.</string>
-    <string name="settings_use_device_location">استخدام موقع هذا الجهاز</string>
-    <string name="settings_use_device_location_description">يتبع الطقس مكان الهاتف. أوقف التشغيل لإدخال مدينة بنفسك.</string>
     <string name="settings_temperature_unit">وحدة درجة الحرارة</string>
     <string name="settings_temperature_description">عرض درجة الحرارة بالدرجة المئوية أو الفهرنهايت.</string>
     <string name="settings_auto">تلقائي</string>
@@ -172,7 +165,6 @@
     <string name="settings_quick_hdr">HDR (mpv فقط)</string>
     <string name="settings_quick_autoplay">التشغيل التلقائي</string>
     <string name="settings_quick_check_update">التحقق من وجود تحديث</string>
-    <string name="settings_search_hint">بحث في الإعدادات…</string>
     <string name="settings_language">اللغة</string>
     <string name="settings_language_description">لغة عرض التطبيق</string>
     <string name="settings_language_system_default">الإعداد الافتراضي للنظام</string>
@@ -187,14 +179,10 @@
     <string name="settings_epg_sources_nav_description">إضافة موجزات دليل XMLTV إلى دليل البرامج</string>
     <string name="settings_customize">تخصيص الفئات والعناصر</string>
     <string name="settings_customize_nav_description">إخفاء العناصر وإظهارها وإعادة تسمية الفئات وترتيبها</string>
-    <string name="settings_sidebar_description_root">تكييف الأيقونات الجانبية تلقائيًا مع قائمة التشغيل أو إخفاء أيقونات محددة</string>
     <string name="settings_ch_paging">اختصارات جهاز التحكم</string>
     <string name="settings_ch_paging_description">عيّن أزرار جهاز التحكم الإضافية لإجراءات التنقل والتشغيل والتصفح. تظل أزرار التنقل الأساسية محمية.</string>
-    <!-- Translators: Settings navigation label for the long-press content menus. -->
     <string name="settings_content_menus_title">قوائم الضغط المطوّل</string>
-    <!-- Translators: Description of the long-press content menus settings. -->
     <string name="settings_content_menus_description">أعد ترتيب الإجراءات في قوائم القنوات والأفلام والمسلسلات والحلقات</string>
-    <!-- Translators: Hint shown above the list when arranging a long-press menu. -->
     <string name="settings_content_menus_hint">اضغط مطوّلًا على «موافق» فوق إجراء لالتقاطه، ثم استخدم الأعلى والأسفل لتحريكه. اضغط «موافق» مرة أخرى لإفلاته.</string>
     <string name="settings_browsing_lists">التصفح والقوائم</string>
     <string name="settings_browsing_description">تذكّر آخر فئة وآخر عنصر في البث التلفزيوني المباشر والأفلام والمسلسلات</string>
@@ -203,7 +191,6 @@
     <string name="settings_metadata_root_description">الملصقات والملخصات وطاقم التمثيل والتقييمات للأفلام والمسلسلات</string>
     <string name="settings_download_folder">مجلد التنزيل</string>
     <string name="settings_backup_restore">النسخ الاحتياطي والاستعادة</string>
-    <string name="settings_backup_restore_description">تصدير الملفات الشخصية والمصادر أو استعادتها</string>
     <string name="settings_clear_history">مسح سجل المشاهدة</string>
     <string name="settings_appearance_group">المظهر</string>
     <string name="settings_theme">السمة</string>
@@ -219,13 +206,10 @@
     <string name="settings_focus_width_thick">سميك</string>
     <string name="settings_focus_width_extra">سميك جدًا</string>
     <string name="settings_focus_highlight_sample">محدَّد</string>
-    <string name="settings_glass_effect">التأثير الزجاجي</string>
-    <string name="settings_glass_description">لوحات شفافة ضبابية وصورة خلفية ومستوى الشفافية</string>
     <string name="settings_ui_zoom">تكبير الواجهة</string>
     <string name="settings_ui_zoom_description">تغيير حجم الواجهة بالكامل</string>
     <string name="settings_animations">الحركات</string>
     <string name="settings_animations_description">تشغيل حركة الواجهة أو إيقافها — يبدو الأداء أسرع عند إيقافها على أجهزة التلفزيون منخفضة الإمكانات</string>
-    <string name="settings_animations_description_mobile">تشغيل حركة الواجهة أو إيقافها — يبدو الأداء أسرع عند إيقافها على الهواتف والأجهزة اللوحية الأقدم</string>
     <string name="settings_weather_description_root">شريحة الطقس في الشريط العلوي: إظهارها أو إخفاؤها وتحديد موقع مخصص والاختيار بين الدرجة المئوية والفهرنهايت.</string>
     <string name="settings_playback_group">التشغيل</string>
     <string name="settings_live_preview_description">تشغيل قناة تلقائيًا عند وضع التركيز عليها</string>
@@ -234,10 +218,8 @@
     <string name="settings_mini_player_root">المشغّل المصغّر</string>
     <string name="settings_mini_player_root_description">حجم المشغّل المصغّر المُرسى وموضعه</string>
     <string name="settings_hdr_description">استخدام خرج HDR عندما يدعمه الفيديو والتلفزيون. لـ mpv فقط: لا يدعم محرّك ExoPlayer هذا الإعداد ويمرّر HDR الخاص بالبث كما هو دائمًا.</string>
-    <string name="settings_hdr_description_mobile">استخدام خرج HDR عندما يدعمه الفيديو والشاشة. لـ mpv فقط: لا يدعم محرّك ExoPlayer هذا الإعداد ويمرّر HDR الخاص بالبث كما هو دائمًا.</string>
     <string name="settings_auto_frame_rate">معدل الإطارات التلقائي</string>
     <string name="settings_auto_frame_rate_description">مطابقة معدل تحديث التلفزيون مع الفيديو (24/25/50/60 إطارًا في الثانية) في وضع ملء الشاشة، للبث التلفزيوني المباشر والفيديو حسب الطلب، واستعادته عند الخروج. عطّل هذا الخيار إذا كان التلفزيون أو جهاز الاستقبال يعيد مصافحة HDMI بصورة مزعجة عند كل تغيير للقناة.</string>
-    <string name="settings_auto_frame_rate_description_mobile">مطابقة معدل تحديث الشاشة مع الفيديو (24/25/50/60 إطارًا في الثانية) في وضع ملء الشاشة، للبث التلفزيوني المباشر والفيديو حسب الطلب، واستعادته عند الخروج. عطّل هذا الخيار إذا كانت الشاشة تومض أو تسودّ عند بدء تشغيل الفيديو.</string>
     <string name="settings_afr_pause">إيقاف مؤقت أثناء تبديل الشاشة</string>
     <string name="settings_afr_pause_description">للأفلام فقط. عندما يحتاج التلفاز إلى إعادة المزامنة مع وضع شاشة جديد، ينتظر الفيلم هذه المدة حتى لا تضيع بدايته في الشاشة السوداء. التبديل السلس لا يوقف التشغيل أبدًا.</string>
     <string name="settings_afr_resolution">مطابقة الدقة</string>
@@ -246,7 +228,6 @@
     <string name="settings_surround_description_mobile">فك ترميز Dolby/DTS إلى صوت محيطي (5.1/7.1) لجهاز استقبال حقيقي يدعم 5.1/7.1 متصل بهذا الجهاز. اتركه متوقفًا للسماعة المدمجة أو سماعات الرأس أو مكبّر صوت استريو — قد يتأخر الصوت متعدد القنوات عن الفيديو. إذا انحرفت المزامنة، فاضبط قليلًا قائمة الصوت في المشغّل ← مزامنة A/V.</string>
     <string name="settings_audio_passthrough">تمرير Dolby وDTS</string>
     <string name="settings_audio_passthrough_description">تشغيل: يُرسَل Dolby وDTS دون فك ترميز إلى التلفزيون أو مكبر الصوت الشريطي أو جهاز الاستقبال عندما يفيد بأنه يستطيع تشغيلهما (ExoPlayer). إيقاف: يفك التطبيق ترميزهما، ويظل الصوت محيطيًا حيث يسمح الصوت المحيطي. يفك mpv الترميز دائمًا. لا يُستخدم أثناء تشغيل الوضع الليلي أو موازنة مستوى الصوت.</string>
-    <string name="settings_audio_passthrough_description_mobile">تشغيل: يُرسَل Dolby وDTS دون فك ترميز إلى تلفزيون أو جهاز استقبال متصل عندما يفيد بأنه يستطيع تشغيلهما (ExoPlayer). إيقاف: يفك التطبيق ترميزهما، ويظل الصوت محيطيًا حيث يسمح الصوت المحيطي. يفك mpv الترميز دائمًا. لا يُستخدم أثناء تشغيل الوضع الليلي أو موازنة مستوى الصوت.</string>
     <string name="settings_night_mode">الوضع الليلي</string>
     <string name="settings_night_mode_description">يخفض المشاهد الصاخبة ويرفع الحوار الهادئ، للمشاهدة بصوت منخفض.</string>
     <string name="settings_volume_leveling">موازنة مستوى الصوت</string>
@@ -257,7 +238,6 @@
     <string name="settings_mobile_data_quality_description">على اتصال محدود البيانات، يشغّل هذه الجودة كحد أقصى. إيقاف: كما في Wi-Fi.</string>
     <string name="settings_tunneled_playback">التشغيل النفقي (تجريبي)</string>
     <string name="settings_tunneled_playback_description">البث المباشر على ExoPlayer: تُبقي أجهزة التلفزيون نفسها الصورة والصوت متزامنين، مع عبء أقل على المعالج. يعمل على بعض أجهزة التلفزيون فقط، ويوقف نفسه إذا فشلت قناة معه. لا يمكن ضبط مزامنة الصوت أثناء تشغيله.</string>
-    <string name="settings_tunneled_playback_description_mobile">البث المباشر على ExoPlayer: تُبقي مكونات الجهاز نفسه الصورة والصوت متزامنين، مع عبء أقل على المعالج. يعمل على بعض الأجهزة فقط، ويوقف نفسه إذا فشلت قناة معه. لا يمكن ضبط مزامنة الصوت أثناء تشغيله.</string>
     <string name="settings_tunneled_playback_failed">أُوقف بعد فشل قناة معه على هذا الجهاز.</string>
     <string name="settings_autoplay_next">تشغيل الحلقة التالية تلقائيًا</string>
     <string name="settings_autoplay_next_description">عند انتهاء حلقة، شغّل الحلقة التالية تلقائيًا — وانتقل إلى الموسم التالي. كما تتابع مشاهدة البث الفائت إلى البرنامج التالي.</string>
@@ -272,13 +252,9 @@
     </plurals>
     <string name="settings_catchup_unavailable">لا تتوفر قنوات لمشاهدة البث الفائت في قائمة التشغيل هذه</string>
     <string name="settings_device">الجهاز</string>
-    <string name="settings_video_player">إعدادات مشغّل الفيديو</string>
-    <string name="settings_video_player_description">وحدة فك الترميز والترجمة والمزامنة</string>
     <string name="settings_playback_error_log">سجل الأخطاء</string>
     <string name="settings_playback_speed">سرعة التشغيل</string>
     <string name="settings_player_zoom">تكبير المشغّل</string>
-    <string name="settings_playback_error_description">الأعطال وحالات فشل التشغيل — تفاصيل لقراءتها أو الإبلاغ عنها</string>
-    <string name="settings_network_group">الشبكة</string>
     <string name="settings_app_group">التطبيق</string>
     <string name="settings_app_startup">بدء تشغيل التطبيق</string>
     <string name="settings_app_startup_description">ما يفتحه OwnTV عند بدء تشغيله</string>
@@ -287,7 +263,6 @@
     <string name="settings_update_startup">التحقق من التحديثات عند بدء التشغيل</string>
     <string name="settings_update_startup_description">البحث عن إصدار جديد عند فتح التطبيق</string>
     <string name="settings_about">حول</string>
-    <string name="settings_about_description">الإصدار والترخيص ومعلومات المشروع</string>
     <string name="settings_live_latency">زمن استجابة البث المباشر</string>
     <string name="settings_no_settings_match">لا توجد إعدادات تطابق “<xliff:g id="query">%1$s</xliff:g>”</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
@@ -309,11 +284,8 @@
     <string name="settings_color_picker">أداة اختيار اللون</string>
     <string name="settings_use_color">استخدام هذا اللون</string>
     <string name="settings_about_version">الإصدار <xliff:g id="version">%1$s</xliff:g></string>
-    <string name="settings_about_description_full_mobile">مشغّل IPTV خاص بك لـ Android — تطبيق مجاني ومفتوح المصدر مخصص للتشغيل فقط. لا يوفر أي قنوات أو محتوى؛ بل تستخدم فيه مصادرك الخاصة المتاحة لك قانونيًا.</string>
-    <string name="settings_about_license">© 2026 OwnTV · ترخيص GPLv3</string>
     <string name="settings_join_telegram">انضم إلينا على Telegram</string>
     <string name="settings_telegram_qr">رمز QR لمجموعة Telegram</string>
-    <string name="settings_telegram_scan">امسح رمز QR للانضمام من هاتفك، أو افتح الرابط أعلاه.</string>
     <string name="settings_contributions">نرحب بالمساهمات وتقارير الأخطاء والنجوم على GitHub.</string>
     <string name="settings_playback_error_description_full">آخر عُطل وأحدث حالات فشل التشغيل (الأحدث أولًا). أرفق هذه التفاصيل عند الإبلاغ عن مشكلة.</string>
     <string name="settings_loading">جارٍ التحميل…</string>
@@ -321,15 +293,8 @@
     <string name="settings_live">البث المباشر</string>
     <string name="settings_vod">VOD</string>
     <string name="settings_clear_log">مسح السجل</string>
-    <string name="settings_browsing_title">التصفح والقوائم</string>
     <string name="settings_browsing_description_full">الموضع الذي يعود إليه البث التلفزيوني المباشر والأفلام والمسلسلات عند الرجوع.</string>
-    <string name="settings_glass_surfaces">الأسطح الزجاجية</string>
-    <string name="settings_glass_surfaces_description">اختر أجزاء التطبيق التي تظهر بشكل زجاجي. يؤدي إيقاف كل الأسطح إلى إيقاف التأثير الزجاجي.</string>
-    <string name="settings_all_surfaces_on">كل الأسطح: مفعّلة</string>
-    <string name="settings_all_surfaces_off">كل الأسطح: متوقفة</string>
-    <string name="settings_surface_toggle"><xliff:g id="surface">%1$s</xliff:g>: <xliff:g id="state">%2$s</xliff:g></string>
-    <string name="settings_transparency_description">مقدار ما يظهر عبر اللوحات (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). تؤدي القيمة الأعلى إلى مظهر أكثر تعتيمًا.</string>
-    <string name="settings_catchup_description">كيفية إرسال الطوابع الزمنية لمشاهدة البث الفائت. استخدم المنطقة الزمنية لجهازك، أو عيّن الإزاحة التي يتوقعها خادم المزوّد.</string>
+    <string name="settings_catchup_timezone_description">كيفية إرسال الطوابع الزمنية لمشاهدة البث الفائت. يستخدم الوضع التلقائي المنطقة الزمنية التي يعلنها خادم المزوّد، أو منطقة جهازك إن لم يعلن عن أي منطقة. يمكنك أيضًا اختيار الجهاز، أو تعيين الإزاحة بنفسك.</string>
     <string name="settings_manual">يدوي</string>
     <string name="settings_theme_dark">داكنة</string>
     <string name="settings_theme_light">فاتحة</string>
@@ -352,34 +317,16 @@
     <string name="settings_group_summary_appearance">السمة واللون المميز والزجاج والحركة وحجم النص</string>
     <string name="settings_group_summary_layout">الشريط الجانبي واللوحات والقوائم وشاشة البداية</string>
     <string name="settings_group_summary_content_metadata">التسمية والصور وخدمات الترجمة</string>
-    <string name="settings_group_summary_playback">مشغّل الفيديو وسجل أخطائه</string>
-    <!-- Translators: Video player settings: name of the section holding volume, audio language and surround settings. -->
     <string name="settings_vp_section_sound">الصوت</string>
-    <!-- Translators: Video player settings: one-line summary under the "Subtitles" section name. -->
-    <string name="settings_vp_section_subtitles_summary">الحجم، اللون، الموضع</string>
-    <!-- Translators: Video player settings: one-line summary under the "Diagnostics" section name. -->
-    <string name="settings_vp_section_diagnostics_summary">سجلات مفصّلة للمشغّل</string>
     <string name="settings_vp_cat_player">المشغّل</string>
-    <string name="settings_vp_cat_player_summary">أي مشغّل، لكل قائمة، التطبيقات الخارجية</string>
     <string name="settings_vp_cat_picture">الصورة</string>
-    <string name="settings_vp_cat_picture_summary">فك الترميز، HDR، الجودة، التكبير</string>
     <string name="settings_vp_cat_frame_rate">معدل الإطارات</string>
     <string name="settings_vp_cat_frame_rate_summary">مطابقة الشاشة مع الفيديو</string>
     <string name="settings_vp_cat_streaming">البث</string>
-    <string name="settings_vp_cat_streaming_summary">التخزين المؤقت، المهلة، إعادة الاتصال</string>
-    <string name="settings_vp_cat_live_summary">أرقام القنوات، الإيقاف المؤقت والترجيع</string>
     <string name="settings_vp_cat_live_tuning">ضبط البث المباشر</string>
-    <string name="settings_vp_cat_live_tuning_summary">زمن التأخير، التخزين المسبق، وقت البدء</string>
-    <string name="settings_vp_cat_controls">التحكم</string>
-    <string name="settings_vp_cat_controls_summary">خطوات التخطي والترجيع</string>
     <string name="settings_vp_cat_multiview">العرض المتعدد والمشغّل المصغّر</string>
     <string name="settings_vp_cat_multiview_summary_mobile">عدة قنوات مباشرة في وقت واحد</string>
-    <string name="settings_vp_cat_sound_summary">الصوت، المحيطي، الوضع الليلي، المزامنة</string>
     <string name="settings_vp_cat_languages">اللغات والترجمات</string>
-    <string name="settings_vp_cat_languages_summary">لغة الصوت والترجمة، نمط الترجمة</string>
-    <string name="settings_vp_cat_resume">الاستئناف والتشغيل التلقائي</string>
-    <string name="settings_vp_cat_resume_summary">من أين تبدأ، الحلقة التالية</string>
-    <string name="settings_group_summary_network">الوكيل وDNS لاتصالات البث</string>
     <string name="settings_group_summary_app">اللغة وبدء التشغيل والتحديثات ومعلومات التطبيق</string>
     <string name="settings_group_quick">سريع</string>
     <string name="settings_group_summary_quick">المفاتيح التي تستخدمها أكثر</string>
@@ -391,7 +338,6 @@
     <string name="settings_search_keywords_epg">XMLTV دليل موجز برنامج</string>
     <string name="settings_search_keywords_logos">قناة شعار أيقونة XMLTV دليل picon قائمة تشغيل</string>
     <string name="settings_search_keywords_customize">إخفاء إظهار إعادة تسمية إعادة ترتيب فئات</string>
-    <string name="settings_search_keywords_sidebar">شريط جانبي أيقونات ديناميكي ثابت إخفاء إظهار تكييف قائمة تشغيل</string>
     <string name="settings_search_keywords_ch">قناة أعلى أسفل تخطي صفحة قائمة فئة قناة</string>
     <string name="settings_search_keywords_browsing">تذكّر موضع تمرير فئة آخر عنصر مباشر أفلام مسلسلات إعادة ضبط أعلى</string>
     <string name="settings_search_keywords_home">صفوف بارز إعادة ترتيب تصفية</string>
@@ -467,10 +413,8 @@
     <string name="settings_language_vietnamese">الفيتنامية</string>
     <string name="settings_hardware_decoding">فك الترميز بالأجهزة</string>
     <string name="settings_hardware_decoding_description">استخدام وحدة فك الترميز بالأجهزة في التلفزيون. عطّل هذا الخيار إذا تقطعت بعض عمليات البث أو ظهرت بها عيوب مرئية.</string>
-    <string name="settings_hardware_decoding_description_mobile">استخدام وحدة فك الترميز بالأجهزة في الجهاز. عطّل هذا الخيار إذا تقطعت بعض عمليات البث أو ظهرت بها عيوب مرئية.</string>
     <string name="settings_software_decode_above_1080p">فك الترميز البرمجي فوق 1080p</string>
     <string name="settings_software_decode_above_1080p_description">تشغيل فيديو 4K وغيره من الفيديو الأعلى من 1080p برمجيًا عندما تكون وحدة فك الترميز بالأجهزة في التلفزيون معطّلة أو تفشل. يحتاج إلى معالج سريع، إذ يتقطع التشغيل على معظم أجهزة التلفزيون.</string>
-    <string name="settings_software_decode_above_1080p_description_mobile">تشغيل فيديو 4K وغيره من الفيديو الأعلى من 1080p برمجيًا عندما تكون وحدة فك الترميز بالأجهزة في الجهاز معطّلة أو تفشل. يحتاج إلى معالج سريع، إذ يتقطع التشغيل على كثير من الأجهزة.</string>
     <string name="settings_movies_series_player">مشغّل الأفلام والمسلسلات</string>
     <string name="settings_live_tv_player">مشغّل البث المباشر</string>
     <string name="settings_engine_order"><xliff:g id="first">%1$s</xliff:g>، ثم <xliff:g id="second">%2$s</xliff:g></string>
@@ -480,37 +424,21 @@
     <string name="settings_external_player">مشغّل خارجي</string>
     <string name="settings_default_zoom">التكبير الافتراضي</string>
     <string name="settings_default_zoom_description">نسبة العرض إلى الارتفاع/التكبير المطبّقة عند بدء التشغيل.</string>
-    <!-- Translators: Setting label for the volume level playback starts at. -->
     <string name="settings_default_volume">مستوى الصوت الافتراضي</string>
-    <!-- Translators: Description of the default volume setting. -->
     <string name="settings_default_volume_description">مستوى الصوت المطبّق عند بدء التشغيل. فوق 100%% يجري تضخيم البثوث المنخفضة الصوت.</string>
-    <!-- Translators: Settings-row title for forgetting the zoom saved for individual items. -->
     <string name="settings_reset_saved_zoom">إعادة ضبط التكبير المحفوظ</string>
-    <!-- Translators: Description of the reset-saved-zoom setting row. -->
     <string name="settings_reset_saved_zoom_description">عند تغيير التكبير في المشغّل يُحفظ ذلك لتلك القناة أو الفيلم أو الحلقة. تعيد إعادة الضبط كل شيء إلى التكبير الافتراضي.</string>
-    <!-- Translators: Confirmation dialog title before forgetting the saved per-item zoom. -->
     <string name="settings_reset_saved_zoom_confirm">إعادة ضبط التكبير المحفوظ؟</string>
-    <!-- Translators: Confirmation dialog body before forgetting the saved per-item zoom. -->
     <string name="settings_reset_saved_zoom_confirm_description">تعود كل قناة وكل فيلم وكل حلقة إلى التكبير الافتراضي. أما مستويات الصوت المحفوظة فتبقى كما هي. يمكنك دائمًا ضبط عنصر واحد مرة أخرى من المشغّل.</string>
-    <!-- Translators: Settings-row title for forgetting the volume saved for individual items. -->
     <string name="settings_reset_saved_volume">إعادة ضبط مستوى الصوت المحفوظ</string>
-    <!-- Translators: Description of the reset-saved-volume setting row. -->
     <string name="settings_reset_saved_volume_description">عند تغيير مستوى الصوت في المشغّل يُحفظ ذلك لتلك القناة أو الفيلم أو الحلقة. تعيد إعادة الضبط كل شيء إلى مستوى الصوت الافتراضي.</string>
-    <!-- Translators: Confirmation dialog title before forgetting the saved per-item volume. -->
     <string name="settings_reset_saved_volume_confirm">إعادة ضبط مستوى الصوت المحفوظ؟</string>
-    <!-- Translators: Confirmation dialog body before forgetting the saved per-item volume. -->
     <string name="settings_reset_saved_volume_confirm_description">تعود كل قناة وكل فيلم وكل حلقة إلى مستوى الصوت الافتراضي. أما إعدادات التكبير المحفوظة فتبقى كما هي. يمكنك دائمًا ضبط عنصر واحد مرة أخرى من المشغّل.</string>
-    <!-- Translators: Settings row that forgets every per-item audio-sync offset. -->
     <string name="settings_reset_saved_audio_delay">إعادة ضبط مزامنة الصوت المحفوظة</string>
-    <!-- Translators: Description of the reset-saved-audio-sync row. -->
     <string name="settings_reset_saved_audio_delay_description">اختيار «تذكّر هذا التأخير» في المشغّل يحفظ مزامنة الصوت لتلك القناة أو الفيلم أو الحلقة. تعيد إعادة الضبط كل شيء إلى الإعداد أعلاه.</string>
-    <!-- Translators: Title of the confirmation dialog for resetting saved audio sync. -->
     <string name="settings_reset_saved_audio_delay_confirm">إعادة ضبط مزامنة الصوت المحفوظة؟</string>
-    <!-- Translators: Body of the confirmation dialog for resetting saved audio sync. -->
     <string name="settings_reset_saved_audio_delay_confirm_description">تعود كل قناة وفيلم وحلقة إلى مزامنة الصوت أعلاه. يتم الاحتفاظ بإعدادات التكبير ومستوى الصوت المحفوظة. يمكنك دائمًا ضبط واحدة منفردة مجددًا من المشغّل.</string>
-    <!-- Translators: Setting label for how far rewind/forward jumps in a movie or episode. -->
     <string name="settings_seek_step">خطوة التقديم</string>
-    <!-- Translators: Description of the seek step setting. -->
     <string name="settings_seek_step_description">المسافة التي يقفزها التقديم والإرجاع داخل فيلم أو حلقة.</string>
     <string name="settings_vod_buffer">ذاكرة التخزين المؤقت للأفلام</string>
     <string name="settings_vod_buffer_description">إلى أي مدى تُحمَّل الأفلام والحلقات والإعادة مسبقًا. «تلقائي» يستخدم ما يناسب هذا الجهاز. الذاكرة المؤقتة الأطول تتحمل الاتصال الضعيف بشكل أفضل؛ لكن ذاكرة الجهاز تبقى الحد، لذا قد يحتفظ فيلم عالي معدل البت بأقل مما اخترت.</string>
@@ -519,9 +447,7 @@
     <string name="settings_vod_reconnects">محاولات إعادة الاتصال</string>
     <string name="settings_vod_reconnects_description">عدد المرات التي يُعاد فيها فتح فيلم أو حلقة فقد الاتصال من حيث توقف قبل عرض خطأ. دقيقة من التشغيل المستقر تعيد المحاولات.</string>
     <string name="settings_vod_network_auto">تلقائي</string>
-    <!-- Translators: Setting label for how far rewind/forward jumps inside a live channel's archive. -->
     <string name="settings_live_rewind_step">خطوة الإرجاع المباشر</string>
-    <!-- Translators: Description of the live rewind step setting. -->
     <string name="settings_live_rewind_step_description">مقدار تحريك الإرجاع والتقديم في قناة مباشرة: في أرشيف الإعادة، أو في النسخة المحفوظة عبر إيقاف البث المباشر مؤقتًا وإرجاعه.</string>
     <string name="settings_resume_playback">استئناف التشغيل</string>
     <string name="settings_resume_playback_description">ما يجب فعله عندما يكون لفيلم أو حلقة موضع محفوظ.</string>
@@ -557,7 +483,6 @@
     <string name="settings_live_latency_bitrate_note">على قناة ذات معدل بت مرتفع جدًا — وخاصةً بدقة 4K — قد يحتفظ المخزن المؤقت بمدة أقل مما طلبت، لأن هناك حدًا لكمية الفيديو التي يمكن الاحتفاظ بها في الذاكرة دفعة واحدة.</string>
     <string name="settings_channel_numbers">أرقام القنوات</string>
     <string name="settings_channel_numbers_description">اعرض رقم القناة الذي يحدده مزوّدك بجوار الاسم في قائمة البث التلفزيوني المباشر وطبقة قائمة القنوات المتراكبة والمشغّل — وأدخل رقمًا بجهاز التحكم عن بُعد أثناء التشغيل بملء الشاشة للانتقال مباشرةً إلى تلك القناة (ينتقل زر «موافق» فورًا، ويلغي زر «رجوع»). يؤدي إيقاف الخيار إلى إخفاء جميع الأرقام وتجاهل مفاتيح الأرقام؛ ولن تفقد شيئًا، إذ يعيد تشغيله إظهارها.</string>
-    <string name="settings_channel_numbers_description_mobile">اعرض رقم القناة الذي يحدده مزوّدك بجوار الاسم في قائمة البث التلفزيوني المباشر والمشغّل. يؤدي إيقاف الخيار إلى إخفاء جميع الأرقام؛ ولن تفقد شيئًا، إذ يعيد تشغيله إظهارها.</string>
     <string name="settings_live_left_right_rewinds">اليسار واليمين لإرجاع البث المباشر</string>
     <string name="settings_live_left_right_rewinds_description">عند إخفاء عناصر التحكم، يُرجع اليسار واليمين البث ويقدّمانه في القنوات التي يمكن إرجاعها (الإعادة، أو المحفوظة عبر إيقاف البث المباشر مؤقتًا وإرجاعه)، بدلاً من فتح قائمة القنوات والسجل.</string>
     <string name="settings_timeshift">إيقاف البث المباشر مؤقتًا وإرجاعه</string>
@@ -569,7 +494,6 @@
     <string name="settings_diagnostics">التشخيصات</string>
     <string name="settings_measured_stats">إحصاءات البث المقاسة</string>
     <string name="settings_measured_stats_description">اعرض معدل الإطارات المباشر ومعدل البت والإطارات الساقطة في طبقة معلومات البث المتراكبة (تُقاس أثناء فتح الطبقة المتراكبة لعمليات البث التي لا تعلن هذه القيم). أوقفه فقط إذا كان التلفزيون منخفض الإمكانات يتقطّع — فهو لا يؤثر مطلقًا في الفيديو الفعلي، بل في أرقام التشخيصات فقط.</string>
-    <string name="settings_measured_stats_description_mobile">اعرض معدل الإطارات المباشر ومعدل البت والإطارات الساقطة في طبقة معلومات البث المتراكبة (تُقاس أثناء فتح الطبقة المتراكبة لعمليات البث التي لا تعلن هذه القيم). أوقفه فقط إذا كان الجهاز منخفض الإمكانات يتقطّع — فهو لا يؤثر مطلقًا في الفيديو الفعلي، بل في أرقام التشخيصات فقط.</string>
     <string name="settings_none_auto">لا شيء / تلقائي</string>
     <string name="settings_view_grid">شبكة</string>
     <string name="settings_view_list">قائمة</string>
@@ -592,7 +516,6 @@
     <string name="settings_movies_player_description">يوفّر mpv (موصى به) أوسع دعم للصيغ — صوت DTS/TrueHD والملفات غير المألوفة. ويشغّل ExoPlayer بعض المقاطع التي لا يستطيع mpv تشغيلها على تلفازات معيّنة، لكنه لا يفك ترميز صوت DTS/TrueHD. تجرّب الخيارات المزدوجة المشغّل الآخر تلقائيًا عند فشل الأول، أما خيارات المشغّل الواحد فلا تفعل ذلك أبدًا، ما يوفّر بضع ثوانٍ من الشاشة السوداء إذا كان المشغّل الثاني لا يعمل أبدًا على تلفازك.</string>
     <string name="settings_movies_player_description_mobile">يوفّر mpv (موصى به) أوسع دعم للصيغ — صوت DTS/TrueHD والملفات غير المألوفة. ويشغّل ExoPlayer بعض المقاطع التي لا يستطيع mpv تشغيلها على أجهزة معيّنة، لكنه لا يفك ترميز صوت DTS/TrueHD. تجرّب الخيارات المزدوجة المشغّل الآخر تلقائيًا عند فشل الأول، أما خيارات المشغّل الواحد فلا تفعل ذلك أبدًا، ما يوفّر بضع ثوانٍ من الشاشة السوداء إذا كان المشغّل الثاني لا يعمل أبدًا على جهازك.</string>
     <string name="settings_live_player_description">يفتح ExoPlayer (موصى به) القنوات أسرع بكثير وهو الوحيد الذي يدعم الترجمة أثناء البث المباشر. ويشغّل mpv قنوات لا يستطيع ExoPlayer تشغيلها، بما فيها بعض القنوات ذات الصوت غير المألوف. تجرّب الخيارات المزدوجة المشغّل الآخر تلقائيًا عند فشل الأول، أما خيارات المشغّل الواحد فلا تفعل ذلك أبدًا، ما يوفّر بضع ثوانٍ من الشاشة السوداء إذا كان المشغّل الثاني لا يعمل أبدًا على تلفازك. وتحتفظ أي قناة تبدّلها يدويًا في المشغّل باختيارك في الحالتين.</string>
-    <string name="settings_live_player_description_mobile">يفتح ExoPlayer (موصى به) القنوات أسرع بكثير وهو الوحيد الذي يدعم الترجمة أثناء البث المباشر. ويشغّل mpv قنوات لا يستطيع ExoPlayer تشغيلها، بما فيها بعض القنوات ذات الصوت غير المألوف. تجرّب الخيارات المزدوجة المشغّل الآخر تلقائيًا عند فشل الأول، أما خيارات المشغّل الواحد فلا تفعل ذلك أبدًا، ما يوفّر بضع ثوانٍ من الشاشة السوداء إذا كان المشغّل الثاني لا يعمل أبدًا على جهازك. وتحتفظ أي قناة تبدّلها يدويًا في المشغّل باختيارك في الحالتين.</string>
     <string name="settings_reset_player_choices_description">عند تبديل فيلم أو حلقة واحدة بين mpv وExoPlayer داخل المشغّل، يُحفظ هذا الخيار للمرة التالية. تعيد إعادة الضبط كل شيء إلى الإعداد أعلاه. أما الخيارات المحفوظة لقنوات البث المباشر فتبقى كما هي.</string>
     <string name="settings_reset_player_choices_none">لا شيء محفوظ</string>
     <plurals name="settings_reset_player_choices_count">
@@ -644,23 +567,13 @@
     <string name="settings_download_remote_title">التنزيل على جهاز آخر</string>
     <string name="settings_download_remote_description">على أي جهاز فيه متصفح على شبكة Wi-Fi نفسها — هاتف أو حاسوب أو تلفاز آخر — امسح رمز QR (أو افتح العنوان)، وأدخل رمز PIN هذا، ونزّل ملف النسخة الاحتياطية لحفظه بأمان.</string>
     <string name="settings_preparing_backup">جارٍ إعداد النسخة الاحتياطية…</string>
-    <string name="settings_background_on">صورة الخلفية: مفعّلة</string>
-    <string name="settings_background_off">صورة الخلفية: متوقفة</string>
     <string name="settings_ui_zoom_range">تغيير حجم الواجهة بالكامل (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%).</string>
     <string name="settings_low_zoom_warning_title">⚠️ تحذير بشأن التكبير المنخفض</string>
     <string name="settings_low_zoom_warning">يعرض التكبير بنسبة <xliff:g id="zoom">%1$d</xliff:g>%% عددًا أكبر بكثير من العناصر على الشاشة في وقت واحد. وقد يؤدي ذلك إلى عدم استقرار التطبيق أو تعطّله على الأجهزة ذات الذاكرة المحدودة (مثل أجهزة بث التلفزيون المزودة بذاكرة 2 غيغابايت)، خاصةً مع قوائم التشغيل الكبيرة وبيانات دليل البرامج الإلكتروني.\n\nاضغط على «موافق» للمتابعة، أو «رجوع» للبقاء عند <xliff:g id="safe_zoom">%2$d</xliff:g>%%.</string>
     <string name="settings_low_zoom_warning_mobile">يعرض التكبير بنسبة <xliff:g id="zoom">%1$d</xliff:g>%% عددًا أكبر بكثير من العناصر على الشاشة في وقت واحد. وقد يؤدي ذلك إلى عدم استقرار التطبيق أو تعطّله على الأجهزة ذات الذاكرة المحدودة، خاصةً مع قوائم التشغيل الكبيرة وبيانات دليل البرامج الإلكتروني.\n\nاختر «إلغاء» للبقاء عند <xliff:g id="safe_zoom">%2$d</xliff:g>%%.</string>
     <string name="settings_low_zoom_accept">أفهم المخاطر وأقبلها</string>
     <string name="settings_surface_transparency"><xliff:g id="percent">%1$d</xliff:g>%%</string>
-    <string name="settings_surface_count_all">الأسطح: الكل</string>
-    <plurals name="settings_surface_count">
-        <item quantity="zero"><xliff:g id="count">%1$d</xliff:g> من أصل <xliff:g id="total">%2$d</xliff:g> سطح</item>
-        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> من أصل <xliff:g id="total">%2$d</xliff:g> سطح</item>
-        <item quantity="two"><xliff:g id="count">%1$d</xliff:g> من أصل <xliff:g id="total">%2$d</xliff:g> سطحين</item>
-        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> من أصل <xliff:g id="total">%2$d</xliff:g> أسطح</item>
-        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> من أصل <xliff:g id="total">%2$d</xliff:g> سطحًا</item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> من أصل <xliff:g id="total">%2$d</xliff:g> سطح</item>
-    </plurals>
+    <string name="settings_catchup_timezone_automatic">تلقائي</string>
     <string name="settings_catchup_timezone_device">الجهاز</string>
     <string name="settings_catchup_player_ask">السؤال دائمًا</string>
     <string name="settings_catchup_player_internal">مشغّل OwnTV</string>
@@ -678,23 +591,6 @@
     <string name="settings_history_movies">أفلام</string>
     <string name="settings_history_series">مسلسلات</string>
     <string name="settings_history_all">الكل</string>
-    <string name="settings_decrease">–</string>
-    <string name="settings_increase">+</string>
-    <string name="settings_glass_effect_title">تأثير الزجاج</string>
-    <string name="settings_glass_effect_description">ألواح شفافة ضبابية فوق صورة خلفية، أو فوق خلفية التطبيق نفسه.</string>
-    <string name="settings_transparency_title">الشفافية</string>
-    <string name="settings_blur_title">التمويه / الضبابية</string>
-    <string name="settings_blur_description_enabled">مدى ضبابية الصورة الخلفية (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). يُطبّق فوق صورة خلفية فقط.</string>
-    <string name="settings_blur_description_disabled">مدى ضبابية الصورة الخلفية (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). يُطبّق فوق صورة خلفية فقط. عيّن صورة خلفية لتمكينه.</string>
-    <string name="settings_glass_surface_panels">ألواح المحتوى</string>
-    <string name="settings_glass_surface_sidebar">الشريط الجانبي</string>
-    <string name="settings_glass_surface_preview">أجزاء المعاينة</string>
-    <string name="settings_glass_surface_dialogs">مربعات الحوار والنوافذ المنبثقة</string>
-    <string name="settings_glass_surface_topbar">الشريط العلوي</string>
-    <string name="settings_glass_surface_cards">البطاقات</string>
-    <string name="settings_glass_surface_miniplayer">المشغّل المصغّر</string>
-    <string name="settings_glass_surface_player_controls">عناصر تحكم المشغّل</string>
-    <string name="settings_glass_surface_toasts">الرسائل على الشاشة</string>
     <string name="settings_browsing_last_category">تذكّر آخر فئة</string>
     <string name="settings_browsing_last_category_description">أعد فتح القسم على الفئة التي غادرتها، وليس على «الكل».</string>
     <string name="settings_browsing_last_item">تذكّر آخر عنصر</string>
@@ -778,7 +674,6 @@
     <string name="settings_span_ch_help">CH+ / CH− للتنقل صفحة كاملة. اضغط مطولًا على CH+ / CH− للانتقال إلى العنصر الأخير أو الأول.</string>
     <string name="settings_customize_metadata_separator">"  ·  "</string>
     <string name="settings_sources_title">المصادر</string>
-    <string name="settings_sources_description">المصادر مشتركة بين جميع الملفات الشخصية.</string>
     <string name="settings_sources_empty">لا توجد مصادر بعد. أضف مصدر M3U أو Xtream.</string>
     <string name="settings_sources_add">إضافة مصدر</string>
     <string name="settings_sources_import_failed">فشل الاستيراد</string>
@@ -866,7 +761,6 @@
     <string name="settings_epg_sources_name_hint">مثال: دليل المملكة المتحدة</string>
     <string name="settings_epg_sources_url_hint">https://…/epg.xml(.gz)</string>
     <string name="settings_epg_sources_user_agent_hint">اتركه فارغًا لاستخدام الإعداد الافتراضي</string>
-    <string name="settings_epg_sources_description">تغذيات دليل XMLTV التي تملأ دليل البرامج التلفزيونية. تتم مزامنتها تلقائيًا عند إضافتها وتُدمج مع قنوات قوائم التشغيل لديك.</string>
     <string name="settings_epg_sources_delete_title">هل تريد حذف «<xliff:g id="name">%1$s</xliff:g>»؟</string>
     <string name="settings_epg_sources_delete_message">يزيل مصدر دليل البرامج الإلكتروني هذا وبيانات دليله. وتبقى قنواتك.</string>
     <string name="settings_epg_sources_syncing_percent">جارٍ المزامنة بنسبة <xliff:g id="percent">%1$d</xliff:g>%%</string>
@@ -938,8 +832,6 @@
     <string name="settings_backup_pin_incorrect">رمز PIN غير صحيح.</string>
     <string name="settings_backup_pin_locked">مقفل باستخدام PIN</string>
     <string name="settings_backup_unlock">فتح القفل</string>
-    <string name="settings_backup_export_button">تصدير النسخة الاحتياطية</string>
-    <string name="settings_backup_restore_button">استعادة النسخة الاحتياطية</string>
     <string name="settings_backup_continue">متابعة</string>
     <string name="settings_backup_encrypt_export">تشفير وتصدير</string>
     <string name="settings_backup_export_unencrypted">تصدير دون تشفير</string>
@@ -1101,7 +993,6 @@
     <string name="settings_move_category_keep">أبقِه أيضًا ضمن «<xliff:g id="name">%1$s</xliff:g>»</string>
     <string name="settings_move_category_action">نقل</string>
     <string name="settings_dns_description">استخدام خادم DNS مخصص لاستعلامات النطاقات</string>
-    <string name="settings_dns_custom">DNS مخصص</string>
     <string name="settings_dns_toggle_description">حلّ جميع أسماء النطاقات التي يستعلم عنها OwnTV عبر خادم DNS مخصص.</string>
     <string name="settings_dns_use_custom">استخدام DNS مخصص</string>
     <string name="settings_dns_server_missing">تم تمكين DNS المخصص، ولكن لم تتم تهيئة أي خادم. أدخل عنوان خادم وحدد حفظ، أو أوقف هذا الخيار.</string>
@@ -1151,13 +1042,9 @@
     <string name="settings_live_tune_timeout_description">إذا لم تظهر أي صورة على قناة مباشرة خلال هذه المدة، يتوقف OwnTV عن المحاولة ويخبرك بذلك، بدلاً من ترك شاشة سوداء بينما يجرّب كل مشغّل لديه. الخيار «أبدًا» يواصل المحاولة، وقد يستغرق ذلك أكثر من دقيقة على قناة أزالها مزوّدك. لا تُحتسب فترات الانتظار التي يطلبها المزوّد.</string>
     <string name="settings_live_preroll_per_playlist">التخزين المسبق لكل قائمة تشغيل</string>
     <string name="settings_live_preroll_per_playlist_description">تجاوز الإعداد أعلاه لقائمة تشغيل واحدة مع الحفاظ على سرعة بقية قوائم التشغيل.</string>
-    <!-- Translators: Title of the per-playlist Live TV engine override row. -->
     <string name="settings_live_engine_per_playlist">مشغّل البث المباشر لكل قائمة تشغيل</string>
-    <!-- Translators: Description of the per-playlist Live TV engine override row. -->
     <string name="settings_live_engine_per_playlist_description">تجاوز الإعداد أعلاه لقائمة تشغيل واحدة، لمزوّد تعمل قنواته جيدًا مع أحد المشغّلين فقط.</string>
-    <!-- Translators: Title of the per-playlist Live latency override row. -->
     <string name="settings_live_latency_per_playlist">زمن استجابة البث المباشر لكل قائمة تشغيل</string>
-    <!-- Translators: Description of the per-playlist Live latency override row. -->
     <string name="settings_live_latency_per_playlist_description">تجاوز الإعداد أعلاه لقائمة تشغيل واحدة، لمزوّد يحتاج إلى مخزن مؤقت أكبر أو أصغر من غيره.</string>
     <string name="settings_catchup_timezone_per_playlist">المنطقة الزمنية لإعادة المشاهدة لكل قائمة تشغيل</string>
     <string name="settings_catchup_timezone_per_playlist_description">تجاوز المنطقة الزمنية أعلاه لقائمة تشغيل واحدة، لمزوّد يعمل أرشيفه على توقيت مختلف.</string>
@@ -1200,7 +1087,6 @@
     <string name="settings_playback_kind_error">خطأ</string>
     <string name="settings_playback_kind_event">حدث</string>
     <string name="settings_playback_kind_report">تقرير</string>
-    <string name="settings_playback_entry_with_kind"><xliff:g id="date">%1$s</xliff:g> · <xliff:g id="kind">%2$s</xliff:g> · <xliff:g id="engine">%3$s</xliff:g> · <xliff:g id="stream_type">%4$s</xliff:g></string>
     <string name="settings_export">تصدير</string>
     <string name="settings_detailed_playback_logging_description">احتفظ بسجل كامل لما يفعله محرك البث المباشر — كل ضبط وتراجع وإعادة اتصال — في Logcat وفي التقرير المُصدَّر. اتركه معطّلًا إلا إذا كنت تتعقّب مشكلة؛ فهو لا يغيّر التشغيل أبدًا، بل فقط مقدار ما يُدوَّن.</string>
     <string name="settings_live_preroll_playlist_picker">أي قائمة تشغيل؟</string>
@@ -1257,52 +1143,12 @@
     <string name="settings_font_system_sans">خط النظام بلا زوائد</string>
     <string name="settings_font_monospace">خط أحادي المسافة</string>
     <string name="settings_subtitle_font">خط الترجمة</string>
-    <string name="settings_glass_preset_title">إعداد مسبق للمظهر</string>
-    <string name="settings_glass_preset_clear">شفاف</string>
-    <string name="settings_glass_preset_balanced">متوازن</string>
-    <string name="settings_glass_preset_tinted">ملوّن</string>
-    <string name="settings_glass_preset_custom">مخصص</string>
-    <string name="settings_glass_preset_clear_description">ألوان أكثر من الخلفية مع تمويه متوسط.</string>
-    <string name="settings_glass_preset_balanced_description">وضوح وعمق وسهولة قراءة موصى بها.</string>
-    <string name="settings_glass_preset_tinted_description">لون سطح أقوى للخلفيات المزدحمة أو الساطعة.</string>
-    <string name="settings_glass_preset_custom_description">استخدم قيم الشفافية والتمويه المحفوظة.</string>
     <string name="settings_ambient_glow">التوهج المحيطي</string>
     <string name="settings_ambient_glow_description">يضيف إشراقًا مستوحى من شاشة الإعداد إلى الواجهة المصمتة</string>
     <string name="settings_ambient_glow_dialog_description">يضيف هالة ناعمة بلون التمييز إلى الواجهة غير الزجاجية. ينبض التوهج ببطء عند تفعيل الرسوم المتحركة.</string>
     <string name="settings_ambient_glow_effect">التوهج</string>
     <string name="settings_ambient_glow_pulse">نبض بطيء</string>
-    <string name="settings_glass_preset_ultra_clear">شفاف جدًا</string>
-    <string name="settings_glass_preset_opaque">معتم</string>
-    <string name="settings_glass_preset_ultra_clear_description">أقصى تفاصيل للخلفية مع تمويه خفيف.</string>
-    <string name="settings_glass_preset_opaque_description">أقصى كثافة للألواح مع أقوى تمويه.</string>
-    <string name="settings_glass_preset_aurora">أورورا</string>
-    <string name="settings_glass_preset_aurora_description">زجاج رقيق بأقوى تأثير صقيع — مصمم للهاتف.</string>
-    <string name="settings_glass_highlight_title">قوة الإضاءة</string>
-    <string name="settings_glass_highlight_description">اضبط إضاءة الزجاج وحدوده عند التركيز.</string>
     <string name="settings_glass_live_preview">معاينة مباشرة</string>
-    <string name="settings_glass_screen_description">لوحات شفافة ضبابية وصورة خلفية ومستوى الشفافية</string>
-    <string name="settings_glass_master_description">ألواح شفافة ضبابية فوق صورة خلفية، أو فوق خلفية التطبيق نفسه.</string>
-    <string name="settings_glass_background_image">اختيار صورة خلفية</string>
-    <string name="settings_glass_background_blur_title">التمويه / الضبابية</string>
-    <string name="settings_glass_section_appearance">المظهر</string>
-    <string name="settings_glass_section_fine_tuning">خيارات متقدمة</string>
-    <string name="settings_glass_section_behavior">السلوك</string>
-    <string name="settings_glass_surface_all">الكل</string>
-    <string name="settings_glass_background_action_description">اختيار صورة خلفية</string>
-    <string name="settings_glass_transparency_short_description">20–100 · 5</string>
-    <string name="settings_glass_blur_short_description">0–100 · 10</string>
-    <string name="settings_glass_highlight_short_description">اضبط إضاءة الزجاج وحدوده عند التركيز.</string>
-    <string name="settings_glass_full_transparency_short">السماح بالشفافية الكاملة</string>
-    <string name="settings_glass_full_transparency_short_description">يعطّل الحد التلقائي للوضوح للحصول على أكثر زجاج شفافية.</string>
-    <string name="settings_glass_depth_effects_short">العمق والظلال</string>
-    <string name="settings_glass_depth_effects_short_description">يفعّل إضاءة انتقال التركيز والمنظور الخفيف وحركة العمق.</string>
-    <string name="settings_glass_shine_short">لمعة العبور</string>
-    <string name="settings_glass_shine_short_description">شريط من الضوء يمر عبر اللوحة عند ظهورها.</string>
-    <string name="settings_glass_reset_balanced">إعادة الضبط: متوازن</string>
-    <string name="settings_glass_full_transparency_title">السماح بالشفافية الكاملة</string>
-    <string name="settings_glass_full_transparency_description">يعطّل الحد التلقائي للوضوح للحصول على أكثر زجاج شفافية.</string>
-    <string name="settings_glass_depth_title">العمق والظلال</string>
-    <string name="settings_glass_depth_description">يفعّل إضاءة انتقال التركيز والمنظور الخفيف وحركة العمق.</string>
     <string name="settings_row_menu_pin">تثبيت في سريع</string>
     <string name="settings_row_menu_unpin">إزالة من سريع</string>
     <string name="settings_row_menu_move_up">نقل لأعلى</string>
@@ -1310,8 +1156,6 @@
     <string name="settings_quick_empty_title">لا شيء مثبت بعد</string>
     <string name="settings_quick_empty_hint">اضغط مطولاً على زر OK فوق أي إعداد واختر “تثبيت في سريع”.</string>
     <string name="settings_quick_empty_hint_touch">اضغط مطولاً على أي إعداد واختر “تثبيت في سريع”.</string>
-    <string name="settings_results_title">النتائج</string>
-    <string name="settings_results_summary">كل تطابق أينما كان — مع مساره</string>
     <plurals name="settings_setting_count">
         <item quantity="zero"><xliff:g id="count">%1$d</xliff:g> إعداد</item>
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> إعداد</item>
@@ -1334,45 +1178,29 @@
     <string name="settings_guide_width_summary">قائمة القنوات %1$d%% · الخط الزمني لـ EPG %2$d%%</string>
     <string name="settings_guide_width_help">• تتشارك قائمة القنوات والخط الزمني لـ EPG صفًا واحدًا، لذلك يجب أن يكون المجموع 100%%.\n• يعرض توسيع قائمة القنوات جزءًا أقل من الخط الزمني؛ وتبقى مدد البرامج ومقياس الوقت بلا تغيير.\n• يبقى عرض كل عمود 10%% على الأقل.\n• تعيد إعادة الضبط قائمة القنوات إلى 10%% والخط الزمني إلى 90%%.\n• يؤدي إيقاف التخصيص إلى استعادة التخطيط القياسي دون فقدان قيمك.</string>
     <string name="settings_guide_width_channels">قائمة القنوات</string>
-    <string name="settings_guide_width_epg">الخط الزمني لـ EPG</string>
     <string name="settings_selection_highlight">إبراز التحديد</string>
     <string name="settings_selection_highlight_description">لون وسُمك الإطار حول العنصر المحدد</string>
-    <string name="settings_nav_bar_customization">تخصيص شريط التنقل</string>
-    <string name="settings_playback_mobile">الهاتف</string>
-    <string name="settings_playback_tv_only_note">المعاينة المباشرة واختصارات جهاز التحكم عن بُعد ميزات خاصة بالتلفزيون، وهي غير متاحة على الهاتف.</string>
     <string name="settings_background_playback">التشغيل في الخلفية</string>
     <string name="settings_background_playback_description">إبقاء الصوت يعمل بعد الخروج من التطبيق</string>
     <string name="settings_pip">صورة داخل صورة</string>
-    <string name="settings_pip_description">تصغير الفيديو إلى نافذة عائمة عند الخروج من التطبيق</string>
     <string name="settings_data_saver">توفير البيانات</string>
     <string name="settings_data_saver_description">عدم البث عبر بيانات الهاتف</string>
     <string name="settings_gesture_sensitivity">حساسية الإيماءات</string>
-    <string name="settings_gesture_sensitivity_description">مسافة السحب اللازمة لتغيير الصوت أو السطوع أو الموضع</string>
     <string name="settings_downloads_wifi_only">التنزيل عبر Wi-Fi فقط</string>
     <string name="settings_downloads_wifi_only_description">انتظار Wi-Fi بدلاً من استخدام بيانات الهاتف</string>
-    <string name="settings_search_keywords_background_playback">الخلفية صوت خروج التطبيق استمرار خدمة</string>
-    <string name="settings_search_keywords_pip">صورة داخل صورة نافذة عائمة صغيرة</string>
-    <string name="settings_search_keywords_data_saver">توفير البيانات بيانات الهاتف التجوال استهلاك</string>
-    <string name="settings_search_keywords_gestures">إيماءة سحب حساسية لمس تمرير</string>
-    <string name="settings_mini_player_style">نمط المشغّل المصغّر</string>
     <string name="settings_mini_player_style_description">كيف يتابعك التشغيل أثناء التنقل</string>
     <string name="settings_mini_player_style_floating">نافذة عائمة</string>
     <string name="settings_mini_player_style_docked">شريط مثبّت</string>
     <string name="settings_pip_size">حجم النافذة</string>
-    <string name="settings_pip_size_description">الحجم الذي تبدأ به النافذة العائمة. اقرص لتغييره.</string>
     <string name="settings_pip_size_small">صغير</string>
     <string name="settings_pip_size_medium">متوسط</string>
     <string name="settings_pip_size_large">كبير</string>
     <string name="settings_pip_snap">الالتصاق بالحواف</string>
-    <string name="settings_pip_snap_description">اترك النافذة فتستقر عند أقرب حافة</string>
     <string name="settings_audio_on_screen_off">الصوت فقط عند إطفاء الشاشة</string>
-    <string name="settings_audio_on_screen_off_description">يتوقف فك ترميز فيديو لا يراه أحد، ويوفّر البطارية</string>
     <string name="settings_audio_on_mobile_data">الصوت فقط على بيانات الجوال</string>
     <string name="settings_audio_on_mobile_data_description">ابدأ بدون صورة عند عدم توفر Wi-Fi</string>
     <string name="settings_audio_per_channel">تذكّر الصوت فقط لكل قناة</string>
-    <string name="settings_audio_per_channel_description">القناة التي شاهدتها بدون صورة تُفتح كذلك في المرة القادمة</string>
     <string name="local_sync_title">المزامنة المحلية</string>
-    <string name="local_sync_description">شارك بياناتك مع جهازك الآخر عبر الواي فاي</string>
     <string name="local_sync_host_hint">على جهازك الآخر، فعّل وضع المزامنة أيضًا، ثم اضغط على اتصال واختر هذا الجهاز.</string>
     <string name="local_sync_qr_description">رمز QR يحتوي على عنوان هذا الجهاز</string>
     <string name="local_sync_pin_is">رمز PIN: <xliff:g id="pin">%1$s</xliff:g></string>
@@ -1427,8 +1255,6 @@
     <string name="local_sync_error_bad_payload">تعذّرت قراءة ما وصل. إذا استخدمت كلمة مرور، فتأكد من أنها نفسها على الجهازين.</string>
     <string name="local_sync_error_unknown">حدث خطأ ما. حاول مرة أخرى.</string>
     <string name="local_sync_mode">وضع المزامنة</string>
-    <string name="local_sync_mode_description">يتيح لأجهزتك الأخرى العثور على هذا الجهاز. يبقى مفعّلاً ما دامت هذه الشاشة مفتوحة.</string>
-    <string name="local_sync_mode_pill">وضع المزامنة مفعّل</string>
     <string name="local_sync_connect">اتصال</string>
     <string name="local_sync_connect_description">ابحث عن جهاز آخر مفعّل عليه وضع المزامنة</string>
     <string name="local_sync_last_synced">آخر مزامنة: <xliff:g id="when">%1$s</xliff:g></string>
@@ -1716,7 +1542,7 @@
     <string name="settings_help_playlists">أضف قائمة تشغيل من رابط أو تسجيل دخول Xtream أو بوابة Stalker أو ملف، أو أعد مزامنة إحداها، أو احذفها.</string>
     <string name="settings_help_epg_sources">أضف مصدر دليل XMLTV عبر رابطه، أو حدّثه، أو احذفه. تملأ المصادر دليل التلفاز وسطور البرامج في البث المباشر.</string>
     <string name="settings_help_guide_days">عدد أيام البرامج التي يخزنها الدليل مسبقًا. أيام أقل تعني تحديثًا أسرع للدليل وقاعدة بيانات أصغر.</string>
-    <string name="settings_help_catchup">تشغّل المشاهدة الاستدراكية البرامج من أرشيف مزوّدك. يعتمد معظم المزوّدين على ساعة التلفاز نفسها؛ اختر إزاحة UTC ثابتة إذا بدأت المشاهدة في وقت خاطئ. ومن هنا أيضًا تختار المشغّل الذي تستخدمه.</string>
+    <string name="settings_help_catchup_timezone">تشغّل المشاهدة الاستدراكية البرامج من أرشيف مزوّدك. يستخدم الوضع التلقائي المنطقة الزمنية التي يعلنها مزوّدك، أو ساعة التلفاز نفسها إن لم يعلن عنها؛ اختر إزاحة UTC ثابتة إذا ظلت المشاهدة تبدأ في وقت خاطئ. ومن هنا أيضًا تختار المشغّل الذي تستخدمه.</string>
     <string name="settings_help_theme">صُمّم OwnTV للوضع الداكن. يتبع خيار النظام إعداد التلفاز إن وُجد، ويناسب الوضع الفاتح الغرف المضيئة.</string>
     <string name="settings_help_accent">يلوّن الأزرار وتوهج التركيز وأشرطة التقدم والتمييزات في كل مكان. اختر لونًا جاهزًا، أو اضغط OK لفتح لوحة الألوان وإدخال أي رمز سداسي.</string>
     <string name="settings_help_focus">الحلقة المرسومة حول العنصر المحدد. اختر لونها وسُمكها لتبقى سهلة التتبع من الأريكة.</string>

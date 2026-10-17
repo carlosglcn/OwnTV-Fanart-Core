@@ -237,7 +237,7 @@ class UserDataResolver(
     /**
      * Exports only the rows attached to [sourceId], so a single-source re-sync starts promptly.
      *
-     * "order" is in the default set (B1): manual Move positions orphan on a resync exactly like
+     * "order" is in the default set: manual Move positions orphan on a resync exactly like
      * favorites do — content is clear-then-insert, so every itemId in `content_order` goes stale —
      * and leaving them out of the snapshot silently threw away the user's hand-arranged folders.
      */
@@ -381,7 +381,7 @@ class UserDataResolver(
     }
 
     /**
-     * Resolves and inserts records in chunked transactions (B3): each record used to be 2–4 lookups
+     * Resolves and inserts records in chunked transactions: each record used to be 2–4 lookups
      * plus a single-row insert in its OWN write transaction (one fsync each) — a restore of
      * thousands of favorites/history rows became thousands of fsyncs. Per-record failures are
      * still caught individually (a bad record never aborts its chunk); chunking keeps any single

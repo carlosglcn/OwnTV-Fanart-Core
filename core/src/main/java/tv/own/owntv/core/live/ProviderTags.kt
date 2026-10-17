@@ -3,7 +3,7 @@ package tv.own.owntv.core.live
 import java.text.Normalizer
 
 /**
- * A provider name split the way Stage shows it (G5): "DE| Sky Cinema Premieren ᴴᴰ" becomes the name
+ * A provider name split the way Stage shows it: "DE| Sky Cinema Premieren ᴴᴰ" becomes the name
  * "Sky Cinema Premieren", the tag "HD" and the country "DE". Providers write their quality and
  * source marks as superscript letters; each run of them is one tag. The country prefix is shown
  * once, as the "GROUPS · DE" heading, instead of on every row.
@@ -14,8 +14,17 @@ object ProviderTags {
     // "DE|", "DE |", "UK |" — two or three capitals and a bar at the very start.
     private val countryPrefix = Regex("""^([A-Z]{2,3})\s*\|\s*""")
 
+    // "UK: Sky Sports", "IT: DAZN 1" — some providers write a colon. A colon also ends plain labels
+    // ("TV:", "VIP:", "PRIME:"), so it counts only after a real country code, and "TV" (Tuvalu) never.
+    private val colonPrefix = Regex("""^([A-Z]{2}):\s*""")
+    private val colonCountries: Set<String> =
+        java.util.Locale.getISOCountries().toSet() + "UK" - "TV"
+
+    private fun prefixOf(raw: String): MatchResult? =
+        countryPrefix.find(raw) ?: colonPrefix.find(raw)?.takeIf { it.groupValues[1] in colonCountries }
+
     fun parse(raw: String): ProviderName {
-        val prefix = countryPrefix.find(raw)
+        val prefix = prefixOf(raw)
         var rest = if (prefix != null) raw.substring(prefix.range.last + 1) else raw
         val tags = mutableListOf<String>()
         val name = StringBuilder()
@@ -42,6 +51,14 @@ object ProviderTags {
      */
     fun sharedCountry(names: List<ProviderName>): String? =
         names.map { it.country }.distinct().singleOrNull()
+
+    /**
+     * A group's label in a category list: the bare name when [headingCountry] already shows its country
+     * above the groups, else the name with its country put back ("UK| Sky Max"). A mixed list (UK|, US|)
+     * has no shared heading, and stripping the prefix there left rows nobody could tell apart.
+     */
+    fun groupLabel(name: ProviderName, headingCountry: String?): String =
+        if (name.country == null || name.country == headingCountry) name.name else "${name.country}| ${name.name}"
 
     // Superscript digits and letters, and the small-capital/modifier letters providers use for them
     // (ᴴᴰ, ʳᴬᵂ, ⁴ᴷ). Each folds to a plain letter or digit under NFKC.

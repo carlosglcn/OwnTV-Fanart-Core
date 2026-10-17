@@ -69,7 +69,7 @@ class ExoSubtitleEngine(
         /** Whether any subtitle track (text or image) is selected — however it came to be: a pick in the
          *  HUD, the image-subtitle handoff, remembered tracks, or ExoPlayer's own default/forced choice. */
         fun onSubtitleSelected(selected: Boolean) {}
-        /** N11 — the picture heights this file offers (see [VideoQuality.heights]). */
+        /** The picture heights this file offers (see [VideoQuality.heights]). */
         fun onVideoQualities(heights: List<Int>) {}
         fun onVideoFps(fps: Float)
         /** This file declares no video track at all (music-only VOD). The HUD says so on screen — sound
@@ -85,9 +85,9 @@ class ExoSubtitleEngine(
     private var pendingSubLang: String? = null
     private var pendingSubTypeIndex: Int = -1
     private var subtitleApplied = false
-    // Side-loaded external subtitle files (OpenSubtitles/local — subtitle plan §6.5/§10). ExoPlayer
+    // Side-loaded external subtitle files (OpenSubtitles/local). ExoPlayer
     // can't attach a subtitle to a playing item, so each add/restore re-prepares the same URL with
-    // SubtitleConfigurations at the current position (the plan's "seamless re-prepare").
+    // SubtitleConfigurations at the current position (a seamless re-prepare).
     private data class ExternalSubCfg(
         val path: String,
         val title: String,
@@ -98,11 +98,11 @@ class ExoSubtitleEngine(
     private val externalSubs = ArrayList<ExternalSubCfg>()
     // Label of a just-added external sub to select once its track appears in onTracksChanged.
     private var pendingExternalLabel: String? = null
-    // Subtitle-timing offset for the active external sub (§8): applied by side-loading a
+    // Subtitle-timing offset for the active external sub: applied by side-loading a
     // timestamp-shifted copy of that file on the next (re-)prepare.
     private var subDelayMs = 0
     private var delayLabel: String? = null
-    // X2: shifted copies, keyed by source path + offset. Generating one reads, re-times and rewrites
+    // Shifted copies, keyed by source path + offset. Generating one reads, re-times and rewrites
     // the whole subtitle file — on a big ASS that is tens to hundreds of milliseconds, and
     // buildMediaItem runs on the main thread on every (re-)prepare, so it used to freeze the HUD on
     // every delay nudge. The work now happens on IO once per (file, offset) and the re-prepare waits
@@ -286,7 +286,7 @@ class ExoSubtitleEngine(
             // Network / source / DRM errors are NOT retried here: a different decoder cannot fix them,
             // and mpv (with its own retry ladder and different HTTP stack) is the better next step.
             val url = currentUrl
-            // N18 — a film whose connection dropped after it had started is reopened where it stopped,
+            // A film whose connection dropped after it had started is reopened where it stopped,
             // on this engine, within Settings → Reconnect attempts: the same budget and the same
             // "a minute of playback earns it back" rule as mpv. Before, the drop went straight to mpv
             // or, with "ExoPlayer only", to an error. `prepare()` retries the same item at the same
@@ -342,7 +342,7 @@ class ExoSubtitleEngine(
     fun start(
         url: String, positionMs: Long, surface: Surface, subLang: String?, subTypeIndex: Int,
         fallback: Boolean = false,
-        // External subtitle files to side-load from the first prepare (engine toggle carry-over, §10);
+        // External subtitle files to side-load from the first prepare (engine toggle carry-over);
         // [selectExternalLabel] names the one to select, or null to attach them all unselected.
         sideloadSubs: List<OwnTVPlayer.ExternalSub> = emptyList(),
         selectExternalLabel: String? = null,
@@ -425,7 +425,7 @@ class ExoSubtitleEngine(
 
     private fun buildMediaItem(url: String): MediaItem {
         val builder = MediaItem.Builder().setUri(url)
-        // #115 — a protected item. Single-session: a film's content key does not rotate, unlike a live
+        // A protected item. Single-session: a film's content key does not rotate, unlike a live
         // channel's, so there is nothing to renew mid-playback.
         drmConfig?.let { builder.setDrmConfiguration(it.toMediaDrmConfiguration(multiSession = false)) }
         // v43 — naming the mime type is what makes this player's DefaultMediaSourceFactory build a
@@ -440,8 +440,8 @@ class ExoSubtitleEngine(
         }
         if (externalSubs.isNotEmpty()) {
             builder.setSubtitleConfigurations(externalSubs.map { s ->
-                // Timing offset for the active external sub: side-load a timestamp-shifted copy (§8).
-                // X2 — never generate it here (main thread); setSubtitleDelayMs prepares the copy off
+                // Timing offset for the active external sub: side-load a timestamp-shifted copy.
+                // Never generate it here (main thread); setSubtitleDelayMs prepares the copy off
                 // the main thread and only re-prepares once it is in the cache. The original is the
                 // fallback, which is also what shiftedCopy itself returns on a parse/IO failure.
                 val file = if (s.title == delayLabel && subDelayMs != 0) {
@@ -463,7 +463,7 @@ class ExoSubtitleEngine(
         else -> androidx.media3.common.MimeTypes.APPLICATION_SUBRIP
     }
 
-    /** Attach + select an external subtitle file (plan §6.5): re-prepare the same URL with the sub
+    /** Attach + select an external subtitle file: re-prepare the same URL with the sub
      *  side-loaded, at the same position, and select it by label once its track appears. */
     fun addExternalSubtitle(
         path: String,
@@ -479,8 +479,8 @@ class ExoSubtitleEngine(
         reprepareKeepingPosition(p, url)
     }
 
-    /** Re-attach previously downloaded subtitles WITHOUT changing the current selection (plan §9 —
-     *  they show in the Subtitles list; the user re-picks). No-op when nothing new to attach. */
+    /** Re-attach previously downloaded subtitles WITHOUT changing the current selection (they
+     *  show in the Subtitles list; the user re-picks). No-op when nothing new to attach. */
     fun restoreExternalSubtitles(subs: List<OwnTVPlayer.ExternalSub>) {
         val p = player ?: return
         val url = currentUrl ?: return
@@ -509,7 +509,7 @@ class ExoSubtitleEngine(
         reprepareKeepingPosition(p, url)
     }
 
-    /** Apply a subtitle-timing offset to the active external sub [activeLabel] (§8): re-prepare with a
+    /** Apply a subtitle-timing offset to the active external sub [activeLabel]: re-prepare with a
      *  shifted copy of its file at the same position, then re-select it. The caller debounces. */
     fun setSubtitleDelayMs(ms: Int, activeLabel: String) {
         val p = player ?: return
@@ -525,7 +525,7 @@ class ExoSubtitleEngine(
             reprepareKeepingPosition(p, url)
             return
         }
-        // X2 — build the shifted copy on IO, then re-prepare. A newer offset arriving meanwhile
+        // Build the shifted copy on IO, then re-prepare. A newer offset arriving meanwhile
         // cancels this one, and the staleness check stops a late result from re-preparing over it.
         shiftJob?.cancel()
         shiftJob = shiftScope.launch {
@@ -558,11 +558,11 @@ class ExoSubtitleEngine(
     private var builtForSoftware = false
 
     /** The per-source User-Agent and the per-channel headers of the item mpv handed over, pushed in by
-     *  [OwnTVPlayer] (F16). Without them a stream that only opens with a custom UA/Referer on mpv would
+     *  [OwnTVPlayer]. Without them a stream that only opens with a custom UA/Referer on mpv would
      *  fail the moment the engine fallback took over. */
     @Volatile var userAgent: String? = null
     @Volatile var httpHeaders: Map<String, String> = emptyMap()
-    /** This item's Widevine/ClearKey licence details (#115), pushed in by [OwnTVPlayer]; null for the
+    /** This item's Widevine/ClearKey licence details, pushed in by [OwnTVPlayer]; null for the
      *  unprotected majority. Only this engine can honour it — mpv has no CDM to license the stream. */
     @Volatile var drmConfig: tv.own.owntv.core.drm.DrmConfig? = null
     /** The container this item DECLARED (v43), pushed in by [OwnTVPlayer]; null = infer from the URL,
@@ -644,7 +644,7 @@ class ExoSubtitleEngine(
         // can't open them, and Media3 swallows a side-loaded subtitle's load failure silently (the
         // track lists but never produces cues). The TransferListener stays on the inner OkHttp factory
         // so local subtitle-file bytes don't inflate the measured network bitrate.
-        // N18 — a chosen timeout replaces the shared client's (connect 15 s, read 20 s) for films only;
+        // A chosen timeout replaces the shared client's (connect 15 s, read 20 s) for films only;
         // newBuilder() keeps its pool, proxy, DNS and interceptors.
         val client = filmTimeoutSecs.takeIf { it > 0 }?.let { secs ->
             streamingHttp.client.newBuilder()
@@ -659,7 +659,7 @@ class ExoSubtitleEngine(
         applyRequestHeaders()
         val dataSource = androidx.media3.datasource.DefaultDataSource.Factory(context, http)
         // Match mpv's buffering depth so stability doesn't drop after the handoff (Dev refinement #3).
-        // N18 — the film buffer the user chose, or the tier's. The byte target below follows the same
+        // The film buffer the user chose, or the tier's. The byte target below follows the same
         // choice (see [filmTargetBytes]): on Auto it is the tier's, exactly as before; a chosen buffer
         // may grow it up to the device's film ceiling and the heap cap, so it is no longer fixed at 16/48 MiB.
         val maxBufferMs = FilmNetwork.bufferSecs(filmBufferSecs, budget) * 1000
@@ -701,7 +701,7 @@ class ExoSubtitleEngine(
             audioDelay = audioDelay,
             passthrough = passthroughAllowed,
         )
-        // D-L3 — Blu-ray `.m2ts` (the PGS case this engine exists for) carries DTS on HDMV stream types
+        // Blu-ray `.m2ts` (the PGS case this engine exists for) carries DTS on HDMV stream types
         // the stock TS reader skips; and a longer timestamp search finds the duration of files whose first
         // PCR sits deep in (Media3's 600 packets is the floor; Just Player and Jellyfin use 1500–1800).
         val extractors = androidx.media3.extractor.DefaultExtractorsFactory()
@@ -847,22 +847,22 @@ class ExoSubtitleEngine(
     /** The user's Auto / Stereo only / Surround choice, pushed in by [OwnTVPlayer]; read at build time. */
     @Volatile var surroundMode: SurroundMode = SurroundMode.AUTO
 
-    /** N8 + P14 — may this engine bitstream Dolby/DTS, pushed in by [OwnTVPlayer]; read at build time. */
+    /** May this engine bitstream Dolby/DTS, pushed in by [OwnTVPlayer]; read at build time. */
     @Volatile var passthroughAllowed = true
 
-    /** D-M5 — Settings → background playback, pushed in by [OwnTVPlayer]; read at build time. On, the player
+    /** Settings → background playback, pushed in by [OwnTVPlayer]; read at build time. On, the player
      *  keeps the CPU and Wi-Fi awake while playing, so a phone with its screen off can still reconnect. */
     @Volatile var backgroundPlayback = true
 
     /** Settings → Video player → Auto frame rate, pushed in by [OwnTVPlayer]; read at build time. */
     @Volatile var autoFrameRateEnabled = false
 
-    /** N18 — films' buffer and network timeout (0 = Auto), pushed in by [OwnTVPlayer]. Both are baked
+    /** Films' buffer and network timeout (0 = Auto), pushed in by [OwnTVPlayer]. Both are baked
      *  into the player at build, so a change rebuilds it on the next [start] — see [FilmNetwork]. */
     @Volatile var filmBufferSecs: Int = 0
     @Volatile var filmTimeoutSecs: Int = 0
 
-    /** N18 — Settings → Reconnect attempts, pushed in by [OwnTVPlayer]; read at each drop. */
+    /** Settings → Reconnect attempts, pushed in by [OwnTVPlayer]; read at each drop. */
     @Volatile var filmReconnects: Int = 1
 
     /** In-place reopens this item has used, and the position of the last — reset on every [start]. */
@@ -875,14 +875,14 @@ class ExoSubtitleEngine(
 
     @Volatile var prefSubLang: String = ""
 
-    /** N11 — the Settings limit for this item (lines, null = none), pushed in by [OwnTVPlayer] before
+    /** The Settings limit for this item (lines, null = none), pushed in by [OwnTVPlayer] before
      *  [start]; and a Quality-menu pick, which [start] forgets for a different file. */
     @Volatile var qualityCap: Int? = null
         set(value) { field = value; applyVideoQuality() }
     private var qualityPick: Int? = null
     private var qualityPickUrl: String? = null
 
-    /** N11 — the Quality menu: [height] for this file, or null for Auto (the Settings limit). */
+    /** The Quality menu: [height] for this file, or null for Auto (the Settings limit). */
     fun selectVideoQuality(height: Int?) {
         qualityPick = height
         qualityPickUrl = currentUrl
@@ -1231,7 +1231,7 @@ class ExoSubtitleEngine(
         pendingExternalLabel = null
         subDelayMs = 0
         delayLabel = null
-        // X2 — the shifted copies only make sense for the session that generated them; drop them so
+        // The shifted copies only make sense for the session that generated them; drop them so
         // they don't accumulate in cacheDir. The name guard keeps a fallback result (which is the
         // user's own subtitle file) safe from deletion.
         shiftJob?.cancel()
@@ -1248,7 +1248,7 @@ class ExoSubtitleEngine(
         const val TARGET_BUFFER_BYTES = 24 * 1024 * 1024
         const val LOW_RAM_TARGET_BYTES = 16 * 1024 * 1024
         const val BASE_BUFFER_MS = 30_000
-        /** TS packets searched for a timestamp in a film (D-L3). */
+        /** TS packets searched for a timestamp in a film. */
         const val TS_TIMESTAMP_SEARCH_PACKETS = 1_500
         /** Armed at load, so it covers the open as well as the decode — see [NoFrameWatchdog] for why
          *  this matches the hero preview's budget rather than the live engine's 8 s. */

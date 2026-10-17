@@ -31,7 +31,7 @@ enum class VodEnginePin { MPV, EXO }
  * Keyed by [enginePinKey] — sourceId + media type + provider remoteId — which survives playlist
  * re-syncs on all three source types (Room ids don't, and a Stalker stream URL is minted fresh per
  * play, so the old URL key never matched there). Pins written by older builds are keyed by stream URL
- * and are still read, then rewritten under the stable key (see [migrateKey] — P6).
+ * and are still read, then rewritten under the stable key (see [migrateKey]).
  *
  * Since v44 stored in `playback_quirks`, like [ForceMpvStore]; the old DataStore file is copied in once.
  */

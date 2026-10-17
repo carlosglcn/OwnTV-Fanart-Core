@@ -11,7 +11,7 @@ import java.nio.file.Files
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.concurrent.thread
 
-/** P16a — the buffer on disk: pieces, the wall clock, gaps, dropping, and readers that follow the edge. */
+/** The buffer on disk: pieces, the wall clock, gaps, dropping, and readers that follow the edge. */
 class TimeshiftSessionTest {
 
     private val dir: File = Files.createTempDirectory("timeshift-test").toFile()

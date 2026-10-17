@@ -7,7 +7,7 @@ import tv.own.owntv.core.player.mediaTypeOfPinKey
 import tv.own.owntv.core.player.sourceIdOfPinKey
 
 /**
- * The original language of what is playing, for the "Original language" audio choice (N14).
+ * The original language of what is playing, for the "Original language" audio choice.
  *
  * Takes the player's track key — `<sourceId>:MOVIE:<remoteId>` for a film, `<sourceId>:SERIES:<remoteId>`
  * for every episode of a show — and answers with the 639-2 code tracks carry ("kor"), or null when the

@@ -83,7 +83,7 @@ object RecordingSchedule {
     /**
      * Which of [candidates] would contend with a recording over [startMs]..[stopMs] on the same
      * playlist. Shown to the user **before** they commit to anything, because a live programme
-     * cannot wait its turn: "start when the other finishes" means "start half-way through" (D10).
+     * cannot wait its turn: "start when the other finishes" means "start half-way through".
      */
     fun clashesAmong(
         candidates: List<RecordingEntity>,

@@ -21,7 +21,7 @@ interface ContentOrderDao {
     @Query("DELETE FROM content_order WHERE profileId = :profileId AND mediaType = :type AND contextKey = :contextKey")
     suspend fun clearContext(profileId: Long, type: MediaType, contextKey: String)
 
-    /** Context keys that actually have manual-order rows for this profile/section — the C3 fast
+    /** Context keys that actually have manual-order rows for this profile/section — the fast
      *  path: folders with no overrides use the plain indexed paging query instead of the
      *  unindexable content_order join-sort (which materializes the whole folder per page). */
     @Query("SELECT DISTINCT contextKey FROM content_order WHERE profileId = :profileId AND mediaType = :type")
@@ -44,7 +44,7 @@ interface ContentOrderDao {
 
     /**
      * Manual-order rows tied to one source, joined to stable content keys — the per-source re-sync
-     * snapshot (B1). Without this, a resync renumbered the content ids and every Move the user had
+     * snapshot. Without this, a resync renumbered the content ids and every Move the user had
      * made in that source's folders was silently lost. Episodes never appear in content_order, so
      * the join only covers LIVE/MOVIE/SERIES.
      */

@@ -16,6 +16,7 @@ import tv.own.owntv.core.epg.EpgSourceStore
 import tv.own.owntv.core.model.SourceType
 import tv.own.owntv.core.parser.XtEpgEntry
 import tv.own.owntv.core.parser.XtreamClient
+import tv.own.owntv.core.stalker.ReconnectUrlProvider
 import tv.own.owntv.core.stalker.StreamUrlResolver
 
 /** Archive window assumed when the playlist doesn't say how many days it keeps. One shared value:
@@ -123,11 +124,11 @@ class LiveEpgReader(
                 }
             }
 
-            // 2) Provider short-EPG API fallback (Xtream get_short_epg / Stalker get_short_epg, Phase E §5.5).
+            // 2) Provider short-EPG API fallback (Xtream get_short_epg / Stalker get_short_epg).
             val entries = providerEntries(ch, shift) ?: return@withContext null
             // A gap in the provider's own guide data around "now" (nothing covers this instant) must leave
             // current null — picking the next entry that simply hasn't ended yet would mislabel an upcoming
-            // programme as live (issue #68). "Next"/"Later" are computed independently below, so a genuine
+            // programme as live. "Next"/"Later" are computed independently below, so a genuine
             // gap correctly shows no "Now" while the upcoming programme still appears as "Next".
             val current = entries.firstOrNull { it.startMs <= now && it.stopMs > now }
             val future = entries.filter { it.startMs > (current?.startMs ?: now) }.sortedBy { it.startMs }
@@ -442,7 +443,7 @@ class LiveArchiveUrls(
     suspend fun forProgramme(ch: ChannelEntity, programme: EpgProgrammeEntity): String? =
         withContext(Dispatchers.IO) {
             val source = sourceDao.getById(ch.sourceId) ?: return@withContext null
-            // Stalker archive URLs are minted per-play via create_link (Phase E §5.6); the others
+            // Stalker archive URLs are minted per-play via create_link; the others
             // are pure string templates handled by CatchupUrl.
             if (source.type == SourceType.STALKER) {
                 ch.remoteId?.let { rid ->
@@ -455,8 +456,44 @@ class LiveArchiveUrls(
             }
         }
 
-    /** The rolling-archive URL for watching [ch] [offsetSec] behind the live edge. */
+    /**
+     * A Stalker archive URL is a single-use `create_link`, so a Retry or a stall reconnect that
+     * replays it gets nothing. For a Stalker channel this mints a fresh one for the same [programme];
+     * null for every other source, whose archive URL can simply be replayed.
+     */
+    suspend fun reconnectFor(ch: ChannelEntity, programme: EpgProgrammeEntity): ReconnectUrlProvider? {
+        val type = withContext(Dispatchers.IO) { sourceDao.getById(ch.sourceId)?.type }
+        return if (type == SourceType.STALKER) ReconnectUrlProvider { forProgramme(ch, programme) } else null
+    }
+
+    /** An archive URL, the wall-clock instant it really starts at, and — for Stalker — how to mint a
+     *  fresh URL for the same start (see [reconnectFor]). */
+    data class Timeshift(val url: String, val startMs: Long, val reconnect: ReconnectUrlProvider? = null)
+
+    /**
+     * The rolling-archive URL for watching [ch] [offsetSec] behind the live edge, asked to start at
+     * [startMs]. The returned start is the one the archive will really begin at, and the one every
+     * "behind live" counter must be measured from: an Xtream timeshift start is written to the
+     * minute, so the panel serves from the minute's start — up to 59 s earlier than asked.
+     */
     suspend fun forTimeshift(
+        ch: ChannelEntity,
+        source: tv.own.owntv.core.database.entity.SourceEntity,
+        startMs: Long,
+        offsetSec: Int,
+        tz: java.util.TimeZone,
+    ): Timeshift? {
+        val onTheMinute = startsOnTheMinute(source.type, ch.catchupType, ch.catchupSource)
+        val start = if (onTheMinute) startMs - Math.floorMod(startMs, 60_000L) else startMs
+        val reconnect = if (source.type == SourceType.STALKER) {
+            ReconnectUrlProvider { timeshiftUrl(ch, source, start, offsetSec, tz) }
+        } else {
+            null
+        }
+        return timeshiftUrl(ch, source, start, offsetSec, tz)?.let { Timeshift(it, start, reconnect) }
+    }
+
+    private suspend fun timeshiftUrl(
         ch: ChannelEntity,
         source: tv.own.owntv.core.database.entity.SourceEntity,
         startMs: Long,
@@ -479,8 +516,9 @@ class LiveArchiveUrls(
                 startMs,
                 startMs + durationMin * 60_000L,
                 tz,
+                ch.catchupCorrectionMin,
             )
-            // Stalker rewind = the same per-play archive create_link as catch-up (Phase E §5.6).
+            // Stalker rewind = the same per-play archive create_link as catch-up.
             SourceType.STALKER -> ch.remoteId?.let { rid ->
                 runCatching { streamUrlResolver.resolveCatchup(source, rid, startMs, startMs + durationMin * 60_000L) }
                     .onFailure { Log.w(LOG_TAG, "Stalker rewind resolve failed channelId=${ch.id}", it) }
@@ -488,5 +526,14 @@ class LiveArchiveUrls(
             }
             else -> null
         }
+    }
+
+    internal companion object {
+        /** Xtream's timeshift start, and that of an M3U `xc` channel without a template of its own (a
+         *  template wins in `CatchupUrl.forM3u`), is written `yyyy-MM-dd:HH-mm`. */
+        fun startsOnTheMinute(type: SourceType, catchupType: String?, catchupSource: String?): Boolean =
+            type == SourceType.XTREAM ||
+                (type == SourceType.M3U && catchupSource.isNullOrBlank() &&
+                    catchupType?.trim()?.lowercase().let { it == "xc" || it == "xtream" })
     }
 }

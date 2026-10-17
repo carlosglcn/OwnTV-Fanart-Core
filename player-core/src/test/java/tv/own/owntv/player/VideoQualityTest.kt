@@ -4,7 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
 
-/** N11 — the Settings limit, the mobile-data limit and the Quality-menu pick. */
+/** The Settings limit, the mobile-data limit and the Quality-menu pick. */
 class VideoQualityTest {
 
     @Test

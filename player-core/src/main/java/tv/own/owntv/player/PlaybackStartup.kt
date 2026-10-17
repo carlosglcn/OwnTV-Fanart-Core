@@ -20,9 +20,9 @@ import tv.own.owntv.core.timeshift.TimeshiftStorage
 object PlaybackStartup {
 
     fun start(context: Context, scope: CoroutineScope, settings: SettingsRepository, archiveStore: ArchiveDecodeStore) {
-        // S15 — start reading the engines' settings now, so an engine built later is born with them.
+        // Start reading the engines' settings now, so an engine built later is born with them.
         val snapshot = PlaybackSettings.of(settings)
-        // Night mode / volume levelling (P14) are read by every ExoPlayer audio processor on every buffer.
+        // Night mode / volume levelling are read by every ExoPlayer audio processor on every buffer.
         scope.launch {
             snapshot.collect { s ->
                 if (s == null) return@collect
@@ -46,7 +46,7 @@ object PlaybackStartup {
             }
         }
         scope.launch { settings.runOneTimeMigrations() }
-        // N4 — timeshift buffers never outlive the run that wrote them (decision 23).
+        // Timeshift buffers never outlive the run that wrote them.
         scope.launch { TimeshiftStorage.clearAll(context) }
     }
 }

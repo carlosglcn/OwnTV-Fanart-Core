@@ -86,7 +86,7 @@ object AudioOutputPolicy {
  * thing we must not let it do. If a future Media3 removes it, the `runCatching` falls back to the
  * stock sink and we lose the guarantee rather than the playback.
  *
- * Every sink carries an [AudioDynamicsProcessor] (night mode / volume levelling, P14), which passes
+ * Every sink carries an [AudioDynamicsProcessor] (night mode / volume levelling), which passes
  * sound through untouched while both are off. With [passthrough] false the sink refuses encoded
  * Dolby/DTS that the device can decode ([DecodedOnlyAudioSink]), so it is decoded here — multichannel
  * PCM still, when the output takes it.
@@ -100,7 +100,7 @@ class OwnTVRenderersFactory(
     private val forceStereo: Boolean,
     /** A/V-sync offset applied to whichever sink is built — see [AudioDelayClock]. Null = none. */
     private val audioDelay: AudioDelayClock? = null,
-    /** N8 — false: decode Dolby/DTS in the app instead of bitstreaming it. */
+    /** False: decode Dolby/DTS in the app instead of bitstreaming it. */
     private val passthrough: Boolean = true,
 ) : DefaultRenderersFactory(context) {
 
@@ -161,7 +161,7 @@ class OwnTVRenderersFactory(
 }
 
 /**
- * N8 — a sink that will not take encoded audio the app can decode (a device decoder or FFmpeg), so the
+ * A sink that will not take encoded audio the app can decode (a device decoder or FFmpeg), so the
  * renderer decodes it instead of bitstreaming it. A format nothing here decodes is still passed through:
  * sound from the receiver beats silence (and on the live engine, "no decoder" is what hands a channel to mpv).
  */

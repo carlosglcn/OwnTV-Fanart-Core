@@ -3,7 +3,7 @@ package tv.own.owntv.player
 import tv.own.owntv.core.player.PlayerBudget
 
 /**
- * N18 follow-up: makes the Film buffer setting reach memory, not just the seconds.
+ * Makes the Film buffer setting reach memory, not just the seconds.
  *
  * Before this, a chosen Film buffer only raised the *duration* target. Each engine's byte cap stayed the
  * device tier's (ExoPlayer 16/48/72 MiB, mpv 48/128/256 MiB), so a 4K film on a 2 GB TV filled the cap in

@@ -55,17 +55,10 @@
     <!-- Translators: Visual drag indicator shown next to the active item during reorder mode. This is a symbol, not translatable text. -->
     <string name="setup_move_indicator">\u2195</string>
 
-    <!-- Translators: Subtitle on the first-run welcome screen, below the OwnTV brand lockup. -->
-    <string name="setup_welcome_to">WELCOME TO</string>
-    <string name="setup_welcome_tagline">Your own IPTV player.</string>
     <!-- Translators: Primary action button on the first-run welcome screen. -->
     <string name="setup_get_started">Get Started</string>
     <!-- Translators: Heading on the first-run step where the user sets interface and text size before the rest of setup. -->
     <string name="setup_display_size_title">Make it comfortable to read</string>
-    <!-- Translators: Description under the heading on the first-run display-size step. "Settings" refers to the app's Settings screen. -->
-    <string name="setup_display_size_description">Set how big the interface and its text are. You can change both later in Settings.</string>
-    <!-- Translators: Sample sentence shown on the first-run display-size step; it scales live so the user can judge readability from the sofa. -->
-    <string name="setup_display_size_preview">If you can read this easily from your seat, the size is right.</string>
     <!-- Translators: Heading on the first-run disclaimer screen shown before the user can proceed. -->
     <string name="setup_before_you_start">Before you start</string>
     <!-- Translators: Body text on the first-run disclaimer screen. "OwnTV", "Xtream", "M3U" are brand/protocol names that must not be translated. -->
@@ -80,8 +73,6 @@
     <string name="setup_new_profile">New profile</string>
     <!-- Translators: Description text beneath the "New profile" choice card on the setup-choice screen. -->
     <string name="setup_create_profile_add_sources">Create a profile and add sources</string>
-    <!-- Translators: ChoiceCard title on the setup-choice screen for restoring from a backup. -->
-    <string name="setup_restore_backup">Restore backup</string>
     <!-- Translators: Description text beneath the "Restore backup" choice card. -->
     <string name="setup_import_profiles_playlists">Import profiles &amp; playlists from a file</string>
     <!-- Translators: ChoiceCard title on the setup-choice screen for copying everything from another OwnTV device on the same Wi-Fi. -->
@@ -92,10 +83,6 @@
     <string name="setup_add_playlist">Add a playlist</string>
     <!-- Translators: Description on the "add a playlist" step. -->
     <string name="setup_add_playlist_description">Add a source for this profile, or set one up later.</string>
-    <!-- Translators: ChoiceCard title for creating a new M3U/Xtream source from scratch. -->
-    <string name="setup_new">New</string>
-    <!-- Translators: Description beneath the "New" choice card. "M3U" and "Xtream" are protocol/brand names that must not be translated. -->
-    <string name="setup_add_m3u_xtream">Add an M3U, Xtream or Stalker source</string>
     <!-- Translators: ChoiceCard title for reusing playlists from another profile. Only shown when other profiles already have sources. -->
     <string name="setup_existing">Existing</string>
     <!-- Translators: Description beneath the "Existing" choice card. Only shown when other profiles have sources. -->
@@ -332,20 +319,6 @@
     <!-- Translators: Error text on the companion PIN entry page when the entered PIN does not match. -->
     <string name="companion_pin_mismatch">That PIN did not match \u2014 try again.</string>
     <!-- Translators: Page title in the companion browser tab for the add-source page. "OwnTV" is a brand name. -->
-    <!-- Translators: Browser tab title for the page the remote device uses to send a TMDB key to the TV. -->
-    <string name="companion_tmdb_page_title">Send TMDB key</string>
-    <!-- Translators: Heading on that page. -->
-    <string name="companion_tmdb_heading">Send your TMDB key</string>
-    <!-- Translators: Instructions on that page. -->
-    <string name="companion_tmdb_description">Sign in to TMDB below, copy your API key (v3 auth), paste it here and send it to your TV. A personal key is free and has practically no daily limit.</string>
-    <!-- Translators: Link to TMDB's API settings page. -->
-    <string name="companion_tmdb_get_key">Open TMDB API settings</string>
-    <!-- Translators: Error when the pasted text does not look like a TMDB API key. -->
-    <string name="companion_tmdb_invalid">That does not look like a TMDB API key. Copy the \"API Key (v3 auth)\" value.</string>
-    <!-- Translators: Confirmation shown on the remote device after the key reaches the TV. -->
-    <string name="companion_tmdb_sent_body">Your TMDB key is now on the TV. Press Save there to start using it.</string>
-    <!-- Translators: Link back to the form to send another key. -->
-    <string name="companion_tmdb_sent_link">Send a different key</string>
     <string name="companion_service_config_empty">Enter an API key, a Worker URL, or both.</string>
     <string name="companion_service_config_invalid_key">That API key does not look valid.</string>
     <string name="companion_service_config_invalid_url">Enter a valid HTTPS Worker URL.</string>

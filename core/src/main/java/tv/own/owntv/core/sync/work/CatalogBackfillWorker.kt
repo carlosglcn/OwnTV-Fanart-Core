@@ -12,10 +12,10 @@ import tv.own.owntv.core.sync.SyncManager
 import tv.own.owntv.core.timeshift.TimeshiftManager
 
 /**
- * Finishes a Stalker catalogue that setup deliberately left incomplete (plan N1d).
+ * Finishes a Stalker catalogue that setup deliberately left incomplete.
  *
  * The portals this exists for cap a page at ~14 items, so a first import that walked every page
- * would hold the user at a progress bar for four and a half minutes. N1b stops after the first page
+ * would hold the user at a progress bar for four and a half minutes. The setup sweep stops after the first page
  * of every category — every list is immediately browsable — and writes down what it skipped. This
  * worker drains that plan afterwards, invisibly.
  *
@@ -30,7 +30,7 @@ import tv.own.owntv.core.timeshift.TimeshiftManager
  *   the moment either says this source is in use, coming back later.
  * - **It reconciles.** The finish line is the sum of the portal's own *per-category* totals, which
  *   the drain reads back from the plan rows. (Not the synthetic "*" total — that counts items in no
- *   category at all, and a drain chasing it would never finish. See the plan's §4C.)
+ *   category at all, and a drain chasing it would never finish.)
  */
 class CatalogBackfillWorker(
     context: Context,
@@ -79,19 +79,19 @@ class CatalogBackfillWorker(
 
     /**
      * The two things that were measured against a 3%-full catalogue and have to happen again now
-     * that it is whole (plan N1f-1 and N1f-2).
+     * that it is whole.
      *
      * Both are deliberately best-effort: the catalogue is already correct and browsable at this
      * point, so neither failing is worth a retry that would re-walk nothing.
      */
     private suspend fun onCatalogueComplete(sourceId: Long) {
-        // N1f-1. `ensureContentIndexes` runs ANALYZE, and on a lazy add it last ran when the source
+        // `ensureContentIndexes` runs ANALYZE, and on a lazy add it last ran when the source
         // held a few per cent of its final rows. Stale statistics make SQLite ignore the very
         // indexes this function creates and full-sort instead — its own comment says so.
         runCatching { importFinalizer.ensureContentIndexes() }
             .onFailure { Log.w(TAG, "post-backfill index refresh failed sourceId=$sourceId", it) }
 
-        // N1f-2. Trending is a snapshot, and a snapshot of a part-filled catalogue sits behind a
+        // Trending is a snapshot, and a snapshot of a part-filled catalogue sits behind a
         // multi-day timer. CatalogSyncWorker now declines to take one while a drain is outstanding,
         // which makes this the only place it can be taken for a lazily-added source.
         runCatching { scheduler.enqueueTrendingRefresh(sourceId) }
@@ -108,7 +108,7 @@ class CatalogBackfillWorker(
      * which never claims a connection; [OpenStreamRegistry] is Multiview and recordings, which do;
      * [TimeshiftManager] is a live channel's saved copy, whose download can outlive the player screen;
      * [SyncActivityTracker] is an ordinary sync of the same source. The watch clause exists because
-     * the registry alone silently covered none of the common case — see N1f-3.
+     * the registry alone silently covered none of the common case — see [WatchSession].
      */
     private fun shouldYield(sourceId: Long): Boolean =
         watchSession.isWatching(sourceId) ||

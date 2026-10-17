@@ -82,7 +82,7 @@ object LiveBuffer {
 
     /**
      * Turn the user's Live latency preset ([bufferSecs], null = Balanced) and "Pre-buffer"
-     * choice ([prerollSecs], 0 = Off) into load-control durations (F06/F07).
+     * choice ([prerollSecs], 0 = Off) into load-control durations.
      *
      * With the defaults (Balanced + Off) this returns **exactly** the values that were hardcoded
      * before, so the default Live TV behaviour is byte-identical.
@@ -118,7 +118,7 @@ object LiveBuffer {
      * `LivePreviewEngine`'s re-buffer-flap detector is the backstop for that (it drops the pre-roll for
      * that stream), because no sane heap budget holds 10 s of a 4K channel.
      *
-     * [lowSpec] caps the scaling at 2× instead of 3× (S16): on a 2 GB TV the live buffer's 48 MB stacks
+     * [lowSpec] caps the scaling at 2× instead of 3×: on a 2 GB TV the live buffer's 48 MB stacks
      * with mpv's 48 MiB cache while an engine handoff overlaps the two.
      */
     fun targetBufferBytes(bufferSecs: Int?, prerollSecs: Int, defaultBytes: Int, lowSpec: Boolean = false): Int {

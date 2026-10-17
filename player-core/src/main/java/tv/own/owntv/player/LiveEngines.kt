@@ -18,8 +18,19 @@ data class LiveRequest(
     val directSource: String?,
 )
 
-/** What mpv did with a channel it was just given: a picture (or the spinner clearing), or an error. */
+/** What mpv did with a channel it was just given: playback started, or an error. */
 data class MpvOutcome(val opened: Boolean, val error: String?)
+
+/**
+ * mpv's outcome from its two signals, or null while it is still opening. An error wins. Nothing else
+ * counts as "opened" — the spinner is not raised by a normal load, so "not buffering" was true from the
+ * first instant and every mpv tune read as opened before a byte had arrived.
+ */
+internal fun mpvOutcomeOf(playbackStarted: Boolean, error: PlaybackFailure?): MpvOutcome? = when {
+    error != null -> MpvOutcome(opened = false, error = error.toString())
+    playbackStarted -> MpvOutcome(opened = true, error = null)
+    else -> null
+}
 
 /**
  * The two live engines, as [LiveTuneController] drives them.
@@ -64,15 +75,16 @@ interface LiveEngines {
     /**
      * Wait up to [timeoutMs] for mpv to open or fail; null when it did neither.
      *
-     * **"Opened" is a decoded picture or the spinner clearing — never `isPlaying`.** mpv seeds that flag
-     * true at load time, so it says nothing about whether the stream ever arrived.
+     * **"Opened" is playback moving — [OwnTVPlayer.playbackStarted], never `isPlaying` or the spinner.**
+     * mpv seeds `isPlaying` true at load time and never raises the spinner on a normal load, so neither
+     * says anything about whether the stream ever arrived.
      */
     suspend fun awaitMpvOutcome(timeoutMs: Long): MpvOutcome?
 
     /** The Stalker re-resolve hook, installed on both engines, or cleared with null. */
     fun setReconnectProvider(provider: ReconnectUrlProvider?)
 
-    /** How far into its current stream the live engine on screen is — for a saved copy's clock (N4). */
+    /** How far into its current stream the live engine on screen is — for a saved copy's clock. */
     fun positionMs(onExo: Boolean): Long = 0L
 }
 
@@ -138,13 +150,7 @@ class EnginePair(private val exo: LivePreviewEngine, private val mpv: OwnTVPlaye
     override fun mpvAbandon(reason: String) = mpv.abandonLive(reason)
 
     override suspend fun awaitMpvOutcome(timeoutMs: Long): MpvOutcome? = withTimeoutOrNull(timeoutMs) {
-        combine(mpv.videoRes, mpv.buffering, mpv.error) { res, buffering, error ->
-            when {
-                error != null -> MpvOutcome(opened = false, error = error.toString())
-                res != null || !buffering -> MpvOutcome(opened = true, error = null)
-                else -> null
-            }
-        }.first { it != null }
+        combine(mpv.playbackStarted, mpv.error, ::mpvOutcomeOf).first { it != null }
     }
 
     override fun setReconnectProvider(provider: ReconnectUrlProvider?) {

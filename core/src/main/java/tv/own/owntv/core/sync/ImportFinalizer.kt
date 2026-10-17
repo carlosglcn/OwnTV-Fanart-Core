@@ -34,7 +34,7 @@ class ImportFinalizer(
     suspend fun finalize(source: SourceEntity, deferIndexes: Boolean = false): SyncCounts {
         val counts = contentCounts(source.id)
         registerPortalGuide(source)
-        // C4: bounded TTL eviction of the TMDB caches — they grow without limit as the user
+        // Bounded TTL eviction of the TMDB caches — they grow without limit as the user
         // browses. Piggy-backed here (the operation that changes data), never on cold start.
         // Indexed DELETE on updatedAt; evicted rows simply re-fetch on next focus.
         runCatching {
@@ -127,7 +127,7 @@ class ImportFinalizer(
     companion object {
         private const val TAG = "ImportFinalizer"
 
-        /** TMDB cache TTL (C4): entries untouched for this long are evicted after a sync.
+        /** TMDB cache TTL: entries untouched for this long are evicted after a sync.
          *  90 days ≫ the repository's own refresh window, so this only drops long-abandoned rows. */
         private const val METADATA_TTL_MS = 90L * 24 * 60 * 60 * 1000
     }

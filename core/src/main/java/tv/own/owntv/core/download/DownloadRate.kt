@@ -4,7 +4,7 @@ import tv.own.owntv.core.database.entity.DownloadEntity
 import tv.own.owntv.core.model.DownloadStatus
 
 /**
- * Transfer speed over the last few seconds (Stage G3, "12.4 MB/s · 3 min left"). A sliding window
+ * Transfer speed over the last few seconds ("12.4 MB/s · 3 min left"). A sliding window
  * rather than bytes-since-start, so a resumed download or a stall shows the speed *now*.
  * Pure: the caller hands in the clock.
  */

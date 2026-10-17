@@ -5,7 +5,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-/** P16a — the storage rules: at least the window, never under 1 GB free, never the newest pieces. */
+/** The storage rules: at least the window, never under 1 GB free, never the newest pieces. */
 class TimeshiftRulesTest {
 
     private val gb = 1024L * 1024 * 1024

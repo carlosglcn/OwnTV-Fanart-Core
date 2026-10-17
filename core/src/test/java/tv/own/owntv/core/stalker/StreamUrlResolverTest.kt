@@ -126,7 +126,7 @@ class StreamUrlResolverTest {
         )
     }
 
-    // --- Phase E: catch-up archive resolve (§5.6) ---
+    // --- Catch-up archive resolve ---
 
     /**
      * The fix: the cmd carries the PORTAL's programme id, taken from its own guide table. Sending a
@@ -264,7 +264,7 @@ class StreamUrlResolverTest {
         assertEquals(3, client.createLinkCalls)
     }
 
-    // --- Phase E: short EPG (§5.5) ---
+    // --- Short EPG ---
 
     @Test fun shortEpg_returnsClientEntriesForStalkerOnly() = runBlocking {
         val client = RecordingClient()

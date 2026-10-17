@@ -8,7 +8,7 @@ import java.net.URLDecoder
  *
  * Providers hand these out as "your M3U", but the playlist they export carries no movie/series tags
  * (the type is only in the stream path), so an M3U import files every film and episode under Live TV
- * (#238) — and some panels refuse `get.php` outright (HTTP 884) while the same account works on
+ * and some panels refuse `get.php` outright (HTTP 884) while the same account works on
  * `player_api.php`. Importing the link as Xtream fixes both and brings the real catalogue with it.
  */
 data class XtreamM3uLink(

@@ -22,7 +22,7 @@ import tv.own.owntv.core.stalker.StalkerClient
 import tv.own.owntv.core.settings.SettingsRepository
 
 /**
- * Phase 12 — backup & restore of the painful-to-re-enter setup: **profiles** (name/avatar/kids/PIN),
+ * Backup & restore of the painful-to-re-enter setup: **profiles** (name/avatar/kids/PIN),
  * **sources** (URLs + credentials + per-source UA) and their profile links, plus per-profile
  * **customizations** (hidden/renamed/reordered categories & channels), favorites, watch history,
  * resume positions and manual Move positions — as a JSON file. The user picks which [Section]s to
@@ -44,7 +44,7 @@ class BackupManager(
     private val tmdbOverrides: tv.own.owntv.core.metadata.MetadataOverrideStore,
     private val metadataDao: tv.own.owntv.core.database.dao.MetadataDao,
     private val openSubAuth: tv.own.owntv.core.subtitles.OpenSubtitlesAuthStore,
-    /** `filesDir/backgrounds` — where the Glass effect wallpaper lives, so a backup can carry it. */
+    /** `filesDir/backgrounds` — where the background picture lives, so a backup can carry it. */
     private val backgroundsDir: File,
     /** `filesDir/subtitles` — the shared subtitle file cache (see SubtitleRepository), carried too. */
     private val subtitlesDir: File,
@@ -69,7 +69,7 @@ class BackupManager(
      * Writes the chosen [sections] into [folder] as `owntv-backup.own`; returns the file path.
      *
      * The output is a [BackupContainer]: the same backup JSON this class has always produced, plus
-     * the Glass effect wallpaper's actual bytes when one is set. Exporting bare `.json` is gone (the
+     * the background picture's actual bytes when one is set. Exporting bare `.json` is gone (the
      * path in it was device-local and its contents were readable to anyone) — restore still accepts
      * old `.json` files, and always will.
      *
@@ -107,7 +107,7 @@ class BackupManager(
             val seal: ((String) -> JSONObject)? = key?.let { k -> { plain -> BackupCrypto.encrypt(k, plain) } }
 
             val root = JSONObject().apply {
-                put("version", 24) // v24: "preferredLanguages" — each profile's preferred audio/subtitle language ({ "<profileId>": { "a", "s" } }); the shared pref_audio_lang/pref_sub_lang settings stay as the fallback for a profile with no entry. v23: "playbackQuirks" — what a stream needs, shared by every profile (sound-only marks and audio delays; the engine pins stay in compatMode so older readers still get them), and playbackPrefs carry the remembered track languages ("al"/"sl"). A playbackPrefs "d" from an older file restores into the shared delay. v22: sources carry the measured stream limit (maxConnections + maxConnectionsProbedAt), because measuring it costs minutes and interrupts playback and the answer belongs to the account, not the device. v21: "tombstones" — the user data the user DELETED, so a merge (restore or local sync) does not reinstate it. Older readers ignore the block and behave exactly as they do today. v20: playbackPrefs carry the per-item A/V-sync offset. v19: sources carry the per-playlist Live TV engine and Live latency overrides. v18: per-profile specific-channel startup targets. v17: startupModes/customizePins moved SOURCES→SETTINGS (readers accept both); PIN hashes and legacy URL-shaped player keys are encrypted-only; sources carry preferHls/livePrerollSecs/hlsSupported; source-keyed blocks scoped to the ticked profiles' sources. v16: optional Stalker serial/device IDs/signature. v15: custom category membership (issue #87) rides userData as kind "member"; customCategories blobs pass through unremapped. v14: .own container (wallpaper rides along). v13: sources.syncLive/Movies/Series. v12: per-profile OpenSubtitles login (encrypted-only). v11: profile-scoped export. v10: sources.mac. v9: custom TMDB names, encrypted TMDB key
+                put("version", 25) // v25: "sportsConfigs" — each profile's Settings → Sports blob ({ "<profileId>": { ... } }: followed leagues and teams, filters, alerts, remembered channels by portable name); a file without it restores with the defaults. v24: "preferredLanguages" — each profile's preferred audio/subtitle language ({ "<profileId>": { "a", "s" } }); the shared pref_audio_lang/pref_sub_lang settings stay as the fallback for a profile with no entry. v23: "playbackQuirks" — what a stream needs, shared by every profile (sound-only marks and audio delays; the engine pins stay in compatMode so older readers still get them), and playbackPrefs carry the remembered track languages ("al"/"sl"). A playbackPrefs "d" from an older file restores into the shared delay. v22: sources carry the measured stream limit (maxConnections + maxConnectionsProbedAt), because measuring it costs minutes and interrupts playback and the answer belongs to the account, not the device. v21: "tombstones" — the user data the user DELETED, so a merge (restore or local sync) does not reinstate it. Older readers ignore the block and behave exactly as they do today. v20: playbackPrefs carry the per-item A/V-sync offset. v19: sources carry the per-playlist Live TV engine and Live latency overrides. v18: per-profile specific-channel startup targets. v17: startupModes/customizePins moved SOURCES→SETTINGS (readers accept both); PIN hashes and legacy URL-shaped player keys are encrypted-only; sources carry preferHls/livePrerollSecs/hlsSupported; source-keyed blocks scoped to the ticked profiles' sources. v16: optional Stalker serial/device IDs/signature. v15: custom category membership rides userData as kind "member"; customCategories blobs pass through unremapped. v14: .own container (wallpaper rides along). v13: sources.syncLive/Movies/Series. v12: per-profile OpenSubtitles login (encrypted-only). v11: profile-scoped export. v10: sources.mac. v9: custom TMDB names, encrypted TMDB key
                 put("sections", JSONArray().apply { sections.forEach { put(it.name) } })
                 if (salt != null) put("crypto", BackupCrypto.cryptoBlock(salt))
                 // Ticked profiles always ride (backup is profile-based); restore needs SOURCES to apply them.
@@ -187,6 +187,7 @@ class BackupManager(
                 put("startupModes", filterByProfile(settings.exportStartupModes(), pidKeys))
                 put("startupChannels", filterByProfile(settings.exportStartupChannels(), pidKeys))
                 put("preferredLanguages", filterByProfile(settings.exportPreferredLanguages(), pidKeys))
+                put("sportsConfigs", filterByProfile(settings.exportSportsConfigs(), pidKeys))
                     // The Customize PIN is stored as a salted hash, but a 4-digit PIN behind one SHA-256
                     // pass is seconds of offline brute force — so it follows the same rule as every other
                     // secret: encrypted with the backup passphrase, or left out entirely.
@@ -197,7 +198,7 @@ class BackupManager(
                     //
                     // These are keyed by [enginePinKey] — "<sourceId>:<MEDIA_TYPE>:<remoteId>" — so the
                     // source id DOES have to be remapped on restore (the older comment here claimed they
-                    // were stream-URL keyed; that stopped being true when P6 introduced the stable key,
+                    // were stream-URL keyed; that stopped being true when the stable key was introduced,
                     // and an unremapped id silently pinned the wrong source's items). Rows are scoped to
                     // the ticked profiles' sources for the same reason. Keys still in the legacy
                     // stream-URL shape carry no source id and frequently embed the account's username
@@ -478,7 +479,7 @@ class BackupManager(
             .getOrNull()
     }
 
-    /** The current Glass effect background as a container asset, or null when unset/missing/oversized. */
+    /** The current background picture as a container asset, or null when unset/missing/oversized. */
     private suspend fun currentWallpaper(): BackupContainer.Asset? {
         val path = settings.bgImagePath.first().trim()
         if (path.isEmpty()) return null
@@ -564,7 +565,7 @@ class BackupManager(
 
     /**
      * Outcome of a restore: how many rows/entries were applied, and how many `sources[]` entries were
-     * left out because this build doesn't know their [SourceType] (B4 — see [sourceFrom]).
+     * left out because this build doesn't know their [SourceType] (see [sourceFrom]).
      */
     /**
      * Why a file is being applied. The two are not the same instruction and must not share one.
@@ -772,7 +773,7 @@ class BackupManager(
 
     /**
      * Applies the chosen [sections] of the file (only those it actually contains) as a MERGE — a
-     * restore never deletes anything that already exists on the device (owner decision, 2026-07-18):
+     * restore never deletes anything that already exists on the device:
      *
      * - Profiles are matched **by name** (case-insensitive): a match is updated in place (avatar,
      *   kids flag, PIN); a new name is added (with a fresh id if the file's id is taken). Device
@@ -801,7 +802,7 @@ class BackupManager(
          * The user asked for the hardware settings of *another* device (decoder, engines, frame rate,
          * HDR, surround) and its per-channel engine pins. A restore of this device's own
          * backup applies them anyway; a file from elsewhere — a restore or a local sync alike — keeps
-         * this device's unless this is true (owner decision 9, extended to sync on 2026-09-23).
+         * this device's unless this is true. Local sync follows the same rule.
          */
         deviceSettings: Boolean = false,
     ): Result<ImportSummary> = withContext(Dispatchers.IO) {
@@ -832,7 +833,7 @@ class BackupManager(
             }
 
             var count = 0
-            // Sources whose "type" this build can't parse: skipped rather than coerced (B4), and
+            // Sources whose "type" this build can't parse: skipped rather than coerced, and
             // reported back so the restore message can say what was left out.
             var skippedSources = 0
             // Locale is deliberately deferred until every other restore operation and the marker
@@ -858,7 +859,7 @@ class BackupManager(
             val fileSources = root.optJSONArray("sources") ?: JSONArray()
             val applySources = Section.SOURCES in sections && (root.has("profiles") || root.has("sources"))
 
-            // Interrupted-restore marker (B2): set before the first write of any kind, cleared only
+            // Interrupted-restore marker: set before the first write of any kind, cleared only
             // after the last one. A restore spans the database AND several DataStore files, so no
             // single transaction can cover it; the marker is what makes a half-applied restore
             // visible instead of silent (the shell prompts about it at the next launch).
@@ -869,11 +870,11 @@ class BackupManager(
                     "encrypted=${crypto != null} key=${key != null} profiles=${fileProfiles.length()} sources=${fileSources.length()}",
             )
 
-            // MERGE-restore (owner decision): a restore never deletes existing profiles or sources.
+            // MERGE-restore: a restore never deletes existing profiles or sources.
             // One transaction wraps the profile/source/link row writes — the part where a partial
             // apply would be actively wrong (a source inserted but its profile link missing). The
             // DataStore-backed sections below (settings, customizations, engine pins, logins) can't
-            // join it, and neither can the user-data resolve, which is deliberately chunked (B3) so
+            // join it, and neither can the user-data resolve, which is deliberately chunked so
             // a large restore doesn't hold one write transaction for its whole duration.
             db.transaction {
                 // --- profiles: match by NAME (case-insensitive) — ids are per-device counters and
@@ -925,7 +926,7 @@ class BackupManager(
                 // Nothing is wiped.
                 val deviceSources = sourceDao.getAllOnce()
                 // Claim-once: a device row leaves this list as soon as an incoming source merges onto
-                // it, so two playlists in the file can never land on the same row (#114).
+                // it, so two playlists in the file can never land on the same row.
                 val unclaimedSources = deviceSources.toMutableList()
                 val takenSourceIds = deviceSources.map { it.id }.toMutableSet()
                 for (i in 0 until fileSources.length()) {
@@ -1180,6 +1181,7 @@ class BackupManager(
                 }
                 settings.repairSpecificStartupModes(pids)
                 root.optJSONObject("preferredLanguages")?.let { settings.importPreferredLanguages(remapProfileKeys(it, profileIdMap), pids) }
+                root.optJSONObject("sportsConfigs")?.let { settings.importSportsConfigs(remapProfileKeys(it, profileIdMap), pids) }
                     // Encrypted-only since v17, so this restores the lock exactly when the passphrase
                     // is available and otherwise leaves the device's own Customize PIN untouched.
                     root.optJSONObject("customizePins")?.let { o ->
@@ -1496,7 +1498,7 @@ class BackupManager(
         if (Section.FAVORITES in sections) add("fav")
         if (Section.HISTORY in sections) add("his")
         if (Section.RESUME in sections) add("prog")
-        // "sort" (per-series season/episode order) and "member" (custom category membership, #87)
+        // "sort" (per-series season/episode order) and "member" (custom category membership)
         // ride with MANUAL_REORDER: all are per-profile, per-item ordering preferences, so one tick
         // covers everything the user has hand-ordered.
         if (Section.MANUAL_REORDER in sections) { add("order"); add("sort"); add("member") }
@@ -1577,7 +1579,7 @@ class BackupManager(
 
     /**
      * Maps one `sources[]` entry, or **null when its `type` isn't a [SourceType] this build knows**
-     * (B4). It used to coerce an unknown type to [SourceType.M3U], which silently turned a newer
+     * It used to coerce an unknown type to [SourceType.M3U], which silently turned a newer
      * build's Stalker/other portal into a broken M3U row pointing at a portal URL — worse than not
      * restoring it, because the user has no way to tell it apart from a real playlist. Callers skip
      * and count these, and the restore summary says how many were left out.
@@ -1731,7 +1733,7 @@ internal fun profileMatchKey(name: String) = name.trim().lowercase()
  * serves several accounts; the password is not, so a re-exported backup with a rotated password
  * still updates the existing row instead of duplicating it.
  *
- * The MAC joins the key for **Stalker only** (#114). A Stalker source has no username, and several
+ * The MAC joins the key for **Stalker only**. A Stalker source has no username, and several
  * playlists routinely share one portal URL, so type+url+username made every Stalker playlist in a
  * backup the same source: they all merged onto one device row, each one overwriting its MAC, and
  * every playlist's favorites/history/customizations collapsed onto that single row. Other source
@@ -1751,7 +1753,7 @@ private fun normalizeMacForMatch(mac: String?): String =
 /**
  * The device row [incoming] merges onto, or null to insert it as a new source. [candidates] holds
  * only rows no earlier incoming source has already claimed — a device row must never be claimed
- * twice, which is what let several Stalker playlists pile onto one row (#114).
+ * twice, which is what let several Stalker playlists pile onto one row.
  *
  * Exact key first. A Stalker source then falls back to portal+username when the MAC is unknown on
  * either side: a backup written WITHOUT a passphrase omits the MAC entirely (it is a secret), and

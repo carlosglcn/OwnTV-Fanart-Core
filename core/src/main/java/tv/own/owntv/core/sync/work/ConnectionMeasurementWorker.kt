@@ -11,10 +11,10 @@ import tv.own.owntv.core.live.WatchSession
 import tv.own.owntv.core.timeshift.TimeshiftManager
 
 /**
- * Measures how many streams a provider allows, off the setup path (plan N3b).
+ * Measures how many streams a provider allows, off the setup path.
  *
- * This used to run *inside* the first sync, before any phase. §4A measured 55.7 s of a fresh Stalker
- * add going nowhere with nothing logged, and N3a's instrumentation attributed **all** of it to this
+ * This used to run *inside* the first sync, before any phase. A fresh Stalker add spent 55.7 s
+ * going nowhere with nothing logged, and instrumentation attributed **all** of it to this
  * one step: `pre-phase connection measurement ms=55489`. The user sat at "Checking how many channels
  * this provider allows…" for most of a minute before the catalogue even started.
  *
@@ -29,7 +29,7 @@ import tv.own.owntv.core.timeshift.TimeshiftManager
  * nothing to interrupt. Moving it later was unsafe because nothing could answer "is the user
  * watching?".
  *
- * [WatchSession] now answers exactly that (plan N1f-3), so the measurement can wait for a quiet
+ * [WatchSession] now answers exactly that, so the measurement can wait for a quiet
  * moment instead of taking one hostage. If anything is playing or recording on this source, the
  * worker steps aside and comes back later — the same shape as the catalogue drain.
  *

@@ -4,7 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import tv.own.owntv.core.player.PlayerBudget
 
-/** C-H1 — a Live latency choice must reach mpv's cache too, or the device's larger cache wins. */
+/** A Live latency choice must reach mpv's cache too, or the device's larger cache wins. */
 class MpvLiveBufferTest {
 
     private val budget = PlayerBudget("128MiB", "32MiB", readaheadSecs = "30", cacheSecs = "60", lowSpec = false)

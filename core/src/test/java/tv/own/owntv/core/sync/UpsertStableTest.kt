@@ -6,7 +6,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
- * Phase 3 / S1 — `sortOrder` is compared alongside the content hash instead of being folded into it,
+ * `sortOrder` is compared alongside the content hash instead of being folded into it,
  * so a row the provider only *moved* is still rewritten, while an untouched row is still skipped.
  * Folding it into `computeContentHash()` would have changed every stored hash at once and turned the
  * next resync of a 170k-item catalog into a full rewrite.
@@ -68,7 +68,7 @@ class UpsertStableTest {
         assertEquals(0, stats.updated)
         assertEquals(0, stats.skippedUnchanged)
         assertEquals(0, stats.inserted)
-        // Plan A2: a position change must not go through @Update. That writes all ~20 columns and
+        // A position change must not go through @Update. That writes all ~20 columns and
         // re-runs withProviderCatalogMetadata's title parse on a row whose content is byte-identical.
         assertTrue(rec.updated.isEmpty())
         // Keeps its local row id, so favorites/history/resume stay linked.
@@ -76,9 +76,9 @@ class UpsertStableTest {
     }
 
     @Test
-    fun `plan A1 - ten thousand rows shifted by two cost zero content writes`() = runBlocking {
+    fun `ten thousand rows shifted by two cost zero content writes`() = runBlocking {
         val rec = Recorder()
-        // The measured shape of issue #192: two channels removed near the top of the list shifted
+        // The measured shape of a real resync: two channels removed near the top of the list shifted
         // every row below them by exactly -2. Content byte-identical throughout.
         val n = 10_000
         val rows = (0 until n).map { Row(remoteId = "r$it", name = "N$it", sortOrder = it) }
@@ -92,7 +92,7 @@ class UpsertStableTest {
         assertEquals(0, stats.skippedUnchanged)
         // Not one full-row write.
         assertTrue(rec.updated.isEmpty())
-        // Plan A3: one contiguous run, one delta — a single range statement, not 10,000 of them.
+        // One contiguous run, one delta — a single range statement, not 10,000 of them.
         assertEquals(listOf(PositionRange(fromSortOrder = 2, toSortOrder = n + 1, delta = -2)), rec.ranges)
         assertEquals(SOURCE_ID, rec.rangeSourceId)
         assertEquals(1, stats.movedByRange)

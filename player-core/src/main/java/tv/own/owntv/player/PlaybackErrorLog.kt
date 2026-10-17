@@ -26,7 +26,7 @@ object PlaybackErrorLog {
     private const val EXPORT_NAME = "owntv-playback-report.txt"
 
     /** What an entry is. The log used to hold hard failures only, which is exactly why a "the picture
-     *  judders / the sound drifts" report produced an empty log (F18). */
+     *  judders / the sound drifts" report produced an empty log. */
     enum class Kind {
         /** Playback stopped with an error screen. */
         ERROR,
@@ -143,7 +143,7 @@ object PlaybackErrorLog {
      * Record something that happened *without* stopping playback — a decode rescue, an engine handoff,
      * the stereo safety net. [reason] is stable semantic state; [detail] is the technical line under it.
      *
-     * This is the other half of F18: a user whose picture judders or whose sound drifts has no failure to
+     * This is the other half of the error log: a user whose picture judders or whose sound drifts has no failure to
      * report, so the log stayed empty and every report became a guessing game. Callers must keep these
      * rare — one per genuine event, never per frame or per retry tick.
      */

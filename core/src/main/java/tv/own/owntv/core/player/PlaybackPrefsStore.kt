@@ -54,7 +54,7 @@ class PlaybackPrefsStore(
 
     /**
      * The remembered values for [contentKey], or null when this item has none. The audio delay is the
-     * stream's, shared by every profile (owner decision 10); zoom and volume are this profile's.
+     * stream's, shared by every profile; zoom and volume are this profile's.
      */
     suspend fun prefsFor(contentKey: String): PlaybackPrefsEntity? = runCatching {
         copy.ensure()
@@ -88,7 +88,7 @@ class PlaybackPrefsStore(
 
     /**
      * The track languages this profile last picked for [trackKey] (a channel, a film, or a whole
-     * series — owner decision 11), as (audio, subtitle); either may be null. Subtitle may be
+     * series), as (audio, subtitle); either may be null. Subtitle may be
      * [SUBTITLES_OFF].
      */
     suspend fun tracksFor(trackKey: String): Pair<String?, String?>? = runCatching {

@@ -25,7 +25,7 @@ enum class StreamRefusal {
     /** Every connection this playlist allows is in use, by tiles, recordings or both. */
     ALL_IN_USE,
 
-    /** There is a connection free, but it is being kept so the user can still watch something (D10). */
+    /** There is a connection free, but it is being kept so the user can still watch something. */
     RESERVED_FOR_WATCHING,
 }
 
@@ -43,7 +43,7 @@ sealed interface StreamGrant {
 /**
  * May one more stream start on this playlist?
  *
- * The rules are D5, D10 and D11 together, and they are less contradictory than they look. **The
+ * The rules below work together, and they are less contradictory than they look. **The
  * feature is never capped**: the tile-count setting always offers up to four and nothing reduces it
  * behind the user's back. **An individual stream is checked before it tunes**, and if there is
  * nothing spare that one tile — or that one recording — is told why, in a sentence, instead of
@@ -53,7 +53,7 @@ sealed interface StreamGrant {
  * Everything here is arithmetic over [SourceEntity.maxConnections]: no Android, no I/O, no clock.
  *
  * @param source the playlist the stream would come from; null or an unknown limit allows everything.
- * @param open the streams that playlist already has running — tiles *and* recordings (D11).
+ * @param open the streams that playlist already has running — tiles *and* recordings.
  * @param reserveOneForWatching keeps one connection back so recordings can never take the last one.
  *   The user can give this up in Settings and record on every connection.
  */
@@ -77,7 +77,7 @@ fun connectionBudget(
             else -> refuse(StreamRefusal.ALL_IN_USE)
         }
         // A live programme is gone forever and a picture is not, so a recording is allowed to take the
-        // only connection a one-stream account has (D9). What it may not do is take the *last* one on
+        // only connection a one-stream account has. What it may not do is take the *last* one on
         // an account that has several, unless the user has said it may.
         StreamPurpose.RECORDING -> {
             val cap = when {

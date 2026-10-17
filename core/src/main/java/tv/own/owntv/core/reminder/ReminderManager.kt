@@ -14,7 +14,7 @@ import tv.own.owntv.core.database.dao.ReminderDao
 import tv.own.owntv.core.database.entity.ReminderEntity
 
 /**
- * Programme reminders (Stage G2): what the guide's "Remind me" writes and what the start-time prompt
+ * Programme reminders: what the guide's "Remind me" writes and what the start-time prompt
  * reads. Core keeps the time; each app draws the prompt from [due] and calls [dismiss] when the user
  * answers it.
  */

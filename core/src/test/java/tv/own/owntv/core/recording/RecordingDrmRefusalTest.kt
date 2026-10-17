@@ -6,7 +6,7 @@ import org.junit.Test
 import tv.own.owntv.core.model.RecordingFailure
 
 /**
- * A DRM-protected channel is refused rather than recorded (§1.5).
+ * A DRM-protected channel is refused rather than recorded.
  *
  * The behaviour this replaces was genuinely harmful, not merely useless. A protected channel used to
  * fall through to the raw byte pump, which wrote the provider's response into the file, hit

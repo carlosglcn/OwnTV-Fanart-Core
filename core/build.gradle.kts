@@ -198,15 +198,15 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
 
     // Database (Room, via KSP) + Paging. No paging-compose — that is UI.
-    // Plan Phase B: the SQLiteDriver API. `api`, not `implementation` — migrations and the open
+    // The SQLiteDriver API. `api`, not `implementation` — migrations and the open
     // callback are written against SQLiteConnection, and those types appear in core's own public
     // surface, so a consumer compiling against the published AAR needs them on its compile path.
     api(libs.androidx.sqlite)
-    // Plan Phase C: SQLite 3.x shipped inside the APK instead of whatever the TV happens to run.
+    // SQLite 3.x shipped inside the APK instead of whatever the TV happens to run.
     // minSdk 26 otherwise means an Android 8 box is stuck on SQLite 3.18 — no UPSERT, no window
-    // functions, no UPDATE…FROM — which is the wall Phase D exists to get past.
+    // functions, no UPDATE…FROM.
     implementation(libs.androidx.sqlite.bundled)
-    // Kept: AndroidSQLiteDriver is the Phase B intermediate, and the fallback if 3.x ever
+    // Kept: AndroidSQLiteDriver is the platform-engine driver, and the fallback if 3.x ever
     // misbehaves on a specific device. One line in databaseModule chooses between them.
     implementation(libs.androidx.sqlite.framework)
     implementation(libs.androidx.room.runtime)
@@ -246,6 +246,8 @@ dependencies {
     // android.jar's org.json is a stub and isReturnDefaultValues silences it; backup/restore is
     // all JSON, so the tests need the real implementation. Same reason as :app.
     testImplementation(libs.org.json)
+    // Virtual time for the sports repository's refresh loop (same artifact :player-core tests with).
+    testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     // The runner named in `testInstrumentationRunner` above. Not transitive from androidx.test.ext.
     androidTestImplementation(libs.androidx.test.runner)

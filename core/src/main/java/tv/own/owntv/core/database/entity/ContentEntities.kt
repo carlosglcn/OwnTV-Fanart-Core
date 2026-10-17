@@ -81,13 +81,13 @@ data class ChannelEntity(
      *  Xtream, whose timeshift URL is built from the source credentials instead. */
     val catchupSource: String? = null,
     /** M3U `catchup` type — "default" / "append" / "shift" / "flussonic" / "xc". Decides HOW
-     *  [catchupSource] is used; without it the `append` convention can't be honoured (F17). */
+     *  [catchupSource] is used; without it the `append` convention can't be honoured. */
     val catchupType: String? = null,
     /** Per-channel HTTP request headers as `Key: Value` per line — see
      *  [tv.own.owntv.core.network.StreamHeaders]. Set from the M3U's `#EXTVLCOPT` / `#EXTHTTP` /
-     *  `#KODIPROP` directives or a `url|Key=Value` suffix; null for providers that carry none (F16). */
+     *  `#KODIPROP` directives or a `url|Key=Value` suffix; null for providers that carry none. */
     val httpHeaders: String? = null,
-    /** Widevine/ClearKey licence details — see [tv.own.owntv.core.drm.DrmConfig] (v33, #115). Non-null
+    /** Widevine/ClearKey licence details — see [tv.own.owntv.core.drm.DrmConfig] (v33). Non-null
      *  makes this channel ExoPlayer-only: mpv/FFmpeg can decrypt CENC given a raw key
      *  (`--demuxer-lavf-o=decryption_key=…`) but has no CDM, so it cannot FETCH one from a licence
      *  server — which is the only thing a `license_key` URL offers. The ladder must not offer mpv. */
@@ -110,6 +110,9 @@ data class ChannelEntity(
      *  add channels that would otherwise show an error, never take one away. */
     val directSource: String? = null,
     @ColumnInfo(defaultValue = "0") val contentHash: Int = 0,
+    /** M3U `catchup-correction` in minutes (v49): how far the provider's archive clock is from the
+     *  guide's, from the entry or the `#EXTM3U` line. 0 for everything else. */
+    @ColumnInfo(defaultValue = "0") val catchupCorrectionMin: Int = 0,
 )
 
 /**
@@ -244,7 +247,7 @@ data class SeriesEntity(
     /**
      * When this show's episode list was last fetched from the provider (epoch ms; 0 = never).
      * Episodes are loaded lazily on open and used to be cached forever, so a show never gained the
-     * episodes the provider added after the first open (S8). This drives the freshness check in
+     * episodes the provider added after the first open. This drives the freshness check in
      * `SeriesRepository.loadEpisodes`. Deliberately *not* in [computeContentHash] — it is local
      * bookkeeping, not provider content.
      */
@@ -317,7 +320,7 @@ data class EpisodeEntity(
 /**
  * What a resync needs to know about a row it already holds. [sortOrder] is deliberately *outside*
  * `computeContentHash()`: folding it in would change every stored hash at once and turn the next
- * resync of a large catalog into a full rewrite, so the syncer compares it separately (S1).
+ * resync of a large catalog into a full rewrite, so the syncer compares it separately.
  */
 data class ContentHashProjection(
     val remoteId: String,
@@ -328,26 +331,29 @@ data class ContentHashProjection(
 
 /**
  * The v26 fields ([ChannelEntity.catchupType] / [ChannelEntity.httpHeaders]), the v33
- * [ChannelEntity.drmConfig] and the v43 [ChannelEntity.manifestType] / [ChannelEntity.directSource] are
- * folded in ONLY when the channel actually carries one. Adding them unconditionally would change every
- * stored hash at once and turn the next resync of a 100k-channel playlist into a full rewrite for
- * everybody; this way only the (rare) channels that use them pay a single re-upsert, while a later
- * change to a header, a catch-up type, a licence URL or a declared container still propagates.
+ * [ChannelEntity.drmConfig], the v43 [ChannelEntity.manifestType] / [ChannelEntity.directSource] and
+ * the v49 [ChannelEntity.catchupCorrectionMin] are folded in ONLY when the channel actually carries
+ * one. Adding them unconditionally would change every stored hash at once and turn the next resync of
+ * a 100k-channel playlist into a full rewrite for everybody; this way only the (rare) channels that use
+ * them pay a single re-upsert, while a later change to a header, a catch-up type, a licence URL, a
+ * declared container or a correction still propagates.
  */
 fun ChannelEntity.computeContentHash(): Int {
     val base = Objects.hash(
         sourceId, categoryId, name, logoUrl, streamUrl,
         epgChannelId, number, remoteId, catchup, catchupDays, catchupSource,
     )
-    if (catchupType == null && httpHeaders == null && drmConfig == null &&
+    val withV43 = if (catchupType == null && httpHeaders == null && drmConfig == null &&
         manifestType == null && directSource == null
     ) {
-        return base
+        base
+    } else {
+        val withV26 = Objects.hash(base, catchupType, httpHeaders)
+        val withDrm = if (drmConfig == null) withV26 else Objects.hash(withV26, drmConfig)
+        if (manifestType == null && directSource == null) withDrm
+        else Objects.hash(withDrm, manifestType, directSource)
     }
-    val withV26 = Objects.hash(base, catchupType, httpHeaders)
-    val withDrm = if (drmConfig == null) withV26 else Objects.hash(withV26, drmConfig)
-    return if (manifestType == null && directSource == null) withDrm
-    else Objects.hash(withDrm, manifestType, directSource)
+    return if (catchupCorrectionMin == 0) withV43 else Objects.hash(withV43, catchupCorrectionMin)
 }
 
 /** [httpHeaders], [MovieEntity.drmConfig] and [MovieEntity.manifestType] are folded in only when the

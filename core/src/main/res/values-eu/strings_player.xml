@@ -105,6 +105,7 @@
     <string name="player_error_decoder_busy">Telebista honen bideo-deskodetzailea lanpetuta dago. Saiatu berriro une batean.</string>
     <string name="player_error_no_internet">Ez dago Interneteko konexiorik. Egiaztatu sarea eta saiatu berriro.</string>
     <string name="player_error_stream_unavailable">Ezin izan da jario hau erreproduzitu. Baliteke iturburua lineaz kanpo egotea edo onartzen ez den formatu bat erabiltzea. <xliff:g id="hint">%1$s</xliff:g></string>
+    <string name="player_error_account_in_use">Kontu hau beste gailu edo aplikazio batean ari da erreproduzitzen. Gelditu han, eta sakatu Saiatu berriro.</string>
     <string name="player_error_mpv_open_decode">mpvk ezin izan du fitxategi hau ireki edo deskodetu.</string>
     <string name="player_error_mpv_stream_never_started">Jarioa ez da inoiz hasi mpv-n hainbat saiakeraren ondoren.</string>
     <string name="player_error_surround">Audio-irteera honek ezin du surround erabili — estereora aldatu da.</string>

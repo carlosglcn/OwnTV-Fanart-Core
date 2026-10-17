@@ -12,7 +12,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import tv.own.owntv.player.ExoAudioGate.Verdict
 
-/** P2 — which audio ExoPlayer can play: the film hand-off gate, the "no playable audio" check, the sinks. */
+/** Which audio ExoPlayer can play: the film hand-off gate, the "no playable audio" check, the sinks. */
 class ExoAudioGateTest {
 
     private fun verdict(

@@ -25,7 +25,7 @@ fun ownTVRenderers(
     softwareFirst: Boolean = false,
     /** The engine's A/V-sync offset ([AudioDelayClock]); null for an engine that offers none. */
     audioDelay: AudioDelayClock? = null,
-    /** N8 — false: Dolby/DTS decoded in the app, see [OwnTVRenderersFactory]. */
+    /** False: Dolby/DTS decoded in the app, see [OwnTVRenderersFactory]. */
     passthrough: Boolean = true,
 ): DefaultRenderersFactory =
     OwnTVRenderersFactory(context, forceStereo = forceStereo, audioDelay = audioDelay, passthrough = passthrough)

@@ -9,7 +9,7 @@ import android.util.Log
 import tv.own.owntv.core.R
 
 /**
- * The sleep timer's "and turn the screen off" (N17 follow-up).
+ * The sleep timer's "and turn the screen off".
  *
  * An app cannot put a device to sleep — that takes a permission only the firmware holds. The one door
  * open to an ordinary app is the device-admin "force lock" policy: `lockNow()` is the power button,

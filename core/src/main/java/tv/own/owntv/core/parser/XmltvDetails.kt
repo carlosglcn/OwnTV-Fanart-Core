@@ -2,7 +2,7 @@ package tv.own.owntv.core.parser
 
 /**
  * The optional parts of an XMLTV `<programme>` behind the guide's details line
- * ("Animation · Family · 2023 · FSK 0 · 95 min", Stage G1). Every field is null when the feed does not
+ * ("Animation · Family · 2023 · FSK 0 · 95 min"). Every field is null when the feed does not
  * carry it — the screens show only what is there, never a guessed value.
  *
  * [categories] holds up to [MAX_CATEGORIES] distinct `<category>` values joined by [CATEGORY_SEPARATOR];

@@ -21,7 +21,7 @@ private val Context.archiveDecodeStore: DataStore<Preferences> by preferencesDat
  *
  * Only the negative-cost direction is persisted: a host in here opens its archives in software from
  * the start. Nothing ever writes "this host is fine" — an absent host simply tries hardware first.
- * A lesson **expires [TTL_MS] after it was learned** (owner decision 8), so a provider that fixes its
+ * A lesson **expires [TTL_MS] after it was learned**, so a provider that fixes its
  * server gets hardware decoding back on its own; Settings → "Forget learned stream fixes" ([clear])
  * does it at once. A panel that still needs software is re-learned at the cost of one failed open.
  *
@@ -59,7 +59,7 @@ class ArchiveDecodeStore(private val context: Context) {
     }
 
     companion object {
-        /** Owner decision 8: fourteen days. */
+        /** Fourteen days. */
         const val TTL_MS = 14L * 24 * 60 * 60 * 1000
         private const val SEPARATOR = '|'
 

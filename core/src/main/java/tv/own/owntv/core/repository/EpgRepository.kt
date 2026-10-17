@@ -56,7 +56,7 @@ class EpgRepository(
     /**
      * Where the download is tee'd *while it runs*. It only becomes [cacheFile] once the parse has
      * completed cleanly, so a guide truncated by a network drop is never left behind under the name
-     * readers trust (E1). The `.tmp` suffix also keeps it out of [storeProgrammesForIdsFromCache]'s
+     * readers trust. The `.tmp` suffix also keeps it out of [storeProgrammesForIdsFromCache]'s
      * `endsWith(".xmltv")` scan while it's being written.
      */
     private fun tempCacheFile(storeId: Long) = java.io.File(context.cacheDir, "epg_$storeId$EPG_CACHE_TEMP_SUFFIX")
@@ -98,10 +98,6 @@ class EpgRepository(
         } catch (e: Exception) {
             Log.w("EpgRepository", "Unable to create EPG guide index", e)
         }
-    }
-
-    suspend fun countProgrammes(storeId: Long): Int = withContext(Dispatchers.IO) {
-        epgDao.countForSources(listOf(storeId))
     }
 
     /**
@@ -274,7 +270,7 @@ class EpgRepository(
         SourceType.M3U -> source.epgUrl?.takeIf { it.isNotBlank() }
         SourceType.LOCAL_BACKUP -> null
         // Stalker: user-pasted XMLTV, or the portal-advertised one adopted into epgUrl at sync
-        // (StalkerSyncer.adoptPortalXmltvUrl, Phase E §5.5) — and failing both, the portal's OWN
+        // (StalkerSyncer.adoptPortalXmltvUrl) — and failing both, the portal's OWN
         // guide, addressed by the marker URL below — unless the user has switched that off for this
         // playlist. A portal that offers no XMLTV is the common case, and it used to mean no guide and
         // no catch-up at all.
@@ -351,7 +347,7 @@ class EpgRepository(
         var parseCompleted = false
         var removedProgrammes = 0
         var removedChannels = 0
-        // Phase 0 trace: the download/parse and the DB writes are interleaved, so "write" is summed as
+        // Timing trace: the download/parse and the DB writes are interleaved, so "write" is summed as
         // it happens and "parse" is what is left of the wall clock once it is taken out.
         var writeMs = 0L
         var pruneMs = 0L
@@ -562,8 +558,8 @@ class EpgRepository(
     }
 
     /**
-     * Crawl a Stalker portal's own guide into the tables keyed by [storeId] (Phase E, replacing
-     * "bulk get_epg_info is never used"). Written in batches as it parses, so the payload is never
+     * Crawl a Stalker portal's own guide into the tables keyed by [storeId] (bulk `get_epg_info`
+     * is still never used). Written in batches as it parses, so the payload is never
      * held; rows are keyed by the portal's channel id, which is what `StalkerSyncer` gives a portal
      * channel that has no XMLTV id of its own.
      *
@@ -716,7 +712,7 @@ class EpgRepository(
         val from = now - WINDOW_BACK_MS; val to = now + guideAheadMs()
         val pastCutoffFor = pastCutoff(now, from)
         // Only promoted (complete) caches are eligible — an in-flight or abandoned `.xmltv.tmp` is
-        // excluded by name, so a truncated download can't be mistaken for the whole feed (E1).
+        // excluded by name, so a truncated download can't be mistaken for the whole feed.
         val files = context.cacheDir.listFiles()
             ?.filter { isUsableEpgCache(it.name, it.length(), it.lastModified(), now, CACHE_TTL_MS) }
             ?: emptyList<java.io.File>()
@@ -766,7 +762,7 @@ class EpgRepository(
     }
 
     /**
-     * Fill guide gaps left by a catalog sync that finished after the guide sync started (S9).
+     * Fill guide gaps left by a catalog sync that finished after the guide sync started.
      *
      * [refreshUrl] filters the feed down to the channels the user owns, and reads that set **once**,
      * at the start. Sync a playlist and a guide at the same time and every channel the playlist

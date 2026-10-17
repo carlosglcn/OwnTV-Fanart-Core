@@ -106,7 +106,7 @@ class CatalogSyncWorker(
                 if (deferIndexes) {
                     catalogSyncScheduler.enqueueContentIndexBuild(reason = "fresh_sync")
                 }
-                // S9: a guide sync filters the feed to the channels the user owned when it *started*,
+                // A guide sync filters the feed to the channels the user owned when it *started*,
                 // so channels this pass just added have no programmes. Repair them from the cached
                 // feed (no network). A no-op for the usual case where nothing new appeared.
                 val gapFillStartedAt = SystemClock.elapsedRealtime()
@@ -277,7 +277,7 @@ internal fun shouldScheduleTrendingRefresh(
     metadataEnabled: Boolean,
     trendingVisible: Boolean,
     /**
-     * True while a lazily-added Stalker catalogue is still draining (plan N1f-2).
+     * True while a lazily-added Stalker catalogue is still draining.
      *
      * Trending is a *snapshot* sitting behind a multi-day timer, so one taken while the source holds
      * a few per cent of its titles is wrong for days. `CatalogBackfillWorker` takes it instead, once

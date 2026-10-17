@@ -24,38 +24,22 @@
     <string name="player_previous_channel">前のチャンネル</string>
     <string name="player_next_channel_in_list">次のチャンネル</string>
     <string name="player_previous_channel_in_list">リスト内の前のチャンネル</string>
-    <!-- Translators: The bubble above the live scrub bar while rewinding a channel: the clock time being scrubbed to, then the name of the programme on air then. Placeholders are the time and the programme title. -->
     <string name="player_live_scrub_at"><xliff:g id="time">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g></string>
-    <!-- Translators: Label under the volume button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_volume">音量</string>
-    <!-- Translators: Label under the brightness button on the phone player's control bar, and the label on the slider a vertical swipe on the left of the picture shows. Keep this very short (14 characters maximum) — it sits inside a small button. -->
     <string name="player_tool_brightness">明るさ</string>
-    <!-- Translators: Spoken label for the phone player's skip-backwards button, which jumps back by the user's own seek step. Keep this very short (16 characters maximum). -->
     <string name="player_skip_back">巻き戻し</string>
-    <!-- Translators: Spoken label for the phone player's skip-forwards button, which jumps forward by the user's own seek step. Keep this very short (16 characters maximum). -->
     <string name="player_skip_forward">早送り</string>
-    <!-- Translators: Label under the audio-track button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_audio">音声</string>
-    <!-- Translators: Label under the subtitles button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_subtitles">字幕</string>
-    <!-- Translators: Label under the favourite button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_favorite">お気に入り</string>
-    <!-- Translators: Label under the catch-up button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_catchup">見逃し</string>
-    <!-- Translators: Label under the playback-speed button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_speed">速度</string>
-    <!-- Translators: Label under the aspect-ratio/zoom button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_aspect">画面比</string>
     <string name="player_tool_quality">画質</string>
-    <!-- Translators: Label under the mini-player button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_mini">ミニ</string>
-    <!-- Translators: Label under the audio-only button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_audio_only">音声のみ</string>
-    <!-- Translators: Label under the playback-engine button on the player control bar, shown when it has focus. The engine name (MPV/EXO) is shown beside it as the value, so this is just the word for the player itself. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_engine">プレーヤー</string>
-    <!-- Translators: Label under the stream-info button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_info">情報</string>
-    <!-- Translators: Label under the report-stream button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_report">レポート</string>
     <string name="player_channel_not_found">チャンネルが見つかりません</string>
     <string name="player_channel_number_entry">チャンネル番号</string>
@@ -73,7 +57,6 @@
     <string name="player_no_tracks">利用可能なトラックはありません。</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · 画像形式</string>
     <string name="player_av_sync">A/V同期</string>
-    <!-- Translators: Player audio menu action that stores the current A/V-sync offset for this item. -->
     <string name="player_av_sync_remember">この遅延を記憶する</string>
     <string name="player_no_offset">ずれなし</string>
     <string name="player_subtitles_later">字幕を遅く表示</string>
@@ -122,6 +105,7 @@
     <string name="player_error_decoder_busy">このテレビのビデオデコーダーは使用中です。しばらくしてからもう一度お試しください。</string>
     <string name="player_error_no_internet">インターネットに接続されていません。ネットワークを確認して、もう一度お試しください。</string>
     <string name="player_error_stream_unavailable">このストリームを再生できませんでした。ソースがオフラインか、未対応の形式が使用されている可能性があります。<xliff:g id="hint">%1$s</xliff:g></string>
+    <string name="player_error_account_in_use">このアカウントは別のデバイスまたはアプリですでに再生中です。そちらで停止してから、再試行を押してください。</string>
     <string name="player_error_mpv_open_decode">mpvでこのファイルを開くかデコードできませんでした。</string>
     <string name="player_error_mpv_stream_never_started">数回再試行しましたが、mpvでストリームが開始されませんでした。</string>
     <string name="player_error_surround">この音声出力ではサラウンドを利用できないため、ステレオに切り替えました。</string>
@@ -172,9 +156,7 @@
     <string name="player_stream_khz"><xliff:g id="value">%1$s</xliff:g> kHz</string>
     <string name="player_stream_kbps"><xliff:g id="value">%1$s</xliff:g> kbps</string>
     <string name="player_stream_seconds"><xliff:g id="value">%1$s</xliff:g>秒分をバッファ済み</string>
-    <!-- Translators: Heading of the plate shown over the black video area when the item being played has no video track at all (a radio channel, a music-only file). This is NOT an error - playback is working. -->
     <string name="player_audio_only_title">音声のみ</string>
-    <!-- Translators: Body of the "Audio only" plate. Reassures the user that nothing is broken: the item simply contains no picture. -->
     <string name="player_audio_only_body">この項目には音声だけがあり、映像はありません。故障ではなく、正常に再生されています。</string>
     <string name="player_audio_mono">モノラル</string>
     <string name="player_audio_stereo">ステレオ</string>
@@ -247,7 +229,6 @@
     <string name="player_subtitles_enter_credentials">OpenSubtitlesのユーザー名とパスワードを入力してください。</string>
     <string name="player_subtitles_invalid_credentials">入力したアカウント情報ではOpenSubtitlesにログインできませんでした。</string>
     <string name="player_subtitles_sign_in_network_error">OpenSubtitlesに接続できませんでした。インターネット接続を確認して、もう一度お試しください。</string>
-    <!-- Translators: Error when OpenSubtitles answers the sign-in with an HTTP error code (e.g. 403, 429, 500). The placeholder is that code. -->
     <string name="player_subtitles_sign_in_server_error">OpenSubtitlesがリクエストを拒否しました（エラー <xliff:g id="code">%1$d</xliff:g>）。インターネット接続は正常です。しばらくしてからもう一度お試しください。問題を報告する際はこの番号をお知らせください。</string>
     <string name="player_subtitles_refresh_network_error">OpenSubtitlesを更新できませんでした。インターネット接続を確認してください。</string>
     <string name="player_subtitles_no_matches_all_languages">一致する字幕が見つかりませんでした。検索タイトルを編集してみてください。</string>

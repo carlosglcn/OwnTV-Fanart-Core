@@ -98,7 +98,7 @@ class AutoRefresh(
     }
 
     /**
-     * Audit D4 — refill a guide that `MIGRATION_8_9` emptied.
+     * Refill a guide that `MIGRATION_8_9` emptied.
      *
      * That migration deletes every `epg_programmes` row and nothing schedules a re-fetch, so an
      * upgrading user's Guide is simply blank until they think to re-sync EPG by hand. Runs **once per

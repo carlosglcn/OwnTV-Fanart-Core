@@ -9,7 +9,7 @@ import tv.own.owntv.core.parser.M3uEntry
 import tv.own.owntv.core.parser.M3uParser
 
 /**
- * #115 — protected (Widevine/ClearKey) channels. A playlist declares the licence server on its own
+ * Protected (Widevine/ClearKey) channels. A playlist declares the licence server on its own
  * `#KODIPROP` lines; every one of them used to be dropped, so the app had no way to know a stream was
  * encrypted, let alone where to ask for the key.
  *

@@ -16,11 +16,11 @@ import tv.own.owntv.core.settings.SettingsRepository
 fun profileAllowsAdultMetadata(isKids: Boolean?): Boolean = isKids != true
 
 /**
- * On-demand TMDB enrichment orchestrator (plan §3, §7). Resolves a local content item → TMDB metadata,
+ * On-demand TMDB enrichment orchestrator. Resolves a local content item → TMDB metadata,
  * caching both the resolution (match table) and the metadata (cache table) so a second view is instant
  * and offline. NEVER bulk — callers invoke this lazily when a detail screen opens.
  *
- * Merge rule (§7.1) is applied by the UI at render time (`providerField ?: tmdbField`); this layer only
+ * Merge rule is applied by the UI at render time (`providerField ?: tmdbField`); this layer only
  * fetches and caches TMDB fields, never mutating the provider content tables.
  */
 class MetadataRepository(
@@ -89,7 +89,7 @@ class MetadataRepository(
             }
         }
 
-        // 2. Build the search query: a user override (plan §11.2 U5b) wins over the auto-normalizer.
+        // 2. Build the search query: a user override wins over the auto-normalizer.
         val q = resolveQuery(localKey, movie.name, movie.year)
         if (q.query.isBlank()) return null
 
@@ -259,7 +259,7 @@ class MetadataRepository(
 
     /**
      * TMDB's original language (ISO 639-1) of a film or show, for the "Original language" audio choice
-     * (N14); null when enrichment is off, the title has no match, or TMDB could not be reached.
+     * null when enrichment is off, the title has no match, or TMDB could not be reached.
      *
      * A row cached before v45 has no language yet, so its details are fetched again — once, now that
      * the title is being played, rather than for the whole cache (the Worker's quota is shared).
@@ -497,7 +497,7 @@ class MetadataRepository(
 
     /**
      * Clear a movie's TMDB match (negative OR positive) and its cached details so the next [resolveMovie]
-     * re-searches from scratch (plan §11.2 U5a — manual "Refetch TMDB details"). Does NOT resolve; the caller
+     * re-searches from scratch (manual "Refetch TMDB details"). Does NOT resolve; the caller
      * re-triggers [resolveMovie] afterwards.
      */
     suspend fun clearMovie(movie: MovieEntity) {
@@ -512,7 +512,7 @@ class MetadataRepository(
     }
 
     /**
-     * Clear a series' match + cached show details (plan §11.2 U5a). Per-episode cache rows for the old tmdbId
+     * Clear a series' match + cached show details. Per-episode cache rows for the old tmdbId
      * are left in place — they're orphaned but harmless (episode resolve looks them up by tmdbId, so stale
      * rows under an old id are simply never read). Caller re-triggers [resolveSeries].
      */
@@ -528,7 +528,7 @@ class MetadataRepository(
     }
 
     /**
-     * Clear an episode's cache AND its show's match + show cache (plan §11.2 U5a). Episodes inherit the show's
+     * Clear an episode's cache AND its show's match + show cache. Episodes inherit the show's
      * match, so an episode whose show was negative-cached can only recover by clearing the show match too.
      * Caller re-triggers [resolveEpisode].
      */
@@ -554,7 +554,7 @@ class MetadataRepository(
         matchKeys.forEach { dao.deleteMatch(it) } // show match (negative OR positive)
     }
 
-    // --- TMDB name overrides (plan §11.2 U5b) ---
+    // --- TMDB name overrides ---
     // Stored in DataStore (no Room schema change) and keyed by the same stable local key as matching, so
     // they survive re-sync. Setting/clearing also drops the cached match+details so the next resolve
     // re-searches under the new query (caller bumps the meta-refresh tick to trigger it).
@@ -591,7 +591,7 @@ class MetadataRepository(
     }
 
     /**
-     * Build the TMDB search query + year for [localKey]: a user override (§11.2 U5b) wins over the
+     * Build the TMDB search query + year for [localKey]: a user override wins over the
      * auto-normalized provider title. [ResolvedQuery.isOverride] lets the caller bypass the fuzzy
      * threshold and trust TMDB's top relevance hit when the user hand-typed the name.
      */
@@ -649,7 +649,7 @@ class MetadataRepository(
         return entity
     }
 
-    /** Best confident match, or null (plan §12: "no art beats wrong art"). */
+    /** Best confident match, or null (no art beats wrong art). */
     private fun pickBest(query: String, year: Int?, hits: List<MetadataSearchResult>): Scored? {
         if (hits.isEmpty()) return null
         return hits.asSequence()

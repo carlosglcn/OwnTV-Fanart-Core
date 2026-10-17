@@ -18,9 +18,7 @@
     <string name="settings_movies_keep_watching_description">Показывать в главном ряду карточки фильмов, просмотр которых можно продолжить.</string>
     <string name="settings_series_keep_watching">Сериалы в ряду «Продолжить просмотр»</string>
     <string name="settings_series_keep_watching_description">Показывать в главном ряду карточки серий, просмотр которых можно продолжить.</string>
-    <!-- Translators: Toggle label for playing the highlighted Home item's video in the hero row. -->
     <string name="settings_hero_preview">Воспроизводить видео в главном ряду</string>
-    <!-- Translators: Description of the hero-row video preview toggle. -->
     <string name="settings_hero_preview_description">Видео выделенного элемента запускается через мгновение. Отключите, чтобы экономить энергию и память при просмотре главного экрана.</string>
     <string name="settings_android_tv_home">Главный экран Android TV</string>
     <string name="settings_android_tv_home_description">Показывать на главном экране телевизора ряды «Продолжить просмотр» и недавних каналов прямого эфира.</string>
@@ -30,11 +28,8 @@
     <string name="settings_done_check">Готово ✓</string>
     <string name="settings_mode"><xliff:g id="mode">%1$s</xliff:g></string>
     <string name="settings_hidden">Скрыто</string>
-    <string name="settings_nav_dynamic_description">Динамическое — значки подстраиваются под содержимое активного плейлиста. Значки главного экрана и настроек отображаются всегда.</string>
-    <string name="settings_nav_static_description">Статическое — вручную выберите значки, которые будут отображаться ниже.</string>
     <string name="settings_static">Статическое</string>
     <string name="settings_dynamic">Динамическое</string>
-    <string name="settings_http_proxy">HTTP-прокси</string>
     <string name="settings_use_proxy">Использовать прокси</string>
     <string name="settings_proxy_description">Направлять весь трафик OwnTV и воспроизведение через HTTP-прокси.</string>
     <string name="settings_host">Хост</string>
@@ -102,8 +97,6 @@
     <string name="settings_show_weather_description">Отображать текущую погоду на верхней панели.</string>
     <string name="settings_custom_location">Другое местоположение</string>
     <string name="settings_custom_location_description">Заменить город, используемый для погоды. Оставьте поле пустым для автоматического определения или введите город (например, Москва) либо координаты «широта,долгота» (например, 55.75,37.62). Это полезно при использовании VPN, когда автоматически определяется город сервера.</string>
-    <string name="settings_use_device_location">Использовать местоположение устройства</string>
-    <string name="settings_use_device_location_description">Погода следует за телефоном. Отключите, чтобы указать город вручную.</string>
     <string name="settings_temperature_unit">Единица температуры</string>
     <string name="settings_temperature_description">Показывать температуру в градусах Цельсия или Фаренгейта.</string>
     <string name="settings_auto">Авто</string>
@@ -170,7 +163,6 @@
     <string name="settings_quick_hdr">HDR (только mpv)</string>
     <string name="settings_quick_autoplay">Автовоспроизведение</string>
     <string name="settings_quick_check_update">Проверить обновление</string>
-    <string name="settings_search_hint">Поиск настроек…</string>
     <string name="settings_language">Язык</string>
     <string name="settings_language_description">Язык интерфейса приложения</string>
     <string name="settings_language_system_default">Как в системе</string>
@@ -185,14 +177,10 @@
     <string name="settings_epg_sources_nav_description">Добавление лент программы передач XMLTV для телегида</string>
     <string name="settings_customize">Настройка категорий и элементов</string>
     <string name="settings_customize_nav_description">Скрытие и отображение элементов, переименование и изменение порядка категорий</string>
-    <string name="settings_sidebar_description_root">Автоматическая адаптация боковых значков к плейлисту или скрытие отдельных значков</string>
     <string name="settings_ch_paging">Команды пульта</string>
     <string name="settings_ch_paging_description">Назначьте свободным кнопкам навигацию, воспроизведение и просмотр списков. Основные кнопки навигации останутся защищёнными.</string>
-    <!-- Translators: Settings navigation label for the long-press content menus. -->
     <string name="settings_content_menus_title">Меню долгого нажатия</string>
-    <!-- Translators: Description of the long-press content menus settings. -->
     <string name="settings_content_menus_description">Измените порядок действий в меню каналов, фильмов, сериалов и серий</string>
-    <!-- Translators: Hint shown above the list when arranging a long-press menu. -->
     <string name="settings_content_menus_hint">Удерживайте OK на действии, чтобы взять его, затем перемещайте вверх и вниз. Повторное OK опускает его.</string>
     <string name="settings_browsing_lists">Просмотр и списки</string>
     <string name="settings_browsing_description">Запоминание последней категории и последнего элемента в прямом эфире, фильмах и сериалах</string>
@@ -201,7 +189,6 @@
     <string name="settings_metadata_root_description">Постеры, описания, актёрский состав и рейтинги фильмов и сериалов</string>
     <string name="settings_download_folder">Папка загрузок</string>
     <string name="settings_backup_restore">Резервная копия и восстановление</string>
-    <string name="settings_backup_restore_description">Экспорт или восстановление профилей и источников</string>
     <string name="settings_clear_history">Очистить историю просмотров</string>
     <string name="settings_appearance_group">Внешний вид</string>
     <string name="settings_theme">Тема</string>
@@ -217,13 +204,10 @@
     <string name="settings_focus_width_thick">Толстая</string>
     <string name="settings_focus_width_extra">Очень толстая</string>
     <string name="settings_focus_highlight_sample">В фокусе</string>
-    <string name="settings_glass_effect">Эффект стекла</string>
-    <string name="settings_glass_description">Полупрозрачные матовые панели, фоновое изображение и прозрачность</string>
     <string name="settings_ui_zoom">Масштаб интерфейса</string>
     <string name="settings_ui_zoom_description">Масштабирование всего интерфейса</string>
     <string name="settings_animations">Анимации</string>
     <string name="settings_animations_description">Включение или отключение анимации интерфейса — без неё интерфейс быстрее реагирует на маломощных ТВ-приставках</string>
-    <string name="settings_animations_description_mobile">Включение или отключение анимации интерфейса — без неё интерфейс быстрее реагирует на старых телефонах и планшетах</string>
     <string name="settings_weather_description_root">Чип погоды на верхней панели: отображение, другое местоположение и градусы Цельсия или Фаренгейта.</string>
     <string name="settings_playback_group">Воспроизведение</string>
     <string name="settings_live_preview_description">Автоматически воспроизводить канал при переводе на него фокуса</string>
@@ -232,10 +216,8 @@
     <string name="settings_mini_player_root">Мини-плеер</string>
     <string name="settings_mini_player_root_description">Размер и положение закреплённого мини-плеера</string>
     <string name="settings_hdr_description">Использовать вывод HDR, если видео и телевизор его поддерживают. Только mpv: движок ExoPlayer не поддерживает эту настройку и всегда передаёт HDR потока без изменений.</string>
-    <string name="settings_hdr_description_mobile">Использовать вывод HDR, если видео и экран его поддерживают. Только mpv: движок ExoPlayer не поддерживает эту настройку и всегда передаёт HDR потока без изменений.</string>
     <string name="settings_auto_frame_rate">Автоматическая частота кадров</string>
     <string name="settings_auto_frame_rate_description">Согласовывать частоту обновления телевизора с видео (24/25/50/60 кадров/с) в полноэкранном режиме для прямого эфира и VOD и восстанавливать её при выходе. Отключите, если телевизор или ресивер при каждой смене канала заново устанавливает соединение HDMI с заметными помехами.</string>
-    <string name="settings_auto_frame_rate_description_mobile">Согласовывать частоту обновления экрана с видео (24/25/50/60 кадров/с) в полноэкранном режиме для прямого эфира и VOD и восстанавливать её при выходе. Отключите, если экран мерцает или гаснет при запуске видео.</string>
     <string name="settings_afr_pause">Пауза при переключении экрана</string>
     <string name="settings_afr_pause_description">Только фильмы. Когда телевизору нужно заново синхронизироваться с новым режимом экрана, фильм ждёт столько, чтобы начало не потерялось в чёрном экране. При плавном переключении пауза не делается.</string>
     <string name="settings_afr_resolution">Подбирать разрешение</string>
@@ -244,7 +226,6 @@
     <string name="settings_surround_description_mobile">Декодировать Dolby/DTS в объёмный звук (5.1/7.1) для настоящего ресивера 5.1/7.1, подключённого к этому устройству. Оставьте ВЫКЛ. для встроенного динамика, наушников или стереофонического саундбара — многоканальный звук может отставать от видео. Если синхронизация сбивается, скорректируйте её в меню плеера «Звук → Синхронизация аудио и видео».</string>
     <string name="settings_audio_passthrough">Прямая передача Dolby и DTS</string>
     <string name="settings_audio_passthrough_description">Вкл.: Dolby и DTS передаются без декодирования на телевизор, саундбар или ресивер, если он сообщает, что может их воспроизвести (ExoPlayer). Выкл.: приложение декодирует их само, по-прежнему в объёмном звуке, где это позволяет «Объёмный звук». mpv всегда декодирует. Не используется, пока работает «Ночной режим» или «Выравнивание громкости».</string>
-    <string name="settings_audio_passthrough_description_mobile">Вкл.: Dolby и DTS передаются без декодирования на подключённый телевизор или ресивер, если он сообщает, что может их воспроизвести (ExoPlayer). Выкл.: приложение декодирует их само, по-прежнему в объёмном звуке, где это позволяет «Объёмный звук». mpv всегда декодирует. Не используется, пока работает «Ночной режим» или «Выравнивание громкости».</string>
     <string name="settings_night_mode">Ночной режим</string>
     <string name="settings_night_mode_description">Приглушает громкие сцены и усиливает тихие диалоги — для просмотра на малой громкости.</string>
     <string name="settings_volume_leveling">Выравнивание громкости</string>
@@ -255,7 +236,6 @@
     <string name="settings_mobile_data_quality_description">При лимитном подключении воспроизводится не выше этого качества. Выкл.: как по Wi-Fi.</string>
     <string name="settings_tunneled_playback">Туннельное воспроизведение (экспериментально)</string>
     <string name="settings_tunneled_playback_description">Прямой эфир в ExoPlayer: аппаратура телевизора сама держит изображение и звук вместе, меньше нагружая процессор. Работает только на некоторых телевизорах и отключается само, если канал с ним даёт сбой. Пока оно включено, синхронизацию звука подстроить нельзя.</string>
-    <string name="settings_tunneled_playback_description_mobile">Прямой эфир в ExoPlayer: аппаратура устройства сама держит изображение и звук вместе, меньше нагружая процессор. Работает только на некоторых устройствах и отключается само, если канал с ним даёт сбой. Пока оно включено, синхронизацию звука подстроить нельзя.</string>
     <string name="settings_tunneled_playback_failed">Отключено после сбоя канала с ним на этом устройстве.</string>
     <string name="settings_autoplay_next">Автовоспроизведение следующей серии</string>
     <string name="settings_autoplay_next_description">Когда серия заканчивается, автоматически начинать следующую, а после завершения сезона переходить к следующему сезону. Архив тоже продолжается со следующей передачи.</string>
@@ -268,13 +248,9 @@
     </plurals>
     <string name="settings_catchup_unavailable">В этом плейлисте нет каналов с архивом</string>
     <string name="settings_device">Устройство</string>
-    <string name="settings_video_player">Настройки видеоплеера</string>
-    <string name="settings_video_player_description">Декодер, субтитры, синхронизация</string>
     <string name="settings_playback_error_log">Журнал ошибок</string>
     <string name="settings_playback_speed">Скорость воспроизведения</string>
     <string name="settings_player_zoom">Масштаб плеера</string>
-    <string name="settings_playback_error_description">Сбои приложения и ошибки воспроизведения — сведения для просмотра или отправки</string>
-    <string name="settings_network_group">Сеть</string>
     <string name="settings_app_group">Приложение</string>
     <string name="settings_app_startup">Запуск приложения</string>
     <string name="settings_app_startup_description">Какой экран OwnTV открывает при запуске</string>
@@ -283,7 +259,6 @@
     <string name="settings_update_startup">Проверять обновления при запуске</string>
     <string name="settings_update_startup_description">Искать новую версию при открытии приложения</string>
     <string name="settings_about">О приложении</string>
-    <string name="settings_about_description">Версия, лицензия и сведения о проекте</string>
     <string name="settings_live_latency">Задержка прямого эфира</string>
     <string name="settings_no_settings_match">Нет настроек, соответствующих запросу «<xliff:g id="query">%1$s</xliff:g>»</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
@@ -305,11 +280,8 @@
     <string name="settings_color_picker">Выбор цвета</string>
     <string name="settings_use_color">Использовать этот цвет</string>
     <string name="settings_about_version">Версия <xliff:g id="version">%1$s</xliff:g></string>
-    <string name="settings_about_description_full_mobile">Ваш собственный IPTV-плеер для Android — бесплатное приложение с открытым исходным кодом, выполняющее только функции плеера. Оно не предоставляет каналы или контент: вы добавляете собственные источники, к которым имеете законный доступ.</string>
-    <string name="settings_about_license">© 2026 OwnTV · Лицензия GPLv3</string>
     <string name="settings_join_telegram">Присоединиться к нам в Telegram</string>
     <string name="settings_telegram_qr">QR-код группы Telegram</string>
-    <string name="settings_telegram_scan">Отсканируйте QR-код, чтобы присоединиться с телефона, или откройте ссылку выше.</string>
     <string name="settings_contributions">Мы приветствуем вклад в проект, сообщения об ошибках и звёзды на GitHub.</string>
     <string name="settings_playback_error_description_full">Последний сбой приложения и последние ошибки воспроизведения (сначала самые новые). Приложите эти сведения при сообщении о проблеме.</string>
     <string name="settings_loading">Загрузка…</string>
@@ -317,15 +289,8 @@
     <string name="settings_live">Прямой эфир</string>
     <string name="settings_vod">VOD</string>
     <string name="settings_clear_log">Очистить журнал</string>
-    <string name="settings_browsing_title">Просмотр и списки</string>
     <string name="settings_browsing_description_full">К чему возвращаются разделы прямого эфира, фильмов и сериалов, когда вы открываете их снова.</string>
-    <string name="settings_glass_surfaces">Стеклянные поверхности</string>
-    <string name="settings_glass_surfaces_description">Выберите части приложения, которые будут отображаться как стекло. Отключение всех поверхностей отключает эффект стекла.</string>
-    <string name="settings_all_surfaces_on">Все поверхности: вкл.</string>
-    <string name="settings_all_surfaces_off">Все поверхности: выкл.</string>
-    <string name="settings_surface_toggle"><xliff:g id="surface">%1$s</xliff:g>: <xliff:g id="state">%2$s</xliff:g></string>
-    <string name="settings_transparency_description">Насколько содержимое просвечивает сквозь панели (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). Чем выше значение, тем менее прозрачны панели.</string>
-    <string name="settings_catchup_description">Как отправляются временные метки архива. Используйте часовой пояс устройства или задайте смещение, ожидаемое сервером поставщика.</string>
+    <string name="settings_catchup_timezone_description">Как отправляются временные метки архива. В автоматическом режиме используется часовой пояс, который сообщает сервер поставщика, а если он его не сообщает, часовой пояс устройства. Можно также выбрать Устройство или задать смещение вручную.</string>
     <string name="settings_manual">Вручную</string>
     <string name="settings_theme_dark">Тёмная</string>
     <string name="settings_theme_light">Светлая</string>
@@ -348,34 +313,16 @@
     <string name="settings_group_summary_appearance">Тема, акцент, стекло, анимация и размер текста</string>
     <string name="settings_group_summary_layout">Боковая панель, панели, списки и главный экран</string>
     <string name="settings_group_summary_content_metadata">Названия, обложки и сервисы субтитров</string>
-    <string name="settings_group_summary_playback">Видеоплеер и его журнал ошибок</string>
-    <!-- Translators: Video player settings: name of the section holding volume, audio language and surround settings. -->
     <string name="settings_vp_section_sound">Звук</string>
-    <!-- Translators: Video player settings: one-line summary under the "Subtitles" section name. -->
-    <string name="settings_vp_section_subtitles_summary">Размер, цвет, положение</string>
-    <!-- Translators: Video player settings: one-line summary under the "Diagnostics" section name. -->
-    <string name="settings_vp_section_diagnostics_summary">Подробные журналы плеера</string>
     <string name="settings_vp_cat_player">Плеер</string>
-    <string name="settings_vp_cat_player_summary">Какой плеер, по плейлистам, внешние приложения</string>
     <string name="settings_vp_cat_picture">Изображение</string>
-    <string name="settings_vp_cat_picture_summary">Декодер, HDR, качество, масштаб</string>
     <string name="settings_vp_cat_frame_rate">Частота кадров</string>
     <string name="settings_vp_cat_frame_rate_summary">Подстроить экран под видео</string>
     <string name="settings_vp_cat_streaming">Потоковая передача</string>
-    <string name="settings_vp_cat_streaming_summary">Буфер, тайм-аут, переподключения</string>
-    <string name="settings_vp_cat_live_summary">Номера каналов, пауза и перемотка назад</string>
     <string name="settings_vp_cat_live_tuning">Настройка эфира</string>
-    <string name="settings_vp_cat_live_tuning_summary">Задержка, предзагрузка, время запуска</string>
-    <string name="settings_vp_cat_controls">Управление</string>
-    <string name="settings_vp_cat_controls_summary">Шаги пропуска и перемотки</string>
     <string name="settings_vp_cat_multiview">Мультиэкран и мини-плеер</string>
     <string name="settings_vp_cat_multiview_summary_mobile">Несколько каналов в эфире одновременно</string>
-    <string name="settings_vp_cat_sound_summary">Громкость, объёмный звук, ночной режим, синхронизация</string>
     <string name="settings_vp_cat_languages">Языки и субтитры</string>
-    <string name="settings_vp_cat_languages_summary">Язык звука и субтитров, стиль субтитров</string>
-    <string name="settings_vp_cat_resume">Продолжение и автовоспроизведение</string>
-    <string name="settings_vp_cat_resume_summary">Откуда начать, следующая серия</string>
-    <string name="settings_group_summary_network">Прокси и DNS для подключения к потокам</string>
     <string name="settings_group_summary_app">Язык, запуск, обновления и сведения о приложении</string>
     <string name="settings_group_quick">Быстрые</string>
     <string name="settings_group_summary_quick">Переключатели, которые нужны чаще всего</string>
@@ -387,7 +334,6 @@
     <string name="settings_search_keywords_epg">XMLTV программа передач лента телепередача</string>
     <string name="settings_search_keywords_logos">канал логотип значок XMLTV программа передач picon плейлист</string>
     <string name="settings_search_keywords_customize">скрыть показать переименовать порядок категории</string>
-    <string name="settings_search_keywords_sidebar">боковая панель значки динамический статический скрыть показать адаптация плейлист</string>
     <string name="settings_search_keywords_ch">канал вверх вниз пропуск страница список категория канал</string>
     <string name="settings_search_keywords_browsing">запомнить позиция прокрутка категория последний элемент прямой эфир фильмы сериалы сброс начало</string>
     <string name="settings_search_keywords_home">ряды главный порядок фильтр</string>
@@ -463,10 +409,8 @@
     <string name="settings_language_vietnamese">Вьетнамский</string>
     <string name="settings_hardware_decoding">Аппаратное декодирование</string>
     <string name="settings_hardware_decoding_description">Использовать аппаратный декодер телевизора. Отключите, если некоторые потоки воспроизводятся с рывками или артефактами.</string>
-    <string name="settings_hardware_decoding_description_mobile">Использовать аппаратный декодер устройства. Отключите, если некоторые потоки воспроизводятся с рывками или артефактами.</string>
     <string name="settings_software_decode_above_1080p">Программное декодирование выше 1080p</string>
     <string name="settings_software_decode_above_1080p_description">Воспроизводит 4K и другое видео выше 1080p программно, когда аппаратный декодер телевизора отключён или не справляется. Нужен быстрый процессор: на большинстве телевизоров видео идёт рывками.</string>
-    <string name="settings_software_decode_above_1080p_description_mobile">Воспроизводит 4K и другое видео выше 1080p программно, когда аппаратный декодер устройства отключён или не справляется. Нужен быстрый процессор: на многих устройствах видео идёт рывками.</string>
     <string name="settings_movies_series_player">Плеер фильмов и сериалов</string>
     <string name="settings_live_tv_player">Плеер прямого эфира</string>
     <string name="settings_engine_order"><xliff:g id="first">%1$s</xliff:g>, затем <xliff:g id="second">%2$s</xliff:g></string>
@@ -476,37 +420,21 @@
     <string name="settings_external_player">Внешний плеер</string>
     <string name="settings_default_zoom">Масштаб по умолчанию</string>
     <string name="settings_default_zoom_description">Соотношение сторон и масштаб, применяемые при запуске воспроизведения.</string>
-    <!-- Translators: Setting label for the volume level playback starts at. -->
     <string name="settings_default_volume">Громкость по умолчанию</string>
-    <!-- Translators: Description of the default volume setting. -->
     <string name="settings_default_volume_description">Громкость, применяемая при запуске воспроизведения. Выше 100 %% тихие потоки усиливаются.</string>
-    <!-- Translators: Settings-row title for forgetting the zoom saved for individual items. -->
     <string name="settings_reset_saved_zoom">Сбросить сохранённый масштаб</string>
-    <!-- Translators: Description of the reset-saved-zoom setting row. -->
     <string name="settings_reset_saved_zoom_description">Изменение масштаба в плеере сохраняется для этого канала, фильма или серии. Сброс возвращает всё к масштабу по умолчанию.</string>
-    <!-- Translators: Confirmation dialog title before forgetting the saved per-item zoom. -->
     <string name="settings_reset_saved_zoom_confirm">Сбросить сохранённый масштаб?</string>
-    <!-- Translators: Confirmation dialog body before forgetting the saved per-item zoom. -->
     <string name="settings_reset_saved_zoom_confirm_description">Все каналы, фильмы и серии вернутся к масштабу по умолчанию. Сохранённые уровни громкости останутся. Отдельный элемент всегда можно настроить заново прямо в плеере.</string>
-    <!-- Translators: Settings-row title for forgetting the volume saved for individual items. -->
     <string name="settings_reset_saved_volume">Сбросить сохранённую громкость</string>
-    <!-- Translators: Description of the reset-saved-volume setting row. -->
     <string name="settings_reset_saved_volume_description">Изменение громкости в плеере сохраняется для этого канала, фильма или серии. Сброс возвращает всё к громкости по умолчанию.</string>
-    <!-- Translators: Confirmation dialog title before forgetting the saved per-item volume. -->
     <string name="settings_reset_saved_volume_confirm">Сбросить сохранённую громкость?</string>
-    <!-- Translators: Confirmation dialog body before forgetting the saved per-item volume. -->
     <string name="settings_reset_saved_volume_confirm_description">Все каналы, фильмы и серии вернутся к громкости по умолчанию. Сохранённые настройки масштаба останутся. Отдельный элемент всегда можно настроить заново прямо в плеере.</string>
-    <!-- Translators: Settings row that forgets every per-item audio-sync offset. -->
     <string name="settings_reset_saved_audio_delay">Сбросить сохранённую синхронизацию звука</string>
-    <!-- Translators: Description of the reset-saved-audio-sync row. -->
     <string name="settings_reset_saved_audio_delay_description">Выбор «Запомнить эту задержку» в плеере сохраняет синхронизацию звука для этого канала, фильма или серии. Сброс возвращает всё к настройке выше.</string>
-    <!-- Translators: Title of the confirmation dialog for resetting saved audio sync. -->
     <string name="settings_reset_saved_audio_delay_confirm">Сбросить сохранённую синхронизацию звука?</string>
-    <!-- Translators: Body of the confirmation dialog for resetting saved audio sync. -->
     <string name="settings_reset_saved_audio_delay_confirm_description">Каждый канал, фильм и серия вернутся к синхронизации звука выше. Сохранённые масштаб и громкость останутся. Отдельное значение всегда можно задать заново из плеера.</string>
-    <!-- Translators: Setting label for how far rewind/forward jumps in a movie or episode. -->
     <string name="settings_seek_step">Шаг перемотки</string>
-    <!-- Translators: Description of the seek step setting. -->
     <string name="settings_seek_step_description">На сколько перематывают назад и вперёд в фильме или серии.</string>
     <string name="settings_vod_buffer">Буфер фильмов</string>
     <string name="settings_vod_buffer_description">Насколько заранее загружаются фильмы, эпизоды и архив. «Авто» выбирает подходящее для этого устройства. Длинный буфер лучше переживает плохое соединение; предел по-прежнему задаёт память устройства, поэтому фильм с высоким битрейтом может уместить меньше выбранного.</string>
@@ -515,9 +443,7 @@
     <string name="settings_vod_reconnects">Попытки переподключения</string>
     <string name="settings_vod_reconnects_description">Сколько раз фильм или эпизод, потерявший соединение, открывается заново с места остановки, прежде чем появится ошибка. Минута стабильного воспроизведения возвращает попытки.</string>
     <string name="settings_vod_network_auto">Авто</string>
-    <!-- Translators: Setting label for how far rewind/forward jumps inside a live channel's archive. -->
     <string name="settings_live_rewind_step">Шаг перемотки эфира</string>
-    <!-- Translators: Description of the live rewind step setting. -->
     <string name="settings_live_rewind_step_description">На сколько перематывают назад и вперёд на канале в эфире: в его архиве или в копии, сохранённой функцией «Пауза и перемотка эфира».</string>
     <string name="settings_resume_playback">Продолжить воспроизведение</string>
     <string name="settings_resume_playback_description">Что делать, если для фильма или серии сохранена позиция.</string>
@@ -553,7 +479,6 @@
     <string name="settings_live_latency_bitrate_note">На канале с очень высоким битрейтом — особенно в 4K — буфер может вместить меньше времени, чем вы задали, поскольку объём видео, который можно держать в памяти одновременно, ограничен.</string>
     <string name="settings_channel_numbers">Номера каналов</string>
     <string name="settings_channel_numbers_description">Показывать назначенный поставщиком номер канала рядом с его названием в списке прямого эфира, оверлее списка каналов и плеере, а также позволить вводить номер с пульта ДУ во время полноэкранного воспроизведения для мгновенного перехода к каналу (OK сразу включает канал, «Назад» отменяет ввод). Если настройка отключена, все номера скрываются, а цифровые кнопки игнорируются; данные не теряются, и после повторного включения номера снова появятся.</string>
-    <string name="settings_channel_numbers_description_mobile">Показывать назначенный поставщиком номер канала рядом с его названием в списке прямого эфира и плеере. Если настройка отключена, все номера скрываются; данные не теряются, и после повторного включения номера снова появятся.</string>
     <string name="settings_live_left_right_rewinds">Влево и вправо перематывают эфир</string>
     <string name="settings_live_left_right_rewinds_description">Когда элементы управления скрыты, влево и вправо перематывают назад и вперёд на каналах, которые можно перематывать (архив или копия функции «Пауза и перемотка эфира»), вместо того чтобы открывать список каналов и историю.</string>
     <string name="settings_timeshift">Пауза и перемотка эфира</string>
@@ -565,7 +490,6 @@
     <string name="settings_diagnostics">Диагностика</string>
     <string name="settings_measured_stats">Измеренная статистика потока</string>
     <string name="settings_measured_stats_description">Показывать текущую частоту кадров, битрейт и количество пропущенных кадров в оверлее информации о потоке (значения измеряются, пока открыт оверлей, для потоков, в которых эти данные не указаны). Отключайте только в том случае, если маломощный телевизор начинает воспроизводить видео рывками: настройка никогда не влияет на само видео, а только на диагностические показатели.</string>
-    <string name="settings_measured_stats_description_mobile">Показывать текущую частоту кадров, битрейт и количество пропущенных кадров в оверлее информации о потоке (значения измеряются, пока открыт оверлей, для потоков, в которых эти данные не указаны). Отключайте только в том случае, если маломощное устройство начинает воспроизводить видео рывками: настройка никогда не влияет на само видео, а только на диагностические показатели.</string>
     <string name="settings_none_auto">Нет / Авто</string>
     <string name="settings_view_grid">Сетка</string>
     <string name="settings_view_list">Список</string>
@@ -588,7 +512,6 @@
     <string name="settings_movies_player_description">mpv (рекомендуется) поддерживает больше всего форматов — звук DTS/TrueHD, необычные файлы. На некоторых телевизорах ExoPlayer воспроизводит потоки, которые не даются mpv, но он не декодирует звук DTS/TrueHD. Комбинированные варианты автоматически пробуют второй плеер, когда первый не справился; варианты с одним плеером не делают этого никогда, что экономит несколько секунд чёрного экрана, если второй плеер на вашем телевизоре всё равно не работает.</string>
     <string name="settings_movies_player_description_mobile">mpv (рекомендуется) поддерживает больше всего форматов — звук DTS/TrueHD, необычные файлы. На некоторых устройствах ExoPlayer воспроизводит потоки, которые не даются mpv, но он не декодирует звук DTS/TrueHD. Комбинированные варианты автоматически пробуют второй плеер, когда первый не справился; варианты с одним плеером не делают этого никогда, что экономит несколько секунд чёрного экрана, если второй плеер на вашем устройстве всё равно не работает.</string>
     <string name="settings_live_player_description">ExoPlayer (рекомендуется) открывает каналы намного быстрее и единственный поддерживает субтитры в прямом эфире. mpv воспроизводит каналы, которые не даются ExoPlayer, в том числе некоторые с необычным звуком. Комбинированные варианты автоматически пробуют второй плеер, когда первый не справился; варианты с одним плеером не делают этого никогда, что экономит несколько секунд чёрного экрана, если второй плеер на вашем телевизоре всё равно не работает. На канале, переключённом вручную в плеере, ваш выбор сохраняется в любом случае.</string>
-    <string name="settings_live_player_description_mobile">ExoPlayer (рекомендуется) открывает каналы намного быстрее и единственный поддерживает субтитры в прямом эфире. mpv воспроизводит каналы, которые не даются ExoPlayer, в том числе некоторые с необычным звуком. Комбинированные варианты автоматически пробуют второй плеер, когда первый не справился; варианты с одним плеером не делают этого никогда, что экономит несколько секунд чёрного экрана, если второй плеер на вашем устройстве всё равно не работает. На канале, переключённом вручную в плеере, ваш выбор сохраняется в любом случае.</string>
     <string name="settings_reset_player_choices_description">Если переключить отдельный фильм или серию между mpv и ExoPlayer прямо в плеере, этот выбор сохраняется на следующий раз. Сброс возвращает всё к настройке выше. Сохранённый выбор для каналов прямого эфира остаётся.</string>
     <string name="settings_reset_player_choices_none">Ничего не сохранено</string>
     <plurals name="settings_reset_player_choices_count">
@@ -638,21 +561,13 @@
     <string name="settings_download_remote_title">Загрузка на другое устройство</string>
     <string name="settings_download_remote_description">На любом устройстве с браузером в той же сети Wi-Fi — телефоне, компьютере или другом телевизоре — отсканируйте QR-код (или откройте адрес), введите этот PIN и скачайте файл резервной копии, чтобы сохранить его.</string>
     <string name="settings_preparing_backup">Подготовка резервной копии…</string>
-    <string name="settings_background_on">Фоновое изображение: вкл.</string>
-    <string name="settings_background_off">Фоновое изображение: выкл.</string>
     <string name="settings_ui_zoom_range">Масштаб всего интерфейса (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%).</string>
     <string name="settings_low_zoom_warning_title">⚠️ Предупреждение о малом масштабе</string>
     <string name="settings_low_zoom_warning">При масштабе <xliff:g id="zoom">%1$d</xliff:g>%% на экране одновременно отображается гораздо больше элементов. На устройствах с небольшим объёмом памяти (например, ТВ-приставках с 2 ГБ памяти) это может привести к нестабильной работе или сбою приложения, особенно при больших плейлистах и объёмах данных EPG.\n\nНажмите OK, чтобы продолжить, или «Назад», чтобы оставить масштаб <xliff:g id="safe_zoom">%2$d</xliff:g>%%.</string>
     <string name="settings_low_zoom_warning_mobile">При масштабе <xliff:g id="zoom">%1$d</xliff:g>%% на экране одновременно отображается гораздо больше элементов. На устройствах с небольшим объёмом памяти это может привести к нестабильной работе или сбою приложения, особенно при больших плейлистах и объёмах данных EPG.\n\nВыберите «Отмена», чтобы оставить масштаб <xliff:g id="safe_zoom">%2$d</xliff:g>%%.</string>
     <string name="settings_low_zoom_accept">Я понимаю и принимаю риск</string>
     <string name="settings_surface_transparency"><xliff:g id="percent">%1$d</xliff:g>%%</string>
-    <string name="settings_surface_count_all">Поверхности: все</string>
-    <plurals name="settings_surface_count">
-        <item quantity="one">Включена <xliff:g id="count">%1$d</xliff:g> поверхность из <xliff:g id="total">%2$d</xliff:g>.</item>
-        <item quantity="few">Включены <xliff:g id="count">%1$d</xliff:g> поверхности из <xliff:g id="total">%2$d</xliff:g>.</item>
-        <item quantity="many">Включено <xliff:g id="count">%1$d</xliff:g> поверхностей из <xliff:g id="total">%2$d</xliff:g>.</item>
-        <item quantity="other">Включено <xliff:g id="count">%1$d</xliff:g> поверхностей из <xliff:g id="total">%2$d</xliff:g>.</item>
-    </plurals>
+    <string name="settings_catchup_timezone_automatic">Автоматически</string>
     <string name="settings_catchup_timezone_device">Устройство</string>
     <string name="settings_catchup_player_ask">Всегда спрашивать</string>
     <string name="settings_catchup_player_internal">Плеер OwnTV</string>
@@ -670,23 +585,6 @@
     <string name="settings_history_movies">Фильмы</string>
     <string name="settings_history_series">Сериалы</string>
     <string name="settings_history_all">всё</string>
-    <string name="settings_decrease">–</string>
-    <string name="settings_increase">+</string>
-    <string name="settings_glass_effect_title">Эффект стекла</string>
-    <string name="settings_glass_effect_description">Полупрозрачные матовые панели поверх фоновой фотографии или собственного фона приложения.</string>
-    <string name="settings_transparency_title">Прозрачность</string>
-    <string name="settings_blur_title">Размытие / матовость</string>
-    <string name="settings_blur_description_enabled">Степень размытия фонового изображения (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). Применяется только поверх фонового изображения.</string>
-    <string name="settings_blur_description_disabled">Степень размытия фонового изображения (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). Применяется только поверх фонового изображения. Установите фоновое изображение, чтобы включить настройку.</string>
-    <string name="settings_glass_surface_panels">Панели контента</string>
-    <string name="settings_glass_surface_sidebar">Боковая панель</string>
-    <string name="settings_glass_surface_preview">Панели предпросмотра</string>
-    <string name="settings_glass_surface_dialogs">Диалоговые окна и всплывающие элементы</string>
-    <string name="settings_glass_surface_topbar">Верхняя панель</string>
-    <string name="settings_glass_surface_cards">Карточки</string>
-    <string name="settings_glass_surface_miniplayer">Мини-плеер</string>
-    <string name="settings_glass_surface_player_controls">Элементы управления плеером</string>
-    <string name="settings_glass_surface_toasts">Сообщения на экране</string>
     <string name="settings_browsing_last_category">Запоминать последнюю категорию</string>
     <string name="settings_browsing_last_category_description">Снова открывать раздел с той категорией, которую вы покинули, а не со «Все».</string>
     <string name="settings_browsing_last_item">Запоминать последний элемент</string>
@@ -766,7 +664,6 @@
     <string name="settings_span_ch_help">CH+ / CH− перелистывают страницу. Удерживайте CH+ / CH−, чтобы перейти к последнему или первому элементу.</string>
     <string name="settings_customize_metadata_separator">"  ·  "</string>
     <string name="settings_sources_title">Источники</string>
-    <string name="settings_sources_description">Источники общие для всех профилей.</string>
     <string name="settings_sources_empty">Источников пока нет. Добавьте источник M3U или Xtream.</string>
     <string name="settings_sources_add">Добавить источник</string>
     <string name="settings_sources_import_failed">Не удалось выполнить импорт</string>
@@ -850,7 +747,6 @@
     <string name="settings_epg_sources_name_hint">например, программа передач Великобритании</string>
     <string name="settings_epg_sources_url_hint">https://…/epg.xml(.gz)</string>
     <string name="settings_epg_sources_user_agent_hint">Оставьте пустым для значения по умолчанию</string>
-    <string name="settings_epg_sources_description">Источники программы передач XMLTV, заполняющие программу передач. Они автоматически синхронизируются после добавления и объединяются с каналами ваших плейлистов.</string>
     <string name="settings_epg_sources_delete_title">Удалить «<xliff:g id="name">%1$s</xliff:g>»?</string>
     <string name="settings_epg_sources_delete_message">Этот источник EPG и данные его программы передач будут удалены. Ваши каналы останутся.</string>
     <string name="settings_epg_sources_syncing_percent">Синхронизация: <xliff:g id="percent">%1$d</xliff:g>%%</string>
@@ -916,8 +812,6 @@
     <string name="settings_backup_pin_incorrect">Неверный PIN.</string>
     <string name="settings_backup_pin_locked">Заблокировано с помощью PIN</string>
     <string name="settings_backup_unlock">Разблокировать</string>
-    <string name="settings_backup_export_button">Экспортировать резервную копию</string>
-    <string name="settings_backup_restore_button">Восстановить резервную копию</string>
     <string name="settings_backup_continue">Продолжить</string>
     <string name="settings_backup_encrypt_export">Зашифровать и экспортировать</string>
     <string name="settings_backup_export_unencrypted">Экспортировать без шифрования</string>
@@ -1063,7 +957,6 @@
     <string name="settings_move_category_keep">Также оставить в категории «<xliff:g id="name">%1$s</xliff:g>»</string>
     <string name="settings_move_category_action">Переместить</string>
     <string name="settings_dns_description">Использовать пользовательский DNS-сервер для разрешения доменных имён</string>
-    <string name="settings_dns_custom">Пользовательский DNS</string>
     <string name="settings_dns_toggle_description">Обрабатывать все запросы OwnTV на разрешение доменных имён через пользовательский DNS-сервер.</string>
     <string name="settings_dns_use_custom">Использовать пользовательский DNS</string>
     <string name="settings_dns_server_missing">Пользовательский DNS включён, но сервер не настроен. Введите адрес сервера и выберите «Сохранить» либо отключите эту функцию.</string>
@@ -1113,13 +1006,9 @@
     <string name="settings_live_tune_timeout_description">Если за это время на прямом канале не появилось изображение, OwnTV прекращает попытки и сообщает вам об этом, вместо того чтобы держать чёрный экран, перебирая все свои плееры. «Никогда» продолжает попытки, а на канале, удалённом провайдером, это может занять заметно больше минуты. Ожидание, о котором просит сам провайдер, не учитывается.</string>
     <string name="settings_live_preroll_per_playlist">Предварительная буферизация для плейлиста</string>
     <string name="settings_live_preroll_per_playlist_description">Переопределяет указанную выше настройку для одного плейлиста, сохраняя быстрый запуск остальных плейлистов.</string>
-    <!-- Translators: Title of the per-playlist Live TV engine override row. -->
     <string name="settings_live_engine_per_playlist">Плеер прямого эфира для плейлиста</string>
-    <!-- Translators: Description of the per-playlist Live TV engine override row. -->
     <string name="settings_live_engine_per_playlist_description">Переопределяет указанную выше настройку для одного плейлиста — для провайдера, каналы которого хорошо воспроизводит только один из плееров.</string>
-    <!-- Translators: Title of the per-playlist Live latency override row. -->
     <string name="settings_live_latency_per_playlist">Задержка прямого эфира для плейлиста</string>
-    <!-- Translators: Description of the per-playlist Live latency override row. -->
     <string name="settings_live_latency_per_playlist_description">Переопределяет указанную выше настройку для одного плейлиста — для провайдера, которому нужен больший или меньший буфер, чем остальным.</string>
     <string name="settings_catchup_timezone_per_playlist">Часовой пояс архива для плейлиста</string>
     <string name="settings_catchup_timezone_per_playlist_description">Заменяет часовой пояс выше для одного плейлиста — для провайдера, чей архив идёт по другим часам.</string>
@@ -1160,7 +1049,6 @@
     <string name="settings_playback_kind_error">Ошибка</string>
     <string name="settings_playback_kind_event">Событие</string>
     <string name="settings_playback_kind_report">Отчёт</string>
-    <string name="settings_playback_entry_with_kind"><xliff:g id="date">%1$s</xliff:g> · <xliff:g id="kind">%2$s</xliff:g> · <xliff:g id="engine">%3$s</xliff:g> · <xliff:g id="stream_type">%4$s</xliff:g></string>
     <string name="settings_export">Экспорт</string>
     <string name="settings_detailed_playback_logging_description">Ведёт полную трассировку действий движка прямого эфира — каждое переключение, откат и переподключение — в Logcat и в экспортируемом отчёте. Оставляйте выключенным, если вы не ищете причину проблемы: эта опция не влияет на воспроизведение, а только увеличивает объём записываемых данных.</string>
     <string name="settings_live_preroll_playlist_picker">Какой плейлист?</string>
@@ -1217,52 +1105,12 @@
     <string name="settings_font_system_sans">Системный шрифт без засечек</string>
     <string name="settings_font_monospace">Моноширинный</string>
     <string name="settings_subtitle_font">Шрифт субтитров</string>
-    <string name="settings_glass_preset_title">Предустановка оформления</string>
-    <string name="settings_glass_preset_clear">Прозрачное</string>
-    <string name="settings_glass_preset_balanced">Сбалансированное</string>
-    <string name="settings_glass_preset_tinted">Тонированное</string>
-    <string name="settings_glass_preset_custom">Своё</string>
-    <string name="settings_glass_preset_clear_description">Больше цветов обоев при умеренном размытии.</string>
-    <string name="settings_glass_preset_balanced_description">Рекомендуемый баланс чёткости, глубины и читаемости.</string>
-    <string name="settings_glass_preset_tinted_description">Более насыщенный цвет поверхности для яркого или сложного фона.</string>
-    <string name="settings_glass_preset_custom_description">Использовать сохранённые значения прозрачности и размытия.</string>
     <string name="settings_ambient_glow">Фоновое свечение</string>
     <string name="settings_ambient_glow_description">Добавляет сплошному интерфейсу свечение в стиле мастера настройки</string>
     <string name="settings_ambient_glow_dialog_description">Добавляет мягкое акцентное свечение в интерфейс без стекла. Медленная пульсация плавно меняется, когда анимация включена.</string>
     <string name="settings_ambient_glow_effect">Свечение</string>
     <string name="settings_ambient_glow_pulse">Медленная пульсация</string>
-    <string name="settings_glass_preset_ultra_clear">Ультрапрозрачный</string>
-    <string name="settings_glass_preset_opaque">Непрозрачный</string>
-    <string name="settings_glass_preset_ultra_clear_description">Максимум деталей фона с лёгким размытием.</string>
-    <string name="settings_glass_preset_opaque_description">Максимальная плотность панелей с самым сильным размытием.</string>
-    <string name="settings_glass_preset_aurora">Аврора</string>
-    <string name="settings_glass_preset_aurora_description">Тонкое стекло с самым плотным матированием — сделано для телефона.</string>
-    <string name="settings_glass_highlight_title">Яркость блика</string>
-    <string name="settings_glass_highlight_description">Настройте свет и контур стекла в фокусе.</string>
     <string name="settings_glass_live_preview">Предпросмотр</string>
-    <string name="settings_glass_screen_description">Полупрозрачные матовые панели, фоновое изображение и прозрачность</string>
-    <string name="settings_glass_master_description">Полупрозрачные матовые панели поверх фоновой фотографии или собственного фона приложения.</string>
-    <string name="settings_glass_background_image">Выберите фоновое изображение</string>
-    <string name="settings_glass_background_blur_title">Размытие / матовость</string>
-    <string name="settings_glass_section_appearance">Внешний вид</string>
-    <string name="settings_glass_section_fine_tuning">Дополнительные параметры</string>
-    <string name="settings_glass_section_behavior">Поведение</string>
-    <string name="settings_glass_surface_all">Все</string>
-    <string name="settings_glass_background_action_description">Выберите фоновое изображение</string>
-    <string name="settings_glass_transparency_short_description">20–100 · 5</string>
-    <string name="settings_glass_blur_short_description">0–100 · 10</string>
-    <string name="settings_glass_highlight_short_description">Настройте свет и контур стекла в фокусе.</string>
-    <string name="settings_glass_full_transparency_short">Разрешить полную прозрачность</string>
-    <string name="settings_glass_full_transparency_short_description">Отключает автоматический порог читаемости для максимально прозрачного стекла.</string>
-    <string name="settings_glass_depth_effects_short">Глубина и тени</string>
-    <string name="settings_glass_depth_effects_short_description">Включает свет при перемещении фокуса, лёгкий параллакс и движение глубины.</string>
-    <string name="settings_glass_shine_short">Скользящий блик</string>
-    <string name="settings_glass_shine_short_description">Полоса света проходит по панели при её появлении.</string>
-    <string name="settings_glass_reset_balanced">Сбросить: Сбалансированное</string>
-    <string name="settings_glass_full_transparency_title">Разрешить полную прозрачность</string>
-    <string name="settings_glass_full_transparency_description">Отключает автоматический порог читаемости для максимально прозрачного стекла.</string>
-    <string name="settings_glass_depth_title">Глубина и тени</string>
-    <string name="settings_glass_depth_description">Включает свет при перемещении фокуса, лёгкий параллакс и движение глубины.</string>
     <string name="settings_row_menu_pin">Закрепить в «Быстрые»</string>
     <string name="settings_row_menu_unpin">Убрать из «Быстрые»</string>
     <string name="settings_row_menu_move_up">Переместить вверх</string>
@@ -1270,8 +1118,6 @@
     <string name="settings_quick_empty_title">Пока ничего не закреплено</string>
     <string name="settings_quick_empty_hint">Удерживайте OK на любой настройке и выберите «Закрепить в Быстрые».</string>
     <string name="settings_quick_empty_hint_touch">Удерживайте любую настройку и выберите «Закрепить в Быстрые».</string>
-    <string name="settings_results_title">Результаты</string>
-    <string name="settings_results_summary">Все совпадения, где бы они ни были, — вместе с путём</string>
     <plurals name="settings_setting_count">
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> настройка</item>
         <item quantity="few"><xliff:g id="count">%1$d</xliff:g> настройки</item>
@@ -1290,45 +1136,29 @@
     <string name="settings_guide_width_summary">Список каналов %1$d%% · Шкала EPG %2$d%%</string>
     <string name="settings_guide_width_help">• Список каналов и шкала EPG занимают одну строку, поэтому их сумма должна быть 100%%.\n• При расширении списка каналов видно меньше шкалы; длительность передач и масштаб времени не меняются.\n• Оба столбца остаются не уже 10%%.\n• Сброс устанавливает 10%% для списка каналов и 90%% для шкалы EPG.\n• Отключение настройки возвращает стандартный вид без потери сохранённых значений.</string>
     <string name="settings_guide_width_channels">Список каналов</string>
-    <string name="settings_guide_width_epg">Шкала EPG</string>
     <string name="settings_selection_highlight">Подсветка выбора</string>
     <string name="settings_selection_highlight_description">Цвет и толщина рамки вокруг выбранного элемента</string>
-    <string name="settings_nav_bar_customization">Настройка панели навигации</string>
-    <string name="settings_playback_mobile">Телефон</string>
-    <string name="settings_playback_tv_only_note">Предпросмотр в реальном времени и горячие клавиши пульта — это функции телевизора, на телефоне их нет.</string>
     <string name="settings_background_playback">Воспроизведение в фоне</string>
     <string name="settings_background_playback_description">Не выключать звук после выхода из приложения</string>
     <string name="settings_pip">Картинка в картинке</string>
-    <string name="settings_pip_description">Уменьшать видео в плавающее окно при выходе из приложения</string>
     <string name="settings_data_saver">Экономия трафика</string>
     <string name="settings_data_saver_description">Не воспроизводить через мобильный интернет</string>
     <string name="settings_gesture_sensitivity">Чувствительность жестов</string>
-    <string name="settings_gesture_sensitivity_description">Насколько далеко нужно провести пальцем, чтобы изменить громкость, яркость или позицию</string>
     <string name="settings_downloads_wifi_only">Загружать только по Wi-Fi</string>
     <string name="settings_downloads_wifi_only_description">Дождаться Wi-Fi вместо мобильного интернета</string>
-    <string name="settings_search_keywords_background_playback">фон звук аудио выход приложение продолжить служба</string>
-    <string name="settings_search_keywords_pip">картинка в картинке плавающее окно поверх маленькое</string>
-    <string name="settings_search_keywords_data_saver">экономия трафика мобильный интернет роуминг лимит</string>
-    <string name="settings_search_keywords_gestures">жест свайп чувствительность касание перетаскивание</string>
-    <string name="settings_mini_player_style">Стиль мини-плеера</string>
     <string name="settings_mini_player_style_description">Как воспроизведение следует за вами при просмотре списков</string>
     <string name="settings_mini_player_style_floating">Плавающее окно</string>
     <string name="settings_mini_player_style_docked">Закреплённая панель</string>
     <string name="settings_pip_size">Размер окна</string>
-    <string name="settings_pip_size_description">С каким размером открывается плавающее окно. Меняйте его щипком.</string>
     <string name="settings_pip_size_small">Маленькое</string>
     <string name="settings_pip_size_medium">Среднее</string>
     <string name="settings_pip_size_large">Большое</string>
     <string name="settings_pip_snap">Прилипать к краям</string>
-    <string name="settings_pip_snap_description">Отпустите окно, и оно встанет у ближайшего края</string>
     <string name="settings_audio_on_screen_off">Только звук при выключении экрана</string>
-    <string name="settings_audio_on_screen_off_description">Перестаёт декодировать видео, которого никто не видит, и экономит батарею</string>
     <string name="settings_audio_on_mobile_data">Только звук на мобильном интернете</string>
     <string name="settings_audio_on_mobile_data_description">Начинать без изображения, когда нет Wi-Fi</string>
     <string name="settings_audio_per_channel">Запоминать только звук для канала</string>
-    <string name="settings_audio_per_channel_description">Канал, который вы смотрели без изображения, в следующий раз откроется так же</string>
     <string name="local_sync_title">Локальная синхронизация</string>
-    <string name="local_sync_description">Обменивайтесь данными с другим устройством по Wi-Fi</string>
     <string name="local_sync_host_hint">На другом устройстве тоже включите режим синхронизации, нажмите «Подключиться» и выберите это устройство.</string>
     <string name="local_sync_qr_description">QR-код с адресом этого устройства</string>
     <string name="local_sync_pin_is">PIN-код: <xliff:g id="pin">%1$s</xliff:g></string>
@@ -1383,8 +1213,6 @@
     <string name="local_sync_error_bad_payload">Не удалось прочитать полученные данные. Если вы использовали пароль, проверьте, что он одинаков на обоих устройствах.</string>
     <string name="local_sync_error_unknown">Что-то пошло не так. Попробуйте ещё раз.</string>
     <string name="local_sync_mode">Режим синхронизации</string>
-    <string name="local_sync_mode_description">Позволяет другим вашим устройствам найти это. Работает, пока открыт этот экран.</string>
-    <string name="local_sync_mode_pill">Режим синхронизации включён</string>
     <string name="local_sync_connect">Подключиться</string>
     <string name="local_sync_connect_description">Найдите другое устройство с включённым режимом синхронизации</string>
     <string name="local_sync_last_synced">Последняя синхронизация: <xliff:g id="when">%1$s</xliff:g></string>
@@ -1658,7 +1486,7 @@
     <string name="settings_help_playlists">Добавьте плейлист по ссылке, входу Xtream, порталу Stalker или из файла, синхронизируйте заново или удалите.</string>
     <string name="settings_help_epg_sources">Добавьте источник телегида XMLTV по ссылке, обновите или удалите его. Источники заполняют телегид и строки передач в прямом эфире.</string>
     <string name="settings_help_guide_days">Сколько дней передач телегид хранит вперёд. Чем меньше дней, тем быстрее обновление и меньше база данных.</string>
-    <string name="settings_help_catchup">Архив воспроизводит передачи из хранилища провайдера. Большинство провайдеров используют часы телевизора; выберите фиксированное смещение UTC, если архив начинается не вовремя. Здесь же выбирается плеер для архива.</string>
+    <string name="settings_help_catchup_timezone">Архив воспроизводит передачи из хранилища провайдера. В автоматическом режиме используется часовой пояс, который сообщает провайдер, а если он его не сообщает, часы телевизора; выберите фиксированное смещение UTC, если архив всё равно начинается не вовремя. Здесь же выбирается плеер для архива.</string>
     <string name="settings_help_theme">OwnTV создан для тёмной темы. Системная следует настройке телевизора, если она есть; светлая подходит для яркой комнаты.</string>
     <string name="settings_help_accent">Окрашивает кнопки, свечение выделения, полосы прогресса и акценты везде. Выберите готовый цвет или нажмите OK, чтобы открыть палитру и ввести любой HEX-код.</string>
     <string name="settings_help_focus">Рамка вокруг выделенного элемента. Выберите её цвет и толщину, чтобы она была хорошо видна с дивана.</string>

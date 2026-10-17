@@ -18,7 +18,7 @@ import java.io.InputStream
 /**
  * Thin OkHttp wrapper for fetching M3U playlists and Xtream JSON. [get] streams the response body to
  * a block (so huge payloads are never fully buffered) and always closes the response. A per-source
- * custom User-Agent can be supplied (Phase 12 power feature).
+ * custom User-Agent can be supplied.
  */
 class HttpClient(private val client: OkHttpClient) {
 
@@ -64,7 +64,7 @@ class HttpClient(private val client: OkHttpClient) {
                     val totalBytes = body.contentLength().takeIf { it >= 0 }
                     // Info, not debug, and deliberately so: release builds strip Log.d, and this one
                     // line is what answers "are we actually getting gzip?" — the question behind a
-                    // 73 MB catalogue body that the provider drops four minutes in (plan N2a). It
+                    // 73 MB catalogue body that the provider drops four minutes in. It
                     // was debug-level for exactly as long as that question went unanswered.
                     Log.i(
                         TAG,
@@ -123,7 +123,7 @@ class HttpClient(private val client: OkHttpClient) {
     companion object {
         private const val TAG = "HttpClient"
 
-        /** Player-style UA that IPTV panels broadly accept. Overridable per-source in Phase 12. */
+        /** Player-style UA that IPTV panels broadly accept. Overridable per source. */
         const val DEFAULT_USER_AGENT = "VLC/3.0.20 LibVLC/3.0.20"
 
         /**

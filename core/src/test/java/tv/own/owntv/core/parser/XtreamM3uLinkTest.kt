@@ -7,7 +7,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
- * A provider's `get.php` "M3U" link is an Xtream account (#238). These are the shapes users paste:
+ * A provider's `get.php` "M3U" link is an Xtream account. These are the shapes users paste:
  * straight from the provider, copied off a web page with `&amp;`, with a port, on HTTPS, or behind a
  * path prefix — and the links that must stay plain M3U.
  */

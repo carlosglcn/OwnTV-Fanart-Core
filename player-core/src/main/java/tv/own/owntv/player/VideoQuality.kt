@@ -7,7 +7,7 @@ import androidx.media3.common.TrackSelectionOverride
 import androidx.media3.common.Tracks
 
 /**
- * N11 — which picture a stream that offers several (HLS / DASH variants) plays at.
+ * Which picture a stream that offers several (HLS / DASH variants) plays at.
  *
  * Two inputs: the Settings limit ([cap]: "Maximum video quality", and on a metered connection the
  * phone's mobile-data limit, the lower wins), and a pick in the player's Quality menu, which beats the
@@ -69,7 +69,7 @@ object VideoQuality {
 }
 
 /**
- * N19 — whether this device has a video decoder that can play tunneled (the TV's own hardware keeps
+ * Whether this device has a video decoder that can play tunneled (the TV's own hardware keeps
  * picture and sound in step). Asked once per process; the apps show the setting only when true.
  */
 object Tunneling {

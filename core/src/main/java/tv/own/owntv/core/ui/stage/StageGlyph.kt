@@ -1,9 +1,9 @@
 package tv.own.owntv.core.ui.stage
 
 /**
- * The Stage mockup's line icons as SVG path data on a 24×24 grid: 2-unit stroke, round caps and joins.
+ * The Stage line icons as SVG path data on a 24×24 grid: 2-unit stroke, round caps and joins.
  * Rects and circles are written out as paths; nothing is redrawn by hand. FORWARD, CHEVRON and
- * CHEVRON_UP are the mirror images of the mockup's rewind, chev-l and chev-d, so each pair still matches.
+ * CHEVRON_UP are the mirror images of REWIND, CHEVRON_LEFT and CHEVRON_DOWN, so each pair still matches.
  *
  * Shared by both apps: the TV's `OwnTVIcon` and the phone's `MobileIcons` draw from it. Each name is
  * the TV's `OwnTVIcon` entry it replaces; PLUS and MOON have none (the TV keeps its own Add and Bedtime).
@@ -57,7 +57,7 @@ enum class StageGlyph(val path: String) {
     NOW("M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0zM12 7v5l3.5 2M12 1.5v2"), // now
     CALENDAR("M6 4.5H18A3 3 0 0 1 21 7.5V18A3 3 0 0 1 18 21H6A3 3 0 0 1 3 18V7.5A3 3 0 0 1 6 4.5zM3 10h18M8 2.5v4M16 2.5v4"), // calendar
     TILES("M5.5 3.5H8.5A2 2 0 0 1 10.5 5.5V8.5A2 2 0 0 1 8.5 10.5H5.5A2 2 0 0 1 3.5 8.5V5.5A2 2 0 0 1 5.5 3.5zM15.5 3.5H18.5A2 2 0 0 1 20.5 5.5V8.5A2 2 0 0 1 18.5 10.5H15.5A2 2 0 0 1 13.5 8.5V5.5A2 2 0 0 1 15.5 3.5zM5.5 13.5H8.5A2 2 0 0 1 10.5 15.5V18.5A2 2 0 0 1 8.5 20.5H5.5A2 2 0 0 1 3.5 18.5V15.5A2 2 0 0 1 5.5 13.5zM15.5 13.5H18.5A2 2 0 0 1 20.5 15.5V18.5A2 2 0 0 1 18.5 20.5H15.5A2 2 0 0 1 13.5 18.5V15.5A2 2 0 0 1 15.5 13.5z"), // more
-    // Audio mode (added to the mockup 30 Sep).
+    // Audio mode.
     EQ("M4 20v-6M8.5 20V8M13 20v-9M17.5 20V5M21 20v-4"), // eq
     HEADPHONES("M3.5 17v-4a8.5 8.5 0 0 1 17 0v4M5.3 14H6.2A1.8 1.8 0 0 1 8 15.8V19.2A1.8 1.8 0 0 1 6.2 21H5.3A1.8 1.8 0 0 1 3.5 19.2V15.8A1.8 1.8 0 0 1 5.3 14zM17.8 14H18.7A1.8 1.8 0 0 1 20.5 15.8V19.2A1.8 1.8 0 0 1 18.7 21H17.8A1.8 1.8 0 0 1 16 19.2V15.8A1.8 1.8 0 0 1 17.8 14z"), // headphones
     VOLUME_HIGH("M4 9.5h3.5L12 5.5v13l-4.5-4H4zM15.5 9a4.2 4.2 0 0 1 0 6M18.3 6.3a8 8 0 0 1 0 11.4"), // vol
@@ -69,7 +69,9 @@ enum class StageGlyph(val path: String) {
     FORWARD("M13 19l8-7-8-7zM3 19l8-7-8-7z"),
     CHEVRON("M9 18l6-6-6-6"),
     CHEVRON_UP("M6 15l6-6 6 6"),
-    // The phone mockup's two marks the TV draws its own way (its ADD and BEDTIME).
+    // Sports Hub (rail, tab bar, Settings → Sports): the review's simplified trophy, cup + two handles + stem + base.
+    SPORTS("M8 4h8v4.5a4 4 0 0 1-8 0zM16 6h3v1.5a3.5 3.5 0 0 1-3.3 3.5M8 6H5v1.5A3.5 3.5 0 0 0 8.3 11M12 13v4M9 20h6v-2a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1z"), // trophy
+    // The phone's two marks the TV draws its own way (its ADD and BEDTIME).
     PLUS("M12 5v14M5 12h14"), // plus
     MOON("M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"), // moon
     ;

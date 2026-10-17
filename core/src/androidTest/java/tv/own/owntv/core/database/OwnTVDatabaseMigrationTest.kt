@@ -85,7 +85,7 @@ class OwnTVDatabaseMigrationTest {
             assertIndexExists(sqlite, "index_epg_programmes_natural_key")
             assertTableExists(sqlite, "content_order")
             assertIndexExists(sqlite, "index_content_order_profileId_mediaType_contextKey_itemId")
-            // D1: v8→v9 now truncates the rebuildable programme cache (instant first launch)
+            // v8→v9 truncates the rebuildable programme cache (instant first launch)
             // instead of the old row-wise de-dup; the guide re-downloads on the next EPG sync.
             // epg_channels is untouched.
             assertCount(sqlite, "epg_programmes", 0)
@@ -108,7 +108,7 @@ class OwnTVDatabaseMigrationTest {
             // Structure added along the way.
             assertTableExists(sqlite, "content_order")
             assertIndexExists(sqlite, "index_content_order_profileId_mediaType_contextKey_itemId")
-            // v24: custom category membership (issue #87).
+            // v24: custom category membership.
             assertTableExists(sqlite, "custom_category_members")
             assertIndexExists(sqlite, "index_custom_category_members_profileId_mediaType_contextKey_itemId")
             assertColumnExists(sqlite, "channels", "contentHash")
@@ -259,7 +259,7 @@ class OwnTVDatabaseMigrationTest {
     }
 
     /**
-     * The v23 → v24 hop: custom category membership (issue #87). A user arriving from a v23 dev
+     * The v23 → v24 hop: custom category membership. A user arriving from a v23 dev
      * build (or the next public release built on it) must gain the table with zero data loss —
      * content_order rows made before the upgrade survive, and the new table is empty but fully
      * indexed. `everyExportedSchemaVersionMigratesToCurrent` covers the schema-validity half of
@@ -381,7 +381,7 @@ class OwnTVDatabaseMigrationTest {
     }
 
     /**
-     * D2 — the tests above each pick one interesting starting version, which leaves the hops in
+     * The tests above each pick one interesting starting version, which leaves the hops in
      * between covered only by accident. A user can arrive from *any* shipped version, so every
      * exported schema must migrate all the way to the current one and pass Room's full-schema
      * validation. This is the test that fails when a new migration is added without its predecessor
@@ -417,7 +417,7 @@ class OwnTVDatabaseMigrationTest {
     }
 
     /**
-     * D2 — MIGRATION_4_6 skips version 5 rather than shipping 4→5 and 5→6. That is only safe
+     * MIGRATION_4_6 skips version 5 rather than shipping 4→5 and 5→6. That is only safe
      * because v5 never reached a public build: it existed on dev machines for one change to
      * `favorites` that was reverted before release, so 4.json and 6.json describe the identical
      * schema (same identityHash). If a future change ever makes them differ, this no-op hop would
@@ -435,7 +435,7 @@ class OwnTVDatabaseMigrationTest {
     }
 
     /**
-     * D2 — [OwnTVDatabase.healSchema] is the last line of defence against the interrupted-import
+     * [OwnTVDatabase.healSchema] is the last line of defence against the interrupted-import
      * drift that crash-looped 4.0.x → 4.1.0. The test above proves it rescues one drifted upgrade;
      * this one proves it is complete: strip *every* object it claims to guarantee (all non-unique
      * indexes on the bulk-synced tables and all four external-content FTS tables) from a current
@@ -498,7 +498,7 @@ class OwnTVDatabaseMigrationTest {
     /**
      * v40 → v41: the matcher's normalized names become stored columns, and a time index appears.
      *
-     * The upgrade path that matters is the owner's: a database already full of guide rows, upgraded
+     * The upgrade path that matters is the common one: a database already full of guide rows, upgraded
      * in place. What is proved here is that the columns and indexes arrive, that existing rows are
      * backfilled with the same answer [EpgMatcher.normalizeForEpg] would have given, and — the part a
      * schema check cannot see — that no guide row is lost on the way.
@@ -536,7 +536,7 @@ class OwnTVDatabaseMigrationTest {
     }
 
     /**
-     * v43 → v44 (plan P5), from the published baseline (core-1.0.57 ships v43). Additive only: the
+     * v43 → v44, from the published baseline (core-1.0.57 ships v43). Additive only: the
      * remembered zoom / volume / delay a user already has must survive untouched and read as
      * "no playlist known" (`sourceId = -1`) until the startup step fills it in; the new table and
      * every new column must exist, and a new quirk row must be writable.
@@ -736,6 +736,60 @@ class OwnTVDatabaseMigrationTest {
                 assertTrue(it.isNull(4))
                 assertTrue(it.isNull(5))
             }
+        } finally {
+            db.close()
+        }
+    }
+
+    /**
+     * v49: the panel's time zone on the source and the M3U catch-up correction
+     * on the channel. Existing rows come through whole and read "not known" (null / 0) — exactly what
+     * builds the catch-up URLs they built before — until the next sync fills them.
+     */
+    @Test
+    fun migrateVersion48To49_addsServerTimeZoneAndCatchupCorrection_keepingSourcesAndChannels() {
+        context.deleteDatabase(DB_NAME)
+        val db48 = context.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null)
+        try {
+            executeSchemaQueries(db48, "tv.own.owntv.core.database.OwnTVDatabase/48.json")
+            db48.execSQL(
+                "INSERT INTO sources (id, name, type, url, username, password, syncLive, syncMovies, syncSeries, hlsSupported, " +
+                    "preferHls, livePrerollSecs, liveLatencyCustomSecs, maxConnections, maxConnectionsProbedAt, createdAt, catchupTimezone) " +
+                    "VALUES (10, 'Playlist', '${SourceType.XTREAM.name}', 'https://example.test', 'user', 'pass', 1, 1, 1, 0, " +
+                    "0, -1, -1, 1, 0, 2, 'MANUAL')",
+            )
+            db48.execSQL(
+                "INSERT INTO channels (id, sourceId, name, streamUrl, remoteId, sortOrder, catchup, catchupDays, catchupType, contentHash) " +
+                    "VALUES (30, 10, 'News', 'https://example.test/live.ts', 'ch-30', 0, 1, 7, 'shift', 42)",
+            )
+            db48.version = 48
+        } finally {
+            db48.close()
+        }
+
+        val db = openWithAllMigrations()
+        try {
+            val sqlite = openForAssertions(db)
+            assertColumnExists(sqlite, "sources", "serverTimeZone")
+            assertColumnExists(sqlite, "channels", "catchupCorrectionMin")
+            sqlite.prepare("SELECT name, maxConnections, catchupTimezone, serverTimeZone FROM sources").use {
+                assertTrue(it.step())
+                assertEquals("Playlist", it.getText(0))
+                assertEquals(1L, it.getLong(1))
+                assertEquals("MANUAL", it.getText(2))
+                assertTrue(it.isNull(3))
+            }
+            sqlite.prepare("SELECT name, catchupDays, catchupType, contentHash, catchupCorrectionMin FROM channels").use {
+                assertTrue(it.step())
+                assertEquals("News", it.getText(0))
+                assertEquals(7L, it.getLong(1))
+                assertEquals("shift", it.getText(2))
+                // Unchanged hash: the next resync must not rewrite every channel.
+                assertEquals(42L, it.getLong(3))
+                assertEquals(0L, it.getLong(4))
+            }
+            sqlite.execSQL("UPDATE sources SET serverTimeZone = 'Europe/London' WHERE id = 10")
+            sqlite.execSQL("UPDATE channels SET catchupCorrectionMin = -60 WHERE id = 30")
         } finally {
             db.close()
         }
@@ -1027,9 +1081,9 @@ class OwnTVDatabaseMigrationTest {
     /**
      * A driver connection to the test database file.
      *
-     * Phase B configures a SQLiteDriver, and `RoomDatabase.openHelper` throws once one is set — so
-     * this test can no longer reach the file that way, and it should not want to: the whole point
-     * of the phase is that the driver path is the one users run. Room's public `useWriterConnection`
+     * Production configures a SQLiteDriver, and `RoomDatabase.openHelper` throws once one is set — so
+     * this test can no longer reach the file that way, and it should not want to: the driver path
+     * is the one users run. Room's public `useWriterConnection`
      * hands back a `Transactor`, which is not a `SQLiteConnection`, so the schema assertions open
      * their own connection to the same file instead.
      */

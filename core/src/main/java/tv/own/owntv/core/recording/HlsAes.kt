@@ -8,7 +8,7 @@ import javax.crypto.spec.SecretKeySpec
 /**
  * HLS `METHOD=AES-128` (RFC 8216 §5.2): each segment is AES-128-CBC with PKCS7 padding, under a
  * 16-byte key fetched from the key URI. Not DRM — the key is a plain URL every player fetches — so
- * the recorder decrypts the way the player does and writes clear MPEG-TS (#243).
+ * the recorder decrypts the way the player does and writes clear MPEG-TS.
  */
 object HlsAes {
 

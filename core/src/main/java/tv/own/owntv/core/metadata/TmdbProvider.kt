@@ -10,7 +10,7 @@ import java.net.URLEncoder
 /**
  * TMDB-backed [MetadataProvider]. All three access tiers run through this one class — [resolveEndpoint]
  * turns the current [MetadataConfig] into a base URL + optional api_key, so search/details calls are
- * tier-agnostic (plan §4).
+ * tier-agnostic.
  *
  * Only small JSON calls go through here. Images load directly from image.tmdb.org (no key), never via the
  * provider, so a proxy/Worker never sees heavy image traffic.
@@ -36,7 +36,7 @@ class TmdbProvider(
         val metered: Boolean = false,
     )
 
-    /** Precedence per plan §4: self-host URL > user key > default Worker. */
+    /** Precedence: self-host URL > user key > default Worker. */
     private suspend fun resolveEndpoint(): Endpoint {
         val cfg = settings.metadataConfig()
         val lang = cfg.resolvedLanguage
@@ -285,7 +285,7 @@ class TmdbProvider(
     }
 
     /**
-     * YouTube trailer keys from an `append_to_response=videos` payload (plan §7.3), best first: official
+     * YouTube trailer keys from an `append_to_response=videos` payload, best first: official
      * Trailers, other Trailers, Teasers; each tier in the user's language before others. Several are kept
      * because an owner can block a video from embedded players — the in-app player then tries the next
      * one. Stored joined (see [TrailerKeys]). Null when the title has no usable video.
@@ -400,7 +400,7 @@ class TmdbProvider(
         /** Direct TMDB API base (Tier 2, user's own key). */
         const val TMDB_DIRECT_BASE = "https://api.themoviedb.org"
 
-        /** Tier 0 default caching Worker (plan §0.5) — maintainer's key lives in the Worker secret,
+        /** Tier 0 default caching Worker — maintainer's key lives in the Worker secret,
          *  never in the APK. The app never sends api_key on this tier; the Worker injects it.
          *
          *  Behind a Cloudflare edge rule that refuses anything without the right `x-owntv-key`, so only

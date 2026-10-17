@@ -1,7 +1,7 @@
 package tv.own.owntv.core.timeshift
 
 /**
- * Cuts a live MPEG-TS byte stream into timeshift pieces that each play on their own (N4, P16a).
+ * Cuts a live MPEG-TS byte stream into timeshift pieces that each play on their own.
  *
  * A piece must be a valid place to *start* a stream, because a rewind opens the buffer at a piece
  * boundary. So a cut is made only where a decoder can begin — on a video packet flagged as a random

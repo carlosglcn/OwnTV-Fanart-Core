@@ -1,7 +1,7 @@
 package tv.own.owntv.core.brand
 
 /**
- * "Pixel": today's TV-set silhouette rebuilt as a dot matrix (the mockup's `markSignal()`), on the same
+ * "Pixel": today's TV-set silhouette rebuilt as a dot matrix, on the same
  * 100-unit grid as `owntv_mark_pixel`. Both apps draw it in code so the play triangle can take the
  * accent: each [Dot] is a circle of radius [DOT_RADIUS], plus one power light.
  */

@@ -24,38 +24,22 @@
     <string name="player_previous_channel">മുൻ ചാനൽ</string>
     <string name="player_next_channel_in_list">അടുത്ത ചാനൽ</string>
     <string name="player_previous_channel_in_list">ലിസ്റ്റിലെ മുൻ ചാനൽ</string>
-    <!-- Translators: The bubble above the live scrub bar while rewinding a channel: the clock time being scrubbed to, then the name of the programme on air then. Placeholders are the time and the programme title. -->
     <string name="player_live_scrub_at"><xliff:g id="time">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g></string>
-    <!-- Translators: Label under the volume button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_volume">ശബ്ദം</string>
-    <!-- Translators: Label under the brightness button on the phone player's control bar, and the label on the slider a vertical swipe on the left of the picture shows. Keep this very short (14 characters maximum) — it sits inside a small button. -->
     <string name="player_tool_brightness">തെളിച്ചം</string>
-    <!-- Translators: Spoken label for the phone player's skip-backwards button, which jumps back by the user's own seek step. Keep this very short (16 characters maximum). -->
     <string name="player_skip_back">പിന്നോട്ട് പോകുക</string>
-    <!-- Translators: Spoken label for the phone player's skip-forwards button, which jumps forward by the user's own seek step. Keep this very short (16 characters maximum). -->
     <string name="player_skip_forward">മുന്നോട്ട് പോകുക</string>
-    <!-- Translators: Label under the audio-track button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_audio">ഓഡിയോ</string>
-    <!-- Translators: Label under the subtitles button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_subtitles">സബ്ടൈറ്റിൽ</string>
-    <!-- Translators: Label under the favourite button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_favorite">പ്രിയപ്പെട്ടത്</string>
-    <!-- Translators: Label under the catch-up button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_catchup">ക്യാച്ച്-അപ്പ്</string>
-    <!-- Translators: Label under the playback-speed button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_speed">വേഗത</string>
-    <!-- Translators: Label under the aspect-ratio/zoom button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_aspect">അനുപാതം</string>
     <string name="player_tool_quality">നിലവാരം</string>
-    <!-- Translators: Label under the mini-player button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_mini">മിനി</string>
-    <!-- Translators: Label under the audio-only button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_audio_only">ഓഡിയോ മാത്രം</string>
-    <!-- Translators: Label under the playback-engine button on the player control bar, shown when it has focus. The engine name (MPV/EXO) is shown beside it as the value, so this is just the word for the player itself. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_engine">പ്ലെയർ</string>
-    <!-- Translators: Label under the stream-info button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_info">വിവരം</string>
-    <!-- Translators: Label under the report-stream button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_report">റിപ്പോർട്ട്</string>
     <string name="player_channel_not_found">ചാനൽ കണ്ടെത്തിയില്ല</string>
     <string name="player_channel_number_entry">ചാനൽ നമ്പർ</string>
@@ -73,7 +57,6 @@
     <string name="player_no_tracks">ട്രാക്കുകളൊന്നും ലഭ്യമല്ല.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · ചിത്രം</string>
     <string name="player_av_sync">A/V സമന്വയിപ്പിക്കൽ</string>
-    <!-- Translators: Player audio menu action that stores the current A/V-sync offset for this item. -->
     <string name="player_av_sync_remember">ഈ കാലതാമസം ഓർത്തുവയ്ക്കുക</string>
     <string name="player_no_offset">സമയ വ്യത്യാസമില്ല</string>
     <string name="player_subtitles_later">സബ്‌ടൈറ്റിലുകൾ വൈകി കാണിക്കുന്നു</string>
@@ -122,6 +105,7 @@
     <string name="player_error_decoder_busy">ഈ ടിവിയുടെ വീഡിയോ ഡീകോഡർ തിരക്കിലാണ്. അൽപ്പസമയം കഴിഞ്ഞ് വീണ്ടും ശ്രമിക്കുക.</string>
     <string name="player_error_no_internet">ഇന്റർനെറ്റ് കണക്ഷനില്ല. നെറ്റ്‌വർക്ക് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.</string>
     <string name="player_error_stream_unavailable">ഈ സ്ട്രീം പ്ലേ ചെയ്യാനായില്ല. ഉറവിടം ഓഫ്‌ലൈൻ ആയിരിക്കാം അല്ലെങ്കിൽ പിന്തുണയ്ക്കാത്ത ഫോർമാറ്റ് ഉപയോഗിക്കുന്നുണ്ടാകാം. <xliff:g id="hint">%1$s</xliff:g></string>
+    <string name="player_error_account_in_use">ഈ അക്കൗണ്ട് ഇതിനകം മറ്റൊരു ഉപകരണത്തിലോ ആപ്പിലോ പ്ലേ ചെയ്യുന്നുണ്ട്. അവിടെ നിർത്തിയ ശേഷം വീണ്ടും ശ്രമിക്കുക അമർത്തുക.</string>
     <string name="player_error_mpv_open_decode">ഈ ഫയൽ തുറക്കാനോ ഡീകോഡ് ചെയ്യാനോ mpv-ന് കഴിഞ്ഞില്ല.</string>
     <string name="player_error_mpv_stream_never_started">നിരവധി തവണ വീണ്ടും ശ്രമിച്ചിട്ടും mpv-ൽ സ്ട്രീം ആരംഭിച്ചില്ല.</string>
     <string name="player_error_surround">ഈ ഓഡിയോ ഔട്ട്‌പുട്ടിൽ സറൗണ്ട് ലഭ്യമല്ല — സ്റ്റീരിയോയിലേക്ക് മാറി.</string>
@@ -172,9 +156,7 @@
     <string name="player_stream_khz"><xliff:g id="value">%1$s</xliff:g> kHz</string>
     <string name="player_stream_kbps"><xliff:g id="value">%1$s</xliff:g> kbps</string>
     <string name="player_stream_seconds"><xliff:g id="value">%1$s</xliff:g> s ബഫർ ചെയ്തു</string>
-    <!-- Translators: Heading of the plate shown over the black video area when the item being played has no video track at all (a radio channel, a music-only file). This is NOT an error - playback is working. -->
     <string name="player_audio_only_title">ഓഡിയോ മാത്രം</string>
-    <!-- Translators: Body of the "Audio only" plate. Reassures the user that nothing is broken: the item simply contains no picture. -->
     <string name="player_audio_only_body">ഇതിൽ ശബ്ദം മാത്രമേയുള്ളൂ, ദൃശ്യമില്ല. തകരാറൊന്നുമില്ല — ഇത് സാധാരണ പോലെ പ്ലേ ചെയ്യുന്നു.</string>
     <string name="player_audio_mono">മോണോ</string>
     <string name="player_audio_stereo">സ്റ്റീരിയോ</string>
@@ -254,7 +236,6 @@
     <string name="player_subtitles_enter_credentials">നിങ്ങളുടെ OpenSubtitles ഉപയോക്തൃനാമവും പാസ്‌വേഡും നൽകുക.</string>
     <string name="player_subtitles_invalid_credentials">ആ അക്കൗണ്ട് വിവരങ്ങൾ ഉപയോഗിച്ച് OpenSubtitles-ലേക്ക് സൈൻ ഇൻ ചെയ്യാനായില്ല.</string>
     <string name="player_subtitles_sign_in_network_error">OpenSubtitles-നെ ബന്ധപ്പെടാനായില്ല. ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.</string>
-    <!-- Translators: Error when OpenSubtitles answers the sign-in with an HTTP error code (e.g. 403, 429, 500). The placeholder is that code. -->
     <string name="player_subtitles_sign_in_server_error">OpenSubtitles അഭ്യർത്ഥന നിരസിച്ചു (പിശക് <xliff:g id="code">%1$d</xliff:g>). നിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പ്രവർത്തിക്കുന്നുണ്ട് — പിന്നീട് വീണ്ടും ശ്രമിക്കുക, പ്രശ്നം അറിയിക്കുമ്പോൾ ഈ നമ്പർ ചേർക്കുക.</string>
     <string name="player_subtitles_refresh_network_error">OpenSubtitles പുതുക്കാനായില്ല. ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിക്കുക.</string>
     <string name="player_subtitles_no_matches_all_languages">പൊരുത്തപ്പെടുന്ന സബ്ടൈറ്റിലുകൾ ഒന്നും കണ്ടെത്തിയില്ല. തിരയൽ ശീർഷകം എഡിറ്റ് ചെയ്ത് ശ്രമിക്കുക.</string>

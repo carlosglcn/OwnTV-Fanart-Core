@@ -12,7 +12,7 @@ import tv.own.owntv.core.i18n.LocaleStore
 
 /**
  * Runs the download queue as a foreground service so transfers keep going once the user leaves
- * OwnTV — an app-scoped coroutine died with the process the moment Android reclaimed it (DL1).
+ * OwnTV — an app-scoped coroutine died with the process the moment Android reclaimed it.
  *
  * There is exactly one of these at a time (unique work, KEEP), and it lives until the queue is
  * empty, which is what preserves the one-at-a-time semantics downloads always had.

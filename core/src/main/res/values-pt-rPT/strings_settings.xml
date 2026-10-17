@@ -18,9 +18,7 @@
     <string name="settings_movies_keep_watching_description">Mostrar cartões para retomar filmes na linha principal.</string>
     <string name="settings_series_keep_watching">Séries em Continuar a ver</string>
     <string name="settings_series_keep_watching_description">Mostrar cartões para retomar episódios na linha principal.</string>
-    <!-- Translators: Toggle label for playing the highlighted Home item's video in the hero row. -->
     <string name="settings_hero_preview">Reproduzir vídeo na linha principal</string>
-    <!-- Translators: Description of the hero-row video preview toggle. -->
     <string name="settings_hero_preview_description">A pré-visualização em vídeo do item destacado é reproduzida após um instante. Desative para poupar energia e memória ao navegar no ecrã principal.</string>
     <string name="settings_android_tv_home">Ecrã principal do Android TV</string>
     <string name="settings_android_tv_home_description">Mostrar Continuar a ver e os canais em direto recentes no ecrã principal da TV.</string>
@@ -30,11 +28,8 @@
     <string name="settings_done_check">Concluído ✓</string>
     <string name="settings_mode"><xliff:g id="mode">%1$s</xliff:g></string>
     <string name="settings_hidden">Oculto</string>
-    <string name="settings_nav_dynamic_description">Dinâmico — os ícones adaptam-se ao conteúdo disponibilizado pela lista de reprodução ativa. O ecrã principal e as Definições são sempre apresentados.</string>
-    <string name="settings_nav_static_description">Estático — escolha manualmente os ícones apresentados abaixo.</string>
     <string name="settings_static">Estático</string>
     <string name="settings_dynamic">Dinâmico</string>
-    <string name="settings_http_proxy">Proxy HTTP</string>
     <string name="settings_use_proxy">Utilizar proxy</string>
     <string name="settings_proxy_description">Encaminhar todo o tráfego e a reprodução do OwnTV através de um proxy HTTP.</string>
     <string name="settings_host">Anfitrião</string>
@@ -102,8 +97,6 @@
     <string name="settings_show_weather_description">Apresentar as condições meteorológicas atuais na barra superior.</string>
     <string name="settings_custom_location">Localização personalizada</string>
     <string name="settings_custom_location_description">Substitua a cidade utilizada para a meteorologia. Deixe em branco para detetar automaticamente ou introduza uma cidade (por exemplo, Londres) ou \"lat,lon\" (por exemplo, 51.5,-0.12). É útil ao utilizar uma VPN, caso em que a deteção automática identifica a cidade do servidor.</string>
-    <string name="settings_use_device_location">Usar a localização deste dispositivo</string>
-    <string name="settings_use_device_location_description">O tempo segue onde o telemóvel está. Desative para introduzir uma cidade.</string>
     <string name="settings_temperature_unit">Unidade de temperatura</string>
     <string name="settings_temperature_description">Mostrar a temperatura em graus Celsius ou Fahrenheit.</string>
     <string name="settings_auto">Automático</string>
@@ -169,7 +162,6 @@
     <string name="settings_quick_hdr">HDR (só mpv)</string>
     <string name="settings_quick_autoplay">Reprodução automática</string>
     <string name="settings_quick_check_update">Procurar atualização</string>
-    <string name="settings_search_hint">Pesquisar nas definições…</string>
     <string name="settings_language">Idioma</string>
     <string name="settings_language_description">Idioma de apresentação da aplicação</string>
     <string name="settings_language_system_default">Predefinição do sistema</string>
@@ -184,14 +176,10 @@
     <string name="settings_epg_sources_nav_description">Adicionar fontes XMLTV ao guia de programação</string>
     <string name="settings_customize">Personalizar categorias e itens</string>
     <string name="settings_customize_nav_description">Ocultar e voltar a mostrar itens, mudar o nome e reordenar categorias</string>
-    <string name="settings_sidebar_description_root">Adaptar automaticamente os ícones laterais à sua lista de reprodução ou ocultar ícones específicos</string>
     <string name="settings_ch_paging">Atalhos do comando</string>
     <string name="settings_ch_paging_description">Atribua botões livres à navegação, reprodução e consulta. Os botões essenciais continuam protegidos.</string>
-    <!-- Translators: Settings navigation label for the long-press content menus. -->
     <string name="settings_content_menus_title">Menus de toque longo</string>
-    <!-- Translators: Description of the long-press content menus settings. -->
     <string name="settings_content_menus_description">Reordene as ações nos menus de canais, filmes, séries e episódios</string>
-    <!-- Translators: Hint shown above the list when arranging a long-press menu. -->
     <string name="settings_content_menus_hint">Mantenha OK numa ação para a pegar e mova-a com Cima e Baixo. Prima OK novamente para a largar.</string>
     <string name="settings_browsing_lists">Navegação e listas</string>
     <string name="settings_browsing_description">Memorizar a última categoria e o último item em TV em direto, Filmes e Séries</string>
@@ -200,7 +188,6 @@
     <string name="settings_metadata_root_description">Cartazes, sinopses, elenco e classificações de filmes e séries</string>
     <string name="settings_download_folder">Pasta de transferências</string>
     <string name="settings_backup_restore">Cópia de segurança e restauro</string>
-    <string name="settings_backup_restore_description">Exportar ou restaurar perfis e origens</string>
     <string name="settings_clear_history">Limpar histórico de visualização</string>
     <string name="settings_appearance_group">Aspeto</string>
     <string name="settings_theme">Tema</string>
@@ -216,13 +203,10 @@
     <string name="settings_focus_width_thick">Grossa</string>
     <string name="settings_focus_width_extra">Extra grossa</string>
     <string name="settings_focus_highlight_sample">Em foco</string>
-    <string name="settings_glass_effect">Efeito de vidro</string>
-    <string name="settings_glass_description">Painéis translúcidos foscos, imagem de fundo e transparência</string>
     <string name="settings_ui_zoom">Zoom da interface</string>
     <string name="settings_ui_zoom_description">Ajustar a escala de toda a interface</string>
     <string name="settings_animations">Animações</string>
     <string name="settings_animations_description">Ativar ou desativar o movimento da interface — a opção Desativado torna a utilização mais rápida em equipamentos de TV de gama baixa</string>
-    <string name="settings_animations_description_mobile">Ativar ou desativar o movimento da interface — a opção Desativado torna a utilização mais rápida em telemóveis e tablets mais antigos</string>
     <string name="settings_weather_description_root">Etiqueta de meteorologia na barra superior: mostrar ou ocultar, localização personalizada e Celsius/Fahrenheit.</string>
     <string name="settings_playback_group">Reprodução</string>
     <string name="settings_live_preview_description">Reproduzir automaticamente um canal quando este fica com foco</string>
@@ -231,10 +215,8 @@
     <string name="settings_mini_player_root">Minileitor</string>
     <string name="settings_mini_player_root_description">Tamanho e posição do minileitor encaixado</string>
     <string name="settings_hdr_description">Utilizar a saída HDR quando o vídeo e a TV forem compatíveis. Só mpv: o motor ExoPlayer não suporta esta definição e passa sempre o HDR da emissão tal como está.</string>
-    <string name="settings_hdr_description_mobile">Utilizar a saída HDR quando o vídeo e o ecrã forem compatíveis. Só mpv: o motor ExoPlayer não suporta esta definição e passa sempre o HDR da emissão tal como está.</string>
     <string name="settings_auto_frame_rate">Taxa de fotogramas automática</string>
     <string name="settings_auto_frame_rate_description">Ajustar a frequência de atualização da TV ao vídeo (24/25/50/60 fps) em ecrã inteiro, para TV em direto e VOD, e restaurá-la ao sair. Desative esta opção se a TV ou o recetor voltar a negociar a ligação HDMI de forma ruidosa sempre que muda de canal.</string>
-    <string name="settings_auto_frame_rate_description_mobile">Ajustar a frequência de atualização do ecrã ao vídeo (24/25/50/60 fps) em ecrã inteiro, para TV em direto e VOD, e restaurá-la ao sair. Desative esta opção se o ecrã tremeluzir ou ficar escuro quando um vídeo começa.</string>
     <string name="settings_afr_pause">Pausar durante a mudança de ecrã</string>
     <string name="settings_afr_pause_description">Apenas filmes. Quando o televisor tem de voltar a sincronizar com um novo modo de ecrã, o filme espera este tempo para que o início não se perca no ecrã preto. Uma mudança sem interrupção nunca pausa.</string>
     <string name="settings_afr_resolution">Ajustar a resolução</string>
@@ -243,7 +225,6 @@
     <string name="settings_surround_description_mobile">Descodificar Dolby/DTS para som surround (5.1/7.1) num verdadeiro recetor 5.1/7.1 ligado a este dispositivo. Deixe DESATIVADO para o altifalante integrado, auscultadores ou uma barra de som estéreo — o áudio multicanal pode ficar atrasado em relação ao vídeo. Se perder a sincronização, ajuste ligeiramente no menu Áudio do leitor → Sincronização A/V.</string>
     <string name="settings_audio_passthrough">Passthrough de Dolby e DTS</string>
     <string name="settings_audio_passthrough_description">Ativado: o Dolby e o DTS seguem sem descodificação para o televisor, a barra de som ou o recetor quando este indica que os consegue reproduzir (ExoPlayer). Desativado: a aplicação descodifica-os, ainda em surround onde Som surround o permitir. O mpv descodifica sempre. Não é usado enquanto Modo noturno ou Nivelamento do volume estiver ativado.</string>
-    <string name="settings_audio_passthrough_description_mobile">Ativado: o Dolby e o DTS seguem sem descodificação para um televisor ou recetor ligado quando este indica que os consegue reproduzir (ExoPlayer). Desativado: a aplicação descodifica-os, ainda em surround onde Som surround o permitir. O mpv descodifica sempre. Não é usado enquanto Modo noturno ou Nivelamento do volume estiver ativado.</string>
     <string name="settings_night_mode">Modo noturno</string>
     <string name="settings_night_mode_description">Baixa as cenas altas e sobe os diálogos baixos, para ver com o volume baixo.</string>
     <string name="settings_volume_leveling">Nivelamento do volume</string>
@@ -254,7 +235,6 @@
     <string name="settings_mobile_data_quality_description">Numa ligação limitada, reproduz no máximo esta qualidade. Desativado: igual ao Wi-Fi.</string>
     <string name="settings_tunneled_playback">Reprodução em túnel (experimental)</string>
     <string name="settings_tunneled_playback_description">TV em direto no ExoPlayer: o próprio hardware do televisor mantém a imagem e o som juntos, com menos trabalho para o processador. Só funciona em alguns televisores e desativa-se se um canal falhar com ela. A sincronização de áudio não pode ser ajustada enquanto estiver ativada.</string>
-    <string name="settings_tunneled_playback_description_mobile">TV em direto no ExoPlayer: o próprio hardware do dispositivo mantém a imagem e o som juntos, com menos trabalho para o processador. Só funciona em alguns dispositivos e desativa-se se um canal falhar com ela. A sincronização de áudio não pode ser ajustada enquanto estiver ativada.</string>
     <string name="settings_tunneled_playback_failed">Desativada depois de um canal ter falhado com ela neste dispositivo.</string>
     <string name="settings_autoplay_next">Reproduzir automaticamente o episódio seguinte</string>
     <string name="settings_autoplay_next_description">Quando um episódio terminar, iniciar automaticamente o seguinte — e continuar para a temporada seguinte. Os programas em diferido continuam também para o programa seguinte.</string>
@@ -266,13 +246,9 @@
     </plurals>
     <string name="settings_catchup_unavailable">Não há canais com programas em diferido disponíveis nesta lista de reprodução</string>
     <string name="settings_device">Dispositivo</string>
-    <string name="settings_video_player">Definições do leitor de vídeo</string>
-    <string name="settings_video_player_description">Descodificador, legendas, sincronização</string>
     <string name="settings_playback_error_log">Registo de erros</string>
     <string name="settings_playback_speed">Velocidade de reprodução</string>
     <string name="settings_player_zoom">Zoom do leitor</string>
-    <string name="settings_playback_error_description">Falhas da aplicação e de reprodução — detalhes para consultar ou comunicar</string>
-    <string name="settings_network_group">Rede</string>
     <string name="settings_app_group">Aplicação</string>
     <string name="settings_app_startup">Arranque da aplicação</string>
     <string name="settings_app_startup_description">O que o OwnTV abre ao iniciar</string>
@@ -281,7 +257,6 @@
     <string name="settings_update_startup">Procurar atualizações ao iniciar</string>
     <string name="settings_update_startup_description">Procurar uma nova versão quando a aplicação abrir</string>
     <string name="settings_about">Acerca de</string>
-    <string name="settings_about_description">Versão, licença e informações do projeto</string>
     <string name="settings_live_latency">Latência da transmissão em direto</string>
     <string name="settings_no_settings_match">Nenhuma definição corresponde a “<xliff:g id="query">%1$s</xliff:g>”</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
@@ -303,11 +278,8 @@
     <string name="settings_color_picker">Seletor de cores</string>
     <string name="settings_use_color">Utilizar esta cor</string>
     <string name="settings_about_version">Versão <xliff:g id="version">%1$s</xliff:g></string>
-    <string name="settings_about_description_full_mobile">O seu próprio leitor de IPTV para Android — uma aplicação gratuita, de código aberto e exclusivamente de reprodução. Não fornece canais nem conteúdos; cabe-lhe adicionar origens às quais possa aceder legalmente.</string>
-    <string name="settings_about_license">© 2026 OwnTV · Licença GPLv3</string>
     <string name="settings_join_telegram">Junte-se a nós no Telegram</string>
     <string name="settings_telegram_qr">Código QR do grupo do Telegram</string>
-    <string name="settings_telegram_scan">Digitalize o código QR para aderir através do telemóvel ou abra a ligação acima.</string>
     <string name="settings_contributions">Contribuições, relatórios de erros e estrelas são bem-vindos no GitHub.</string>
     <string name="settings_playback_error_description_full">A última falha da aplicação e as falhas de reprodução mais recentes (da mais recente para a mais antiga). Inclua estes detalhes quando comunicar um problema.</string>
     <string name="settings_loading">A carregar…</string>
@@ -315,15 +287,8 @@
     <string name="settings_live">Em direto</string>
     <string name="settings_vod">VOD</string>
     <string name="settings_clear_log">Limpar registo</string>
-    <string name="settings_browsing_title">Navegação e listas</string>
     <string name="settings_browsing_description_full">O ponto a que TV em direto, Filmes e Séries regressam quando volta.</string>
-    <string name="settings_glass_surfaces">Superfícies de vidro</string>
-    <string name="settings_glass_surfaces_description">Escolha as partes da aplicação que são apresentadas como vidro. Desativar todas as superfícies desativa o efeito de vidro.</string>
-    <string name="settings_all_surfaces_on">Todas as superfícies: Ativadas</string>
-    <string name="settings_all_surfaces_off">Todas as superfícies: Desativadas</string>
-    <string name="settings_surface_toggle"><xliff:g id="surface">%1$s</xliff:g>: <xliff:g id="state">%2$s</xliff:g></string>
-    <string name="settings_transparency_description">O quanto é visível através dos painéis (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). Um valor mais elevado torna-os mais opacos.</string>
-    <string name="settings_catchup_description">Como são enviados os carimbos de data e hora dos programas em diferido. Utilize o fuso horário do dispositivo ou defina a diferença esperada pelo servidor do fornecedor.</string>
+    <string name="settings_catchup_timezone_description">Como são enviados os carimbos de data e hora dos programas em diferido. Automático utiliza o fuso horário indicado pelo servidor do fornecedor ou, se não indicar nenhum, o do dispositivo. Também pode escolher Dispositivo ou definir a diferença manualmente.</string>
     <string name="settings_manual">Manual</string>
     <string name="settings_theme_dark">Escuro</string>
     <string name="settings_theme_light">Claro</string>
@@ -346,34 +311,16 @@
     <string name="settings_group_summary_appearance">Tema, cor de destaque, vidro, movimento e texto</string>
     <string name="settings_group_summary_layout">Barra lateral, painéis, listas e ecrã principal</string>
     <string name="settings_group_summary_content_metadata">Nomes, imagens e serviços de legendas</string>
-    <string name="settings_group_summary_playback">O reprodutor de vídeo e o seu registo de erros</string>
-    <!-- Translators: Video player settings: name of the section holding volume, audio language and surround settings. -->
     <string name="settings_vp_section_sound">Som</string>
-    <!-- Translators: Video player settings: one-line summary under the "Subtitles" section name. -->
-    <string name="settings_vp_section_subtitles_summary">Tamanho, cor, posição</string>
-    <!-- Translators: Video player settings: one-line summary under the "Diagnostics" section name. -->
-    <string name="settings_vp_section_diagnostics_summary">Registos detalhados do leitor</string>
     <string name="settings_vp_cat_player">Leitor</string>
-    <string name="settings_vp_cat_player_summary">Que leitor, por lista, apps externas</string>
     <string name="settings_vp_cat_picture">Imagem</string>
-    <string name="settings_vp_cat_picture_summary">Descodificador, HDR, qualidade, zoom</string>
     <string name="settings_vp_cat_frame_rate">Taxa de fotogramas</string>
     <string name="settings_vp_cat_frame_rate_summary">Ajustar o ecrã ao vídeo</string>
     <string name="settings_vp_cat_streaming">Streaming</string>
-    <string name="settings_vp_cat_streaming_summary">Buffer, tempo limite, religações</string>
-    <string name="settings_vp_cat_live_summary">Números dos canais, pausar e recuar</string>
     <string name="settings_vp_cat_live_tuning">Ajuste em direto</string>
-    <string name="settings_vp_cat_live_tuning_summary">Latência, pré-buffer, tempo de arranque</string>
-    <string name="settings_vp_cat_controls">Controlos</string>
-    <string name="settings_vp_cat_controls_summary">Passos de avanço e recuo</string>
     <string name="settings_vp_cat_multiview">Multiview e minileitor</string>
     <string name="settings_vp_cat_multiview_summary_mobile">Vários canais em direto ao mesmo tempo</string>
-    <string name="settings_vp_cat_sound_summary">Volume, surround, modo noturno, sincronização</string>
     <string name="settings_vp_cat_languages">Idiomas e legendas</string>
-    <string name="settings_vp_cat_languages_summary">Idioma do áudio e das legendas, estilo das legendas</string>
-    <string name="settings_vp_cat_resume">Retomar e reprodução automática</string>
-    <string name="settings_vp_cat_resume_summary">Onde começar, o episódio seguinte</string>
-    <string name="settings_group_summary_network">Proxy e DNS para as ligações às transmissões</string>
     <string name="settings_group_summary_app">Idioma, arranque, atualizações e info da aplicação</string>
     <string name="settings_group_quick">Rápido</string>
     <string name="settings_group_summary_quick">Os botões que utiliza mais</string>
@@ -385,7 +332,6 @@
     <string name="settings_search_keywords_epg">XMLTV guia fonte programa</string>
     <string name="settings_search_keywords_logos">canal logótipo ícone XMLTV guia picon lista de reprodução</string>
     <string name="settings_search_keywords_customize">ocultar mostrar mudar nome reordenar categorias</string>
-    <string name="settings_search_keywords_sidebar">barra lateral ícones dinâmico estático ocultar mostrar adaptar lista de reprodução</string>
     <string name="settings_search_keywords_ch">canal cima baixo avançar página lista categoria canal</string>
     <string name="settings_search_keywords_browsing">memorizar posição deslocar categoria último item direto filmes séries repor topo</string>
     <string name="settings_search_keywords_home">linhas principal reordenar filtrar</string>
@@ -461,10 +407,8 @@
     <string name="settings_language_vietnamese">Vietnamita</string>
     <string name="settings_hardware_decoding">Descodificação por hardware</string>
     <string name="settings_hardware_decoding_description">Utilizar o descodificador por hardware da TV. Desative esta opção se algumas transmissões tiverem interrupções ou apresentarem artefactos.</string>
-    <string name="settings_hardware_decoding_description_mobile">Utilizar o descodificador por hardware do dispositivo. Desative esta opção se algumas transmissões tiverem interrupções ou apresentarem artefactos.</string>
     <string name="settings_software_decode_above_1080p">Descodificação por software acima de 1080p</string>
     <string name="settings_software_decode_above_1080p_description">Reproduz por software vídeo 4K e outros acima de 1080p quando o descodificador por hardware da TV está desativado ou falha. Requer um processador rápido: na maioria das TVs, a reprodução tem interrupções.</string>
-    <string name="settings_software_decode_above_1080p_description_mobile">Reproduz por software vídeo 4K e outros acima de 1080p quando o descodificador por hardware do dispositivo está desativado ou falha. Requer um processador rápido: em muitos dispositivos, a reprodução tem interrupções.</string>
     <string name="settings_movies_series_player">Leitor de filmes e séries</string>
     <string name="settings_live_tv_player">Leitor de TV em direto</string>
     <string name="settings_engine_order"><xliff:g id="first">%1$s</xliff:g>, depois <xliff:g id="second">%2$s</xliff:g></string>
@@ -474,37 +418,21 @@
     <string name="settings_external_player">Leitor externo</string>
     <string name="settings_default_zoom">Zoom predefinido</string>
     <string name="settings_default_zoom_description">Proporção da imagem/zoom aplicados quando a reprodução começa.</string>
-    <!-- Translators: Setting label for the volume level playback starts at. -->
     <string name="settings_default_volume">Volume predefinido</string>
-    <!-- Translators: Description of the default volume setting. -->
     <string name="settings_default_volume_description">Volume aplicado quando a reprodução começa. Acima de 100%%, as emissões com pouco som são amplificadas.</string>
-    <!-- Translators: Settings-row title for forgetting the zoom saved for individual items. -->
     <string name="settings_reset_saved_zoom">Repor o zoom guardado</string>
-    <!-- Translators: Description of the reset-saved-zoom setting row. -->
     <string name="settings_reset_saved_zoom_description">Alterar o zoom no leitor guarda o valor para esse canal, filme ou episódio. Repor faz com que tudo volte a seguir o zoom predefinido.</string>
-    <!-- Translators: Confirmation dialog title before forgetting the saved per-item zoom. -->
     <string name="settings_reset_saved_zoom_confirm">Repor o zoom guardado?</string>
-    <!-- Translators: Confirmation dialog body before forgetting the saved per-item zoom. -->
     <string name="settings_reset_saved_zoom_confirm_description">Todos os canais, filmes e episódios voltam ao zoom predefinido. Os volumes guardados são mantidos. Pode sempre definir um item específico no leitor.</string>
-    <!-- Translators: Settings-row title for forgetting the volume saved for individual items. -->
     <string name="settings_reset_saved_volume">Repor o volume guardado</string>
-    <!-- Translators: Description of the reset-saved-volume setting row. -->
     <string name="settings_reset_saved_volume_description">Alterar o volume no leitor guarda o valor para esse canal, filme ou episódio. Repor faz com que tudo volte a seguir o volume predefinido.</string>
-    <!-- Translators: Confirmation dialog title before forgetting the saved per-item volume. -->
     <string name="settings_reset_saved_volume_confirm">Repor o volume guardado?</string>
-    <!-- Translators: Confirmation dialog body before forgetting the saved per-item volume. -->
     <string name="settings_reset_saved_volume_confirm_description">Todos os canais, filmes e episódios voltam ao volume predefinido. As definições de zoom guardadas são mantidas. Pode sempre definir um item específico no leitor.</string>
-    <!-- Translators: Settings row that forgets every per-item audio-sync offset. -->
     <string name="settings_reset_saved_audio_delay">Repor a sincronização A/V guardada</string>
-    <!-- Translators: Description of the reset-saved-audio-sync row. -->
     <string name="settings_reset_saved_audio_delay_description">Escolher “Memorizar este atraso” no leitor guarda a sincronização de áudio para esse canal, filme ou episódio. Repor faz com que tudo volte a seguir a definição acima.</string>
-    <!-- Translators: Title of the confirmation dialog for resetting saved audio sync. -->
     <string name="settings_reset_saved_audio_delay_confirm">Repor a sincronização A/V guardada?</string>
-    <!-- Translators: Body of the confirmation dialog for resetting saved audio sync. -->
     <string name="settings_reset_saved_audio_delay_confirm_description">Cada canal, filme e episódio volta à sincronização de áudio acima. O zoom e o volume guardados são mantidos. Pode sempre definir um individual novamente a partir do leitor.</string>
-    <!-- Translators: Setting label for how far rewind/forward jumps in a movie or episode. -->
     <string name="settings_seek_step">Salto de avanço</string>
-    <!-- Translators: Description of the seek step setting. -->
     <string name="settings_seek_step_description">Quanto avançam e recuam os comandos num filme ou episódio.</string>
     <string name="settings_vod_buffer">Memória intermédia de filmes</string>
     <string name="settings_vod_buffer_description">Quanto de filmes, episódios e catch-up é carregado antecipadamente. Automático usa o que convém a este dispositivo. Uma memória intermédia maior aguenta melhor uma má ligação; a memória do dispositivo continua a ser o limite, por isso um filme de débito elevado pode guardar menos do que o escolhido.</string>
@@ -513,9 +441,7 @@
     <string name="settings_vod_reconnects">Tentativas de religação</string>
     <string name="settings_vod_reconnects_description">Quantas vezes um filme ou episódio que perde a ligação é reaberto onde parou antes de mostrar um erro. Um minuto de reprodução estável devolve as tentativas.</string>
     <string name="settings_vod_network_auto">Automático</string>
-    <!-- Translators: Setting label for how far rewind/forward jumps inside a live channel's archive. -->
     <string name="settings_live_rewind_step">Salto em direto</string>
-    <!-- Translators: Description of the live rewind step setting. -->
     <string name="settings_live_rewind_step_description">Quanto o recuo e o avanço se movem num canal em direto: no arquivo de catch-up ou na cópia guardada por Pausar e recuar a TV em direto.</string>
     <string name="settings_resume_playback">Retomar a reprodução</string>
     <string name="settings_resume_playback_description">O que fazer quando um filme ou episódio tem uma posição guardada.</string>
@@ -551,7 +477,6 @@
     <string name="settings_live_latency_bitrate_note">Num canal com taxa de bits muito elevada — sobretudo em 4K — o buffer pode conter menos tempo do que pediste, porque há um limite para a quantidade de vídeo que pode ficar em memória de uma só vez.</string>
     <string name="settings_channel_numbers">Números dos canais</string>
     <string name="settings_channel_numbers_description">Mostrar o número de canal do fornecedor junto ao nome na lista da TV em direto, na sobreposição da lista de canais e no leitor — e introduzir um número no comando durante a reprodução em ecrã inteiro para ir diretamente para esse canal (OK sintoniza-o de imediato; Voltar cancela). Se desativar, todos os números ficam ocultos e as teclas numéricas são ignoradas; nada se perde e, ao reativar, os números são repostos.</string>
-    <string name="settings_channel_numbers_description_mobile">Mostrar o número de canal do fornecedor junto ao nome na lista da TV em direto e no leitor. Se desativar, todos os números ficam ocultos; nada se perde e, ao reativar, os números são repostos.</string>
     <string name="settings_live_left_right_rewinds">Esquerda e direita recuam a TV em direto</string>
     <string name="settings_live_left_right_rewinds_description">Com os controlos ocultos, esquerda e direita recuam e avançam nos canais que podem ser recuados (catch-up, ou guardados por Pausar e recuar a TV em direto), em vez de abrir a lista de canais e o histórico.</string>
     <string name="settings_timeshift">Pausar e recuar a TV em direto</string>
@@ -563,7 +488,6 @@
     <string name="settings_diagnostics">Diagnóstico</string>
     <string name="settings_measured_stats">Estatísticas medidas da transmissão</string>
     <string name="settings_measured_stats_description">Mostrar os fps em direto, a taxa de bits e os fotogramas perdidos na sobreposição de informações da transmissão (medidos enquanto a sobreposição está aberta, em transmissões que não declarem estes valores). Desative apenas se uma TV de gama baixa apresentar interrupções — nunca afeta o vídeo em si, apenas os valores de diagnóstico.</string>
-    <string name="settings_measured_stats_description_mobile">Mostrar os fps em direto, a taxa de bits e os fotogramas perdidos na sobreposição de informações da transmissão (medidos enquanto a sobreposição está aberta, em transmissões que não declarem estes valores). Desative apenas se um dispositivo de gama baixa apresentar interrupções — nunca afeta o vídeo em si, apenas os valores de diagnóstico.</string>
     <string name="settings_none_auto">Nenhum / Automático</string>
     <string name="settings_view_grid">Grelha</string>
     <string name="settings_view_list">Lista</string>
@@ -586,7 +510,6 @@
     <string name="settings_movies_player_description">O mpv (recomendado) tem o suporte mais amplo a formatos — áudio DTS/TrueHD, ficheiros invulgares. Em certos televisores o ExoPlayer reproduz emissões que o mpv não consegue, mas não descodifica áudio DTS/TrueHD. As opções combinadas experimentam o outro leitor automaticamente quando o primeiro falha; as opções de um único leitor nunca o fazem, o que poupa alguns segundos de ecrã preto se o segundo leitor não funcionar mesmo no seu televisor.</string>
     <string name="settings_movies_player_description_mobile">O mpv (recomendado) tem o suporte mais amplo a formatos — áudio DTS/TrueHD, ficheiros invulgares. Em certos dispositivos o ExoPlayer reproduz emissões que o mpv não consegue, mas não descodifica áudio DTS/TrueHD. As opções combinadas experimentam o outro leitor automaticamente quando o primeiro falha; as opções de um único leitor nunca o fazem, o que poupa alguns segundos de ecrã preto se o segundo leitor não funcionar mesmo no seu dispositivo.</string>
     <string name="settings_live_player_description">O ExoPlayer (recomendado) abre os canais muito mais depressa e é o único com legendas em direto. O mpv reproduz canais que o ExoPlayer não consegue, incluindo alguns com áudio invulgar. As opções combinadas experimentam o outro leitor automaticamente quando o primeiro falha; as opções de um único leitor nunca o fazem, o que poupa alguns segundos de ecrã preto se o segundo leitor não funcionar mesmo no seu televisor. Num canal que mude à mão no leitor, a sua escolha é mantida em qualquer dos casos.</string>
-    <string name="settings_live_player_description_mobile">O ExoPlayer (recomendado) abre os canais muito mais depressa e é o único com legendas em direto. O mpv reproduz canais que o ExoPlayer não consegue, incluindo alguns com áudio invulgar. As opções combinadas experimentam o outro leitor automaticamente quando o primeiro falha; as opções de um único leitor nunca o fazem, o que poupa alguns segundos de ecrã preto se o segundo leitor não funcionar mesmo no seu dispositivo. Num canal que mude à mão no leitor, a sua escolha é mantida em qualquer dos casos.</string>
     <string name="settings_reset_player_choices_description">Mudar um filme ou episódio específico entre o mpv e o ExoPlayer no leitor guarda essa opção para a próxima vez. Repor faz com que tudo volte a seguir a definição acima. As opções guardadas dos canais em direto são mantidas.</string>
     <string name="settings_reset_player_choices_none">Nenhuma guardada</string>
     <plurals name="settings_reset_player_choices_count">
@@ -635,20 +558,13 @@
     <string name="settings_download_remote_title">Transferir noutro dispositivo</string>
     <string name="settings_download_remote_description">Em qualquer dispositivo com navegador na mesma rede Wi-Fi — telemóvel, computador ou outra TV —, leia o QR (ou abra o URL), introduza este PIN e transfira o seu ficheiro de cópia para o guardar em segurança.</string>
     <string name="settings_preparing_backup">A preparar a cópia de segurança…</string>
-    <string name="settings_background_on">Imagem de fundo: ativada</string>
-    <string name="settings_background_off">Imagem de fundo: desativada</string>
     <string name="settings_ui_zoom_range">Dimensionar toda a interface (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%).</string>
     <string name="settings_low_zoom_warning_title">⚠️ Aviso de zoom reduzido</string>
     <string name="settings_low_zoom_warning">Um zoom de <xliff:g id="zoom">%1$d</xliff:g>%% mostra muitos mais itens no ecrã em simultâneo. Em dispositivos com pouca memória (por exemplo, sticks de TV com 2 GB), isto pode tornar a aplicação instável ou fazê-la falhar, sobretudo com listas de reprodução grandes e dados de EPG.\n\nPrima OK para continuar ou Voltar para manter <xliff:g id="safe_zoom">%2$d</xliff:g>%%.</string>
     <string name="settings_low_zoom_warning_mobile">Um zoom de <xliff:g id="zoom">%1$d</xliff:g>%% mostra muitos mais itens no ecrã em simultâneo. Em dispositivos com pouca memória, isto pode tornar a aplicação instável ou fazê-la falhar, sobretudo com listas de reprodução grandes e dados de EPG.\n\nEscolha Cancelar para manter <xliff:g id="safe_zoom">%2$d</xliff:g>%%.</string>
     <string name="settings_low_zoom_accept">Compreendo e aceito o risco</string>
     <string name="settings_surface_transparency"><xliff:g id="percent">%1$d</xliff:g>%%</string>
-    <string name="settings_surface_count_all">Superfícies: todas</string>
-    <plurals name="settings_surface_count">
-        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> superfície de um total de <xliff:g id="total">%2$d</xliff:g></item>
-        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> superfícies de um total de <xliff:g id="total">%2$d</xliff:g></item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> superfícies de um total de <xliff:g id="total">%2$d</xliff:g></item>
-    </plurals>
+    <string name="settings_catchup_timezone_automatic">Automático</string>
     <string name="settings_catchup_timezone_device">Dispositivo</string>
     <string name="settings_catchup_player_ask">Perguntar sempre</string>
     <string name="settings_catchup_player_internal">Leitor do OwnTV</string>
@@ -666,23 +582,6 @@
     <string name="settings_history_movies">Filmes</string>
     <string name="settings_history_series">Séries</string>
     <string name="settings_history_all">tudo</string>
-    <string name="settings_decrease">–</string>
-    <string name="settings_increase">+</string>
-    <string name="settings_glass_effect_title">Efeito de vidro</string>
-    <string name="settings_glass_effect_description">Painéis translúcidos de vidro fosco sobre uma fotografia de fundo ou sobre a imagem de fundo da própria aplicação.</string>
-    <string name="settings_transparency_title">Transparência</string>
-    <string name="settings_blur_title">Desfocagem / Fosco</string>
-    <string name="settings_blur_description_enabled">Nível de efeito fosco da imagem de fundo (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). Apenas sobre uma imagem de fundo.</string>
-    <string name="settings_blur_description_disabled">Nível de efeito fosco da imagem de fundo (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). Apenas sobre uma imagem de fundo. Defina uma imagem de fundo para ativar.</string>
-    <string name="settings_glass_surface_panels">Painéis de conteúdos</string>
-    <string name="settings_glass_surface_sidebar">Barra lateral</string>
-    <string name="settings_glass_surface_preview">Painéis de pré-visualização</string>
-    <string name="settings_glass_surface_dialogs">Caixas de diálogo e janelas de contexto</string>
-    <string name="settings_glass_surface_topbar">Barra superior</string>
-    <string name="settings_glass_surface_cards">Cartões</string>
-    <string name="settings_glass_surface_miniplayer">Minileitor</string>
-    <string name="settings_glass_surface_player_controls">Controlos do reprodutor</string>
-    <string name="settings_glass_surface_toasts">Mensagens no ecrã</string>
     <string name="settings_browsing_last_category">Recordar a última categoria</string>
     <string name="settings_browsing_last_category_description">Reabrir a secção na categoria onde ficou, em vez de Tudo.</string>
     <string name="settings_browsing_last_item">Recordar o último item</string>
@@ -760,7 +659,6 @@
     <string name="settings_span_ch_help">CH+ / CH− saltam uma página. Mantenha CH+ / CH− premido para ir para o último ou o primeiro item.</string>
     <string name="settings_customize_metadata_separator">"  ·  "</string>
     <string name="settings_sources_title">Origens</string>
-    <string name="settings_sources_description">As origens são partilhadas entre todos os perfis.</string>
     <string name="settings_sources_empty">Ainda não há origens. Adicione uma origem M3U ou Xtream.</string>
     <string name="settings_sources_add">Adicionar origem</string>
     <string name="settings_sources_import_failed">Falha na importação</string>
@@ -842,7 +740,6 @@
     <string name="settings_epg_sources_name_hint">por exemplo, Guia do Reino Unido</string>
     <string name="settings_epg_sources_url_hint">https://…/epg.xml(.gz)</string>
     <string name="settings_epg_sources_user_agent_hint">Deixe em branco para utilizar a predefinição</string>
-    <string name="settings_epg_sources_description">Origens de guias XMLTV que preenchem o guia de programação. São sincronizadas automaticamente quando adicionadas e combinadas com os canais das suas listas de reprodução.</string>
     <string name="settings_epg_sources_delete_title">Eliminar “<xliff:g id="name">%1$s</xliff:g>”?</string>
     <string name="settings_epg_sources_delete_message">Remove esta origem de EPG e os respetivos dados do guia. Os seus canais permanecem.</string>
     <string name="settings_epg_sources_syncing_percent">A sincronizar: <xliff:g id="percent">%1$d</xliff:g>%%</string>
@@ -905,8 +802,6 @@
     <string name="settings_backup_pin_incorrect">PIN incorreto.</string>
     <string name="settings_backup_pin_locked">Bloqueado por PIN</string>
     <string name="settings_backup_unlock">Desbloquear</string>
-    <string name="settings_backup_export_button">Exportar cópia de segurança</string>
-    <string name="settings_backup_restore_button">Restaurar cópia de segurança</string>
     <string name="settings_backup_continue">Continuar</string>
     <string name="settings_backup_encrypt_export">Encriptar e exportar</string>
     <string name="settings_backup_export_unencrypted">Exportar sem encriptação</string>
@@ -1044,7 +939,6 @@
     <string name="settings_move_category_keep">Manter também em “<xliff:g id="name">%1$s</xliff:g>”</string>
     <string name="settings_move_category_action">Mover</string>
     <string name="settings_dns_description">Utilizar um servidor DNS personalizado para resolver domínios</string>
-    <string name="settings_dns_custom">DNS personalizado</string>
     <string name="settings_dns_toggle_description">Resolver todos os domínios do OwnTV através de um servidor DNS personalizado.</string>
     <string name="settings_dns_use_custom">Utilizar DNS personalizado</string>
     <string name="settings_dns_server_missing">O DNS personalizado está ativado, mas não está configurado nenhum servidor. Introduza o endereço de um servidor e selecione Guardar, ou desative esta opção.</string>
@@ -1094,13 +988,9 @@
     <string name="settings_live_tune_timeout_description">Se um canal em direto não mostrar imagem até esse tempo, o OwnTV deixa de tentar e avisa-o, em vez de deixar um ecrã preto enquanto percorre todos os seus reprodutores. «Nunca» continua a tentar, o que num canal que o seu fornecedor removeu pode demorar bastante mais de um minuto. As esperas pedidas pelo fornecedor não são contadas.</string>
     <string name="settings_live_preroll_per_playlist">Pré-buffer por lista de reprodução</string>
     <string name="settings_live_preroll_per_playlist_description">Substitua a definição acima para uma lista de reprodução, mantendo as suas outras listas de reprodução rápidas.</string>
-    <!-- Translators: Title of the per-playlist Live TV engine override row. -->
     <string name="settings_live_engine_per_playlist">Leitor de TV em direto por lista de reprodução</string>
-    <!-- Translators: Description of the per-playlist Live TV engine override row. -->
     <string name="settings_live_engine_per_playlist_description">Substitua a definição acima para uma lista de reprodução, para um fornecedor cujos canais só funcionam bem num dos leitores.</string>
-    <!-- Translators: Title of the per-playlist Live latency override row. -->
     <string name="settings_live_latency_per_playlist">Latência da transmissão em direto por lista de reprodução</string>
-    <!-- Translators: Description of the per-playlist Live latency override row. -->
     <string name="settings_live_latency_per_playlist_description">Substitua a definição acima para uma lista de reprodução, para um fornecedor que precisa de uma memória intermédia maior ou menor do que os restantes.</string>
     <string name="settings_catchup_timezone_per_playlist">Fuso horário do catch-up por lista</string>
     <string name="settings_catchup_timezone_per_playlist_description">Substitui o fuso horário acima para uma lista, para um fornecedor cujo arquivo segue outro relógio.</string>
@@ -1140,7 +1030,6 @@
     <string name="settings_playback_kind_error">Erro</string>
     <string name="settings_playback_kind_event">Evento</string>
     <string name="settings_playback_kind_report">Relatório</string>
-    <string name="settings_playback_entry_with_kind"><xliff:g id="date">%1$s</xliff:g> · <xliff:g id="kind">%2$s</xliff:g> · <xliff:g id="engine">%3$s</xliff:g> · <xliff:g id="stream_type">%4$s</xliff:g></string>
     <string name="settings_export">Exportar</string>
     <string name="settings_detailed_playback_logging_description">Mantenha um rasto completo do que o motor de TV em direto faz — cada sintonização, fallback e religação — no Logcat e no relatório exportado. Deixe-o desligado, a menos que esteja a investigar um problema; nunca altera a reprodução, apenas a quantidade de informação que é registada.</string>
     <string name="settings_live_preroll_playlist_picker">Qual é a lista de reprodução?</string>
@@ -1197,52 +1086,12 @@
     <string name="settings_font_system_sans">Sans do sistema</string>
     <string name="settings_font_monospace">Monoespaçada</string>
     <string name="settings_subtitle_font">Tipo de letra das legendas</string>
-    <string name="settings_glass_preset_title">Predefinição de aspeto</string>
-    <string name="settings_glass_preset_clear">Claro</string>
-    <string name="settings_glass_preset_balanced">Equilibrado</string>
-    <string name="settings_glass_preset_tinted">Colorido</string>
-    <string name="settings_glass_preset_custom">Personalizado</string>
-    <string name="settings_glass_preset_clear_description">Mais cor do fundo com desfocagem moderada.</string>
-    <string name="settings_glass_preset_balanced_description">Nitidez, profundidade e legibilidade recomendadas.</string>
-    <string name="settings_glass_preset_tinted_description">Cor de superfície mais forte para fundos intensos ou claros.</string>
-    <string name="settings_glass_preset_custom_description">Utilizar os valores guardados de transparência e desfocagem.</string>
     <string name="settings_ambient_glow">Brilho ambiente</string>
     <string name="settings_ambient_glow_description">Adiciona à interface sólida o brilho do assistente de configuração</string>
     <string name="settings_ambient_glow_dialog_description">Adiciona um brilho suave da cor de destaque à interface sem vidro. A pulsação lenta respira suavemente quando as animações estão ativadas.</string>
     <string name="settings_ambient_glow_effect">Brilho</string>
     <string name="settings_ambient_glow_pulse">Pulsação lenta</string>
-    <string name="settings_glass_preset_ultra_clear">Ultranítido</string>
-    <string name="settings_glass_preset_opaque">Opaco</string>
-    <string name="settings_glass_preset_ultra_clear_description">Máximo detalhe do fundo com desfocagem ligeira.</string>
-    <string name="settings_glass_preset_opaque_description">Máxima densidade do painel com a desfocagem mais intensa.</string>
-    <string name="settings_glass_preset_aurora">Aurora</string>
-    <string name="settings_glass_preset_aurora_description">Vidro fino com o fosco mais intenso: feito para o telemóvel.</string>
-    <string name="settings_glass_highlight_title">Intensidade do brilho</string>
-    <string name="settings_glass_highlight_description">Ajuste a luz e o contorno do vidro em foco.</string>
     <string name="settings_glass_live_preview">Pré-visualização em direto</string>
-    <string name="settings_glass_screen_description">Painéis translúcidos foscos, imagem de fundo e transparência</string>
-    <string name="settings_glass_master_description">Painéis translúcidos de vidro fosco sobre uma fotografia de fundo ou sobre a imagem de fundo da própria aplicação.</string>
-    <string name="settings_glass_background_image">Escolher uma imagem de fundo</string>
-    <string name="settings_glass_background_blur_title">Desfocagem / Fosco</string>
-    <string name="settings_glass_section_appearance">Aspeto</string>
-    <string name="settings_glass_section_fine_tuning">Opções avançadas</string>
-    <string name="settings_glass_section_behavior">Comportamento</string>
-    <string name="settings_glass_surface_all">Todos</string>
-    <string name="settings_glass_background_action_description">Escolher uma imagem de fundo</string>
-    <string name="settings_glass_transparency_short_description">20–100 · 5</string>
-    <string name="settings_glass_blur_short_description">0–100 · 10</string>
-    <string name="settings_glass_highlight_short_description">Ajuste a luz e o contorno do vidro em foco.</string>
-    <string name="settings_glass_full_transparency_short">Permitir transparência total</string>
-    <string name="settings_glass_full_transparency_short_description">Desativa o limite automático de legibilidade para obter o vidro mais transparente.</string>
-    <string name="settings_glass_depth_effects_short">Profundidade e sombras</string>
-    <string name="settings_glass_depth_effects_short_description">Ativa a luz que acompanha o foco, a paralaxe subtil e o movimento de profundidade.</string>
-    <string name="settings_glass_shine_short">Brilho deslizante</string>
-    <string name="settings_glass_shine_short_description">Uma faixa de luz atravessa o painel quando este aparece.</string>
-    <string name="settings_glass_reset_balanced">Repor: Equilibrado</string>
-    <string name="settings_glass_full_transparency_title">Permitir transparência total</string>
-    <string name="settings_glass_full_transparency_description">Desativa o limite automático de legibilidade para obter o vidro mais transparente.</string>
-    <string name="settings_glass_depth_title">Profundidade e sombras</string>
-    <string name="settings_glass_depth_description">Ativa a luz que acompanha o foco, a paralaxe subtil e o movimento de profundidade.</string>
     <string name="settings_row_menu_pin">Fixar em Rápido</string>
     <string name="settings_row_menu_unpin">Remover de Rápido</string>
     <string name="settings_row_menu_move_up">Mover para cima</string>
@@ -1250,8 +1099,6 @@
     <string name="settings_quick_empty_title">Ainda nada fixado</string>
     <string name="settings_quick_empty_hint">Mantenha OK premido em qualquer definição e escolha “Fixar em Rápido”.</string>
     <string name="settings_quick_empty_hint_touch">Mantenha qualquer definição premida e escolha “Fixar em Rápido”.</string>
-    <string name="settings_results_title">Resultados</string>
-    <string name="settings_results_summary">Cada correspondência, onde quer que esteja — com o caminho</string>
     <plurals name="settings_setting_count">
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> ajuste</item>
         <item quantity="many"><xliff:g id="count">%1$d</xliff:g> de ajustes</item>
@@ -1268,45 +1115,29 @@
     <string name="settings_guide_width_summary">Lista de canais %1$d%% · Linha temporal EPG %2$d%%</string>
     <string name="settings_guide_width_help">• A lista de canais e a linha temporal EPG partilham uma linha, pelo que o total tem de ser 100%%.\n• Alargar a lista de canais mostra menos da linha temporal; a duração dos programas e a escala de tempo não mudam.\n• Ambas as colunas mantêm pelo menos 10%%.\n• Repor define a lista de canais para 10%% e a linha temporal EPG para 90%%.\n• Desativar a personalização restaura a disposição padrão sem apagar os seus valores.</string>
     <string name="settings_guide_width_channels">Lista de canais</string>
-    <string name="settings_guide_width_epg">Linha temporal EPG</string>
     <string name="settings_selection_highlight">Destaque da seleção</string>
     <string name="settings_selection_highlight_description">Cor e espessura da borda em volta do item selecionado</string>
-    <string name="settings_nav_bar_customization">Personalização da barra de navegação</string>
-    <string name="settings_playback_mobile">Telemóvel</string>
-    <string name="settings_playback_tv_only_note">A pré-visualização em direto e os atalhos do comando são funcionalidades de televisão — não estão disponíveis no telemóvel.</string>
     <string name="settings_background_playback">Reprodução em segundo plano</string>
     <string name="settings_background_playback_description">Manter o som depois de sair da aplicação</string>
     <string name="settings_pip">Picture-in-picture</string>
-    <string name="settings_pip_description">Reduzir o vídeo a uma janela flutuante ao sair da aplicação</string>
     <string name="settings_data_saver">Economia de dados</string>
     <string name="settings_data_saver_description">Não transmitir usando dados móveis</string>
     <string name="settings_gesture_sensitivity">Sensibilidade dos gestos</string>
-    <string name="settings_gesture_sensitivity_description">O quanto você desliza para mudar volume, brilho ou posição</string>
     <string name="settings_downloads_wifi_only">Transferir apenas por Wi-Fi</string>
     <string name="settings_downloads_wifi_only_description">Esperar pelo Wi-Fi em vez de usar dados móveis</string>
-    <string name="settings_search_keywords_background_playback">segundo plano audio som sair aplicacao continuar servico</string>
-    <string name="settings_search_keywords_pip">picture in picture janela flutuante sobreposta pequena</string>
-    <string name="settings_search_keywords_data_saver">economia dados moveis celular limitado roaming trafego</string>
-    <string name="settings_search_keywords_gestures">gesto deslizar sensibilidade toque arrastar</string>
-    <string name="settings_mini_player_style">Estilo do mini-reprodutor</string>
     <string name="settings_mini_player_style_description">Como a reprodução o acompanha enquanto navega</string>
     <string name="settings_mini_player_style_floating">Janela flutuante</string>
     <string name="settings_mini_player_style_docked">Barra fixa</string>
     <string name="settings_pip_size">Tamanho da janela</string>
-    <string name="settings_pip_size_description">Com que tamanho a janela flutuante começa. Faça pinça para redimensionar.</string>
     <string name="settings_pip_size_small">Pequena</string>
     <string name="settings_pip_size_medium">Média</string>
     <string name="settings_pip_size_large">Grande</string>
     <string name="settings_pip_snap">Encaixar nas bordas</string>
-    <string name="settings_pip_snap_description">Largue a janela e ela encaixa na borda mais próxima</string>
     <string name="settings_audio_on_screen_off">Só som quando o ecrã se desligar</string>
-    <string name="settings_audio_on_screen_off_description">Deixe de descodificar vídeo que ninguém vê e poupe bateria</string>
     <string name="settings_audio_on_mobile_data">Só som nos dados móveis</string>
     <string name="settings_audio_on_mobile_data_description">Começar sem imagem quando não houver Wi-Fi</string>
     <string name="settings_audio_per_channel">Memorizar só som por canal</string>
-    <string name="settings_audio_per_channel_description">Um canal visto sem imagem abre assim na próxima vez</string>
     <string name="local_sync_title">Sincronização local</string>
-    <string name="local_sync_description">Partilhe os seus dados com o outro dispositivo por Wi-Fi</string>
     <string name="local_sync_host_hint">No outro dispositivo, ligue também o Modo de sincronização, toque em Ligar e escolha este.</string>
     <string name="local_sync_qr_description">Código QR com o endereço deste dispositivo</string>
     <string name="local_sync_pin_is">PIN: <xliff:g id="pin">%1$s</xliff:g></string>
@@ -1361,8 +1192,6 @@
     <string name="local_sync_error_bad_payload">Não foi possível ler o que chegou. Se usou uma palavra-passe, verifique se é a mesma nos dois dispositivos.</string>
     <string name="local_sync_error_unknown">Algo correu mal. Tente novamente.</string>
     <string name="local_sync_mode">Modo de sincronização</string>
-    <string name="local_sync_mode_description">Permite que os seus outros dispositivos encontrem este. Fica ligado enquanto este ecrã estiver aberto.</string>
-    <string name="local_sync_mode_pill">Modo de sincronização ligado</string>
     <string name="local_sync_connect">Ligar</string>
     <string name="local_sync_connect_description">Encontre outro dispositivo com o Modo de sincronização ligado</string>
     <string name="local_sync_last_synced">Última sincronização: <xliff:g id="when">%1$s</xliff:g></string>
@@ -1629,7 +1458,7 @@
     <string name="settings_help_playlists">Adicione uma playlist por ligação, início de sessão Xtream, portal Stalker ou ficheiro, sincronize-a de novo ou remova-a.</string>
     <string name="settings_help_epg_sources">Adicione uma fonte de guia XMLTV pela ligação, atualize-a ou remova-a. As fontes preenchem o Guia TV e as linhas de programa da TV em direto.</string>
     <string name="settings_help_guide_days">Quantos dias de programas o guia guarda à frente. Menos dias tornam a atualização mais rápida e a base de dados mais pequena.</string>
-    <string name="settings_help_catchup">O catch-up reproduz programas do arquivo do seu fornecedor. A maioria segue o relógio da própria TV; escolha um desvio UTC fixo se o catch-up começar à hora errada. Aqui também escolhe o leitor que o catch-up usa.</string>
+    <string name="settings_help_catchup_timezone">O catch-up reproduz programas do arquivo do seu fornecedor. Automático utiliza o fuso horário indicado pelo fornecedor ou, se não indicar nenhum, o relógio da própria TV; escolha um desvio UTC fixo se o catch-up continuar a começar à hora errada. Aqui também escolhe o leitor que o catch-up usa.</string>
     <string name="settings_help_theme">O OwnTV foi feito para o tema escuro. Sistema segue a definição da própria TV, quando existe; Claro adequa-se a uma sala iluminada.</string>
     <string name="settings_help_accent">Colore botões, o brilho do foco, as barras de progresso e os destaques em toda a app. Escolha uma predefinição ou prima OK para a paleta e qualquer código hexadecimal.</string>
     <string name="settings_help_focus">O anel à volta do que está em foco. Escolha a cor e a espessura para o seguir bem a partir do sofá.</string>

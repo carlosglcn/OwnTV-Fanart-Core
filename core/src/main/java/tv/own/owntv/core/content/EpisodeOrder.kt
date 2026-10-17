@@ -6,9 +6,9 @@ import tv.own.owntv.core.database.entity.EpisodeEntity
  * The order a show is watched in: the regular seasons in turn, then the Specials (season 0) after the
  * last of them. Sorting by season number put the Specials first, so Play on a show nobody had started
  * opened a special from years later instead of S1 E1 — invisible until Specials actually arrived from
- * Xtream panels (#238). Every "what plays next" / "where does it start" answer in both apps uses this.
+ * Xtream panels. Every "what plays next" / "where does it start" answer in both apps uses this.
  *
- * The season tabs follow the user's Episode order setting instead (Specials last either way, #228).
+ * The season tabs follow the user's Episode order setting instead (Specials last either way).
  */
 object EpisodeOrder {
 

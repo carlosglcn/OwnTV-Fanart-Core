@@ -216,6 +216,8 @@
     <string name="player_error_no_internet">No internet connection. Check your network and try again.</string>
     <!-- Translators: Generic stream playback error with an optional hint. "hint" is a hint string (may be empty or contain player_error_custom_user_agent text). -->
     <string name="player_error_stream_unavailable">Couldn\'t play this stream. The source may be offline or use an unsupported format. <xliff:g id="hint">%1$s</xliff:g></string>
+    <!-- Translators: Error title when the provider refuses playback because the same account is already streaming elsewhere (HTTP 458). "Retry" is the button below it. -->
+    <string name="player_error_account_in_use">This account is already playing on another device or app. Stop it there, then press Retry.</string>
     <!-- Translators: Error when mpv cannot open or decode the file. "mpv" is an engine brand name. -->
     <string name="player_error_mpv_open_decode">mpv couldn\'t open or decode this file.</string>
     <!-- Translators: Error when mpv fails to start the stream after multiple retries. -->

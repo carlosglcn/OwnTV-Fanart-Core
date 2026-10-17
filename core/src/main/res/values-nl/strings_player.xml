@@ -24,38 +24,22 @@
     <string name="player_previous_channel">Vorige zender</string>
     <string name="player_next_channel_in_list">Volgende zender</string>
     <string name="player_previous_channel_in_list">Vorige zender in de lijst</string>
-    <!-- Translators: The bubble above the live scrub bar while rewinding a channel: the clock time being scrubbed to, then the name of the programme on air then. Placeholders are the time and the programme title. -->
     <string name="player_live_scrub_at"><xliff:g id="time">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g></string>
-    <!-- Translators: Label under the volume button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_volume">Volume</string>
-    <!-- Translators: Label under the brightness button on the phone player's control bar, and the label on the slider a vertical swipe on the left of the picture shows. Keep this very short (14 characters maximum) — it sits inside a small button. -->
     <string name="player_tool_brightness">Helderheid</string>
-    <!-- Translators: Spoken label for the phone player's skip-backwards button, which jumps back by the user's own seek step. Keep this very short (16 characters maximum). -->
     <string name="player_skip_back">Terugspoelen</string>
-    <!-- Translators: Spoken label for the phone player's skip-forwards button, which jumps forward by the user's own seek step. Keep this very short (16 characters maximum). -->
     <string name="player_skip_forward">Vooruitspoelen</string>
-    <!-- Translators: Label under the audio-track button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_audio">Audio</string>
-    <!-- Translators: Label under the subtitles button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_subtitles">Ondertitels</string>
-    <!-- Translators: Label under the favourite button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_favorite">Favoriet</string>
-    <!-- Translators: Label under the catch-up button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_catchup">Terugkijken</string>
-    <!-- Translators: Label under the playback-speed button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_speed">Snelheid</string>
-    <!-- Translators: Label under the aspect-ratio/zoom button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_aspect">Formaat</string>
     <string name="player_tool_quality">Kwaliteit</string>
-    <!-- Translators: Label under the mini-player button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_mini">Mini</string>
-    <!-- Translators: Label under the audio-only button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_audio_only">Alleen audio</string>
-    <!-- Translators: Label under the playback-engine button on the player control bar, shown when it has focus. The engine name (MPV/EXO) is shown beside it as the value, so this is just the word for the player itself. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_engine">Speler</string>
-    <!-- Translators: Label under the stream-info button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_info">Info</string>
-    <!-- Translators: Label under the report-stream button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_report">Rapport</string>
     <string name="player_channel_not_found">Zender niet gevonden</string>
     <string name="player_channel_number_entry">Kanaalnummer</string>
@@ -73,7 +57,6 @@
     <string name="player_no_tracks">Geen sporen beschikbaar.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · afbeelding</string>
     <string name="player_av_sync">A/V-synchronisatie</string>
-    <!-- Translators: Player audio menu action that stores the current A/V-sync offset for this item. -->
     <string name="player_av_sync_remember">Deze vertraging onthouden</string>
     <string name="player_no_offset">Geen verschuiving</string>
     <string name="player_subtitles_later">Ondertiteling wordt later weergegeven</string>
@@ -122,6 +105,7 @@
     <string name="player_error_decoder_busy">De videodecoder van deze tv is bezet. Probeer het zo nogmaals.</string>
     <string name="player_error_no_internet">Geen internetverbinding. Controleer je netwerk en probeer het opnieuw.</string>
     <string name="player_error_stream_unavailable">Kan deze stream niet afspelen. De bron is mogelijk offline of gebruikt een niet-ondersteunde indeling. <xliff:g id="hint">%1$s</xliff:g></string>
+    <string name="player_error_account_in_use">Dit account speelt al af op een ander apparaat of in een andere app. Stop het daar en druk dan op Opnieuw proberen.</string>
     <string name="player_error_mpv_open_decode">mpv kan dit bestand niet openen of decoderen.</string>
     <string name="player_error_mpv_stream_never_started">De stream is na meerdere pogingen niet gestart in mpv.</string>
     <string name="player_error_surround">Deze audio-uitgang ondersteunt geen surroundgeluid — overgeschakeld naar stereo.</string>
@@ -172,9 +156,7 @@
     <string name="player_stream_khz"><xliff:g id="value">%1$s</xliff:g> kHz</string>
     <string name="player_stream_kbps"><xliff:g id="value">%1$s</xliff:g> kbps</string>
     <string name="player_stream_seconds"><xliff:g id="value">%1$s</xliff:g> s gebufferd</string>
-    <!-- Translators: Heading of the plate shown over the black video area when the item being played has no video track at all (a radio channel, a music-only file). This is NOT an error - playback is working. -->
     <string name="player_audio_only_title">Alleen audio</string>
-    <!-- Translators: Body of the "Audio only" plate. Reassures the user that nothing is broken: the item simply contains no picture. -->
     <string name="player_audio_only_body">Dit item heeft geluid maar geen beeld. Er is niets mis — het speelt gewoon normaal af.</string>
     <string name="player_audio_mono">mono</string>
     <string name="player_audio_stereo">stereo</string>
@@ -254,7 +236,6 @@
     <string name="player_subtitles_enter_credentials">Voer je gebruikersnaam en wachtwoord voor OpenSubtitles in.</string>
     <string name="player_subtitles_invalid_credentials">Aanmelden bij OpenSubtitles met deze accountgegevens is mislukt.</string>
     <string name="player_subtitles_sign_in_network_error">Kan OpenSubtitles niet bereiken. Controleer je internetverbinding en probeer het opnieuw.</string>
-    <!-- Translators: Error when OpenSubtitles answers the sign-in with an HTTP error code (e.g. 403, 429, 500). The placeholder is that code. -->
     <string name="player_subtitles_sign_in_server_error">OpenSubtitles heeft het verzoek geweigerd (fout <xliff:g id="code">%1$d</xliff:g>). Je internetverbinding werkt – probeer het later opnieuw en vermeld dit nummer als je het probleem meldt.</string>
     <string name="player_subtitles_refresh_network_error">Kan OpenSubtitles niet vernieuwen. Controleer je internetverbinding.</string>
     <string name="player_subtitles_no_matches_all_languages">Er zijn geen overeenkomende ondertitels gevonden. Probeer de zoektitel te bewerken.</string>

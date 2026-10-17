@@ -756,7 +756,7 @@ def main(report: str = "text") -> int:
         if len(fails) > 200:
             print(f"  ... and {len(fails) - 200} more", file=diagnostics)
     elif not src:
-        print("i18n validate: no translatable source keys yet (Phase 0 empty split files); catalogue OK.",
+        print("i18n validate: no translatable source keys yet (empty split files); catalogue OK.",
               file=diagnostics)
     else:
         print("i18n validation OK", file=diagnostics)

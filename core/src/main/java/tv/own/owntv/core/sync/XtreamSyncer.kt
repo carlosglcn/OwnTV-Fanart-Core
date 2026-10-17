@@ -21,10 +21,10 @@ import tv.own.owntv.core.parser.XtreamClient
 import kotlin.coroutines.CoroutineContext
 
 /**
- * The Xtream import flow (split out of SyncManager, Phase 0 of the Stalker plan): re-syncs preserve
+ * The Xtream import flow (split out of SyncManager): re-syncs preserve
  * existing rows until a phase succeeds — rows are matched by provider remote id, unchanged rows are
  * skipped, changed rows keep their local id, and stale rows are pruned only after the full phase
- * completes. Series episodes are intentionally fetched lazily later (Phase 9), not during sync.
+ * completes. Series episodes are intentionally fetched lazily on open, not during sync.
  */
 internal class XtreamSyncer(
     private val xtream: XtreamClient,
@@ -41,12 +41,14 @@ internal class XtreamSyncer(
                 tv.own.owntv.core.model.HlsSupport.of(details.hlsSupported),
             )
             // The panel states its session limit up front; the app used to learn it only by failing a
-            // tune and reading the 458 back (F30). Stored, so it also survives a restart.
+            // tune and reading the 458 back. Stored, so it also survives a restart.
             support.sourceDao.updateMaxConnections(s.id, details.maxConnections)
             if (details.maxConnections == 1) tv.own.owntv.core.player.LiveSessionLimit.singleSession(s.url)
+            // The zone its timeshift `start` is written in — catch-up's Automatic time zone.
+            support.sourceDao.updateServerTimeZone(s.id, details.serverTimeZone)
         }
         val semaphore = Semaphore(PHASE_CONCURRENCY)
-        Log.i(TAG, "Xtream sync scheduling sourceId=${s.id} contentTypes=$contentTypes concurrency=$PHASE_CONCURRENCY hlsSupported=${details?.hlsSupported} maxConnections=${details?.maxConnections}")
+        Log.i(TAG, "Xtream sync scheduling sourceId=${s.id} contentTypes=$contentTypes concurrency=$PHASE_CONCURRENCY hlsSupported=${details?.hlsSupported} maxConnections=${details?.maxConnections} serverTimeZone=${details?.serverTimeZone}")
         coroutineScope {
             if (contentTypes.live) async { semaphore.withPermit { syncLive(s, progress, stats) } }
             if (contentTypes.movies) async { semaphore.withPermit { syncMovies(s, progress, stats) } }
@@ -54,7 +56,7 @@ internal class XtreamSyncer(
         }
     }
 
-    // C5: the three Xtream phases share one generic scaffolding (syncXtreamPhase) — they differ only
+    // The three Xtream phases share one generic scaffolding (syncXtreamPhase) — they differ only
     // in phase/table names, the entity mapper, and per-entity DAO lambdas (ContentAdapter). Live is
     // NOT wrapped in guardStep (a live failure fails the whole sync, as before); movies/series are.
 
@@ -205,7 +207,7 @@ internal class XtreamSyncer(
     )
 
     /**
-     * One Xtream content phase (C5 — extracted from the three near-identical copies):
+     * One Xtream content phase (extracted from three near-identical copies):
      * category refresh → bulk stream (fresh insert or hash-diffed stable upsert) → per-category
      * fallback when the bulk list errors/truncates → prune (only after a COMPLETE bulk pass).
      */
@@ -241,7 +243,11 @@ internal class XtreamSyncer(
             { rows -> support.upsertStable(rows, hashDeferred!!, p.adapter) }
         }
         val total = intArrayOf(0)
-        val remoteIds = if (freshSource) null else HashSet<String>()
+        // Every stream id seen this pass. Filters duplicates on a fresh import too: panels list one film
+        // under several categories, the insert keeps only the first, and without the filter the
+        // "unique" count reported to the import screen counted every copy (123,602 for 118,363 films).
+        // Only a re-sync prunes against it.
+        val remoteIds = HashSet<String>()
         var done = false
         bulkInsertHelper.withOptimizedBulkInsert(
             p.table,
@@ -279,7 +285,7 @@ internal class XtreamSyncer(
                 }
             }
             if (!freshSource && done && !backfillIncomplete) {
-                support.pruneRemoteIds(label, s.id, remoteIds!!, stats, p.adapter.remoteIdsForSource, p.adapter.deleteByRemoteIds)
+                support.pruneRemoteIds(label, s.id, remoteIds, stats, p.adapter.remoteIdsForSource, p.adapter.deleteByRemoteIds)
                 support.pruneCategories(s.id, p.type, categories.seenRemoteIds, label, stats)
             } else if (!freshSource) {
                 Log.i(TAG, "$label prune skipped sourceId=${s.id} reason=incomplete_bulk")
@@ -295,7 +301,7 @@ internal class XtreamSyncer(
                 streams.byCategory(cat, add)
             }
             Log.i(TAG, "$label fallback end sourceId=${s.id} unique=${total[0]} ms=${SystemClock.elapsedRealtime() - fallbackStart}")
-            // Plan N2d. Until now this path produced "Success" and nothing else: a ten-minute sync
+            // Until now this path produced "Success" and nothing else: a ten-minute sync
             // recovering from a dropped connection looked exactly like a clean thirty-second one.
             // The warning carries where the cut fell and whether the fallback made it whole.
             stats.addWarning(
@@ -308,7 +314,7 @@ internal class XtreamSyncer(
                     count = total[0],
                 ),
             )
-            if (!freshSource) pruneAfterFallback(s, p, label, categories, outcome, remoteIds!!, stats)
+            if (!freshSource) pruneAfterFallback(s, p, label, categories, outcome, remoteIds, stats)
         }
         progress.update(p.phase, total[0])
         p.timingKey?.let { stats.phaseTiming[it] = System.currentTimeMillis() - phaseStart }
@@ -317,7 +323,7 @@ internal class XtreamSyncer(
     }
 
     /**
-     * Prune after a per-category fallback (S2). Before this, a fallback run never pruned at all, so
+     * Prune after a per-category fallback. Before this, a fallback run never pruned at all, so
      * titles the provider had removed stayed in the catalog forever on any panel that can't serve the
      * bulk list.
      *
@@ -325,7 +331,7 @@ internal class XtreamSyncer(
      * That is not just caution about partial failures: a per-category request can never return an
      * item that has no category, so a source-wide prune here would delete every uncategorized row.
      * Scoping also gives partial pruning for free — a run where half the categories failed still
-     * cleans the half that succeeded. The Phase 0 catalog-shrink guard applies on top, with the
+     * cleans the half that succeeded. The catalog-shrink guard applies on top, with the
      * scoped row count as its denominator.
      */
     private suspend fun <T> pruneAfterFallback(
@@ -393,7 +399,7 @@ internal class XtreamSyncer(
         }
 
     /**
-     * Fallback for when a provider truncates the single bulk list (issue #15): re-fetch one category at
+     * Fallback for when a provider truncates the single bulk list: re-fetch one category at
      * a time (`&category_id=X`, tiny payloads) and upsert progressively. The table is NOT cleared first,
      * so any items the partial bulk already inserted (incl. uncategorized ones missing from the category
      * list) survive — the unique `(sourceId, remoteId)` index dedupes the overlap. [total] is shared with

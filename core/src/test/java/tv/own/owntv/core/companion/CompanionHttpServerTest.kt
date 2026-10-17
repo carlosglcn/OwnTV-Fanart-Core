@@ -172,7 +172,7 @@ class CompanionHttpServerTest {
 
     // ---- robustness ----
 
-    // ---- body cap (C1) ----
+    // ---- body cap ----
 
     private fun read(body: String, contentLength: String, limit: Int): String? =
         protocol.readBody(

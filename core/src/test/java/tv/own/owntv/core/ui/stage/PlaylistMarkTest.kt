@@ -6,7 +6,7 @@ import org.junit.Test
 
 class PlaylistMarkTest {
 
-    // --- the three examples decision D4 names ---
+    // --- the three documented examples ---
 
     @Test
     fun iptvPrefixAndSeparatorAreDropped() = assertEquals("GOLD", PlaylistMark.textOf("IPTV_GOLD"))

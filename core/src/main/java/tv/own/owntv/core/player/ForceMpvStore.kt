@@ -32,7 +32,7 @@ private val Context.forceMpvStore: DataStore<Preferences> by preferencesDataStor
  * Keyed by [enginePinKey] — sourceId + media type + provider remoteId — which is stable across
  * playlist re-syncs for all three source types. Channel rows are REPLACE-upserted on every sync, so a
  * column on the channel (or its Room id) would be wiped on refresh; the provider id is not. Pins made
- * by older builds are keyed by stream URL and still read (see [migrateKey] — P6).
+ * by older builds are keyed by stream URL and still read (see [migrateKey]).
  */
 class ForceMpvStore(
     private val context: Context,
@@ -74,7 +74,7 @@ class ForceMpvStore(
         dao.setEnginePin(url, sourceIdOfPinKey(url), LIVE, null)
     }
 
-    /** Forget every channel's pin, so all of them follow the Live TV player setting again (N15). The
+    /** Forget every channel's pin, so all of them follow the Live TV player setting again. The
      *  films' and episodes' pins ([VodEngineStore]) are kept. */
     suspend fun clearAll() {
         copy.ensure()

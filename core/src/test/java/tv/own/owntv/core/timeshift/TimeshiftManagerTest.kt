@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger
 import kotlin.concurrent.thread
 
 /**
- * P16c — the whole buffer end to end on the JVM: a fake provider streaming live TS, the downloader
+ * The whole buffer end to end on the JVM: a fake provider streaming live TS, the downloader
  * saving it, a player reading it back over loopback, and the park / wake / resume rules.
  */
 class TimeshiftManagerTest {

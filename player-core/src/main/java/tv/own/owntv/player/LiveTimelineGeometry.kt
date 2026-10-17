@@ -38,7 +38,7 @@ private fun frac(atMs: Long, liveEdgeMs: Long): Float =
 data class LiveSpan(val startFrac: Float, val endFrac: Float)
 
 /**
- * N4 — the holes in a channel's saved copy (wall-clock spans with no picture, where the connection
+ * The holes in a channel's saved copy (wall-clock spans with no picture, where the connection
  * dropped) placed on the bar, clipped to the window; empty spans are left off.
  */
 fun liveGapSpans(gaps: List<LongRange>, liveEdgeMs: Long): List<LiveSpan> =

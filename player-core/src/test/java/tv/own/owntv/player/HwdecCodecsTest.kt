@@ -32,7 +32,7 @@ class HwdecCodecsTest {
         assertNull(OwnTVPlayer.hwdecCovers("  "))
     }
 
-    /** Current mpv reports only FFmpeg's long description ("H.264 / AVC / …"), with no short name first (#229). */
+    /** Current mpv reports only FFmpeg's long description ("H.264 / AVC / …"), with no short name first. */
     @Test
     fun `mpv's long codec description is read as its FFmpeg name`() {
         mapOf(

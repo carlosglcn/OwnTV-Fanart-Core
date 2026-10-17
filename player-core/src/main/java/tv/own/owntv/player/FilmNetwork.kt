@@ -3,7 +3,7 @@ package tv.own.owntv.player
 import tv.own.owntv.core.player.PlayerBudget
 
 /**
- * N18 — a film's buffer, network timeout and mid-play reconnects, resolved against the device.
+ * A film's buffer, network timeout and mid-play reconnects, resolved against the device.
  *
  * Films only: live has its own latency, pre-buffer and "Give up after" settings and its own reconnect
  * rules. Every "Auto" (0) is exactly what the engines did before these settings existed.

@@ -5,9 +5,9 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
- * Plan A3's run detection, on its own.
+ * Run detection for range position updates, on its own.
  *
- * This is the part of Phase A most likely to be subtly wrong, because a range statement
+ * This is the part of the position sync most likely to be subtly wrong, because a range statement
  * (`sortOrder = sortOrder + delta WHERE sortOrder BETWEEN lo AND hi`) hits **every** stored row in
  * the span, not only the rows the caller named. Getting it wrong does not throw — it silently
  * renumbers rows nobody asked to move, and the user sees a scrambled channel list.

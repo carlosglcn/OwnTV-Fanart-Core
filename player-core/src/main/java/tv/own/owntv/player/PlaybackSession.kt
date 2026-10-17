@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 
 /**
  * The app's single point of contact with the rest of the system's audio: **audio focus** and a
- * **MediaSession** (F27). Before this, OwnTV neither requested focus nor published a session, so two
+ * **MediaSession**. Before this, OwnTV neither requested focus nor published a session, so two
  * apps could play over each other and the TV's transport keys / Assistant "pause" never reached the
  * player.
  *
@@ -89,7 +89,7 @@ class PlaybackSession(
 
     /**
      * What "previous" from a headset or the media notification does on a live channel — go back to the
-     * channel watched before (N2). A live engine has no previous item of its own, so without it the
+     * channel watched before. A live engine has no previous item of its own, so without it the
      * button did nothing. Assigned once by the app's live screen; null keeps the old no-op.
      */
     var livePrevious: (() -> Unit)? = null
@@ -173,7 +173,7 @@ class PlaybackSession(
         if (state.playing) requestFocus() else if (!pausedByUs) abandonFocus()
         val s = session ?: return
         runCatching {
-            // Metadata only when it actually changed (A-F10/F-F9). This is driven by a combine() that also
+            // Metadata only when it actually changed. This is driven by a combine() that also
             // carries the position, so it fires on every position tick — but the title, subtitle and
             // duration only change when the ITEM does. Rebuilding and re-publishing MediaMetadata dozens
             // of times a second was pure waste, and every controller on the TV had to process each one.

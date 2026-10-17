@@ -93,12 +93,12 @@ interface PlaybackEngine {
     fun selectSubtitle(id: Int)
     fun disableSubtitles()
     /** Attach + select an external subtitle file (OpenSubtitles/local). VOD only (mpv sub-add, or an
-     *  ExoPlayer side-load re-prepare); a live engine ignores it (subtitle plan §3.4). */
+     *  ExoPlayer side-load re-prepare); a live engine ignores it. */
     fun addExternalSubtitle(path: String, title: String, lang: String?) {}
     fun audioTracks(): List<TrackOption>
     fun textTracks(): List<TrackOption>
 
-    /** N11 — the picture heights this item offers, highest first; empty when there is nothing to choose
+    /** The picture heights this item offers, highest first; empty when there is nothing to choose
      *  between (the player's Quality button shows only then). */
     val videoQualities: StateFlow<List<Int>> get() = NO_QUALITIES
     /** The Quality-menu pick for this item, or null for Auto (Settings → Maximum video quality). */
@@ -135,7 +135,7 @@ interface PlaybackEngine {
     val audioDelayRemembered: StateFlow<Boolean> get() = FALSE_FLOW
     /** Remember the current A/V-sync offset for this item, or forget it again. */
     fun toggleRememberAudioDelay() {}
-    /** Subtitle-timing offset (ms) for the ACTIVE subtitle — VOD only (subtitle plan §8). */
+    /** Subtitle-timing offset (ms) for the ACTIVE subtitle — VOD only. */
     val subDelayMs: StateFlow<Int> get() = ZERO_INT
     /** Settings → Seek step: how far one press of rewind/forward moves. VOD only; a live engine never
      *  seeks (stepping through a live archive is Live TV's own rewind, with its own setting). */
@@ -144,7 +144,7 @@ interface PlaybackEngine {
     fun adjustAudioDelay(deltaMs: Int) {}
     fun adjustSubtitleDelay(deltaMs: Int) {}
     fun resetSubtitleDelay() {}
-    /** True when timing adjustment applies to the active subtitle on this engine (plan §8.1). */
+    /** True when timing adjustment applies to the active subtitle on this engine. */
     fun subtitleTimingAvailable(): Boolean = false
     fun previous() {}
     fun next() {}

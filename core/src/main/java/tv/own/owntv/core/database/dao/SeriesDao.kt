@@ -60,9 +60,6 @@ interface SeriesDao {
     @Query("SELECT * FROM series WHERE sourceId = :sourceId AND remoteId = :remoteId LIMIT 1")
     suspend fun findSeriesByRemote(sourceId: Long, remoteId: String): SeriesEntity?
 
-    @Query("SELECT * FROM series WHERE sourceId = :sourceId AND remoteId IN (:remoteIds)")
-    suspend fun findSeriesByRemoteIds(sourceId: Long, remoteIds: List<String>): List<SeriesEntity>
-
     @Query("SELECT remoteId FROM series WHERE sourceId = :sourceId AND remoteId IS NOT NULL")
     suspend fun remoteIdsForSource(sourceId: Long): List<String>
 
@@ -70,12 +67,12 @@ interface SeriesDao {
     suspend fun contentHashesForSource(sourceId: Long): List<ContentHashProjection>
 
     /**
-     * Write only the position of a row whose content did not change (plan A2).
+     * Write only the position of a row whose content did not change.
      *
      * The whole point is what it does *not* touch. Room's `@Update` writes every column and, on
      * this table's insert path, re-derives the provider-catalogue metadata from the title — all for
      * a row that is byte-identical and has merely slid down the list because the provider removed
-     * something above it. Issue #192 measured 1,397 real changes producing 255,775 of those.
+     * something above it. One measured resync had 1,397 real changes producing 255,775 of those.
      */
     @Query("UPDATE series SET sortOrder = :sortOrder WHERE id = :id")
     suspend fun setSortOrder(id: Long, sortOrder: Int)
@@ -87,7 +84,7 @@ interface SeriesDao {
     }
 
     /**
-     * Shift every row of this source whose position lies in a span (plan A3).
+     * Shift every row of this source whose position lies in a span.
      *
      * Removing two channels near the top of a 30,000-channel list moves all 30,000 below them by
      * exactly -2. That is one statement, not 30,000 writes. The caller has already proved that the
@@ -345,9 +342,6 @@ interface SeriesDao {
     @Query("SELECT * FROM episodes WHERE id = :id")
     suspend fun getEpisodeById(id: Long): EpisodeEntity?
 
-    @Query("SELECT * FROM episodes WHERE seasonId = :seasonId ORDER BY episodeNumber ASC")
-    fun episodesBySeason(seasonId: Long): Flow<List<EpisodeEntity>>
-
     @Query("SELECT * FROM episodes WHERE seriesId = :seriesId ORDER BY seasonNumber ASC, episodeNumber ASC")
     fun episodesBySeries(seriesId: Long): Flow<List<EpisodeEntity>>
 
@@ -367,7 +361,7 @@ interface SeriesDao {
     @Query("DELETE FROM episodes WHERE seriesId = :seriesId")
     suspend fun deleteEpisodes(seriesId: Long)
 
-    // --- Episode refresh (S8) ---
+    // --- Episode refresh ---
     // The refresh path must preserve episode row ids: watch history, resume positions and
     // next-episode autoplay all key on them, so a delete-then-reinsert would silently detach the
     // user's progress on every refresh. Hence read/update/insert/delete-the-gone rather than
@@ -389,7 +383,7 @@ interface SeriesDao {
     /**
      * Invalidates every episode cache belonging to a source, so the next open of any of its shows
      * re-fetches. Called after a successful sync: "just resync" is what a user does when episodes
-     * look stale, and before S8 that did nothing at all for episodes.
+     * look stale, and once that did nothing at all for episodes.
      *
      * The `!= 0` keeps this proportional to the shows actually opened rather than to the catalog:
      * a 46k-series source where the user has opened twelve shows writes twelve rows. It also makes

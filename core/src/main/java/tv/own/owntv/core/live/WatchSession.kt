@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.first
  * never claims, so `openOn(sourceId).total > 0` is false for the single most important case there
  * is. The background catalogue drain was gated on exactly that expression and consequently never
  * yielded once; a channel played for four minutes on the reference portal and the drain paged
- * straight through it (plan N1f-3, §4D).
+ * straight through it.
  *
  * The engines in `:player-core` cannot raise this themselves — they are handed a URL and have no
  * notion of a `sourceId`. So it is the host's playback screen, which holds the row, that opens and

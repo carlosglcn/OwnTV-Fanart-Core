@@ -18,9 +18,7 @@
     <string name="settings_movies_keep_watching_description">Toon kaarten om films te hervatten in de prominente rij.</string>
     <string name="settings_series_keep_watching">Series in Verder kijken</string>
     <string name="settings_series_keep_watching_description">Toon kaarten om afleveringen te hervatten in de prominente rij.</string>
-    <!-- Translators: Toggle label for playing the highlighted Home item's video in the hero row. -->
     <string name="settings_hero_preview">Video afspelen in de prominente rij</string>
-    <!-- Translators: Description of the hero-row video preview toggle. -->
     <string name="settings_hero_preview_description">De videovoorbeeldweergave van het gemarkeerde item start na een moment. Schakel uit om stroom en geheugen te sparen tijdens het bladeren op het startscherm.</string>
     <string name="settings_android_tv_home">Startscherm van Android TV</string>
     <string name="settings_android_tv_home_description">Toon Verder kijken en recente live-zenders op het startscherm van de tv.</string>
@@ -30,11 +28,8 @@
     <string name="settings_done_check">Gereed ✓</string>
     <string name="settings_mode"><xliff:g id="mode">%1$s</xliff:g></string>
     <string name="settings_hidden">Verborgen</string>
-    <string name="settings_nav_dynamic_description">Dynamisch — pictogrammen passen zich aan de inhoud van je actieve afspeellijst aan. Startscherm en Instellingen worden altijd getoond.</string>
-    <string name="settings_nav_static_description">Statisch — kies hieronder handmatig welke pictogrammen verschijnen.</string>
     <string name="settings_static">Statisch</string>
     <string name="settings_dynamic">Dynamisch</string>
-    <string name="settings_http_proxy">HTTP-proxy</string>
     <string name="settings_use_proxy">Proxy gebruiken</string>
     <string name="settings_proxy_description">Stuur al het verkeer en afspelen van OwnTV via een HTTP-proxy.</string>
     <string name="settings_host">Host</string>
@@ -102,8 +97,6 @@
     <string name="settings_show_weather_description">Toon het huidige weer in de bovenbalk.</string>
     <string name="settings_custom_location">Aangepaste locatie</string>
     <string name="settings_custom_location_description">Overschrijf de plaats die voor het weer wordt gebruikt. Laat dit leeg voor automatische detectie, of voer een plaats (bijv. Londen) of ‘lat,lon’ (bijv. 51.5,-0.12) in. Dit is handig bij een VPN, waarbij automatische detectie de plaats van de server oplevert.</string>
-    <string name="settings_use_device_location">Locatie van dit apparaat gebruiken</string>
-    <string name="settings_use_device_location_description">Het weer volgt waar de telefoon is. Zet dit uit om zelf een stad in te voeren.</string>
     <string name="settings_temperature_unit">Temperatuureenheid</string>
     <string name="settings_temperature_description">Toon de temperatuur in Celsius of Fahrenheit.</string>
     <string name="settings_auto">Automatisch</string>
@@ -168,7 +161,6 @@
     <string name="settings_quick_hdr">HDR (alleen mpv)</string>
     <string name="settings_quick_autoplay">Automatisch afspelen</string>
     <string name="settings_quick_check_update">Controleren op update</string>
-    <string name="settings_search_hint">Instellingen doorzoeken…</string>
     <string name="settings_language">Taal</string>
     <string name="settings_language_description">Weergavetaal van de app</string>
     <string name="settings_language_system_default">Systeemstandaard</string>
@@ -183,14 +175,10 @@
     <string name="settings_epg_sources_nav_description">Voeg XMLTV-feeds voor de programmagids toe</string>
     <string name="settings_customize">Categorieën en items aanpassen</string>
     <string name="settings_customize_nav_description">Items verbergen en zichtbaar maken, en categorieën hernoemen en herschikken</string>
-    <string name="settings_sidebar_description_root">Pas zijpictogrammen automatisch aan je afspeellijst aan of verberg specifieke pictogrammen</string>
     <string name="settings_ch_paging">Afstandsbedieningssnelkoppelingen</string>
     <string name="settings_ch_paging_description">Wijs vrije knoppen toe aan navigatie, afspelen en bladeren. Essentiële navigatieknoppen blijven beveiligd.</string>
-    <!-- Translators: Settings navigation label for the long-press content menus. -->
     <string name="settings_content_menus_title">Menu’s bij lang indrukken</string>
-    <!-- Translators: Description of the long-press content menus settings. -->
     <string name="settings_content_menus_description">Wijzig de volgorde van de acties in de menu’s voor zenders, films, series en afleveringen</string>
-    <!-- Translators: Hint shown above the list when arranging a long-press menu. -->
     <string name="settings_content_menus_hint">Houd OK op een actie ingedrukt om hem op te pakken en verplaats hem met Omhoog en Omlaag. Druk nogmaals op OK om hem neer te zetten.</string>
     <string name="settings_browsing_lists">Bladeren en lijsten</string>
     <string name="settings_browsing_description">Onthoud de laatste categorie en het laatste item in live-tv, Films en Series</string>
@@ -199,7 +187,6 @@
     <string name="settings_metadata_root_description">Posters, samenvattingen, cast en beoordelingen voor films en series</string>
     <string name="settings_download_folder">Downloadmap</string>
     <string name="settings_backup_restore">Back-up en herstellen</string>
-    <string name="settings_backup_restore_description">Exporteer of herstel profielen en bronnen</string>
     <string name="settings_clear_history">Kijkgeschiedenis wissen</string>
     <string name="settings_appearance_group">Weergave</string>
     <string name="settings_theme">Thema</string>
@@ -215,13 +202,10 @@
     <string name="settings_focus_width_thick">Dik</string>
     <string name="settings_focus_width_extra">Extra dik</string>
     <string name="settings_focus_highlight_sample">Gefocust</string>
-    <string name="settings_glass_effect">Glaseffect</string>
-    <string name="settings_glass_description">Doorschijnende panelen met matglaseffect, achtergrondafbeelding en transparantie</string>
     <string name="settings_ui_zoom">UI-zoom</string>
     <string name="settings_ui_zoom_description">Schaal de volledige interface</string>
     <string name="settings_animations">Animaties</string>
     <string name="settings_animations_description">Schakel beweging in de interface in of uit — Uit voelt sneller aan op minder krachtige tv-boxen</string>
-    <string name="settings_animations_description_mobile">Schakel beweging in de interface in of uit — Uit voelt sneller aan op oudere telefoons en tablets</string>
     <string name="settings_weather_description_root">Weerchip in de bovenbalk: tonen of verbergen, aangepaste locatie en Celsius / Fahrenheit.</string>
     <string name="settings_playback_group">Afspelen</string>
     <string name="settings_live_preview_description">Speel automatisch een zender af wanneer je deze focust</string>
@@ -230,10 +214,8 @@
     <string name="settings_mini_player_root">Minispeler</string>
     <string name="settings_mini_player_root_description">Grootte en positie van de vastgezette minispeler</string>
     <string name="settings_hdr_description">Gebruik HDR-uitvoer wanneer de video en tv dit ondersteunen. Alleen mpv: de ExoPlayer-engine ondersteunt deze instelling niet en geeft de HDR van de stream altijd ongewijzigd door.</string>
-    <string name="settings_hdr_description_mobile">Gebruik HDR-uitvoer wanneer de video en het scherm dit ondersteunen. Alleen mpv: de ExoPlayer-engine ondersteunt deze instelling niet en geeft de HDR van de stream altijd ongewijzigd door.</string>
     <string name="settings_auto_frame_rate">Automatische beeldfrequentie</string>
     <string name="settings_auto_frame_rate_description">Stem in volledig scherm de vernieuwingsfrequentie van de tv af op de video (24/25/50/60 fps), voor live-tv en VOD, en herstel deze bij afsluiten. Schakel dit uit als je tv of ontvanger bij elke zenderwissel de HDMI-verbinding hoorbaar opnieuw opbouwt.</string>
-    <string name="settings_auto_frame_rate_description_mobile">Stem in volledig scherm de vernieuwingsfrequentie van het scherm af op de video (24/25/50/60 fps), voor live-tv en VOD, en herstel deze bij afsluiten. Schakel dit uit als het scherm flikkert of zwart wordt wanneer een video start.</string>
     <string name="settings_afr_pause">Pauzeren tijdens de beeldwissel</string>
     <string name="settings_afr_pause_description">Alleen films. Als de tv opnieuw moet synchroniseren op een nieuwe beeldmodus, wacht de film zo lang, zodat het begin niet in het zwarte beeld verloren gaat. Een naadloze wissel pauzeert nooit.</string>
     <string name="settings_afr_resolution">Resolutie aanpassen</string>
@@ -242,7 +224,6 @@
     <string name="settings_surround_description_mobile">Decodeer Dolby/DTS naar surround (5.1/7.1) voor een echte 5.1/7.1-ontvanger die op dit apparaat is aangesloten. Laat dit UIT voor de ingebouwde luidspreker, een koptelefoon of een stereosoundbar — meerkanaalsaudio kan achterlopen op het beeld. Als het geluid wegdrijft, pas je dit licht aan via het menu Audio van de speler → A/V-synchronisatie.</string>
     <string name="settings_audio_passthrough">Dolby- en DTS-passthrough</string>
     <string name="settings_audio_passthrough_description">Aan: Dolby en DTS gaan ongedecodeerd naar de tv, soundbar of receiver als die zegt ze te kunnen afspelen (ExoPlayer). Uit: de app decodeert ze, nog steeds als surround waar Surroundsound dat toestaat. mpv decodeert altijd. Niet gebruikt zolang Nachtmodus of Volume-egalisatie aan staat.</string>
-    <string name="settings_audio_passthrough_description_mobile">Aan: Dolby en DTS gaan ongedecodeerd naar een aangesloten tv of receiver als die zegt ze te kunnen afspelen (ExoPlayer). Uit: de app decodeert ze, nog steeds als surround waar Surroundsound dat toestaat. mpv decodeert altijd. Niet gebruikt zolang Nachtmodus of Volume-egalisatie aan staat.</string>
     <string name="settings_night_mode">Nachtmodus</string>
     <string name="settings_night_mode_description">Zet luide scènes zachter en zachte dialogen luider, om op laag volume te kijken.</string>
     <string name="settings_volume_leveling">Volume-egalisatie</string>
@@ -253,7 +234,6 @@
     <string name="settings_mobile_data_quality_description">Op een verbinding met datalimiet wordt hoogstens deze kwaliteit afgespeeld. Uit: hetzelfde als via wifi.</string>
     <string name="settings_tunneled_playback">Getunnelde weergave (experimenteel)</string>
     <string name="settings_tunneled_playback_description">Live-tv op ExoPlayer: de hardware van de tv houdt beeld en geluid zelf samen, met minder werk voor de processor. Werkt alleen op sommige tv\'s en schakelt zichzelf uit als een kanaal ermee mislukt. De audiosynchronisatie kan dan niet worden bijgesteld.</string>
-    <string name="settings_tunneled_playback_description_mobile">Live-tv op ExoPlayer: de hardware van het apparaat houdt beeld en geluid zelf samen, met minder werk voor de processor. Werkt alleen op sommige apparaten en schakelt zichzelf uit als een kanaal ermee mislukt. De audiosynchronisatie kan dan niet worden bijgesteld.</string>
     <string name="settings_tunneled_playback_failed">Uitgeschakeld nadat een kanaal er op dit apparaat mee mislukte.</string>
     <string name="settings_autoplay_next">Volgende aflevering automatisch afspelen</string>
     <string name="settings_autoplay_next_description">Wanneer een aflevering eindigt, wordt automatisch de volgende gestart — en daarna het volgende seizoen. Ook terugkijken gaat door naar het volgende programma.</string>
@@ -264,13 +244,9 @@
     </plurals>
     <string name="settings_catchup_unavailable">Geen zenders voor terugkijken beschikbaar in deze afspeellijst</string>
     <string name="settings_device">Apparaat</string>
-    <string name="settings_video_player">Instellingen voor videospeler</string>
-    <string name="settings_video_player_description">Decoder, ondertiteling, synchronisatie</string>
     <string name="settings_playback_error_log">Foutenlogboek</string>
     <string name="settings_playback_speed">Afspeelsnelheid</string>
     <string name="settings_player_zoom">Zoomniveau van speler</string>
-    <string name="settings_playback_error_description">Crashes en afspeelfouten — details om te lezen of te melden</string>
-    <string name="settings_network_group">Netwerk</string>
     <string name="settings_app_group">App</string>
     <string name="settings_app_startup">Opstartgedrag van app</string>
     <string name="settings_app_startup_description">Wat OwnTV opent wanneer de app start</string>
@@ -279,7 +255,6 @@
     <string name="settings_update_startup">Bij opstarten controleren op updates</string>
     <string name="settings_update_startup_description">Zoek naar een nieuwe versie wanneer de app wordt geopend</string>
     <string name="settings_about">Over</string>
-    <string name="settings_about_description">Versie, licentie en projectinformatie</string>
     <string name="settings_live_latency">Livevertraging</string>
     <string name="settings_no_settings_match">Geen instellingen gevonden voor ‘<xliff:g id="query">%1$s</xliff:g>’</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
@@ -301,11 +276,8 @@
     <string name="settings_color_picker">Kleurkiezer</string>
     <string name="settings_use_color">Deze kleur gebruiken</string>
     <string name="settings_about_version">Versie <xliff:g id="version">%1$s</xliff:g></string>
-    <string name="settings_about_description_full_mobile">Je eigen IPTV-speler voor Android — een gratis, opensource-app die uitsluitend als speler dient. De app biedt geen zenders of inhoud; je gebruikt je eigen legaal toegankelijke bronnen.</string>
-    <string name="settings_about_license">© 2026 OwnTV · GPLv3-licentie</string>
     <string name="settings_join_telegram">Word lid op Telegram</string>
     <string name="settings_telegram_qr">QR-code van Telegram-groep</string>
-    <string name="settings_telegram_scan">Scan de QR-code om via je telefoon deel te nemen, of open de bovenstaande link.</string>
     <string name="settings_contributions">Bijdragen, bugrapporten en sterren zijn welkom op GitHub.</string>
     <string name="settings_playback_error_description_full">De laatste crash en de meest recente afspeelfouten (nieuwste eerst). Voeg deze details toe wanneer je een probleem meldt.</string>
     <string name="settings_loading">Laden…</string>
@@ -313,15 +285,8 @@
     <string name="settings_live">Live</string>
     <string name="settings_vod">VOD</string>
     <string name="settings_clear_log">Logboek wissen</string>
-    <string name="settings_browsing_title">Bladeren en lijsten</string>
     <string name="settings_browsing_description_full">Waarnaar live-tv, Films en Series terugkeren wanneer je terugkomt.</string>
-    <string name="settings_glass_surfaces">Glasoppervlakken</string>
-    <string name="settings_glass_surfaces_description">Kies welke delen van de app als glas worden weergegeven. Als je elk oppervlak uitschakelt, wordt glas uitgeschakeld.</string>
-    <string name="settings_all_surfaces_on">Alle oppervlakken: Aan</string>
-    <string name="settings_all_surfaces_off">Alle oppervlakken: Uit</string>
-    <string name="settings_surface_toggle"><xliff:g id="surface">%1$s</xliff:g>: <xliff:g id="state">%2$s</xliff:g></string>
-    <string name="settings_transparency_description">Hoeveel er door de panelen heen zichtbaar is (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). Hoger is minder transparant.</string>
-    <string name="settings_catchup_description">Hoe tijdstempels voor terugkijken worden verzonden. Gebruik de tijdzone van je apparaat of stel de tijdsafwijking in die de server van je aanbieder verwacht.</string>
+    <string name="settings_catchup_timezone_description">Hoe tijdstempels voor terugkijken worden verzonden. Automatisch gebruikt de tijdzone die de server van je aanbieder doorgeeft, of die van je apparaat als hij er geen doorgeeft. Je kunt ook Apparaat kiezen of de tijdsafwijking zelf instellen.</string>
     <string name="settings_manual">Handmatig</string>
     <string name="settings_theme_dark">Donker</string>
     <string name="settings_theme_light">Licht</string>
@@ -344,34 +309,16 @@
     <string name="settings_group_summary_appearance">Thema, accent, glas, beweging en tekstgrootte</string>
     <string name="settings_group_summary_layout">Zijbalk, panelen, lijsten en het startscherm</string>
     <string name="settings_group_summary_content_metadata">Namen, afbeeldingen en ondertitelingsdiensten</string>
-    <string name="settings_group_summary_playback">De videospeler en het foutenlogboek</string>
-    <!-- Translators: Video player settings: name of the section holding volume, audio language and surround settings. -->
     <string name="settings_vp_section_sound">Geluid</string>
-    <!-- Translators: Video player settings: one-line summary under the "Subtitles" section name. -->
-    <string name="settings_vp_section_subtitles_summary">Grootte, kleur, positie</string>
-    <!-- Translators: Video player settings: one-line summary under the "Diagnostics" section name. -->
-    <string name="settings_vp_section_diagnostics_summary">Uitgebreide spelerlogboeken</string>
     <string name="settings_vp_cat_player">Speler</string>
-    <string name="settings_vp_cat_player_summary">Welke speler, per afspeellijst, externe apps</string>
     <string name="settings_vp_cat_picture">Beeld</string>
-    <string name="settings_vp_cat_picture_summary">Decoder, HDR, kwaliteit, zoom</string>
     <string name="settings_vp_cat_frame_rate">Beeldfrequentie</string>
     <string name="settings_vp_cat_frame_rate_summary">Scherm afstemmen op de video</string>
     <string name="settings_vp_cat_streaming">Streaming</string>
-    <string name="settings_vp_cat_streaming_summary">Buffer, time-out, herverbindingen</string>
-    <string name="settings_vp_cat_live_summary">Kanaalnummers, pauzeren en terugspoelen</string>
     <string name="settings_vp_cat_live_tuning">Live afstemmen</string>
-    <string name="settings_vp_cat_live_tuning_summary">Vertraging, voorbuffer, starttijd</string>
-    <string name="settings_vp_cat_controls">Bediening</string>
-    <string name="settings_vp_cat_controls_summary">Stappen voor overslaan en terugspoelen</string>
     <string name="settings_vp_cat_multiview">Multiview en minispeler</string>
     <string name="settings_vp_cat_multiview_summary_mobile">Meerdere live zenders tegelijk</string>
-    <string name="settings_vp_cat_sound_summary">Volume, surround, nachtmodus, synchronisatie</string>
     <string name="settings_vp_cat_languages">Talen en ondertitels</string>
-    <string name="settings_vp_cat_languages_summary">Audio- en ondertiteltaal, ondertitelstijl</string>
-    <string name="settings_vp_cat_resume">Hervatten en automatisch afspelen</string>
-    <string name="settings_vp_cat_resume_summary">Waar te beginnen, de volgende aflevering</string>
-    <string name="settings_group_summary_network">Proxy en DNS voor streamverbindingen</string>
     <string name="settings_group_summary_app">Taal, opstarten, updates en app-informatie</string>
     <string name="settings_group_quick">Snel</string>
     <string name="settings_group_summary_quick">De schakelaars die je het vaakst gebruikt</string>
@@ -383,7 +330,6 @@
     <string name="settings_search_keywords_epg">XMLTV gids feed programma</string>
     <string name="settings_search_keywords_logos">zender logo pictogram XMLTV gids picon afspeellijst</string>
     <string name="settings_search_keywords_customize">verbergen zichtbaar maken hernoemen herschikken categorieën</string>
-    <string name="settings_search_keywords_sidebar">zijbalk pictogrammen dynamisch statisch verbergen tonen aanpassen afspeellijst</string>
     <string name="settings_search_keywords_ch">zender omhoog omlaag overslaan bladeren lijst categorie zender</string>
     <string name="settings_search_keywords_browsing">onthouden positie scrollen categorie laatste item live films series reset bovenaan</string>
     <string name="settings_search_keywords_home">rijen prominent herschikken filteren</string>
@@ -459,10 +405,8 @@
     <string name="settings_language_vietnamese">Vietnamees</string>
     <string name="settings_hardware_decoding">Hardwaredecodering</string>
     <string name="settings_hardware_decoding_description">Gebruik de hardwaredecoder van de tv. Schakel dit uit als sommige streams haperen of beeldfouten vertonen.</string>
-    <string name="settings_hardware_decoding_description_mobile">Gebruik de hardwaredecoder van het apparaat. Schakel dit uit als sommige streams haperen of beeldfouten vertonen.</string>
     <string name="settings_software_decode_above_1080p">Softwaredecodering boven 1080p</string>
     <string name="settings_software_decode_above_1080p_description">Speelt 4K en andere video boven 1080p af via software als de hardwaredecoder van de tv uit staat of faalt. Vereist een snelle processor: op de meeste tv\'s hapert het.</string>
-    <string name="settings_software_decode_above_1080p_description_mobile">Speelt 4K en andere video boven 1080p af via software als de hardwaredecoder van het apparaat uit staat of faalt. Vereist een snelle processor: op veel apparaten hapert het.</string>
     <string name="settings_movies_series_player">Speler voor films en series</string>
     <string name="settings_live_tv_player">Speler voor live-tv</string>
     <string name="settings_engine_order"><xliff:g id="first">%1$s</xliff:g>, daarna <xliff:g id="second">%2$s</xliff:g></string>
@@ -472,37 +416,21 @@
     <string name="settings_external_player">Externe speler</string>
     <string name="settings_default_zoom">Standaardzoom</string>
     <string name="settings_default_zoom_description">Beeldverhouding/zoom die wordt toegepast wanneer het afspelen begint.</string>
-    <!-- Translators: Setting label for the volume level playback starts at. -->
     <string name="settings_default_volume">Standaardvolume</string>
-    <!-- Translators: Description of the default volume setting. -->
     <string name="settings_default_volume_description">Volume dat wordt toegepast wanneer het afspelen begint. Boven 100%% worden stille streams versterkt.</string>
-    <!-- Translators: Settings-row title for forgetting the zoom saved for individual items. -->
     <string name="settings_reset_saved_zoom">Opgeslagen zoom opnieuw instellen</string>
-    <!-- Translators: Description of the reset-saved-zoom setting row. -->
     <string name="settings_reset_saved_zoom_description">Als je de zoom in de speler wijzigt, wordt die bewaard voor dat kanaal, die film of aflevering. Na opnieuw instellen volgt alles weer de standaardzoom.</string>
-    <!-- Translators: Confirmation dialog title before forgetting the saved per-item zoom. -->
     <string name="settings_reset_saved_zoom_confirm">Opgeslagen zoom opnieuw instellen?</string>
-    <!-- Translators: Confirmation dialog body before forgetting the saved per-item zoom. -->
     <string name="settings_reset_saved_zoom_confirm_description">Elk kanaal, elke film en aflevering keert terug naar de standaardzoom. Opgeslagen volumes blijven behouden. Je kunt een afzonderlijke titel altijd opnieuw instellen vanuit de speler.</string>
-    <!-- Translators: Settings-row title for forgetting the volume saved for individual items. -->
     <string name="settings_reset_saved_volume">Opgeslagen volume opnieuw instellen</string>
-    <!-- Translators: Description of the reset-saved-volume setting row. -->
     <string name="settings_reset_saved_volume_description">Als je het volume in de speler wijzigt, wordt dat bewaard voor dat kanaal, die film of aflevering. Na opnieuw instellen volgt alles weer het standaardvolume.</string>
-    <!-- Translators: Confirmation dialog title before forgetting the saved per-item volume. -->
     <string name="settings_reset_saved_volume_confirm">Opgeslagen volume opnieuw instellen?</string>
-    <!-- Translators: Confirmation dialog body before forgetting the saved per-item volume. -->
     <string name="settings_reset_saved_volume_confirm_description">Elk kanaal, elke film en aflevering keert terug naar het standaardvolume. Opgeslagen zoominstellingen blijven behouden. Je kunt een afzonderlijke titel altijd opnieuw instellen vanuit de speler.</string>
-    <!-- Translators: Settings row that forgets every per-item audio-sync offset. -->
     <string name="settings_reset_saved_audio_delay">Opgeslagen A/V-synchronisatie opnieuw instellen</string>
-    <!-- Translators: Description of the reset-saved-audio-sync row. -->
     <string name="settings_reset_saved_audio_delay_description">Als je in de speler ‘Deze vertraging onthouden’ kiest, wordt de audiosynchronisatie voor dat kanaal, die film of die aflevering opgeslagen. Opnieuw instellen laat alles weer de instelling hierboven volgen.</string>
-    <!-- Translators: Title of the confirmation dialog for resetting saved audio sync. -->
     <string name="settings_reset_saved_audio_delay_confirm">Opgeslagen A/V-synchronisatie opnieuw instellen?</string>
-    <!-- Translators: Body of the confirmation dialog for resetting saved audio sync. -->
     <string name="settings_reset_saved_audio_delay_confirm_description">Elk kanaal, elke film en elke aflevering keert terug naar de audiosynchronisatie hierboven. Opgeslagen zoom en volume blijven behouden. Je kunt er altijd weer een afzonderlijk instellen vanuit de speler.</string>
-    <!-- Translators: Setting label for how far rewind/forward jumps in a movie or episode. -->
     <string name="settings_seek_step">Zoekstap</string>
-    <!-- Translators: Description of the seek step setting. -->
     <string name="settings_seek_step_description">Hoe ver terug- en vooruitspoelen springen in een film of aflevering.</string>
     <string name="settings_vod_buffer">Filmbuffer</string>
     <string name="settings_vod_buffer_description">Hoe ver films, afleveringen en terugkijken vooruit worden geladen. Auto gebruikt wat bij dit apparaat past. Een langere buffer vangt een slechte verbinding beter op; het geheugen van dit apparaat blijft de grens, dus een film met hoge bitrate kan minder vasthouden dan gekozen.</string>
@@ -511,9 +439,7 @@
     <string name="settings_vod_reconnects">Verbindingspogingen</string>
     <string name="settings_vod_reconnects_description">Hoe vaak een film of aflevering die de verbinding verliest opnieuw wordt geopend waar hij stopte, voordat er een fout verschijnt. Een minuut ongestoord afspelen geeft de pogingen terug.</string>
     <string name="settings_vod_network_auto">Auto</string>
-    <!-- Translators: Setting label for how far rewind/forward jumps inside a live channel's archive. -->
     <string name="settings_live_rewind_step">Live-terugspoelstap</string>
-    <!-- Translators: Description of the live rewind step setting. -->
     <string name="settings_live_rewind_step_description">Hoe ver terug- en vooruitspoelen gaan op een live-zender: in het terugkijkarchief, of in de kopie opgeslagen door Live-tv pauzeren en terugspoelen.</string>
     <string name="settings_resume_playback">Afspelen hervatten</string>
     <string name="settings_resume_playback_description">Wat er moet gebeuren wanneer een film of aflevering een opgeslagen positie heeft.</string>
@@ -549,7 +475,6 @@
     <string name="settings_live_latency_bitrate_note">Bij een kanaal met een zeer hoge bitrate — vooral in 4K — kan de buffer minder tijd bevatten dan je hebt ingesteld, omdat er een limiet zit op hoeveel video tegelijk in het geheugen past.</string>
     <string name="settings_channel_numbers">Zendernummers</string>
     <string name="settings_channel_numbers_description">Toon het zendernummer van uw aanbieder naast de naam in de live-tv-lijst, de overlay met de zenderlijst en de speler. U kunt tijdens afspelen op volledig scherm ook een nummer invoeren met de afstandsbediening om direct naar die zender te gaan (OK schakelt meteen over, Terug annuleert). Als dit uitstaat, worden alle nummers verborgen en de cijfertoetsen genegeerd; er gaat niets verloren en als u dit weer aanzet, worden ze hersteld.</string>
-    <string name="settings_channel_numbers_description_mobile">Toon het zendernummer van uw aanbieder naast de naam in de live-tv-lijst en de speler. Als dit uitstaat, worden alle nummers verborgen; er gaat niets verloren en als u dit weer aanzet, worden ze hersteld.</string>
     <string name="settings_live_left_right_rewinds">Links en rechts spoelen live-tv terug</string>
     <string name="settings_live_left_right_rewinds_description">Met verborgen bediening spoelen links en rechts terug en vooruit op zenders die je kunt terugspoelen (terugkijken, of opgeslagen door Live-tv pauzeren en terugspoelen), in plaats van de zenderlijst en de geschiedenis te openen.</string>
     <string name="settings_timeshift">Live-tv pauzeren en terugspoelen</string>
@@ -561,7 +486,6 @@
     <string name="settings_diagnostics">Diagnostiek</string>
     <string name="settings_measured_stats">Gemeten streamstatistieken</string>
     <string name="settings_measured_stats_description">Toon live de fps, bitsnelheid en overgeslagen frames in de overlay met streaminformatie (gemeten terwijl de overlay geopend is, voor streams die deze waarden niet opgeven). Schakel dit alleen uit als een minder krachtige tv hapert — het heeft nooit invloed op de video zelf, alleen op de diagnostische waarden.</string>
-    <string name="settings_measured_stats_description_mobile">Toon live de fps, bitsnelheid en overgeslagen frames in de overlay met streaminformatie (gemeten terwijl de overlay geopend is, voor streams die deze waarden niet opgeven). Schakel dit alleen uit als een minder krachtig apparaat hapert — het heeft nooit invloed op de video zelf, alleen op de diagnostische waarden.</string>
     <string name="settings_none_auto">Geen / Automatisch</string>
     <string name="settings_view_grid">Raster</string>
     <string name="settings_view_list">Lijst</string>
@@ -584,7 +508,6 @@
     <string name="settings_movies_player_description">mpv (aanbevolen) ondersteunt de meeste formaten — DTS/TrueHD-audio, ongebruikelijke bestanden. Op sommige tv’s speelt ExoPlayer streams af die mpv niet aankan, maar het decodeert geen DTS/TrueHD-audio. De gecombineerde opties proberen automatisch de andere speler zodra de eerste faalt; de opties met één speler doen dat nooit, wat een paar seconden zwart beeld scheelt als de tweede speler op jouw tv toch niet werkt.</string>
     <string name="settings_movies_player_description_mobile">mpv (aanbevolen) ondersteunt de meeste formaten — DTS/TrueHD-audio, ongebruikelijke bestanden. Op sommige apparaten speelt ExoPlayer streams af die mpv niet aankan, maar het decodeert geen DTS/TrueHD-audio. De gecombineerde opties proberen automatisch de andere speler zodra de eerste faalt; de opties met één speler doen dat nooit, wat een paar seconden zwart beeld scheelt als de tweede speler op jouw apparaat toch niet werkt.</string>
     <string name="settings_live_player_description">ExoPlayer (aanbevolen) opent zenders veel sneller en is de enige met ondertiteling bij live-tv. mpv speelt zenders af die ExoPlayer niet aankan, waaronder een aantal met ongebruikelijke audio. De gecombineerde opties proberen automatisch de andere speler zodra de eerste faalt; de opties met één speler doen dat nooit, wat een paar seconden zwart beeld scheelt als de tweede speler op jouw tv toch niet werkt. Bij een zender die je in de speler handmatig omschakelt, blijft je keuze in beide gevallen bewaard.</string>
-    <string name="settings_live_player_description_mobile">ExoPlayer (aanbevolen) opent zenders veel sneller en is de enige met ondertiteling bij live-tv. mpv speelt zenders af die ExoPlayer niet aankan, waaronder een aantal met ongebruikelijke audio. De gecombineerde opties proberen automatisch de andere speler zodra de eerste faalt; de opties met één speler doen dat nooit, wat een paar seconden zwart beeld scheelt als de tweede speler op jouw apparaat toch niet werkt. Bij een zender die je in de speler handmatig omschakelt, blijft je keuze in beide gevallen bewaard.</string>
     <string name="settings_reset_player_choices_description">Als je een afzonderlijke film of aflevering in de speler tussen mpv en ExoPlayer wisselt, wordt die keuze bewaard voor de volgende keer. Na opnieuw instellen volgt alles weer de instelling hierboven. Opgeslagen keuzes voor livekanalen blijven behouden.</string>
     <string name="settings_reset_player_choices_none">Niets opgeslagen</string>
     <plurals name="settings_reset_player_choices_count">
@@ -632,19 +555,13 @@
     <string name="settings_download_remote_title">Downloaden op een ander apparaat</string>
     <string name="settings_download_remote_description">Scan op een apparaat met een browser op hetzelfde wifi-netwerk — telefoon, computer of een andere tv — de QR-code (of open de URL), voer deze pincode in en download je back-upbestand om het veilig te bewaren.</string>
     <string name="settings_preparing_backup">Back-up voorbereiden…</string>
-    <string name="settings_background_on">Achtergrondafbeelding: aan</string>
-    <string name="settings_background_off">Achtergrondafbeelding: uit</string>
     <string name="settings_ui_zoom_range">Schaal de volledige interface (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%).</string>
     <string name="settings_low_zoom_warning_title">⚠️ Waarschuwing voor lage zoom</string>
     <string name="settings_low_zoom_warning">Met <xliff:g id="zoom">%1$d</xliff:g>%% zoom worden veel meer items tegelijk op het scherm weergegeven. Op apparaten met beperkt geheugen (bijvoorbeeld tv-sticks met 2 GB) kan dit de app instabiel maken of laten crashen, vooral bij grote afspeellijsten en veel EPG-gegevens.\n\nDruk op OK om door te gaan of op Terug om op <xliff:g id="safe_zoom">%2$d</xliff:g>%% te blijven.</string>
     <string name="settings_low_zoom_warning_mobile">Met <xliff:g id="zoom">%1$d</xliff:g>%% zoom worden veel meer items tegelijk op het scherm weergegeven. Op apparaten met beperkt geheugen kan dit de app instabiel maken of laten crashen, vooral bij grote afspeellijsten en veel EPG-gegevens.\n\nKies Annuleren om op <xliff:g id="safe_zoom">%2$d</xliff:g>%% te blijven.</string>
     <string name="settings_low_zoom_accept">Ik begrijp en aanvaard het risico</string>
     <string name="settings_surface_transparency"><xliff:g id="percent">%1$d</xliff:g>%%</string>
-    <string name="settings_surface_count_all">Oppervlakken: alle</string>
-    <plurals name="settings_surface_count">
-        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> van <xliff:g id="total">%2$d</xliff:g> oppervlak</item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> van <xliff:g id="total">%2$d</xliff:g> oppervlakken</item>
-    </plurals>
+    <string name="settings_catchup_timezone_automatic">Automatisch</string>
     <string name="settings_catchup_timezone_device">Apparaat</string>
     <string name="settings_catchup_player_ask">Altijd vragen</string>
     <string name="settings_catchup_player_internal">OwnTV-speler</string>
@@ -662,23 +579,6 @@
     <string name="settings_history_movies">Films</string>
     <string name="settings_history_series">Series</string>
     <string name="settings_history_all">alles</string>
-    <string name="settings_decrease">–</string>
-    <string name="settings_increase">+</string>
-    <string name="settings_glass_effect_title">Glaseffect</string>
-    <string name="settings_glass_effect_description">Doorschijnende, gematteerde panelen over een achtergrondfoto of over de eigen achtergrond van de app.</string>
-    <string name="settings_transparency_title">Transparantie</string>
-    <string name="settings_blur_title">Vervaging / matglas</string>
-    <string name="settings_blur_description_enabled">Hoe mat de achtergrondafbeelding is (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). Alleen boven een achtergrondafbeelding.</string>
-    <string name="settings_blur_description_disabled">Hoe mat de achtergrondafbeelding is (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). Alleen boven een achtergrondafbeelding. Stel een achtergrondafbeelding in om dit in te schakelen.</string>
-    <string name="settings_glass_surface_panels">Inhoudspanelen</string>
-    <string name="settings_glass_surface_sidebar">Zijbalk</string>
-    <string name="settings_glass_surface_preview">Voorbeeldvensters</string>
-    <string name="settings_glass_surface_dialogs">Dialoogvensters en pop-ups</string>
-    <string name="settings_glass_surface_topbar">Bovenbalk</string>
-    <string name="settings_glass_surface_cards">Kaarten</string>
-    <string name="settings_glass_surface_miniplayer">Minispeler</string>
-    <string name="settings_glass_surface_player_controls">Spelerbediening</string>
-    <string name="settings_glass_surface_toasts">Schermberichten</string>
     <string name="settings_browsing_last_category">Laatste categorie onthouden</string>
     <string name="settings_browsing_last_category_description">Open het onderdeel opnieuw in de categorie die u hebt verlaten, niet in Alles.</string>
     <string name="settings_browsing_last_item">Laatste item onthouden</string>
@@ -754,7 +654,6 @@
     <string name="settings_span_ch_help">CH+ / CH− springen een pagina. Houd CH+ / CH− ingedrukt om naar het laatste of eerste item te gaan.</string>
     <string name="settings_customize_metadata_separator">"  ·  "</string>
     <string name="settings_sources_title">Bronnen</string>
-    <string name="settings_sources_description">Bronnen worden met alle profielen gedeeld.</string>
     <string name="settings_sources_empty">Nog geen bronnen. Voeg een M3U- of Xtream-bron toe.</string>
     <string name="settings_sources_add">Bron toevoegen</string>
     <string name="settings_sources_import_failed">Importeren mislukt</string>
@@ -834,7 +733,6 @@
     <string name="settings_epg_sources_name_hint">bijv. Britse gids</string>
     <string name="settings_epg_sources_url_hint">https://…/epg.xml(.gz)</string>
     <string name="settings_epg_sources_user_agent_hint">Laat leeg voor standaardwaarde</string>
-    <string name="settings_epg_sources_description">XMLTV-gidsfeeds die de programmagids vullen. Ze worden na toevoeging automatisch gesynchroniseerd en samengevoegd met de zenders uit uw afspeellijsten.</string>
     <string name="settings_epg_sources_delete_title">“<xliff:g id="name">%1$s</xliff:g>” verwijderen?</string>
     <string name="settings_epg_sources_delete_message">Verwijdert deze EPG-bron en de bijbehorende gidsgegevens. Uw zenders blijven behouden.</string>
     <string name="settings_epg_sources_syncing_percent">Synchroniseren: <xliff:g id="percent">%1$d</xliff:g>%%</string>
@@ -894,8 +792,6 @@
     <string name="settings_backup_pin_incorrect">PIN onjuist.</string>
     <string name="settings_backup_pin_locked">Met PIN vergrendeld</string>
     <string name="settings_backup_unlock">Ontgrendelen</string>
-    <string name="settings_backup_export_button">Back-up exporteren</string>
-    <string name="settings_backup_restore_button">Back-up herstellen</string>
     <string name="settings_backup_continue">Doorgaan</string>
     <string name="settings_backup_encrypt_export">Versleutelen en exporteren</string>
     <string name="settings_backup_export_unencrypted">Onversleuteld exporteren</string>
@@ -1025,7 +921,6 @@
     <string name="settings_move_category_keep">Ook in “<xliff:g id="name">%1$s</xliff:g>” behouden</string>
     <string name="settings_move_category_action">Verplaatsen</string>
     <string name="settings_dns_description">Een aangepaste DNS-server gebruiken om domeinnamen op te zoeken</string>
-    <string name="settings_dns_custom">Aangepaste DNS</string>
     <string name="settings_dns_toggle_description">Alle domeinnamen die OwnTV opzoekt via een aangepaste DNS-server laten omzetten.</string>
     <string name="settings_dns_use_custom">Aangepaste DNS gebruiken</string>
     <string name="settings_dns_server_missing">Aangepaste DNS is ingeschakeld, maar er is geen server geconfigureerd. Voer een serveradres in en selecteer Opslaan, of schakel deze optie uit.</string>
@@ -1075,13 +970,9 @@
     <string name="settings_live_tune_timeout_description">Als een livekanaal binnen deze tijd geen beeld heeft laten zien, stopt OwnTV met proberen en laat het je weten, in plaats van een zwart scherm te tonen terwijl het alle spelers een voor een afgaat. ‘Nooit’ blijft proberen, wat op een kanaal dat je provider heeft verwijderd ruim een minuut kan duren. Wachttijden waar je provider zelf om vraagt, tellen niet mee.</string>
     <string name="settings_live_preroll_per_playlist">Vooraf bufferen per afspeellijst</string>
     <string name="settings_live_preroll_per_playlist_description">Overschrijf de bovenstaande instelling voor één afspeellijst terwijl je andere afspeellijsten snel blijven.</string>
-    <!-- Translators: Title of the per-playlist Live TV engine override row. -->
     <string name="settings_live_engine_per_playlist">Speler voor live-tv per afspeellijst</string>
-    <!-- Translators: Description of the per-playlist Live TV engine override row. -->
     <string name="settings_live_engine_per_playlist_description">Overschrijf de bovenstaande instelling voor één afspeellijst — voor een aanbieder waarvan de kanalen maar met één van de spelers goed werken.</string>
-    <!-- Translators: Title of the per-playlist Live latency override row. -->
     <string name="settings_live_latency_per_playlist">Livevertraging per afspeellijst</string>
-    <!-- Translators: Description of the per-playlist Live latency override row. -->
     <string name="settings_live_latency_per_playlist_description">Overschrijf de bovenstaande instelling voor één afspeellijst — voor een aanbieder die een grotere of kleinere buffer nodig heeft dan de andere.</string>
     <string name="settings_catchup_timezone_per_playlist">Catch-up-tijdzone per playlist</string>
     <string name="settings_catchup_timezone_per_playlist_description">Overschrijf de tijdzone hierboven voor één playlist, voor een aanbieder wiens archief op een andere klok loopt.</string>
@@ -1120,7 +1011,6 @@
     <string name="settings_playback_kind_error">Fout</string>
     <string name="settings_playback_kind_event">Gebeurtenis</string>
     <string name="settings_playback_kind_report">Rapport</string>
-    <string name="settings_playback_entry_with_kind"><xliff:g id="date">%1$s</xliff:g> · <xliff:g id="kind">%2$s</xliff:g> · <xliff:g id="engine">%3$s</xliff:g> · <xliff:g id="stream_type">%4$s</xliff:g></string>
     <string name="settings_export">Exporteren</string>
     <string name="settings_detailed_playback_logging_description">Leg een volledig spoor vast van wat de live-engine doet — elke afstemming, fallback en herverbinding — in Logcat en in het geëxporteerde rapport. Laat het uit staan tenzij je een probleem opspoort; het verandert nooit de weergave, alleen hoeveel er wordt vastgelegd.</string>
     <string name="settings_live_preroll_playlist_picker">Welke afspeellijst?</string>
@@ -1177,52 +1067,12 @@
     <string name="settings_font_system_sans">Systeem Sans</string>
     <string name="settings_font_monospace">Monospace</string>
     <string name="settings_subtitle_font">Lettertype voor ondertitels</string>
-    <string name="settings_glass_preset_title">Voorinstelling voor uiterlijk</string>
-    <string name="settings_glass_preset_clear">Helder</string>
-    <string name="settings_glass_preset_balanced">Gebalanceerd</string>
-    <string name="settings_glass_preset_tinted">Getint</string>
-    <string name="settings_glass_preset_custom">Aangepast</string>
-    <string name="settings_glass_preset_clear_description">Meer kleur van de achtergrond met matige vervaging.</string>
-    <string name="settings_glass_preset_balanced_description">Aanbevolen helderheid, diepte en leesbaarheid.</string>
-    <string name="settings_glass_preset_tinted_description">Sterkere oppervlakkleur voor drukke of heldere achtergronden.</string>
-    <string name="settings_glass_preset_custom_description">Gebruik je opgeslagen waarden voor transparantie en vervaging.</string>
     <string name="settings_ambient_glow">Omgevingsgloed</string>
     <string name="settings_ambient_glow_description">Voegt de gloed van de configuratie toe aan de effen interface</string>
     <string name="settings_ambient_glow_dialog_description">Voegt een zachte accentgloed toe aan de interface zonder glas. De langzame puls ademt rustig wanneer animaties zijn ingeschakeld.</string>
     <string name="settings_ambient_glow_effect">Gloed</string>
     <string name="settings_ambient_glow_pulse">Langzame puls</string>
-    <string name="settings_glass_preset_ultra_clear">Ultr helder</string>
-    <string name="settings_glass_preset_opaque">Ondoorzichtig</string>
-    <string name="settings_glass_preset_ultra_clear_description">Maximale achtergronddetails met lichte vervaging.</string>
-    <string name="settings_glass_preset_opaque_description">Maximale paneeldichtheid met de sterkste vervaging.</string>
-    <string name="settings_glass_preset_aurora">Aurora</string>
-    <string name="settings_glass_preset_aurora_description">Dun glas met de zwaarste matte laag — gemaakt voor een telefoon.</string>
-    <string name="settings_glass_highlight_title">Sterkte van lichtaccent</string>
-    <string name="settings_glass_highlight_description">Pas het licht en de rand van het geselecteerde glas aan.</string>
     <string name="settings_glass_live_preview">Livevoorbeeld</string>
-    <string name="settings_glass_screen_description">Doorschijnende panelen met matglaseffect, achtergrondafbeelding en transparantie</string>
-    <string name="settings_glass_master_description">Doorschijnende, gematteerde panelen over een achtergrondfoto of over de eigen achtergrond van de app.</string>
-    <string name="settings_glass_background_image">Achtergrondafbeelding kiezen</string>
-    <string name="settings_glass_background_blur_title">Vervaging / matglas</string>
-    <string name="settings_glass_section_appearance">Weergave</string>
-    <string name="settings_glass_section_fine_tuning">Geavanceerde opties</string>
-    <string name="settings_glass_section_behavior">Gedrag</string>
-    <string name="settings_glass_surface_all">Alles</string>
-    <string name="settings_glass_background_action_description">Achtergrondafbeelding kiezen</string>
-    <string name="settings_glass_transparency_short_description">20–100 · 5</string>
-    <string name="settings_glass_blur_short_description">0–100 · 10</string>
-    <string name="settings_glass_highlight_short_description">Pas het licht en de rand van het geselecteerde glas aan.</string>
-    <string name="settings_glass_full_transparency_short">Volledige transparantie toestaan</string>
-    <string name="settings_glass_full_transparency_short_description">Schakelt de automatische leesbaarheidsgrens uit voor het helderst mogelijke glas.</string>
-    <string name="settings_glass_depth_effects_short">Diepte en schaduwen</string>
-    <string name="settings_glass_depth_effects_short_description">Schakelt focuslicht, subtiele parallax en dieptebeweging in.</string>
-    <string name="settings_glass_shine_short">Lichtveeg</string>
-    <string name="settings_glass_shine_short_description">Een lichtband strijkt over een paneel wanneer het verschijnt.</string>
-    <string name="settings_glass_reset_balanced">Opnieuw instellen: Gebalanceerd</string>
-    <string name="settings_glass_full_transparency_title">Volledige transparantie toestaan</string>
-    <string name="settings_glass_full_transparency_description">Schakelt de automatische leesbaarheidsgrens uit voor het helderst mogelijke glas.</string>
-    <string name="settings_glass_depth_title">Diepte en schaduwen</string>
-    <string name="settings_glass_depth_description">Schakelt focuslicht, subtiele parallax en dieptebeweging in.</string>
     <string name="settings_row_menu_pin">Vastzetten in Snel</string>
     <string name="settings_row_menu_unpin">Verwijderen uit Snel</string>
     <string name="settings_row_menu_move_up">Omhoog</string>
@@ -1230,8 +1080,6 @@
     <string name="settings_quick_empty_title">Nog niets vastgezet</string>
     <string name="settings_quick_empty_hint">Houd OK ingedrukt op een instelling en kies “Vastzetten in Snel”.</string>
     <string name="settings_quick_empty_hint_touch">Houd een instelling ingedrukt en kies “Vastzetten in Snel”.</string>
-    <string name="settings_results_title">Resultaten</string>
-    <string name="settings_results_summary">Elke treffer, waar die ook staat — met het pad erbij</string>
     <plurals name="settings_setting_count">
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> instelling</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> instellingen</item>
@@ -1246,45 +1094,29 @@
     <string name="settings_guide_width_summary">Zenderlijst %1$d%% · EPG-tijdlijn %2$d%%</string>
     <string name="settings_guide_width_help">• De zenderlijst en EPG-tijdlijn delen één rij en moeten daarom samen 100%% zijn.\n• Een bredere zenderlijst toont minder van de tijdlijn; programmaduur en tijdschaal blijven gelijk.\n• Beide kolommen blijven minimaal 10%% breed.\n• Herstellen zet de zenderlijst op 10%% en de EPG-tijdlijn op 90%%.\n• Aanpassing uitschakelen herstelt de standaardindeling zonder je waarden te verwijderen.</string>
     <string name="settings_guide_width_channels">Zenderlijst</string>
-    <string name="settings_guide_width_epg">EPG-tijdlijn</string>
     <string name="settings_selection_highlight">Selectiemarkering</string>
     <string name="settings_selection_highlight_description">Kleur en dikte van de rand rond het geselecteerde item</string>
-    <string name="settings_nav_bar_customization">Navigatiebalk aanpassen</string>
-    <string name="settings_playback_mobile">Mobiel</string>
-    <string name="settings_playback_tv_only_note">Livevoorbeeld en afstandsbedieningssneltoetsen zijn tv-functies — ze zijn niet beschikbaar op een telefoon.</string>
     <string name="settings_background_playback">Afspelen op de achtergrond</string>
     <string name="settings_background_playback_description">Geluid door laten spelen als je de app verlaat</string>
     <string name="settings_pip">Beeld-in-beeld</string>
-    <string name="settings_pip_description">De video verkleinen tot een zwevend venster als je de app verlaat</string>
     <string name="settings_data_saver">Databesparing</string>
     <string name="settings_data_saver_description">Niet streamen via mobiele data</string>
     <string name="settings_gesture_sensitivity">Gevoeligheid van gebaren</string>
-    <string name="settings_gesture_sensitivity_description">Hoe ver je veegt om volume, helderheid of positie te wijzigen</string>
     <string name="settings_downloads_wifi_only">Alleen downloaden via wifi</string>
     <string name="settings_downloads_wifi_only_description">Wachten op wifi in plaats van mobiele data gebruiken</string>
-    <string name="settings_search_keywords_background_playback">achtergrond audio geluid app verlaten doorspelen service</string>
-    <string name="settings_search_keywords_pip">beeld in beeld zwevend venster overlay klein</string>
-    <string name="settings_search_keywords_data_saver">databesparing mobiele data verbruik roaming besparen</string>
-    <string name="settings_search_keywords_gestures">gebaar vegen gevoeligheid aanraken slepen</string>
-    <string name="settings_mini_player_style">Stijl van de mini-speler</string>
     <string name="settings_mini_player_style_description">Hoe het spelen met je meegaat terwijl je rondkijkt</string>
     <string name="settings_mini_player_style_floating">Zwevend venster</string>
     <string name="settings_mini_player_style_docked">Vaste balk</string>
     <string name="settings_pip_size">Venstergrootte</string>
-    <string name="settings_pip_size_description">Hoe groot het zwevende venster begint. Knijp om het te veranderen.</string>
     <string name="settings_pip_size_small">Klein</string>
     <string name="settings_pip_size_medium">Middel</string>
     <string name="settings_pip_size_large">Groot</string>
     <string name="settings_pip_snap">Aan de randen kleven</string>
-    <string name="settings_pip_snap_description">Laat het venster los en het schuift tegen de dichtstbijzijnde rand</string>
     <string name="settings_audio_on_screen_off">Alleen geluid als het scherm uitgaat</string>
-    <string name="settings_audio_on_screen_off_description">Stop met het decoderen van beeld dat niemand ziet en spaar de accu</string>
     <string name="settings_audio_on_mobile_data">Alleen geluid op mobiele data</string>
     <string name="settings_audio_on_mobile_data_description">Zonder beeld beginnen als er geen wifi is</string>
     <string name="settings_audio_per_channel">Alleen geluid per kanaal onthouden</string>
-    <string name="settings_audio_per_channel_description">Een kanaal dat je zonder beeld keek, opent de volgende keer zo</string>
     <string name="local_sync_title">Lokaal synchroniseren</string>
-    <string name="local_sync_description">Deel je gegevens met je andere apparaat via wifi</string>
     <string name="local_sync_host_hint">Zet op je andere apparaat ook Synchronisatiemodus aan, tik op Verbinden en kies dit apparaat.</string>
     <string name="local_sync_qr_description">QR-code met het adres van dit apparaat</string>
     <string name="local_sync_pin_is">Pincode: <xliff:g id="pin">%1$s</xliff:g></string>
@@ -1339,8 +1171,6 @@
     <string name="local_sync_error_bad_payload">Wat binnenkwam kon niet worden gelezen. Als je een wachtwoord gebruikte, controleer of het op beide apparaten hetzelfde is.</string>
     <string name="local_sync_error_unknown">Er is iets misgegaan. Probeer het opnieuw.</string>
     <string name="local_sync_mode">Synchronisatiemodus</string>
-    <string name="local_sync_mode_description">Laat je andere apparaten dit apparaat vinden. Blijft aan zolang dit scherm open is.</string>
-    <string name="local_sync_mode_pill">Synchronisatiemodus aan</string>
     <string name="local_sync_connect">Verbinden</string>
     <string name="local_sync_connect_description">Zoek een ander apparaat waarop Synchronisatiemodus aan staat</string>
     <string name="local_sync_last_synced">Laatst gesynchroniseerd: <xliff:g id="when">%1$s</xliff:g></string>
@@ -1600,7 +1430,7 @@
     <string name="settings_help_playlists">Voeg een afspeellijst toe via een link, een Xtream-login, een Stalker-portaal of een bestand, synchroniseer hem opnieuw of verwijder hem.</string>
     <string name="settings_help_epg_sources">Voeg een XMLTV-gidsbron toe via de link, vernieuw hem of verwijder hem. Bronnen vullen de tv-gids en de programmaregels in Live tv.</string>
     <string name="settings_help_guide_days">Hoeveel dagen aan programma’s de gids vooruit bewaart. Minder dagen maken het vernieuwen sneller en de database kleiner.</string>
-    <string name="settings_help_catchup">Terugkijken speelt programma’s af uit het archief van je aanbieder. De meeste aanbieders volgen de klok van de tv; kies een vaste UTC-verschuiving als terugkijken op het verkeerde moment begint. Hier kies je ook welke speler terugkijken gebruikt.</string>
+    <string name="settings_help_catchup_timezone">Terugkijken speelt programma’s af uit het archief van je aanbieder. Automatisch gebruikt de tijdzone die je aanbieder doorgeeft, of de klok van de tv als hij er geen doorgeeft; kies een vaste UTC-verschuiving als terugkijken nog steeds op het verkeerde moment begint. Hier kies je ook welke speler terugkijken gebruikt.</string>
     <string name="settings_help_theme">OwnTV is ontworpen voor donker. Systeem volgt de instelling van de tv, als die er is; licht past bij een lichte kamer.</string>
     <string name="settings_help_accent">Kleurt knoppen, de focusgloed, voortgangsbalken en accenten overal. Kies een voorinstelling of druk op OK voor het palet en elke hexcode.</string>
     <string name="settings_help_focus">De rand rond wat de focus heeft. Kies kleur en dikte zodat je hem vanaf de bank goed kunt volgen.</string>

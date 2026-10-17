@@ -53,6 +53,10 @@ interface SourceDao {
     @Query("UPDATE sources SET maxConnections = :maxConnections WHERE id = :id")
     suspend fun updateMaxConnections(id: Long, maxConnections: Int)
 
+    /** The Xtream panel's own time zone (a `TimeZone` ID), read at every sync; null = not reported. */
+    @Query("UPDATE sources SET serverTimeZone = :zone WHERE id = :id")
+    suspend fun updateServerTimeZone(id: Long, zone: String?)
+
     /**
      * Record a *measured* limit and when it was measured.
      *
@@ -63,9 +67,6 @@ interface SourceDao {
      */
     @Query("UPDATE sources SET maxConnections = :maxConnections, maxConnectionsProbedAt = :probedAt WHERE id = :id")
     suspend fun updateProbedConnections(id: Long, maxConnections: Int, probedAt: Long)
-
-    @Query("UPDATE sources SET preferHls = :preferHls WHERE id = :id")
-    suspend fun updatePreferHls(id: Long, preferHls: Boolean)
 
     /** Per-playlist "Pre-buffer" override in seconds; `-1` follows the global setting. */
     @Query("UPDATE sources SET livePrerollSecs = :secs WHERE id = :id")
@@ -93,17 +94,10 @@ interface SourceDao {
     @Query("UPDATE sources SET liveTuneTimeoutSecs = :secs WHERE id = :id")
     suspend fun updateLiveTuneTimeout(id: Long, secs: Int?)
 
-    /** Per-playlist HTTP Referer; `null` sends none beyond what each stream declares. */
-    @Query("UPDATE sources SET httpReferer = :referer WHERE id = :id")
-    suspend fun updateHttpReferer(id: Long, referer: String?)
-
     // --- profile <-> source links (hybrid model) ---
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun link(ref: ProfileSourceCrossRef)
-
-    @Query("DELETE FROM profile_source WHERE profileId = :profileId AND sourceId = :sourceId")
-    suspend fun unlink(profileId: Long, sourceId: Long)
 
     @Query(
         "SELECT s.* FROM sources s " +
@@ -126,7 +120,4 @@ interface SourceDao {
 
     @Query("SELECT * FROM profile_source")
     suspend fun allLinks(): List<ProfileSourceCrossRef>
-
-    @Query("DELETE FROM sources")
-    suspend fun deleteAllSources()
 }

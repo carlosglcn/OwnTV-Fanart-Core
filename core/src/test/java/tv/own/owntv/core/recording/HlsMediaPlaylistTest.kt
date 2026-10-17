@@ -81,7 +81,7 @@ class HlsMediaPlaylistTest {
             a.ts
             """.trimIndent(),
         )
-        // AES-128 is plain HLS encryption with a public key: recorded and decrypted (#243), not refused.
+        // AES-128 is plain HLS encryption with a public key: recorded and decrypted, not refused.
         assertFalse(encrypted.isEncrypted)
         assertEquals("AES-128", encrypted.encryptionMethod)
 
@@ -173,7 +173,7 @@ class HlsMediaPlaylistTest {
         assertFalse(HlsMediaPlaylist.looksLikePlaylist(null, "binary rubbish"))
     }
 
-    // --- Master playlists (#243): a list of qualities, not of segments ---
+    // --- Master playlists: a list of qualities, not of segments ---
 
     /** The shape the Australian 7/9/10 channels serve: qualities, each its own media playlist. */
     private val master = """
@@ -212,14 +212,14 @@ class HlsMediaPlaylistTest {
 
     @Test
     fun `a segment body that is a playlist is never video`() {
-        // What #243 wrote into its recordings: the quality playlists, read as if they were segments.
+        // What a broken recorder once wrote into its recordings: the quality playlists, read as if they were segments.
         assertTrue(HlsMediaPlaylist.isPlaylistBody("#EXTM3U\n#EXTINF:6,\nseg.ts".toByteArray()))
         assertTrue(HlsMediaPlaylist.isPlaylistBody("\uFEFF  #EXTM3U".toByteArray()))
         assertFalse(HlsMediaPlaylist.isPlaylistBody(byteArrayOf(0x47, 0x40, 0x11, 0x10)))
         assertFalse(HlsMediaPlaylist.isPlaylistBody(ByteArray(0)))
     }
 
-    // --- AES-128 (#243): the key, the IV, and the bytes ---
+    // --- AES-128: the key, the IV, and the bytes ---
 
     private val aes = """
         #EXTM3U

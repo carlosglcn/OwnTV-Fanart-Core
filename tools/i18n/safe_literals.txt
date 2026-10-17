@@ -168,6 +168,7 @@
 2	json	core/src/main/java/tv/own/owntv/core/backup/BackupManager.kt	source
 2	json	core/src/main/java/tv/own/owntv/core/backup/BackupManager.kt	sourceId
 7	json	core/src/main/java/tv/own/owntv/core/backup/BackupManager.kt	sources
+2	json	core/src/main/java/tv/own/owntv/core/backup/BackupManager.kt	sportsConfigs
 6	json	core/src/main/java/tv/own/owntv/core/backup/BackupManager.kt	src
 4	json	core/src/main/java/tv/own/owntv/core/backup/BackupManager.kt	stalkerDeviceId
 4	json	core/src/main/java/tv/own/owntv/core/backup/BackupManager.kt	stalkerDeviceId2
@@ -422,10 +423,9 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	HTTP/1.1 200 OK
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	Not Found
 2	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	OK
-7	uri	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	POST
+6	uri	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	POST
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	Payload Too Large
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	Unauthorized
-1	regex	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	^[A-Za-z0-9._-]{16,128}$
 1	regex	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	^data:image/([a-zA-Z0-9.+-]+);base64,
 1	uri	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	application/json; charset=utf-8
 2	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	bmp
@@ -441,7 +441,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	text/html; charset=utf-8
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	text/plain; charset=utf-8
 2	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	webp
-8	uri	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	x-companion-pin
+7	uri	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	x-companion-pin
 3	uri	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	{}
 1	technical	core/src/main/java/tv/own/owntv/core/companion/CompanionLink.kt	10.
 2	technical	core/src/main/java/tv/own/owntv/core/companion/CompanionLink.kt	127.0.0.1
@@ -522,6 +522,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `$table` ADD COLUMN `providerLanguage` TEXT
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `$table` ADD COLUMN `qualityRank` INTEGER NOT NULL DEFAULT 0
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `$table` ADD COLUMN `titleSignature` TEXT NOT NULL DEFAULT ''
+1	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `channels` ADD COLUMN `catchupCorrectionMin` INTEGER NOT NULL DEFAULT 0
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `channels` ADD COLUMN `catchupDays` INTEGER NOT NULL DEFAULT 0
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `channels` ADD COLUMN `catchupSource` TEXT
 1	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `channels` ADD COLUMN `catchupType` TEXT
@@ -563,6 +564,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `sources` ADD COLUMN `mac` TEXT
 1	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `sources` ADD COLUMN `maxConnectionsProbedAt` INTEGER NOT NULL DEFAULT 0
 1	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `sources` ADD COLUMN `maxConnections` INTEGER NOT NULL DEFAULT 0
+1	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `sources` ADD COLUMN `serverTimeZone` TEXT
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `sources` ADD COLUMN `stalkerDeviceId2` TEXT
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `sources` ADD COLUMN `stalkerDeviceId` TEXT
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `sources` ADD COLUMN `stalkerSerialNumber` TEXT
@@ -837,12 +839,13 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	addedAt
 1	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	audioLang
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	catchup
+1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	catchupCorrectionMin
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	catchupDays
 1	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	catchupOffsetMin
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	catchupSource
 1	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	catchupTimezone
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	catchupType
-10	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	channels
+11	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	channels
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	channels_fts
 4	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	contentHash
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	directSource
@@ -870,8 +873,9 @@
 4	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	playback_prefs
 5	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	series
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	series_fts
+1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	serverTimeZone
 1	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	sourceId
-17	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	sources
+18	sql	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	sources
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	stalkerDeviceId
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	stalkerDeviceId2
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	stalkerSerialNumber
@@ -1048,7 +1052,6 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	AND title LIKE '%' || :query || '%' ORDER BY startMs ASC LIMIT :limit
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	DELETE FROM epg_channels WHERE sourceId = :sourceId
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	DELETE FROM epg_channels WHERE sourceId = :sourceId AND epgChannelId IN (:epgChannelIds)
-1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	DELETE FROM epg_programmes WHERE epgChannelId = :epgChannelId
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	DELETE FROM epg_programmes WHERE epgChannelId = :epgChannelId AND sourceId IN (:sourceIds)
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	DELETE FROM epg_programmes WHERE id IN (:ids)
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	DELETE FROM epg_programmes WHERE sourceId = :sourceId
@@ -1071,12 +1074,16 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT COUNT(DISTINCT epgChannelId) FROM epg_programmes WHERE sourceId IN (:sourceIds)
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT DISTINCT epgChannelId FROM epg_programmes LIMIT :limit
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT DISTINCT sourceId FROM epg_channels WHERE epgChannelId IN (:epgChannelIds) AND iconUrl IS NOT NULL AND iconUrl != ''
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT MAX(id) FROM epg_programmes
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT description FROM epg_programmes WHERE id = :programmeId LIMIT 1
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT epgChannelId FROM epg_channels WHERE sourceId = :sourceId
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT epgChannelId, displayName, normName, normId FROM epg_channels LIMIT :limit
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT epgChannelId, iconUrl FROM epg_channels WHERE sourceId IN (:sourceIds) AND iconUrl IS NOT NULL AND iconUrl != ''
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT id, description FROM epg_programmes WHERE id IN (:ids) AND description IS NOT NULL
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT id, epgChannelId, startMs, contentHash FROM epg_programmes WHERE sourceId = :sourceId AND epgChannelId = :epgChannelId
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT id, epgChannelId, startMs, stopMs, title, categories FROM epg_programmes
 3	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT id, sourceId, epgChannelId, startMs, stopMs, title, NULL AS description, 0 AS contentHash,
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	WHERE startMs >= :from AND startMs < :to AND +stopMs > :minStop LIMIT :limit
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	categories, year, rating, lengthMin, episode, imageUrl
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	(:type = 'LIVE' AND itemId NOT IN (SELECT id FROM channels)) OR
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	(:type = 'MOVIE' AND itemId NOT IN (SELECT id FROM movies)) OR
@@ -1152,7 +1159,6 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	DELETE FROM metadata_cache
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	DELETE FROM metadata_cache WHERE key = :key
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	DELETE FROM metadata_cache WHERE updatedAt < :cutoff
-1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	DELETE FROM metadata_match
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	DELETE FROM metadata_match WHERE localKey = :localKey
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	DELETE FROM metadata_match WHERE tmdbId IS NULL
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	DELETE FROM metadata_match WHERE updatedAt < :cutoff
@@ -1325,7 +1331,6 @@
 2	sql	core/src/main/java/tv/own/owntv/core/database/dao/RecordingDao.kt	SELECT * FROM recordings WHERE status = 'RECORDING' ORDER BY startMs ASC
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/RecordingDao.kt	SELECT * FROM recordings WHERE status = 'SCHEDULED' ORDER BY startMs ASC
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/RecordingDao.kt	SELECT * FROM recordings WHERE status IN ('SCHEDULED', 'RECORDING')
-1	sql	core/src/main/java/tv/own/owntv/core/database/dao/RecordingDao.kt	SELECT COUNT(*) FROM recordings WHERE sourceId = :sourceId AND status = 'RECORDING'
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/RecordingDao.kt	UPDATE recordings SET status = :status, failure = :failure, bytes = :bytes,
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/RecordingDao.kt	filePath = :filePath, startedAt = :startedAt, endedAt = :endedAt, updatedAt = :timestamp WHERE id = :id
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ReminderDao.kt	DELETE FROM programme_reminders WHERE id = :id
@@ -1355,7 +1360,6 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	ORDER BY sortOrder ASC, name ASC, id ASC
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	ORDER BY sortOrder ASC, name ASC, id ASC LIMIT :limit
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM episodes WHERE id = :id
-1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM episodes WHERE seasonId = :seasonId ORDER BY episodeNumber ASC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM episodes WHERE seriesId = :seriesId AND remoteId = :remoteId LIMIT 1
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM episodes WHERE seriesId = :seriesId AND seasonNumber = :season AND episodeNumber = :episode LIMIT 1
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM episodes WHERE seriesId = :seriesId ORDER BY seasonNumber ASC, episodeNumber ASC
@@ -1370,7 +1374,6 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE id IN (:ids)
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId = :sourceId AND name = :name LIMIT 1
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId = :sourceId AND remoteId = :remoteId LIMIT 1
-1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId = :sourceId AND remoteId IN (:remoteIds)
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId = :sourceId AND titleSignature = '' LIMIT :limit
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds)
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY addedAt DESC, sortOrder DESC, id DESC
@@ -1433,8 +1436,6 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesSortOrderDao.kt	s.sourceId AS sourceId, s.remoteId AS remoteId, s.name AS name
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesSortOrderDao.kt	seasonsDescending = :seasonsDescending, episodesDescending = :episodesDescending
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	AND (:hlsSupported = 1 OR hlsSupported != 1)
-1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	DELETE FROM profile_source WHERE profileId = :profileId AND sourceId = :sourceId
-1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	DELETE FROM sources
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	INNER JOIN profile_source ps ON ps.sourceId = s.id
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	SELECT * FROM profile_source
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	SELECT * FROM sources ORDER BY createdAt ASC
@@ -1445,18 +1446,17 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	SELECT sourceId FROM profile_source WHERE profileId = :profileId
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	UPDATE sources SET catchupTimezone = :mode, catchupOffsetMin = :offsetMin WHERE id = :id
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	UPDATE sources SET hlsSupported = :hlsSupported WHERE id = :id
-1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	UPDATE sources SET httpReferer = :referer WHERE id = :id
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	UPDATE sources SET lastSyncAt = :timestamp WHERE id = :id
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	UPDATE sources SET livePrerollSecs = :secs WHERE id = :id
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	UPDATE sources SET liveTuneTimeoutSecs = :secs WHERE id = :id
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	UPDATE sources SET maxConnections = :maxConnections WHERE id = :id
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	UPDATE sources SET maxConnections = :maxConnections, maxConnectionsProbedAt = :probedAt WHERE id = :id
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	UPDATE sources SET serverTimeZone = :zone WHERE id = :id
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	UPDATE sources SET vodEnginePreference = :preference WHERE id = :id
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	WHERE ps.profileId = :profileId ORDER BY s.createdAt ASC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SubtitleDao.kt	DELETE FROM subtitle_cache WHERE id = :id
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SubtitleDao.kt	DELETE FROM subtitle_link WHERE profileId = :profileId AND cacheId = :cacheId
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SubtitleDao.kt	DELETE FROM subtitle_link WHERE profileId = :profileId AND cacheId = :cacheId AND mediaType = :mediaType
-1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SubtitleDao.kt	DELETE FROM subtitle_selection WHERE profileId = :profileId AND contentKey = :contentKey
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SubtitleDao.kt	FROM subtitle_link l JOIN subtitle_cache c ON c.id = l.cacheId
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SubtitleDao.kt	SELECT * FROM subtitle_cache
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SubtitleDao.kt	SELECT * FROM subtitle_cache WHERE id = :id LIMIT 1
@@ -1468,7 +1468,6 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SubtitleDao.kt	SELECT * FROM subtitle_timing
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SubtitleDao.kt	SELECT COUNT(*) FROM subtitle_link WHERE cacheId = :cacheId AND profileId != :profileId
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SubtitleDao.kt	SELECT COUNT(*) FROM subtitle_link WHERE cacheId = :cacheId AND profileId = :profileId
-1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SubtitleDao.kt	SELECT COUNT(*) FROM subtitle_link WHERE profileId = :profileId AND contentKey = :contentKey
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SubtitleDao.kt	SELECT DISTINCT cacheId FROM subtitle_link WHERE profileId = :profileId AND mediaType = :mediaType
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SubtitleDao.kt	SELECT c.id AS cacheId, l.contentKey AS contentKey, l.contentTitle AS contentTitle,
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SubtitleDao.kt	SELECT offsetMs FROM subtitle_timing WHERE profileId = :profileId AND contentKey = :contentKey AND subtitleKey = :subtitleKey LIMIT 1
@@ -1488,10 +1487,9 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/TombstoneDao.kt	SELECT COUNT(*) FROM user_data_tombstones
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/TombstoneDao.kt	SELECT deletedAt FROM user_data_tombstones WHERE profileId = :profileId AND kind = :kind AND identity = :identity
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/TrendingDao.kt	DELETE FROM trending_items WHERE sourceId = :sourceId
-1	sql	core/src/main/java/tv/own/owntv/core/database/dao/TrendingDao.kt	DELETE FROM trending_snapshots WHERE sourceId = :sourceId
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/TrendingDao.kt	SELECT * FROM trending_items ORDER BY sourceId, position
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/TrendingDao.kt	SELECT * FROM trending_items WHERE sourceId = :sourceId ORDER BY position
-2	sql	core/src/main/java/tv/own/owntv/core/database/dao/TrendingDao.kt	SELECT * FROM trending_items WHERE sourceId IN (:sourceIds) ORDER BY sourceId, position
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/TrendingDao.kt	SELECT * FROM trending_items WHERE sourceId IN (:sourceIds) ORDER BY sourceId, position
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/TrendingDao.kt	SELECT * FROM trending_snapshots WHERE sourceId = :sourceId LIMIT 1
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/TrendingDao.kt	SELECT * FROM trending_snapshots WHERE sourceId IN (:sourceIds) ORDER BY sourceId
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/TrendingDao.kt	UPDATE trending_snapshots SET lastAttemptAt = :attemptAt, lastAttemptStatus = 'FAILED',
@@ -1509,7 +1507,7 @@
 4	room-schema	core/src/main/java/tv/own/owntv/core/database/entity/CatalogBackfillEntities.kt	sourceId
 4	empty	core/src/main/java/tv/own/owntv/core/database/entity/ContentEntities.kt	\0
 4	room-schema	core/src/main/java/tv/own/owntv/core/database/entity/ContentEntities.kt	''
-6	room-schema	core/src/main/java/tv/own/owntv/core/database/entity/ContentEntities.kt	0
+7	room-schema	core/src/main/java/tv/own/owntv/core/database/entity/ContentEntities.kt	0
 4	room-schema	core/src/main/java/tv/own/owntv/core/database/entity/ContentEntities.kt	addedAt
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/entity/ContentEntities.kt	categories
 16	room-schema	core/src/main/java/tv/own/owntv/core/database/entity/ContentEntities.kt	categoryId
@@ -1628,6 +1626,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/entity/UserDataEntities.kt	watchedAt
 2	technical	core/src/main/java/tv/own/owntv/core/di/DataModule.kt	User-Agent
 1	file-path	core/src/main/java/tv/own/owntv/core/di/DataModule.kt	backgrounds
+1	technical	core/src/main/java/tv/own/owntv/core/di/DataModule.kt	sports
 1	json	core/src/main/java/tv/own/owntv/core/di/DataModule.kt	subtitles
 3	empty	core/src/main/java/tv/own/owntv/core/di/DatabaseModule.kt	\0
 1	technical	core/src/main/java/tv/own/owntv/core/di/DatabaseModule.kt	)
@@ -1701,29 +1700,22 @@
 1	uri	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	?
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	?$it
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	?utc={utc}&lutc={lutc}
-1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	H
-1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	M
-1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	S
 2	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	UTC
-1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	Y
-1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	\\$?\\{([A-Za-z_][A-Za-z0-9_-]*)\\}
+1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	YmdHMS
+1	regex	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	\\$?\\{([A-Za-z_][A-Za-z0-9_-]*)(?::([^}]*))?\\}
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	^(.+?)/timeshift/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/.]+)\\.(?:ts|m3u8)$
 1	regex	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	^(https?://[^/]+)/(?:live/)?([^/]+)/([^/]+)/(\\d+)(?:\\.[A-Za-z0-9]+)?$
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	append
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	currenttime
-3	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	d
-1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	duration
+1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	default
+2	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	duration
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	end
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	end-timestamp
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	flussonic
-2	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	h
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	lutc
-3	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	m
-2	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	min
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	mpegts
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	now
-1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	offset
-2	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	s
+2	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	offset
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	shift
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	start
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	start-timestamp
@@ -1737,7 +1729,6 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	utcstart
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	xc
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	xtream
-2	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	y
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	yyyy-MM-dd:HH-mm
 1	log	core/src/main/java/tv/own/owntv/core/epg/EpgAutoMatcher.kt	applied=${applied.size} review=${review.size} withheld=$withheld
 1	log	core/src/main/java/tv/own/owntv/core/epg/EpgAutoMatcher.kt	channels=${channels.size} unmatched=${unmatched.size}
@@ -1996,6 +1987,8 @@
 1	log	core/src/main/java/tv/own/owntv/core/live/LiveEpgReader.kt	live_nowplaying channels=${channels.size} keyed=${channelKeys.size}
 1	log	core/src/main/java/tv/own/owntv/core/live/LiveEpgReader.kt	totalMs=${android.os.SystemClock.elapsedRealtime() - startedAt}
 1	uri	core/src/main/java/tv/own/owntv/core/live/LiveEpgReader.kt	ts
+1	protocol	core/src/main/java/tv/own/owntv/core/live/LiveEpgReader.kt	xc
+1	protocol	core/src/main/java/tv/own/owntv/core/live/LiveEpgReader.kt	xtream
 2	preference-key	core/src/main/java/tv/own/owntv/core/live/LiveKey.kt	ALL
 2	preference-key	core/src/main/java/tv/own/owntv/core/live/LiveKey.kt	CATCHUP
 2	preference-key	core/src/main/java/tv/own/owntv/core/live/LiveKey.kt	CUSTOM:
@@ -2012,8 +2005,12 @@
 1	log	core/src/main/java/tv/own/owntv/core/live/ProbeChannelSource.kt	probe could not resolve '${channel.name}': ${it.message}
 1	json	core/src/main/java/tv/own/owntv/core/live/ProbeChannelSource.kt	vod
 1	technical	core/src/main/java/tv/own/owntv/core/live/ProviderTags.kt	\0
+1	technical	core/src/main/java/tv/own/owntv/core/live/ProviderTags.kt	${name.country}| ${name.name}
+1	technical	core/src/main/java/tv/own/owntv/core/live/ProviderTags.kt	TV
+1	technical	core/src/main/java/tv/own/owntv/core/live/ProviderTags.kt	UK
 1	regex	core/src/main/java/tv/own/owntv/core/live/ProviderTags.kt	\\s+
 1	regex	core/src/main/java/tv/own/owntv/core/live/ProviderTags.kt	^([A-Z]{2,3})\\s*\\|\\s*
+1	regex	core/src/main/java/tv/own/owntv/core/live/ProviderTags.kt	^([A-Z]{2}):\\s*
 1	log	core/src/main/java/tv/own/owntv/core/live/WatchSession.kt	WatchSession
 1	log	core/src/main/java/tv/own/owntv/core/live/WatchSession.kt	watch close sourceId=$sourceId watching=${_watching.value}
 1	log	core/src/main/java/tv/own/owntv/core/live/WatchSession.kt	watch open sourceId=$sourceId watching=${_watching.value}
@@ -2295,6 +2292,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	M3uParser
 1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	UTF-8
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	catchup
+2	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	catchup-correction
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	catchup-days
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	catchup-source
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	catchup-type
@@ -2306,6 +2304,8 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	parse start
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	parseOrReadMs=$parseOrReadDelta callbackMs=$callbackDelta
 2	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	series
+1	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	shift
+1	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	timeshift
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	totalMs=${now - startedAt}
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	totalParseOrReadMs=${metrics.parseOrReadMs} totalCallbackMs=${metrics.callbackMs}
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	tvg-chno
@@ -2396,8 +2396,9 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	&stream_id=$streamId&limit=$limit
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	0
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	1
+1	technical	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	GMT$sign${(minutes / 60).toString().padStart(2, '0')}:${(minutes % 60).toString().padStart(2, '0')}
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	Stream truncated after $count items label=$label — partial list kept
-1	technical	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	UTC
+2	technical	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	UTC
 6	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	UTF-8
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	XtreamClient
 1	json	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	active_cons
@@ -2446,6 +2447,7 @@
 2	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	releasedate
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	season
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	series_id
+1	json	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	server_info
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	start_timestamp
 1	json	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	status
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	stop_timestamp
@@ -2455,6 +2457,9 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	streamArray start label=$label
 2	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	stream_icon
 2	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	stream_id
+1	json	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	time_now
+1	json	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	timestamp_now
+1	json	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	timezone
 2	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	title
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	totalMs=${SystemClock.elapsedRealtime() - startedAt}
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	totalMs=${now - startedAt}
@@ -2463,6 +2468,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	tv_archive_duration
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	user_info
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	year
+1	technical	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	yyyy-MM-dd HH:mm:ss
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	yyyy-MM-dd:HH-mm
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	—
 1	empty	core/src/main/java/tv/own/owntv/core/parser/XtreamM3uLink.kt	\0
@@ -2486,6 +2492,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/player/AudioOnlyStore.kt	moved_to_db_v44
 1	preference-key	core/src/main/java/tv/own/owntv/core/player/AudioOnlyStore.kt	owntv_audio_only
 1	technical	core/src/main/java/tv/own/owntv/core/player/EnginePinKey.kt	$sourceId:$mediaType:$it
+1	preference-key	core/src/main/java/tv/own/owntv/core/player/EnginePinKey.kt	CATCHUP
 2	empty	core/src/main/java/tv/own/owntv/core/player/ExternalPlayerLauncher.kt	\0
 1	technical	core/src/main/java/tv/own/owntv/core/player/ExternalPlayerLauncher.kt	$title · $subtitle
 1	protocol	core/src/main/java/tv/own/owntv/core/player/ExternalPlayerLauncher.kt	.fileprovider
@@ -2506,6 +2513,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/player/ExternalPlayerLauncher.kt	mov
 1	protocol	core/src/main/java/tv/own/owntv/core/player/ExternalPlayerLauncher.kt	mp4
 1	protocol	core/src/main/java/tv/own/owntv/core/player/ExternalPlayerLauncher.kt	mts
+1	technical	core/src/main/java/tv/own/owntv/core/player/ExternalPlayerLauncher.kt	position
 1	protocol	core/src/main/java/tv/own/owntv/core/player/ExternalPlayerLauncher.kt	rtmp
 1	protocol	core/src/main/java/tv/own/owntv/core/player/ExternalPlayerLauncher.kt	rtsp
 1	protocol	core/src/main/java/tv/own/owntv/core/player/ExternalPlayerLauncher.kt	title
@@ -2856,6 +2864,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/settings/SettingsImportRules.kt	mini_player_position
 1	technical	core/src/main/java/tv/own/owntv/core/settings/SettingsImportRules.kt	seek_step_sec
 36	empty	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	\0
+1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	$SPORTS_CONFIG_PREFIX$profileId
 2	log	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	${mode.name}$SEPARATOR$manualDays
 3	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	,
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	ALL
@@ -2890,7 +2899,6 @@
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	auto_frame_rate_prompted
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	auto_frame_rate_reset_pre12
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	auto_play_next
-1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	avatar_id
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	background_playback
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	bg_accent_light
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	bg_blur
@@ -2937,13 +2945,7 @@
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	font_jakarta_migrated
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	font_size_percent
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	gesture_sensitivity_pct
-1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glass_allow_full_transparency
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glass_alpha
-1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glass_blur
-1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glass_depth_effects
-1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glass_glint
-1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glass_highlight
-1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glass_preset
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glass_scope
 1	log	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	guide_days_to_keep
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	guide_density_pct
@@ -3084,6 +3086,7 @@
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	sort_movies
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	sort_series
 2	json	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	sourceId
+1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	sports_config_
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	stage_defaults_applied
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	startup_channel_
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	startup_channel_$pid
@@ -3137,6 +3140,786 @@
 1	url	core/src/main/java/tv/own/owntv/core/setup/SourceImporter.kt	file://
 1	technical	core/src/main/java/tv/own/owntv/core/setup/SourceImporter.kt	fresh_add
 1	technical	core/src/main/java/tv/own/owntv/core/setup/SourceImporter.kt	restore
+5	empty	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	\0
+1	technical	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	$id-$i
+1	technical	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	(
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	,
+1	url	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	/i/
+1	url	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	://a.espncdn.com
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	:00Z
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	@
+1	technical	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	ABANDON
+1	technical	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	CANCEL
+1	technical	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	POSTPONED
+1	technical	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	STATUS_HALFTIME
+1	regex	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	\\((\\d+(?:\\.\\d)?)(?:/\\d+)? ov
+1	regex	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	^\\d+
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	abandon
+5	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	abbreviation
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	address
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	alt
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	atVs
+3	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	athlete
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	athletesInvolved
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	boxscore
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	broadcasts
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	children
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	circuit
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	city
+2	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	clock
+5	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	competitions
+6	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	competitors
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	country
+7	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	date
+2	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	description
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	details
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	displayClock
+11	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	displayName
+6	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	displayValue
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	end-regular-time
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	entries
+3	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	events
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	flag
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	formation
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	fullName
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	fullStatus
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	gameDate
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	gameResult
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	gamesPlayed
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	geoBroadcasts
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	goal
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	grouping
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	groupings
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	halftime
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	header
+3	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	home
+3	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	homeAway
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	href
+1	url	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	https://a.espncdn.com/combiner/i?img=$path&w=$LOGO_PX&h=$LOGO_PX
+15	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	id
+2	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	in
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	jersey
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	keyEvents
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	kickoff
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	label
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	lastFiveGames
+3	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	leagues
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	linescores
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	location
+2	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	logo
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	logos
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	losses
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	market
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	media
+18	technical	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	name
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	names
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	note
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	opponent
+2	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	order
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	own-goal
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	ownGoal
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	participants
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	penalty
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	penaltyKick
+3	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	period
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	pointDifferential
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	points
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	pointsAgainst
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	pointsFor
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	position
+2	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	post
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	rank
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	red-card
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	redCard
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	region
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	roster
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	rosters
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	round
+4	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	score
+4	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	scoringPlay
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	shortDetail
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	shortDisplayName
+3	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	shortName
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	slug
+2	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	sports
+2	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	standings
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	starter
+3	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	state
+2	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	statistics
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	stats
+8	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	status
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	subbedIn
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	subbedOut
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	substitution
+4	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	summary
+7	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	team
+2	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	teams
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	text
+2	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	tiebreak
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	ties
+8	technical	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	type
+1	technical	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	v
+2	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	value
+2	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	venue
+4	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	winner
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	wins
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	yellow-card
+1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	yellowCard
+1	technical	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	·
+1	technical	core/src/main/java/tv/own/owntv/core/sports/LiveMatchCardService.kt	match
+1	technical	core/src/main/java/tv/own/owntv/core/sports/LiveMatchCardService.kt	tv.own.owntv.core.action.STOP_LIVE_MATCH
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	$FILE.tmp
+1	log	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	OwnTV-Sports
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	alert
+1	log	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	alert check failed ${e.javaClass.simpleName}
+1	log	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	alert state write failed: ${it.javaClass.simpleName}
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	alerts.json
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	at
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	ch
+1	log	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	could not arm $uri: ${it.message}
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	lead
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	m
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	match
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	owntv-sports-${if (reminder) "reminder" else "alert"}-$key
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	owntv://match-alert/
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	owntv://match-reminder/
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	r
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	reminder
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	s
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	tv.own.owntv.core.action.MATCH_DUE
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	w
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlerts.kt	\0
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlerts.kt	a
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlerts.kt	aw
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlerts.kt	h
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlerts.kt	ht
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlerts.kt	hw
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlerts.kt	r
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlerts.kt	s
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	\0
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	${m.key}#${a.kind}#$score
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	${match.key}#reminder
+2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	0
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	owntv-sports
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	owntv_sports_goals
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	owntv_sports_live
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	owntv_sports_reminders
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	tv.own.owntv.extra.SPORTS_MATCH
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	·
+3	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	\0
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	$it
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	${TeamNames.tokens(text).joinToString(" ")} | ${raw.joinToString(" ")}
+1	regex	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	[^\\p{L}\\p{N}]+
+1	regex	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	\\S\\s+(?:[-–—:]|v|vs\\.?|gegen|contre|x)\\s+\\S
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	alpine skiing
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	american football
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	athletics
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	athletisme
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	atletismo
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	atp
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	baloncesto
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	balonmano
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	baseball
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	basket
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	basketball
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	basketbol
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	bbl
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	beisbol
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	biathlon
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	bisiklet
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	bobsleigh
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	boks
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	boxe
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	boxen
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	boxing
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	bundesliga
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	calcio
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	champions
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	ciclismo
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	cricket
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	cycling
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	cyclisme
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	dart
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	darts
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	del
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	deporte
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	deportes
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	dfb
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	dtm
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	ehf
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	eishockey
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	esporte
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	euroleague
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	europa
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	fifa
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	football
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	football americain
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	formel
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	formel 1
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	formula
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	formula 1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	formula one
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	fusball
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	fussball
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	futbol
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	futbol americano
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	futebol
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	golf
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	grand
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	grand prix
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	grosser preis
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	handball
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	hbl
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	hentbol
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	hockey
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	hokey
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	ice hockey
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	indycar
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	ipl
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	kickboxing
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	laliga
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	langlauf
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	league
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	leichtathletik
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	lig
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	liga
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	ligue
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	live sport
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	marathon
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	mlb
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	mma
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	motogp
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	motorsport
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	nascar
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	nba
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	ncaaf
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	nfl
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	nhl
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	odi
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	pallamano
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	pallavolo
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	pdc
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	pga
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	pokal
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	premier
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	prix
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	radrennen
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	radsport
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	rally
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	rallye
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	rodeln
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	rugby
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	serie
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	ski
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	ski alpin
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	ski jumping
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	skispringen
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	snooker
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	soccer
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	spor
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	sport
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	sports
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	sport|dazn|eurosport|bein|espn|tsn|arena|eleven|setanta|tnt ?sport|premier ?sports|canal\\+ ?(?:sport|foot)|movistar ?(?:deportes|liga)|dyn|magenta ?sport|sky ?sport|laliga ?tv|nba ?tv|nfl|mlb|nhl
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	super
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	superbike
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	superbowl
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	tenis
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	tennis
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	uefa
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	ufc
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	voetbal
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	voleibol
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	voleybol
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	volley
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	volleyball
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	wrestling
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	wta
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	wwe
+4	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	a
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	ab
+5	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	at
+4	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	b
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	c
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	ck
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	co
+4	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	d
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	e
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	end
+6	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	f
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	fo
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	for
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	g
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	gd
+6	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	h
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	ht
+4	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	id
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	img
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	in
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	j
+4	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	k
+4	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	l
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	ln
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	lo
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	ls
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	lu
+6	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	m
+11	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	n
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	no
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	o
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	out
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	ov
+10	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	p
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	pt
+4	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	r
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	rk
+6	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	s
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	sn
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	sp
+4	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	st
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	sub
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	sum
+4	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	t
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	t0
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	tab
+3	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	tb
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	ti
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	tl
+8	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	tm
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	today
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	tomorrow
+4	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	tx
+7	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	v
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	ve
+5	json	core/src/main/java/tv/own/owntv/core/sports/SportsCacheJson.kt	w
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	1. Lig
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	164205
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	180659
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	2. Bundesliga
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	242041
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	244293
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	267979
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	270557
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	270559
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	271937
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	3
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	AFC Champions League Elite
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	AFL
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	AR
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	AT
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ATP
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	AU
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Austrian Bundesliga
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	BE
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	BR
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Brasileirão
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Bundesliga
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	CH
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Carabao Cup
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Champions Cup
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Champions League
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Championship
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	College Football
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Conference League
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Copa Libertadores
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Copa del Rey
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Coppa Italia
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Coupe de France
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Cricket
+3	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	DE
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	DFB-Pokal
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	DP World Tour
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ES
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EURO
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Eredivisie
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Europa League
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	F1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	FA Cup
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	FIFA World Cup
+3	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	FR
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Formula 1
+7	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	GB
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	IN
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	IT
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Indian Super League
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	IndyCar
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	LIV Golf
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	LPGA Tour
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	LaLiga
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga MX
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga Portugal
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga Profesional
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Ligue 1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	MLB
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	MLS
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	MX
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	NASCAR
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	NASCAR Cup Series
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	NBA
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	NCAA Basketball
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	NCAAF
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	NCAAM
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	NFL
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	NHL
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	NL
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	NRL
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Nations League
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	PGA Tour
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	PT
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Premier League
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Premiership Rugby
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Pro League
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Rugby World Cup
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	SA
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Saudi Pro League
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Scottish Premiership
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Serie A
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Six Nations
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Super Rugby Pacific
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Swiss Super League
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Süper Lig
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	TR
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	The Rugby Championship
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Top 14
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	UFC
+10	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	US
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	United Rugby Championship
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	WNBA
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	WTA
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Women's Super League
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	World Cup Qualifying – UEFA
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	afc.champions
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	afl
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	all
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	arg.1
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	atp
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	aut.1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	bel.1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	bra.1
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	college-football
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	conmebol.libertadores
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	eng.1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	eng.2
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	eng.fa
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	eng.league_cup
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	eng.w.1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	esp.1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	esp.copa_del_rey
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	eur
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	f1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	fifa.world
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	fifa.worldq.uefa
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	fra.1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	fra.coupe_de_france
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ger.1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ger.2
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ger.dfb_pokal
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ind.1
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	irl
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ita.1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ita.coppa_italia
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ksa.1
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	liv
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	lpga
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	mens-college-basketball
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	mex.1
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	mlb
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	nascar-premier
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	nba
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ned.1
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	nfl
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	nhl
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	pga
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	por.1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	sco.1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	sui.1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	tur.1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	tur.2
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	uefa.champions
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	uefa.euro
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	uefa.europa
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	uefa.europa.conf
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	uefa.nations
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ufc
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	usa.1
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	wnba
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	wta
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	\0
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	${sport.path}/$id
+4	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	ab
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	alerts
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	allSports
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	autoRebuild
+4	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	c
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	card
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	channels
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	closed
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	countries
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	id
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	kinds
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	l
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	languages
+4	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	leagues
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	liveRefreshSeconds
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	minQuality
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	myTeams
+6	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	n
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	on
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	onlyConfirmed
+3	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	played
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	rememberFilters
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	reminderLead
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	s
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	scoreInInfoBar
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	showLikely
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	sources
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	spoilerFree
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	sportOrder
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	strict
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	t
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	teams
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsHomeRow.kt	\0
+2	json	core/src/main/java/tv/own/owntv/core/sports/SportsMemory.kt	\0
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsMemory.kt	cricket/
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsMemory.kt	cricket/all
+1	file-path	core/src/main/java/tv/own/owntv/core/sports/SportsRepository.kt	$CACHE_FILE.tmp
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsRepository.kt	America/New_York
+1	log	core/src/main/java/tv/own/owntv/core/sports/SportsRepository.kt	OwnTV-Sports
+1	file-path	core/src/main/java/tv/own/owntv/core/sports/SportsRepository.kt	board.json
+1	log	core/src/main/java/tv/own/owntv/core/sports/SportsRepository.kt	cache write failed: ${it.javaClass.simpleName}
+1	log	core/src/main/java/tv/own/owntv/core/sports/SportsRepository.kt	fetch failed feed=$feed code=${code ?: -1} error=${e.javaClass.simpleName}
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsRepository.kt	not in the catalogue
+1	log	core/src/main/java/tv/own/owntv/core/sports/SportsRepository.kt	rebuild fetch failed code=${code ?: -1} error=${e.javaClass.simpleName}
+1	log	core/src/main/java/tv/own/owntv/core/sports/SportsRepository.kt	refetch failed error=${e.javaClass.simpleName}
+1	json	core/src/main/java/tv/own/owntv/core/sports/SportsRepository.kt	sports
+1	url	core/src/main/java/tv/own/owntv/core/sports/SportsSource.kt	$SITE/apis/site/v2/sports/${league.sport.path}/${league.slug}/scoreboard
+1	url	core/src/main/java/tv/own/owntv/core/sports/SportsSource.kt	$SITE/apis/site/v2/sports/${league.sport.path}/${league.slug}/teams
+1	url	core/src/main/java/tv/own/owntv/core/sports/SportsSource.kt	$SITE/apis/site/v2/sports/${match.sport.path}/${match.leagueSlug}/summary?event=${match.id}
+1	url	core/src/main/java/tv/own/owntv/core/sports/SportsSource.kt	$SITE/apis/v2/sports/${league.sport.path}/${league.slug}/standings
+1	url	core/src/main/java/tv/own/owntv/core/sports/SportsSource.kt	$WEB/apis/v2/scoreboard/header?sport=cricket
+1	url	core/src/main/java/tv/own/owntv/core/sports/SportsSource.kt	&dates=$it
+1	url	core/src/main/java/tv/own/owntv/core/sports/SportsSource.kt	?dates=$it
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsSource.kt	HTTP $code
+1	url	core/src/main/java/tv/own/owntv/core/sports/SportsSource.kt	https://site.api.espn.com
+1	url	core/src/main/java/tv/own/owntv/core/sports/SportsSource.kt	https://site.web.api.espn.com
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	\0
+2	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	$1
+1	regex	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	(\\p{L})\\1+
+1	regex	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	[^\\p{L}\\p{N}]+
+1	regex	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	\\p{M}+
+1	regex	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	\\p{N}+
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	a
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	ac
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	ae
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	afc
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	al
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	alemania
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	allemagne
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	and
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	angleterre
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	as
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	athletic
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	austria
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	belgrade
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	beograd
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	brasil
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	brasilien
+2	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	brazil
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	brusel
+2	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	brusels
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	bruxeles
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	bsc
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	bucharest
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	bucuresti
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	bv
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	ca
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	calcio
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	cd
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	cf
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	city
+2	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	club
+2	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	cologne
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	copenhagen
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	county
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	de
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	del
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	deutschland
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	el
+2	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	england
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	espana
+2	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	fc
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	firenze
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	fk
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	florence
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	france
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	frankreich
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	fsv
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	fussball
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	futbol
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	genoa
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	genova
+3	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	germany
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	goteborg
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	gothenburg
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	holland
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	inglaterra
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	italia
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	italien
+2	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	italy
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	kobenhavn
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	koeln
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	koln
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	la
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	lisboa
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	lisbon
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	milan
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	milano
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	moscow
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	moskva
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	muenchen
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	munchen
+2	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	munich
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	naples
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	napoli
+2	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	netherlands
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	niederlande
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	nk
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	nuernberg
+2	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	nuremberg
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	nurnberg
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	o
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	oe
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	osterreich
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	prague
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	praha
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	rc
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	rcd
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	real
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	roma
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	rome
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	rovers
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	sc
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	schweiz
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	sd
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	sevila
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	seville
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	sk
+2	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	spain
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	spanien
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	sporting
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	ss
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	ssc
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	suisse
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	sv
+2	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	switzerland
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	team
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	the
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	torino
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	town
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	tsg
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	tsv
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	turin
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	turkei
+2	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	turkey
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	turkiye
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	u
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	u19
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	u21
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	u23
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	ud
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	ue
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	united
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	us
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	utd
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	venezia
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	venice
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	vfl
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	vienna
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	w
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	warsaw
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	warszawa
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	wien
+1	technical	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	women
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchFilter.kt	\0
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	\0
+1	regex	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	#{3,}|={4,}|-{4,}|\\*{4,}
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	AE
+8	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	AR
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	ARA
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	AT
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	AU
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	BE
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	BR
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	CA
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	CH
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	CS
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	CZ
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	DA
+4	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	DE
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	DK
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	EG
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	EL
+9	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	EN
+4	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	ES
+2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	FI
+3	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	FR
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	GB
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	GR
+2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	HU
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	IE
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	IN
+2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	IT
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	LAT
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	MA
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	MX
+2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	NL
+2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	NO
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	NZ
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	PK
+2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	PL
+3	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	PT
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	QA
+2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	RO
+2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	RU
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	SA
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	SE
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	SV
+2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	TR
+2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	UK
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	UR
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	US
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	USA
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	[A-Za-z]{4,}
+1	regex	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	\\s(vs?\\.?|v)\\s
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchReader.kt	\0
+2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchReader.kt	$it*
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchReader.kt	${it.id}@${it.lastSyncAt}
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchReader.kt	,
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchReader.kt	OR
+1	log	core/src/main/java/tv/own/owntv/core/sports/WatchReader.kt	OwnTV-Sports
+1	regex	core/src/main/java/tv/own/owntv/core/sports/WatchReader.kt	[^\\p{L}\\p{N}]+
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchReader.kt	b:${b.name}
+1	log	core/src/main/java/tv/own/owntv/core/sports/WatchReader.kt	channel search failed: ${it.message}
+1	log	core/src/main/java/tv/own/owntv/core/sports/WatchReader.kt	slot start=$start matches=${slot.size} programmes=${programmes.size} near=${partial.size}
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchReader.kt	|
+1	empty	core/src/main/java/tv/own/owntv/core/sports/model/Match.kt	\0
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Match.kt	${League.keyOf(sport, leagueSlug)}#$id
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	${sport.path}/$slug
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	australian-football
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	baseball
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	basketball
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	cricket
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	football
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	golf
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	hockey
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	lacrosse
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	mma
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	racing
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	rugby
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	rugby-league
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	soccer
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	tennis
+1	protocol	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	volleyball
 2	technical	core/src/main/java/tv/own/owntv/core/stalker/StalkerAuthManager.kt	?
 1	log	core/src/main/java/tv/own/owntv/core/stalker/StalkerAuthManager.kt	StalkerAuth
 1	log	core/src/main/java/tv/own/owntv/core/stalker/StalkerAuthManager.kt	account_info unavailable sourceId=${creds.sourceId}: ${it.message}
@@ -3151,7 +3934,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	$apiBase?type=${enc(type)}&action=create_link&cmd=${enc(cmd)}$seriesParam&forced_storage=0&disable_ad=0&JsHttpRequest=1-xml
 1	protocol	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	$apiBase?type=account_info&action=get_main_info&JsHttpRequest=1-xml
 1	protocol	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	$apiBase?type=itv&action=get_all_channels&JsHttpRequest=1-xml
-2	protocol	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	$apiBase?type=itv&action=get_epg_info&period=$periodDays&JsHttpRequest=1-xml
+1	protocol	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	$apiBase?type=itv&action=get_epg_info&period=$periodDays&JsHttpRequest=1-xml
 1	protocol	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	$apiBase?type=itv&action=get_genres&JsHttpRequest=1-xml
 1	protocol	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	$apiBase?type=itv&action=get_ordered_list&genre=${enc(genreId)}&p=$page&JsHttpRequest=1-xml
 1	protocol	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	$apiBase?type=itv&action=get_short_epg&ch_id=${enc(channelId)}&size=$size&JsHttpRequest=1-xml
@@ -3679,7 +4462,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/XtreamSyncer.kt	ABORTING fallback
 1	technical	core/src/main/java/tv/own/owntv/core/sync/XtreamSyncer.kt	HTTP
 4	log	core/src/main/java/tv/own/owntv/core/sync/XtreamSyncer.kt	SyncManager
-1	log	core/src/main/java/tv/own/owntv/core/sync/XtreamSyncer.kt	Xtream sync scheduling sourceId=${s.id} contentTypes=$contentTypes concurrency=$PHASE_CONCURRENCY hlsSupported=${details?.hlsSupported} maxConnections=${details?.maxConnections}
+1	log	core/src/main/java/tv/own/owntv/core/sync/XtreamSyncer.kt	Xtream sync scheduling sourceId=${s.id} contentTypes=$contentTypes concurrency=$PHASE_CONCURRENCY hlsSupported=${details?.hlsSupported} maxConnections=${details?.maxConnections} serverTimeZone=${details?.serverTimeZone}
 2	technical	core/src/main/java/tv/own/owntv/core/sync/XtreamSyncer.kt	channels
 1	technical	core/src/main/java/tv/own/owntv/core/sync/XtreamSyncer.kt	channels_fts
 1	log	core/src/main/java/tv/own/owntv/core/sync/XtreamSyncer.kt	complete=$complete newUnique=$delta totalUnique=${total[0]} ms=${SystemClock.elapsedRealtime() - categoryStart}
@@ -3907,12 +4690,14 @@
 1	log	core/src/main/java/tv/own/owntv/core/timeshift/TimeshiftDownloader.kt	the DASH representation went away
 1	log	core/src/main/java/tv/own/owntv/core/timeshift/TimeshiftDownloader.kt	the playlist ended
 1	log	core/src/main/java/tv/own/owntv/core/timeshift/TimeshiftDownloader.kt	the stream ended
+1	log	core/src/main/java/tv/own/owntv/core/timeshift/TimeshiftDownloader.kt	timeshift: DASH segment ${segment.number} has an unreadable address — skipped
 1	log	core/src/main/java/tv/own/owntv/core/timeshift/TimeshiftDownloader.kt	timeshift: DASH segment ${segment.number} refused
 1	log	core/src/main/java/tv/own/owntv/core/timeshift/TimeshiftDownloader.kt	timeshift: connection dropped ($why) — reconnect $failures in ${wait}ms
 1	log	core/src/main/java/tv/own/owntv/core/timeshift/TimeshiftDownloader.kt	timeshift: first connection failed — $why
 1	log	core/src/main/java/tv/own/owntv/core/timeshift/TimeshiftDownloader.kt	timeshift: giving up after $failures drops — $why
 1	log	core/src/main/java/tv/own/owntv/core/timeshift/TimeshiftDownloader.kt	timeshift: no network ($why) — waiting
 1	log	core/src/main/java/tv/own/owntv/core/timeshift/TimeshiftDownloader.kt	timeshift: not buffered — ${e.why}
+1	log	core/src/main/java/tv/own/owntv/core/timeshift/TimeshiftDownloader.kt	timeshift: segment ${segment.sequence} has an unreadable address — skipped
 1	log	core/src/main/java/tv/own/owntv/core/timeshift/TimeshiftDownloader.kt	timeshift: segment ${segment.sequence} refused
 1	log	core/src/main/java/tv/own/owntv/core/timeshift/TimeshiftDownloader.kt	unreadable DASH manifest
 1	log	core/src/main/java/tv/own/owntv/core/timeshift/TimeshiftDownloader.kt	unreadable HLS variant address
@@ -4145,6 +4930,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/ui/stage/StageGlyph.kt	M6 9l6 6 6-6
 1	technical	core/src/main/java/tv/own/owntv/core/ui/stage/StageGlyph.kt	M7 4.5v15l12.5-7.5z
 1	technical	core/src/main/java/tv/own/owntv/core/ui/stage/StageGlyph.kt	M8 12a4 4 0 1 0 8 0a4 4 0 1 0 -8 0zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4
+1	technical	core/src/main/java/tv/own/owntv/core/ui/stage/StageGlyph.kt	M8 4h8v4.5a4 4 0 0 1-8 0zM16 6h3v1.5a3.5 3.5 0 0 1-3.3 3.5M8 6H5v1.5A3.5 3.5 0 0 0 8.3 11M12 13v4M9 20h6v-2a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1z
 1	technical	core/src/main/java/tv/own/owntv/core/ui/stage/StageGlyph.kt	M8 5v14M16 5v14
 1	technical	core/src/main/java/tv/own/owntv/core/ui/stage/StageGlyph.kt	M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01
 1	technical	core/src/main/java/tv/own/owntv/core/ui/stage/StageGlyph.kt	M8 8a4 4 0 1 0 8 0a4 4 0 1 0 -8 0zM4 21a8 8 0 0 1 16 0
@@ -4778,7 +5564,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/MpvAudioChannels.kt	InlinedApi
 1	technical	player-core/src/main/java/tv/own/owntv/player/MpvAudioChannels.kt	auto-safe
 1	technical	player-core/src/main/java/tv/own/owntv/player/MpvAudioChannels.kt	stereo
-13	empty	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	\0
+11	empty	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	\0
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	$STREAM_RECONNECT_OPTIONS,$LIVE_TS_RECONNECT_OPTIONS
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	$reason — archive rescue: reopening mid-GOP catch-up in software decode
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	$reason — rescue rung 1: hwdec=mediacodec-copy (GL compositing)
@@ -4803,7 +5589,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	,
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	-
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	.m3u8
-2	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	.ts
+1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	.ts
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	/sdk_
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	/timeshift/
 4	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	0
@@ -4822,12 +5608,15 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	60
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	7.1
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	8MiB
+1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	://
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	Android SDK built for
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	CC software-decode override ${if (on) "ON" else "OFF"} (height=${load.currentHeightPx}px)
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	CC track selected but software decode not viable (height=${load.currentHeightPx}px, gl=${!glUnsupported}) — captions may stay empty
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	Could not prepare subtitle fonts: ${it.message}
+1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	DEPRECATION
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	Decode guard TRIPPED: ${h}px on software decoder
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	END_FILE STOP with no credit left — app-caused, not a failure
+1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	END_FILE before FILE_LOADED — account session in use, showing the error
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	END_FILE before FILE_LOADED — demuxer rejected file, hard-resetting
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	END_FILE reason=${endFileReasonName(reason)} error=$error live=$isLiveContent
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	EXO
@@ -4844,6 +5633,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	OFF
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	OMX.google
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	ON
+2	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	OwnTV:mpv
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	OwnTVPlayer
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	PlayerBudget: $budget
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	STEREO
@@ -4889,6 +5679,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audio-params/samplerate
 2	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audio-pts
 3	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audio-samplerate
+1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audioFormat=${getPropertyString("audio-format")}
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audiotrack
 4	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	auto
 2	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	av1
@@ -5191,6 +5982,10 @@
 28	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	yes
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	ytdl
 1	technical	player-core/src/main/java/tv/own/owntv/player/PlaybackEngines.kt	DEPRECATION
+1	log	player-core/src/main/java/tv/own/owntv/player/PlaybackEngines.kt	OwnTV-Memory
+1	log	player-core/src/main/java/tv/own/owntv/player/PlaybackEngines.kt	memory poll off
+1	log	player-core/src/main/java/tv/own/owntv/player/PlaybackEngines.kt	memory poll on
+1	log	player-core/src/main/java/tv/own/owntv/player/PlaybackEngines.kt	memory pressure $pressure avail=${info.availMem shr 20}MiB threshold=${info.threshold shr 20}MiB
 6	empty	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	\0
 2	file-path	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	$relativePath$EXPORT_NAME
 1	technical	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	${Build.MANUFACTURER} ${Build.MODEL}

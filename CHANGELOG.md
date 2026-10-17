@@ -9,14 +9,48 @@
 > in one bolded line of its own (e.g. **Database v46 · Backup v24 · Breaking**). The detail — what,
 > why, files and verification — belongs in the commit message, never here.
 
-## Unreleased
+## core-1.0.68 — 2026-10-17
+
+**Database v49 · Backup v25 · Breaking (glass settings)**
+
+### ✨ New features
+
+- **🏆 Sports Hub: live scores, fixtures and match details from ESPN, with the channels in your guide that show each match**
+- **🔎 Find channels for a match, from 30 minutes before kick-off to 30 minutes after the end**
+- **📺 Broadcasts: who shows a match, from your guide and from ESPN**
+- **🔁 Sports data rebuilt on a schedule you choose, or by hand**
+- **⭐ My teams, followed leagues, and your own order of sports and leagues**
+- **🔔 Goal alerts and match reminders**
+- **🏠 Sports row on Home**
+- **🕒 Catch-up time zone "Automatic": the Xtream panel's own zone**
+- **▶️ External player starts a film or episode where you left it**
+- **🎞️ Film buffer follows the seconds you choose (#31)**
+- **⚡ Faster zapping on one-session panels (#32)**
 
 ### 🐛 Fixes
 
+- **🌍 Channel names written "UK: …" or "IT: …" are read as their country, like "UK| …"**
+- **🧹 Sports leaves out playlist divider rows and other matches' event channels**
 - **📺 Xtream series no longer lose every episode over one oddly written field**
 - **💬 A series whose episode list the provider refused says why instead of "No episodes"**
 - **📡 Pause and rewind live TV: a channel comes back by itself after a network outage**
 - **▶️ External player picker offers Always again, so one player can be the default**
+- **📺 Live TV falls back from mpv to ExoPlayer and gives up on time again**
+- **🔊 Opening a previewed channel keeps its volume; unmute returns to the level before**
+- **🔈 Changing sound settings during a film on ExoPlayer no longer starts a second copy**
+- **🗣️ Audio language and the episode queue survive a reload and the screensaver**
+- **🚫 A dead film link shows its error in seconds**
+- **📱 Films on mpv keep playing with the phone's screen off**
+- **⏪ M3U catch-up: every Kodi/TiviMate placeholder, catch-up-correction and timeshift="N"**
+- **⏱️ Xtream rewind counter matches the clock in the picture**
+- **🔁 Stalker catch-up Retry gets a fresh link; catch-up remembers player and zoom per channel**
+- **🧩 Pause-and-rewind no longer skips segments with signed links**
+- **🧠 Memory-pressure trim works on Android 14 and newer**
+- **🏷️ Categories keep their country ("UK|") when a list mixes countries**
+- **🔁 Retry works after a live channel gives up**
+- **👤 "Account already in use" says so, instead of loading forever on a film**
+- **🔢 First Xtream import counts a film listed in two categories once**
+- **🪟 Glass keeps only on/off and opacity; the old fine-tuning settings are gone**
 
 ## core-1.0.67 — 2026-10-12
 

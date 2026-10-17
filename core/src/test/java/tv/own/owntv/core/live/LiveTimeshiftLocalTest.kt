@@ -14,7 +14,7 @@ import org.junit.Test
 import tv.own.owntv.core.database.entity.ChannelEntity
 
 /**
- * P16d — the rewind on a channel without catch-up, through its own saved copy (N4): the same offsets,
+ * The rewind on a channel without catch-up, through its own saved copy: the same offsets,
  * counter and live edge the apps already show for a provider archive.
  */
 class LiveTimeshiftLocalTest {
@@ -45,7 +45,7 @@ class LiveTimeshiftLocalTest {
             override val hasError = false
             override val hasActiveStream = true
         },
-        loadArchive = { _, start, _ -> archiveLoads += start; true },
+        loadArchive = { _, start, _ -> archiveLoads += start; start },
         onLiveEdge = { liveEdge++ },
         coalesceMs = 10,
         tickMs = 10,

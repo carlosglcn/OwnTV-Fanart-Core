@@ -74,20 +74,20 @@ class LiveTuneController(
         fun onEngineStarted() {}
         /** A handover is re-opening the channel at its live edge, so any rewind is over. */
         fun onBackToLiveEdge() {}
-        /** N4 — the saved-copy buffers; null where there are none (tests). */
+        /** The saved-copy buffers; null where there are none (tests). */
         val timeshift: TimeshiftManager? get() = null
-        /** N4 — Settings → the window in minutes while local timeshift is on; null while it is off. */
+        /** Settings → the window in minutes while local timeshift is on; null while it is off. */
         suspend fun timeshiftWindowMinutes(): Int? = null
-        /** N4 — Settings → what coming back to a kept copy does ("Continue where you left off?"). */
+        /** Settings → what coming back to a kept copy does ("Continue where you left off?"). */
         suspend fun timeshiftResumeMode(): SettingsRepository.ResumeMode = SettingsRepository.ResumeMode.ASK
-        /** N11 — Settings → Maximum video quality, for the variant a buffer saves; null for none. */
+        /** Settings → Maximum video quality, for the variant a buffer saves; null for none. */
         suspend fun maxVideoHeight(): Int? = null
         /** A download is using the only stream [sourceId] allows, so the preview pane must not take it. */
         fun downloadHoldsOnlyStream(sourceId: Long): Boolean = false
     }
 
     /**
-     * N4 — the channel on screen is playing from its saved copy ([session]: how far back it reaches, its
+     * The channel on screen is playing from its saved copy ([session]: how far back it reaches, its
      * gaps; [timeshiftWatchingWallMs]: what is on screen). [resumeAtWallMs] is set when the user came back
      * to a channel they had left: where they were, for "Resume from buffer / Go live".
      */
@@ -119,7 +119,7 @@ class LiveTuneController(
     private var tsWindowSec = 0
     private val _localTimeshift = MutableStateFlow<LocalTimeshift?>(null)
 
-    /** N4 — non-null while the channel plays from its saved copy (see [LocalTimeshift]). */
+    /** Non-null while the channel plays from its saved copy (see [LocalTimeshift]). */
     val localTimeshift: StateFlow<LocalTimeshift?> = _localTimeshift.asStateFlow()
 
     init {
@@ -130,7 +130,7 @@ class LiveTuneController(
         }
     }
 
-    /** The channel watched before the one on screen — the "previous channel" key's target (N2). The app
+    /** The channel watched before the one on screen — the "previous channel" key's target. The app
      *  still vets it (profile, playlists, adult filter) before tuning it. */
     val previousChannel: StateFlow<ChannelEntity?> = recall.previous
 
@@ -384,7 +384,7 @@ class LiveTuneController(
         host.timeshift?.watching(null)
     }
 
-    // --- Local timeshift (N4) ---------------------------------------------------------------------
+    // --- Local timeshift ---------------------------------------------------------------------
 
     /**
      * Show the saved copy from wall-clock instant [wallMs], or from the live edge when null. The engine
@@ -404,7 +404,7 @@ class LiveTuneController(
     }
 
     /**
-     * N4 — the channel's saved copy as a rewind source for [tv.own.owntv.core.live.LiveTimeshift]: the
+     * The channel's saved copy as a rewind source for [tv.own.owntv.core.live.LiveTimeshift]: the
      * apps' existing rewind bar, counter, "Go back to…" list and "Go to live" work on it unchanged.
      */
     val localRewind: tv.own.owntv.core.live.LiveTimeshift.Local = object : tv.own.owntv.core.live.LiveTimeshift.Local {
@@ -424,7 +424,7 @@ class LiveTuneController(
     /** The "Resume from buffer / Go live" question has been answered (or ignored). */
     fun dismissResumeOffer() = publishTimeshift(resumeAtWallMs = null)
 
-    /** N4 — the wall-clock spans the saved copy has no picture for (the connection dropped); empty without a copy. */
+    /** The wall-clock spans the saved copy has no picture for (the connection dropped); empty without a copy. */
     fun localGaps(): List<LongRange> = ts?.gaps().orEmpty()
 
     /** What is on screen on the wall clock, while playing from a copy. */
@@ -998,7 +998,7 @@ class LiveTuneController(
             if (key != null) forceMpvStore.forget(channel.streamUrl)
         }
 
-        // Both wait for the settings snapshot (S15), so a tune started at a cold start — Last-channel
+        // Both wait for the settings snapshot, so a tune started at a cold start — Last-channel
         // autoplay — is routed and budgeted by the stored settings, never by defaults.
         override suspend fun globalPreference(): EnginePreference =
             PlaybackSettings.await(settings).liveEnginePreference

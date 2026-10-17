@@ -10,6 +10,8 @@ import tv.own.owntv.core.database.entity.EpgChannelEntity
 import tv.own.owntv.core.database.entity.EpgChannelIcon
 import tv.own.owntv.core.database.entity.EpgChannelName
 import tv.own.owntv.core.database.entity.EpgProgrammeEntity
+import tv.own.owntv.core.database.entity.EpgProgrammeLite
+import tv.own.owntv.core.database.entity.EpgProgrammeText
 
 /** EPG storage + now/next lookups. Programmes are kept to a rolling window and pruned. */
 @Dao
@@ -45,10 +47,6 @@ interface EpgDao {
      *  Used by the Stalker portal guide, where the portal's answer is the whole truth for that store. */
     @Query("DELETE FROM epg_programmes WHERE sourceId = :sourceId AND (stopMs <= :from OR startMs >= :to)")
     suspend fun pruneOutsideWindow(sourceId: Long, from: Long, to: Long)
-
-    /** Drop all programmes for one EPG channel id (used to re-fill it from cache after a smart-match). */
-    @Query("DELETE FROM epg_programmes WHERE epgChannelId = :epgChannelId")
-    suspend fun clearChannel(epgChannelId: String)
 
     /**
      * Drop programmes for one EPG channel id only within the given sources. Used by the cache re-fill so
@@ -154,6 +152,33 @@ interface EpgDao {
             "AND title LIKE '%' || :query || '%' ORDER BY startMs ASC LIMIT :limit",
     )
     suspend fun searchTitles(query: String, from: Long, to: Long, limit: Int): List<EpgProgrammeEntity>
+
+    /**
+     * Every programme *starting* in `[from, to)` and still running after [minStop] — the Sports hub's
+     * one read per kick-off slot, and its "on now" read with `minStop = now`.
+     *
+     * A range seek on the `(startMs, stopMs)` index. The stop condition is written `+stopMs` on
+     * purpose: the unary plus stops SQLite from choosing the single-column `stopMs` index instead,
+     * which for "still running after kick-off" would walk every future programme in the guide.
+     * No synopsis — [programmeDescriptions] reads those only for the rows the title did not match.
+     */
+    @Query(
+        "SELECT id, epgChannelId, startMs, stopMs, title, categories FROM epg_programmes " +
+            "WHERE startMs >= :from AND startMs < :to AND +stopMs > :minStop LIMIT :limit",
+    )
+    suspend fun sportsProgrammes(from: Long, to: Long, minStop: Long, limit: Int): List<EpgProgrammeLite>
+
+    /**
+     * The newest programme row id — one primary-key lookup. Every guide write (an EPG sync, a re-fill
+     * after a smart match) inserts rows with new ids, so the Sports hub knows its cached channel
+     * matches are stale when this moves, without a sync event of its own.
+     */
+    @Query("SELECT MAX(id) FROM epg_programmes")
+    suspend fun newestProgrammeId(): Long?
+
+    /** The synopses of [ids] (by primary key) — at most a few hundred, chunked by the caller. */
+    @Query("SELECT id, description FROM epg_programmes WHERE id IN (:ids) AND description IS NOT NULL")
+    suspend fun programmeDescriptions(ids: List<Long>): List<EpgProgrammeText>
 
     /** How many programmes are stored for these sources (to tell "no guide yet" from "empty window"). */
     @Query("SELECT COUNT(*) FROM epg_programmes WHERE sourceId IN (:sourceIds)")

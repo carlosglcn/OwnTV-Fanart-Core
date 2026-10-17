@@ -13,7 +13,7 @@ import tv.own.owntv.core.i18n.LocaleStore
 /**
  * Runs whatever is due to record, in a **`mediaPlayback`** foreground service so it keeps going once
  * the user leaves OwnTV — and so it is not subject to the six-hours-a-day cap Android 15 puts on
- * `dataSync`, which a DVR would hit (§1.4). See [RecordingNotifications].
+ * `dataSync`, which a DVR would hit. See [RecordingNotifications].
  *
  * One of these at a time (unique work, KEEP). It lives until nothing is recording and nothing is due;
  * the scheduler wakes it again at the next start time.

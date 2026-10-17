@@ -6,7 +6,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 
 /**
- * A programme reminder (v47, Stage G2): "tell me when this starts". The alarm fires [leadMinutes]
+ * A programme reminder (v47): "tell me when this starts". The alarm fires [leadMinutes]
  * before [startMs]; the apps show the prompt, core only keeps time.
  *
  * Shaped after [RecordingEntity]: `profileId` cascades with its profile; `channelId` is a local id that

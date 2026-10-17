@@ -8,9 +8,9 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
- * Phase 1 — the two decisions that keep a live channel alive through a provider hiccup:
- * how long we wait between reconnects (X3), and whether an early END_FILE means "corrupt file"
- * or "live stream being live" (P1).
+ * The two decisions that keep a live channel alive through a provider hiccup:
+ * how long we wait between reconnects, and whether an early END_FILE means "corrupt file"
+ * or "live stream being live".
  */
 class LiveReconnectLadderTest {
 
@@ -112,6 +112,20 @@ class LiveReconnectLadderTest {
     }
 
     @Test
+    fun `a ts in the host name or the query is not a raw TS stream`() {
+        // An extensionless HLS URL on such a host got reconnect_at_eof and re-fetched its manifest forever.
+        assertEquals(
+            OwnTVPlayer.STREAM_RECONNECT_OPTIONS,
+            OwnTVPlayer.streamLavfOptionsFor("http://line.tsnet.tv/live/u/p/7", live = true, hls = false),
+        )
+        assertFalse(OwnTVPlayer.hasTsPath("http://line.tsnet.tv:8080/live/u/p/7"))
+        assertFalse(OwnTVPlayer.hasTsPath("http://panel/play?file=7.ts"))
+        assertFalse(OwnTVPlayer.hasTsPath("http://panel.ts"))
+        assertTrue(OwnTVPlayer.hasTsPath("http://line.tsnet.tv/live/u/p/7.TS?token=a.ts"))
+        assertTrue(OwnTVPlayer.hasTsPath("https://panel:443/timeshift/u/p/60/2026-10-15:20-00/7.ts"))
+    }
+
+    @Test
     fun `live raw TS retries 458 in FFmpeg, and gives up inside the open timeout`() {
         val opts = OwnTVPlayer.LIVE_TS_RECONNECT_OPTIONS
         // `[…]` keeps FFmpeg's comma list as one mpv value; unquoted, `458` would become a key of its own.
@@ -145,8 +159,10 @@ class LiveReconnectLadderTest {
         assertEquals(10, LivePreviewEngine.retryAfterSecs(" 10 "))
         // "come back now" still costs one tick, so the countdown always has something to show.
         assertEquals(1, LivePreviewEngine.retryAfterSecs("0"))
-        // Longer than the ceiling reads as a hang behind a spinner — wait the ceiling, then let the user decide.
-        assertEquals(LivePreviewEngine.MAX_RETRY_AFTER_SECS, LivePreviewEngine.retryAfterSecs("3600"))
+        // Up to the ceiling is waited; longer reads as a hang behind a spinner, so the error screen shows.
+        assertEquals(LivePreviewEngine.MAX_RETRY_AFTER_SECS, LivePreviewEngine.retryAfterSecs("60"))
+        assertNull(LivePreviewEngine.retryAfterSecs("61"))
+        assertNull(LivePreviewEngine.retryAfterSecs("3600"))
         // The HTTP-date form and junk name no deadline we can honestly count down, so there is no wait.
         assertNull(LivePreviewEngine.retryAfterSecs("Wed, 21 Oct 2015 07:28:00 GMT"))
         assertNull(LivePreviewEngine.retryAfterSecs("-5"))
@@ -169,7 +185,7 @@ class LiveReconnectLadderTest {
 
     @Test
     fun `busy is not refusal — 458 429 408 keep their retries`() {
-        // F29: "the account's one session is already in use" (the non-standard 458 Xtream panels use),
+        // "The account's one session is already in use" (the non-standard 458 Xtream panels use),
         // a rate limit and a request timeout all mean the stream is fine and we should ask again after
         // a back-off — which is what the ExoPlayer side already does via LiveStreamQuirks.isSessionLimit.
         // Treating them as hard refusals made mpv give up on panels ExoPlayer reconnects to.
@@ -179,6 +195,39 @@ class LiveReconnectLadderTest {
         assertEquals(OwnTVPlayer.HttpRefusal.HARD, OwnTVPlayer.httpRefusalKind("ffmpeg: http: HTTP error 401 Unauthorized"))
         assertEquals(OwnTVPlayer.HttpRefusal.NONE, OwnTVPlayer.httpRefusalKind("ffmpeg: http: HTTP error 503 Unavailable"))
         assertEquals(OwnTVPlayer.HttpRefusal.NONE, OwnTVPlayer.httpRefusalKind(null))
+    }
+
+    @Test
+    fun `a film refused as account in use takes no rung, live keeps its ladder`() {
+        val busy = "ffmpeg: http: HTTP error 458"
+        for (rung in OwnTVPlayer.LadderRung.entries) {
+            assertFalse(rung.name, OwnTVPlayer.ladderRungUseful(rung, busy, live = false))
+            assertTrue(rung.name, OwnTVPlayer.ladderRungUseful(rung, busy, live = true))
+        }
+        assertTrue(OwnTVPlayer.isSessionLimitRefusal(busy))
+        assertFalse(OwnTVPlayer.isSessionLimitRefusal("ffmpeg: http: HTTP error 404 Not Found"))
+    }
+
+    @Test
+    fun `a refused file skips the rungs that assume it was delivered`() {
+        // A dead film link walked the tolerant-demux and decoder rungs — ~6 opens before its error.
+        val rungs = OwnTVPlayer.LadderRung.entries
+        fun useful(rung: OwnTVPlayer.LadderRung, error: String?) = OwnTVPlayer.ladderRungUseful(rung, error)
+        for (code in listOf("401 Unauthorized", "403 Forbidden", "404 Not Found", "410 Gone")) {
+            val e = "ffmpeg: http: HTTP error $code"
+            assertFalse(code, useful(OwnTVPlayer.LadderRung.TOLERANT_DEMUX, e))
+            assertFalse(code, useful(OwnTVPlayer.LadderRung.DECODE_RESCUE, e))
+        }
+        // Another identity can talk a WAF round; nothing turns a missing file into a present one.
+        assertTrue(useful(OwnTVPlayer.LadderRung.UA_RETRY, "ffmpeg: http: HTTP error 401 Unauthorized"))
+        assertTrue(useful(OwnTVPlayer.LadderRung.UA_RETRY, "ffmpeg: http: HTTP error 403 Forbidden"))
+        assertFalse(useful(OwnTVPlayer.LadderRung.UA_RETRY, "ffmpeg: http: HTTP error 404 Not Found"))
+        assertFalse(useful(OwnTVPlayer.LadderRung.UA_RETRY, "ffmpeg: http: HTTP error 410 Gone"))
+        // Busy, server-side and non-HTTP failures keep the whole ladder.
+        for (e in listOf("ffmpeg: http: HTTP error 458 <none>", "ffmpeg: http: HTTP error 503 Unavailable",
+            "ffmpeg/demuxer: mpegts: Invalid data found", null)) {
+            for (rung in rungs) assertTrue("$rung $e", useful(rung, e))
+        }
     }
 
     @Test

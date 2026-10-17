@@ -24,9 +24,6 @@
     <string name="common_title">ശീർഷകം</string>
     <string name="common_search_hint">തിരയുക…</string>
     <string name="common_search">തിരയൽ</string>
-    <string name="common_weather_fahrenheit"><xliff:g id="temperature">%1$d</xliff:g>°F</string>
-    <string name="common_weather_celsius"><xliff:g id="temperature">%1$d</xliff:g>°C</string>
-    <string name="common_weather_city"><xliff:g id="temperature">%1$s</xliff:g> · <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_nav_search">തിരയൽ</string>
     <string name="common_nav_home">ഹോം</string>
     <string name="common_nav_live_tv">തത്സമയ ടിവി</string>
@@ -41,8 +38,6 @@
     <string name="common_nav_settings">ക്രമീകരണങ്ങൾ</string>
     <string name="shell_no_source">ഉറവിടമില്ല</string>
     <string name="shell_now_playing">ഇപ്പോൾ പ്ലേ ചെയ്യുന്നു</string>
-    <string name="common_something_went_wrong">എന്തോ പിശക് സംഭവിച്ചു</string>
-    <string name="common_move_instructions">നീക്കാൻ ▲/▼ · സംരക്ഷിക്കാൻ OK · റദ്ദാക്കാൻ തിരികെ</string>
     <string name="common_number_grouped"><xliff:g id="count">%1$,d</xliff:g></string>
     <string name="common_percent"><xliff:g id="percent">%1$d</xliff:g>%%</string>
     <string name="common_timestamp_minutes"><xliff:g id="minutes">%1$d</xliff:g>:<xliff:g id="seconds">%2$02d</xliff:g></string>

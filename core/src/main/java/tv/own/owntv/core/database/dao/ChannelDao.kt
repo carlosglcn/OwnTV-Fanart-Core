@@ -89,7 +89,7 @@ interface ChannelDao {
     suspend fun allEpgChannelIds(): List<String>
 
     /**
-     * Normalised tvg-ids of this source's channels that currently have **no** guide data at all (S9).
+     * Normalised tvg-ids of this source's channels that currently have **no** guide data at all.
      *
      * A guide sync filters the feed to the channels the user owns, and that set is snapshotted once
      * when it starts — so a catalog sync running at the same time (or any later one that adds
@@ -105,7 +105,7 @@ interface ChannelDao {
     suspend fun epgChannelIdsWithoutProgrammes(sourceId: Long): List<String>
 
     /** Every catch-up channel, across every source — the ones whose past programmes can still be
-     *  replayed, and therefore the only ones whose history is worth keeping (guide plan S4). */
+     *  replayed, and therefore the only ones whose history is worth keeping. */
     @Query("SELECT * FROM channels WHERE catchup = 1")
     suspend fun allCatchupChannels(): List<ChannelEntity>
 
@@ -181,12 +181,12 @@ interface ChannelDao {
     suspend fun contentHashesForSource(sourceId: Long): List<ContentHashProjection>
 
     /**
-     * Write only the position of a row whose content did not change (plan A2).
+     * Write only the position of a row whose content did not change.
      *
      * The whole point is what it does *not* touch. Room's `@Update` writes every column and, on
      * this table's insert path, re-derives the provider-catalogue metadata from the title — all for
      * a row that is byte-identical and has merely slid down the list because the provider removed
-     * something above it. Issue #192 measured 1,397 real changes producing 255,775 of those.
+     * something above it. One measured resync had 1,397 real changes producing 255,775 of those.
      */
     @Query("UPDATE channels SET sortOrder = :sortOrder WHERE id = :id")
     suspend fun setSortOrder(id: Long, sortOrder: Int)
@@ -198,7 +198,7 @@ interface ChannelDao {
     }
 
     /**
-     * Shift every row of this source whose position lies in a span (plan A3).
+     * Shift every row of this source whose position lies in a span.
      *
      * Removing two channels near the top of a 30,000-channel list moves all 30,000 below them by
      * exactly -2. That is one statement, not 30,000 writes. The caller has already proved that the

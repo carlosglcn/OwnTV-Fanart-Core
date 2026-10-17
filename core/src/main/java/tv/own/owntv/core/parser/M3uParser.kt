@@ -27,11 +27,11 @@ data class M3uEntry(
     val catchupSource: String?,
     /** `catchup-days` — how many days back the archive goes. */
     val catchupDays: Int?,
-    /** Per-channel HTTP request headers (F16) — from `#EXTVLCOPT` / `#EXTHTTP` / `#KODIPROP` or the
+    /** Per-channel HTTP request headers — from `#EXTVLCOPT` / `#EXTHTTP` / `#KODIPROP` or the
      *  `url|Key=Value` pipe suffix. Empty when the entry carries none. */
     val headers: Map<String, String> = emptyMap(),
     /** Widevine/ClearKey licence details from the entry's `#KODIPROP:inputstream.adaptive.license_*`
-     *  lines (#115); null for the overwhelming majority of entries, which carry no DRM. */
+     *  lines; null for the overwhelming majority of entries, which carry no DRM. */
     val drm: tv.own.owntv.core.drm.DrmConfig? = null,
     /** The container the entry declares for itself via `#KODIPROP:…manifest_type` — see
      *  [tv.own.owntv.core.player.ManifestType]. Independent of [drm]: an unprotected entry may declare
@@ -39,6 +39,8 @@ data class M3uEntry(
     val manifestType: tv.own.owntv.core.player.ManifestType? = null,
     /** glcn: the `glcn-*` attributes (plot, backdrop, year, rating…) the Emby bridge writes. */
     val extra: Map<String, String> = emptyMap(),
+    /** `catchup-correction` in minutes — the entry's own, else the `#EXTM3U` line's; 0 when neither. */
+    val catchupCorrectionMin: Int = 0,
 ) {
     /** Tagged as series content — per-episode entries like "Show S01E05" grouped into shows. */
     val isSeries: Boolean get() = type == "series" || tvgType == "series"
@@ -72,12 +74,14 @@ class M3uParser {
         var entries = 0
         val metrics = ParseMetrics()
         var header = M3uHeader(urlTvg = null)
+        // `catchup-correction` on the #EXTM3U line is the default for every entry that has none.
+        var headerCorrectionMin = 0
         var pending: PendingExtInf? = null
         // Per-channel HTTP options arrive on their own lines BETWEEN the #EXTINF and the URL, so they
-        // are collected separately and consumed by the URL line (F16).
+        // are collected separately and consumed by the URL line.
         var pendingHeaders: MutableMap<String, String>? = null
         // Same story for the `#KODIPROP` stream properties: several lines describe one entry's licence
-        // (#115) and its manifest type, and only the URL line knows the entry is complete.
+        // and its manifest type, and only the URL line knows the entry is complete.
         var pendingKodiProps: MutableMap<String, String>? = null
         var firstLine = true
         if (debug) Log.d(TAG, "parse start")
@@ -95,12 +99,17 @@ class M3uParser {
                 line.startsWith("#EXTM3U") -> {
                     val attrs = parseAttrs(line)
                     header = M3uHeader(urlTvg = attrs.attr("url-tvg") ?: attrs.attr("x-tvg-url"))
+                    headerCorrectionMin = correctionMinutes(attrs.attr("catchup-correction")) ?: 0
                 }
 
                 line.startsWith("#EXTINF") -> {
                     val attrs = parseAttrs(line)
                     pendingHeaders = null // a new entry starts; drop anything the previous one left
                     pendingKodiProps = null
+                    val catchup = attrs.attr("catchup") ?: attrs.attr("catchup-type")
+                    // Legacy SIPTV `timeshift="N"`: N days of archive in the `shift` convention. Only when
+                    // the entry says nothing in the newer attributes, which win.
+                    val timeshiftDays = attrs.attr("timeshift")?.toIntOrNull()?.takeIf { catchup == null && it > 0 }
                     pending = PendingExtInf(
                         name = displayName(line, attrs),
                         logo = attrs.attr("tvg-logo"),
@@ -110,15 +119,16 @@ class M3uParser {
                         tvgChno = attrs.attr("tvg-chno")?.toIntOrNull(),
                         type = attrs.attr("type"),
                         tvgType = attrs.attr("tvg-type"),
-                        catchup = attrs.attr("catchup") ?: attrs.attr("catchup-type"),
+                        catchup = catchup ?: timeshiftDays?.let { "shift" },
                         catchupSource = attrs.attr("catchup-source"),
-                        catchupDays = attrs.attr("catchup-days")?.toIntOrNull(),
+                        catchupDays = attrs.attr("catchup-days")?.toIntOrNull() ?: timeshiftDays,
+                        catchupCorrectionMin = correctionMinutes(attrs.attr("catchup-correction")) ?: headerCorrectionMin,
                         extra = attrs.filterKeys { it.startsWith("glcn-") },
                     )
                 }
 
                 line.startsWith("#") -> {
-                    // Per-channel HTTP options (F16). Every other directive (e.g. #EXTGRP) is ignored,
+                    // Per-channel HTTP options. Every other directive (e.g. #EXTGRP) is ignored,
                     // and the three prefixes are checked only inside this branch so a playlist without
                     // them pays one startsWith("#") as before.
                     parseHttpDirective(line)?.let { parsed ->
@@ -168,6 +178,7 @@ class M3uParser {
                                         tv.own.owntv.core.player.ManifestType.fromKodiProps(it)
                                     },
                                     extra = p.extra,
+                                    catchupCorrectionMin = p.catchupCorrectionMin,
                                 ),
                             )
                         } finally {
@@ -220,7 +231,13 @@ class M3uParser {
         val catchupSource: String?,
         val catchupDays: Int?,
         val extra: Map<String, String> = emptyMap(),
+        val catchupCorrectionMin: Int,
     )
+
+    /** `catchup-correction` is in hours and may be fractional or negative ("-1.5"); null when it is
+     *  not a number. Rounded to whole minutes, which is all a guide time ever needs. */
+    private fun correctionMinutes(hours: String?): Int? =
+        hours?.trim()?.toDoubleOrNull()?.takeIf { it.isFinite() }?.let { Math.round(it * 60).toInt() }
 
     private data class ParseMetrics(
         var parseOrReadMs: Long = 0L,
@@ -287,7 +304,7 @@ class M3uParser {
     }
 
     /**
-     * Per-channel HTTP headers from the three conventions playlists use (F16). Returns null for every
+     * Per-channel HTTP headers from the three conventions playlists use. Returns null for every
      * other `#` directive, which is the overwhelmingly common case.
      *
      *  - `#EXTVLCOPT:http-user-agent=Foo` / `http-referrer=` / `http-origin=` / `http-cookie=`
@@ -337,7 +354,7 @@ class M3uParser {
     }
 
     /**
-     * The `license_type` / `license_key` (#115) and `manifest_type` half of a `#KODIPROP` line, as a
+     * The `license_type` / `license_key` and `manifest_type` half of a `#KODIPROP` line, as a
      * short key and its raw value; null for every other line, which is nearly all of them. Kept
      * separate from [parseHttpDirective] because these describe the stream and its licence rather than
      * the HTTP request, and because only [tv.own.owntv.core.drm.DrmConfig] /

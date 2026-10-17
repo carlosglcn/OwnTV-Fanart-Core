@@ -24,8 +24,11 @@ import tv.own.owntv.core.i18n.LocaleStore
 // stream behind a UA check or per-channel auth headers now has a chance of playing instead of a
 // guaranteed 403. Players that ignore the extras are unaffected — they see the same intent as before.
 //
-// Limitations: extras are best-effort (an unknown player may still ignore them); no resume position
-// or prev/next queue.
+// A film's resume point goes along as "position" (ms) — MX Player reads it as an int, VLC as a long
+// with an int fallback, so the int form serves both.
+//
+// Limitations: extras are best-effort (an unknown player may still ignore them); where the user
+// stopped is not read back (that needs an Activity result), and there is no prev/next queue.
 class ExternalPlayerLauncher(private val context: Context) {
 
     // Open url externally. Returns true if an external app was actually launched.
@@ -37,11 +40,12 @@ class ExternalPlayerLauncher(private val context: Context) {
         subtitle: String? = null,
         userAgent: String? = null,
         httpHeaders: String? = null,
+        /** Where to start, in ms — the item's saved resume point; 0 plays from the beginning. */
+        startPositionMs: Long = 0L,
     ): Boolean {
-        val localized = localizedContext()
         val uri = uriFor(url)
         if (uri == null) {
-            toast(localized.getString(tv.own.owntv.core.R.string.player_external_could_not_open))
+            toast(localizedContext().getString(tv.own.owntv.core.R.string.player_external_could_not_open))
             return false
         }
         // Try the precise MIME first, then widen. VLC and MX Player advertise `video/*` but NOT every
@@ -56,13 +60,14 @@ class ExternalPlayerLauncher(private val context: Context) {
             applyHeaders(intent, url, userAgent, httpHeaders)
             // VLC and MX Player show this as the name of what is playing, instead of the URL.
             (if (title != null && subtitle != null) "$title · $subtitle" else title)?.let { intent.putExtra("title", it) }
+            if (startPositionMs > 0) intent.putExtra("position", startPositionMs.coerceAtMost(Int.MAX_VALUE.toLong()).toInt())
 
             if (context.packageManager.queryIntentActivities(intent, 0).isEmpty()) continue
             // The intent itself, never Intent.createChooser: only the system's own "Open with" window
-            // offers Just once / Always, so a user can make one player the default (owner, 2026-10-15).
+            // offers Just once / Always, so a user can make one player the default.
             return startActivity(intent)
         }
-        toast(localized.getString(tv.own.owntv.core.R.string.player_external_not_found))
+        toast(localizedContext().getString(tv.own.owntv.core.R.string.player_external_not_found))
         return false
     }
 
@@ -136,6 +141,7 @@ class ExternalPlayerLauncher(private val context: Context) {
         return listOf(specific, "video/*", null).distinct()
     }
 
+    // A blocking DataStore read — only the error toasts need it, never a successful launch.
     private fun localizedContext(): Context =
         AppLocale.wrap(context, LocaleStore.from(context).readBlocking())
 

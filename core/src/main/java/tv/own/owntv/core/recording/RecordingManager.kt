@@ -37,7 +37,7 @@ import java.util.TimeZone
  *
  * [RecordingDao] is the single source of truth; nothing here holds a queue.
  *
- * Recordings are written to `TV/` inside the same root downloads use (D1) — one folder the user
+ * Recordings are written to `TV/` inside the same root downloads use — one folder the user
  * chose, three folders OwnTV keeps inside it.
  */
 class RecordingManager(
@@ -87,7 +87,7 @@ class RecordingManager(
 
     fun observe(profileId: Long): Flow<List<RecordingEntity>> = recordingDao.observeForProfile(profileId)
 
-    /** Everything currently being written, for the pill and the player's REC indicator (D13). */
+    /** Everything currently being written, for the pill and the player's REC indicator. */
     fun observeRunning(): Flow<List<RecordingEntity>> = recordingDao.observeRunning()
 
     /** Free/total space of the volume the recordings land on — the same volume downloads use. */
@@ -102,7 +102,7 @@ class RecordingManager(
 
     /**
      * Would one more recording on this playlist be allowed right now? The apps ask before they offer
-     * the button, so a refusal is a sentence rather than a failure (D5/D10/D11).
+     * the button, so a refusal is a sentence rather than a failure.
      */
     suspend fun canRecordOn(sourceId: Long): StreamGrant = connectionBudget(
         source = sourceDao.getById(sourceId),
@@ -113,7 +113,7 @@ class RecordingManager(
 
     /**
      * Anything already claiming this playlist over the same window — the clash the UI warns about at
-     * scheduling time, before the user has committed to anything (D10).
+     * scheduling time, before the user has committed to anything.
      */
     suspend fun clashesWith(sourceId: Long, startMs: Long, stopMs: Long, excludeId: Long = 0): List<RecordingEntity> =
         recordingDao.overlapping(sourceId, startMs, stopMs, excludeId)
@@ -243,7 +243,7 @@ class RecordingManager(
         )
     }
 
-    // --- Series recording: "record every showing of this title on this channel" (D7) -------------
+    // --- Series recording: "record every showing of this title on this channel" -------------
 
     /** This profile's standing rules, for the screens that list and cancel them. */
     fun observeRules(profileId: Long): Flow<List<RecordingRuleEntity>> = recordingDao.observeRules(profileId)
@@ -315,7 +315,7 @@ class RecordingManager(
      * the table, and `schedule` finds an existing row rather than adding a second.
      *
      * Clashes are **not** resolved here. A clash is decided when the recording is due, by the
-     * connection budget, and reported as a MISSED row with a reason (D10) — deciding it now, against
+     * connection budget, and reported as a MISSED row with a reason — deciding it now, against
      * a guide that may still change, would refuse recordings that would have been fine.
      */
     suspend fun applyRules() = withContext(Dispatchers.IO) {
@@ -412,7 +412,7 @@ class RecordingManager(
         }
     }
 
-    /** Remove the row **and** the file. The only thing in the app that deletes a recording (D2). */
+    /** Remove the row **and** the file. The only thing in the app that deletes a recording. */
     fun delete(recording: RecordingEntity) {
         scope.launch {
             scheduler.cancel(recording.id)
@@ -470,8 +470,5 @@ class RecordingManager(
  */
 private const val RULE_HORIZON_MS = 14L * 24 * 60 * 60 * 1000
 
-/** Free/total space on the volume recordings are written to, and the floor they stop at (D8). */
-data class RecordingStorageInfo(val freeBytes: Long, val totalBytes: Long, val reserveBytes: Long) {
-    /** What is actually available to a recording: everything above the reserve. */
-    val writableBytes: Long get() = (freeBytes - reserveBytes).coerceAtLeast(0L)
-}
+/** Free/total space on the volume recordings are written to, and the floor they stop at. */
+data class RecordingStorageInfo(val freeBytes: Long, val totalBytes: Long, val reserveBytes: Long)

@@ -14,7 +14,7 @@ import tv.own.owntv.core.database.entity.SeriesEntity
 import tv.own.owntv.core.model.MediaType
 
 /**
- * Membership rows of the user's custom combined categories (issue #87). Each row pins one content
+ * Membership rows of the user's custom combined categories. Each row pins one content
  * item to a [position] inside a custom category, identified by its stable DataStore key
  * (`"custom:<uuid>"`, `CustomizeKeys.CUSTOM_PREFIX`) as [CustomCategoryMemberEntity.contextKey].
  * The table is modeled on `content_order`: membership defines the SET, while the user's manual

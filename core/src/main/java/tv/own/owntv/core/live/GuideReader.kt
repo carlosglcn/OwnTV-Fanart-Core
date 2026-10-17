@@ -55,7 +55,7 @@ class GuideReader(
     // grouped it by channel, so the grid could be drawn from one batch. It is deleted, not fixed,
     // because the shape was the fault.
     //
-    // Measured on the owner's television (2026-09-18), it read **349,077 programme rows in a single
+    // Measured on a real television, it read **349,077 programme rows in a single
     // list** over a 166-hour window — seven days of catch-up lookback for all 3,585 guide channels —
     // to draw the eight rows on screen. That is ~100 MB against a 192 MB heap before anything else,
     // and it spent 146 seconds inside `groupBy` because the heap was thrashing rather than working.

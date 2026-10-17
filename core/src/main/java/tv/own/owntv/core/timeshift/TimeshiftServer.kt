@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap
 import kotlin.concurrent.thread
 
 /**
- * Serves timeshift buffers to the players over loopback HTTP (N4, P16b).
+ * Serves timeshift buffers to the players over loopback HTTP.
  *
  * Both engines already play a live `.ts` (or fragmented-MP4) stream over HTTP better than anything
  * else, so the saved copy is handed to them in exactly that shape: `GET /<token>/<piece>` streams the

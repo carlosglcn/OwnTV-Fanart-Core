@@ -20,7 +20,7 @@ import tv.own.owntv.core.settings.SettingsRepository
  */
 
 /** The paging query for one rail selection. [contextKey] is the folder's stable customization key and
- *  [hasManualOrder] says whether that folder actually carries manual-order rows — see the C3 fast path. */
+ *  [hasManualOrder] says whether that folder actually carries manual-order rows — see the fast path. */
 fun livePagingSource(
     key: LiveKey,
     profileId: Long,
@@ -43,7 +43,7 @@ fun livePagingSource(
             is LiveKey.Custom -> if (playlist) customCategoryDao.pagingChannels(profileId, key.id, ids) else customCategoryDao.pagingChannelsAlpha(profileId, key.id, ids)
             is LiveKey.Folder -> {
                 val ctxKey = contextKey(key.id) ?: ""
-                // C3 fast path: no manual order in this folder → the plain indexed query has
+                // Fast path: no manual order in this folder → the plain indexed query has
                 // the identical (sortOrder, name) order without the join-sort.
                 if (!hasManualOrder(ctxKey)) {
                     if (playlist) channelDao.pagingByCategory(key.id) else channelDao.pagingByCategoryAlpha(key.id)

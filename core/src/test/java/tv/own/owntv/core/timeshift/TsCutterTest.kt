@@ -7,7 +7,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.io.ByteArrayOutputStream
 
-/** P16a — where a live TS stream is cut, and that every piece is a place a player can start. */
+/** Where a live TS stream is cut, and that every piece is a place a player can start. */
 class TsCutterTest {
 
     private class Pieces : TsCutter.Sink {

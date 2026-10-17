@@ -5,7 +5,7 @@ import org.junit.Assert.assertNull
 import org.junit.Test
 import tv.own.owntv.core.player.PlayerBudget
 
-/** N18 — films' buffer, timeout and reconnects; every Auto must be what the engines did before. */
+/** Films' buffer, timeout and reconnects; every Auto must be what the engines did before. */
 class FilmNetworkTest {
 
     private val lowSpec = PlayerBudget("48MiB", "16MiB", readaheadSecs = "10", cacheSecs = "30", lowSpec = true)

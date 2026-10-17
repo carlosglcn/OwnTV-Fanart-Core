@@ -74,7 +74,7 @@ data class EpgProgrammeEntity(
     val title: String,
     val description: String? = null,
     @ColumnInfo(defaultValue = "0") val contentHash: Int = 0,
-    // The details line (v47, Stage G1), from XMLTV only; null when the feed does not carry it.
+    // The details line (v47), from XMLTV only; null when the feed does not carry it.
     // See tv.own.owntv.core.parser.EpgDetails — [categories] is joined by its separator.
     val categories: String? = null,
     val year: Int? = null,
@@ -115,16 +115,27 @@ data class EpgChannelName(
     val normId: String?,
 )
 
+/**
+ * A programme as the Sports hub's matcher reads it: what it is called and how the feed files it, never
+ * its synopsis — see [tv.own.owntv.core.database.dao.EpgDao.sportsProgrammes].
+ */
+data class EpgProgrammeLite(
+    val id: Long,
+    val epgChannelId: String,
+    val startMs: Long,
+    val stopMs: Long,
+    val title: String,
+    val categories: String?,
+)
+
+/** One programme's synopsis, read only for the programmes the title alone did not match. */
+data class EpgProgrammeText(val id: Long, val description: String?)
+
 data class EpgHashProjection(
     val id: Long,
     val epgChannelId: String,
     val startMs: Long,
     val contentHash: Int,
-)
-
-data class EpgProgrammeKey(
-    val epgChannelId: String,
-    val startMs: Long,
 )
 
 // The details are part of the hash, so a feed that starts sending them (or the first sync after v47)

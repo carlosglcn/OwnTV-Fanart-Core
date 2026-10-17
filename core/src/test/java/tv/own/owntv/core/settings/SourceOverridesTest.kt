@@ -32,6 +32,16 @@ class SourceOverridesTest {
         assertEquals(90 * 60_000, tz.rawOffset)
     }
 
+    /** Automatic is the panel's reported zone when there is one, else the device's. */
+    @Test fun automaticCatchupZoneUsesThePanelZone() {
+        val panel = source(tz = "AUTOMATIC").copy(serverTimeZone = "Asia/Kolkata")
+        assertEquals("Asia/Kolkata", SourceOverrides.catchupTimeZoneOf(panel)!!.id)
+        assertEquals("Asia/Kolkata", SourceOverrides.panelTimeZoneOf(panel)!!.id)
+        assertEquals(java.util.TimeZone.getDefault().id, SourceOverrides.catchupTimeZoneOf(source(tz = "AUTOMATIC"))!!.id)
+        assertNull(SourceOverrides.panelTimeZoneOf(source()))
+        assertEquals(60 * 60_000, SourceOverrides.panelTimeZoneOf(source().copy(serverTimeZone = "GMT+01:00"))!!.rawOffset)
+    }
+
     @Test fun unknownNamesReadAsNoOverride() {
         assertNull(SourceOverrides.catchupTimeZoneOf(source(tz = "MARS")))
         assertNull(SourceOverrides.vodEngineOf(source(vod = "VLC")))

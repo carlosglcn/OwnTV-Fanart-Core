@@ -8,6 +8,7 @@ import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.job
 import kotlinx.coroutines.withContext
 import okhttp3.Call
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -17,7 +18,7 @@ import tv.own.owntv.core.recording.HlsMediaPlaylist
 import java.io.InputStream
 
 /**
- * The one connection of a timeshift buffer (N4, decision 25): the channel is downloaded here, once, and
+ * The one connection of a timeshift buffer: the channel is downloaded here, once, and
  * every player watches the saved copy. It keeps downloading while the player is paused — that is the
  * whole point — and it is the only thing that talks to the provider while timeshift is on.
  *
@@ -224,7 +225,10 @@ class TimeshiftDownloader(
                 else playlist.segments.filter { it.sequence > lastSequence }
             for (segment in due) {
                 currentCoroutineContext().ensureActive()
-                val segmentUrl = absolute(playlistUrl, segment.uri) ?: continue
+                val segmentUrl = absolute(playlistUrl, segment.uri) ?: run {
+                    log("timeshift: segment ${segment.sequence} has an unreadable address — skipped")
+                    continue
+                }
                 val ok = if (map != null) {
                     fmp4Piece(segmentUrl, (segment.durationSecs * 1000).toLong())
                 } else {
@@ -311,7 +315,10 @@ class TimeshiftDownloader(
             if (plan.unschedulable) throw NotSupported("unschedulable DASH manifest")
             for (segment in plan.segments) {
                 currentCoroutineContext().ensureActive()
-                val segmentUrl = absolute(url, segment.url) ?: continue
+                val segmentUrl = absolute(url, segment.url) ?: run {
+                    log("timeshift: DASH segment ${segment.number} has an unreadable address — skipped")
+                    continue
+                }
                 if (!fmp4Piece(segmentUrl, segment.durationMs)) log("timeshift: DASH segment ${segment.number} refused")
             }
             lastNumber = plan.lastNumber
@@ -339,8 +346,7 @@ class TimeshiftDownloader(
         response.body.bytes()
     }
 
-    private fun absolute(base: String, uri: String): String? =
-        runCatching { java.net.URI(base).resolve(uri).toString() }.getOrNull()
+    private fun absolute(base: String, uri: String): String? = resolveSegmentUrl(base, uri)
 
     private companion object {
         const val PEEK_BYTES = 1024L
@@ -351,3 +357,12 @@ class TimeshiftDownloader(
         const val START_SEGMENTS = 3
     }
 }
+
+/**
+ * [uri] resolved against [base]. OkHttp's resolver first: signed CDN tokens carry characters such as
+ * `|`, `^` and spaces that `java.net.URI` refuses outright, which silently dropped every segment of
+ * such a stream. `URI` stays as the fallback for a base OkHttp cannot parse.
+ */
+internal fun resolveSegmentUrl(base: String, uri: String): String? =
+    base.toHttpUrlOrNull()?.resolve(uri)?.toString()
+        ?: runCatching { java.net.URI(base).resolve(uri).toString() }.getOrNull()

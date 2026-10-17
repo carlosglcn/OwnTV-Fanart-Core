@@ -24,38 +24,22 @@
     <string name="player_previous_channel">القناة السابقة</string>
     <string name="player_next_channel_in_list">القناة التالية</string>
     <string name="player_previous_channel_in_list">القناة السابقة في القائمة</string>
-    <!-- Translators: The bubble above the live scrub bar while rewinding a channel: the clock time being scrubbed to, then the name of the programme on air then. Placeholders are the time and the programme title. -->
     <string name="player_live_scrub_at"><xliff:g id="time">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g></string>
-    <!-- Translators: Label under the volume button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_volume">مستوى الصوت</string>
-    <!-- Translators: Label under the brightness button on the phone player's control bar, and the label on the slider a vertical swipe on the left of the picture shows. Keep this very short (14 characters maximum) — it sits inside a small button. -->
     <string name="player_tool_brightness">السطوع</string>
-    <!-- Translators: Spoken label for the phone player's skip-backwards button, which jumps back by the user's own seek step. Keep this very short (16 characters maximum). -->
     <string name="player_skip_back">رجوع</string>
-    <!-- Translators: Spoken label for the phone player's skip-forwards button, which jumps forward by the user's own seek step. Keep this very short (16 characters maximum). -->
     <string name="player_skip_forward">تقديم</string>
-    <!-- Translators: Label under the audio-track button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_audio">الصوت</string>
-    <!-- Translators: Label under the subtitles button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_subtitles">ترجمة</string>
-    <!-- Translators: Label under the favourite button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_favorite">مفضّلة</string>
-    <!-- Translators: Label under the catch-up button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_catchup">البث الفائت</string>
-    <!-- Translators: Label under the playback-speed button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_speed">السرعة</string>
-    <!-- Translators: Label under the aspect-ratio/zoom button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_aspect">التكبير</string>
     <string name="player_tool_quality">الجودة</string>
-    <!-- Translators: Label under the mini-player button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_mini">مصغّر</string>
-    <!-- Translators: Label under the audio-only button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_audio_only">الصوت فقط</string>
-    <!-- Translators: Label under the playback-engine button on the player control bar, shown when it has focus. The engine name (MPV/EXO) is shown beside it as the value, so this is just the word for the player itself. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_engine">المشغل</string>
-    <!-- Translators: Label under the stream-info button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_info">معلومات</string>
-    <!-- Translators: Label under the report-stream button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_report">تقرير</string>
     <string name="player_channel_not_found">لم يتم العثور على القناة</string>
     <string name="player_channel_number_entry">رقم القناة</string>
@@ -73,7 +57,6 @@
     <string name="player_no_tracks">لا توجد مسارات متاحة.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · صورية</string>
     <string name="player_av_sync">مزامنة الصوت/الفيديو</string>
-    <!-- Translators: Player audio menu action that stores the current A/V-sync offset for this item. -->
     <string name="player_av_sync_remember">تذكّر هذا التأخير</string>
     <string name="player_no_offset">بلا إزاحة</string>
     <string name="player_subtitles_later">عرض الترجمات لاحقًا</string>
@@ -122,6 +105,7 @@
     <string name="player_error_decoder_busy">وحدة فك ترميز الفيديو في هذا التلفزيون مشغولة. حاول مجددًا بعد قليل.</string>
     <string name="player_error_no_internet">لا يوجد اتصال بالإنترنت. تحقّق من شبكتك وحاول مجددًا.</string>
     <string name="player_error_stream_unavailable">تعذّر تشغيل هذا البث. قد يكون المصدر غير متصل أو يستخدم تنسيقًا غير مدعوم. <xliff:g id="hint">%1$s</xliff:g></string>
+    <string name="player_error_account_in_use">هذا الحساب قيد التشغيل بالفعل على جهاز أو تطبيق آخر. أوقفه هناك، ثم اضغط على إعادة المحاولة.</string>
     <string name="player_error_mpv_open_decode">تعذّر على mpv فتح هذا الملف أو فك ترميزه.</string>
     <string name="player_error_mpv_stream_never_started">لم يبدأ البث في mpv بعد عدة محاولات.</string>
     <string name="player_error_surround">لا يدعم مخرج الصوت هذا الصوت المحيطي — تم التبديل إلى صوت ستيريو.</string>
@@ -172,9 +156,7 @@
     <string name="player_stream_khz"><xliff:g id="value">%1$s</xliff:g> كيلوهرتز</string>
     <string name="player_stream_kbps"><xliff:g id="value">%1$s</xliff:g> كيلوبت/ث</string>
     <string name="player_stream_seconds"><xliff:g id="value">%1$s</xliff:g> ث في المخزن المؤقت</string>
-    <!-- Translators: Heading of the plate shown over the black video area when the item being played has no video track at all (a radio channel, a music-only file). This is NOT an error - playback is working. -->
     <string name="player_audio_only_title">الصوت فقط</string>
-    <!-- Translators: Body of the "Audio only" plate. Reassures the user that nothing is broken: the item simply contains no picture. -->
     <string name="player_audio_only_body">هذا العنصر فيه صوت بلا صورة. لا يوجد خطأ — التشغيل يعمل بشكل طبيعي.</string>
     <string name="player_audio_mono">أحادي</string>
     <string name="player_audio_stereo">ستيريو</string>
@@ -282,7 +264,6 @@
     <string name="player_subtitles_enter_credentials">أدخل اسم المستخدم وكلمة المرور لحساب OpenSubtitles.</string>
     <string name="player_subtitles_invalid_credentials">تعذّر على OpenSubtitles تسجيل الدخول باستخدام بيانات الحساب هذه.</string>
     <string name="player_subtitles_sign_in_network_error">تعذّر الوصول إلى OpenSubtitles. تحقّق من اتصالك بالإنترنت وحاول مجددًا.</string>
-    <!-- Translators: Error when OpenSubtitles answers the sign-in with an HTTP error code (e.g. 403, 429, 500). The placeholder is that code. -->
     <string name="player_subtitles_sign_in_server_error">رفض OpenSubtitles الطلب (خطأ <xliff:g id="code">%1$d</xliff:g>). اتصالك بالإنترنت يعمل — أعد المحاولة لاحقًا، واذكر هذا الرقم إذا أبلغت عن المشكلة.</string>
     <string name="player_subtitles_refresh_network_error">تعذّر تحديث OpenSubtitles. تحقّق من اتصالك بالإنترنت.</string>
     <string name="player_subtitles_no_matches_all_languages">لم يتم العثور على ترجمات مطابقة. جرّب تعديل عنوان البحث.</string>

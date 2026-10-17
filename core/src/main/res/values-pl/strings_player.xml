@@ -24,38 +24,22 @@
     <string name="player_previous_channel">Poprzedni kanał</string>
     <string name="player_next_channel_in_list">Następny kanał</string>
     <string name="player_previous_channel_in_list">Poprzedni kanał na liście</string>
-    <!-- Translators: The bubble above the live scrub bar while rewinding a channel: the clock time being scrubbed to, then the name of the programme on air then. Placeholders are the time and the programme title. -->
     <string name="player_live_scrub_at"><xliff:g id="time">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g></string>
-    <!-- Translators: Label under the volume button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_volume">Głośność</string>
-    <!-- Translators: Label under the brightness button on the phone player's control bar, and the label on the slider a vertical swipe on the left of the picture shows. Keep this very short (14 characters maximum) — it sits inside a small button. -->
     <string name="player_tool_brightness">Jasność</string>
-    <!-- Translators: Spoken label for the phone player's skip-backwards button, which jumps back by the user's own seek step. Keep this very short (16 characters maximum). -->
     <string name="player_skip_back">Przeskocz wstecz</string>
-    <!-- Translators: Spoken label for the phone player's skip-forwards button, which jumps forward by the user's own seek step. Keep this very short (16 characters maximum). -->
     <string name="player_skip_forward">Przeskocz naprzód</string>
-    <!-- Translators: Label under the audio-track button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_audio">Dźwięk</string>
-    <!-- Translators: Label under the subtitles button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_subtitles">Napisy</string>
-    <!-- Translators: Label under the favourite button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_favorite">Ulubione</string>
-    <!-- Translators: Label under the catch-up button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_catchup">Wstecz</string>
-    <!-- Translators: Label under the playback-speed button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_speed">Prędkość</string>
-    <!-- Translators: Label under the aspect-ratio/zoom button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_aspect">Format</string>
     <string name="player_tool_quality">Jakość</string>
-    <!-- Translators: Label under the mini-player button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_mini">Mini</string>
-    <!-- Translators: Label under the audio-only button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_audio_only">Tylko dźwięk</string>
-    <!-- Translators: Label under the playback-engine button on the player control bar, shown when it has focus. The engine name (MPV/EXO) is shown beside it as the value, so this is just the word for the player itself. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_engine">Odtwarzacz</string>
-    <!-- Translators: Label under the stream-info button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_info">Info</string>
-    <!-- Translators: Label under the report-stream button on the player control bar, shown when it has focus. Keep this very short (14 characters maximum) — it sits inside the button on the remote-driven player bar. -->
     <string name="player_tool_report">Raport</string>
     <string name="player_channel_not_found">Nie znaleziono kanału</string>
     <string name="player_channel_number_entry">Numer kanału</string>
@@ -73,7 +57,6 @@
     <string name="player_no_tracks">Brak dostępnych ścieżek.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · graficzne</string>
     <string name="player_av_sync">Synchronizacja A/V</string>
-    <!-- Translators: Player audio menu action that stores the current A/V-sync offset for this item. -->
     <string name="player_av_sync_remember">Zapamiętaj to opóźnienie</string>
     <string name="player_no_offset">Brak opóźnienia</string>
     <string name="player_subtitles_later">Napisy wyświetlane później</string>
@@ -122,6 +105,7 @@
     <string name="player_error_decoder_busy">Dekoder wideo tego telewizora jest zajęty. Spróbuj ponownie za chwilę.</string>
     <string name="player_error_no_internet">Brak połączenia z internetem. Sprawdź sieć i spróbuj ponownie.</string>
     <string name="player_error_stream_unavailable">Nie udało się odtworzyć tego strumienia. Źródło może być bez połączenia lub używać nieobsługiwanego formatu. <xliff:g id="hint">%1$s</xliff:g></string>
+    <string name="player_error_account_in_use">To konto już odtwarza na innym urządzeniu lub w innej aplikacji. Zatrzymaj odtwarzanie tam, a potem naciśnij Spróbuj ponownie.</string>
     <string name="player_error_mpv_open_decode">mpv nie mógł otworzyć ani zdekodować tego pliku.</string>
     <string name="player_error_mpv_stream_never_started">Po kilku próbach strumień nadal nie uruchomił się w mpv.</string>
     <string name="player_error_surround">To wyjście audio nie obsługuje dźwięku przestrzennego — przełączono na stereo.</string>
@@ -172,9 +156,7 @@
     <string name="player_stream_khz"><xliff:g id="value">%1$s</xliff:g> kHz</string>
     <string name="player_stream_kbps"><xliff:g id="value">%1$s</xliff:g> kbps</string>
     <string name="player_stream_seconds">Zbuforowano <xliff:g id="value">%1$s</xliff:g> s</string>
-    <!-- Translators: Heading of the plate shown over the black video area when the item being played has no video track at all (a radio channel, a music-only file). This is NOT an error - playback is working. -->
     <string name="player_audio_only_title">Tylko dźwięk</string>
-    <!-- Translators: Body of the "Audio only" plate. Reassures the user that nothing is broken: the item simply contains no picture. -->
     <string name="player_audio_only_body">Ta pozycja ma dźwięk, ale nie ma obrazu. Nic się nie zepsuło — odtwarzanie działa normalnie.</string>
     <string name="player_audio_mono">mono</string>
     <string name="player_audio_stereo">stereo</string>
@@ -268,7 +250,6 @@
     <string name="player_subtitles_enter_credentials">Wprowadź nazwę użytkownika i hasło do OpenSubtitles.</string>
     <string name="player_subtitles_invalid_credentials">OpenSubtitles nie mógł zalogować się przy użyciu tych danych konta.</string>
     <string name="player_subtitles_sign_in_network_error">Nie udało się połączyć z OpenSubtitles. Sprawdź połączenie z internetem i spróbuj ponownie.</string>
-    <!-- Translators: Error when OpenSubtitles answers the sign-in with an HTTP error code (e.g. 403, 429, 500). The placeholder is that code. -->
     <string name="player_subtitles_sign_in_server_error">OpenSubtitles odrzucił żądanie (błąd <xliff:g id="code">%1$d</xliff:g>). Twoje połączenie internetowe działa – spróbuj ponownie później i podaj ten numer, zgłaszając problem.</string>
     <string name="player_subtitles_refresh_network_error">Nie udało się odświeżyć OpenSubtitles. Sprawdź połączenie z internetem.</string>
     <string name="player_subtitles_no_matches_all_languages">Nie znaleziono pasujących napisów. Spróbuj zmienić tytuł wyszukiwania.</string>

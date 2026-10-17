@@ -28,7 +28,7 @@ private val Context.customizeStore: DataStore<Preferences> by preferencesDataSto
  * id) fall back to the name — so a provider-side rename can detach an M3U customization.
  */
 object CustomizeKeys {
-    /** Prefix of custom combined-category ids (issue #87) — they share the key namespace, so
+    /** Prefix of custom combined-category ids — they share the key namespace, so
      *  hide/rename/reorder need no new code. */
     const val CUSTOM_PREFIX = "custom:"
 
@@ -104,7 +104,7 @@ class EpgMatchResolver(private val matches: Map<String, String>) {
 }
 
 /**
- * A user-created category (issue #87) combining items from any provider category. Lives in the
+ * A user-created category combining items from any provider category. Lives in the
  * same customization namespace as everything else via [CustomCategory.id] ("custom:<uuid>"), so
  * hide / rename / reorder work with no new code. Membership rows live in the Room table
  * `custom_category_members` (per profile), keyed by [CustomCategory.id] as contextKey.
@@ -131,9 +131,9 @@ data class SectionCustomizations(
      *  shares the JSON map helpers). Overrides the global offset; needed when East/West feeds of the
      *  same network share one guide and only one of them is on the guide's clock. */
     val epgShifts: Map<String, String> = emptyMap(),
-    /** User-created combined categories (issue #87); membership lives in Room. */
+    /** User-created combined categories; membership lives in Room. */
     val customCategories: List<CustomCategory> = emptyList(),
-    /** Items moved OUT of a provider category into a custom category (issue #87): item key → the
+    /** Items moved OUT of a provider category into a custom category: item key → the
      *  provider category key it was moved from. The item stays in All/search/recent but leaves that
      *  folder — that's what makes a "sidebar of only my folders" possible. Stable keys, so a re-sync
      *  that re-lists the item does not undo the move. */
@@ -231,7 +231,7 @@ class CustomizationStore(private val context: Context) {
         }
 
     /**
-     * Applies all accepted bulk-rename results (issue #86) in ONE atomic edit, so a 2000-row rename
+     * Applies all accepted bulk-rename results in ONE atomic edit, so a 2000-row rename
      * lands as a single DataStore write. Values are trimmed; blank values are dropped (a bulk rule
      * can never clear a name — per-row blank restore stays [renameItem]'s job).
      */
@@ -251,7 +251,7 @@ class CustomizationStore(private val context: Context) {
     suspend fun clearItemNames(profileId: Long, type: MediaType, keys: Set<String>) =
         update(profileId, type) { it.copy(itemNames = it.itemNames - keys) }
 
-    // --- custom categories (issue #87) ---
+    // --- custom categories ---
 
     /** Creates a custom category with a fresh stable id ("custom:<uuid>") and returns it. */
     suspend fun createCustomCategory(profileId: Long, type: MediaType, name: String): CustomCategory {
@@ -261,8 +261,8 @@ class CustomizationStore(private val context: Context) {
     }
 
     /**
-     * Records or clears a "moved out of provider category [originKey]" mark for [itemKey] (issue
-     * #87). The browse pager for [originKey]'s folder drops the item; All/search/recent keep it.
+     * Records or clears a "moved out of provider category [originKey]" mark for [itemKey].
+     * The browse pager for [originKey]'s folder drops the item; All/search/recent keep it.
      */
     suspend fun setItemMovedFromOrigin(profileId: Long, type: MediaType, itemKey: String, originKey: String, moved: Boolean) =
         update(profileId, type) {
@@ -396,7 +396,7 @@ fun List<CategoryEntity>.applyCustomizations(
 }
 
 /** One rail entry after customizations are applied: a provider folder ([categoryId] set) or a user
- *  custom combined category ([customId] set, issue #87). */
+ *  custom combined category ([customId] set). */
 data class CustomizedCategory(
     val key: String,
     val displayName: String,
@@ -405,7 +405,7 @@ data class CustomizedCategory(
 )
 
 /**
- * [applyCustomizations] extended with the user's custom combined categories (issue #87): provider
+ * [applyCustomizations] extended with the user's custom combined categories: provider
  * folders and custom categories are merged into ONE ordered list, so hide / rename / reorder apply
  * uniformly to both — their keys share the [CustomizeKeys] namespace, so a custom category drops
  * into `hiddenCategories`, `categoryNames` and `categoryOrder` with no extra code.
@@ -421,7 +421,7 @@ fun List<CategoryEntity>.applyCustomizationsWithCustoms(
     val visibleCats =
         if (c.hiddenCategories.isEmpty()) this
         else filter { CustomizeKeys.category(it) !in c.hiddenCategories }
-    // User folders lead the natural rail order, matching the agreed mockup. Explicit manual order
+    // User folders lead the natural rail order. Explicit manual order
     // still wins through categoryOrder below.
     val entries = customs.filter { it.id !in c.hiddenCategories }.map { cc ->
         CustomizedCategory(

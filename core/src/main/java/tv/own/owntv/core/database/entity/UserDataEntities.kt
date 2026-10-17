@@ -113,7 +113,7 @@ data class ContentOrderEntity(
  * row at all until the user changes something in the player.
  *
  * [contentKey] is deliberately NOT the volatile Room `itemId` that favorites/history use. It is the
- * P6 stable identity — `sourceId:mediaType:remoteId` from
+ * stable identity — `sourceId:mediaType:remoteId` from
  * [tv.own.owntv.core.player.enginePinKey], falling back to the stream URL for rows with no provider
  * id — exactly like the engine pins ([tv.own.owntv.core.player.VodEngineStore],
  * `ForceMpvStore`) and the subtitle tables. That key survives the clear-then-insert of a re-sync on
@@ -146,25 +146,25 @@ data class PlaybackPrefsEntity(
     val audioDelayMs: Int? = null,
     val updatedAt: Long = System.currentTimeMillis(),
     /**
-     * v44: the playlist [contentKey] belongs to, so deleting a playlist deletes its rows (owner
-     * decision 13). `-1` = unknown — a legacy stream-URL key, or a row written before v44.
+     * v44: the playlist [contentKey] belongs to, so deleting a playlist deletes its rows.
+     * `-1` = unknown — a legacy stream-URL key, or a row written before v44.
      */
     @androidx.room.ColumnInfo(defaultValue = "-1") val sourceId: Long = -1,
-    /** v44: the audio track language this profile last chose here (N12); null = follow the preference. */
+    /** v44: the audio track language this profile last chose here; null = follow the preference. */
     val audioLang: String? = null,
     /** v44: the subtitle track language this profile last chose here; `""` = subtitles off. */
     val subtitleLang: String? = null,
 )
 
 /**
- * What a **stream** needs, whoever is watching (v44, owner decision 10). [playback_prefs][PlaybackPrefsEntity]
+ * What a **stream** needs, whoever is watching (v44). [playback_prefs][PlaybackPrefsEntity]
  * is what a *person* prefers — zoom and volume — and stays per profile; the facts here belong to the
  * stream and the device's output, so they are shared: the engine a channel only plays on, whether it is
  * sound only, its lip-sync correction.
  *
  * Keyed by [tv.own.owntv.core.player.enginePinKey] like every per-item store. Replaces the DataStore
  * sets `ForceMpvStore` / `VodEngineStore` / `AudioOnlyStore`, which are copied in once at startup and
- * kept readable for one release (owner decision 14). [sourceId] lets a playlist's rows go with it.
+ * kept readable for one release. [sourceId] lets a playlist's rows go with it.
  */
 @Entity(
     tableName = "playback_quirks",
@@ -189,7 +189,7 @@ data class PlaybackQuirkEntity(
 )
 
 /**
- * Membership rows of the user's custom combined categories (issue #87). One row pins one content
+ * Membership rows of the user's custom combined categories. One row pins one content
  * item (channel/movie/series) to a [position] inside a custom category, identified by its stable
  * DataStore key — `CustomizeKeys` with the `"custom:"` prefix, e.g. `"custom:1b2f…"` — in
  * [contextKey]. Modeled EXACTLY on [ContentOrderEntity]: the same (profileId, mediaType, contextKey,

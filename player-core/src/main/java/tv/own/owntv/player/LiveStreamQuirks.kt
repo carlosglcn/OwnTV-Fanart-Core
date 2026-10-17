@@ -426,7 +426,7 @@ object LiveStreamQuirks {
         providerMessages[hostKey(url)]?.takeIf { it.first == responseCode }?.second
 
     /**
-     * N15 — Settings → "Forget learned stream fixes": drop every lesson of this session and the stored
+     * Settings → "Forget learned stream fixes": drop every lesson of this session and the stored
      * catch-up decode list, so channels open the standard way again and relearn only what a provider
      * still needs. The persistence hook stays installed, so a lesson learned afterwards is saved again.
      */

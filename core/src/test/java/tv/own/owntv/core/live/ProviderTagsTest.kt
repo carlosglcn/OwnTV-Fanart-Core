@@ -36,6 +36,15 @@ class ProviderTagsTest {
     fun tagOnlyNameKeepsTheProviderSpelling() = assertEquals("DE| ᴴᴰ", ProviderTags.parse("DE| ᴴᴰ").name)
 
     @Test
+    fun groupLabelKeepsTheCountryUnlessTheHeadingShowsIt() {
+        val uk = ProviderTags.parse("UK| Sky Max ᴴᴰ")
+        assertEquals("UK| Sky Max", ProviderTags.groupLabel(uk, headingCountry = null))
+        assertEquals("Sky Max", ProviderTags.groupLabel(uk, headingCountry = "UK"))
+        assertEquals("UK| Sky Max", ProviderTags.groupLabel(uk, headingCountry = "DE"))
+        assertEquals("Sky Max", ProviderTags.groupLabel(ProviderTags.parse("Sky Max"), headingCountry = null))
+    }
+
+    @Test
     fun sharedCountryWhenAllAgree() = assertEquals(
         "DE",
         ProviderTags.sharedCountry(listOf(ProviderTags.parse("DE| A"), ProviderTags.parse("DE| B"))),
@@ -50,4 +59,16 @@ class ProviderTagsTest {
     fun noSharedCountryWhenOneHasNone() = assertNull(
         ProviderTags.sharedCountry(listOf(ProviderTags.parse("DE| A"), ProviderTags.parse("B"))),
     )
+
+    @Test
+    fun colonPrefixIsACountryOnlyForARealCode() {
+        assertEquals("UK", ProviderTags.parse("UK: PREMIER LEAGUE+ 1").country)
+        assertEquals("PREMIER LEAGUE+ 1", ProviderTags.parse("UK: PREMIER LEAGUE+ 1").name)
+        assertEquals("IT", ProviderTags.parse("IT: DAZN 1").country)
+        // Labels a provider ends with a colon are not countries.
+        assertNull(ProviderTags.parse("TV: DAZN LALIGA 2").country)
+        assertNull(ProviderTags.parse("VIP: KOMBAT SPORT").country)
+        assertNull(ProviderTags.parse("PRIME: 3SAT").country)
+        assertEquals("TV: DAZN LALIGA 2", ProviderTags.parse("TV: DAZN LALIGA 2").name)
+    }
 }

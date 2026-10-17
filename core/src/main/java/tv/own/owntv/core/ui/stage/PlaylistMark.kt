@@ -9,12 +9,12 @@ import java.util.Locale
 data class PlaylistMark(val text: String, val argb: Long) {
     companion object {
         /**
-         * Decision D4: the first four letters of the playlist's name, upper-case, after dropping a
+         * The first four letters of the playlist's name, upper-case, after dropping a
          * leading "IPTV" or "TV" word and every separator — IPTV_GOLD → GOLD, Junior → JUNI, X → X. A
          * prefix only counts as a whole word, so "Tvoli" keeps its T; a name that is nothing but the
          * prefix keeps it.
          *
-         * The colour comes from the mockup's palette by [index] (the playlist's position), so marks
+         * The colour comes from [Palette] by [index] (the playlist's position), so marks
          * stay distinct and never change while the playlists do not.
          */
         fun of(name: String, index: Int): PlaylistMark = PlaylistMark(textOf(name), Palette[Math.floorMod(index, Palette.size)])
@@ -28,7 +28,7 @@ data class PlaylistMark(val text: String, val argb: Long) {
             return letters.substring(0, end)
         }
 
-        /** GOLD, JR and X are the mockup's; the rest continue its spacing round the colour wheel. */
+        /** The first three are the Stage palette's; the rest continue its spacing round the colour wheel. */
         private val Palette = listOf(
             0xFFE8B64AL,
             0xFF6FB0FFL,

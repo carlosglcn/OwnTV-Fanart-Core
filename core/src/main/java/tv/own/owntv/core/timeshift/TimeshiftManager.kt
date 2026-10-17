@@ -17,7 +17,7 @@ import java.io.File
 import java.util.UUID
 
 /**
- * Which timeshift buffers exist and whether each is downloading (N4, decision 25). Process-wide: one
+ * Which timeshift buffers exist and whether each is downloading. Process-wide: one
  * buffer downloading at most — the channel being watched — and at most one *parked*: a channel the user
  * left, kept for [TimeshiftRules.PARKED_GRACE_MS] so coming back offers "Resume from buffer".
  *

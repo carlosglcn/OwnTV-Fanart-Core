@@ -107,7 +107,7 @@ class XtreamClient(private val http: HttpClient) {
 
     // --- Streams (callback-streamed) ---
     // Each returns true if the full list parsed cleanly, false if the server truncated it mid-stream
-    // (issue #15) — the sync uses that to fall back to per-category fetching. [categoryId] filters the
+    // the sync uses that to fall back to per-category fetching. [categoryId] filters the
     // request server-side (`&category_id=X`), keeping payloads small enough to dodge the truncation.
     suspend fun streamLive(
         s: SourceEntity,
@@ -515,7 +515,7 @@ class XtreamClient(private val http: HttpClient) {
         val expiryMs: Long? = null,
         val hlsSupported: Boolean = false,
         /** `user_info.max_connections` — simultaneous streams the account may open; 0 when the panel
-         *  omits it or reports nonsense. `1` is the one that changes playback (F30). */
+         *  omits it or reports nonsense. `1` is the one that changes playback. */
         val maxConnections: Int = 0,
         /** `user_info.active_cons` — streams open right now; -1 when the panel omits it. */
         val activeConnections: Int = -1,
@@ -526,6 +526,8 @@ class XtreamClient(private val http: HttpClient) {
         val authOk: Boolean = true,
         /** `user_info.is_trial` — "1" on a trial line. */
         val trial: Boolean = false,
+        /** The panel's own time zone from `server_info` — see [xtreamServerTimeZone]; null when unknown. */
+        val serverTimeZone: String? = null,
     )
 
     /**
@@ -559,12 +561,31 @@ class XtreamClient(private val http: HttpClient) {
             var status: String? = null
             var authOk = true
             var trial = false
+            var zoneName: String? = null
+            var timeNow: String? = null
+            var timestampNow: Long? = null
             JsonReader(java.io.InputStreamReader(input, Charsets.UTF_8)).use { r ->
                 r.isLenient = true
                 if (r.peek() != JsonToken.BEGIN_OBJECT) return@use
                 r.beginObject()
                 while (r.hasNext()) {
-                    if (r.nextName() == "user_info" && r.peek() == JsonToken.BEGIN_OBJECT) {
+                    val section = r.nextName()
+                    if (section == "server_info" && r.peek() == JsonToken.BEGIN_OBJECT) {
+                        r.beginObject()
+                        while (r.hasNext()) {
+                            when (r.nextName()) {
+                                "timezone" -> zoneName = if (r.peek() == JsonToken.STRING) r.nextString() else { r.skipValue(); null }
+                                "time_now" -> timeNow = if (r.peek() == JsonToken.STRING) r.nextString() else { r.skipValue(); null }
+                                "timestamp_now" -> timestampNow = when (r.peek()) {
+                                    JsonToken.STRING -> r.nextString().trim().toLongOrNull()
+                                    JsonToken.NUMBER -> r.nextLong()
+                                    else -> { r.skipValue(); null }
+                                }
+                                else -> r.skipValue()
+                            }
+                        }
+                        r.endObject()
+                    } else if (section == "user_info" && r.peek() == JsonToken.BEGIN_OBJECT) {
                         r.beginObject()
                         while (r.hasNext()) {
                             when (r.nextName()) {
@@ -649,6 +670,7 @@ class XtreamClient(private val http: HttpClient) {
                 status = status,
                 authOk = authOk,
                 trial = trial,
+                serverTimeZone = xtreamServerTimeZone(zoneName, timeNow, timestampNow),
             )
         }
     }
@@ -836,7 +858,7 @@ class XtreamClient(private val http: HttpClient) {
 
     /**
      * Streams a top-level JSON array. Returns true if the array parsed to its end, false if the server
-     * truncated it mid-stream (issue #15). A failure before any item is read is fatal and rethrown.
+     * truncated it mid-stream. A failure before any item is read is fatal and rethrown.
      */
     private suspend fun streamArray(label: String, input: InputStream, readItem: suspend (JsonReader, StreamMetrics) -> Unit): Boolean {
         val ctx = currentCoroutineContext()
@@ -1106,4 +1128,27 @@ class XtreamClient(private val http: HttpClient) {
             null
         }
     }
+}
+
+/**
+ * The time zone an Xtream panel runs on, as a `java.util.TimeZone` ID — what its timeshift `start` is
+ * written in. [name] is `server_info.timezone` and wins when it is a real zone ID. Otherwise the
+ * offset between `server_info.time_now` (panel-local "yyyy-MM-dd HH:mm:ss") and `timestamp_now` (unix
+ * seconds) gives a fixed `GMT±hh:mm`, rounded to the quarter hour every real zone sits on. Null when
+ * neither is usable, so the caller falls back to the device's zone.
+ */
+internal fun xtreamServerTimeZone(name: String?, timeNow: String?, timestampNowSec: Long?): String? {
+    val id = name?.trim()
+    if (!id.isNullOrEmpty() && id in java.util.TimeZone.getAvailableIDs()) return id
+    if (timeNow.isNullOrBlank() || timestampNowSec == null || timestampNowSec <= 0) return null
+    val localAsUtc = runCatching {
+        java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.US)
+            .apply { timeZone = java.util.TimeZone.getTimeZone("UTC"); isLenient = false }
+            .parse(timeNow.trim())?.time
+    }.getOrNull() ?: return null
+    val quarterHours = Math.round((localAsUtc - timestampNowSec * 1000) / 900_000.0).toInt()
+    if (quarterHours !in -12 * 4..14 * 4) return null
+    val minutes = kotlin.math.abs(quarterHours) * 15
+    val sign = if (quarterHours < 0) '-' else '+'
+    return "GMT$sign${(minutes / 60).toString().padStart(2, '0')}:${(minutes % 60).toString().padStart(2, '0')}"
 }

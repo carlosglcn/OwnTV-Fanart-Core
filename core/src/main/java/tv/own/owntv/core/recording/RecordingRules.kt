@@ -16,11 +16,11 @@ import java.util.Locale
 object RecordingRules {
 
     /**
-     * The floor free space may not fall through, 500 MB (D8).
+     * The floor free space may not fall through, 500 MB.
      *
      * Not zero, and never an eviction: a recording that runs out of room **stops and says so**,
      * keeping everything it captured, and it never deletes a download or another recording to make
-     * space (D2). Leaving half a gigabyte behind is what stops a full volume from taking the rest of
+     * space. Leaving half a gigabyte behind is what stops a full volume from taking the rest of
      * the device down with it.
      */
     const val RESERVE_BYTES = 500L * 1024L * 1024L
@@ -30,7 +30,7 @@ object RecordingRules {
 
     /**
      * Less than this is not a recording. One six-second segment of even an audio-only channel is
-     * about 48 kB; #243's files of playlist text were 12 and 20 kB and were shown as ready to watch.
+     * about 48 kB; recordings that were only playlist text were 12 and 20 kB and were shown as ready to watch.
      */
     const val MIN_PLAYABLE_BYTES = 32L * 1024L
 

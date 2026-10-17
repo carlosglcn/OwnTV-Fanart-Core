@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import tv.own.owntv.core.database.entity.ChannelEntity
 
 /**
- * "Previous channel" (N2): the channel watched before the one on screen.
+ * "Previous channel": the channel watched before the one on screen.
  *
  * Fed by every full-screen tune ([LiveTuneController.start]); a browse preview is not watching and
  * never reaches it. Tuning the previous channel makes the two swap, so the key flips between them the

@@ -1,12 +1,12 @@
 package tv.own.owntv.core.timeshift
 
 /**
- * The arithmetic of a timeshift buffer (N4): how much to keep, when to refuse, when to reconnect.
+ * The arithmetic of a timeshift buffer: how much to keep, when to refuse, when to reconnect.
  * Pure, so the storage rules — the part that can fill a television's flash — are pinned by unit tests.
  */
 object TimeshiftRules {
 
-    /** Owner decision 25: whatever the window, at least this much of the device stays free. */
+    /** Whatever the window, at least this much of the device stays free. */
     const val FREE_FLOOR_BYTES = 1024L * 1024 * 1024
 
     /** Not worth starting at all below the floor plus this: the buffer would only ever hold seconds. */
@@ -73,9 +73,9 @@ object TimeshiftRules {
             (it is java.net.SocketException && it.message?.contains("ENETUNREACH") == true)
     }
 
-    /** A parked buffer (the user left the channel) is kept this long for a "Resume from buffer" (decision 25). */
+    /** A parked buffer (the user left the channel) is kept this long for a "Resume from buffer". */
     const val PARKED_GRACE_MS = 5 * 60_000L
 
-    /** Watching another channel this long deletes a parked buffer at once (decision 25). */
+    /** Watching another channel this long deletes a parked buffer at once. */
     const val REPLACED_AFTER_MS = 2 * 60_000L
 }

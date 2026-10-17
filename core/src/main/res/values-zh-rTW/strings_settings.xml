@@ -18,9 +18,7 @@
     <string name="settings_movies_keep_watching_description">在主打內容列顯示可繼續播放的電影資訊卡。</string>
     <string name="settings_series_keep_watching">在「繼續觀看」中顯示影集</string>
     <string name="settings_series_keep_watching_description">在主打內容列顯示可繼續播放的集數資訊卡。</string>
-    <!-- Translators: Toggle label for playing the highlighted Home item's video in the hero row. -->
     <string name="settings_hero_preview">在主打內容列播放影片</string>
-    <!-- Translators: Description of the hero-row video preview toggle. -->
     <string name="settings_hero_preview_description">稍候片刻後播放所選項目的影片預覽。瀏覽主畫面時若要節省電力與記憶體，請關閉。</string>
     <string name="settings_android_tv_home">Android TV 主畫面</string>
     <string name="settings_android_tv_home_description">在電視主畫面顯示「繼續觀看」和最近觀看的直播頻道。</string>
@@ -30,11 +28,8 @@
     <string name="settings_done_check">完成 ✓</string>
     <string name="settings_mode"><xliff:g id="mode">%1$s</xliff:g></string>
     <string name="settings_hidden">已隱藏</string>
-    <string name="settings_nav_dynamic_description">動態 — 圖示會依目前啟用的播放清單所提供的內容調整。主畫面和設定一律顯示。</string>
-    <string name="settings_nav_static_description">靜態 — 手動選擇要在下方顯示的圖示。</string>
     <string name="settings_static">靜態</string>
     <string name="settings_dynamic">動態</string>
-    <string name="settings_http_proxy">HTTP 代理伺服器</string>
     <string name="settings_use_proxy">使用代理伺服器</string>
     <string name="settings_proxy_description">透過 HTTP 代理伺服器傳送所有 OwnTV 流量及播放內容。</string>
     <string name="settings_host">主機</string>
@@ -102,8 +97,6 @@
     <string name="settings_show_weather_description">在頂端列顯示目前天氣。</string>
     <string name="settings_custom_location">自訂位置</string>
     <string name="settings_custom_location_description">覆寫天氣所使用的城市。留空可自動偵測，或輸入城市（例如 London）或「lat,lon」（例如 51.5,-0.12）。使用 VPN 時特別實用，因為自動偵測可能會判定為伺服器所在的城市。</string>
-    <string name="settings_use_device_location">使用此裝置的位置</string>
-    <string name="settings_use_device_location_description">天氣會跟隨手機所在的位置。關閉後可自行輸入城市。</string>
     <string name="settings_temperature_unit">溫度單位</string>
     <string name="settings_temperature_description">以攝氏或華氏顯示溫度。</string>
     <string name="settings_auto">自動</string>
@@ -167,7 +160,6 @@
     <string name="settings_quick_hdr">HDR（僅 mpv）</string>
     <string name="settings_quick_autoplay">自動播放</string>
     <string name="settings_quick_check_update">檢查更新</string>
-    <string name="settings_search_hint">搜尋設定…</string>
     <string name="settings_language">語言</string>
     <string name="settings_language_description">應用程式顯示語言</string>
     <string name="settings_language_system_default">系統預設</string>
@@ -182,14 +174,10 @@
     <string name="settings_epg_sources_nav_description">新增 XMLTV 節目表來源供電視節目表使用</string>
     <string name="settings_customize">自訂分類與項目</string>
     <string name="settings_customize_nav_description">隱藏及取消隱藏項目、重新命名及排序分類</string>
-    <string name="settings_sidebar_description_root">依播放清單自動調整側邊圖示，或隱藏特定圖示</string>
     <string name="settings_ch_paging">遙控器捷徑</string>
     <string name="settings_ch_paging_description">將遙控器的空閒按鍵指派給導覽、播放和瀏覽操作。必要的導覽按鍵會保持受保護。</string>
-    <!-- Translators: Settings navigation label for the long-press content menus. -->
     <string name="settings_content_menus_title">長按選單</string>
-    <!-- Translators: Description of the long-press content menus settings. -->
     <string name="settings_content_menus_description">重新排列頻道、電影、影集與分集選單中的動作</string>
-    <!-- Translators: Hint shown above the list when arranging a long-press menu. -->
     <string name="settings_content_menus_hint">長按「確定」拿起某個動作，再用上下鍵移動，再次按「確定」放下。</string>
     <string name="settings_browsing_lists">瀏覽與清單</string>
     <string name="settings_browsing_description">記住電視直播、電影和影集中的上一個分類及項目</string>
@@ -198,7 +186,6 @@
     <string name="settings_metadata_root_description">電影和影集的海報、劇情簡介、演員與評分</string>
     <string name="settings_download_folder">下載資料夾</string>
     <string name="settings_backup_restore">備份與還原</string>
-    <string name="settings_backup_restore_description">匯出或還原使用者檔案與來源</string>
     <string name="settings_clear_history">清除觀看記錄</string>
     <string name="settings_appearance_group">外觀</string>
     <string name="settings_theme">主題</string>
@@ -214,13 +201,10 @@
     <string name="settings_focus_width_thick">粗</string>
     <string name="settings_focus_width_extra">超粗</string>
     <string name="settings_focus_highlight_sample">已選取</string>
-    <string name="settings_glass_effect">玻璃效果</string>
-    <string name="settings_glass_description">半透明毛玻璃面板、背景圖片和透明度</string>
     <string name="settings_ui_zoom">UI 縮放</string>
     <string name="settings_ui_zoom_description">縮放整個介面</string>
     <string name="settings_animations">動畫</string>
     <string name="settings_animations_description">開啟或關閉介面動畫 — 關閉後在低階電視盒上會更流暢俐落</string>
-    <string name="settings_animations_description_mobile">開啟或關閉介面動畫 — 關閉後在較舊的手機和平板上會更流暢俐落</string>
     <string name="settings_weather_description_root">頂端列天氣資訊方塊：顯示或隱藏、自訂位置，以及攝氏／華氏。</string>
     <string name="settings_playback_group">播放</string>
     <string name="settings_live_preview_description">焦點移至頻道時自動播放</string>
@@ -229,10 +213,8 @@
     <string name="settings_mini_player_root">迷你播放器</string>
     <string name="settings_mini_player_root_description">已停駐迷你播放器的大小和位置</string>
     <string name="settings_hdr_description">影片和電視支援時使用 HDR 輸出。僅適用於 mpv：ExoPlayer 引擎不支援此設定，一律依原樣輸出串流的 HDR。</string>
-    <string name="settings_hdr_description_mobile">影片和螢幕支援時使用 HDR 輸出。僅適用於 mpv：ExoPlayer 引擎不支援此設定，一律依原樣輸出串流的 HDR。</string>
     <string name="settings_auto_frame_rate">自動影格率</string>
     <string name="settings_auto_frame_rate_description">在全螢幕播放電視直播和隨選影片時，將電視更新率配合影片調整為 24/25/50/60 fps，並在結束時還原。如果您的電視或接收器每次切換頻道時都會重新進行 HDMI 交握並產生明顯干擾，請關閉此功能。</string>
-    <string name="settings_auto_frame_rate_description_mobile">在全螢幕播放電視直播和隨選影片時，將螢幕更新率配合影片調整為 24/25/50/60 fps，並在結束時還原。如果影片開始播放時螢幕閃爍或變黑，請關閉此功能。</string>
     <string name="settings_afr_pause">切換顯示時暫停</string>
     <string name="settings_afr_pause_description">僅限電影。電視需要重新同步到新的顯示模式時，電影會等待這段時間，以免開頭在黑畫面中錯過。無縫切換不會暫停。</string>
     <string name="settings_afr_resolution">配合解析度</string>
@@ -241,7 +223,6 @@
     <string name="settings_surround_description_mobile">針對連接到此裝置的真正 5.1/7.1 接收器，將 Dolby/DTS 解碼為環繞音效（5.1/7.1）。使用內建揚聲器、耳機或立體聲聲霸時請保持關閉 — 多聲道音訊可能落後於畫面。如果音訊逐漸不同步，請微調播放器的「音訊」選單 → A/V 同步。</string>
     <string name="settings_audio_passthrough">Dolby/DTS 直通</string>
     <string name="settings_audio_passthrough_description">開啟：當電視、聲霸或擴大機表示可以播放時，Dolby 和 DTS 不經解碼直接傳送（ExoPlayer）。關閉：由應用程式解碼，在環繞音效允許時仍為環繞音效。mpv 一律解碼。夜間模式或音量平衡開啟時不使用。</string>
-    <string name="settings_audio_passthrough_description_mobile">開啟：當連接的電視或擴大機表示可以播放時，Dolby 和 DTS 不經解碼直接傳送（ExoPlayer）。關閉：由應用程式解碼，在環繞音效允許時仍為環繞音效。mpv 一律解碼。夜間模式或音量平衡開啟時不使用。</string>
     <string name="settings_night_mode">夜間模式</string>
     <string name="settings_night_mode_description">調低響亮的場景、調高輕聲的對白，適合低音量觀看。</string>
     <string name="settings_volume_leveling">音量平衡</string>
@@ -252,7 +233,6 @@
     <string name="settings_mobile_data_quality_description">在計量付費的連線上，最多播放此畫質。關閉：與 Wi-Fi 相同。</string>
     <string name="settings_tunneled_playback">通道播放（實驗性）</string>
     <string name="settings_tunneled_playback_description">ExoPlayer 直播電視：由電視本身的硬體保持影音同步，減輕處理器負擔。僅部分電視支援；若頻道因此播放失敗，會自動關閉。開啟期間無法微調音訊同步。</string>
-    <string name="settings_tunneled_playback_description_mobile">ExoPlayer 直播電視：由裝置本身的硬體保持影音同步，減輕處理器負擔。僅部分裝置支援；若頻道因此播放失敗，會自動關閉。開啟期間無法微調音訊同步。</string>
     <string name="settings_tunneled_playback_failed">此裝置上有頻道因此播放失敗，已自動關閉。</string>
     <string name="settings_autoplay_next">自動播放下一集</string>
     <string name="settings_autoplay_next_description">一集播放完畢時自動開始播放下一集 — 並在本季結束後接續下一季。回看也會接續播放下一個節目。</string>
@@ -262,13 +242,9 @@
     </plurals>
     <string name="settings_catchup_unavailable">此播放清單沒有可用的回看頻道</string>
     <string name="settings_device">裝置</string>
-    <string name="settings_video_player">影片播放器設定</string>
-    <string name="settings_video_player_description">解碼器、字幕、同步</string>
     <string name="settings_playback_error_log">錯誤記錄</string>
     <string name="settings_playback_speed">播放速度</string>
     <string name="settings_player_zoom">播放器縮放</string>
-    <string name="settings_playback_error_description">應用程式當機與播放失敗記錄 — 可供查看或回報的詳細資料</string>
-    <string name="settings_network_group">網路</string>
     <string name="settings_app_group">應用程式</string>
     <string name="settings_app_startup">應用程式啟動</string>
     <string name="settings_app_startup_description">OwnTV 啟動時開啟的內容</string>
@@ -277,7 +253,6 @@
     <string name="settings_update_startup">啟動時檢查更新</string>
     <string name="settings_update_startup_description">應用程式開啟時檢查是否有新版本</string>
     <string name="settings_about">關於</string>
-    <string name="settings_about_description">版本、授權條款和專案資訊</string>
     <string name="settings_live_latency">直播延遲</string>
     <string name="settings_no_settings_match">沒有符合「<xliff:g id="query">%1$s</xliff:g>」的設定</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
@@ -299,11 +274,8 @@
     <string name="settings_color_picker">色彩選擇器</string>
     <string name="settings_use_color">使用此色彩</string>
     <string name="settings_about_version">版本 <xliff:g id="version">%1$s</xliff:g></string>
-    <string name="settings_about_description_full_mobile">專屬於您的 Android IPTV 播放器 — 免費、開放原始碼且僅提供播放功能的應用程式。本應用程式不提供任何頻道或內容；請自行加入您可合法存取的來源。</string>
-    <string name="settings_about_license">© 2026 OwnTV · GPLv3 授權條款</string>
     <string name="settings_join_telegram">加入我們的 Telegram</string>
     <string name="settings_telegram_qr">Telegram 群組 QR 圖碼</string>
-    <string name="settings_telegram_scan">使用手機掃描 QR 圖碼即可加入，或開啟上方連結。</string>
     <string name="settings_contributions">歡迎在 GitHub 貢獻程式碼、回報錯誤或給予星號。</string>
     <string name="settings_playback_error_description_full">最近一次當機與最近的播放失敗記錄（最新的列在最前面）。回報問題時請附上這些詳細資料。</string>
     <string name="settings_loading">載入中…</string>
@@ -311,15 +283,8 @@
     <string name="settings_live">直播</string>
     <string name="settings_vod">VOD</string>
     <string name="settings_clear_log">清除記錄</string>
-    <string name="settings_browsing_title">瀏覽與清單</string>
     <string name="settings_browsing_description_full">返回電視直播、電影和影集時要回到的位置。</string>
-    <string name="settings_glass_surfaces">玻璃效果介面</string>
-    <string name="settings_glass_surfaces_description">選擇應用程式中要以玻璃效果呈現的部分。關閉所有介面會停用玻璃效果。</string>
-    <string name="settings_all_surfaces_on">所有介面：開啟</string>
-    <string name="settings_all_surfaces_off">所有介面：關閉</string>
-    <string name="settings_surface_toggle"><xliff:g id="surface">%1$s</xliff:g>：<xliff:g id="state">%2$s</xliff:g></string>
-    <string name="settings_transparency_description">面板可透出背景的程度（<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%）。數值越高越不透明。</string>
-    <string name="settings_catchup_description">回看時間戳記的傳送方式。使用裝置時區，或設定供應商伺服器所需的時差。</string>
+    <string name="settings_catchup_timezone_description">回看時間戳記的傳送方式。自動會使用供應商伺服器回報的時區，若未回報則使用裝置時區。也可以選擇裝置時區，或自行設定時差。</string>
     <string name="settings_manual">手動</string>
     <string name="settings_theme_dark">深色</string>
     <string name="settings_theme_light">淺色</string>
@@ -342,34 +307,16 @@
     <string name="settings_group_summary_appearance">主題、強調色、玻璃、動態和字級</string>
     <string name="settings_group_summary_layout">側邊欄、面板、清單和主畫面</string>
     <string name="settings_group_summary_content_metadata">名稱、圖片和字幕服務</string>
-    <string name="settings_group_summary_playback">影片播放器及其錯誤記錄</string>
-    <!-- Translators: Video player settings: name of the section holding volume, audio language and surround settings. -->
     <string name="settings_vp_section_sound">聲音</string>
-    <!-- Translators: Video player settings: one-line summary under the "Subtitles" section name. -->
-    <string name="settings_vp_section_subtitles_summary">大小、顏色、位置</string>
-    <!-- Translators: Video player settings: one-line summary under the "Diagnostics" section name. -->
-    <string name="settings_vp_section_diagnostics_summary">詳細播放器記錄</string>
     <string name="settings_vp_cat_player">播放器</string>
-    <string name="settings_vp_cat_player_summary">使用哪個播放器、依播放清單、外部應用程式</string>
     <string name="settings_vp_cat_picture">畫面</string>
-    <string name="settings_vp_cat_picture_summary">解碼器、HDR、畫質、縮放</string>
     <string name="settings_vp_cat_frame_rate">影格速率</string>
     <string name="settings_vp_cat_frame_rate_summary">讓螢幕配合影片</string>
     <string name="settings_vp_cat_streaming">串流</string>
-    <string name="settings_vp_cat_streaming_summary">緩衝、逾時、重新連線</string>
-    <string name="settings_vp_cat_live_summary">頻道號碼、暫停與倒轉</string>
     <string name="settings_vp_cat_live_tuning">直播調整</string>
-    <string name="settings_vp_cat_live_tuning_summary">延遲、預先緩衝、啟動時間</string>
-    <string name="settings_vp_cat_controls">控制</string>
-    <string name="settings_vp_cat_controls_summary">快轉與倒轉間隔</string>
     <string name="settings_vp_cat_multiview">多畫面與迷你播放器</string>
     <string name="settings_vp_cat_multiview_summary_mobile">同時觀看多個直播頻道</string>
-    <string name="settings_vp_cat_sound_summary">音量、環繞音效、夜間模式、同步</string>
     <string name="settings_vp_cat_languages">語言與字幕</string>
-    <string name="settings_vp_cat_languages_summary">音訊與字幕語言、字幕樣式</string>
-    <string name="settings_vp_cat_resume">繼續播放與自動播放</string>
-    <string name="settings_vp_cat_resume_summary">從哪裡開始、下一集</string>
-    <string name="settings_group_summary_network">用於串流連線的 Proxy 和 DNS</string>
     <string name="settings_group_summary_app">語言、啟動、更新和應用程式資訊</string>
     <string name="settings_group_quick">快捷</string>
     <string name="settings_group_summary_quick">最常用的開關</string>
@@ -381,7 +328,6 @@
     <string name="settings_search_keywords_epg">XMLTV 節目表 來源 節目</string>
     <string name="settings_search_keywords_logos">頻道 標誌 圖示 XMLTV 節目表 picon 播放清單</string>
     <string name="settings_search_keywords_customize">隱藏 取消隱藏 重新命名 重新排序 分類</string>
-    <string name="settings_search_keywords_sidebar">側邊欄 圖示 動態 靜態 隱藏 顯示 調整 播放清單</string>
     <string name="settings_search_keywords_ch">頻道 向上 向下 跳轉 翻頁 清單 分類 頻道</string>
     <string name="settings_search_keywords_browsing">記住 位置 捲動 分類 上一個項目 直播 電影 影集 重設 頂端</string>
     <string name="settings_search_keywords_home">列 主打內容 重新排序 篩選</string>
@@ -457,10 +403,8 @@
     <string name="settings_language_vietnamese">越南文</string>
     <string name="settings_hardware_decoding">硬體解碼</string>
     <string name="settings_hardware_decoding_description">使用電視的硬體解碼器。如果部分串流播放不順或出現影像瑕疵，請關閉此功能。</string>
-    <string name="settings_hardware_decoding_description_mobile">使用裝置的硬體解碼器。如果部分串流播放不順或出現影像瑕疵，請關閉此功能。</string>
     <string name="settings_software_decode_above_1080p">1080p 以上軟體解碼</string>
     <string name="settings_software_decode_above_1080p_description">當電視的硬體解碼器關閉或失敗時，以軟體播放 4K 及其他 1080p 以上的影片。需要快速的處理器：在大多數電視上會卡頓。</string>
-    <string name="settings_software_decode_above_1080p_description_mobile">當裝置的硬體解碼器關閉或失敗時，以軟體播放 4K 及其他 1080p 以上的影片。需要快速的處理器：在許多裝置上會卡頓。</string>
     <string name="settings_movies_series_player">電影與影集播放器</string>
     <string name="settings_live_tv_player">電視直播播放器</string>
     <string name="settings_engine_order">先 <xliff:g id="first">%1$s</xliff:g>，後 <xliff:g id="second">%2$s</xliff:g></string>
@@ -470,37 +414,21 @@
     <string name="settings_external_player">外部播放器</string>
     <string name="settings_default_zoom">預設縮放</string>
     <string name="settings_default_zoom_description">開始播放時套用的長寬比／縮放設定。</string>
-    <!-- Translators: Setting label for the volume level playback starts at. -->
     <string name="settings_default_volume">預設音量</string>
-    <!-- Translators: Description of the default volume setting. -->
     <string name="settings_default_volume_description">開始播放時套用的音量。超過 100%% 時，聲音較小的串流會被放大。</string>
-    <!-- Translators: Settings-row title for forgetting the zoom saved for individual items. -->
     <string name="settings_reset_saved_zoom">重設已儲存的縮放</string>
-    <!-- Translators: Description of the reset-saved-zoom setting row. -->
     <string name="settings_reset_saved_zoom_description">在播放器中變更縮放後，該設定會為對應的頻道、電影或影集儲存下來。重設後，所有內容會重新依照預設縮放。</string>
-    <!-- Translators: Confirmation dialog title before forgetting the saved per-item zoom. -->
     <string name="settings_reset_saved_zoom_confirm">要重設已儲存的縮放嗎？</string>
-    <!-- Translators: Confirmation dialog body before forgetting the saved per-item zoom. -->
     <string name="settings_reset_saved_zoom_confirm_description">所有頻道、電影與影集會恢復為預設縮放。已儲存的音量會保留。你隨時可以在播放器中再次個別設定某一項。</string>
-    <!-- Translators: Settings-row title for forgetting the volume saved for individual items. -->
     <string name="settings_reset_saved_volume">重設已儲存的音量</string>
-    <!-- Translators: Description of the reset-saved-volume setting row. -->
     <string name="settings_reset_saved_volume_description">在播放器中變更音量後，該設定會為對應的頻道、電影或影集儲存下來。重設後，所有內容會重新依照預設音量。</string>
-    <!-- Translators: Confirmation dialog title before forgetting the saved per-item volume. -->
     <string name="settings_reset_saved_volume_confirm">要重設已儲存的音量嗎？</string>
-    <!-- Translators: Confirmation dialog body before forgetting the saved per-item volume. -->
     <string name="settings_reset_saved_volume_confirm_description">所有頻道、電影與影集會恢復為預設音量。已儲存的縮放設定會保留。你隨時可以在播放器中再次個別設定某一項。</string>
-    <!-- Translators: Settings row that forgets every per-item audio-sync offset. -->
     <string name="settings_reset_saved_audio_delay">重設已儲存的音訊／視訊同步</string>
-    <!-- Translators: Description of the reset-saved-audio-sync row. -->
     <string name="settings_reset_saved_audio_delay_description">在播放器中選擇「記住此延遲」會為該頻道、電影或集數儲存音訊同步。重設後所有內容將重新依照上方的設定。</string>
-    <!-- Translators: Title of the confirmation dialog for resetting saved audio sync. -->
     <string name="settings_reset_saved_audio_delay_confirm">要重設已儲存的音訊／視訊同步嗎？</string>
-    <!-- Translators: Body of the confirmation dialog for resetting saved audio sync. -->
     <string name="settings_reset_saved_audio_delay_confirm_description">每個頻道、電影與集數都會回到上方的音訊同步。已儲存的縮放與音量會保留。你隨時可以在播放器中重新單獨設定。</string>
-    <!-- Translators: Setting label for how far rewind/forward jumps in a movie or episode. -->
     <string name="settings_seek_step">快轉間隔</string>
-    <!-- Translators: Description of the seek step setting. -->
     <string name="settings_seek_step_description">在電影或影集中，倒轉與快轉一次移動的時間長度。</string>
     <string name="settings_vod_buffer">電影緩衝</string>
     <string name="settings_vod_buffer_description">電影、劇集和回看要預先載入多少。自動會使用適合本裝置的值。緩衝越長越能撐過不穩定的網路；但上限仍由裝置記憶體決定，因此高位元率電影可能緩衝得比所選少。</string>
@@ -509,9 +437,7 @@
     <string name="settings_vod_reconnects">重新連線次數</string>
     <string name="settings_vod_reconnects_description">電影或劇集中斷連線後，在顯示錯誤前從停止處重新開啟的次數。穩定播放一分鐘後次數會恢復。</string>
     <string name="settings_vod_network_auto">自動</string>
-    <!-- Translators: Setting label for how far rewind/forward jumps inside a live channel's archive. -->
     <string name="settings_live_rewind_step">直播回看間隔</string>
-    <!-- Translators: Description of the live rewind step setting. -->
     <string name="settings_live_rewind_step_description">直播頻道上倒轉和快轉的幅度：在回看封存中，或在「暫停和倒轉直播」儲存的副本中。</string>
     <string name="settings_resume_playback">繼續播放</string>
     <string name="settings_resume_playback_description">電影或集數有已儲存的播放位置時要執行的動作。</string>
@@ -547,7 +473,6 @@
     <string name="settings_live_latency_bitrate_note">在位元率非常高的頻道上（尤其是 4K），由於記憶體一次能保存的影片量有限，緩衝的時間可能比你設定的更短。</string>
     <string name="settings_channel_numbers">頻道號碼</string>
     <string name="settings_channel_numbers_description">在電視直播清單、頻道清單疊加層和播放器中，於名稱旁顯示供應商的頻道號碼；在全螢幕播放期間，也可使用遙控器輸入號碼直接跳至該頻道（按「確定」可立即轉台，按「返回」則取消）。關閉後會隱藏所有號碼並忽略數字鍵；不會遺失任何資料，重新開啟即可恢復顯示。</string>
-    <string name="settings_channel_numbers_description_mobile">在電視直播清單和播放器中，於名稱旁顯示供應商的頻道號碼。關閉後會隱藏所有號碼；不會遺失任何資料，重新開啟即可恢復顯示。</string>
     <string name="settings_live_left_right_rewinds">左右鍵倒轉直播</string>
     <string name="settings_live_left_right_rewinds_description">控制列隱藏時，在可以倒轉的頻道上（支援回看，或由「暫停和倒轉直播」儲存），左右鍵會倒轉和快轉，而不是開啟頻道清單和觀看記錄。</string>
     <string name="settings_timeshift">暫停和倒轉直播</string>
@@ -559,7 +484,6 @@
     <string name="settings_diagnostics">診斷</string>
     <string name="settings_measured_stats">實測串流統計資料</string>
     <string name="settings_measured_stats_description">在串流資訊疊加層中顯示即時 fps、位元率和掉格數（在疊加層開啟期間進行測量，適用於未宣告這些數值的串流）。只有低階電視發生停頓時才需要關閉；這絕不會影響實際視訊，只會影響診斷數值。</string>
-    <string name="settings_measured_stats_description_mobile">在串流資訊疊加層中顯示即時 fps、位元率和掉格數（在疊加層開啟期間進行測量，適用於未宣告這些數值的串流）。只有低階裝置發生停頓時才需要關閉；這絕不會影響實際視訊，只會影響診斷數值。</string>
     <string name="settings_none_auto">無／自動</string>
     <string name="settings_view_grid">網格</string>
     <string name="settings_view_list">清單</string>
@@ -582,7 +506,6 @@
     <string name="settings_movies_player_description">mpv（建議）支援的格式最廣——DTS/TrueHD 音訊、少見的檔案。在某些電視上，ExoPlayer 能播放 mpv 開不了的串流，但它無法解碼 DTS/TrueHD 音訊。組合選項會在第一個播放器失敗時自動改試另一個；單一播放器選項則從不改試，若另一個播放器在你的電視上本來就用不了，這樣可省下幾秒鐘黑畫面。</string>
     <string name="settings_movies_player_description_mobile">mpv（建議）支援的格式最廣——DTS/TrueHD 音訊、少見的檔案。在某些裝置上，ExoPlayer 能播放 mpv 開不了的串流，但它無法解碼 DTS/TrueHD 音訊。組合選項會在第一個播放器失敗時自動改試另一個；單一播放器選項則從不改試，若另一個播放器在你的裝置上本來就用不了，這樣可省下幾秒鐘黑畫面。</string>
     <string name="settings_live_player_description">ExoPlayer（建議）開啟頻道快得多，也是唯一支援直播字幕的播放器。mpv 能播放 ExoPlayer 開不了的頻道，包括一些音訊格式少見的頻道。組合選項會在第一個播放器失敗時自動改試另一個；單一播放器選項則從不改試，若另一個播放器在你的電視上本來就用不了，這樣可省下幾秒鐘黑畫面。在播放器中手動切換過的頻道，兩種情況下都會保留你的選擇。</string>
-    <string name="settings_live_player_description_mobile">ExoPlayer（建議）開啟頻道快得多，也是唯一支援直播字幕的播放器。mpv 能播放 ExoPlayer 開不了的頻道，包括一些音訊格式少見的頻道。組合選項會在第一個播放器失敗時自動改試另一個；單一播放器選項則從不改試，若另一個播放器在你的裝置上本來就用不了，這樣可省下幾秒鐘黑畫面。在播放器中手動切換過的頻道，兩種情況下都會保留你的選擇。</string>
     <string name="settings_reset_player_choices_description">在播放器中將單一電影或影集在 mpv 與 ExoPlayer 之間切換後，該選擇會儲存下來供下次使用。重設後，所有內容會重新依照上方的設定。直播頻道已儲存的選擇會保留。</string>
     <string name="settings_reset_player_choices_none">未儲存任何選擇</string>
     <plurals name="settings_reset_player_choices_count">
@@ -629,18 +552,13 @@
     <string name="settings_download_remote_title">在其他裝置上下載</string>
     <string name="settings_download_remote_description">在同一 Wi-Fi 下任何有瀏覽器的裝置（手機、電腦或另一台電視）上掃描 QR 碼（或開啟網址），輸入此 PIN，下載你的備份檔案並妥善保存。</string>
     <string name="settings_preparing_backup">正在準備備份…</string>
-    <string name="settings_background_on">背景圖片：開啟</string>
-    <string name="settings_background_off">背景圖片：關閉</string>
     <string name="settings_ui_zoom_range">縮放整個介面（<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%）。</string>
     <string name="settings_low_zoom_warning_title">⚠️ 低縮放比例警告</string>
     <string name="settings_low_zoom_warning"><xliff:g id="zoom">%1$d</xliff:g>%% 的縮放比例會同時在畫面上顯示更多項目。在記憶體有限的裝置上（例如 2 GB 電視棒），這可能導致應用程式不穩定或當機，尤其是播放清單和電子節目表資料量龐大時。\n\n按「確定」繼續，或按「返回」維持在 <xliff:g id="safe_zoom">%2$d</xliff:g>%%。</string>
     <string name="settings_low_zoom_warning_mobile"><xliff:g id="zoom">%1$d</xliff:g>%% 的縮放比例會同時在畫面上顯示更多項目。在記憶體有限的裝置上，這可能導致應用程式不穩定或當機，尤其是播放清單和電子節目表資料量龐大時。\n\n選擇「取消」維持在 <xliff:g id="safe_zoom">%2$d</xliff:g>%%。</string>
     <string name="settings_low_zoom_accept">我瞭解並接受風險</string>
     <string name="settings_surface_transparency"><xliff:g id="percent">%1$d</xliff:g>%%</string>
-    <string name="settings_surface_count_all">介面區塊：全部</string>
-    <plurals name="settings_surface_count">
-        <item quantity="other">已啟用 <xliff:g id="count">%1$d</xliff:g>／<xliff:g id="total">%2$d</xliff:g> 個介面區塊</item>
-    </plurals>
+    <string name="settings_catchup_timezone_automatic">自動</string>
     <string name="settings_catchup_timezone_device">裝置</string>
     <string name="settings_catchup_player_ask">一律詢問</string>
     <string name="settings_catchup_player_internal">OwnTV 播放器</string>
@@ -658,23 +576,6 @@
     <string name="settings_history_movies">電影</string>
     <string name="settings_history_series">影集</string>
     <string name="settings_history_all">全部</string>
-    <string name="settings_decrease">–</string>
-    <string name="settings_increase">+</string>
-    <string name="settings_glass_effect_title">玻璃效果</string>
-    <string name="settings_glass_effect_description">在背景相片或應用程式本身的背景上顯示半透明霧面面板。</string>
-    <string name="settings_transparency_title">透明度</string>
-    <string name="settings_blur_title">模糊／霧面</string>
-    <string name="settings_blur_description_enabled">背景圖的霧面程度（<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%）。僅套用於背景圖片。</string>
-    <string name="settings_blur_description_disabled">背景圖的霧面程度（<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%）。僅套用於背景圖片。請設定背景圖片以啟用。</string>
-    <string name="settings_glass_surface_panels">內容面板</string>
-    <string name="settings_glass_surface_sidebar">側邊欄</string>
-    <string name="settings_glass_surface_preview">預覽窗格</string>
-    <string name="settings_glass_surface_dialogs">對話方塊與快顯視窗</string>
-    <string name="settings_glass_surface_topbar">頂端列</string>
-    <string name="settings_glass_surface_cards">卡片</string>
-    <string name="settings_glass_surface_miniplayer">迷你播放器</string>
-    <string name="settings_glass_surface_player_controls">播放器控制項</string>
-    <string name="settings_glass_surface_toasts">螢幕訊息</string>
     <string name="settings_browsing_last_category">記住上次的分類</string>
     <string name="settings_browsing_last_category_description">重新開啟區段時回到您離開時的分類，而非「全部」。</string>
     <string name="settings_browsing_last_item">記住上次的項目</string>
@@ -748,7 +649,6 @@
     <string name="settings_span_ch_help">CH+ / CH− 翻一頁。長按 CH+ / CH− 跳到最後一項或第一項。</string>
     <string name="settings_customize_metadata_separator">"  ·  "</string>
     <string name="settings_sources_title">來源</string>
-    <string name="settings_sources_description">所有使用者檔案共用這些來源。</string>
     <string name="settings_sources_empty">目前沒有來源。請新增 M3U 或 Xtream 來源。</string>
     <string name="settings_sources_add">新增來源</string>
     <string name="settings_sources_import_failed">匯入失敗</string>
@@ -826,7 +726,6 @@
     <string name="settings_epg_sources_name_hint">例如：英國節目表</string>
     <string name="settings_epg_sources_url_hint">https://…/epg.xml(.gz)</string>
     <string name="settings_epg_sources_user_agent_hint">留白以使用預設值</string>
-    <string name="settings_epg_sources_description">用來填入電視節目表的 XMLTV 節目表資料來源。新增後會自動同步，並與播放清單中的頻道合併。</string>
     <string name="settings_epg_sources_delete_title">要刪除「<xliff:g id="name">%1$s</xliff:g>」嗎？</string>
     <string name="settings_epg_sources_delete_message">移除此電子節目表來源及其節目表資料。您的頻道會保留。</string>
     <string name="settings_epg_sources_syncing_percent">正在同步 <xliff:g id="percent">%1$d</xliff:g>%%</string>
@@ -883,8 +782,6 @@
     <string name="settings_backup_pin_incorrect">PIN 不正確。</string>
     <string name="settings_backup_pin_locked">已由 PIN 鎖定</string>
     <string name="settings_backup_unlock">解鎖</string>
-    <string name="settings_backup_export_button">匯出備份</string>
-    <string name="settings_backup_restore_button">還原備份</string>
     <string name="settings_backup_continue">繼續</string>
     <string name="settings_backup_encrypt_export">加密並匯出</string>
     <string name="settings_backup_export_unencrypted">不加密並匯出</string>
@@ -1006,7 +903,6 @@
     <string name="settings_move_category_keep">也保留在「<xliff:g id="name">%1$s</xliff:g>」中</string>
     <string name="settings_move_category_action">移動</string>
     <string name="settings_dns_description">使用自訂 DNS 伺服器進行網域查詢</string>
-    <string name="settings_dns_custom">自訂 DNS</string>
     <string name="settings_dns_toggle_description">透過自訂 DNS 伺服器解析 OwnTV 的所有網域查詢。</string>
     <string name="settings_dns_use_custom">使用自訂 DNS</string>
     <string name="settings_dns_server_missing">自訂 DNS 已啟用，但尚未設定伺服器。請輸入伺服器位址並選取「儲存」，或關閉此功能。</string>
@@ -1056,13 +952,9 @@
     <string name="settings_live_tune_timeout_description">若直播頻道在此時間內仍未出現畫面，OwnTV 會停止嘗試並告知你，而不是一邊逐一試遍所有播放器、一邊留著黑畫面。選擇「永不」會一直嘗試，在供應商已下架的頻道上可能遠超過一分鐘。供應商自己要求的等待時間不計入其中。</string>
     <string name="settings_live_preroll_per_playlist">各播放清單的預先緩衝</string>
     <string name="settings_live_preroll_per_playlist_description">為某個播放清單覆寫上述設定，同時讓其他播放清單保持快速啟動。</string>
-    <!-- Translators: Title of the per-playlist Live TV engine override row. -->
     <string name="settings_live_engine_per_playlist">依播放清單設定電視直播播放器</string>
-    <!-- Translators: Description of the per-playlist Live TV engine override row. -->
     <string name="settings_live_engine_per_playlist_description">為某個播放清單覆寫上述設定，適用於頻道只在其中一個播放器上表現良好的供應商。</string>
-    <!-- Translators: Title of the per-playlist Live latency override row. -->
     <string name="settings_live_latency_per_playlist">依播放清單設定直播延遲</string>
-    <!-- Translators: Description of the per-playlist Live latency override row. -->
     <string name="settings_live_latency_per_playlist_description">為某個播放清單覆寫上述設定，適用於需要比其他供應商更大或更小緩衝的供應商。</string>
     <string name="settings_catchup_timezone_per_playlist">依播放清單設定回看時區</string>
     <string name="settings_catchup_timezone_per_playlist_description">為單一播放清單覆寫上方的時區，適用於存檔依另一個時鐘運作的供應商。</string>
@@ -1100,7 +992,6 @@
     <string name="settings_playback_kind_error">錯誤</string>
     <string name="settings_playback_kind_event">事件</string>
     <string name="settings_playback_kind_report">報告</string>
-    <string name="settings_playback_entry_with_kind"><xliff:g id="date">%1$s</xliff:g> · <xliff:g id="kind">%2$s</xliff:g> · <xliff:g id="engine">%3$s</xliff:g> · <xliff:g id="stream_type">%4$s</xliff:g></string>
     <string name="settings_export">匯出</string>
     <string name="settings_detailed_playback_logging_description">在 Logcat 和匯出的報告中，完整記錄直播引擎的所做所為——包括每一次轉台、備援與重新連線。除非你在追查問題，否則請保持關閉；它絕不會改變播放，只會影響記錄下來的內容多寡。</string>
     <string name="settings_live_preroll_playlist_picker">哪個播放清單？</string>
@@ -1157,52 +1048,12 @@
     <string name="settings_font_system_sans">系統無襯線字型</string>
     <string name="settings_font_monospace">等寬字型</string>
     <string name="settings_subtitle_font">字幕字型</string>
-    <string name="settings_glass_preset_title">外觀預設</string>
-    <string name="settings_glass_preset_clear">清透</string>
-    <string name="settings_glass_preset_balanced">平衡</string>
-    <string name="settings_glass_preset_tinted">著色</string>
-    <string name="settings_glass_preset_custom">自訂</string>
-    <string name="settings_glass_preset_clear_description">使用適度霧化，顯示更多桌布色彩。</string>
-    <string name="settings_glass_preset_balanced_description">建議的清晰度、層次感與可讀性。</string>
-    <string name="settings_glass_preset_tinted_description">為複雜或明亮背景提供更強的表面色彩。</string>
-    <string name="settings_glass_preset_custom_description">使用已儲存的透明度與模糊值。</string>
     <string name="settings_ambient_glow">環境光暈</string>
     <string name="settings_ambient_glow_description">為純色介面加入設定精靈風格的光暈</string>
     <string name="settings_ambient_glow_dialog_description">為非玻璃介面加入柔和的強調色光暈。啟用動畫時，慢速脈動會輕柔地呼吸。</string>
     <string name="settings_ambient_glow_effect">光暈</string>
     <string name="settings_ambient_glow_pulse">慢速脈動</string>
-    <string name="settings_glass_preset_ultra_clear">超清透</string>
-    <string name="settings_glass_preset_opaque">不透明</string>
-    <string name="settings_glass_preset_ultra_clear_description">以輕微霧化顯示最多桌布細節。</string>
-    <string name="settings_glass_preset_opaque_description">以最強霧化呈現最高面板密度。</string>
-    <string name="settings_glass_preset_aurora">極光</string>
-    <string name="settings_glass_preset_aurora_description">最薄的玻璃、最強的霧面——專為手機打造。</string>
-    <string name="settings_glass_highlight_title">高光強度</string>
-    <string name="settings_glass_highlight_description">調整聚焦玻璃的光線與邊緣。</string>
     <string name="settings_glass_live_preview">即時預覽</string>
-    <string name="settings_glass_screen_description">半透明毛玻璃面板、背景圖片和透明度</string>
-    <string name="settings_glass_master_description">在背景相片或應用程式本身的背景上顯示半透明霧面面板。</string>
-    <string name="settings_glass_background_image">選擇背景圖片</string>
-    <string name="settings_glass_background_blur_title">模糊／霧面</string>
-    <string name="settings_glass_section_appearance">外觀</string>
-    <string name="settings_glass_section_fine_tuning">進階選項</string>
-    <string name="settings_glass_section_behavior">行為</string>
-    <string name="settings_glass_surface_all">全部</string>
-    <string name="settings_glass_background_action_description">選擇背景圖片</string>
-    <string name="settings_glass_transparency_short_description">20–100 · 5</string>
-    <string name="settings_glass_blur_short_description">0–100 · 10</string>
-    <string name="settings_glass_highlight_short_description">調整聚焦玻璃的光線與邊緣。</string>
-    <string name="settings_glass_full_transparency_short">允許完全透明</string>
-    <string name="settings_glass_full_transparency_short_description">關閉自動可讀性下限，以獲得最通透的玻璃效果。</string>
-    <string name="settings_glass_depth_effects_short">深度與陰影</string>
-    <string name="settings_glass_depth_effects_short_description">啟用焦點移動光效、輕微視差與深度動態。</string>
-    <string name="settings_glass_shine_short">掠光</string>
-    <string name="settings_glass_shine_short_description">面板出現時，一道光帶掃過面板。</string>
-    <string name="settings_glass_reset_balanced">重設: 平衡</string>
-    <string name="settings_glass_full_transparency_title">允許完全透明</string>
-    <string name="settings_glass_full_transparency_description">關閉自動可讀性下限，以獲得最通透的玻璃效果。</string>
-    <string name="settings_glass_depth_title">深度與陰影</string>
-    <string name="settings_glass_depth_description">啟用焦點移動光效、輕微視差與深度動態。</string>
     <string name="settings_row_menu_pin">釘選至快捷</string>
     <string name="settings_row_menu_unpin">從快捷中移除</string>
     <string name="settings_row_menu_move_up">上移</string>
@@ -1210,8 +1061,6 @@
     <string name="settings_quick_empty_title">尚未釘選任何設定</string>
     <string name="settings_quick_empty_hint">在任一設定上長按 OK，然後選擇「釘選至快捷」。</string>
     <string name="settings_quick_empty_hint_touch">長按任一設定，然後選擇「釘選至快捷」。</string>
-    <string name="settings_results_title">搜尋結果</string>
-    <string name="settings_results_summary">無論藏在哪裡的相符項目，都帶著它的路徑</string>
     <plurals name="settings_setting_count">
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> 項設定</item>
     </plurals>
@@ -1224,45 +1073,29 @@
     <string name="settings_guide_width_summary">頻道清單 %1$d%% · EPG 時間軸 %2$d%%</string>
     <string name="settings_guide_width_help">• 頻道清單和 EPG 時間軸共用一列，因此總計必須為 100%%。\n• 加寬頻道清單後，一次顯示的時間軸範圍會減少；節目長度和時間比例維持不變。\n• 兩欄寬度都不會低於 10%%。\n• 重設會將頻道清單設為 10%%，EPG 時間軸設為 90%%。\n• 關閉自訂會恢復標準版面配置，但不會遺失已儲存的值。</string>
     <string name="settings_guide_width_channels">頻道清單</string>
-    <string name="settings_guide_width_epg">EPG 時間軸</string>
     <string name="settings_selection_highlight">選取高亮</string>
     <string name="settings_selection_highlight_description">選取項目周圍框線的顏色與粗細</string>
-    <string name="settings_nav_bar_customization">自訂導覽列</string>
-    <string name="settings_playback_mobile">手機</string>
-    <string name="settings_playback_tv_only_note">即時預覽與遙控器快捷鍵是電視版功能，手機上並不提供。</string>
     <string name="settings_background_playback">背景播放</string>
     <string name="settings_background_playback_description">離開應用程式後繼續播放聲音</string>
     <string name="settings_pip">子母畫面</string>
-    <string name="settings_pip_description">離開應用程式時把影片縮成浮動視窗</string>
     <string name="settings_data_saver">數據節省</string>
     <string name="settings_data_saver_description">不使用行動數據播放</string>
     <string name="settings_gesture_sensitivity">手勢靈敏度</string>
-    <string name="settings_gesture_sensitivity_description">要滑多遠才會改變音量、亮度或進度</string>
     <string name="settings_downloads_wifi_only">僅在 Wi-Fi 下下載</string>
     <string name="settings_downloads_wifi_only_description">等待 Wi-Fi，而不使用行動數據</string>
-    <string name="settings_search_keywords_background_playback">背景 聲音 音訊 離開 應用程式 繼續 服務</string>
-    <string name="settings_search_keywords_pip">子母畫面 浮動視窗 小視窗 覆蓋</string>
-    <string name="settings_search_keywords_data_saver">數據 節省 行動數據 漫遊 用量</string>
-    <string name="settings_search_keywords_gestures">手勢 滑動 靈敏度 觸控 拖曳</string>
-    <string name="settings_mini_player_style">小視窗播放器樣式</string>
     <string name="settings_mini_player_style_description">瀏覽清單時播放如何跟著你</string>
     <string name="settings_mini_player_style_floating">浮動視窗</string>
     <string name="settings_mini_player_style_docked">停駐列</string>
     <string name="settings_pip_size">視窗大小</string>
-    <string name="settings_pip_size_description">浮動視窗的起始大小。可用雙指縮放調整。</string>
     <string name="settings_pip_size_small">小</string>
     <string name="settings_pip_size_medium">中</string>
     <string name="settings_pip_size_large">大</string>
     <string name="settings_pip_snap">吸附至邊緣</string>
-    <string name="settings_pip_snap_description">放開視窗，它會靠到最近的邊緣</string>
     <string name="settings_audio_on_screen_off">螢幕關閉後只播聲音</string>
-    <string name="settings_audio_on_screen_off_description">不再解碼沒人看的畫面，省電</string>
     <string name="settings_audio_on_mobile_data">行動數據下只播聲音</string>
     <string name="settings_audio_on_mobile_data_description">沒有 Wi-Fi 時不帶畫面開始播放</string>
     <string name="settings_audio_per_channel">依頻道記住只播聲音</string>
-    <string name="settings_audio_per_channel_description">不帶畫面看過的頻道，下次也這樣開啟</string>
     <string name="local_sync_title">本機同步</string>
-    <string name="local_sync_description">透過 Wi-Fi 與你的另一部裝置分享資料</string>
     <string name="local_sync_host_hint">在另一部裝置上同樣開啟同步模式，然後點選「連線」並選擇本機。</string>
     <string name="local_sync_qr_description">包含本機位址的 QR 碼</string>
     <string name="local_sync_pin_is">PIN 碼：<xliff:g id="pin">%1$s</xliff:g></string>
@@ -1317,8 +1150,6 @@
     <string name="local_sync_error_bad_payload">無法讀取收到的內容。如果使用了密碼，請確認兩部裝置上的密碼相同。</string>
     <string name="local_sync_error_unknown">發生問題，請再試一次。</string>
     <string name="local_sync_mode">同步模式</string>
-    <string name="local_sync_mode_description">讓你的其他裝置能找到本機。此畫面開啟期間保持開啟。</string>
-    <string name="local_sync_mode_pill">同步模式已開啟</string>
     <string name="local_sync_connect">連線</string>
     <string name="local_sync_connect_description">尋找另一部已開啟同步模式的裝置</string>
     <string name="local_sync_last_synced">上次同步：<xliff:g id="when">%1$s</xliff:g></string>
@@ -1571,7 +1402,7 @@
     <string name="settings_help_playlists">透過連結、Xtream 登入、Stalker 入口網站或檔案新增播放清單，也可重新同步或移除。</string>
     <string name="settings_help_epg_sources">透過連結新增 XMLTV 節目指南來源，或重新整理、移除它。這些來源會填入節目指南和直播電視中的節目資訊。</string>
     <string name="settings_help_guide_days">節目指南預先儲存多少天的節目。天數越少，指南重新整理越快，資料庫也越小。</string>
-    <string name="settings_help_catchup">回看會播放供應商存檔中的節目。大多數供應商依電視本身的時鐘運作；如果回看開始時間不對，請選擇固定的 UTC 偏移。回看使用哪個播放器也在這裡選擇。</string>
+    <string name="settings_help_catchup_timezone">回看會播放供應商存檔中的節目。自動模式會使用供應商回報的時區，若未回報則依電視本身的時鐘運作；如果回看開始時間仍然不對，請選擇固定的 UTC 偏移。回看使用哪個播放器也在這裡選擇。</string>
     <string name="settings_help_theme">OwnTV 是為深色主題設計的。「系統」在電視有相應設定時跟隨電視；淺色適合明亮的房間。</string>
     <string name="settings_help_accent">為按鈕、焦點光暈、進度列和醒目提示統一上色。選擇一個預設，或按 OK 開啟調色盤並輸入任意十六進位代碼。</string>
     <string name="settings_help_focus">焦點項目周圍的外框。選擇它的顏色和粗細，讓你坐在沙發上也能看清楚。</string>

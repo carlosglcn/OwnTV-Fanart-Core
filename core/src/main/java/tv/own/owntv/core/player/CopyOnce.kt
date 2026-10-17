@@ -4,8 +4,8 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
 /**
- * The v44 move of a DataStore set into `playback_quirks`, run at most once per install (owner
- * decision 14 keeps the old file on disk, untouched, for one release). Every read and write of the
+ * The v44 move of a DataStore set into `playback_quirks`, run at most once per install (the old file
+ * stays on disk, untouched, for one release). Every read and write of the
  * store awaits it, so nothing is ever read from a half-filled table — a cold-start auto-tune included.
  *
  * [copy] must be idempotent: a crash between it and [markDone] simply repeats it next time.

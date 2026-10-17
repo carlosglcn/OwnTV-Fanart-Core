@@ -18,9 +18,7 @@
     <string name="settings_movies_keep_watching_description">Filmlere devam etme kartlarını öne çıkanlar satırında gösterin.</string>
     <string name="settings_series_keep_watching">İzlemeye Devam Et satırındaki diziler</string>
     <string name="settings_series_keep_watching_description">Bölümlere devam etme kartlarını öne çıkanlar satırında gösterin.</string>
-    <!-- Translators: Toggle label for playing the highlighted Home item's video in the hero row. -->
     <string name="settings_hero_preview">Öne çıkanlar satırında videoyu oynat</string>
-    <!-- Translators: Description of the hero-row video preview toggle. -->
     <string name="settings_hero_preview_description">Seçili öğenin video önizlemesi kısa bir süre sonra oynatılır. Ana ekranda gezinirken güç ve bellekten tasarruf etmek için kapatın.</string>
     <string name="settings_android_tv_home">Android TV ana ekranı</string>
     <string name="settings_android_tv_home_description">İzlemeye Devam Et içeriklerini ve son izlenen canlı kanalları TV ana ekranında gösterin.</string>
@@ -30,11 +28,8 @@
     <string name="settings_done_check">Tamamlandı ✓</string>
     <string name="settings_mode"><xliff:g id="mode">%1$s</xliff:g></string>
     <string name="settings_hidden">Gizli</string>
-    <string name="settings_nav_dynamic_description">Dinamik — simgeler, etkin oynatma listenizin sunduklarına göre uyarlanır. Ana ekran ve Ayarlar her zaman gösterilir.</string>
-    <string name="settings_nav_static_description">Statik — aşağıda hangi simgelerin görüneceğini elle seçin.</string>
     <string name="settings_static">Statik</string>
     <string name="settings_dynamic">Dinamik</string>
-    <string name="settings_http_proxy">HTTP Proxy</string>
     <string name="settings_use_proxy">Proxy kullan</string>
     <string name="settings_proxy_description">Tüm OwnTV trafiğini ve oynatmayı bir HTTP proxy üzerinden gönderin.</string>
     <string name="settings_host">Sunucu</string>
@@ -102,8 +97,6 @@
     <string name="settings_show_weather_description">Güncel hava durumunu üst çubukta gösterin.</string>
     <string name="settings_custom_location">Özel konum</string>
     <string name="settings_custom_location_description">Hava durumu için kullanılan şehri değiştirin. Otomatik algılama için boş bırakın veya bir şehir (ör. Londra) ya da \"enlem,boylam\" (ör. 51.5,-0.12) girin. Otomatik algılamanın sunucunun şehrini bulduğu VPN bağlantılarında kullanışlıdır.</string>
-    <string name="settings_use_device_location">Bu cihazın konumunu kullan</string>
-    <string name="settings_use_device_location_description">Hava durumu telefonun bulunduğu yeri izler. Şehri kendiniz girmek için kapatın.</string>
     <string name="settings_temperature_unit">Sıcaklık birimi</string>
     <string name="settings_temperature_description">Sıcaklığı Celsius veya Fahrenheit cinsinden gösterin.</string>
     <string name="settings_auto">Otomatik</string>
@@ -168,7 +161,6 @@
     <string name="settings_quick_hdr">HDR (yalnızca mpv)</string>
     <string name="settings_quick_autoplay">Otomatik oynatma</string>
     <string name="settings_quick_check_update">Güncellemeleri denetle</string>
-    <string name="settings_search_hint">Ayarlarda ara…</string>
     <string name="settings_language">Dil</string>
     <string name="settings_language_description">Uygulamanın görüntüleme dili</string>
     <string name="settings_language_system_default">Sistem varsayılanı</string>
@@ -183,14 +175,10 @@
     <string name="settings_epg_sources_nav_description">TV program rehberi için XMLTV rehber akışları ekleyin</string>
     <string name="settings_customize">Kategorileri ve ögeleri özelleştir</string>
     <string name="settings_customize_nav_description">Ögeleri gizleyin ve gösterin, kategorileri yeniden adlandırın ve sıralayın</string>
-    <string name="settings_sidebar_description_root">Kenar simgelerini oynatma listenize göre otomatik uyarlayın veya belirli simgeleri gizleyin</string>
     <string name="settings_ch_paging">Kumanda kısayolları</string>
     <string name="settings_ch_paging_description">Kumandanın boş tuşlarına gezinme, oynatma ve liste işlemleri atayın. Temel gezinme tuşları korunur.</string>
-    <!-- Translators: Settings navigation label for the long-press content menus. -->
     <string name="settings_content_menus_title">Uzun basma menüleri</string>
-    <!-- Translators: Description of the long-press content menus settings. -->
     <string name="settings_content_menus_description">Kanal, film, dizi ve bölüm menülerindeki eylemleri yeniden sıralayın</string>
-    <!-- Translators: Hint shown above the list when arranging a long-press menu. -->
     <string name="settings_content_menus_hint">Bir eylemi almak için üzerinde OK tuşunu basılı tutun, sonra Yukarı ve Aşağı ile taşıyın. Bırakmak için tekrar OK’a basın.</string>
     <string name="settings_browsing_lists">Gezinme ve listeler</string>
     <string name="settings_browsing_description">Canlı TV, Filmler ve Diziler bölümlerindeki son kategoriyi ve son ögeyi hatırlayın</string>
@@ -199,7 +187,6 @@
     <string name="settings_metadata_root_description">Filmler ve Diziler için afişler, özetler, oyuncu kadroları ve puanlar</string>
     <string name="settings_download_folder">İndirme klasörü</string>
     <string name="settings_backup_restore">Yedekleme ve Geri Yükleme</string>
-    <string name="settings_backup_restore_description">Profilleri ve kaynakları dışa aktarın veya geri yükleyin</string>
     <string name="settings_clear_history">İzleme geçmişini temizle</string>
     <string name="settings_appearance_group">Görünüm</string>
     <string name="settings_theme">Tema</string>
@@ -215,13 +202,10 @@
     <string name="settings_focus_width_thick">Kalın</string>
     <string name="settings_focus_width_extra">Çok kalın</string>
     <string name="settings_focus_highlight_sample">Odakta</string>
-    <string name="settings_glass_effect">Cam Efekti</string>
-    <string name="settings_glass_description">Yarı saydam buzlu paneller, arka plan görseli ve şeffaflık</string>
     <string name="settings_ui_zoom">Arayüz yakınlaştırması</string>
     <string name="settings_ui_zoom_description">Tüm arayüzü ölçeklendirin</string>
     <string name="settings_animations">Animasyonlar</string>
     <string name="settings_animations_description">Arayüz hareketlerini açın veya kapatın — Kapalı seçeneği, düşük donanımlı TV kutularında daha hızlı hissettirir</string>
-    <string name="settings_animations_description_mobile">Arayüz hareketlerini açın veya kapatın — Kapalı seçeneği, eski telefon ve tabletlerde daha hızlı hissettirir</string>
     <string name="settings_weather_description_root">Üst çubuktaki hava durumu çipi: gösterin veya gizleyin, özel konumu ve Celsius / Fahrenheit birimini ayarlayın.</string>
     <string name="settings_playback_group">Oynatma</string>
     <string name="settings_live_preview_description">Odaklandığınız kanalı otomatik olarak oynatın</string>
@@ -230,10 +214,8 @@
     <string name="settings_mini_player_root">Mini oynatıcı</string>
     <string name="settings_mini_player_root_description">Sabitlenmiş mini oynatıcının boyutu ve konumu</string>
     <string name="settings_hdr_description">Video ve TV desteklediğinde HDR çıkışı kullanın. Yalnızca mpv: ExoPlayer motoru bu ayarı desteklemez ve yayının HDR’ını her zaman olduğu gibi iletir.</string>
-    <string name="settings_hdr_description_mobile">Video ve ekran desteklediğinde HDR çıkışı kullanın. Yalnızca mpv: ExoPlayer motoru bu ayarı desteklemez ve yayının HDR’ını her zaman olduğu gibi iletir.</string>
     <string name="settings_auto_frame_rate">Otomatik kare hızı</string>
     <string name="settings_auto_frame_rate_description">Canlı TV ve VOD içeriklerinde tam ekrandayken TV\'nin yenileme hızını videoyla (24/25/50/60 fps) eşleştirin ve çıkışta eski hâline getirin. TV\'niz veya alıcınız her kanal değişikliğinde HDMI el sıkışmasını gürültülü biçimde tekrarlıyorsa bu seçeneği kapatın.</string>
-    <string name="settings_auto_frame_rate_description_mobile">Canlı TV ve VOD içeriklerinde tam ekrandayken ekranın yenileme hızını videoyla (24/25/50/60 fps) eşleştirin ve çıkışta eski hâline getirin. Bir video başladığında ekran titriyor veya kararıyorsa bu seçeneği kapatın.</string>
     <string name="settings_afr_pause">Ekran geçişinde duraklat</string>
     <string name="settings_afr_pause_description">Yalnızca filmler. Televizyonun yeni bir ekran moduna yeniden eşitlenmesi gerektiğinde, film bu süre kadar bekler; böylece başlangıcı siyah ekranda kaybolmaz. Kesintisiz bir geçiş hiç duraklatmaz.</string>
     <string name="settings_afr_resolution">Çözünürlüğü eşleştir</string>
@@ -242,7 +224,6 @@
     <string name="settings_surround_description_mobile">Bu cihaza bağlı gerçek bir 5.1/7.1 alıcı için Dolby/DTS sesini çevresel sese (5.1/7.1) dönüştürün. Dahili hoparlör, kulaklık veya stereo soundbar kullanıyorsanız KAPALI bırakın — çok kanallı ses, sesin görüntünün gerisinde kalmasına yol açabilir. Eşitleme kayarsa oynatıcının Ses menüsü → A/V eşitleme ayarını hafifçe değiştirin.</string>
     <string name="settings_audio_passthrough">Dolby ve DTS doğrudan aktarım</string>
     <string name="settings_audio_passthrough_description">Açık: TV, soundbar veya alıcı oynatabildiğini bildirdiğinde Dolby ve DTS ona çözülmeden gönderilir (ExoPlayer). Kapalı: uygulama bunları çözer; Çevresel ses izin verdiği yerde yine çok kanallı olarak. mpv her zaman çözer. Gece modu veya Ses seviyesi dengeleme açıkken kullanılmaz.</string>
-    <string name="settings_audio_passthrough_description_mobile">Açık: bağlı bir TV veya alıcı oynatabildiğini bildirdiğinde Dolby ve DTS ona çözülmeden gönderilir (ExoPlayer). Kapalı: uygulama bunları çözer; Çevresel ses izin verdiği yerde yine çok kanallı olarak. mpv her zaman çözer. Gece modu veya Ses seviyesi dengeleme açıkken kullanılmaz.</string>
     <string name="settings_night_mode">Gece modu</string>
     <string name="settings_night_mode_description">Yüksek sahneleri kısar, alçak diyalogları açar; düşük seste izlemek için.</string>
     <string name="settings_volume_leveling">Ses seviyesi dengeleme</string>
@@ -253,7 +234,6 @@
     <string name="settings_mobile_data_quality_description">Ölçülü bağlantıda en fazla bu kaliteyi oynatır. Kapalı: Wi-Fi ile aynı.</string>
     <string name="settings_tunneled_playback">Tünelli oynatma (deneysel)</string>
     <string name="settings_tunneled_playback_description">ExoPlayer\'da canlı TV: TV\'nin kendi donanımı görüntü ve sesi birlikte tutar, işlemciye daha az iş düşer. Yalnızca bazı TV\'lerde çalışır ve bir kanal bununla başarısız olursa kendini kapatır. Açıkken ses senkronu ayarlanamaz.</string>
-    <string name="settings_tunneled_playback_description_mobile">ExoPlayer\'da canlı TV: cihazın kendi donanımı görüntü ve sesi birlikte tutar, işlemciye daha az iş düşer. Yalnızca bazı cihazlarda çalışır ve bir kanal bununla başarısız olursa kendini kapatır. Açıkken ses senkronu ayarlanamaz.</string>
     <string name="settings_tunneled_playback_failed">Bu cihazda bir kanal bununla başarısız olduktan sonra kapatıldı.</string>
     <string name="settings_autoplay_next">Sonraki bölümü otomatik oynat</string>
     <string name="settings_autoplay_next_description">Bir bölüm sona erdiğinde sonraki bölümü otomatik olarak başlatın — sezon bitince sonraki sezona geçin. Geri izleme de sonraki programla devam eder.</string>
@@ -264,13 +244,9 @@
     </plurals>
     <string name="settings_catchup_unavailable">Bu oynatma listesinde geri izlemeyi destekleyen kanal yok</string>
     <string name="settings_device">Cihaz</string>
-    <string name="settings_video_player">Video Oynatıcı Ayarları</string>
-    <string name="settings_video_player_description">Kod çözücü, altyazılar, eşitleme</string>
     <string name="settings_playback_error_log">Hata günlüğü</string>
     <string name="settings_playback_speed">Oynatma Hızı</string>
     <string name="settings_player_zoom">Oynatıcı Yakınlaştırması</string>
-    <string name="settings_playback_error_description">Uygulama çökmeleri ve oynatma hataları — okunacak veya bildirilecek ayrıntılar</string>
-    <string name="settings_network_group">Ağ</string>
     <string name="settings_app_group">Uygulama</string>
     <string name="settings_app_startup">Uygulama başlangıcı</string>
     <string name="settings_app_startup_description">OwnTV başlatıldığında açılacak bölüm</string>
@@ -279,7 +255,6 @@
     <string name="settings_update_startup">Başlangıçta güncellemeleri denetle</string>
     <string name="settings_update_startup_description">Uygulama açıldığında yeni sürüm olup olmadığını denetleyin</string>
     <string name="settings_about">Hakkında</string>
-    <string name="settings_about_description">Sürüm, lisans ve proje bilgileri</string>
     <string name="settings_live_latency">Canlı yayın gecikmesi</string>
     <string name="settings_no_settings_match">“<xliff:g id="query">%1$s</xliff:g>” ile eşleşen ayar yok</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
@@ -301,11 +276,8 @@
     <string name="settings_color_picker">Renk seçici</string>
     <string name="settings_use_color">Bu rengi kullan</string>
     <string name="settings_about_version">Sürüm <xliff:g id="version">%1$s</xliff:g></string>
-    <string name="settings_about_description_full_mobile">Android için kendi IPTV oynatıcınız — ücretsiz, açık kaynaklı ve yalnızca oynatıcı işlevi sunan bir uygulama. Herhangi bir kanal veya içerik sağlamaz; yasal olarak erişebildiğiniz kaynakları kendiniz eklersiniz.</string>
-    <string name="settings_about_license">© 2026 OwnTV · GPLv3 Lisansı</string>
     <string name="settings_join_telegram">Telegram topluluğumuza katılın</string>
     <string name="settings_telegram_qr">Telegram grubu QR kodu</string>
-    <string name="settings_telegram_scan">Telefonunuzdan katılmak için QR kodunu tarayın veya yukarıdaki bağlantıyı açın.</string>
     <string name="settings_contributions">Katkılar, hata bildirimleri ve yıldızlar GitHub\'da memnuniyetle karşılanır.</string>
     <string name="settings_playback_error_description_full">Son çökme ve en son oynatma hataları (en yeniden eskiye). Bir sorun bildirirken bu ayrıntıları ekleyin.</string>
     <string name="settings_loading">Yükleniyor…</string>
@@ -313,15 +285,8 @@
     <string name="settings_live">Canlı</string>
     <string name="settings_vod">VOD</string>
     <string name="settings_clear_log">Günlüğü temizle</string>
-    <string name="settings_browsing_title">Gezinme ve listeler</string>
     <string name="settings_browsing_description_full">Canlı TV, Filmler ve Diziler bölümlerine döndüğünüzde hangi konuma gidileceği.</string>
-    <string name="settings_glass_surfaces">Cam yüzeyler</string>
-    <string name="settings_glass_surfaces_description">Uygulamanın hangi bölümlerinin cam olarak görüntüleneceğini seçin. Tüm yüzeylerin kapatılması cam efektini kapatır.</string>
-    <string name="settings_all_surfaces_on">Tüm yüzeyler: Açık</string>
-    <string name="settings_all_surfaces_off">Tüm yüzeyler: Kapalı</string>
-    <string name="settings_surface_toggle"><xliff:g id="surface">%1$s</xliff:g>: <xliff:g id="state">%2$s</xliff:g></string>
-    <string name="settings_transparency_description">Panellerin arkasının ne kadar görüneceği (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). Değer yükseldikçe panel daha opak olur.</string>
-    <string name="settings_catchup_description">Geri izleme zaman damgalarının nasıl gönderileceği. Cihazınızın saat dilimini kullanın veya sağlayıcınızın sunucusunun beklediği zaman farkını ayarlayın.</string>
+    <string name="settings_catchup_timezone_description">Geri izleme zaman damgalarının nasıl gönderileceği. Otomatik, sağlayıcınızın sunucusunun bildirdiği saat dilimini, bildirmiyorsa cihazınızın saat dilimini kullanır. Cihaz seçeneğini de seçebilir veya zaman farkını kendiniz ayarlayabilirsiniz.</string>
     <string name="settings_manual">Manuel</string>
     <string name="settings_theme_dark">Koyu</string>
     <string name="settings_theme_light">Açık</string>
@@ -344,34 +309,16 @@
     <string name="settings_group_summary_appearance">Tema, vurgu, cam, hareket ve yazı boyutu</string>
     <string name="settings_group_summary_layout">Kenar çubuğu, paneller, listeler ve Ana ekran</string>
     <string name="settings_group_summary_content_metadata">Adlandırma, görseller ve altyazı hizmetleri</string>
-    <string name="settings_group_summary_playback">Video oynatıcı ve hata kaydı</string>
-    <!-- Translators: Video player settings: name of the section holding volume, audio language and surround settings. -->
     <string name="settings_vp_section_sound">Ses</string>
-    <!-- Translators: Video player settings: one-line summary under the "Subtitles" section name. -->
-    <string name="settings_vp_section_subtitles_summary">Boyut, renk, konum</string>
-    <!-- Translators: Video player settings: one-line summary under the "Diagnostics" section name. -->
-    <string name="settings_vp_section_diagnostics_summary">Ayrıntılı oynatıcı günlükleri</string>
     <string name="settings_vp_cat_player">Oynatıcı</string>
-    <string name="settings_vp_cat_player_summary">Hangi oynatıcı, oynatma listesine göre, harici uygulamalar</string>
     <string name="settings_vp_cat_picture">Görüntü</string>
-    <string name="settings_vp_cat_picture_summary">Kod çözücü, HDR, kalite, yakınlaştırma</string>
     <string name="settings_vp_cat_frame_rate">Kare hızı</string>
     <string name="settings_vp_cat_frame_rate_summary">Ekranı videoya uydur</string>
     <string name="settings_vp_cat_streaming">Akış</string>
-    <string name="settings_vp_cat_streaming_summary">Arabellek, zaman aşımı, yeniden bağlanma</string>
-    <string name="settings_vp_cat_live_summary">Kanal numaraları, duraklatma ve geri sarma</string>
     <string name="settings_vp_cat_live_tuning">Canlı ayar</string>
-    <string name="settings_vp_cat_live_tuning_summary">Gecikme, ön arabellek, başlama süresi</string>
-    <string name="settings_vp_cat_controls">Kontroller</string>
-    <string name="settings_vp_cat_controls_summary">Atlama ve geri sarma adımları</string>
     <string name="settings_vp_cat_multiview">Çoklu görüntü ve mini oynatıcı</string>
     <string name="settings_vp_cat_multiview_summary_mobile">Aynı anda birden çok canlı kanal</string>
-    <string name="settings_vp_cat_sound_summary">Ses düzeyi, surround, gece modu, senkron</string>
     <string name="settings_vp_cat_languages">Diller ve altyazılar</string>
-    <string name="settings_vp_cat_languages_summary">Ses ve altyazı dili, altyazı stili</string>
-    <string name="settings_vp_cat_resume">Devam etme ve otomatik oynatma</string>
-    <string name="settings_vp_cat_resume_summary">Nereden başlanacağı, sonraki bölüm</string>
-    <string name="settings_group_summary_network">Yayın bağlantıları için proxy ve DNS</string>
     <string name="settings_group_summary_app">Dil, açılış, güncellemeler ve uygulama bilgisi</string>
     <string name="settings_group_quick">Hızlı</string>
     <string name="settings_group_summary_quick">En sık kullandığınız anahtarlar</string>
@@ -383,7 +330,6 @@
     <string name="settings_search_keywords_epg">XMLTV rehber akış program</string>
     <string name="settings_search_keywords_logos">kanal logo simge XMLTV rehber picon oynatma listesi</string>
     <string name="settings_search_keywords_customize">gizle göster yeniden adlandır sırala kategoriler</string>
-    <string name="settings_search_keywords_sidebar">kenar şerit simgeler dinamik statik gizle göster uyarla oynatma listesi</string>
     <string name="settings_search_keywords_ch">kanal yukarı aşağı atla sayfa liste kategori kanal</string>
     <string name="settings_search_keywords_browsing">hatırla konum kaydır kategori son öge canlı filmler diziler sıfırla başa</string>
     <string name="settings_search_keywords_home">satırlar öne çıkan yeniden sırala filtrele</string>
@@ -459,10 +405,8 @@
     <string name="settings_language_vietnamese">Vietnamca</string>
     <string name="settings_hardware_decoding">Donanımla kod çözme</string>
     <string name="settings_hardware_decoding_description">TV\'nin donanım kod çözücüsünü kullanın. Bazı akışlar takılıyor veya görüntü bozuklukları gösteriyorsa kapatın.</string>
-    <string name="settings_hardware_decoding_description_mobile">Cihazın donanım kod çözücüsünü kullanın. Bazı akışlar takılıyor veya görüntü bozuklukları gösteriyorsa kapatın.</string>
     <string name="settings_software_decode_above_1080p">1080p üzeri yazılımla kod çözme</string>
     <string name="settings_software_decode_above_1080p_description">TV\'nin donanım kod çözücüsü kapalıyken veya başarısız olduğunda 4K ve 1080p üzerindeki diğer videoları yazılımla oynatır. Hızlı bir işlemci gerekir: çoğu TV\'de takılır.</string>
-    <string name="settings_software_decode_above_1080p_description_mobile">Cihazın donanım kod çözücüsü kapalıyken veya başarısız olduğunda 4K ve 1080p üzerindeki diğer videoları yazılımla oynatır. Hızlı bir işlemci gerekir: birçok cihazda takılır.</string>
     <string name="settings_movies_series_player">Film ve Dizi oynatıcısı</string>
     <string name="settings_live_tv_player">Canlı TV oynatıcısı</string>
     <string name="settings_engine_order"><xliff:g id="first">%1$s</xliff:g>, sonra <xliff:g id="second">%2$s</xliff:g></string>
@@ -472,37 +416,21 @@
     <string name="settings_external_player">Harici oynatıcı</string>
     <string name="settings_default_zoom">Varsayılan yakınlaştırma</string>
     <string name="settings_default_zoom_description">Oynatma başladığında uygulanacak en-boy oranı/yakınlaştırma.</string>
-    <!-- Translators: Setting label for the volume level playback starts at. -->
     <string name="settings_default_volume">Varsayılan ses düzeyi</string>
-    <!-- Translators: Description of the default volume setting. -->
     <string name="settings_default_volume_description">Oynatma başladığında uygulanacak ses düzeyi. %%100\'ün üzerinde sesi düşük yayınlar yükseltilir.</string>
-    <!-- Translators: Settings-row title for forgetting the zoom saved for individual items. -->
     <string name="settings_reset_saved_zoom">Kaydedilen yakınlaştırmayı sıfırla</string>
-    <!-- Translators: Description of the reset-saved-zoom setting row. -->
     <string name="settings_reset_saved_zoom_description">Oynatıcıda yakınlaştırmayı değiştirmek, bunu ilgili kanal, film ya da bölüm için kaydeder. Sıfırlama her şeyin yeniden varsayılan yakınlaştırmayı izlemesini sağlar.</string>
-    <!-- Translators: Confirmation dialog title before forgetting the saved per-item zoom. -->
     <string name="settings_reset_saved_zoom_confirm">Kaydedilen yakınlaştırma sıfırlansın mı?</string>
-    <!-- Translators: Confirmation dialog body before forgetting the saved per-item zoom. -->
     <string name="settings_reset_saved_zoom_confirm_description">Her kanal, film ve bölüm varsayılan yakınlaştırmaya döner. Kaydedilen ses düzeyleri korunur. Tek bir öğeyi istediğiniz zaman oynatıcıdan yeniden ayarlayabilirsiniz.</string>
-    <!-- Translators: Settings-row title for forgetting the volume saved for individual items. -->
     <string name="settings_reset_saved_volume">Kaydedilen ses düzeyini sıfırla</string>
-    <!-- Translators: Description of the reset-saved-volume setting row. -->
     <string name="settings_reset_saved_volume_description">Oynatıcıda ses düzeyini değiştirmek, bunu ilgili kanal, film ya da bölüm için kaydeder. Sıfırlama her şeyin yeniden varsayılan ses düzeyini izlemesini sağlar.</string>
-    <!-- Translators: Confirmation dialog title before forgetting the saved per-item volume. -->
     <string name="settings_reset_saved_volume_confirm">Kaydedilen ses düzeyi sıfırlansın mı?</string>
-    <!-- Translators: Confirmation dialog body before forgetting the saved per-item volume. -->
     <string name="settings_reset_saved_volume_confirm_description">Her kanal, film ve bölüm varsayılan ses düzeyine döner. Kaydedilen yakınlaştırma ayarları korunur. Tek bir öğeyi istediğiniz zaman oynatıcıdan yeniden ayarlayabilirsiniz.</string>
-    <!-- Translators: Settings row that forgets every per-item audio-sync offset. -->
     <string name="settings_reset_saved_audio_delay">Kaydedilen ses/görüntü eşitlemesini sıfırla</string>
-    <!-- Translators: Description of the reset-saved-audio-sync row. -->
     <string name="settings_reset_saved_audio_delay_description">Oynatıcıda “Bu gecikmeyi hatırla” seçildiğinde ses eşitlemesi o kanal, film veya bölüm için kaydedilir. Sıfırlama her şeyin yeniden üstteki ayarı izlemesini sağlar.</string>
-    <!-- Translators: Title of the confirmation dialog for resetting saved audio sync. -->
     <string name="settings_reset_saved_audio_delay_confirm">Kaydedilen ses/görüntü eşitlemesi sıfırlansın mı?</string>
-    <!-- Translators: Body of the confirmation dialog for resetting saved audio sync. -->
     <string name="settings_reset_saved_audio_delay_confirm_description">Her kanal, film ve bölüm üstteki ses eşitlemesine döner. Kaydedilen yakınlaştırma ve ses düzeyi korunur. Tek tek olanı istediğiniz zaman oynatıcıdan yeniden ayarlayabilirsiniz.</string>
-    <!-- Translators: Setting label for how far rewind/forward jumps in a movie or episode. -->
     <string name="settings_seek_step">Atlama adımı</string>
-    <!-- Translators: Description of the seek step setting. -->
     <string name="settings_seek_step_description">Bir filmde veya bölümde geri ve ileri sarmanın ne kadar atladığı.</string>
     <string name="settings_vod_buffer">Film arabelleği</string>
     <string name="settings_vod_buffer_description">Filmlerin, bölümlerin ve geri izlemenin ne kadar önceden yükleneceği. Otomatik, bu cihaza uygun olanı kullanır. Daha uzun bir arabellek kötü bir bağlantıyı daha iyi atlatır; sınırı yine cihazın belleği belirler, bu yüzden yüksek bit hızlı bir film seçilenden azını tutabilir.</string>
@@ -511,9 +439,7 @@
     <string name="settings_vod_reconnects">Yeniden bağlanma denemeleri</string>
     <string name="settings_vod_reconnects_description">Bağlantısı kopan bir film veya bölümün, hata gösterilmeden önce kaldığı yerden kaç kez yeniden açılacağı. Bir dakika kesintisiz oynatma denemeleri geri verir.</string>
     <string name="settings_vod_network_auto">Otomatik</string>
-    <!-- Translators: Setting label for how far rewind/forward jumps inside a live channel's archive. -->
     <string name="settings_live_rewind_step">Canlı geri sarma adımı</string>
-    <!-- Translators: Description of the live rewind step setting. -->
     <string name="settings_live_rewind_step_description">Canlı bir kanalda geri ve ileri sarmanın ne kadar ilerlediği: geri izleme arşivinde veya Canlı TV’yi duraklat ve geri sar ile kaydedilen kopyada.</string>
     <string name="settings_resume_playback">Oynatmaya devam et</string>
     <string name="settings_resume_playback_description">Bir filmin veya bölümün kayıtlı oynatma konumu olduğunda ne yapılacağı.</string>
@@ -549,7 +475,6 @@
     <string name="settings_live_latency_bitrate_note">Çok yüksek bit hızına sahip bir kanalda (özellikle 4K) arabellek, istediğinden daha kısa bir süreyi tutabilir; çünkü aynı anda bellekte tutulabilecek video miktarı sınırlıdır.</string>
     <string name="settings_channel_numbers">Kanal numaraları</string>
     <string name="settings_channel_numbers_description">Sağlayıcınızın kanal numarasını Canlı TV listesindeki, kanal listesi ekran katmanındaki ve oynatıcıdaki adın yanında gösterin; ayrıca tam ekran oynatma sırasında doğrudan o kanala geçmek için uzaktan kumandadan bir numara girin (OK anında kanala geçer, Geri iptal eder). Kapalıyken tüm numaralar gizlenir ve sayı tuşları yok sayılır; hiçbir veri kaybolmaz ve tekrar açıldığında numaralar geri gelir.</string>
-    <string name="settings_channel_numbers_description_mobile">Sağlayıcınızın kanal numarasını Canlı TV listesindeki ve oynatıcıdaki adın yanında gösterin. Kapalıyken tüm numaralar gizlenir; hiçbir veri kaybolmaz ve tekrar açıldığında numaralar geri gelir.</string>
     <string name="settings_live_left_right_rewinds">Sol ve sağ canlı TV’yi geri sarar</string>
     <string name="settings_live_left_right_rewinds_description">Kontroller gizliyken, geri sarılabilen kanallarda (geri izleme veya Canlı TV’yi duraklat ve geri sar ile kaydedilen) sol ve sağ, kanal listesini ve geçmişi açmak yerine geri ve ileri sarar.</string>
     <string name="settings_timeshift">Canlı TV’yi duraklat ve geri sar</string>
@@ -561,7 +486,6 @@
     <string name="settings_diagnostics">Tanılama</string>
     <string name="settings_measured_stats">Ölçülen akış istatistikleri</string>
     <string name="settings_measured_stats_description">Akış bilgisi ekran katmanında anlık fps, bit hızı ve atlanan kareleri gösterin (bu değerleri bildirmeyen akışlarda, ekran katmanı açıkken ölçülür). Yalnızca düşük donanımlı bir TV takılıyorsa kapatın — gerçek görüntüyü hiçbir zaman etkilemez, yalnızca tanılama sayılarını etkiler.</string>
-    <string name="settings_measured_stats_description_mobile">Akış bilgisi ekran katmanında anlık fps, bit hızı ve atlanan kareleri gösterin (bu değerleri bildirmeyen akışlarda, ekran katmanı açıkken ölçülür). Yalnızca düşük donanımlı bir cihaz takılıyorsa kapatın — gerçek görüntüyü hiçbir zaman etkilemez, yalnızca tanılama sayılarını etkiler.</string>
     <string name="settings_none_auto">Yok / Otomatik</string>
     <string name="settings_view_grid">Izgara</string>
     <string name="settings_view_list">Liste</string>
@@ -584,7 +508,6 @@
     <string name="settings_movies_player_description">mpv (önerilir) en geniş biçim desteğine sahiptir — DTS/TrueHD ses, alışılmadık dosyalar. Bazı televizyonlarda ExoPlayer, mpv’nin açamadığı yayınları oynatır; ancak DTS/TrueHD sesi çözemez. Birleşik seçenekler ilki başarısız olduğunda diğer oynatıcıyı otomatik dener; tek oynatıcılı seçenekler bunu hiç yapmaz; ikinci oynatıcı televizyonunuzda zaten çalışmıyorsa bu, birkaç saniyelik siyah ekrandan kurtarır.</string>
     <string name="settings_movies_player_description_mobile">mpv (önerilir) en geniş biçim desteğine sahiptir — DTS/TrueHD ses, alışılmadık dosyalar. Bazı cihazlarda ExoPlayer, mpv’nin açamadığı yayınları oynatır; ancak DTS/TrueHD sesi çözemez. Birleşik seçenekler ilki başarısız olduğunda diğer oynatıcıyı otomatik dener; tek oynatıcılı seçenekler bunu hiç yapmaz; ikinci oynatıcı cihazınızda zaten çalışmıyorsa bu, birkaç saniyelik siyah ekrandan kurtarır.</string>
     <string name="settings_live_player_description">ExoPlayer (önerilir) kanalları çok daha hızlı açar ve canlı altyazıyı destekleyen tek oynatıcıdır. mpv, ExoPlayer’ın açamadığı kanalları, alışılmadık sese sahip bazıları dahil, oynatır. Birleşik seçenekler ilki başarısız olduğunda diğer oynatıcıyı otomatik dener; tek oynatıcılı seçenekler bunu hiç yapmaz; ikinci oynatıcı televizyonunuzda zaten çalışmıyorsa bu, birkaç saniyelik siyah ekrandan kurtarır. Oynatıcıda elle değiştirdiğiniz bir kanalda seçiminiz her iki durumda da korunur.</string>
-    <string name="settings_live_player_description_mobile">ExoPlayer (önerilir) kanalları çok daha hızlı açar ve canlı altyazıyı destekleyen tek oynatıcıdır. mpv, ExoPlayer’ın açamadığı kanalları, alışılmadık sese sahip bazıları dahil, oynatır. Birleşik seçenekler ilki başarısız olduğunda diğer oynatıcıyı otomatik dener; tek oynatıcılı seçenekler bunu hiç yapmaz; ikinci oynatıcı cihazınızda zaten çalışmıyorsa bu, birkaç saniyelik siyah ekrandan kurtarır. Oynatıcıda elle değiştirdiğiniz bir kanalda seçiminiz her iki durumda da korunur.</string>
     <string name="settings_reset_player_choices_description">Oynatıcıda tek bir filmi veya bölümü mpv ile ExoPlayer arasında değiştirmek, bu seçimi bir sonraki sefer için kaydeder. Sıfırlama her şeyin yeniden yukarıdaki ayarı izlemesini sağlar. Canlı kanallar için kaydedilen seçimler korunur.</string>
     <string name="settings_reset_player_choices_none">Kayıtlı seçim yok</string>
     <plurals name="settings_reset_player_choices_count">
@@ -632,19 +555,13 @@
     <string name="settings_download_remote_title">Başka bir cihaza indir</string>
     <string name="settings_download_remote_description">Aynı Wi-Fi’daki tarayıcılı herhangi bir cihazda — telefon, bilgisayar veya başka bir TV — QR kodunu tarayın (veya URL’yi açın), bu PIN’i girin ve yedek dosyanızı güvende tutmak için indirin.</string>
     <string name="settings_preparing_backup">Yedekleme hazırlanıyor…</string>
-    <string name="settings_background_on">Arka plan görseli: Açık</string>
-    <string name="settings_background_off">Arka plan görseli: Kapalı</string>
     <string name="settings_ui_zoom_range">Tüm arayüzü ölçeklendirin (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%).</string>
     <string name="settings_low_zoom_warning_title">⚠️ Düşük yakınlaştırma uyarısı</string>
     <string name="settings_low_zoom_warning"><xliff:g id="zoom">%1$d</xliff:g>%% yakınlaştırma, ekranda aynı anda çok daha fazla öğe gösterir. Sınırlı belleğe sahip cihazlarda (örneğin 2 GB belleğe sahip TV çubuklarında), özellikle büyük oynatma listeleri ve EPG verileri kullanılırken bu durum uygulamanın kararsızlaşmasına veya çökmesine neden olabilir.\n\nDevam etmek için OK düğmesine, <xliff:g id="safe_zoom">%2$d</xliff:g>%% düzeyinde kalmak için Geri düğmesine basın.</string>
     <string name="settings_low_zoom_warning_mobile"><xliff:g id="zoom">%1$d</xliff:g>%% yakınlaştırma, ekranda aynı anda çok daha fazla öğe gösterir. Sınırlı belleğe sahip cihazlarda, özellikle büyük oynatma listeleri ve EPG verileri kullanılırken bu durum uygulamanın kararsızlaşmasına veya çökmesine neden olabilir.\n\n<xliff:g id="safe_zoom">%2$d</xliff:g>%% düzeyinde kalmak için İptal\'i seçin.</string>
     <string name="settings_low_zoom_accept">Anlıyorum ve riski kabul ediyorum</string>
     <string name="settings_surface_transparency"><xliff:g id="percent">%1$d</xliff:g>%%</string>
-    <string name="settings_surface_count_all">Yüzeyler: Tümü</string>
-    <plurals name="settings_surface_count">
-        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> / <xliff:g id="total">%2$d</xliff:g> yüzey</item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> / <xliff:g id="total">%2$d</xliff:g> yüzey</item>
-    </plurals>
+    <string name="settings_catchup_timezone_automatic">Otomatik</string>
     <string name="settings_catchup_timezone_device">Cihaz</string>
     <string name="settings_catchup_player_ask">Her zaman sor</string>
     <string name="settings_catchup_player_internal">OwnTV oynatıcı</string>
@@ -662,23 +579,6 @@
     <string name="settings_history_movies">Filmler</string>
     <string name="settings_history_series">Diziler</string>
     <string name="settings_history_all">tümü</string>
-    <string name="settings_decrease">–</string>
-    <string name="settings_increase">+</string>
-    <string name="settings_glass_effect_title">Cam Efekti</string>
-    <string name="settings_glass_effect_description">Bir arka plan fotoğrafının veya uygulamanın kendi arka planının üzerinde yarı saydam buzlu paneller.</string>
-    <string name="settings_transparency_title">Saydamlık</string>
-    <string name="settings_blur_title">Bulanıklık / Buzlanma</string>
-    <string name="settings_blur_description_enabled">Arka plan görselinin ne kadar buzlu görüneceği (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). Yalnızca bir arka plan görseli üzerinde uygulanır.</string>
-    <string name="settings_blur_description_disabled">Arka plan görselinin ne kadar buzlu görüneceği (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). Yalnızca bir arka plan görseli üzerinde uygulanır. Etkinleştirmek için bir arka plan görseli ayarlayın.</string>
-    <string name="settings_glass_surface_panels">İçerik panelleri</string>
-    <string name="settings_glass_surface_sidebar">Kenar çubuğu</string>
-    <string name="settings_glass_surface_preview">Ön izleme bölmeleri</string>
-    <string name="settings_glass_surface_dialogs">İletişim kutuları ve açılır pencereler</string>
-    <string name="settings_glass_surface_topbar">Üst çubuk</string>
-    <string name="settings_glass_surface_cards">Kartlar</string>
-    <string name="settings_glass_surface_miniplayer">Mini oynatıcı</string>
-    <string name="settings_glass_surface_player_controls">Oynatıcı denetimleri</string>
-    <string name="settings_glass_surface_toasts">Ekran mesajları</string>
     <string name="settings_browsing_last_category">Son kategoriyi hatırla</string>
     <string name="settings_browsing_last_category_description">Bölümü Tümü yerine bıraktığınız kategoride yeniden açın.</string>
     <string name="settings_browsing_last_item">Son öğeyi hatırla</string>
@@ -754,7 +654,6 @@
     <string name="settings_span_ch_help">CH+ / CH− bir sayfa atlar. Son veya ilk öğeye gitmek için CH+ / CH− tuşunu basılı tutun.</string>
     <string name="settings_customize_metadata_separator">"  ·  "</string>
     <string name="settings_sources_title">Kaynaklar</string>
-    <string name="settings_sources_description">Kaynaklar tüm profiller arasında paylaşılır.</string>
     <string name="settings_sources_empty">Henüz kaynak yok. Bir M3U veya Xtream kaynağı ekleyin.</string>
     <string name="settings_sources_add">Kaynak ekle</string>
     <string name="settings_sources_import_failed">İçe aktarma başarısız oldu</string>
@@ -834,7 +733,6 @@
     <string name="settings_epg_sources_name_hint">ör. Birleşik Krallık Rehberi</string>
     <string name="settings_epg_sources_url_hint">https://…/epg.xml(.gz)</string>
     <string name="settings_epg_sources_user_agent_hint">Varsayılan için boş bırakın</string>
-    <string name="settings_epg_sources_description">Program rehberini dolduran XMLTV rehber akışlarıdır. Eklendiklerinde otomatik olarak eşitlenir ve oynatma listelerinizdeki kanallarla birleştirilir.</string>
     <string name="settings_epg_sources_delete_title">“<xliff:g id="name">%1$s</xliff:g>” silinsin mi?</string>
     <string name="settings_epg_sources_delete_message">Bu EPG kaynağını ve rehber verilerini kaldırır. Kanallarınız kalır.</string>
     <string name="settings_epg_sources_syncing_percent">Eşitleniyor: <xliff:g id="percent">%1$d</xliff:g>%%</string>
@@ -894,8 +792,6 @@
     <string name="settings_backup_pin_incorrect">PIN yanlış.</string>
     <string name="settings_backup_pin_locked">PIN ile kilitli</string>
     <string name="settings_backup_unlock">Kilidi aç</string>
-    <string name="settings_backup_export_button">Yedeklemeyi dışa aktar</string>
-    <string name="settings_backup_restore_button">Yedeklemeyi geri yükle</string>
     <string name="settings_backup_continue">Devam et</string>
     <string name="settings_backup_encrypt_export">Şifrele ve dışa aktar</string>
     <string name="settings_backup_export_unencrypted">Şifrelemeden dışa aktar</string>
@@ -1025,7 +921,6 @@
     <string name="settings_move_category_keep">“<xliff:g id="name">%1$s</xliff:g>” kategorisinde de tut</string>
     <string name="settings_move_category_action">Taşı</string>
     <string name="settings_dns_description">Alan adı sorguları için özel bir DNS sunucusu kullanın</string>
-    <string name="settings_dns_custom">Özel DNS</string>
     <string name="settings_dns_toggle_description">Tüm OwnTV alan adı sorguları özel bir DNS sunucusu üzerinden çözümlenir.</string>
     <string name="settings_dns_use_custom">Özel DNS kullan</string>
     <string name="settings_dns_server_missing">Özel DNS etkin ancak hiçbir sunucu yapılandırılmadı. Bir sunucu adresi girip Kaydet’i seçin veya bu seçeneği kapatın.</string>
@@ -1075,13 +970,9 @@
     <string name="settings_live_tune_timeout_description">Bir canlı kanal bu süre içinde görüntü vermediyse, OwnTV tüm oynatıcılarını tek tek denerken siyah ekran bırakmak yerine denemeyi bırakır ve size söyler. “Asla” denemeyi sürdürür; sağlayıcınızın kaldırdığı bir kanalda bu bir dakikayı rahatça aşabilir. Sağlayıcınızın istediği bekleme süreleri sayılmaz.</string>
     <string name="settings_live_preroll_per_playlist">Yayın listesi başına ön arabellek</string>
     <string name="settings_live_preroll_per_playlist_description">Üstteki ayarı bir yayın listesi için geçersiz kılarken diğer yayın listelerinizin hızlı kalmasını sağlar.</string>
-    <!-- Translators: Title of the per-playlist Live TV engine override row. -->
     <string name="settings_live_engine_per_playlist">Yayın listesi başına canlı TV oynatıcısı</string>
-    <!-- Translators: Description of the per-playlist Live TV engine override row. -->
     <string name="settings_live_engine_per_playlist_description">Üstteki ayarı bir yayın listesi için geçersiz kılar — kanalları yalnızca oynatıcılardan biriyle düzgün çalışan bir sağlayıcı için.</string>
-    <!-- Translators: Title of the per-playlist Live latency override row. -->
     <string name="settings_live_latency_per_playlist">Yayın listesi başına canlı yayın gecikmesi</string>
-    <!-- Translators: Description of the per-playlist Live latency override row. -->
     <string name="settings_live_latency_per_playlist_description">Üstteki ayarı bir yayın listesi için geçersiz kılar — diğerlerinden daha büyük veya daha küçük bir arabellek gereken bir sağlayıcı için.</string>
     <string name="settings_catchup_timezone_per_playlist">Oynatma listesine göre catch-up saat dilimi</string>
     <string name="settings_catchup_timezone_per_playlist_description">Yukarıdaki saat dilimini tek bir oynatma listesi için değiştirin; arşivi başka bir saate göre çalışan sağlayıcılar için.</string>
@@ -1120,7 +1011,6 @@
     <string name="settings_playback_kind_error">Hata</string>
     <string name="settings_playback_kind_event">Olay</string>
     <string name="settings_playback_kind_report">Rapor</string>
-    <string name="settings_playback_entry_with_kind"><xliff:g id="date">%1$s</xliff:g> · <xliff:g id="kind">%2$s</xliff:g> · <xliff:g id="engine">%3$s</xliff:g> · <xliff:g id="stream_type">%4$s</xliff:g></string>
     <string name="settings_export">Dışa aktar</string>
     <string name="settings_detailed_playback_logging_description">Canlı yayın motorunun yaptığı her şeyin tam izini — her kanal seçimini, yedek akışa geçişi ve yeniden bağlanmayı — Logcat\'te ve dışa aktarılan raporda tutar. Bir sorunu araştırmıyorsanız kapalı bırakın; oynatmayı asla değiştirmez, yalnızca ne kadar yazıldığını etkiler.</string>
     <string name="settings_live_preroll_playlist_picker">Hangi yayın listesi?</string>
@@ -1177,52 +1067,12 @@
     <string name="settings_font_system_sans">Sistem Sans</string>
     <string name="settings_font_monospace">Eş aralıklı</string>
     <string name="settings_subtitle_font">Altyazı yazı tipi</string>
-    <string name="settings_glass_preset_title">Görünüm ön ayarı</string>
-    <string name="settings_glass_preset_clear">Şeffaf</string>
-    <string name="settings_glass_preset_balanced">Dengeli</string>
-    <string name="settings_glass_preset_tinted">Renkli</string>
-    <string name="settings_glass_preset_custom">Özel</string>
-    <string name="settings_glass_preset_clear_description">Orta düzey bulanıklıkla daha fazla duvar kâğıdı rengi.</string>
-    <string name="settings_glass_preset_balanced_description">Önerilen netlik, derinlik ve okunabilirlik.</string>
-    <string name="settings_glass_preset_tinted_description">Yoğun veya parlak arka planlar için daha güçlü yüzey rengi.</string>
-    <string name="settings_glass_preset_custom_description">Kayıtlı şeffaflık ve bulanıklık değerlerinizi kullanın.</string>
     <string name="settings_ambient_glow">Ortam ışıması</string>
     <string name="settings_ambient_glow_description">Düz arayüze kurulum tarzı bir ışıma ekler</string>
     <string name="settings_ambient_glow_dialog_description">Cam olmayan arayüze yumuşak bir vurgu ışıması ekler. Animasyonlar açıkken yavaş nabız hafifçe nefes alır.</string>
     <string name="settings_ambient_glow_effect">Işıma</string>
     <string name="settings_ambient_glow_pulse">Yavaş nabız</string>
-    <string name="settings_glass_preset_ultra_clear">Ultra Net</string>
-    <string name="settings_glass_preset_opaque">Opak</string>
-    <string name="settings_glass_preset_ultra_clear_description">Hafif bulanıklıkla en yüksek duvar kâğıdı ayrıntısı.</string>
-    <string name="settings_glass_preset_opaque_description">En güçlü bulanıklıkla en yüksek panel yoğunluğu.</string>
-    <string name="settings_glass_preset_aurora">Aurora</string>
-    <string name="settings_glass_preset_aurora_description">En yoğun buzlanmaya sahip ince cam — telefon için tasarlandı.</string>
-    <string name="settings_glass_highlight_title">Vurgu gücü</string>
-    <string name="settings_glass_highlight_description">Odaktaki camın ışığını ve kenarını ayarlayın.</string>
     <string name="settings_glass_live_preview">Canlı önizleme</string>
-    <string name="settings_glass_screen_description">Yarı saydam buzlu paneller, arka plan görseli ve şeffaflık</string>
-    <string name="settings_glass_master_description">Bir arka plan fotoğrafının veya uygulamanın kendi arka planının üzerinde yarı saydam buzlu paneller.</string>
-    <string name="settings_glass_background_image">Bir arka plan görseli seçin</string>
-    <string name="settings_glass_background_blur_title">Bulanıklık / Buzlanma</string>
-    <string name="settings_glass_section_appearance">Görünüm</string>
-    <string name="settings_glass_section_fine_tuning">Gelişmiş seçenekler</string>
-    <string name="settings_glass_section_behavior">Davranış</string>
-    <string name="settings_glass_surface_all">Tümü</string>
-    <string name="settings_glass_background_action_description">Bir arka plan görseli seçin</string>
-    <string name="settings_glass_transparency_short_description">20–100 · 5</string>
-    <string name="settings_glass_blur_short_description">0–100 · 10</string>
-    <string name="settings_glass_highlight_short_description">Odaktaki camın ışığını ve kenarını ayarlayın.</string>
-    <string name="settings_glass_full_transparency_short">Tam şeffaflığa izin ver</string>
-    <string name="settings_glass_full_transparency_short_description">Mümkün olan en şeffaf cam için otomatik okunabilirlik sınırını kapatır.</string>
-    <string name="settings_glass_depth_effects_short">Derinlik ve gölgeler</string>
-    <string name="settings_glass_depth_effects_short_description">Odak geçişi ışığını, hafif paralaksı ve derinlik hareketini açar.</string>
-    <string name="settings_glass_shine_short">Kayan parıltı</string>
-    <string name="settings_glass_shine_short_description">Panel göründüğünde üzerinden bir ışık şeridi geçer.</string>
-    <string name="settings_glass_reset_balanced">Sıfırla: Dengeli</string>
-    <string name="settings_glass_full_transparency_title">Tam şeffaflığa izin ver</string>
-    <string name="settings_glass_full_transparency_description">Mümkün olan en şeffaf cam için otomatik okunabilirlik sınırını kapatır.</string>
-    <string name="settings_glass_depth_title">Derinlik ve gölgeler</string>
-    <string name="settings_glass_depth_description">Odak geçişi ışığını, hafif paralaksı ve derinlik hareketini açar.</string>
     <string name="settings_row_menu_pin">Hızlı’ya sabitle</string>
     <string name="settings_row_menu_unpin">Hızlı’dan kaldır</string>
     <string name="settings_row_menu_move_up">Yukarı taşı</string>
@@ -1230,8 +1080,6 @@
     <string name="settings_quick_empty_title">Henüz hiçbir şey sabitlenmedi</string>
     <string name="settings_quick_empty_hint">Herhangi bir ayarda OK tuşunu basılı tutun ve “Hızlı’ya sabitle” seçeneğini seçin.</string>
     <string name="settings_quick_empty_hint_touch">Herhangi bir ayara uzun basın ve “Hızlı’ya sabitle” seçeneğini seçin.</string>
-    <string name="settings_results_title">Sonuçlar</string>
-    <string name="settings_results_summary">Nerede olursa olsun her eşleşme — yoluyla birlikte</string>
     <plurals name="settings_setting_count">
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> ayar</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> ayar</item>
@@ -1246,45 +1094,29 @@
     <string name="settings_guide_width_summary">Kanal listesi %1$d%% · EPG zaman çizelgesi %2$d%%</string>
     <string name="settings_guide_width_help">• Kanal listesi ve EPG zaman çizelgesi aynı satırı paylaşır; toplamları 100%% olmalıdır.\n• Kanal listesini genişletmek zaman çizelgesinin daha azını gösterir; program süreleri ve zaman ölçeği değişmez.\n• Her iki sütun da en az 10%% genişliğinde kalır.\n• Sıfırla, kanal listesini 10%% ve EPG zaman çizelgesini 90%% yapar.\n• Özelleştirmeyi kapatmak, değerlerinizi silmeden standart düzeni geri yükler.</string>
     <string name="settings_guide_width_channels">Kanal listesi</string>
-    <string name="settings_guide_width_epg">EPG zaman çizelgesi</string>
     <string name="settings_selection_highlight">Seçim vurgusu</string>
     <string name="settings_selection_highlight_description">Seçili öğenin çevresindeki çerçevenin rengi ve kalınlığı</string>
-    <string name="settings_nav_bar_customization">Gezinme çubuğunu özelleştirme</string>
-    <string name="settings_playback_mobile">Mobil</string>
-    <string name="settings_playback_tv_only_note">Canlı önizleme ve uzaktan kumanda kısayolları televizyon özellikleridir; telefonda bulunmaz.</string>
     <string name="settings_background_playback">Arka planda oynatma</string>
     <string name="settings_background_playback_description">Uygulamadan çıktığında ses çalmaya devam etsin</string>
     <string name="settings_pip">Pencere içinde pencere</string>
-    <string name="settings_pip_description">Uygulamadan çıktığında videoyu küçük bir pencereye küçült</string>
     <string name="settings_data_saver">Veri tasarrufu</string>
     <string name="settings_data_saver_description">Mobil veriyle yayın açma</string>
     <string name="settings_gesture_sensitivity">Hareket hassasiyeti</string>
-    <string name="settings_gesture_sensitivity_description">Ses, parlaklık veya konumu değiştirmek için ne kadar kaydırman gerektiği</string>
     <string name="settings_downloads_wifi_only">Yalnızca Wi-Fi ile indir</string>
     <string name="settings_downloads_wifi_only_description">Mobil veri kullanmak yerine Wi-Fi bekle</string>
-    <string name="settings_search_keywords_background_playback">arka plan ses audio uygulamadan cikma devam servis</string>
-    <string name="settings_search_keywords_pip">pencere icinde pencere yuzen kucuk kaplama</string>
-    <string name="settings_search_keywords_data_saver">veri tasarrufu mobil veri kota dolasim</string>
-    <string name="settings_search_keywords_gestures">hareket kaydirma hassasiyet dokunma surukleme</string>
-    <string name="settings_mini_player_style">Mini oynatıcı stili</string>
     <string name="settings_mini_player_style_description">Gezinirken oynatmanın sizi nasıl izlediği</string>
     <string name="settings_mini_player_style_floating">Yüzen pencere</string>
     <string name="settings_mini_player_style_docked">Sabit çubuk</string>
     <string name="settings_pip_size">Pencere boyutu</string>
-    <string name="settings_pip_size_description">Yüzen pencerenin başlangıç boyutu. Boyutunu parmakla değiştirin.</string>
     <string name="settings_pip_size_small">Küçük</string>
     <string name="settings_pip_size_medium">Orta</string>
     <string name="settings_pip_size_large">Büyük</string>
     <string name="settings_pip_snap">Kenarlara yapış</string>
-    <string name="settings_pip_snap_description">Pencereyi bırakın, en yakın kenara oturur</string>
     <string name="settings_audio_on_screen_off">Ekran kapanınca yalnızca ses</string>
-    <string name="settings_audio_on_screen_off_description">Kimsenin görmediği videoyu çözmeyi bırakır, pil tasarrufu sağlar</string>
     <string name="settings_audio_on_mobile_data">Mobil veride yalnızca ses</string>
     <string name="settings_audio_on_mobile_data_description">Wi-Fi yoksa görüntüsüz başla</string>
     <string name="settings_audio_per_channel">Kanal başına yalnızca sesi hatırla</string>
-    <string name="settings_audio_per_channel_description">Görüntüsüz izlenen kanal bir dahaki sefere öyle açılır</string>
     <string name="local_sync_title">Yerel eşitleme</string>
-    <string name="local_sync_description">Verilerinizi Wi-Fi üzerinden diğer cihazınızla paylaşın</string>
     <string name="local_sync_host_hint">Diğer cihazınızda da Eşitleme modunu açın, Bağlan\'a dokunun ve bu cihazı seçin.</string>
     <string name="local_sync_qr_description">Bu cihazın adresini içeren QR kodu</string>
     <string name="local_sync_pin_is">PIN: <xliff:g id="pin">%1$s</xliff:g></string>
@@ -1339,8 +1171,6 @@
     <string name="local_sync_error_bad_payload">Gelen veri okunamadı. Parola kullandıysanız her iki cihazda da aynı olduğunu kontrol edin.</string>
     <string name="local_sync_error_unknown">Bir şeyler ters gitti. Tekrar deneyin.</string>
     <string name="local_sync_mode">Eşitleme modu</string>
-    <string name="local_sync_mode_description">Diğer cihazlarınızın bu cihazı bulmasını sağlar. Bu ekran açık kaldığı sürece açık kalır.</string>
-    <string name="local_sync_mode_pill">Eşitleme modu açık</string>
     <string name="local_sync_connect">Bağlan</string>
     <string name="local_sync_connect_description">Eşitleme modu açık olan başka bir cihaz bulun</string>
     <string name="local_sync_last_synced">Son eşitleme: <xliff:g id="when">%1$s</xliff:g></string>
@@ -1600,7 +1430,7 @@
     <string name="settings_help_playlists">Bir bağlantıdan, Xtream girişinden, Stalker portalından veya dosyadan oynatma listesi ekleyin, yeniden eşitleyin ya da kaldırın.</string>
     <string name="settings_help_epg_sources">Bir XMLTV rehber kaynağını bağlantısıyla ekleyin, yenileyin veya kaldırın. Kaynaklar TV Rehberi’ni ve Canlı TV’deki program satırlarını doldurur.</string>
     <string name="settings_help_guide_days">Rehberin ileriye dönük kaç günlük programı sakladığı. Daha az gün, daha hızlı yenileme ve daha küçük veritabanı demektir.</string>
-    <string name="settings_help_catchup">Geriye dönük izleme, programları sağlayıcınızın arşivinden oynatır. Çoğu sağlayıcı TV’nin kendi saatini kullanır; yanlış saatte başlıyorsa sabit bir UTC farkı seçin. Hangi oynatıcının kullanılacağını da burada seçersiniz.</string>
+    <string name="settings_help_catchup_timezone">Geriye dönük izleme, programları sağlayıcınızın arşivinden oynatır. Otomatik, sağlayıcınızın bildirdiği saat dilimini, bildirmiyorsa TV’nin kendi saatini kullanır; yine de yanlış saatte başlıyorsa sabit bir UTC farkı seçin. Hangi oynatıcının kullanılacağını da burada seçersiniz.</string>
     <string name="settings_help_theme">OwnTV koyu tema için tasarlandı. Sistem, varsa TV’nin kendi ayarını izler; açık tema aydınlık bir oda için uygundur.</string>
     <string name="settings_help_accent">Düğmeleri, odak parıltısını, ilerleme çubuklarını ve vurguları her yerde renklendirir. Hazır bir renk seçin veya palet ve istediğiniz onaltılık kod için OK’ye basın.</string>
     <string name="settings_help_focus">Odaktaki öğenin çevresindeki halka. Kanepeden kolayca izlenebilmesi için rengini ve kalınlığını seçin.</string>

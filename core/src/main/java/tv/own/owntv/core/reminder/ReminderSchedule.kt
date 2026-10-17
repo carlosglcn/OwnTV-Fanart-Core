@@ -8,7 +8,7 @@ import tv.own.owntv.core.database.entity.ReminderEntity
  */
 object ReminderSchedule {
 
-    /** The mockup's "Remind me (5 min before)". */
+    /** "Remind me (5 min before)". */
     const val DEFAULT_LEAD_MINUTES = 5
 
     /** The *Reminder time* setting's choices: at the start, 1 or 5 minutes before. */

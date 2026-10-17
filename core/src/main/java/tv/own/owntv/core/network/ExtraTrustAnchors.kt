@@ -11,7 +11,7 @@ import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
 
 /**
- * Let's Encrypt roots that many devices do not trust yet (#208), read from `res/raw/isrg_extra_roots.pem`.
+ * Let's Encrypt roots that many devices do not trust yet, read from `res/raw/isrg_extra_roots.pem`.
  *
  * ISRG Root YE / YR (2025) are in no platform trust store at all, and ISRG Root X2 only from Android 14,
  * so a panel whose chain ends at one of them failed import with "Unacceptable certificate: CN=Root YR".

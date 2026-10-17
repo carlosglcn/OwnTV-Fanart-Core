@@ -28,19 +28,19 @@ import tv.own.owntv.core.stalker.stalkerCredentials
 import java.io.IOException
 
 /**
- * Stalker/Ministra portal import (plan Phase C). Unlike Xtream there is no single bulk endpoint —
+ * Stalker/Ministra portal import. Unlike Xtream there is no single bulk endpoint —
  * content is inherently paged per genre — so this walks `get_genres` → per-genre `get_ordered_list`
  * pages, but reuses the shared [SyncSupport] machinery (chunked streaming insert with remoteId
  * dedupe, hash-diffed stable upsert / fresh insert, category refresh, pruning). The per-item `cmd`
  * is stored in `streamUrl` and resolved to a real URL at play time by StreamUrlResolver.
  *
- * LIVE (Phase C-1) uses a bulk `get_all_channels` fast path with per-genre paging fallback. VOD and
- * series (Phase D-1) have no *known* single-dump endpoint (there's no documented `get_all_vod`), so
+ * LIVE uses a bulk `get_all_channels` fast path with per-genre paging fallback. VOD and
+ * series have no *known* single-dump endpoint (there's no documented `get_all_vod`), so
  * they walk `get_categories` → per-category `get_ordered_list` pages through the shared
  * [syncPagedCatalog], which drains all pages through one global concurrency pool. If a portal turns
  * out to serve a bulk/all-category VOD dump (as `get_all_channels` surprised us for live), the
  * `page-plan`/`fetch done` logs will show it — probe `get_ordered_list&category=*` before assuming
- * paging is the only path. Series SHOW rows are stored here; episodes load lazily on open (Phase D-2).
+ * paging is the only path. Series SHOW rows are stored here; episodes load lazily on open.
  */
 internal class StalkerSyncer(
     private val client: StalkerClient,
@@ -59,7 +59,7 @@ internal class StalkerSyncer(
      */
     suspend fun sync(s: SourceEntity, progress: SyncCounters, stats: SyncStatsCollector, contentTypes: SyncContentTypes) {
         val creds = credentialsFor(s)
-        // Phase E (§5.5 priority 1): if the portal profile advertises an XMLTV feed, adopt it as the
+        // First choice: if the portal profile advertises an XMLTV feed, adopt it as the
         // source's guide URL so the existing (stream-parsed, rolling-window) XMLTV pipeline can sync
         // it from Settings → EPG. Best effort — a failure here must never fail the catalog sync.
         runCatching { adoptPortalXmltvUrl(s, creds) }
@@ -110,7 +110,7 @@ internal class StalkerSyncer(
         // Genres/pages this pass could not fetch. A non-zero count means remoteIds is incomplete,
         // so pruning against it would delete the missing genres' channels as "stale".
         val pageFailures = java.util.concurrent.atomic.AtomicInteger(0)
-        // Audit S7 diagnostic: the first few channels this pass builds, so their per-field
+        // Diagnostic: the first few channels this pass builds, so their per-field
         // fingerprints can be compared across two consecutive syncs — see [logFieldFingerprints].
         val fieldDiffSample = ArrayList<ChannelEntity>(FIELD_DIFF_SAMPLE)
         var order = 0
@@ -273,7 +273,7 @@ internal class StalkerSyncer(
     }
 
     /**
-     * Audit S7 diagnostic — which channel field makes Stalker rewrite ~99% of its rows every sync.
+     * Diagnostic — which channel field makes Stalker rewrite ~99% of its rows every sync.
      *
      * Stalker resyncs report `dbUpdated≈1500 dbSkipped=0` with identical counts run after run, i.e.
      * the hash differs for nearly every channel even though the catalog plainly hasn't changed. The
@@ -325,7 +325,7 @@ internal class StalkerSyncer(
             adapter = support.seriesAdapter,
             fetchCategories = { auth.withAuthRetry(creds) { client.getSeriesCategories(it.apiBase, creds.mac, it.token, creds.userAgent) } },
             fetchPage = { catId, page -> auth.withAuthRetry(creds) { client.getSeriesPage(it.apiBase, creds.mac, it.token, creds.userAgent, catId, page) } },
-            // SHOW rows only — episodes are listed lazily when a show is opened (Phase D-2).
+            // SHOW rows only — episodes are listed lazily when a show is opened.
             map = { item, catDbId, order ->
                 SeriesEntity(
                     sourceId = s.id, categoryId = catDbId, name = item.name,
@@ -387,7 +387,7 @@ internal class StalkerSyncer(
         // (or wholly) missing from this pass, so the prune below must be skipped — otherwise the
         // missing items would be deleted as "stale" (the plan's re-sync data-loss scenario).
         val pageFailures = java.util.concurrent.atomic.AtomicInteger(0)
-        // Set when this pass deliberately left pages unfetched (N1b), so the code after the drain can
+        // Set when this pass deliberately left pages unfetched, so the code after the drain can
         // tell "finished the whole catalogue" from "stored page 1 of everything and wrote a plan".
         val lazyEngaged = java.util.concurrent.atomic.AtomicBoolean(false)
         // Re-sync delta check: a category whose portal total_items equals its local row count very
@@ -500,7 +500,7 @@ internal class StalkerSyncer(
                                 }
                                 page1.items.forEachIndexed { i, item -> items.send(Triple(item, catDbId, sortKey(catBase, 1, maxPer, i))) }
                                 for (p in 2..pages) pageTasks.add(PageTask(cat.id, p, catDbId, sortKey(catBase, p, maxPer, 0)))
-                                // The same plan, in the durable form the background drain reads (N1b).
+                                // The same plan, in the durable form the background drain reads.
                                 // Single-page categories are recorded too, already done: `advertisedTotal`
                                 // is summed from these rows, and it is the reconciliation target.
                                 planRows.add(
@@ -515,7 +515,7 @@ internal class StalkerSyncer(
                             }
                             Log.i(TAG, "$label page-plan sourceId=${s.id} cats=${cats.size} itemsPerPage~=$maxPerSeen extraPages=${pageTasks.size} advertisedTotal=$advertisedTotal concurrency=adaptive(${budget.currentLimit}..${budget.max})")
 
-                            // N1b — the portals that hurt cap a page at ~14 items, which turns a full
+                            // The portals that hurt cap a page at ~14 items, which turns a full
                             // catalogue into thousands of round trips (4,681 pages for 65,523 movies on
                             // the reference portal: 4½ minutes of progress bar). Setup stops here: the
                             // page-1 sweep above already stored the top of every category, so every list
@@ -574,7 +574,7 @@ internal class StalkerSyncer(
                 stats.addWarning(SyncWarning(phase.name, kind = SyncWarningKind.PAGE_FAILURE, count = pageFailures.get()))
             }
             // A drain that ran to the end leaves nothing outstanding, so any plan written by an
-            // earlier lazy setup is now stale — drop it, or the worker and N1c would keep treating a
+            // earlier lazy setup is now stale — drop it, or the worker and the category priority would keep treating a
             // complete phase as unfinished. Page failures mean the pass was NOT complete, so the plan
             // (if any) must survive to cover what this pass missed.
             if (!lazyEngaged.get() && pageFailures.get() == 0) catalogBackfillDao.clear(s.id, mediaType)
@@ -607,10 +607,10 @@ internal class StalkerSyncer(
     /** One remaining page fetch for the worker pool: which category/page, and the page's first sort key. */
     private data class PageTask(val catId: String, val page: Int, val catDbId: Long?, val sortBase: Int)
 
-    // ── N1d: the background drain of the plan N1b wrote ──────────────────────────────────────────
+    // ── The background drain of the page plan the setup sweep wrote ──────────────────────────────────────────
 
     /**
-     * Finish a lazily-set-up catalogue (N1d): walk the pages [syncPagedCatalog] deliberately skipped
+     * Finish a lazily-set-up catalogue: walk the pages [syncPagedCatalog] deliberately skipped
      * until the stored counts reach the portal's own advertised totals.
      *
      * Called from a WorkManager job, never from setup, and shaped by that: it persists its position
@@ -679,7 +679,7 @@ internal class StalkerSyncer(
     ): BackfillOutcome = coroutineScope {
         val planned = catalogBackfillDao.pending(s.id, mediaType)
         if (planned.isEmpty()) return@coroutineScope BackfillOutcome()
-        // Plan N1c's re-ordering lives inside `drain` below, where it is re-read between
+        // The category priority's re-ordering lives inside `drain` below, where it is re-read between
         // categories rather than fixed for the whole pass.
         val pending = planned
         val startedAt = SystemClock.elapsedRealtime()
@@ -693,7 +693,7 @@ internal class StalkerSyncer(
         /** Walk one batch of categories from each one's stored cursor. Returns false if it yielded. */
         suspend fun drain(rows: List<CatalogBackfillEntity>): Boolean {
             // A queue rather than a plain loop, because the priority is re-read *between*
-            // categories (plan N1c). Reading it once per pass was not enough: a pass over 127
+            // categories. Reading it once per pass was not enough: a pass over 127
             // categories runs for minutes, and "the category the user is looking at" is a thing
             // they do in the middle of one. Checked here, opening a category jumps the queue within
             // seconds instead of waiting for the next pass.
@@ -740,7 +740,7 @@ internal class StalkerSyncer(
                         }
                     }
                     if (newRows.isNotEmpty()) {
-                        // N1f-6. `eligible = false`, so this never drops an index or a trigger — it
+                        // `eligible = false`, so this never drops an index or a trigger — it
                         // only registers as a writer. That is the point: while another source's
                         // fresh import holds this table in bulk mode, the last-writer restore
                         // rebuilds the FTS index and *then* re-creates the AFTER_INSERT trigger, and
@@ -769,12 +769,12 @@ internal class StalkerSyncer(
         paused = !drain(pending)
 
         // Reconcile, and re-walk the gap — "I fetched every page" is not the same as "the rows are
-        // here". §4A measured the eager walk itself losing 4,987 of 65,523 movies to pages the portal
+        // here". A measured eager walk lost 4,987 of 65,523 movies to pages the portal
         // answered without filling, so a drain that trusted its own page counter would inherit exactly
         // that bug. Compare each category's stored rows against the portal's own total_items, and put
         // the short ones back in the queue.
         //
-        // The comparison is per category and the target is the sum of the PER-CATEGORY totals (§4C),
+        // The comparison is per category and the target is the sum of the PER-CATEGORY totals,
         // never the synthetic "*" total — that one counts items belonging to no category at all
         // (65,523 against 65,318), and a drain chasing it could never finish.
         //
@@ -889,7 +889,7 @@ internal class StalkerSyncer(
     }
 
     /**
-     * Phase E (§5.5): some portals advertise an XMLTV feed in their `get_profile` payload. If this
+     * Some portals advertise an XMLTV feed in their `get_profile` payload. If this
      * source has no guide URL yet, persist the advertised one into `epgUrl` — `EpgRepository.guideUrl`
      * then treats the source exactly like an M3U with `url-tvg`. A user-entered URL always wins
      * (never overwritten), and EPG sync itself stays user-initiated (Settings → EPG).
@@ -954,14 +954,14 @@ internal class StalkerSyncer(
             else -> false
         }
 
-        /** `get_profile` fields observed in the wild to carry a portal's XMLTV feed URL (§5.5). */
+        /** `get_profile` fields observed in the wild to carry a portal's XMLTV feed URL. */
         private val XMLTV_PROFILE_KEYS = listOf("xmltv_url", "epg_url", "tv_guide_url", "guide_url")
 
         /** Flush every N channels so import progress shows early (see [chunkSize] note). */
         private const val STALKER_CHUNK = 1_500
 
         /**
-         * A page size at or below this is the pathology N1 exists for — the reference portal serves
+         * A page size at or below this is the pathology the lazy setup exists for — the reference portal serves
          * 14 and ignores any `max_page_items` we ask for, so a catalogue costs thousands of requests.
          * A portal that pages sanely (hundreds per page) finishes its walk quickly and is left alone.
          */
@@ -995,7 +995,7 @@ internal class StalkerSyncer(
         internal fun sortKey(sortBase: Int, page: Int, maxPageItems: Int, indexInPage: Int): Int =
             sortBase + (page - 1) * maxPageItems + indexInPage
 
-        /** How many channels the S7 field-diff diagnostic fingerprints per sync (see [logFieldFingerprints]). */
+        /** How many channels the field-diff diagnostic fingerprints per sync (see [logFieldFingerprints]). */
         private const val FIELD_DIFF_SAMPLE = 3
 
         /** Total attempts per page for transient 429/5xx errors (1 original + 2 retries). */
@@ -1030,11 +1030,11 @@ internal class StalkerSyncer(
 
 internal object BackfillQueue {
     /**
-     * Move the category the user is looking at to the head of the queue (plan N1c).
+     * Move the category the user is looking at to the head of the queue.
      *
      * Returns how many categories it jumped, or 0 when there was nothing to do — no request, the
      * request is for another phase, it is already first, or it is not in this queue at all (already
-     * complete). Pulled out of the drain loop so the one piece of N1c with an ordering bug in it can
+     * complete). Pulled out of the drain loop so the one piece of the priority with an ordering bug in it can
      * be tested without a portal: the drain runs for minutes and re-reads this between every
      * category, so getting it wrong would quietly starve a category rather than fail.
      */

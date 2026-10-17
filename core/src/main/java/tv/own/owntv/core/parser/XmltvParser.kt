@@ -211,7 +211,7 @@ object XmltvParser {
         val stopMs = parseTime(parser.getAttributeValue(null, "stop"))
         var title = ""
         var desc: String? = null
-        // The details line (G1). Created only when a programme has an element other than title/desc:
+        // The details line. Created only when a programme has an element other than title/desc:
         // most feeds carry none, and the guide reader must stay as fast for them as before.
         var details: DetailReader? = null
         try {
@@ -343,7 +343,7 @@ object XmltvParser {
     /**
      * XMLTV time is `yyyyMMddHHmmss` optionally followed by a ` +0000` style offset.
      * See [parseXmltvTime] — this used to build a `SimpleDateFormat` per timestamp, which is two
-     * per programme and ~200,000 on a large guide (E2).
+     * per programme and ~200,000 on a large guide.
      */
     private fun parseTime(raw: String?): Long = parseXmltvTime(raw)
 

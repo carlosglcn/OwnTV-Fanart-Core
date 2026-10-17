@@ -20,7 +20,7 @@ class DownloadActivityTracker {
         val title: String,
         val downloadedBytes: Long,
         val totalBytes: Long,
-        /** Speed over the last few seconds; null until measurable (Stage G3). */
+        /** Speed over the last few seconds; null until measurable. */
         val bytesPerSecond: Long? = null,
     ) {
         /** 0f..1f when the size is known; null while the server has not said how big the file is. */

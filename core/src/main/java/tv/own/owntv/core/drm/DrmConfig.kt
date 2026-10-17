@@ -4,7 +4,7 @@ import org.json.JSONObject
 import tv.own.owntv.core.network.StreamHeaders
 
 /**
- * The DRM a stream needs, as an M3U playlist declares it (#115).
+ * The DRM a stream needs, as an M3U playlist declares it.
  *
  * Kodi's `#KODIPROP:inputstream.adaptive.*` convention is what playlists in the wild use, and it is
  * how self-hosted proxies (JioTV-Go and friends) publish protected channels:

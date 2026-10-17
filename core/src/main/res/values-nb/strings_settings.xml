@@ -18,9 +18,7 @@
     <string name="settings_movies_keep_watching_description">Vis kort for å fortsette filmer i hovedraden.</string>
     <string name="settings_series_keep_watching">Serier i Fortsett å se</string>
     <string name="settings_series_keep_watching_description">Vis kort for å fortsette episoder i hovedraden.</string>
-    <!-- Translators: Toggle label for playing the highlighted Home item's video in the hero row. -->
     <string name="settings_hero_preview">Spill av video i hovedraden</string>
-    <!-- Translators: Description of the hero-row video preview toggle. -->
     <string name="settings_hero_preview_description">Videoen til det markerte elementet spilles av etter et øyeblikk. Slå av for å spare strøm og minne mens du blar på startskjermen.</string>
     <string name="settings_android_tv_home">Android TV-startskjerm</string>
     <string name="settings_android_tv_home_description">Vis Fortsett å se og nylige direktekanaler på TV-ens startskjerm.</string>
@@ -30,11 +28,8 @@
     <string name="settings_done_check">Ferdig ✓</string>
     <string name="settings_mode"><xliff:g id="mode">%1$s</xliff:g></string>
     <string name="settings_hidden">Skjult</string>
-    <string name="settings_nav_dynamic_description">Dynamisk — ikonene tilpasser seg innholdet i den aktive spillelisten. Startskjerm og Innstillinger vises alltid.</string>
-    <string name="settings_nav_static_description">Statisk — velg manuelt hvilke ikoner som vises nedenfor.</string>
     <string name="settings_static">Statisk</string>
     <string name="settings_dynamic">Dynamisk</string>
-    <string name="settings_http_proxy">HTTP-proxy</string>
     <string name="settings_use_proxy">Bruk proxy</string>
     <string name="settings_proxy_description">Send all OwnTV-trafikk og avspilling gjennom en HTTP-proxy.</string>
     <string name="settings_host">Vert</string>
@@ -102,8 +97,6 @@
     <string name="settings_show_weather_description">Vis gjeldende vær på topplinjen.</string>
     <string name="settings_custom_location">Egendefinert sted</string>
     <string name="settings_custom_location_description">Overstyr byen som brukes for været. La feltet stå tomt for automatisk registrering, eller angi en by (f.eks. London) eller «breddegrad,lengdegrad» (f.eks. 51.5,-0.12). Dette er nyttig med VPN, der automatisk registrering finner serverens by.</string>
-    <string name="settings_use_device_location">Bruk posisjonen til denne enheten</string>
-    <string name="settings_use_device_location_description">Været følger der telefonen er. Slå av for å skrive inn en by selv.</string>
     <string name="settings_temperature_unit">Temperaturenhet</string>
     <string name="settings_temperature_description">Vis temperaturen i Celsius eller Fahrenheit.</string>
     <string name="settings_auto">Automatisk</string>
@@ -168,7 +161,6 @@
     <string name="settings_quick_hdr">HDR (bare mpv)</string>
     <string name="settings_quick_autoplay">Automatisk avspilling</string>
     <string name="settings_quick_check_update">Se etter oppdatering</string>
-    <string name="settings_search_hint">Søk i innstillinger…</string>
     <string name="settings_language">Språk</string>
     <string name="settings_language_description">Visningsspråk for appen</string>
     <string name="settings_language_system_default">Systemstandard</string>
@@ -183,14 +175,10 @@
     <string name="settings_epg_sources_nav_description">Legg til XMLTV-kilder for programoversikten</string>
     <string name="settings_customize">Tilpass kategorier og elementer</string>
     <string name="settings_customize_nav_description">Skjul og vis elementer, gi kategorier nytt navn og endre rekkefølgen</string>
-    <string name="settings_sidebar_description_root">Tilpass sideikonene automatisk til spillelisten, eller skjul bestemte ikoner</string>
     <string name="settings_ch_paging">Fjernkontrollsnarveier</string>
     <string name="settings_ch_paging_description">Tilordne ledige knapper til navigasjon, avspilling og blaing. Viktige navigasjonsknapper forblir beskyttet.</string>
-    <!-- Translators: Settings navigation label for the long-press content menus. -->
     <string name="settings_content_menus_title">Menyer ved langt trykk</string>
-    <!-- Translators: Description of the long-press content menus settings. -->
     <string name="settings_content_menus_description">Endre rekkefølgen på handlingene i menyene for kanaler, filmer, serier og episoder</string>
-    <!-- Translators: Hint shown above the list when arranging a long-press menu. -->
     <string name="settings_content_menus_hint">Hold inne OK på en handling for å plukke den opp, og flytt den så opp og ned. Trykk OK igjen for å slippe den.</string>
     <string name="settings_browsing_lists">Blaing og lister</string>
     <string name="settings_browsing_description">Husk den siste kategorien og det siste elementet i Direkte-TV, filmer og serier</string>
@@ -199,7 +187,6 @@
     <string name="settings_metadata_root_description">Plakater, handlingsbeskrivelser, skuespillere og vurderinger for filmer og serier</string>
     <string name="settings_download_folder">Nedlastingsmappe</string>
     <string name="settings_backup_restore">Sikkerhetskopiering og gjenoppretting</string>
-    <string name="settings_backup_restore_description">Eksporter eller gjenopprett profiler og kilder</string>
     <string name="settings_clear_history">Tøm seerhistorikken</string>
     <string name="settings_appearance_group">Utseende</string>
     <string name="settings_theme">Tema</string>
@@ -215,13 +202,10 @@
     <string name="settings_focus_width_thick">Tykk</string>
     <string name="settings_focus_width_extra">Ekstra tykk</string>
     <string name="settings_focus_highlight_sample">Fokusert</string>
-    <string name="settings_glass_effect">Glasseffekt</string>
-    <string name="settings_glass_description">Gjennomsiktige, frostede paneler, bakgrunnsbilde og transparens</string>
     <string name="settings_ui_zoom">Zoom i brukergrensesnittet</string>
     <string name="settings_ui_zoom_description">Skaler hele grensesnittet</string>
     <string name="settings_animations">Animasjoner</string>
     <string name="settings_animations_description">Slå bevegelser i grensesnittet av eller på — Av føles raskere på enklere TV-bokser</string>
-    <string name="settings_animations_description_mobile">Slå bevegelser i grensesnittet av eller på — Av føles raskere på eldre telefoner og nettbrett</string>
     <string name="settings_weather_description_root">Værbrikke på topplinjen: vis eller skjul den, angi et egendefinert sted og velg Celsius eller Fahrenheit.</string>
     <string name="settings_playback_group">Avspilling</string>
     <string name="settings_live_preview_description">Spill av en kanal automatisk når du fokuserer på den</string>
@@ -230,10 +214,8 @@
     <string name="settings_mini_player_root">Miniavspiller</string>
     <string name="settings_mini_player_root_description">Størrelse og plassering for den forankrede miniavspilleren</string>
     <string name="settings_hdr_description">Bruk HDR-utdata når videoen og TV-en støtter det. Bare mpv: ExoPlayer-motoren støtter ikke denne innstillingen og sender alltid strømmens HDR uendret videre.</string>
-    <string name="settings_hdr_description_mobile">Bruk HDR-utdata når videoen og skjermen støtter det. Bare mpv: ExoPlayer-motoren støtter ikke denne innstillingen og sender alltid strømmens HDR uendret videre.</string>
     <string name="settings_auto_frame_rate">Automatisk bildefrekvens</string>
     <string name="settings_auto_frame_rate_description">Tilpass TV-ens oppdateringsfrekvens til videoen (24/25/50/60 bilder/s) i fullskjerm for Direkte-TV og VOD, og gjenopprett den når du avslutter. Slå av hvis TV-en eller mottakeren utfører et støyende HDMI-håndtrykk ved hvert kanalbytte.</string>
-    <string name="settings_auto_frame_rate_description_mobile">Tilpass skjermens oppdateringsfrekvens til videoen (24/25/50/60 bilder/s) i fullskjerm for Direkte-TV og VOD, og gjenopprett den når du avslutter. Slå av hvis skjermen flimrer eller blir mørk når en video starter.</string>
     <string name="settings_afr_pause">Pause under skjermbytte</string>
     <string name="settings_afr_pause_description">Bare filmer. Når TV-en må synkronisere på nytt til en ny skjermmodus, venter filmen så lenge, slik at begynnelsen ikke går tapt i det svarte bildet. Et sømløst bytte pauser aldri.</string>
     <string name="settings_afr_resolution">Tilpass oppløsning</string>
@@ -242,7 +224,6 @@
     <string name="settings_surround_description_mobile">Dekod Dolby/DTS til surroundlyd (5.1/7.1) for en ekte 5.1/7.1-mottaker koblet til denne enheten. La dette være AV for den innebygde høyttaleren, hodetelefoner eller en stereolydplanke — flerkanalslyd kan føre til at lyden henger etter bildet. Hvis synkroniseringen forskyves, finjusterer du den i avspillerens meny Lyd → A/V-synkronisering.</string>
     <string name="settings_audio_passthrough">Dolby- og DTS-passthrough</string>
     <string name="settings_audio_passthrough_description">På: Dolby og DTS sendes udekodet til TV-en, lydplanken eller receiveren når den sier at den kan spille dem av (ExoPlayer). Av: appen dekoder dem, fortsatt som surround der Surroundlyd tillater det. mpv dekoder alltid. Brukes ikke mens Nattmodus eller Volumutjevning er på.</string>
-    <string name="settings_audio_passthrough_description_mobile">På: Dolby og DTS sendes udekodet til en tilkoblet TV eller receiver når den sier at den kan spille dem av (ExoPlayer). Av: appen dekoder dem, fortsatt som surround der Surroundlyd tillater det. mpv dekoder alltid. Brukes ikke mens Nattmodus eller Volumutjevning er på.</string>
     <string name="settings_night_mode">Nattmodus</string>
     <string name="settings_night_mode_description">Demper høye scener og løfter stille dialog, for å se med lavt volum.</string>
     <string name="settings_volume_leveling">Volumutjevning</string>
@@ -253,7 +234,6 @@
     <string name="settings_mobile_data_quality_description">På en forbindelse med datamåling spilles høyst denne kvaliteten av. Av: det samme som på Wi-Fi.</string>
     <string name="settings_tunneled_playback">Tunnelert avspilling (eksperimentell)</string>
     <string name="settings_tunneled_playback_description">Direkte-TV på ExoPlayer: TV-ens egen maskinvare holder bilde og lyd sammen, med mindre arbeid for prosessoren. Virker bare på noen TV-er og slår seg av selv hvis en kanal feiler med den. Lydsynkronisering kan ikke justeres mens den er på.</string>
-    <string name="settings_tunneled_playback_description_mobile">Direkte-TV på ExoPlayer: enhetens egen maskinvare holder bilde og lyd sammen, med mindre arbeid for prosessoren. Virker bare på noen enheter og slår seg av selv hvis en kanal feiler med den. Lydsynkronisering kan ikke justeres mens den er på.</string>
     <string name="settings_tunneled_playback_failed">Slått av etter at en kanal feilet med den på denne enheten.</string>
     <string name="settings_autoplay_next">Spill av neste episode automatisk</string>
     <string name="settings_autoplay_next_description">Når en episode slutter, starter neste automatisk — og fortsetter inn i neste sesong. Arkiv fortsetter også til neste program.</string>
@@ -264,13 +244,9 @@
     </plurals>
     <string name="settings_catchup_unavailable">Ingen kanaler med arkiv er tilgjengelige i denne spillelisten</string>
     <string name="settings_device">Enhet</string>
-    <string name="settings_video_player">Innstillinger for videoavspiller</string>
-    <string name="settings_video_player_description">Dekoder, undertekster, synkronisering</string>
     <string name="settings_playback_error_log">Feillogg</string>
     <string name="settings_playback_speed">Avspillingshastighet</string>
     <string name="settings_player_zoom">Avspillerzoom</string>
-    <string name="settings_playback_error_description">Krasj og avspillingsfeil — detaljer du kan lese eller rapportere</string>
-    <string name="settings_network_group">Nettverk</string>
     <string name="settings_app_group">App</string>
     <string name="settings_app_startup">Oppstart av appen</string>
     <string name="settings_app_startup_description">Hva OwnTV åpner ved oppstart</string>
@@ -279,7 +255,6 @@
     <string name="settings_update_startup">Se etter oppdateringer ved oppstart</string>
     <string name="settings_update_startup_description">Se etter en ny versjon når appen åpnes</string>
     <string name="settings_about">Om</string>
-    <string name="settings_about_description">Versjon, lisens og prosjektinformasjon</string>
     <string name="settings_live_latency">Direkteforsinkelse</string>
     <string name="settings_no_settings_match">Ingen innstillinger samsvarer med «<xliff:g id="query">%1$s</xliff:g>»</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
@@ -301,11 +276,8 @@
     <string name="settings_color_picker">Fargevelger</string>
     <string name="settings_use_color">Bruk denne fargen</string>
     <string name="settings_about_version">Versjon <xliff:g id="version">%1$s</xliff:g></string>
-    <string name="settings_about_description_full_mobile">Din egen IPTV-avspiller for Android — en gratis app med åpen kildekode som bare er en avspiller. Den leverer ingen kanaler eller noe innhold. Du bruker dine egne kilder som du har lovlig tilgang til.</string>
-    <string name="settings_about_license">© 2026 OwnTV · GPLv3-lisens</string>
     <string name="settings_join_telegram">Bli med på Telegram</string>
     <string name="settings_telegram_qr">QR-kode for Telegram-gruppen</string>
-    <string name="settings_telegram_scan">Skann QR-koden for å bli med fra telefonen, eller åpne lenken ovenfor.</string>
     <string name="settings_contributions">Bidrag, feilrapporter og stjerner er velkomne på GitHub.</string>
     <string name="settings_playback_error_description_full">Det siste krasjet og de nyeste avspillingsfeilene (nyeste først). Ta med disse detaljene når du rapporterer et problem.</string>
     <string name="settings_loading">Laster inn…</string>
@@ -313,15 +285,8 @@
     <string name="settings_live">Direkte</string>
     <string name="settings_vod">VOD</string>
     <string name="settings_clear_log">Tøm loggen</string>
-    <string name="settings_browsing_title">Blaing og lister</string>
     <string name="settings_browsing_description_full">Hva Direkte-TV, filmer og serier går tilbake til når du kommer tilbake.</string>
-    <string name="settings_glass_surfaces">Glassflater</string>
-    <string name="settings_glass_surfaces_description">Velg hvilke deler av appen som skal vises som glass. Hvis alle flater slås av, slås glasseffekten av.</string>
-    <string name="settings_all_surfaces_on">Alle flater: På</string>
-    <string name="settings_all_surfaces_off">Alle flater: Av</string>
-    <string name="settings_surface_toggle"><xliff:g id="surface">%1$s</xliff:g>: <xliff:g id="state">%2$s</xliff:g></string>
-    <string name="settings_transparency_description">Hvor mye som skinner gjennom panelene (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). Høyere verdi gir mer ugjennomsiktige paneler.</string>
-    <string name="settings_catchup_description">Hvordan tidsstempler for arkiv sendes. Bruk enhetens tidssone, eller angi forskyvningen som leverandørens server forventer.</string>
+    <string name="settings_catchup_timezone_description">Hvordan tidsstempler for arkiv sendes. Automatisk bruker tidssonen leverandørens server oppgir, eller enhetens hvis den ikke oppgir noen. Du kan også velge Enhet eller angi forskyvningen selv.</string>
     <string name="settings_manual">Manuelt</string>
     <string name="settings_theme_dark">Mørkt</string>
     <string name="settings_theme_light">Lyst</string>
@@ -344,34 +309,16 @@
     <string name="settings_group_summary_appearance">Tema, aksent, glass, bevegelse og tekststørrelse</string>
     <string name="settings_group_summary_layout">Sidepanel, paneler, lister og startskjermen</string>
     <string name="settings_group_summary_content_metadata">Navn, bilder og teksttjenester</string>
-    <string name="settings_group_summary_playback">Videospilleren og feilloggen</string>
-    <!-- Translators: Video player settings: name of the section holding volume, audio language and surround settings. -->
     <string name="settings_vp_section_sound">Lyd</string>
-    <!-- Translators: Video player settings: one-line summary under the "Subtitles" section name. -->
-    <string name="settings_vp_section_subtitles_summary">Størrelse, farge, plassering</string>
-    <!-- Translators: Video player settings: one-line summary under the "Diagnostics" section name. -->
-    <string name="settings_vp_section_diagnostics_summary">Detaljerte spillerlogger</string>
     <string name="settings_vp_cat_player">Avspiller</string>
-    <string name="settings_vp_cat_player_summary">Hvilken avspiller, per spilleliste, eksterne apper</string>
     <string name="settings_vp_cat_picture">Bilde</string>
-    <string name="settings_vp_cat_picture_summary">Dekoder, HDR, kvalitet, zoom</string>
     <string name="settings_vp_cat_frame_rate">Bildefrekvens</string>
     <string name="settings_vp_cat_frame_rate_summary">Tilpass skjermen til videoen</string>
     <string name="settings_vp_cat_streaming">Strømming</string>
-    <string name="settings_vp_cat_streaming_summary">Buffer, tidsavbrudd, nye tilkoblinger</string>
-    <string name="settings_vp_cat_live_summary">Kanalnumre, pause og spoling tilbake</string>
     <string name="settings_vp_cat_live_tuning">Direkte-innstilling</string>
-    <string name="settings_vp_cat_live_tuning_summary">Forsinkelse, forhåndsbuffer, starttid</string>
-    <string name="settings_vp_cat_controls">Kontroller</string>
-    <string name="settings_vp_cat_controls_summary">Hopp- og tilbakespolingstrinn</string>
     <string name="settings_vp_cat_multiview">Multiview og miniavspiller</string>
     <string name="settings_vp_cat_multiview_summary_mobile">Flere direktekanaler samtidig</string>
-    <string name="settings_vp_cat_sound_summary">Volum, surround, nattmodus, synkronisering</string>
     <string name="settings_vp_cat_languages">Språk og undertekster</string>
-    <string name="settings_vp_cat_languages_summary">Lyd- og undertekstspråk, undertekststil</string>
-    <string name="settings_vp_cat_resume">Gjenoppta og autoavspilling</string>
-    <string name="settings_vp_cat_resume_summary">Hvor den starter, neste episode</string>
-    <string name="settings_group_summary_network">Proxy og DNS for strømmetilkoblinger</string>
     <string name="settings_group_summary_app">Språk, oppstart, oppdateringer og appinfo</string>
     <string name="settings_group_quick">Hurtig</string>
     <string name="settings_group_summary_quick">Bryterne du bruker mest</string>
@@ -383,7 +330,6 @@
     <string name="settings_search_keywords_epg">XMLTV programoversikt kilde program</string>
     <string name="settings_search_keywords_logos">kanal logo ikon XMLTV programoversikt picon spilleliste</string>
     <string name="settings_search_keywords_customize">skjul vis gi nytt navn endre rekkefølge kategorier</string>
-    <string name="settings_search_keywords_sidebar">sidelinje ikoner dynamisk statisk skjul vis tilpass spilleliste</string>
     <string name="settings_search_keywords_ch">kanal opp ned hopp side liste kategori kanal</string>
     <string name="settings_search_keywords_browsing">husk posisjon rull kategori siste element direkte filmer serier tilbakestill topp</string>
     <string name="settings_search_keywords_home">rader hovedrad endre rekkefølge filtrer</string>
@@ -459,10 +405,8 @@
     <string name="settings_language_vietnamese">Vietnamesisk</string>
     <string name="settings_hardware_decoding">Maskinvaredekoding</string>
     <string name="settings_hardware_decoding_description">Bruk TV-ens maskinvaredekoder. Slå av hvis enkelte strømmer hakker eller viser bildefeil.</string>
-    <string name="settings_hardware_decoding_description_mobile">Bruk enhetens maskinvaredekoder. Slå av hvis enkelte strømmer hakker eller viser bildefeil.</string>
     <string name="settings_software_decode_above_1080p">Programvaredekoding over 1080p</string>
     <string name="settings_software_decode_above_1080p_description">Spiller av 4K og annen video over 1080p i programvare når TV-ens maskinvaredekoder er slått av eller svikter. Krever en rask prosessor: på de fleste TV-er hakker det.</string>
-    <string name="settings_software_decode_above_1080p_description_mobile">Spiller av 4K og annen video over 1080p i programvare når enhetens maskinvaredekoder er slått av eller svikter. Krever en rask prosessor: på mange enheter hakker det.</string>
     <string name="settings_movies_series_player">Avspiller for filmer og serier</string>
     <string name="settings_live_tv_player">Avspiller for direkte-TV</string>
     <string name="settings_engine_order"><xliff:g id="first">%1$s</xliff:g>, deretter <xliff:g id="second">%2$s</xliff:g></string>
@@ -472,37 +416,21 @@
     <string name="settings_external_player">Ekstern avspiller</string>
     <string name="settings_default_zoom">Standardzoom</string>
     <string name="settings_default_zoom_description">Bildeformat/zoom som brukes når avspillingen starter.</string>
-    <!-- Translators: Setting label for the volume level playback starts at. -->
     <string name="settings_default_volume">Standardlydstyrke</string>
-    <!-- Translators: Description of the default volume setting. -->
     <string name="settings_default_volume_description">Lydstyrke som brukes når avspillingen starter. Over 100 %% forsterkes strømmer med lav lyd.</string>
-    <!-- Translators: Settings-row title for forgetting the zoom saved for individual items. -->
     <string name="settings_reset_saved_zoom">Tilbakestill lagret zoom</string>
-    <!-- Translators: Description of the reset-saved-zoom setting row. -->
     <string name="settings_reset_saved_zoom_description">Når du endrer zoom i avspilleren, lagres det for den kanalen, filmen eller episoden. Tilbakestilling gjør at alt følger standardzoom igjen.</string>
-    <!-- Translators: Confirmation dialog title before forgetting the saved per-item zoom. -->
     <string name="settings_reset_saved_zoom_confirm">Tilbakestille lagret zoom?</string>
-    <!-- Translators: Confirmation dialog body before forgetting the saved per-item zoom. -->
     <string name="settings_reset_saved_zoom_confirm_description">Alle kanaler, filmer og episoder går tilbake til standardzoom. Lagrede lydstyrker beholdes. Du kan når som helst stille inn en enkelt av dem igjen fra avspilleren.</string>
-    <!-- Translators: Settings-row title for forgetting the volume saved for individual items. -->
     <string name="settings_reset_saved_volume">Tilbakestill lagret lydstyrke</string>
-    <!-- Translators: Description of the reset-saved-volume setting row. -->
     <string name="settings_reset_saved_volume_description">Når du endrer lydstyrken i avspilleren, lagres den for den kanalen, filmen eller episoden. Tilbakestilling gjør at alt følger standardlydstyrken igjen.</string>
-    <!-- Translators: Confirmation dialog title before forgetting the saved per-item volume. -->
     <string name="settings_reset_saved_volume_confirm">Tilbakestille lagret lydstyrke?</string>
-    <!-- Translators: Confirmation dialog body before forgetting the saved per-item volume. -->
     <string name="settings_reset_saved_volume_confirm_description">Alle kanaler, filmer og episoder går tilbake til standardlydstyrken. Lagrede zoominnstillinger beholdes. Du kan når som helst stille inn en enkelt av dem igjen fra avspilleren.</string>
-    <!-- Translators: Settings row that forgets every per-item audio-sync offset. -->
     <string name="settings_reset_saved_audio_delay">Tilbakestill lagret A/V-synkronisering</string>
-    <!-- Translators: Description of the reset-saved-audio-sync row. -->
     <string name="settings_reset_saved_audio_delay_description">Når du velger «Husk denne forsinkelsen» i avspilleren, lagres lydsynkroniseringen for den kanalen, filmen eller episoden. Tilbakestilling gjør at alt følger innstillingen ovenfor igjen.</string>
-    <!-- Translators: Title of the confirmation dialog for resetting saved audio sync. -->
     <string name="settings_reset_saved_audio_delay_confirm">Tilbakestille lagret A/V-synkronisering?</string>
-    <!-- Translators: Body of the confirmation dialog for resetting saved audio sync. -->
     <string name="settings_reset_saved_audio_delay_confirm_description">Hver kanal, film og episode går tilbake til lydsynkroniseringen ovenfor. Lagret zoom og lydstyrke beholdes. Du kan alltid stille inn en enkelt på nytt fra avspilleren.</string>
-    <!-- Translators: Setting label for how far rewind/forward jumps in a movie or episode. -->
     <string name="settings_seek_step">Spolesteg</string>
-    <!-- Translators: Description of the seek step setting. -->
     <string name="settings_seek_step_description">Hvor langt spol bakover og fremover hopper i en film eller episode.</string>
     <string name="settings_vod_buffer">Filmbuffer</string>
     <string name="settings_vod_buffer_description">Hvor langt frem filmer, episoder og catch-up lastes inn. Auto bruker det som passer denne enheten. En lengre buffer tåler en dårlig tilkobling bedre; enhetens minne setter fortsatt grensen, så en film med høy bithastighet kan romme mindre enn valgt.</string>
@@ -511,9 +439,7 @@
     <string name="settings_vod_reconnects">Tilkoblingsforsøk</string>
     <string name="settings_vod_reconnects_description">Hvor mange ganger en film eller episode som mister tilkoblingen, åpnes igjen der den stoppet før en feil vises. Ett minutt med stabil avspilling gir forsøkene tilbake.</string>
     <string name="settings_vod_network_auto">Auto</string>
-    <!-- Translators: Setting label for how far rewind/forward jumps inside a live channel's archive. -->
     <string name="settings_live_rewind_step">Spolesteg for direkte</string>
-    <!-- Translators: Description of the live rewind step setting. -->
     <string name="settings_live_rewind_step_description">Hvor langt tilbake- og fremoverspoling flytter på en direktekanal: i catch-up-arkivet, eller i kopien lagret av Pause og spol tilbake i direkte-TV.</string>
     <string name="settings_resume_playback">Fortsett avspillingen</string>
     <string name="settings_resume_playback_description">Hva som skal gjøres når en film eller episode har en lagret posisjon.</string>
@@ -549,7 +475,6 @@
     <string name="settings_live_latency_bitrate_note">På en kanal med svært høy bitrate – særlig 4K – kan bufferen romme kortere tid enn du har bedt om, fordi det finnes en grense for hvor mye video som kan holdes i minnet samtidig.</string>
     <string name="settings_channel_numbers">Kanalnumre</string>
     <string name="settings_channel_numbers_description">Vis leverandørens kanalnummer ved siden av navnet i Direkte-TV-listen, kanallisteoverlegget og avspilleren – og skriv inn et nummer på fjernkontrollen under avspilling i fullskjerm for å gå rett til den kanalen (OK bytter med én gang, Tilbake avbryter). Når dette er av, skjules alle numre, og talltastene ignoreres. Ingenting går tapt, og numrene gjenopprettes når du slår det på igjen.</string>
-    <string name="settings_channel_numbers_description_mobile">Vis leverandørens kanalnummer ved siden av navnet i Direkte-TV-listen og avspilleren. Når dette er av, skjules alle numre. Ingenting går tapt, og numrene gjenopprettes når du slår det på igjen.</string>
     <string name="settings_live_left_right_rewinds">Venstre og høyre spoler direkte-TV</string>
     <string name="settings_live_left_right_rewinds_description">Når kontrollene er skjult, spoler venstre og høyre bakover og fremover på kanaler som kan spoles tilbake (catch-up, eller lagret av Pause og spol tilbake i direkte-TV), i stedet for å åpne kanallisten og loggen.</string>
     <string name="settings_timeshift">Pause og spol tilbake i direkte-TV</string>
@@ -561,7 +486,6 @@
     <string name="settings_diagnostics">Diagnostikk</string>
     <string name="settings_measured_stats">Målt strømstatistikk</string>
     <string name="settings_measured_stats_description">Vis bildefrekvens, bithastighet og tapte bilder i sanntid i strøm informasjons-overlegget (målt mens overlegget er åpent, for strømmer som ikke oppgir disse verdiene). Slå det bare av hvis en enkel TV hakker – det påvirker aldri selve videoen, bare diagnostikktallene.</string>
-    <string name="settings_measured_stats_description_mobile">Vis bildefrekvens, bithastighet og tapte bilder i sanntid i strøm informasjons-overlegget (målt mens overlegget er åpent, for strømmer som ikke oppgir disse verdiene). Slå det bare av hvis en enkel enhet hakker – det påvirker aldri selve videoen, bare diagnostikktallene.</string>
     <string name="settings_none_auto">Ingen / Automatisk</string>
     <string name="settings_view_grid">Rutenett</string>
     <string name="settings_view_list">Liste</string>
@@ -584,7 +508,6 @@
     <string name="settings_movies_player_description">mpv (anbefales) har den bredeste formatstøtten — DTS/TrueHD-lyd, uvanlige filer. På enkelte TV-er spiller ExoPlayer av strømmer mpv ikke klarer, men den kan ikke dekode DTS/TrueHD-lyd. De kombinerte valgene prøver automatisk den andre avspilleren når den første mislykkes; valgene med bare én avspiller gjør det aldri, noe som sparer noen sekunder med svart skjerm hvis den andre avspilleren uansett ikke virker på TV-en din.</string>
     <string name="settings_movies_player_description_mobile">mpv (anbefales) har den bredeste formatstøtten — DTS/TrueHD-lyd, uvanlige filer. På enkelte enheter spiller ExoPlayer av strømmer mpv ikke klarer, men den kan ikke dekode DTS/TrueHD-lyd. De kombinerte valgene prøver automatisk den andre avspilleren når den første mislykkes; valgene med bare én avspiller gjør det aldri, noe som sparer noen sekunder med svart skjerm hvis den andre avspilleren uansett ikke virker på enheten din.</string>
     <string name="settings_live_player_description">ExoPlayer (anbefales) åpner kanaler mye raskere og er den eneste med teksting i direktesendinger. mpv spiller av kanaler ExoPlayer ikke klarer, blant annet noen med uvanlig lyd. De kombinerte valgene prøver automatisk den andre avspilleren når den første mislykkes; valgene med bare én avspiller gjør det aldri, noe som sparer noen sekunder med svart skjerm hvis den andre avspilleren uansett ikke virker på TV-en din. En kanal du bytter manuelt i avspilleren, beholder valget ditt uansett.</string>
-    <string name="settings_live_player_description_mobile">ExoPlayer (anbefales) åpner kanaler mye raskere og er den eneste med teksting i direktesendinger. mpv spiller av kanaler ExoPlayer ikke klarer, blant annet noen med uvanlig lyd. De kombinerte valgene prøver automatisk den andre avspilleren når den første mislykkes; valgene med bare én avspiller gjør det aldri, noe som sparer noen sekunder med svart skjerm hvis den andre avspilleren uansett ikke virker på enheten din. En kanal du bytter manuelt i avspilleren, beholder valget ditt uansett.</string>
     <string name="settings_reset_player_choices_description">Når du bytter en enkelt film eller episode mellom mpv og ExoPlayer i avspilleren, lagres det valget til neste gang. Tilbakestilling gjør at alt følger innstillingen ovenfor igjen. Lagrede valg for direktekanaler beholdes.</string>
     <string name="settings_reset_player_choices_none">Ingen lagret</string>
     <plurals name="settings_reset_player_choices_count">
@@ -632,19 +555,13 @@
     <string name="settings_download_remote_title">Last ned på en annen enhet</string>
     <string name="settings_download_remote_description">På en hvilken som helst enhet med nettleser på samme Wi-Fi – telefon, datamaskin eller en annen TV – skann QR-koden (eller åpne URL-en), skriv inn denne PIN-koden og last ned sikkerhetskopien for å ta vare på den.</string>
     <string name="settings_preparing_backup">Klargjør sikkerhetskopien…</string>
-    <string name="settings_background_on">Bakgrunnsbilde: På</string>
-    <string name="settings_background_off">Bakgrunnsbilde: Av</string>
     <string name="settings_ui_zoom_range">Skaler hele grensesnittet (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%).</string>
     <string name="settings_low_zoom_warning_title">⚠️ Advarsel om lav zoom</string>
     <string name="settings_low_zoom_warning"><xliff:g id="zoom">%1$d</xliff:g>%% zoom viser mange flere elementer på skjermen samtidig. På enheter med begrenset minne (for eksempel TV-pinner med 2 GB) kan dette gjøre appen ustabil eller føre til krasj, spesielt med store spillelister og EPG-data.\n\nTrykk på OK for å fortsette, eller Tilbake for å beholde <xliff:g id="safe_zoom">%2$d</xliff:g>%%.</string>
     <string name="settings_low_zoom_warning_mobile"><xliff:g id="zoom">%1$d</xliff:g>%% zoom viser mange flere elementer på skjermen samtidig. På enheter med begrenset minne kan dette gjøre appen ustabil eller føre til krasj, spesielt med store spillelister og EPG-data.\n\nVelg Avbryt for å beholde <xliff:g id="safe_zoom">%2$d</xliff:g>%%.</string>
     <string name="settings_low_zoom_accept">Jeg forstår og godtar risikoen</string>
     <string name="settings_surface_transparency"><xliff:g id="percent">%1$d</xliff:g>%%</string>
-    <string name="settings_surface_count_all">Flater: Alle</string>
-    <plurals name="settings_surface_count">
-        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> av <xliff:g id="total">%2$d</xliff:g> flate</item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> av <xliff:g id="total">%2$d</xliff:g> flater</item>
-    </plurals>
+    <string name="settings_catchup_timezone_automatic">Automatisk</string>
     <string name="settings_catchup_timezone_device">Enhet</string>
     <string name="settings_catchup_player_ask">Spør alltid</string>
     <string name="settings_catchup_player_internal">OwnTV-avspiller</string>
@@ -662,23 +579,6 @@
     <string name="settings_history_movies">Filmer</string>
     <string name="settings_history_series">Serier</string>
     <string name="settings_history_all">alle</string>
-    <string name="settings_decrease">–</string>
-    <string name="settings_increase">+</string>
-    <string name="settings_glass_effect_title">Glasseffekt</string>
-    <string name="settings_glass_effect_description">Gjennomsiktige, frostede paneler over et bakgrunnsbilde eller over appens egen bakgrunn.</string>
-    <string name="settings_transparency_title">Gjennomsiktighet</string>
-    <string name="settings_blur_title">Uskarphet / Frost</string>
-    <string name="settings_blur_description_enabled">Hvor frostet bakgrunnsbildet er (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). Bare over et bakgrunnsbilde.</string>
-    <string name="settings_blur_description_disabled">Hvor frostet bakgrunnsbildet er (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%). Bare over et bakgrunnsbilde. Angi et bakgrunnsbilde for å aktivere dette.</string>
-    <string name="settings_glass_surface_panels">Innholdspaneler</string>
-    <string name="settings_glass_surface_sidebar">Sidefelt</string>
-    <string name="settings_glass_surface_preview">Forhåndsvisningsruter</string>
-    <string name="settings_glass_surface_dialogs">Dialogbokser og sprettoppvinduer</string>
-    <string name="settings_glass_surface_topbar">Topplinje</string>
-    <string name="settings_glass_surface_cards">Kort</string>
-    <string name="settings_glass_surface_miniplayer">Miniavspiller</string>
-    <string name="settings_glass_surface_player_controls">Avspillerkontroller</string>
-    <string name="settings_glass_surface_toasts">Skjermmeldinger</string>
     <string name="settings_browsing_last_category">Husk siste kategori</string>
     <string name="settings_browsing_last_category_description">Åpne delen igjen i kategorien du forlot, ikke Alle.</string>
     <string name="settings_browsing_last_item">Husk siste element</string>
@@ -754,7 +654,6 @@
     <string name="settings_span_ch_help">CH+ / CH− hopper en side. Hold CH+ / CH− for å hoppe til det siste eller første elementet.</string>
     <string name="settings_customize_metadata_separator">"  ·  "</string>
     <string name="settings_sources_title">Kilder</string>
-    <string name="settings_sources_description">Kilder deles mellom alle profiler.</string>
     <string name="settings_sources_empty">Ingen kilder ennå. Legg til en M3U- eller Xtream-kilde.</string>
     <string name="settings_sources_add">Legg til kilde</string>
     <string name="settings_sources_import_failed">Importeringen mislyktes</string>
@@ -834,7 +733,6 @@
     <string name="settings_epg_sources_name_hint">f.eks. britisk programoversikt</string>
     <string name="settings_epg_sources_url_hint">https://…/epg.xml(.gz)</string>
     <string name="settings_epg_sources_user_agent_hint">La stå tomt for standardverdien</string>
-    <string name="settings_epg_sources_description">XMLTV-kilder med programoversikter som fyller programoversikten. De synkroniseres automatisk når de legges til, og slås sammen med kanalene i spillelistene dine.</string>
     <string name="settings_epg_sources_delete_title">Slette «<xliff:g id="name">%1$s</xliff:g>»?</string>
     <string name="settings_epg_sources_delete_message">Fjerner denne EPG-kilden og programdataene fra den. Kanalene dine beholdes.</string>
     <string name="settings_epg_sources_syncing_percent">Synkroniserer <xliff:g id="percent">%1$d</xliff:g>%%</string>
@@ -894,8 +792,6 @@
     <string name="settings_backup_pin_incorrect">Feil PIN.</string>
     <string name="settings_backup_pin_locked">Låst med PIN</string>
     <string name="settings_backup_unlock">Lås opp</string>
-    <string name="settings_backup_export_button">Eksporter sikkerhetskopi</string>
-    <string name="settings_backup_restore_button">Gjenopprett sikkerhetskopi</string>
     <string name="settings_backup_continue">Fortsett</string>
     <string name="settings_backup_encrypt_export">Krypter og eksporter</string>
     <string name="settings_backup_export_unencrypted">Eksporter ukryptert</string>
@@ -1025,7 +921,6 @@
     <string name="settings_move_category_keep">Behold også i «<xliff:g id="name">%1$s</xliff:g>»</string>
     <string name="settings_move_category_action">Flytt</string>
     <string name="settings_dns_description">Bruk en egendefinert DNS-server for domeneoppslag</string>
-    <string name="settings_dns_custom">Egendefinert DNS</string>
     <string name="settings_dns_toggle_description">Utfør alle domeneoppslag for OwnTV via en egendefinert DNS-server.</string>
     <string name="settings_dns_use_custom">Bruk egendefinert DNS</string>
     <string name="settings_dns_server_missing">Egendefinert DNS er aktivert, men ingen server er konfigurert. Angi en serveradresse og velg Lagre, eller slå av dette.</string>
@@ -1075,13 +970,9 @@
     <string name="settings_live_tune_timeout_description">Hvis en direktekanal ikke har vist bilde innen dette tidspunktet, slutter OwnTV å prøve og sier fra, i stedet for å la en svart skjerm bli stående mens den går gjennom alle spillerne sine. «Aldri» fortsetter å prøve, noe som på en kanal leverandøren din har fjernet kan ta godt over ett minutt. Ventetid leverandøren selv ber om, telles ikke med.</string>
     <string name="settings_live_preroll_per_playlist">Forhåndsbufring per spilleliste</string>
     <string name="settings_live_preroll_per_playlist_description">Overstyr den ovennevnte innstillingen for én spilleliste mens du holder de andre spillelistene dine raske.</string>
-    <!-- Translators: Title of the per-playlist Live TV engine override row. -->
     <string name="settings_live_engine_per_playlist">Avspiller for direkte-TV per spilleliste</string>
-    <!-- Translators: Description of the per-playlist Live TV engine override row. -->
     <string name="settings_live_engine_per_playlist_description">Overstyr innstillingen ovenfor for én spilleliste — for en leverandør der bare den ene avspilleren håndterer kanalene godt.</string>
-    <!-- Translators: Title of the per-playlist Live latency override row. -->
     <string name="settings_live_latency_per_playlist">Direkteforsinkelse per spilleliste</string>
-    <!-- Translators: Description of the per-playlist Live latency override row. -->
     <string name="settings_live_latency_per_playlist_description">Overstyr innstillingen ovenfor for én spilleliste — for en leverandør som trenger en større eller mindre buffer enn de andre.</string>
     <string name="settings_catchup_timezone_per_playlist">Catch-up-tidssone per spilleliste</string>
     <string name="settings_catchup_timezone_per_playlist_description">Overstyr tidssonen over for én spilleliste – for en leverandør der arkivet går etter en annen klokke.</string>
@@ -1120,7 +1011,6 @@
     <string name="settings_playback_kind_error">Feil</string>
     <string name="settings_playback_kind_event">Hendelse</string>
     <string name="settings_playback_kind_report">Rapport</string>
-    <string name="settings_playback_entry_with_kind"><xliff:g id="date">%1$s</xliff:g> · <xliff:g id="kind">%2$s</xliff:g> · <xliff:g id="engine">%3$s</xliff:g> · <xliff:g id="stream_type">%4$s</xliff:g></string>
     <string name="settings_export">Eksporter</string>
     <string name="settings_detailed_playback_logging_description">Behold et fullstendig spor av hva direktemotoren gjør – hver tuning, fallback og gjentilkobling – i Logcat og i den eksporterte rapporten. La den være av med mindre du jakter på et problem; den endrer aldri avspillingen, bare hvor mye som skrives ned.</string>
     <string name="settings_live_preroll_playlist_picker">Hvilken spilleliste?</string>
@@ -1177,52 +1067,12 @@
     <string name="settings_font_system_sans">System Sans</string>
     <string name="settings_font_monospace">Fast bredde</string>
     <string name="settings_subtitle_font">Skrift for undertekster</string>
-    <string name="settings_glass_preset_title">Utseendeforvalg</string>
-    <string name="settings_glass_preset_clear">Klar</string>
-    <string name="settings_glass_preset_balanced">Balansert</string>
-    <string name="settings_glass_preset_tinted">Tonet</string>
-    <string name="settings_glass_preset_custom">Egendefinert</string>
-    <string name="settings_glass_preset_clear_description">Mer farge fra bakgrunnen med moderat sløring.</string>
-    <string name="settings_glass_preset_balanced_description">Anbefalt klarhet, dybde og lesbarhet.</string>
-    <string name="settings_glass_preset_tinted_description">Sterkere overflatefarge for travle eller lyse bakgrunner.</string>
-    <string name="settings_glass_preset_custom_description">Bruk lagrede verdier for gjennomsiktighet og sløring.</string>
     <string name="settings_ambient_glow">Omgivelsesglød</string>
     <string name="settings_ambient_glow_description">Legger til gløden fra oppsettet i det solide grensesnittet</string>
     <string name="settings_ambient_glow_dialog_description">Legger til en myk aksentglød i grensesnittet uten glass. Langsom puls puster rolig når animasjoner er slått på.</string>
     <string name="settings_ambient_glow_effect">Glød</string>
     <string name="settings_ambient_glow_pulse">Langsom puls</string>
-    <string name="settings_glass_preset_ultra_clear">Ultraklar</string>
-    <string name="settings_glass_preset_opaque">Ugjennomsiktig</string>
-    <string name="settings_glass_preset_ultra_clear_description">Maksimale bakgrunnsdetaljer med lett uskarphet.</string>
-    <string name="settings_glass_preset_opaque_description">Maksimal paneltetthet med den kraftigste uskarpheten.</string>
-    <string name="settings_glass_preset_aurora">Aurora</string>
-    <string name="settings_glass_preset_aurora_description">Tynt glass med den kraftigste frosten – laget for telefon.</string>
-    <string name="settings_glass_highlight_title">Fremhevingsstyrke</string>
-    <string name="settings_glass_highlight_description">Juster lyset og kanten på glass i fokus.</string>
     <string name="settings_glass_live_preview">Direkte forhåndsvisning</string>
-    <string name="settings_glass_screen_description">Gjennomsiktige, frostede paneler, bakgrunnsbilde og transparens</string>
-    <string name="settings_glass_master_description">Gjennomsiktige, frostede paneler over et bakgrunnsbilde eller over appens egen bakgrunn.</string>
-    <string name="settings_glass_background_image">Velg et bakgrunnsbilde</string>
-    <string name="settings_glass_background_blur_title">Uskarphet / Frost</string>
-    <string name="settings_glass_section_appearance">Utseende</string>
-    <string name="settings_glass_section_fine_tuning">Avanserte alternativer</string>
-    <string name="settings_glass_section_behavior">Virkemåte</string>
-    <string name="settings_glass_surface_all">Alle</string>
-    <string name="settings_glass_background_action_description">Velg et bakgrunnsbilde</string>
-    <string name="settings_glass_transparency_short_description">20–100 · 5</string>
-    <string name="settings_glass_blur_short_description">0–100 · 10</string>
-    <string name="settings_glass_highlight_short_description">Juster lyset og kanten på glass i fokus.</string>
-    <string name="settings_glass_full_transparency_short">Tillat full gjennomsiktighet</string>
-    <string name="settings_glass_full_transparency_short_description">Slår av den automatiske lesbarhetsgrensen for klarest mulig glass.</string>
-    <string name="settings_glass_depth_effects_short">Dybde og skygger</string>
-    <string name="settings_glass_depth_effects_short_description">Aktiverer fokuslys, diskret parallakse og dybdebevegelse.</string>
-    <string name="settings_glass_shine_short">Lysstrøk</string>
-    <string name="settings_glass_shine_short_description">En stripe lys stryker over panelet når det vises.</string>
-    <string name="settings_glass_reset_balanced">Tilbakestill: Balansert</string>
-    <string name="settings_glass_full_transparency_title">Tillat full gjennomsiktighet</string>
-    <string name="settings_glass_full_transparency_description">Slår av den automatiske lesbarhetsgrensen for klarest mulig glass.</string>
-    <string name="settings_glass_depth_title">Dybde og skygger</string>
-    <string name="settings_glass_depth_description">Aktiverer fokuslys, diskret parallakse og dybdebevegelse.</string>
     <string name="settings_row_menu_pin">Fest til Hurtig</string>
     <string name="settings_row_menu_unpin">Fjern fra Hurtig</string>
     <string name="settings_row_menu_move_up">Flytt opp</string>
@@ -1230,8 +1080,6 @@
     <string name="settings_quick_empty_title">Ingenting festet ennå</string>
     <string name="settings_quick_empty_hint">Hold inne OK på en innstilling og velg «Fest til Hurtig».</string>
     <string name="settings_quick_empty_hint_touch">Trykk og hold på en innstilling og velg «Fest til Hurtig».</string>
-    <string name="settings_results_title">Resultater</string>
-    <string name="settings_results_summary">Alle treff, uansett hvor de ligger — med stien</string>
     <plurals name="settings_setting_count">
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> innstilling</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> innstillinger</item>
@@ -1246,45 +1094,29 @@
     <string name="settings_guide_width_summary">Kanalliste %1$d%% · EPG-tidslinje %2$d%%</string>
     <string name="settings_guide_width_help">• Kanallisten og EPG-tidslinjen deler én rad, så summen må være 100%%.\n• En bredere kanalliste viser mindre av tidslinjen om gangen; programlengder og tidsskala endres ikke.\n• Begge kolonnene er minst 10%% brede.\n• Tilbakestill setter kanallisten til 10%% og EPG-tidslinjen til 90%%.\n• Når tilpasning slås av, gjenopprettes standardoppsettet uten at verdiene slettes.</string>
     <string name="settings_guide_width_channels">Kanalliste</string>
-    <string name="settings_guide_width_epg">EPG-tidslinje</string>
     <string name="settings_selection_highlight">Merking av valg</string>
     <string name="settings_selection_highlight_description">Farge og tykkelse på rammen rundt det valgte elementet</string>
-    <string name="settings_nav_bar_customization">Tilpasning av navigasjonslinjen</string>
-    <string name="settings_playback_mobile">Mobil</string>
-    <string name="settings_playback_tv_only_note">Direkteforhåndsvisning og fjernkontrollsnarveier er TV-funksjoner – de finnes ikke på en telefon.</string>
     <string name="settings_background_playback">Avspilling i bakgrunnen</string>
     <string name="settings_background_playback_description">Fortsett å spille lyden når du forlater appen</string>
     <string name="settings_pip">Bilde-i-bilde</string>
-    <string name="settings_pip_description">Krymp videoen til et flytende vindu når du forlater appen</string>
     <string name="settings_data_saver">Datasparing</string>
     <string name="settings_data_saver_description">Ikke strøm over mobildata</string>
     <string name="settings_gesture_sensitivity">Følsomhet for bevegelser</string>
-    <string name="settings_gesture_sensitivity_description">Hvor langt du sveiper for å endre volum, lysstyrke eller posisjon</string>
     <string name="settings_downloads_wifi_only">Last ned bare over Wi-Fi</string>
     <string name="settings_downloads_wifi_only_description">Vent på Wi-Fi i stedet for å bruke mobildata</string>
-    <string name="settings_search_keywords_background_playback">bakgrunn lyd audio forlate app fortsette tjeneste</string>
-    <string name="settings_search_keywords_pip">bilde i bilde flytende vindu overlegg lite</string>
-    <string name="settings_search_keywords_data_saver">datasparing mobildata forbruk roaming spare</string>
-    <string name="settings_search_keywords_gestures">bevegelse sveip folsomhet trykk dra</string>
-    <string name="settings_mini_player_style">Stil på minispilleren</string>
     <string name="settings_mini_player_style_description">Hvordan avspillingen følger deg mens du ser deg rundt</string>
     <string name="settings_mini_player_style_floating">Flytende vindu</string>
     <string name="settings_mini_player_style_docked">Festet rad</string>
     <string name="settings_pip_size">Vindusstørrelse</string>
-    <string name="settings_pip_size_description">Hvor stort det flytende vinduet starter. Knip for å endre det.</string>
     <string name="settings_pip_size_small">Liten</string>
     <string name="settings_pip_size_medium">Middels</string>
     <string name="settings_pip_size_large">Stor</string>
     <string name="settings_pip_snap">Fest til kantene</string>
-    <string name="settings_pip_snap_description">Slipp vinduet, og det legger seg mot nærmeste kant</string>
     <string name="settings_audio_on_screen_off">Bare lyd når skjermen slås av</string>
-    <string name="settings_audio_on_screen_off_description">Slutt å dekode video ingen ser, og spar batteri</string>
     <string name="settings_audio_on_mobile_data">Bare lyd på mobildata</string>
     <string name="settings_audio_on_mobile_data_description">Start uten bilde når det ikke er Wi-Fi</string>
     <string name="settings_audio_per_channel">Husk bare lyd per kanal</string>
-    <string name="settings_audio_per_channel_description">En kanal du så uten bilde, åpnes slik neste gang</string>
     <string name="local_sync_title">Lokal synkronisering</string>
-    <string name="local_sync_description">Del dataene dine med den andre enheten over Wi-Fi</string>
     <string name="local_sync_host_hint">Slå også på Synkroniseringsmodus på den andre enheten, trykk Koble til og velg denne.</string>
     <string name="local_sync_qr_description">QR-kode med adressen til denne enheten</string>
     <string name="local_sync_pin_is">PIN: <xliff:g id="pin">%1$s</xliff:g></string>
@@ -1339,8 +1171,6 @@
     <string name="local_sync_error_bad_payload">Det som kom, kunne ikke leses. Hvis du brukte et passord, sjekk at det er likt på begge enhetene.</string>
     <string name="local_sync_error_unknown">Noe gikk galt. Prøv igjen.</string>
     <string name="local_sync_mode">Synkroniseringsmodus</string>
-    <string name="local_sync_mode_description">Lar de andre enhetene dine finne denne. Er på så lenge denne skjermen er åpen.</string>
-    <string name="local_sync_mode_pill">Synkroniseringsmodus på</string>
     <string name="local_sync_connect">Koble til</string>
     <string name="local_sync_connect_description">Finn en annen enhet med Synkroniseringsmodus på</string>
     <string name="local_sync_last_synced">Sist synkronisert: <xliff:g id="when">%1$s</xliff:g></string>
@@ -1600,7 +1430,7 @@
     <string name="settings_help_playlists">Legg til en spilleliste fra en lenke, en Xtream-pålogging, en Stalker-portal eller en fil, synkroniser den på nytt eller fjern den.</string>
     <string name="settings_help_epg_sources">Legg til en XMLTV-guidekilde via lenken, oppdater den eller fjern den. Kildene fyller TV-guiden og programlinjene i direkte-TV.</string>
     <string name="settings_help_guide_days">Hvor mange dager med programmer guiden lagrer framover. Færre dager gir raskere oppdatering og mindre database.</string>
-    <string name="settings_help_catchup">Catch-up spiller programmer fra leverandørens arkiv. De fleste leverandører følger TV-ens egen klokke; velg en fast UTC-forskyvning hvis catch-up starter på feil tidspunkt. Her velger du også hvilken spiller catch-up bruker.</string>
+    <string name="settings_help_catchup_timezone">Catch-up spiller programmer fra leverandørens arkiv. Automatisk bruker tidssonen leverandøren oppgir, eller TV-ens egen klokke hvis den ikke oppgir noen; velg en fast UTC-forskyvning hvis catch-up fortsatt starter på feil tidspunkt. Her velger du også hvilken spiller catch-up bruker.</string>
     <string name="settings_help_theme">OwnTV er laget for mørkt tema. System følger TV-ens egen innstilling hvis den finnes; lyst passer i et lyst rom.</string>
     <string name="settings_help_accent">Farger knapper, fokusglød, fremdriftslinjer og uthevinger overalt. Velg en forhåndsinnstilling, eller trykk OK for paletten og en hvilken som helst heksadesimal kode.</string>
     <string name="settings_help_focus">Ringen rundt det som har fokus. Velg farge og tykkelse så den er lett å følge fra sofaen.</string>

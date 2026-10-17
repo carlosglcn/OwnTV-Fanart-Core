@@ -234,7 +234,7 @@ class SourceImporter(
         httpReferer: String = "",
     ) {
         // A provider's `get.php` "M3U" is an Xtream account; import it as one when the panel agrees.
-        // Its M3U export files movies and series under Live TV (#238), and some panels refuse it.
+        // Its M3U export files movies and series under Live TV, and some panels refuse it.
         XtreamM3uLink.parse(url)?.let { link ->
             _state.value = ImportState.Running
             val probe = SourceEntity(

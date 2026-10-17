@@ -19,7 +19,7 @@ import kotlinx.coroutines.withContext
  * **Why SharedPreferences and not DataStore** (see `docs/internationalization.md` 0b): the selected
  * locale must be readable *synchronously* from `Application.attachBaseContext` and
  * `Activity.attachBaseContext`. DataStore is asynchronous and cannot be read cleanly from those
- * lifecycle hooks without blocking or redesigning startup. This one bootstrap-critical setting
+ * lifecycle hooks without blocking or restructuring startup. This one bootstrap-critical setting
  * therefore lives in SharedPreferences — alone, with no DataStore mirror, no dual write, and no
  * mirror-repair collector (all of v1's reconciliation complexity is gone because OwnTV no longer
  * participates in the Android system per-app-language screen).

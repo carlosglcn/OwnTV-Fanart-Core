@@ -8,10 +8,6 @@
     <string name="content_catchup_prompt">Pick a recent programme to replay from the start.</string>
     <string name="content_category_favorites">Favourites</string>
     <string name="content_epg_matched_no_programmes">Matched — but this guide channel has no current programmes in the EPG feed yet.</string>
-    <plurals name="content_epg_stats_programmes">
-        <item quantity="one">The guide contains <xliff:g id="programmes">%1$d</xliff:g> programme.</item>
-        <item quantity="other">The guide contains <xliff:g id="programmes">%1$d</xliff:g> programmes.</item>
-    </plurals>
     <string name="content_epg_no_programme">No programme at this time.</string>
     <string name="content_epg_add_description">Add an EPG (XMLTV) source to fill the guide with programmes.</string>
     <string name="content_epg_add_favourite">Add to favourites</string>

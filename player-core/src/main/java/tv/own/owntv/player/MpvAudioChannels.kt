@@ -11,7 +11,7 @@ import android.os.Build
  * mpv's multichannel `audio-channels` list, taken from what the audio output itself says it plays.
  *
  * `auto-safe` cannot do this on Android: mpv's AudioTrack output ignores the "safe" part and always
- * offers up to 7.1, so a sink's real limit was only found after it failed (the #25 class, caught by the
+ * offers up to 7.1, so a sink's real limit was only found after it failed (caught by the
  * stereo latch). The output's own PCM channel masks are the limit instead — a TCL panel's speakers list
  * stereo and 5.1, so 7.1 is downmixed by mpv rather than handed to a HAL that never claimed it.
  */

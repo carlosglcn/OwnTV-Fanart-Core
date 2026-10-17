@@ -24,9 +24,6 @@
     <string name="common_title">标题</string>
     <string name="common_search_hint">搜索…</string>
     <string name="common_search">搜索</string>
-    <string name="common_weather_fahrenheit"><xliff:g id="temperature">%1$d</xliff:g>°F</string>
-    <string name="common_weather_celsius"><xliff:g id="temperature">%1$d</xliff:g>°C</string>
-    <string name="common_weather_city"><xliff:g id="temperature">%1$s</xliff:g> · <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_nav_search">搜索</string>
     <string name="common_nav_home">主屏幕</string>
     <string name="common_nav_live_tv">直播电视</string>
@@ -41,8 +38,6 @@
     <string name="common_nav_settings">设置</string>
     <string name="shell_no_source">未配置源</string>
     <string name="shell_now_playing">正在播放</string>
-    <string name="common_something_went_wrong">出了点问题</string>
-    <string name="common_move_instructions">按 ▲/▼ 移动 · 按确定保存 · 按返回取消</string>
     <string name="common_number_grouped"><xliff:g id="count">%1$,d</xliff:g></string>
     <string name="common_percent"><xliff:g id="percent">%1$d</xliff:g>%%</string>
     <string name="common_timestamp_minutes"><xliff:g id="minutes">%1$d</xliff:g>:<xliff:g id="seconds">%2$02d</xliff:g></string>

@@ -27,7 +27,7 @@ import java.nio.file.Files
 import kotlin.concurrent.thread
 
 /**
- * P16c — the controller with local timeshift on: which channels play from a saved copy, that both
+ * The controller with local timeshift on: which channels play from a saved copy, that both
  * engines of the ladder are handed the copy (never the provider), and that leaving parks it. Real
  * buffers against a fake provider on loopback, so this runs on real time.
  */

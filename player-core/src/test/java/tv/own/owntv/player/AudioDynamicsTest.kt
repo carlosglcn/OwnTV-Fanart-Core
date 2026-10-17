@@ -10,7 +10,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-/** Night mode (N9) and volume levelling (N10) on the ExoPlayer path, and the passthrough rule. */
+/** Night mode and volume levelling on the ExoPlayer path, and the passthrough rule. */
 class AudioDynamicsTest {
 
     private val rate = 48_000

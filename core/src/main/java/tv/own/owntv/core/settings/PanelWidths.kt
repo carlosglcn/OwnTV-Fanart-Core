@@ -60,7 +60,7 @@ data class LiveStageWidths(val sheet: Int, val list: Int, val preview: Int) {
     companion object {
         const val LIVE_SHEET_MIN = 15
         const val LIVE_SHEET_MAX = 40
-        /** The mockup's 450 of 1920, and its 846 : 912 list and stage, snapped to the 5% step. */
+        /** 450 of 1920 for the sheet, and 846 : 912 for list and stage, snapped to the 5% step. */
         val DEFAULT = LiveStageWidths(sheet = 25, list = 50, preview = 50)
     }
 }

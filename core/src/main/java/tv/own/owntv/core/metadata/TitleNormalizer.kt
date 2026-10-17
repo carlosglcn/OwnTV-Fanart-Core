@@ -1,11 +1,11 @@
 package tv.own.owntv.core.metadata
 
 /**
- * Cleans messy IPTV VOD titles into a searchable query + an extracted year (plan §3). Providers ship
+ * Cleans messy IPTV VOD titles into a searchable query + an extracted year. Providers ship
  * titles like `EN| The Movie Name (2021) [HD] (MULTI-SUB)` — prefixes, quality tags, country flags and
  * embedded years all confuse a TMDB search. This strips the noise; the shared matcher then searches TMDB.
  *
- * Pure and stateless so it's trivially unit-testable and reused by Trakt later (cloud-backup-plan §9.4).
+ * Pure and stateless so it's trivially unit-testable.
  */
 object TitleNormalizer {
 

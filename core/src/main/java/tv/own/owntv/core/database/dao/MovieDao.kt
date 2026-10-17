@@ -70,12 +70,12 @@ interface MovieDao {
     suspend fun contentHashesForSource(sourceId: Long): List<ContentHashProjection>
 
     /**
-     * Write only the position of a row whose content did not change (plan A2).
+     * Write only the position of a row whose content did not change.
      *
      * The whole point is what it does *not* touch. Room's `@Update` writes every column and, on
      * this table's insert path, re-derives the provider-catalogue metadata from the title — all for
      * a row that is byte-identical and has merely slid down the list because the provider removed
-     * something above it. Issue #192 measured 1,397 real changes producing 255,775 of those.
+     * something above it. One measured resync had 1,397 real changes producing 255,775 of those.
      */
     @Query("UPDATE movies SET sortOrder = :sortOrder WHERE id = :id")
     suspend fun setSortOrder(id: Long, sortOrder: Int)
@@ -87,7 +87,7 @@ interface MovieDao {
     }
 
     /**
-     * Shift every row of this source whose position lies in a span (plan A3).
+     * Shift every row of this source whose position lies in a span.
      *
      * Removing two channels near the top of a 30,000-channel list moves all 30,000 below them by
      * exactly -2. That is one statement, not 30,000 writes. The caller has already proved that the

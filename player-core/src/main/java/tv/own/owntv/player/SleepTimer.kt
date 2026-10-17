@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 /**
- * Stop playing in a while, for a user who is falling asleep to it (N17; the phone's M14 fixes).
+ * Stop playing in a while, for a user who is falling asleep to it.
  *
  * One per process, because the countdown has to outlive the screen it was set on. Deliberately **not**
  * persisted: a timer that survived a restart would stop a stream someone started hours later.

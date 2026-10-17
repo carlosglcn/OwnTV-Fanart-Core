@@ -10,7 +10,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.file.Files
 
-/** P16b — the players read the buffer over loopback HTTP, from any piece, and only with the token. */
+/** The players read the buffer over loopback HTTP, from any piece, and only with the token. */
 class TimeshiftServerTest {
 
     private val dir: File = Files.createTempDirectory("timeshift-server").toFile()

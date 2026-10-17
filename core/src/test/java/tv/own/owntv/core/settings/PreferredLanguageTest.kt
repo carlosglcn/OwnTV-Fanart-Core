@@ -5,7 +5,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-/** N13: each profile has its own preferred languages; one that never chose follows the shared setting. */
+/** Each profile has its own preferred languages; one that never chose follows the shared setting. */
 class PreferredLanguageTest {
 
     private val shared = SettingsRepository.Keys.PREF_AUDIO_LANG

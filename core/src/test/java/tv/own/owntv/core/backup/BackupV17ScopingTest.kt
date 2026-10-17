@@ -144,10 +144,13 @@ class BackupV17ScopingTest {
             // is the same wherever it is restored. The merge prefers whatever this device measured
             // itself.
             "maxConnections", "maxConnectionsProbedAt",
-            // v44: the four per-playlist overrides of owner decision 12 (five columns).
+            // v44: the four per-playlist overrides (five columns).
             "catchupTimezone", "catchupOffsetMin", "vodEnginePreference", "liveTuneTimeoutSecs", "httpReferer",
         )
-        val deliberatelyExcluded = emptySet<String>()
+        // v49 `serverTimeZone`: the Xtream panel's own report, re-read at EVERY sync (unlike a measured
+        // `maxConnections`, nothing expensive is lost) and only ever set for Xtream. A restored row
+        // reads null — catch-up's Automatic falls back to the device zone — until its next sync.
+        val deliberatelyExcluded = setOf("serverTimeZone")
         // Not a field of the entity at all: the Compose compiler adds `$stable` as a static, and
         // Kotlin does not flag it synthetic.
         val compilerGenerated = setOf("\$stable")

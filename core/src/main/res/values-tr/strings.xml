@@ -24,9 +24,6 @@
     <string name="common_title">Başlık</string>
     <string name="common_search_hint">Ara…</string>
     <string name="common_search">Arama</string>
-    <string name="common_weather_fahrenheit"><xliff:g id="temperature">%1$d</xliff:g>°F</string>
-    <string name="common_weather_celsius"><xliff:g id="temperature">%1$d</xliff:g>°C</string>
-    <string name="common_weather_city"><xliff:g id="temperature">%1$s</xliff:g> · <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_nav_search">Arama</string>
     <string name="common_nav_home">Ana Ekran</string>
     <string name="common_nav_live_tv">Canlı TV</string>
@@ -41,8 +38,6 @@
     <string name="common_nav_settings">Ayarlar</string>
     <string name="shell_no_source">Kaynak yok</string>
     <string name="shell_now_playing">Şimdi oynatılıyor</string>
-    <string name="common_something_went_wrong">Bir sorun oluştu</string>
-    <string name="common_move_instructions">Taşımak için ▲/▼ · Kaydetmek için OK · İptal etmek için Geri</string>
     <string name="common_number_grouped"><xliff:g id="count">%1$,d</xliff:g></string>
     <string name="common_percent"><xliff:g id="percent">%1$d</xliff:g>%%</string>
     <string name="common_timestamp_minutes"><xliff:g id="minutes">%1$d</xliff:g>:<xliff:g id="seconds">%2$02d</xliff:g></string>

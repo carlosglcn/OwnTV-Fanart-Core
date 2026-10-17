@@ -8,7 +8,7 @@ import java.io.OutputStream
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
- * One channel's timeshift buffer on disk (N4): a folder of short pieces, the oldest dropped as the
+ * One channel's timeshift buffer on disk: a folder of short pieces, the oldest dropped as the
  * newest arrive, and any number of readers following it — each reader is a player watching from some
  * piece onwards, at the live edge or behind it.
  *

@@ -5,7 +5,7 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 /**
- * Holds the network path until the stored proxy / DNS setting has been read once (S6).
+ * Holds the network path until the stored proxy / DNS setting has been read once.
  *
  * The holders start from "off" and learn the real value from DataStore's first emission. A cold start
  * with Last-channel autoplay could tune before that arrived, so the first stream went out directly: an

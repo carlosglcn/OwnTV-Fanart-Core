@@ -26,11 +26,8 @@
     <string name="player_previous_channel_in_list">Előző csatorna a listában</string>
     <string name="player_live_scrub_at"><xliff:g id="time">%1$s</xliff:g> · <xliff:g id="programme">%2$s</xliff:g></string>
     <string name="player_tool_volume">Hangerő</string>
-    <!-- Translators: Label under the brightness button on the phone player's control bar, and the label on the slider a vertical swipe on the left of the picture shows. Keep this very short (14 characters maximum) — it sits inside a small button. -->
     <string name="player_tool_brightness">Fényerő</string>
-    <!-- Translators: Spoken label for the phone player's skip-backwards button, which jumps back by the user's own seek step. Keep this very short (16 characters maximum). -->
     <string name="player_skip_back">Ugrás vissza</string>
-    <!-- Translators: Spoken label for the phone player's skip-forwards button, which jumps forward by the user's own seek step. Keep this very short (16 characters maximum). -->
     <string name="player_skip_forward">Ugrás előre</string>
     <string name="player_tool_audio">Hang</string>
     <string name="player_tool_subtitles">Felirat</string>
@@ -108,6 +105,7 @@
     <string name="player_error_decoder_busy">Ennek a tévének a videódekódere le van terhelve. Próbáld újra egy pillanat múlva.</string>
     <string name="player_error_no_internet">Nincs internetkapcsolat. Ellenőrizd a hálózatot, és próbáld újra.</string>
     <string name="player_error_stream_unavailable">Ezt az adatfolyamot nem sikerült lejátszani. Lehet, hogy a forrás offline, vagy nem támogatott formátumot használ. <xliff:g id="hint">%1$s</xliff:g></string>
+    <string name="player_error_account_in_use">Ez a fiók már lejátszik egy másik eszközön vagy alkalmazásban. Állítsa le ott, majd nyomja meg az Újra gombot.</string>
     <string name="player_error_mpv_open_decode">Az mpv nem tudta megnyitni vagy dekódolni ezt a fájlt.</string>
     <string name="player_error_mpv_stream_never_started">Az adatfolyam több próbálkozás után sem indult el az mpv-ben.</string>
     <string name="player_error_surround">Ez a hangkimenet nem támogatja a térhangzást — átváltás sztereóra.</string>

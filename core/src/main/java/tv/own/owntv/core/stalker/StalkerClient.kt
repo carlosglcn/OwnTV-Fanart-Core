@@ -20,10 +20,9 @@ import java.net.URLEncoder
 import java.util.TimeZone
 
 /**
- * Stalker/Ministra (MAG portal) protocol client — Phase A of `future-plan/stalker-portal-plan.md`:
- * portal-URL normalization, the MAC handshake (`handshake` → Bearer token → `get_profile`), and the
- * MAG request headers, all derived in one place. Content lists and `create_link` come in later
- * phases. Responses are small JSON wrapped as `{"js": <payload>}` and parsed with [JsonReader].
+ * Stalker/Ministra (MAG portal) protocol client: portal-URL normalization, the MAC handshake
+ * (`handshake` → Bearer token → `get_profile`), the MAG request headers, the content lists and
+ * `create_link`, all in one place. Responses are small JSON wrapped as `{"js": <payload>}` and parsed with [JsonReader].
  */
 open class StalkerClient(okHttpClient: OkHttpClient) {
 
@@ -67,7 +66,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
     )
 
     /**
-     * A VOD (movie) or series-show item from `get_ordered_list` (§1.3). For a movie, [cmd] is the
+     * A VOD (movie) or series-show item from `get_ordered_list`. For a movie, [cmd] is the
      * portal command resolved to a real URL at play time via [createLink] (`type=vod`). For a series
      * SHOW, [cmd] carries the show command; per-episode URLs are minted with a `series=<ep>` param at
      * play time (episodes themselves are listed lazily when the show is opened). [id] is the stable
@@ -106,7 +105,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         val episodes: List<Int>,
     )
 
-    /** One programme from `get_short_epg` (Phase E, §5.5) — times in epoch ms. */
+    /** One programme from `get_short_epg` — times in epoch ms. */
     data class ShortEpgEntry(val title: String, val description: String?, val startMs: Long, val stopMs: Long)
 
     /**
@@ -118,7 +117,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
     data class ArchiveEntry(val id: String, val startMs: Long, val stopMs: Long, val archived: Boolean)
 
     /**
-     * Probe the API-endpoint candidates for [portalUrl] (§1.1: `portal.php`, `stalker_portal/server/
+     * Probe the API-endpoint candidates for [portalUrl] (`portal.php`, `stalker_portal/server/
      * load.php`, `server/load.php`) and return the first that completes a handshake. The winning
      * [Handshake.apiBase] should be reused for every later call on this source.
      */
@@ -177,7 +176,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
     }
 
     /**
-     * `?type=account_info&action=get_main_info` — subscription status/expiry (§1.2, Phase F).
+     * `?type=account_info&action=get_main_info` — subscription status/expiry.
      * Optional and portal-quirky (expiry is often surfaced oddly, e.g. in `phone`); callers must
      * treat a failure or an empty map as "no account info", never as an error.
      */
@@ -186,7 +185,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         return request(url, mac, token, userAgent) { readScalarFields(it) }
     }
 
-    // --- Content lists (Phase C) ---
+    // --- Content lists ---
 
     /** `?type=itv&action=get_genres` → live TV genres (the js payload is an array). */
     suspend fun getGenres(apiBase: String, mac: String, token: String, userAgent: String? = null): List<Genre> {
@@ -208,7 +207,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
 
     /**
      * `?type=itv&action=get_short_epg&ch_id=<id>&size=<n>` → the channel's now/next programmes
-     * (Phase E, §5.5 — the safe per-channel path; the OOM-prone bulk `get_epg_info` is never used).
+     * (the safe per-channel path; the OOM-prone bulk `get_epg_info` is never used).
      * The js payload is an array (some portals wrap it as `{data:[…]}`); entries with no readable
      * start/stop are dropped.
      */
@@ -312,29 +311,11 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
     }
 
     /**
-     * `?type=itv&action=get_epg_info&period=<days>` → **the whole portal guide**, streamed.
+     * Download the whole portal guide (`?type=itv&action=get_epg_info&period=<days>`) to [dest]
+     * **without parsing a byte of it**, returning the size.
      *
      * This is the call STBEmu and TiviMate make, and the reason their users see a full guide and a
-     * working catch-up list on portals where we showed only now/next. It was avoided here as an OOM
-     * risk, which it is *if the reply is collected into a list* — a week of a thousand channels is
-     * hundreds of thousands of programmes. It is not a risk when the reply is never held: [onEntry]
-     * is called as each programme is read, so the caller can write in batches and nothing bigger than
-     * one programme is alive at a time. Exactly how the Xtream catalog lists are already handled.
-     *
-     * Both payload shapes are accepted, because portals disagree: an object keyed by channel id
-     * (`{"data":{"1234":[…]}}` or `{"1234":[…]}`), or one flat array whose entries carry `ch_id`.
-     * Entries with no readable start/stop or no title are skipped rather than failing the crawl.
-     */
-    open suspend fun streamEpgInfo(
-        apiBase: String, mac: String, token: String, userAgent: String?, periodDays: Int,
-        onEntry: suspend (channelId: String, entry: ShortEpgEntry) -> Unit,
-    ) {
-        val url = "$apiBase?type=itv&action=get_epg_info&period=$periodDays&JsHttpRequest=1-xml"
-        request(url, mac, token, userAgent) { reader -> readEpgInfo(reader, onEntry) }
-    }
-
-    /**
-     * Download the whole portal guide to [dest] **without parsing a byte of it**, returning the size.
+     * working catch-up list on portals that offer only now/next otherwise.
      *
      * Written this way because of what a real portal did. The guide itself is quick — a measured
      * 9 MB in about a second for a 12 000-channel panel — but the first attempt parsed it as it
@@ -355,7 +336,15 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         return requestToFile(url, mac, token, userAgent, dest)
     }
 
-    /** Parse a guide previously fetched by [downloadEpgInfo]. No network, no time limit. */
+    /**
+     * Parse a guide previously fetched by [downloadEpgInfo]. No network, no time limit. [onEntry] is
+     * called as each programme is read, so the caller writes in batches and nothing bigger than one
+     * programme is held — a week of a thousand channels is hundreds of thousands of programmes.
+     *
+     * Both payload shapes are accepted, because portals disagree: an object keyed by channel id
+     * (`{"data":{"1234":[…]}}` or `{"1234":[…]}`), or one flat array whose entries carry `ch_id`.
+     * Entries with no readable start/stop or no title are skipped rather than failing the crawl.
+     */
     open suspend fun parseEpgInfoFile(file: File, onEntry: suspend (channelId: String, entry: ShortEpgEntry) -> Unit) {
         file.inputStream().buffered().use { input -> parseEnvelope(input) { reader -> readEpgInfo(reader, onEntry) } }
     }
@@ -426,7 +415,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
 
     /**
      * `?type=series&action=get_ordered_list&movie_id=<show remoteId>&p=<page>` → one page of the
-     * show's SEASONS, each carrying its `series` episode-number array (§1.3). Category is included
+     * show's SEASONS, each carrying its `series` episode-number array. Category is included
      * because some portals require it alongside movie_id.
      */
     suspend fun getSeriesSeasons(
@@ -538,7 +527,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
     private fun readVodItem(reader: JsonReader): VodItem? {
         if (reader.peek() != JsonToken.BEGIN_OBJECT) { reader.skipValue(); return null }
         // Nested fields (the series episode list, actors arrays) are skipped by readScalarFields — the
-        // show/movie row only needs the scalar metadata; episodes are fetched lazily on open (Phase D-2).
+        // show/movie row only needs the scalar metadata; episodes are fetched lazily on open.
         val f = readScalarFields(reader)
         val id = f["id"]?.takeIf { it.isNotBlank() } ?: return null
         return VodItem(
@@ -633,12 +622,12 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
 
     /**
      * `?type=itv&action=create_link&cmd=<cmd>` → the real, short-lived stream URL (the leading
-     * `ffmpeg `/`auto ` prefix stripped). This is the one call that mints a playable URL (§1.4);
+     * `ffmpeg `/`auto ` prefix stripped). This is the one call that mints a playable URL;
      * resolve immediately before playback, never at sync.
      */
     open suspend fun createLink(
         apiBase: String, mac: String, token: String, userAgent: String?, cmd: String,
-        // "itv" for live; "vod" for movies AND series episodes (§1.4). [episode] is the series episode
+        // "itv" for live; "vod" for movies AND series episodes. [episode] is the series episode
         // number minted into the URL via `series=<ep>` — null for live/movies.
         type: String = "itv", episode: Int? = null,
     ): String {
@@ -702,7 +691,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
     /**
      * GET a portal URL with the MAG headers, unwrap the `{"js": <payload>}` envelope, and hand the
      * reader — positioned at the `js` value — to [parseJs]. `{"js": false/null/""}` (the portal's
-     * "not authorized / token dead" shape) throws [StalkerAuthException] (§5.2: "re-handshake").
+     * "not authorized / token dead" shape) throws [StalkerAuthException] ("re-handshake").
      */
     /**
      * GET [url] straight to [dest], returning the bytes written. Same headers and cancellation as
@@ -865,7 +854,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         internal fun seasonNumberOf(id: String, name: String?): Int? {
             // "280:2" — the suffix after ':' is the season on classic portals.
             id.substringAfterLast(':', "").toIntOrNull()?.let { return it }
-            // A "Specials" season is season 0 (#228). Without this it had no number, took its list position,
+            // A "Specials" season is season 0. Without this it had no number, took its list position,
             // and — listed first — merged into Season 1.
             if (name != null && SPECIALS.containsMatchIn(name)) return 0
             // Else a trailing number in the name ("Season 2", "S02").
@@ -888,7 +877,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         /** How much of a non-JSON response is worth quoting in the error — enough to name the shape, not the whole body. */
         private const val RESPONSE_PEEK_BYTES = 200
 
-        /** Classic MAG-box UA most portals accept (§1.1); overridable per source (MAG254/270/420 presets in Phase B). */
+        /** Classic MAG-box UA most portals accept; overridable per source (MAG254/270/420 presets). */
         const val DEFAULT_MAG_USER_AGENT =
             "Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 4 rev: 2721 Safari/533.3"
 
@@ -1013,7 +1002,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
             if (code == 401) StalkerAuthException("Portal rejected the request (HTTP $code)")
             else StalkerHttpException(code, "HTTP $code for $safeUrl")
 
-        /** Play-command prefixes minted by `create_link` (§1.4) — everything after them is the playable URL. */
+        /** Play-command prefixes minted by `create_link` — everything after them is the playable URL. */
         private val CMD_PREFIXES = listOf("ffmpeg ", "ffrt2 ", "ffrt3 ", "ffrt ", "auto ")
 
         /**
@@ -1039,7 +1028,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         }
 
         /**
-         * API-endpoint candidates for a portal URL, in probe order (§1.1). A pasted direct `.php`
+         * API-endpoint candidates for a portal URL, in probe order. A pasted direct `.php`
          * endpoint is honored first; otherwise try `portal.php`, then the stalker_portal layouts.
          */
         fun apiCandidates(input: String): List<String> {

@@ -3,7 +3,7 @@ package tv.own.owntv.player
 import tv.own.owntv.core.player.PlaybackPrefsStore
 
 /**
- * Remembered audio / subtitle choice for one item (owner decision 11), turned into what an engine
+ * Remembered audio / subtitle choice for one item, turned into what an engine
  * should do once it knows the stream's tracks.
  *
  * A remembered choice is stored as a *language*, not a track id — ids change between streams of the

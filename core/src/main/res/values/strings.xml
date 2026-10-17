@@ -50,12 +50,6 @@
     <string name="common_search_hint">Search\u2026</string>
     <!-- Translators: Generic search button or section label. -->
     <string name="common_search">Search</string>
-    <!-- Translators: Temperature display in Fahrenheit. "temperature" is the numeric value. The degree symbol and F are part of the format. -->
-    <string name="common_weather_fahrenheit"><xliff:g id="temperature">%1$d</xliff:g>\u00b0F</string>
-    <!-- Translators: Temperature display in Celsius. "temperature" is the numeric value. -->
-    <string name="common_weather_celsius"><xliff:g id="temperature">%1$d</xliff:g>\u00b0C</string>
-    <!-- Translators: Weather display with temperature and city. "temperature" is the formatted temperature, "city" is the city name. The dot is a separator. -->
-    <string name="common_weather_city"><xliff:g id="temperature">%1$s</xliff:g> \u00b7 <xliff:g id="city">%2$s</xliff:g></string>
     <!-- Translators: Navigation label for the Search screen in the sidebar. -->
     <string name="common_nav_search">Search</string>
     <!-- Translators: Navigation label for the Home screen in the sidebar. -->
@@ -84,10 +78,6 @@
     <string name="shell_no_source">No source</string>
     <!-- Translators: Label of the sidebar item that jumps to the docked mini player or the audio session. -->
     <string name="shell_now_playing">Now playing</string>
-    <!-- Translators: Generic error message for unexpected failures. -->
-    <string name="common_something_went_wrong">Something went wrong</string>
-    <!-- Translators: Instructional text shown during reorder mode. The arrows are visual direction indicators. -->
-    <string name="common_move_instructions">\u25b2/\u25bc to move \u00b7 OK to save \u00b7 Back to cancel</string>
     <!-- Translators: Formatted number with locale-specific grouping. "count" is the number to format. Used for large counts like channel or movie totals. -->
     <string name="common_number_grouped"><xliff:g id="count">%1$,d</xliff:g></string>
     <!-- Translators: Formatted rating display. "rating" is a decimal number such as 7.5. -->

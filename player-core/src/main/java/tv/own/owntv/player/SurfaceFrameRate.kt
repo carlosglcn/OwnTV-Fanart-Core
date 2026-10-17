@@ -7,7 +7,7 @@ import android.view.Surface
  * The `Surface.setFrameRate()` hint for an mpv video surface — both apps' auto frame rate for mpv.
  * (ExoPlayer sets its own through `setVideoChangeFrameRateStrategy`.)
  *
- * [seamlessOnly] is the phone's rule (owner decision 7): switch only where the panel can do it without
+ * [seamlessOnly] is the phone's rule: switch only where the panel can do it without
  * blanking, e.g. a 120 Hz phone dropping to 50 Hz for 25 fps. The television allows a real mode switch.
  * Below Android 12 the platform takes no strategy and treats the hint as seamless-only anyway.
  *

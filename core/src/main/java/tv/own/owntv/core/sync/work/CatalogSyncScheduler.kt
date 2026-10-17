@@ -89,7 +89,7 @@ class CatalogSyncScheduler(private val context: Context) {
     }
 
     /**
-     * Finish a Stalker catalogue in the background (N1d).
+     * Finish a Stalker catalogue in the background.
      *
      * KEEP, not REPLACE: a drain already running has a live position in a category, and replacing it
      * would throw that away to start the identical work over. Enqueued after a sync that left pages
@@ -99,7 +99,7 @@ class CatalogSyncScheduler(private val context: Context) {
      * is for the catalogue to be whole by the time the user scrolls that far, not overnight.
      */
     /**
-     * Measure this provider's stream limit in the background (plan N3b).
+     * Measure this provider's stream limit in the background.
      *
      * KEEP, not REPLACE: the measurement runs at most once per playlist, and a second enqueue from a
      * re-sync must not restart one that is already waiting for the user to stop watching.

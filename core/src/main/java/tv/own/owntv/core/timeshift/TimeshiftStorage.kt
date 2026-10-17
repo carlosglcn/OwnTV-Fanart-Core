@@ -4,7 +4,7 @@ import android.content.Context
 import java.io.File
 
 /**
- * Where timeshift buffers live: internal storage only (decision 25 — no USB, it is temporary). The
+ * Where timeshift buffers live: internal storage only (no USB, it is temporary). The
  * no-backup folder rather than the cache, because the system may clear a cache under storage pressure
  * while a buffer is being watched; the 1 GB floor is what protects the device instead.
  */

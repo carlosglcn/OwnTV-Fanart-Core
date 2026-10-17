@@ -55,7 +55,7 @@ class TrendingRefreshSchedulingTest {
 
     @Test
     fun `no snapshot while a lazily-added catalogue is still draining`() {
-        // N1f-2: every other condition says yes, but the source holds a fraction of its titles.
+        // Every other condition says yes, but the source holds a fraction of its titles.
         assertFalse(
             schedule(
                 effective = allVod,

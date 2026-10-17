@@ -35,7 +35,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 /**
  * The byte pump behind live recording: [tv.own.owntv.core.download.DownloadEngine]'s shape, with the
- * four differences a live stream forces (§1.3).
+ * four differences a live stream forces.
  *
  * 1. **A time-based stop.** A live `.ts` URL never returns end-of-body, so the recording ends at
  *    `stopMs` and nowhere else.
@@ -44,7 +44,7 @@ import java.util.concurrent.ConcurrentHashMap
  *    and unavoidable, and a `.ts` survives it.
  * 3. **Its own queue.** Recordings must not be serialised behind a 6 GB film — `DownloadEngine`
  *    drains strictly one at a time, deliberately, and a film would eat the nine o'clock news.
- * 4. **Concurrency bounded by the provider, not by us** (D10). Several recordings run at once, up to
+ * 4. **Concurrency bounded by the provider, not by us**. Several recordings run at once, up to
  *    what the playlist's `maxConnections` allows, with one stream kept back so the user can still
  *    watch — unless they have said otherwise.
  *
@@ -115,7 +115,7 @@ class RecordingEngine(
                 if (active.containsKey(row.id) || row.id in suppressed) continue
                 // A blank stream URL means "somebody else is writing this file": a
                 // "record what I'm watching" row, whose bytes come from the player's already-open
-                // stream (D3, mode b). Touching it would open a second connection, which is the one
+                // stream. Touching it would open a second connection, which is the one
                 // thing that mode exists to avoid.
                 if (row.streamUrl.isBlank()) continue
                 // Said as a MISSED row with a reason rather than by deferring the work. A download
@@ -159,7 +159,7 @@ class RecordingEngine(
         job.start()
     }
 
-    /** May this recording have one of the playlist's connections right now? (D10/D11.) */
+    /** May this recording have one of the playlist's connections right now? */
     private suspend fun grantFor(row: RecordingEntity, reserveOneForWatching: Boolean): StreamGrant =
         connectionBudget(
             source = sourceDao.getById(row.sourceId),
@@ -257,7 +257,7 @@ class RecordingEngine(
         target: MediaTarget,
         onProgress: (RecordingProgress) -> Unit,
     ): RecordingFailure {
-        // #115 — a channel whose playlist declares a licence can never be written down: the CDM
+        // A channel whose playlist declares a licence can never be written down: the CDM
         // decrypts only into a secure decoder for immediate display, so there is no point at which
         // these bytes exist in the clear for us to keep. Refused BEFORE the request, so it costs no
         // connection at all — unlike the HLS `#EXT-X-KEY` refusal, which can only be found by asking.
@@ -357,9 +357,9 @@ class RecordingEngine(
      * identified by their **media sequence number**, not by their URL, so a signature that changes
      * between polls does not make an old segment look new.
      *
-     * **AES-128 segments are decrypted as they are written** (#243): the key is a public URL every
+     * **AES-128 segments are decrypted as they are written**: the key is a public URL every
      * player fetches, so the file on disk is clear MPEG-TS. **Anything else encrypted is refused, not
-     * attempted** (§1.5) — SAMPLE-AES written out unchanged produces a file of exactly the right size
+     * attempted** — SAMPLE-AES written out unchanged produces a file of exactly the right size
      * that will not play, and a recording the user only discovers is worthless when they sit down to
      * watch it is worse than one that said no at the start.
      */
@@ -390,7 +390,7 @@ class RecordingEngine(
                 mediaUrl = response.request.url.toString()
                 response.body.string()
             }
-            // A master playlist lists qualities, not segments (#243). Follow the best one — every
+            // A master playlist lists qualities, not segments. Follow the best one — every
             // cycle, because these providers sign the quality URLs too and a kept one expires.
             if (HlsMediaPlaylist.isMaster(text)) {
                 val variant = HlsMediaPlaylist.bestVariant(text)?.let { absoluteUrl(mediaUrl, it) }
@@ -430,7 +430,7 @@ class RecordingEngine(
                 }
                 val ok = client.newCall(request(segmentUrl, userAgent, headers)).execute().use { response ->
                     if (!response.isSuccessful) return@use false
-                    // Never write a playlist into the recording as if it were video (#243): stop
+                    // Never write a playlist into the recording as if it were video: stop
                     // and say so instead of filling a file that cannot play.
                     if (HlsMediaPlaylist.isPlaylistBody(response.peekBody(PLAYLIST_PEEK_BYTES).bytes())) {
                         android.util.Log.w(TAG, "recording stopped, segment is a playlist id=${row.id}")
@@ -816,7 +816,7 @@ class RecordingEngine(
         )
     }
 
-    /** Nothing was written and nothing will be: the programme is gone and the row says why (D10). */
+    /** Nothing was written and nothing will be: the programme is gone and the row says why. */
     private suspend fun markMissed(row: RecordingEntity, failure: RecordingFailure) {
         android.util.Log.i(TAG, "recording missed id=${row.id} reason=$failure")
         recordingDao.updateProgress(

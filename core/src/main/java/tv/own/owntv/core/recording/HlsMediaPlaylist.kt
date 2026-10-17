@@ -31,7 +31,7 @@ data class HlsMediaPlaylist(
     /**
      * True when the segments are encrypted in a way this recorder will not produce a playable file
      * for. AES-128 is not among them: its key is a public URL every player fetches, so the recorder
-     * decrypts it too (#243). SAMPLE-AES and anything unknown are refused.
+     * decrypts it too. SAMPLE-AES and anything unknown are refused.
      */
     val isEncrypted: Boolean
         get() = encryptionMethod != null &&
@@ -66,7 +66,7 @@ data class HlsMediaPlaylist(
         /**
          * Is this a **master** playlist — a list of qualities, each its own media playlist — rather
          * than a list of segments? Read as segments, its quality lines were fetched and written into
-         * the recording as text (#243).
+         * the recording as text.
          */
         fun isMaster(text: String): Boolean = text.lineSequence().any { it.trim().startsWith(STREAM_INF) }
 

@@ -3,7 +3,7 @@ package tv.own.owntv.player
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-/** C-H2 — mpv gets the layouts the output names, never more; an output that reports none keeps auto-safe. */
+/** mpv gets the layouts the output names, never more; an output that reports none keeps auto-safe. */
 class MpvAudioChannelsTest {
 
     @Test

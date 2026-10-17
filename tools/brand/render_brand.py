@@ -1,12 +1,12 @@
-"""Renders the OwnTV flip-card brand images from the pass-6 mockup's own numbers.
+"""Renders the OwnTV flip-card brand images from the design's own numbers.
 
-The source of truth is future_work/OwnTV_Icon_Pass6_FlipCard.html. Every coordinate, colour and effect
-below is copied from its PAL object and geometry constants (TOP, BOT, PLAY, LIP, TABS, TABS_S), in the
-same 108-unit adaptive-icon canvas. Change the mockup first, then this file, never the other way round.
+Every coordinate, colour and effect below is the design's: its palette (PAL) and geometry constants
+(TOP, BOT, PLAY, LIP, TABS, TABS_S), in the same 108-unit adaptive-icon canvas. Change the design
+here, then re-render; never edit a generated file by hand.
 
     python tools/brand/render_brand.py extras  --font <Roboto.ttf> --out <repo>/extras
     python tools/brand/render_brand.py android --font <Roboto.ttf> --out core/src/main/res
-    python tools/brand/render_brand.py logos --out <repo>/extras      (README logos, #227 wordmark, no font)
+    python tools/brand/render_brand.py logos --out <repo>/extras      (README logos, wordmark, no font)
 
 Needs Pillow. The wordmark uses the apps' default font (the system sans, Roboto on Android).
 """
@@ -15,7 +15,7 @@ import os
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-# ---- palettes: hex for hex from the mockup's PAL -------------------------------------------------
+# ---- palettes: hex for hex, the design's PAL -----------------------------------------------------
 PAL = {
     'petrol':    dict(top='#2F8F8A', bot='#227773', deep='#155653', gap='#0B3B39', pt='#FFFFFF', pb='#DDEDEC', field='#062321', acc='#5CC2BC', ui='#1B6E6A'),
     'sunflower': dict(top='#FFD24D', bot='#F4B82A', deep='#B7820F', gap='#7A5406', pt='#2B2208', pb='#3A2F0E', field='#231A04', acc='#FFD24D', ui='#946500'),
@@ -27,7 +27,7 @@ PAL = {
     'olive_cream': dict(top='#F4F1E4', bot='#E8E3CE', deep='#C9C09F', gap='#3E4A1C', pt='#779E23', pb='#66881D', field='#26330C', acc='#A5CC4E', ui='#5E7F1B', dot='#E0A526'),
 }
 
-# ---- geometry: the mockup's constants ------------------------------------------------------------
+# ---- geometry: the design's constants ------------------------------------------------------------
 CARD = (32, 29, 76, 75, 10)            # TOP + BOT together: x0, y0, x1, y1, corner radius
 HINGE = 52
 PLAY = [(48.7, 42), (66.2, 52), (48.7, 62)]
@@ -47,7 +47,7 @@ def rgb(h, a=255):
 
 
 class Canvas:
-    """Maps 108-unit mockup coordinates onto a supersampled square image."""
+    """Maps 108-unit design coordinates onto a supersampled square image."""
 
     def __init__(self, px, vb):
         self.w = px * SS
@@ -94,7 +94,7 @@ def mark(p, px, variant='launcher', vb=VB_FULL, lip=True, shadow=True):
     c = Canvas(px, vb)
     c.dy = 0.5 if use_lip else 2
     sw = 6 if small else 4
-    # No hinge line and no shade band on any still image (owner, 2026-09-24): they appear only in the
+    # No hinge line and no shade band on any still image: they appear only in the
     # flip animation, where the flap needs them. The two flat halves still read as the split card.
     obj = c.layer()
     if use_lip:
@@ -124,14 +124,14 @@ def mark(p, px, variant='launcher', vb=VB_FULL, lip=True, shadow=True):
 def font(path, size):
     f = ImageFont.truetype(path, size)
     try:
-        f.set_variation_by_axes([800, 100])   # mockup wordmark: weight 800
+        f.set_variation_by_axes([800, 100])   # wordmark: weight 800
     except Exception:
         pass
     return f
 
 
 def wordmark(draw, xy, text_parts, f, tracking):
-    """Draws "Own" + "TV" letter by letter with the mockup's -0.025em tracking. Returns the end x."""
+    """Draws "Own" + "TV" letter by letter with -0.025em tracking. Returns the end x."""
     x, y = xy
     for text, colour in text_parts:
         for ch in text:
@@ -145,7 +145,7 @@ def word_width(text, f, tracking):
 
 
 def lockup(p, mark_px, font_px, font_path, own='#FFFFFF', pad=0, tv=None):
-    """Horizontal lockup (mockup lockH): flat mark, gap = mark * .26, wordmark. On light: own=ink, tv=p['ui']."""
+    """Horizontal lockup: flat mark, gap = mark * .26, wordmark. On light: own=ink, tv=p['ui']."""
     f = font(font_path, font_px)
     tr = -0.025 * font_px
     ww = word_width('OwnTV', f, tr)
@@ -162,7 +162,7 @@ def lockup(p, mark_px, font_px, font_path, own='#FFFFFF', pad=0, tv=None):
 
 
 def banner(p, w, h, font_path):
-    """The TV banner layout from the mockup, scaled from its 320x180 artboard."""
+    """The TV banner layout, scaled from a 320x180 artboard."""
     s = h / 180
     img = Image.new('RGBA', (w, h), rgb(p['field']))
     mk = round(108 * s)
@@ -196,9 +196,9 @@ def circle_path(cx, cy, r):
     return f'M{f(cx - r)},{f(cy)}a{f(r)},{f(r)} 0 1 0 {f(2 * r)},0a{f(r)},{f(r)} 0 1 0 {f(-2 * r)},0Z'
 
 
-TOP_PATH = 'M32,52V39a10,10 0 0 1 10,-10h24a10,10 0 0 1 10,10v13z'      # the mockup's TOP
-BOT_PATH = 'M32,52h44v13a10,10 0 0 1 -10,10H42a10,10 0 0 1 -10,-10z'    # the mockup's BOT
-PLAY_PATH = 'M48.7,42L66.2,52L48.7,62Z'                                  # the mockup's PLAY
+TOP_PATH = 'M32,52V39a10,10 0 0 1 10,-10h24a10,10 0 0 1 10,10v13z'      # the card's top half
+BOT_PATH = 'M32,52h44v13a10,10 0 0 1 -10,10H42a10,10 0 0 1 -10,-10z'    # the card's bottom half
+PLAY_PATH = 'M48.7,42L66.2,52L48.7,62Z'                                  # the play triangle
 CLIP_TOP = 'M0,0H108V52H0Z'
 CLIP_BOT = 'M0,52H108V108H0Z'
 
@@ -225,7 +225,7 @@ def _clipped(clip, inner, ind=8):
 
 
 def flat_body(p, small=False, ind=12):
-    """Flat card (no next card, no shadow) in the mockup's 108 space, already shifted by dy = 2."""
+    """Flat card (no next card, no shadow) in the 108 space, already shifted by dy = 2."""
     sw = 6 if small else 4
     b = ''.join(_p(rr_path(*t), p['deep'], ind=ind + 4) for t in (TABS_S if small else TABS))
     b += _p(TOP_PATH, p['top'], ind=ind + 4) + _p(BOT_PATH, p['bot'], ind=ind + 4)
@@ -288,7 +288,7 @@ def vector_mono(small=False, vb=VB_TIGHT, size_dp=24, colour='#FFFFFFFF'):
 # -- the launch animation: the card flips on ---------------------------------------------------------
 
 def vector_splash_anim(p):
-    """AnimatedVectorDrawable in the 108 canvas. Timeline = the mockup's, squeezed to 800 ms:
+    """AnimatedVectorDrawable in the 108 canvas. Timeline = the design's, squeezed to 800 ms:
     pop-in 0-220 ms (scale .55 -> 1.04, fading in) then 1.04 -> 1 by 320 ms; the blank top flap falls to
     the hinge 380-560 ms; the new bottom flap drops in 560-700 ms to 1.07, settling to 1 by 800 ms."""
     g = 1.7
@@ -336,7 +336,7 @@ def vector_splash_anim(p):
 
 DENSITIES = {'mdpi': 1, 'hdpi': 1.5, 'xhdpi': 2, 'xxhdpi': 3, 'xxxhdpi': 4}
 VB_CANVAS = (0, 108)
-HEADER = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by tools/brand/render_brand.py from the pass-6 mockup. Do not edit by hand. -->\n'
+HEADER = '<?xml version="1.0" encoding="utf-8"?>\n<!-- Generated by tools/brand/render_brand.py. Do not edit by hand. -->\n'
 
 
 def write(path, text):
@@ -383,7 +383,7 @@ def android(res, font_path):
 
 
 def splash_name(p, w, h, font_path):
-    """The mockup's launch-screen wordmark, "Own" white and "TV" in the accent, centred on a transparent
+    """The launch-screen wordmark, "Own" white and "TV" in the accent, centred on a transparent
     200x80 dp canvas: Android 12+ draws it at the bottom of the launch screen (windowSplashScreenBrandingImage)."""
     fpx = round(h * .45)
     f = font(font_path, fpx)
@@ -402,7 +402,7 @@ def extras(root, font_path):
         os.makedirs(d, exist_ok=True)
         # shown at width 360 in the READMEs, drawn at 2x
         lockup(p, 150, 108, font_path, pad=10).save(os.path.join(d, f'logo_{key}.png'))
-        # the mockup's "on light" version (family card F): ink "Own", darker accent "TV"
+        # the "on light" version: ink "Own", darker accent "TV"
         lockup(p, 150, 108, font_path, own='#16181D', pad=10, tv=p['ui']).save(os.path.join(d, f'logo_{key}_light.png'))
         d = os.path.join(root, 'brand', 'app-icons')
         os.makedirs(d, exist_ok=True)
@@ -412,10 +412,10 @@ def extras(root, font_path):
         banner(p, 1920, 384, font_path).convert('RGB').save(os.path.join(d, f'banner_{key}.png'))
 
 
-# ==== Stage (P11): the "Pixel" icon and the #227 wordmark ==========================================
-# Pixel is the Stage mockup's dot-matrix mark (screens.js markSignal()): today's TV-set silhouette as a
+# ==== Stage: the "Pixel" icon and the wordmark ======================================================
+# Pixel is the Stage dot-matrix mark: today's TV-set silhouette as a
 # dot grid in a 100-unit box, the play triangle in the default accent. Its banner and launch-screen name
-# use the #227 wordmark by @m3th0d93 (tools/brand/pixel/wordmark.json), so `stage` needs no font file:
+# use the wordmark (tools/brand/pixel/wordmark.json), so `stage` needs no font file:
 #
 #     python tools/brand/render_brand.py stage --out core/src/main/res
 
@@ -538,7 +538,7 @@ def fill_evenodd(img, polys, colour, tx):
 
 
 def wordmark_227(width_px, tv_colour, own=WORD_OWN):
-    """The #227 wordmark (viewBox 988x182) at width_px, transparent, supersampled."""
+    """The wordmark (viewBox 988x182) at width_px, transparent, supersampled."""
     wm = json.load(open(os.path.join(HERE, 'pixel', 'wordmark.json'), encoding='utf-8'))
     w = width_px * SS
     k = w / 988
@@ -552,7 +552,7 @@ def wordmark_227(width_px, tv_colour, own=WORD_OWN):
 
 
 def lockup_227(p, mark_px, own=WORD_OWN, tv=None, pad=0):
-    """Horizontal lockup with the #227 wordmark: flat mark, gap = mark * .26, the wordmark .6 of the mark high."""
+    """Horizontal lockup with the wordmark: flat mark, gap = mark * .26, the wordmark .6 of the mark high."""
     word = wordmark_227(round(mark_px * .6 * 988 / 182), tv or p['acc'], own)
     gap = round(mark_px * .26)
     w = pad * 2 + mark_px + gap + word.width
@@ -564,7 +564,7 @@ def lockup_227(p, mark_px, own=WORD_OWN, tv=None, pad=0):
 
 
 def logos(root):
-    """The README logos (extras/brand/app-logos) with the #227 wordmark, every colour, dark and light."""
+    """The README logos (extras/brand/app-logos) with the wordmark, every colour, dark and light."""
     d = os.path.join(root, 'brand', 'app-logos')
     os.makedirs(d, exist_ok=True)
     for key, p in PAL.items():
@@ -577,7 +577,7 @@ def logos(root):
 # ---- Pixel: the dot-matrix TV set ------------------------------------------------------------------
 
 def pixel_dots_grid():
-    """(x, y, kind) in the 100 box; kind 'body' / 'tri' / 'side'. The same loop as the mockup."""
+    """(x, y, kind) in the 100 box; kind 'body' / 'tri' / 'side'. The same loop as `PixelMark.kt`."""
     def in_rr(x, y, x0, y0, x1, y1, r):
         if x < x0 or x > x1 or y < y0 or y > y1:
             return False
@@ -644,7 +644,7 @@ def vector_pixel(size_dp=56, translate=None, scale=None, vp=100):
 
 def vector_splash_pixel():
     """Launch animation: the dots light up in a sweep from the top left, the triangle glows, under
-    600 ms. Dots are grouped into 40 ms bands of the mockup's delay (y*9 + x*3 ms, here x0.4)."""
+    600 ms. Dots are grouped into 40 ms bands of the design's delay (y*9 + x*3 ms, here x0.4)."""
     t0, sc = PIXEL_IN_CANVAS
     bands = {}
     for x, y, kind in pixel_dots_grid():
@@ -684,7 +684,7 @@ def vector_splash_pixel():
 
 
 def stage_banner(w=320, h=180):
-    """Mark left, #227 wordmark right, on the icon's dark field, as the other banners are laid out."""
+    """Mark left, wordmark right, on the icon's dark field, as the other banners are laid out."""
     s = h / 180
     img = Image.new('RGBA', (w, h), rgb(PIXEL['bg']))
     x0 = round(26 * s)
@@ -722,7 +722,7 @@ def stage(res):
     write(os.path.join(res, 'drawable', 'owntv_splash_pixel.xml'), vector_splash_pixel())
     write(os.path.join(res, 'drawable', 'owntv_splash_static_pixel.xml'), vector_pixel(108, t0, sc, 108))
     stage_banner().save(os.path.join(res, 'drawable-xhdpi', 'owntv_banner_pixel.png'))
-    # The #227 wordmark as two white vectors on the same 988x182 viewport, "own" and "tv", for the apps to
+    # The wordmark as two white vectors on the same 988x182 viewport, "own" and "tv", for the apps to
     # stack and tint (the lockup's "tv" follows the accent).
     wm = json.load(open(os.path.join(HERE, 'pixel', 'wordmark.json'), encoding='utf-8'))
     for name, parts in (('owntv_wordmark_own', ('o', 'w', 'n')), ('owntv_wordmark_tv', ('tv',))):

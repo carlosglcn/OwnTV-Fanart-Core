@@ -112,7 +112,7 @@ class ProfileManager(
         val activeProfileId = settings.activeProfileId.first()
         val remainingProfileId = profileDao.getAllOnce().firstOrNull { it.id != profile.id }?.id
         runCatching { launcherIntegration.clearProfile(profile.id) }
-        // Deleting a profile permanently erases its stored OpenSubtitles login (subtitle plan §5.5).
+        // Deleting a profile permanently erases its stored OpenSubtitles login.
         openSubtitlesAccounts.eraseFor(profile.id)
         // …and its picture, which nothing else would ever clean up.
         avatars.clear(profile.id)

@@ -97,7 +97,7 @@ class EpgAutoMatcherTest {
 
     @Test
     fun aMatchThatSurvivedAReAddedPlaylistIsNotMatchedAgain() = runBlocking {
-        // Phase 3's resolver answers for this channel, so auto-match must not treat it as unmatched
+        // The stored-match resolver answers for this channel, so auto-match must not treat it as unmatched
         // and overwrite the user's own choice.
         db.epgDao().upsertChannels(
             listOf(

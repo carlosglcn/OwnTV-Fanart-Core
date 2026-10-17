@@ -6,8 +6,9 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import tv.own.owntv.core.settings.SettingsRepository.Keys
+import tv.own.owntv.core.theme.GlassConfig
 
-/** The TV app's one-time Stage defaults (owner, 2026-10-02). */
+/** The TV app's one-time Stage defaults. */
 class StageDefaultsTest {
 
     @Test
@@ -18,11 +19,11 @@ class StageDefaultsTest {
             Keys.GLASS_SCOPE to 0, Keys.GLASS_ALPHA to 80,
             Keys.BG_STYLE to "PICTURE", Keys.BG_LOOK to "DARK", Keys.BG_DIM to 70,
         )
-        SettingsRepository.stageDefaults(prefs, allSurfacesBits = 0b111)
+        SettingsRepository.stageDefaults(prefs)
         assertEquals("DOCKED", prefs[Keys.NAV_STYLE])
         assertEquals("COMPACT", prefs[Keys.NAV_SIZE])
         assertEquals("FIT", prefs[Keys.NAV_LENGTH])
-        assertEquals(0b111, prefs[Keys.GLASS_SCOPE])
+        assertEquals(GlassConfig.ON_BITS, prefs[Keys.GLASS_SCOPE])
         assertEquals(50, prefs[Keys.GLASS_ALPHA])
         assertEquals("STAGE", prefs[Keys.BG_STYLE])
         assertNull(prefs[Keys.BG_LOOK])
@@ -35,14 +36,14 @@ class StageDefaultsTest {
     @Test
     fun `an update with a chosen Movies layout keeps it`() {
         val prefs = mutablePreferencesOf(Keys.ACTIVE_PROFILE to 1L, Keys.VOD_LAYOUT to "CINEMATIC")
-        SettingsRepository.stageDefaults(prefs, allSurfacesBits = 1)
+        SettingsRepository.stageDefaults(prefs)
         assertEquals("CINEMATIC", prefs[Keys.VOD_LAYOUT])
     }
 
     @Test
     fun `a fresh install leaves Movies to the Cinematic default`() {
         val prefs = mutablePreferencesOf()
-        SettingsRepository.stageDefaults(prefs, allSurfacesBits = 1)
+        SettingsRepository.stageDefaults(prefs)
         assertNull(prefs[Keys.VOD_LAYOUT])
         assertEquals("DOCKED", prefs[Keys.NAV_STYLE])
     }
@@ -50,8 +51,8 @@ class StageDefaultsTest {
     @Test
     fun `a fresh phone install starts on Stage with glass on at the given opacity`() {
         val prefs = mutablePreferencesOf()
-        SettingsRepository.phoneStageDefaults(prefs, allSurfacesBits = 0b111, alphaPct = 51)
-        assertEquals(0b111, prefs[Keys.GLASS_SCOPE])
+        SettingsRepository.phoneStageDefaults(prefs, alphaPct = 51)
+        assertEquals(GlassConfig.ON_BITS, prefs[Keys.GLASS_SCOPE])
         assertEquals(51, prefs[Keys.GLASS_ALPHA])
         assertEquals("STAGE", prefs[Keys.BG_STYLE])
         assertNull(prefs[Keys.NAV_STYLE])
@@ -60,10 +61,10 @@ class StageDefaultsTest {
     @Test
     fun `an existing phone install keeps its own look`() {
         val withProfile = mutablePreferencesOf(Keys.ACTIVE_PROFILE to 1L)
-        SettingsRepository.phoneStageDefaults(withProfile, allSurfacesBits = 1, alphaPct = 51)
+        SettingsRepository.phoneStageDefaults(withProfile, alphaPct = 51)
         assertNull(withProfile[Keys.GLASS_SCOPE])
         val glassOff = mutablePreferencesOf(Keys.GLASS_SCOPE to 0)
-        SettingsRepository.phoneStageDefaults(glassOff, allSurfacesBits = 1, alphaPct = 51)
+        SettingsRepository.phoneStageDefaults(glassOff, alphaPct = 51)
         assertEquals(0, glassOff[Keys.GLASS_SCOPE])
         assertNull(glassOff[Keys.BG_STYLE])
     }

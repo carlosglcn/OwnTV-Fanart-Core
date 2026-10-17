@@ -24,9 +24,6 @@
     <string name="common_title">शीर्षक</string>
     <string name="common_search_hint">खोज…</string>
     <string name="common_search">खोज</string>
-    <string name="common_weather_fahrenheit"><xliff:g id="temperature">%1$d</xliff:g>°F</string>
-    <string name="common_weather_celsius"><xliff:g id="temperature">%1$d</xliff:g>°C</string>
-    <string name="common_weather_city"><xliff:g id="temperature">%1$s</xliff:g> · <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_nav_search">खोज</string>
     <string name="common_nav_home">होम</string>
     <string name="common_nav_live_tv">लाइव टीवी</string>
@@ -41,8 +38,6 @@
     <string name="common_nav_settings">सेटिंग</string>
     <string name="shell_no_source">कोई स्रोत नहीं</string>
     <string name="shell_now_playing">अभी चल रहा है</string>
-    <string name="common_something_went_wrong">कुछ गड़बड़ हुई</string>
-    <string name="common_move_instructions">स्थान बदलने के लिए ▲/▼ · सहेजने के लिए OK · रद्द करने के लिए वापस</string>
     <string name="common_number_grouped"><xliff:g id="count">%1$,d</xliff:g></string>
     <string name="common_percent"><xliff:g id="percent">%1$d</xliff:g>%%</string>
     <string name="common_timestamp_minutes"><xliff:g id="minutes">%1$d</xliff:g>:<xliff:g id="seconds">%2$02d</xliff:g></string>

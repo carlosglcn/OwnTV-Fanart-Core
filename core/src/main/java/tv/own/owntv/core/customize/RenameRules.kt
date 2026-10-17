@@ -1,7 +1,7 @@
 package tv.own.owntv.core.customize
 
 /**
- * Rule engine for bulk renaming channel/movie/series names (issue #86). Pure functions over
+ * Rule engine for bulk renaming channel/movie/series names. Pure functions over
  * (name, rules, options) — no Android dependencies, fully JVM-testable (see
  * app/src/test/.../RenameRulesTest.kt).
  *
@@ -95,7 +95,7 @@ object RenameRules {
         rule.value.split(SEPARATOR).map { it.trim() }.filter { it.isNotEmpty() }
 
     /**
-     * The ✨ Auto cleanup preset (plan §2.6): country tags, quality tags, emoji — each emitted
+     * The ✨ Auto cleanup preset: country tags, quality tags, emoji — each emitted
      * twice (PREFIX + SUFFIX) because tags hang off both ends of names ("DE | FUSS-TV 3 [HD]").
      * Space collapse comes from [Options.trimLeftovers], on by default.
      */

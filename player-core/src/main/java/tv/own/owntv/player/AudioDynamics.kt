@@ -12,7 +12,7 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 
 /**
- * Night mode (N9) and volume levelling (N10) on 16-bit PCM, for ExoPlayer. mpv gets the same through
+ * Night mode and volume levelling on 16-bit PCM, for ExoPlayer. mpv gets the same through
  * FFmpeg filters — [mpvFilter] — which OwnTV's own libmpv build (tv.own.owntv:libmpv) compiles in; the
  * earlier jdtech build had none, and an `af=lavfi=[…]` there played silence.
  *
@@ -170,7 +170,7 @@ class AudioDynamics(private val sampleRate: Int, private val channels: Int) {
 
         private fun fmt(v: Double): String = String.format(java.util.Locale.ROOT, "%.4f", v)
 
-        /** Whether ExoPlayer may bitstream: the N8 setting, and neither switch on (a processor cannot
+        /** Whether ExoPlayer may bitstream: the passthrough setting, and neither switch on (a processor cannot
          *  touch an encoded stream, so either would silently do nothing). */
         fun passthroughAllowed(setting: Boolean, night: Boolean, levelling: Boolean): Boolean =
             setting && !night && !levelling
