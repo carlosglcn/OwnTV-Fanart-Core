@@ -108,6 +108,7 @@
     <string name="content_no_movies_here">No hay películas aquí.</string>
     <string name="content_no_series_here">No hay series aquí.</string>
     <string name="content_no_episodes">No hay episodios disponibles.</string>
+    <string name="content_episodes_load_failed">No se pudieron cargar los episodios del proveedor (<xliff:g id="reason">%1$s</xliff:g>).</string>
     <string name="content_no_movies_found">No se encontraron películas para “<xliff:g id="query">%1$s</xliff:g>”</string>
     <plurals name="content_count_movies">
         <item quantity="one"><xliff:g id="category">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g> película)</item>

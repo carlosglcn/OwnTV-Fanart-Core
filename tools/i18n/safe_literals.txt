@@ -2817,12 +2817,12 @@
 1	technical	core/src/main/java/tv/own/owntv/core/repository/EpisodeMerge.kt	s${seasonNumber}e$episodeNumber
 1	technical	core/src/main/java/tv/own/owntv/core/repository/SeriesRepository.kt	\0
 1	technical	core/src/main/java/tv/own/owntv/core/repository/SeriesRepository.kt	${season.id}:$epNo
+1	log	core/src/main/java/tv/own/owntv/core/repository/SeriesRepository.kt	${source.type} episode load failed seriesId=${series.id}
+1	technical	core/src/main/java/tv/own/owntv/core/repository/SeriesRepository.kt	HTTP ${e.code}
 1	log	core/src/main/java/tv/own/owntv/core/repository/SeriesRepository.kt	SeriesRepository
 1	log	core/src/main/java/tv/own/owntv/core/repository/SeriesRepository.kt	episodes seriesId=$seriesId fetched=${fetched.size} new=${plan.inserts.size}
-1	log	core/src/main/java/tv/own/owntv/core/repository/SeriesRepository.kt	stalker episode load failed seriesId=${series.id}
 1	log	core/src/main/java/tv/own/owntv/core/repository/SeriesRepository.kt	stalker episodes seriesId=${series.id} remoteId=$remoteId seasons=${seasons.size} episodes=${episodes.size}
 1	log	core/src/main/java/tv/own/owntv/core/repository/SeriesRepository.kt	updated=${plan.updates.size} removed=${plan.deleteIds.size}
-1	log	core/src/main/java/tv/own/owntv/core/repository/SeriesRepository.kt	xtream episode load failed seriesId=${series.id}
 1	technical	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	Cancelled
 1	technical	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	Failed
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	SourceRepository

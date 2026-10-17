@@ -114,6 +114,7 @@
     <string name="content_no_movies_here">Nejsou zde žádné filmy.</string>
     <string name="content_no_series_here">Nejsou zde žádné seriály.</string>
     <string name="content_no_episodes">Nejsou k dispozici žádné epizody.</string>
+    <string name="content_episodes_load_failed">Epizody se od poskytovatele nepodařilo načíst (<xliff:g id="reason">%1$s</xliff:g>).</string>
     <string name="content_no_movies_found">Pro „<xliff:g id="query">%1$s</xliff:g>“ nebyly nalezeny žádné filmy</string>
     <plurals name="content_count_movies">
         <item quantity="one"><xliff:g id="category">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g> film)</item>

@@ -98,6 +98,7 @@
     <string name="content_no_movies_here">Itt nincsenek filmek.</string>
     <string name="content_no_series_here">Itt nincsenek sorozatok.</string>
     <string name="content_no_episodes">Nincs elérhető epizód.</string>
+    <string name="content_episodes_load_failed">Nem sikerült betölteni az epizódokat a szolgáltatótól (<xliff:g id="reason">%1$s</xliff:g>).</string>
     <string name="content_no_movies_found">Nincs találat erre: „<xliff:g id="query">%1$s</xliff:g>”</string>
     <plurals name="content_count_movies">
         <item quantity="one"><xliff:g id="category">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g> film)</item>

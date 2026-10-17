@@ -102,6 +102,7 @@
     <string name="content_no_movies_here">Hier zijn geen films.</string>
     <string name="content_no_series_here">Hier zijn geen series.</string>
     <string name="content_no_episodes">Geen afleveringen beschikbaar.</string>
+    <string name="content_episodes_load_failed">De afleveringen konden niet van de provider worden geladen (<xliff:g id="reason">%1$s</xliff:g>).</string>
     <string name="content_no_movies_found">Geen films gevonden voor “<xliff:g id="query">%1$s</xliff:g>”</string>
     <plurals name="content_count_movies">
         <item quantity="one"><xliff:g id="category">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g> film)</item>

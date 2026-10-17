@@ -96,6 +96,7 @@
     <string name="content_no_movies_here">ここに映画はありません。</string>
     <string name="content_no_series_here">ここにシリーズはありません。</string>
     <string name="content_no_episodes">利用可能なエピソードはありません。</string>
+    <string name="content_episodes_load_failed">プロバイダーからエピソードを読み込めませんでした（<xliff:g id="reason">%1$s</xliff:g>）。</string>
     <string name="content_no_movies_found">「<xliff:g id="query">%1$s</xliff:g>」に一致する映画は見つかりませんでした</string>
     <plurals name="content_count_movies">
         <item quantity="other"><xliff:g id="category">%1$s</xliff:g>（映画<xliff:g id="count">%2$d</xliff:g>本）</item>

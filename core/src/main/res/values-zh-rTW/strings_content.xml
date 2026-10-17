@@ -96,6 +96,7 @@
     <string name="content_no_movies_here">這裡沒有電影。</string>
     <string name="content_no_series_here">這裡沒有影集。</string>
     <string name="content_no_episodes">沒有可用的集數。</string>
+    <string name="content_episodes_load_failed">無法從供應商載入集數（<xliff:g id="reason">%1$s</xliff:g>）。</string>
     <string name="content_no_movies_found">找不到與「<xliff:g id="query">%1$s</xliff:g>」相關的電影</string>
     <plurals name="content_count_movies">
         <item quantity="other"><xliff:g id="category">%1$s</xliff:g>（<xliff:g id="count">%2$d</xliff:g> 部電影）</item>

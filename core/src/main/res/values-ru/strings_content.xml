@@ -114,6 +114,7 @@
     <string name="content_no_movies_here">Здесь нет фильмов.</string>
     <string name="content_no_series_here">Здесь нет сериалов.</string>
     <string name="content_no_episodes">Нет доступных серий.</string>
+    <string name="content_episodes_load_failed">Не удалось загрузить серии от поставщика (<xliff:g id="reason">%1$s</xliff:g>).</string>
     <string name="content_no_movies_found">По запросу «<xliff:g id="query">%1$s</xliff:g>» фильмы не найдены</string>
     <plurals name="content_count_movies">
         <item quantity="one"><xliff:g id="category">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g> фильм)</item>

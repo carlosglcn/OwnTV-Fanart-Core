@@ -102,6 +102,7 @@
     <string name="content_no_movies_here">यहाँ कोई फ़िल्म नहीं है।</string>
     <string name="content_no_series_here">यहाँ कोई सीरीज़ नहीं है।</string>
     <string name="content_no_episodes">कोई episodes उपलब्ध नहीं हैं।</string>
+    <string name="content_episodes_load_failed">प्रदाता से एपिसोड लोड नहीं हो सके (<xliff:g id="reason">%1$s</xliff:g>)।</string>
     <string name="content_no_movies_found">“<xliff:g id="query">%1$s</xliff:g>” के लिए फ़िल्में नहीं मिलीं</string>
     <plurals name="content_count_movies">
         <item quantity="one"><xliff:g id="category">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g> फ़िल्म)</item>

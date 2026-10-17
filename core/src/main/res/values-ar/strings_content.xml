@@ -126,6 +126,7 @@
     <string name="content_no_movies_here">لا توجد أفلام هنا.</string>
     <string name="content_no_series_here">لا توجد مسلسلات هنا.</string>
     <string name="content_no_episodes">لا تتوفر حلقات.</string>
+    <string name="content_episodes_load_failed">تعذّر تحميل الحلقات من المزوّد (<xliff:g id="reason">%1$s</xliff:g>).</string>
     <string name="content_no_movies_found">لم يتم العثور على أفلام لـ «<xliff:g id="query">%1$s</xliff:g>»</string>
     <plurals name="content_count_movies">
         <item quantity="zero"><xliff:g id="category">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g> فيلم)</item>

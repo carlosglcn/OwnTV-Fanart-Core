@@ -1,5 +1,6 @@
 package tv.own.owntv.core.repository
 
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import tv.own.owntv.core.database.dao.SeriesDao
@@ -8,11 +9,34 @@ import tv.own.owntv.core.database.entity.EpisodeEntity
 import tv.own.owntv.core.database.entity.SeriesEntity
 import tv.own.owntv.core.database.entity.SourceEntity
 import tv.own.owntv.core.model.SourceType
+import tv.own.owntv.core.network.HttpClient
 import tv.own.owntv.core.parser.XtreamClient
 import tv.own.owntv.core.stalker.StalkerAuthManager
 import tv.own.owntv.core.stalker.StalkerClient
 import tv.own.owntv.core.stalker.StalkerCredentials
 import tv.own.owntv.core.stalker.stalkerCredentials
+
+/**
+ * What opening a show's episode list came to. A provider refusing the request used to read exactly
+ * like a show with no episodes; [Failed] keeps the two apart on screen.
+ */
+sealed interface EpisodeLoad {
+    /** Episodes are stored — cached, or just fetched. */
+    data object Ready : EpisodeLoad
+
+    /** Nothing stored, and there is nothing to fetch or the provider sent none. */
+    data object Empty : EpisodeLoad
+
+    /** Nothing stored, because the request failed. [reason] is technical and untranslated. */
+    data class Failed(val reason: String) : EpisodeLoad
+}
+
+/**
+ * The reason a [EpisodeLoad.Failed] shows: the provider's HTTP status, else the exception's kind.
+ * Never the exception's message — it can carry the provider's host.
+ */
+internal fun episodeLoadFailure(e: Exception): String =
+    if (e is HttpClient.HttpStatusException) "HTTP ${e.code}" else e.javaClass.simpleName.ifEmpty { e.javaClass.name }
 
 /** Loads a series' seasons/episodes on demand (Xtream `get_series_info`; Stalker paged
  *  `get_ordered_list&movie_id=` season rows, plan D-2). Episodes carry their season number
@@ -34,34 +58,42 @@ class SeriesRepository(
      * deleted and re-added (which cascade-drops the rows). That's S8; the cache now expires, and a
      * source sync invalidates it outright.
      */
-    suspend fun loadEpisodes(series: SeriesEntity): Boolean = withContext(Dispatchers.IO) {
+    suspend fun loadEpisodes(series: SeriesEntity): EpisodeLoad = withContext(Dispatchers.IO) {
         val cachedCount = seriesDao.episodeCount(series.id)
         val hasCache = cachedCount > 0
-        val source = sourceDao.getById(series.sourceId) ?: return@withContext hasCache
+        val stored = if (hasCache) EpisodeLoad.Ready else EpisodeLoad.Empty
+        val source = sourceDao.getById(series.sourceId) ?: return@withContext stored
 
         // M3U is not affected by S8 and deliberately doesn't take this path: its episodes come from
         // the playlist during the sync itself, and `M3uSyncer.flushSeries` folds the episode list
         // into the show's content hash — so a playlist that gains an episode rewrites that show's
         // hierarchy on the next resync. There is nothing to fetch on demand and no cache to expire.
-        if (source.type != SourceType.XTREAM && source.type != SourceType.STALKER) return@withContext hasCache
+        if (source.type != SourceType.XTREAM && source.type != SourceType.STALKER) return@withContext stored
 
         // Read the stamp from the database rather than the passed-in entity: callers hold list rows
         // that may have been loaded before a sync invalidated the cache.
         val syncedAt = seriesDao.getSeriesById(series.id)?.episodesSyncedAt ?: series.episodesSyncedAt
-        if (!shouldRefreshEpisodes(cachedCount, syncedAt, System.currentTimeMillis())) return@withContext true
+        if (!shouldRefreshEpisodes(cachedCount, syncedAt, System.currentTimeMillis())) return@withContext EpisodeLoad.Ready
 
         val remoteId = series.remoteId
-        if (remoteId.isNullOrBlank()) return@withContext hasCache
-        val fetched = when (source.type) {
-            SourceType.XTREAM -> fetchXtreamEpisodes(series, source, remoteId)
-            else -> fetchStalkerEpisodes(series, source, remoteId)
-        }
+        if (remoteId.isNullOrBlank()) return@withContext stored
         // A failed or empty fetch must never empty a populated show: a provider hiccup would
         // otherwise wipe a season the user was midway through. Leave the stamp alone so the next
         // open retries instead of waiting out the TTL on nothing.
-        if (fetched.isNullOrEmpty()) return@withContext hasCache
+        val fetched = try {
+            when (source.type) {
+                SourceType.XTREAM -> fetchXtreamEpisodes(series, source, remoteId)
+                else -> fetchStalkerEpisodes(series, source, remoteId)
+            }
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            android.util.Log.w(TAG, "${source.type} episode load failed seriesId=${series.id}", e)
+            return@withContext if (hasCache) EpisodeLoad.Ready else EpisodeLoad.Failed(episodeLoadFailure(e))
+        }
+        if (fetched.isNullOrEmpty()) return@withContext stored
         applyEpisodes(series.id, fetched)
-        true
+        EpisodeLoad.Ready
     }
 
     /**
@@ -84,9 +116,9 @@ class SeriesRepository(
         if (plan.inserts.isNotEmpty()) runCatching { userData.resolvePending() }
     }
 
-    private suspend fun fetchXtreamEpisodes(series: SeriesEntity, source: SourceEntity, remoteId: String): List<EpisodeEntity>? = try {
+    private suspend fun fetchXtreamEpisodes(series: SeriesEntity, source: SourceEntity, remoteId: String): List<EpisodeEntity> {
         val info = xtream.getSeriesInfo(source, remoteId)
-        info.episodes.map { e ->
+        return info.episodes.map { e ->
             EpisodeEntity(
                 seriesId = series.id,
                 seasonId = null,
@@ -99,9 +131,6 @@ class SeriesRepository(
                 airDateMs = e.airDateMs,
             )
         }
-    } catch (e: Exception) {
-        android.util.Log.w(TAG, "xtream episode load failed seriesId=${series.id}", e)
-        null
     }
 
     /**
@@ -111,7 +140,7 @@ class SeriesRepository(
      * `create_link&type=vod&series=<episode>` (StreamUrlResolver) — never at listing time, the links
      * are short-lived.
      */
-    private suspend fun fetchStalkerEpisodes(series: SeriesEntity, source: SourceEntity, remoteId: String): List<EpisodeEntity>? = try {
+    private suspend fun fetchStalkerEpisodes(series: SeriesEntity, source: SourceEntity, remoteId: String): List<EpisodeEntity>? {
         val mac = source.mac?.let { StalkerClient.canonicalizeMac(it) } ?: return null
         val creds = source.stalkerCredentials(mac)
         val seasons = ArrayList<StalkerClient.SeasonItem>()
@@ -154,10 +183,7 @@ class SeriesRepository(
             TAG,
             "stalker episodes seriesId=${series.id} remoteId=$remoteId seasons=${seasons.size} episodes=${episodes.size}",
         )
-        episodes
-    } catch (e: Exception) {
-        android.util.Log.w(TAG, "stalker episode load failed seriesId=${series.id}", e)
-        null
+        return episodes
     }
 
     private companion object {

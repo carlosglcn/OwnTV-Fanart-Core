@@ -96,6 +96,7 @@
     <string name="content_no_movies_here">여기에 영화가 없습니다.</string>
     <string name="content_no_series_here">여기에 시리즈가 없습니다.</string>
     <string name="content_no_episodes">이용 가능한 에피소드가 없습니다.</string>
+    <string name="content_episodes_load_failed">공급자에서 에피소드를 불러오지 못했습니다(<xliff:g id="reason">%1$s</xliff:g>).</string>
     <string name="content_no_movies_found">“<xliff:g id="query">%1$s</xliff:g>”에 대한 영화를 찾지 못했습니다</string>
     <plurals name="content_count_movies">
         <item quantity="other"><xliff:g id="category">%1$s</xliff:g>(영화 <xliff:g id="count">%2$d</xliff:g>편)</item>

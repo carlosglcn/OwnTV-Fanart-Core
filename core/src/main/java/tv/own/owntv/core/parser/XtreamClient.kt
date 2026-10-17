@@ -401,9 +401,15 @@ class XtreamClient(private val http: HttpClient) {
         return tv.own.owntv.core.content.AirDate.parse(text)
     }
 
-    /** Reads a string, coercing numbers and tolerating JSON null. */
-    private fun JsonReader.nextStringOrNull(): String? =
-        if (peek() == JsonToken.NULL) { nextNull(); null } else nextString()
+    /**
+     * Reads a string, coercing numbers; JSON null, a boolean, an array or an object reads as null.
+     * `nextString()` throws on those, and one `"title": false` used to cost the whole show its episodes.
+     */
+    private fun JsonReader.nextStringOrNull(): String? = when (peek()) {
+        JsonToken.STRING, JsonToken.NUMBER -> nextString()
+        JsonToken.NULL -> { nextNull(); null }
+        else -> { skipValue(); null }
+    }
 
     /** Reads an int from a number or a numeric string, tolerating null/other. */
     private fun JsonReader.nextIntOrNull(): Int? = when (peek()) {

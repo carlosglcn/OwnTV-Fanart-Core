@@ -185,6 +185,8 @@
     <string name="content_no_series_here">No series here.</string>
     <!-- Translators: Empty-state message when a season has no episodes. -->
     <string name="content_no_episodes">No episodes available.</string>
+    <!-- Translators: Shown instead of "No episodes available." when the provider refused or failed the request for a show's episode list. "reason" is technical and untranslated, e.g. HTTP 407 or SocketTimeoutException. -->
+    <string name="content_episodes_load_failed">Could not load the episodes from the provider (<xliff:g id="reason">%1$s</xliff:g>).</string>
     <!-- Translators: Empty-state message when a movie search returns no results. "query" is the user\'s search text. -->
     <string name="content_no_movies_found">No movies found for \u201c<xliff:g id="query">%1$s</xliff:g>\u201d</string>
     <!-- Translators: Plural category count label in the category browser. "category" is the category name; "count" is the number of movies. -->

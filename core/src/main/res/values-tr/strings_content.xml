@@ -102,6 +102,7 @@
     <string name="content_no_movies_here">Burada film yok.</string>
     <string name="content_no_series_here">Burada dizi yok.</string>
     <string name="content_no_episodes">Kullanılabilir bölüm yok.</string>
+    <string name="content_episodes_load_failed">Bölümler sağlayıcıdan yüklenemedi (<xliff:g id="reason">%1$s</xliff:g>).</string>
     <string name="content_no_movies_found">“<xliff:g id="query">%1$s</xliff:g>” için film bulunamadı</string>
     <plurals name="content_count_movies">
         <item quantity="one"><xliff:g id="category">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g> film)</item>
