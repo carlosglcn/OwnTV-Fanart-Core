@@ -634,7 +634,8 @@ class LivePreviewEngine(
             if (f.width > 0 && f.height > 0) aspectLabel(f.width, f.height)?.let { chips += it }
             qualityLabel(f.width, f.height)?.let { chips += it }
             displayFps(f)?.let { chips += "${Math.round(it)} FPS" }
-            f.bitrate.takeIf { it > 0 }?.let { chips += "%.1f Mbps".format(Locale.ROOT, it / 1_000_000.0) }
+            (f.bitrate.takeIf { it > 0 }?.toLong() ?: chipMeasuredBps())
+                ?.let { chips += "%.1f Mbps".format(Locale.ROOT, it / 1_000_000.0) }
         }
         p.audioFormat?.let { f ->
             (when (f.channelCount) { 1 -> "MONO"; 2 -> "STEREO"; 6 -> "5.1"; 8 -> "7.1"; else -> null })?.let { chips += it }
@@ -652,16 +653,38 @@ class LivePreviewEngine(
 
     private fun displayFps(f: Format) = f.frameRate.takeIf { it > 0 } ?: fpsSample.lastFps
 
-    override fun refreshStreamChips() = ensureFpsMeasurement()
+    // glcn: the player's controls ask for the chips while they show — the frame rate is measured for them
+    // even with the stats setting off (bounded, a few samples), and the chips are rebuilt each time so the
+    // bitrate keeps up.
+    override fun refreshStreamChips() {
+        ensureFpsMeasurement(force = true)
+        updateStreamChips()
+    }
+
+    /** glcn: the stream's rate from the bytes that arrived since the last call — the passive count, which
+     *  is kept anyway, so nothing extra is measured. Null until two readings a sensible time apart. */
+    private var chipBytes = 0L
+    private var chipAtMs = 0L
+    private fun chipMeasuredBps(): Long? {
+        val now = android.os.SystemClock.elapsedRealtime()
+        val bytes = throughputTracker.passiveBytes
+        val dt = now - chipAtMs
+        val db = bytes - chipBytes
+        val prevAt = chipAtMs
+        chipBytes = bytes; chipAtMs = now
+        if (prevAt == 0L || dt < 1_500L || dt > 30_000L || db <= 0L) return lastChipBps
+        return (db * 8_000L / dt).also { lastChipBps = it }
+    }
+    private var lastChipBps: Long? = null
     override fun setBitrateTrackingEnabled(enabled: Boolean) = throughputTracker.setEnabled(enabled && measuredStatsEnabled)
 
-    private fun ensureFpsMeasurement() {
+    private fun ensureFpsMeasurement(force: Boolean = false) {
         // F14: "Measured stream stats" is presented as a *performance* escape hatch, but Auto frame rate
         // depends on this measurement — raw MPEG-TS almost never declares Format.frameRate, so with the
         // stats toggle off `videoFps` stayed null and AFR silently did nothing while appearing enabled.
         // The measurement is cheap and bounded (FPS_MAX_ATTEMPTS samples, then it stops), so AFR keeps it
         // alive on its own; only the continuous throughput/bitrate tracking follows the stats toggle.
-        if (!measuredStatsEnabled && !autoFrameRateEnabled) return
+        if (!force && !measuredStatsEnabled && !autoFrameRateEnabled) return
         if ((player?.videoFormat?.frameRate ?: 0f) <= 0f) restartFpsMeasurement()
     }
 
@@ -1543,7 +1566,7 @@ class LivePreviewEngine(
         _subtitleOn.value = false; _cues.value = emptyList(); _audioUnsupported.value = false; _videoUnsupported.value = false
         _noVideoDetected.value = false
         _audioOnlyMedia.value = false // re-decided from this stream's own track list
-        _videoHeight.value = null; _videoAspect.value = null; _videoSize.value = null; _streamChips.value = emptyList(); _videoFps.value = null
+        _videoHeight.value = null; _videoAspect.value = null; _videoSize.value = null; _streamChips.value = emptyList(); _videoFps.value = null; lastChipBps = null; chipAtMs = 0L
         _videoRes.value = null
         _error.value = null
         _errorInfo.value = null
@@ -1837,7 +1860,7 @@ class LivePreviewEngine(
         mainHandler.removeCallbacks(audioOnlyConfirmation)
         tune.hasAudioTrack = false
         tune.hasVideoTrack = true
-        _videoHeight.value = null; _videoAspect.value = null; _videoSize.value = null; _streamChips.value = emptyList(); _videoFps.value = null
+        _videoHeight.value = null; _videoAspect.value = null; _videoSize.value = null; _streamChips.value = emptyList(); _videoFps.value = null; lastChipBps = null; chipAtMs = 0L
         _videoRes.value = null // else the next channel's HUD opens showing the previous one's resolution badge
         _state.value = State.IDLE
         // Said here, not left to STATE_IDLE: a player already idle mid-reconnect raises no new state, and
