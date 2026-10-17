@@ -918,7 +918,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     /** glcn: Back on a live channel full screen leaves it playing in the small window (off: it stops). */
     val backToWindow: Flow<Boolean> = prefsFlow { it[Keys.GLCN_BACK_TO_WINDOW] ?: false }
     suspend fun setBackToWindow(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_BACK_TO_WINDOW] = on } }
-    suspend fun setZapPanel(mode: Int) { context.dataStore.edit { it[Keys.GLCN_ZAP_PANEL] = mode.coerceIn(0, 1) } }
+    suspend fun setZapPanel(mode: Int) { context.dataStore.edit { it[Keys.GLCN_ZAP_PANEL] = mode.coerceIn(0, 2) } }
 
     /** glcn: Home's background — 0 classic (top corner), 1 cinema (full screen, rows below), 2 panel (full screen, info at the side). */
     val homeBackdropStyle: Flow<Int> = prefsFlow { it[Keys.GLCN_HOME_BACKDROP] ?: 0 }

@@ -885,6 +885,15 @@
     <string name="glcn_about_by">by %1$s</string>
     <string name="glcn_zap_panel_title">Beside the channel list</string>
     <string name="glcn_zap_panel_desc">What shows next to the channel list over the player: the programme\'s picture, or the channel\'s coming schedule</string>
+    <string name="glcn_zap_view_list">List</string>
+    <string name="glcn_zap_view_next">View</string>
+    <string name="glcn_fanart_group">Fanart</string>
+    <string name="glcn_fanart_summary">Home, player, sounds and motion — everything this version adds</string>
+    <string name="glcn_part_home">Home</string>
+    <string name="glcn_part_player">Player</string>
+    <string name="glcn_part_motion">Sound and motion</string>
+    <string name="glcn_ui_sounds_desc_all">A soft tick as you move, a click on OK and Back, and a chime when the app opens. Silent while anything plays</string>
+    <string name="glcn_motion_desc">Off: no transitions. Subtle: only the gentle lean of the focused card. Full: zoom, light and a moving backdrop</string>
     <string name="glcn_back_title">Back in the player</string>
     <string name="glcn_back_desc">On a live channel: Stop leaves the player; Window keeps the channel playing in a small window while you browse</string>
     <string name="glcn_back_stop">Stop</string>

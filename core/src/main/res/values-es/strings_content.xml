@@ -515,6 +515,15 @@
     <string name="glcn_about_by">por %1$s</string>
     <string name="glcn_zap_panel_title">Junto a la lista de canales</string>
     <string name="glcn_zap_panel_desc">Qué se muestra al lado de la lista de canales sobre el reproductor: la imagen del programa o la programación siguiente del canal</string>
+    <string name="glcn_zap_view_list">Lista</string>
+    <string name="glcn_zap_view_next">Vista</string>
+    <string name="glcn_fanart_group">Fanart</string>
+    <string name="glcn_fanart_summary">Inicio, reproductor, sonidos y movimiento: todo lo que añade esta versión</string>
+    <string name="glcn_part_home">Inicio</string>
+    <string name="glcn_part_player">Reproductor</string>
+    <string name="glcn_part_motion">Sonido y movimiento</string>
+    <string name="glcn_ui_sounds_desc_all">Un toque suave al moverte, un clic con OK y Atrás, y una melodía al abrir la app. En silencio mientras algo se reproduce</string>
+    <string name="glcn_motion_desc">Apagadas: sin transiciones. Sutiles: solo la ligera inclinación de la tarjeta seleccionada. Completas: zoom, brillo y fondo en movimiento</string>
     <string name="glcn_back_title">Atrás en el reproductor</string>
     <string name="glcn_back_desc">Con un canal en directo: Parar sale del reproductor; Ventana deja el canal en una ventana pequeña mientras navegas</string>
     <string name="glcn_back_stop">Parar</string>
