@@ -484,7 +484,7 @@
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder failed before first frame (${error.errorCodeName}) — rebuilding the decoder and retrying once
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder rebuild failed: ${it.message}
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	default User-Agent refused — retrying once as ${HttpClient.FALLBACK_USER_AGENT}
-1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	go live: live=${p.isCurrentMediaItemLive} pos=${p.currentPosition} playing=${p.isPlaying}
+1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	go live: live=${p.isCurrentMediaItemLive} pos=${p.currentPosition} playing=${p.isPlaying} reopen=$reopen
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	html
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	insufficient resource
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	insufficientresources

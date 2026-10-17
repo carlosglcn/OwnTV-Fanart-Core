@@ -2612,10 +2612,19 @@ class LivePreviewEngine(
      * glcn: "Go to live" on whatever ExoPlayer holds — the newest moment of a live stream (or of a saved
      * copy re-opened at its edge), playing. A paused live stream otherwise resumes where it was paused.
      */
-    fun goLiveEdge() {
+    /**
+     * Back to the newest moment. An HLS/DASH live item seeks to its live edge. A plain live stream (MPEG-TS,
+     * the usual IPTV channel) has no edge to seek to: paused, it just resumes from what it had buffered,
+     * still behind — with [reopen] the stream is opened again, which starts it at the provider's "now".
+     */
+    fun goLiveEdge(reopen: Boolean = false) {
         val p = player ?: return
-        LiveDiagnosticsLog.event("go live: live=${p.isCurrentMediaItemLive} pos=${p.currentPosition} playing=${p.isPlaying}")
-        if (p.isCurrentMediaItemLive || p.isCurrentMediaItemDynamic) runCatching { p.seekToDefaultPosition() }
+        LiveDiagnosticsLog.event("go live: live=${p.isCurrentMediaItemLive} pos=${p.currentPosition} playing=${p.isPlaying} reopen=$reopen")
+        if (p.isCurrentMediaItemLive || p.isCurrentMediaItemDynamic) {
+            runCatching { p.seekToDefaultPosition() }
+        } else if (reopen) {
+            runCatching { p.stop(); p.prepare() }
+        }
         p.playWhenReady = true
     }
 
