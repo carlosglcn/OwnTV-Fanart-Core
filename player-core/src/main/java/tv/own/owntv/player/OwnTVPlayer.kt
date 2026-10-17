@@ -4757,6 +4757,7 @@ class OwnTVPlayer(
         val now = System.currentTimeMillis()
         fun since(at: Long) = if (at > 0L) "${at - l.loadStartTime}ms" else "-"
         val sincePress = ZapTiming.sincePress(l.zapPressAt, android.os.SystemClock.elapsedRealtime())
+        ZapTiming.lastStartMs.value = sincePress ?: (now - l.loadStartTime)
         LiveDiagnosticsLog.event(
             "mpv live first position after ${now - l.loadStartTime}ms " +
                 "(file loaded ${since(l.fileLoadedAt)}, video ${since(l.firstVideoAt)})${ZapTiming.pressSuffix(sincePress)}",

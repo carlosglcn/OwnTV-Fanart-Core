@@ -784,6 +784,7 @@ class LivePreviewEngine(
             // A CH+/− press that led here adds the whole wait the user saw, including the app's zap delay.
             val sincePress = ZapTiming.sincePress(t.pressAtMs, now)
             LiveDiagnosticsLog.event("first frame after ${now - t.startedMs}ms${ZapTiming.pressSuffix(sincePress)}")
+            ZapTiming.lastStartMs.value = sincePress ?: (now - t.startedMs)
         }
     }
     private var fpsAttempts = 0

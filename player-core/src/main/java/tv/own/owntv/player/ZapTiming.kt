@@ -49,6 +49,10 @@ class ZapTiming(private val claimWindowMs: Long = CLAIM_WINDOW_MS) {
         /** The one instance both engines and the app share. */
         val shared = ZapTiming()
 
+        /** glcn: how long the last live channel took to show its picture (from the key press when one was
+         *  measured, else from the start of the load), in ms — shown in the player's stream info. */
+        val lastStartMs = kotlinx.coroutines.flow.MutableStateFlow<Long?>(null)
+
         /** Milliseconds from a claimed press at [pressAtMs] to [nowMs]; null without a press. */
         fun sincePress(pressAtMs: Long?, nowMs: Long): Long? = pressAtMs?.let { (nowMs - it).coerceAtLeast(0L) }
 
