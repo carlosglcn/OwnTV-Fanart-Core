@@ -397,7 +397,9 @@ class LiveTuneController(
         if (current == null) return
         tsFromIndex = if (wallMs == null) null else session.pieceAt(wallMs) ?: return
         publishTimeshift(resumeAtWallMs = null)
-        val url = localUrl() ?: return
+        // glcn: "go live" asks for the same live address the engine may already hold; a fresh query makes
+        // both engines open it again (from the newest moment) instead of carrying on from their buffer.
+        val url = (localUrl() ?: return).let { if (wallMs == null) "$it?at=${android.os.SystemClock.elapsedRealtime()}" else it }
         if (_liveOnExo.value) engines.exoPlay(url, muted = false, request) else engines.mpvPlay(url, request)
     }
 
