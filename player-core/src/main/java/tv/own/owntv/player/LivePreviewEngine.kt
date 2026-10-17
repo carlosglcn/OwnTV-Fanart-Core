@@ -2620,6 +2620,10 @@ class LivePreviewEngine(
     fun goLiveEdge(reopen: Boolean = false) {
         val p = player ?: return
         LiveDiagnosticsLog.event("go live: live=${p.isCurrentMediaItemLive} pos=${p.currentPosition} playing=${p.isPlaying} reopen=$reopen")
+        // The copy saved on this device was already re-opened at its newest moment by the caller. Seeking
+        // it to its "default position" as well broke the clock its rewind steps are measured with — after
+        // that, every step back landed at the start of the copy and every step forward at the live edge.
+        if (tv.own.owntv.core.timeshift.TimeshiftServer.isLocal(currentUrl)) { p.playWhenReady = true; return }
         if (p.isCurrentMediaItemLive || p.isCurrentMediaItemDynamic) {
             runCatching { p.seekToDefaultPosition() }
         } else if (reopen) {
