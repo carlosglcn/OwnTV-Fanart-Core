@@ -100,7 +100,7 @@ class UpdateManager(
         scope.launch {
             runCatching {
                 val request = Request.Builder()
-                    .url("https://api.github.com/repos/${CoreBuildInfo.releaseRepo}/releases/latest")
+                    .url("https://api.github.com/repos/${CoreBuildInfo.releaseRepo}/releases/" + (CoreBuildInfo.releaseTag?.let { "tags/$it" } ?: "latest"))
                     .header("Accept", "application/vnd.github+json")
                     .header("User-Agent", "OwnTV")
                     .build()
@@ -109,7 +109,8 @@ class UpdateManager(
                     val body = resp.body.string()
                     if (body.isBlank()) throw InvalidReleaseResponseException()
                     val o = runCatching { JSONObject(body) }.getOrElse { throw InvalidReleaseResponseException() }
-                    val version = o.optString("tag_name").removePrefix("v").takeIf { it.isNotBlank() }
+                    val version = (if (CoreBuildInfo.releaseTag != null) o.optString("name").substringAfterLast(' ') else o.optString("tag_name"))
+                        .removePrefix("v").takeIf { it.isNotBlank() }
                         ?: throw InvalidReleaseResponseException()
                     val notes = o.optString("body").take(16_000)
                     val assets = o.optJSONArray("assets") ?: throw InvalidReleaseResponseException()

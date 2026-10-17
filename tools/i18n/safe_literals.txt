@@ -4159,7 +4159,6 @@
 1	json	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	assets
 1	json	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	body
 1	json	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	browser_download_url
-1	url	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	https://api.github.com/repos/${CoreBuildInfo.releaseRepo}/releases/latest
 1	log	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	install cancelled by user
 1	log	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	install refused status=$status message=$message
 1	json	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	name

@@ -454,6 +454,10 @@
 1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🎄
 1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🎭
 1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🥂
+1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	https://api.github.com/repos/${CoreBuildInfo.releaseRepo}/releases/
+1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	latest
+1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	name
+1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	tags/$it
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	${Build.MANUFACTURER} ${Build.MODEL} · Android ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	--- live diagnostics leading up to the crash ---
 1	player-core/src/main/java/tv/own/owntv/player/AudioDynamics.kt	equalizer=f=110:t=q:w=1.0:g=-3

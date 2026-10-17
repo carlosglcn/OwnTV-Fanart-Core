@@ -75,4 +75,8 @@ object CoreBuildInfo {
      * marker, which both repositories' release names carry.
      */
     var releaseRepo: String = "ahXN00/OwnTV"
+
+    /** glcn: a fixed release tag to follow instead of the latest release — the beta's "beta-latest",
+     *  whose version is the last word of the release's name. Null follows releases/latest. */
+    var releaseTag: String? = null
 }
