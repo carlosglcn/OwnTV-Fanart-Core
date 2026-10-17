@@ -124,7 +124,7 @@ class ProfileManager(
 
 /** How many avatars each app draws. Both shells number them the same, so a profile made on one
  *  device shows the same picture on the other. */
-const val PROFILE_AVATAR_COUNT = 10
+const val PROFILE_AVATAR_COUNT = 24
 
 /** One unlocked profile enters the app immediately; every chooser and PIN case stays gated. */
 fun profileGateRequired(profiles: List<ProfileEntity>): Boolean =
