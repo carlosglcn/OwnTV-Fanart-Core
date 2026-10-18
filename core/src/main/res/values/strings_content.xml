@@ -741,6 +741,11 @@
     <string name="glcn_anim_style_desc">Full: zoom, light and a moving backdrop on the focused card. Subtle: only the Apple TV-style lean</string>
     <string name="glcn_anim_style_full">Full</string>
     <string name="glcn_anim_style_subtle">Subtle</string>
+    <string name="glcn_logo_plate_title">Logo background</string>
+    <string name="glcn_logo_plate_desc">Plate behind dark channel logos so they stay readable</string>
+    <string name="glcn_logo_plate_soft">Soft</string>
+    <string name="glcn_logo_plate_classic">Classic</string>
+    <string name="glcn_logo_plate_none">None</string>
     <string name="glcn_ui_sounds_title">Menu sounds</string>
     <string name="glcn_ui_sounds_desc">A soft tick as you move, a click on OK and Back. Silent while anything plays</string>
     <string name="glcn_ui_sounds_soft">Soft</string>

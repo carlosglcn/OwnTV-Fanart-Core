@@ -504,6 +504,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_DIALOGUE_BOOST = booleanPreferencesKey("glcn_dialogue_boost")
         val GLCN_MPV_PASSTHROUGH = booleanPreferencesKey("glcn_mpv_passthrough")
         val GLCN_ANIM_STYLE = intPreferencesKey("glcn_anim_style")
+        val GLCN_LOGO_PLATE = intPreferencesKey("glcn_logo_plate")
         val GLCN_UI_SOUNDS = intPreferencesKey("glcn_ui_sounds")
         val GLCN_STARTUP_SOUND = booleanPreferencesKey("glcn_startup_sound")
         val RESUME_LAST_CHANNEL = booleanPreferencesKey("resume_last_channel")
@@ -911,6 +912,10 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     /** glcn: how much the focused card moves — 0 full (zoom, light, tilt, drifting backdrop), 1 subtle (Apple TV-like). */
     val animStyle: Flow<Int> = prefsFlow { it[Keys.GLCN_ANIM_STYLE] ?: 0 }
     suspend fun setAnimStyle(style: Int) { context.dataStore.edit { it[Keys.GLCN_ANIM_STYLE] = style.coerceIn(0, 1) } }
+
+    /** glcn: plate behind dark channel logos — 0 soft (default), 1 classic (bright, as upstream), 2 none. */
+    val logoPlate: Flow<Int> = prefsFlow { it[Keys.GLCN_LOGO_PLATE] ?: 0 }
+    suspend fun setLogoPlate(mode: Int) { context.dataStore.edit { it[Keys.GLCN_LOGO_PLATE] = mode.coerceIn(0, 2) } }
 
     /** glcn: menu sounds — 0 off, 1 soft, 2 normal. */
     /** glcn: Soft by default on a new install (see [keepUiSoundsForExistingOnce]). */
