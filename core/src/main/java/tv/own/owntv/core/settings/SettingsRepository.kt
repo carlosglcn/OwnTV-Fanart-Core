@@ -509,6 +509,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_OSD_SECONDS = intPreferencesKey("glcn_osd_seconds")
         val GLCN_HOME_COVER = intPreferencesKey("glcn_home_cover")
         val GLCN_HOME_COVER_DIM = intPreferencesKey("glcn_home_cover_dim")
+        val GLCN_HOME_IMAGE = stringPreferencesKey("glcn_home_image")
         val GLCN_HABIT_LOG = stringPreferencesKey("glcn_habit_log")
         val GLCN_HABIT_DONE = stringPreferencesKey("glcn_habit_done")
         val GLCN_UI_SOUNDS = intPreferencesKey("glcn_ui_sounds")
@@ -935,7 +936,10 @@ class SettingsRepository(private val context: Context, private val localeStore: 
 
     /** glcn: what is behind Home — 0 the focused item's cover, 1 the app's own background (Settings → Background). */
     val homeCover: Flow<Int> = prefsFlow { it[Keys.GLCN_HOME_COVER] ?: 0 }
-    suspend fun setHomeCover(mode: Int) { context.dataStore.edit { it[Keys.GLCN_HOME_COVER] = mode.coerceIn(0, 1) } }
+    suspend fun setHomeCover(mode: Int) { context.dataStore.edit { it[Keys.GLCN_HOME_COVER] = mode.coerceIn(0, 2) } }
+    /** glcn: the user's own picture for Home (mode 2 of the setting above); empty = none. */
+    val homeImage: Flow<String> = prefsFlow { it[Keys.GLCN_HOME_IMAGE] ?: "" }
+    suspend fun setHomeImage(path: String) { context.dataStore.edit { it[Keys.GLCN_HOME_IMAGE] = path } }
     /** glcn: how strong the cover is behind Home — 0 normal, 1 soft, 2 very soft. */
     val homeCoverDim: Flow<Int> = prefsFlow { it[Keys.GLCN_HOME_COVER_DIM] ?: 0 }
     suspend fun setHomeCoverDim(level: Int) { context.dataStore.edit { it[Keys.GLCN_HOME_COVER_DIM] = level.coerceIn(0, 2) } }

@@ -342,7 +342,7 @@
 3	core/src/main/java/tv/own/owntv/core/reminder/HabitTracker.kt	\0
 1	core/src/main/java/tv/own/owntv/core/reminder/ReminderScheduler.kt	owntvfanart://reminder/$id
 1	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	Emby/Jellyfin no responde en ${target.root}
-2	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	\0
+3	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	\0
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	auto_frame_rate_reset_416
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	dns_doh_url
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	dns_enabled
@@ -360,6 +360,7 @@
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_home_backdrop
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_home_cover
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_home_cover_dim
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_home_image
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_icon_v1
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_logo_plate
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_mpv_passthrough

@@ -791,6 +791,8 @@
     <string name="glcn_home_cover_desc">What shows behind the rows: the cover of what you point at, or the app’s background (your picture, if you set one under Background)</string>
     <string name="glcn_home_cover_art">Cover</string>
     <string name="glcn_home_cover_app">App background</string>
+    <string name="glcn_home_cover_mine">My picture</string>
+    <string name="glcn_pick_home_image">Choose a picture for Home</string>
     <string name="glcn_home_dim_title">Cover transparency</string>
     <string name="glcn_home_dim_desc">How much the cover shows through behind the rows (not in Cinema)</string>
     <string name="glcn_home_dim_normal">Opaque</string>
