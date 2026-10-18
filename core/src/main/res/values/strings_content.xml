@@ -751,7 +751,7 @@
     <string name="glcn_ui_sounds_normal">Normal</string>
     <string name="glcn_startup_sound_title">Opening sound</string>
     <string name="glcn_startup_sound_desc">A short chime when the app opens — the season\'s own with a seasonal theme on</string>
-    <string name="glcn_home_backdrop_title">Home background</string>
+    <string name="glcn_home_backdrop_title">Home layout</string>
     <string name="glcn_home_backdrop_desc">Classic: the picture in the top corner. Cinema: the picture full screen with its title, the rows below. Panel: the picture behind everything and the details in a side panel</string>
     <string name="glcn_home_backdrop_classic">Classic</string>
     <string name="glcn_home_backdrop_cinema">Cinema</string>
@@ -787,8 +787,8 @@
     <string name="glcn_auto_skip_title">Skip intros by themselves</string>
     <string name="glcn_habits_title">Warn me about what I usually watch</string>
     <string name="glcn_habits_desc">Learns the programmes you watch on a channel (3 times in 4 weeks) and warns you before they start, and puts them first on Home. Stays on this device</string>
-    <string name="glcn_home_cover_title">Home background</string>
-    <string name="glcn_home_cover_desc">What sits behind Home: the cover of what you point at, or the app’s own background (your picture, if you set one under Background)</string>
+    <string name="glcn_home_cover_title">Image behind rows</string>
+    <string name="glcn_home_cover_desc">What shows behind the rows: the cover of what you point at, or the app’s background (your picture, if you set one under Background)</string>
     <string name="glcn_home_cover_art">Cover</string>
     <string name="glcn_home_cover_app">App background</string>
     <string name="glcn_home_dim_title">Cover strength</string>
