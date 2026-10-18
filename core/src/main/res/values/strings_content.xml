@@ -801,6 +801,10 @@
     <string name="glcn_osd_standard">Standard</string>
     <string name="glcn_osd_seconds">%1$d s</string>
     <string name="glcn_osd_until_back">Until Back</string>
+    <string name="glcn_select_many">Select several</string>
+    <string name="glcn_selected_count">%1$d selected</string>
+    <string name="glcn_select_done">Finish selection</string>
+    <string name="glcn_select_hint">OK marks · Menu for actions · Back cancels</string>
     <string name="glcn_auto_skip_desc">Series: once a series knows where its intro ends (the first time you skip it), later episodes jump it without asking</string>
     <string name="glcn_zap_view_list">List</string>
     <string name="glcn_zap_view_next">View</string>

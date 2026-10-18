@@ -466,6 +466,10 @@
     <string name="glcn_osd_standard">Estándar</string>
     <string name="glcn_osd_seconds">%1$d s</string>
     <string name="glcn_osd_until_back">Hasta Atrás</string>
+    <string name="glcn_select_many">Seleccionar varios</string>
+    <string name="glcn_selected_count">%1$d seleccionados</string>
+    <string name="glcn_select_done">Terminar selección</string>
+    <string name="glcn_select_hint">OK marca · Menú para acciones · Atrás cancela</string>
     <string name="glcn_auto_skip_desc">Series: cuando una serie ya sabe dónde acaba su intro (la primera vez que la saltas), los siguientes episodios la saltan sin preguntar</string>
     <string name="glcn_zap_view_list">Lista</string>
     <string name="glcn_zap_view_next">Vista</string>
