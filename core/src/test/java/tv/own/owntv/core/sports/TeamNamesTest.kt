@@ -83,4 +83,15 @@ class TeamNamesTest {
         assertTrue(pl.foundIn(TeamNames.tokens("Premier League Live: Arsenal v Chelsea").toSet()))
         assertFalse(pl.foundIn(TeamNames.tokens("Darts Premier Night").toSet()))
     }
+
+    @Test fun `a player is found by surname alone`() {
+        val davidovich = Team("1", "Alejandro Davidovich Fokina", "A. Davidovich Fokina", isAthlete = true)
+        val jodar = Team("2", "Rafael Jodar", "R. Jodar", isAthlete = true)
+        val title = "Final: Davidovich – Jodar T2026 · Torneo de Shanghai"
+        assertTrue(found(davidovich, title))
+        assertTrue(found(jodar, title))
+        assertFalse(found(jodar, "Final: Davidovich – Alcaraz"))
+        // A team is not split into words: "Bayern" alone is still found through its own variants only.
+        assertFalse(found(Team("9", "Real Sociedad", "R. Sociedad"), "Sociedad de Fomento"))
+    }
 }

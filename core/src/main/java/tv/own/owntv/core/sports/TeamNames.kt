@@ -88,6 +88,9 @@ object TeamNames {
             val locTokens = tokens(loc).toSet()
             add(display.filter { it !in locTokens })
         }
+        // glcn: a player is named by surname in a guide ("Final: Davidovich – Jodar"), while ESPN gives the
+        // full name ("Alejandro Davidovich Fokina"): each surname word (4+ letters) finds him on its own.
+        if (team.isAthlete && display.size >= 2) display.drop(1).filter { it.length >= 4 }.forEach { add(listOf(it)) }
         team.abbreviation.lowercase().takeIf { it.length >= 3 && it.all(Char::isLetter) }?.let { add(listOf(it)) }
         return out.toList()
     }
