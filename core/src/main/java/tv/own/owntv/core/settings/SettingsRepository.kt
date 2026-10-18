@@ -913,9 +913,9 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     val animStyle: Flow<Int> = prefsFlow { it[Keys.GLCN_ANIM_STYLE] ?: 0 }
     suspend fun setAnimStyle(style: Int) { context.dataStore.edit { it[Keys.GLCN_ANIM_STYLE] = style.coerceIn(0, 1) } }
 
-    /** glcn: plate behind dark channel logos — 0 soft (default), 1 classic (bright, as upstream), 2 none. */
+    /** glcn: plate behind dark channel logos — 0 classic (default, as upstream), 1 none. */
     val logoPlate: Flow<Int> = prefsFlow { it[Keys.GLCN_LOGO_PLATE] ?: 0 }
-    suspend fun setLogoPlate(mode: Int) { context.dataStore.edit { it[Keys.GLCN_LOGO_PLATE] = mode.coerceIn(0, 2) } }
+    suspend fun setLogoPlate(mode: Int) { context.dataStore.edit { it[Keys.GLCN_LOGO_PLATE] = mode.coerceIn(0, 1) } }
 
     /** glcn: menu sounds — 0 off, 1 soft, 2 normal. */
     /** glcn: Soft by default on a new install (see [keepUiSoundsForExistingOnce]). */

@@ -743,7 +743,6 @@
     <string name="glcn_anim_style_subtle">Subtle</string>
     <string name="glcn_logo_plate_title">Logo background</string>
     <string name="glcn_logo_plate_desc">Plate behind dark channel logos so they stay readable</string>
-    <string name="glcn_logo_plate_soft">Soft</string>
     <string name="glcn_logo_plate_classic">Classic</string>
     <string name="glcn_logo_plate_none">None</string>
     <string name="glcn_ui_sounds_title">Menu sounds</string>

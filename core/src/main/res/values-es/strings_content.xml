@@ -416,7 +416,6 @@
     <string name="glcn_anim_style_subtle">Sutil</string>
     <string name="glcn_logo_plate_title">Fondo de logos</string>
     <string name="glcn_logo_plate_desc">Placa tras los logos oscuros para que se lean</string>
-    <string name="glcn_logo_plate_soft">Suave</string>
     <string name="glcn_logo_plate_classic">Clásico</string>
     <string name="glcn_logo_plate_none">Sin fondo</string>
     <string name="glcn_ui_sounds_title">Sonidos de menú</string>
