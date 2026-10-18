@@ -343,3 +343,6 @@ interface MovieDao {
     @Query("SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY (rating IS NULL), rating DESC, sortOrder LIMIT :limit")
     suspend fun inCategoryTop(categoryId: Long, limit: Int): List<MovieEntity>
 }
+
+/** glcn: a category id with its item count. */
+data class GlcnCategoryCount(val categoryId: Long, val count: Int)
