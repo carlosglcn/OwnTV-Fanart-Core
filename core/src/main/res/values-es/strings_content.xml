@@ -477,6 +477,8 @@
     <string name="glcn_select_done">Terminar selección</string>
     <string name="glcn_select_hint">OK marca · Menú para acciones · Atrás cancela</string>
     <string name="glcn_related_title">Relacionado</string>
+    <string name="glcn_nav_top_floating">Barra superior flotante</string>
+    <string name="glcn_nav_top_floating_desc">Se esconde sola pasado el tiempo y vuelve al subir con el mando</string>
     <string name="glcn_similar_title">Quizás te guste</string>
     <string name="glcn_similar_now">Ahora</string>
     <string name="glcn_auto_skip_desc">Series: cuando una serie ya sabe dónde acaba su intro (la primera vez que la saltas), los siguientes episodios la saltan sin preguntar</string>

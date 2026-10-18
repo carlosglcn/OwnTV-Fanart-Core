@@ -510,6 +510,8 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_HOME_COVER = intPreferencesKey("glcn_home_cover")
         val GLCN_HOME_COVER_DIM = intPreferencesKey("glcn_home_cover_dim")
         val GLCN_HOME_IMAGE = stringPreferencesKey("glcn_home_image")
+        val GLCN_TOP_SIZE = stringPreferencesKey("glcn_top_size")
+        val GLCN_TOP_FLOATING = booleanPreferencesKey("glcn_top_floating")
         val GLCN_HABIT_LOG = stringPreferencesKey("glcn_habit_log")
         val GLCN_HABIT_DONE = stringPreferencesKey("glcn_habit_done")
         val GLCN_UI_SOUNDS = intPreferencesKey("glcn_ui_sounds")
@@ -938,6 +940,16 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     val homeCover: Flow<Int> = prefsFlow { it[Keys.GLCN_HOME_COVER] ?: 0 }
     suspend fun setHomeCover(mode: Int) { context.dataStore.edit { it[Keys.GLCN_HOME_COVER] = mode.coerceIn(0, 2) } }
     /** glcn: the user's own picture for Home (mode 2 of the setting above); empty = none. */
+    /** glcn: the top bar's own size (Compact = icons only); Normal unless changed. */
+    val topSize: Flow<NavSize> = prefsFlow { prefs ->
+        prefs[Keys.GLCN_TOP_SIZE]?.let { runCatching { NavSize.valueOf(it) }.getOrNull() } ?: NavSize.NORMAL
+    }
+    suspend fun setTopSize(size: NavSize) { context.dataStore.edit { it[Keys.GLCN_TOP_SIZE] = size.name } }
+
+    /** glcn: the top bar hides itself after the Floating delay and comes back when focus reaches it. */
+    val topFloating: Flow<Boolean> = prefsFlow { it[Keys.GLCN_TOP_FLOATING] ?: false }
+    suspend fun setTopFloating(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_TOP_FLOATING] = on } }
+
     val homeImage: Flow<String> = prefsFlow { it[Keys.GLCN_HOME_IMAGE] ?: "" }
     suspend fun setHomeImage(path: String) { context.dataStore.edit { it[Keys.GLCN_HOME_IMAGE] = path } }
     /** glcn: how strong the cover is behind Home — 0 normal, 1 soft, 2 very soft. */

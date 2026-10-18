@@ -798,6 +798,8 @@
     <string name="glcn_home_image_none">None</string>
     <string name="glcn_home_image_change">Change</string>
     <string name="glcn_related_title">Related</string>
+    <string name="glcn_nav_top_floating">Floating top bar</string>
+    <string name="glcn_nav_top_floating_desc">Hides by itself after the delay and comes back when you go up to it</string>
     <string name="glcn_similar_title">You may like</string>
     <string name="glcn_similar_now">Now</string>
     <string name="glcn_home_dim_title">Cover transparency</string>
