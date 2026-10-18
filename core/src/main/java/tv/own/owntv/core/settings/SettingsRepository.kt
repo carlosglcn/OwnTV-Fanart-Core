@@ -955,7 +955,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
             p[Keys.THEME_MODE] = (if (style.light) ThemeMode.LIGHT else ThemeMode.DARK).name
             p[Keys.ACCENT_CUSTOM] = style.accentHex
             when {
-                style.glass -> p[Keys.GLASS_SCOPE] = tv.own.owntv.core.theme.GlassSurface.entries.fold(0) { acc, s -> acc or (1 shl s.ordinal) }
+                style.glass -> p[Keys.GLASS_SCOPE] = tv.own.owntv.core.theme.GlassConfig.ON_BITS
                 wasGlass -> p[Keys.GLASS_SCOPE] = 0
             }
         }
