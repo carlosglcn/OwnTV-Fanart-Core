@@ -70,6 +70,18 @@ object WatchMatcher {
         val league: TeamNames.Key = TeamNames.keyOfName(*competitionNames.toTypedArray())
         val broadcasters: List<TeamNames.Key> = match.broadcasts.map { TeamNames.keyOfName(it.name) }
 
+        /**
+         * glcn: a guide that names no player ("Final T2026 · Torneo de Shanghai") still says which final
+         * it is. For a singles final between two players, the tournament's own words (its city, minus
+         * "Masters", "Open", "ATP"...) plus the word "final" are enough. Empty when this is not such a match.
+         */
+        val finalTournamentWords: Set<String> = run {
+            val sides = listOfNotNull(match.home?.team, match.away?.team)
+            val round = TeamNames.tokens(match.subtitle.orEmpty()).toSet()
+            if (sides.size != 2 || !sides.all { it.isAthlete } || "final" !in round || "singles" !in round) emptySet()
+            else TeamNames.tokens(match.leagueName).filter { it !in GENERIC_TOURNAMENT }.toSet()
+        }
+
         /** Words for a channel full-text search: one team's word is enough to find "Frankfurt v Köln". */
         val searchWords: List<String> = buildList {
             listOfNotNull(match.home?.team, match.away?.team).forEach { t ->
@@ -87,6 +99,7 @@ object WatchMatcher {
         val away = keys.away?.foundIn(tokens) == true
         val league = keys.league.foundIn(tokens)
         return when {
+            keys.finalTournamentWords.isNotEmpty() && "final" in tokens && tokens.containsAll(keys.finalTournamentWords) -> Hit.CONFIRMED
             keys.home == null && keys.away == null -> if (league) Hit.CONFIRMED else Hit.NONE
             home && away -> Hit.CONFIRMED
             (home || away) && league -> Hit.CONFIRMED
@@ -116,6 +129,12 @@ object WatchMatcher {
 
     /** A playlist's divider row ("##### PREMIER LEAGUE #####"): a heading, never a channel to watch. */
     fun isSeparator(channelName: String): Boolean = SEPARATOR.containsMatchIn(channelName)
+
+    // Words of a tournament's name that say nothing about *which* tournament.
+    private val GENERIC_TOURNAMENT = setOf(
+        "masters", "open", "atp", "wta", "tour", "rolex", "cup", "championships", "championship", "tennis",
+        "international", "series", "classic", "trophy", "tournament", "torneo", "of", "finals", "mens", "womens",
+    )
 
     private val FIXTURE = Regex("""\s(vs?\.?|v)\s""", RegexOption.IGNORE_CASE)
     private val SEPARATOR = Regex("""#{3,}|={4,}|-{4,}|\*{4,}""")
