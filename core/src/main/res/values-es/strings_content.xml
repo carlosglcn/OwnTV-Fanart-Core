@@ -456,11 +456,11 @@
     <string name="glcn_home_cover_desc">Qué se ve detrás de las filas: la portada de lo que señalas o el fondo de la app (tu imagen, si la pones en Fondo)</string>
     <string name="glcn_home_cover_art">Portada</string>
     <string name="glcn_home_cover_app">Fondo de la app</string>
-    <string name="glcn_home_dim_title">Intensidad de la portada</string>
-    <string name="glcn_home_dim_desc">Cuánto se ve la portada detrás de las filas (no en Cine)</string>
-    <string name="glcn_home_dim_normal">Normal</string>
-    <string name="glcn_home_dim_soft">Suave</string>
-    <string name="glcn_home_dim_softer">Muy suave</string>
+    <string name="glcn_home_dim_title">Transparencia de la portada</string>
+    <string name="glcn_home_dim_desc">Cuánto se transparenta la portada detrás de las filas (no en Cine)</string>
+    <string name="glcn_home_dim_normal">Sin transparencia</string>
+    <string name="glcn_home_dim_soft">Transparente</string>
+    <string name="glcn_home_dim_softer">Muy transparente</string>
     <string name="glcn_osd_title">Duración de la info en pantalla</string>
     <string name="glcn_osd_desc">Cuánto tiempo se quedan los controles del reproductor y el banner del canal</string>
     <string name="glcn_osd_standard">Estándar</string>

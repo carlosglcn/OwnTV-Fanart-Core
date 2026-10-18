@@ -791,11 +791,11 @@
     <string name="glcn_home_cover_desc">What shows behind the rows: the cover of what you point at, or the app’s background (your picture, if you set one under Background)</string>
     <string name="glcn_home_cover_art">Cover</string>
     <string name="glcn_home_cover_app">App background</string>
-    <string name="glcn_home_dim_title">Cover strength</string>
-    <string name="glcn_home_dim_desc">How strong the cover is behind the rows (not in Cinema)</string>
-    <string name="glcn_home_dim_normal">Normal</string>
-    <string name="glcn_home_dim_soft">Soft</string>
-    <string name="glcn_home_dim_softer">Very soft</string>
+    <string name="glcn_home_dim_title">Cover transparency</string>
+    <string name="glcn_home_dim_desc">How much the cover shows through behind the rows (not in Cinema)</string>
+    <string name="glcn_home_dim_normal">Opaque</string>
+    <string name="glcn_home_dim_soft">Transparent</string>
+    <string name="glcn_home_dim_softer">Very transparent</string>
     <string name="glcn_osd_title">On-screen info time</string>
     <string name="glcn_osd_desc">How long the player’s controls and the channel banner stay up</string>
     <string name="glcn_osd_standard">Standard</string>
