@@ -389,6 +389,8 @@
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_season_mode
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_startup_sound
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_style
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_top_floating
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_top_size
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_ui_sounds
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_ui_sounds_default_v2
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_zap_panel
