@@ -458,6 +458,10 @@
     <string name="glcn_home_cover_app">Fondo de la app</string>
     <string name="glcn_home_cover_mine">Mi imagen</string>
     <string name="glcn_pick_home_image">Elige una imagen para Inicio</string>
+    <string name="glcn_home_image_title">Imagen de Inicio</string>
+    <string name="glcn_home_image_desc">La foto que se usa cuando «Imagen tras las filas» está en Mi imagen</string>
+    <string name="glcn_home_image_none">Ninguna</string>
+    <string name="glcn_home_image_change">Cambiar</string>
     <string name="glcn_home_dim_title">Transparencia de la portada</string>
     <string name="glcn_home_dim_desc">Cuánto se transparenta la portada detrás de las filas (no en Cine)</string>
     <string name="glcn_home_dim_normal">Sin transparencia</string>

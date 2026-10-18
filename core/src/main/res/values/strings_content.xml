@@ -793,6 +793,10 @@
     <string name="glcn_home_cover_app">App background</string>
     <string name="glcn_home_cover_mine">My picture</string>
     <string name="glcn_pick_home_image">Choose a picture for Home</string>
+    <string name="glcn_home_image_title">Home picture</string>
+    <string name="glcn_home_image_desc">The picture used when “Image behind rows” is set to My picture</string>
+    <string name="glcn_home_image_none">None</string>
+    <string name="glcn_home_image_change">Change</string>
     <string name="glcn_home_dim_title">Cover transparency</string>
     <string name="glcn_home_dim_desc">How much the cover shows through behind the rows (not in Cinema)</string>
     <string name="glcn_home_dim_normal">Opaque</string>
