@@ -48,6 +48,38 @@ object TeamNames {
         "club", "team", "women", "w", "u19", "u21", "u23",
     )
 
+    /**
+     * glcn: how guides really write some clubs. Each entry: tokens that identify the team (all must be in its
+     * ESPN name) → extra name variants that find it in a title ("Barça", "Atleti", "Betis – Sevilla").
+     */
+    private val ALIASES: List<Pair<Set<String>, List<Set<String>>>> = listOf(
+        setOf("barcelona") to listOf(setOf("barca")),
+        setOf("atletico", "madrid") to listOf(setOf("atletico"), setOf("atleti")),
+        setOf("real", "madrid") to listOf(setOf("realmadrid")),
+        setOf("real", "betis") to listOf(setOf("betis")),
+        setOf("real", "sociedad") to listOf(setOf("sociedad")),
+        setOf("athletic") to listOf(setOf("athletic"), setOf("athletic", "bilbao"), setOf("bilbao")),
+        setOf("celta") to listOf(setOf("celta")),
+        setOf("rayo", "vallecano") to listOf(setOf("rayo")),
+        setOf("alaves") to listOf(setOf("alaves")),
+        setOf("las", "palmas") to listOf(setOf("laspalmas")),
+        setOf("real", "valladolid") to listOf(setOf("valladolid")),
+        setOf("real", "oviedo") to listOf(setOf("oviedo")),
+        setOf("real", "zaragoza") to listOf(setOf("zaragoza")),
+        setOf("manchester", "united") to listOf(setOf("man", "united"), setOf("man", "utd")),
+        setOf("manchester", "city") to listOf(setOf("man", "city")),
+        setOf("tottenham") to listOf(setOf("tottenham"), setOf("spurs")),
+        setOf("wolverhampton") to listOf(setOf("wolves")),
+        setOf("newcastle") to listOf(setOf("newcastle")),
+        setOf("west", "ham") to listOf(setOf("west", "ham")),
+        setOf("bayern") to listOf(setOf("bayern")),
+        setOf("borussia", "dortmund") to listOf(setOf("dortmund")),
+        setOf("bayer", "leverkusen") to listOf(setOf("leverkusen")),
+        setOf("inter", "milan") to listOf(setOf("inter"), setOf("internazionale")),
+        setOf("paris", "saint", "germain") to listOf(setOf("psg"), setOf("paris", "sg")),
+        setOf("sporting", "cp") to listOf(setOf("sporting", "lisbon")),
+    )
+
     private val COMBINING = Regex("\\p{M}+")
     private val NON_ALNUM = Regex("[^\\p{L}\\p{N}]+")
     private val DIGITS = Regex("\\p{N}+")
@@ -88,6 +120,9 @@ object TeamNames {
             val locTokens = tokens(loc).toSet()
             add(display.filter { it !in locTokens })
         }
+        // glcn: club nicknames and short forms.
+        val displaySet = display.toSet()
+        ALIASES.forEach { (key, extra) -> if (displaySet.containsAll(key)) extra.forEach { add(it) } }
         // glcn: a player is named by surname in a guide ("Final: Davidovich – Jodar"), while ESPN gives the
         // full name ("Alejandro Davidovich Fokina"): each surname word (4+ letters) finds him on its own.
         if (team.isAthlete && display.size >= 2) display.drop(1).filter { it.length >= 4 }.forEach { add(listOf(it)) }
