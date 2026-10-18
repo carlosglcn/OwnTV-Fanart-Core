@@ -209,7 +209,10 @@
 1	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntvfanart://play/episode
 1	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntvfanart://play/live
 1	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntvfanart://play/movie
-1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	\0
+3	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	\0
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	(?i)\\b(uhd|fhd|hd|4k)\\b
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	[^a-z0-9]+
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	\\b(uhd|fhd|hd|sd|4k|hevc|h265|1080p?|720p?|50fps|60fps)\\b
 1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	\\p{M}+
 1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	film
 1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	general

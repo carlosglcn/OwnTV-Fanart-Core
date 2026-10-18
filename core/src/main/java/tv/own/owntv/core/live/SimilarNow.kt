@@ -24,6 +24,7 @@ class SimilarNow(
         categories: String?,
         year: Int?,
         focusedChannelId: Long?,
+        focusedChannelName: String? = null,
         sourceIds: List<Long>,
         cust: SectionCustomizations,
         globalShiftMinutes: Int,
@@ -32,10 +33,13 @@ class SimilarNow(
     ): List<Entry> {
         if (title.isNullOrBlank() || sourceIds.isEmpty()) return emptyList()
         val wanted = genres(categories)
+        val focusFamily = focusedChannelName?.let { family(it) }
         if (wanted.isEmpty()) return emptyList()
         val channels = channelDao.allForSources(sourceIds, MAX_CHANNELS)
             .filter { CustomizeKeys.channel(it) !in cust.hiddenItems }
             .filter { it.id != focusedChannelId }
+            // The same channel in another quality (La 2 HD / La 2 SD) is not a suggestion.
+            .filter { focusFamily == null || family(it.name) != focusFamily }
             .map { ch -> cust.itemNames[CustomizeKeys.channel(ch)]?.let { ch.copy(name = it) } ?: ch }
         if (channels.isEmpty()) return emptyList()
         val byId = channels.associateBy { it.id }
@@ -50,6 +54,7 @@ class SimilarNow(
                 val shared = genres(p.categories).count { it in wanted }
                 if (shared == 0) continue
                 var score = shared * 10
+                if (QUALITY.containsMatchIn(ch.name)) score += 1
                 if (!p.imageUrl.isNullOrBlank()) score += 4
                 if (p.startMs <= now) score += 2
                 if (year != null && p.year == year) score += 1
@@ -65,6 +70,12 @@ class SimilarNow(
 
     companion object {
         private const val MAX_CHANNELS = 5_000
+        private val QUALITY = Regex("(?i)\\b(uhd|fhd|hd|4k)\\b")
+        private val QUALITY_WORDS = Regex("\\b(uhd|fhd|hd|sd|4k|hevc|h265|1080p?|720p?|50fps|60fps)\\b")
+
+        /** A channel's name without its provider tag or quality, so La 2 HD and La 2 SD are one family. */
+        fun family(name: String): String =
+            QUALITY_WORDS.replace(fold(ProviderTags.parse(name).name), "").replace(Regex("[^a-z0-9]+"), "")
         private const val AHEAD_MS = 4 * 3_600_000L
 
         /** Genres too broad to say anything ("Series", "Movie"…): they never count as a match on their own. */
