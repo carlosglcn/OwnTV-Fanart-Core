@@ -450,6 +450,8 @@
     <string name="glcn_style_none_desc">Tema y acento como los tengas en Apariencia</string>
     <string name="glcn_skip_intro">Saltar intro</string>
     <string name="glcn_auto_skip_title">Saltar intros solas</string>
+    <string name="glcn_habits_title">Avisarme de lo que suelo ver</string>
+    <string name="glcn_habits_desc">Aprende los programas que ves en un canal (3 veces en 4 semanas) y te avisa antes de que empiecen, y los pone primero en Inicio. Se queda en este dispositivo</string>
     <string name="glcn_auto_skip_desc">Series: cuando una serie ya sabe dónde acaba su intro (la primera vez que la saltas), los siguientes episodios la saltan sin preguntar</string>
     <string name="glcn_zap_view_list">Lista</string>
     <string name="glcn_zap_view_next">Vista</string>

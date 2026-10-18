@@ -340,6 +340,26 @@ class HomeFeedReader(
                         .toMap()
                 }.getOrDefault(emptyMap())
             }
+            // glcn: what the viewer usually watches, if it is on air right now (see HabitTracker).
+            val habitNowAsync = async {
+                if (HomeRow.FEATURED !in config.visibleOrder) emptyList()
+                else runCatching {
+                    val habits = org.koin.core.context.GlobalContext.get()
+                        .get<tv.own.owntv.core.reminder.HabitTracker>().habits(profileId)
+                    val channels = habits.take(20).mapNotNull { h ->
+                        channelDao.getById(h.channelId)?.takeIf { it.sourceId in liveIds && !isChannelHidden(it, hidden) }
+                    }
+                    if (channels.isEmpty()) emptyList()
+                    else {
+                        val t = System.currentTimeMillis()
+                        guide.slice(channels, hidden.live, shiftAsync.await(), t, t + 1).mapNotNull { (id, rows) ->
+                            val p = rows.firstOrNull { t in it.startMs until it.stopMs } ?: return@mapNotNull null
+                            val ch = channels.firstOrNull { it.id == id } ?: return@mapNotNull null
+                            if (tv.own.owntv.core.reminder.HabitRules.isHabit(habits, ch.id, p.title)) ch to p else null
+                        }
+                    }
+                }.getOrDefault(emptyList())
+            }
             // glcn: tonight's programmes (21:00–24:00) on the favourite channels, else the recent ones.
             val tonightAsync = async {
                 if (HomeRow.TONIGHT !in config.visibleOrder) emptyList()
@@ -445,6 +465,7 @@ class HomeFeedReader(
                 recentSeries = recentSeriesAsync.await(),
                 featured = buildFeatured(
                     sports = sportsAsync.await(),
+                    habitNow = habitNowAsync.await(),
                     favourites = favLive,
                     favNow = favNowAsync.await(),
                     movies = recentMoviesAsync.await(),
@@ -458,9 +479,10 @@ class HomeFeedReader(
         }
     }
 
-    /** glcn: the billboard's slides — live matches, then favourites on air, then the newest films and shows. */
+    /** glcn: the billboard's slides — live matches, then what the viewer usually watches, then favourites on air, then the newest films and shows. */
     private fun buildFeatured(
         sports: List<tv.own.owntv.core.live.SportsNow.Entry>,
+        habitNow: List<Pair<ChannelEntity, EpgProgrammeEntity>>,
         favourites: List<ChannelEntity>,
         favNow: Map<Long, EpgProgrammeEntity>,
         movies: List<MovieEntity>,
@@ -473,6 +495,11 @@ class HomeFeedReader(
         sports.filter { !it.programme.imageUrl.isNullOrBlank() }.take(3).forEach {
             if (seen.add(it.channel.id)) out += FeaturedItem.Live(it.channel, it.programme, tv.own.owntv.core.live.SportsNow.isLive(it.programme))
         }
+        // glcn: what the viewer usually watches, on air now — right after live matches.
+        habitNow.filter { (_, p) -> !p.imageUrl.isNullOrBlank() }
+            .filter { (ch, _) -> ch.id !in seen }
+            .take(2)
+            .forEach { (ch, p) -> seen += ch.id; out += FeaturedItem.Live(ch, p, tv.own.owntv.core.live.SportsNow.isLive(p)) }
         favourites.mapNotNull { ch -> favNow[ch.id]?.takeIf { !it.imageUrl.isNullOrBlank() }?.let { ch to it } }
             .filter { (ch, _) -> ch.id !in seen }
             .take(3)

@@ -785,6 +785,8 @@
     <string name="glcn_style_none_desc">Theme and accent as set in Appearance</string>
     <string name="glcn_skip_intro">Skip intro</string>
     <string name="glcn_auto_skip_title">Skip intros by themselves</string>
+    <string name="glcn_habits_title">Warn me about what I usually watch</string>
+    <string name="glcn_habits_desc">Learns the programmes you watch on a channel (3 times in 4 weeks) and warns you before they start, and puts them first on Home. Stays on this device</string>
     <string name="glcn_auto_skip_desc">Series: once a series knows where its intro ends (the first time you skip it), later episodes jump it without asking</string>
     <string name="glcn_zap_view_list">List</string>
     <string name="glcn_zap_view_next">View</string>

@@ -505,6 +505,9 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_MPV_PASSTHROUGH = booleanPreferencesKey("glcn_mpv_passthrough")
         val GLCN_ANIM_STYLE = intPreferencesKey("glcn_anim_style")
         val GLCN_LOGO_PLATE = intPreferencesKey("glcn_logo_plate")
+        val GLCN_HABIT_LEARNING = booleanPreferencesKey("glcn_habit_learning")
+        val GLCN_HABIT_LOG = stringPreferencesKey("glcn_habit_log")
+        val GLCN_HABIT_DONE = stringPreferencesKey("glcn_habit_done")
         val GLCN_UI_SOUNDS = intPreferencesKey("glcn_ui_sounds")
         val GLCN_STARTUP_SOUND = booleanPreferencesKey("glcn_startup_sound")
         val RESUME_LAST_CHANNEL = booleanPreferencesKey("resume_last_channel")
@@ -916,6 +919,16 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     /** glcn: plate behind dark channel logos — 0 classic (default, as upstream), 1 none. */
     val logoPlate: Flow<Int> = prefsFlow { it[Keys.GLCN_LOGO_PLATE] ?: 0 }
     suspend fun setLogoPlate(mode: Int) { context.dataStore.edit { it[Keys.GLCN_LOGO_PLATE] = mode.coerceIn(0, 1) } }
+
+    /** glcn: learn what is usually watched (programme, channel) and warn when it is about to start. On by default. */
+    val habitLearning: Flow<Boolean> = prefsFlow { it[Keys.GLCN_HABIT_LEARNING] ?: true }
+    suspend fun setHabitLearning(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_HABIT_LEARNING] = on } }
+    /** glcn: the viewing log behind [habitLearning] — see [tv.own.owntv.core.reminder.HabitRules]. Stays on the device. */
+    val habitLog: Flow<String> = prefsFlow { it[Keys.GLCN_HABIT_LOG] ?: "" }
+    suspend fun setHabitLog(text: String) { context.dataStore.edit { it[Keys.GLCN_HABIT_LOG] = text } }
+    /** glcn: showings of a habit already turned into a reminder (one "channel:start" per line). */
+    val habitDone: Flow<String> = prefsFlow { it[Keys.GLCN_HABIT_DONE] ?: "" }
+    suspend fun setHabitDone(text: String) { context.dataStore.edit { it[Keys.GLCN_HABIT_DONE] = text } }
 
     /** glcn: menu sounds — 0 off, 1 soft, 2 normal. */
     /** glcn: Soft by default on a new install (see [keepUiSoundsForExistingOnce]). */

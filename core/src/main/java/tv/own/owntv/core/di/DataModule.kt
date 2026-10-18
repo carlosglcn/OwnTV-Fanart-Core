@@ -331,6 +331,8 @@ val dataModule = module {
     // same reason as RecordingManager: every launch re-arms, whether or not BOOT_COMPLETED arrived.
     single { tv.own.owntv.core.reminder.ReminderScheduler(androidContext(), get()) }
     single(createdAtStart = true) { tv.own.owntv.core.reminder.ReminderManager(get(), get()) }
+    // glcn: habit learning (settings, epgDao, reminders).
+    single { tv.own.owntv.core.reminder.HabitTracker(get(), get(), get()) }
     // profileDao, sourceDao, settings, customizationStore, userDataResolver, epgSourceStore,
     // forceMpvStore, vodEngineStore, db, metadataOverrideStore, metadataDao, openSubtitlesAuthStore,
     // backgroundsDir (same folder ingestBackgroundImage writes to — the .own container carries the wallpaper),
