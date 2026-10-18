@@ -14,9 +14,9 @@ class WatchWindowTest {
 
     private fun match(state: MatchState) = Match("1", Sport.SOCCER, "soccer/ger.1", "ger.1", "Bundesliga", kickoff, state, "", "A v B")
 
-    @Test fun `before kick-off - closed until 30 minutes before, then open`() {
-        assertEquals(WatchWindow.TooEarly(kickoff - 30 * min), WatchWindow.of(match(MatchState.PRE), null, kickoff - 31 * min))
-        assertEquals(WatchWindow.Open, WatchWindow.of(match(MatchState.PRE), null, kickoff - 30 * min))
+    @Test fun `before kick-off - closed until 36 hours before, then open`() {
+        assertEquals(WatchWindow.TooEarly(kickoff - 36 * 60 * min), WatchWindow.of(match(MatchState.PRE), null, kickoff - 36 * 60 * min - min))
+        assertEquals(WatchWindow.Open, WatchWindow.of(match(MatchState.PRE), null, kickoff - 36 * 60 * min))
         assertEquals("still listed as not started after kick-off", WatchWindow.Open, WatchWindow.of(match(MatchState.PRE), null, kickoff + 10 * min))
     }
 

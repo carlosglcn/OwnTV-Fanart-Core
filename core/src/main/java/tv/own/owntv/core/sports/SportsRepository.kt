@@ -97,14 +97,15 @@ sealed interface WatchWindow {
     data object Ended : WatchWindow
 
     companion object {
-        const val BEFORE_MS = 30 * 60_000L
+        /** glcn: opens as soon as the match is on the board (36 h ahead), so tonight's channel is known all day. */
+        const val BEFORE_MS = 36 * 60 * 60_000L
         const val AFTER_MS = 30 * 60_000L
 
         /** A finished match this device never saw end is taken to have ended this long after kick-off. */
         const val ASSUMED_LENGTH_MS = 2 * 60 * 60_000L
 
         /**
-         * From 30 min before kick-off to 30 min after the end, judged on a freshly fetched [m]: live is
+         * From 36 h before kick-off to 30 min after the end, judged on a freshly fetched [m]: live is
          * always open, however long it runs; postponed and cancelled never are.
          */
         fun of(m: Match, endedAt: Long?, now: Long): WatchWindow = when (m.state) {
