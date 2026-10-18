@@ -416,6 +416,10 @@
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	shortname
 2	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	status
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	yyyy-MM-dd'T'HH:mm:ssxx
+2	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ACB
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ES
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga ACB
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga Endesa
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	MotoGP
 2	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	alaves
 3	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	athletic
@@ -466,6 +470,46 @@
 1	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	wolverhampton
 1	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	wolves
 2	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	zaragoza
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	\0
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	$BASE/$path
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	$homeName v $awayName
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	0
+2	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	FT
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	Finished
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	Match Finished
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	Round $it
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	T
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	Z
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	acb
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	dateEvent
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	events
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	eventsnextleague.php?id=$id
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	eventspastleague.php?id=$id
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	https://www.thesportsdb.com/api/v1/json/3
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	idAwayTeam
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	idEvent
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	idHomeTeam
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	idTeam
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	intAwayScore
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	intHomeScore
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	intRound
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	lookup_all_teams.php?id=$id
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	results
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strAwayTeam
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strAwayTeamBadge
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strBadge
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strEvent
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strHomeTeam
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strHomeTeamBadge
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strPostponed
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strStatus
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strTeam
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strTeamShort
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strTime
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strTimestamp
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strVenue
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	teams
+1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	yes
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	atp
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	championship
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	championships

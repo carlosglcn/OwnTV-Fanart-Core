@@ -142,20 +142,37 @@ class MotoGpSource(client: OkHttpClient) {
 }
 
 /** ESPN for everything it carries, the MotoGP feed for MotoGP. */
-class CompositeSportsSource(private val espn: SportsSource, private val motoGp: MotoGpSource) : SportsSource {
+class CompositeSportsSource(
+    private val espn: SportsSource,
+    private val motoGp: MotoGpSource,
+    private val tsdb: TheSportsDbSource? = null,
+) : SportsSource {
     private fun League.isMotoGp() = slug == MOTOGP
+    private fun League.isTsdb() = tsdb != null && slug == TheSportsDbSource.ACB
 
     override suspend fun scoreboard(league: League, day: LocalDate?): List<Match> =
-        if (league.isMotoGp()) motoGp.scoreboard(league, day) else espn.scoreboard(league, day)
+        when {
+            league.isMotoGp() -> motoGp.scoreboard(league, day)
+            league.isTsdb() -> tsdb!!.scoreboard(league, day)
+            else -> espn.scoreboard(league, day)
+        }
 
     override suspend fun summary(match: Match): MatchSummary =
-        if (match.leagueSlug == MOTOGP) motoGp.summary(match) else espn.summary(match)
+        when {
+            match.leagueSlug == MOTOGP -> motoGp.summary(match)
+            match.leagueSlug == TheSportsDbSource.ACB -> MatchSummary(match, emptyList(), emptyList(), emptyList())
+            else -> espn.summary(match)
+        }
 
     override suspend fun standings(league: League): StandingsTable =
-        if (league.isMotoGp()) throw IllegalArgumentException("no table") else espn.standings(league)
+        if (league.isMotoGp() || league.isTsdb()) throw IllegalArgumentException("no table") else espn.standings(league)
 
     override suspend fun teams(league: League): List<Team> =
-        if (league.isMotoGp()) emptyList() else espn.teams(league)
+        when {
+            league.isMotoGp() -> emptyList()
+            league.isTsdb() -> tsdb!!.teams(league)
+            else -> espn.teams(league)
+        }
 
     companion object { const val MOTOGP = "motogp" }
 }

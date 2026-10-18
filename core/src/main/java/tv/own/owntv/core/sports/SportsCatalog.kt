@@ -56,6 +56,8 @@ object SportsCatalog {
         // Basketball
         League(Sport.BASKETBALL, "nba", "NBA", country = "US"),
         League(Sport.BASKETBALL, "wnba", "WNBA", country = "US"),
+        // glcn: not on ESPN; served by TheSportsDbSource.
+        League(Sport.BASKETBALL, TheSportsDbSource.ACB, "Liga ACB", "ACB", "ES"),
         League(Sport.BASKETBALL, "mens-college-basketball", "NCAA Basketball", "NCAAM", "US"),
         // Tennis
         League(Sport.TENNIS, "atp", "ATP"),
@@ -106,7 +108,13 @@ object SportsCatalog {
      * its feed, `cricket/all`, is every series at once.
      */
     fun competitionNames(match: Match): List<String> =
-        listOfNotNull(league(League.keyOf(match.sport, match.leagueSlug))?.name, match.leagueName).distinct()
+        (listOfNotNull(league(League.keyOf(match.sport, match.leagueSlug))?.name, match.leagueName) +
+            ALSO_CALLED[League.keyOf(match.sport, match.leagueSlug)].orEmpty()).distinct()
+
+    /** glcn: other names guides use for a competition (the ACB is "Liga Endesa" on TV). */
+    private val ALSO_CALLED = mapOf(
+        League.keyOf(Sport.BASKETBALL, TheSportsDbSource.ACB) to listOf("Liga Endesa", "ACB"),
+    )
 
     /** The sports that have something in the catalogue, in chip order. */
     val sports: List<Sport> get() = Sport.entries.filter { s -> leagues.any { it.sport == s } }
