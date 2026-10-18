@@ -139,10 +139,12 @@
 1	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	FROM epg_programmes WHERE epgChannelId IN (:epgKeys)
 1	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT title FROM epg_programmes WHERE imageUrl = :url LIMIT 1
 1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY (addedAt IS NULL), addedAt DESC, sortOrder LIMIT :limit
+1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY (rating IS NULL), rating DESC, sortOrder LIMIT :limit
 1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND addedAt IS NOT NULL ORDER BY addedAt DESC, id DESC LIMIT :limit
 1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT categoryId AS categoryId, COUNT(*) AS count FROM movies WHERE sourceId IN (:sourceIds) AND categoryId IS NOT NULL GROUP BY categoryId ORDER BY count DESC LIMIT :limit
 1	core/src/main/java/tv/own/owntv/core/database/dao/PlaybackPrefsDao.kt	DELETE FROM playback_prefs WHERE zoomMode IS NULL AND volumeBoost IS NULL AND audioDelayMs IS NULL
 1	core/src/main/java/tv/own/owntv/core/database/dao/PlaybackPrefsDao.kt	UPDATE playback_prefs SET audioDelayMs = NULL
+1	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE categoryId = :categoryId ORDER BY (rating IS NULL), rating DESC, sortOrder LIMIT :limit
 1	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds) AND addedAt IS NOT NULL ORDER BY addedAt DESC, id DESC LIMIT :limit
 1	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	UPDATE sources SET liveEnginePreference = :preference WHERE id = :id
 1	core/src/main/java/tv/own/owntv/core/database/dao/SourceDao.kt	UPDATE sources SET liveLatencyMode = :mode, liveLatencyCustomSecs = :customSecs WHERE id = :id
@@ -207,6 +209,22 @@
 1	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntvfanart://play/episode
 1	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntvfanart://play/live
 1	core/src/main/java/tv/own/owntv/core/launcher/LauncherDeepLink.kt	owntvfanart://play/movie
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	\0
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	\\p{M}+
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	film
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	general
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	movie
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	movies
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	otros
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	pelicula
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	peliculas
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	programa
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	serie
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	series
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	show
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	television
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	tv
+1	core/src/main/java/tv/own/owntv/core/live/SimilarNow.kt	varios
 2	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	\0
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	(?i)(uhd|fhd|hd|4k)
 1	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	(en directo)

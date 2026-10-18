@@ -797,6 +797,9 @@
     <string name="glcn_home_image_desc">The picture used when “Image behind rows” is set to My picture</string>
     <string name="glcn_home_image_none">None</string>
     <string name="glcn_home_image_change">Change</string>
+    <string name="glcn_related_title">Related</string>
+    <string name="glcn_similar_title">You may like</string>
+    <string name="glcn_similar_now">Now</string>
     <string name="glcn_home_dim_title">Cover transparency</string>
     <string name="glcn_home_dim_desc">How much the cover shows through behind the rows (not in Cinema)</string>
     <string name="glcn_home_dim_normal">Opaque</string>

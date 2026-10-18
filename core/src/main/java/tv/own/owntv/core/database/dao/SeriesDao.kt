@@ -398,4 +398,8 @@ interface SeriesDao {
     /** One-time cleanup of pre-stable-key M3U rows (remoteId was always NULL under clear-then-insert). */
     @Query("DELETE FROM series WHERE sourceId = :sourceId AND remoteId IS NULL")
     suspend fun deleteNullRemoteIds(sourceId: Long)
+
+    /** glcn: "Related" on a series' details page — the best-rated of its category. */
+    @Query("SELECT * FROM series WHERE categoryId = :categoryId ORDER BY (rating IS NULL), rating DESC, sortOrder LIMIT :limit")
+    suspend fun inCategoryTop(categoryId: Long, limit: Int): List<SeriesEntity>
 }

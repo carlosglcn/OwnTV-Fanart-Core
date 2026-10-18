@@ -338,7 +338,8 @@ interface MovieDao {
             "WHERE m.sourceId IN (:sourceIds) AND h.itemId IS NULL ORDER BY f.addedAt DESC LIMIT :limit",
     )
     suspend fun unwatchedFavorites(profileId: Long, sourceIds: List<Long>, limit: Int): List<MovieEntity>
-}
 
-/** glcn: a category id with its item count. */
-data class GlcnCategoryCount(val categoryId: Long, val count: Int)
+    /** glcn: "Related" on a movie's details page — the best-rated of its category. */
+    @Query("SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY (rating IS NULL), rating DESC, sortOrder LIMIT :limit")
+    suspend fun inCategoryTop(categoryId: Long, limit: Int): List<MovieEntity>
+}
