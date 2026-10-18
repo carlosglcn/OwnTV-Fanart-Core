@@ -358,9 +358,12 @@
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_habit_learning
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_habit_log
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_home_backdrop
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_home_cover
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_home_cover_dim
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_icon_v1
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_logo_plate
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_mpv_passthrough
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_osd_seconds
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_remote_v2
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_remote_v3
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_safe_area

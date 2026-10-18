@@ -506,6 +506,9 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_ANIM_STYLE = intPreferencesKey("glcn_anim_style")
         val GLCN_LOGO_PLATE = intPreferencesKey("glcn_logo_plate")
         val GLCN_HABIT_LEARNING = booleanPreferencesKey("glcn_habit_learning")
+        val GLCN_OSD_SECONDS = intPreferencesKey("glcn_osd_seconds")
+        val GLCN_HOME_COVER = intPreferencesKey("glcn_home_cover")
+        val GLCN_HOME_COVER_DIM = intPreferencesKey("glcn_home_cover_dim")
         val GLCN_HABIT_LOG = stringPreferencesKey("glcn_habit_log")
         val GLCN_HABIT_DONE = stringPreferencesKey("glcn_habit_done")
         val GLCN_UI_SOUNDS = intPreferencesKey("glcn_ui_sounds")
@@ -929,6 +932,17 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     /** glcn: showings of a habit already turned into a reminder (one "channel:start" per line). */
     val habitDone: Flow<String> = prefsFlow { it[Keys.GLCN_HABIT_DONE] ?: "" }
     suspend fun setHabitDone(text: String) { context.dataStore.edit { it[Keys.GLCN_HABIT_DONE] = text } }
+
+    /** glcn: what is behind Home — 0 the focused item's cover, 1 the app's own background (Settings → Background). */
+    val homeCover: Flow<Int> = prefsFlow { it[Keys.GLCN_HOME_COVER] ?: 0 }
+    suspend fun setHomeCover(mode: Int) { context.dataStore.edit { it[Keys.GLCN_HOME_COVER] = mode.coerceIn(0, 1) } }
+    /** glcn: how strong the cover is behind Home — 0 normal, 1 soft, 2 very soft. */
+    val homeCoverDim: Flow<Int> = prefsFlow { it[Keys.GLCN_HOME_COVER_DIM] ?: 0 }
+    suspend fun setHomeCoverDim(level: Int) { context.dataStore.edit { it[Keys.GLCN_HOME_COVER_DIM] = level.coerceIn(0, 2) } }
+
+    /** glcn: how long the player's controls stay up — 0 standard (4.5 s), 8, 12 or 20 seconds, or -1 until Back. */
+    val osdSeconds: Flow<Int> = prefsFlow { it[Keys.GLCN_OSD_SECONDS] ?: 0 }
+    suspend fun setOsdSeconds(seconds: Int) { context.dataStore.edit { it[Keys.GLCN_OSD_SECONDS] = if (seconds in OsdRules.CHOICES) seconds else 0 } }
 
     /** glcn: menu sounds — 0 off, 1 soft, 2 normal. */
     /** glcn: Soft by default on a new install (see [keepUiSoundsForExistingOnce]). */
