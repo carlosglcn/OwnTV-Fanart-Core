@@ -147,7 +147,12 @@ val dataModule = module {
     single { WeatherRepository(get(), get()) }
     // Sports Hub: ESPN straight from the device on the shared client (no Worker, no key). Lazy like
     // everything here — none of it exists, let alone fetches, until a sports screen asks (startup zero-work).
-    single<tv.own.owntv.core.sports.SportsSource> { tv.own.owntv.core.sports.EspnSportsSource(get()) }
+    single<tv.own.owntv.core.sports.SportsSource> {
+        tv.own.owntv.core.sports.CompositeSportsSource(
+            tv.own.owntv.core.sports.EspnSportsSource(get()),
+            tv.own.owntv.core.sports.MotoGpSource(get()),
+        )
+    }
     single { tv.own.owntv.core.sports.SportsRefreshPolicy() }
     single {
         val settings = get<tv.own.owntv.core.settings.SettingsRepository>()

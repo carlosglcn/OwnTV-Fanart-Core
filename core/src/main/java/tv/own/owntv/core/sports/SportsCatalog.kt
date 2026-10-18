@@ -64,6 +64,8 @@ object SportsCatalog {
         League(Sport.CRICKET, CRICKET_ALL, "Cricket"),
         // Motorsport
         League(Sport.RACING, "f1", "Formula 1", "F1"),
+        // glcn: not on ESPN; served by MotoGpSource.
+        League(Sport.RACING, CompositeSportsSource.MOTOGP, "MotoGP"),
         League(Sport.RACING, "irl", "IndyCar", country = "US"),
         League(Sport.RACING, "nascar-premier", "NASCAR Cup Series", "NASCAR", "US"),
         // Ice hockey
