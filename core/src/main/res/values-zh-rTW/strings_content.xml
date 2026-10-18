@@ -347,4 +347,5 @@
     <string name="content_season_specials">特別篇</string>
     <string name="content_poster_size">海報大小</string>
     <string name="content_vod_more_in"><xliff:g id="category">%1$s</xliff:g> 中的更多內容</string>
+    <string name="content_live_next_label">接下來 · <xliff:g id="time">%1$s</xliff:g></string>
 </resources>

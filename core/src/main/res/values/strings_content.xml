@@ -817,4 +817,5 @@
     <string name="glcn_start_time">Channel start</string>
     <string name="glcn_safe_area_title">Screen margin</string>
     <string name="glcn_safe_area_desc">Shrinks the whole interface inside the screen, for a TV that crops its edges (overscan). Off by default.</string>
+    <string name="content_live_next_label">NEXT \u00b7 <xliff:g id="time">%1$s</xliff:g></string>
 </resources>

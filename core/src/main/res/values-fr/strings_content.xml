@@ -375,4 +375,5 @@
     <string name="content_season_specials">Épisodes spéciaux</string>
     <string name="content_poster_size">Taille des affiches</string>
     <string name="content_vod_more_in">Plus dans <xliff:g id="category">%1$s</xliff:g></string>
+    <string name="content_live_next_label">À SUIVRE · <xliff:g id="time">%1$s</xliff:g></string>
 </resources>

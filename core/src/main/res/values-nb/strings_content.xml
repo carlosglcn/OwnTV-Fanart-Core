@@ -361,4 +361,5 @@
     <string name="content_season_specials">Spesialepisoder</string>
     <string name="content_poster_size">Plakatstørrelse</string>
     <string name="content_vod_more_in">Mer i <xliff:g id="category">%1$s</xliff:g></string>
+    <string name="content_live_next_label">NESTE · <xliff:g id="time">%1$s</xliff:g></string>
 </resources>

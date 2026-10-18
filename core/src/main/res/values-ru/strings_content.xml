@@ -389,4 +389,5 @@
     <string name="content_season_specials">Спецвыпуски</string>
     <string name="content_poster_size">Размер постеров</string>
     <string name="content_vod_more_in">Ещё в категории «<xliff:g id="category">%1$s</xliff:g>»</string>
+    <string name="content_live_next_label">ДАЛЕЕ · <xliff:g id="time">%1$s</xliff:g></string>
 </resources>

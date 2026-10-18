@@ -389,4 +389,5 @@
     <string name="content_season_specials">Odcinki specjalne</string>
     <string name="content_poster_size">Rozmiar plakatów</string>
     <string name="content_vod_more_in">Więcej w kategorii <xliff:g id="category">%1$s</xliff:g></string>
+    <string name="content_live_next_label">NASTĘPNIE · <xliff:g id="time">%1$s</xliff:g></string>
 </resources>

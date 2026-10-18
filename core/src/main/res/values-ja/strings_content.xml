@@ -347,4 +347,5 @@
     <string name="content_season_specials">特別編</string>
     <string name="content_poster_size">ポスターのサイズ</string>
     <string name="content_vod_more_in"><xliff:g id="category">%1$s</xliff:g>のその他の作品</string>
+    <string name="content_live_next_label">次 · <xliff:g id="time">%1$s</xliff:g></string>
 </resources>

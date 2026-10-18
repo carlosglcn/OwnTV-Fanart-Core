@@ -417,4 +417,5 @@
     <string name="content_season_specials">حلقات خاصة</string>
     <string name="content_poster_size">حجم الملصقات</string>
     <string name="content_vod_more_in">المزيد في <xliff:g id="category">%1$s</xliff:g></string>
+    <string name="content_live_next_label">التالي · <xliff:g id="time">%1$s</xliff:g></string>
 </resources>

@@ -361,4 +361,5 @@
     <string name="content_season_specials">Specials</string>
     <string name="content_poster_size">Postergröße</string>
     <string name="content_vod_more_in">Mehr in <xliff:g id="category">%1$s</xliff:g></string>
+    <string name="content_live_next_label">ALS NÄCHSTES · <xliff:g id="time">%1$s</xliff:g></string>
 </resources>

@@ -347,4 +347,5 @@
     <string name="content_season_specials">스페셜</string>
     <string name="content_poster_size">포스터 크기</string>
     <string name="content_vod_more_in"><xliff:g id="category">%1$s</xliff:g>의 다른 작품</string>
+    <string name="content_live_next_label">다음 · <xliff:g id="time">%1$s</xliff:g></string>
 </resources>

@@ -375,4 +375,5 @@
     <string name="content_season_specials">Speciali</string>
     <string name="content_poster_size">Dimensione locandine</string>
     <string name="content_vod_more_in">Altro in <xliff:g id="category">%1$s</xliff:g></string>
+    <string name="content_live_next_label">SUCCESSIVO · <xliff:g id="time">%1$s</xliff:g></string>
 </resources>
