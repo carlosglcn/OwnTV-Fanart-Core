@@ -99,14 +99,30 @@ class UpdateManager(
         _state.value = State.Checking
         scope.launch {
             runCatching {
+                // glcn: GitHub allows an unsigned-in client only 60 calls an hour per IP address, shared by every
+                // device (and every other app asking GitHub) at home. A conditional request that answers
+                // "not modified" (304) does not count, so the last answer and its ETag are kept and sent back.
+                val cacheKey = "${CoreBuildInfo.releaseRepo}|${CoreBuildInfo.releaseTag ?: "latest"}"
+                val cache = context.getSharedPreferences("owntv_update_cache", android.content.Context.MODE_PRIVATE)
+                val cachedEtag = cache.getString("etag:$cacheKey", null)
+                val cachedBody = cache.getString("body:$cacheKey", null)
                 val request = Request.Builder()
                     .url("https://api.github.com/repos/${CoreBuildInfo.releaseRepo}/releases/" + (CoreBuildInfo.releaseTag?.let { "tags/$it" } ?: "latest"))
                     .header("Accept", "application/vnd.github+json")
                     .header("User-Agent", "OwnTV")
+                    .apply { if (cachedEtag != null && !cachedBody.isNullOrBlank()) header("If-None-Match", cachedEtag) }
                     .build()
                 client.newCall(request).execute().use { resp ->
-                    if (!resp.isSuccessful) throw CheckHttpException(resp.code)
-                    val body = resp.body.string()
+                    val body = when {
+                        resp.code == 304 && !cachedBody.isNullOrBlank() -> cachedBody
+                        !resp.isSuccessful -> throw CheckHttpException(resp.code)
+                        else -> resp.body.string().also { fresh ->
+                            val etag = resp.header("ETag")
+                            if (etag != null && fresh.isNotBlank()) {
+                                cache.edit().putString("etag:$cacheKey", etag).putString("body:$cacheKey", fresh).apply()
+                            }
+                        }
+                    }
                     if (body.isBlank()) throw InvalidReleaseResponseException()
                     val o = runCatching { JSONObject(body) }.getOrElse { throw InvalidReleaseResponseException() }
                     val version = (if (CoreBuildInfo.releaseTag != null) o.optString("name").substringAfterLast(' ') else o.optString("tag_name"))

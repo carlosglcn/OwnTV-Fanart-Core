@@ -503,9 +503,15 @@
 1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🎄
 1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🎭
 1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🥂
+1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	${CoreBuildInfo.releaseRepo}|${CoreBuildInfo.releaseTag ?: "latest"}
+1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	ETag
+1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	If-None-Match
+2	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	body:$cacheKey
+2	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	etag:$cacheKey
 1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	https://api.github.com/repos/${CoreBuildInfo.releaseRepo}/releases/
-1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	latest
+2	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	latest
 1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	name
+1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	owntv_update_cache
 1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	tags/$it
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	${Build.MANUFACTURER} ${Build.MODEL} · Android ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	--- live diagnostics leading up to the crash ---
