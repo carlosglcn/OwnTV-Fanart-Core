@@ -861,4 +861,5 @@
     <string name="glcn_ui_sound_style_crystal">Crystal</string>
     <string name="glcn_ui_sound_style_wood">Wood</string>
     <string name="glcn_ui_sound_style_bubble">Bubble</string>
+    <string name="glcn_remote_next_playlist">Next playlist</string>
 </resources>

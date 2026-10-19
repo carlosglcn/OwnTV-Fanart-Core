@@ -40,6 +40,8 @@ enum class RemoteShortcutAction {
     TOGGLE_ENGINE,
     NEXT_AUDIO_TRACK,
     TOGGLE_SUBTITLES,
+    // glcn: step through the playlists (all → each one → all), wherever the user is.
+    NEXT_PLAYLIST,
 }
 
 enum class RemoteShortcutPress { SHORT, LONG }
