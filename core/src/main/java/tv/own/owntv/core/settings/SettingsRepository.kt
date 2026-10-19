@@ -515,6 +515,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_HABIT_LOG = stringPreferencesKey("glcn_habit_log")
         val GLCN_HABIT_DONE = stringPreferencesKey("glcn_habit_done")
         val GLCN_UI_SOUNDS = intPreferencesKey("glcn_ui_sounds")
+        val GLCN_UI_SOUND_STYLE = intPreferencesKey("glcn_ui_sound_style")
         val GLCN_STARTUP_SOUND = booleanPreferencesKey("glcn_startup_sound")
         val RESUME_LAST_CHANNEL = booleanPreferencesKey("resume_last_channel")
         val LAST_LIVE_CATEGORY = stringPreferencesKey("last_live_category")
@@ -975,6 +976,9 @@ class SettingsRepository(private val context: Context, private val localeStore: 
             if (Keys.GLCN_UI_SOUNDS !in prefs && Keys.ACTIVE_PROFILE in prefs) prefs[Keys.GLCN_UI_SOUNDS] = 0
         }
     }
+    /** glcn: the menu sounds' character — 0 classic, 1 crystal, 2 wood, 3 bubble. */
+    val uiSoundStyle: Flow<Int> = prefsFlow { it[Keys.GLCN_UI_SOUND_STYLE] ?: 0 }
+    suspend fun setUiSoundStyle(style: Int) { context.dataStore.edit { it[Keys.GLCN_UI_SOUND_STYLE] = style.coerceIn(0, 3) } }
     suspend fun setUiSounds(level: Int) { context.dataStore.edit { it[Keys.GLCN_UI_SOUNDS] = level.coerceIn(0, 2) } }
 
     /** glcn: a short chime as the app opens (the season's own while a seasonal theme is on). */

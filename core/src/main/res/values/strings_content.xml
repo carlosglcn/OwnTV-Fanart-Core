@@ -855,4 +855,10 @@
     <string name="content_live_next_label">NEXT \u00b7 <xliff:g id="time">%1$s</xliff:g></string>
     <string name="glcn_synopsis_full">Full synopsis</string>
     <string name="glcn_synopsis_none">No synopsis available for this programme.</string>
+    <string name="glcn_ui_sound_style_title">Sound style</string>
+    <string name="glcn_ui_sound_style_desc">The character of the menu sounds: classic, crystal, wood or bubble</string>
+    <string name="glcn_ui_sound_style_classic">Classic</string>
+    <string name="glcn_ui_sound_style_crystal">Crystal</string>
+    <string name="glcn_ui_sound_style_wood">Wood</string>
+    <string name="glcn_ui_sound_style_bubble">Bubble</string>
 </resources>

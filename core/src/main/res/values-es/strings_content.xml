@@ -518,4 +518,10 @@
     <string name="content_live_next_label">A CONTINUACIÓN · <xliff:g id="time">%1$s</xliff:g></string>
     <string name="glcn_synopsis_full">Sinopsis completa</string>
     <string name="glcn_synopsis_none">Este programa no tiene sinopsis.</string>
+    <string name="glcn_ui_sound_style_title">Estilo de sonido</string>
+    <string name="glcn_ui_sound_style_desc">El carácter de los sonidos de menú: clásico, cristal, madera o burbuja</string>
+    <string name="glcn_ui_sound_style_classic">Clásico</string>
+    <string name="glcn_ui_sound_style_crystal">Cristal</string>
+    <string name="glcn_ui_sound_style_wood">Madera</string>
+    <string name="glcn_ui_sound_style_bubble">Burbuja</string>
 </resources>
