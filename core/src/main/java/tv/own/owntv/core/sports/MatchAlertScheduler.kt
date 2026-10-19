@@ -248,7 +248,8 @@ class MatchAlertWorker(
         val reminder = inputData.getBoolean(KEY_REMINDER, false)
         val state = scheduler.state()
         if (reminder) {
-            state.reminders[key]?.let { notifications.postReminder(it.match, it.leadMinutes, it.channels) }
+            // glcn: a host that does not want alerts outside the app (the phone, by choice) posts nothing here.
+            if (MatchAlertHost.backgroundAllowed) state.reminders[key]?.let { notifications.postReminder(it.match, it.leadMinutes, it.channels) }
             scheduler.cancelReminder(key)
             return Result.success()
         }

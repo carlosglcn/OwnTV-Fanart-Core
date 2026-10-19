@@ -862,4 +862,6 @@
     <string name="glcn_ui_sound_style_wood">Wood</string>
     <string name="glcn_ui_sound_style_bubble">Bubble</string>
     <string name="glcn_remote_next_playlist">Next playlist</string>
+    <string name="glcn_alerts_outside_title">Alerts outside the app</string>
+    <string name="glcn_alerts_outside_desc">Reminders and match alerts as notifications when the app is not open. Off: they only appear inside the open app</string>
 </resources>

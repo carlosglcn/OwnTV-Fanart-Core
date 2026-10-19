@@ -525,4 +525,6 @@
     <string name="glcn_ui_sound_style_wood">Madera</string>
     <string name="glcn_ui_sound_style_bubble">Burbuja</string>
     <string name="glcn_remote_next_playlist">Lista siguiente</string>
+    <string name="glcn_alerts_outside_title">Avisos fuera de la app</string>
+    <string name="glcn_alerts_outside_desc">Recordatorios y alertas de partidos como notificación cuando la app no está abierta. Desactivado: solo salen dentro de la app abierta</string>
 </resources>
