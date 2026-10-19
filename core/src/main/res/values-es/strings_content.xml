@@ -516,4 +516,6 @@
     <string name="glcn_safe_area_title">Margen de pantalla</string>
     <string name="glcn_safe_area_desc">Encoge toda la interfaz dentro de la pantalla, para teles que recortan los bordes (overscan). Desactivado de serie.</string>
     <string name="content_live_next_label">A CONTINUACIÓN · <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="glcn_synopsis_full">Sinopsis completa</string>
+    <string name="glcn_synopsis_none">Este programa no tiene sinopsis.</string>
 </resources>

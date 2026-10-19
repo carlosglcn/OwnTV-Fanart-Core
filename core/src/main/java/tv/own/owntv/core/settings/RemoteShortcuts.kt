@@ -69,6 +69,9 @@ object RemoteShortcutBindings {
         RemoteShortcutBinding(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, RemoteShortcutPress.SHORT, RemoteShortcutAction.PLAY_PAUSE),
         // Held ≡ is the SHIELD's own quick settings — the app never receives it — so the guide is a held ⏯.
         RemoteShortcutBinding(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, RemoteShortcutPress.LONG, RemoteShortcutAction.OPEN_GUIDE),
+        // Info (remotes that have it): enlarge the mini player. Lists use Info for the full synopsis first,
+        // so it only reaches here where nothing under the cursor took it.
+        RemoteShortcutBinding(KeyEvent.KEYCODE_INFO, RemoteShortcutPress.SHORT, RemoteShortcutAction.EXPAND_NOW_PLAYING),
     )
 
     val defaults: List<RemoteShortcutBinding> = listOf(
