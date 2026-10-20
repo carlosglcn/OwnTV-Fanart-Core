@@ -493,6 +493,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_SEASON_MODE = intPreferencesKey("glcn_season_mode")
         val GLCN_HOME_BACKDROP = intPreferencesKey("glcn_home_backdrop")
         val GLCN_ZAP_PANEL = intPreferencesKey("glcn_zap_panel")
+        val GLCN_ZAP_VIEWS = intPreferencesKey("glcn_zap_views")
         val GLCN_BACK_TO_WINDOW = booleanPreferencesKey("glcn_back_to_window")
         val GLCN_AUTO_SKIP_INTRO = booleanPreferencesKey("glcn_auto_skip_intro")
         val GLCN_STYLE = stringPreferencesKey("glcn_style")
@@ -992,6 +993,8 @@ class SettingsRepository(private val context: Context, private val localeStore: 
 
     /** glcn: beside the channel list over the player — 0 the programme's picture, 1 the channel's coming schedule. */
     val zapPanel: Flow<Int> = prefsFlow { it[Keys.GLCN_ZAP_PANEL] ?: 0 }
+    /** glcn: which zapping-list views the ▶ key alternates between — bit 1 list + picture, 2 schedule, 4 posters. Never empty. */
+    val zapViews: Flow<Int> = prefsFlow { (it[Keys.GLCN_ZAP_VIEWS] ?: ZapViews.DEFAULT).and(ZapViews.ALL).takeIf { m -> m != 0 } ?: ZapViews.DEFAULT }
     /** glcn: Back on a live channel full screen leaves it playing in the small window (off: it stops). */
     val backToWindow: Flow<Boolean> = prefsFlow { it[Keys.GLCN_BACK_TO_WINDOW] ?: false }
     suspend fun setBackToWindow(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_BACK_TO_WINDOW] = on } }
@@ -1017,6 +1020,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
             }
         }
     }
+    suspend fun setZapViews(mask: Int) { context.dataStore.edit { it[Keys.GLCN_ZAP_VIEWS] = mask.and(ZapViews.ALL).takeIf { m -> m != 0 } ?: ZapViews.DEFAULT } }
     suspend fun setZapPanel(mode: Int) { context.dataStore.edit { it[Keys.GLCN_ZAP_PANEL] = mode.coerceIn(0, 2) } }
 
     /** glcn: Home's background — 0 classic (top corner), 1 cinema (full screen, rows below), 2 panel (full screen, info at the side). */
@@ -3884,3 +3888,20 @@ internal fun activeProfileLangKey(prefs: Preferences, prefix: String): Preferenc
 /** The active profile's own choice, else the shared setting, else no preference. */
 internal fun profileLang(prefs: Preferences, prefix: String, shared: Preferences.Key<String>): String =
     prefs[activeProfileLangKey(prefs, prefix)] ?: prefs[shared] ?: ""
+
+
+/** glcn: the zapping-list views (panel 0 list + picture, 1 schedule, 2 posters) as a bit mask the user chooses from. */
+object ZapViews {
+    const val ALL = 7
+    /** Schedule and posters; the light list-and-picture view is opt-in. */
+    const val DEFAULT = 6
+
+    fun has(mask: Int, panel: Int) = mask and (1 shl panel) != 0
+
+    /** The panel to show: [panel] if enabled, otherwise the next enabled one. */
+    fun effective(panel: Int, mask: Int): Int = if (has(mask, panel)) panel else next(panel, mask)
+
+    /** The next enabled panel after [panel], wrapping; [panel] itself when it is the only one. */
+    fun next(panel: Int, mask: Int): Int =
+        (1..3).map { (panel + it) % 3 }.firstOrNull { has(mask, it) } ?: panel
+}
