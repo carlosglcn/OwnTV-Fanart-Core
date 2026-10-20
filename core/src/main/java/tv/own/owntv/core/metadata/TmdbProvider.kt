@@ -189,6 +189,48 @@ class TmdbProvider(
         return runCatching { parseTvDetails(json, ep.language.substringBefore('-')) }.getOrNull()
     }
 
+    override suspend fun platform(tmdbId: Int, isTv: Boolean): PlatformBadge? {
+        if (tmdbId <= 0) return null
+        val ep = resolveEndpoint()
+        val url = buildString {
+            append(ep.baseUrl).append(if (isTv) "/3/tv/" else "/3/movie/").append(tmdbId)
+            append("?append_to_response=watch/providers")
+            ep.apiKey?.takeIf { it.isNotBlank() }?.let { append("&api_key=").append(enc(it)) }
+        }
+        val json = fetch(ep, url, "platform id=$tmdbId") ?: return null
+        return runCatching { parsePlatform(json, isTv, regionOf(ep.language)) }.getOrNull()
+    }
+
+    private fun regionOf(language: String): String =
+        language.substringAfter('-', "").uppercase().takeIf { it.length == 2 } ?: "ES"
+
+    private fun parsePlatform(body: String, isTv: Boolean, region: String): PlatformBadge? {
+        val o = JSONObject(body)
+        val names = (if (isTv) o.optJSONArray("networks") else o.optJSONArray("production_companies"))
+        val makers = ArrayList<Pair<String, String?>>()
+        if (names != null) for (i in 0 until names.length()) {
+            val n = names.optJSONObject(i) ?: continue
+            makers += n.optString("name") to n.optString("logo_path").takeIf { it.isNotBlank() && it != "null" }
+        }
+        val where = o.optJSONObject("watch/providers")?.optJSONObject("results")?.optJSONObject(region)
+        val offered = ArrayList<Pair<String, String?>>()
+        for (kind in listOf("flatrate", "free", "ads")) {
+            val arr = where?.optJSONArray(kind) ?: continue
+            for (i in 0 until arr.length()) {
+                val n = arr.optJSONObject(i) ?: continue
+                offered += n.optString("provider_name") to n.optString("logo_path").takeIf { it.isNotBlank() && it != "null" }
+            }
+        }
+        val original = makers.firstNotNullOfOrNull { (name, logo) -> platformKey(name)?.let { Triple(it, name, logo) } }
+        if (original != null) {
+            val (key, name, ownLogo) = original
+            val square = offered.firstOrNull { platformKey(it.first) == key }?.second
+            return PlatformBadge(name, square ?: ownLogo, original = true)
+        }
+        val first = offered.firstOrNull() ?: return null
+        return PlatformBadge(first.first, first.second, original = false)
+    }
+
     override suspend fun tvSeasonBundle(tvId: Int, seasons: List<Int>): List<SeasonEpisode>? {
         if (tvId <= 0 || seasons.isEmpty()) return null
         val ep = resolveEndpoint()
@@ -416,6 +458,24 @@ class TmdbProvider(
             if (CoreBuildInfo.edgeKey.isBlank()) LEGACY_WORKER_BASE else DEFAULT_WORKER_BASE
 
         /** TMDB image CDN — poster/backdrop paths render straight from here, no key. */
+        private val PLATFORMS = listOf(
+            "netflix", "hbo", "max", "disney+", "prime video", "amazon", "apple tv+", "apple tv", "paramount+",
+            "hulu", "peacock", "movistar", "skyshowtime", "atresplayer", "rtve", "filmin", "starz", "showtime",
+        )
+
+        /** A known streaming platform's key from a TMDB network/studio/provider name, or null for anything else. */
+        internal fun platformKey(name: String): String? {
+            val n = name.trim().lowercase().replace(" plus", "+")
+            if (n.isEmpty()) return null
+            val hit = PLATFORMS.firstOrNull { n == it || n.startsWith("$it ") || n.startsWith("$it+") } ?: return null
+            return when (hit) {
+                "max" -> "hbo"
+                "amazon" -> "prime video"
+                "apple tv" -> "apple tv+"
+                else -> hit
+            }
+        }
+
         const val IMAGE_BASE = "https://image.tmdb.org/t/p"
 
         internal fun buildTrendingUrl(

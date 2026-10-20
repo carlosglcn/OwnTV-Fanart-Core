@@ -240,4 +240,14 @@ interface MetadataProvider {
      * rather than failing — so the caller may over-request without knowing the real season count.
      */
     suspend fun tvSeasonBundle(tvId: Int, seasons: List<Int>): List<SeasonEpisode>?
+
+    /** glcn: the platform behind a title (see [PlatformBadge]); null when unknown or on failure. */
+    suspend fun platform(tmdbId: Int, isTv: Boolean): PlatformBadge? = null
 }
+
+/**
+ * glcn: the streaming platform to show beside a title's details. [original] is true when the platform
+ * made it (a network or studio such as Netflix, HBO); false when it is only where it can be watched in
+ * the user's country. [logoPath] is a TMDB relative path.
+ */
+data class PlatformBadge(val name: String, val logoPath: String?, val original: Boolean)

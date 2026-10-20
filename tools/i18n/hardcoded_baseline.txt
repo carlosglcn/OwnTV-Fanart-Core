@@ -295,6 +295,11 @@
 1	core/src/main/java/tv/own/owntv/core/metadata/MetadataRepository.kt	$TYPE_TV:$lang:$tvId:s${season}e$episode
 1	core/src/main/java/tv/own/owntv/core/metadata/OwnTVClientId.kt	\0
 1	core/src/main/java/tv/own/owntv/core/metadata/OwnTVClientId.kt	%02x
+1	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	$now|1|${if (badge.original) 1 else 0}|${badge.name.replace('|', ' ')}|${badge.logoPath.orEmpty()}
+2	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	1
+2	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	m
+1	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	owntv_platform_badges
+2	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	t
 8	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\0
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	%.1f
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	[^a-z0-9]+
@@ -309,19 +314,57 @@
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	glcn_programme_info
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	w780
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	·
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	&api_key=
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	\0
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	$it
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	$it+
+2	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	&api_key=
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	+
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	,
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/3/movie/
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/3/tv/
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	?append_to_response=watch/providers
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	ES
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	TMDB $label failed: ${it.message}
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	Trending type=$type page=$page
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	ads
+2	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	amazon
+2	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	apple tv
+2	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	apple tv+
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	atresplayer
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	backdrop_path
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	disney+
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	filmin
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	flatrate
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	free
+2	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	hbo
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	hulu
+2	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	logo_path
+2	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	max
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	metadata allowance spent, skipping $label
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	movie details id=$tmdbId
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	null
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	movistar
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	name
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	netflix
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	networks
+3	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	null
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	paramount+
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	peacock
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	platform id=$tmdbId
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	plus
+2	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	prime video
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	production_companies
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	profile_path
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	provider_name
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	results
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	rtve
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	search type=$type
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	showtime
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	skyshowtime
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	starz
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	tv details id=$tmdbId
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_average
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_count
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	watch/providers
 2	core/src/main/java/tv/own/owntv/core/model/HomeRow.kt	glcnGenresDefault
 2	core/src/main/java/tv/own/owntv/core/model/HomeRow.kt	glcnLayoutV2
 3	core/src/main/java/tv/own/owntv/core/network/DnsConfig.kt	\0
