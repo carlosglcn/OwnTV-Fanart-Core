@@ -37,7 +37,11 @@ class ProgrammeArtResolver(
     /** A wide picture for the programme whose (portrait) picture is [imageUrl]; null for none. */
     suspend fun landscapeFor(imageUrl: String): String? = withContext(Dispatchers.IO) {
         val programme = runCatching { epgDao.programmeForImage(imageUrl) }.getOrNull() ?: return@withContext null
-        infoFor(programme)?.backdropUrl
+        // The guide's own picture is normally the provider's real one, so TMDB's replaces it only when
+        // the guide says what the programme is (a film or a series) and, if it gives a year, the year agrees.
+        val hint = Hint(programme.categories, programme.year, programme.lengthMin, programme.episode)
+        if (hint.kind(programme.title) == Kind.UNKNOWN) return@withContext null
+        infoFor(programme.title, hint)?.backdropUrl
     }
 
     /** TMDB's average rating for the programme called [title]; null for none. */
