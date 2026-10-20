@@ -401,6 +401,30 @@ class LiveTuneController(
         // both engines open it again (from the newest moment) instead of carrying on from their buffer.
         val url = (localUrl() ?: return).let { if (wallMs == null) "$it?at=${android.os.SystemClock.elapsedRealtime()}" else it }
         if (_liveOnExo.value) engines.exoPlay(url, muted = false, request) else engines.mpvPlay(url, request)
+        traceTimeshiftSeek(wallMs, session)
+    }
+
+    /**
+     * glcn: leaves a trail in the playback report for the rewind clock — what was asked, and what the
+     * engine says 2 s and 6 s later — so a clock that drifts after ◀ ▶ / "Go to live" can be read off
+     * a report instead of guessed at. Costs three log lines per seek.
+     */
+    private fun traceTimeshiftSeek(wallMs: Long?, session: tv.own.owntv.core.timeshift.TimeshiftSession) {
+        val onExo = _liveOnExo.value
+        val edge = session.playableEdgeWallMs()
+        engineLog("timeshift seek: engine=${if (onExo) "exo" else "mpv"} ask=${wallMs?.let { "edge-" + ((edge ?: it) - it) / 1000 + "s" } ?: "live"} reading=${session.readingFromWallMs?.let { "edge-" + ((edge ?: it) - it) / 1000 + "s" }}")
+        scope.launch {
+            for (afterMs in longArrayOf(2_000L, 4_000L)) {
+                kotlinx.coroutines.delay(afterMs)
+                val edgeNow = session.playableEdgeWallMs()
+                val watching = timeshiftWatchingWallMs()
+                engineLog(
+                    "timeshift check +${afterMs / 1000}s: pos=${engines.positionMs(onExo)}ms " +
+                        "reading=${session.readingFromWallMs?.let { "edge-" + ((edgeNow ?: it) - it) / 1000 + "s" }} " +
+                        "watching=${watching?.let { "edge-" + ((edgeNow ?: it) - it) / 1000 + "s" }}",
+                )
+            }
+        }
     }
 
     /**

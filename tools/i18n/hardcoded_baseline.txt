@@ -685,6 +685,15 @@
 4	player-core/src/main/java/tv/own/owntv/player/LiveStreamQuirks.kt	.m3u8
 3	player-core/src/main/java/tv/own/owntv/player/LiveStreamQuirks.kt	.ts
 1	player-core/src/main/java/tv/own/owntv/player/LiveTuneController.kt	$it?at=${android.os.SystemClock.elapsedRealtime()}
+4	player-core/src/main/java/tv/own/owntv/player/LiveTuneController.kt	edge-
+1	player-core/src/main/java/tv/own/owntv/player/LiveTuneController.kt	exo
+1	player-core/src/main/java/tv/own/owntv/player/LiveTuneController.kt	live
+1	player-core/src/main/java/tv/own/owntv/player/LiveTuneController.kt	mpv
+1	player-core/src/main/java/tv/own/owntv/player/LiveTuneController.kt	reading=${session.readingFromWallMs?.let { "edge-" + ((edgeNow ?: it) - it) / 1000 + "s" }}
+4	player-core/src/main/java/tv/own/owntv/player/LiveTuneController.kt	s
+1	player-core/src/main/java/tv/own/owntv/player/LiveTuneController.kt	timeshift check +${afterMs / 1000}s: pos=${engines.positionMs(onExo)}ms
+1	player-core/src/main/java/tv/own/owntv/player/LiveTuneController.kt	timeshift seek: engine=${if (onExo) "exo" else "mpv"} ask=${wallMs?.let { "edge-" + ((edge ?: it) - it) / 1000 + "s" } ?: "live"} reading=${session.readingFromWallMs?.let { "edge-" + ((edge ?: it) - it) / 1000 + "s" }}
+1	player-core/src/main/java/tv/own/owntv/player/LiveTuneController.kt	watching=${watching?.let { "edge-" + ((edgeNow ?: it) - it) / 1000 + "s" }}
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	\0
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	#00000000
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	#FFFFFFFF
