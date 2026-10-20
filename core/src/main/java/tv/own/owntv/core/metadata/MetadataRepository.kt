@@ -113,6 +113,30 @@ class MetadataRepository(
     }
 
     /**
+     * What the local cache already knows about [movie], with no network, no search and no negative-cache
+     * write. A plain database read, so the focus handler can show a known title's artwork at once and
+     * keep the debounce for titles that really need a TMDB lookup.
+     */
+    suspend fun cachedMovie(movie: MovieEntity): MetadataCacheEntity? {
+        if (!settings.metadataConfig().enabled) return null
+        val matchKey = maturityMatchKey(movieLocalKey(movie), currentProfileAllowsAdult())
+        val match = dao.getMatch(matchKey) ?: return null
+        val tmdbId = match.tmdbId ?: return null
+        if (System.currentTimeMillis() - match.updatedAt >= POSITIVE_TTL_MS) return null
+        return dao.getCache(cacheKey(tmdbId, currentLang()))?.takeIf { it.isUsable() }
+    }
+
+    /** Series counterpart to [cachedMovie]. */
+    suspend fun cachedSeries(series: tv.own.owntv.core.database.entity.SeriesEntity): MetadataCacheEntity? {
+        if (!settings.metadataConfig().enabled) return null
+        val matchKey = maturityMatchKey(seriesLocalKey(series), currentProfileAllowsAdult())
+        val match = dao.getMatch(matchKey) ?: return null
+        val tmdbId = match.tmdbId ?: return null
+        if (System.currentTimeMillis() - match.updatedAt >= POSITIVE_TTL_MS) return null
+        return dao.getCache(tvCacheKey(tmdbId, currentLang()))?.takeIf { it.isUsable() }
+    }
+
+    /**
      * Resolve TMDB metadata for a series (show-level). Same lazy resolve + cache + negative-cache as
      * [resolveMovie], but against TMDB's TV endpoints. Cache/match keyed with the "tv" type.
      */
@@ -694,11 +718,11 @@ class MetadataRepository(
         /**
          * Focus debounce for on-demand metadata resolves, shared by the movie / series / episode panes.
          *
-         * 700 ms rather than the original 350: at 350 ms a sustained D-pad scroll fired a lookup for
-         * almost every card it passed over, which made browsing the single largest source of metadata
-         * traffic. At 700 ms a scroll costs nothing and only settling on a title resolves it.
+         * 450 ms: at 350 ms a sustained D-pad scroll fired a lookup for almost every card it passed
+         * over, and 700 ms made title art feel slow. Titles already in the local cache skip the wait
+         * altogether (see cachedMovie), so this only delays a real TMDB lookup.
          */
-        const val FOCUS_DEBOUNCE_MS = 700L
+        const val FOCUS_DEBOUNCE_MS = 450L
 
         // 180 days, not 60: TMDB details for a released title barely change, and a shorter TTL just buys
         // a re-download of identical JSON. Negative stays at 7 days — a miss is worth retrying sooner.
