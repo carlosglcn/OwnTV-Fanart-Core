@@ -18,7 +18,7 @@ class PlatformBadgeRepository(
     /** What is already known on the device, without any network: [Known.Unknown] when nothing is stored yet. */
     fun peek(tmdbId: Int, isTv: Boolean): Known {
         if (tmdbId <= 0) return Known.Unknown
-        val key = (if (isTv) "t" else "m") + tmdbId
+        val key = (if (isTv) "tv2_" else "mv2_") + tmdbId
         synchronized(memory) { if (memory.containsKey(key)) return Known.Value(memory[key]) }
         val raw = prefs.getString(key, null) ?: return Known.Unknown
         val parts = raw.split('|')
@@ -41,7 +41,7 @@ class PlatformBadgeRepository(
 
     suspend fun get(tmdbId: Int, isTv: Boolean): PlatformBadge? {
         if (tmdbId <= 0 || !settings.metadataConfig().enabled) return null
-        val key = (if (isTv) "t" else "m") + tmdbId
+        val key = (if (isTv) "tv2_" else "mv2_") + tmdbId
         val now = System.currentTimeMillis()
         (peek(tmdbId, isTv) as? Known.Value)?.let { return it.badge }
         // A transport failure is not remembered: the next open asks again.
