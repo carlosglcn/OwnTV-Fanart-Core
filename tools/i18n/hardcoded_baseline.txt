@@ -730,6 +730,7 @@
 4	player-core/src/main/java/tv/own/owntv/player/LiveStreamQuirks.kt	.m3u8
 3	player-core/src/main/java/tv/own/owntv/player/LiveStreamQuirks.kt	.ts
 1	player-core/src/main/java/tv/own/owntv/player/LiveTuneController.kt	$it?at=${android.os.SystemClock.elapsedRealtime()}
+1	player-core/src/main/java/tv/own/owntv/player/LiveTuneController.kt	'${channel.name}' — its saved copy would not play ($detail); playing the channel directly
 4	player-core/src/main/java/tv/own/owntv/player/LiveTuneController.kt	edge-
 1	player-core/src/main/java/tv/own/owntv/player/LiveTuneController.kt	exo
 1	player-core/src/main/java/tv/own/owntv/player/LiveTuneController.kt	live

@@ -115,6 +115,8 @@ class LiveTuneController(
     private var ts: TimeshiftSession? = null
     /** The piece the engine's stream starts at; null is the live edge. */
     private var tsFromIndex: Long? = null
+    /** glcn: channels whose saved copy no engine could play; they play directly until the app restarts. */
+    private val copyUnplayable = HashSet<String>()
     private var tsRequest: LiveRequest? = null
     private var tsWindowSec = 0
     private val _localTimeshift = MutableStateFlow<LocalTimeshift?>(null)
@@ -470,7 +472,7 @@ class LiveTuneController(
         // The channel being left, parked by the manager with what was on screen — see [TimeshiftManager.open].
         val leaving = ts?.takeIf { it.channelKey != key }
         val leavingWallMs = leaving?.let { timeshiftWatchingWallMs() }
-        val window = if (channel.catchup || channel.drmConfig != null) null else host.timeshiftWindowMinutes()
+        val window = if (channel.catchup || channel.drmConfig != null || key in copyUnplayable) null else host.timeshiftWindowMinutes()
         if (window == null) {
             if (leaving != null) parkTimeshift()
             manager.watching(key)
@@ -865,6 +867,19 @@ class LiveTuneController(
             // itself once its own ladder is spent.
             if (_liveOnExo.value && engines.exoStillReconnecting) {
                 engineLog("'${channel.name}' — no fallback left ($detail); leaving ExoPlayer's own reconnects running")
+                return
+            }
+            // glcn: the channel was playing from its saved copy and neither engine could open that copy
+            // (a stream the copy does not carry cleanly). The channel itself may still play: open it
+            // directly, and do not make a copy of it again until the app restarts.
+            val session = ts
+            if (session != null && !session.isClosed && session.channelKey == timeshiftKey(channel)) {
+                engineLog("'${channel.name}' — its saved copy would not play ($detail); playing the channel directly")
+                copyUnplayable.add(timeshiftKey(channel))
+                // The copy holds the provider's connection; let it go before the channel opens directly.
+                host.timeshift?.closeAll()
+                clearTimeshift()
+                tune(channel)
                 return
             }
             engineLog("'${channel.name}' — no fallback left ($detail)")
