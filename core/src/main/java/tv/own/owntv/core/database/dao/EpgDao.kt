@@ -132,6 +132,10 @@ interface EpgDao {
     @Query("SELECT title FROM epg_programmes WHERE imageUrl = :url LIMIT 1")
     suspend fun titleForImage(url: String): String?
 
+    /** glcn: the programme that uses this picture, with what tells a film from a series. */
+    @Query("SELECT * FROM epg_programmes WHERE imageUrl = :url LIMIT 1")
+    suspend fun programmeForImage(url: String): EpgProgrammeEntity?
+
     @Query(
         "SELECT id, sourceId, epgChannelId, startMs, stopMs, title, NULL AS description, 0 AS contentHash, " +
             "categories, year, rating, lengthMin, episode, imageUrl " +

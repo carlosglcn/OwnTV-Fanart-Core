@@ -29,15 +29,15 @@ class ProgrammeArtResolver(
     /** What TMDB knows about one title; both null for "nothing usable". */
     data class Info(val backdropUrl: String?, val rating: Double?)
 
-    private val prefs = context.getSharedPreferences("glcn_programme_info", Context.MODE_PRIVATE)
+    private val prefs = context.getSharedPreferences("glcn_programme_info_v2", Context.MODE_PRIVATE)
     private val memory = ConcurrentHashMap<String, Info>()
     private val mutex = Mutex()
     private val lookups = ArrayDeque<Long>()
 
     /** A wide picture for the programme whose (portrait) picture is [imageUrl]; null for none. */
     suspend fun landscapeFor(imageUrl: String): String? = withContext(Dispatchers.IO) {
-        val title = runCatching { epgDao.titleForImage(imageUrl) }.getOrNull() ?: return@withContext null
-        infoFor(title)?.backdropUrl
+        val programme = runCatching { epgDao.programmeForImage(imageUrl) }.getOrNull() ?: return@withContext null
+        infoFor(programme)?.backdropUrl
     }
 
     /** TMDB's average rating for the programme called [title]; null for none. */
@@ -48,14 +48,38 @@ class ProgrammeArtResolver(
      * talk and quiz shows are never looked up, so the hourly allowance goes to what TMDB can rate.
      */
     suspend fun ratingFor(title: String, categories: String?): Double? =
-        if (worthRating(title, categories)) infoFor(title)?.rating else null
+        if (worthRating(title, categories)) infoFor(title, Hint(categories, null, null, null))?.rating else null
 
-    suspend fun infoFor(title: String): Info? = withContext(Dispatchers.IO) {
+    /** What tells a film from a series in the guide: the feed's categories, year, length and episode mark. */
+    data class Hint(val categories: String?, val year: Int?, val lengthMin: Int?, val episode: String?) {
+        /** FILM / SERIES when the feed says so, else UNKNOWN. */
+        fun kind(title: String): Kind {
+            val cats = categories?.let(::fold).orEmpty()
+            val episodic = !episode.isNullOrBlank() || EPISODE.containsMatchIn(title) || title.contains(" · ")
+            return when {
+                episodic -> Kind.SERIES
+                Regex("""\b(cine|pelicula|peliculas|film|movie|movies)\b""").containsMatchIn(cats) -> Kind.FILM
+                Regex("""\b(serie|series|telenovela|miniserie)\b""").containsMatchIn(cats) -> Kind.SERIES
+                (lengthMin ?: 0) >= 80 -> Kind.FILM
+                else -> Kind.UNKNOWN
+            }
+        }
+    }
+
+    enum class Kind { FILM, SERIES, UNKNOWN }
+
+    suspend fun infoFor(p: tv.own.owntv.core.database.entity.EpgProgrammeEntity): Info? =
+        infoFor(p.title, Hint(p.categories, p.year, p.lengthMin, p.episode))
+
+    suspend fun infoFor(title: String): Info? = infoFor(title, null)
+
+    suspend fun infoFor(title: String, hint: Hint?): Info? = withContext(Dispatchers.IO) {
         if (!runCatching { settings.metadataConfig().enabled }.getOrDefault(false)) return@withContext null
         val query = clean(title)
         if (query.length < 2) return@withContext null
-        val key = fold(query)
-        if (key.isEmpty()) return@withContext null
+        val kind = hint?.kind(title) ?: Kind.UNKNOWN
+        val key = fold(query) + "|" + kind.name.first() + (hint?.year ?: "")
+        if (fold(query).isEmpty()) return@withContext null
         memory[key]?.let { return@withContext it.orNull() }
         prefs.getString(key, null)?.let { stored ->
             val info = decode(stored)
@@ -66,7 +90,7 @@ class ProgrammeArtResolver(
             memory[key]?.let { return@withLock it.orNull() }
             if (!allowLookup()) return@withLock null
             // Transport failure: nothing is remembered, so it is asked again later.
-            val found = runCatching { search(query) }.getOrNull() ?: return@withLock null
+            val found = runCatching { search(query, kind, hint?.year) }.getOrNull() ?: return@withLock null
             memory[key] = found
             if (prefs.all.size > MAX_STORED) prefs.edit().clear().apply()
             prefs.edit().putString(key, encode(found)).apply()
@@ -74,16 +98,26 @@ class ProgrammeArtResolver(
         }
     }
 
-    /** NONE when TMDB answered with nothing that matches; null when it could not be asked. */
-    private suspend fun search(query: String): Info? {
+    /**
+     * NONE when TMDB answered with nothing that matches; null when it could not be asked. A film in the
+     * guide is looked up among films only, a series among series — the same title ("Aquaman") is both a
+     * 2018 film and a 1967 cartoon, and the wrong one's picture is worse than none. With no hint, both
+     * are asked and the better known wins.
+     */
+    private suspend fun search(query: String, kind: Kind, year: Int?): Info? {
         val want = fold(query)
         fun best(results: List<MetadataSearchResult>?): MetadataSearchResult? = results
             ?.filter { r -> fold(r.title) == want || r.originalTitle?.let(::fold) == want }
+            ?.filter { r -> year == null || r.year == null || kotlin.math.abs(r.year - year) <= 1 }
             ?.maxByOrNull { it.popularity }
-        val tv = provider.searchTv(query, null, false) ?: return null
-        val hit = best(tv) ?: run {
-            val movies = provider.searchMovie(query, null, false) ?: return null
-            best(movies)
+        val hit = when (kind) {
+            Kind.FILM -> best(provider.searchMovie(query, year, false) ?: return null)
+            Kind.SERIES -> best(provider.searchTv(query, null, false) ?: return null)
+            Kind.UNKNOWN -> {
+                val tv = best(provider.searchTv(query, null, false) ?: return null)
+                val movie = best(provider.searchMovie(query, year, false) ?: return null)
+                listOfNotNull(tv, movie).maxByOrNull { it.popularity }
+            }
         } ?: return NONE
         return Info(
             backdropUrl = hit.backdropPath?.let { MetadataImages.backdrop(it, "w780") },

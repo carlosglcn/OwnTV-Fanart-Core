@@ -137,6 +137,7 @@
 1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	WHERE s.sourceId IN (:sourceIds) AND s.name LIKE '%' || :query || '%'
 1	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	FROM epg_programmes WHERE epgChannelId = :epgKey
 1	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	FROM epg_programmes WHERE epgChannelId IN (:epgKeys)
+1	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT * FROM epg_programmes WHERE imageUrl = :url LIMIT 1
 1	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT title FROM epg_programmes WHERE imageUrl = :url LIMIT 1
 1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY (addedAt IS NULL), addedAt DESC, sortOrder LIMIT :limit
 1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY (rating IS NULL), rating DESC, sortOrder LIMIT :limit
@@ -300,20 +301,23 @@
 2	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	mv2_
 1	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	owntv_platform_badges
 2	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	tv2_
-8	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\0
+9	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\0
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	%.1f
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	[^a-z0-9]+
+1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\b(cine|pelicula|peliculas|film|movie|movies)\\b
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\b(cine|pelicula|peliculas|film|movie|movies|serie|series|drama|comedia|comedy|thriller|terror|horror|accion|action|animacion|animation|ciencia ficcion|sci fi|fantasia|fantasy|western|suspense|romance|aventura|adventure|crimen|crime|policiaca|misterio|mystery|documental|documentary)\\b
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\b(deporte|deportes|sport|sports|futbol|football|soccer|baloncesto|basket|tenis|tennis|motor|ciclismo|golf|noticias|news|informativo|informativos|telediario|magazine|tertulia|debate|talk|concurso|quiz|game show|reality|entretenimiento|tiempo|weather|tarot|teletienda|infocomercial|musica|music)\\b
+1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\b(serie|series|telenovela|miniserie)\\b
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\p{M}+
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\s*[\\(\\[][^)\\]]*[\\)\\]]
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\s+(T\\d+(\\s*E\\d+)?|S\\d+\\s*E\\d+|Temporada\\s+\\d+|Ep\\.?\\s*\\d+|Episodio\\s+\\d+)\\b.*$
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	^\\s*\\(?(EN\\s+)?DIRECTO\\)?\\s*[:\\-]?\\s*
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	directo
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	en directo
-1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	glcn_programme_info
+1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	glcn_programme_info_v2
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	w780
-1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	·
+1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	|
+2	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	·
 2	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	&api_key=
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	,
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/3/movie/
