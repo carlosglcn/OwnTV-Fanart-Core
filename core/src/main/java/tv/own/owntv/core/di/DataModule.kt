@@ -208,6 +208,7 @@ val dataModule = module {
             discovery = get(),
         )
     }
+    single { tv.own.owntv.core.sync.local.AutoSyncManager(androidContext(), get(), get(), get()) }
     single { BulkInsertHelper(get()) }
     single {
         tv.own.owntv.core.sync.ImportFinalizer(
