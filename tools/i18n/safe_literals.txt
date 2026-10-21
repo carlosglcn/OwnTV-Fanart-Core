@@ -2077,9 +2077,7 @@
 1	preference-key	core/src/main/java/tv/own/owntv/core/metadata/OwnTVClientId.kt	owntv_client_id
 1	preference-key	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	$now|1|${if (badge.original) 1 else 0}|${badge.name.replace('|', ' ')}|${badge.logoPath.orEmpty()}|${badge.iconPath.orEmpty()}
 2	protocol	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	1
-2	preference-key	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	mv4_
 2	preference-key	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	mv5_
-2	preference-key	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	tv4_
 2	preference-key	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	tv5_
 1	regex	core/src/main/java/tv/own/owntv/core/metadata/TitleMatchScorer.kt	\\s+
 10	empty	core/src/main/java/tv/own/owntv/core/metadata/TitleNormalizer.kt	\0

@@ -339,14 +339,12 @@
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	metro-goldwyn
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	miramax
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	movie details id=$tmdbId
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	name
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	netflix
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	networks
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	new line
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	paramount
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	pixar
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	platform id=$tmdbId
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	production_companies
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	profile_path
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	search type=$type
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	searchlight
