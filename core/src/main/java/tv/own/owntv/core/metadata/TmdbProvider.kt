@@ -254,8 +254,11 @@ class TmdbProvider(
         val network = if (isTv) list("networks").firstOrNull() else null
         if (network != null) return PlatformBadge(network.first, network.second, original = true)
         val studios = list("production_companies")
-        val studio = studios.minByOrNull { studioRank(it.first) } ?: return null
-        return PlatformBadge(studio.first, studio.second, original = true)
+        val studio = studios.minByOrNull { studioRank(it.first) }
+        if (studio != null) return PlatformBadge(studio.first, studio.second, original = true)
+        // No studio has a logo on TMDB: the first one's name, as text (the screen shows it as a tag).
+        val plain = o.optJSONArray("production_companies")?.optJSONObject(0)?.optString("name")?.takeIf { it.isNotBlank() }
+        return plain?.let { PlatformBadge(it, null, original = true) }
     }
 
     override suspend fun tvSeasonBundle(tvId: Int, seasons: List<Int>): List<SeasonEpisode>? {
