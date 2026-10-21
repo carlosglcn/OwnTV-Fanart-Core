@@ -316,8 +316,8 @@ class TmdbProvider(
     }
 
     /**
-     * YouTube trailer keys from an `append_to_response=videos` payload, best first: official
-     * Trailers, other Trailers, Teasers; each tier in the user's language before others. Several are kept
+     * YouTube trailer keys from an `append_to_response=videos` payload, best first: everything in the
+     * user's language before anything else, and within a language official Trailers, other Trailers, Teasers. Several are kept
      * because an owner can block a video from embedded players — the in-app player then tries the next
      * one. Stored joined (see [TrailerKeys]). Null when the title has no usable video.
      */
@@ -336,7 +336,7 @@ class TmdbProvider(
             }
             videos += Video(key, tier, if (v.optString("iso_639_1") == preferredLang) 0 else 1)
         }
-        return TrailerKeys.join(videos.sortedWith(compareBy({ it.tier }, { it.otherLang })).map { it.key })
+        return TrailerKeys.join(videos.sortedWith(compareBy({ it.otherLang }, { it.tier })).map { it.key })
     }
 
     /**
