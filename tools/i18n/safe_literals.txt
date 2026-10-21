@@ -4475,6 +4475,10 @@
 1	log	core/src/main/java/tv/own/owntv/core/sync/XtreamSyncer.kt	succeeded=${outcome.succeededCategoryRemoteIds.size} aborted=${outcome.aborted} stoppedEarly=${outcome.stoppedEarly}
 1	log	core/src/main/java/tv/own/owntv/core/sync/XtreamSyncer.kt	succeeded=${succeeded.size}/${categories.size} aborted=$aborted stoppedEarly=$stoppedEarly
 1	technical	core/src/main/java/tv/own/owntv/core/sync/XtreamSyncer.kt	unknown
+1	log	core/src/main/java/tv/own/owntv/core/sync/local/AutoSyncManager.kt	Auto sync cycle failed
+1	log	core/src/main/java/tv/own/owntv/core/sync/local/AutoSyncManager.kt	AutoSync
+1	json	core/src/main/java/tv/own/owntv/core/sync/local/AutoSyncManager.kt	enabled
+1	json	core/src/main/java/tv/own/owntv/core/sync/local/AutoSyncManager.kt	glcn_autosync
 1	protocol	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncClient.kt	/backup
 1	protocol	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncClient.kt	/backup.own
 1	protocol	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncClient.kt	/sync/hello
