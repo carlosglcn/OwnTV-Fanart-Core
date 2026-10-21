@@ -375,6 +375,9 @@
     <string name="content_season_specials">Especiales</string>
     <!-- glcn -->
     <string name="glcn_remove_from_continue">Quitar de Seguir viendo</string>
+    <string name="glcn_watch_on_tv">Ver en la TV</string>
+    <string name="glcn_sent_to_tv">Enviado a %1$s</string>
+    <string name="glcn_tv_unreachable">No se pudo conectar con la TV. Abre la app en ella, en la misma Wi-Fi.</string>
     <string name="glcn_sports_now">Deportes ahora</string>
     <string name="glcn_sports_none">Ahora no hay deporte en emisión</string>
     <string name="glcn_auto_favorites">Favoritos</string>

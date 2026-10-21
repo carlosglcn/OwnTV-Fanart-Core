@@ -80,6 +80,8 @@ class CompanionHttpServer(
     /** Session callbacks — set on [start], only the one matching [mode] ever fires. */
     @Volatile private var onPayload: (CompanionPayload) -> Unit = {}
     @Volatile private var onBackup: (String) -> Unit = {}
+    /** glcn: a command from a paired device (what to play), local sync mode only. */
+    @Volatile private var onCommand: (String) -> Unit = {}
     @Volatile private var onImage: (bytes: ByteArray, extension: String) -> Unit = { _, _ -> }
     @Volatile private var onServiceConfig: (CompanionServiceConfig) -> Unit = {}
 
@@ -110,6 +112,7 @@ class CompanionHttpServer(
         mode: CompanionMode = CompanionMode.ADD_SOURCE,
         onPayload: (CompanionPayload) -> Unit = {},
         onBackup: (String) -> Unit = {},
+        onCommand: (String) -> Unit = {},
         onImage: (bytes: ByteArray, extension: String) -> Unit = { _, _ -> },
         onServiceConfig: (CompanionServiceConfig) -> Unit = {},
         downloadFile: File? = null,
@@ -126,6 +129,7 @@ class CompanionHttpServer(
         this.mode = mode
         this.onPayload = onPayload
         this.onBackup = onBackup
+        this.onCommand = onCommand
         this.onImage = onImage
         this.onServiceConfig = onServiceConfig
         this.downloadFile = downloadFile
@@ -146,6 +150,7 @@ class CompanionHttpServer(
         pin = ""
         onPayload = {}
         onBackup = {}
+        onCommand = {}
         onImage = { _, _ -> }
         onLocked = {}
         downloadFile = null
@@ -292,6 +297,20 @@ class CompanionHttpServer(
                 val secret = onPair(name, remoteAddress, deviceId)
                     ?: return sendText(socket, 500, localized(R.string.companion_error_pair_failed))
                 return sendJson(socket, 200, org.json.JSONObject().put("secret", secret).toString())
+            }
+
+            // glcn: a paired device asks this one to play something. A pairing secret only — never the
+            // PIN — and the command is data the app interprets (a link to open), never executed here.
+            if (method == "POST" && path == "/sync/command") {
+                if (mode != CompanionMode.LOCAL_SYNC) return sendText(socket, 404, localized(R.string.companion_error_not_found))
+                if (!pairedSecrets().contains(headers["x-companion-pin"].orEmpty())) {
+                    return sendText(socket, 401, localized(R.string.companion_error_unauthorized))
+                }
+                val body = CompanionHttpProtocol.readBody(input, headers, CompanionHttpProtocol.maxBodyBytes(path))
+                    ?: return sendText(socket, 413, localized(R.string.companion_error_body_too_large))
+                if (body.isBlank() || body.length > 2048) return sendText(socket, 400, localized(R.string.companion_error_not_found))
+                onCommand(body)
+                return sendJson(socket, 200, "{}")
             }
 
             // Backup download (BACKUP_DOWNLOAD mode) — PIN required, streams the exported container.

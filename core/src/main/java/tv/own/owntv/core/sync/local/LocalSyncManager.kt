@@ -218,6 +218,13 @@ class LocalSyncManager(
      */
     val incoming: Flow<File> = companion.backups
 
+    /** glcn: commands paired devices send here — a link the app turns into playing something. */
+    val commands: Flow<String> = companion.commands
+
+    /** glcn: asks [device] to open [command]; finds it on the network first, as a sync does. */
+    suspend fun sendCommand(device: PairedDevice, command: String): Result<Unit> =
+        client.command(device.address, device.port, device.secret, command)
+
     /**
      * Called on the HOST when the other device presents the right PIN: mint its secret, remember it,
      * and hand it back.

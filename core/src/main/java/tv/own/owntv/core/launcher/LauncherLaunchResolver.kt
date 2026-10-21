@@ -45,6 +45,7 @@ class LauncherLaunchResolver(
         val movie = when {
             sourceId != null && !remoteId.isNullOrBlank() -> movieDao.findByRemote(sourceId, remoteId)
             sourceId != null && !name.isNullOrBlank() -> movieDao.findByName(sourceId, name)
+            sourceId == null && !name.isNullOrBlank() -> movieDao.findByNameAny(sourceIds.toList(), name)
             deepLink.itemId != null -> movieDao.getById(deepLink.itemId)
             else -> null
         } ?: return null
@@ -61,6 +62,7 @@ class LauncherLaunchResolver(
         val channel = when {
             sourceId != null && !remoteId.isNullOrBlank() -> channelDao.findByRemote(sourceId, remoteId)
             sourceId != null && !name.isNullOrBlank() -> channelDao.findByName(sourceId, name)
+            sourceId == null && !name.isNullOrBlank() -> channelDao.findByNameAny(sourceIds.toList(), name)
             deepLink.itemId != null -> channelDao.getById(deepLink.itemId)
             else -> null
         } ?: return null
@@ -93,6 +95,7 @@ class LauncherLaunchResolver(
         val show = when {
             sourceId != null && !remoteId.isNullOrBlank() -> seriesDao.findSeriesByRemote(sourceId, remoteId)
             sourceId != null && !name.isNullOrBlank() -> seriesDao.findSeriesByName(sourceId, name)
+            sourceId == null && !name.isNullOrBlank() -> seriesDao.findSeriesByNameAny(sourceIds.toList(), name)
             deepLink.seriesItemId != null -> seriesDao.getSeriesById(deepLink.seriesItemId)
             else -> null
         } ?: return null

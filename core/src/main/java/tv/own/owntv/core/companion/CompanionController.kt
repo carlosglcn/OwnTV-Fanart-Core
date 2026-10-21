@@ -44,6 +44,10 @@ class CompanionController(context: Context, localeStore: LocaleStore) {
     private val _backups = MutableSharedFlow<File>(extraBufferCapacity = 4)
     val backups: SharedFlow<File> = _backups.asSharedFlow()
 
+    /** glcn: commands from paired devices (a link to open), while hosting for local sync. */
+    private val _commands = MutableSharedFlow<String>(extraBufferCapacity = 8)
+    val commands: SharedFlow<String> = _commands.asSharedFlow()
+
     /** Cache folder the remote-export flow writes the backup into before serving it for download. */
     val backupExportDir: File get() = File(appContext.cacheDir, "remote-backup-export").apply { mkdirs() }
 
@@ -141,6 +145,7 @@ class CompanionController(context: Context, localeStore: LocaleStore) {
                     _payloads.tryEmit(payload)
                 },
                 onBackup = ::onBackupUploaded,
+                onCommand = { _commands.tryEmit(it) },
                 onImage = ::onImageUploaded,
                 onServiceConfig = { config ->
                     when (mode) {

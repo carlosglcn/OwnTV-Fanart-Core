@@ -111,6 +111,37 @@ class AutoSyncManager(
         }
     }
 
+    /** The paired devices, for a screen that lets the user pick where to send something. */
+    val devices = paired.devices
+
+    /**
+     * Sends [command] (a link to open) to [target], or to the first paired device that answers.
+     * The device is looked up on the network first, so a changed address does not matter.
+     */
+    suspend fun sendCommand(command: String, target: PairedDevice? = null): Result<PairedDevice> {
+        val candidates = target?.let { listOf(it) } ?: paired.current()
+        if (candidates.isEmpty()) return Result.failure(IllegalStateException("not paired"))
+        var last: Throwable? = null
+        for (device in candidates) {
+            val where = resolve(device)
+            val r = sync.sendCommand(where, command)
+            if (r.isSuccess) {
+                paired.touch(where.id, where.address, where.port, device.lastSyncAt)
+                return Result.success(where)
+            }
+            last = r.exceptionOrNull()
+        }
+        return Result.failure(last ?: IllegalStateException("unreachable"))
+    }
+
+    /** [sendCommand] that outlives the screen that asked for it; [onDone] runs on the main thread. */
+    fun sendCommandInBackground(command: String, onDone: (Result<PairedDevice>) -> Unit) {
+        scope.launch {
+            val result = sendCommand(command)
+            kotlinx.coroutines.withContext(Dispatchers.Main) { onDone(result) }
+        }
+    }
+
     /** The device at its current address when it can be found on the network, else as last seen. */
     private suspend fun resolve(device: PairedDevice): PairedDevice {
         val found = withTimeoutOrNull(DISCOVER_MS) {

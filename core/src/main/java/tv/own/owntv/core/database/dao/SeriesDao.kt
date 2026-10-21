@@ -116,6 +116,9 @@ interface SeriesDao {
     @Query("SELECT * FROM series WHERE sourceId = :sourceId AND name = :name LIMIT 1")
     suspend fun findSeriesByName(sourceId: Long, name: String): SeriesEntity?
 
+    @Query("SELECT * FROM series WHERE sourceId IN (:sourceIds) AND name = :name COLLATE NOCASE ORDER BY sourceId LIMIT 1")
+    suspend fun findSeriesByNameAny(sourceIds: List<Long>, name: String): SeriesEntity?
+
     @Query("SELECT * FROM episodes WHERE seriesId = :seriesId AND remoteId = :remoteId LIMIT 1")
     suspend fun findEpisodeByRemote(seriesId: Long, remoteId: String): EpisodeEntity?
 

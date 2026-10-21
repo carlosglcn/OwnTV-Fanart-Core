@@ -94,6 +94,15 @@ class LocalSyncClient {
             }
         }
 
+    /** glcn: asks the other device to open [command] (a link). It must be listening and paired. */
+    suspend fun command(address: String, port: Int, credential: String, command: String): Result<Unit> =
+        withContext(Dispatchers.IO) {
+            runCatching {
+                post(url(address, port, "/sync/command"), credential, command, "text/plain")
+                Unit
+            }
+        }
+
     private fun url(address: String, port: Int, path: String): URL {
         // An address may arrive as a bare IP, or as the whole URL a QR code carried.
         val host = address.removePrefix("http://").removePrefix("https://").substringBefore('/').substringBefore(':')

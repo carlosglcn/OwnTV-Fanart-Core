@@ -125,6 +125,9 @@ interface MovieDao {
     @Query("SELECT * FROM movies WHERE sourceId = :sourceId AND name = :name LIMIT 1")
     suspend fun findByName(sourceId: Long, name: String): MovieEntity?
 
+    @Query("SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND name = :name COLLATE NOCASE ORDER BY sourceId LIMIT 1")
+    suspend fun findByNameAny(sourceIds: List<Long>, name: String): MovieEntity?
+
     @Query("SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY sortOrder ASC, name ASC")
     fun pagingByCategory(categoryId: Long): PagingSource<Int, MovieEntity>
 

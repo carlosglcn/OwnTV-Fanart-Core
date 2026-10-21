@@ -64,6 +64,10 @@ interface ChannelDao {
     @Query("SELECT * FROM channels WHERE sourceId = :sourceId AND name = :name LIMIT 1")
     suspend fun findByName(sourceId: Long, name: String): ChannelEntity?
 
+    /** glcn: by name across several playlists (a command from another device carries no local id). */
+    @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND name = :name COLLATE NOCASE ORDER BY sourceId LIMIT 1")
+    suspend fun findByNameAny(sourceIds: List<Long>, name: String): ChannelEntity?
+
     /** Channels whose own guide id is one of [epgKeys] (normalised lower+trim) — Search's "On TV". */
     @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND LOWER(TRIM(epgChannelId)) IN (:epgKeys)")
     suspend fun byEpgKeys(sourceIds: List<Long>, epgKeys: List<String>): List<ChannelEntity>
