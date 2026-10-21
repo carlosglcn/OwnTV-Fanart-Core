@@ -403,6 +403,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/lora.ttf
 2	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/m3u
 2	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/stalker
+1	json	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/sync/command
 1	uri	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/sync/hello
 1	uri	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/sync/pair
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/xtream
@@ -423,7 +424,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	HTTP/1.1 200 OK
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	Not Found
 2	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	OK
-6	uri	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	POST
+7	json	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	POST
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	Payload Too Large
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	Unauthorized
 1	regex	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	^data:image/([a-zA-Z0-9.+-]+);base64,
@@ -441,8 +442,8 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	text/html; charset=utf-8
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	text/plain; charset=utf-8
 2	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	webp
-7	uri	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	x-companion-pin
-3	uri	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	{}
+8	json	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	x-companion-pin
+4	json	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	{}
 1	technical	core/src/main/java/tv/own/owntv/core/companion/CompanionLink.kt	10.
 2	technical	core/src/main/java/tv/own/owntv/core/companion/CompanionLink.kt	127.0.0.1
 1	technical	core/src/main/java/tv/own/owntv/core/companion/CompanionLink.kt	172.
@@ -951,6 +952,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND catchup = 1 ORDER BY sourceId ASC, sortOrder ASC, name ASC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND catchup = 1 ORDER BY sourceId ASC, sortOrder ASC, name ASC LIMIT :limit
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND epgChannelId IS NOT NULL AND epgChannelId != ''
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND name = :name COLLATE NOCASE ORDER BY sourceId LIMIT 1
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY name ASC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY name ASC LIMIT :limit
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND number = :number ORDER BY sourceId ASC, sortOrder ASC, name ASC, id ASC
@@ -1198,6 +1200,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId = :sourceId AND remoteId IN (:remoteIds)
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId = :sourceId AND titleSignature = '' LIMIT :limit
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds)
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND name = :name COLLATE NOCASE ORDER BY sourceId LIMIT 1
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY addedAt DESC, sortOrder DESC, id DESC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY name ASC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY name ASC LIMIT :limit
@@ -1376,6 +1379,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId = :sourceId AND remoteId = :remoteId LIMIT 1
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId = :sourceId AND titleSignature = '' LIMIT :limit
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds)
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds) AND name = :name COLLATE NOCASE ORDER BY sourceId LIMIT 1
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY addedAt DESC, sortOrder DESC, id DESC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY name ASC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY name ASC LIMIT :limit
@@ -4479,8 +4483,11 @@
 1	log	core/src/main/java/tv/own/owntv/core/sync/local/AutoSyncManager.kt	AutoSync
 1	json	core/src/main/java/tv/own/owntv/core/sync/local/AutoSyncManager.kt	enabled
 1	json	core/src/main/java/tv/own/owntv/core/sync/local/AutoSyncManager.kt	glcn_autosync
+1	log	core/src/main/java/tv/own/owntv/core/sync/local/AutoSyncManager.kt	not paired
+1	log	core/src/main/java/tv/own/owntv/core/sync/local/AutoSyncManager.kt	unreachable
 1	protocol	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncClient.kt	/backup
 1	protocol	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncClient.kt	/backup.own
+1	json	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncClient.kt	/sync/command
 1	protocol	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncClient.kt	/sync/hello
 1	protocol	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncClient.kt	/sync/pair
 1	protocol	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncClient.kt	Content-Type
@@ -4504,7 +4511,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncClient.kt	payload
 1	protocol	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncClient.kt	secret
 1	json	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncClient.kt	session
-1	protocol	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncClient.kt	text/plain
+2	json	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncClient.kt	text/plain
 1	empty	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncDiscovery.kt	\0
 1	log	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncDiscovery.kt	Could not announce this device for local sync (error $errorCode)
 1	compiler	core/src/main/java/tv/own/owntv/core/sync/local/LocalSyncDiscovery.kt	DEPRECATION
