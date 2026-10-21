@@ -202,7 +202,7 @@ class TmdbProvider(
         // glcn: the service's own square icon, when TMDB lists a service of that name — every one has the
         // same shape and an opaque background, so none disappears into a dark screen.
         val icon = runCatching { providerIcon(ep, badge.name, isTv) }.getOrNull() ?: return badge
-        return badge.copy(logoPath = icon, square = true)
+        return badge.copy(iconPath = icon)
     }
 
     @Volatile private var providerCatalogue = mutableMapOf<Boolean, List<Pair<String, String>>>()

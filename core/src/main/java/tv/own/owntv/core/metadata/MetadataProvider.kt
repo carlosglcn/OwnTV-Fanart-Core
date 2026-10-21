@@ -254,6 +254,6 @@ data class PlatformBadge(
     val name: String,
     val logoPath: String?,
     val original: Boolean,
-    /** The logo is the streaming service's own square icon (TMDB watch providers), not a network/studio logo. */
-    val square: Boolean = false,
+    /** The streaming service's own square icon (TMDB watch providers), when one of that name exists. */
+    val iconPath: String? = null,
 )

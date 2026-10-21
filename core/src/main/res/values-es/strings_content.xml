@@ -375,6 +375,8 @@
     <string name="content_season_specials">Especiales</string>
     <!-- glcn -->
     <string name="glcn_remove_from_continue">Quitar de Seguir viendo</string>
+    <string name="glcn_platform_square_title">Iconos cuadrados de plataforma</string>
+    <string name="glcn_platform_square_desc">Muestra el icono cuadrado del servicio en vez del logo alargado de la cadena</string>
     <string name="glcn_watch_on_tv">Ver en la TV</string>
     <string name="glcn_sent_to_tv">Enviado a %1$s</string>
     <string name="glcn_tv_unreachable">No se pudo conectar con la TV. Abre la app en ella, en la misma Wi-Fi.</string>
