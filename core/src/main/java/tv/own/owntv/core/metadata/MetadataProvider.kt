@@ -250,4 +250,10 @@ interface MetadataProvider {
  * made it (a network or studio such as Netflix, HBO); false when it is only where it can be watched in
  * the user's country. [logoPath] is a TMDB relative path.
  */
-data class PlatformBadge(val name: String, val logoPath: String?, val original: Boolean)
+data class PlatformBadge(
+    val name: String,
+    val logoPath: String?,
+    val original: Boolean,
+    /** The logo is the streaming service's own square icon (TMDB watch providers), not a network/studio logo. */
+    val square: Boolean = false,
+)

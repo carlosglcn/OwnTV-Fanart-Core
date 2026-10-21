@@ -198,7 +198,45 @@ class TmdbProvider(
             ep.apiKey?.takeIf { it.isNotBlank() }?.let { append("&api_key=").append(enc(it)) }
         }
         val json = fetch(ep, url, "platform id=$tmdbId") ?: return null
-        return runCatching { parsePlatform(json, isTv) }.getOrNull()
+        val badge = runCatching { parsePlatform(json, isTv) }.getOrNull() ?: return null
+        // glcn: the service's own square icon, when TMDB lists a service of that name — every one has the
+        // same shape and an opaque background, so none disappears into a dark screen.
+        val icon = runCatching { providerIcon(ep, badge.name, isTv) }.getOrNull() ?: return badge
+        return badge.copy(logoPath = icon, square = true)
+    }
+
+    @Volatile private var providerCatalogue = mutableMapOf<Boolean, List<Pair<String, String>>>()
+
+    private suspend fun providerIcon(ep: Endpoint, name: String, isTv: Boolean): String? {
+        val catalogue = providerCatalogue[isTv] ?: run {
+            val url = buildString {
+                append(ep.baseUrl).append("/3/watch/providers/").append(if (isTv) "tv" else "movie")
+                append("?language=en-US")
+                ep.apiKey?.takeIf { it.isNotBlank() }?.let { append("&api_key=").append(enc(it)) }
+            }
+            val body = fetch(ep, url, "providers ${if (isTv) "tv" else "movie"}") ?: return null
+            val arr = JSONObject(body).optJSONArray("results") ?: return null
+            val list = (0 until arr.length()).mapNotNull { i ->
+                val p = arr.optJSONObject(i) ?: return@mapNotNull null
+                val logo = p.optString("logo_path").takeIf { it.isNotBlank() && it != "null" } ?: return@mapNotNull null
+                p.optString("provider_name").takeIf { it.isNotBlank() }?.let { it to logo }
+            }
+            synchronized(this) { providerCatalogue[isTv] = list }
+            list
+        }
+        fun norm(s: String) = s.lowercase().replace("+", "plus").filter { it.isLetterOrDigit() }
+        val n = norm(name)
+        if (n.length < 3) return null
+        // Same name, or one contains the other (HBO ↔ HBO Max); the closest name wins. Variants such as
+        // "… Amazon Channel" or "… with Ads" are other products, not the service itself.
+        return catalogue
+            .filter { (pn, _) ->
+                val p = norm(pn)
+                !pn.contains("Channel", true) && !pn.contains("with Ads", true) &&
+                    (p == n || (p.length >= 3 && (p.contains(n) || n.contains(p))))
+            }
+            .minByOrNull { (pn, _) -> kotlin.math.abs(norm(pn).length - n.length) }
+            ?.second
     }
 
     private fun parsePlatform(body: String, isTv: Boolean): PlatformBadge? {
