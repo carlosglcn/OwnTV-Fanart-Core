@@ -2165,6 +2165,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	plus
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	popularity
 3	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	poster_path
+2	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	production_companies
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	provider_name
 1	log	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	providers ${if (isTv) "tv" else "movie"}
 2	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	release_date
