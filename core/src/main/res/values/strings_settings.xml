@@ -2343,6 +2343,8 @@
     <!-- Translators: More › Local sync: line under the title. -->
     <string name="more_sync_description">Share your data with your other device over Wi-Fi. Nothing leaves your home network.</string>
     <!-- Translators: More › Local sync: line on the Sync mode tile. -->
+    <string name="auto_sync_title">Sync automatically</string>
+    <string name="auto_sync_description">While the app is open, keeps favourites, history and continue watching in step with your paired devices.</string>
     <string name="more_sync_mode_description">Lets your other devices find this one. Stays on while this page is open.</string>
     <!-- Translators: More › Local sync: button on a paired device that forgets it. One short verb. -->
     <string name="more_sync_unpair">Unpair</string>
