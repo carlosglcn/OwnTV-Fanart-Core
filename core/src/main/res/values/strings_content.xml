@@ -706,6 +706,7 @@
     <string name="glcn_platform_square_desc">Show the service\'s own square icon instead of the wide network logo</string>
     <string name="glcn_show_hidden_categories">Show hidden (%1$d)</string>
     <string name="glcn_category_hidden_toast">Hidden. Bring it back with “Show hidden” at the end of the list.</string>
+    <string name="glcn_new_badge">NEW</string>
     <string name="glcn_voice_search">Speak</string>
     <string name="glcn_voice_prompt">Say a channel, film or series</string>
     <string name="glcn_voice_unavailable">Voice search isn\'t available on this phone</string>
