@@ -704,6 +704,8 @@
     <string name="glcn_remove_from_continue">Remove from Keep watching</string>
     <string name="glcn_platform_square_title">Square platform icons</string>
     <string name="glcn_platform_square_desc">Show the service\'s own square icon instead of the wide network logo</string>
+    <string name="glcn_show_hidden_categories">Show hidden (%1$d)</string>
+    <string name="glcn_category_hidden_toast">Hidden. Bring it back with “Show hidden” at the end of the list.</string>
     <string name="glcn_watch_on_tv">Watch on TV</string>
     <string name="glcn_sent_to_tv">Sent to %1$s</string>
     <string name="glcn_tv_unreachable">Couldn\'t reach the TV. Open the app on it, on the same Wi-Fi.</string>

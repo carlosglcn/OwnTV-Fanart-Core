@@ -15,6 +15,9 @@ class EpgMatcherTest {
         assertEquals("sky sport bundesliga 1", EpgMatcher.normalizeForEpg("Sky Sport Bundesliga 1 FHD"))
         assertEquals("cnn", EpgMatcher.normalizeForEpg("(US) CNN ᴴᴰ"))
         assertEquals("bbc 1", EpgMatcher.normalizeForEpg("BBC.One.UK")) // number words → digits
+        assertEquals("la 1", EpgMatcher.normalizeForEpg("ES-4 La 1 HD (ES)"))
+        assertEquals("la 2", EpgMatcher.normalizeForEpg("ES 3 La 2 SD"))
+        assertEquals("3 bretagne", EpgMatcher.normalizeForEpg("FR 3 Bretagne"))
     }
 
     @Test

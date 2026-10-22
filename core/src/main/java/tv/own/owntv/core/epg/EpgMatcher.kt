@@ -112,7 +112,15 @@ object EpgMatcher {
         // that ARE a country plus a number ("France 24", "France 2") keep their name.
         fun canDropCountryAt(index: Int) = tokens.size > 1 && tokens[index] in COUNTRY &&
             tokens.filterIndexed { i, _ -> i != index }.any { t -> t.any { it.isLetter() } }
-        if (canDropCountryAt(0)) tokens.removeAt(0)
+        if (canDropCountryAt(0)) {
+            tokens.removeAt(0)
+            // glcn: "ES 4 La 1 UHD", "ES-3 La 1 SD" — a lone digit right after the country is the provider's
+            // quality tier, not part of the name. Dropped only when the name still carries its own number
+            // ("la 1"), so "FR 3 Bretagne" or "ES 4" are left alone.
+            if (tokens.size >= 3 && tokens[0].length == 1 && tokens[0][0].isDigit() &&
+                tokens.drop(1).any { t -> t.any { it.isDigit() } }
+            ) tokens.removeAt(0)
+        }
         if (tokens.isNotEmpty() && canDropCountryAt(tokens.size - 1)) tokens.removeAt(tokens.size - 1)
         return tokens.joinToString(" ").trim()
     }
