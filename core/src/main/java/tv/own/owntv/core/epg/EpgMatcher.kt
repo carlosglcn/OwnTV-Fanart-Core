@@ -69,6 +69,7 @@ object EpgMatcher {
     // those scripts could never match a guide entry.
     private val NON_ALNUM = Regex("[^\\p{L}\\p{N} ]")
     private val SPACES = Regex("\\s+")
+    private val BITRATE = Regex("\\d+(mb|mbps|kbps|k)")
     private val TIER_PREFIX = Regex("^\\s*\\p{L}{2,3}\\s*[-:]\\s*\\d(?!\\d)\\s*[-:]?\\s*\\p{L}")
 
     /**
@@ -108,7 +109,8 @@ object EpgMatcher {
         s = s.replace(BRACKETS, " ")
         s = s.replace(SEPARATORS, " ")
         s = s.replace(NON_ALNUM, " ")
-        val tokens = s.split(SPACES).filter { it.isNotBlank() && it !in NOISE }
+        // glcn: "HD 2MB", "1.5MB" — a provider's bitrate tag is no part of the name; "de" links words ("Liga de Campeones").
+        val tokens = s.split(SPACES).filter { it.isNotBlank() && it !in NOISE && it != "de" && !BITRATE.matches(it) }
             .map { NUMBER_WORDS[it] ?: it }.toMutableList()
         // Drop a country/region tag at either end — but only if a wordy token remains, so channels
         // that ARE a country plus a number ("France 24", "France 2") keep their name.
@@ -164,12 +166,24 @@ object EpgMatcher {
         if (a == b) return 1.0
         // glcn: "la1" and "la 1" are the same name written with and without the space.
         if (a.length > 2 && a.replace(" ", "") == b.replace(" ", "")) return 1.0
-        var score = maxOf(jaroWinkler(a, b), tokenDice(a, b))
+        var score = maxOf(jaroWinkler(a, b), tokenDice(a, b), containedTokens(a, b))
         if (da != db) {
             val cap = if (da.isNotEmpty() && db.isNotEmpty()) DIGIT_MISMATCH_CAP else DIGIT_MISSING_CAP
             score = minOf(score, cap)
         }
         return score
+    }
+
+    /**
+     * glcn: one name holding all the words of the other ("M+ LaLiga 2" inside "M+ LaLiga 2 Extra") is the
+     * same channel for the guide's purpose — at least two words, so a lone "sport" never swallows a name.
+     * The digit guard in [scoreNormalized] still stops "LaLiga 2" matching "LaLiga 3".
+     */
+    private fun containedTokens(a: String, b: String): Double {
+        val ta = a.split(' ').toSet()
+        val tb = b.split(' ').toSet()
+        val (small, big) = if (ta.size <= tb.size) ta to tb else tb to ta
+        return if (small.size >= 2 && big.containsAll(small)) 0.93 else 0.0
     }
 
     /** Sørensen–Dice over the two token sets — order-insensitive word overlap. */
