@@ -14,12 +14,17 @@ data class VoiceCommand(val query: String, val kind: VoiceKind, val onTv: Boolea
  * (Gladiator, movie); "busca la serie The Last of Us" → (The Last of Us, series). Spanish and English.
  */
 object VoiceCommandParser {
-    private val LEAD = Regex(
-        "^(?:(?:por favor|oye|ok|vale)\\s+)*(?:(?:pon(?:me|er|gas)?|quiero ver|quiero que pongas|ver|ve|reproduce(?:me)?|busca(?:me)?|abre|enciende|sintoniza|play|watch|put on|show me|open|find)(?:\\s+|$))+",
-    )
-    private val TV_TAIL = Regex("\\s+(?:en|on)\\s+(?:la\\s+|el\\s+|the\\s+|mi\\s+)?(?:tele(?:vision|visión)?|tv|televisor|television)\\s*$")
-    private val KIND_WORD = Regex("^(?:(?:el|la|los|las|un|una|the)\\s+)?(canal|cadena|channel|peli|pelicula|película|film|movie|serie|show|episodio|capitulo|capítulo)\\s+(?:de\\s+)?")
-    private val ARTICLE = Regex("^(?:el|la|los|las|the)\\s+(?=\\S)")
+    private val FILLER = "(?:(?:por favor|oye|ok|vale)\\s+)*"
+    private val VERBS = "(?:pon(?:me|er|gas)?|quiero ver|quiero que pongas|ver|ve|"
+    private val VERBS_B = "reproduce(?:me)?|busca(?:me)?|"
+    private val VERBS_EN = "abre|enciende|sintoniza|play|watch|put on|show me|open|find)"
+    private val LEAD = Regex("^" + FILLER + "(?:" + VERBS + VERBS_B + VERBS_EN + "(?:\\s+|$))+")
+    private val TV_WORD = "(?:tele(?:vision|visión)?|tv|televisor|television)"
+    private val TV_TAIL = Regex("\\s+(?:en|on)\\s+(?:la\\s+|el\\s+|the\\s+|mi\\s+)?" + TV_WORD + "\\s*$")
+    private val KIND_ART = "^(?:(?:el|la|los|las|un|una|the)\\s+)?"
+    private val KIND_NAMES = "(canal|cadena|channel|peli|pelicula|película|film|movie|serie|show|"
+    private val KIND_NAMES2 = "episodio|capitulo|capítulo)\\s+(?:de\\s+)?"
+    private val KIND_WORD = Regex(KIND_ART + KIND_NAMES + KIND_NAMES2)
 
     fun parse(spoken: String): VoiceCommand? {
         var s = spoken.trim().trimEnd('.', '!', '?', ',')
