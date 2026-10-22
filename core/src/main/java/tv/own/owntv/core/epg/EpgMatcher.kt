@@ -47,7 +47,7 @@ object EpgMatcher {
         "se", "no", "dk", "fi", "is", "ee", "lv", "lt", "hr", "rs", "si",
         "br", "mx", "ar", "cl", "co", "pe", "ve", "ae", "sa", "qa", "eg",
         "usa", "america", "canada", "australia", "ireland", "england", "scotland", "wales",
-        "france", "germany", "deutschland", "austria", "switzerland", "spain", "espana",
+        "france", "germany", "deutschland", "austria", "switzerland", "spain", "espana", "españa",
         "italy", "italia", "portugal", "netherlands", "holland", "belgium",
         "poland", "polska", "czech", "czechia", "slovakia", "hungary", "romania", "bulgaria",
         "greece", "turkey", "turkiye", "russia", "ukraine",
@@ -69,6 +69,7 @@ object EpgMatcher {
     // those scripts could never match a guide entry.
     private val NON_ALNUM = Regex("[^\\p{L}\\p{N} ]")
     private val SPACES = Regex("\\s+")
+    private val TIER_PREFIX = Regex("^\\s*\\p{L}{2,3}\\s*[-:]\\s*\\d(?!\\d)\\s*[-:]?\\s*\\p{L}")
 
     /**
      * Reduce a raw channel/EPG name to a comparable token string: lowercase, bracketed tags removed,
@@ -103,6 +104,7 @@ object EpgMatcher {
         // Compose (NFKC), not decompose (NFKD): decomposing would leave combining marks that
         // NON_ALNUM turns into spaces, splitting "Чайка" into two tokens and degrading "ﾊﾟ" to "ハ".
         var s = java.text.Normalizer.normalize(raw, java.text.Normalizer.Form.NFKC).lowercase()
+        val s0 = s
         s = s.replace(BRACKETS, " ")
         s = s.replace(SEPARATORS, " ")
         s = s.replace(NON_ALNUM, " ")
@@ -119,6 +121,10 @@ object EpgMatcher {
             // ("la 1"), so "FR 3 Bretagne" or "ES 4" are left alone.
             if (tokens.size >= 3 && tokens[0].length == 1 && tokens[0][0].isDigit() &&
                 tokens.drop(1).any { t -> t.any { it.isDigit() } }
+            ) tokens.removeAt(0)
+            // "ES-5: FDF HD", "ES-5: Antena 3 Internacional SD" — the same tier written with a dash or colon.
+            else if (tokens.size >= 2 && tokens[0].length == 1 && tokens[0][0].isDigit() && TIER_PREFIX.containsMatchIn(s0) &&
+                tokens.drop(1).any { t -> t.any { it.isLetter() } }
             ) tokens.removeAt(0)
         }
         if (tokens.isNotEmpty() && canDropCountryAt(tokens.size - 1)) tokens.removeAt(tokens.size - 1)
@@ -156,6 +162,8 @@ object EpgMatcher {
     internal fun scoreNormalized(a: String, b: String, da: List<String>, db: List<String>): Double {
         if (a.isEmpty() || b.isEmpty()) return 0.0
         if (a == b) return 1.0
+        // glcn: "la1" and "la 1" are the same name written with and without the space.
+        if (a.length > 2 && a.replace(" ", "") == b.replace(" ", "")) return 1.0
         var score = maxOf(jaroWinkler(a, b), tokenDice(a, b))
         if (da != db) {
             val cap = if (da.isNotEmpty() && db.isNotEmpty()) DIGIT_MISMATCH_CAP else DIGIT_MISSING_CAP

@@ -17,6 +17,10 @@ class EpgMatcherTest {
         assertEquals("bbc 1", EpgMatcher.normalizeForEpg("BBC.One.UK")) // number words → digits
         assertEquals("la 1", EpgMatcher.normalizeForEpg("ES-4 La 1 HD (ES)"))
         assertEquals("la 2", EpgMatcher.normalizeForEpg("ES 3 La 2 SD"))
+        assertEquals("fdf", EpgMatcher.normalizeForEpg("ES-5: FDF HD"))
+        assertEquals("antena 3 internacional", EpgMatcher.normalizeForEpg("ES-5: Antena 3 Internacional SD"))
+        assertEquals("la1", EpgMatcher.normalizeForEpg("ESPAÑA | LA1 (SD)"))
+        assertEquals(1.0, EpgMatcher.scoreNormalized("la1", "la 1"), 0.0)
         assertEquals("3 bretagne", EpgMatcher.normalizeForEpg("FR 3 Bretagne"))
     }
 
