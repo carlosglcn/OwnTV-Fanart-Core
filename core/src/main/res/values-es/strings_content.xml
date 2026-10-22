@@ -379,6 +379,10 @@
     <string name="glcn_platform_square_desc">Muestra el icono cuadrado del servicio en vez del logo alargado de la cadena</string>
     <string name="glcn_show_hidden_categories">Mostrar ocultas (%1$d)</string>
     <string name="glcn_category_hidden_toast">Oculto. Para recuperarlo, usa «Mostrar ocultas» al final de la lista.</string>
+    <string name="glcn_voice_search">Hablar</string>
+    <string name="glcn_voice_prompt">Di un canal, película o serie</string>
+    <string name="glcn_voice_unavailable">La búsqueda por voz no está disponible en este móvil</string>
+    <string name="glcn_voice_not_found">No he encontrado nada que enviar a la TV</string>
     <string name="glcn_watch_on_tv">Ver en la TV</string>
     <string name="glcn_sent_to_tv">Enviado a %1$s</string>
     <string name="glcn_tv_unreachable">No se pudo conectar con la TV. Abre la app en ella, en la misma Wi-Fi.</string>
