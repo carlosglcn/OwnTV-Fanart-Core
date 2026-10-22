@@ -47,7 +47,7 @@ class SportsConfigTest {
         assertEquals(30, d.liveRefreshSeconds)
         assertEquals(10, d.reminderLeadMinutes)
         assertEquals(true, d.scoreInInfoBar)
-        assertEquals(true, d.showLikely)
+        assertEquals(false, d.showLikely)
         assertEquals(false, d.spoilerFree)
         assertEquals(false, d.alerts.enabled)
         assertEquals(setOf(AlertKind.GOALS, AlertKind.KICKOFF_FULL_TIME), d.alerts.kinds)

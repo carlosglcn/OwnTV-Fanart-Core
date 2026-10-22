@@ -71,7 +71,7 @@ data class SportsConfig(
     val spoilerFree: Boolean = false,
     val scoreInInfoBar: Boolean = true,
     val liveRefreshSeconds: Int = SportsRefreshPolicy.DEFAULT_LIVE_SECONDS,
-    val showLikely: Boolean = true,
+    val showLikely: Boolean = false,
     val rememberedChannels: Map<String, RememberedChannel> = emptyMap(),
     val alerts: GoalAlerts = GoalAlerts(),
     val reminderLeadMinutes: Int = DEFAULT_REMINDER_LEAD_MINUTES,
@@ -114,7 +114,7 @@ data class SportsConfig(
         put("spoilerFree", spoilerFree)
         put("scoreInInfoBar", scoreInInfoBar)
         put("liveRefreshSeconds", liveRefreshSeconds)
-        put("showLikely", showLikely)
+        put("showLikely2", showLikely)
         put("channels", JSONObject().apply {
             rememberedChannels.forEach { (league, ch) -> put(league, JSONObject().put("n", ch.name).putOpt("c", ch.country)) }
         })
@@ -164,7 +164,7 @@ data class SportsConfig(
                 spoilerFree = o.optBoolean("spoilerFree", d.spoilerFree),
                 scoreInInfoBar = o.optBoolean("scoreInInfoBar", d.scoreInInfoBar),
                 liveRefreshSeconds = SettingsImportRules.sportsLiveRefresh(o.optInt("liveRefreshSeconds", d.liveRefreshSeconds)),
-                showLikely = o.optBoolean("showLikely", d.showLikely),
+                showLikely = o.optBoolean("showLikely2", d.showLikely),
                 rememberedChannels = o.optJSONObject("channels")?.let { ch ->
                     ch.keys().asSequence().mapNotNull { league ->
                         val c = ch.optJSONObject(league) ?: return@mapNotNull null
