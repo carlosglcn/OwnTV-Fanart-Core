@@ -86,6 +86,7 @@
     <string name="player_time_remaining">−<xliff:g id="time">%1$s</xliff:g></string>
     <string name="player_switch_exo">Se ha cambiado a ExoPlayer</string>
     <string name="player_switch_mpv">Se ha cambiado a MPV</string>
+    <string name="player_smoothness_hint">Este canal está perdiendo fotogramas. Cambiar el reproductor a MPV puede hacer que se vea con más fluidez.</string>
     <string name="player_error_image_subtitle_audio">Los subtítulos de imagen no están disponibles para el formato de audio de este vídeo.</string>
     <string name="player_error_both_engines_exo_first">La reproducción ha fallado en ambos motores de vídeo (primero ExoPlayer y después mpv). Puede que el archivo esté dañado o utilice un formato que este televisor no puede reproducir.</string>
     <string name="player_error_both_engines_mpv_first">La reproducción ha fallado en ambos motores de vídeo (mpv y ExoPlayer). Puede que el archivo esté dañado o utilice un formato que este televisor no puede reproducir. (<xliff:g id="error">%1$s</xliff:g>)</string>
@@ -274,7 +275,7 @@
     <string name="player_subtitles_search_language_description">Solo los subtítulos en este idioma aparecen en los resultados de búsqueda. Aun así, puedes pulsar «Todos los idiomas» en los resultados para ver todo lo que haya para una sola búsqueda.</string>
     <string name="player_subtitles_language_not_set">Sin definir</string>
     <string name="player_frame_rate_prompt_title">Este canal puede verse entrecortado</string>
-    <string name="player_frame_rate_prompt_description">Se reproduce a <xliff:g id="fps">%1$d</xliff:g> fps mientras tu TV funciona a <xliff:g id="current_hz">%2$d</xliff:g> Hz, una frecuencia que no puede mostrar esos fotogramas de forma uniforme — el movimiento se ve ligeramente entrecortado.\n\nLa frecuencia de imagen automática cambia la TV a <xliff:g id="target_hz">%3$d</xliff:g> Hz mientras ves el contenido y la restablece después. Algunas TVs se quedan en negro un momento al cambiar la frecuencia; puedes volver a desactivarla en Ajustes → Reproductor de vídeo.</string>
+    <string name="player_frame_rate_prompt_description">Se reproduce a <xliff:g id="fps">%1$d</xliff:g> fps mientras tu TV funciona a <xliff:g id="current_hz">%2$d</xliff:g> Hz, una frecuencia que no puede mostrar esos fotogramas de forma uniforme — el movimiento se ve ligeramente entrecortado.\n\nLa frecuencia de imagen automática cambia la TV a <xliff:g id="target_hz">%3$d</xliff:g> Hz mientras ves el contenido y la restablece después. Algunas TVs se quedan en negro un momento al cambiar la frecuencia; puedes volver a desactivarla en Ajustes → Imagen → Frecuencia de fotogramas.</string>
     <string name="player_frame_rate_turn_on">Activar</string>
     <string name="player_reason_live_fallback">La reproducción en directo cambió a una alternativa</string>
     <string name="player_reason_live_no_fallback">La reproducción en directo falló: no queda ninguna alternativa</string>

@@ -9,6 +9,49 @@
 > in one bolded line of its own (e.g. **Database v46 · Backup v24 · Breaking**). The detail — what,
 > why, files and verification — belongs in the commit message, never here.
 
+## core-1.0.69 — 2026-10-21
+
+### ✨ New features
+
+- **🏆 Sports: 54 more leagues, with Volleyball and Lacrosse**
+- **📅 Sports calendar: every followed league's month, saved on the device**
+- **🏁 Driver, constructor and tennis rankings**
+- **👕 Team pages: fixtures and results, cups included**
+- **🗂️ League cards: leader and next match**
+- **🔄 Calendar refresh setting**
+- **🎚️ FFmpeg audio for ExoPlayer, as a switch (off by default)**
+- **💡 A hint to try MPV when a live channel keeps dropping frames**
+- **🌗 Prefer SDR when a stream offers both (replaces the HDR switch)**
+- **🎧 Audio delay for each output: HDMI, soundbar, Bluetooth, speakers, headphones**
+- **🎬 mpv engine 2026.10.4**
+
+### 🐛 Fixes
+
+- **Cups no longer fetch a table they never have**
+- **A saved channel plays again after the TV wakes from standby**
+- **A live channel ExoPlayer can only show as a slideshow moves to mpv by itself**
+- **Full frame rate on mpv after zapping from a 25 fps channel**
+- **H.264 catch-up stays on hardware decoding on mpv**
+- **Catch-up no longer stays on software decoding for two weeks after one stalled open**
+- **Settings hints point to the right menu, in every language**
+- **Live H.264 channels no longer freeze or drop frames on some TVs**
+- **FFmpeg decodes audio only when the TV has no decoder for it**
+- **A frozen live picture gets a new decoder and surface before mpv takes over**
+- **Live video never starts on a stand-in surface**
+- **Auto frame rate tells 59.94, 29.97 and 23.976 from 60, 30 and 24**
+- **Auto frame rate works for films that do not state their frame rate**
+- **Hardware decoding changed in Settings reaches Live TV without a restart**
+- **No sound or picture left playing under a live error screen**
+- **"Software decoding above 1080p" is obeyed on Live TV**
+- **mpv resumes a film in one step, to the millisecond**
+- **mpv waits for 2 seconds of live video before resuming after a stall**
+- **TV speakers get stereo from mpv on Android 12 and older**
+- **ExoPlayer plays its audio as a movie, like the rest of the app**
+- **Lighter playback logging, with mpv's frame counters in the report**
+- **Switching channels on mpv no longer holds up the screen**
+- **Each playlist keeps its own category order**
+- **A re-sync with many custom-category items finishes, instead of locking the database**
+
 ## core-1.0.68 — 2026-10-17
 
 **Database v49 · Backup v25 · Breaking (glass settings)**

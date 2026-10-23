@@ -380,6 +380,45 @@
     <string name="sports_switch_channel">Zender wisselen</string>
     <string name="sports_tab_fixtures">Programma</string>
     <string name="sports_tab_results">Uitslagen</string>
+    <string name="sports_tab_scores">Live</string>
+    <string name="sports_tab_calendar">Kalender</string>
+    <string name="sports_tab_leagues">Competities</string>
+    <string name="sports_previous_month">Vorige maand</string>
+    <string name="sports_next_month">Volgende maand</string>
+    <string name="sports_next">Hierna: <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">Hierna</string>
+    <string name="sports_new_badge">Nieuw</string>
+    <string name="sports_no_table_series">Geen stand — series wisselen elke week</string>
+    <string name="sports_follow_league">Competitie volgen</string>
+    <string name="sports_unfollow_league">Competitie niet meer volgen</string>
+    <string name="sports_no_matches_on">Geen wedstrijden in je sporten op <xliff:g id="day">%1$s</xliff:g></string>
+    <string name="sports_nothing_on_day">Niets op deze dag</string>
+    <string name="sports_nothing_in_sport"><xliff:g id="sport">%1$s</xliff:g>: niets op deze dag</string>
+    <string name="sports_change_leagues_hint">Competities voeg je toe of verwijder je in Instellingen → Sport</string>
+    <string name="sports_loading_month"><xliff:g id="month">%1$s</xliff:g> laden…</string>
+    <string name="sports_offline_saved">Je ziet wat er <xliff:g id="time">%1$s</xliff:g> is opgeslagen — ESPN is niet bereikbaar</string>
+    <string name="sports_team_page">Teampagina</string>
+    <string name="sports_next_match">Volgende wedstrijd</string>
+    <string name="sports_last_five">Laatste vijf</string>
+    <string name="sports_league_position">Plaats in de stand</string>
+    <string name="sports_in_my_teams">In Mijn teams</string>
+    <string name="sports_open_match_page">Wedstrijdpagina openen</string>
+    <string name="sports_open_team_page">Teampagina openen</string>
+    <string name="sports_my_teams_leagues">De competities waarin je teams spelen</string>
+    <string name="sports_tab_drivers">Coureurs</string>
+    <string name="sports_tab_constructors">Constructeurs</string>
+    <string name="sports_tab_races">Races</string>
+    <string name="sports_tab_rankings">Ranglijst</string>
+    <string name="sports_tab_matches">Wedstrijden</string>
+    <string name="sports_next_race_weekend">Volgend raceweekend</string>
+    <string name="sports_last_weekend">Afgelopen weekend</string>
+    <string name="sports_session_practice_1">Vrije training 1</string>
+    <string name="sports_session_practice_2">Vrije training 2</string>
+    <string name="sports_session_practice_3">Vrije training 3</string>
+    <string name="sports_session_sprint_qualifying">Sprintkwalificatie</string>
+    <string name="sports_session_qualifying">Kwalificatie</string>
+    <string name="sports_session_sprint">Sprint</string>
+    <string name="sports_session_race">Race</string>
     <string name="sports_table_team">Team</string>
     <string name="sports_table_played">G</string>
     <string name="sports_table_won">W</string>
@@ -464,6 +503,12 @@
         <item quantity="other">Elke <xliff:g id="count">%1$d</xliff:g> uur</item>
     </plurals>
     <string name="sports_auto_rebuild_app_start">Bij elke start van de app</string>
+    <string name="sports_calendar_refresh">Kalender verversen</string>
+    <string name="sports_calendar_refresh_description">Hoe vaak opgeslagen maanden opnieuw worden opgehaald</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="one">Elke <xliff:g id="count">%1$d</xliff:g> dag</item>
+        <item quantity="other">Elke <xliff:g id="count">%1$d</xliff:g> dagen</item>
+    </plurals>
     <string name="sports_find_channels">Zenders zoeken</string>
     <string name="sports_find_channels_description">Zoekt deze wedstrijd in je gids en zendernamen. Bij een grote afspeellijst kan dat even duren.</string>
     <string name="sports_finding_channels">Je zenders worden doorzocht…</string>

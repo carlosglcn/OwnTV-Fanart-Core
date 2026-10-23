@@ -380,6 +380,45 @@
     <string name="sports_switch_channel">চ্যানেল বদলান</string>
     <string name="sports_tab_fixtures">সূচি</string>
     <string name="sports_tab_results">ফলাফল</string>
+    <string name="sports_tab_scores">স্কোর</string>
+    <string name="sports_tab_calendar">ক্যালেন্ডার</string>
+    <string name="sports_tab_leagues">লিগ</string>
+    <string name="sports_previous_month">আগের মাস</string>
+    <string name="sports_next_month">পরের মাস</string>
+    <string name="sports_next">পরবর্তী: <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">পরবর্তী</string>
+    <string name="sports_new_badge">নতুন</string>
+    <string name="sports_no_table_series">কোনো টেবিল নেই — সিরিজ প্রতি সপ্তাহে বদলায়</string>
+    <string name="sports_follow_league">লিগ ফলো করুন</string>
+    <string name="sports_unfollow_league">লিগ আনফলো করুন</string>
+    <string name="sports_no_matches_on"><xliff:g id="day">%1$s</xliff:g> তারিখে আপনার খেলাগুলোতে কোনো ম্যাচ নেই</string>
+    <string name="sports_nothing_on_day">এই দিনে কিছু নেই</string>
+    <string name="sports_nothing_in_sport"><xliff:g id="sport">%1$s</xliff:g>: এই দিনে কিছু নেই</string>
+    <string name="sports_change_leagues_hint">সেটিংস → খেলা থেকে লিগ যোগ করুন বা সরান</string>
+    <string name="sports_loading_month"><xliff:g id="month">%1$s</xliff:g> লোড হচ্ছে…</string>
+    <string name="sports_offline_saved"><xliff:g id="time">%1$s</xliff:g> সময়ে সংরক্ষিত তথ্য দেখানো হচ্ছে — ESPN-এ পৌঁছানো যায়নি</string>
+    <string name="sports_team_page">দলের পাতা</string>
+    <string name="sports_next_match">পরবর্তী ম্যাচ</string>
+    <string name="sports_last_five">শেষ পাঁচটি</string>
+    <string name="sports_league_position">লিগে অবস্থান</string>
+    <string name="sports_in_my_teams">আমার দলে আছে</string>
+    <string name="sports_open_match_page">ম্যাচের পাতা খুলুন</string>
+    <string name="sports_open_team_page">দলের পাতা খুলুন</string>
+    <string name="sports_my_teams_leagues">আপনার দলগুলো যেসব লিগে খেলে</string>
+    <string name="sports_tab_drivers">ড্রাইভার</string>
+    <string name="sports_tab_constructors">কনস্ট্রাক্টর</string>
+    <string name="sports_tab_races">রেস</string>
+    <string name="sports_tab_rankings">র‍্যাঙ্কিং</string>
+    <string name="sports_tab_matches">ম্যাচ</string>
+    <string name="sports_next_race_weekend">পরবর্তী রেস উইকেন্ড</string>
+    <string name="sports_last_weekend">গত সপ্তাহান্ত</string>
+    <string name="sports_session_practice_1">প্র্যাকটিস ১</string>
+    <string name="sports_session_practice_2">প্র্যাকটিস ২</string>
+    <string name="sports_session_practice_3">প্র্যাকটিস ৩</string>
+    <string name="sports_session_sprint_qualifying">স্প্রিন্ট কোয়ালিফাইং</string>
+    <string name="sports_session_qualifying">কোয়ালিফাইং</string>
+    <string name="sports_session_sprint">স্প্রিন্ট</string>
+    <string name="sports_session_race">রেস</string>
     <string name="sports_table_team">দল</string>
     <string name="sports_table_played">ম্যা</string>
     <string name="sports_table_won">জ</string>
@@ -464,6 +503,12 @@
         <item quantity="other">প্রতি <xliff:g id="count">%1$d</xliff:g> ঘণ্টায়</item>
     </plurals>
     <string name="sports_auto_rebuild_app_start">প্রতিবার অ্যাপ চালু হলে</string>
+    <string name="sports_calendar_refresh">ক্যালেন্ডার রিফ্রেশ</string>
+    <string name="sports_calendar_refresh_description">সংরক্ষিত মাসগুলো কতবার আবার আনা হবে</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="one">প্রতি <xliff:g id="count">%1$d</xliff:g> দিনে</item>
+        <item quantity="other">প্রতি <xliff:g id="count">%1$d</xliff:g> দিনে</item>
+    </plurals>
     <string name="sports_find_channels">চ্যানেল খুঁজুন</string>
     <string name="sports_find_channels_description">আপনার গাইড ও চ্যানেলের নামে এই ম্যাচটি খোঁজে। বড় প্লেলিস্টে একটু সময় লাগতে পারে।</string>
     <string name="sports_finding_channels">আপনার চ্যানেল খোঁজা হচ্ছে…</string>

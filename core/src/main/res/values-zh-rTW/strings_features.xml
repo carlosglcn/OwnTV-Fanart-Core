@@ -362,6 +362,45 @@
     <string name="sports_switch_channel">切換頻道</string>
     <string name="sports_tab_fixtures">賽程</string>
     <string name="sports_tab_results">賽果</string>
+    <string name="sports_tab_scores">比分</string>
+    <string name="sports_tab_calendar">行事曆</string>
+    <string name="sports_tab_leagues">聯賽</string>
+    <string name="sports_previous_month">上個月</string>
+    <string name="sports_next_month">下個月</string>
+    <string name="sports_next">下一場：<xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">下一場</string>
+    <string name="sports_new_badge">新</string>
+    <string name="sports_no_table_series">無積分榜 — 系列賽每週更換</string>
+    <string name="sports_follow_league">關注聯賽</string>
+    <string name="sports_unfollow_league">取消關注聯賽</string>
+    <string name="sports_no_matches_on"><xliff:g id="day">%1$s</xliff:g>你關注的項目沒有比賽</string>
+    <string name="sports_nothing_on_day">這一天沒有賽事</string>
+    <string name="sports_nothing_in_sport">這一天沒有<xliff:g id="sport">%1$s</xliff:g>賽事</string>
+    <string name="sports_change_leagues_hint">在 設定 → 體育 中新增或移除聯賽</string>
+    <string name="sports_loading_month">正在載入<xliff:g id="month">%1$s</xliff:g>…</string>
+    <string name="sports_offline_saved">顯示的是<xliff:g id="time">%1$s</xliff:g>儲存的內容 — 無法連線到 ESPN</string>
+    <string name="sports_team_page">球隊頁面</string>
+    <string name="sports_next_match">下一場比賽</string>
+    <string name="sports_last_five">近五場</string>
+    <string name="sports_league_position">聯賽排名</string>
+    <string name="sports_in_my_teams">已在我的球隊中</string>
+    <string name="sports_open_match_page">開啟比賽頁面</string>
+    <string name="sports_open_team_page">開啟球隊頁面</string>
+    <string name="sports_my_teams_leagues">你的球隊參加的聯賽</string>
+    <string name="sports_tab_drivers">車手</string>
+    <string name="sports_tab_constructors">車隊</string>
+    <string name="sports_tab_races">分站賽</string>
+    <string name="sports_tab_rankings">排名</string>
+    <string name="sports_tab_matches">比賽</string>
+    <string name="sports_next_race_weekend">下一個比賽週末</string>
+    <string name="sports_last_weekend">上週末</string>
+    <string name="sports_session_practice_1">一練</string>
+    <string name="sports_session_practice_2">二練</string>
+    <string name="sports_session_practice_3">三練</string>
+    <string name="sports_session_sprint_qualifying">衝刺排位賽</string>
+    <string name="sports_session_qualifying">排位賽</string>
+    <string name="sports_session_sprint">衝刺賽</string>
+    <string name="sports_session_race">正賽</string>
     <string name="sports_table_team">球隊</string>
     <string name="sports_table_played">場</string>
     <string name="sports_table_won">勝</string>
@@ -442,6 +481,11 @@
         <item quantity="other">每 <xliff:g id="count">%1$d</xliff:g> 小時</item>
     </plurals>
     <string name="sports_auto_rebuild_app_start">每次啟動應用程式時</string>
+    <string name="sports_calendar_refresh">行事曆重新整理</string>
+    <string name="sports_calendar_refresh_description">已儲存月份的重新取得頻率</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="other">每 <xliff:g id="count">%1$d</xliff:g> 天</item>
+    </plurals>
     <string name="sports_find_channels">尋找頻道</string>
     <string name="sports_find_channels_description">在你的節目表和頻道名稱中搜尋這場比賽。播放清單較大時可能需要一些時間。</string>
     <string name="sports_finding_channels">正在搜尋你的頻道…</string>

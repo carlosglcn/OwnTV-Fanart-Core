@@ -61,7 +61,7 @@ internal class StalkerSyncer(
         val creds = credentialsFor(s)
         // First choice: if the portal profile advertises an XMLTV feed, adopt it as the
         // source's guide URL so the existing (stream-parsed, rolling-window) XMLTV pipeline can sync
-        // it from Settings → EPG. Best effort — a failure here must never fail the catalog sync.
+        // it from Settings → EPG Sources. Best effort — a failure here must never fail the catalog sync.
         runCatching { adoptPortalXmltvUrl(s, creds) }
             .onFailure { Log.w(TAG, "portal XMLTV probe failed sourceId=${s.id}: ${it.message}") }
         // Shared adaptive budget: every phase draws from one gate, so the portal never sees more than
@@ -892,7 +892,7 @@ internal class StalkerSyncer(
      * Some portals advertise an XMLTV feed in their `get_profile` payload. If this
      * source has no guide URL yet, persist the advertised one into `epgUrl` — `EpgRepository.guideUrl`
      * then treats the source exactly like an M3U with `url-tvg`. A user-entered URL always wins
-     * (never overwritten), and EPG sync itself stays user-initiated (Settings → EPG).
+     * (never overwritten), and EPG sync itself stays user-initiated (Settings → EPG Sources).
      */
     private suspend fun adoptPortalXmltvUrl(s: SourceEntity, creds: StalkerCredentials) {
         if (!s.epgUrl.isNullOrBlank()) return

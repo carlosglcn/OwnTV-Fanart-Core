@@ -380,6 +380,45 @@
     <string name="sports_switch_channel">Skift kanal</string>
     <string name="sports_tab_fixtures">Program</string>
     <string name="sports_tab_results">Resultater</string>
+    <string name="sports_tab_scores">Live</string>
+    <string name="sports_tab_calendar">Kalender</string>
+    <string name="sports_tab_leagues">Ligaer</string>
+    <string name="sports_previous_month">Forrige måned</string>
+    <string name="sports_next_month">Næste måned</string>
+    <string name="sports_next">Næste: <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">Næste</string>
+    <string name="sports_new_badge">Ny</string>
+    <string name="sports_no_table_series">Ingen tabel — serierne skifter hver uge</string>
+    <string name="sports_follow_league">Følg liga</string>
+    <string name="sports_unfollow_league">Stop med at følge liga</string>
+    <string name="sports_no_matches_on">Ingen kampe i dine sportsgrene <xliff:g id="day">%1$s</xliff:g></string>
+    <string name="sports_nothing_on_day">Intet denne dag</string>
+    <string name="sports_nothing_in_sport"><xliff:g id="sport">%1$s</xliff:g>: intet denne dag</string>
+    <string name="sports_change_leagues_hint">Tilføj eller fjern ligaer i Indstillinger → Sport</string>
+    <string name="sports_loading_month">Indlæser <xliff:g id="month">%1$s</xliff:g>…</string>
+    <string name="sports_offline_saved">Viser det, der blev gemt <xliff:g id="time">%1$s</xliff:g> — ESPN kunne ikke nås</string>
+    <string name="sports_team_page">Holdside</string>
+    <string name="sports_next_match">Næste kamp</string>
+    <string name="sports_last_five">Seneste fem</string>
+    <string name="sports_league_position">Placering i ligaen</string>
+    <string name="sports_in_my_teams">I Mine hold</string>
+    <string name="sports_open_match_page">Åbn kampside</string>
+    <string name="sports_open_team_page">Åbn holdside</string>
+    <string name="sports_my_teams_leagues">Ligaerne, dine hold spiller i</string>
+    <string name="sports_tab_drivers">Kørere</string>
+    <string name="sports_tab_constructors">Konstruktører</string>
+    <string name="sports_tab_races">Løb</string>
+    <string name="sports_tab_rankings">Rangliste</string>
+    <string name="sports_tab_matches">Kampe</string>
+    <string name="sports_next_race_weekend">Næste løbsweekend</string>
+    <string name="sports_last_weekend">Sidste weekend</string>
+    <string name="sports_session_practice_1">Træning 1</string>
+    <string name="sports_session_practice_2">Træning 2</string>
+    <string name="sports_session_practice_3">Træning 3</string>
+    <string name="sports_session_sprint_qualifying">Sprintkvalifikation</string>
+    <string name="sports_session_qualifying">Kvalifikation</string>
+    <string name="sports_session_sprint">Sprint</string>
+    <string name="sports_session_race">Løb</string>
     <string name="sports_table_team">Hold</string>
     <string name="sports_table_played">K</string>
     <string name="sports_table_won">V</string>
@@ -464,6 +503,12 @@
         <item quantity="other">Hver <xliff:g id="count">%1$d</xliff:g>. time</item>
     </plurals>
     <string name="sports_auto_rebuild_app_start">Ved hver start af appen</string>
+    <string name="sports_calendar_refresh">Kalenderopdatering</string>
+    <string name="sports_calendar_refresh_description">Hvor ofte gemte måneder hentes igen</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="one">Hver <xliff:g id="count">%1$d</xliff:g>. dag</item>
+        <item quantity="other">Hver <xliff:g id="count">%1$d</xliff:g>. dag</item>
+    </plurals>
     <string name="sports_find_channels">Find kanaler</string>
     <string name="sports_find_channels_description">Søger efter kampen i din guide og dine kanalnavne. Med en stor playliste kan det tage et øjeblik.</string>
     <string name="sports_finding_channels">Søger i dine kanaler…</string>

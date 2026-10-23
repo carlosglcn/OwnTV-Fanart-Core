@@ -398,6 +398,45 @@
     <string name="sports_switch_channel">Cambiar de canal</string>
     <string name="sports_tab_fixtures">Calendario</string>
     <string name="sports_tab_results">Resultados</string>
+    <string name="sports_tab_scores">Marcadores</string>
+    <string name="sports_tab_calendar">Agenda</string>
+    <string name="sports_tab_leagues">Ligas</string>
+    <string name="sports_previous_month">Mes anterior</string>
+    <string name="sports_next_month">Mes siguiente</string>
+    <string name="sports_next">Siguiente: <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">Siguiente</string>
+    <string name="sports_new_badge">Nuevo</string>
+    <string name="sports_no_table_series">Sin clasificación — las series cambian cada semana</string>
+    <string name="sports_follow_league">Seguir liga</string>
+    <string name="sports_unfollow_league">Dejar de seguir la liga</string>
+    <string name="sports_no_matches_on">No hay partidos de tus deportes el <xliff:g id="day">%1$s</xliff:g></string>
+    <string name="sports_nothing_on_day">Nada este día</string>
+    <string name="sports_nothing_in_sport"><xliff:g id="sport">%1$s</xliff:g>: nada este día</string>
+    <string name="sports_change_leagues_hint">Añade o quita ligas en Ajustes → Deportes</string>
+    <string name="sports_loading_month">Cargando <xliff:g id="month">%1$s</xliff:g>…</string>
+    <string name="sports_offline_saved">Se muestra lo guardado <xliff:g id="time">%1$s</xliff:g> — no se pudo conectar con ESPN</string>
+    <string name="sports_team_page">Página del equipo</string>
+    <string name="sports_next_match">Próximo partido</string>
+    <string name="sports_last_five">Últimos cinco</string>
+    <string name="sports_league_position">Posición en la liga</string>
+    <string name="sports_in_my_teams">En Mis equipos</string>
+    <string name="sports_open_match_page">Abrir página del partido</string>
+    <string name="sports_open_team_page">Abrir página del equipo</string>
+    <string name="sports_my_teams_leagues">Las ligas en las que juegan tus equipos</string>
+    <string name="sports_tab_drivers">Pilotos</string>
+    <string name="sports_tab_constructors">Constructores</string>
+    <string name="sports_tab_races">Carreras</string>
+    <string name="sports_tab_rankings">Ranking</string>
+    <string name="sports_tab_matches">Partidos</string>
+    <string name="sports_next_race_weekend">Próximo fin de semana de carrera</string>
+    <string name="sports_last_weekend">Último fin de semana</string>
+    <string name="sports_session_practice_1">Libres 1</string>
+    <string name="sports_session_practice_2">Libres 2</string>
+    <string name="sports_session_practice_3">Libres 3</string>
+    <string name="sports_session_sprint_qualifying">Clasificación al sprint</string>
+    <string name="sports_session_qualifying">Clasificación</string>
+    <string name="sports_session_sprint">Sprint</string>
+    <string name="sports_session_race">Carrera</string>
     <string name="sports_table_team">Equipo</string>
     <string name="sports_table_played">PJ</string>
     <string name="sports_table_won">G</string>
@@ -486,6 +525,13 @@
         <item quantity="other">Cada <xliff:g id="count">%1$d</xliff:g> horas</item>
     </plurals>
     <string name="sports_auto_rebuild_app_start">Cada vez que se abre la app</string>
+    <string name="sports_calendar_refresh">Actualización de la agenda</string>
+    <string name="sports_calendar_refresh_description">Cada cuánto se vuelven a obtener los meses guardados</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="one">Cada <xliff:g id="count">%1$d</xliff:g> día</item>
+        <item quantity="many">Cada <xliff:g id="count">%1$d</xliff:g> días</item>
+        <item quantity="other">Cada <xliff:g id="count">%1$d</xliff:g> días</item>
+    </plurals>
     <string name="sports_find_channels">Buscar canales</string>
     <string name="sports_find_channels_description">Busca este partido en tu guía y en los nombres de los canales. Con una lista grande puede tardar un momento.</string>
     <string name="sports_finding_channels">Buscando en tus canales…</string>

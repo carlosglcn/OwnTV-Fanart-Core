@@ -86,6 +86,7 @@
     <string name="player_time_remaining">−<xliff:g id="time">%1$s</xliff:g></string>
     <string name="player_switch_exo">Passage à ExoPlayer</string>
     <string name="player_switch_mpv">Passage à mpv</string>
+    <string name="player_smoothness_hint">Cette chaîne perd des images. Passer le lecteur sur mpv peut la rendre plus fluide.</string>
     <string name="player_error_image_subtitle_audio">Les sous-titres graphiques ne sont pas disponibles avec le format audio de cette vidéo.</string>
     <string name="player_error_both_engines_exo_first">La lecture a échoué avec les deux moteurs vidéo (ExoPlayer, puis mpv). Le fichier est peut-être corrompu ou utilise un format que ce téléviseur ne peut pas lire.</string>
     <string name="player_error_both_engines_mpv_first">La lecture a échoué avec les deux moteurs vidéo (mpv et ExoPlayer). Le fichier est peut-être corrompu ou utilise un format que ce téléviseur ne peut pas lire. (<xliff:g id="error">%1$s</xliff:g>)</string>
@@ -274,7 +275,7 @@
     <string name="player_subtitles_search_language_description">Seuls les sous-titres dans cette langue apparaissent dans les résultats de recherche. Vous pouvez toujours appuyer sur « Toutes les langues » dans les résultats pour tout voir pour une recherche.</string>
     <string name="player_subtitles_language_not_set">Non défini</string>
     <string name="player_frame_rate_prompt_title">Cette chaîne peut saccader</string>
-    <string name="player_frame_rate_prompt_description">Elle diffuse à <xliff:g id="fps">%1$d</xliff:g> images/s alors que votre téléviseur fonctionne à <xliff:g id="current_hz">%2$d</xliff:g> Hz, ce qui ne permet pas d\'afficher ces images de manière uniforme — le mouvement semble légèrement saccadé.\n\nLa fréquence d\'images automatique fait passer le téléviseur à <xliff:g id="target_hz">%3$d</xliff:g> Hz pendant le visionnage, puis le rétablit ensuite. Certains téléviseurs noircissent un instant lorsque la fréquence change ; vous pouvez la désactiver à nouveau dans Paramètres → Lecteur vidéo.</string>
+    <string name="player_frame_rate_prompt_description">Elle diffuse à <xliff:g id="fps">%1$d</xliff:g> images/s alors que votre téléviseur fonctionne à <xliff:g id="current_hz">%2$d</xliff:g> Hz, ce qui ne permet pas d\'afficher ces images de manière uniforme — le mouvement semble légèrement saccadé.\n\nLa fréquence d\'images automatique fait passer le téléviseur à <xliff:g id="target_hz">%3$d</xliff:g> Hz pendant le visionnage, puis le rétablit ensuite. Certains téléviseurs noircissent un instant lorsque la fréquence change ; vous pouvez la désactiver à nouveau dans Paramètres → Image → Fréquence d’images.</string>
     <string name="player_frame_rate_turn_on">Activer</string>
     <string name="player_reason_live_fallback">La lecture en direct a basculé vers une solution de repli</string>
     <string name="player_reason_live_no_fallback">La lecture en direct a échoué — plus aucune solution de repli disponible</string>

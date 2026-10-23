@@ -86,6 +86,7 @@
     <string name="player_time_remaining">−<xliff:g id="time">%1$s</xliff:g></string>
     <string name="player_switch_exo">Byttet til ExoPlayer</string>
     <string name="player_switch_mpv">Byttet til MPV</string>
+    <string name="player_smoothness_hint">Denne kanalen mister bilder. Bytter du avspilleren til MPV, kan den gå jevnere.</string>
     <string name="player_error_image_subtitle_audio">Bildebaserte undertekster er ikke tilgjengelige for lydformatet i denne videoen.</string>
     <string name="player_error_both_engines_exo_first">Avspillingen mislyktes med begge videomotorene (først ExoPlayer, deretter mpv). Filen kan være skadet eller bruke et format denne TV-en ikke kan spille av.</string>
     <string name="player_error_both_engines_mpv_first">Avspillingen mislyktes med begge videomotorene (mpv og ExoPlayer). Filen kan være skadet eller bruke et format denne TV-en ikke kan spille av. (<xliff:g id="error">%1$s</xliff:g>)</string>
@@ -267,7 +268,7 @@
     <string name="player_subtitles_search_language_description">Bare undertekster på dette språket vises i søkeresultatene. Du kan likevel trykke på «Alle språk» i resultatene for å se alt for ett søk.</string>
     <string name="player_subtitles_language_not_set">Ikke angitt</string>
     <string name="player_frame_rate_prompt_title">Denne kanalen kan hakke</string>
-    <string name="player_frame_rate_prompt_description">Den spilles av i <xliff:g id="fps">%1$d</xliff:g> fps mens TV-en kjører i <xliff:g id="current_hz">%2$d</xliff:g> Hz, som ikke kan vise disse bildene jevnt – bevegelser ser litt hakkete ut.\n\nAutomatisk bildefrekvens bytter TV-en til <xliff:g id="target_hz">%3$d</xliff:g> Hz mens du ser på, og setter den tilbake etterpå. Noen TV-er blir svarte et øyeblikk når frekvensen endres; du kan slå den av igjen i Innstillinger → Videoavspiller.</string>
+    <string name="player_frame_rate_prompt_description">Den spilles av i <xliff:g id="fps">%1$d</xliff:g> fps mens TV-en kjører i <xliff:g id="current_hz">%2$d</xliff:g> Hz, som ikke kan vise disse bildene jevnt – bevegelser ser litt hakkete ut.\n\nAutomatisk bildefrekvens bytter TV-en til <xliff:g id="target_hz">%3$d</xliff:g> Hz mens du ser på, og setter den tilbake etterpå. Noen TV-er blir svarte et øyeblikk når frekvensen endres; du kan slå den av igjen i Innstillinger → Bilde → Bildefrekvens.</string>
     <string name="player_frame_rate_turn_on">Slå på</string>
     <string name="player_reason_live_fallback">Direkteavspillingen byttet til en fallback</string>
     <string name="player_reason_live_no_fallback">Direkteavspillingen feilet — ingen fallback gjenstår</string>

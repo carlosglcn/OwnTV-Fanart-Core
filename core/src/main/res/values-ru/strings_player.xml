@@ -86,6 +86,7 @@
     <string name="player_time_remaining">−<xliff:g id="time">%1$s</xliff:g></string>
     <string name="player_switch_exo">Переключено на ExoPlayer</string>
     <string name="player_switch_mpv">Переключено на mpv</string>
+    <string name="player_smoothness_hint">Этот канал теряет кадры. Переключение плеера на mpv может сделать воспроизведение плавнее.</string>
     <string name="player_error_image_subtitle_audio">Графические субтитры недоступны для аудиоформата этого видео.</string>
     <string name="player_error_both_engines_exo_first">Воспроизведение не удалось в обоих видеодвижках (сначала ExoPlayer, затем mpv). Возможно, файл повреждён или использует формат, который этот телевизор не поддерживает.</string>
     <string name="player_error_both_engines_mpv_first">Воспроизведение не удалось в обоих видеодвижках (mpv и ExoPlayer). Возможно, файл повреждён или использует формат, который этот телевизор не поддерживает. (<xliff:g id="error">%1$s</xliff:g>)</string>
@@ -281,7 +282,7 @@
     <string name="player_subtitles_search_language_description">В результатах поиска будут только субтитры на этом языке. Вы по-прежнему можете нажать «Все языки» в результатах, чтобы увидеть всё для одного поиска.</string>
     <string name="player_subtitles_language_not_set">Не выбран</string>
     <string name="player_frame_rate_prompt_title">На этом канале возможны рывки изображения</string>
-    <string name="player_frame_rate_prompt_description">Канал воспроизводится со скоростью <xliff:g id="fps">%1$d</xliff:g> fps, а ваш телевизор работает с частотой <xliff:g id="current_hz">%2$d</xliff:g> Гц, поэтому не может показывать эти кадры равномерно — движение выглядит слегка прерывистым.\n\nАвтопереключение частоты кадров переводит телевизор на <xliff:g id="target_hz">%3$d</xliff:g> Гц, пока вы смотрите, а затем возвращает обратно. Некоторые телевизоры на мгновение гаснут при смене частоты; вы можете снова отключить эту функцию в разделе «Настройки» → «Видеоплеер».</string>
+    <string name="player_frame_rate_prompt_description">Канал воспроизводится со скоростью <xliff:g id="fps">%1$d</xliff:g> fps, а ваш телевизор работает с частотой <xliff:g id="current_hz">%2$d</xliff:g> Гц, поэтому не может показывать эти кадры равномерно — движение выглядит слегка прерывистым.\n\nАвтопереключение частоты кадров переводит телевизор на <xliff:g id="target_hz">%3$d</xliff:g> Гц, пока вы смотрите, а затем возвращает обратно. Некоторые телевизоры на мгновение гаснут при смене частоты; вы можете снова отключить эту функцию в разделе «Настройки» → «Изображение» → «Частота кадров».</string>
     <string name="player_frame_rate_turn_on">Включить</string>
     <string name="player_reason_live_fallback">Воспроизведение прямого эфира переключено на резервный вариант</string>
     <string name="player_reason_live_no_fallback">Воспроизведение прямого эфира не удалось — резервных вариантов не осталось</string>

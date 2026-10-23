@@ -380,6 +380,45 @@
     <string name="sports_switch_channel">Csatornaváltás</string>
     <string name="sports_tab_fixtures">Program</string>
     <string name="sports_tab_results">Eredmények</string>
+    <string name="sports_tab_scores">Élő</string>
+    <string name="sports_tab_calendar">Naptár</string>
+    <string name="sports_tab_leagues">Bajnokságok</string>
+    <string name="sports_previous_month">Előző hónap</string>
+    <string name="sports_next_month">Következő hónap</string>
+    <string name="sports_next">Következik: <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">Következik</string>
+    <string name="sports_new_badge">Új</string>
+    <string name="sports_no_table_series">Nincs tabella — a sorozatok hetente változnak</string>
+    <string name="sports_follow_league">Bajnokság követése</string>
+    <string name="sports_unfollow_league">Bajnokság követésének leállítása</string>
+    <string name="sports_no_matches_on"><xliff:g id="day">%1$s</xliff:g>: nincs meccs a sportágaidban</string>
+    <string name="sports_nothing_on_day">Ezen a napon nincs semmi</string>
+    <string name="sports_nothing_in_sport"><xliff:g id="sport">%1$s</xliff:g>: ezen a napon nincs semmi</string>
+    <string name="sports_change_leagues_hint">Bajnokságokat a Beállítások → Sport alatt adhatsz hozzá vagy távolíthatsz el</string>
+    <string name="sports_loading_month"><xliff:g id="month">%1$s</xliff:g> betöltése…</string>
+    <string name="sports_offline_saved">A mentett állapot látható (<xliff:g id="time">%1$s</xliff:g>) — az ESPN nem érhető el</string>
+    <string name="sports_team_page">Csapatoldal</string>
+    <string name="sports_next_match">Következő meccs</string>
+    <string name="sports_last_five">Utolsó öt</string>
+    <string name="sports_league_position">Helyezés a tabellán</string>
+    <string name="sports_in_my_teams">A Csapataim között</string>
+    <string name="sports_open_match_page">Meccsoldal megnyitása</string>
+    <string name="sports_open_team_page">Csapatoldal megnyitása</string>
+    <string name="sports_my_teams_leagues">A bajnokságok, ahol a csapataid játszanak</string>
+    <string name="sports_tab_drivers">Versenyzők</string>
+    <string name="sports_tab_constructors">Konstruktőrök</string>
+    <string name="sports_tab_races">Futamok</string>
+    <string name="sports_tab_rankings">Ranglista</string>
+    <string name="sports_tab_matches">Meccsek</string>
+    <string name="sports_next_race_weekend">Következő versenyhétvége</string>
+    <string name="sports_last_weekend">Múlt hétvége</string>
+    <string name="sports_session_practice_1">1. szabadedzés</string>
+    <string name="sports_session_practice_2">2. szabadedzés</string>
+    <string name="sports_session_practice_3">3. szabadedzés</string>
+    <string name="sports_session_sprint_qualifying">Sprintkvalifikáció</string>
+    <string name="sports_session_qualifying">Időmérő</string>
+    <string name="sports_session_sprint">Sprint</string>
+    <string name="sports_session_race">Futam</string>
     <string name="sports_table_team">Csapat</string>
     <string name="sports_table_played">M</string>
     <string name="sports_table_won">GY</string>
@@ -464,6 +503,12 @@
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> óránként</item>
     </plurals>
     <string name="sports_auto_rebuild_app_start">Minden alkalmazásindításkor</string>
+    <string name="sports_calendar_refresh">Naptár frissítése</string>
+    <string name="sports_calendar_refresh_description">Milyen gyakran töltődjenek le újra a mentett hónapok</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> naponta</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> naponta</item>
+    </plurals>
     <string name="sports_find_channels">Csatornák keresése</string>
     <string name="sports_find_channels_description">Megkeresi ezt a meccset a műsorújságodban és a csatornanevekben. Nagy lejátszási listánál ez eltarthat egy ideig.</string>
     <string name="sports_finding_channels">Csatornáid átkeresése…</string>

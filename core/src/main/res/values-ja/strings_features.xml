@@ -362,6 +362,45 @@
     <string name="sports_switch_channel">チャンネルを切り替え</string>
     <string name="sports_tab_fixtures">日程</string>
     <string name="sports_tab_results">結果</string>
+    <string name="sports_tab_scores">スコア</string>
+    <string name="sports_tab_calendar">カレンダー</string>
+    <string name="sports_tab_leagues">リーグ</string>
+    <string name="sports_previous_month">前の月</string>
+    <string name="sports_next_month">次の月</string>
+    <string name="sports_next">次：<xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">次</string>
+    <string name="sports_new_badge">新着</string>
+    <string name="sports_no_table_series">順位表なし — シリーズは毎週変わります</string>
+    <string name="sports_follow_league">リーグをフォロー</string>
+    <string name="sports_unfollow_league">リーグのフォローを解除</string>
+    <string name="sports_no_matches_on"><xliff:g id="day">%1$s</xliff:g>はフォロー中のスポーツの試合がありません</string>
+    <string name="sports_nothing_on_day">この日は予定がありません</string>
+    <string name="sports_nothing_in_sport">この日は<xliff:g id="sport">%1$s</xliff:g>の予定はありません</string>
+    <string name="sports_change_leagues_hint">リーグの追加・削除は 設定 → スポーツ で行えます</string>
+    <string name="sports_loading_month"><xliff:g id="month">%1$s</xliff:g>を読み込み中…</string>
+    <string name="sports_offline_saved"><xliff:g id="time">%1$s</xliff:g>に保存した内容を表示中 — ESPNに接続できません</string>
+    <string name="sports_team_page">チームページ</string>
+    <string name="sports_next_match">次の試合</string>
+    <string name="sports_last_five">直近5試合</string>
+    <string name="sports_league_position">リーグ順位</string>
+    <string name="sports_in_my_teams">マイチームに登録済み</string>
+    <string name="sports_open_match_page">試合ページを開く</string>
+    <string name="sports_open_team_page">チームページを開く</string>
+    <string name="sports_my_teams_leagues">マイチームが出場するリーグ</string>
+    <string name="sports_tab_drivers">ドライバー</string>
+    <string name="sports_tab_constructors">コンストラクター</string>
+    <string name="sports_tab_races">レース</string>
+    <string name="sports_tab_rankings">ランキング</string>
+    <string name="sports_tab_matches">試合</string>
+    <string name="sports_next_race_weekend">次のレースウィークエンド</string>
+    <string name="sports_last_weekend">先週末</string>
+    <string name="sports_session_practice_1">フリー走行1</string>
+    <string name="sports_session_practice_2">フリー走行2</string>
+    <string name="sports_session_practice_3">フリー走行3</string>
+    <string name="sports_session_sprint_qualifying">スプリント予選</string>
+    <string name="sports_session_qualifying">予選</string>
+    <string name="sports_session_sprint">スプリント</string>
+    <string name="sports_session_race">決勝</string>
     <string name="sports_table_team">チーム</string>
     <string name="sports_table_played">試</string>
     <string name="sports_table_won">勝</string>
@@ -442,6 +481,11 @@
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> 時間ごと</item>
     </plurals>
     <string name="sports_auto_rebuild_app_start">アプリの起動ごと</string>
+    <string name="sports_calendar_refresh">カレンダーの更新</string>
+    <string name="sports_calendar_refresh_description">保存した月を取得し直す頻度</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> 日ごと</item>
+    </plurals>
     <string name="sports_find_channels">チャンネルを探す</string>
     <string name="sports_find_channels_description">番組表とチャンネル名からこの試合を探します。大きなプレイリストでは少し時間がかかることがあります。</string>
     <string name="sports_finding_channels">チャンネルを検索中…</string>

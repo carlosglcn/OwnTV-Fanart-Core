@@ -416,6 +416,45 @@
     <string name="sports_switch_channel">Переключить канал</string>
     <string name="sports_tab_fixtures">Календарь</string>
     <string name="sports_tab_results">Результаты</string>
+    <string name="sports_tab_scores">Счёт</string>
+    <string name="sports_tab_calendar">Расписание</string>
+    <string name="sports_tab_leagues">Лиги</string>
+    <string name="sports_previous_month">Предыдущий месяц</string>
+    <string name="sports_next_month">Следующий месяц</string>
+    <string name="sports_next">Далее: <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">Далее</string>
+    <string name="sports_new_badge">Новое</string>
+    <string name="sports_no_table_series">Таблицы нет — серии меняются каждую неделю</string>
+    <string name="sports_follow_league">Следить за лигой</string>
+    <string name="sports_unfollow_league">Не следить за лигой</string>
+    <string name="sports_no_matches_on"><xliff:g id="day">%1$s</xliff:g>: в ваших видах спорта матчей нет</string>
+    <string name="sports_nothing_on_day">В этот день ничего</string>
+    <string name="sports_nothing_in_sport"><xliff:g id="sport">%1$s</xliff:g>: в этот день ничего</string>
+    <string name="sports_change_leagues_hint">Добавить или убрать лиги можно в Настройки → Спорт</string>
+    <string name="sports_loading_month">Загрузка: <xliff:g id="month">%1$s</xliff:g>…</string>
+    <string name="sports_offline_saved">Показано сохранённое <xliff:g id="time">%1$s</xliff:g> — ESPN недоступен</string>
+    <string name="sports_team_page">Страница команды</string>
+    <string name="sports_next_match">Следующий матч</string>
+    <string name="sports_last_five">Последние пять</string>
+    <string name="sports_league_position">Место в таблице</string>
+    <string name="sports_in_my_teams">В «Моих командах»</string>
+    <string name="sports_open_match_page">Открыть страницу матча</string>
+    <string name="sports_open_team_page">Открыть страницу команды</string>
+    <string name="sports_my_teams_leagues">Лиги, где играют ваши команды</string>
+    <string name="sports_tab_drivers">Пилоты</string>
+    <string name="sports_tab_constructors">Конструкторы</string>
+    <string name="sports_tab_races">Гонки</string>
+    <string name="sports_tab_rankings">Рейтинг</string>
+    <string name="sports_tab_matches">Матчи</string>
+    <string name="sports_next_race_weekend">Следующий гоночный уик-энд</string>
+    <string name="sports_last_weekend">Прошлые выходные</string>
+    <string name="sports_session_practice_1">Практика 1</string>
+    <string name="sports_session_practice_2">Практика 2</string>
+    <string name="sports_session_practice_3">Практика 3</string>
+    <string name="sports_session_sprint_qualifying">Квалификация спринта</string>
+    <string name="sports_session_qualifying">Квалификация</string>
+    <string name="sports_session_sprint">Спринт</string>
+    <string name="sports_session_race">Гонка</string>
     <string name="sports_table_team">Команда</string>
     <string name="sports_table_played">И</string>
     <string name="sports_table_won">В</string>
@@ -508,6 +547,14 @@
         <item quantity="other">Каждые <xliff:g id="count">%1$d</xliff:g> часов</item>
     </plurals>
     <string name="sports_auto_rebuild_app_start">При каждом запуске приложения</string>
+    <string name="sports_calendar_refresh">Обновление расписания</string>
+    <string name="sports_calendar_refresh_description">Как часто сохранённые месяцы загружаются заново</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="one">Каждый <xliff:g id="count">%1$d</xliff:g> день</item>
+        <item quantity="few">Каждые <xliff:g id="count">%1$d</xliff:g> дня</item>
+        <item quantity="many">Каждые <xliff:g id="count">%1$d</xliff:g> дней</item>
+        <item quantity="other">Каждые <xliff:g id="count">%1$d</xliff:g> дней</item>
+    </plurals>
     <string name="sports_find_channels">Найти каналы</string>
     <string name="sports_find_channels_description">Ищет этот матч в вашей телепрограмме и названиях каналов. В большом плейлисте это может занять некоторое время.</string>
     <string name="sports_finding_channels">Поиск по вашим каналам…</string>

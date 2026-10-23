@@ -159,7 +159,7 @@
     <string name="settings_quick_live_preview">Vista previa en directo</string>
     <string name="settings_quick_preview_sound">Sonido de la vista previa</string>
     <string name="settings_quick_channel_numbers">Números de canal</string>
-    <string name="settings_quick_hdr">HDR (solo mpv)</string>
+    <string name="settings_quick_prefer_sdr">Preferir SDR</string>
     <string name="settings_quick_autoplay">Reproducción automática</string>
     <string name="settings_quick_check_update">Buscar actualizaciones</string>
     <string name="settings_language">Idioma</string>
@@ -214,7 +214,7 @@
     <string name="settings_preview_audio_description">Reproduce sonido en la vista previa en directo</string>
     <string name="settings_mini_player_root">Minirreproductor</string>
     <string name="settings_mini_player_root_description">Tamaño y posición del minirreproductor acoplado</string>
-    <string name="settings_hdr_description">Usa la salida HDR cuando el vídeo y el televisor sean compatibles. Solo mpv: el motor ExoPlayer no admite este ajuste y siempre transmite el HDR de la emisión tal cual.</string>
+    <string name="settings_prefer_sdr_description">Si una emisión ofrece imagen SDR y HDR, se reproduce la SDR: para televisores en los que el HDR se ve apagado o demasiado oscuro. Una emisión solo en HDR sigue en HDR. Solo ExoPlayer.</string>
     <string name="settings_auto_frame_rate">Frecuencia de fotogramas automática</string>
     <string name="settings_auto_frame_rate_description">Ajusta la frecuencia de refresco del televisor a la del vídeo (24/25/50/60 fps) en pantalla completa, tanto para TV en directo como para VOD, y la restaura al salir. Desactívalo si tu televisor o receptor vuelve a establecer la conexión HDMI de forma molesta cada vez que cambias de canal.</string>
     <string name="settings_afr_pause">Pausa durante el cambio de pantalla</string>
@@ -225,6 +225,10 @@
     <string name="settings_surround_description_mobile">Descodifica Dolby/DTS como sonido envolvente (5.1/7.1) para un receptor 5.1/7.1 real conectado a este dispositivo. Déjalo DESACTIVADO para el altavoz integrado, los auriculares o una barra de sonido estéreo; el audio multicanal puede retrasarse respecto al vídeo. Si se desincroniza, ajústalo en el menú Audio del reproductor → Sincronización A/V.</string>
     <string name="settings_audio_passthrough">Passthrough de Dolby y DTS</string>
     <string name="settings_audio_passthrough_description">Activado: Dolby y DTS se envían sin decodificar al televisor, la barra de sonido o el receptor si indica que puede reproducirlos (ExoPlayer). Desactivado: la aplicación los decodifica, aún en envolvente donde Sonido envolvente lo permita. mpv siempre decodifica. No se usa mientras Modo nocturno o Nivelación de volumen esté activado.</string>
+    <string name="settings_ffmpeg_audio">Audio FFmpeg para ExoPlayer</string>
+    <string name="settings_ffmpeg_audio_description">Activado: ExoPlayer también puede decodificar el sonido para el que el dispositivo no tiene decodificador, como DTS, TrueHD o MP2. Los decodificadores propios del dispositivo siguen teniendo prioridad. Desactivado: ExoPlayer usa solo los decodificadores del dispositivo. mpv siempre decodifica con FFmpeg. Al cambiarlo, OwnTV se reinicia.</string>
+    <string name="settings_line_ffmpeg_audio">Para el sonido que el dispositivo no puede decodificar</string>
+    <string name="settings_ffmpeg_audio_restart_message">El decodificador de audio cambia cuando OwnTV se reinicia.</string>
     <string name="settings_night_mode">Modo nocturno</string>
     <string name="settings_night_mode_description">Baja las escenas fuertes y sube los diálogos suaves, para ver con el volumen bajo.</string>
     <string name="settings_volume_leveling">Nivelación de volumen</string>
@@ -348,7 +352,7 @@
     <string name="settings_search_keywords_audio">volumen alto bajo sincronización labial retardo pista de audio idioma</string>
     <string name="settings_search_keywords_channel_numbers">canal número sintonización directa escribir dígitos teclado numérico zapeo lcn</string>
     <string name="settings_search_keywords_mini">acoplado pip minirreproductor tamaño posición escala porcentaje esquina mover</string>
-    <string name="settings_search_keywords_hdr">alto rango dinámico salida</string>
+    <string name="settings_search_keywords_prefer_sdr">hdr sdr rango dinámico estándar imagen apagada oscura</string>
     <string name="settings_search_keywords_afr">afr refresco frecuencia hz tirones 24fps 25fps 50hz 60hz pantalla modo ajustar</string>
     <string name="settings_search_keywords_surround">Dolby DTS 5.1 7.1 receptor audio</string>
     <string name="settings_search_keywords_autoplay">reproducción automática series temporada</string>
@@ -472,6 +476,10 @@
     <string name="settings_preferred_audio_language">Idioma de audio preferido</string>
     <string name="settings_audio_sync">Sincronización de audio</string>
     <string name="settings_audio_sync_description">Adelanta o retrasa el audio para sincronizarlo con el vídeo. Funciona con ambos reproductores (mpv y ExoPlayer).</string>
+    <string name="settings_output_audio_delay">Retraso para esta salida</string>
+    <string name="settings_output_audio_delay_description">Se suma a «Sincronización de audio» y se guarda por separado para cada salida: HDMI, barra de sonido por HDMI ARC, Bluetooth, altavoces integrados, auriculares. Ajústalo mientras escuchas por esa salida.</string>
+    <string name="settings_audio_output_speaker">Altavoces integrados</string>
+    <string name="settings_audio_output_other">Auriculares o USB</string>
     <string name="settings_live_tv">TV en directo</string>
     <string name="settings_live_latency_description">Determina lo cerca de la emisión en directo que se reproduce el contenido. Un valor más bajo acerca la reproducción al directo, pero reduce el búfer, por lo que las transmisiones débiles pueden entrecortarse o volver a conectarse con más frecuencia. Se aplica al siguiente canal que abras.</string>
     <string name="settings_live_latency_bitrate_note">En un canal con un bitrate muy alto (sobre todo en 4K), el búfer puede contener menos tiempo del que has pedido, porque hay un límite de cuánto vídeo se puede mantener en memoria a la vez.</string>
@@ -523,10 +531,6 @@
     <string name="settings_reset_live_player_choices_description">Si cambias un canal entre ExoPlayer y mpv desde el reproductor, esa opción se guarda para ese canal. Al restablecer, todos los canales vuelven a seguir el ajuste «Reproductor para TV en directo». Las opciones guardadas de películas y episodios se mantienen.</string>
     <string name="settings_reset_live_player_choices_confirm">¿Restablecer las opciones guardadas del reproductor de TV en directo?</string>
     <string name="settings_reset_live_player_choices_confirm_description">Todos los canales vuelven al ajuste «Reproductor para TV en directo». Siempre puedes volver a cambiar uno concreto desde el reproductor.</string>
-    <string name="settings_forget_stream_fixes">Olvidar las correcciones de emisión aprendidas</string>
-    <string name="settings_forget_stream_fixes_description">El reproductor aprende lo que necesitan las emisiones de cada proveedor: mpv en lugar de ExoPlayer, otro formato, decodificación por software para la televisión a la carta. Olvídalo si un proveedor ha arreglado sus emisiones. Lo aprendido sobre la televisión a la carta también se olvida solo a los 14 días.</string>
-    <string name="settings_forget_stream_fixes_confirm">¿Olvidar las correcciones de emisión aprendidas?</string>
-    <string name="settings_forget_stream_fixes_confirm_description">Los canales vuelven a abrirse de la forma habitual y el reproductor vuelve a aprender lo que un proveedor aún necesite. La primera reproducción de un canal afectado puede tardar unos segundos más.</string>
     <string name="settings_external_player_row_description">Abre las transmisiones en una aplicación externa (VLC o MX Player), en lugar de usar el reproductor integrado, con una opción distinta para cada sección. Resulta útil para transmisiones que esta aplicación no puede descodificar o si prefieres otro reproductor. La posición de reanudación y los controles anterior/siguiente no están disponibles durante la reproducción externa; es posible que no se reproduzcan las transmisiones que requieran un User-Agent o un referer personalizados.</string>
     <string name="settings_resume_always">Reanudar siempre</string>
     <string name="settings_resume_ask">Preguntar si se reanuda</string>
@@ -543,7 +547,7 @@
     <string name="settings_delete_all_series">Eliminar todos los de series</string>
     <string name="settings_section_count"><xliff:g id="section">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g>)</string>
     <string name="settings_sync_guide_question">¿Sincronizar ahora la guía de programación?</string>
-    <string name="settings_sync_guide_description">Descarga la guía de programación (EPG) de «<xliff:g id="source">%1$s</xliff:g>». También puedes hacerlo más adelante en Ajustes → EPG.</string>
+    <string name="settings_sync_guide_description">Descarga la guía de programación (EPG) de «<xliff:g id="source">%1$s</xliff:g>». También puedes hacerlo más adelante en Ajustes → Fuentes y guía → Fuentes de EPG.</string>
     <string name="settings_not_now">Ahora no</string>
     <string name="settings_sync_now">Sincronizar ahora</string>
     <string name="settings_syncing_guide">Sincronizando la guía de programación…</string>
@@ -1187,7 +1191,7 @@
     <string name="local_sync_received_items">Elementos recibidos: <xliff:g id="count">%1$d</xliff:g></string>
     <string name="local_sync_sent">Se enviaron tus datos</string>
     <string name="local_sync_failed">Ha fallado la sincronización</string>
-    <string name="local_sync_error_unreachable">No se ha podido contactar con este dispositivo. En él, abre OwnTV → Ajustes → Datos → Sincronización local y activa el Modo de sincronización. Ambos deben estar en la misma red Wi-Fi.</string>
+    <string name="local_sync_error_unreachable">No se ha podido contactar con este dispositivo. En él, abre OwnTV → Más → Sincronización local y activa el Modo de sincronización. Ambos deben estar en la misma red Wi-Fi.</string>
     <string name="local_sync_error_unauthorized">El otro dispositivo rechazó la conexión. Puede que el PIN sea incorrecto o que haya olvidado este dispositivo.</string>
     <string name="local_sync_error_bad_payload">No se pudo leer lo que llegó. Si usaste una contraseña, comprueba que sea la misma en ambos dispositivos.</string>
     <string name="local_sync_error_unknown">Algo ha salido mal. Inténtalo de nuevo.</string>
@@ -1365,7 +1369,6 @@
     <string name="settings_part_guide_catchup">Guía y catch-up</string>
     <string name="settings_vp_cat_controls_resume">Controles y reanudación</string>
     <string name="settings_pinned_from">Fijado desde <xliff:g id="group">%1$s</xliff:g></string>
-    <string name="settings_forget">Olvidar</string>
     <string name="settings_check_now">Comprobar ahora</string>
     <string name="settings_line_epg_offset">Desplaza toda la guía cuando las horas de una fuente no cuadran</string>
     <string name="settings_line_reminders">Qué ocurre cuando llega un recordatorio</string>
@@ -1399,13 +1402,12 @@
     <string name="settings_line_quick_live_preview">Reproduce el canal enfocado en TV en directo</string>
     <string name="settings_line_preview_sound">Sonido en la vista previa en directo</string>
     <string name="settings_line_quick_channel_numbers">Escribe un número en el mando para sintonizar</string>
-    <string name="settings_line_hdr">Alto rango dinámico en mpv</string>
+    <string name="settings_line_prefer_sdr">SDR cuando la emisión ofrece ambos</string>
     <string name="settings_line_quick_autoplay">Empieza el siguiente episodio solo</string>
     <string name="settings_line_live_engine">Qué motor abre los canales y cuál es el de respaldo</string>
     <string name="settings_line_saved_live_choices">Canales que cambiaste a mano</string>
     <string name="settings_line_vod_engine">Qué motor abre películas y episodios</string>
     <string name="settings_line_saved_choices">Películas y episodios que cambiaste a mano</string>
-    <string name="settings_line_learned_fixes">Lo que el reproductor aprendió de cada proveedor</string>
     <string name="settings_line_external">VLC, MX Player… por sección</string>
     <string name="settings_line_vod_buffer">Cuánto se cargan las películas por adelantado</string>
     <string name="settings_line_vod_timeout">Espera ante un servidor que no responde</string>
@@ -1423,6 +1425,7 @@
     <string name="settings_line_night_mode">Escenas fuertes más bajas, diálogos más altos</string>
     <string name="settings_line_leveling">Todos los canales con el mismo volumen</string>
     <string name="settings_line_audio_sync">Adelanta o retrasa el audio</string>
+    <string name="settings_line_output_audio_delay">Retraso extra para la salida actual</string>
     <string name="settings_line_saved_audio_sync">Retrasos que guardaste en el reproductor</string>
     <string name="settings_line_audio_lang">Reproduce esta pista cuando la emisión la tiene</string>
     <string name="settings_line_sub_lang">Activa los subtítulos en este idioma</string>
@@ -1430,7 +1433,6 @@
     <string name="settings_title_fonts">Fuentes y tamaño del texto</string>
     <string name="settings_title_saved_live_choices">Elecciones de reproductor de TV en directo guardadas</string>
     <string name="settings_title_saved_choices">Elecciones de reproductor guardadas</string>
-    <string name="settings_title_learned_fixes">Correcciones de emisión aprendidas</string>
     <string name="settings_title_tunneled">Reproducción en túnel</string>
     <string name="settings_title_saved_zoom">Zoom guardado</string>
     <string name="settings_title_saved_volume">Volumen guardado</string>

@@ -86,6 +86,7 @@
     <string name="player_time_remaining">−<xliff:g id="time">%1$s</xliff:g></string>
     <string name="player_switch_exo">Zu ExoPlayer gewechselt</string>
     <string name="player_switch_mpv">Zu MPV gewechselt</string>
+    <string name="player_smoothness_hint">Dieser Sender verliert Bilder. Mit MPV als Player läuft er möglicherweise flüssiger.</string>
     <string name="player_error_image_subtitle_audio">Bildbasierte Untertitel sind für das Audioformat dieses Videos nicht verfügbar.</string>
     <string name="player_error_both_engines_exo_first">Die Wiedergabe ist mit beiden Video-Engines fehlgeschlagen (zuerst ExoPlayer, dann mpv). Die Datei ist möglicherweise beschädigt oder verwendet ein Format, das dieser Fernseher nicht wiedergeben kann.</string>
     <string name="player_error_both_engines_mpv_first">Die Wiedergabe ist mit beiden Video-Engines fehlgeschlagen (mpv und ExoPlayer). Die Datei ist möglicherweise beschädigt oder verwendet ein Format, das dieser Fernseher nicht wiedergeben kann. (<xliff:g id="error">%1$s</xliff:g>)</string>
@@ -267,7 +268,7 @@
     <string name="player_subtitles_search_language_description">In den Suchergebnissen werden nur Untertitel in dieser Sprache angezeigt. Du kannst in den Ergebnissen weiterhin „Alle Sprachen“ drücken, um alle Ergebnisse dieser Suche zu sehen.</string>
     <string name="player_subtitles_language_not_set">Nicht festgelegt</string>
     <string name="player_frame_rate_prompt_title">Bei diesem Sender kann das Bild ruckeln</string>
-    <string name="player_frame_rate_prompt_description">Die Wiedergabe läuft mit <xliff:g id="fps">%1$d</xliff:g> fps, während dein Fernseher mit <xliff:g id="current_hz">%2$d</xliff:g> Hz läuft, wodurch dein Fernseher diese Bilder nicht gleichmäßig darstellen kann – Bewegungen wirken leicht ruckelig.\n\nDie automatische Bildrate schaltet deinen Fernseher während der Wiedergabe auf <xliff:g id="target_hz">%3$d</xliff:g> Hz und danach wieder zurück. Bei manchen Fernsehern wird der Bildschirm beim Ändern der Bildrate kurz schwarz; du kannst die Funktion unter Einstellungen → Videoplayer wieder deaktivieren.</string>
+    <string name="player_frame_rate_prompt_description">Die Wiedergabe läuft mit <xliff:g id="fps">%1$d</xliff:g> fps, während dein Fernseher mit <xliff:g id="current_hz">%2$d</xliff:g> Hz läuft, wodurch dein Fernseher diese Bilder nicht gleichmäßig darstellen kann – Bewegungen wirken leicht ruckelig.\n\nDie automatische Bildrate schaltet deinen Fernseher während der Wiedergabe auf <xliff:g id="target_hz">%3$d</xliff:g> Hz und danach wieder zurück. Bei manchen Fernsehern wird der Bildschirm beim Ändern der Bildrate kurz schwarz; du kannst die Funktion unter Einstellungen → Bild → Bildrate wieder deaktivieren.</string>
     <string name="player_frame_rate_turn_on">Einschalten</string>
     <string name="player_reason_live_fallback">Live-Wiedergabe auf einen Fallback umgeschaltet</string>
     <string name="player_reason_live_no_fallback">Live-Wiedergabe fehlgeschlagen – kein Fallback mehr übrig</string>

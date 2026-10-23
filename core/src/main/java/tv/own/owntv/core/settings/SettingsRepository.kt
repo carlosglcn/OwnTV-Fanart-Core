@@ -390,7 +390,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val FONT_JAKARTA_MIGRATED = booleanPreferencesKey("font_jakarta_migrated")
         // Stage (2026-10-02): the TV app's new-UI defaults written once (applyStageDefaults). Device-local.
         val STAGE_DEFAULTS_APPLIED = booleanPreferencesKey("stage_defaults_applied")
-        val HDR_ENABLED = booleanPreferencesKey("hdr_enabled")
+        val PREFER_SDR = booleanPreferencesKey("prefer_sdr")
         val AUTO_FRAME_RATE = booleanPreferencesKey("auto_frame_rate")
         val AFR_PAUSE_SECS = intPreferencesKey("afr_pause_secs")
         val AFR_MATCH_RESOLUTION = booleanPreferencesKey("afr_match_resolution")
@@ -466,6 +466,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val SUB_POSITION = stringPreferencesKey("sub_position")
         val SUB_BG_OPACITY = intPreferencesKey("sub_bg_opacity")
         val AUDIO_DELAY_MS = intPreferencesKey("audio_delay_ms")
+        val AUDIO_DELAY_BY_OUTPUT = stringPreferencesKey("audio_delay_by_output")
         val PREF_AUDIO_LANG = stringPreferencesKey("pref_audio_lang")
         val PREF_SUB_LANG = stringPreferencesKey("pref_sub_lang")
         // OpenSubtitles online-search language filter. Separate from PREF_SUB_LANG (embedded tracks) —
@@ -1736,7 +1737,8 @@ class SettingsRepository(private val context: Context, private val localeStore: 
 
     // --- Video Player Settings ---
 
-    /** Hardware decoding (mpv hwdec auto-safe). Off = force software decoding for tricky streams. */
+    /** Hardware decoding: mpv's `hwdec=mediacodec`, and hardware decoders first on ExoPlayer. Off = software
+     *  decoders first on both engines, for streams a vendor decoder mishandles. */
     val hwDecoding: Flow<Boolean> = prefsFlow { it[Keys.HW_DECODING] ?: true }
 
     suspend fun setHwDecoding(enabled: Boolean) {
@@ -2115,11 +2117,22 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         context.dataStore.edit { it[Keys.SUB_BG_OPACITY] = value }
     }
 
-    /** Audio sync offset in milliseconds (mpv audio-delay); +ve delays audio. */
+    /** Audio sync offset in milliseconds, on both engines (mpv `audio-delay`, ExoPlayer's audio clock); +ve delays audio. */
     val audioDelayMs: Flow<Int> = prefsFlow { it[Keys.AUDIO_DELAY_MS] ?: 0 }
 
     suspend fun setAudioDelayMs(ms: Int) {
         context.dataStore.edit { it[Keys.AUDIO_DELAY_MS] = ms }
+    }
+
+    /** Extra audio delay per kind of output, on top of [audioDelayMs] — see [tv.own.owntv.core.player.OutputAudioDelays]. */
+    val outputAudioDelays: Flow<tv.own.owntv.core.player.OutputAudioDelays> =
+        parsedFlow(Keys.AUDIO_DELAY_BY_OUTPUT, tv.own.owntv.core.player.OutputAudioDelays::parse)
+
+    suspend fun setOutputAudioDelay(kind: tv.own.owntv.core.player.AudioOutputKind, ms: Int) {
+        context.dataStore.edit {
+            val next = tv.own.owntv.core.player.OutputAudioDelays.parse(it[Keys.AUDIO_DELAY_BY_OUTPUT]).with(kind, ms)
+            it[Keys.AUDIO_DELAY_BY_OUTPUT] = next.encode()
+        }
     }
 
     // --- CH+- key paging (browse panels): master toggle + per-direction skip counts ---
@@ -2607,11 +2620,15 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         context.dataStore.edit { it[Keys.LIVE_PREVIEW_AUDIO] = enabled }
     }
 
-    /** Use HDR output when the video and display support it. */
-    val hdrEnabled: Flow<Boolean> = prefsFlow { it[Keys.HDR_ENABLED] ?: true }
+    /**
+     * An HLS stream offering both an SDR and an HDR picture plays the SDR one, for a TV whose HDR looks
+     * washed out. Streams with one kind only are untouched. ExoPlayer only: mpv's HLS reader does not see
+     * which variant is which.
+     */
+    val preferSdr: Flow<Boolean> = prefsFlow { it[Keys.PREFER_SDR] ?: false }
 
-    suspend fun setHdrEnabled(enabled: Boolean) {
-        context.dataStore.edit { it[Keys.HDR_ENABLED] = enabled }
+    suspend fun setPreferSdr(enabled: Boolean) {
+        context.dataStore.edit { it[Keys.PREFER_SDR] = enabled }
     }
 
     /**
@@ -2733,8 +2750,9 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     }
 
     /**
-     * Switch the display's refresh rate to match the video frame rate (24/25/30/50/60 fps) during
-     * full-screen playback, and restore it on exit. Applies to both engines and to Live TV as well as
+     * Switch the display's refresh rate to match the video frame rate (24/25/30/50/60 fps and the
+     * 23.976/29.97/59.94 variants) during full-screen playback, and restore it on exit. Applies to both
+     * engines and to Live TV as well as
      * VOD. Default off; users whose display switches cleanly can opt in.
      */
     val autoFrameRate: Flow<Boolean> = prefsFlow { prefs ->
@@ -3348,7 +3366,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
             Keys.TIMESHIFT_WINDOW_MINUTES)
         val bools = listOf(
             Keys.GUIDE_SHOW_EMPTY, Keys.GUIDE_PREVIEW,
-            Keys.LIVE_PREVIEW, Keys.LIVE_PREVIEW_AUDIO, Keys.HERO_PREVIEW, Keys.HDR_ENABLED, Keys.AUTO_FRAME_RATE, Keys.AFR_MATCH_RESOLUTION, Keys.AUTO_FRAME_RATE_PROMPTED, Keys.ANDROID_TV_HOME, Keys.HW_DECODING, Keys.SOFTWARE_DECODE_ABOVE_1080P,
+            Keys.LIVE_PREVIEW, Keys.LIVE_PREVIEW_AUDIO, Keys.HERO_PREVIEW, Keys.PREFER_SDR, Keys.AUTO_FRAME_RATE, Keys.AFR_MATCH_RESOLUTION, Keys.AUTO_FRAME_RATE_PROMPTED, Keys.ANDROID_TV_HOME, Keys.HW_DECODING, Keys.SOFTWARE_DECODE_ABOVE_1080P,
             Keys.VOD_PREFER_EXO, Keys.MEASURED_STREAM_STATS, Keys.DETAILED_DIAGNOSTICS, Keys.DIRECT_TUNE, Keys.LIVE_LEFT_RIGHT_REWINDS, Keys.EXTERNAL_PLAYER,
             Keys.EXTERNAL_PLAYER_LIVE, Keys.EXTERNAL_PLAYER_MOVIES, Keys.EXTERNAL_PLAYER_SERIES, Keys.UPDATE_CHECK_ON_START, Keys.SURROUND_SOUND, Keys.AUTO_PLAY_NEXT, Keys.PROXY_ENABLED,
             Keys.WEATHER_ENABLED, Keys.WEATHER_FAHRENHEIT, Keys.RESUME_LAST_CHANNEL, Keys.METADATA_ENABLED, Keys.CH_NAV_ENABLED,
@@ -3447,7 +3465,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     private val deviceSpecificSettings: Set<String> = listOf(
         Keys.LIVE_ENGINE, Keys.VOD_ENGINE, Keys.VOD_PREFER_EXO, Keys.HW_DECODING, Keys.SOFTWARE_DECODE_ABOVE_1080P, Keys.AUTO_FRAME_RATE,
         Keys.AFR_PAUSE_SECS, Keys.AFR_MATCH_RESOLUTION,
-        Keys.HDR_ENABLED, Keys.SURROUND_MODE, Keys.SURROUND_SOUND, Keys.AUDIO_PASSTHROUGH,
+        Keys.PREFER_SDR, Keys.SURROUND_MODE, Keys.SURROUND_SOUND, Keys.AUDIO_PASSTHROUGH,
         Keys.TUNNELED_PLAYBACK,
     ).map { it.name }.toSet()
 

@@ -158,7 +158,7 @@
     <string name="settings_quick_live_preview">लाइव पूर्वावलोकन</string>
     <string name="settings_quick_preview_sound">पूर्वावलोकन की ध्वनि</string>
     <string name="settings_quick_channel_numbers">चैनल नंबर</string>
-    <string name="settings_quick_hdr">HDR (केवल mpv)</string>
+    <string name="settings_quick_prefer_sdr">SDR को प्राथमिकता दें</string>
     <string name="settings_quick_autoplay">अपने-आप चलाएँ</string>
     <string name="settings_quick_check_update">अपडेट जाँचें</string>
     <string name="settings_language">भाषा</string>
@@ -213,7 +213,7 @@
     <string name="settings_preview_audio_description">लाइव पूर्वावलोकन में ध्वनि चलाएँ</string>
     <string name="settings_mini_player_root">मिनी-प्लेयर</string>
     <string name="settings_mini_player_root_description">डॉक किए गए मिनी-प्लेयर का आकार और स्थिति</string>
-    <string name="settings_hdr_description">वीडियो और TV द्वारा समर्थित होने पर HDR आउटपुट का उपयोग करें। केवल mpv: ExoPlayer इंजन इस सेटिंग का समर्थन नहीं करता और स्ट्रीम का HDR हमेशा जैसा है वैसा ही भेजता है।</string>
+    <string name="settings_prefer_sdr_description">जब किसी स्ट्रीम में SDR और HDR दोनों तस्वीरें हों, तो SDR चलती है: उस टीवी के लिए जिस पर HDR फीका या बहुत गहरा दिखता है। सिर्फ़ HDR वाली स्ट्रीम HDR ही रहती है। सिर्फ़ ExoPlayer।</string>
     <string name="settings_auto_frame_rate">अपने-आप फ़्रेम दर मिलाना</string>
     <string name="settings_auto_frame_rate_description">फ़ुल स्क्रीन में लाइव टीवी और VOD के लिए TV की रीफ़्रेश दर को वीडियो (24/25/50/60 fps) से मिलाएँ और बाहर निकलने पर उसे पहले जैसा करें। यदि हर चैनल बदलने पर आपका TV या रिसीवर शोर के साथ फिर से HDMI हैंडशेक करता है, तो इसे बंद कर दें।</string>
     <string name="settings_afr_pause">डिस्प्ले बदलते समय रोकें</string>
@@ -224,6 +224,10 @@
     <string name="settings_surround_description_mobile">इस डिवाइस से जुड़े वास्तविक 5.1/7.1 रिसीवर के लिए Dolby/DTS को सराउंड (5.1/7.1) में डिकोड करें। बिल्ट-इन स्पीकर, हेडफ़ोन या स्टीरियो साउंडबार के लिए इसे बंद रखें — मल्टीचैनल ऑडियो वीडियो से पीछे हो सकता है। यदि सिंक बिगड़ता है, तो प्लेयर के ऑडियो मेन्यू → A/V सिंक को थोड़ा समायोजित करें।</string>
     <string name="settings_audio_passthrough">Dolby और DTS पासथ्रू</string>
     <string name="settings_audio_passthrough_description">चालू: जब टीवी, साउंडबार या रिसीवर बताता है कि वह इन्हें चला सकता है, तो Dolby और DTS बिना डिकोड किए भेजे जाते हैं (ExoPlayer)। बंद: ऐप इन्हें डिकोड करता है, और जहाँ सराउंड साउंड अनुमति दे वहाँ सराउंड ही रहता है। mpv हमेशा डिकोड करता है। नाइट मोड या वॉल्यूम समतलन चालू रहने पर इस्तेमाल नहीं होता।</string>
+    <string name="settings_ffmpeg_audio">ExoPlayer के लिए FFmpeg ऑडियो</string>
+    <string name="settings_ffmpeg_audio_description">चालू: ExoPlayer वह आवाज़ भी डिकोड कर सकता है जिसके लिए डिवाइस में डिकोडर नहीं है, जैसे DTS, TrueHD या MP2। डिवाइस के अपने डिकोडर अब भी पहले आते हैं। बंद: ExoPlayer सिर्फ़ डिवाइस के डिकोडर इस्तेमाल करता है। mpv हमेशा FFmpeg से डिकोड करता है। इसे बदलने पर OwnTV रीस्टार्ट होता है।</string>
+    <string name="settings_line_ffmpeg_audio">उस आवाज़ के लिए जिसे डिवाइस डिकोड नहीं कर सकता</string>
+    <string name="settings_ffmpeg_audio_restart_message">OwnTV रीस्टार्ट होने के बाद ऑडियो डिकोडर बदल जाएगा।</string>
     <string name="settings_night_mode">नाइट मोड</string>
     <string name="settings_night_mode_description">तेज़ दृश्यों को धीमा और धीमे संवादों को तेज़ करता है, ताकि कम आवाज़ में देखा जा सके।</string>
     <string name="settings_volume_leveling">वॉल्यूम समतलन</string>
@@ -346,7 +350,7 @@
     <string name="settings_search_keywords_audio">वॉल्यूम तेज़ धीमा लिप सिंक विलंब ऑडियो ट्रैक भाषा</string>
     <string name="settings_search_keywords_channel_numbers">चैनल नंबर सीधे ट्यून टाइप अंक कीपैड संख्यात्मक ज़ैप LCN</string>
     <string name="settings_search_keywords_mini">डॉक किया हुआ PiP मिनी-प्लेयर आकार स्थिति स्केल प्रतिशत कोना खिसकाएँ</string>
-    <string name="settings_search_keywords_hdr">HDR हाई डायनेमिक रेंज आउटपुट</string>
+    <string name="settings_search_keywords_prefer_sdr">hdr sdr स्टैंडर्ड डायनामिक रेंज फीकी गहरी तस्वीर</string>
     <string name="settings_search_keywords_afr">AFR रीफ़्रेश दर Hz जडर 24fps 25fps 50Hz 60Hz डिस्प्ले मोड मिलान</string>
     <string name="settings_search_keywords_surround">Dolby DTS 5.1 7.1 रिसीवर ऑडियो</string>
     <string name="settings_search_keywords_autoplay">अपने-आप चलाएँ सीरीज़ सीज़न</string>
@@ -470,6 +474,10 @@
     <string name="settings_preferred_audio_language">पसंदीदा ऑडियो भाषा</string>
     <string name="settings_audio_sync">ऑडियो सिंक</string>
     <string name="settings_audio_sync_description">वीडियो से मिलाने के लिए ऑडियो को पहले या बाद में करें। यह दोनों प्लेयर (mpv और ExoPlayer) पर काम करता है।</string>
+    <string name="settings_output_audio_delay">इस आउटपुट के लिए देरी</string>
+    <string name="settings_output_audio_delay_description">यह “ऑडियो सिंक” में जुड़ती है और हर आउटपुट के लिए अलग से सहेजी जाती है: HDMI, HDMI ARC पर साउंडबार, Bluetooth, बिल्ट-इन स्पीकर, हेडफ़ोन। इसे उसी आउटपुट पर सुनते हुए सेट करें।</string>
+    <string name="settings_audio_output_speaker">बिल्ट-इन स्पीकर</string>
+    <string name="settings_audio_output_other">हेडफ़ोन या USB</string>
     <string name="settings_live_tv">लाइव टीवी</string>
     <string name="settings_live_latency_description">लाइव प्रसारण के कितने करीब चलाना है। कम मान का अर्थ लाइव के अधिक करीब, लेकिन छोटा बफ़र है; इसलिए कमज़ोर स्ट्रीम अधिक अटक सकती हैं या बार-बार कनेक्ट हो सकती हैं। यह अगली बार खोले जाने वाले चैनल पर लागू होगा।</string>
     <string name="settings_live_latency_bitrate_note">बहुत ज़्यादा बिटरेट वाले चैनल पर — खास तौर पर 4K में — बफ़र आपकी माँगी गई अवधि से कम रख पाता है, क्योंकि एक बार में मेमोरी में रखे जा सकने वाले वीडियो की एक सीमा है।</string>
@@ -520,10 +528,6 @@
     <string name="settings_reset_live_player_choices_description">प्लेयर में किसी चैनल को ExoPlayer और mpv के बीच बदलने पर वह विकल्प उस चैनल के लिए सहेज लिया जाता है। रीसेट करने पर हर चैनल फिर से “लाइव टीवी का प्लेयर” सेटिंग का पालन करेगा। फ़िल्मों और एपिसोड के सहेजे गए विकल्प बने रहते हैं।</string>
     <string name="settings_reset_live_player_choices_confirm">लाइव टीवी प्लेयर के सहेजे गए विकल्प रीसेट करें?</string>
     <string name="settings_reset_live_player_choices_confirm_description">हर चैनल फिर से “लाइव टीवी का प्लेयर” सेटिंग का पालन करेगा। आप किसी एक चैनल को प्लेयर से कभी भी दोबारा बदल सकते हैं।</string>
-    <string name="settings_forget_stream_fixes">सीखे गए स्ट्रीम सुधार भूल जाएँ</string>
-    <string name="settings_forget_stream_fixes_description">प्लेयर सीखता है कि हर प्रोवाइडर की स्ट्रीम को क्या चाहिए — ExoPlayer की जगह mpv, कोई दूसरा फ़ॉर्मैट, कैच-अप के लिए सॉफ़्टवेयर डिकोडिंग। अगर किसी प्रोवाइडर ने अपनी स्ट्रीम ठीक कर ली है तो इसे भूल जाएँ। कैच-अप से जुड़ी सीख 14 दिन बाद अपने आप भी भुला दी जाती है।</string>
-    <string name="settings_forget_stream_fixes_confirm">सीखे गए स्ट्रीम सुधार भूल जाएँ?</string>
-    <string name="settings_forget_stream_fixes_confirm_description">चैनल फिर से सामान्य तरीके से खुलेंगे, और प्रोवाइडर को अभी भी जो चाहिए वह प्लेयर फिर से सीख लेगा। किसी प्रभावित चैनल को पहली बार चलने में कुछ सेकंड ज़्यादा लग सकते हैं।</string>
     <string name="settings_external_player_row_description">स्ट्रीम को अंतर्निहित प्लेयर के बजाय हर अनुभाग के लिए चुने गए बाहरी ऐप (VLC, MX प्लेयर) में खोलें। यह उन स्ट्रीम के लिए उपयोगी है जिन्हें यह ऐप डिकोड नहीं कर सकता, या यदि आप किसी दूसरे प्लेयर को पसंद करते हैं। बाहरी रूप से चलाते समय प्लेबैक जारी रखने की स्थिति और पिछला/अगला उपलब्ध नहीं होते; जिन स्ट्रीम के लिए कस्टम User-Agent या रेफ़रर आवश्यक है, वे शायद न चलें।</string>
     <string name="settings_resume_always">हमेशा जारी रखें</string>
     <string name="settings_resume_ask">जारी रखने से पहले पूछें</string>
@@ -540,7 +544,7 @@
     <string name="settings_delete_all_series">सभी सीरीज़ के हटाएँ</string>
     <string name="settings_section_count"><xliff:g id="section">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g>)</string>
     <string name="settings_sync_guide_question">टीवी गाइड अभी सिंक करें?</string>
-    <string name="settings_sync_guide_description">“<xliff:g id="source">%1$s</xliff:g>” के लिए कार्यक्रम गाइड (EPG) डाउनलोड करें। आप इसे बाद में सेटिंग → EPG में भी कर सकते हैं।</string>
+    <string name="settings_sync_guide_description">“<xliff:g id="source">%1$s</xliff:g>” के लिए कार्यक्रम गाइड (EPG) डाउनलोड करें। आप इसे बाद में सेटिंग → स्रोत और गाइड → EPG स्रोत में भी कर सकते हैं।</string>
     <string name="settings_not_now">अभी नहीं</string>
     <string name="settings_sync_now">अभी सिंक करें</string>
     <string name="settings_syncing_guide">टीवी गाइड सिंक किया जा रहा है…</string>
@@ -1166,7 +1170,7 @@
     <string name="local_sync_received_items">प्राप्त आइटम: <xliff:g id="count">%1$d</xliff:g></string>
     <string name="local_sync_sent">आपका डेटा भेज दिया गया</string>
     <string name="local_sync_failed">सिंक विफल</string>
-    <string name="local_sync_error_unreachable">इस डिवाइस तक नहीं पहुँचा जा सका। उस पर OwnTV → सेटिंग्स → डेटा → लोकल सिंक खोलें और सिंक मोड चालू करें। दोनों डिवाइस एक ही वाई-फ़ाई पर होने चाहिए।</string>
+    <string name="local_sync_error_unreachable">इस डिवाइस तक नहीं पहुँचा जा सका। उस पर OwnTV → अधिक → लोकल सिंक खोलें और सिंक मोड चालू करें। दोनों डिवाइस एक ही वाई-फ़ाई पर होने चाहिए।</string>
     <string name="local_sync_error_unauthorized">दूसरे डिवाइस ने मना कर दिया। पिन ग़लत हो सकता है, या उसने इस डिवाइस को भुला दिया है।</string>
     <string name="local_sync_error_bad_payload">जो आया उसे पढ़ा नहीं जा सका। अगर आपने पासवर्ड लगाया है, तो देखें कि वह दोनों डिवाइस पर एक जैसा है।</string>
     <string name="local_sync_error_unknown">कुछ ग़लत हो गया। दोबारा कोशिश करें।</string>
@@ -1336,7 +1340,6 @@
     <string name="settings_part_guide_catchup">गाइड और कैच-अप</string>
     <string name="settings_vp_cat_controls_resume">नियंत्रण और फिर से शुरू</string>
     <string name="settings_pinned_from"><xliff:g id="group">%1$s</xliff:g> से पिन किया गया</string>
-    <string name="settings_forget">भूल जाएँ</string>
     <string name="settings_check_now">अभी जाँचें</string>
     <string name="settings_line_epg_offset">किसी फ़ीड का समय गलत हो तो पूरी गाइड खिसकाएँ</string>
     <string name="settings_line_reminders">रिमाइंडर का समय होने पर क्या हो</string>
@@ -1370,13 +1373,12 @@
     <string name="settings_line_quick_live_preview">लाइव टीवी में फ़ोकस किया चैनल चलाएँ</string>
     <string name="settings_line_preview_sound">लाइव प्रीव्यू में आवाज़</string>
     <string name="settings_line_quick_channel_numbers">चैनल बदलने के लिए रिमोट पर नंबर दबाएँ</string>
-    <string name="settings_line_hdr">mpv पर हाई डायनेमिक रेंज</string>
+    <string name="settings_line_prefer_sdr">स्ट्रीम में दोनों हों तो SDR</string>
     <string name="settings_line_quick_autoplay">अगला एपिसोड अपने आप शुरू करें</string>
     <string name="settings_line_live_engine">कौन-सा इंजन चैनल खोले, और विकल्प</string>
     <string name="settings_line_saved_live_choices">जो चैनल आपने खुद बदले</string>
     <string name="settings_line_vod_engine">कौन-सा इंजन फ़िल्में और एपिसोड खोले</string>
     <string name="settings_line_saved_choices">जो फ़िल्में और एपिसोड आपने खुद बदले</string>
-    <string name="settings_line_learned_fixes">प्लेयर ने हर प्रोवाइडर के बारे में क्या सीखा</string>
     <string name="settings_line_external">VLC, MX Player… हर सेक्शन के लिए</string>
     <string name="settings_line_vod_buffer">फ़िल्में कितनी आगे तक लोड हों</string>
     <string name="settings_line_vod_timeout">चुप सर्वर का कितना इंतज़ार</string>
@@ -1394,6 +1396,7 @@
     <string name="settings_line_night_mode">तेज़ दृश्य धीमे, संवाद ऊँचे</string>
     <string name="settings_line_leveling">हर चैनल एक जैसी आवाज़ में</string>
     <string name="settings_line_audio_sync">ऑडियो को पहले या बाद में खिसकाएँ</string>
+    <string name="settings_line_output_audio_delay">मौजूदा आउटपुट के लिए अतिरिक्त देरी</string>
     <string name="settings_line_saved_audio_sync">प्लेयर में याद रखे गए विलंब</string>
     <string name="settings_line_audio_lang">स्ट्रीम में हो तो यही ट्रैक चलाता है</string>
     <string name="settings_line_sub_lang">इस भाषा में सबटाइटल चालू करें</string>
@@ -1401,7 +1404,6 @@
     <string name="settings_title_fonts">फ़ॉन्ट और टेक्स्ट आकार</string>
     <string name="settings_title_saved_live_choices">सहेजे गए लाइव टीवी प्लेयर विकल्प</string>
     <string name="settings_title_saved_choices">सहेजे गए प्लेयर विकल्प</string>
-    <string name="settings_title_learned_fixes">सीखे गए स्ट्रीम सुधार</string>
     <string name="settings_title_tunneled">टनल्ड प्लेबैक</string>
     <string name="settings_title_saved_zoom">सहेजा गया ज़ूम</string>
     <string name="settings_title_saved_volume">सहेजा गया वॉल्यूम</string>

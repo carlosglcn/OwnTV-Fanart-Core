@@ -157,7 +157,7 @@
     <string name="settings_quick_live_preview">直播預覽</string>
     <string name="settings_quick_preview_sound">預覽音效</string>
     <string name="settings_quick_channel_numbers">頻道編號</string>
-    <string name="settings_quick_hdr">HDR（僅 mpv）</string>
+    <string name="settings_quick_prefer_sdr">優先 SDR</string>
     <string name="settings_quick_autoplay">自動播放</string>
     <string name="settings_quick_check_update">檢查更新</string>
     <string name="settings_language">語言</string>
@@ -212,7 +212,7 @@
     <string name="settings_preview_audio_description">在直播預覽中播放聲音</string>
     <string name="settings_mini_player_root">迷你播放器</string>
     <string name="settings_mini_player_root_description">已停駐迷你播放器的大小和位置</string>
-    <string name="settings_hdr_description">影片和電視支援時使用 HDR 輸出。僅適用於 mpv：ExoPlayer 引擎不支援此設定，一律依原樣輸出串流的 HDR。</string>
+    <string name="settings_prefer_sdr_description">當串流同時提供 SDR 和 HDR 畫面時，播放 SDR 畫面：適合 HDR 看起來泛白或過暗的電視。僅有 HDR 的串流仍為 HDR。僅限 ExoPlayer。</string>
     <string name="settings_auto_frame_rate">自動影格率</string>
     <string name="settings_auto_frame_rate_description">在全螢幕播放電視直播和隨選影片時，將電視更新率配合影片調整為 24/25/50/60 fps，並在結束時還原。如果您的電視或接收器每次切換頻道時都會重新進行 HDMI 交握並產生明顯干擾，請關閉此功能。</string>
     <string name="settings_afr_pause">切換顯示時暫停</string>
@@ -223,6 +223,10 @@
     <string name="settings_surround_description_mobile">針對連接到此裝置的真正 5.1/7.1 接收器，將 Dolby/DTS 解碼為環繞音效（5.1/7.1）。使用內建揚聲器、耳機或立體聲聲霸時請保持關閉 — 多聲道音訊可能落後於畫面。如果音訊逐漸不同步，請微調播放器的「音訊」選單 → A/V 同步。</string>
     <string name="settings_audio_passthrough">Dolby/DTS 直通</string>
     <string name="settings_audio_passthrough_description">開啟：當電視、聲霸或擴大機表示可以播放時，Dolby 和 DTS 不經解碼直接傳送（ExoPlayer）。關閉：由應用程式解碼，在環繞音效允許時仍為環繞音效。mpv 一律解碼。夜間模式或音量平衡開啟時不使用。</string>
+    <string name="settings_ffmpeg_audio">ExoPlayer 使用 FFmpeg 音訊解碼</string>
+    <string name="settings_ffmpeg_audio_description">開啟：ExoPlayer 也能解碼裝置沒有解碼器的音訊，例如 DTS、TrueHD 或 MP2。裝置本身的解碼器仍然優先。關閉：ExoPlayer 只使用裝置的解碼器。mpv 一律使用 FFmpeg 解碼。變更後 OwnTV 會重新啟動。</string>
+    <string name="settings_line_ffmpeg_audio">用於裝置無法解碼的音訊</string>
+    <string name="settings_ffmpeg_audio_restart_message">音訊解碼器會在 OwnTV 重新啟動後切換。</string>
     <string name="settings_night_mode">夜間模式</string>
     <string name="settings_night_mode_description">調低響亮的場景、調高輕聲的對白，適合低音量觀看。</string>
     <string name="settings_volume_leveling">音量平衡</string>
@@ -344,7 +348,7 @@
     <string name="settings_search_keywords_audio">音量 大聲 小聲 對嘴同步 延遲 音軌 語言</string>
     <string name="settings_search_keywords_channel_numbers">頻道 編號 直接選台 輸入 數字 鍵盤 數字鍵 換台 LCN</string>
     <string name="settings_search_keywords_mini">停駐 子母畫面 迷你播放器 大小 位置 縮放 百分比 角落 移動</string>
-    <string name="settings_search_keywords_hdr">HDR 高動態範圍 輸出</string>
+    <string name="settings_search_keywords_prefer_sdr">hdr sdr 標準動態範圍 泛白 過暗 畫面</string>
     <string name="settings_search_keywords_afr">AFR 更新率 Hz 畫面抖動 24fps 25fps 50Hz 60Hz 顯示模式 配合</string>
     <string name="settings_search_keywords_surround">Dolby DTS 5.1 7.1 接收器 音訊</string>
     <string name="settings_search_keywords_autoplay">自動播放 影集 季</string>
@@ -468,6 +472,10 @@
     <string name="settings_preferred_audio_language">偏好的音訊語言</string>
     <string name="settings_audio_sync">音訊同步</string>
     <string name="settings_audio_sync_description">將音訊提前或延後，以配合視訊。兩個播放器（mpv 與 ExoPlayer）皆可使用。</string>
+    <string name="settings_output_audio_delay">此輸出的延遲</string>
+    <string name="settings_output_audio_delay_description">疊加在「音訊同步」之上，並為每種輸出分別儲存：HDMI、透過 HDMI ARC 連接的聲霸、藍牙、內建喇叭、耳機。請在透過該輸出收聽時進行調整。</string>
+    <string name="settings_audio_output_speaker">內建喇叭</string>
+    <string name="settings_audio_output_other">耳機或 USB</string>
     <string name="settings_live_tv">電視直播</string>
     <string name="settings_live_latency_description">播放進度與直播節目的接近程度。數值越低代表越接近直播，但緩衝區也越小，因此不穩定的串流可能更常發生停頓或重新連線。套用至您下一個開啟的頻道。</string>
     <string name="settings_live_latency_bitrate_note">在位元率非常高的頻道上（尤其是 4K），由於記憶體一次能保存的影片量有限，緩衝的時間可能比你設定的更短。</string>
@@ -517,10 +525,6 @@
     <string name="settings_reset_live_player_choices_description">在播放器中將某個頻道在 ExoPlayer 與 mpv 之間切換後，該選擇會為這個頻道儲存下來。重設後，所有頻道會重新依照「電視直播播放器」設定。電影與影集已儲存的選擇會保留。</string>
     <string name="settings_reset_live_player_choices_confirm">要重設電視直播播放器的已儲存選擇嗎？</string>
     <string name="settings_reset_live_player_choices_confirm_description">所有頻道會重新依照「電視直播播放器」設定。你隨時可以在播放器中再次個別切換某個頻道。</string>
-    <string name="settings_forget_stream_fixes">忘記已學到的播放修正</string>
-    <string name="settings_forget_stream_fixes_description">播放器會學習每個供應商的串流需要什麼——以 mpv 取代 ExoPlayer、改用其他格式、回看時使用軟體解碼。如果供應商已修正其串流，請讓播放器忘記這些內容。關於回看學到的內容也會在 14 天後自動忘記。</string>
-    <string name="settings_forget_stream_fixes_confirm">要忘記已學到的播放修正嗎？</string>
-    <string name="settings_forget_stream_fixes_confirm_description">頻道會重新以標準方式開啟，播放器會重新學習供應商仍需要的內容。受影響頻道的首次播放可能會多花幾秒鐘。</string>
     <string name="settings_external_player_row_description">依各區段所選的設定，使用外部應用程式（VLC、MX Player）而非內建播放器開啟串流。若本應用程式無法解碼某些串流，或您偏好其他播放器，此功能會很實用。使用外部播放器播放時，無法使用續播位置及上一個／下一個功能；需要自訂 User-Agent 或 referer 的串流可能無法播放。</string>
     <string name="settings_resume_always">一律繼續播放</string>
     <string name="settings_resume_ask">詢問是否繼續播放</string>
@@ -537,7 +541,7 @@
     <string name="settings_delete_all_series">刪除所有影集字幕</string>
     <string name="settings_section_count"><xliff:g id="section">%1$s</xliff:g>（<xliff:g id="count">%2$d</xliff:g>）</string>
     <string name="settings_sync_guide_question">要立即同步電視節目表嗎？</string>
-    <string name="settings_sync_guide_description">下載「<xliff:g id="source">%1$s</xliff:g>」的節目表（電子節目表）。您也可以稍後前往「設定 → 電子節目表」執行此操作。</string>
+    <string name="settings_sync_guide_description">下載「<xliff:g id="source">%1$s</xliff:g>」的節目表（電子節目表）。您也可以稍後前往「設定 → 來源與節目表 → 電子節目表來源」執行此操作。</string>
     <string name="settings_not_now">暫時不要</string>
     <string name="settings_sync_now">立即同步</string>
     <string name="settings_syncing_guide">正在同步電視節目表…</string>
@@ -1145,7 +1149,7 @@
     <string name="local_sync_received_items">已接收的項目: <xliff:g id="count">%1$d</xliff:g></string>
     <string name="local_sync_sent">你的資料已傳送</string>
     <string name="local_sync_failed">同步失敗</string>
-    <string name="local_sync_error_unreachable">無法連線到該裝置。請在那部裝置上開啟 OwnTV → 設定 → 資料 → 本機同步，並開啟同步模式。兩部裝置必須連線同一個 Wi-Fi。</string>
+    <string name="local_sync_error_unreachable">無法連線到該裝置。請在那部裝置上開啟 OwnTV → 更多 → 本機同步，並開啟同步模式。兩部裝置必須連線同一個 Wi-Fi。</string>
     <string name="local_sync_error_unauthorized">另一部裝置拒絕了連線。可能是 PIN 碼不對，或它已忘記本機。</string>
     <string name="local_sync_error_bad_payload">無法讀取收到的內容。如果使用了密碼，請確認兩部裝置上的密碼相同。</string>
     <string name="local_sync_error_unknown">發生問題，請再試一次。</string>
@@ -1308,7 +1312,6 @@
     <string name="settings_part_guide_catchup">節目指南與回看</string>
     <string name="settings_vp_cat_controls_resume">控制與繼續播放</string>
     <string name="settings_pinned_from">從「<xliff:g id="group">%1$s</xliff:g>」釘選</string>
-    <string name="settings_forget">清除</string>
     <string name="settings_check_now">立即檢查</string>
     <string name="settings_line_epg_offset">來源時間不準時平移整個節目指南</string>
     <string name="settings_line_reminders">提醒到時會發生什麼</string>
@@ -1342,13 +1345,12 @@
     <string name="settings_line_quick_live_preview">在直播電視中播放焦點頻道</string>
     <string name="settings_line_preview_sound">直播預覽中的聲音</string>
     <string name="settings_line_quick_channel_numbers">在遙控器上輸入數字轉台</string>
-    <string name="settings_line_hdr">mpv 的高動態範圍</string>
+    <string name="settings_line_prefer_sdr">串流同時提供兩種時用 SDR</string>
     <string name="settings_line_quick_autoplay">自動開始下一集</string>
     <string name="settings_line_live_engine">由哪個引擎開啟頻道，以及備用引擎</string>
     <string name="settings_line_saved_live_choices">你手動切換過的頻道</string>
     <string name="settings_line_vod_engine">由哪個引擎開啟電影和集數</string>
     <string name="settings_line_saved_choices">你手動切換過的電影和集數</string>
-    <string name="settings_line_learned_fixes">播放器針對每個供應商學到的內容</string>
     <string name="settings_line_external">VLC、MX Player… 依分區設定</string>
     <string name="settings_line_vod_buffer">電影提前載入多少</string>
     <string name="settings_line_vod_timeout">等待無回應的伺服器</string>
@@ -1366,6 +1368,7 @@
     <string name="settings_line_night_mode">壓低大聲場景，提升對白</string>
     <string name="settings_line_leveling">所有頻道音量一致</string>
     <string name="settings_line_audio_sync">讓音訊提前或延後</string>
+    <string name="settings_line_output_audio_delay">目前輸出的額外延遲</string>
     <string name="settings_line_saved_audio_sync">你在播放器裡記住的延遲</string>
     <string name="settings_line_audio_lang">串流裡有這條音軌時就播放它</string>
     <string name="settings_line_sub_lang">開啟此語言的字幕</string>
@@ -1373,7 +1376,6 @@
     <string name="settings_title_fonts">字型和文字大小</string>
     <string name="settings_title_saved_live_choices">已儲存的直播電視播放器選擇</string>
     <string name="settings_title_saved_choices">已儲存的播放器選擇</string>
-    <string name="settings_title_learned_fixes">已學習的串流修正</string>
     <string name="settings_title_tunneled">通道播放</string>
     <string name="settings_title_saved_zoom">已儲存的縮放</string>
     <string name="settings_title_saved_volume">已儲存的音量</string>

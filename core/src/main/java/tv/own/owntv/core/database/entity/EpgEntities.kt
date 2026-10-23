@@ -28,7 +28,8 @@ data class EpgChannelEntity(
     val epgChannelId: String,
     val displayName: String? = null,
     /** The feed's own `<icon src>` logo, used instead of the provider logo when the user turns
-     *  Settings → EPG → "Prefer EPG logos" on. Null when the feed carries no usable icon. */
+     *  Settings → EPG Sources → "Use this guide's channel logos" on for this feed. Null when the feed
+     *  carries no usable icon. */
     val iconUrl: String? = null,
     /**
      * [displayName] and [epgChannelId] through `EpgMatcher.normalizeForEpg`, stored at sync time.
@@ -97,7 +98,7 @@ fun EpgProgrammeEntity.withDetails(details: EpgDetails): EpgProgrammeEntity = if
     imageUrl = details.imageUrl,
 )
 
-/** Projection for the "Prefer EPG logos" override: one EPG channel id → its feed icon. */
+/** Projection for the "Use this guide's channel logos" override: one EPG channel id → its feed icon. */
 data class EpgChannelIcon(
     val epgChannelId: String,
     val iconUrl: String,

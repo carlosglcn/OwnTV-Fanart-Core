@@ -86,6 +86,7 @@
     <string name="player_time_remaining">−<xliff:g id="time">%1$s</xliff:g></string>
     <string name="player_switch_exo">Passaggio a ExoPlayer effettuato</string>
     <string name="player_switch_mpv">Passaggio a mpv effettuato</string>
+    <string name="player_smoothness_hint">Questo canale sta perdendo fotogrammi. Passare il lettore a mpv può renderlo più fluido.</string>
     <string name="player_error_image_subtitle_audio">I sottotitoli basati su immagini non sono disponibili per il formato audio di questo video.</string>
     <string name="player_error_both_engines_exo_first">La riproduzione non è riuscita con entrambi i motori video (prima ExoPlayer, poi mpv). Il file potrebbe essere danneggiato o utilizzare un formato che questo televisore non può riprodurre.</string>
     <string name="player_error_both_engines_mpv_first">La riproduzione non è riuscita con entrambi i motori video (mpv ed ExoPlayer). Il file potrebbe essere danneggiato o utilizzare un formato che questo televisore non può riprodurre. (<xliff:g id="error">%1$s</xliff:g>)</string>
@@ -274,7 +275,7 @@
     <string name="player_subtitles_search_language_description">Nei risultati di ricerca compaiono solo i sottotitoli in questa lingua. Puoi comunque premere “Tutte le lingue” nei risultati per vedere tutto per una singola ricerca.</string>
     <string name="player_subtitles_language_not_set">Non impostato</string>
     <string name="player_frame_rate_prompt_title">Questo canale potrebbe andare a scatti</string>
-    <string name="player_frame_rate_prompt_description">Riproduce a <xliff:g id="fps">%1$d</xliff:g> fps mentre la tua TV, che è a <xliff:g id="current_hz">%2$d</xliff:g> Hz, non può mostrare questi fotogrammi in modo uniforme — il movimento risulta leggermente a scatti.\n\nIl frame rate automatico porta la TV a <xliff:g id="target_hz">%3$d</xliff:g> Hz mentre guardi e poi la ripristina. Alcune TV restano nere per un attimo quando cambia la frequenza; puoi disattivarlo di nuovo in Impostazioni → Lettore video.</string>
+    <string name="player_frame_rate_prompt_description">Riproduce a <xliff:g id="fps">%1$d</xliff:g> fps mentre la tua TV, che è a <xliff:g id="current_hz">%2$d</xliff:g> Hz, non può mostrare questi fotogrammi in modo uniforme — il movimento risulta leggermente a scatti.\n\nIl frame rate automatico porta la TV a <xliff:g id="target_hz">%3$d</xliff:g> Hz mentre guardi e poi la ripristina. Alcune TV restano nere per un attimo quando cambia la frequenza; puoi disattivarlo di nuovo in Impostazioni → Immagine → Frequenza fotogrammi.</string>
     <string name="player_frame_rate_turn_on">Attiva</string>
     <string name="player_reason_live_fallback">La riproduzione in diretta è passata a un fallback</string>
     <string name="player_reason_live_no_fallback">Riproduzione in diretta non riuscita — non rimane alcun fallback</string>

@@ -12,7 +12,7 @@ import java.io.IOException
  *
  * The case that prompted this: a Stalker portal whose guide had been emptied answered every route
  * successfully with nothing in it. That arrived as a plain `IOException`, which this worker read as
- * "network trouble" and retried three times with backoff — so Settings → EPG sat on "Connecting…"
+ * "network trouble" and retried three times with backoff — so Settings → EPG Sources sat on "Connecting…"
  * for six minutes before admitting a failure that was certain from the first second.
  */
 class EpgSyncRetryTest {

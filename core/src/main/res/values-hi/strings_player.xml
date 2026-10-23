@@ -86,6 +86,7 @@
     <string name="player_time_remaining">−<xliff:g id="time">%1$s</xliff:g></string>
     <string name="player_switch_exo">ExoPlayer पर स्विच किया गया</string>
     <string name="player_switch_mpv">MPV पर स्विच किया गया</string>
+    <string name="player_smoothness_hint">यह चैनल फ़्रेम छोड़ रहा है। प्लेयर को MPV पर स्विच करने से यह ज़्यादा सहज चल सकता है।</string>
     <string name="player_error_image_subtitle_audio">इस वीडियो के ऑडियो फ़ॉर्मैट के लिए चित्र-आधारित सबटाइटल उपलब्ध नहीं हैं।</string>
     <string name="player_error_both_engines_exo_first">दोनों वीडियो इंजन पर प्लेबैक विफल रहा (पहले ExoPlayer, फिर mpv)। फ़ाइल खराब हो सकती है या ऐसे फ़ॉर्मैट में हो सकती है जिसे यह टीवी नहीं चला सकता।</string>
     <string name="player_error_both_engines_mpv_first">दोनों वीडियो इंजन पर प्लेबैक विफल रहा (mpv और ExoPlayer)। फ़ाइल खराब हो सकती है या ऐसे फ़ॉर्मैट में हो सकती है जिसे यह टीवी नहीं चला सकता। (<xliff:g id="error">%1$s</xliff:g>)</string>
@@ -267,7 +268,7 @@
     <string name="player_subtitles_search_language_description">खोज परिणामों में केवल इसी भाषा के उपशीर्षक दिखते हैं। आप परिणामों में “सभी भाषाएँ” दबाकर भी एक खोज के लिए सब कुछ देख सकते हैं।</string>
     <string name="player_subtitles_language_not_set">सेट नहीं है</string>
     <string name="player_frame_rate_prompt_title">इस चैनल में झटके लग सकते हैं</string>
-    <string name="player_frame_rate_prompt_description">यह <xliff:g id="fps">%1$d</xliff:g> fps पर चलता है जबकि आपका टीवी <xliff:g id="current_hz">%2$d</xliff:g> Hz पर चल रहा है, जो उन फ़्रेमों को समान रूप से नहीं दिखा सकता — गति थोड़ी झटकेदार लगती है।\n\nऑटो फ़्रेम रेट देखते समय टीवी को <xliff:g id="target_hz">%3$d</xliff:g> Hz पर स्विच कर देता है और बाद में वापस कर देता है। कुछ टीवी रेट बदलने पर एक पल के लिए ब्लैंक हो जाते हैं; आप इसे सेटिंग्स → वीडियो प्लेयर में फिर से बंद कर सकते हैं।</string>
+    <string name="player_frame_rate_prompt_description">यह <xliff:g id="fps">%1$d</xliff:g> fps पर चलता है जबकि आपका टीवी <xliff:g id="current_hz">%2$d</xliff:g> Hz पर चल रहा है, जो उन फ़्रेमों को समान रूप से नहीं दिखा सकता — गति थोड़ी झटकेदार लगती है।\n\nऑटो फ़्रेम रेट देखते समय टीवी को <xliff:g id="target_hz">%3$d</xliff:g> Hz पर स्विच कर देता है और बाद में वापस कर देता है। कुछ टीवी रेट बदलने पर एक पल के लिए ब्लैंक हो जाते हैं; आप इसे सेटिंग → तस्वीर → फ़्रेम रेट में फिर से बंद कर सकते हैं।</string>
     <string name="player_frame_rate_turn_on">चालू करें</string>
     <string name="player_reason_live_fallback">लाइव प्लेबैक एक फ़ॉलबैक पर स्विच हो गया</string>
     <string name="player_reason_live_no_fallback">लाइव प्लेबैक विफल — कोई फ़ॉलबैक शेष नहीं है</string>

@@ -380,6 +380,45 @@
     <string name="sports_switch_channel">Kanalı değiştir</string>
     <string name="sports_tab_fixtures">Fikstür</string>
     <string name="sports_tab_results">Sonuçlar</string>
+    <string name="sports_tab_scores">Skorlar</string>
+    <string name="sports_tab_calendar">Takvim</string>
+    <string name="sports_tab_leagues">Ligler</string>
+    <string name="sports_previous_month">Önceki ay</string>
+    <string name="sports_next_month">Sonraki ay</string>
+    <string name="sports_next">Sıradaki: <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">Sıradaki</string>
+    <string name="sports_new_badge">Yeni</string>
+    <string name="sports_no_table_series">Puan tablosu yok — seriler her hafta değişir</string>
+    <string name="sports_follow_league">Ligi takip et</string>
+    <string name="sports_unfollow_league">Ligi takipten çık</string>
+    <string name="sports_no_matches_on"><xliff:g id="day">%1$s</xliff:g>: sporlarında maç yok</string>
+    <string name="sports_nothing_on_day">Bu gün bir şey yok</string>
+    <string name="sports_nothing_in_sport"><xliff:g id="sport">%1$s</xliff:g>: bu gün bir şey yok</string>
+    <string name="sports_change_leagues_hint">Ligleri Ayarlar → Spor bölümünden ekle veya kaldır</string>
+    <string name="sports_loading_month"><xliff:g id="month">%1$s</xliff:g> yükleniyor…</string>
+    <string name="sports_offline_saved">Kaydedilen gösteriliyor (<xliff:g id="time">%1$s</xliff:g>) — ESPN’e ulaşılamadı</string>
+    <string name="sports_team_page">Takım sayfası</string>
+    <string name="sports_next_match">Sıradaki maç</string>
+    <string name="sports_last_five">Son beş</string>
+    <string name="sports_league_position">Ligdeki sıra</string>
+    <string name="sports_in_my_teams">Takımlarımda</string>
+    <string name="sports_open_match_page">Maç sayfasını aç</string>
+    <string name="sports_open_team_page">Takım sayfasını aç</string>
+    <string name="sports_my_teams_leagues">Takımlarının oynadığı ligler</string>
+    <string name="sports_tab_drivers">Pilotlar</string>
+    <string name="sports_tab_constructors">Konstrüktörler</string>
+    <string name="sports_tab_races">Yarışlar</string>
+    <string name="sports_tab_rankings">Sıralama</string>
+    <string name="sports_tab_matches">Maçlar</string>
+    <string name="sports_next_race_weekend">Sıradaki yarış hafta sonu</string>
+    <string name="sports_last_weekend">Geçen hafta sonu</string>
+    <string name="sports_session_practice_1">Antrenman 1</string>
+    <string name="sports_session_practice_2">Antrenman 2</string>
+    <string name="sports_session_practice_3">Antrenman 3</string>
+    <string name="sports_session_sprint_qualifying">Sprint sıralama turları</string>
+    <string name="sports_session_qualifying">Sıralama turları</string>
+    <string name="sports_session_sprint">Sprint</string>
+    <string name="sports_session_race">Yarış</string>
     <string name="sports_table_team">Takım</string>
     <string name="sports_table_played">O</string>
     <string name="sports_table_won">G</string>
@@ -464,6 +503,12 @@
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> saatte bir</item>
     </plurals>
     <string name="sports_auto_rebuild_app_start">Uygulama her açıldığında</string>
+    <string name="sports_calendar_refresh">Takvim yenileme</string>
+    <string name="sports_calendar_refresh_description">Kaydedilen ayların ne sıklıkla yeniden alınacağı</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> günde bir</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> günde bir</item>
+    </plurals>
     <string name="sports_find_channels">Kanalları bul</string>
     <string name="sports_find_channels_description">Bu maçı rehberinde ve kanal adlarında arar. Büyük bir oynatma listesinde biraz sürebilir.</string>
     <string name="sports_finding_channels">Kanalların aranıyor…</string>

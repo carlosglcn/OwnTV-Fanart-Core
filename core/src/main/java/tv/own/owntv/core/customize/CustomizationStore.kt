@@ -212,8 +212,10 @@ class CustomizationStore(private val context: Context) {
             it.copy(itemNames = if (name.isNullOrBlank()) it.itemNames - itemKey else it.itemNames + (itemKey to name.trim()))
         }
 
+    /** Saves the order of the categories on screen; the stored order of every other category (another
+     *  playlist's, while the rail shows one) is kept — see [mergeCategoryOrder]. */
     suspend fun setCategoryOrder(profileId: Long, type: MediaType, orderedKeys: List<String>) =
-        update(profileId, type) { it.copy(categoryOrder = orderedKeys) }
+        update(profileId, type) { it.copy(categoryOrder = mergeCategoryOrder(it.categoryOrder, orderedKeys)) }
 
     /** Manually map an item to an EPG channel id (null/blank clears the override → auto-match). */
     suspend fun setEpgMatch(profileId: Long, type: MediaType, itemKey: String, epgChannelId: String?) =
@@ -393,6 +395,21 @@ fun List<CategoryEntity>.applyCustomizations(
     val (pinned, rest) = named.partition { (cat, _) -> CustomizeKeys.category(cat) in orderIndex }
     return pinned.sortedBy { (cat, _) -> orderIndex.getValue(CustomizeKeys.category(cat)) } +
         (if (alphaRest) rest.sortedBy { (_, name) -> name.lowercase() } else rest)
+}
+
+/**
+ * A new category order for the keys [onScreen], merged into the [stored] one. A move is made on the rail
+ * as it is shown — one playlist's categories when the rail shows one — so saving only those keys erased
+ * every other playlist's order. The other keys keep their places; the keys on screen go, in their new
+ * order, where the first of them already was (at the end when none was stored). A custom category is on
+ * every playlist's rail, so it must not be pulled ahead of another playlist's folders by a move here.
+ */
+fun mergeCategoryOrder(stored: List<String>, onScreen: List<String>): List<String> {
+    val shown = onScreen.toSet()
+    val firstShown = stored.indexOfFirst { it in shown }
+    val rest = stored.filterNot { it in shown }
+    val at = if (firstShown < 0) rest.size else stored.take(firstShown).count { it !in shown }
+    return rest.take(at) + onScreen + rest.drop(at)
 }
 
 /** One rail entry after customizations are applied: a provider folder ([categoryId] set) or a user

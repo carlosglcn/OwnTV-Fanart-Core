@@ -48,6 +48,10 @@ internal object SettingsImportRules {
     fun sportsReminderLead(v: Int): Int =
         v.takeIf { it in SportsConfig.REMINDER_LEAD_CHOICES } ?: SportsConfig.DEFAULT_REMINDER_LEAD_MINUTES
 
+    /** Calendar refresh: one of the stepper's days; anything else is the default. */
+    fun sportsCalendarRefresh(v: Int): Int =
+        v.takeIf { it in SportsConfig.CALENDAR_REFRESH_CHOICES } ?: SportsConfig.DEFAULT_CALENDAR_REFRESH_DAYS
+
     /** Only leagues this build can fetch; one from a newer build's catalogue is dropped. */
     fun sportsLeagues(keys: List<String>): List<String> = keys.filter { SportsCatalog.league(it) != null }.distinct()
 

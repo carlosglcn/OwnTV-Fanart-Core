@@ -158,7 +158,7 @@
     <string name="settings_quick_live_preview">Livevoorvertoning</string>
     <string name="settings_quick_preview_sound">Geluid bij voorvertoning</string>
     <string name="settings_quick_channel_numbers">Zendernummers</string>
-    <string name="settings_quick_hdr">HDR (alleen mpv)</string>
+    <string name="settings_quick_prefer_sdr">SDR voorkeur</string>
     <string name="settings_quick_autoplay">Automatisch afspelen</string>
     <string name="settings_quick_check_update">Controleren op update</string>
     <string name="settings_language">Taal</string>
@@ -213,7 +213,7 @@
     <string name="settings_preview_audio_description">Speel geluid af tijdens de livevoorvertoning</string>
     <string name="settings_mini_player_root">Minispeler</string>
     <string name="settings_mini_player_root_description">Grootte en positie van de vastgezette minispeler</string>
-    <string name="settings_hdr_description">Gebruik HDR-uitvoer wanneer de video en tv dit ondersteunen. Alleen mpv: de ExoPlayer-engine ondersteunt deze instelling niet en geeft de HDR van de stream altijd ongewijzigd door.</string>
+    <string name="settings_prefer_sdr_description">Als een stream zowel een SDR- als een HDR-beeld biedt, wordt het SDR-beeld afgespeeld: voor een tv waarop HDR flets of te donker oogt. Een stream met alleen HDR blijft HDR. Alleen ExoPlayer.</string>
     <string name="settings_auto_frame_rate">Automatische beeldfrequentie</string>
     <string name="settings_auto_frame_rate_description">Stem in volledig scherm de vernieuwingsfrequentie van de tv af op de video (24/25/50/60 fps), voor live-tv en VOD, en herstel deze bij afsluiten. Schakel dit uit als je tv of ontvanger bij elke zenderwissel de HDMI-verbinding hoorbaar opnieuw opbouwt.</string>
     <string name="settings_afr_pause">Pauzeren tijdens de beeldwissel</string>
@@ -224,6 +224,10 @@
     <string name="settings_surround_description_mobile">Decodeer Dolby/DTS naar surround (5.1/7.1) voor een echte 5.1/7.1-ontvanger die op dit apparaat is aangesloten. Laat dit UIT voor de ingebouwde luidspreker, een koptelefoon of een stereosoundbar — meerkanaalsaudio kan achterlopen op het beeld. Als het geluid wegdrijft, pas je dit licht aan via het menu Audio van de speler → A/V-synchronisatie.</string>
     <string name="settings_audio_passthrough">Dolby- en DTS-passthrough</string>
     <string name="settings_audio_passthrough_description">Aan: Dolby en DTS gaan ongedecodeerd naar de tv, soundbar of receiver als die zegt ze te kunnen afspelen (ExoPlayer). Uit: de app decodeert ze, nog steeds als surround waar Surroundsound dat toestaat. mpv decodeert altijd. Niet gebruikt zolang Nachtmodus of Volume-egalisatie aan staat.</string>
+    <string name="settings_ffmpeg_audio">FFmpeg-audio voor ExoPlayer</string>
+    <string name="settings_ffmpeg_audio_description">Aan: ExoPlayer kan ook geluid decoderen waarvoor het apparaat geen decoder heeft, zoals DTS, TrueHD of MP2. De eigen decoders van het apparaat gaan nog steeds voor. Uit: ExoPlayer gebruikt alleen de decoders van het apparaat. mpv decodeert altijd met FFmpeg. Wijzigen herstart OwnTV.</string>
+    <string name="settings_line_ffmpeg_audio">Voor geluid dat het apparaat niet kan decoderen</string>
+    <string name="settings_ffmpeg_audio_restart_message">De audiodecoder wisselt nadat OwnTV opnieuw is gestart.</string>
     <string name="settings_night_mode">Nachtmodus</string>
     <string name="settings_night_mode_description">Zet luide scènes zachter en zachte dialogen luider, om op laag volume te kijken.</string>
     <string name="settings_volume_leveling">Volume-egalisatie</string>
@@ -346,7 +350,7 @@
     <string name="settings_search_keywords_audio">volume luid zacht lipsynchronisatie vertraging audiospoor taal</string>
     <string name="settings_search_keywords_channel_numbers">zender nummer direct afstemmen typen cijfers toetsenblok numeriek zappen lcn</string>
     <string name="settings_search_keywords_mini">vastgezet pip minispeler grootte positie schaal percentage hoek verplaatsen</string>
-    <string name="settings_search_keywords_hdr">hoog dynamisch bereik uitvoer</string>
+    <string name="settings_search_keywords_prefer_sdr">hdr sdr standaard dynamisch bereik flets donker beeld</string>
     <string name="settings_search_keywords_afr">afr vernieuwingsfrequentie hz schokken 24fps 25fps 50hz 60hz weergavemodus afstemmen</string>
     <string name="settings_search_keywords_surround">dolby DTS 5.1 7.1 ontvanger audio</string>
     <string name="settings_search_keywords_autoplay">automatisch afspelen series seizoen</string>
@@ -470,6 +474,10 @@
     <string name="settings_preferred_audio_language">Voorkeurstaal voor audio</string>
     <string name="settings_audio_sync">Audiosynchronisatie</string>
     <string name="settings_audio_sync_description">Verschuif de audio naar voren of achteren zodat deze gelijkloopt met de video. Werkt met beide spelers (mpv en ExoPlayer).</string>
+    <string name="settings_output_audio_delay">Vertraging voor deze uitgang</string>
+    <string name="settings_output_audio_delay_description">Komt bovenop ‘Audiosynchronisatie’ en wordt per uitgang apart bewaard: HDMI, een soundbar via HDMI ARC, Bluetooth, de ingebouwde luidsprekers, een koptelefoon. Stel het in terwijl je via die uitgang luistert.</string>
+    <string name="settings_audio_output_speaker">Ingebouwde luidsprekers</string>
+    <string name="settings_audio_output_other">Koptelefoon of USB</string>
     <string name="settings_live_tv">Live-tv</string>
     <string name="settings_live_latency_description">Hoe dicht bij de live-uitzending wordt afgespeeld. Lager betekent dichter bij live, maar ook een kleinere buffer, waardoor zwakke streams vaker kunnen haperen of opnieuw verbinding kunnen maken. Geldt voor de volgende zender die u opent.</string>
     <string name="settings_live_latency_bitrate_note">Bij een kanaal met een zeer hoge bitrate — vooral in 4K — kan de buffer minder tijd bevatten dan je hebt ingesteld, omdat er een limiet zit op hoeveel video tegelijk in het geheugen past.</string>
@@ -520,10 +528,6 @@
     <string name="settings_reset_live_player_choices_description">Als je een zender in de speler tussen ExoPlayer en mpv wisselt, wordt die keuze voor de zender bewaard. Na opnieuw instellen volgen alle zenders weer de instelling “Speler voor live-tv”. Opgeslagen keuzes voor films en afleveringen blijven behouden.</string>
     <string name="settings_reset_live_player_choices_confirm">Opgeslagen spelerkeuzes voor live-tv opnieuw instellen?</string>
     <string name="settings_reset_live_player_choices_confirm_description">Elke zender volgt weer de instelling “Speler voor live-tv”. Je kunt een afzonderlijke zender altijd opnieuw wisselen vanuit de speler.</string>
-    <string name="settings_forget_stream_fixes">Geleerde streamoplossingen vergeten</string>
-    <string name="settings_forget_stream_fixes_description">De speler leert wat de streams van elke aanbieder nodig hebben: mpv in plaats van ExoPlayer, een ander formaat, softwaredecodering voor terugkijken. Vergeet dit als een aanbieder zijn streams heeft gerepareerd. Wat over terugkijken is geleerd, wordt na 14 dagen ook vanzelf vergeten.</string>
-    <string name="settings_forget_stream_fixes_confirm">Geleerde streamoplossingen vergeten?</string>
-    <string name="settings_forget_stream_fixes_confirm_description">Zenders openen weer op de standaardmanier en de speler leert opnieuw wat een aanbieder nog nodig heeft. Het eerste afspelen van een betrokken zender kan een paar seconden langer duren.</string>
     <string name="settings_external_player_row_description">Open streams in een externe app (VLC, MX Player) in plaats van met de ingebouwde speler; dit wordt per sectie ingesteld. Handig voor streams die deze app niet kan decoderen, of als je liever een andere speler gebruikt. De hervatpositie en vorige/volgende zijn niet beschikbaar bij extern afspelen; streams waarvoor een aangepaste User-Agent of Referer-header nodig is, worden mogelijk niet afgespeeld.</string>
     <string name="settings_resume_always">Altijd hervatten</string>
     <string name="settings_resume_ask">Vragen om te hervatten</string>
@@ -540,7 +544,7 @@
     <string name="settings_delete_all_series">Alle series verwijderen</string>
     <string name="settings_section_count"><xliff:g id="section">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g>)</string>
     <string name="settings_sync_guide_question">De programmagids nu synchroniseren?</string>
-    <string name="settings_sync_guide_description">Download de programmagids (EPG) voor “<xliff:g id="source">%1$s</xliff:g>”. U kunt dit later ook doen via Instellingen → EPG.</string>
+    <string name="settings_sync_guide_description">Download de programmagids (EPG) voor “<xliff:g id="source">%1$s</xliff:g>”. U kunt dit later ook doen via Instellingen → Bronnen en gids → EPG-bronnen.</string>
     <string name="settings_not_now">Niet nu</string>
     <string name="settings_sync_now">Nu synchroniseren</string>
     <string name="settings_syncing_guide">Programmagids synchroniseren…</string>
@@ -1166,7 +1170,7 @@
     <string name="local_sync_received_items">Ontvangen items: <xliff:g id="count">%1$d</xliff:g></string>
     <string name="local_sync_sent">Je gegevens zijn verstuurd</string>
     <string name="local_sync_failed">Synchroniseren mislukt</string>
-    <string name="local_sync_error_unreachable">Dit apparaat was niet bereikbaar. Open daarop OwnTV → Instellingen → Gegevens → Lokaal synchroniseren en zet Synchronisatiemodus aan. Beide apparaten moeten op hetzelfde wifinetwerk zitten.</string>
+    <string name="local_sync_error_unreachable">Dit apparaat was niet bereikbaar. Open daarop OwnTV → Meer → Lokaal synchroniseren en zet Synchronisatiemodus aan. Beide apparaten moeten op hetzelfde wifinetwerk zitten.</string>
     <string name="local_sync_error_unauthorized">Het andere apparaat weigerde. De pincode klopt mogelijk niet, of het is dit apparaat vergeten.</string>
     <string name="local_sync_error_bad_payload">Wat binnenkwam kon niet worden gelezen. Als je een wachtwoord gebruikte, controleer of het op beide apparaten hetzelfde is.</string>
     <string name="local_sync_error_unknown">Er is iets misgegaan. Probeer het opnieuw.</string>
@@ -1336,7 +1340,6 @@
     <string name="settings_part_guide_catchup">Gids en terugkijken</string>
     <string name="settings_vp_cat_controls_resume">Bediening en hervatten</string>
     <string name="settings_pinned_from">Vastgezet uit <xliff:g id="group">%1$s</xliff:g></string>
-    <string name="settings_forget">Vergeten</string>
     <string name="settings_check_now">Nu controleren</string>
     <string name="settings_line_epg_offset">Verschuif de hele gids als de tijden van een bron niet kloppen</string>
     <string name="settings_line_reminders">Wat er gebeurt als een herinnering afgaat</string>
@@ -1370,13 +1373,12 @@
     <string name="settings_line_quick_live_preview">Het geselecteerde kanaal afspelen in Live tv</string>
     <string name="settings_line_preview_sound">Geluid in het livevoorbeeld</string>
     <string name="settings_line_quick_channel_numbers">Typ een nummer op de afstandsbediening om af te stemmen</string>
-    <string name="settings_line_hdr">Hoog dynamisch bereik op mpv</string>
+    <string name="settings_line_prefer_sdr">SDR als een stream beide biedt</string>
     <string name="settings_line_quick_autoplay">De volgende aflevering vanzelf starten</string>
     <string name="settings_line_live_engine">Welke speler zenders opent, en de reserve</string>
     <string name="settings_line_saved_live_choices">Zenders die je zelf hebt omgezet</string>
     <string name="settings_line_vod_engine">Welke speler films en afleveringen opent</string>
     <string name="settings_line_saved_choices">Films en afleveringen die je zelf hebt omgezet</string>
-    <string name="settings_line_learned_fixes">Wat de speler over elke aanbieder heeft geleerd</string>
     <string name="settings_line_external">VLC, MX Player… per onderdeel</string>
     <string name="settings_line_vod_buffer">Hoe ver vooruit films worden geladen</string>
     <string name="settings_line_vod_timeout">Wachten op een stille server</string>
@@ -1394,6 +1396,7 @@
     <string name="settings_line_night_mode">Harde scènes zachter, dialoog harder</string>
     <string name="settings_line_leveling">Elke zender even luid</string>
     <string name="settings_line_audio_sync">Geluid eerder of later zetten</string>
+    <string name="settings_line_output_audio_delay">Extra vertraging voor de huidige uitgang</string>
     <string name="settings_line_saved_audio_sync">Vertragingen die je in de speler hebt onthouden</string>
     <string name="settings_line_audio_lang">Speelt dit spoor als de stream het heeft</string>
     <string name="settings_line_sub_lang">Ondertitels in deze taal aanzetten</string>
@@ -1401,7 +1404,6 @@
     <string name="settings_title_fonts">Lettertypen en tekstgrootte</string>
     <string name="settings_title_saved_live_choices">Opgeslagen spelerkeuzes voor live tv</string>
     <string name="settings_title_saved_choices">Opgeslagen spelerkeuzes</string>
-    <string name="settings_title_learned_fixes">Geleerde streamcorrecties</string>
     <string name="settings_title_tunneled">Getunnelde weergave</string>
     <string name="settings_title_saved_zoom">Opgeslagen zoom</string>
     <string name="settings_title_saved_volume">Opgeslagen volume</string>

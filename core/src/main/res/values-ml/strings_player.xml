@@ -86,6 +86,7 @@
     <string name="player_time_remaining">−<xliff:g id="time">%1$s</xliff:g></string>
     <string name="player_switch_exo">ExoPlayer-ലേക്ക് മാറി</string>
     <string name="player_switch_mpv">MPV-ലേക്ക് മാറി</string>
+    <string name="player_smoothness_hint">ഈ ചാനലിൽ ഫ്രെയിമുകൾ നഷ്ടപ്പെടുന്നു. പ്ലെയർ MPV-ലേക്ക് മാറ്റിയാൽ ഇത് കൂടുതൽ സുഗമമായി പ്ലേ ചെയ്തേക്കാം.</string>
     <string name="player_error_image_subtitle_audio">ഈ വീഡിയോയുടെ ഓഡിയോ ഫോർമാറ്റിൽ ചിത്രാധിഷ്ഠിത സബ്‌ടൈറ്റിലുകൾ ലഭ്യമല്ല.</string>
     <string name="player_error_both_engines_exo_first">രണ്ട് വീഡിയോ എഞ്ചിനുകളിലും പ്ലേബാക്ക് പരാജയപ്പെട്ടു (ആദ്യം ExoPlayer, തുടർന്ന് mpv). ഫയൽ കേടായിരിക്കാം അല്ലെങ്കിൽ ഈ ടിവിക്ക് പ്ലേ ചെയ്യാനാകാത്ത ഫോർമാറ്റിലായിരിക്കാം.</string>
     <string name="player_error_both_engines_mpv_first">രണ്ട് വീഡിയോ എഞ്ചിനുകളിലും പ്ലേബാക്ക് പരാജയപ്പെട്ടു (mpv, ExoPlayer). ഫയൽ കേടായിരിക്കാം അല്ലെങ്കിൽ ഈ ടിവിക്ക് പ്ലേ ചെയ്യാനാകാത്ത ഫോർമാറ്റിലായിരിക്കാം. (<xliff:g id="error">%1$s</xliff:g>)</string>
@@ -267,7 +268,7 @@
     <string name="player_subtitles_search_language_description">ഈ ഭാഷയിലെ സബ്ടൈറ്റിലുകൾ മാത്രമേ തിരയൽ ഫലങ്ങളിൽ ദൃശ്യമാകൂ. ഒരു തിരയലിനായി എല്ലാം കാണാൻ ഫലങ്ങളിൽ “എല്ലാ ഭാഷകളും” അമർത്താം.</string>
     <string name="player_subtitles_language_not_set">സജ്ജീകരിച്ചിട്ടില്ല</string>
     <string name="player_frame_rate_prompt_title">ഈ ചാനലിന് ജട്ടർ ഉണ്ടാകാം</string>
-    <string name="player_frame_rate_prompt_description">ഇത് <xliff:g id="fps">%1$d</xliff:g> fps-ൽ പ്ലേ ചെയ്യുമ്പോൾ നിങ്ങളുടെ ടിവി <xliff:g id="current_hz">%2$d</xliff:g> Hz-ൽ പ്രവർത്തിക്കുന്നു, അതിനാൽ ആ ഫ്രെയിമുകൾ ഒരേപോലെ കാണിക്കാൻ കഴിയില്ല — ചലനം ചെറുതായി ജെർക്കി ആയിരിക്കും.\n\nഓട്ടോ ഫ്രെയിം റേറ്റ് നിങ്ങൾ കാണുമ്പോൾ ടിവിയെ <xliff:g id="target_hz">%3$d</xliff:g> Hz-ലേക്ക് മാറ്റുകയും പിന്നീട് തിരികെ മാറ്റുകയും ചെയ്യും. ചില ടിവികൾ റേറ്റ് മാറുമ്പോൾ ഒരു നിമിഷം ബ്ലാങ്ക് ആകും; ക്രമീകരണങ്ങൾ → വീഡിയോ പ്ലെയറിൽ ചെന്ന് നിങ്ങൾക്ക് അത് വീണ്ടും ഓഫ് ചെയ്യാം.</string>
+    <string name="player_frame_rate_prompt_description">ഇത് <xliff:g id="fps">%1$d</xliff:g> fps-ൽ പ്ലേ ചെയ്യുമ്പോൾ നിങ്ങളുടെ ടിവി <xliff:g id="current_hz">%2$d</xliff:g> Hz-ൽ പ്രവർത്തിക്കുന്നു, അതിനാൽ ആ ഫ്രെയിമുകൾ ഒരേപോലെ കാണിക്കാൻ കഴിയില്ല — ചലനം ചെറുതായി ജെർക്കി ആയിരിക്കും.\n\nഓട്ടോ ഫ്രെയിം റേറ്റ് നിങ്ങൾ കാണുമ്പോൾ ടിവിയെ <xliff:g id="target_hz">%3$d</xliff:g> Hz-ലേക്ക് മാറ്റുകയും പിന്നീട് തിരികെ മാറ്റുകയും ചെയ്യും. ചില ടിവികൾ റേറ്റ് മാറുമ്പോൾ ഒരു നിമിഷം ബ്ലാങ്ക് ആകും; ക്രമീകരണങ്ങൾ → ചിത്രം → ഫ്രെയിം റേറ്റിൽ ചെന്ന് നിങ്ങൾക്ക് അത് വീണ്ടും ഓഫ് ചെയ്യാം.</string>
     <string name="player_frame_rate_turn_on">ഓണാക്കുക</string>
     <string name="player_reason_live_fallback">ലൈവ് പ്ലേബാക്ക് ഒരു ഫോൾബാക്കിലേക്ക് മാറി</string>
     <string name="player_reason_live_no_fallback">ലൈവ് പ്ലേബാക്ക് പരാജയപ്പെട്ടു — ഫോൾബാക്ക് ശേഷിക്കുന്നില്ല</string>

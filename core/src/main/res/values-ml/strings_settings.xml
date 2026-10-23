@@ -158,7 +158,7 @@
     <string name="settings_quick_live_preview">തത്സമയ പ്രിവ്യൂ</string>
     <string name="settings_quick_preview_sound">പ്രിവ്യൂ ശബ്ദം</string>
     <string name="settings_quick_channel_numbers">ചാനൽ നമ്പറുകൾ</string>
-    <string name="settings_quick_hdr">HDR (mpv മാത്രം)</string>
+    <string name="settings_quick_prefer_sdr">SDR-ന് മുൻഗണന</string>
     <string name="settings_quick_autoplay">സ്വയം പ്ലേ ചെയ്യുക</string>
     <string name="settings_quick_check_update">അപ്‌ഡേറ്റിനായി പരിശോധിക്കുക</string>
     <string name="settings_language">ഭാഷ</string>
@@ -213,7 +213,7 @@
     <string name="settings_preview_audio_description">തത്സമയ പ്രിവ്യൂവിൽ ശബ്ദം പ്ലേ ചെയ്യുക</string>
     <string name="settings_mini_player_root">മിനി പ്ലെയർ</string>
     <string name="settings_mini_player_root_description">ഡോക്ക് ചെയ്ത മിനി പ്ലെയറിന്റെ വലുപ്പവും സ്ഥാനവും</string>
-    <string name="settings_hdr_description">വീഡിയോയും ടിവിയും പിന്തുണയ്ക്കുമ്പോൾ HDR ഔട്ട്‌പുട്ട് ഉപയോഗിക്കുക. mpv മാത്രം: ExoPlayer എഞ്ചിൻ ഈ ക്രമീകരണം പിന്തുണയ്ക്കുന്നില്ല, സ്ട്രീമിന്റെ HDR എപ്പോഴും അതേപടി കൈമാറും.</string>
+    <string name="settings_prefer_sdr_description">ഒരു സ്ട്രീമിൽ SDR, HDR ചിത്രങ്ങൾ രണ്ടും ഉണ്ടെങ്കിൽ SDR പ്ലേ ചെയ്യും: HDR മങ്ങിയോ വളരെ ഇരുണ്ടോ കാണുന്ന ടിവിക്കായി. HDR മാത്രമുള്ള സ്ട്രീം HDR ആയി തുടരും. ExoPlayer-ൽ മാത്രം.</string>
     <string name="settings_auto_frame_rate">സ്വയമേവയുള്ള ഫ്രെയിം നിരക്ക്</string>
     <string name="settings_auto_frame_rate_description">തത്സമയ ടിവിക്കും VOD-ക്കും പൂർണ്ണ സ്ക്രീനിൽ ടിവിയുടെ പുതുക്കൽ നിരക്ക് വീഡിയോയുമായി (24/25/50/60 fps) പൊരുത്തപ്പെടുത്തി, പുറത്തുകടക്കുമ്പോൾ പഴയ നിലയിലാക്കുക. ഓരോ ചാനൽ മാറ്റത്തിലും നിങ്ങളുടെ ടിവിയോ റിസീവറോ HDMI ഹാൻഡ്‌ഷേക്ക് ശബ്ദത്തോടെ വീണ്ടും നടത്തുകയാണെങ്കിൽ ഇത് പ്രവർത്തനരഹിതമാക്കുക.</string>
     <string name="settings_afr_pause">ഡിസ്‌പ്ലേ മാറുമ്പോൾ താൽക്കാലികമായി നിർത്തുക</string>
@@ -224,6 +224,10 @@
     <string name="settings_surround_description_mobile">ഈ ഉപകരണവുമായി ബന്ധിപ്പിച്ച യഥാർഥ 5.1/7.1 റിസീവറിനായി Dolby/DTS സറൗണ്ടിലേക്ക് (5.1/7.1) ഡീകോഡ് ചെയ്യുക. ബിൽറ്റ്-ഇൻ സ്പീക്കറിനോ ഹെഡ്‌ഫോണുകൾക്കോ സ്റ്റീരിയോ സൗണ്ട്ബാറിനോ ഇത് പ്രവർത്തനരഹിതമായി വിടുക — മൾട്ടിചാനൽ ശബ്ദം വീഡിയോയെക്കാൾ വൈകാൻ ഇടയാക്കാം. സമന്വയം തെറ്റുകയാണെങ്കിൽ പ്ലെയറിലെ ഓഡിയോ മെനു → A/V സമന്വയം ക്രമീകരിക്കുക.</string>
     <string name="settings_audio_passthrough">Dolby, DTS പാസ്ത്രൂ</string>
     <string name="settings_audio_passthrough_description">ഓൺ: ടിവി, സൗണ്ട്ബാർ അല്ലെങ്കിൽ റിസീവർ പ്ലേ ചെയ്യാനാകുമെന്ന് അറിയിച്ചാൽ Dolby, DTS എന്നിവ ഡീകോഡ് ചെയ്യാതെ അയയ്ക്കുന്നു (ExoPlayer). ഓഫ്: ആപ്പ് അവ ഡീകോഡ് ചെയ്യുന്നു; സറൗണ്ട് സൗണ്ട് അനുവദിക്കുന്നിടത്ത് സറൗണ്ടായി തന്നെ. mpv എപ്പോഴും ഡീകോഡ് ചെയ്യുന്നു. നൈറ്റ് മോഡ് അല്ലെങ്കിൽ വോളിയം സമീകരണം ഓണായിരിക്കുമ്പോൾ ഉപയോഗിക്കില്ല.</string>
+    <string name="settings_ffmpeg_audio">ExoPlayer-നുള്ള FFmpeg ഓഡിയോ</string>
+    <string name="settings_ffmpeg_audio_description">ഓൺ: ഉപകരണത്തിൽ ഡീകോഡർ ഇല്ലാത്ത ശബ്ദവും (ഉദാ. DTS, TrueHD, MP2) ExoPlayer-ന് ഡീകോഡ് ചെയ്യാം. ഉപകരണത്തിന്റെ സ്വന്തം ഡീകോഡറുകൾക്കാണ് ഇപ്പോഴും മുൻഗണന. ഓഫ്: ExoPlayer ഉപകരണത്തിന്റെ ഡീകോഡറുകൾ മാത്രം ഉപയോഗിക്കുന്നു. mpv എപ്പോഴും FFmpeg ഉപയോഗിച്ച് ഡീകോഡ് ചെയ്യുന്നു. ഇത് മാറ്റിയാൽ OwnTV റീസ്റ്റാർട്ട് ചെയ്യും.</string>
+    <string name="settings_line_ffmpeg_audio">ഉപകരണത്തിന് ഡീകോഡ് ചെയ്യാനാകാത്ത ശബ്ദത്തിന്</string>
+    <string name="settings_ffmpeg_audio_restart_message">OwnTV റീസ്റ്റാർട്ട് ചെയ്ത ശേഷം ഓഡിയോ ഡീകോഡർ മാറും.</string>
     <string name="settings_night_mode">നൈറ്റ് മോഡ്</string>
     <string name="settings_night_mode_description">ഉച്ചത്തിലുള്ള രംഗങ്ങൾ കുറയ്ക്കുകയും പതിഞ്ഞ സംഭാഷണം കൂട്ടുകയും ചെയ്യുന്നു, കുറഞ്ഞ ശബ്ദത്തിൽ കാണാൻ.</string>
     <string name="settings_volume_leveling">വോളിയം സമീകരണം</string>
@@ -346,7 +350,7 @@
     <string name="settings_search_keywords_audio">ശബ്ദനില ഉച്ചത്തിൽ പതുക്കെ ലിപ് സിങ്ക് കാലതാമസം ഓഡിയോ ട്രാക്ക് ഭാഷ</string>
     <string name="settings_search_keywords_channel_numbers">ചാനൽ നമ്പർ നേരിട്ടുള്ള ട്യൂൺ ടൈപ്പ് അക്കങ്ങൾ കീപാഡ് സംഖ്യാ സാപ്പ് lcn</string>
     <string name="settings_search_keywords_mini">ഡോക്ക് ചെയ്തത് pip മിനി പ്ലെയർ വലുപ്പം സ്ഥാനം സ്കെയിൽ ശതമാനം മൂല നീക്കുക</string>
-    <string name="settings_search_keywords_hdr">HDR ഉയർന്ന ഡൈനാമിക് റേഞ്ച് ഔട്ട്‌പുട്ട്</string>
+    <string name="settings_search_keywords_prefer_sdr">hdr sdr സ്റ്റാൻഡേർഡ് ഡൈനാമിക് റേഞ്ച് മങ്ങിയ ഇരുണ്ട ചിത്രം</string>
     <string name="settings_search_keywords_afr">afr പുതുക്കൽ നിരക്ക് hz ജഡർ 24fps 25fps 50hz 60hz ഡിസ്പ്ലേ മോഡ് പൊരുത്തപ്പെടുത്തൽ</string>
     <string name="settings_search_keywords_surround">Dolby DTS 5.1 7.1 റിസീവർ ഓഡിയോ</string>
     <string name="settings_search_keywords_autoplay">സ്വയംപ്ലേ സീരീസ് സീസൺ</string>
@@ -470,6 +474,10 @@
     <string name="settings_preferred_audio_language">മുൻഗണനയുള്ള ഓഡിയോ ഭാഷ</string>
     <string name="settings_audio_sync">ഓഡിയോ സമന്വയിപ്പിക്കൽ</string>
     <string name="settings_audio_sync_description">വീഡിയോയുമായി പൊരുത്തപ്പെടുത്താൻ ഓഡിയോ നേരത്തെയോ വൈകിയോ ആക്കുക. രണ്ട് പ്ലെയറുകളിലും (mpv, ExoPlayer) പ്രവർത്തിക്കും.</string>
+    <string name="settings_output_audio_delay">ഈ ഔട്ട്‌പുട്ടിനുള്ള കാലതാമസം</string>
+    <string name="settings_output_audio_delay_description">ഇത് “ഓഡിയോ സമന്വയിപ്പിക്കൽ”-ലേക്ക് കൂട്ടിച്ചേർക്കുന്നു, ഓരോ ഔട്ട്‌പുട്ടിനും പ്രത്യേകം സൂക്ഷിക്കുന്നു: HDMI, HDMI ARC വഴിയുള്ള സൗണ്ട്ബാർ, Bluetooth, ബിൽറ്റ്-ഇൻ സ്പീക്കറുകൾ, ഹെഡ്‌ഫോണുകൾ. ആ ഔട്ട്‌പുട്ടിൽ കേട്ടുകൊണ്ട് ഇത് ക്രമീകരിക്കുക.</string>
+    <string name="settings_audio_output_speaker">ബിൽറ്റ്-ഇൻ സ്പീക്കറുകൾ</string>
+    <string name="settings_audio_output_other">ഹെഡ്‌ഫോണുകൾ അല്ലെങ്കിൽ USB</string>
     <string name="settings_live_tv">തത്സമയ ടിവി</string>
     <string name="settings_live_latency_description">തത്സമയ പ്രക്ഷേപണത്തോട് എത്ര അടുത്തായി പ്ലേ ചെയ്യണം. കുറഞ്ഞ മൂല്യം തത്സമയത്തോട് കൂടുതൽ അടുത്തായിരിക്കും, എന്നാൽ ബഫർ ചെറുതായതിനാൽ ദുർബലമായ സ്ട്രീമുകൾ തടസ്സപ്പെടുകയോ കൂടുതൽ തവണ വീണ്ടും കണക്റ്റ് ചെയ്യുകയോ ചെയ്‌തേക്കാം. അടുത്തതായി തുറക്കുന്ന ചാനലിന് ഇത് ബാധകമാകും.</string>
     <string name="settings_live_latency_bitrate_note">വളരെ ഉയർന്ന ബിറ്റ്റേറ്റുള്ള ചാനലിൽ — പ്രത്യേകിച്ച് 4K-യിൽ — നിങ്ങൾ ആവശ്യപ്പെട്ടതിലും കുറഞ്ഞ സമയമേ ബഫറിന് സൂക്ഷിക്കാനാകൂ, കാരണം ഒരേസമയം മെമ്മറിയിൽ സൂക്ഷിക്കാവുന്ന വീഡിയോയ്ക്ക് പരിധിയുണ്ട്.</string>
@@ -520,10 +528,6 @@
     <string name="settings_reset_live_player_choices_description">പ്ലെയറിൽ ഒരു ചാനൽ ExoPlayer-നും mpv-യ്ക്കും ഇടയിൽ മാറ്റിയാൽ ആ തിരഞ്ഞെടുപ്പ് ആ ചാനലിനായി സേവ് ചെയ്യപ്പെടും. പുനഃസജ്ജമാക്കിയാൽ എല്ലാ ചാനലുകളും വീണ്ടും “തത്സമയ ടിവിയുടെ പ്ലെയർ” ക്രമീകരണം പിന്തുടരും. സിനിമകളുടെയും എപ്പിസോഡുകളുടെയും സേവ് ചെയ്ത തിരഞ്ഞെടുപ്പുകൾ നിലനിർത്തും.</string>
     <string name="settings_reset_live_player_choices_confirm">തത്സമയ ടിവി പ്ലെയറിന്റെ സേവ് ചെയ്ത തിരഞ്ഞെടുപ്പുകൾ പുനഃസജ്ജമാക്കണോ?</string>
     <string name="settings_reset_live_player_choices_confirm_description">എല്ലാ ചാനലുകളും വീണ്ടും “തത്സമയ ടിവിയുടെ പ്ലെയർ” ക്രമീകരണം പിന്തുടരും. ഒറ്റ ചാനൽ എപ്പോൾ വേണമെങ്കിലും പ്ലെയറിൽ നിന്ന് വീണ്ടും മാറ്റാം.</string>
-    <string name="settings_forget_stream_fixes">പഠിച്ച സ്ട്രീം പരിഹാരങ്ങൾ മറക്കുക</string>
-    <string name="settings_forget_stream_fixes_description">ഓരോ ദാതാവിന്റെയും സ്ട്രീമുകൾക്ക് എന്താണ് വേണ്ടതെന്ന് പ്ലെയർ പഠിക്കുന്നു — ExoPlayer-ന് പകരം mpv, മറ്റൊരു ഫോർമാറ്റ്, ക്യാച്ച്-അപ്പിനായി സോഫ്റ്റ്‌വെയർ ഡീകോഡിംഗ്. ഒരു ദാതാവ് അവരുടെ സ്ട്രീമുകൾ ശരിയാക്കിയെങ്കിൽ ഇത് മറക്കുക. ക്യാച്ച്-അപ്പിനെക്കുറിച്ച് പഠിച്ചവ 14 ദിവസത്തിനുശേഷം സ്വയം മറക്കപ്പെടും.</string>
-    <string name="settings_forget_stream_fixes_confirm">പഠിച്ച സ്ട്രീം പരിഹാരങ്ങൾ മറക്കണോ?</string>
-    <string name="settings_forget_stream_fixes_confirm_description">ചാനലുകൾ വീണ്ടും സാധാരണ രീതിയിൽ തുറക്കും, ദാതാവിന് ഇപ്പോഴും വേണ്ടത് പ്ലെയർ വീണ്ടും പഠിക്കും. ബാധിച്ച ഒരു ചാനലിന്റെ ആദ്യ പ്ലേ കുറച്ച് സെക്കൻഡ് കൂടുതൽ എടുത്തേക്കാം.</string>
     <string name="settings_external_player_row_description">ഓരോ വിഭാഗത്തിനും പ്രത്യേകം തിരഞ്ഞെടുത്തതനുസരിച്ച്, സ്ട്രീമുകൾ അന്തർനിർമ്മിത പ്ലെയറിന് പകരം ഒരു ബാഹ്യ ആപ്പിൽ (VLC, MX പ്ലെയർ) തുറക്കുക. ഈ ആപ്പിന് ഡീകോഡ് ചെയ്യാനാകാത്ത സ്ട്രീമുകൾക്കോ നിങ്ങൾ മറ്റൊരു പ്ലെയർ ഇഷ്ടപ്പെടുന്നെങ്കിലോ ഇത് ഉപകാരപ്പെടും. ബാഹ്യമായി പ്ലേ ചെയ്യുമ്പോൾ തുടരേണ്ട സ്ഥാനവും മുമ്പത്തേത്/അടുത്തത് എന്നീ നിയന്ത്രണങ്ങളും ലഭ്യമല്ല; ഇഷ്ടാനുസൃത യൂസർ-ഏജന്റോ റെഫററോ ആവശ്യമായ സ്ട്രീമുകൾ പ്ലേ ആയേക്കില്ല.</string>
     <string name="settings_resume_always">എപ്പോഴും തുടരുക</string>
     <string name="settings_resume_ask">തുടരണോ എന്ന് ചോദിക്കുക</string>
@@ -540,7 +544,7 @@
     <string name="settings_delete_all_series">എല്ലാ സീരീസുകളുടെയും സബ്‌ടൈറ്റിലുകൾ ഇല്ലാതാക്കുക</string>
     <string name="settings_section_count"><xliff:g id="section">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g>)</string>
     <string name="settings_sync_guide_question">ടിവി ഗൈഡ് ഇപ്പോൾ സമന്വയിപ്പിക്കണോ?</string>
-    <string name="settings_sync_guide_description">“<xliff:g id="source">%1$s</xliff:g>” എന്നതിനുള്ള പരിപാടികളുടെ ഗൈഡ് (EPG) ഡൗൺലോഡ് ചെയ്യുക. ക്രമീകരണങ്ങൾ → EPG എന്നതിൽ പിന്നീട് ഇത് ചെയ്യാനും കഴിയും.</string>
+    <string name="settings_sync_guide_description">“<xliff:g id="source">%1$s</xliff:g>” എന്നതിനുള്ള പരിപാടികളുടെ ഗൈഡ് (EPG) ഡൗൺലോഡ് ചെയ്യുക. ക്രമീകരണങ്ങൾ → ഉറവിടങ്ങളും ഗൈഡും → EPG ഉറവിടങ്ങൾ എന്നതിൽ പിന്നീട് ഇത് ചെയ്യാനും കഴിയും.</string>
     <string name="settings_not_now">ഇപ്പോൾ വേണ്ട</string>
     <string name="settings_sync_now">ഇപ്പോൾ സമന്വയിപ്പിക്കുക</string>
     <string name="settings_syncing_guide">ടിവി ഗൈഡ് സമന്വയിപ്പിക്കുന്നു…</string>
@@ -1166,7 +1170,7 @@
     <string name="local_sync_received_items">ലഭിച്ച ഇനങ്ങൾ: <xliff:g id="count">%1$d</xliff:g></string>
     <string name="local_sync_sent">നിങ്ങളുടെ ഡാറ്റ അയച്ചു</string>
     <string name="local_sync_failed">സമന്വയം പരാജയപ്പെട്ടു</string>
-    <string name="local_sync_error_unreachable">ഈ ഉപകരണത്തിലേക്ക് എത്താനായില്ല. അതിൽ OwnTV → ക്രമീകരണങ്ങൾ → ഡാറ്റ → ലോക്കൽ സമന്വയം തുറന്ന് സമന്വയ മോഡ് ഓണാക്കുക. രണ്ട് ഉപകരണങ്ങളും ഒരേ വൈ-ഫൈയിൽ ആയിരിക്കണം.</string>
+    <string name="local_sync_error_unreachable">ഈ ഉപകരണത്തിലേക്ക് എത്താനായില്ല. അതിൽ OwnTV → കൂടുതൽ → ലോക്കൽ സമന്വയം തുറന്ന് സമന്വയ മോഡ് ഓണാക്കുക. രണ്ട് ഉപകരണങ്ങളും ഒരേ വൈ-ഫൈയിൽ ആയിരിക്കണം.</string>
     <string name="local_sync_error_unauthorized">മറ്റേ ഉപകരണം നിരസിച്ചു. പിൻ തെറ്റായിരിക്കാം, അല്ലെങ്കിൽ അത് ഈ ഉപകരണം മറന്നിരിക്കാം.</string>
     <string name="local_sync_error_bad_payload">വന്നത് വായിക്കാൻ കഴിഞ്ഞില്ല. പാസ്‌വേഡ് ഉപയോഗിച്ചെങ്കിൽ, രണ്ട് ഉപകരണങ്ങളിലും ഒന്നുതന്നെയാണോ എന്ന് പരിശോധിക്കുക.</string>
     <string name="local_sync_error_unknown">എന്തോ കുഴപ്പം സംഭവിച്ചു. വീണ്ടും ശ്രമിക്കുക.</string>
@@ -1336,7 +1340,6 @@
     <string name="settings_part_guide_catchup">ഗൈഡും ക്യാച്ച്-അപ്പും</string>
     <string name="settings_vp_cat_controls_resume">നിയന്ത്രണങ്ങളും തുടരലും</string>
     <string name="settings_pinned_from"><xliff:g id="group">%1$s</xliff:g> എന്നതിൽ നിന്ന് പിൻ ചെയ്തത്</string>
-    <string name="settings_forget">മറക്കുക</string>
     <string name="settings_check_now">ഇപ്പോൾ പരിശോധിക്കുക</string>
     <string name="settings_line_epg_offset">ഫീഡിന്റെ സമയം തെറ്റുമ്പോൾ ഗൈഡ് മുഴുവൻ നീക്കുക</string>
     <string name="settings_line_reminders">ഓർമ്മപ്പെടുത്തൽ സമയമാകുമ്പോൾ എന്ത് സംഭവിക്കണം</string>
@@ -1370,13 +1373,12 @@
     <string name="settings_line_quick_live_preview">ലൈവ് ടിവിയിൽ ഫോക്കസ് ചെയ്ത ചാനൽ പ്ലേ ചെയ്യുക</string>
     <string name="settings_line_preview_sound">ലൈവ് പ്രിവ്യൂവിൽ ശബ്ദം</string>
     <string name="settings_line_quick_channel_numbers">ചാനൽ മാറാൻ റിമോട്ടിൽ നമ്പർ അമർത്തുക</string>
-    <string name="settings_line_hdr">mpv-ൽ ഹൈ ഡൈനാമിക് റേഞ്ച്</string>
+    <string name="settings_line_prefer_sdr">സ്ട്രീമിൽ രണ്ടും ഉണ്ടെങ്കിൽ SDR</string>
     <string name="settings_line_quick_autoplay">അടുത്ത എപ്പിസോഡ് സ്വയം തുടങ്ങുക</string>
     <string name="settings_line_live_engine">ചാനലുകൾ തുറക്കുന്ന എഞ്ചിനും പകരമുള്ളതും</string>
     <string name="settings_line_saved_live_choices">നിങ്ങൾ സ്വയം മാറ്റിയ ചാനലുകൾ</string>
     <string name="settings_line_vod_engine">സിനിമകളും എപ്പിസോഡുകളും തുറക്കുന്ന എഞ്ചിൻ</string>
     <string name="settings_line_saved_choices">നിങ്ങൾ സ്വയം മാറ്റിയ സിനിമകളും എപ്പിസോഡുകളും</string>
-    <string name="settings_line_learned_fixes">ഓരോ ദാതാവിനെക്കുറിച്ചും പ്ലെയർ പഠിച്ചത്</string>
     <string name="settings_line_external">VLC, MX Player… ഓരോ വിഭാഗത്തിനും</string>
     <string name="settings_line_vod_buffer">സിനിമകൾ എത്ര മുന്നോട്ട് ലോഡ് ചെയ്യണം</string>
     <string name="settings_line_vod_timeout">പ്രതികരിക്കാത്ത സെർവറിനായി കാത്തിരിപ്പ്</string>
@@ -1394,6 +1396,7 @@
     <string name="settings_line_night_mode">ഉച്ചത്തിലുള്ള രംഗങ്ങൾ കുറച്ച്, സംഭാഷണം കൂട്ടി</string>
     <string name="settings_line_leveling">എല്ലാ ചാനലും ഒരേ ശബ്ദത്തിൽ</string>
     <string name="settings_line_audio_sync">ഓഡിയോ മുമ്പോട്ടോ പിന്നോട്ടോ മാറ്റുക</string>
+    <string name="settings_line_output_audio_delay">നിലവിലെ ഔട്ട്‌പുട്ടിന് അധിക കാലതാമസം</string>
     <string name="settings_line_saved_audio_sync">പ്ലെയറിൽ ഓർത്തുവെച്ച കാലതാമസങ്ങൾ</string>
     <string name="settings_line_audio_lang">സ്ട്രീമിൽ ഉണ്ടെങ്കിൽ ഈ ട്രാക്ക് പ്ലേ ചെയ്യും</string>
     <string name="settings_line_sub_lang">ഈ ഭാഷയിലെ സബ്ടൈറ്റിലുകൾ ഓണാക്കുക</string>
@@ -1401,7 +1404,6 @@
     <string name="settings_title_fonts">ഫോണ്ടുകളും എഴുത്തിന്റെ വലുപ്പവും</string>
     <string name="settings_title_saved_live_choices">സേവ് ചെയ്ത ലൈവ് ടിവി പ്ലെയർ തിരഞ്ഞെടുപ്പുകൾ</string>
     <string name="settings_title_saved_choices">സേവ് ചെയ്ത പ്ലെയർ തിരഞ്ഞെടുപ്പുകൾ</string>
-    <string name="settings_title_learned_fixes">പഠിച്ച സ്ട്രീം പരിഹാരങ്ങൾ</string>
     <string name="settings_title_tunneled">ടണൽഡ് പ്ലേബാക്ക്</string>
     <string name="settings_title_saved_zoom">സേവ് ചെയ്ത സൂം</string>
     <string name="settings_title_saved_volume">സേവ് ചെയ്ത ശബ്ദം</string>

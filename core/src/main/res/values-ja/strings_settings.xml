@@ -157,7 +157,7 @@
     <string name="settings_quick_live_preview">ライブプレビュー</string>
     <string name="settings_quick_preview_sound">プレビュー音声</string>
     <string name="settings_quick_channel_numbers">チャンネル番号</string>
-    <string name="settings_quick_hdr">HDR（mpvのみ）</string>
+    <string name="settings_quick_prefer_sdr">SDR を優先</string>
     <string name="settings_quick_autoplay">自動再生</string>
     <string name="settings_quick_check_update">更新を確認</string>
     <string name="settings_language">言語</string>
@@ -212,7 +212,7 @@
     <string name="settings_preview_audio_description">ライブプレビューで音声を再生</string>
     <string name="settings_mini_player_root">ミニプレーヤー</string>
     <string name="settings_mini_player_root_description">ドッキングしたミニプレーヤーのサイズと位置</string>
-    <string name="settings_hdr_description">動画とTVが対応している場合にHDR出力を使用。mpvのみ：ExoPlayerエンジンはこの設定に対応しておらず、ストリームのHDRを常にそのまま出力します。</string>
+    <string name="settings_prefer_sdr_description">ストリームに SDR と HDR の両方の映像がある場合、SDR を再生します。HDR が白っぽく、または暗すぎて見えるテレビ向けです。HDR のみのストリームは HDR のままです。ExoPlayer のみ。</string>
     <string name="settings_auto_frame_rate">自動フレームレート</string>
     <string name="settings_auto_frame_rate_description">全画面表示でライブTVとVODの再生時にTVのリフレッシュレートを動画（24/25/50/60 fps）に合わせ、終了時に元に戻します。チャンネルを切り替えるたびにTVやレシーバーが大きな音を伴ってHDMIを再ハンドシェイクする場合はオフにしてください。</string>
     <string name="settings_afr_pause">表示切り替え中は一時停止</string>
@@ -223,6 +223,10 @@
     <string name="settings_surround_description_mobile">このデバイスに接続した実際の5.1/7.1対応レシーバー向けにDolby/DTSをサラウンド（5.1/7.1）へデコードします。内蔵スピーカー、ヘッドホン、ステレオサウンドバーではオフのままにしてください。マルチチャンネル音声が映像より遅れることがあります。ずれが生じる場合は、プレーヤーの「音声」メニュー→「A/V同期」で微調整してください。</string>
     <string name="settings_audio_passthrough">Dolby/DTS パススルー</string>
     <string name="settings_audio_passthrough_description">オン：テレビ、サウンドバー、AV アンプが再生できると通知した場合、Dolby と DTS をデコードせずに送ります（ExoPlayer）。オフ：アプリでデコードします。「サラウンドサウンド」が許可していればサラウンドのままです。mpv は常にデコードします。「ナイトモード」または「音量の平準化」がオンの間は使われません。</string>
+    <string name="settings_ffmpeg_audio">ExoPlayer の FFmpeg 音声デコード</string>
+    <string name="settings_ffmpeg_audio_description">オン：ExoPlayer は、デバイスにデコーダーがない音声（DTS、TrueHD、MP2 など）もデコードできます。デバイス自身のデコーダーが引き続き優先されます。オフ：ExoPlayer はデバイスのデコーダーだけを使います。mpv は常に FFmpeg でデコードします。変更すると OwnTV が再起動します。</string>
+    <string name="settings_line_ffmpeg_audio">デバイスがデコードできない音声用</string>
+    <string name="settings_ffmpeg_audio_restart_message">音声デコーダーは OwnTV の再起動後に切り替わります。</string>
     <string name="settings_night_mode">ナイトモード</string>
     <string name="settings_night_mode_description">大きな場面の音を下げ、小さな会話を上げて、小さな音量でも見やすくします。</string>
     <string name="settings_volume_leveling">音量の平準化</string>
@@ -344,7 +348,7 @@
     <string name="settings_search_keywords_audio">音量 大きい 小さい リップシンク 遅延 音声トラック 言語</string>
     <string name="settings_search_keywords_channel_numbers">チャンネル 番号 ダイレクト選局 入力 数字 キーパッド 数値 ザッピング LCN</string>
     <string name="settings_search_keywords_mini">ドッキング PiP ミニプレーヤー サイズ 位置 拡大縮小 パーセント 隅 移動</string>
-    <string name="settings_search_keywords_hdr">ハイダイナミックレンジ 出力</string>
+    <string name="settings_search_keywords_prefer_sdr">hdr sdr 標準ダイナミックレンジ 白っぽい 暗い 映像</string>
     <string name="settings_search_keywords_afr">AFR リフレッシュレート Hz ジャダー 24fps 25fps 50Hz 60Hz 表示モード 一致</string>
     <string name="settings_search_keywords_surround">Dolby DTS 5.1 7.1 レシーバー 音声</string>
     <string name="settings_search_keywords_autoplay">自動再生 シリーズ シーズン</string>
@@ -468,6 +472,10 @@
     <string name="settings_preferred_audio_language">優先する音声言語</string>
     <string name="settings_audio_sync">音声同期</string>
     <string name="settings_audio_sync_description">映像に合うように音声を早めたり遅らせたりします。両方のプレーヤー（mpv と ExoPlayer）で使えます。</string>
+    <string name="settings_output_audio_delay">この出力の遅延</string>
+    <string name="settings_output_audio_delay_description">「音声同期」に加算され、出力ごとに別々に保存されます（HDMI、HDMI ARC 接続のサウンドバー、Bluetooth、内蔵スピーカー、ヘッドホン）。対象の出力で聞きながら設定してください。</string>
+    <string name="settings_audio_output_speaker">内蔵スピーカー</string>
+    <string name="settings_audio_output_other">ヘッドホンまたは USB</string>
     <string name="settings_live_tv">ライブTV</string>
     <string name="settings_live_latency_description">ライブ放送にどの程度近い位置を再生するかを設定します。低くするとライブに近づきますが、バッファが小さくなるため、不安定なストリームでは途切れや再接続が増えることがあります。次に開くチャンネルから適用されます。</string>
     <string name="settings_live_latency_bitrate_note">ビットレートが非常に高いチャンネル（特に4K）では、メモリに保持できる映像の量に上限があるため、指定した長さよりも短いぶんしかバッファできないことがあります。</string>
@@ -517,10 +525,6 @@
     <string name="settings_reset_live_player_choices_description">プレーヤーでチャンネルをExoPlayerとmpvで切り替えると、その選択がチャンネルごとに保存されます。リセットすると、すべてのチャンネルが再び「ライブTVのプレーヤー」設定に従います。映画とエピソードの保存済みの選択はそのまま残ります。</string>
     <string name="settings_reset_live_player_choices_confirm">ライブTVのプレーヤーの保存した選択をリセットしますか？</string>
     <string name="settings_reset_live_player_choices_confirm_description">すべてのチャンネルが「ライブTVのプレーヤー」設定に戻ります。個別の切り替えは、いつでもプレーヤーから行えます。</string>
-    <string name="settings_forget_stream_fixes">学習したストリームの対処を忘れる</string>
-    <string name="settings_forget_stream_fixes_description">プレーヤーは、各プロバイダーのストリームに必要なもの（ExoPlayerの代わりにmpv、別の形式、見逃し再生のソフトウェアデコードなど）を学習します。プロバイダーがストリームを修正した場合は忘れてください。見逃し再生についての学習は、14日後にも自動で忘れられます。</string>
-    <string name="settings_forget_stream_fixes_confirm">学習したストリームの対処を忘れますか？</string>
-    <string name="settings_forget_stream_fixes_confirm_description">チャンネルは再び標準の方法で開き、プロバイダーにまだ必要なことはプレーヤーが学習し直します。影響を受けたチャンネルの最初の再生は、数秒長くかかることがあります。</string>
     <string name="settings_external_player_row_description">セクションごとに選択し、内蔵プレーヤーではなく外部アプリ（VLC、MX Player）でストリームを開きます。このアプリでデコードできないストリームを再生する場合や、別のプレーヤーを使用したい場合に便利です。外部での再生中は再開位置と前へ／次へは利用できません。また、カスタムUser-Agentまたはリファラーが必要なストリームは再生できない場合があります。</string>
     <string name="settings_resume_always">常に再開</string>
     <string name="settings_resume_ask">再開するか確認</string>
@@ -537,7 +541,7 @@
     <string name="settings_delete_all_series">シリーズの字幕をすべて削除</string>
     <string name="settings_section_count"><xliff:g id="section">%1$s</xliff:g>（<xliff:g id="count">%2$d</xliff:g>）</string>
     <string name="settings_sync_guide_question">今すぐ番組表を同期しますか？</string>
-    <string name="settings_sync_guide_description">「<xliff:g id="source">%1$s</xliff:g>」の番組表（EPG）をダウンロードします。後で「設定」→「EPG」から実行することもできます。</string>
+    <string name="settings_sync_guide_description">「<xliff:g id="source">%1$s</xliff:g>」の番組表（EPG）をダウンロードします。後で「設定」→「ソースと番組表」→「EPGソース」から実行することもできます。</string>
     <string name="settings_not_now">今はしない</string>
     <string name="settings_sync_now">今すぐ同期</string>
     <string name="settings_syncing_guide">番組表を同期中…</string>
@@ -1145,7 +1149,7 @@
     <string name="local_sync_received_items">受け取った項目: <xliff:g id="count">%1$d</xliff:g></string>
     <string name="local_sync_sent">データを送信しました</string>
     <string name="local_sync_failed">同期に失敗しました</string>
-    <string name="local_sync_error_unreachable">その端末に接続できませんでした。その端末で OwnTV → 設定 → データ → ローカル同期 を開き、同期モードをオンにしてください。両方が同じ Wi-Fi に接続している必要があります。</string>
+    <string name="local_sync_error_unreachable">その端末に接続できませんでした。その端末で OwnTV → その他 → ローカル同期 を開き、同期モードをオンにしてください。両方が同じ Wi-Fi に接続している必要があります。</string>
     <string name="local_sync_error_unauthorized">もう一方の端末に拒否されました。PIN が違うか、この端末を削除した可能性があります。</string>
     <string name="local_sync_error_bad_payload">受け取った内容を読み取れませんでした。パスワードを使った場合は、両方の端末で同じか確認してください。</string>
     <string name="local_sync_error_unknown">問題が発生しました。もう一度お試しください。</string>
@@ -1308,7 +1312,6 @@
     <string name="settings_part_guide_catchup">番組表とキャッチアップ</string>
     <string name="settings_vp_cat_controls_resume">操作と再開</string>
     <string name="settings_pinned_from"><xliff:g id="group">%1$s</xliff:g> から固定</string>
-    <string name="settings_forget">消去</string>
     <string name="settings_check_now">今すぐ確認</string>
     <string name="settings_line_epg_offset">フィードの時刻がずれているときにガイド全体をずらす</string>
     <string name="settings_line_reminders">リマインダーの時刻になったときの動作</string>
@@ -1342,13 +1345,12 @@
     <string name="settings_line_quick_live_preview">ライブ TV でフォーカス中のチャンネルを再生</string>
     <string name="settings_line_preview_sound">ライブプレビューの音声</string>
     <string name="settings_line_quick_channel_numbers">リモコンで番号を入力して選局</string>
-    <string name="settings_line_hdr">mpv のハイダイナミックレンジ</string>
+    <string name="settings_line_prefer_sdr">ストリームに両方あるときは SDR</string>
     <string name="settings_line_quick_autoplay">次のエピソードを自動で開始</string>
     <string name="settings_line_live_engine">チャンネルを開くエンジンと予備</string>
     <string name="settings_line_saved_live_choices">手動で切り替えたチャンネル</string>
     <string name="settings_line_vod_engine">映画とエピソードを開くエンジン</string>
     <string name="settings_line_saved_choices">手動で切り替えた映画とエピソード</string>
-    <string name="settings_line_learned_fixes">プレーヤーが各プロバイダーについて学んだこと</string>
     <string name="settings_line_external">VLC、MX Player… セクションごと</string>
     <string name="settings_line_vod_buffer">映画を先読みする量</string>
     <string name="settings_line_vod_timeout">応答しないサーバーを待つ時間</string>
@@ -1366,6 +1368,7 @@
     <string name="settings_line_night_mode">大きな場面を抑え、会話を強調</string>
     <string name="settings_line_leveling">どのチャンネルも同じ音量に</string>
     <string name="settings_line_audio_sync">音声を早めたり遅らせたりする</string>
+    <string name="settings_line_output_audio_delay">現在の出力の追加遅延</string>
     <string name="settings_line_saved_audio_sync">プレーヤーで記憶した遅延</string>
     <string name="settings_line_audio_lang">ストリームにあればこの音声を再生</string>
     <string name="settings_line_sub_lang">この言語の字幕をオンにする</string>
@@ -1373,7 +1376,6 @@
     <string name="settings_title_fonts">フォントと文字サイズ</string>
     <string name="settings_title_saved_live_choices">保存したライブ TV プレーヤーの選択</string>
     <string name="settings_title_saved_choices">保存したプレーヤーの選択</string>
-    <string name="settings_title_learned_fixes">学習したストリームの修正</string>
     <string name="settings_title_tunneled">トンネル再生</string>
     <string name="settings_title_saved_zoom">保存したズーム</string>
     <string name="settings_title_saved_volume">保存した音量</string>

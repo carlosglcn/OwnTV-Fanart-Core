@@ -380,6 +380,45 @@
     <string name="sports_switch_channel">Byt kanal</string>
     <string name="sports_tab_fixtures">Spelschema</string>
     <string name="sports_tab_results">Resultat</string>
+    <string name="sports_tab_scores">Live</string>
+    <string name="sports_tab_calendar">Kalender</string>
+    <string name="sports_tab_leagues">Ligor</string>
+    <string name="sports_previous_month">Föregående månad</string>
+    <string name="sports_next_month">Nästa månad</string>
+    <string name="sports_next">Härnäst: <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">Härnäst</string>
+    <string name="sports_new_badge">Ny</string>
+    <string name="sports_no_table_series">Ingen tabell — serierna byts varje vecka</string>
+    <string name="sports_follow_league">Följ liga</string>
+    <string name="sports_unfollow_league">Sluta följa liga</string>
+    <string name="sports_no_matches_on">Inga matcher i dina sporter <xliff:g id="day">%1$s</xliff:g></string>
+    <string name="sports_nothing_on_day">Inget den här dagen</string>
+    <string name="sports_nothing_in_sport"><xliff:g id="sport">%1$s</xliff:g>: inget den här dagen</string>
+    <string name="sports_change_leagues_hint">Lägg till eller ta bort ligor i Inställningar → Sport</string>
+    <string name="sports_loading_month">Läser in <xliff:g id="month">%1$s</xliff:g>…</string>
+    <string name="sports_offline_saved">Visar det som sparades <xliff:g id="time">%1$s</xliff:g> — ESPN gick inte att nå</string>
+    <string name="sports_team_page">Lagsida</string>
+    <string name="sports_next_match">Nästa match</string>
+    <string name="sports_last_five">Senaste fem</string>
+    <string name="sports_league_position">Tabellplacering</string>
+    <string name="sports_in_my_teams">I Mina lag</string>
+    <string name="sports_open_match_page">Öppna matchsidan</string>
+    <string name="sports_open_team_page">Öppna lagsidan</string>
+    <string name="sports_my_teams_leagues">Ligorna dina lag spelar i</string>
+    <string name="sports_tab_drivers">Förare</string>
+    <string name="sports_tab_constructors">Konstruktörer</string>
+    <string name="sports_tab_races">Lopp</string>
+    <string name="sports_tab_rankings">Ranking</string>
+    <string name="sports_tab_matches">Matcher</string>
+    <string name="sports_next_race_weekend">Nästa racehelg</string>
+    <string name="sports_last_weekend">Förra helgen</string>
+    <string name="sports_session_practice_1">Träning 1</string>
+    <string name="sports_session_practice_2">Träning 2</string>
+    <string name="sports_session_practice_3">Träning 3</string>
+    <string name="sports_session_sprint_qualifying">Sprintkval</string>
+    <string name="sports_session_qualifying">Kval</string>
+    <string name="sports_session_sprint">Sprint</string>
+    <string name="sports_session_race">Lopp</string>
     <string name="sports_table_team">Lag</string>
     <string name="sports_table_played">M</string>
     <string name="sports_table_won">V</string>
@@ -464,6 +503,12 @@
         <item quantity="other">Var <xliff:g id="count">%1$d</xliff:g>:e timme</item>
     </plurals>
     <string name="sports_auto_rebuild_app_start">Vid varje appstart</string>
+    <string name="sports_calendar_refresh">Kalenderuppdatering</string>
+    <string name="sports_calendar_refresh_description">Hur ofta sparade månader hämtas på nytt</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="one">Var <xliff:g id="count">%1$d</xliff:g>:e dag</item>
+        <item quantity="other">Var <xliff:g id="count">%1$d</xliff:g>:e dag</item>
+    </plurals>
     <string name="sports_find_channels">Hitta kanaler</string>
     <string name="sports_find_channels_description">Söker efter matchen i din tablå och dina kanalnamn. Med en stor spellista kan det ta en stund.</string>
     <string name="sports_finding_channels">Söker i dina kanaler…</string>

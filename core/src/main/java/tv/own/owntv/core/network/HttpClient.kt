@@ -147,13 +147,19 @@ class HttpClient(private val client: OkHttpClient) {
         /** Mask credentials for display (info overlay / logs): query params AND Xtream `/type/user/pass/`
          *  path segments, which is where live URLs embed them. */
         fun redactUrl(url: String): String = url
-        .replace(Regex("(?i)(username|password|user|pass|token|data|auth|signature|sig|key)=[^&]*"), "$1=***")
-            // `timeshift` is the catch-up/archive form (/timeshift/user/pass/duration/start/id.ts) — it
-            // embeds the same credentials as a live URL, so it must be masked here too.
-            .replace(Regex("(?i)(://[^/]+/(?:live|movie|series|vod|timeshift)/)([^/]+)/([^/]+)/"), "$1•••/•••/")
-            // Strip userinfo credentials from a `scheme://user:pass@host` URL (e.g. a proxy URL handed
-            // to mpv, or any source URL with embedded creds) so they never reach a log line.
-            .replace(Regex("(?i)(://)([^/@:]+)(:[^/@]*)?@"), "$1***@")
+            .replace(QUERY_CREDENTIALS, "$1=***")
+            .replace(PATH_CREDENTIALS, "$1•••/•••/")
+            .replace(USERINFO, "$1***@")
+
+        // Compiled once: redactUrl runs on every logged HTTP response and every play() line, several times
+        // a second while a live channel plays with detailed logging on.
+        private val QUERY_CREDENTIALS = Regex("(?i)(username|password|user|pass|token|data|auth|signature|sig|key)=[^&]*")
+        // `timeshift` is the catch-up/archive form (/timeshift/user/pass/duration/start/id.ts) — it embeds
+        // the same credentials as a live URL, so it must be masked here too.
+        private val PATH_CREDENTIALS = Regex("(?i)(://[^/]+/(?:live|movie|series|vod|timeshift)/)([^/]+)/([^/]+)/")
+        // Userinfo credentials in a `scheme://user:pass@host` URL (e.g. a proxy URL handed to mpv, or any
+        // source URL with embedded creds).
+        private val USERINFO = Regex("(?i)(://)([^/@:]+)(:[^/@]*)?@")
 
         /** Mask a bare hostname for display (logs, errors), as [redactUrl] masks a URL's credentials: the
          *  provider's host identifies the account's panel as surely as the credentials do. */

@@ -137,15 +137,20 @@ interface CustomCategoryDao {
     )
     suspend fun exportRowsForSource(sourceId: Long): List<CustomCategoryMemberExportRow>
 
-    /** Snapshot-scoped orphan drop, mirroring FavoriteDao.purgeSnapshotOrphan. */
+    /**
+     * Snapshot-scoped orphan drop (as FavoriteDao.purgeSnapshotOrphan) for many ids at once. This
+     * table has no index that starts with (profileId, mediaType, itemId), so a one-row form scans all of
+     * a profile's rows for every snapshot row — quadratic, and hours with tens of thousands of rows while
+     * it holds the writer.
+     */
     @Query(
-        "DELETE FROM custom_category_members WHERE profileId = :profileId AND mediaType = :type AND itemId = :itemId AND (" +
+        "DELETE FROM custom_category_members WHERE profileId = :profileId AND mediaType = :type AND itemId IN (:itemIds) AND (" +
             "(:type = 'LIVE'   AND itemId NOT IN (SELECT id FROM channels)) OR " +
             "(:type = 'MOVIE'  AND itemId NOT IN (SELECT id FROM movies))   OR " +
             "(:type = 'SERIES' AND itemId NOT IN (SELECT id FROM series))" +
             ")",
     )
-    suspend fun purgeSnapshotOrphan(profileId: Long, type: MediaType, itemId: Long)
+    suspend fun purgeSnapshotOrphans(profileId: Long, type: MediaType, itemIds: List<Long>)
 
     /**
      * Drops membership rows whose content row no longer exists — content is clear-then-insert on

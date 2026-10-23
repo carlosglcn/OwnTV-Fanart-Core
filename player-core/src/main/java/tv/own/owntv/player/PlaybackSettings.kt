@@ -12,7 +12,9 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import tv.own.owntv.core.player.AudioOutputWatch
 import tv.own.owntv.core.player.EnginePreference
+import tv.own.owntv.core.player.OutputAudioDelays
 import tv.own.owntv.core.player.SurroundMode
 import tv.own.owntv.core.settings.SettingsRepository
 import tv.own.owntv.core.settings.SubtitleStyle
@@ -32,7 +34,8 @@ import tv.own.owntv.core.theme.AppFontFamily
  * setting, through [field].
  */
 data class PlaybackSettings(
-    val hdrEnabled: Boolean,
+    /** HLS with SDR and HDR variants plays the SDR ones — see [SdrVariants]. */
+    val preferSdr: Boolean,
     val hwDecoding: Boolean,
     /** Software decoding allowed above 1080p — see [SettingsRepository.softwareDecodeAbove1080p]. */
     val softwareDecodeAbove1080p: Boolean,
@@ -49,6 +52,8 @@ data class PlaybackSettings(
     val subtitlePosition: SubtitleStyle.Position,
     val subtitleBgOpacity: Int,
     val audioDelayMs: Int,
+    /** Extra delay per output kind, on top of [audioDelayMs]. */
+    val outputAudioDelays: OutputAudioDelays,
     val preferredAudioLang: String,
     val preferredSubLang: String,
     val defaultZoom: String,
@@ -93,7 +98,7 @@ data class PlaybackSettings(
         @Suppress("UNCHECKED_CAST")
         private fun snapshotOf(s: SettingsRepository): StateFlow<PlaybackSettings?> {
             val sources: List<Flow<Any?>> = listOf(
-                s.hdrEnabled, s.hwDecoding, s.surroundMode, s.autoPlayNext,
+                s.preferSdr, s.hwDecoding, s.surroundMode, s.autoPlayNext,
                 s.vodEnginePreference, s.measuredStreamStats, s.livePrerollSecs, s.liveBufferSeconds,
                 s.subtitleStyleEnabled, s.subtitleScaleMpv, s.subtitleFont, s.subtitleColor,
                 s.subtitlePosition, s.subtitleBgOpacity, s.audioDelayMs, s.preferredAudioLang,
@@ -103,11 +108,11 @@ data class PlaybackSettings(
                 s.audioPassthrough, s.nightMode, s.volumeLevelling,
                 s.maxVideoHeight, s.mobileDataMaxVideoHeight, s.tunneledPlayback, s.backgroundPlayback,
                 s.softwareDecodeAbove1080p,
-                s.dialogueBoost, s.mpvPassthrough,
+                s.dialogueBoost, s.mpvPassthrough, s.outputAudioDelays,
             )
             return combine(sources) { v ->
                 PlaybackSettings(
-                    hdrEnabled = v[0] as Boolean,
+                    preferSdr = v[0] as Boolean,
                     hwDecoding = v[1] as Boolean,
                     surroundMode = v[2] as SurroundMode,
                     autoPlayNext = v[3] as Boolean,
@@ -143,6 +148,7 @@ data class PlaybackSettings(
                     softwareDecodeAbove1080p = v[33] as Boolean,
                     dialogueBoost = v[34] as Boolean,
                     mpvPassthrough = v[35] as Boolean,
+                    outputAudioDelays = v[36] as OutputAudioDelays,
                 )
             }.stateIn(CoroutineScope(SupervisorJob() + Dispatchers.Default), SharingStarted.Eagerly, null)
         }
@@ -155,3 +161,8 @@ data class PlaybackSettings(
  */
 internal fun <T> StateFlow<PlaybackSettings?>.field(pick: (PlaybackSettings) -> T): Flow<T> =
     filterNotNull().map(pick).distinctUntilChanged()
+
+/** The extra audio delay for the output media plays to right now; follows both the setting and the device. */
+internal fun StateFlow<PlaybackSettings?>.outputAudioDelayMs(context: android.content.Context): Flow<Int> =
+    combine(field { it.outputAudioDelays }, AudioOutputWatch.current(context)) { delays, kind -> delays.offsetFor(kind) }
+        .distinctUntilChanged()

@@ -160,7 +160,7 @@
     <string name="settings_quick_live_preview">Živý náhled</string>
     <string name="settings_quick_preview_sound">Zvuk náhledu</string>
     <string name="settings_quick_channel_numbers">Čísla kanálů</string>
-    <string name="settings_quick_hdr">HDR (jen mpv)</string>
+    <string name="settings_quick_prefer_sdr">Upřednostnit SDR</string>
     <string name="settings_quick_autoplay">Automatické přehrávání</string>
     <string name="settings_quick_check_update">Zkontrolovat aktualizaci</string>
     <string name="settings_language">Jazyk</string>
@@ -215,7 +215,7 @@
     <string name="settings_preview_audio_description">Přehrávat zvuk v živém náhledu</string>
     <string name="settings_mini_player_root">Minipřehrávač</string>
     <string name="settings_mini_player_root_description">Velikost a umístění ukotveného minipřehrávače</string>
-    <string name="settings_hdr_description">Používat výstup HDR, pokud jej video a televizor podporují. Jen pro mpv: jádro ExoPlayer toto nastavení nepodporuje a HDR streamu vždy předává beze změny.</string>
+    <string name="settings_prefer_sdr_description">Když stream nabízí obraz SDR i HDR, přehraje se SDR: pro televizor, na kterém HDR vypadá vybledle nebo příliš tmavě. Stream jen s HDR zůstane v HDR. Pouze ExoPlayer.</string>
     <string name="settings_auto_frame_rate">Automatická snímková frekvence</string>
     <string name="settings_auto_frame_rate_description">Při zobrazení na celé obrazovce přizpůsobit obnovovací frekvenci televizoru videu (24/25/50/60 sn./s) pro živé vysílání i VOD a při ukončení ji obnovit. Vypněte, pokud televizor nebo přijímač při každé změně kanálu rušivě znovu navazuje spojení HDMI.</string>
     <string name="settings_afr_pause">Pozastavit při přepnutí obrazu</string>
@@ -226,6 +226,10 @@
     <string name="settings_surround_description_mobile">Dekódovat Dolby/DTS do prostorového zvuku (5.1/7.1) pro skutečný přijímač 5.1/7.1 připojený k tomuto zařízení. U vestavěného reproduktoru, sluchátek nebo stereofonního soundbaru ponechte VYPNUTO — vícekanálový zvuk může zaostávat za obrazem. Pokud se rozchází, upravte v nabídce Zvuk přehrávače → Synchronizace A/V.</string>
     <string name="settings_audio_passthrough">Passthrough Dolby a DTS</string>
     <string name="settings_audio_passthrough_description">Zapnuto: Dolby a DTS jdou nedekódované do televizoru, soundbaru nebo receiveru, pokud hlásí, že je umí přehrát (ExoPlayer). Vypnuto: aplikace je dekóduje, stále jako prostorový zvuk tam, kde to Prostorový zvuk dovoluje. mpv dekóduje vždy. Nepoužívá se, dokud běží Noční režim nebo Vyrovnání hlasitosti.</string>
+    <string name="settings_ffmpeg_audio">Zvuk FFmpeg pro ExoPlayer</string>
+    <string name="settings_ffmpeg_audio_description">Zapnuto: ExoPlayer umí dekódovat i zvuk, pro který zařízení nemá dekodér, například DTS, TrueHD nebo MP2. Vlastní dekodéry zařízení mají stále přednost. Vypnuto: ExoPlayer používá jen dekodéry zařízení. mpv vždy dekóduje pomocí FFmpeg. Změna restartuje OwnTV.</string>
+    <string name="settings_line_ffmpeg_audio">Pro zvuk, který zařízení neumí dekódovat</string>
+    <string name="settings_ffmpeg_audio_restart_message">Zvukový dekodér se změní po restartu OwnTV.</string>
     <string name="settings_night_mode">Noční režim</string>
     <string name="settings_night_mode_description">Ztlumí hlasité scény a zesílí tichý dialog, pro sledování při nízké hlasitosti.</string>
     <string name="settings_volume_leveling">Vyrovnání hlasitosti</string>
@@ -350,7 +354,7 @@
     <string name="settings_search_keywords_audio">hlasitost hlasitě potichu synchronizace rtů zpoždění zvuková stopa jazyk</string>
     <string name="settings_search_keywords_channel_numbers">kanál číslo přímé naladění zadat číslice klávesnice číselná přepnout lcn</string>
     <string name="settings_search_keywords_mini">ukotvený pip minipřehrávač velikost umístění měřítko procenta roh přesunout</string>
-    <string name="settings_search_keywords_hdr">vysoký dynamický rozsah výstup HDR</string>
+    <string name="settings_search_keywords_prefer_sdr">hdr sdr standardní dynamický rozsah vybledlý tmavý obraz</string>
     <string name="settings_search_keywords_afr">afr obnovovací frekvence hz trhání 24fps 25fps 50hz 60hz režim obrazovky přizpůsobit</string>
     <string name="settings_search_keywords_surround">Dolby DTS 5.1 7.1 přijímač zvuk</string>
     <string name="settings_search_keywords_autoplay">automatické přehrávání seriály řada</string>
@@ -474,6 +478,10 @@
     <string name="settings_preferred_audio_language">Preferovaný jazyk zvuku</string>
     <string name="settings_audio_sync">Synchronizace zvuku</string>
     <string name="settings_audio_sync_description">Posuňte zvuk dopředu nebo dozadu, aby odpovídal obrazu. Funguje v obou přehrávačích (mpv i ExoPlayer).</string>
+    <string name="settings_output_audio_delay">Zpoždění pro tento výstup</string>
+    <string name="settings_output_audio_delay_description">Přičítá se k nastavení „Synchronizace zvuku“ a ukládá se zvlášť pro každý výstup: HDMI, soundbar přes HDMI ARC, Bluetooth, vestavěné reproduktory, sluchátka. Nastavte ho při poslechu z výstupu, kterého se týká.</string>
+    <string name="settings_audio_output_speaker">Vestavěné reproduktory</string>
+    <string name="settings_audio_output_other">Sluchátka nebo USB</string>
     <string name="settings_live_tv">Živé vysílání</string>
     <string name="settings_live_latency_description">Určuje, jak blízko aktuálnímu vysílání se má přehrávat. Nižší hodnota znamená menší zpoždění oproti živému vysílání, ale také menší vyrovnávací paměť, takže slabé streamy se mohou častěji zadrhávat nebo znovu připojovat. Použije se u dalšího kanálu, který otevřete.</string>
     <string name="settings_live_latency_bitrate_note">U kanálu s velmi vysokým datovým tokem — zvláště ve 4K — může vyrovnávací paměť pojmout kratší dobu, než jste zadali, protože množství videa uchovávaného v paměti je omezené.</string>
@@ -526,10 +534,6 @@
     <string name="settings_reset_live_player_choices_description">Když v přehrávači přepnete kanál mezi ExoPlayerem a mpv, tato volba se pro kanál uloží. Reset vrátí všechny kanály k nastavení „Přehrávač živého vysílání“. Uložené volby pro filmy a epizody zůstávají zachovány.</string>
     <string name="settings_reset_live_player_choices_confirm">Resetovat uložené volby přehrávače živého vysílání?</string>
     <string name="settings_reset_live_player_choices_confirm_description">Každý kanál se vrátí k nastavení „Přehrávač živého vysílání“. Jednotlivý kanál můžete kdykoli znovu přepnout přímo v přehrávači.</string>
-    <string name="settings_forget_stream_fixes">Zapomenout naučené opravy streamů</string>
-    <string name="settings_forget_stream_fixes_description">Přehrávač se učí, co streamy jednotlivých poskytovatelů potřebují — mpv místo ExoPlayeru, jiný formát, softwarové dekódování pro zpětné přehrávání. Zapomeňte to, pokud poskytovatel své streamy opravil. Poznatky o zpětném přehrávání se navíc samy zapomenou po 14 dnech.</string>
-    <string name="settings_forget_stream_fixes_confirm">Zapomenout naučené opravy streamů?</string>
-    <string name="settings_forget_stream_fixes_confirm_description">Kanály se znovu otevírají standardním způsobem a přehrávač se znovu naučí, co poskytovatel stále potřebuje. První spuštění dotčeného kanálu může trvat o několik sekund déle.</string>
     <string name="settings_external_player_row_description">Otevírat streamy v externí aplikaci (VLC, MX Player) namísto vestavěného přehrávače, s volbou pro každou sekci. Užitečné pro streamy, které tato aplikace nedokáže dekódovat, nebo pokud dáváte přednost jinému přehrávači. Při externím přehrávání není k dispozici pokračování v přehrávání od poslední pozice ani předchozí/další; streamy vyžadující vlastní User-Agent nebo referer se nemusí přehrát.</string>
     <string name="settings_resume_always">Vždy pokračovat</string>
     <string name="settings_resume_ask">Zeptat se na pokračování</string>
@@ -546,7 +550,7 @@
     <string name="settings_delete_all_series">Odstranit všechny titulky k seriálům</string>
     <string name="settings_section_count"><xliff:g id="section">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g>)</string>
     <string name="settings_sync_guide_question">Synchronizovat TV program nyní?</string>
-    <string name="settings_sync_guide_description">Stáhnout TV program (EPG) pro „<xliff:g id="source">%1$s</xliff:g>“. Můžete to provést také později v části Nastavení → EPG.</string>
+    <string name="settings_sync_guide_description">Stáhnout TV program (EPG) pro „<xliff:g id="source">%1$s</xliff:g>“. Můžete to provést také později v části Nastavení → Zdroje a program → Zdroje EPG.</string>
     <string name="settings_not_now">Teď ne</string>
     <string name="settings_sync_now">Synchronizovat nyní</string>
     <string name="settings_syncing_guide">Synchronizace TV programu…</string>
@@ -1208,7 +1212,7 @@
     <string name="local_sync_received_items">Přijaté položky: <xliff:g id="count">%1$d</xliff:g></string>
     <string name="local_sync_sent">Vaše data byla odeslána</string>
     <string name="local_sync_failed">Synchronizace selhala</string>
-    <string name="local_sync_error_unreachable">Toto zařízení se nepodařilo kontaktovat. Otevřete na něm OwnTV → Nastavení → Data → Místní synchronizace a zapněte Režim synchronizace. Obě zařízení musí být na stejné Wi-Fi.</string>
+    <string name="local_sync_error_unreachable">Toto zařízení se nepodařilo kontaktovat. Otevřete na něm OwnTV → Více → Místní synchronizace a zapněte Režim synchronizace. Obě zařízení musí být na stejné Wi-Fi.</string>
     <string name="local_sync_error_unauthorized">Druhé zařízení odmítlo spojení. PIN může být špatný, nebo si toto zařízení už nepamatuje.</string>
     <string name="local_sync_error_bad_payload">Přijatá data se nepodařilo přečíst. Pokud jste použili heslo, ověřte, že je na obou zařízeních stejné.</string>
     <string name="local_sync_error_unknown">Něco se pokazilo. Zkuste to znovu.</string>
@@ -1392,7 +1396,6 @@
     <string name="settings_part_guide_catchup">Průvodce a zpětné sledování</string>
     <string name="settings_vp_cat_controls_resume">Ovládání a pokračování</string>
     <string name="settings_pinned_from">Připnuto ze skupiny <xliff:g id="group">%1$s</xliff:g></string>
-    <string name="settings_forget">Zapomenout</string>
     <string name="settings_check_now">Zkontrolovat</string>
     <string name="settings_line_epg_offset">Posunout celého průvodce, když zdroj uvádí špatné časy</string>
     <string name="settings_line_reminders">Co se stane, když připomínka nastane</string>
@@ -1426,13 +1429,12 @@
     <string name="settings_line_quick_live_preview">Přehrát vybraný kanál v živé TV</string>
     <string name="settings_line_preview_sound">Zvuk v živém náhledu</string>
     <string name="settings_line_quick_channel_numbers">Naladit kanál zadáním čísla na ovladači</string>
-    <string name="settings_line_hdr">Vysoký dynamický rozsah v mpv</string>
+    <string name="settings_line_prefer_sdr">SDR, když stream nabízí obojí</string>
     <string name="settings_line_quick_autoplay">Další díl se spustí sám</string>
     <string name="settings_line_live_engine">Který přehrávač otevírá kanály a záloha</string>
     <string name="settings_line_saved_live_choices">Kanály, které jste přepnuli ručně</string>
     <string name="settings_line_vod_engine">Který přehrávač otevírá filmy a díly</string>
     <string name="settings_line_saved_choices">Filmy a díly, které jste přepnuli ručně</string>
-    <string name="settings_line_learned_fixes">Co se přehrávač naučil o každém poskytovateli</string>
     <string name="settings_line_external">VLC, MX Player… pro každou sekci</string>
     <string name="settings_line_vod_buffer">Jak daleko dopředu se filmy načítají</string>
     <string name="settings_line_vod_timeout">Čekání na neodpovídající server</string>
@@ -1450,6 +1452,7 @@
     <string name="settings_line_night_mode">Hlasité scény ztlumit, dialogy zesílit</string>
     <string name="settings_line_leveling">Každý kanál stejně hlasitý</string>
     <string name="settings_line_audio_sync">Posunout zvuk dříve nebo později</string>
+    <string name="settings_line_output_audio_delay">Další zpoždění pro aktuální výstup</string>
     <string name="settings_line_saved_audio_sync">Zpoždění uložená v přehrávači</string>
     <string name="settings_line_audio_lang">Přehraje tuto stopu, když ji stream má</string>
     <string name="settings_line_sub_lang">Zapnout titulky v tomto jazyce</string>
@@ -1457,7 +1460,6 @@
     <string name="settings_title_fonts">Písma a velikost textu</string>
     <string name="settings_title_saved_live_choices">Uložené volby přehrávače živé TV</string>
     <string name="settings_title_saved_choices">Uložené volby přehrávače</string>
-    <string name="settings_title_learned_fixes">Naučené opravy streamů</string>
     <string name="settings_title_tunneled">Tunelované přehrávání</string>
     <string name="settings_title_saved_zoom">Uložené přiblížení</string>
     <string name="settings_title_saved_volume">Uložená hlasitost</string>

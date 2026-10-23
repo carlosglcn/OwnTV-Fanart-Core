@@ -362,6 +362,45 @@
     <string name="sports_switch_channel">채널 전환</string>
     <string name="sports_tab_fixtures">일정</string>
     <string name="sports_tab_results">결과</string>
+    <string name="sports_tab_scores">점수</string>
+    <string name="sports_tab_calendar">캘린더</string>
+    <string name="sports_tab_leagues">리그</string>
+    <string name="sports_previous_month">이전 달</string>
+    <string name="sports_next_month">다음 달</string>
+    <string name="sports_next">다음: <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">다음</string>
+    <string name="sports_new_badge">신규</string>
+    <string name="sports_no_table_series">순위표 없음 — 시리즈가 매주 바뀝니다</string>
+    <string name="sports_follow_league">리그 팔로우</string>
+    <string name="sports_unfollow_league">리그 팔로우 취소</string>
+    <string name="sports_no_matches_on"><xliff:g id="day">%1$s</xliff:g>에는 내 종목의 경기가 없습니다</string>
+    <string name="sports_nothing_on_day">이날은 일정이 없습니다</string>
+    <string name="sports_nothing_in_sport">이날은 <xliff:g id="sport">%1$s</xliff:g> 일정이 없습니다</string>
+    <string name="sports_change_leagues_hint">설정 → 스포츠에서 리그를 추가하거나 삭제하세요</string>
+    <string name="sports_loading_month"><xliff:g id="month">%1$s</xliff:g> 불러오는 중…</string>
+    <string name="sports_offline_saved"><xliff:g id="time">%1$s</xliff:g>에 저장된 내용 표시 중 — ESPN에 연결할 수 없습니다</string>
+    <string name="sports_team_page">팀 페이지</string>
+    <string name="sports_next_match">다음 경기</string>
+    <string name="sports_last_five">최근 5경기</string>
+    <string name="sports_league_position">리그 순위</string>
+    <string name="sports_in_my_teams">내 팀에 있음</string>
+    <string name="sports_open_match_page">경기 페이지 열기</string>
+    <string name="sports_open_team_page">팀 페이지 열기</string>
+    <string name="sports_my_teams_leagues">내 팀이 뛰는 리그</string>
+    <string name="sports_tab_drivers">드라이버</string>
+    <string name="sports_tab_constructors">컨스트럭터</string>
+    <string name="sports_tab_races">레이스</string>
+    <string name="sports_tab_rankings">랭킹</string>
+    <string name="sports_tab_matches">경기</string>
+    <string name="sports_next_race_weekend">다음 레이스 주말</string>
+    <string name="sports_last_weekend">지난 주말</string>
+    <string name="sports_session_practice_1">연습 주행 1</string>
+    <string name="sports_session_practice_2">연습 주행 2</string>
+    <string name="sports_session_practice_3">연습 주행 3</string>
+    <string name="sports_session_sprint_qualifying">스프린트 예선</string>
+    <string name="sports_session_qualifying">예선</string>
+    <string name="sports_session_sprint">스프린트</string>
+    <string name="sports_session_race">결승</string>
     <string name="sports_table_team">팀</string>
     <string name="sports_table_played">경기</string>
     <string name="sports_table_won">승</string>
@@ -442,6 +481,11 @@
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g>시간마다</item>
     </plurals>
     <string name="sports_auto_rebuild_app_start">앱을 시작할 때마다</string>
+    <string name="sports_calendar_refresh">캘린더 새로고침</string>
+    <string name="sports_calendar_refresh_description">저장된 달을 다시 가져오는 주기</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g>일마다</item>
+    </plurals>
     <string name="sports_find_channels">채널 찾기</string>
     <string name="sports_find_channels_description">편성표와 채널 이름에서 이 경기를 찾습니다. 재생목록이 크면 잠시 걸릴 수 있습니다.</string>
     <string name="sports_finding_channels">채널을 검색하는 중…</string>

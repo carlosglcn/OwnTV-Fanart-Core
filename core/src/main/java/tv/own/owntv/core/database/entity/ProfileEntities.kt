@@ -72,7 +72,7 @@ data class SourceEntity(
     /**
      * Whether a Stalker portal's **own** guide may be imported (v37). On by default: a portal that
      * publishes no XMLTV feed has no other way to fill the Guide, and without it catch-up cannot be
-     * used at all. Turning it off removes the portal's guide entry from Settings → EPG and stops it
+     * used at all. Turning it off removes the portal's guide entry from Settings → EPG Sources and stops it
      * being offered again.
      *
      * Only meaningful for [SourceType.STALKER]; a portal that advertises an XMLTV feed uses that

@@ -380,6 +380,45 @@
     <string name="sports_switch_channel">Sender wechseln</string>
     <string name="sports_tab_fixtures">Spielplan</string>
     <string name="sports_tab_results">Ergebnisse</string>
+    <string name="sports_tab_scores">Live</string>
+    <string name="sports_tab_calendar">Kalender</string>
+    <string name="sports_tab_leagues">Ligen</string>
+    <string name="sports_previous_month">Vorheriger Monat</string>
+    <string name="sports_next_month">Nächster Monat</string>
+    <string name="sports_next">Als Nächstes: <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">Als Nächstes</string>
+    <string name="sports_new_badge">Neu</string>
+    <string name="sports_no_table_series">Keine Tabelle — die Serien wechseln jede Woche</string>
+    <string name="sports_follow_league">Liga folgen</string>
+    <string name="sports_unfollow_league">Liga nicht mehr folgen</string>
+    <string name="sports_no_matches_on">Keine Spiele in deinen Sportarten am <xliff:g id="day">%1$s</xliff:g></string>
+    <string name="sports_nothing_on_day">An diesem Tag nichts</string>
+    <string name="sports_nothing_in_sport"><xliff:g id="sport">%1$s</xliff:g>: an diesem Tag nichts</string>
+    <string name="sports_change_leagues_hint">Ligen fügst du unter Einstellungen → Sport hinzu oder entfernst sie</string>
+    <string name="sports_loading_month"><xliff:g id="month">%1$s</xliff:g> wird geladen…</string>
+    <string name="sports_offline_saved">Angezeigt wird der Stand von <xliff:g id="time">%1$s</xliff:g> — ESPN nicht erreichbar</string>
+    <string name="sports_team_page">Teamseite</string>
+    <string name="sports_next_match">Nächstes Spiel</string>
+    <string name="sports_last_five">Letzte fünf</string>
+    <string name="sports_league_position">Tabellenplatz</string>
+    <string name="sports_in_my_teams">In Meine Teams</string>
+    <string name="sports_open_match_page">Spielseite öffnen</string>
+    <string name="sports_open_team_page">Teamseite öffnen</string>
+    <string name="sports_my_teams_leagues">Die Ligen, in denen deine Teams spielen</string>
+    <string name="sports_tab_drivers">Fahrer</string>
+    <string name="sports_tab_constructors">Konstrukteure</string>
+    <string name="sports_tab_races">Rennen</string>
+    <string name="sports_tab_rankings">Rangliste</string>
+    <string name="sports_tab_matches">Spiele</string>
+    <string name="sports_next_race_weekend">Nächstes Rennwochenende</string>
+    <string name="sports_last_weekend">Letztes Wochenende</string>
+    <string name="sports_session_practice_1">Training 1</string>
+    <string name="sports_session_practice_2">Training 2</string>
+    <string name="sports_session_practice_3">Training 3</string>
+    <string name="sports_session_sprint_qualifying">Sprint-Qualifying</string>
+    <string name="sports_session_qualifying">Qualifying</string>
+    <string name="sports_session_sprint">Sprint</string>
+    <string name="sports_session_race">Rennen</string>
     <string name="sports_table_team">Team</string>
     <string name="sports_table_played">Sp.</string>
     <string name="sports_table_won">S</string>
@@ -464,6 +503,12 @@
         <item quantity="other">Alle <xliff:g id="count">%1$d</xliff:g> Stunden</item>
     </plurals>
     <string name="sports_auto_rebuild_app_start">Bei jedem App-Start</string>
+    <string name="sports_calendar_refresh">Kalender aktualisieren</string>
+    <string name="sports_calendar_refresh_description">Wie oft gespeicherte Monate neu geladen werden</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="one">Jeden <xliff:g id="count">%1$d</xliff:g>. Tag</item>
+        <item quantity="other">Alle <xliff:g id="count">%1$d</xliff:g> Tage</item>
+    </plurals>
     <string name="sports_find_channels">Sender suchen</string>
     <string name="sports_find_channels_description">Sucht dieses Spiel in deinem Programm und in den Sendernamen. Bei einer großen Playlist kann das einen Moment dauern.</string>
     <string name="sports_finding_channels">Deine Sender werden durchsucht…</string>

@@ -162,7 +162,7 @@
     <string name="settings_quick_live_preview">المعاينة المباشرة</string>
     <string name="settings_quick_preview_sound">صوت المعاينة</string>
     <string name="settings_quick_channel_numbers">أرقام القنوات</string>
-    <string name="settings_quick_hdr">HDR (mpv فقط)</string>
+    <string name="settings_quick_prefer_sdr">تفضيل SDR</string>
     <string name="settings_quick_autoplay">التشغيل التلقائي</string>
     <string name="settings_quick_check_update">التحقق من وجود تحديث</string>
     <string name="settings_language">اللغة</string>
@@ -217,7 +217,7 @@
     <string name="settings_preview_audio_description">تشغيل الصوت في المعاينة المباشرة</string>
     <string name="settings_mini_player_root">المشغّل المصغّر</string>
     <string name="settings_mini_player_root_description">حجم المشغّل المصغّر المُرسى وموضعه</string>
-    <string name="settings_hdr_description">استخدام خرج HDR عندما يدعمه الفيديو والتلفزيون. لـ mpv فقط: لا يدعم محرّك ExoPlayer هذا الإعداد ويمرّر HDR الخاص بالبث كما هو دائمًا.</string>
+    <string name="settings_prefer_sdr_description">عندما يوفّر البث صورة SDR وصورة HDR معًا، تُشغَّل صورة SDR: للتلفاز الذي تبدو فيه صورة HDR باهتة أو داكنة جدًا. البث الذي يوفّر HDR فقط يبقى HDR. مع ExoPlayer فقط.</string>
     <string name="settings_auto_frame_rate">معدل الإطارات التلقائي</string>
     <string name="settings_auto_frame_rate_description">مطابقة معدل تحديث التلفزيون مع الفيديو (24/25/50/60 إطارًا في الثانية) في وضع ملء الشاشة، للبث التلفزيوني المباشر والفيديو حسب الطلب، واستعادته عند الخروج. عطّل هذا الخيار إذا كان التلفزيون أو جهاز الاستقبال يعيد مصافحة HDMI بصورة مزعجة عند كل تغيير للقناة.</string>
     <string name="settings_afr_pause">إيقاف مؤقت أثناء تبديل الشاشة</string>
@@ -228,6 +228,10 @@
     <string name="settings_surround_description_mobile">فك ترميز Dolby/DTS إلى صوت محيطي (5.1/7.1) لجهاز استقبال حقيقي يدعم 5.1/7.1 متصل بهذا الجهاز. اتركه متوقفًا للسماعة المدمجة أو سماعات الرأس أو مكبّر صوت استريو — قد يتأخر الصوت متعدد القنوات عن الفيديو. إذا انحرفت المزامنة، فاضبط قليلًا قائمة الصوت في المشغّل ← مزامنة A/V.</string>
     <string name="settings_audio_passthrough">تمرير Dolby وDTS</string>
     <string name="settings_audio_passthrough_description">تشغيل: يُرسَل Dolby وDTS دون فك ترميز إلى التلفزيون أو مكبر الصوت الشريطي أو جهاز الاستقبال عندما يفيد بأنه يستطيع تشغيلهما (ExoPlayer). إيقاف: يفك التطبيق ترميزهما، ويظل الصوت محيطيًا حيث يسمح الصوت المحيطي. يفك mpv الترميز دائمًا. لا يُستخدم أثناء تشغيل الوضع الليلي أو موازنة مستوى الصوت.</string>
+    <string name="settings_ffmpeg_audio">صوت FFmpeg لمشغّل ExoPlayer</string>
+    <string name="settings_ffmpeg_audio_description">تشغيل: يمكن لـ ExoPlayer أيضًا فك ترميز الصوت الذي لا يملك الجهاز وحدة فك ترميز له، مثل DTS أو TrueHD أو MP2. تبقى الأولوية لوحدات فك الترميز الخاصة بالجهاز. إيقاف: يستخدم ExoPlayer وحدات فك ترميز الجهاز فقط. يفك mpv الترميز دائمًا باستخدام FFmpeg. يؤدي تغيير هذا الإعداد إلى إعادة تشغيل OwnTV.</string>
+    <string name="settings_line_ffmpeg_audio">للصوت الذي لا يستطيع الجهاز فك ترميزه</string>
+    <string name="settings_ffmpeg_audio_restart_message">تتغير وحدة فك ترميز الصوت بعد إعادة تشغيل OwnTV.</string>
     <string name="settings_night_mode">الوضع الليلي</string>
     <string name="settings_night_mode_description">يخفض المشاهد الصاخبة ويرفع الحوار الهادئ، للمشاهدة بصوت منخفض.</string>
     <string name="settings_volume_leveling">موازنة مستوى الصوت</string>
@@ -354,7 +358,7 @@
     <string name="settings_search_keywords_audio">مستوى الصوت عالٍ منخفض مزامنة الشفاه تأخير مسار الصوت اللغة</string>
     <string name="settings_search_keywords_channel_numbers">قناة رقم ضبط مباشر كتابة أرقام لوحة أرقام رقمي تبديل lcn</string>
     <string name="settings_search_keywords_mini">إرساء pip مشغّل مصغّر حجم موضع مقياس نسبة زاوية نقل</string>
-    <string name="settings_search_keywords_hdr">نطاق ديناميكي عالٍ خرج</string>
+    <string name="settings_search_keywords_prefer_sdr">hdr sdr نطاق ديناميكي قياسي صورة باهتة داكنة</string>
     <string name="settings_search_keywords_afr">afr تحديث معدل هرتز تقطع 24fps 25fps 50hz 60hz وضع عرض مطابقة</string>
     <string name="settings_search_keywords_surround">Dolby DTS 5.1 7.1 جهاز استقبال صوت</string>
     <string name="settings_search_keywords_autoplay">تشغيل تلقائي مسلسل موسم</string>
@@ -478,6 +482,10 @@
     <string name="settings_preferred_audio_language">لغة الصوت المفضّلة</string>
     <string name="settings_audio_sync">مزامنة الصوت</string>
     <string name="settings_audio_sync_description">قدّم الصوت أو أخّره ليتطابق مع الفيديو. يعمل مع المشغّلين كليهما (mpv وExoPlayer).</string>
+    <string name="settings_output_audio_delay">تأخير هذا المخرج</string>
+    <string name="settings_output_audio_delay_description">يُضاف إلى «مزامنة الصوت» ويُحفظ بشكل منفصل لكل مخرج: HDMI، ومكبر صوت شريطي عبر HDMI ARC، وبلوتوث، والسماعات المدمجة، وسماعات الرأس. اضبطه أثناء الاستماع عبر المخرج المقصود.</string>
+    <string name="settings_audio_output_speaker">السماعات المدمجة</string>
+    <string name="settings_audio_output_other">سماعات الرأس أو USB</string>
     <string name="settings_live_tv">البث التلفزيوني المباشر</string>
     <string name="settings_live_latency_description">مدى قرب التشغيل من البث المباشر. تعني القيمة الأقل قربًا أكبر من البث المباشر، ولكن مع مخزن مؤقت أصغر، لذلك قد تتقطّع عمليات البث الضعيفة أو تعيد الاتصال أكثر. ينطبق ذلك على القناة التالية التي تفتحها.</string>
     <string name="settings_live_latency_bitrate_note">على قناة ذات معدل بت مرتفع جدًا — وخاصةً بدقة 4K — قد يحتفظ المخزن المؤقت بمدة أقل مما طلبت، لأن هناك حدًا لكمية الفيديو التي يمكن الاحتفاظ بها في الذاكرة دفعة واحدة.</string>
@@ -532,10 +540,6 @@
     <string name="settings_reset_live_player_choices_description">عند تبديل قناة بين ExoPlayer وmpv داخل المشغّل، يُحفظ هذا الخيار لتلك القناة. تعيد إعادة الضبط كل القنوات إلى إعداد «مشغّل البث المباشر». أما الخيارات المحفوظة للأفلام والحلقات فتبقى كما هي.</string>
     <string name="settings_reset_live_player_choices_confirm">إعادة ضبط خيارات مشغّل البث المباشر المحفوظة؟</string>
     <string name="settings_reset_live_player_choices_confirm_description">تعود كل قناة إلى إعداد «مشغّل البث المباشر». يمكنك دائمًا تبديل قناة واحدة مرة أخرى من المشغّل.</string>
-    <string name="settings_forget_stream_fixes">نسيان إصلاحات البث التي تعلّمها المشغّل</string>
-    <string name="settings_forget_stream_fixes_description">يتعلّم المشغّل ما تحتاجه بثوث كل مزوّد — mpv بدل ExoPlayer، أو صيغة أخرى، أو فك ترميز برمجي للمشاهدة الاستدراكية. انسَ ذلك إذا أصلح المزوّد بثوثه. كما تُنسى دروس المشاهدة الاستدراكية تلقائيًا بعد 14 يومًا.</string>
-    <string name="settings_forget_stream_fixes_confirm">نسيان إصلاحات البث التي تعلّمها المشغّل؟</string>
-    <string name="settings_forget_stream_fixes_confirm_description">تُفتح القنوات بالطريقة المعتادة من جديد، ويتعلّم المشغّل مجددًا ما يحتاجه المزوّد. قد يستغرق التشغيل الأول لقناة متأثرة بضع ثوانٍ إضافية.</string>
     <string name="settings_external_player_row_description">افتح عمليات البث في تطبيق خارجي (VLC أو MX Player) بدلًا من المشغّل المدمج، مع تحديد ذلك لكل قسم. يفيد هذا مع عمليات البث التي لا يستطيع هذا التطبيق فك ترميزها، أو إذا كنت تفضّل مشغّلًا آخر. لا يتوفر موضع الاستئناف ولا السابق/التالي أثناء التشغيل خارجيًا؛ وقد لا تعمل عمليات البث التي تحتاج إلى User-Agent مخصّص أو مُحيل.</string>
     <string name="settings_resume_always">الاستئناف دائمًا</string>
     <string name="settings_resume_ask">السؤال قبل الاستئناف</string>
@@ -552,7 +556,7 @@
     <string name="settings_delete_all_series">حذف جميع المسلسلات</string>
     <string name="settings_section_count"><xliff:g id="section">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g>)</string>
     <string name="settings_sync_guide_question">هل تريد مزامنة دليل البرامج التلفزيونية الآن؟</string>
-    <string name="settings_sync_guide_description">نزّل دليل البرامج (دليل البرامج الإلكتروني) لـ «<xliff:g id="source">%1$s</xliff:g>». يمكنك أيضًا إجراء ذلك لاحقًا من الإعدادات ← دليل البرامج الإلكتروني.</string>
+    <string name="settings_sync_guide_description">نزّل دليل البرامج (دليل البرامج الإلكتروني) لـ «<xliff:g id="source">%1$s</xliff:g>». يمكنك أيضًا إجراء ذلك لاحقًا من الإعدادات ← المصادر ودليل البرامج ← مصادر دليل البرامج الإلكتروني.</string>
     <string name="settings_not_now">ليس الآن</string>
     <string name="settings_sync_now">المزامنة الآن</string>
     <string name="settings_syncing_guide">جارٍ مزامنة دليل البرامج التلفزيونية…</string>
@@ -1250,7 +1254,7 @@
     <string name="local_sync_received_items">عناصر مستلمة: <xliff:g id="count">%1$d</xliff:g></string>
     <string name="local_sync_sent">تم إرسال بياناتك</string>
     <string name="local_sync_failed">فشلت المزامنة</string>
-    <string name="local_sync_error_unreachable">تعذّر الوصول إلى هذا الجهاز. افتح عليه OwnTV ← الإعدادات ← البيانات ← المزامنة المحلية وفعّل وضع المزامنة. يجب أن يكون الجهازان على نفس شبكة الواي فاي.</string>
+    <string name="local_sync_error_unreachable">تعذّر الوصول إلى هذا الجهاز. افتح عليه OwnTV ← المزيد ← المزامنة المحلية وفعّل وضع المزامنة. يجب أن يكون الجهازان على نفس شبكة الواي فاي.</string>
     <string name="local_sync_error_unauthorized">رفض الجهاز الآخر الاتصال. قد يكون رمز PIN خاطئًا أو ربما نسي هذا الجهاز.</string>
     <string name="local_sync_error_bad_payload">تعذّرت قراءة ما وصل. إذا استخدمت كلمة مرور، فتأكد من أنها نفسها على الجهازين.</string>
     <string name="local_sync_error_unknown">حدث خطأ ما. حاول مرة أخرى.</string>
@@ -1448,7 +1452,6 @@
     <string name="settings_part_guide_catchup">الدليل والمشاهدة الاستدراكية</string>
     <string name="settings_vp_cat_controls_resume">عناصر التحكم والاستئناف</string>
     <string name="settings_pinned_from">مثبَّت من <xliff:g id="group">%1$s</xliff:g></string>
-    <string name="settings_forget">نسيان</string>
     <string name="settings_check_now">تحقق الآن</string>
     <string name="settings_line_epg_offset">إزاحة الدليل كله عندما تكون أوقات المصدر خاطئة</string>
     <string name="settings_line_reminders">ما يحدث عند حلول موعد التذكير</string>
@@ -1482,13 +1485,12 @@
     <string name="settings_line_quick_live_preview">تشغيل القناة المحددة في البث المباشر</string>
     <string name="settings_line_preview_sound">الصوت في معاينة البث المباشر</string>
     <string name="settings_line_quick_channel_numbers">اكتب رقمًا على الريموت للانتقال إلى القناة</string>
-    <string name="settings_line_hdr">نطاق ديناميكي عالٍ على mpv</string>
+    <string name="settings_line_prefer_sdr">SDR عندما يوفّر البث الاثنين</string>
     <string name="settings_line_quick_autoplay">بدء الحلقة التالية تلقائيًا</string>
     <string name="settings_line_live_engine">أي مشغّل يفتح القنوات، والبديل</string>
     <string name="settings_line_saved_live_choices">القنوات التي غيّرت مشغّلها يدويًا</string>
     <string name="settings_line_vod_engine">أي مشغّل يفتح الأفلام والحلقات</string>
     <string name="settings_line_saved_choices">الأفلام والحلقات التي غيّرت مشغّلها يدويًا</string>
-    <string name="settings_line_learned_fixes">ما تعلّمه المشغّل عن كل مزوّد</string>
     <string name="settings_line_external">VLC وMX Player… لكل قسم</string>
     <string name="settings_line_vod_buffer">مدى التحميل المسبق للأفلام</string>
     <string name="settings_line_vod_timeout">مدة انتظار خادم لا يستجيب</string>
@@ -1506,6 +1508,7 @@
     <string name="settings_line_night_mode">خفض المشاهد الصاخبة ورفع الحوار</string>
     <string name="settings_line_leveling">كل القنوات بنفس الارتفاع</string>
     <string name="settings_line_audio_sync">تقديم الصوت أو تأخيره</string>
+    <string name="settings_line_output_audio_delay">تأخير إضافي للمخرج الحالي</string>
     <string name="settings_line_saved_audio_sync">التأخيرات التي حفظتها في المشغّل</string>
     <string name="settings_line_audio_lang">يشغّل هذا المسار إذا توفر في البث</string>
     <string name="settings_line_sub_lang">تشغيل الترجمة بهذه اللغة</string>
@@ -1513,7 +1516,6 @@
     <string name="settings_title_fonts">الخطوط وحجم النص</string>
     <string name="settings_title_saved_live_choices">خيارات مشغّل البث المباشر المحفوظة</string>
     <string name="settings_title_saved_choices">خيارات المشغّل المحفوظة</string>
-    <string name="settings_title_learned_fixes">إصلاحات البث المكتسبة</string>
     <string name="settings_title_tunneled">التشغيل النفقي</string>
     <string name="settings_title_saved_zoom">التكبير المحفوظ</string>
     <string name="settings_title_saved_volume">مستوى الصوت المحفوظ</string>

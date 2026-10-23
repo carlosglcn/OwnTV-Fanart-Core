@@ -99,7 +99,6 @@
 1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	DELETE FROM custom_category_members WHERE
 1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	DELETE FROM custom_category_members WHERE profileId = :profileId AND mediaType = :type AND contextKey = :contextKey
 1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	DELETE FROM custom_category_members WHERE profileId = :profileId AND mediaType = :type AND contextKey = :contextKey AND itemId = :itemId
-1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	DELETE FROM custom_category_members WHERE profileId = :profileId AND mediaType = :type AND itemId = :itemId AND (
 1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	FROM custom_category_members m
 1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	FROM custom_category_members m INNER JOIN channels c ON m.mediaType = 'LIVE' AND m.itemId = c.id
 1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	FROM custom_category_members m INNER JOIN movies mv ON m.mediaType = 'MOVIE' AND m.itemId = mv.id
@@ -694,19 +693,11 @@
 1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	tags/$it
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	${Build.MANUFACTURER} ${Build.MODEL} · Android ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	--- live diagnostics leading up to the crash ---
-1	player-core/src/main/java/tv/own/owntv/player/AudioDynamics.kt	equalizer=f=110:t=q:w=1.0:g=-3
-1	player-core/src/main/java/tv/own/owntv/player/AudioDynamics.kt	equalizer=f=1200:t=q:w=1.4:g=2
-1	player-core/src/main/java/tv/own/owntv/player/AudioDynamics.kt	equalizer=f=2600:t=q:w=1.1:g=5
-1	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	no decoder on this device for the video track (audio plays, no picture)
-4	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	\0
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	-
-2	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	?
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	body="$failureText"
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder failed before first frame (${error.errorCodeName}) — rebuilding the decoder and retrying once
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder rebuild failed: ${it.message}
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	default User-Agent refused — retrying once as ${HttpClient.FALLBACK_USER_AGENT}
-1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	go live: live=${p.isCurrentMediaItemLive} pos=${p.currentPosition} playing=${p.isPlaying} reopen=$reopen
-1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	html
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	insufficient resource
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	insufficientresources
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	no more instances

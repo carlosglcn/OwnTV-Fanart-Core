@@ -94,7 +94,6 @@ val dataModule = module {
     single { CustomizationStore(androidContext()) }
     single { tv.own.owntv.core.epg.EpgSourceStore(androidContext()) }
     single { tv.own.owntv.core.player.ForceMpvStore(androidContext(), get()) }
-    single { tv.own.owntv.core.player.ArchiveDecodeStore(androidContext()) }
     // Per-channel "watched without a picture" memory, for the mobile audio-only mode.
     single { tv.own.owntv.core.player.AudioOnlyStore(androidContext(), get()) }
     // Per-item zoom/volume the player remembers (playbackPrefsDao, settings).
@@ -157,11 +156,13 @@ val dataModule = module {
         )
     }
     single { tv.own.owntv.core.sports.SportsRefreshPolicy() }
+    single { tv.own.owntv.core.sports.SportsGate(get()) }
     single {
         val settings = get<tv.own.owntv.core.settings.SettingsRepository>()
         tv.own.owntv.core.sports.SportsRepository(
             source = get(),
             policy = get(),
+            gate = get(),
             // The active profile's follow list (every catalogue league with "All sports").
             followed = settings.activeSportsConfig.map { it.followedLeagues() },
             liveRefreshSeconds = settings.activeSportsConfig.map { it.liveRefreshSeconds },
@@ -175,6 +176,19 @@ val dataModule = module {
                 .follow(repository.board, settings.activeSportsConfig)
         }
     }
+    single {
+        val settings = get<tv.own.owntv.core.settings.SettingsRepository>()
+        tv.own.owntv.core.sports.SportsCalendar(
+            source = get(),
+            gate = get(),
+            board = get<tv.own.owntv.core.sports.SportsRepository>().board,
+            followed = settings.activeSportsConfig.map { it.followedLeagues() },
+            refreshDays = settings.activeSportsConfig.map { it.calendarRefreshDays },
+            dataDir = androidContext().filesDir,
+            scope = kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.SupervisorJob() + kotlinx.coroutines.Dispatchers.Default),
+        )
+    }
+    single { tv.own.owntv.core.sports.SportsTeams(get(), get(), get()) }
     // "Where is it live": the database reads (Search's own channel ↔ guide mapping) and the cached ranking.
     single<tv.own.owntv.core.sports.WatchData> {
         tv.own.owntv.core.sports.RoomWatchData(get(), get(), get(), get(), get(), get(), get())

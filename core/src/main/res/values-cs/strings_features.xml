@@ -416,6 +416,45 @@
     <string name="sports_switch_channel">Přepnout kanál</string>
     <string name="sports_tab_fixtures">Program</string>
     <string name="sports_tab_results">Výsledky</string>
+    <string name="sports_tab_scores">Živě</string>
+    <string name="sports_tab_calendar">Kalendář</string>
+    <string name="sports_tab_leagues">Soutěže</string>
+    <string name="sports_previous_month">Předchozí měsíc</string>
+    <string name="sports_next_month">Další měsíc</string>
+    <string name="sports_next">Další: <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">Další</string>
+    <string name="sports_new_badge">Nové</string>
+    <string name="sports_no_table_series">Bez tabulky — série se mění každý týden</string>
+    <string name="sports_follow_league">Sledovat soutěž</string>
+    <string name="sports_unfollow_league">Přestat sledovat soutěž</string>
+    <string name="sports_no_matches_on"><xliff:g id="day">%1$s</xliff:g>: ve vašich sportech žádné zápasy</string>
+    <string name="sports_nothing_on_day">V tento den nic</string>
+    <string name="sports_nothing_in_sport"><xliff:g id="sport">%1$s</xliff:g>: v tento den nic</string>
+    <string name="sports_change_leagues_hint">Soutěže přidáte nebo odeberete v Nastavení → Sport</string>
+    <string name="sports_loading_month">Načítání: <xliff:g id="month">%1$s</xliff:g>…</string>
+    <string name="sports_offline_saved">Zobrazuje se stav uložený <xliff:g id="time">%1$s</xliff:g> — ESPN není dostupné</string>
+    <string name="sports_team_page">Stránka týmu</string>
+    <string name="sports_next_match">Další zápas</string>
+    <string name="sports_last_five">Posledních pět</string>
+    <string name="sports_league_position">Pozice v tabulce</string>
+    <string name="sports_in_my_teams">V Mých týmech</string>
+    <string name="sports_open_match_page">Otevřít stránku zápasu</string>
+    <string name="sports_open_team_page">Otevřít stránku týmu</string>
+    <string name="sports_my_teams_leagues">Soutěže, ve kterých hrají vaše týmy</string>
+    <string name="sports_tab_drivers">Jezdci</string>
+    <string name="sports_tab_constructors">Konstruktéři</string>
+    <string name="sports_tab_races">Závody</string>
+    <string name="sports_tab_rankings">Žebříček</string>
+    <string name="sports_tab_matches">Zápasy</string>
+    <string name="sports_next_race_weekend">Další závodní víkend</string>
+    <string name="sports_last_weekend">Minulý víkend</string>
+    <string name="sports_session_practice_1">Trénink 1</string>
+    <string name="sports_session_practice_2">Trénink 2</string>
+    <string name="sports_session_practice_3">Trénink 3</string>
+    <string name="sports_session_sprint_qualifying">Kvalifikace na sprint</string>
+    <string name="sports_session_qualifying">Kvalifikace</string>
+    <string name="sports_session_sprint">Sprint</string>
+    <string name="sports_session_race">Závod</string>
     <string name="sports_table_team">Tým</string>
     <string name="sports_table_played">Z</string>
     <string name="sports_table_won">V</string>
@@ -508,6 +547,14 @@
         <item quantity="other">Každých <xliff:g id="count">%1$d</xliff:g> hodin</item>
     </plurals>
     <string name="sports_auto_rebuild_app_start">Při každém spuštění aplikace</string>
+    <string name="sports_calendar_refresh">Obnova kalendáře</string>
+    <string name="sports_calendar_refresh_description">Jak často se uložené měsíce znovu načtou</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="one">Každý <xliff:g id="count">%1$d</xliff:g> den</item>
+        <item quantity="few">Každé <xliff:g id="count">%1$d</xliff:g> dny</item>
+        <item quantity="many">Každých <xliff:g id="count">%1$d</xliff:g> dní</item>
+        <item quantity="other">Každých <xliff:g id="count">%1$d</xliff:g> dní</item>
+    </plurals>
     <string name="sports_find_channels">Najít kanály</string>
     <string name="sports_find_channels_description">Hledá tento zápas ve vašem průvodci a v názvech kanálů. U velkého playlistu to může chvíli trvat.</string>
     <string name="sports_finding_channels">Prohledávají se vaše kanály…</string>

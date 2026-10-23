@@ -171,7 +171,7 @@
     <string name="settings_quick_live_preview">Élő előnézet</string>
     <string name="settings_quick_preview_sound">Előnézet hangja</string>
     <string name="settings_quick_channel_numbers">Csatornaszámok</string>
-    <string name="settings_quick_hdr">HDR (csak mpv)</string>
+    <string name="settings_quick_prefer_sdr">SDR előnyben</string>
     <string name="settings_quick_autoplay">Automatikus lejátszás</string>
     <string name="settings_quick_check_update">Frissítés keresése</string>
     <string name="settings_row_menu_pin">Kitűzés a Gyors közé</string>
@@ -258,7 +258,7 @@
     <string name="settings_preview_audio_description">Hang lejátszása az élő előnézetben</string>
     <string name="settings_mini_player_root">Mini lejátszó</string>
     <string name="settings_mini_player_root_description">A dokkolt mini lejátszó mérete és pozíciója</string>
-    <string name="settings_hdr_description">HDR-kimenet használata, ha a videó és a TV is támogatja. Csak mpv: az ExoPlayer motor nem támogatja ezt a beállítást, és a stream HDR-jét mindig változatlanul továbbítja.</string>
+    <string name="settings_prefer_sdr_description">Ha egy stream SDR és HDR képet is kínál, az SDR kép játszódik le: olyan tévéhez, amelyen a HDR fakónak vagy túl sötétnek tűnik. A csak HDR-es stream HDR marad. Csak ExoPlayer.</string>
     <string name="settings_auto_frame_rate">Automatikus képkockasebesség</string>
     <string name="settings_auto_frame_rate_description">Teljes képernyőn a TV frissítési frekvenciáját a videóhoz igazítja (24/25/50/60 fps) élő TV és VOD esetén is, kilépéskor pedig visszaállítja. Kapcsold ki, ha a TV-d vagy a vevőd minden csatornaváltásnál zajosan újraegyezteti a HDMI-t.</string>
     <string name="settings_afr_pause">Szünet a kijelzőváltás alatt</string>
@@ -276,6 +276,10 @@
     <string name="settings_surround_description_mobile">A Dolby/DTS térhangzásra (5.1/7.1) dekódolása egy ehhez az eszközhöz csatlakoztatott igazi 5.1/7.1 vevőhöz. A beépített hangszóróhoz, fejhallgatóhoz vagy sztereó hangprojektorhoz hagyd KI — a többcsatornás hang a kép mögé csúszhat. Ha elcsúszik, igazíts a lejátszó Hang menü → A/V szinkron beállításán.</string>
     <string name="settings_audio_passthrough">Dolby és DTS továbbítás</string>
     <string name="settings_audio_passthrough_description">Be: a Dolby és a DTS dekódolatlanul jut a tévéhez, hangprojektorhoz vagy erősítőhöz, ha az jelzi, hogy le tudja játszani (ExoPlayer). Ki: az alkalmazás dekódolja, továbbra is térhangként, ahol a(z) Térhatású hang megengedi. Az mpv mindig dekódol. Nem használatos, amíg a(z) Éjszakai mód vagy a(z) Hangerő-kiegyenlítés be van kapcsolva.</string>
+    <string name="settings_ffmpeg_audio">FFmpeg hang az ExoPlayerhez</string>
+    <string name="settings_ffmpeg_audio_description">Be: az ExoPlayer olyan hangot is dekódolhat, amelyhez az eszköznek nincs dekódere, például DTS, TrueHD vagy MP2. Az eszköz saját dekóderei továbbra is elsőbbséget élveznek. Ki: az ExoPlayer csak az eszköz dekódereit használja. Az mpv mindig FFmpeggel dekódol. A módosítás újraindítja az OwnTV-t.</string>
+    <string name="settings_line_ffmpeg_audio">Az eszköz által nem dekódolható hanghoz</string>
+    <string name="settings_ffmpeg_audio_restart_message">A hangdekóder az OwnTV újraindítása után vált.</string>
     <string name="settings_night_mode">Éjszakai mód</string>
     <string name="settings_night_mode_description">Lehalkítja a hangos jeleneteket és felhangosítja a halk párbeszédet, hogy kis hangerőn is lehessen nézni.</string>
     <string name="settings_volume_leveling">Hangerő-kiegyenlítés</string>
@@ -398,7 +402,7 @@
     <string name="settings_search_keywords_audio">hangerő hangos halk szájszinkron késleltetés hangsáv nyelv</string>
     <string name="settings_search_keywords_channel_numbers">csatornaszám közvetlen hangolás számjegyek billentyűzet numerikus zapping lcn</string>
     <string name="settings_search_keywords_mini">dokkolt pip mini lejátszó méret pozíció méretezés százalék sarok mozgatás</string>
-    <string name="settings_search_keywords_hdr">nagy dinamikatartomány kimenet</string>
+    <string name="settings_search_keywords_prefer_sdr">hdr sdr normál dinamikatartomány fakó sötét kép</string>
     <string name="settings_search_keywords_afr">afr frissítési frekvencia hz remegés 24fps 25fps 50hz 60hz megjelenítési mód igazítás</string>
     <string name="settings_search_keywords_surround">dolby dts 5.1 7.1 vevő hang</string>
     <string name="settings_search_keywords_autoplay">automatikus lejátszás sorozat évad</string>
@@ -509,6 +513,10 @@
     <string name="settings_preferred_audio_language">Előnyben részesített hangnyelv</string>
     <string name="settings_audio_sync">Hangszinkron</string>
     <string name="settings_audio_sync_description">A hang előre- vagy hátracsúsztatása a képhez igazításhoz. Mindkét lejátszóval működik (mpv és ExoPlayer).</string>
+    <string name="settings_output_audio_delay">Késleltetés ehhez a kimenethez</string>
+    <string name="settings_output_audio_delay_description">Hozzáadódik a(z) „Hangszinkron” beállításhoz, és kimenetenként külön tárolódik: HDMI, HDMI ARC-n csatlakozó hangprojektor, Bluetooth, beépített hangszórók, fejhallgató. Akkor állítsd be, amikor azon a kimeneten hallgatod.</string>
+    <string name="settings_audio_output_speaker">Beépített hangszórók</string>
+    <string name="settings_audio_output_other">Fejhallgató vagy USB</string>
     <string name="settings_live_tv">Élő TV</string>
     <string name="settings_live_latency_description">Milyen közel az élő adáshoz játsszon. Az alacsonyabb közelebb van az élőhöz, de kisebb a puffer, így a gyenge adatfolyamok akadozhatnak vagy többször újracsatlakozhatnak. A legközelebb megnyitott csatornától él.</string>
     <string name="settings_live_latency_bitrate_note">Nagyon nagy bitsebességű csatornán — különösen 4K esetén — a puffer kevesebb időt tárolhat a kértnél, mert korlátozott, mennyi videó tartható egyszerre a memóriában.</string>
@@ -559,10 +567,6 @@
     <string name="settings_reset_live_player_choices_description">Ha a lejátszóban egy csatornánál ExoPlayer és mpv között váltasz, a választás elmentődik a csatornához. A visszaállítás után minden csatorna újra az „Élő TV lejátszója” beállítást követi. A filmekhez és epizódokhoz mentett választások megmaradnak.</string>
     <string name="settings_reset_live_player_choices_confirm">Visszaállítod az élő TV mentett lejátszóválasztásait?</string>
     <string name="settings_reset_live_player_choices_confirm_description">Minden csatorna visszatér az „Élő TV lejátszója” beállításhoz. Bármikor válthatsz újra egy csatornát a lejátszóból.</string>
-    <string name="settings_forget_stream_fixes">Tanult streamjavítások elfelejtése</string>
-    <string name="settings_forget_stream_fixes_description">A lejátszó megtanulja, mire van szükségük az egyes szolgáltatók streamjeinek – mpv az ExoPlayer helyett, más formátum, szoftveres dekódolás a visszanézéshez. Felejtsd el, ha egy szolgáltató kijavította a streamjeit. A visszanézéssel kapcsolatos tanulságokat 14 nap után magától is elfelejti.</string>
-    <string name="settings_forget_stream_fixes_confirm">Elfelejted a tanult streamjavításokat?</string>
-    <string name="settings_forget_stream_fixes_confirm_description">A csatornák újra a szokásos módon nyílnak meg, és a lejátszó újra megtanulja, amire egy szolgáltatónak még szüksége van. Egy érintett csatorna első indítása néhány másodperccel tovább tarthat.</string>
     <string name="settings_external_player_row_description">Az adatfolyamok megnyitása külső alkalmazásban (VLC, MX Player) a beépített lejátszó helyett, szakaszonként választva. Hasznos olyan adatfolyamokhoz, amiket ez az alkalmazás nem tud dekódolni, vagy ha másik lejátszót szeretsz. Külső lejátszás közben a folytatási pozíció és az előző/következő nem érhető el; az egyéni User-Agentet vagy hivatkozót igénylő adatfolyamok esetleg nem indulnak el.</string>
     <string name="settings_resume_always">Mindig folytassa</string>
     <string name="settings_resume_ask">Kérdezzen rá</string>
@@ -579,7 +583,7 @@
     <string name="settings_delete_all_series">Összes sorozat törlése</string>
     <string name="settings_section_count"><xliff:g id="section">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g>)</string>
     <string name="settings_sync_guide_question">Szinkronizáljuk most a műsorújságot?</string>
-    <string name="settings_sync_guide_description">A műsorújság (EPG) letöltése ehhez: „<xliff:g id="source">%1$s</xliff:g>”. Ezt később is megteheted a Beállítások → EPG alatt.</string>
+    <string name="settings_sync_guide_description">A műsorújság (EPG) letöltése ehhez: „<xliff:g id="source">%1$s</xliff:g>”. Ezt később is megteheted a Beállítások → Források és műsorújság → EPG-források alatt.</string>
     <string name="settings_not_now">Most nem</string>
     <string name="settings_sync_now">Szinkronizálás most</string>
     <string name="settings_syncing_guide">Műsorújság szinkronizálása…</string>
@@ -1166,7 +1170,7 @@
     <string name="local_sync_received_items">Fogadott elemek: <xliff:g id="count">%1$d</xliff:g></string>
     <string name="local_sync_sent">Az adatai elküldve</string>
     <string name="local_sync_failed">A szinkronizálás sikertelen</string>
-    <string name="local_sync_error_unreachable">Ez az eszköz nem érhető el. Nyissa meg rajta az OwnTV → Beállítások → Adatok → Helyi szinkronizálás menüpontot, és kapcsolja be a Szinkronizálási módot. Mindkét eszköznek ugyanazon a Wi-Fi-n kell lennie.</string>
+    <string name="local_sync_error_unreachable">Ez az eszköz nem érhető el. Nyissa meg rajta az OwnTV → Továbbiak → Helyi szinkronizálás menüpontot, és kapcsolja be a Szinkronizálási módot. Mindkét eszköznek ugyanazon a Wi-Fi-n kell lennie.</string>
     <string name="local_sync_error_unauthorized">A másik eszköz elutasította. Lehet, hogy a PIN hibás, vagy elfelejtette ezt az eszközt.</string>
     <string name="local_sync_error_bad_payload">A beérkezett adatokat nem sikerült beolvasni. Ha jelszót használt, ellenőrizze, hogy mindkét eszközön ugyanaz-e.</string>
     <string name="local_sync_error_unknown">Valami hiba történt. Próbálja újra.</string>
@@ -1336,7 +1340,6 @@
     <string name="settings_part_guide_catchup">Műsorújság és visszanézés</string>
     <string name="settings_vp_cat_controls_resume">Vezérlés és folytatás</string>
     <string name="settings_pinned_from">Rögzítve innen: <xliff:g id="group">%1$s</xliff:g></string>
-    <string name="settings_forget">Elfelejtés</string>
     <string name="settings_check_now">Ellenőrzés most</string>
     <string name="settings_line_epg_offset">Az egész műsorújság eltolása, ha egy forrás ideje hibás</string>
     <string name="settings_line_reminders">Mi történjen, amikor egy emlékeztető esedékes</string>
@@ -1370,13 +1373,12 @@
     <string name="settings_line_quick_live_preview">A kijelölt csatorna lejátszása az élő tévében</string>
     <string name="settings_line_preview_sound">Hang az élő előnézetben</string>
     <string name="settings_line_quick_channel_numbers">Hangoláshoz írjon be egy számot a távirányítón</string>
-    <string name="settings_line_hdr">Nagy dinamikatartomány mpv-n</string>
+    <string name="settings_line_prefer_sdr">SDR, ha a stream mindkettőt kínálja</string>
     <string name="settings_line_quick_autoplay">A következő rész magától indul</string>
     <string name="settings_line_live_engine">Melyik lejátszó nyitja a csatornákat, és a tartalék</string>
     <string name="settings_line_saved_live_choices">Kézzel átállított csatornák</string>
     <string name="settings_line_vod_engine">Melyik lejátszó nyitja a filmeket és részeket</string>
     <string name="settings_line_saved_choices">Kézzel átállított filmek és részek</string>
-    <string name="settings_line_learned_fixes">Amit a lejátszó az egyes szolgáltatókról tanult</string>
     <string name="settings_line_external">VLC, MX Player… szakaszonként</string>
     <string name="settings_line_vod_buffer">Mennyit tölt előre a filmekből</string>
     <string name="settings_line_vod_timeout">Várakozás egy nem válaszoló szerverre</string>
@@ -1394,6 +1396,7 @@
     <string name="settings_line_night_mode">Hangos jelenetek halkabban, párbeszéd hangosabban</string>
     <string name="settings_line_leveling">Minden csatorna ugyanolyan hangos</string>
     <string name="settings_line_audio_sync">A hang előbbre vagy későbbre tolása</string>
+    <string name="settings_line_output_audio_delay">Extra késleltetés az aktuális kimenethez</string>
     <string name="settings_line_saved_audio_sync">A lejátszóban megjegyzett késleltetések</string>
     <string name="settings_line_audio_lang">Ezt a sávot játssza, ha az adásban van</string>
     <string name="settings_line_sub_lang">Feliratok bekapcsolása ezen a nyelven</string>
@@ -1401,7 +1404,6 @@
     <string name="settings_title_fonts">Betűtípusok és szövegméret</string>
     <string name="settings_title_saved_live_choices">Mentett élő tévés lejátszóválasztások</string>
     <string name="settings_title_saved_choices">Mentett lejátszóválasztások</string>
-    <string name="settings_title_learned_fixes">Megtanult adásjavítások</string>
     <string name="settings_title_tunneled">Alagutas lejátszás</string>
     <string name="settings_title_saved_zoom">Mentett nagyítás</string>
     <string name="settings_title_saved_volume">Mentett hangerő</string>

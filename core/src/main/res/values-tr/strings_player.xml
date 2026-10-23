@@ -86,6 +86,7 @@
     <string name="player_time_remaining">−<xliff:g id="time">%1$s</xliff:g></string>
     <string name="player_switch_exo">ExoPlayer\'a geçildi</string>
     <string name="player_switch_mpv">mpv\'ye geçildi</string>
+    <string name="player_smoothness_hint">Bu kanal kare kaybediyor. Oynatıcıyı mpv\'ye geçirmek daha akıcı oynatılmasını sağlayabilir.</string>
     <string name="player_error_image_subtitle_audio">Görsel tabanlı altyazılar bu videonun ses biçiminde kullanılamaz.</string>
     <string name="player_error_both_engines_exo_first">Her iki video motorunda da oynatma başarısız oldu (önce ExoPlayer, ardından mpv). Dosya bozuk olabilir veya bu TV\'nin oynatamadığı bir biçim kullanıyor olabilir.</string>
     <string name="player_error_both_engines_mpv_first">Her iki video motorunda da oynatma başarısız oldu (mpv ve ExoPlayer). Dosya bozuk olabilir veya bu TV\'nin oynatamadığı bir biçim kullanıyor olabilir. (<xliff:g id="error">%1$s</xliff:g>)</string>
@@ -267,7 +268,7 @@
     <string name="player_subtitles_search_language_description">Arama sonuçlarında yalnızca bu dildeki altyazılar görünür. Yine de sonuçlarda “Tüm diller” seçeneğine basarak tek bir arama için tümünü görebilirsiniz.</string>
     <string name="player_subtitles_language_not_set">Ayarlanmadı</string>
     <string name="player_frame_rate_prompt_title">Bu kanalda takılma görülebilir</string>
-    <string name="player_frame_rate_prompt_description">İçerik <xliff:g id="fps">%1$d</xliff:g> fps ile oynatılırken TV\'niz <xliff:g id="current_hz">%2$d</xliff:g> Hz\'de çalışıyor; TV bu kareleri eşit aralıklarla gösteremez, bu yüzden hareket hafifçe takılmalı görünür.\n\nOtomatik kare hızı, izlerken TV\'yi <xliff:g id="target_hz">%3$d</xliff:g> Hz\'e geçirir ve ardından eski hâline döndürür. Bazı TV\'ler kare hızı değiştiğinde bir an kararır; bunu Ayarlar → Video Oynatıcı bölümünden yeniden kapatabilirsiniz.</string>
+    <string name="player_frame_rate_prompt_description">İçerik <xliff:g id="fps">%1$d</xliff:g> fps ile oynatılırken TV\'niz <xliff:g id="current_hz">%2$d</xliff:g> Hz\'de çalışıyor; TV bu kareleri eşit aralıklarla gösteremez, bu yüzden hareket hafifçe takılmalı görünür.\n\nOtomatik kare hızı, izlerken TV\'yi <xliff:g id="target_hz">%3$d</xliff:g> Hz\'e geçirir ve ardından eski hâline döndürür. Bazı TV\'ler kare hızı değiştiğinde bir an kararır; bunu Ayarlar → Görüntü → Kare hızı bölümünden yeniden kapatabilirsiniz.</string>
     <string name="player_frame_rate_turn_on">Aç</string>
     <string name="player_reason_live_fallback">Canlı oynatma bir yedeğe geçti</string>
     <string name="player_reason_live_no_fallback">Canlı oynatma başarısız oldu — kalan yedek yok</string>

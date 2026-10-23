@@ -86,6 +86,7 @@
     <string name="player_time_remaining">−<xliff:g id="time">%1$s</xliff:g></string>
     <string name="player_switch_exo">Overgeschakeld naar ExoPlayer</string>
     <string name="player_switch_mpv">Overgeschakeld naar mpv</string>
+    <string name="player_smoothness_hint">Dit kanaal verliest beelden. Als je de speler overschakelt naar mpv, kan het vloeiender afspelen.</string>
     <string name="player_error_image_subtitle_audio">Beeldondertiteling is niet beschikbaar voor de audio-indeling van deze video.</string>
     <string name="player_error_both_engines_exo_first">Afspelen is met beide video-engines mislukt (eerst ExoPlayer, daarna mpv). Het bestand is mogelijk beschadigd of gebruikt een indeling die deze tv niet kan afspelen.</string>
     <string name="player_error_both_engines_mpv_first">Afspelen is met beide video-engines mislukt (mpv en ExoPlayer). Het bestand is mogelijk beschadigd of gebruikt een indeling die deze tv niet kan afspelen. (<xliff:g id="error">%1$s</xliff:g>)</string>
@@ -267,7 +268,7 @@
     <string name="player_subtitles_search_language_description">Alleen ondertitels in deze taal verschijnen in de zoekresultaten. Je kunt in de resultaten nog steeds op “Alle talen” drukken om alles voor één zoekopdracht te zien.</string>
     <string name="player_subtitles_language_not_set">Niet ingesteld</string>
     <string name="player_frame_rate_prompt_title">Deze zender kan haperen</string>
-    <string name="player_frame_rate_prompt_description">Het speelt af met <xliff:g id="fps">%1$d</xliff:g> fps terwijl je tv op <xliff:g id="current_hz">%2$d</xliff:g> Hz draait, waardoor die frames niet gelijkmatig kunnen worden weergegeven — beweging ziet er iets schokkerig uit.\n\nAutomatische framerate schakelt de tv tijdens het kijken naar <xliff:g id="target_hz">%3$d</xliff:g> Hz en zet hem daarna terug. Sommige tv\'s worden even zwart wanneer de frequentie verandert; je kunt dit weer uitzetten in Instellingen → Videospeler.</string>
+    <string name="player_frame_rate_prompt_description">Het speelt af met <xliff:g id="fps">%1$d</xliff:g> fps terwijl je tv op <xliff:g id="current_hz">%2$d</xliff:g> Hz draait, waardoor die frames niet gelijkmatig kunnen worden weergegeven — beweging ziet er iets schokkerig uit.\n\nAutomatische framerate schakelt de tv tijdens het kijken naar <xliff:g id="target_hz">%3$d</xliff:g> Hz en zet hem daarna terug. Sommige tv\'s worden even zwart wanneer de frequentie verandert; je kunt dit weer uitzetten in Instellingen → Beeld → Beeldfrequentie.</string>
     <string name="player_frame_rate_turn_on">Inschakelen</string>
     <string name="player_reason_live_fallback">Live-weergave overgeschakeld naar een fallback</string>
     <string name="player_reason_live_no_fallback">Live-weergave mislukt — er is geen fallback meer over</string>

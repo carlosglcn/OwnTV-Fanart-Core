@@ -380,6 +380,45 @@
     <string name="sports_switch_channel">ചാനൽ മാറ്റുക</string>
     <string name="sports_tab_fixtures">ഫിക്സ്ചറുകൾ</string>
     <string name="sports_tab_results">ഫലങ്ങൾ</string>
+    <string name="sports_tab_scores">സ്കോറുകൾ</string>
+    <string name="sports_tab_calendar">കലണ്ടർ</string>
+    <string name="sports_tab_leagues">ലീഗുകൾ</string>
+    <string name="sports_previous_month">മുൻ മാസം</string>
+    <string name="sports_next_month">അടുത്ത മാസം</string>
+    <string name="sports_next">അടുത്തത്: <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">അടുത്തത്</string>
+    <string name="sports_new_badge">പുതിയത്</string>
+    <string name="sports_no_table_series">പട്ടികയില്ല — സീരീസുകൾ ഓരോ ആഴ്ചയും മാറുന്നു</string>
+    <string name="sports_follow_league">ലീഗ് പിന്തുടരുക</string>
+    <string name="sports_unfollow_league">ലീഗ് പിന്തുടരുന്നത് നിർത്തുക</string>
+    <string name="sports_no_matches_on"><xliff:g id="day">%1$s</xliff:g>: നിങ്ങളുടെ കായിക ഇനങ്ങളിൽ മത്സരങ്ങളില്ല</string>
+    <string name="sports_nothing_on_day">ഈ ദിവസം ഒന്നുമില്ല</string>
+    <string name="sports_nothing_in_sport"><xliff:g id="sport">%1$s</xliff:g>: ഈ ദിവസം ഒന്നുമില്ല</string>
+    <string name="sports_change_leagues_hint">ക്രമീകരണങ്ങൾ → സ്പോർട്സ് എന്നതിൽ ലീഗുകൾ ചേർക്കുകയോ നീക്കം ചെയ്യുകയോ ചെയ്യുക</string>
+    <string name="sports_loading_month"><xliff:g id="month">%1$s</xliff:g> ലോഡ് ചെയ്യുന്നു…</string>
+    <string name="sports_offline_saved"><xliff:g id="time">%1$s</xliff:g> സംരക്ഷിച്ചത് കാണിക്കുന്നു — ESPN-ൽ എത്താനായില്ല</string>
+    <string name="sports_team_page">ടീം പേജ്</string>
+    <string name="sports_next_match">അടുത്ത മത്സരം</string>
+    <string name="sports_last_five">അവസാന അഞ്ച്</string>
+    <string name="sports_league_position">ലീഗിലെ സ്ഥാനം</string>
+    <string name="sports_in_my_teams">എന്റെ ടീമുകളിൽ</string>
+    <string name="sports_open_match_page">മത്സര പേജ് തുറക്കുക</string>
+    <string name="sports_open_team_page">ടീം പേജ് തുറക്കുക</string>
+    <string name="sports_my_teams_leagues">നിങ്ങളുടെ ടീമുകൾ കളിക്കുന്ന ലീഗുകൾ</string>
+    <string name="sports_tab_drivers">ഡ്രൈവർമാർ</string>
+    <string name="sports_tab_constructors">കൺസ്ട്രക്ടർമാർ</string>
+    <string name="sports_tab_races">റേസുകൾ</string>
+    <string name="sports_tab_rankings">റാങ്കിംഗ്</string>
+    <string name="sports_tab_matches">മത്സരങ്ങൾ</string>
+    <string name="sports_next_race_weekend">അടുത്ത റേസ് വാരാന്ത്യം</string>
+    <string name="sports_last_weekend">കഴിഞ്ഞ വാരാന്ത്യം</string>
+    <string name="sports_session_practice_1">പ്രാക്ടീസ് 1</string>
+    <string name="sports_session_practice_2">പ്രാക്ടീസ് 2</string>
+    <string name="sports_session_practice_3">പ്രാക്ടീസ് 3</string>
+    <string name="sports_session_sprint_qualifying">സ്പ്രിന്റ് യോഗ്യതാ റൗണ്ട്</string>
+    <string name="sports_session_qualifying">യോഗ്യതാ റൗണ്ട്</string>
+    <string name="sports_session_sprint">സ്പ്രിന്റ്</string>
+    <string name="sports_session_race">റേസ്</string>
     <string name="sports_table_team">ടീം</string>
     <string name="sports_table_played">ക</string>
     <string name="sports_table_won">ജ</string>
@@ -464,6 +503,12 @@
         <item quantity="other">ഓരോ <xliff:g id="count">%1$d</xliff:g> മണിക്കൂറിലും</item>
     </plurals>
     <string name="sports_auto_rebuild_app_start">ആപ്പ് തുറക്കുമ്പോഴെല്ലാം</string>
+    <string name="sports_calendar_refresh">കലണ്ടർ പുതുക്കൽ</string>
+    <string name="sports_calendar_refresh_description">സംരക്ഷിച്ച മാസങ്ങൾ വീണ്ടും എടുക്കുന്നതിന്റെ ഇടവേള</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="one">ഓരോ <xliff:g id="count">%1$d</xliff:g> ദിവസത്തിലും</item>
+        <item quantity="other">ഓരോ <xliff:g id="count">%1$d</xliff:g> ദിവസത്തിലും</item>
+    </plurals>
     <string name="sports_find_channels">ചാനലുകൾ കണ്ടെത്തുക</string>
     <string name="sports_find_channels_description">നിങ്ങളുടെ ഗൈഡിലും ചാനൽ പേരുകളിലും ഈ മത്സരം തിരയുന്നു. വലിയ പ്ലേലിസ്റ്റിൽ ഇതിന് അൽപ്പം സമയമെടുക്കാം.</string>
     <string name="sports_finding_channels">നിങ്ങളുടെ ചാനലുകൾ തിരയുന്നു…</string>

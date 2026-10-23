@@ -86,6 +86,7 @@
     <string name="player_time_remaining">−<xliff:g id="time">%1$s</xliff:g></string>
     <string name="player_switch_exo">Bytte till ExoPlayer</string>
     <string name="player_switch_mpv">Bytte till mpv</string>
+    <string name="player_smoothness_hint">Den här kanalen tappar bildrutor. Om du byter spelaren till mpv kan den spelas upp jämnare.</string>
     <string name="player_error_image_subtitle_audio">Bildbaserade undertexter är inte tillgängliga för videons ljudformat.</string>
     <string name="player_error_both_engines_exo_first">Uppspelningen misslyckades med båda videomotorerna (först ExoPlayer, sedan mpv). Filen kan vara skadad eller använda ett format som den här tv:n inte kan spela upp.</string>
     <string name="player_error_both_engines_mpv_first">Uppspelningen misslyckades med båda videomotorerna (mpv och ExoPlayer). Filen kan vara skadad eller använda ett format som den här tv:n inte kan spela upp. (<xliff:g id="error">%1$s</xliff:g>)</string>
@@ -267,7 +268,7 @@
     <string name="player_subtitles_search_language_description">Endast undertexter på detta språk visas i sökresultaten. Du kan fortfarande trycka på ”Alla språk” i resultaten för att se allt för en sökning.</string>
     <string name="player_subtitles_language_not_set">Inte valt</string>
     <string name="player_frame_rate_prompt_title">Den här kanalen kan bli ryckig</string>
-    <string name="player_frame_rate_prompt_description">Den spelar med <xliff:g id="fps">%1$d</xliff:g> fps medan din TV kör i <xliff:g id="current_hz">%2$d</xliff:g> Hz, vilket inte kan visa dessa bildrutor jämnt — rörelsen ser lite ryckig ut.\n\nAutomatisk bildfrekvens växlar TV:n till <xliff:g id="target_hz">%3$d</xliff:g> Hz medan du tittar och ställer tillbaka den efteråt. Vissa TV-apparater blir svarta en stund när frekvensen ändras; du kan stänga av det igen i Inställningar → Videospelare.</string>
+    <string name="player_frame_rate_prompt_description">Den spelar med <xliff:g id="fps">%1$d</xliff:g> fps medan din TV kör i <xliff:g id="current_hz">%2$d</xliff:g> Hz, vilket inte kan visa dessa bildrutor jämnt — rörelsen ser lite ryckig ut.\n\nAutomatisk bildfrekvens växlar TV:n till <xliff:g id="target_hz">%3$d</xliff:g> Hz medan du tittar och ställer tillbaka den efteråt. Vissa TV-apparater blir svarta en stund när frekvensen ändras; du kan stänga av det igen i Inställningar → Bild → Bildfrekvens.</string>
     <string name="player_frame_rate_turn_on">Aktivera</string>
     <string name="player_reason_live_fallback">Live-uppspelning växlade till en fallback</string>
     <string name="player_reason_live_no_fallback">Live-uppspelning misslyckades — ingen fallback återstår</string>

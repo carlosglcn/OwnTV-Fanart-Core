@@ -452,6 +452,45 @@
     <string name="sports_switch_channel">تغيير القناة</string>
     <string name="sports_tab_fixtures">المباريات القادمة</string>
     <string name="sports_tab_results">النتائج</string>
+    <string name="sports_tab_scores">مباشر</string>
+    <string name="sports_tab_calendar">التقويم</string>
+    <string name="sports_tab_leagues">الدوريات</string>
+    <string name="sports_previous_month">الشهر السابق</string>
+    <string name="sports_next_month">الشهر التالي</string>
+    <string name="sports_next">التالي: <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">التالي</string>
+    <string name="sports_new_badge">جديد</string>
+    <string name="sports_no_table_series">لا يوجد ترتيب — السلاسل تتغير كل أسبوع</string>
+    <string name="sports_follow_league">متابعة الدوري</string>
+    <string name="sports_unfollow_league">إلغاء متابعة الدوري</string>
+    <string name="sports_no_matches_on">لا مباريات في رياضاتك يوم <xliff:g id="day">%1$s</xliff:g></string>
+    <string name="sports_nothing_on_day">لا شيء في هذا اليوم</string>
+    <string name="sports_nothing_in_sport"><xliff:g id="sport">%1$s</xliff:g>: لا شيء في هذا اليوم</string>
+    <string name="sports_change_leagues_hint">أضف الدوريات أو أزلها من الإعدادات ← الرياضة</string>
+    <string name="sports_loading_month">جارٍ تحميل <xliff:g id="month">%1$s</xliff:g>…</string>
+    <string name="sports_offline_saved">يُعرض ما حُفظ <xliff:g id="time">%1$s</xliff:g> — تعذّر الوصول إلى ESPN</string>
+    <string name="sports_team_page">صفحة الفريق</string>
+    <string name="sports_next_match">المباراة التالية</string>
+    <string name="sports_last_five">آخر خمس مباريات</string>
+    <string name="sports_league_position">المركز في الدوري</string>
+    <string name="sports_in_my_teams">ضمن فرقي</string>
+    <string name="sports_open_match_page">فتح صفحة المباراة</string>
+    <string name="sports_open_team_page">فتح صفحة الفريق</string>
+    <string name="sports_my_teams_leagues">الدوريات التي تلعب فيها فرقك</string>
+    <string name="sports_tab_drivers">السائقون</string>
+    <string name="sports_tab_constructors">الصانعون</string>
+    <string name="sports_tab_races">السباقات</string>
+    <string name="sports_tab_rankings">التصنيف</string>
+    <string name="sports_tab_matches">المباريات</string>
+    <string name="sports_next_race_weekend">عطلة السباق القادمة</string>
+    <string name="sports_last_weekend">عطلة نهاية الأسبوع الماضية</string>
+    <string name="sports_session_practice_1">التجارب الحرة 1</string>
+    <string name="sports_session_practice_2">التجارب الحرة 2</string>
+    <string name="sports_session_practice_3">التجارب الحرة 3</string>
+    <string name="sports_session_sprint_qualifying">تأهيل السباق القصير</string>
+    <string name="sports_session_qualifying">التأهيل</string>
+    <string name="sports_session_sprint">السباق القصير</string>
+    <string name="sports_session_race">السباق</string>
     <string name="sports_table_team">الفريق</string>
     <string name="sports_table_played">لعب</string>
     <string name="sports_table_won">ف</string>
@@ -552,6 +591,16 @@
         <item quantity="other">كل <xliff:g id="count">%1$d</xliff:g> ساعة</item>
     </plurals>
     <string name="sports_auto_rebuild_app_start">عند كل تشغيل للتطبيق</string>
+    <string name="sports_calendar_refresh">تحديث التقويم</string>
+    <string name="sports_calendar_refresh_description">عدد مرات جلب الأشهر المحفوظة من جديد</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="zero">كل <xliff:g id="count">%1$d</xliff:g> يوم</item>
+        <item quantity="one">كل <xliff:g id="count">%1$d</xliff:g> يوم</item>
+        <item quantity="two">كل <xliff:g id="count">%1$d</xliff:g> يومين</item>
+        <item quantity="few">كل <xliff:g id="count">%1$d</xliff:g> أيام</item>
+        <item quantity="many">كل <xliff:g id="count">%1$d</xliff:g> يومًا</item>
+        <item quantity="other">كل <xliff:g id="count">%1$d</xliff:g> يوم</item>
+    </plurals>
     <string name="sports_find_channels">البحث عن القنوات</string>
     <string name="sports_find_channels_description">يبحث في دليلك وأسماء قنواتك عن هذه المباراة. قد يستغرق ذلك لحظة في قائمة تشغيل كبيرة.</string>
     <string name="sports_finding_channels">جارٍ البحث في قنواتك…</string>

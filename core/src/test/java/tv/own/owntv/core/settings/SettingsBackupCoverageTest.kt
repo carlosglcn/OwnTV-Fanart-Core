@@ -24,6 +24,8 @@ class SettingsBackupCoverageTest {
         "auto_frame_rate_reset_pre12", "metadata_match_heal_version", "stage_defaults_applied",
         // A fact about this device's decoders (tunneled playback failed here), not a choice.
         "tunneling_failed",
+        // The latency of this device's own outputs; another device's HDMI or Bluetooth path differs.
+        "audio_delay_by_output",
         "last_backup_at", "last_backup_bytes", "last_backup_encrypted", "last_backup_path",
         // When this device last asked for an update: restoring it elsewhere would claim a check that never ran.
         "last_update_check_at",
