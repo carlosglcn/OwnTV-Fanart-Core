@@ -3386,6 +3386,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	owntv_sports_reminders
 1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	tv.own.owntv.extra.SPORTS_MATCH
 1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	·
+1	json	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	no ranking
 3	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	\0
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	$it
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	${TeamNames.tokens(text).joinToString(" ")} | ${raw.joinToString(" ")}
