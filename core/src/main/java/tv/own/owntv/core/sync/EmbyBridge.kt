@@ -44,7 +44,10 @@ internal object EmbyBridge {
     private const val AUTH_FIELDS =
         "Client=\"OwnTV\", Device=\"OwnTV\", DeviceId=\"owntv-glcn\", Version=\"1.0\""
 
-    private const val FIELDS = "ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,Container,Genres,Overview,CommunityRating,BackdropImageTags,DateCreated,ProviderIds"
+    private const val FIELDS =
+        "ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId," +
+            "Container,Genres,Overview,CommunityRating,BackdropImageTags," +
+            "DateCreated,ProviderIds,RunTimeTicks,UserData"
 
     /**
      * `http(s)://user[:password]@host[:port][/path]` with no file name in the path → a possible server.
@@ -124,13 +127,13 @@ internal object EmbyBridge {
         }
     }
 
-    private fun items(s: Session, kind: String): List<JSONObject> {
+    private fun items(s: Session, kind: String, filters: String? = null): List<JSONObject> {
         val out = ArrayList<JSONObject>()
         var start = 0
         while (true) {
             val sort = if (kind == "Movie") "SortName" else "SeriesSortName,ParentIndexNumber,IndexNumber"
             val url = "${s.api}/Users/${s.userId}/Items?Recursive=true&IncludeItemTypes=$kind&Fields=$FIELDS" +
-                "&SortBy=$sort&IsMissing=false&StartIndex=$start&Limit=$PAGE"
+                "&SortBy=$sort&IsMissing=false&StartIndex=$start&Limit=$PAGE" + (filters?.let { f -> "&Filters=$f" } ?: "")
             val req = Request.Builder().url(url).header("X-Emby-Token", s.token).get().build()
             val page = client.newCall(req).execute().use { r ->
                 if (!r.isSuccessful) throw IOException("Emby: HTTP ${r.code}")
@@ -154,11 +157,7 @@ internal object EmbyBridge {
             if ((it.optJSONArray("BackdropImageTags")?.length() ?: 0) > 0) {
                 "${s.api}/Items/${it.getString("Id")}/Images/Backdrop?maxWidth=1280&api_key=${s.token}"
             } else null
-        fun stream(it: JSONObject): String {
-            val container = it.optString("Container").substringBefore(',').takeIf { c -> c.isNotBlank() }
-            return "${s.api}/Videos/${it.getString("Id")}/stream" +
-                (container?.let { c -> ".$c" } ?: "") + "?static=true&api_key=${s.token}"
-        }
+        fun stream(it: JSONObject): String = streamOf(s, it)
         /** ` key="value"` for the glcn-* details; nothing when the server has no value. */
         fun StringBuilder.extra(key: String, value: String?): StringBuilder {
             if (!value.isNullOrBlank()) append(' ').append(key).append("=\"").append(attr(value)).append('"')
@@ -184,6 +183,7 @@ internal object EmbyBridge {
             val label = if (year > 0) "$title ($year)" else title
             val group = m.optJSONArray("Genres")?.optString(0)?.takeIf { it.isNotBlank() } ?: MOVIES_GROUP
             val rating = m.optDouble("CommunityRating", Double.NaN).takeIf { !it.isNaN() && it > 0 }
+            tv.own.owntv.core.emby.EmbyWatchState.record(stream(m), m)
             sb.append("#EXTINF:-1 type=\"movie\" tvg-logo=\"").append(attr(image(m.getString("Id")))).append('"')
                 .extra("glcn-plot", m.optString("Overview"))
                 .extra("glcn-backdrop", backdrop(m))
@@ -205,6 +205,7 @@ internal object EmbyBridge {
             val seriesId = e.optString("SeriesId").takeIf { it.isNotBlank() }
             val series = seriesId?.let { shows[it] }
             val logo = seriesId?.let(::image) ?: image(e.getString("Id"))
+            tv.own.owntv.core.emby.EmbyWatchState.record(stream(e), e)
             sb.append("#EXTINF:-1 type=\"series\" tvg-logo=\"").append(attr(logo)).append('"')
                 .extra("glcn-plot", e.optString("Overview"))
                 .extra("glcn-series-plot", series?.optString("Overview"))
@@ -214,6 +215,28 @@ internal object EmbyBridge {
                 .append(stream(e)).append('\n')
         }
         sb.toString()
+    }
+
+    /** The stream URL the playlist gives an item — the key the watch state is matched on. */
+    private fun streamOf(s: Session, it: JSONObject): String {
+        val container = it.optString("Container").substringBefore(',').takeIf { c -> c.isNotBlank() }
+        return "${s.api}/Videos/${it.getString("Id")}/stream" +
+            (container?.let { c -> ".$c" } ?: "") + "?static=true&api_key=${s.token}"
+    }
+
+    /**
+     * glcn: only what the user has watched or half-watched — a few requests, no playlist — recorded in
+     * [tv.own.owntv.core.emby.EmbyWatchState]. Lets the app catch up with Emby between full syncs.
+     */
+    suspend fun readWatchState(t: Target): Boolean = withContext(Dispatchers.IO) {
+        val api = detect(t) ?: return@withContext false
+        val s = login(t, api)
+        for (filter in listOf("IsPlayed", "IsResumable")) for (kind in listOf("Movie", "Episode")) {
+            for (item in items(s, kind, filter)) {
+                tv.own.owntv.core.emby.EmbyWatchState.record(streamOf(s, item), item)
+            }
+        }
+        true
     }
 
     private const val PAGE = 1000

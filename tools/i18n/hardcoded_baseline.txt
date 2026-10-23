@@ -629,7 +629,6 @@
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	MediaBrowser $AUTH_FIELDS
 3	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Overview
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear
-1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,Container,Genres,Overview,CommunityRating,BackdropImageTags,DateCreated,ProviderIds
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProviderIds
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Series
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	SeriesId

@@ -17,6 +17,12 @@ import tv.own.owntv.core.database.entity.SeriesEntity
 /** Series browsing plus the Show → Season → Episode hierarchy. */
 @Dao
 interface SeriesDao {
+    @Query(
+        "SELECT e.id AS id, e.streamUrl AS streamUrl FROM episodes e " +
+            "JOIN series s ON s.id = e.seriesId WHERE s.sourceId = :sourceId",
+    )
+    suspend fun episodeIdsAndUrls(sourceId: Long): List<IdUrlRow>
+
     // --- Series ---
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertSeriesNormalized(series: List<SeriesEntity>)

@@ -12,11 +12,17 @@ import tv.own.owntv.core.catalog.withProviderCatalogMetadata
 import tv.own.owntv.core.database.entity.ContentHashProjection
 import tv.own.owntv.core.database.entity.MovieEntity
 
+/** glcn: an item id with its stream URL — what the Emby watch-state import matches on. */
+data class IdUrlRow(val id: Long, val streamUrl: String)
+
 /** One category's current item count for a source (re-sync delta check). */
 data class CategoryItemCount(val categoryId: Long, val itemCount: Int)
 
 @Dao
 interface MovieDao {
+    @Query("SELECT id, streamUrl FROM movies WHERE sourceId = :sourceId")
+    suspend fun idsAndUrls(sourceId: Long): List<IdUrlRow>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertAllNormalized(movies: List<MovieEntity>)
 

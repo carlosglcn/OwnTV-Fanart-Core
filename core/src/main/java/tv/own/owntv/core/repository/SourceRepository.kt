@@ -28,6 +28,7 @@ class SourceRepository(
     private val categoryDao: tv.own.owntv.core.database.dao.CategoryDao,
     private val playbackQuirkDao: tv.own.owntv.core.database.dao.PlaybackQuirkDao,
     private val playbackPrefsDao: tv.own.owntv.core.database.dao.PlaybackPrefsDao,
+    private val progressDao: tv.own.owntv.core.database.dao.ProgressDao,
 ) {
     fun observeSources(profileId: Long): Flow<List<SourceEntity>> = sourceDao.observeForProfile(profileId)
 
@@ -150,6 +151,11 @@ class SourceRepository(
                 .onSuccess { Log.i(TAG, "userData relink sourceId=${source.id} rows=${snapshot?.length() ?: 0} purge=$purge ms=${SystemClock.elapsedRealtime() - relinkStartedAt}") }
                 .onFailure { Log.w(TAG, "userData relink failed sourceId=${source.id} ms=${SystemClock.elapsedRealtime() - relinkStartedAt}", it) }
         }
+        // glcn: an Emby/Jellyfin server's own watched / half-watched state, written as resume points.
+        if (result is SyncResult.Success) {
+            runCatching { importEmbyWatchState(source.id) }
+                .onFailure { Log.w(TAG, "emby watch state import failed sourceId=${source.id}", it) }
+        }
         // Episodes are fetched lazily on show-open, never by the syncer, so a resync would otherwise
         // leave every already-opened show frozen on the episode list it cached the first time.
         // Zeroing the stamps makes the user's "I'll just resync" actually refresh them, on demand
@@ -160,6 +166,74 @@ class SourceRepository(
         }
         Log.i(TAG, "sync wrapper end sourceId=${source.id} result=${result.name()} totalMs=${SystemClock.elapsedRealtime() - startedAt}")
         return result
+    }
+
+    private val embyLastRead = java.util.concurrent.ConcurrentHashMap<Long, Long>()
+
+    /**
+     * glcn: between full syncs, asks each Emby/Jellyfin server of the profile what was watched there since
+     * and writes it as resume points. At most once every 2 minutes per source; quiet when there is no
+     * Emby source, no network or a wrong password. Returns how many sources changed something.
+     */
+    suspend fun refreshEmbyWatchState(profileId: Long): Int {
+        var touched = 0
+        for (sourceId in sourceDao.sourceIdsForProfile(profileId)) {
+            val src = sourceDao.getById(sourceId) ?: continue
+            if (src.type != tv.own.owntv.core.model.SourceType.M3U) continue
+            val target = tv.own.owntv.core.sync.EmbyBridge.parse(src.url) ?: continue
+            val now = SystemClock.elapsedRealtime()
+            if (now - (embyLastRead[sourceId] ?: -EMBY_READ_GAP_MS) < EMBY_READ_GAP_MS) continue
+            embyLastRead[sourceId] = now
+            runCatching {
+                if (tv.own.owntv.core.sync.EmbyBridge.readWatchState(target)) { if (importEmbyWatchState(sourceId) > 0) touched++ }
+            }.onFailure { Log.w(TAG, "emby watch refresh failed sourceId=$sourceId", it) }
+        }
+        return touched
+    }
+
+    /**
+     * glcn: copies what the Emby server knows into this app's resume points, for every profile that uses the
+     * source. Only ever adds: an item the server shows as watched is marked watched here, a half-watched one
+     * gets its position — and a local ✓ or a further position is never taken back.
+     */
+    private suspend fun importEmbyWatchState(sourceId: Long): Int {
+        val state = tv.own.owntv.core.emby.EmbyWatchState.drain()
+        if (state.isEmpty()) return 0
+        val profiles = sourceDao.profileIdsForSource(sourceId)
+        if (profiles.isEmpty()) return 0
+        val now = System.currentTimeMillis()
+        var written = 0
+        suspend fun apply(type: tv.own.owntv.core.model.MediaType, rows: List<tv.own.owntv.core.database.dao.IdUrlRow>) {
+            for (row in rows) {
+                val st = state[tv.own.owntv.core.emby.EmbyWatchState.key(row.streamUrl)] ?: continue
+                // Watched: the same 1/1 the manual "mark watched" writes when the length is unknown.
+                val duration = if (st.played) st.durationMs.takeIf { it > 0 } ?: 1L else st.durationMs
+                val position = if (st.played) duration else st.positionMs
+                if (duration <= 0L || position <= 0L) continue
+                for (pid in profiles) {
+                    val have = progressDao.get(pid, type, row.id)
+                    val haveDone = have != null && have.durationMs > 0 && have.positionMs >= (have.durationMs * 0.95f).toLong()
+                    val take = when {
+                        have == null -> true
+                        haveDone -> false
+                        st.played -> true
+                        else -> position > have.positionMs
+                    }
+                    if (!take) continue
+                    progressDao.save(
+                        tv.own.owntv.core.database.entity.PlaybackProgressEntity(
+                            profileId = pid, mediaType = type, itemId = row.id,
+                            positionMs = position, durationMs = duration, updatedAt = now,
+                        ),
+                    )
+                    written++
+                }
+            }
+        }
+        apply(tv.own.owntv.core.model.MediaType.MOVIE, movieDao.idsAndUrls(sourceId))
+        apply(tv.own.owntv.core.model.MediaType.EPISODE, seriesDao.episodeIdsAndUrls(sourceId))
+        Log.i(TAG, "emby watch state sourceId=$sourceId server=${state.size} written=$written")
+        return written
     }
 
     fun getLastSyncStats(sourceId: Long): tv.own.owntv.core.sync.SyncRunStats? =
@@ -185,6 +259,7 @@ class SourceRepository(
 
     private companion object {
         const val TAG = "SourceRepository"
+        const val EMBY_READ_GAP_MS = 120_000L
         /** Class-wide: SourceRepository is a Koin singleton, but keep the lock global regardless. */
         val relinkMutex = Mutex()
     }

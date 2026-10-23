@@ -228,7 +228,7 @@ val dataModule = module {
     // the delete in the same transaction. db, favoriteDao, historyDao, progressDao, customCategoryDao, userData
     single { tv.own.owntv.core.backup.UserDataWriter(get(), get(), get(), get(), get(), get()) }
     // sourceDao, syncManager, userDataResolver, channelDao, movieDao, seriesDao, categoryDao
-    single { SourceRepository(get(), get(), get(), get(), get(), get(), get(), playbackQuirkDao = get(), playbackPrefsDao = get()) }
+    single { SourceRepository(get(), get(), get(), get(), get(), get(), get(), playbackQuirkDao = get(), playbackPrefsDao = get(), progressDao = get()) }
     // settings, sourceRepository, channelDao, movieDao, seriesDao
     single { tv.own.owntv.core.nav.NavVisibility(get(), get(), get(), get(), get()) }
     single {

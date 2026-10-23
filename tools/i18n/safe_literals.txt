@@ -1217,6 +1217,7 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT categoryId, COUNT(*) AS itemCount FROM movies
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT categoryId, COUNT(*) AS itemCount FROM movies WHERE sourceId = :sourceId AND categoryId IS NOT NULL GROUP BY categoryId
 2	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT id, sourceId, categoryId, name, year, remoteId, sortOrder, canonicalTitle,
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT id, streamUrl FROM movies WHERE sourceId = :sourceId
 10	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT m.* FROM movies m
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT m.* FROM movies m INNER JOIN favorites f ON f.itemId = m.id AND f.mediaType = 'MOVIE'
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT m.* FROM movies m INNER JOIN watch_history h ON h.itemId = m.id AND h.mediaType = 'MOVIE'
@@ -1353,6 +1354,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	DELETE FROM series WHERE sourceId = :sourceId AND remoteId IS NULL
 3	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	INNER JOIN favorites f ON f.itemId = s.id AND f.mediaType = 'SERIES'
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	INNER JOIN favorites f ON f.itemId = s.id AND f.mediaType = 'SERIES' AND f.profileId = :profileId
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	JOIN series s ON s.id = e.seriesId WHERE s.sourceId = :sourceId
 5	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	LEFT JOIN content_order o ON o.itemId = s.id AND o.profileId = :profileId AND o.mediaType = 'SERIES' AND o.contextKey = :contextKey
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	LEFT JOIN watch_history h ON h.itemId = s.id AND h.mediaType = 'SERIES' AND h.profileId = :profileId
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	ORDER BY (CASE WHEN o.position IS NULL THEN 1 ELSE 0 END), o.position, f.addedAt DESC
@@ -1397,6 +1399,7 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT COUNT(DISTINCT seasonNumber) FROM episodes WHERE seriesId = :seriesId AND seasonNumber > 0
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT categoryId, COUNT(*) AS itemCount FROM series
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT categoryId, COUNT(*) AS itemCount FROM series WHERE sourceId = :sourceId AND categoryId IS NOT NULL GROUP BY categoryId
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT e.id AS id, e.streamUrl AS streamUrl FROM episodes e
 2	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT id, sourceId, categoryId, name, year, remoteId, sortOrder, canonicalTitle,
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT remoteId FROM series WHERE sourceId = :sourceId AND categoryId = :categoryId AND remoteId IS NOT NULL
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT remoteId FROM series WHERE sourceId = :sourceId AND categoryId IN (:categoryIds) AND remoteId IS NOT NULL
@@ -1690,6 +1693,10 @@
 1	json	core/src/main/java/tv/own/owntv/core/drm/DrmConfig.kt	scheme
 2	protocol	core/src/main/java/tv/own/owntv/core/drm/DrmConfig.kt	widevine
 1	technical	core/src/main/java/tv/own/owntv/core/drm/DrmConfig.kt	{
+1	json	core/src/main/java/tv/own/owntv/core/emby/EmbyWatchState.kt	PlaybackPositionTicks
+1	json	core/src/main/java/tv/own/owntv/core/emby/EmbyWatchState.kt	Played
+1	json	core/src/main/java/tv/own/owntv/core/emby/EmbyWatchState.kt	RunTimeTicks
+1	json	core/src/main/java/tv/own/owntv/core/emby/EmbyWatchState.kt	UserData
 2	empty	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	\0
 1	uri	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	$base&$body
 1	uri	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	$base?$body
@@ -2857,6 +2864,9 @@
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	SourceRepository
 1	technical	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	Success
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	core sync sourceId=${source.id} result=${result.name()} ms=${SystemClock.elapsedRealtime() - coreStartedAt}
+1	log	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	emby watch refresh failed sourceId=$sourceId
+1	log	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	emby watch state import failed sourceId=${source.id}
+1	log	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	emby watch state sourceId=$sourceId server=${state.size} written=$written
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	episode cache invalidate failed sourceId=${source.id}
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	sync wrapper end sourceId=${source.id} result=${result.name()} totalMs=${SystemClock.elapsedRealtime() - startedAt}
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	sync wrapper start sourceId=${source.id} type=${source.type} contentTypes=$contentTypes
@@ -4256,7 +4266,7 @@
 1	log	core/src/main/java/tv/own/owntv/core/sync/CatalogPriority.kt	CatalogPriority
 1	log	core/src/main/java/tv/own/owntv/core/sync/CatalogPriority.kt	pagesLeft=${row.lastPage - row.nextPage + 1}
 1	log	core/src/main/java/tv/own/owntv/core/sync/CatalogPriority.kt	priority category sourceId=${row.sourceId} type=${row.mediaType} cat=${row.categoryRemoteId}
-4	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	\0
+5	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	\0
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	",
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTINF:-1 type="movie" tvg-logo="
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTINF:-1 type="series" tvg-logo="
@@ -4268,6 +4278,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${s.api}/Videos/${it.getString("Id")}/stream
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${t.root}$prefix/System/Info/Public
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	%s S%02dE%02d %s
+1	uri	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	&Filters=$f
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	&SortBy=$sort&IsMissing=false&StartIndex=$start&Limit=$PAGE
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	.$c
 1	url	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	/emby
@@ -4276,18 +4287,23 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	AccessToken
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Authorization
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Container
+1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Container,Genres,Overview,CommunityRating,BackdropImageTags,
+1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DateCreated,ProviderIds,RunTimeTicks,UserData
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Emby: HTTP ${r.code}
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Emby: usuario o contraseña incorrectos
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Episode
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Episode
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Genres
 5	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Id
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IndexNumber
+1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IsPlayed
+1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IsResumable
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Items
-2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Movie
+3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Movie
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Name
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ParentIndexNumber
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Películas
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear
+1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Pw
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Series
 1	log	core/src/main/java/tv/own/owntv/core/sync/ImportFinalizer.kt	ImportFinalizer
