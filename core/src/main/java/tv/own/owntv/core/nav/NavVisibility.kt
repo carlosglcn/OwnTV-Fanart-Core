@@ -52,12 +52,12 @@ class NavVisibility(
         .flatMapLatest { pid ->
             if (pid < 0) flowOf(MainSection.allBrowse)
             else sourceRepository.observeSources(pid).flatMapLatest { sources ->
-                settings.defaultSourceId.flatMapLatest { defaultId -> capsFlow(sources, defaultId) }
+                settings.defaultSourceId.combine(settings.activeSourceSet) { d, set -> d to set }.flatMapLatest { (defaultId, set) -> capsFlow(sources, defaultId, set) }
             }
         }
 
-    private fun capsFlow(sources: List<SourceEntity>, defaultId: Long): Flow<Set<MainSection>> {
-        val scoped = if (defaultId > 0) sources.filter { it.id == defaultId } else sources
+    private fun capsFlow(sources: List<SourceEntity>, defaultId: Long, set: Set<Long> = emptySet()): Flow<Set<MainSection>> {
+        val scoped = if (set.isNotEmpty()) sources.filter { it.id in set }.ifEmpty { sources } else if (defaultId > 0) sources.filter { it.id == defaultId } else sources
         if (scoped.isEmpty()) return flowOf(MainSection.dynamicVisible(hasLive = false, hasMovies = false, hasSeries = false))
         val liveIds = scoped.filter { it.syncLive }.map { it.id }
         val movieIds = scoped.filter { it.syncMovies }.map { it.id }

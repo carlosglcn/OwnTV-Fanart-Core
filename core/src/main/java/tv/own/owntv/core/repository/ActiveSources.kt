@@ -49,8 +49,10 @@ fun activeProfileSources(
             if (pid < 0) {
                 flowOf(ActiveProfileSources(pid, emptyList()))
             } else {
-                combine(sourceDao.observeForProfile(pid), settings.defaultSourceId) { srcs, defaultId ->
-                    val filtered = if (defaultId > 0 && srcs.any { it.id == defaultId }) {
+                combine(sourceDao.observeForProfile(pid), settings.defaultSourceId, settings.activeSourceSet) { srcs, defaultId, set ->
+                    val filtered = if (set.isNotEmpty() && srcs.any { it.id in set }) {
+                        srcs.filter { it.id in set }
+                    } else if (defaultId > 0 && srcs.any { it.id == defaultId }) {
                         srcs.filter { it.id == defaultId }
                     } else {
                         srcs
@@ -94,7 +96,10 @@ suspend fun activeSourceIds(
 ): List<Long> {
     val all = sourceDao.observeForProfile(profileId).first()
     val defaultId = settings.defaultSourceId.first()
-    val filtered = if (defaultId > 0 && all.any { it.id == defaultId }) {
+    val set = settings.activeSourceSet.first()
+    val filtered = if (set.isNotEmpty() && all.any { it.id in set }) {
+        all.filter { it.id in set }
+    } else if (defaultId > 0 && all.any { it.id == defaultId }) {
         all.filter { it.id == defaultId }
     } else {
         all

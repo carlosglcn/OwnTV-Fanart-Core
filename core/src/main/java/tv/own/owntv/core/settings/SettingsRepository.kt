@@ -354,6 +354,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val FOCUS_HIGHLIGHT_WIDTH = intPreferencesKey("focus_highlight_width")
         val ACTIVE_PROFILE = longPreferencesKey("active_profile_id")
         val DEFAULT_SOURCE = longPreferencesKey("default_source_id")
+        val ACTIVE_SOURCE_SET = stringPreferencesKey("active_source_set")
         val DOWNLOAD_ROOT = stringPreferencesKey("download_root")
         val REFRESH_SOURCE_IDS = stringSetPreferencesKey("refresh_source_ids")
         // Per-source auto-refresh selections (JSON maps: { "<sourceId>": "<EnumName>" }). Replace the
@@ -2873,7 +2874,21 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     val defaultSourceId: Flow<Long> = prefsFlow { it[Keys.DEFAULT_SOURCE] ?: -1L }
 
     suspend fun setDefaultSource(id: Long) {
-        context.dataStore.edit { it[Keys.DEFAULT_SOURCE] = id }
+        context.dataStore.edit { it[Keys.DEFAULT_SOURCE] = id; it.remove(Keys.ACTIVE_SOURCE_SET) }
+    }
+
+    /** glcn: several playlists shown together (ids). Empty = [defaultSourceId] decides; only ever 2+ ids. */
+    val activeSourceSet: Flow<Set<Long>> = prefsFlow {
+        (it[Keys.ACTIVE_SOURCE_SET] ?: "").split(',').mapNotNull { s -> s.toLongOrNull() }.toSet()
+    }
+
+    /** glcn: choose which playlists show — none or one reduce to the single filter, 2+ are kept as a set. */
+    suspend fun setActiveSources(ids: Set<Long>) {
+        if (ids.size < 2) { setDefaultSource(ids.firstOrNull() ?: -1L); return }
+        context.dataStore.edit {
+            it[Keys.DEFAULT_SOURCE] = -1L
+            it[Keys.ACTIVE_SOURCE_SET] = ids.sorted().joinToString(",")
+        }
     }
 
     /** User-chosen download base folder; blank = app-specific storage. */
