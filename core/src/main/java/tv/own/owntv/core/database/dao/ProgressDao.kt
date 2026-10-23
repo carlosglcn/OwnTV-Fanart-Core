@@ -42,6 +42,19 @@ interface ProgressDao {
     @Query("SELECT * FROM playback_progress WHERE profileId = :profileId AND mediaType = :type AND itemId = :itemId")
     fun observe(profileId: Long, type: MediaType, itemId: Long): Flow<PlaybackProgressEntity?>
 
+    /**
+     * glcn: the shows this profile has watched to the end — every episode the library holds for them is at
+     * 95% or more. Looked at only for shows that have some progress, so the query stays cheap.
+     */
+    @Query(
+        "SELECT e.seriesId FROM episodes e LEFT JOIN playback_progress p ON p.itemId = e.id AND p.profileId = :profileId " +
+            "AND p.mediaType = 'EPISODE' AND p.durationMs > 0 AND p.positionMs >= p.durationMs * 0.95 " +
+            "WHERE e.seriesId IN (SELECT e2.seriesId FROM episodes e2 JOIN playback_progress p2 ON p2.itemId = e2.id " +
+            "AND p2.profileId = :profileId AND p2.mediaType = 'EPISODE') " +
+            "GROUP BY e.seriesId HAVING COUNT(p.id) = COUNT(*)",
+    )
+    fun observeCompletedSeriesIds(profileId: Long): Flow<List<Long>>
+
     @Query("SELECT * FROM playback_progress WHERE profileId = :profileId AND mediaType = :type AND itemId = :itemId")
     suspend fun get(profileId: Long, type: MediaType, itemId: Long): PlaybackProgressEntity?
 

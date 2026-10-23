@@ -1288,6 +1288,8 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	(mediaType = 'SERIES' AND itemId NOT IN (SELECT id FROM series))
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	)
 4	sql	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	AND itemId IN (SELECT id FROM episodes WHERE seriesId = :seriesId)
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	AND p.mediaType = 'EPISODE' AND p.durationMs > 0 AND p.positionMs >= p.durationMs * 0.95
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	AND p2.profileId = :profileId AND p2.mediaType = 'EPISODE')
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	COALESCE(c.name, m.name, s.name) AS name,
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	COALESCE(c.remoteId, m.remoteId, s.remoteId, e.remoteId) AS remoteId,
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	COALESCE(c.sourceId, m.sourceId, s.sourceId, episodeSeries.sourceId) AS sourceId,
@@ -1300,6 +1302,7 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	DELETE FROM playback_progress WHERE profileId = :profileId AND mediaType = :type AND itemId = :itemId AND updatedAt <= :at
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	FROM playback_progress p
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	FROM playback_progress p JOIN episodes e ON e.id = p.itemId
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	GROUP BY e.seriesId HAVING COUNT(p.id) = COUNT(*)
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	LEFT JOIN channels c ON p.mediaType = 'LIVE' AND p.itemId = c.id
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	LEFT JOIN episodes e ON p.mediaType = 'EPISODE' AND p.itemId = e.id
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	LEFT JOIN movies m ON p.mediaType = 'MOVIE' AND p.itemId = m.id
@@ -1314,11 +1317,13 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	SELECT * FROM playback_progress WHERE profileId = :profileId AND mediaType = :type
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	SELECT * FROM playback_progress WHERE profileId = :profileId AND mediaType = :type AND itemId = :itemId
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	SELECT e.seriesId AS seriesId, p.positionMs AS positionMs, p.durationMs AS durationMs,
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	SELECT e.seriesId FROM episodes e LEFT JOIN playback_progress p ON p.itemId = e.id AND p.profileId = :profileId
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	SELECT itemId FROM playback_progress
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	SELECT itemId FROM playback_progress WHERE profileId = :profileId AND mediaType = 'EPISODE'
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	SELECT p.profileId AS profileId, p.mediaType AS mediaType, p.itemId AS itemId,
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	UPDATE playback_progress SET positionMs = :positionMs, durationMs = :durationMs, updatedAt = :at
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	WHERE c.sourceId = :sourceId OR m.sourceId = :sourceId OR s.sourceId = :sourceId OR episodeSeries.sourceId = :sourceId
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	WHERE e.seriesId IN (SELECT e2.seriesId FROM episodes e2 JOIN playback_progress p2 ON p2.itemId = e2.id
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	WHERE p.profileId = :profileId AND p.mediaType = 'EPISODE' GROUP BY e.seriesId
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	WHERE profileId = :profileId AND mediaType = 'EPISODE'
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ProgressDao.kt	WHERE profileId = :profileId AND mediaType = :type AND itemId = :itemId AND updatedAt < :at
