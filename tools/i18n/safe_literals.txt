@@ -3469,6 +3469,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	esporte
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	euroleague
 2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	europa
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	f1
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	fifa
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	football
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	football americain
@@ -3689,7 +3690,7 @@
 1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Euroliga
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Europa League
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	European Challenge Cup
-1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	F1
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	F1
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	FA Cup
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	FIBA World Cup
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	FIFA Club World Cup
@@ -3830,7 +3831,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	esp.copa_del_rey
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	esp.super_cup
 1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	eur
-1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	f1
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	f1
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	fiba
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	fifa.cwc
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	fifa.friendly

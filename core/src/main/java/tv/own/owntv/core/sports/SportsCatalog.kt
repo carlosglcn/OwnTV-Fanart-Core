@@ -190,6 +190,8 @@ object SportsCatalog {
     private val ALSO_CALLED = mapOf(
         League.keyOf(Sport.BASKETBALL, BasketDataSource.ACB) to listOf("Liga Endesa", "ACB"),
         League.keyOf(Sport.BASKETBALL, BasketDataSource.EUROLEAGUE) to listOf("Euroliga", "Turkish Airlines EuroLeague", "Euroleague"),
+        // A guide calls the series "Mundial F1": its own word, which "Formula 1" never contains once digits are dropped.
+        League.keyOf(Sport.RACING, "f1") to listOf("F1"),
     )
 
     /** The sports that have something in the catalogue, in chip order. */
