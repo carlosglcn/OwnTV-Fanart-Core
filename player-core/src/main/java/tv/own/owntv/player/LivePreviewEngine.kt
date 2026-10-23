@@ -3460,6 +3460,15 @@ class LivePreviewEngine(
             .setTrackSelector(trackSelector)
             .setMediaSourceFactory(DefaultMediaSourceFactory(httpDataSourceFor(currentUa)))
             .setLoadControl(loadControl)
+            // glcn: a multi-quality (HLS) channel started on the lowest rung until a measurement said
+            // otherwise — a zap is too short for that, so it stayed soft where mpv, which opens on the
+            // best rung, was sharp. Open on the top estimate; the first real measurement steps it down
+            // on a link that cannot hold it. Single-quality streams have no rungs and are unaffected.
+            .setBandwidthMeter(
+                androidx.media3.exoplayer.upstream.DefaultBandwidthMeter.Builder(context)
+                    .setInitialBitrateEstimate(60_000_000L)
+                    .build(),
+            )
             .build()
             .apply {
                 setWakeMode(if (backgroundPlayback) C.WAKE_MODE_NETWORK else C.WAKE_MODE_NONE)
