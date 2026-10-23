@@ -229,7 +229,7 @@
 12	json	core/src/main/java/tv/own/owntv/core/backup/UserDataResolver.kt	src
 5	json	core/src/main/java/tv/own/owntv/core/backup/UserDataResolver.kt	srid
 16	json	core/src/main/java/tv/own/owntv/core/backup/UserDataResolver.kt	t
-1	json	core/src/main/java/tv/own/owntv/core/backup/UserDataWriter.kt	fav
+2	json	core/src/main/java/tv/own/owntv/core/backup/UserDataWriter.kt	fav
 4	json	core/src/main/java/tv/own/owntv/core/backup/UserDataWriter.kt	his
 1	json	core/src/main/java/tv/own/owntv/core/backup/UserDataWriter.kt	member
 3	json	core/src/main/java/tv/own/owntv/core/backup/UserDataWriter.kt	prog
@@ -1098,6 +1098,8 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	COALESCE(c.remoteId, m.remoteId, s.remoteId, e.remoteId) AS remoteId,
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	COALESCE(c.sourceId, m.sourceId, s.sourceId, episodeSeries.sourceId) AS sourceId,
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	DELETE FROM favorites WHERE
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	DELETE FROM favorites WHERE profileId = :profileId
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	DELETE FROM favorites WHERE profileId = :profileId AND mediaType = :type
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	DELETE FROM favorites WHERE profileId = :profileId AND mediaType = :type AND itemId = :itemId
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	DELETE FROM favorites WHERE profileId = :profileId AND mediaType = :type AND itemId = :itemId AND (
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	DELETE FROM favorites WHERE profileId = :profileId AND mediaType = :type AND itemId = :itemId AND addedAt <= :at
@@ -1108,6 +1110,8 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	LEFT JOIN series episodeSeries ON e.seriesId = episodeSeries.id
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	LEFT JOIN series s ON f.mediaType = 'SERIES' AND f.itemId = s.id
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	SELECT * FROM favorites
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	SELECT * FROM favorites WHERE profileId = :profileId
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	SELECT * FROM favorites WHERE profileId = :profileId AND mediaType = :type
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	SELECT COUNT(*) FROM favorites WHERE profileId = :profileId AND mediaType = :type
 2	sql	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	SELECT EXISTS(SELECT 1 FROM favorites WHERE profileId = :profileId AND mediaType = :type AND itemId = :itemId)
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	SELECT addedAt FROM favorites WHERE profileId = :profileId AND mediaType = :type AND itemId = :itemId

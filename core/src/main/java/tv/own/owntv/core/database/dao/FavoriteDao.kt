@@ -14,6 +14,19 @@ interface FavoriteDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun add(favorite: FavoriteEntity)
 
+    /** glcn: "Clear favourites" — one profile's favourites, all or one type. */
+    @Query("SELECT * FROM favorites WHERE profileId = :profileId")
+    suspend fun getForProfile(profileId: Long): List<FavoriteEntity>
+
+    @Query("SELECT * FROM favorites WHERE profileId = :profileId AND mediaType = :type")
+    suspend fun getForProfileType(profileId: Long, type: MediaType): List<FavoriteEntity>
+
+    @Query("DELETE FROM favorites WHERE profileId = :profileId")
+    suspend fun clearProfile(profileId: Long)
+
+    @Query("DELETE FROM favorites WHERE profileId = :profileId AND mediaType = :type")
+    suspend fun clearProfileType(profileId: Long, type: MediaType)
+
     @Query("DELETE FROM favorites WHERE profileId = :profileId AND mediaType = :type AND itemId = :itemId")
     suspend fun remove(profileId: Long, type: MediaType, itemId: Long)
 

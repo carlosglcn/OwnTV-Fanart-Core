@@ -879,4 +879,9 @@
     <string name="glcn_zap_views_title">Zapping list views</string>
     <string name="glcn_zap_views_desc">Views you switch between with ▶ in the channel list</string>
     <string name="glcn_zap_view_posters">Posters</string>
+    <string name="glcn_remove_from_recent">Remove from Recent channels</string>
+    <string name="glcn_clear_favorites">Clear favorites</string>
+    <string name="glcn_all_favorites">All favorites</string>
+    <string name="glcn_choose_favorites">Choose what to remove for this profile. Playlists, history and downloads are not affected.</string>
+    <string name="glcn_clear_favorites_confirm">Clear <xliff:g id="scope">%1$s</xliff:g> favorites?</string>
 </resources>

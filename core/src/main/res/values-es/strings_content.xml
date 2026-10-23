@@ -542,4 +542,9 @@
     <string name="glcn_zap_views_title">Vistas de la lista de canales</string>
     <string name="glcn_zap_views_desc">Vistas que alternas con ▶ en la lista de canales</string>
     <string name="glcn_zap_view_posters">Pósters</string>
+    <string name="glcn_remove_from_recent">Quitar de Canales recientes</string>
+    <string name="glcn_clear_favorites">Borrar favoritos</string>
+    <string name="glcn_all_favorites">Todos los favoritos</string>
+    <string name="glcn_choose_favorites">Elige qué quieres eliminar de este perfil. Las listas de reproducción, el historial y las descargas no se verán afectados.</string>
+    <string name="glcn_clear_favorites_confirm">¿Borrar los favoritos de <xliff:g id="scope">%1$s</xliff:g>\?</string>
 </resources>

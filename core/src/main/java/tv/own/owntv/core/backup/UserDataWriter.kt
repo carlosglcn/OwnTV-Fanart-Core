@@ -111,4 +111,15 @@ class UserDataWriter(
         }
         userData.pruneTombstones()
     }
+
+    /**
+     * glcn: clear a profile's favourites — everything, or one type. Each deletion is recorded, so a local
+     * sync does not hand the cleared favourites straight back.
+     */
+    suspend fun clearFavorites(profileId: Long, type: MediaType? = null) = db.transaction {
+        val rows = if (type == null) favoriteDao.getForProfile(profileId) else favoriteDao.getForProfileType(profileId, type)
+        rows.forEach { userData.recordDeletion(profileId, "fav", it.mediaType, it.itemId) }
+        if (type == null) favoriteDao.clearProfile(profileId) else favoriteDao.clearProfileType(profileId, type)
+        userData.pruneTombstones()
+    }
 }
