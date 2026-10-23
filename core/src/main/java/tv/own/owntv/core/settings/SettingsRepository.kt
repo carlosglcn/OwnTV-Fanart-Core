@@ -2879,7 +2879,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
 
     /** glcn: several playlists shown together (ids). Empty = [defaultSourceId] decides; only ever 2+ ids. */
     val activeSourceSet: Flow<Set<Long>> = prefsFlow {
-        (it[Keys.ACTIVE_SOURCE_SET] ?: "").split(',').mapNotNull { s -> s.toLongOrNull() }.toSet()
+        (it[Keys.ACTIVE_SOURCE_SET].orEmpty()).split(',').mapNotNull { s -> s.toLongOrNull() }.toSet()
     }
 
     /** glcn: choose which playlists show — none or one reduce to the single filter, 2+ are kept as a set. */
