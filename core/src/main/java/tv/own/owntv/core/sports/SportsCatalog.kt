@@ -93,8 +93,9 @@ object SportsCatalog {
         // Basketball
         League(Sport.BASKETBALL, "nba", "NBA", country = "US"),
         League(Sport.BASKETBALL, "wnba", "WNBA", country = "US"),
-        // glcn: not on ESPN; served by TheSportsDbSource.
-        League(Sport.BASKETBALL, TheSportsDbSource.ACB, "Liga ACB", "ACB", "ES"),
+        // glcn: not on ESPN; served by BasketDataSource.
+        League(Sport.BASKETBALL, BasketDataSource.ACB, "Liga ACB", "ACB", "ES"),
+        League(Sport.BASKETBALL, BasketDataSource.EUROLEAGUE, "EuroLeague", "EL", "EU"),
         League(Sport.BASKETBALL, "mens-college-basketball", "NCAA Basketball", "NCAAM", "US"),
         League(Sport.BASKETBALL, "womens-college-basketball", "NCAA Women's Basketball", "NCAAW", "US"),
         League(Sport.BASKETBALL, "fiba", "FIBA World Cup"),
@@ -187,7 +188,8 @@ object SportsCatalog {
 
     /** glcn: other names guides use for a competition (the ACB is "Liga Endesa" on TV). */
     private val ALSO_CALLED = mapOf(
-        League.keyOf(Sport.BASKETBALL, TheSportsDbSource.ACB) to listOf("Liga Endesa", "ACB"),
+        League.keyOf(Sport.BASKETBALL, BasketDataSource.ACB) to listOf("Liga Endesa", "ACB"),
+        League.keyOf(Sport.BASKETBALL, BasketDataSource.EUROLEAGUE) to listOf("Euroliga", "Turkish Airlines EuroLeague", "Euroleague"),
     )
 
     /** The sports that have something in the catalogue, in chip order. */

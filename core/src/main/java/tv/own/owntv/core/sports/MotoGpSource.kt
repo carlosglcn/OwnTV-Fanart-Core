@@ -146,10 +146,10 @@ class MotoGpSource(client: OkHttpClient) {
 class CompositeSportsSource(
     private val espn: SportsSource,
     private val motoGp: MotoGpSource,
-    private val tsdb: TheSportsDbSource? = null,
+    private val tsdb: BasketDataSource? = null,
 ) : SportsSource {
     private fun League.isMotoGp() = slug == MOTOGP
-    private fun League.isTsdb() = tsdb != null && slug == TheSportsDbSource.ACB
+    private fun League.isTsdb() = tsdb != null && slug in BasketDataSource.SLUGS
 
     override suspend fun scoreboard(league: League, day: LocalDate?): List<Match> =
         when {
@@ -161,12 +161,16 @@ class CompositeSportsSource(
     override suspend fun summary(match: Match): MatchSummary =
         when {
             match.leagueSlug == MOTOGP -> motoGp.summary(match)
-            match.leagueSlug == TheSportsDbSource.ACB -> MatchSummary(match, emptyList(), emptyList(), emptyList())
+            match.leagueSlug in BasketDataSource.SLUGS -> tsdb!!.summary(match)
             else -> espn.summary(match)
         }
 
     override suspend fun standings(league: League): StandingsTable =
-        if (league.isMotoGp() || league.isTsdb()) throw IllegalArgumentException("no table") else espn.standings(league)
+        when {
+            league.isTsdb() -> tsdb!!.standings(league)
+            league.isMotoGp() -> throw IllegalArgumentException("no table")
+            else -> espn.standings(league)
+        }
 
     override suspend fun teams(league: League): List<Team> =
         when {
@@ -188,7 +192,11 @@ class CompositeSportsSource(
         if (league.isMotoGp() || league.isTsdb()) throw IllegalArgumentException("no ranking") else espn.rankings(league)
 
     override suspend fun teamSchedule(league: League, teamId: String, fixtures: Boolean): List<Match> =
-        if (league.isMotoGp() || league.isTsdb()) emptyList() else espn.teamSchedule(league, teamId, fixtures)
+        when {
+            league.isTsdb() -> tsdb!!.teamSchedule(league, teamId, fixtures)
+            league.isMotoGp() -> emptyList()
+            else -> espn.teamSchedule(league, teamId, fixtures)
+        }
 
     companion object { const val MOTOGP = "motogp" }
 }
