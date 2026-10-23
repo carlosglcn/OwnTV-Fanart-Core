@@ -41,6 +41,24 @@ class TheSportsDbSource(client: OkHttpClient) {
             .filter { Instant.ofEpochMilli(it.startMs).atZone(zone).toLocalDate() == date }
     }
 
+    /**
+     * glcn: a league's [month] — the whole season's list from the feed, narrowed to the month, plus the
+     * next/last games so a feed that cuts the season short still shows what it has. The season list is
+     * kept for six hours: opening the calendar never costs more than one call.
+     */
+    suspend fun month(league: League, month: java.time.YearMonth): MonthBoard {
+        val id = LEAGUE_IDS[league.slug] ?: return MonthBoard(emptyList(), null)
+        val season = if (month.monthValue >= 8) "${month.year}-${month.year + 1}" else "${month.year - 1}-${month.year}"
+        val events = runCatching { rows("eventsseason.php?id=$id&s=$season", "events", SEASON_CACHE_MS) }.getOrDefault(emptyList()) +
+            rows("eventsnextleague.php?id=$id", "events") + rows("eventspastleague.php?id=$id", "results")
+        val now = System.currentTimeMillis()
+        val matches = events.mapNotNull { e -> toMatch(league, e, now) }
+            .distinctBy { it.id }
+            .filter { java.time.YearMonth.from(Instant.ofEpochMilli(it.startMs).atZone(zone)) == month }
+            .sortedBy { it.startMs }
+        return MonthBoard(matches, null)
+    }
+
     suspend fun teams(league: League): List<Team> {
         val id = LEAGUE_IDS[league.slug] ?: return emptyList()
         return rows("lookup_all_teams.php?id=$id", "teams").mapNotNull { t ->
@@ -105,9 +123,9 @@ class TheSportsDbSource(client: OkHttpClient) {
         return local?.toInstant(ZoneOffset.UTC)?.toEpochMilli()
     }
 
-    private suspend fun rows(path: String, key: String): List<JSONObject> {
+    private suspend fun rows(path: String, key: String, keepMs: Long = CACHE_MS): List<JSONObject> {
         val now = System.currentTimeMillis()
-        cache[path]?.takeIf { now - it.first < CACHE_MS }?.let { return it.second }
+        cache[path]?.takeIf { now - it.first < keepMs }?.let { return it.second }
         val body = withContext(Dispatchers.IO) {
             http.newCall(Request.Builder().url("$BASE/$path").build()).execute().use { r ->
                 if (!r.isSuccessful) throw SportsHttpException(r.code)
@@ -126,6 +144,7 @@ class TheSportsDbSource(client: OkHttpClient) {
         private const val BASE = "https://www.thesportsdb.com/api/v1/json/3"
         private const val TIMEOUT_SECONDS = 10L
         private const val CACHE_MS = 10 * 60_000L
+        private const val SEASON_CACHE_MS = 6 * 60 * 60_000L
         private const val LENGTH_MS = 150 * 60_000L
     }
 }

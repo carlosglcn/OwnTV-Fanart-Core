@@ -178,7 +178,11 @@ class CompositeSportsSource(
     // glcn: the interface grew a month, rankings and a team's schedule; MotoGP and the ACB feed have neither,
     // so they answer with what their scoreboard holds, no ranking, and no team schedule.
     override suspend fun month(league: League, month: java.time.YearMonth): MonthBoard =
-        if (league.isMotoGp() || league.isTsdb()) MonthBoard(scoreboard(league, null), null) else espn.month(league, month)
+        when {
+            league.isTsdb() -> tsdb!!.month(league, month)
+            league.isMotoGp() -> MonthBoard(scoreboard(league, null), null)
+            else -> espn.month(league, month)
+        }
 
     override suspend fun rankings(league: League): Ranking =
         if (league.isMotoGp() || league.isTsdb()) throw IllegalArgumentException("no ranking") else espn.rankings(league)

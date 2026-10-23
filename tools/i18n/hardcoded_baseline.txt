@@ -542,9 +542,6 @@
 1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	Z
 1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	acb
 1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	dateEvent
-1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	events
-1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	eventsnextleague.php?id=$id
-1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	eventspastleague.php?id=$id
 1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	https://www.thesportsdb.com/api/v1/json/3
 1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	idAwayTeam
 1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	idEvent
@@ -554,7 +551,6 @@
 1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	intHomeScore
 1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	intRound
 1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	lookup_all_teams.php?id=$id
-1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	results
 1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strAwayTeam
 1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strAwayTeamBadge
 1	core/src/main/java/tv/own/owntv/core/sports/TheSportsDbSource.kt	strBadge
