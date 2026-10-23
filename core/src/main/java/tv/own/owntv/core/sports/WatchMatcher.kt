@@ -5,6 +5,7 @@ import tv.own.owntv.core.database.entity.ChannelEntity
 import tv.own.owntv.core.epg.EpgMatcher
 import tv.own.owntv.core.live.ProviderTags
 import tv.own.owntv.core.sports.model.Match
+import tv.own.owntv.core.sports.model.Sport
 
 /** Why a channel is listed under "Watch live", best first. */
 enum class WatchTier { GUIDE, EVENT, REMEMBERED, LIKELY }
@@ -64,8 +65,11 @@ object WatchMatcher {
 
     /** A match prepared once: its sides' and competition's name keys. */
     class Keys(val match: Match) {
-        val home: TeamNames.Key? = match.home?.team?.let(TeamNames::keyOf)
-        val away: TeamNames.Key? = match.away?.team?.let(TeamNames::keyOf)
+        // glcn: a racing session has no sides — the drivers on its podium are never in the guide's title —
+        // so it is found by its competition alone, also once it is live and ESPN lists the leaders.
+        private val sided = match.sport != Sport.RACING
+        val home: TeamNames.Key? = match.home?.team?.takeIf { sided }?.let(TeamNames::keyOf)
+        val away: TeamNames.Key? = match.away?.team?.takeIf { sided }?.let(TeamNames::keyOf)
         val competitionNames: List<String> = SportsCatalog.competitionNames(match)
         val league: TeamNames.Key = TeamNames.keyOfName(*competitionNames.toTypedArray())
         val broadcasters: List<TeamNames.Key> = match.broadcasts.map { TeamNames.keyOfName(it.name) }
@@ -84,7 +88,7 @@ object WatchMatcher {
 
         /** Words for a channel full-text search: one team's word is enough to find "Frankfurt v Köln". */
         val searchWords: List<String> = buildList {
-            listOfNotNull(match.home?.team, match.away?.team).forEach { t ->
+            if (sided) listOfNotNull(match.home?.team, match.away?.team).forEach { t ->
                 addAll(asciiWords(t.shortName)); addAll(asciiWords(t.name))
             }
         }.distinct()
