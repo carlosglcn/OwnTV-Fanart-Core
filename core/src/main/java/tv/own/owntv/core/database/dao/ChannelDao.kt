@@ -68,6 +68,13 @@ interface ChannelDao {
     @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND name = :name COLLATE NOCASE ORDER BY sourceId LIMIT 1")
     suspend fun findByNameAny(sourceIds: List<Long>, name: String): ChannelEntity?
 
+    /** glcn: candidates for "the same channel elsewhere in this playlist" — by guide id or a word of the name. */
+    @Query(
+        "SELECT * FROM channels WHERE sourceId = :sourceId AND " +
+            "(LOWER(TRIM(epgChannelId)) = :epgKey OR name LIKE '%' || :token || '%' COLLATE NOCASE) LIMIT 300",
+    )
+    suspend fun siblingCandidates(sourceId: Long, epgKey: String, token: String): List<ChannelEntity>
+
     /** Channels whose own guide id is one of [epgKeys] (normalised lower+trim) — Search's "On TV". */
     @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND LOWER(TRIM(epgChannelId)) IN (:epgKeys)")
     suspend fun byEpgKeys(sourceIds: List<Long>, epgKeys: List<String>): List<ChannelEntity>

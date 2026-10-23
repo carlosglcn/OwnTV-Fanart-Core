@@ -909,6 +909,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/CategoryDao.kt	SELECT categories.* FROM categories
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/CategoryDao.kt	SELECT remoteId FROM categories WHERE sourceId = :sourceId AND mediaType = :type AND remoteId IS NOT NULL
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/CategoryDao.kt	WHERE categories.sourceId IN (:sourceIds) AND categories.mediaType = :type
+1	json	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	(LOWER(TRIM(epgChannelId)) = :epgKey OR name LIKE '%' || :token || '%' COLLATE NOCASE) LIMIT 300
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	) ORDER BY number ASC, name ASC LIMIT :limit
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	AND (:query = '' OR name LIKE '%' || :query || '%')
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	AND (:query = '' OR name LIKE '%' || :query || '%') ORDER BY number ASC, name ASC LIMIT :limit
@@ -939,6 +940,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE categoryId = :categoryId ORDER BY name ASC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE categoryId = :categoryId ORDER BY sortOrder ASC, name ASC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE id = :id
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE sourceId = :sourceId AND
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE sourceId = :sourceId AND (sortOrder < :beforeSortOrder OR (sortOrder = :beforeSortOrder AND id < :beforeId)) ORDER BY sortOrder DESC, id DESC LIMIT :limit
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE sourceId = :sourceId AND (sortOrder > :afterSortOrder OR (sortOrder = :afterSortOrder AND id > :afterId)) ORDER BY sortOrder ASC, id ASC LIMIT :limit
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE sourceId = :sourceId AND name = :name LIMIT 1
@@ -1981,6 +1983,28 @@
 1	technical	core/src/main/java/tv/own/owntv/core/launcher/LauncherRecommendationPlanner.kt	episode:${show.sourceId}:${show.remoteId ?: show.name}:${episode.remoteId ?: "${episode.seasonNumber}-${episode.episodeNumber}"}
 1	technical	core/src/main/java/tv/own/owntv/core/launcher/LauncherRecommendationPlanner.kt	live:${channel.sourceId}:${channel.remoteId ?: channel.name}
 1	technical	core/src/main/java/tv/own/owntv/core/launcher/LauncherRecommendationPlanner.kt	movie:${movie.sourceId}:${movie.remoteId ?: movie.name}
+2	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	\0
+2	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	1080i
+2	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	1080p
+1	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	2160p
+2	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	480p
+2	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	4k
+1	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	50fps
+2	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	576p
+1	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	60fps
+2	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	720p
+2	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	[^\\p{L}\\p{N}]+
+1	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	backup
+1	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	bk
+2	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	fhd
+1	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	h264
+1	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	h265
+2	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	hd
+1	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	hevc
+1	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	raw
+2	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	sd
+2	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	uhd
+1	json	core/src/main/java/tv/own/owntv/core/live/ChannelFailover.kt	vip
 1	log	core/src/main/java/tv/own/owntv/core/live/ConnectionLimits.kt	ConnectionLimits
 1	log	core/src/main/java/tv/own/owntv/core/live/ConnectionLimits.kt	measured source ${source.id}: $result
 1	log	core/src/main/java/tv/own/owntv/core/live/ConnectionLimits.kt	no playable channels for source ${source.id}

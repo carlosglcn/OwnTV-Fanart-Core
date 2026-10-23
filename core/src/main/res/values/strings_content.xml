@@ -884,4 +884,5 @@
     <string name="glcn_all_favorites">All favorites</string>
     <string name="glcn_choose_favorites">Choose what to remove for this profile. Playlists, history and downloads are not affected.</string>
     <string name="glcn_clear_favorites_confirm">Clear <xliff:g id="scope">%1$s</xliff:g> favorites?</string>
+    <string name="glcn_failover_toast">Channel failed — switched to %1$s</string>
 </resources>
