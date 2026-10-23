@@ -3506,11 +3506,12 @@ class LivePreviewEngine(
         val trackSelector = androidx.media3.exoplayer.trackselection.DefaultTrackSelector(context).apply {
             // A soundbar waking up or ARC renegotiating mid-channel changes what the output takes; let
             // the selector re-pick passthrough vs decode instead of staying silent until the latch trips.
-            // Part of the FFmpeg audio path: with that setting off, the audio decoder stays as first picked.
+            // glcn: always on. Auto frame rate switches the HDMI mode a few seconds in, which changes what the
+            // output takes; without the re-pick the channel stayed silent after the switch.
             setParameters(
                 buildUponParameters()
                     .setTunnelingEnabled(tunneled)
-                    .setAllowInvalidateSelectionsOnRendererCapabilitiesChange(FfmpegAudio.switchedOn),
+                    .setAllowInvalidateSelectionsOnRendererCapabilitiesChange(true),
             )
         }
         return ExoPlayer.Builder(context)

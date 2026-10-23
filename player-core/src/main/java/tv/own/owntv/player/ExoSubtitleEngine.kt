@@ -716,8 +716,8 @@ class ExoSubtitleEngine(
                 .setPreferredAudioLanguage(prefAudioLang.takeIf { it.isNotBlank() })
                 .setPreferredTextLanguage(prefSubLang.takeIf { it.isNotBlank() })
                 // Re-pick passthrough vs decode when the audio output changes mid-film (soundbar wakes).
-                // Part of the FFmpeg audio path: with that setting off, the audio decoder stays as first picked.
-                .setAllowInvalidateSelectionsOnRendererCapabilitiesChange(FfmpegAudio.switchedOn)
+                // glcn: always on, so the audio comes back after an auto-frame-rate display switch.
+                .setAllowInvalidateSelectionsOnRendererCapabilitiesChange(true)
                 .build()
         }
         // Software decoding is a rescue, not the default. A catch-up archive starts mid-GOP and SOME
