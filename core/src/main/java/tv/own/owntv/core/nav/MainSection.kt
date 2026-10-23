@@ -41,6 +41,9 @@ enum class MainSection(@param:StringRes val labelRes: Int) {
         /** Fixed order of the browse items (Settings is pinned separately). */
         val browseOrder: List<MainSection> = listOf(HOME, LIVE_TV, SPORTS, MOVIES, SERIES, DOWNLOADS, EPG)
 
+        /** glcn: what a family (kids) profile's menu may hold — the watching places, no Sports, Downloads or Settings. */
+        val FAMILY: Set<MainSection> = setOf(HOME, LIVE_TV, MOVIES, SERIES, EPG)
+
         /** All seven browse items — the default value, so a cold start shows a full nav rather than
          *  flickering through an empty one before the first real emission lands. */
         val allBrowse: Set<MainSection> = browseOrder.toSet()

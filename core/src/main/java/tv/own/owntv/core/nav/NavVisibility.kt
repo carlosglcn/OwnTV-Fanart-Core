@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import tv.own.owntv.core.database.dao.ChannelDao
 import tv.own.owntv.core.database.dao.MovieDao
 import tv.own.owntv.core.database.dao.SeriesDao
@@ -32,16 +33,26 @@ class NavVisibility(
     private val channelDao: ChannelDao,
     private val movieDao: MovieDao,
     private val seriesDao: SeriesDao,
+    private val profileDao: tv.own.owntv.core.database.dao.ProfileDao? = null,
 ) {
+
+    /** glcn: the family profile — a kids profile — gets a short menu and no way into Settings or More. */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val familyMode: Flow<Boolean> = settings.activeProfileId
+        .flatMapLatest { pid ->
+            if (pid < 0 || profileDao == null) flowOf(false) else profileDao.observeById(pid).map { it?.isKids == true }
+        }
+        .distinctUntilChanged()
 
     /** What the nav shows right now, honouring the user's mode and hidden set. */
     fun visibleSections(): Flow<Set<MainSection>> = settings.navMenuMode
         .flatMapLatest { mode ->
-            combine(dynamicCaps(), settings.navMenuHidden) { contentBased, hidden ->
-                when (mode) {
+            combine(dynamicCaps(), settings.navMenuHidden, familyMode) { contentBased, hidden, family ->
+                val sections = when (mode) {
                     SettingsRepository.NavMenuMode.STATIC -> MainSection.staticVisible(hidden)
                     SettingsRepository.NavMenuMode.DYNAMIC -> contentBased
                 }
+                if (family) sections intersect MainSection.FAMILY else sections
             }
         }
         .distinctUntilChanged()
