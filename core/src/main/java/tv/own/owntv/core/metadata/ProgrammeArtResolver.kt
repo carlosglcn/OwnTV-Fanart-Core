@@ -89,7 +89,7 @@ class ProgrammeArtResolver(
         val query = clean(title)
         if (query.length < 2) return@withContext null
         val kind = hint?.kind(title) ?: Kind.UNKNOWN
-        val key = fold(query) + "|" + kind.name.first() + (hint?.year ?: "") + (if (loose) "~" else "")
+        val key = fold(query) + "|" + kind.name.first() + listOfNotNull(hint?.year, '~'.takeIf { loose }).joinToString(separator = "")
         if (fold(query).isEmpty()) return@withContext null
         memory[key]?.let { return@withContext it.orNull() }
         prefs.getString(key, null)?.let { stored ->
