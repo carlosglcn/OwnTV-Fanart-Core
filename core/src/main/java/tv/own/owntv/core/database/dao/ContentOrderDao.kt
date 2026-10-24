@@ -34,6 +34,25 @@ interface ContentOrderDao {
         if (rows.isNotEmpty()) insertAll(rows)
     }
 
+    @Query("SELECT * FROM content_order WHERE profileId = :profileId AND mediaType = :type AND contextKey = :contextKey")
+    suspend fun inContext(profileId: Long, type: MediaType, contextKey: String): List<ContentOrderEntity>
+
+    /**
+     * Like [replaceContext], for a context shared by several playlists (Favorites) when only some of its
+     * items were on screen: the order of the items that were not moved is kept as it was, and the moved
+     * ones are written after them, in the new order. Ordering one playlist's favourites no longer wipes
+     * another's.
+     */
+    @Transaction
+    suspend fun replaceKeepingOthers(profileId: Long, type: MediaType, contextKey: String, rows: List<ContentOrderEntity>) {
+        val moved = rows.mapTo(HashSet()) { it.itemId }
+        val others = inContext(profileId, type, contextKey).filter { it.itemId !in moved }
+        val base = (others.maxOfOrNull { it.position } ?: -1) + 1
+        clearContext(profileId, type, contextKey)
+        val all = others + rows.map { it.copy(id = 0, position = base + it.position) }
+        if (all.isNotEmpty()) insertAll(all.map { it.copy(id = 0) })
+    }
+
     /** Everything, for Backup & Restore / re-sync snapshotting. */
     /** Does this row already exist? The dry run before a sync counts what is genuinely new. */
     @Query("SELECT EXISTS(SELECT 1 FROM content_order WHERE profileId = :profileId AND mediaType = :type AND contextKey = :contextKey AND itemId = :itemId)")
