@@ -96,6 +96,8 @@ object SportsCatalog {
         // glcn: not on ESPN; served by BasketDataSource.
         League(Sport.BASKETBALL, BasketDataSource.ACB, "Liga ACB", "ACB", "ES"),
         League(Sport.BASKETBALL, BasketDataSource.EUROLEAGUE, "EuroLeague", "EL", "EU"),
+        // glcn: handball is not on ESPN either; served by BasketDataSource from the league's own site.
+        League(Sport.HANDBALL, BasketDataSource.ASOBAL, "Liga ASOBAL", "ASOBAL", "ES"),
         League(Sport.BASKETBALL, "mens-college-basketball", "NCAA Basketball", "NCAAM", "US"),
         League(Sport.BASKETBALL, "womens-college-basketball", "NCAA Women's Basketball", "NCAAW", "US"),
         League(Sport.BASKETBALL, "fiba", "FIBA World Cup"),
@@ -190,6 +192,7 @@ object SportsCatalog {
     private val ALSO_CALLED = mapOf(
         League.keyOf(Sport.BASKETBALL, BasketDataSource.ACB) to listOf("Liga Endesa", "ACB"),
         League.keyOf(Sport.BASKETBALL, BasketDataSource.EUROLEAGUE) to listOf("Euroliga", "Turkish Airlines EuroLeague", "Euroleague"),
+        League.keyOf(Sport.HANDBALL, BasketDataSource.ASOBAL) to listOf("ASOBAL", "Liga Nexus Energia ASOBAL"),
         // A guide calls the series "Mundial F1": its own word, which "Formula 1" never contains once digits are dropped.
         League.keyOf(Sport.RACING, "f1") to listOf("F1"),
     )

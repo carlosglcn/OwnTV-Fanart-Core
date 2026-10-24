@@ -25,10 +25,11 @@ import java.time.ZoneId
 import java.util.concurrent.TimeUnit
 
 /**
- * The Spanish Liga ACB and the EuroLeague. Neither is on ESPN, so a small scheduled job
+ * The Spanish Liga ACB, the EuroLeague and the handball Liga ASOBAL. None is on ESPN, so a small scheduled job
  * (carlosglcn/owntv-sports-data) reads the leagues' own sites and publishes one JSON file per league:
  * every match of the season, with the score and the quarter of a live game, and the table.
- * A file is kept for five minutes, so opening a screen costs at most one small download.
+ * A file is kept for five minutes, so opening a screen costs at most one small download. The ASOBAL's own
+ * round page is read every half minute while one of its matches is on, so a live score is never ten minutes old.
  * Every read is defensive: a surprise in the answer gives an empty board, never a crash.
  */
 class BasketDataSource(client: OkHttpClient) {
@@ -41,11 +42,11 @@ class BasketDataSource(client: OkHttpClient) {
 
     suspend fun scoreboard(league: League, day: LocalDate?): List<Match> {
         val date = day ?: LocalDate.now(zone)
-        return feed(league).matches.filter { Instant.ofEpochMilli(it.startMs).atZone(zone).toLocalDate() == date }
+        return matches(league).filter { Instant.ofEpochMilli(it.startMs).atZone(zone).toLocalDate() == date }
     }
 
     suspend fun month(league: League, month: YearMonth): MonthBoard =
-        MonthBoard(feed(league).matches.filter { YearMonth.from(Instant.ofEpochMilli(it.startMs).atZone(zone)) == month }, null)
+        MonthBoard(matches(league).filter { YearMonth.from(Instant.ofEpochMilli(it.startMs).atZone(zone)) == month }, null)
 
     suspend fun teams(league: League): List<Team> = feed(league).teams
 
@@ -53,11 +54,75 @@ class BasketDataSource(client: OkHttpClient) {
         StandingsTable(league.key, listOf(StandingsGroup(league.name, feed(league).standings)))
 
     suspend fun teamSchedule(league: League, teamId: String, fixtures: Boolean): List<Match> {
-        val mine = feed(league).matches.filter { m -> m.competitors.any { it.team.id == teamId } }
+        val mine = matches(league).filter { m -> m.competitors.any { it.team.id == teamId } }
         return if (fixtures) mine.filter { it.state != MatchState.POST } else mine.filter { it.state == MatchState.POST }.reversed()
     }
 
     fun summary(match: Match) = MatchSummary(match, emptyList(), emptyList(), emptyList())
+
+    /** The league's matches, with a live ASOBAL match read from the league's own round page. */
+    private suspend fun matches(league: League): List<Match> {
+        val base = feed(league).matches
+        if (league.slug != ASOBAL) return base
+        val now = System.currentTimeMillis()
+        val rounds = base.filter { it.state != MatchState.POST && now in (it.startMs - LIVE_LEAD_MS)..(it.startMs + LIVE_WINDOW_MS) }
+            .mapNotNull { it.subtitle?.removePrefix("Round ")?.toIntOrNull() }.toSet()
+        if (rounds.isEmpty()) return base
+        val live = rounds.flatMap { roundLive(it) }.associateBy { it.id }
+        if (live.isEmpty()) return base
+        return base.map { m ->
+            val l = live[m.id] ?: return@map m
+            val state = when (l.status) { "final" -> MatchState.POST; "live" -> MatchState.IN; else -> m.state }
+            if (state == MatchState.PRE) return@map m
+            val decided = state == MatchState.POST && l.home != l.away
+            m.copy(
+                state = state,
+                statusText = if (state == MatchState.POST) "FT" else l.label,
+                clock = if (state == MatchState.IN && l.label.isNotEmpty()) MatchClock(display = l.label, period = 0) else null,
+                competitors = m.competitors.map { c ->
+                    val goals = if (c.home) l.home else l.away
+                    c.copy(score = Score(goals.toString(), goals), winner = if (decided) (if (c.home) l.home > l.away else l.away > l.home) else null)
+                },
+            )
+        }
+    }
+
+    private class LiveLine(val id: String, val status: String, val home: Int, val away: Int, val label: String)
+
+    private val roundCache = HashMap<Int, Pair<Long, List<LiveLine>>>()
+
+    private suspend fun roundLive(round: Int): List<LiveLine> {
+        val now = System.currentTimeMillis()
+        roundCache[round]?.takeIf { now - it.first < LIVE_CACHE_MS }?.let { return it.second }
+        val lines = runCatching {
+            val html = withContext(Dispatchers.IO) {
+                http.newCall(Request.Builder().url("$ASOBAL_SITE/liga/calendario/$round/").build()).execute().use { r ->
+                    if (!r.isSuccessful) throw SportsHttpException(r.code)
+                    r.body.string()
+                }
+            }
+            parseRound(html)
+        }.getOrDefault(emptyList())
+        roundCache[round] = now to lines
+        return lines
+    }
+
+    /** One `<li>` per match on the league's round page: its id, score and the text under it ("Partido finalizado"). */
+    private fun parseRound(html: String): List<LiveLine> {
+        val start = html.indexOf("info-results").takeIf { it >= 0 } ?: return emptyList()
+        return ROUND_ITEM.findAll(html.substring(start)).mapNotNull { li ->
+            val item = li.groupValues[1]
+            val id = STATS_ID.find(item)?.groupValues?.get(1) ?: return@mapNotNull null
+            val goals = GOALS.find(item) ?: return@mapNotNull null
+            val label = ENLACES.find(item)?.groupValues?.get(1)?.replace(TAGS, SPACE)?.replace(SPACES, SPACE)?.trim().orEmpty()
+            val status = when {
+                label.contains("finalizado", ignoreCase = true) -> "final"
+                label.isEmpty() || label.contains("no ha comenzado", ignoreCase = true) -> "scheduled"
+                else -> "live"
+            }
+            LiveLine(id, status, goals.groupValues[1].toInt(), goals.groupValues[2].toInt(), label)
+        }.toList()
+    }
 
     private suspend fun feed(league: League): Feed {
         val now = System.currentTimeMillis()
@@ -98,9 +163,9 @@ class BasketDataSource(client: OkHttpClient) {
             val team = byId[r.optString("team")] ?: return@mapNotNull null
             val diff = r.optInt("diff")
             StandingsRow(
-                rank = r.optInt("pos", i + 1), team = team, played = r.optInt("p"), won = r.optInt("w"), drawn = 0,
+                rank = r.optInt("pos", i + 1), team = team, played = r.optInt("p"), won = r.optInt("w"), drawn = r.optInt("d"),
                 lost = r.optInt("l"), scored = r.optInt("pf"), conceded = r.optInt("pa"),
-                difference = if (diff > 0) "+$diff" else diff.toString(), points = r.optInt("w"),
+                difference = if (diff > 0) "+$diff" else diff.toString(), points = if (r.has("pts")) r.optInt("pts") else r.optInt("w"),
             )
         }
         return Feed(teams, matches, standings)
@@ -113,7 +178,8 @@ class BasketDataSource(client: OkHttpClient) {
         val start = m.optLong("start", -1L).takeIf { it > 0 } ?: return null
         val hs = if (m.isNull("hs")) null else m.optInt("hs")
         val aw = if (m.isNull("as")) null else m.optInt("as")
-        val period = if (m.isNull("period")) 0 else m.optInt("period")
+        val periodText = m.optString("period").takeUnless { m.isNull("period") }.orEmpty()
+        val period = if (league.sport == Sport.HANDBALL) 0 else periodText.toIntOrNull() ?: 0
         val state = when {
             m.optString("status") == "final" -> MatchState.POST
             m.optString("status") == "live" -> MatchState.IN
@@ -128,7 +194,7 @@ class BasketDataSource(client: OkHttpClient) {
         val channels = m.optJSONArray("tv")
         return Match(
             id = id,
-            sport = Sport.BASKETBALL,
+            sport = league.sport,
             feed = league.key,
             leagueSlug = league.slug,
             leagueName = league.name,
@@ -136,12 +202,17 @@ class BasketDataSource(client: OkHttpClient) {
             state = state,
             statusText = when (state) {
                 MatchState.POST -> "FT"
-                MatchState.IN -> "Q$period".takeIf { period > 0 }.orEmpty()
+                MatchState.IN -> if (league.sport == Sport.HANDBALL) periodText else "Q$period".takeIf { period > 0 }.orEmpty()
                 else -> null.orEmpty()
             },
             title = home.name + " v " + away.name,
             subtitle = m.optInt("round").takeIf { it > 0 }?.let { "Round $it" },
-            clock = if (state == MatchState.IN && period > 0) MatchClock(display = "Q$period", period = period) else null,
+            clock = when {
+                state != MatchState.IN -> null
+                league.sport == Sport.HANDBALL -> periodText.takeIf { it.isNotEmpty() }?.let { MatchClock(display = it, period = 0) }
+                period > 0 -> MatchClock(display = "Q$period", period = period)
+                else -> null
+            },
             competitors = listOf(
                 side(home, true, hs, if (decided) hs!! > aw!! else null),
                 side(away, false, aw, if (decided) aw!! > hs!! else null),
@@ -154,7 +225,19 @@ class BasketDataSource(client: OkHttpClient) {
     companion object {
         const val ACB = "acb"
         const val EUROLEAGUE = "euroleague"
-        val SLUGS = setOf(ACB, EUROLEAGUE)
+        const val ASOBAL = "asobal"
+        val SLUGS = setOf(ACB, EUROLEAGUE, ASOBAL)
+        private const val ASOBAL_SITE = "https://www.asobal.es"
+        private const val LIVE_CACHE_MS = 30_000L
+        private const val LIVE_LEAD_MS = 15 * 60_000L
+        private const val LIVE_WINDOW_MS = 3 * 3_600_000L
+        private val ROUND_ITEM = Regex("<li>(.*?)</li>", RegexOption.DOT_MATCHES_ALL)
+        private val STATS_ID = Regex("estadisticas/(\\d+)/")
+        private val GOALS = Regex("<b>\\s*(\\d+)\\s*</b>\\s*-\\s*<b>\\s*(\\d+)\\s*</b>")
+        private val ENLACES = Regex("class=\"enlaces\">(.*?)(?:\\||</span>)", RegexOption.DOT_MATCHES_ALL)
+        private val TAGS = Regex("<[^>]+>")
+        private val SPACE = ' '.toString()
+        private val SPACES = Regex("\\s+")
         private const val BASE = "https://raw.githubusercontent.com/carlosglcn/owntv-sports-data/main"
         private const val TIMEOUT_SECONDS = 10L
         private const val CACHE_MS = 5 * 60_000L

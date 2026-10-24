@@ -477,7 +477,6 @@
 2	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	status
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	yyyy-MM-dd'T'HH:mm:ssxx
 2	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ACB
-1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ES
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga ACB
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga Endesa
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	MotoGP

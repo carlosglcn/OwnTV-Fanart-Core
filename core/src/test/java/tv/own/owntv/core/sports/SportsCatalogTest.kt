@@ -38,7 +38,7 @@ class SportsCatalogTest {
     @Test
     fun `sports come in the hub's chip order`() {
         assertEquals(
-            listOf(Sport.SOCCER, Sport.BASKETBALL, Sport.TENNIS, Sport.CRICKET, Sport.RACING, Sport.HOCKEY, Sport.FOOTBALL, Sport.MMA),
+            listOf(Sport.SOCCER, Sport.BASKETBALL, Sport.HANDBALL, Sport.TENNIS, Sport.CRICKET, Sport.RACING, Sport.HOCKEY, Sport.FOOTBALL),
             SportsCatalog.sports.take(8),
         )
     }

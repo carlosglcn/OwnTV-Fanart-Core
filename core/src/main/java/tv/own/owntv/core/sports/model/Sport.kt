@@ -7,6 +7,7 @@ package tv.own.owntv.core.sports.model
 enum class Sport(val path: String) {
     SOCCER("soccer"),
     BASKETBALL("basketball"),
+    HANDBALL("handball"),
     TENNIS("tennis"),
     CRICKET("cricket"),
     RACING("racing"),
