@@ -27,9 +27,9 @@ class ProgrammeArtResolver(
     private val settings: SettingsRepository,
 ) {
     /** What TMDB knows about one title; both null for "nothing usable". */
-    data class Info(val backdropUrl: String?, val rating: Double?)
+    data class Info(val backdropUrl: String?, val rating: Double?, val overview: String? = null, val year: Int? = null)
 
-    private val prefs = context.getSharedPreferences("glcn_programme_info_v2", Context.MODE_PRIVATE)
+    private val prefs = context.getSharedPreferences("glcn_programme_info_v3", Context.MODE_PRIVATE)
     private val memory = ConcurrentHashMap<String, Info>()
     private val mutex = Mutex()
     private val lookups = ArrayDeque<Long>()
@@ -53,6 +53,13 @@ class ProgrammeArtResolver(
      */
     suspend fun ratingFor(title: String, categories: String?): Double? =
         if (worthRating(title, categories)) infoFor(title, Hint(categories, null, null, null))?.rating else null
+
+    /**
+     * Everything TMDB knows for a guide programme that may be a film or a series: rating, year and a
+     * synopsis, for a programme whose guide entry says nothing. Same allowance and memory as [ratingFor].
+     */
+    suspend fun detailsFor(title: String, categories: String?): Info? =
+        if (worthRating(title, categories)) infoFor(title, Hint(categories, null, null, null)) else null
 
     /** What tells a film from a series in the guide: the feed's categories, year, length and episode mark. */
     data class Hint(val categories: String?, val year: Int?, val lengthMin: Int?, val episode: String?) {
@@ -126,6 +133,8 @@ class ProgrammeArtResolver(
         return Info(
             backdropUrl = hit.backdropPath?.let { MetadataImages.backdrop(it, "w780") },
             rating = hit.voteAverage,
+            overview = hit.overview?.takeIf { it.isNotBlank() },
+            year = hit.year,
         )
     }
 
@@ -137,17 +146,26 @@ class ProgrammeArtResolver(
         return true
     }
 
-    private fun Info.orNull(): Info? = takeIf { backdropUrl != null || rating != null }
+    private fun Info.orNull(): Info? = takeIf { backdropUrl != null || rating != null || overview != null }
 
     companion object {
         private const val MAX_PER_HOUR = 40
         private const val MAX_STORED = 3_000
         private val NONE = Info(null, null)
 
-        private fun encode(i: Info) = (i.backdropUrl ?: "") + "\t" + (i.rating?.toString() ?: "")
+        private fun encode(i: Info) = listOf(
+            i.backdropUrl.orEmpty(), i.rating?.toString().orEmpty(), i.year?.toString().orEmpty(),
+            i.overview.orEmpty().filterNot { it == '\t' || it == '\n' || it == '\r' },
+        ).joinToString("\t")
+
         private fun decode(s: String): Info {
             val parts = s.split('\t')
-            return Info(parts.getOrNull(0)?.ifBlank { null }, parts.getOrNull(1)?.toDoubleOrNull())
+            return Info(
+                backdropUrl = parts.getOrNull(0)?.ifBlank { null },
+                rating = parts.getOrNull(1)?.toDoubleOrNull(),
+                overview = parts.getOrNull(3)?.ifBlank { null },
+                year = parts.getOrNull(2)?.toIntOrNull(),
+            )
         }
 
         private val EPISODE = Regex("""\s+(T\d+(\s*E\d+)?|S\d+\s*E\d+|Temporada\s+\d+|Ep\.?\s*\d+|Episodio\s+\d+)\b.*$""", RegexOption.IGNORE_CASE)
