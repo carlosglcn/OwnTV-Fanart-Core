@@ -18,6 +18,7 @@
     <string name="setup_tmdb_name">Establecer nombre de TMDB</string>
     <string name="setup_tmdb_description">Escribe el título exacto de TMDB que quieras buscar. El año es opcional, pero ayuda cuando varios títulos comparten el mismo nombre.</string>
     <string name="setup_year_optional">Año (opcional)</string>
+    <string name="setup_tmdb_id_optional">ID de TMDB (opcional)</string>
     <string name="setup_pick_location">Elegir una ubicación</string>
     <string name="setup_grant_storage_access">Conceder acceso completo al almacenamiento</string>
     <string name="setup_use_folder">Usar esta carpeta</string>

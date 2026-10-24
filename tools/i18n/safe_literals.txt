@@ -2098,6 +2098,7 @@
 2	url	core/src/main/java/tv/own/owntv/core/metadata/MetadataImages.kt	w500
 1	url	core/src/main/java/tv/own/owntv/core/metadata/MetadataImages.kt	w780
 1	empty	core/src/main/java/tv/own/owntv/core/metadata/MetadataOverrideStore.kt	\0
+2	json	core/src/main/java/tv/own/owntv/core/metadata/MetadataOverrideStore.kt	i
 1	preference-key	core/src/main/java/tv/own/owntv/core/metadata/MetadataOverrideStore.kt	overrides
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/MetadataOverrideStore.kt	owntv_tmdb_overrides
 2	json	core/src/main/java/tv/own/owntv/core/metadata/MetadataOverrideStore.kt	t

@@ -13,7 +13,7 @@ private val Context.metadataOverrideStore: DataStore<Preferences> by
     preferencesDataStore(name = "owntv_tmdb_overrides")
 
 /** A user-set TMDB search override: a custom title (and optional year) used instead of the auto-normalized one. */
-data class TmdbOverride(val title: String, val year: Int?)
+data class TmdbOverride(val title: String, val year: Int?, val tmdbId: Int? = null)
 
 /**
  * Per-content TMDB name overrides, stored as JSON in DataStore — deliberately NOT a Room
@@ -38,10 +38,10 @@ class MetadataOverrideStore(private val context: Context) {
         return parseMap(raw).containsKey(localKey)
     }
 
-    suspend fun set(localKey: String, title: String, year: Int?) {
+    suspend fun set(localKey: String, title: String, year: Int?, tmdbId: Int? = null) {
         context.metadataOverrideStore.edit { prefs ->
             val map = parseMap(prefs[mapKey])
-            map[localKey] = TmdbOverride(title.trim(), year)
+            map[localKey] = TmdbOverride(title.trim(), year, tmdbId?.takeIf { it > 0 })
             prefs[mapKey] = serializeMap(map)
         }
     }
@@ -82,7 +82,7 @@ class MetadataOverrideStore(private val context: Context) {
                 val entry = o.optJSONObject(k) ?: return@forEach
                 val title = entry.optString("t").takeIf { it.isNotBlank() } ?: return@forEach
                 val year = entry.optInt("y", 0).takeIf { it > 0 }
-                out[k] = TmdbOverride(title, year)
+                out[k] = TmdbOverride(title, year, entry.optInt("i", 0).takeIf { it > 0 })
             }
             out
         }.getOrDefault(HashMap())
@@ -92,6 +92,7 @@ class MetadataOverrideStore(private val context: Context) {
         map.forEach { (k, v) ->
             val entry = JSONObject().put("t", v.title)
             if (v.year != null) entry.put("y", v.year)
+            if (v.tmdbId != null) entry.put("i", v.tmdbId)
             put(k, entry)
         }
     }.toString()

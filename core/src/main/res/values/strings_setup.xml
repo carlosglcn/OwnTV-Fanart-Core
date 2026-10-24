@@ -37,6 +37,7 @@
     <string name="setup_tmdb_description">Type the exact TMDB title to match. Year is optional but helps when several titles share a name.</string>
     <!-- Translators: Text-field label in the Set-TMDB-name dialog for an optional year to narrow the TMDB search. -->
     <string name="setup_year_optional">Year (optional)</string>
+    <string name="setup_tmdb_id_optional">TMDB ID (optional)</string>
     <!-- Translators: Storage-browser fallback title/path label when no folder is selected. -->
     <string name="setup_pick_location">Pick a location</string>
     <!-- Translators: Button label shown in the storage browser when the app does not yet have storage permission. -->

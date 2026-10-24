@@ -89,6 +89,9 @@ class MetadataRepository(
             }
         }
 
+        // glcn: a TMDB id typed by the user decides it outright — no search by name.
+        overrideStore.get(localKey)?.tmdbId?.let { return resolveKnownMovie(movie, it) }
+
         // 2. Build the search query: a user override wins over the auto-normalizer.
         val q = resolveQuery(localKey, movie.name, movie.year)
         if (q.query.isBlank()) return null
@@ -158,6 +161,9 @@ class MetadataRepository(
                 return fetchAndCacheTv(tmdbId, lang, null)
             }
         }
+
+        // glcn: a TMDB id typed by the user decides it outright — no search by name.
+        overrideStore.get(localKey)?.tmdbId?.let { return resolveKnownSeries(series, it) }
 
         val q = resolveQuery(localKey, series.name, series.year)
         if (q.query.isBlank()) return null
@@ -591,14 +597,14 @@ class MetadataRepository(
         overrideStore.get(seriesLocalKey(series))
 
     /** Save a movie's override and drop its cached match so the next resolve uses the new query. */
-    suspend fun setMovieOverride(movie: MovieEntity, title: String, year: Int?) {
-        overrideStore.set(movieLocalKey(movie), title, year)
+    suspend fun setMovieOverride(movie: MovieEntity, title: String, year: Int?, tmdbId: Int? = null) {
+        overrideStore.set(movieLocalKey(movie), title, year, tmdbId)
         clearMovie(movie)
     }
 
     /** Save a series' override and drop its cached match so the next resolve uses the new query. */
-    suspend fun setSeriesOverride(series: tv.own.owntv.core.database.entity.SeriesEntity, title: String, year: Int?) {
-        overrideStore.set(seriesLocalKey(series), title, year)
+    suspend fun setSeriesOverride(series: tv.own.owntv.core.database.entity.SeriesEntity, title: String, year: Int?, tmdbId: Int? = null) {
+        overrideStore.set(seriesLocalKey(series), title, year, tmdbId)
         clearSeries(series)
     }
 
