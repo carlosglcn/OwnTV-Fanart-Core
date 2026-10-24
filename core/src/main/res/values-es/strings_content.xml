@@ -42,7 +42,7 @@
     <string name="content_category_browser_title">Categorías</string>
     <string name="content_channel_overlay_title">Canales</string>
     <string name="content_live_now">En directo ahora</string>
-    <string name="content_live_next">En directo después</string>
+    <string name="content_live_next">A continuación</string>
     <string name="content_archive_playing">Reproduciendo</string>
     <string name="content_archive_then">Después</string>
     <string name="content_clock_programme">Hora del programa</string>

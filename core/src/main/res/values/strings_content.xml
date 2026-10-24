@@ -71,7 +71,7 @@
     <!-- Translators: Slot label inside LiveEpgCard for the programme on air now. Says "Live" because a second card sits beside it during catch-up showing an archived programme; the two must not be confusable. -->
     <string name="content_live_now">Live now</string>
     <!-- Translators: Slot label inside LiveEpgCard for the next programme on air. See content_live_now. -->
-    <string name="content_live_next">Live next</string>
+    <string name="content_live_next">Up next</string>
     <!-- Translators: Slot label for the archived programme currently being replayed (catch-up), beside the live card. -->
     <string name="content_archive_playing">Playing</string>
     <!-- Translators: Slot label for the programme that aired immediately after the one being replayed. Reads as "and then this was on". -->
