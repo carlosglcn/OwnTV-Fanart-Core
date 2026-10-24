@@ -1943,7 +1943,9 @@
 1	log	core/src/main/java/tv/own/owntv/core/epg/GuideCandidates.kt	namedLimitHit=${named.size >= limit} programmeLimitHit=${withProgrammes.size >= limit}
 1	log	core/src/main/java/tv/own/owntv/core/epg/GuideCandidates.kt	queryMs=${queriedAt - startedAt} totalMs=${SystemClock.elapsedRealtime() - startedAt}
 1	log	core/src/main/java/tv/own/owntv/core/epg/GuideCandidates.kt	rankMs=${SystemClock.elapsedRealtime() - startedAt}
+3	technical	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\0
 1	protocol	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	${snapshot.mediaType.name}:${snapshot.tmdbId}
+1	regex	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	(?i)(^|[^\\p{L}])(hd|fhd|4k|uhd)([^\\p{L}]|$)
 1	protocol	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	1080p FHD
 1	protocol	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	4K
 1	protocol	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	4K UHD
@@ -1953,10 +1955,13 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	FHD
 1	protocol	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	HD
 1	protocol	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	SD
+1	regex	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\\W+
+1	regex	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\\b(documental|documentales|documentary|reportaje|serie|series|naturaleza|historia|ciencia|biografia|thriller|drama|comedia|animacion)\\b
 1	locale	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	en
 1	technical	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	episode:${episode.id}
 1	technical	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	live:${channel.id}
 1	technical	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	movie:${movie.id}
+2	technical	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	|
 1	empty	core/src/main/java/tv/own/owntv/core/i18n/AppLocale.kt	\0
 1	empty	core/src/main/java/tv/own/owntv/core/i18n/LocaleStore.kt	\0
 1	technical	core/src/main/java/tv/own/owntv/core/i18n/LocaleStore.kt	Failed to persist application locale

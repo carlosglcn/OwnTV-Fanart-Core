@@ -360,6 +360,46 @@ class HomeFeedReader(
                     }
                 }.getOrDefault(emptyList())
             }
+            // glcn: something worth watching on TV right now — a film, a premiere, a documentary, a series — for the
+            // billboard, on the main channels (the HD copy when a channel has both), leaning to what the viewer follows.
+            val tvNowAsync = async {
+                if (HomeRow.FEATURED !in config.visibleOrder) emptyList()
+                else runCatching {
+                    val mine = (favLive + live).distinctBy { it.id }.filterNot(::isBarChannel)
+                    val mineIds = mine.map { it.id }.toSet()
+                    val pool = (mine.take(60) + channelDao.allForSources(liveIds.toList(), 5_000)
+                        .filter { it.id !in mineIds && !isChannelHidden(it, hidden) && !isBarChannel(it) && TONIGHT_CHANNEL.containsMatchIn(it.name) })
+                        .distinctBy { it.id }
+                    if (pool.isEmpty()) return@runCatching emptyList()
+                    val t = System.currentTimeMillis()
+                    val byId = pool.associateBy { it.id }
+                    // The kinds of programme the viewer's own channels are showing: a small lean, never a filter.
+                    val liked = (habitNowAsync.await().map { it.second } + favNowAsync.await().values)
+                        .flatMap { p -> p.categories?.let(tv.own.owntv.core.metadata.ProgrammeArtResolver::fold).orEmpty().split(NON_WORD_RUN) }
+                        .filter { it.length > 3 }.toSet()
+                    guide.slice(pool, hidden.live, shiftAsync.await(), t, t + 1)
+                        .mapNotNull { (id, rows) ->
+                            val p = rows.firstOrNull { t in it.startMs until it.stopMs && !it.imageUrl.isNullOrBlank() } ?: return@mapNotNull null
+                            val ch = byId[id] ?: return@mapNotNull null
+                            val f = tv.own.owntv.core.metadata.ProgrammeArtResolver.fold(p.title) + " " + p.categories?.let(tv.own.owntv.core.metadata.ProgrammeArtResolver::fold).orEmpty()
+                            if (tv.own.owntv.core.live.SportsNow.isSport(p) || TONIGHT_LOW.containsMatchIn(f)) return@mapNotNull null
+                            val kind = when {
+                                TONIGHT_PREMIERE.containsMatchIn(f) || TONIGHT_FILM.containsMatchIn(f) -> 3
+                                TV_WORTH.containsMatchIn(f) -> 2
+                                else -> return@mapNotNull null
+                            }
+                            val lean = if (liked.isNotEmpty() && f.split(NON_WORD_RUN).any { it in liked }) 1 else 0
+                            val score = kind * 2 + lean + (if (ch.id in mineIds) 1 else 0)
+                            Triple(ch, p, score)
+                        }
+                        // One programme on an HD and an SD copy: the HD one.
+                        .groupBy { (_, p, _) -> tv.own.owntv.core.metadata.ProgrammeArtResolver.fold(p.title) + "|" + p.startMs }
+                        .map { (_, same) -> same.sortedByDescending { (c, _, _) -> if (HD_NAME.containsMatchIn(c.name)) 1 else 0 }.first() }
+                        .sortedByDescending { it.third }
+                        .take(TV_NOW_LIMIT)
+                        .map { it.first to it.second }
+                }.getOrDefault(emptyList())
+            }
             // glcn: tonight's programmes (21:00–24:00) on the favourite channels, else the recent ones.
             val tonightAsync = async {
                 if (HomeRow.TONIGHT !in config.visibleOrder) emptyList()
@@ -466,6 +506,7 @@ class HomeFeedReader(
                 featured = buildFeatured(
                     sports = sportsAsync.await(),
                     habitNow = habitNowAsync.await(),
+                    tvNow = tvNowAsync.await(),
                     favourites = favLive,
                     favNow = favNowAsync.await(),
                     movies = recentMoviesAsync.await(),
@@ -483,6 +524,7 @@ class HomeFeedReader(
     private fun buildFeatured(
         sports: List<tv.own.owntv.core.live.SportsNow.Entry>,
         habitNow: List<Pair<ChannelEntity, EpgProgrammeEntity>>,
+        tvNow: List<Pair<ChannelEntity, EpgProgrammeEntity>>,
         favourites: List<ChannelEntity>,
         favNow: Map<Long, EpgProgrammeEntity>,
         movies: List<MovieEntity>,
@@ -492,8 +534,13 @@ class HomeFeedReader(
         if (!enabled) return emptyList()
         val out = ArrayList<FeaturedItem>()
         val seen = HashSet<Long>()
-        sports.filter { !it.programme.imageUrl.isNullOrBlank() }.take(3).forEach {
+        sports.filter { !it.programme.imageUrl.isNullOrBlank() }.take(3).forEachIndexed { i, it ->
             if (seen.add(it.channel.id)) out += FeaturedItem.Live(it.channel, it.programme, tv.own.owntv.core.live.SportsNow.isLive(it.programme))
+            // glcn: right after the first live sport, something good on TV now (a film, a documentary…).
+            if (i == 0) tvNow.filter { (ch, _) -> ch.id !in seen }.forEach { (ch, p) -> seen += ch.id; out += FeaturedItem.Live(ch, p, false) }
+        }
+        if (sports.none { !it.programme.imageUrl.isNullOrBlank() }) {
+            tvNow.filter { (ch, _) -> ch.id !in seen }.forEach { (ch, p) -> seen += ch.id; out += FeaturedItem.Live(ch, p, false) }
         }
         // glcn: what the viewer usually watches, on air now — right after live matches.
         habitNow.filter { (_, p) -> !p.imageUrl.isNullOrBlank() }
@@ -754,6 +801,12 @@ private const val GENRE_ROWS = 4
 
 private val TONIGHT_PREMIERE = Regex("""\b(estreno|premiere|stream premiere)\b""")
 private val TONIGHT_FILM = Regex("""\b(cine|pelicula|peliculas|film|movie)\b""")
+/** Documentaries, series and the like — worth a billboard slide when on air now. */
+private val TV_WORTH = Regex("""\b(documental|documentales|documentary|reportaje|serie|series|naturaleza|historia|ciencia|biografia|thriller|drama|comedia|animacion)\b""")
+private val HD_NAME = Regex("""(?i)(^|[^\p{L}])(hd|fhd|4k|uhd)([^\p{L}]|$)""")
+private const val TV_NOW_LIMIT = 2
+private val NON_WORD_RUN = Regex("""\W+""")
+
 private val TONIGHT_LOW = Regex("""\b(informativo|informativos|noticias|news|telediario|tiempo|magazine|tertulia|debate|concurso|teletienda|tarot|late night)\b""")
 private const val TONIGHT_HIGHLIGHTS = 10
 
