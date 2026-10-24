@@ -59,7 +59,7 @@ class ProgrammeArtResolver(
      * synopsis, for a programme whose guide entry says nothing. Same allowance and memory as [ratingFor].
      */
     suspend fun detailsFor(title: String, categories: String?): Info? =
-        if (worthRating(title, categories)) infoFor(title, Hint(categories, null, null, null)) else null
+        if (worthRating(title, categories)) infoFor(title, Hint(categories, null, null, null), loose = true) else null
 
     /** What tells a film from a series in the guide: the feed's categories, year, length and episode mark. */
     data class Hint(val categories: String?, val year: Int?, val lengthMin: Int?, val episode: String?) {
@@ -84,12 +84,12 @@ class ProgrammeArtResolver(
 
     suspend fun infoFor(title: String): Info? = infoFor(title, null)
 
-    suspend fun infoFor(title: String, hint: Hint?): Info? = withContext(Dispatchers.IO) {
+    suspend fun infoFor(title: String, hint: Hint?, loose: Boolean = false): Info? = withContext(Dispatchers.IO) {
         if (!runCatching { settings.metadataConfig().enabled }.getOrDefault(false)) return@withContext null
         val query = clean(title)
         if (query.length < 2) return@withContext null
         val kind = hint?.kind(title) ?: Kind.UNKNOWN
-        val key = fold(query) + "|" + kind.name.first() + (hint?.year ?: "")
+        val key = fold(query) + "|" + kind.name.first() + (hint?.year ?: "") + (if (loose) "~" else "")
         if (fold(query).isEmpty()) return@withContext null
         memory[key]?.let { return@withContext it.orNull() }
         prefs.getString(key, null)?.let { stored ->
@@ -101,7 +101,7 @@ class ProgrammeArtResolver(
             memory[key]?.let { return@withLock it.orNull() }
             if (!allowLookup()) return@withLock null
             // Transport failure: nothing is remembered, so it is asked again later.
-            val found = runCatching { search(query, kind, hint?.year) }.getOrNull() ?: return@withLock null
+            val found = runCatching { search(query, kind, hint?.year, loose) }.getOrNull() ?: return@withLock null
             memory[key] = found
             if (prefs.all.size > MAX_STORED) prefs.edit().clear().apply()
             prefs.edit().putString(key, encode(found)).apply()
@@ -115,12 +115,18 @@ class ProgrammeArtResolver(
      * 2018 film and a 1967 cartoon, and the wrong one's picture is worse than none. With no hint, both
      * are asked and the better known wins.
      */
-    private suspend fun search(query: String, kind: Kind, year: Int?): Info? {
+    private suspend fun search(query: String, kind: Kind, year: Int?, loose: Boolean = false): Info? {
         val want = fold(query)
-        fun best(results: List<MetadataSearchResult>?): MetadataSearchResult? = results
-            ?.filter { r -> fold(r.title) == want || r.originalTitle?.let(::fold) == want }
-            ?.filter { r -> year == null || r.year == null || kotlin.math.abs(r.year - year) <= 1 }
-            ?.maxByOrNull { it.popularity }
+        fun best(results: List<MetadataSearchResult>?): MetadataSearchResult? {
+            val inYear = results?.filter { r -> year == null || r.year == null || kotlin.math.abs(r.year - year) <= 1 }
+            inYear?.filter { r -> fold(r.title) == want || r.originalTitle?.let(::fold) == want }
+                ?.maxByOrNull { it.popularity }?.let { return it }
+            // glcn: for the synopsis only — a guide title that is the film's name plus a tag or subtitle
+            // ("Directoras sin piedad - estreno"), kept to long titles so a short one never matches by chance.
+            if (!loose || want.length < 10) return null
+            return inYear?.filter { r -> val t = fold(r.title); t.length >= 10 && (t.startsWith(want) || want.startsWith(t)) }
+                ?.maxByOrNull { it.popularity }
+        }
         val hit = when (kind) {
             Kind.FILM -> best(provider.searchMovie(query, year, false) ?: return null)
             Kind.SERIES -> best(provider.searchTv(query, null, false) ?: return null)
