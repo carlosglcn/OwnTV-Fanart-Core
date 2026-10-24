@@ -752,6 +752,8 @@
     <string name="glcn_setup_home_classic">The featured billboard on top and the rows under it</string>
     <string name="glcn_setup_home_cinema">The picture of what you point at fills the screen, with its details; the rows below</string>
     <string name="glcn_setup_home_panel">The rows on the left and a fixed panel on the right with what you point at</string>
+    <string name="glcn_style_lumen_noche" translatable="false">Lumen Noche</string>
+    <string name="glcn_style_lumen_dia" translatable="false">Lumen Día</string>
     <string name="glcn_style_atardecer" translatable="false">Atardecer</string>
     <string name="glcn_style_estudio" translatable="false">Estudio</string>
     <string name="glcn_style_vitrina" translatable="false">Vitrina</string>
