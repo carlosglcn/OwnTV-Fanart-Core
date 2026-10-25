@@ -1069,7 +1069,6 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	NULL AS categories, NULL AS year, NULL AS rating, NULL AS lengthMin, NULL AS episode, NULL AS imageUrl
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	NULL AS categories, NULL AS year, NULL AS rating, NULL AS lengthMin, NULL AS episode, imageUrl
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT (MAX(stopMs) - MIN(startMs)) / 86400000 FROM epg_programmes WHERE epgChannelId = :epgChannelId
-1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT * FROM epg_programmes WHERE epgChannelId = :epgChannelId AND startMs <= :now AND stopMs > :now ORDER BY startMs DESC LIMIT 1
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT * FROM epg_programmes WHERE epgChannelId = :epgChannelId AND stopMs <= :now ORDER BY stopMs DESC LIMIT 1
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT * FROM epg_programmes WHERE epgChannelId = :epgChannelId AND stopMs > :now ORDER BY startMs ASC LIMIT :limit
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT * FROM epg_programmes WHERE epgChannelId = :epgKey
@@ -4255,7 +4254,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	circuito
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	city
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	course
-1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	gp gran grand premio prix motogp moto2 moto3 f1 formula carrera race clasificacion qualifying libres sprint warm
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	gp gran grand premio prix motogp moto2 moto3 f1 carrera race clasificacion qualifying libres sprint warm
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	grand
 2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	international
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	island

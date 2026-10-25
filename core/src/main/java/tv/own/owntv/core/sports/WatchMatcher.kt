@@ -79,7 +79,11 @@ object WatchMatcher {
          */
         val placeWords: Set<String> = if (match.sport != Sport.RACING) emptySet()
         else TeamNames.tokens(match.venue.orEmpty()).filter { it.length >= 4 && it !in GENERIC_VENUE }.toSet()
-        val league: TeamNames.Key = TeamNames.keyOfName(*competitionNames.toTypedArray())
+        // "Formula 1" loses its digit in a title, leaving "formula" — which a cartoon's "Amenaza en la fórmula" also holds.
+        // For racing that bare word is no evidence: "F1", or a Grand Prix with its place, are.
+        val league: TeamNames.Key = TeamNames.keyOfName(*competitionNames.toTypedArray()).let { k ->
+            if (match.sport == Sport.RACING) TeamNames.Key(k.variants.filter { it != setOf("formula") }) else k
+        }
         val broadcasters: List<TeamNames.Key> = match.broadcasts.map { TeamNames.keyOfName(it.name) }
 
         /**
@@ -151,7 +155,7 @@ object WatchMatcher {
 
     // glcn: words that mark a programme as a motor race, beside a circuit's own place name.
     private val RACING_TITLE: Set<String> = TeamNames.tokens(
-        "gp gran grand premio prix motogp moto2 moto3 f1 formula carrera race clasificacion qualifying libres sprint warm",
+        "gp gran grand premio prix motogp moto2 moto3 f1 carrera race clasificacion qualifying libres sprint warm",
     ).toSet()
 
     // Words of a circuit's name that say nothing about *which* circuit.

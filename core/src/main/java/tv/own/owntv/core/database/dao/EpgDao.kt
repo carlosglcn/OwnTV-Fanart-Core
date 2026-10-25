@@ -56,8 +56,8 @@ interface EpgDao {
     @Query("DELETE FROM epg_programmes WHERE epgChannelId = :epgChannelId AND sourceId IN (:sourceIds)")
     suspend fun clearChannelForSources(epgChannelId: String, sourceIds: List<Long>)
 
-    /** The programme airing at [now] on a given EPG channel. */
-    @Query("SELECT * FROM epg_programmes WHERE epgChannelId = :epgChannelId AND startMs <= :now AND stopMs > :now ORDER BY startMs DESC LIMIT 1")
+    /** The programme airing at [now] on a given EPG channel. When entries overlap, the one with a synopsis wins over a bare placeholder. */
+    @Query("SELECT * FROM epg_programmes WHERE epgChannelId = :epgChannelId AND startMs <= :now AND stopMs > :now ORDER BY (description IS NOT NULL AND description != '') DESC, startMs DESC LIMIT 1")
     suspend fun nowPlaying(epgChannelId: String, now: Long): EpgProgrammeEntity?
 
     /** The most recently FINISHED programme on a channel (the "Before" slot in the player overlay). */
