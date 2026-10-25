@@ -3465,6 +3465,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	category
 2	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	date
 2	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	date_start
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	date_start<
 1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	date_start>
 2	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	driver_number
 1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	drivers
