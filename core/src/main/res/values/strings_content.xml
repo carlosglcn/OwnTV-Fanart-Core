@@ -892,4 +892,5 @@
     <string name="glcn_lowram_prompt_body">This device is short of memory. Light mode asks less of it: no moving text, no image fades and a smaller picture cache. Switch it on? You can change it later in Settings.</string>
     <string name="glcn_lowram_prompt_yes">Switch on</string>
     <string name="glcn_lowram_prompt_no">No, thanks</string>
+    <string name="glcn_event_pit">Pit stop · %1$s</string>
 </resources>

@@ -581,4 +581,5 @@
     <string name="glcn_lowram_prompt_body">Este aparato va justo de memoria. El modo ligero le pide menos: sin texto en movimiento, sin fundidos de imagen y con menos caché de imágenes. ¿Lo activo? Luego puedes cambiarlo en Ajustes.</string>
     <string name="glcn_lowram_prompt_yes">Activar</string>
     <string name="glcn_lowram_prompt_no">No, gracias</string>
+    <string name="glcn_event_pit">Parada en boxes · %1$s</string>
 </resources>

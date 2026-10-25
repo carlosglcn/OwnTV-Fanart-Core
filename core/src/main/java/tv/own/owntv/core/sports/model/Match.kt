@@ -52,7 +52,7 @@ data class MatchEvent(
     val players: List<String>,
     val text: String? = null,
 ) {
-    enum class Kind { GOAL, OWN_GOAL, PENALTY_GOAL, YELLOW_CARD, RED_CARD, SUBSTITUTION, WICKET, KICKOFF, HALF_TIME, FULL_TIME }
+    enum class Kind { GOAL, OWN_GOAL, PENALTY_GOAL, YELLOW_CARD, RED_CARD, SUBSTITUTION, WICKET, KICKOFF, HALF_TIME, FULL_TIME, PIT_STOP, RACE_CONTROL }
 }
 
 /**

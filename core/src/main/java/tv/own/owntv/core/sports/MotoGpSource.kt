@@ -147,6 +147,7 @@ class CompositeSportsSource(
     private val espn: SportsSource,
     private val motoGp: MotoGpSource,
     private val tsdb: BasketDataSource? = null,
+    private val openF1: OpenF1Source? = null,
 ) : SportsSource {
     private fun League.isMotoGp() = slug == MOTOGP
     private fun League.isTsdb() = tsdb != null && slug in BasketDataSource.SLUGS
@@ -162,7 +163,13 @@ class CompositeSportsSource(
         when {
             match.leagueSlug == MOTOGP -> motoGp.summary(match)
             match.leagueSlug in BasketDataSource.SLUGS -> tsdb!!.summary(match)
-            else -> espn.summary(match)
+            else -> espn.summary(match).let { base ->
+                // glcn: a finished Formula 1 session also gets its pit stops and race-director notes (free history).
+                if (match.leagueSlug == "f1" && match.state == tv.own.owntv.core.sports.model.MatchState.POST && openF1 != null && base.timeline.isEmpty()) {
+                    val extra = openF1.timeline(match)
+                    if (extra.isEmpty()) base else base.copy(timeline = extra)
+                } else base
+            }
         }
 
     override suspend fun standings(league: League): StandingsTable =
