@@ -1026,9 +1026,9 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     suspend fun setZapViews(mask: Int) { context.dataStore.edit { it[Keys.GLCN_ZAP_VIEWS] = mask.and(ZapViews.ALL).takeIf { m -> m != 0 } ?: ZapViews.DEFAULT } }
     suspend fun setZapPanel(mode: Int) { context.dataStore.edit { it[Keys.GLCN_ZAP_PANEL] = mode.coerceIn(0, 2) } }
 
-    /** glcn: Home's background — 0 classic (top corner), 1 cinema (full screen, rows below), 2 panel (full screen, info at the side). */
+    /** glcn: Home's layout — 0 classic (top corner), 1 cinema (full screen, rows below), 2 panel (full screen, info at the side), 3 dock (title over its picture, glass dock with tabs). */
     val homeBackdropStyle: Flow<Int> = prefsFlow { it[Keys.GLCN_HOME_BACKDROP] ?: 0 }
-    suspend fun setHomeBackdropStyle(style: Int) { context.dataStore.edit { it[Keys.GLCN_HOME_BACKDROP] = style.coerceIn(0, 2) } }
+    suspend fun setHomeBackdropStyle(style: Int) { context.dataStore.edit { it[Keys.GLCN_HOME_BACKDROP] = style.coerceIn(0, 3) } }
 
     /** glcn: seasonal touches — 0 off, 1 details only, 2 details and small animations. */
     val seasonMode: Flow<Int> = prefsFlow { it[Keys.GLCN_SEASON_MODE] ?: 0 }

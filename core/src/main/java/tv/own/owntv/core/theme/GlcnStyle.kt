@@ -20,9 +20,9 @@ enum class GlcnStyle(
     /** Home's background this style asks for (0 classic, 1 cinema, 2 panel); null leaves the user's own choice. */
     val homeBackdrop: Int? = null,
 ) {
-    // Lumen: clear glass over a near-black or pearl page, one cool accent.
-    LUMEN_NOCHE(false, "#8AB4FF", 0xFF07090B, 0xFF151A21, 0xFFF4F6F7, 0xFFA9B0B6, 0xFFCBD1D6, glass = true),
-    LUMEN_DIA(true, "#1D5FD6", 0xFFEDF0F3, 0xFFFFFFFF, 0xFF0E1215, 0xFF55606A, 0xFF2A3138, glass = true),
+    // Lumen: clear glass over a near-black or pearl page, one turquoise accent (no other style uses it).
+    LUMEN_NOCHE(false, "#4FD1C5", 0xFF06090A, 0xFF111C1C, 0xFFF2F7F6, 0xFFA5B2B0, 0xFFC9D3D1, glass = true),
+    LUMEN_DIA(true, "#0E8F86", 0xFFF3F5F2, 0xFFFFFFFF, 0xFF0D1413, 0xFF566663, 0xFF2A3836, glass = true),
     ATARDECER(false, "#FF8A5B", 0xFF0E0B0A, 0xFF1B1512, 0xFFF6EEE8, 0xFFB8A79C, 0xFFD9CBC2),
     ESTUDIO(false, "#8AB4F8", 0xFF1A1C1E, 0xFF25282B, 0xFFE8EAED, 0xFF9AA0A6, 0xFFC9CDD2),
     VITRINA(false, "#FFFFFF", 0xFF000000, 0xFF1A1A1C, 0xFFFFFFFF, 0xFFA3A3A8, 0xFFD6D6DA, glass = true),
@@ -32,9 +32,6 @@ enum class GlcnStyle(
     PAPEL(true, "#E0312B", 0xFFF4F1EA, 0xFFFFFFFF, 0xFF141414, 0xFF5E5A54, 0xFF2E2B27),
     ARENA(true, "#C4562E", 0xFFF1E8DB, 0xFFFBF6EF, 0xFF2B211A, 0xFF6E5E50, 0xFF3E332A),
     ;
-
-    /** The Lumen styles draw Home as the focused title over its picture and a glass dock with tabs. */
-    val homeDock: Boolean get() = this == LUMEN_NOCHE || this == LUMEN_DIA
 
     companion object {
         fun of(name: String?): GlcnStyle? = entries.firstOrNull { it.name == name }
