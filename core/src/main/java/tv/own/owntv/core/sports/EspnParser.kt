@@ -384,7 +384,8 @@ internal object EspnParser {
             ?: id.takeIf { sport == Sport.TENNIS && it.isNotEmpty() }?.let { "https://a.espncdn.com/i/headshots/tennis/players/full/$it.png" }
         return Team(
             id = id,
-            logoUrl = photo?.let { logo(it) },
+            // As it comes: the logo resizer forces a square and squeezes a photo that is wider than tall.
+            logoUrl = photo,
             name = name,
             shortName = a.optString("shortName").ifEmpty { name },
             isAthlete = true,
