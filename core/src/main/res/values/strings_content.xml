@@ -893,4 +893,5 @@
     <string name="glcn_lowram_prompt_yes">Switch on</string>
     <string name="glcn_lowram_prompt_no">No, thanks</string>
     <string name="glcn_event_pit">Pit stop · %1$s</string>
+    <string name="glcn_share_log">Share</string>
 </resources>

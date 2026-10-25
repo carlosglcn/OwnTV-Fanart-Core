@@ -240,7 +240,7 @@
     <!-- Translators: Error when the Stalker portal session expires. -->
     <string name="sync_error_session">The portal session expired. Please try again.</string>
     <!-- Translators: Error when the server rejects login credentials. -->
-    <string name="sync_error_auth">The server rejected your login. Check your username and password.</string>
+    <string name="sync_error_auth">The provider refused the connection. The list may have expired, be in use on too many devices, or be blocked for this network (or the username and password are wrong). Check with your provider, then try again.</string>
     <!-- Translators: Error when the requested resource is not found on the server. -->
     <string name="sync_error_not_found">Not found on the server. Check the URL.</string>
     <!-- Translators: Generic server error during sync. -->

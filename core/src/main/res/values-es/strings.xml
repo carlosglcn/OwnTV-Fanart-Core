@@ -124,7 +124,7 @@
     </plurals>
     <string name="sync_error_portal">No se ha podido acceder al portal. Comprueba la URL del portal — normalmente termina en /c/.</string>
     <string name="sync_error_session">La sesión del portal ha caducado. Inténtalo de nuevo.</string>
-    <string name="sync_error_auth">El servidor ha rechazado el inicio de sesión. Comprueba el nombre de usuario y la contraseña.</string>
+    <string name="sync_error_auth">El proveedor ha rechazado la conexión. La lista puede haber caducado, estar en uso en demasiados aparatos o estar bloqueada para esta red (o el usuario y la contraseña no son correctos). Consúltalo con tu proveedor y vuelve a intentarlo.</string>
     <string name="sync_error_not_found">No se ha encontrado en el servidor. Comprueba la URL.</string>
     <string name="sync_error_server">El servidor ha tenido un problema. Inténtalo de nuevo más tarde.</string>
     <string name="sync_error_secure">Ha fallado la conexión segura — puede que el certificado del servidor no sea válido.</string>

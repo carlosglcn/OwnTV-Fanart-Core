@@ -582,4 +582,5 @@
     <string name="glcn_lowram_prompt_yes">Activar</string>
     <string name="glcn_lowram_prompt_no">No, gracias</string>
     <string name="glcn_event_pit">Parada en boxes · %1$s</string>
+    <string name="glcn_share_log">Compartir</string>
 </resources>
