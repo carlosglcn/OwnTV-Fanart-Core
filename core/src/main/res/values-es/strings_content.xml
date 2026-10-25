@@ -475,8 +475,8 @@
     <string name="glcn_style_kind_dark">Oscuro</string>
     <string name="glcn_style_kind_light">Claro</string>
     <string name="glcn_style_kind_glass">✦ Cristal · equipos potentes</string>
-    <string name="glcn_style_none">Ninguno, mis ajustes</string>
-    <string name="glcn_style_none_desc">Tema y acento como los tengas en Apariencia</string>
+    <string name="glcn_style_none">Personalizado</string>
+    <string name="glcn_style_none_desc">Eliges tú el tema y el acento; se abren a continuación</string>
     <string name="glcn_skip_intro">Saltar intro</string>
     <string name="glcn_auto_skip_title">Saltar intros solas</string>
     <string name="glcn_habits_title">Avisarme de lo que suelo ver</string>
@@ -573,8 +573,12 @@
     <string name="glcn_preview_ok_title">Vista previa con OK</string>
     <string name="glcn_preview_ok_desc">No se reproduce nada al moverte por la lista. OK inicia la vista previa del canal; otro OK lo abre a pantalla completa. Más ligero para aparatos con poca memoria.</string>
     <string name="glcn_light_mode_title">Modo ligero</string>
-    <string name="glcn_light_mode_desc">Para aparatos con poca memoria: sin texto en movimiento, sin fundidos de imagen y con menos caché de imágenes. Se activa solo en aparatos de 2 GB.</string>
+    <string name="glcn_light_mode_desc">Para aparatos con poca memoria: sin texto en movimiento, sin fundidos de imagen y con menos caché de imágenes.</string>
     <string name="glcn_reset_appearance_title">Restablecer apariencia</string>
     <string name="glcn_reset_appearance_desc">Tema, color de acento, resaltado del foco, cristal y fondo, tamaños de texto y ventanas y zoom vuelven a como venía la app.</string>
     <string name="glcn_reset_appearance_confirm">Restablecer</string>
+    <string name="glcn_lowram_prompt_title">Memoria justa</string>
+    <string name="glcn_lowram_prompt_body">Este aparato va justo de memoria. El modo ligero le pide menos: sin texto en movimiento, sin fundidos de imagen y con menos caché de imágenes. ¿Lo activo? Luego puedes cambiarlo en Ajustes.</string>
+    <string name="glcn_lowram_prompt_yes">Activar</string>
+    <string name="glcn_lowram_prompt_no">No, gracias</string>
 </resources>

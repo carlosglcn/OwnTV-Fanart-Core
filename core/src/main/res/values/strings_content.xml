@@ -784,8 +784,8 @@
     <string name="glcn_style_kind_dark">Dark</string>
     <string name="glcn_style_kind_light">Light</string>
     <string name="glcn_style_kind_glass">✦ Glass · stronger devices</string>
-    <string name="glcn_style_none">None — my own settings</string>
-    <string name="glcn_style_none_desc">Theme and accent as set in Appearance</string>
+    <string name="glcn_style_none">Custom</string>
+    <string name="glcn_style_none_desc">Choose the theme and accent yourself — they open next</string>
     <string name="glcn_skip_intro">Skip intro</string>
     <string name="glcn_auto_skip_title">Skip intros by themselves</string>
     <string name="glcn_habits_title">Warn me about what I usually watch</string>
@@ -884,8 +884,12 @@
     <string name="glcn_preview_ok_title">Preview with OK</string>
     <string name="glcn_preview_ok_desc">Nothing plays while you move through the list. OK starts the preview of the channel; OK again opens it full screen. Kinder to boxes with little memory.</string>
     <string name="glcn_light_mode_title">Light mode</string>
-    <string name="glcn_light_mode_desc">For boxes with little memory: no moving text, no image fades and a smaller picture cache. It switches on by itself on 2 GB boxes.</string>
+    <string name="glcn_light_mode_desc">For boxes with little memory: no moving text, no image fades and a smaller picture cache.</string>
     <string name="glcn_reset_appearance_title">Reset appearance</string>
     <string name="glcn_reset_appearance_desc">Theme, accent colour, focus highlight, glass and background, text and window sizes and zoom go back to how the app came.</string>
     <string name="glcn_reset_appearance_confirm">Reset</string>
+    <string name="glcn_lowram_prompt_title">Memory is running low</string>
+    <string name="glcn_lowram_prompt_body">This device is short of memory. Light mode asks less of it: no moving text, no image fades and a smaller picture cache. Switch it on? You can change it later in Settings.</string>
+    <string name="glcn_lowram_prompt_yes">Switch on</string>
+    <string name="glcn_lowram_prompt_no">No, thanks</string>
 </resources>
