@@ -570,4 +570,8 @@
     <string name="glcn_reset_saved_all">Restablecer todo</string>
     <string name="glcn_ui_sound_style_soft">Suave</string>
     <string name="glcn_ui_sound_style_air">Aire</string>
+    <string name="glcn_preview_ok_title">Vista previa con OK</string>
+    <string name="glcn_preview_ok_desc">No se reproduce nada al moverte por la lista. OK inicia la vista previa del canal; otro OK lo abre a pantalla completa. Más ligero para aparatos con poca memoria.</string>
+    <string name="glcn_light_mode_title">Modo ligero</string>
+    <string name="glcn_light_mode_desc">Para aparatos con poca memoria: sin texto en movimiento, sin fundidos de imagen y con menos caché de imágenes. Se activa solo en aparatos de 2 GB.</string>
 </resources>

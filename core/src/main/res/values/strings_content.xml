@@ -881,4 +881,8 @@
     <string name="glcn_reset_saved_all">Reset everything</string>
     <string name="glcn_ui_sound_style_soft">Soft</string>
     <string name="glcn_ui_sound_style_air">Air</string>
+    <string name="glcn_preview_ok_title">Preview with OK</string>
+    <string name="glcn_preview_ok_desc">Nothing plays while you move through the list. OK starts the preview of the channel; OK again opens it full screen. Kinder to boxes with little memory.</string>
+    <string name="glcn_light_mode_title">Light mode</string>
+    <string name="glcn_light_mode_desc">For boxes with little memory: no moving text, no image fades and a smaller picture cache. It switches on by itself on 2 GB boxes.</string>
 </resources>
