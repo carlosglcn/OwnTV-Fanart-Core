@@ -3448,7 +3448,37 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	owntv_sports_reminders
 1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	tv.own.owntv.extra.SPORTS_MATCH
 1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchNotifications.kt	·
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	f1
 1	json	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	no ranking
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	$BASE/$path?session_key=$sessionKey
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	$BASE/sessions
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	%.1f s
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	'
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	CHEQUERED
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	L$it
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	PENALTY
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	RED
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	RETIRED
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	STOPPED
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	SafetyCar
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	TRACK
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	category
+2	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	date
+2	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	date_start
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	date_start>
+2	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	driver_number
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	drivers
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	flag
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	https://api.openf1.org/v1
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	lap_number
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	message
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	name_acronym
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	pit
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	pit_duration
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	race_control
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	session_key
+3	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	stop_duration
+1	technical	core/src/main/java/tv/own/owntv/core/sports/OpenF1Source.kt	·
 3	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	\0
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	$it
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	${TeamNames.tokens(text).joinToString(" ")} | ${raw.joinToString(" ")}
