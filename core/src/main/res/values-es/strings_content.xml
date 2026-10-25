@@ -418,6 +418,7 @@
     <string name="glcn_season_desc">Pequeños detalles en Inicio por Halloween, Navidad, Nochevieja, Carnaval y San Valentín</string>
     <string name="glcn_season_details">Solo detalles</string>
     <string name="glcn_season_animated">Con animaciones</string>
+    <string name="glcn_volume_all">Usar en todos</string>
     <string name="glcn_dialogue_title">Diálogos más claros</string>
     <string name="glcn_dialogue_desc">Adelanta las voces y suaviza los graves — como el realce de diálogos de Kodi. Solo con sonido decodificado (no con paso directo)</string>
     <string name="glcn_mpv_passthrough_title">Paso directo con MPV (experimental)</string>

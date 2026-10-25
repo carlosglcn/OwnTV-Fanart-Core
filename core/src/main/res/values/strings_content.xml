@@ -717,6 +717,7 @@
     <string name="glcn_season_desc">Small touches on Home for Halloween, Christmas, New Year\'s Eve, Carnival and Valentine\'s</string>
     <string name="glcn_season_details">Details</string>
     <string name="glcn_season_animated">Animated</string>
+    <string name="glcn_volume_all">Use for all</string>
     <string name="glcn_dialogue_title">Clearer dialogue</string>
     <string name="glcn_dialogue_desc">Brings voices forward and tames the boom — like Kodi\'s dialogue boost. Decoded sound only (not with passthrough)</string>
     <string name="glcn_mpv_passthrough_title">Passthrough with MPV (experimental)</string>
