@@ -2465,7 +2465,7 @@
     <!-- Translators: Live TV layout option: the channel list and preview use the whole screen; the categories slide in from the left. -->
     <string name="settings_live_layout_stage">Stage</string>
     <!-- Translators: Description of the Stage option for the Live TV layout. -->
-    <string name="settings_live_layout_stage_description">Press Left to open the categories. The channel list and preview get the full width.</string>
+    <string name="settings_live_layout_stage_description">The categories open from a button at the top. The channel list and preview get the full width.</string>
     <!-- Translators: Description of the Separate panels option for the Live TV layout. -->
     <string name="settings_live_layout_separate_description">Categories, the channel list and the preview side by side.</string>
     <string name="settings_live_layout_cinematic_description">The focused programme’s artwork behind the preview, channels as a row of picture cards with what is on next.</string>
