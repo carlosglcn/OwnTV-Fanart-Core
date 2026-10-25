@@ -574,4 +574,7 @@
     <string name="glcn_preview_ok_desc">No se reproduce nada al moverte por la lista. OK inicia la vista previa del canal; otro OK lo abre a pantalla completa. Más ligero para aparatos con poca memoria.</string>
     <string name="glcn_light_mode_title">Modo ligero</string>
     <string name="glcn_light_mode_desc">Para aparatos con poca memoria: sin texto en movimiento, sin fundidos de imagen y con menos caché de imágenes. Se activa solo en aparatos de 2 GB.</string>
+    <string name="glcn_reset_appearance_title">Restablecer apariencia</string>
+    <string name="glcn_reset_appearance_desc">Tema, color de acento, resaltado del foco, cristal y fondo, tamaños de texto y ventanas y zoom vuelven a como venía la app.</string>
+    <string name="glcn_reset_appearance_confirm">Restablecer</string>
 </resources>

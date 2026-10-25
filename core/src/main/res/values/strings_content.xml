@@ -885,4 +885,7 @@
     <string name="glcn_preview_ok_desc">Nothing plays while you move through the list. OK starts the preview of the channel; OK again opens it full screen. Kinder to boxes with little memory.</string>
     <string name="glcn_light_mode_title">Light mode</string>
     <string name="glcn_light_mode_desc">For boxes with little memory: no moving text, no image fades and a smaller picture cache. It switches on by itself on 2 GB boxes.</string>
+    <string name="glcn_reset_appearance_title">Reset appearance</string>
+    <string name="glcn_reset_appearance_desc">Theme, accent colour, focus highlight, glass and background, text and window sizes and zoom go back to how the app came.</string>
+    <string name="glcn_reset_appearance_confirm">Reset</string>
 </resources>
