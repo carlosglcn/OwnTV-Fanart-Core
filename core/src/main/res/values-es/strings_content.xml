@@ -548,7 +548,7 @@
     <string name="glcn_synopsis_full">Sinopsis completa</string>
     <string name="glcn_synopsis_none">Este programa no tiene sinopsis.</string>
     <string name="glcn_ui_sound_style_title">Estilo de sonido</string>
-    <string name="glcn_ui_sound_style_desc">El carácter de los sonidos de menú: clásico, cristal, madera o burbuja</string>
+    <string name="glcn_ui_sound_style_desc">El carácter de los sonidos de menú: clásico, cristal, madera, burbuja, suave o aire</string>
     <string name="glcn_ui_sound_style_classic">Clásico</string>
     <string name="glcn_ui_sound_style_crystal">Cristal</string>
     <string name="glcn_ui_sound_style_wood">Madera</string>
@@ -565,4 +565,9 @@
     <string name="glcn_choose_favorites">Elige qué quieres eliminar de este perfil. Las listas de reproducción, el historial y las descargas no se verán afectados.</string>
     <string name="glcn_clear_favorites_confirm">¿Borrar los favoritos de <xliff:g id="scope">%1$s</xliff:g>\?</string>
     <string name="glcn_failover_toast">El canal falló — cambiado a %1$s</string>
+    <string name="glcn_reset_saved">Restablecer lo guardado</string>
+    <string name="glcn_reset_saved_description">Olvida lo que el reproductor guardó solo: motor en directo y en películas y series, zoom, volumen y retardo de audio.</string>
+    <string name="glcn_reset_saved_all">Restablecer todo</string>
+    <string name="glcn_ui_sound_style_soft">Suave</string>
+    <string name="glcn_ui_sound_style_air">Aire</string>
 </resources>

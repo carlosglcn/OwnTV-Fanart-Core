@@ -859,7 +859,7 @@
     <string name="glcn_synopsis_full">Full synopsis</string>
     <string name="glcn_synopsis_none">No synopsis available for this programme.</string>
     <string name="glcn_ui_sound_style_title">Sound style</string>
-    <string name="glcn_ui_sound_style_desc">The character of the menu sounds: classic, crystal, wood or bubble</string>
+    <string name="glcn_ui_sound_style_desc">The character of the menu sounds: classic, crystal, wood, bubble, soft or air</string>
     <string name="glcn_ui_sound_style_classic">Classic</string>
     <string name="glcn_ui_sound_style_crystal">Crystal</string>
     <string name="glcn_ui_sound_style_wood">Wood</string>
@@ -876,4 +876,9 @@
     <string name="glcn_choose_favorites">Choose what to remove for this profile. Playlists, history and downloads are not affected.</string>
     <string name="glcn_clear_favorites_confirm">Clear <xliff:g id="scope">%1$s</xliff:g> favorites?</string>
     <string name="glcn_failover_toast">Channel failed — switched to %1$s</string>
+    <string name="glcn_reset_saved">Reset saved choices</string>
+    <string name="glcn_reset_saved_description">Forget what the player saved on its own: engine choices for live and for films and series, zoom, volume and audio delay.</string>
+    <string name="glcn_reset_saved_all">Reset everything</string>
+    <string name="glcn_ui_sound_style_soft">Soft</string>
+    <string name="glcn_ui_sound_style_air">Air</string>
 </resources>

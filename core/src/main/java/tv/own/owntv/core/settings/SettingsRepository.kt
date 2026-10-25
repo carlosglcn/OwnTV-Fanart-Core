@@ -984,9 +984,9 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     val alertsOutsideApp: Flow<Boolean> = prefsFlow { it[Keys.GLCN_ALERTS_OUTSIDE_APP] ?: true }
     suspend fun setAlertsOutsideApp(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_ALERTS_OUTSIDE_APP] = on } }
 
-    /** glcn: the menu sounds' character — 0 classic, 1 crystal, 2 wood, 3 bubble. */
+    /** glcn: the menu sounds' character — 0 classic, 1 crystal, 2 wood, 3 bubble, 4 soft, 5 air. */
     val uiSoundStyle: Flow<Int> = prefsFlow { it[Keys.GLCN_UI_SOUND_STYLE] ?: 0 }
-    suspend fun setUiSoundStyle(style: Int) { context.dataStore.edit { it[Keys.GLCN_UI_SOUND_STYLE] = style.coerceIn(0, 3) } }
+    suspend fun setUiSoundStyle(style: Int) { context.dataStore.edit { it[Keys.GLCN_UI_SOUND_STYLE] = style.coerceIn(0, 5) } }
     suspend fun setUiSounds(level: Int) { context.dataStore.edit { it[Keys.GLCN_UI_SOUNDS] = level.coerceIn(0, 2) } }
 
     /** glcn: a short chime as the app opens (the season's own while a seasonal theme is on). */
