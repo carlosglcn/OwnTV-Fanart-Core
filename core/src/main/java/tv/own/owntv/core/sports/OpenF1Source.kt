@@ -82,7 +82,8 @@ class OpenF1Source(client: OkHttpClient) {
     private suspend fun sessionAt(startMs: Long): JSONObject? {
         val from = Instant.ofEpochMilli(startMs - WINDOW_MS).toString()
         val to = Instant.ofEpochMilli(startMs + WINDOW_MS).toString()
-        val url = "$BASE/sessions".toHttpUrl().newBuilder().addQueryParameter("date_start>", from) // the name carries the operator: date_start>=….addQueryParameter("date_start<", to).build().toString()
+        // The operator is part of the name: "date_start>=…" reaches the service as the name "date_start>".
+        val url = "$BASE/sessions".toHttpUrl().newBuilder().addQueryParameter("date_start>", from).addQueryParameter("date_start<", to).build().toString()
         return array(get(url)).minByOrNull { r -> kotlin.math.abs((instant(r.optString("date_start")) ?: Long.MAX_VALUE / 2) - startMs) }
     }
 
