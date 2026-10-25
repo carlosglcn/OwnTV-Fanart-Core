@@ -1016,6 +1016,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
             p[Keys.GLCN_STYLE] = style.name
             p[Keys.THEME_MODE] = (if (style.light) ThemeMode.LIGHT else ThemeMode.DARK).name
             p[Keys.ACCENT_CUSTOM] = style.accentHex
+            style.homeBackdrop?.let { p[Keys.GLCN_HOME_BACKDROP] = it }
             when {
                 style.glass -> p[Keys.GLASS_SCOPE] = tv.own.owntv.core.theme.GlassConfig.ON_BITS
                 wasGlass -> p[Keys.GLASS_SCOPE] = 0
