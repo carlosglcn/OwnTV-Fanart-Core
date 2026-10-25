@@ -348,7 +348,7 @@ internal object EspnParser {
 
     private fun competitor(c: JSONObject, sport: Sport): Competitor {
         val teamJson = c.optJSONObject("team")
-        val team = if (teamJson != null) team(teamJson) else athlete(c.getJSONObject("athlete"), c.optString("id"))
+        val team = if (teamJson != null) team(teamJson) else athlete(c.getJSONObject("athlete"), c.optString("id"), sport)
         val periods = objects(c.optJSONArray("linescores")).map {
             PeriodScore(it.optDouble("value", 0.0).toInt(), if (it.has("tiebreak")) it.optInt("tiebreak") else null)
         }
@@ -375,10 +375,16 @@ internal object EspnParser {
         logoUrl = logo(t.optString("logo").ifEmpty { t.optJSONArray("logos")?.optJSONObject(0)?.optString("href").orEmpty() }),
     )
 
-    private fun athlete(a: JSONObject, fallbackId: String): Team {
+    private fun athlete(a: JSONObject, fallbackId: String, sport: Sport? = null): Team {
         val name = a.optString("displayName")
+        val id = a.optString("id").ifEmpty { fallbackId }
+        // The player's own photo: the feed's headshot when it carries one, else ESPN's standard path for
+        // tennis (ATP and WTA alike). A photo that does not load leaves the initials showing.
+        val photo = a.optJSONObject("headshot")?.optString("href")?.takeIf { it.isNotEmpty() }
+            ?: id.takeIf { sport == Sport.TENNIS && it.isNotEmpty() }?.let { "https://a.espncdn.com/i/headshots/tennis/players/full/$it.png" }
         return Team(
-            id = a.optString("id").ifEmpty { fallbackId },
+            id = id,
+            logoUrl = photo?.let { logo(it) },
             name = name,
             shortName = a.optString("shortName").ifEmpty { name },
             isAthlete = true,
