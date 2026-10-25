@@ -2,6 +2,7 @@ package tv.own.owntv.core.sports
 
 import tv.own.owntv.core.sports.model.Match
 import tv.own.owntv.core.sports.model.MatchState
+import tv.own.owntv.core.sports.model.Sport
 
 /**
  * What a screen is showing, and so what it needs kept fresh. A screen holds one while it is visible
@@ -172,6 +173,8 @@ class SportsRefreshPolicy {
                     val summary = Feed.Summary(d.match.key)
                     val known = feeds[summary]?.matches?.firstOrNull() ?: d.match
                     want(summary, if (isLive(listOf(known), now)) Want.Every(liveMs) else Want.Once)
+                    // glcn: a racing session's page shows the drivers' and constructors' standings.
+                    SportsCatalog.league(d.match.feed)?.takeIf { it.sport == Sport.RACING }?.let { want(Feed.Rankings(it.key), Want.Once) }
                 }
                 is Demand.PlayerScore -> {
                     val board = Feed.Scoreboard(d.match.feed)
