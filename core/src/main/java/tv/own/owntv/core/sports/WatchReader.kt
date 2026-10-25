@@ -21,6 +21,7 @@ import tv.own.owntv.core.model.MediaType
 import tv.own.owntv.core.repository.activeProfileSources
 import tv.own.owntv.core.settings.SettingsRepository
 import tv.own.owntv.core.sports.model.Match
+import tv.own.owntv.core.sports.model.Sport
 
 /**
  * The reads "Watch live" needs, behind an interface so [WatchReader] is unit-tested on a fake.
@@ -106,7 +107,13 @@ class WatchReader(private val data: WatchData) {
     private suspend fun runSlot(start: Long, slot: List<Match>) {
         runs++
         val keys = slot.map { WatchMatcher.Keys(it) }
-        val programmes = data.programmes(start - SLOT_BEFORE_MS, start + SLOT_AFTER_MS, minStop = start)
+        // glcn: a motor race's guide entry drifts more than a match's (a feed in another time zone, a clock change).
+        val racing = slot.any { it.sport == Sport.RACING }
+        val programmes = data.programmes(
+            start - if (racing) RACING_BEFORE_MS else SLOT_BEFORE_MS,
+            start + if (racing) RACING_AFTER_MS else SLOT_AFTER_MS,
+            minStop = start - if (racing) RACING_AFTER_MS else 0L,
+        )
         val tokens = programmes.associate { it.id to TeamNames.tokens(it.title).toSet() }
         val confirmed = HashMap<String, MutableList<EpgProgrammeLite>>()
         val partial = HashMap<Long, MutableList<WatchMatcher.Keys>>()
@@ -157,6 +164,8 @@ class WatchReader(private val data: WatchData) {
         /** A slot reads programmes starting two hours before kick-off (pre-match shows) to 30 min after. */
         const val SLOT_BEFORE_MS = 2 * 60 * 60_000L
         const val SLOT_AFTER_MS = 30 * 60_000L
+        const val RACING_BEFORE_MS = 3 * 60 * 60_000L
+        const val RACING_AFTER_MS = 90 * 60_000L
         private const val MAX_DESCRIPTIONS = 600
         private const val ID_CHUNK = 400
 

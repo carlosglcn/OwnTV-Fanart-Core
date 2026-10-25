@@ -117,6 +117,10 @@ class EspnParserTest {
         assertEquals(RaceSession.SPRINT, RaceSession.of("SR"))
         assertEquals(RaceSession.QUALIFYING, RaceSession.of("Qual"))
         assertEquals(RaceSession.RACE, RaceSession.of("Race"))
+        assertEquals(RaceSession.RACE, RaceSession.of("RAC"))
+        assertEquals(RaceSession.SPRINT, RaceSession.of("SPR"))
+        assertEquals(RaceSession.QUALIFYING, RaceSession.of("Q2"))
+        assertEquals(RaceSession.WARM_UP, RaceSession.of("WUP"))
         assertNull(RaceSession.of("XYZ"))
     }
 

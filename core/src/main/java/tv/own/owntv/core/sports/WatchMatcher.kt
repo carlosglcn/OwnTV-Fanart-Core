@@ -71,6 +71,14 @@ object WatchMatcher {
         val home: TeamNames.Key? = match.home?.team?.takeIf { sided }?.let(TeamNames::keyOf)
         val away: TeamNames.Key? = match.away?.team?.takeIf { sided }?.let(TeamNames::keyOf)
         val competitionNames: List<String> = SportsCatalog.competitionNames(match)
+
+        /**
+         * glcn: a Grand Prix is named in a guide by its place ("GP de Australia") as often as by its series, and
+         * a guide that leaves the series out must still be found. The circuit's own words — the city and
+         * country, minus "circuit", "island"... — are the other half.
+         */
+        val placeWords: Set<String> = if (match.sport != Sport.RACING) emptySet()
+        else TeamNames.tokens(match.venue.orEmpty()).filter { it.length >= 4 && it !in GENERIC_VENUE }.toSet()
         val league: TeamNames.Key = TeamNames.keyOfName(*competitionNames.toTypedArray())
         val broadcasters: List<TeamNames.Key> = match.broadcasts.map { TeamNames.keyOfName(it.name) }
 
@@ -104,7 +112,8 @@ object WatchMatcher {
         val league = keys.league.foundIn(tokens)
         return when {
             keys.finalTournamentWords.isNotEmpty() && "final" in tokens && tokens.containsAll(keys.finalTournamentWords) -> Hit.CONFIRMED
-            keys.home == null && keys.away == null -> if (league) Hit.CONFIRMED else Hit.NONE
+            keys.home == null && keys.away == null ->
+                if (league || (keys.placeWords.isNotEmpty() && tokens.any { it in keys.placeWords } && tokens.any { it in RACING_TITLE })) Hit.CONFIRMED else Hit.NONE
             home && away -> Hit.CONFIRMED
             (home || away) && league -> Hit.CONFIRMED
             home || away -> Hit.PARTIAL
@@ -138,6 +147,17 @@ object WatchMatcher {
     private val GENERIC_TOURNAMENT = setOf(
         "masters", "open", "atp", "wta", "tour", "rolex", "cup", "championships", "championship", "tennis",
         "international", "series", "classic", "trophy", "tournament", "torneo", "of", "finals", "mens", "womens",
+    )
+
+    // glcn: words that mark a programme as a motor race, beside a circuit's own place name.
+    private val RACING_TITLE: Set<String> = TeamNames.tokens(
+        "gp gran grand premio prix motogp moto2 moto3 f1 formula carrera race clasificacion qualifying libres sprint warm",
+    ).toSet()
+
+    // Words of a circuit's name that say nothing about *which* circuit.
+    private val GENERIC_VENUE = setOf(
+        "circuit", "circuito", "international", "autodromo", "autodrome", "speedway", "motor", "park", "road", "racing",
+        "course", "island", "grand", "prix", "street", "city", "center", "centre", "ring",
     )
 
     private val FIXTURE = Regex("""\s(vs?\.?|v)\s""", RegexOption.IGNORE_CASE)

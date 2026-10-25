@@ -66,18 +66,21 @@ data class Ranking(val leagueKey: String, val groups: List<RankingGroup>)
 
 /** A racing session as ESPN codes it (`FP1`, `SS`, `Race` …), so each app can name it in the user's language. */
 enum class RaceSession {
-    PRACTICE_1, PRACTICE_2, PRACTICE_3, SPRINT_QUALIFYING, SPRINT, QUALIFYING, RACE;
+    PRACTICE_1, PRACTICE_2, PRACTICE_3, PRACTICE, WARM_UP, SPRINT_QUALIFYING, SPRINT, QUALIFYING, RACE;
 
     companion object {
         /** [Match.subtitle] of a racing session → its kind; null for a code ESPN has not used before. */
-        fun of(code: String?): RaceSession? = when (code) {
+        fun of(code: String?): RaceSession? = when (code?.trim()?.uppercase()) {
             "FP1" -> PRACTICE_1
             "FP2" -> PRACTICE_2
             "FP3" -> PRACTICE_3
+            // MotoGP's own codes: Saturday practice, the warm-up, the sprint, the two qualifying parts, the race.
+            "PR", "FP" -> PRACTICE
+            "WUP" -> WARM_UP
             "SS" -> SPRINT_QUALIFYING
-            "SR" -> SPRINT
-            "Qual" -> QUALIFYING
-            "Race" -> RACE
+            "SR", "SPR" -> SPRINT
+            "QUAL", "Q", "Q1", "Q2" -> QUALIFYING
+            "RACE", "RAC" -> RACE
             else -> null
         }
     }

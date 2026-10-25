@@ -421,6 +421,8 @@
     <string name="glcn_race_practice_1">Libres 1</string>
     <string name="glcn_race_practice_2">Libres 2</string>
     <string name="glcn_race_practice_3">Libres 3</string>
+    <string name="glcn_race_practice">Libres</string>
+    <string name="glcn_race_warm_up">Warm-up</string>
     <string name="glcn_race_sprint_qualifying">Clasificación sprint</string>
     <string name="glcn_race_sprint">Carrera sprint</string>
     <string name="glcn_race_qualifying">Clasificación</string>

@@ -720,6 +720,8 @@
     <string name="glcn_race_practice_1">Free practice 1</string>
     <string name="glcn_race_practice_2">Free practice 2</string>
     <string name="glcn_race_practice_3">Free practice 3</string>
+    <string name="glcn_race_practice">Practice</string>
+    <string name="glcn_race_warm_up">Warm-up</string>
     <string name="glcn_race_sprint_qualifying">Sprint qualifying</string>
     <string name="glcn_race_sprint">Sprint race</string>
     <string name="glcn_race_qualifying">Qualifying</string>
