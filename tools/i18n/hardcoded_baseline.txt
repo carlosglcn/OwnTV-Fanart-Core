@@ -295,7 +295,6 @@
 1	core/src/main/java/tv/own/owntv/core/metadata/OwnTVClientId.kt	\0
 1	core/src/main/java/tv/own/owntv/core/metadata/OwnTVClientId.kt	%02x
 1	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	owntv_platform_badges
-7	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\0
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	%.1f
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	[^a-z0-9]+
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\\b(cine|pelicula|peliculas|film|movie|movies)\\b
@@ -309,7 +308,6 @@
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	directo
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	en directo
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	w780
-1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	|
 2	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	·
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	,
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/3/movie/
