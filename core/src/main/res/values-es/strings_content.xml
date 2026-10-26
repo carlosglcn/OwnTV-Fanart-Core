@@ -468,7 +468,7 @@
     <string name="glcn_setup_home_sub">Las mismas filas, cuatro maneras de enseñarlas. Se puede cambiar luego en Ajustes › Fanart</string>
     <string name="glcn_setup_home_classic">El cartel destacado arriba y las filas debajo</string>
     <string name="glcn_setup_home_cinema">La imagen de lo que señalas ocupa toda la pantalla, con su información; las filas abajo</string>
-    <string name="glcn_setup_home_dock">El título grande sobre su imagen y un dock de cristal debajo, con una pestaña por fila</string>
+    <string name="glcn_setup_home_dock">El título grande sobre su imagen y un dock que sube desde abajo con una tarjeta ancha y otras estrechas, con una pestaña por fila</string>
     <string name="glcn_setup_home_panel">Las filas a la izquierda y un panel fijo a la derecha con la ficha de lo que señalas</string>
     <string name="glcn_style_title">Estilo</string>
     <string name="glcn_style_desc">Colores, fondo y acento elegidos a juego. ✦ Los de cristal lucen mejor en equipos potentes; en el resto se ven sin desenfoque</string>
