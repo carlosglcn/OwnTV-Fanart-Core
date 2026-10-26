@@ -894,4 +894,11 @@
     <string name="glcn_lowram_prompt_no">No, thanks</string>
     <string name="glcn_event_pit">Pit stop · %1$s</string>
     <string name="glcn_share_log">Share</string>
+    <string name="glcn_pi_on_air">On air now</string>
+    <string name="glcn_pi_next">Next</string>
+    <string name="glcn_pi_airs_again">Airs again this week</string>
+    <string name="glcn_pi_no_repeats">Not on again this week, according to the guide</string>
+    <string name="glcn_pi_technical">Technical data</string>
+    <string name="glcn_pi_hide_technical">Hide technical data</string>
+    <string name="glcn_pi_no_guide">The guide has nothing for this channel right now</string>
 </resources>

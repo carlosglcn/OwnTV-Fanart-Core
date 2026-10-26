@@ -583,4 +583,11 @@
     <string name="glcn_lowram_prompt_no">No, gracias</string>
     <string name="glcn_event_pit">Parada en boxes · %1$s</string>
     <string name="glcn_share_log">Compartir</string>
+    <string name="glcn_pi_on_air">En emisión ahora</string>
+    <string name="glcn_pi_next">A continuación</string>
+    <string name="glcn_pi_airs_again">Se emite de nuevo esta semana</string>
+    <string name="glcn_pi_no_repeats">No se repite esta semana, según la guía</string>
+    <string name="glcn_pi_technical">Datos técnicos</string>
+    <string name="glcn_pi_hide_technical">Ocultar datos técnicos</string>
+    <string name="glcn_pi_no_guide">La guía no tiene nada de este canal ahora mismo</string>
 </resources>
