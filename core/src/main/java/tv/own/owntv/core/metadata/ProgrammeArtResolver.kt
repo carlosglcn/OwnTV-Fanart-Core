@@ -61,6 +61,41 @@ class ProgrammeArtResolver(
     suspend fun detailsFor(title: String, categories: String?): Info? =
         if (worthRating(title, categories)) infoFor(title, Hint(categories, null, null, null), loose = true) else null
 
+    private val logoPrefs = context.getSharedPreferences("glcn_programme_logo_v1", Context.MODE_PRIVATE)
+    private val logoMemory = ConcurrentHashMap<String, String>()
+
+    /**
+     * The title's own logo (the lettering a film is known by), for a programme that is a film — never for a
+     * series or a bulletin. Asked once per title and remembered, a miss too ("" = none). Null when there is
+     * none or TMDB could not be asked.
+     */
+    suspend fun logoFor(title: String, categories: String?): String? = withContext(Dispatchers.IO) {
+        if (!worthRating(title, categories)) return@withContext null
+        if (!runCatching { settings.metadataConfig().enabled }.getOrDefault(false)) return@withContext null
+        val hint = Hint(categories, null, null, null)
+        if (hint.kind(title) == Kind.SERIES) return@withContext null
+        val query = clean(title)
+        val want = fold(query)
+        if (want.isEmpty()) return@withContext null
+        val key = want + "|" + hint.kind(title).name.first()
+        (logoMemory[key] ?: logoPrefs.getString(key, null))?.let { logoMemory[key] = it; return@withContext it.ifBlank { null } }
+        mutex.withLock {
+            if (!allowLookup()) return@withLock null
+            val hits = runCatching { provider.searchMovie(query, null, false) }.getOrNull() ?: return@withLock null
+            val hit = hits.filter { r -> fold(r.title) == want || r.originalTitle?.let(::fold) == want }.maxByOrNull { it.popularity }
+            val url = hit?.let { runCatching { provider.movieDetails(it.tmdbId) }.getOrNull() }?.logoPath?.let { MetadataImages.logo(it) }
+            if (hit != null && url == null) {
+                // A film found, no lettering for it: remember that. A failed call is asked again later.
+                logoMemory[key] = ""; logoPrefs.edit().putString(key, "").apply(); return@withLock null
+            }
+            if (hit == null) { logoMemory[key] = ""; logoPrefs.edit().putString(key, "").apply(); return@withLock null }
+            logoMemory[key] = url!!
+            if (logoPrefs.all.size > MAX_STORED) logoPrefs.edit().clear().apply()
+            logoPrefs.edit().putString(key, url).apply()
+            url
+        }
+    }
+
     /** What tells a film from a series in the guide: the feed's categories, year, length and episode mark. */
     data class Hint(val categories: String?, val year: Int?, val lengthMin: Int?, val episode: String?) {
         /** FILM / SERIES when the feed says so, else UNKNOWN. */
