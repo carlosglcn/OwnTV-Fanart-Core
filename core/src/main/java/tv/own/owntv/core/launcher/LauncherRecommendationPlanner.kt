@@ -194,6 +194,8 @@ class LauncherRecommendationPlanner(
             positionMs = progress.positionMs,
             watchNextType = LauncherWatchNextType.CONTINUE,
             year = movie.year,
+            backdropUrl = movie.backdropUrl,
+            plot = movie.plot,
         )
     }
 
@@ -242,6 +244,8 @@ class LauncherRecommendationPlanner(
             containerTitle = show.name,
             seasonNumber = targetEpisode.seasonNumber,
             episodeNumber = targetEpisode.episodeNumber,
+            backdropUrl = show.backdropUrl,
+            plot = show.plot,
         )
     }
 

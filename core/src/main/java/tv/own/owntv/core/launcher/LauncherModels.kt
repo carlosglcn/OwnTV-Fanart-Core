@@ -30,6 +30,8 @@ data class LauncherContinuationItem(
     val seasonNumber: Int? = null,
     val episodeNumber: Int? = null,
     val year: Int? = null,
+    val backdropUrl: String? = null,
+    val plot: String? = null,
 )
 
 data class LauncherSnapshot(
