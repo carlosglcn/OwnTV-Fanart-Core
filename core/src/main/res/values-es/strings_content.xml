@@ -152,6 +152,7 @@
     <string name="content_subtitle_select_file">Seleccionar archivo de subtítulos local</string>
     <string name="content_subtitle_load_failed">No se ha podido cargar el archivo de subtítulos.</string>
     <string name="content_all_playlists">Todas las listas de reproducción</string>
+    <string name="content_all_playlists_short">Todas</string>
     <string name="content_search_categories">Buscar categorías…</string>
     <string name="content_action_resume">Reanudar</string>
     <string name="content_action_play">Reproducir</string>

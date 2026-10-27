@@ -274,6 +274,7 @@
     <string name="content_subtitle_load_failed">Couldn\'t load the subtitle file.</string>
     <!-- Translators: Label for the playlist filter showing all playlists. -->
     <string name="content_all_playlists">All playlists</string>
+    <string name="content_all_playlists_short">All</string>
     <!-- Translators: Search hint text in the category browser. -->
     <string name="content_search_categories">Search categories\u2026</string>
     <!-- Translators: Imperative action in the clickable top-bar Continue chip. -->
