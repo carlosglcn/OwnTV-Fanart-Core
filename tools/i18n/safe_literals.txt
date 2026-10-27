@@ -5264,6 +5264,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	SHA-256
 1	uri	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	content://${context.packageName}$AUTHORITY_SUFFIX/${file.name}
 1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	tv-live-logo-art
+1	technical	core/src/main/java/tv/own/owntv/core/tv/RecentLiveRefreshWorker.kt	recent-live-refresh
 1	empty	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	\0
 1	log	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	$profileId|${mediaType.name}|$stableKey
 1	log	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	${surface.name}:${mediaType.name}:$groupId

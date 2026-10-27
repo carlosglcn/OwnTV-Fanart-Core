@@ -92,6 +92,12 @@ class KoinWorkerFactory : WorkerFactory() {
                 koin.get(),
                 koin.get(),
             )
+            tv.own.owntv.core.tv.RecentLiveRefreshWorker::class.java.name -> tv.own.owntv.core.tv.RecentLiveRefreshWorker(
+                appContext,
+                workerParameters,
+                koin.get(),
+                koin.get(),
+            )
             else -> null
         }
     }

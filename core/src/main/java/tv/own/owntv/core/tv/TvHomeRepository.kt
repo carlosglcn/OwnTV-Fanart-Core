@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
 import tv.own.owntv.core.R
 import tv.own.owntv.core.customize.CustomizationStore
 import tv.own.owntv.core.i18n.AppLocale
@@ -63,6 +64,8 @@ class TvHomeRepository(
     private val launcherPlanner: LauncherRecommendationPlanner,
     private val localeStore: LocaleStore,
     private val liveLogoPosterArt: LiveLogoPosterArt,
+    private val epgDao: tv.own.owntv.core.database.dao.EpgDao,
+    private val programmeArt: tv.own.owntv.core.metadata.ProgrammeArtResolver,
 ) {
     private val resolver: ContentResolver get() = context.contentResolver
     private val channelHelper = PreviewChannelHelper(context)
@@ -75,6 +78,7 @@ class TvHomeRepository(
         private const val RECENT_LIVE_REFRESH_INTERVAL_MS = 5_000L
         private const val RECENT_LIVE_CHANNEL_GROUP_ID = 0L
         private const val RECENT_LIVE_CHANNEL_STABLE_KEY = "recent-live"
+        private const val FANART_LOOKUP_TIMEOUT_MS = 4_000L
     }
 
     private fun logD(message: String) {
@@ -93,10 +97,12 @@ class TvHomeRepository(
         val enabled = settings.androidTvHomeEnabled.first()
         logD("refreshProfile profile=$profileId enabled=$enabled allowBrowsable=$allowBrowsableRequest")
         if (!enabled) {
+            RecentLiveRefreshWorker.cancel(context)
             logD("refreshProfile profile=$profileId clearing platform rows because Android TV home is disabled")
             clearProfile(profileId)
             return@withContext
         }
+        RecentLiveRefreshWorker.schedule(context)
         mutex.withLock {
             logD("refreshProfile profile=$profileId publishing Watch Next and Recent Live rows")
             refreshWatchNextLocked(profileId)
@@ -135,14 +141,14 @@ class TvHomeRepository(
         mutex.withLock { syncEpisode(profileId, episodeId, positionMs, durationMs) }
     }
 
-    suspend fun refreshRecentLive(profileId: Long, allowBrowsableRequest: Boolean = false) = withContext(Dispatchers.IO) {
+    suspend fun refreshRecentLive(profileId: Long, allowBrowsableRequest: Boolean = false, force: Boolean = false) = withContext(Dispatchers.IO) {
         val enabled = settings.androidTvHomeEnabled.first()
         if (profileId < 0 || !enabled) {
             logD("refreshRecentLive skip profile=$profileId enabled=$enabled allowBrowsable=$allowBrowsableRequest")
             return@withContext
         }
         logD("refreshRecentLive profile=$profileId allowBrowsable=$allowBrowsableRequest")
-        mutex.withLock { refreshRecentLiveLocked(profileId, allowBrowsableRequest) }
+        mutex.withLock { refreshRecentLiveLocked(profileId, allowBrowsableRequest, force) }
     }
 
     private suspend fun refreshWatchNextLocked(profileId: Long) {
@@ -217,7 +223,7 @@ class TvHomeRepository(
                     groupId = stableKey,
                     targetItemId = channel.id,
                 )
-            publishRecentLiveProgram(profileId, channelId, channel, row, index, customizations)
+            publishRecentLiveProgram(profileId, channelId, channel, row, index, customizations, now)
         }
 
         tvProviderProgramDao.upsert(channelRow.copy(lastPublishedAt = now, lastEngagementAt = now))
@@ -545,25 +551,52 @@ class TvHomeRepository(
         row: TvProviderProgramEntity,
         index: Int,
         customizations: SectionCustomizations,
+        now: Long,
     ) {
         val label = customizations.itemNames[CustomizeKeys.channel(channel)] ?: channel.name
+        // glcn: the programme on air now, with its fanart, when the guide has one; otherwise the channel's logo as before.
+        val onAir = nowOnAir(channel, customizations, now)
         val art = safeLiveArtUri(channel.displayLogoUrl)
         val fittedArt = art?.let { liveLogoPosterArt.cached(it, TvContractCompat.PreviewProgramColumns.ASPECT_RATIO_16_9) } ?: art
+        val posterArt = onAir?.fanart ?: fittedArt
         val stableKey = launcherPlanner.liveStableKey(channel)
         val stableKeyString = launcherPlanner.liveStableKeyString(channel)
         val program = PreviewProgram.Builder()
             .setChannelId(channelId)
             .setType(TvContractCompat.PreviewProgramColumns.TYPE_CHANNEL)
-            .setTitle(label)
-            .setDescription(channelDaoName(channel))
+            .setTitle(if (onAir?.fanart != null) onAir.title else label)
+            .setDescription(if (onAir?.fanart != null) label else channelDaoName(channel))
             .setInternalProviderId(platformInternalId(TvProviderSurface.RECENT_LIVE, profileId, MediaType.LIVE, stableKeyString))
             .setIntent(Intent(Intent.ACTION_VIEW, LauncherDeepLink.Live(channel.sourceId, channel.remoteId, channel.name).toUri()))
             .setWeight(RECENT_LIVE_MAX_ITEMS - index)
-            .apply { if (fittedArt != null) setPosterArtUri(fittedArt) }
-            .apply { if (art != null) setPosterArtAspectRatio(TvContractCompat.PreviewProgramColumns.ASPECT_RATIO_16_9) }
+            .apply { if (posterArt != null) setPosterArtUri(posterArt) }
+            .apply { if (posterArt != null) setPosterArtAspectRatio(TvContractCompat.PreviewProgramColumns.ASPECT_RATIO_16_9) }
             .build()
         logD("persistRecentLive profile=$profileId channelId=$channelId index=$index label=$label row=${row.describe()}")
         persistRecentLiveProgram(row, program, stableKey)
+    }
+
+    private class OnAir(val title: String, val fanart: Uri?)
+
+    /** The programme airing now on [channel] and its wide picture; null when the guide has nothing for it. */
+    private suspend fun nowOnAir(
+        channel: tv.own.owntv.core.database.entity.ChannelEntity,
+        customizations: SectionCustomizations,
+        now: Long,
+    ): OnAir? {
+        val key = tv.own.owntv.core.live.epgKeyOf(channel, customizations) ?: return null
+        val shift = tv.own.owntv.core.epg.EpgShift.minutesFor(customizations, channel, settings.epgOffsetMinutes.first())
+        val programme = runCatching { epgDao.nowPlaying(key, tv.own.owntv.core.epg.EpgShift.toStored(now, shift)) }.getOrNull() ?: return null
+        val title = programme.title.trim().takeIf { it.isNotEmpty() } ?: return null
+        val image = programme.imageUrl?.trim()?.takeIf { it.isNotEmpty() }
+        val url = withTimeoutOrNull(FANART_LOOKUP_TIMEOUT_MS) {
+            runCatching {
+                // The feed's own picture; a film's or series' wide TMDB picture replaces it when the guide says what it is.
+                (image?.let { programmeArt.landscapeFor(it) } ?: image)
+                    ?: programmeArt.infoFor(programme)?.backdropUrl
+            }.getOrNull()
+        }
+        return OnAir(title, safeLiveArtUri(url))
     }
 
     private suspend fun persistRecentLiveProgram(row: TvProviderProgramEntity, program: PreviewProgram, stableKey: Long) {

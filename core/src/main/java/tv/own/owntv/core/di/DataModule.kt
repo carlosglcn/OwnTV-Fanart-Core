@@ -300,7 +300,7 @@ val dataModule = module {
     // sourceDao, channelDao, movieDao, seriesDao, progressDao
     single { LauncherLaunchResolver(get(), get(), get(), get(), get(), get(), get()) }
     // context, sourceDao, channelDao, movieDao, seriesDao, progressDao, tvProviderProgramDao, customize, settings, localeStore
-    single { TvHomeRepository(androidContext(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), LiveLogoPosterArt(androidContext(), get())) }
+    single { TvHomeRepository(androidContext(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), LiveLogoPosterArt(androidContext(), get()), get(), get()) }
     // planner, resolver, tvHomeRepository
     single { LauncherIntegrationRepository(get(), get(), get()) }
     // Who currently holds a stream on which playlist. Multiview tiles and recordings spend the same
