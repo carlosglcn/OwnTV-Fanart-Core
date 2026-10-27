@@ -87,16 +87,25 @@ object WatchMatcher {
         val broadcasters: List<TeamNames.Key> = match.broadcasts.map { TeamNames.keyOfName(it.name) }
 
         /**
-         * glcn: a guide that names no player ("Final T2026 · Torneo de Shanghai") still says which final
-         * it is. For a singles final between two players, the tournament's own words (its city, minus
-         * "Masters", "Open", "ATP"...) plus the word "final" are enough. Empty when this is not such a match.
+         * glcn: a guide that names no player ("Final T2026 · Torneo de Shanghai") still says which tournament it is.
+         * For a singles match between two players, the tournament's own words (its city, minus "Masters", "Open",
+         * "ATP"...) are enough — and for a tournament ESPN names after its sponsor ("Erste Bank Open"), the city
+         * a guide would write instead ([TOURNAMENT_CITIES]). Each group is one word the title must hold (any of its
+         * spellings). Empty when this is not such a match.
          */
-        val finalTournamentWords: Set<String> = run {
+        val tournamentGroups: List<Set<String>> = run {
             val sides = listOfNotNull(match.home?.team, match.away?.team)
             val round = TeamNames.tokens(match.subtitle.orEmpty()).toSet()
-            if (sides.size != 2 || !sides.all { it.isAthlete } || "final" !in round || "singles" !in round) emptySet()
-            else TeamNames.tokens(match.leagueName).filter { it !in GENERIC_TOURNAMENT }.toSet()
+            if (sides.size != 2 || !sides.all { it.isAthlete } || "singles" !in round) emptyList()
+            else {
+                val words = TeamNames.tokens(match.leagueName).filter { it !in GENERIC_TOURNAMENT }
+                val city = TOURNAMENT_CITIES.firstOrNull { (sponsor, _) -> words.containsAll(TeamNames.tokens(sponsor)) }
+                if (city != null) listOf(city.second.flatMap { TeamNames.tokens(it) }.toSet())
+                else words.map { setOf(it) }
+            }
         }
+        /** The round of a tournament match: a final is announced as one, any other round by the tournament alone. */
+        val isFinal: Boolean = "final" in TeamNames.tokens(match.subtitle.orEmpty())
 
         /** Words for a channel full-text search: one team's word is enough to find "Frankfurt v Köln". */
         val searchWords: List<String> = buildList {
@@ -115,7 +124,8 @@ object WatchMatcher {
         val away = keys.away?.foundIn(tokens) == true
         val league = keys.league.foundIn(tokens)
         return when {
-            keys.finalTournamentWords.isNotEmpty() && "final" in tokens && tokens.containsAll(keys.finalTournamentWords) -> Hit.CONFIRMED
+            keys.tournamentGroups.isNotEmpty() && keys.tournamentGroups.all { g -> tokens.any { it in g } } &&
+                (if (keys.isFinal) "final" in tokens else tokens.none { it in LATE_ROUNDS }) -> Hit.CONFIRMED
             keys.home == null && keys.away == null ->
                 if (league || (keys.placeWords.isNotEmpty() && tokens.any { it in keys.placeWords } && tokens.any { it in RACING_TITLE })) Hit.CONFIRMED else Hit.NONE
             home && away -> Hit.CONFIRMED
@@ -146,6 +156,19 @@ object WatchMatcher {
 
     /** A playlist's divider row ("##### PREMIER LEAGUE #####"): a heading, never a channel to watch. */
     fun isSeparator(channelName: String): Boolean = SEPARATOR.containsMatchIn(channelName)
+
+    // glcn: a tournament named for its sponsor, and the city a guide calls it by (any spelling: "Viena", "Vienna", "Wien").
+    private val TOURNAMENT_CITIES: List<Pair<String, List<String>>> = listOf(
+        "Erste Bank" to listOf("Vienna", "Viena", "Wien"),
+        "Swiss Indoors" to listOf("Basel", "Basilea"),
+        "BNP Paribas" to listOf("Indian Wells"),
+        "Western Southern" to listOf("Cincinnati"),
+        "Moselle" to listOf("Metz"),
+        "European" to listOf("Antwerp", "Amberes"),
+    )
+
+    // A title that names a round of its own ("Semifinal", "Cuartos de final") is not the tournament's whole day.
+    private val LATE_ROUNDS = TeamNames.tokens("final semifinal semifinales cuartos octavos quarterfinal quarterfinals semifinals").toSet()
 
     // Words of a tournament's name that say nothing about *which* tournament.
     private val GENERIC_TOURNAMENT = setOf(

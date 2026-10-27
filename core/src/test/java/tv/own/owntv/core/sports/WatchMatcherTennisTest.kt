@@ -39,4 +39,19 @@ class WatchMatcherTennisTest {
         assertEquals(WatchMatcher.Hit.NONE, hit(final(subtitle = "Men's Singles · Round of 16"), "Final T2026 · Torneo de Shanghai"))
         assertEquals(WatchMatcher.Hit.NONE, hit(final(subtitle = "Men's Doubles · Final"), "Final T2026 · Torneo de Shanghai"))
     }
+
+    @Test fun `first round named by the tournament alone`() {
+        val round1 = final(subtitle = "Men's Singles · Round 1", name = "Shanghai Masters")
+        assertEquals(WatchMatcher.Hit.CONFIRMED, hit(round1, "TBC T2026 · Torneo de Shanghai"))
+        assertEquals(WatchMatcher.Hit.NONE, hit(round1, "Semifinal T2026 · Torneo de Shanghai"))
+        assertEquals(WatchMatcher.Hit.NONE, hit(round1, "Final T2026 · Torneo de Shanghai"))
+        assertEquals(WatchMatcher.Hit.NONE, hit(round1, "TBC T2026 · Torneo de Madrid"))
+    }
+
+    @Test fun `a tournament named for its sponsor is found by its city`() {
+        val vienna = final(subtitle = "Men's Singles · Round 1", name = "Erste Bank Open")
+        assertEquals(WatchMatcher.Hit.CONFIRMED, hit(vienna, "TBC T2026 · Torneo de Viena"))
+        assertEquals(WatchMatcher.Hit.CONFIRMED, hit(vienna, "Vienna Open Tennis"))
+        assertEquals(WatchMatcher.Hit.NONE, hit(vienna, "TBC T2026 · Torneo de Basilea"))
+    }
 }
