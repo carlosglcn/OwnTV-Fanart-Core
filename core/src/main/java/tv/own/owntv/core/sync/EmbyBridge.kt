@@ -232,7 +232,7 @@ internal object EmbyBridge {
     suspend fun readWatchState(t: Target): Boolean = withContext(Dispatchers.IO) {
         // glcn: one sign-in is kept and reused — signing in again on every refresh made the server announce
         // "signed in" each time. Only a refused token (it expired) signs in again.
-        val key = t.root + "|" + t.user + "|" + t.password.hashCode()
+        val key = keyOf(t)
         suspend fun read(s: Session) {
             for (filter in listOf("IsPlayed", "IsResumable")) for (kind in listOf("Movie", "Episode")) {
                 for (item in items(s, kind, filter)) {
@@ -255,6 +255,8 @@ internal object EmbyBridge {
         true
     }
 
+    private fun keyOf(t: Target): String = t.root + "|" + t.user + "|" + t.password.hashCode()
+
     private val sessions = java.util.concurrent.ConcurrentHashMap<String, Session>()
 
     /**
@@ -263,7 +265,7 @@ internal object EmbyBridge {
      * logins at every sync); a refused token signs in again once.
      */
     suspend fun playlistFor(t: Target, api: String): String {
-        val key = t.root + "|" + t.user + "|" + t.password.hashCode()
+        val key = keyOf(t)
         sessions[key]?.let { kept ->
             try { return playlist(kept) } catch (e: TokenGone) { sessions.remove(key) }
         }
