@@ -4684,6 +4684,7 @@
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Container,Genres,Overview,CommunityRating,BackdropImageTags,
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DateCreated,ProviderIds,RunTimeTicks,UserData
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Emby: HTTP ${r.code}
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Emby: token refused
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Emby: usuario o contraseña incorrectos
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Episode
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Genres
@@ -4700,6 +4701,7 @@
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Pw
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Series
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	|
 1	log	core/src/main/java/tv/own/owntv/core/sync/ImportFinalizer.kt	ImportFinalizer
 1	log	core/src/main/java/tv/own/owntv/core/sync/ImportFinalizer.kt	Metadata eviction: cache=$cache matches=$matches
 1	log	core/src/main/java/tv/own/owntv/core/sync/ImportFinalizer.kt	Unable to register the portal guide for sourceId=${source.id}

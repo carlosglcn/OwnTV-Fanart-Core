@@ -136,6 +136,7 @@ internal object EmbyBridge {
                 "&SortBy=$sort&IsMissing=false&StartIndex=$start&Limit=$PAGE" + (filters?.let { f -> "&Filters=$f" } ?: "")
             val req = Request.Builder().url(url).header("X-Emby-Token", s.token).get().build()
             val page = client.newCall(req).execute().use { r ->
+                if (r.code == 401) throw TokenGone()
                 if (!r.isSuccessful) throw IOException("Emby: HTTP ${r.code}")
                 JSONObject(r.body?.string().orEmpty())
             }
@@ -229,15 +230,35 @@ internal object EmbyBridge {
      * [tv.own.owntv.core.emby.EmbyWatchState]. Lets the app catch up with Emby between full syncs.
      */
     suspend fun readWatchState(t: Target): Boolean = withContext(Dispatchers.IO) {
-        val api = detect(t) ?: return@withContext false
-        val s = login(t, api)
-        for (filter in listOf("IsPlayed", "IsResumable")) for (kind in listOf("Movie", "Episode")) {
-            for (item in items(s, kind, filter)) {
-                tv.own.owntv.core.emby.EmbyWatchState.record(streamOf(s, item), item)
+        // glcn: one sign-in is kept and reused — signing in again on every refresh made the server announce
+        // "signed in" each time. Only a refused token (it expired) signs in again.
+        val key = t.root + "|" + t.user + "|" + t.password.hashCode()
+        suspend fun read(s: Session) {
+            for (filter in listOf("IsPlayed", "IsResumable")) for (kind in listOf("Movie", "Episode")) {
+                for (item in items(s, kind, filter)) {
+                    tv.own.owntv.core.emby.EmbyWatchState.record(streamOf(s, item), item)
+                }
             }
+        }
+        suspend fun fresh(): Session? {
+            val api = detect(t) ?: return null
+            return login(t, api).also { sessions[key] = it }
+        }
+        val kept = sessions[key]
+        val s = kept ?: fresh() ?: return@withContext false
+        try {
+            read(s)
+        } catch (e: TokenGone) {
+            sessions.remove(key)
+            read(fresh() ?: return@withContext false)
         }
         true
     }
+
+    private val sessions = java.util.concurrent.ConcurrentHashMap<String, Session>()
+
+    /** The kept token was refused: it expired or the server forgot it. */
+    private class TokenGone : IOException("Emby: token refused")
 
     private const val PAGE = 1000
     private const val MOVIES_GROUP = "Películas"
