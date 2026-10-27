@@ -4237,12 +4237,18 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	ARA
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	AT
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	AU
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	Amberes
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	Antwerp
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	BE
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	BNP Paribas
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	BR
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	Basel
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	Basilea
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	CA
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	CH
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	CS
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	CZ
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	Cincinnati
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	DA
 4	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	DE
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	DK
@@ -4250,6 +4256,8 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	EL
 9	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	EN
 4	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	ES
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	Erste Bank
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	European
 2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	FI
 3	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	FR
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	GB
@@ -4258,9 +4266,12 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	IE
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	IN
 2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	IT
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	Indian Wells
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	LAT
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	MA
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	MX
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	Metz
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	Moselle
 2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	NL
 2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	NO
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	NZ
@@ -4273,11 +4284,16 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	SA
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	SE
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	SV
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	Swiss Indoors
 2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	TR
 2	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	UK
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	UR
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	US
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	USA
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	Viena
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	Vienna
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	Western Southern
+1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	Wien
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	[A-Za-z]{4,}
 1	regex	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	\\s(vs?\\.?|v)\\s
 1	technical	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	autodrome

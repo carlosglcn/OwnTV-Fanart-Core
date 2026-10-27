@@ -531,6 +531,7 @@
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	classic
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	cup
 2	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	final
+1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	final semifinal semifinales cuartos octavos quarterfinal quarterfinals semifinals
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	finals
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	formula
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	masters
