@@ -1533,7 +1533,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
      * is left untouched while it is on, so switching back restores the user's List choice.
      * One setting for both sections: a layout preference is about how the user likes to browse.
      */
-    enum class VodLayout { SEPARATE, CINEMATIC }
+    enum class VodLayout { SEPARATE, CINEMATIC, RUNWAY }
     val vodLayout: Flow<VodLayout> = prefsFlow { prefs ->
         prefs[Keys.VOD_LAYOUT]?.let { runCatching { VodLayout.valueOf(it) }.getOrNull() } ?: VodLayout.CINEMATIC
     }

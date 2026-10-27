@@ -257,6 +257,20 @@ internal object EmbyBridge {
 
     private val sessions = java.util.concurrent.ConcurrentHashMap<String, Session>()
 
+    /**
+     * glcn: the whole library as M3U text, signing in only when no kept sign-in works. The sync and the
+     * watch-state refresh share one sign-in (each used to sign in on its own, so the server announced two
+     * logins at every sync); a refused token signs in again once.
+     */
+    suspend fun playlistFor(t: Target, api: String): String {
+        val key = t.root + "|" + t.user + "|" + t.password.hashCode()
+        sessions[key]?.let { kept ->
+            try { return playlist(kept) } catch (e: TokenGone) { sessions.remove(key) }
+        }
+        val s = login(t, api).also { sessions[key] = it }
+        return playlist(s)
+    }
+
     /** The kept token was refused: it expired or the server forgot it. */
     private class TokenGone : IOException("Emby: token refused")
 

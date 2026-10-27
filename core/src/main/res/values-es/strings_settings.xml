@@ -1022,6 +1022,8 @@
     <string name="settings_vod_layout_separate_description">Categorías, la lista de títulos y una vista previa, uno al lado del otro. Incluye las vistas de lista y cuadrícula.</string>
     <string name="settings_vod_layout_cinematic">Cinematográfico</string>
     <string name="settings_vod_layout_cinematic_description">La imagen del título seleccionado llena la pantalla y sus detalles aparecen sobre una cuadrícula de carteles. Solo cuadrícula.</string>
+    <string name="settings_vod_layout_runway">Pasarela</string>
+    <string name="settings_vod_layout_runway_description">Una sola fila de carteles: el seleccionado se abre ancho con sus detalles arriba y los demás se deslizan hacia el lado.</string>
     <string name="settings_search_keywords_vod_layout">diseño cinematográfico fondo imagen paneles películas series cartel vista cuadrícula</string>
     <string name="settings_panel_width_details_height">Altura de los detalles</string>
     <string name="settings_panel_width_details_hint">Reduce la altura de los detalles para ver otra fila de carteles; auméntala para más sinopsis y reparto.</string>

@@ -472,7 +472,7 @@ internal class M3uSyncer(
                 val api = EmbyBridge.detect(target)
                     ?: throw java.io.IOException("Emby/Jellyfin no responde en ${target.root}")
                 Log.i(TAG, "M3U source ${s.id} is an Emby/Jellyfin server at $api")
-                EmbyBridge.playlist(EmbyBridge.login(target, api)).also { text ->
+                EmbyBridge.playlistFor(target, api).also { text ->
                     Log.i(TAG, "Emby playlist entries=${text.lineSequence().count { it.startsWith("#EXTINF") }}")
                 }
             }

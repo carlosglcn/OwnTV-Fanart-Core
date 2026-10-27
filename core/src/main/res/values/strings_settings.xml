@@ -1994,6 +1994,9 @@
     <string name="settings_vod_layout_cinematic">Cinematic</string>
     <!-- Translators: The new layout — the focused title's backdrop fills the screen. -->
     <string name="settings_vod_layout_cinematic_description">The focused title’s artwork fills the screen, with its details above a poster grid. Grid only.</string>
+    <string name="settings_vod_layout_runway">Runway</string>
+    <!-- Translators: A layout — one row of posters; the focused one opens wide and the others slide to the side. -->
+    <string name="settings_vod_layout_runway_description">One row of posters: the focused one opens wide with its details above, and the rest glide to the side.</string>
     <string name="settings_search_keywords_vod_layout">layout cinematic backdrop artwork panels movies series poster view grid</string>
     <!-- Translators: Panel-width slider label, Cinematic layout only. Sizes the details block. -->
     <string name="settings_panel_width_details_height">Details height</string>
