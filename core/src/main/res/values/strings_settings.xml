@@ -2116,9 +2116,9 @@
     <string name="settings_language_contribution_copy_failed">The link could not be copied. Read or type the URL shown above.</string>
     <string name="settings_ambient_glow">Ambient glow</string>
     <string name="settings_ambient_glow_description">Adds setup-style radiance to the solid interface</string>
-    <string name="settings_ambient_glow_dialog_description">Adds a soft accent aura to the non-glass interface. Slow pulse gently breathes when animations are enabled.</string>
+    <string name="settings_ambient_glow_dialog_description">Adds a soft accent glow to the interface without glass. With Aurora on, three fields of colour drawn from your accent drift slowly behind the screen, as if it were lit from behind (when animations are on).</string>
     <string name="settings_ambient_glow_effect">Glow</string>
-    <string name="settings_ambient_glow_pulse">Slow pulse</string>
+    <string name="settings_ambient_glow_pulse">Aurora</string>
     <string name="settings_glass_live_preview">Live preview</string>
     <!-- Translators: Settings row. The touch equivalent of "Focus highlight": the ring drawn around the item the user has selected. -->
     <string name="settings_selection_highlight">Selection highlight</string>

@@ -1121,9 +1121,9 @@
     <string name="settings_subtitle_font">Fuente de subtítulos</string>
     <string name="settings_ambient_glow">Resplandor ambiental</string>
     <string name="settings_ambient_glow_description">Añade a la interfaz sólida el resplandor del asistente de configuración</string>
-    <string name="settings_ambient_glow_dialog_description">Añade un suave resplandor de acento a la interfaz sin cristal. El pulso lento respira suavemente cuando las animaciones están activadas.</string>
+    <string name="settings_ambient_glow_dialog_description">Añade un suave resplandor de acento a la interfaz sin cristal. Con Aurora, tres campos de color sacados de tu acento se desplazan despacio detrás de la pantalla, como si estuviera iluminada desde atrás (con las animaciones activadas).</string>
     <string name="settings_ambient_glow_effect">Resplandor</string>
-    <string name="settings_ambient_glow_pulse">Pulso lento</string>
+    <string name="settings_ambient_glow_pulse">Aurora</string>
     <string name="settings_glass_live_preview">Vista previa en directo</string>
     <string name="settings_row_menu_pin">Fijar en Rápido</string>
     <string name="settings_row_menu_unpin">Quitar de Rápido</string>
