@@ -622,4 +622,22 @@
     <string name="glcn_dock_double_row">Dock: fila doble</string>
     <string name="glcn_dock_double_row_description">Las tarjetas de la pestaña siguiente asoman debajo de la fila; ▼ las sube.</string>
     <string name="glcn_cinema_cast">Con %1$s</string>
+    <string name="glcn_remote_title">Mando de la tele</string>
+    <string name="glcn_remote_none">Primero empareja una tele en Sincronizar con otro dispositivo; luego este móvil podrá ser su mando.</string>
+    <string name="glcn_remote_connected">Conectado a %1$s</string>
+    <string name="glcn_remote_up">Arriba</string>
+    <string name="glcn_remote_down">Abajo</string>
+    <string name="glcn_remote_left">Izquierda</string>
+    <string name="glcn_remote_right">Derecha</string>
+    <string name="glcn_remote_ok">OK</string>
+    <string name="glcn_remote_play_pause">Reproducir / pausa</string>
+    <string name="glcn_remote_info">Información</string>
+    <string name="glcn_remote_channel_up">Canal siguiente</string>
+    <string name="glcn_remote_channel_down">Canal anterior</string>
+    <string name="glcn_remote_ch">CH</string>
+    <string name="glcn_remote_volume_up">Subir volumen</string>
+    <string name="glcn_remote_volume_down">Bajar volumen</string>
+    <string name="glcn_remote_vol">VOL</string>
+    <string name="glcn_remote_mute">Silenciar</string>
+    <string name="glcn_remote_type_hint">Escribe para buscar en la tele</string>
 </resources>

@@ -64,10 +64,22 @@ sealed interface LauncherDeepLink {
             .build()
     }
 
+    /** glcn: a key pressed on the phone's remote ([RemoteKeys]), for the TV to act on as its own remote's. */
+    data class RemoteKey(val name: String) : LauncherDeepLink {
+        override fun toUri(): Uri = Uri.parse("owntvfanart://key/" + name)
+    }
+
+    /** glcn: words typed on the phone's keyboard: the TV searches for them. */
+    data class RemoteText(val text: String) : LauncherDeepLink {
+        override fun toUri(): Uri = Uri.parse("owntvfanart://text").buildUpon().appendQueryParameter("q", text).build()
+    }
+
     companion object {
         fun parse(uri: Uri?): LauncherDeepLink? {
             if (uri == null || uri.scheme != "owntvfanart") return null
             return when (uri.host) {
+                "key" -> uri.pathSegments.firstOrNull()?.takeIf { it in RemoteKeys.ALL }?.let { RemoteKey(it) }
+                "text" -> uri.getQueryParameter("q")?.takeIf { it.isNotBlank() }?.let { RemoteText(it.take(RemoteKeys.TEXT_MAX)) }
                 "open" -> when (uri.pathSegments.firstOrNull()) {
                     "live" -> OpenLiveSection
                     else -> null
@@ -121,4 +133,24 @@ sealed interface LauncherLaunch {
     data class Episode(val show: SeriesEntity, val episode: EpisodeEntity, val queue: List<EpisodeEntity>, val startPositionMs: Long) : LauncherLaunch
     data class Series(val show: SeriesEntity) : LauncherLaunch
     data class Live(val channel: ChannelEntity) : LauncherLaunch
+}
+
+/** glcn: the keys the phone's remote sends, by name. */
+object RemoteKeys {
+    const val UP = "up"
+    const val DOWN = "down"
+    const val LEFT = "left"
+    const val RIGHT = "right"
+    const val OK = "ok"
+    const val BACK = "back"
+    const val PLAY_PAUSE = "playpause"
+    const val CHANNEL_UP = "chup"
+    const val CHANNEL_DOWN = "chdown"
+    const val VOLUME_UP = "volup"
+    const val VOLUME_DOWN = "voldown"
+    const val MUTE = "mute"
+    const val INFO = "info"
+    const val GUIDE = "guide"
+    val ALL = setOf(UP, DOWN, LEFT, RIGHT, OK, BACK, PLAY_PAUSE, CHANNEL_UP, CHANNEL_DOWN, VOLUME_UP, VOLUME_DOWN, MUTE, INFO, GUIDE)
+    const val TEXT_MAX = 120
 }

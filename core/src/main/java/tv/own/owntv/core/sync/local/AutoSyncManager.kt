@@ -134,6 +134,18 @@ class AutoSyncManager(
         return Result.failure(last ?: IllegalStateException("unreachable"))
     }
 
+    /** glcn: where the last quick command went — a remote's keys go straight there, without looking it up each time. */
+    @Volatile private var quickTarget: PairedDevice? = null
+
+    /**
+     * glcn: the phone as a remote — [command] to the device that took the last one, straight to its address; only
+     * when that fails is the network searched again ([sendCommand]).
+     */
+    suspend fun sendQuick(command: String): Result<PairedDevice> {
+        quickTarget?.let { t -> if (sync.sendCommand(t, command).isSuccess) return Result.success(t) }
+        return sendCommand(command).onSuccess { quickTarget = it }
+    }
+
     /** [sendCommand] that outlives the screen that asked for it; [onDone] runs on the main thread. */
     fun sendCommandInBackground(command: String, onDone: (Result<PairedDevice>) -> Unit) {
         scope.launch {

@@ -933,4 +933,22 @@
     <string name="glcn_dock_double_row">Dock: double row</string>
     <string name="glcn_dock_double_row_description">The next tab’s cards peek under the row; ▼ brings them up.</string>
     <string name="glcn_cinema_cast">With %1$s</string>
+    <string name="glcn_remote_title">TV remote</string>
+    <string name="glcn_remote_none">Pair a TV first in Sync with another device; then this phone can be its remote.</string>
+    <string name="glcn_remote_connected">Connected to %1$s</string>
+    <string name="glcn_remote_up">Up</string>
+    <string name="glcn_remote_down">Down</string>
+    <string name="glcn_remote_left">Left</string>
+    <string name="glcn_remote_right">Right</string>
+    <string name="glcn_remote_ok">OK</string>
+    <string name="glcn_remote_play_pause">Play / pause</string>
+    <string name="glcn_remote_info">Info</string>
+    <string name="glcn_remote_channel_up">Next channel</string>
+    <string name="glcn_remote_channel_down">Previous channel</string>
+    <string name="glcn_remote_ch">CH</string>
+    <string name="glcn_remote_volume_up">Volume up</string>
+    <string name="glcn_remote_volume_down">Volume down</string>
+    <string name="glcn_remote_vol">VOL</string>
+    <string name="glcn_remote_mute">Mute</string>
+    <string name="glcn_remote_type_hint">Type to search on the TV</string>
 </resources>
