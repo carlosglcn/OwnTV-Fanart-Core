@@ -71,4 +71,12 @@ class ProviderTagsTest {
         assertNull(ProviderTags.parse("PRIME: 3SAT").country)
         assertEquals("TV: DAZN LALIGA 2", ProviderTags.parse("TV: DAZN LALIGA 2").name)
     }
+
+    @Test
+    fun displayNameKeepsTheFeedNumberButNotTheQuality() {
+        assertEquals("M+ Terror ¹", ProviderTags.displayName("M+ Terror ¹"))
+        assertEquals("M+ LaLiga 2 ³", ProviderTags.displayName("M+ LaLiga 2 ³"))
+        assertEquals("Sky Cinema", ProviderTags.displayName("DE| Sky Cinema ᴴᴰ"))
+        assertEquals("M+ Terror", ProviderTags.parse("M+ Terror ²").name)
+    }
 }

@@ -50,6 +50,22 @@ object ProviderTags {
     }
 
     /**
+     * glcn: the name to show where the tags are not drawn beside it (the TV guide's channel column, the zap
+     * panels): [parse]'s name with the feed number put back as the provider wrote it — "M+ Terror ¹" and
+     * "M+ Terror ²" are two feeds of one channel, and without it the guide showed two identical rows.
+     * Quality marks (ᴴᴰ, ⁴ᴷ) stay off, as everywhere else. Matching keeps using [parse]: two feeds must
+     * still count as the same channel there.
+     */
+    fun displayName(raw: String): String {
+        val parsed = parse(raw)
+        val feed = parsed.tags.filter { t -> t.isNotEmpty() && t.all { it.isDigit() } }
+        if (feed.isEmpty()) return parsed.name
+        return parsed.name + " " + feed.joinToString(" ") { t -> t.map { SUPER_DIGITS[it - '0'] }.joinToString("") }
+    }
+
+    private const val SUPER_DIGITS = "⁰¹²³⁴⁵⁶⁷⁸⁹"
+
+    /**
      * The one country every group shares, for the "GROUPS · DE" heading; null when they differ or
      * any group has none (then the heading reads just "GROUPS").
      */
