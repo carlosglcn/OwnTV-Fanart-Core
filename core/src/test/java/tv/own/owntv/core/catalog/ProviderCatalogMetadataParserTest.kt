@@ -60,4 +60,20 @@ class ProviderCatalogMetadataParserTest {
         assertEquals(0, p.qualityRank)
         assertEquals(null, p.capabilities)
     }
+
+    @Test
+    fun `badges read resolution, remux, hdr and audio`() {
+        assertEquals(listOf("4K", "REMUX"), ProviderCatalogMetadataParser.badges("Normal [4K R]"))
+        assertEquals(listOf("REMUX", "DV"), ProviderCatalogMetadataParser.badges("La asistenta [DV R]"))
+        assertEquals(listOf("4K", "HDR10+", "ATMOS"), ProviderCatalogMetadataParser.badges("Dune 4K HDR10+ Atmos"))
+        assertEquals(listOf("1080p", "REMUX"), ProviderCatalogMetadataParser.badges("Alien 1080p REMUX"))
+        assertEquals(emptyList<String>(), ProviderCatalogMetadataParser.badges("Rocky (R)"))
+    }
+
+    @Test
+    fun `a poster shows the best picture mark and remux only`() {
+        assertEquals(listOf("DV", "REMUX"), ProviderCatalogMetadataParser.posterBadges("Film [4K DV R] Atmos"))
+        assertEquals(listOf("4K"), ProviderCatalogMetadataParser.posterBadges("Film 4K 5.1"))
+        assertEquals(emptyList<String>(), ProviderCatalogMetadataParser.posterBadges("Film 1080p"))
+    }
 }

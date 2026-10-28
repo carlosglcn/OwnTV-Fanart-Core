@@ -267,41 +267,45 @@
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\bHDR10\\b
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\bHDR\\b
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\bSD\\b
-2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	1080P
+3	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	1080P
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	1080p
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	2 0
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	2.0
-2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	2160P
+3	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	2160P
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	2_0
 2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	3840P
-2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	4K
+5	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	4K
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	5 0
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	5 1
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	5.0
-1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	5.1
+2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	5.1
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	5_0
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	5_1
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	7 0
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	7 1
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	7.0
-1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	7.1
+2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	7.1
 2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	720P
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	720p
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	7_0
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	7_1
-2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	8K
-1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	ATMOS
+5	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	8K
+2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	ATMOS
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DE|EN|FR|ES|PT|AR|NL|PL|TR|RU|BG|ZH|HR|CS|DA|ET|FI|EL|HE|HI|HU|ID|JA|KO|LV|LT|MS|NO|FA|RO|SR|SK|SL|SV|TH|UK|VI
-2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DOLBY
-2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DOVI
-2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DV
+3	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DOLBY
+4	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DOVI
+6	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DV
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	Dolby Atmos
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	Dolby Vision
-2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	FHD
+3	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	FHD
 2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	HD
-3	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	HDR
-2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	HDR10
-3	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	HDR10+
+7	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	HDR
+6	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	HDR10
+7	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	HDR10+
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	R
+4	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	REMUX
 2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	SD
-2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	UHD
+3	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	UHD
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	\\s($LANGUAGE_CODES)\\s*$
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	^\\s*($LANGUAGE_CODES)(?=\\s*[|:_-])
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	__unmatchable_${rawName.hashCode().toUInt().toString(16)}

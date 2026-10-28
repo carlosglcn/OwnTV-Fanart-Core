@@ -98,6 +98,7 @@ object ProviderCatalogMetadataParser {
     }
 
     private fun extractCapabilities(t: Title): List<String> = buildList {
+        if (isRemux(t)) add("REMUX") // glcn
         if (t.mayHaveCapability) when {
             t.has("DOLBY", "DOVI", "DV") && DOLBY_VISION.containsMatchIn(t.raw) -> add("Dolby Vision")
             t.has("HDR10+") && HDR10_PLUS.containsMatchIn(t.raw) -> add("HDR10+")
@@ -111,6 +112,59 @@ object ProviderCatalogMetadataParser {
             t.mayHave20 && STEREO_2_0.containsMatchIn(t.raw) -> add("2.0 Audio")
         }
     }
+
+    /**
+     * glcn: the quality marks a title advertises, as short badges in the order they read best: resolution
+     * (8K, 4K, 1080p, 720p), REMUX, the HDR format (DV, HDR10+, HDR10, HDR) and the audio (ATMOS, 7.1, 5.1).
+     * Read from the name each time it is shown, so a new mark (REMUX) needs no re-sync. "[4K R]" / "(DV R)" —
+     * a lone R beside a quality mark in brackets — is how many lists write Remux.
+     */
+    fun badges(rawName: String): List<String> {
+        val t = Title(rawName)
+        return buildList {
+            when (extractQualityRank(t)) {
+                5 -> add("8K")
+                4 -> add("4K")
+                3 -> add("1080p")
+                2 -> add("720p")
+            }
+            if (isRemux(t)) add("REMUX")
+            if (t.mayHaveCapability) when {
+                t.has("DOLBY", "DOVI", "DV") && DOLBY_VISION.containsMatchIn(t.raw) -> add("DV")
+                t.has("HDR10+") && HDR10_PLUS.containsMatchIn(t.raw) -> add("HDR10+")
+                t.has("HDR10") && HDR10.containsMatchIn(t.raw) -> add("HDR10")
+                t.has("HDR") && HDR.containsMatchIn(t.raw) -> add("HDR")
+            }
+            if (t.mayHaveAudio) when {
+                t.mayHaveAtmos && ATMOS.containsMatchIn(t.raw) -> add("ATMOS")
+                t.mayHave71 && SURROUND_7_1.containsMatchIn(t.raw) -> add("7.1")
+                t.mayHave51 && SURROUND_5_1.containsMatchIn(t.raw) -> add("5.1")
+            }
+        }
+    }
+
+    /**
+     * glcn: at most two badges for a poster corner — the best picture mark (DV, HDR10+, HDR10, HDR, else 8K/4K)
+     * and REMUX. 1080p and audio stay on the title's page; on every poster they would only be noise.
+     */
+    fun posterBadges(rawName: String): List<String> {
+        val all = badges(rawName)
+        val picture = listOf("DV", "HDR10+", "HDR10", "HDR", "8K", "4K").firstOrNull { it in all }
+        return listOfNotNull(picture, "REMUX".takeIf { it in all })
+    }
+
+    private fun isRemux(t: Title): Boolean {
+        if (t.has("REMUX") && REMUX.containsMatchIn(t.raw)) return true
+        if (!t.raw.contains('[') && !t.raw.contains('(')) return false
+        return BRACKETS.findAll(t.raw).any { m ->
+            val tokens = m.groupValues[1].split(' ', '|', ',', '/', '-', '_').map { it.trim().uppercase() }.filter { it.isNotEmpty() }
+            "R" in tokens && tokens.any { it in REMUX_COMPANIONS }
+        }
+    }
+
+    private val REMUX = Regex("""(?i)\bREMUX\b""")
+    private val BRACKETS = Regex("""[\[(]([^\])]{1,40})[\])]""")
+    private val REMUX_COMPANIONS = setOf("4K", "UHD", "2160P", "1080P", "FHD", "DV", "DOVI", "HDR", "HDR10", "HDR10+", "8K")
 
     private const val LANGUAGE_CODES = "DE|EN|FR|ES|PT|AR|NL|PL|TR|RU|BG|ZH|HR|CS|DA|ET|FI|EL|HE|HI|HU|ID|JA|KO|LV|LT|MS|NO|FA|RO|SR|SK|SL|SV|TH|UK|VI"
     private val EXPLICIT_LANGUAGE = Regex("""(?i)[|\[({]\s*($LANGUAGE_CODES)\s*[|\])}]""")
