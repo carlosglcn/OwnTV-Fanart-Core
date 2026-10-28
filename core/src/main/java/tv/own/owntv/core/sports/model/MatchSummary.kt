@@ -54,7 +54,7 @@ data class StandingsTable(val leagueKey: String, val groups: List<StandingsGroup
  * One place in a ranking, where a table's won/drawn/lost has no meaning: a driver, an F1 constructor,
  * a tennis player. [team] is the athlete (with [Team.country]) or the constructor.
  */
-data class RankingRow(val rank: Int, val team: Team, val points: Int)
+data class RankingRow(val rank: Int, val team: Team, val points: Int, val previous: Int? = null)
 
 /** Which ranking a [RankingGroup] is, so each app can name its tab in the user's language. */
 enum class RankingKind { DRIVERS, CONSTRUCTORS, PLAYERS }

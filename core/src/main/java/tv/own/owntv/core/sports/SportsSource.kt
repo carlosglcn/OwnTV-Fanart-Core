@@ -54,6 +54,7 @@ class EspnSportsSource(client: OkHttpClient) : SportsSource {
     private val http = client.newBuilder().callTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS).build()
 
     override suspend fun scoreboard(league: League, day: LocalDate?): List<Match> {
+        if (league.sport == Sport.TENNIS) TennisPhotos.refresh(::get)
         val date = day?.format(DateTimeFormatter.BASIC_ISO_DATE)
         return if (league.sport == Sport.CRICKET) {
             // Cricket series change every few weeks, so ESPN's per-league scoreboards are no use to a
@@ -65,12 +66,15 @@ class EspnSportsSource(client: OkHttpClient) : SportsSource {
     }
 
     override suspend fun month(league: League, month: YearMonth): MonthBoard {
+        if (league.sport == Sport.TENNIS) TennisPhotos.refresh(::get)
         require(league.sport != Sport.CRICKET) { "cricket has no month feed" }
         val body = get("$SITE/apis/site/v2/sports/${league.sport.path}/${league.slug}/scoreboard?dates=${month.format(MONTH)}&limit=$MONTH_LIMIT")
         return MonthBoard(EspnParser.scoreboard(league, body), EspnParser.seasonStart(body))
     }
 
-    override suspend fun rankings(league: League): Ranking = when (league.sport) {
+    override suspend fun rankings(league: League): Ranking = rankingsOf(league.also { if (it.sport == Sport.TENNIS) TennisPhotos.refresh(::get) })
+
+    private suspend fun rankingsOf(league: League): Ranking = when (league.sport) {
         Sport.RACING -> EspnParser.racingStandings(league, get("$SITE/apis/v2/sports/racing/${league.slug}/standings"))
         Sport.TENNIS -> EspnParser.tennisRankings(league, get("$SITE/apis/site/v2/sports/tennis/${league.slug}/rankings"))
         else -> throw IllegalArgumentException("no ranking")

@@ -149,14 +149,18 @@ internal object EspnParser {
             runCatching {
                 val a = r.getJSONObject("athlete")
                 val name = a.optString("displayName")
+                val id = a.getString("id")
+                // glcn: the photo (the feed's, else the photo list's) and last week's place, for the list beside it.
+                val shot = a.opt("headshot").let { h -> (h as? String) ?: (h as? JSONObject)?.optString("href") }?.takeIf { it.isNotEmpty() }
                 val player = Team(
-                    id = a.getString("id"),
+                    id = id,
                     name = name,
                     shortName = a.optString("shortname").ifEmpty { name },
                     isAthlete = true,
                     country = a.optString("flagAltText").takeIf { it.isNotEmpty() },
+                    logoUrl = shot ?: TennisPhotos.of(id),
                 )
-                RankingRow(r.getInt("current"), player, r.optDouble("points", 0.0).toInt())
+                RankingRow(r.getInt("current"), player, r.optDouble("points", 0.0).toInt(), r.optInt("previous", 0).takeIf { it > 0 })
             }.getOrNull()
         }
         return Ranking(league.key, if (rows.isEmpty()) emptyList() else listOf(RankingGroup(RankingKind.PLAYERS, rows)))
@@ -381,7 +385,7 @@ internal object EspnParser {
         // The player's own photo: the feed's headshot when it carries one, else ESPN's standard path for
         // tennis (ATP and WTA alike). A photo that does not load leaves the initials showing.
         val photo = a.optJSONObject("headshot")?.optString("href")?.takeIf { it.isNotEmpty() }
-            ?: id.takeIf { sport == Sport.TENNIS && it.isNotEmpty() }?.let { "https://a.espncdn.com/i/headshots/tennis/players/full/$it.png" }
+            ?: id.takeIf { sport == Sport.TENNIS && it.isNotEmpty() }?.let { TennisPhotos.of(it) ?: "https://a.espncdn.com/i/headshots/tennis/players/full/$it.png" }
         return Team(
             id = id,
             // As it comes: the logo resizer forces a square and squeezes a photo that is wider than tall.
