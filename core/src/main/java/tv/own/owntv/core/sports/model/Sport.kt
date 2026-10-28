@@ -23,6 +23,8 @@ enum class Sport(val path: String) {
     LACROSSE("lacrosse"),
     /** glcn: not on ESPN — served by [tv.own.owntv.core.sports.CyclingSource]. */
     CYCLING("cycling"),
+    /** glcn: not on ESPN — the World Snooker Tour, from owntv-sports-data. */
+    SNOOKER("snooker"),
     ;
 
     companion object {

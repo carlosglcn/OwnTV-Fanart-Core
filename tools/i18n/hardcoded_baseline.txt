@@ -529,7 +529,6 @@
 1	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	handball/lnh
 3	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	hockey/nhl
 3	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	mma/ufc
-10	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	racing/f1
 1	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	racing/irl
 2	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	racing/motogp
 1	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	racing/nascar-premier
@@ -551,7 +550,6 @@
 2	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	soccer/conmebol.libertadores
 1	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	soccer/conmebol.sudamericana
 1	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	soccer/den.1
-4	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	soccer/eng.1
 1	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	soccer/eng.2
 1	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	soccer/eng.fa
 1	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	soccer/eng.league_cup

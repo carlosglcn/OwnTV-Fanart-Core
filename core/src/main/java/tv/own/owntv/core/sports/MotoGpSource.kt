@@ -203,6 +203,7 @@ class CompositeSportsSource(
     override suspend fun rankings(league: League): Ranking =
         when {
             league.isCycling() -> cycling!!.rankings(league)
+            league.isTsdb() && league.slug == BasketDataSource.SNOOKER -> tsdb!!.rankings(league)
             league.isMotoGp() || league.isTsdb() -> throw IllegalArgumentException("no ranking")
             else -> espn.rankings(league)
         }

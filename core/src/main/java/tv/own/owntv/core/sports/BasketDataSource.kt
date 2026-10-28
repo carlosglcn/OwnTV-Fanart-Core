@@ -38,7 +38,7 @@ class BasketDataSource(client: OkHttpClient) {
     private val zone get() = ZoneId.systemDefault()
     private val cache = HashMap<String, Pair<Long, Feed>>()
 
-    private class Feed(val teams: List<Team>, val matches: List<Match>, val groups: List<StandingsGroup>)
+    private class Feed(val teams: List<Team>, val matches: List<Match>, val groups: List<StandingsGroup>, val ranking: List<tv.own.owntv.core.sports.model.RankingRow> = emptyList())
 
     suspend fun scoreboard(league: League, day: LocalDate?): List<Match> {
         val date = day ?: LocalDate.now(zone)
@@ -51,6 +51,13 @@ class BasketDataSource(client: OkHttpClient) {
     suspend fun teams(league: League): List<Team> = feed(league).teams
 
     suspend fun standings(league: League): StandingsTable = StandingsTable(league.key, feed(league).groups)
+
+    /** glcn: a tour's world ranking (snooker), when the file carries one. */
+    suspend fun rankings(league: League): tv.own.owntv.core.sports.model.Ranking {
+        val rows = feed(league).ranking
+        return tv.own.owntv.core.sports.model.Ranking(league.key,
+            if (rows.isEmpty()) emptyList() else listOf(tv.own.owntv.core.sports.model.RankingGroup(tv.own.owntv.core.sports.model.RankingKind.PLAYERS, rows)))
+    }
 
     suspend fun teamSchedule(league: League, teamId: String, fixtures: Boolean): List<Match> {
         val mine = matches(league).filter { m -> m.competitors.any { it.team.id == teamId } }
@@ -213,6 +220,9 @@ class BasketDataSource(client: OkHttpClient) {
                 shortName = t.optString("short").ifEmpty { name },
                 abbreviation = t.optString("abbr").takeIf { it.length in 2..5 }.orEmpty(),
                 logoUrl = t.optString("logo").takeIf { it.isNotEmpty() && it != "null" },
+                // glcn: a player (snooker) rather than a club.
+                isAthlete = t.optBoolean("athlete"),
+                country = t.optString("country").takeIf { it.isNotEmpty() && !t.isNull("country") },
             )
         }
         val byId = teams.associateBy { it.id }
@@ -233,7 +243,13 @@ class BasketDataSource(client: OkHttpClient) {
         }
         // glcn: a competition played in groups (the EHF's) has one table per group, in the file's order.
         val groups = standings.groupBy({ it.first }, { it.second }).map { (name, rows) -> StandingsGroup(name.ifEmpty { league.name }, rows) }
-        return Feed(teams, matches, groups)
+        val rankArray = root.optJSONArray("ranking")
+        val ranking = (0 until (rankArray?.length() ?: 0)).mapNotNull { i ->
+            val r = rankArray!!.optJSONObject(i) ?: return@mapNotNull null
+            val team = byId[r.optString("team")] ?: return@mapNotNull null
+            tv.own.owntv.core.sports.model.RankingRow(r.optInt("pos", i + 1), team, r.optInt("points"))
+        }
+        return Feed(teams, matches, groups, ranking)
     }
 
     private fun toMatch(league: League, m: JSONObject, byId: Map<String, Team>, now: Long): Match? {
@@ -298,8 +314,9 @@ class BasketDataSource(client: OkHttpClient) {
         const val LNH = "lnh"
         const val HHL = "hhl"
         const val KHL = "khl"
+        const val SNOOKER = "snooker"
         private val EHF_SLUGS = setOf(EHF_CL, EHF_EL)
-        val SLUGS = setOf(ACB, EUROLEAGUE, ASOBAL, EHF_CL, EHF_EL, HBL, LNH, HHL, KHL)
+        val SLUGS = setOf(ACB, EUROLEAGUE, ASOBAL, EHF_CL, EHF_EL, HBL, LNH, HHL, KHL, SNOOKER)
         private const val EHF_LIVE = "https://www.eurohandball.com/umbraco/api/livescoreapi/GetLiveScoreMatches/1069"
         private const val ASOBAL_SITE = "https://www.asobal.es"
         private const val LIVE_CACHE_MS = 30_000L

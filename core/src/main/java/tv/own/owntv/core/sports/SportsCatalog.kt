@@ -118,6 +118,7 @@ object SportsCatalog {
         League(Sport.RACING, CompositeSportsSource.MOTOGP, "MotoGP"),
         // glcn: not on ESPN; served by CyclingSource.
         League(Sport.CYCLING, CyclingSource.WORLD_TOUR, "UCI WorldTour", "UWT", hasTable = false),
+        League(Sport.SNOOKER, BasketDataSource.SNOOKER, "World Snooker Tour", "WST", hasTable = false),
         League(Sport.RACING, "irl", "IndyCar", country = "US"),
         League(Sport.RACING, "nascar-premier", "NASCAR Cup Series", "NASCAR", "US"),
         League(Sport.RACING, "nascar-secondary", "NASCAR O'Reilly Auto Parts Series", "NASCAR O'Reilly", "US"),
@@ -207,6 +208,7 @@ object SportsCatalog {
         League.keyOf(Sport.HANDBALL, BasketDataSource.LNH) to listOf("Starligue", "Daikin StarLigue", "Liqui Moly StarLigue", "Liga francesa de balonmano"),
         League.keyOf(Sport.HANDBALL, BasketDataSource.HHL) to listOf("Betoro Herreligaen", "Herreligaen", "Liga danesa de balonmano"),
         League.keyOf(Sport.HANDBALL, BasketDataSource.KHL) to listOf("K&H Liga", "K&H férfi liga", "Liga húngara de balonmano"),
+        League.keyOf(Sport.SNOOKER, BasketDataSource.SNOOKER) to listOf("Snooker", "WST"),
         // A guide calls the series "Mundial F1": its own word, which "Formula 1" never contains once digits are dropped.
         League.keyOf(Sport.RACING, "f1") to listOf("F1"),
     )

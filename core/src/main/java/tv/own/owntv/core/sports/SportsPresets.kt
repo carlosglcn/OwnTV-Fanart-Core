@@ -12,27 +12,28 @@ object SportsPresets {
     private val MOTOR = listOf("racing/f1", "racing/motogp")
     private val TENNIS = listOf("tennis/atp", "tennis/wta")
     private val EHF = listOf("handball/ehfcl")
+    private val CYCLING = listOf("cycling/uwt")
 
     private val BY_COUNTRY: Map<String, List<String>> = mapOf(
         "ES" to listOf("soccer/esp.1", "soccer/esp.2", "soccer/esp.copa_del_rey", "soccer/esp.super_cup") + EUROPE +
-            listOf("basketball/acb", "basketball/euroleague", "basketball/nba", "handball/asobal") + EHF + MOTOR + TENNIS,
+            listOf("basketball/acb", "basketball/euroleague", "basketball/nba", "handball/asobal") + EHF + MOTOR + TENNIS + CYCLING,
         "GB" to listOf("soccer/eng.1", "soccer/eng.2", "soccer/eng.fa", "soccer/eng.league_cup", "soccer/sco.1") + EUROPE +
-            listOf("rugby/180659", "rugby/267979", "cricket/all") + MOTOR.take(1) + TENNIS,
-        "IE" to listOf("soccer/eng.1", "rugby/180659", "rugby/270557", "rugby/271937") + EUROPE + MOTOR.take(1),
+            listOf("rugby/180659", "rugby/267979", "cricket/all", "snooker/snooker") + MOTOR.take(1) + TENNIS + CYCLING,
+        "IE" to listOf("soccer/eng.1", "snooker/snooker", "rugby/180659", "rugby/270557", "rugby/271937") + EUROPE + MOTOR.take(1),
         "DE" to listOf("soccer/ger.1", "soccer/ger.2", "soccer/ger.dfb_pokal") + EUROPE +
             listOf("handball/hbl", "basketball/euroleague") + EHF + MOTOR + TENNIS,
         "AT" to listOf("soccer/aut.1", "soccer/ger.1") + EUROPE + MOTOR + TENNIS,
-        "CH" to listOf("soccer/sui.1") + EUROPE + MOTOR + TENNIS,
+        "CH" to listOf("soccer/sui.1") + EUROPE + MOTOR + TENNIS + CYCLING,
         "FR" to listOf("soccer/fra.1", "soccer/fra.2", "soccer/fra.coupe_de_france") + EUROPE +
-            listOf("rugby/270559", "rugby/180659", "rugby/271937", "handball/lnh", "basketball/euroleague") + EHF + MOTOR + TENNIS,
+            listOf("rugby/270559", "rugby/180659", "rugby/271937", "handball/lnh", "basketball/euroleague") + EHF + MOTOR + TENNIS + CYCLING,
         "IT" to listOf("soccer/ita.1", "soccer/ita.2", "soccer/ita.coppa_italia") + EUROPE +
-            listOf("basketball/euroleague", "rugby/180659") + MOTOR + TENNIS,
+            listOf("basketball/euroleague", "rugby/180659") + MOTOR + TENNIS + CYCLING,
         "PT" to listOf("soccer/por.1", "soccer/por.taca.portugal") + EUROPE + EHF + MOTOR,
-        "NL" to listOf("soccer/ned.1", "soccer/ned.cup") + EUROPE + MOTOR + TENNIS,
-        "BE" to listOf("soccer/bel.1") + EUROPE + MOTOR + TENNIS,
-        "DK" to listOf("soccer/den.1", "handball/hhl") + EHF + EUROPE + MOTOR + TENNIS,
-        "NO" to listOf("soccer/nor.1") + EHF + EUROPE + MOTOR,
-        "SE" to listOf("soccer/swe.1") + EHF + EUROPE + listOf("hockey/nhl") + MOTOR,
+        "NL" to listOf("soccer/ned.1", "soccer/ned.cup") + EUROPE + MOTOR + TENNIS + CYCLING,
+        "BE" to listOf("soccer/bel.1") + EUROPE + MOTOR + TENNIS + CYCLING,
+        "DK" to listOf("soccer/den.1", "handball/hhl") + EHF + EUROPE + MOTOR + TENNIS + CYCLING,
+        "NO" to listOf("soccer/nor.1") + EHF + EUROPE + MOTOR + CYCLING,
+        "SE" to listOf("soccer/swe.1") + EHF + EUROPE + listOf("hockey/nhl") + MOTOR + CYCLING,
         "HU" to listOf("handball/khl") + EHF + EUROPE + MOTOR + TENNIS,
         "GR" to listOf("soccer/gre.1", "basketball/euroleague") + EUROPE,
         "TR" to listOf("soccer/tur.1", "basketball/euroleague") + EUROPE,
@@ -44,8 +45,9 @@ object SportsPresets {
             "soccer/fifa.world", "soccer/uefa.champions", "soccer/esp.1", "basketball/nba", "racing/f1") + TENNIS,
         "BR" to listOf("soccer/bra.1", "soccer/bra.copa_do_brazil", "soccer/conmebol.libertadores", "soccer/fifa.worldq.conmebol",
             "soccer/fifa.world", "soccer/uefa.champions", "basketball/nba", "racing/f1", "mma/ufc"),
-        "AU" to listOf("australian-football/afl", "rugby-league/3", "rugby/242041", "cricket/all", "soccer/eng.1", "racing/f1", "racing/motogp") + TENNIS,
+        "AU" to listOf("australian-football/afl", "rugby-league/3", "rugby/242041", "cricket/all", "soccer/eng.1", "racing/f1", "racing/motogp") + TENNIS + CYCLING,
         "NZ" to listOf("rugby/242041", "rugby/244293", "rugby-league/3", "cricket/all", "racing/f1"),
+        "CN" to listOf("snooker/snooker", "basketball/nba", "soccer/eng.1", "racing/f1") + TENNIS,
         "IN" to listOf("cricket/all", "soccer/ind.1", "soccer/eng.1", "racing/f1"),
         "SA" to listOf("soccer/ksa.1", "soccer/afc.champions", "soccer/uefa.champions", "racing/f1"),
     )
