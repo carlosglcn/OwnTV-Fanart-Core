@@ -707,6 +707,9 @@
     <string name="glcn_widget_sports_name">OwnTV · Sports now</string>
     <string name="glcn_widget_empty">No sport on air right now</string>
     <string name="glcn_widget_updated">Updated %1$s</string>
+    <string name="glcn_widget_favorites_name">OwnTV · On now in your favourites</string>
+    <string name="glcn_widget_favorites_title">On now in your favourites</string>
+    <string name="glcn_widget_favorites_empty">Add channels to Favourites to see what they are showing here</string>
     <string name="glcn_sports_now_description">Channels showing sport right now</string>
     <string name="glcn_recent_movies">Recently added movies</string>
     <string name="glcn_recent_movies_description">The newest movies in your libraries</string>
