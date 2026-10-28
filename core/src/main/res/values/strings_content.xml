@@ -930,4 +930,6 @@
     <string name="glcn_dock_watch">Watch</string>
     <string name="glcn_dock_details">Details</string>
     <string name="glcn_dock_trailer">Trailer</string>
+    <string name="glcn_dock_double_row">Dock: double row</string>
+    <string name="glcn_dock_double_row_description">The next tab’s cards peek under the row; ▼ brings them up.</string>
 </resources>

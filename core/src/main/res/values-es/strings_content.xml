@@ -619,4 +619,6 @@
     <string name="glcn_dock_watch">Ver</string>
     <string name="glcn_dock_details">Ficha</string>
     <string name="glcn_dock_trailer">Tráiler</string>
+    <string name="glcn_dock_double_row">Dock: fila doble</string>
+    <string name="glcn_dock_double_row_description">Las tarjetas de la pestaña siguiente asoman debajo de la fila; ▼ las sube.</string>
 </resources>
