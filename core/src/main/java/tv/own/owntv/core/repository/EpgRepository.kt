@@ -4,6 +4,7 @@ import android.os.SystemClock
 import android.util.Log
 import androidx.room.execSQL
 import androidx.room.immediateTransaction
+import androidx.room.useReaderConnection
 import androidx.room.useWriterConnection
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +24,6 @@ import tv.own.owntv.core.database.entity.SourceEntity
 import tv.own.owntv.core.database.entity.computeContentHash
 import tv.own.owntv.core.database.entity.withDetails
 import tv.own.owntv.core.epg.FeedDedupe
-import tv.own.owntv.core.database.transaction
 import tv.own.owntv.core.model.SourceType
 import tv.own.owntv.core.network.HttpClient
 import tv.own.owntv.core.parser.XmltvParser
@@ -339,6 +339,9 @@ class EpgRepository(
         // must never be mirrored into one giant in-memory map on a low-RAM TV box. Channels beyond the
         // cap degrade to write-through (REPLACE on the natural-key unique index keeps that correct).
         val hashTracker = ProgrammeHashTracker(epgDao, storeId, freshSource, MAX_TRACKED_PROGRAMMES)
+        val preloadStartedAt = SystemClock.elapsedRealtime()
+        hashTracker.preload(db)
+        Log.d("EpgRepository", "EPG hash preload sourceId=$storeId ms=${SystemClock.elapsedRealtime() - preloadStartedAt}")
         var processedCount = 0
         var writtenCount = 0
         var inserted = 0
@@ -366,9 +369,7 @@ class EpgRepository(
         suspend fun storeProgrammes(batch: List<EpgProgrammeEntity>) {
             if (batch.isEmpty()) return
             val startedAt = SystemClock.elapsedRealtime()
-            db.transaction {
-                epgDao.upsertProgrammes(batch)
-            }
+            writeProgrammes(batch)
             val batchMs = SystemClock.elapsedRealtime() - startedAt
             writeMs += batchMs
             Log.d(
@@ -478,6 +479,9 @@ class EpgRepository(
                 parseCompleted = true
             }
             if (parseCompleted && channels.isNotEmpty() && processedCount == 0) {
+                // Filtered to the playlists' channels and none of the feed's is one of them: the guide
+                // has programmes, just for channels no playlist links to yet.
+                if (needed != null && channels.keys.none { it in needed }) throw GuideMatchesNoChannelException()
                 throw NoProgrammesInWindowException()
             }
         } catch (c: CancellationException) {
@@ -598,20 +602,18 @@ class EpgRepository(
             // instead of sitting on "Connecting…" until it finishes.
             onProgress = { seenChannels, programmes -> onProgress(seenChannels, programmes) },
         ) { batch ->
-            db.transaction {
-                epgDao.upsertProgrammes(
-                    batch.map {
-                        EpgProgrammeEntity(
-                            sourceId = storeId,
-                            epgChannelId = guideKeys[it.epgChannelId] ?: it.epgChannelId,
-                            startMs = it.startMs,
-                            stopMs = it.stopMs,
-                            title = it.title,
-                            description = it.description,
-                        )
-                    },
-                )
-            }
+            writeProgrammes(
+                batch.map {
+                    EpgProgrammeEntity(
+                        sourceId = storeId,
+                        epgChannelId = guideKeys[it.epgChannelId] ?: it.epgChannelId,
+                        startMs = it.startMs,
+                        stopMs = it.stopMs,
+                        title = it.title,
+                        description = it.description,
+                    )
+                },
+            )
             written += batch.size
             batch.forEach { channels.add(guideKeys[it.epgChannelId] ?: it.epgChannelId) }
         }
@@ -659,7 +661,18 @@ class EpgRepository(
      * have none at all, which left the EPG screen with nothing to show and the row reading "Not
      * synced yet" as though the sync had never run.
      */
-    class NoProgrammesInWindowException : java.io.IOException("Guide has no programmes in the guide window")
+    open class NoProgrammesInWindowException(
+        message: String = "Guide has no programmes in the guide window",
+    ) : java.io.IOException(message)
+
+    /**
+     * The feed carried channels, but not one of them is a channel the playlists use (by tvg-id or a
+     * saved match), so the sync kept none of its programmes. Not an empty guide: Auto-match pairs the
+     * channels by name, and the next sync keeps theirs. Still definitive, like its parent — syncing
+     * again unchanged gives the same answer. The message is a stable comparison key, as above.
+     */
+    class GuideMatchesNoChannelException :
+        NoProgrammesInWindowException("Guide channels match no playlist channel")
 
     /**
      * A portal guide whose playlist has since been deleted. Definitive for the same reason — the
@@ -667,6 +680,38 @@ class EpgRepository(
      */
     class PortalGuideSourceGoneException(portalSourceId: Long) :
         java.io.IOException("Portal guide source $portalSourceId no longer exists")
+
+    /**
+     * Writes [batch] in one plain transaction through one statement, rather than the DAO's insert inside
+     * [tv.own.owntv.core.database.transaction]: that nests Room's own transaction as a SAVEPOINT, and the
+     * bundled SQLite then re-walks the savepoint's whole in-memory journal after every row — 7 ms a row on
+     * a TV for a 10,000-row batch, against microseconds without it. Same SQL as the generated insert.
+     */
+    private suspend fun writeProgrammes(batch: List<EpgProgrammeEntity>) {
+        db.useWriterConnection { connection ->
+            connection.immediateTransaction {
+                usePrepared(UPSERT_PROGRAMME_SQL) { statement ->
+                    for (p in batch) {
+                        statement.bindLong(1, p.id)
+                        statement.bindLong(2, p.sourceId)
+                        statement.bindText(3, p.epgChannelId)
+                        statement.bindLong(4, p.startMs)
+                        statement.bindLong(5, p.stopMs)
+                        statement.bindText(6, p.title)
+                        p.description?.let { statement.bindText(7, it) } ?: statement.bindNull(7)
+                        statement.bindLong(8, p.contentHash.toLong())
+                        p.categories?.let { statement.bindText(9, it) } ?: statement.bindNull(9)
+                        p.year?.let { statement.bindLong(10, it.toLong()) } ?: statement.bindNull(10)
+                        p.rating?.let { statement.bindText(11, it) } ?: statement.bindNull(11)
+                        p.lengthMin?.let { statement.bindLong(12, it.toLong()) } ?: statement.bindNull(12)
+                        p.episode?.let { statement.bindText(13, it) } ?: statement.bindNull(13)
+                        statement.step()
+                        statement.reset()
+                    }
+                }
+            }
+        }
+    }
 
     private suspend fun pruneRemovedProgrammes(sourceId: Long, tracker: ProgrammeHashTracker): Int {
         val startedAt = SystemClock.elapsedRealtime()
@@ -873,6 +918,9 @@ class EpgRepository(
         // because two days was throwing away most of what providers actually send: the grid could only
         // scroll two days, and two days after a sync the guide was empty. See [guideAheadMs].
         private const val QUERY_CHUNK = 500
+        private const val UPSERT_PROGRAMME_SQL =
+            "INSERT OR REPLACE INTO `epg_programmes` (`id`,`sourceId`,`epgChannelId`,`startMs`,`stopMs`,`title`,`description`," +
+                "`contentHash`,`categories`,`year`,`rating`,`lengthMin`,`episode`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?,?,?,?,?)"
         private const val CACHE_TTL_MS = 24L * 60 * 60 * 1000 // reuse a cached XMLTV for incremental matches up to 24h
         private const val PROGRESS_PROGRAMME_STEP = 500
         private const val EPG_DOWNLOAD_ATTEMPTS = 3
@@ -914,6 +962,8 @@ private class ProgrammeHashTracker(
         val seen = BooleanArray(starts.size)
         /** Start times first met in this run (new rows) — a repeat of one is the feed's own duplicate. */
         val added = HashSet<Long>()
+        /** The feed delivered at least one programme for this channel this run. */
+        var reached = false
     }
 
     private val byChannel = HashMap<String, ChannelState>()
@@ -921,6 +971,52 @@ private class ProgrammeHashTracker(
     private var entries = 0
     var overflowed = false
         private set
+
+    /**
+     * Loads the source's stored rows in one ordered read, straight into the per-channel arrays.
+     * Asking channel by channel as the feed reaches each one was thousands of queries — on a TV about
+     * ten seconds of a re-sync. Stops before [maxEntries]; a channel it did not reach is still loaded
+     * on its own by [observe].
+     */
+    suspend fun preload(db: tv.own.owntv.core.database.OwnTVDatabase) {
+        if (freshSource) return
+        db.useReaderConnection { connection ->
+            connection.usePrepared(
+                "SELECT epgChannelId, startMs, id, contentHash FROM epg_programmes WHERE sourceId = ? ORDER BY epgChannelId, startMs",
+            ) { statement ->
+                statement.bindLong(1, sourceId)
+                var channel: String? = null
+                var starts = LongArray(64)
+                var ids = LongArray(64)
+                var hashes = IntArray(64)
+                var n = 0
+                fun flush() {
+                    val key = channel ?: return
+                    byChannel[key] = ChannelState(starts.copyOf(n), ids.copyOf(n), hashes.copyOf(n))
+                    entries += n
+                    n = 0
+                }
+                while (statement.step()) {
+                    val key = statement.getText(0)
+                    if (key != channel) {
+                        flush()
+                        if (entries >= maxEntries) return@usePrepared
+                        channel = key
+                    }
+                    if (n == starts.size) {
+                        starts = starts.copyOf(n * 2)
+                        ids = ids.copyOf(n * 2)
+                        hashes = hashes.copyOf(n * 2)
+                    }
+                    starts[n] = statement.getLong(1)
+                    ids[n] = statement.getLong(2)
+                    hashes[n] = statement.getLong(3).toInt()
+                    n++
+                }
+                flush()
+            }
+        }
+    }
 
     suspend fun observe(channel: String, startMs: Long, hash: Int): ProgrammeDecision {
         if (channel in untrackedChannels) return ProgrammeDecision.WriteThrough
@@ -943,6 +1039,7 @@ private class ProgrammeHashTracker(
                 byChannel[channel] = it
             }
         }
+        state.reached = true
         // A second programme at the same start on the same channel in THIS feed (feeds list e.g.
         // "Mass" and "Live: Mass" at one start time): the first wins. Letting the later one overwrite
         // it made the stored row alternate between the two, so it was rewritten on every sync.
@@ -957,11 +1054,16 @@ private class ProgrammeHashTracker(
         return if (state.hashes[i] == hash) ProgrammeDecision.Unchanged else ProgrammeDecision.Changed(state.ids[i])
     }
 
-    /** Row ids of tracked programmes that existed before this run but never appeared in the feed. */
+    /**
+     * Row ids of tracked programmes that existed before this run but never appeared in the feed. Only
+     * channels the feed reached: a preloaded channel it sent nothing for keeps its guide, as it did when
+     * channels were only loaded on arrival.
+     */
     fun staleTrackedIds(): List<Long> {
         if (freshSource) return emptyList()
         val stale = ArrayList<Long>()
         for (state in byChannel.values) {
+            if (!state.reached) continue
             for (i in state.starts.indices) if (!state.seen[i]) stale.add(state.ids[i])
         }
         return stale

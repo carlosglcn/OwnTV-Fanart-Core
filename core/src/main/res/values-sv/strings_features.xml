@@ -45,6 +45,8 @@
     <string name="search_go_to_movie">Gå till film</string>
     <string name="search_clear_recent">Rensa senaste sökningar</string>
     <string name="search_field_hint">Kanaler, filmer och serier</string>
+    <string name="search_voice">Röstsökning</string>
+    <string name="search_voice_prompt">Säg en kanal, film eller serie</string>
     <string name="search_card_title">Hitta allt i dina spellistor</string>
     <string name="search_card_body">Kanaler, filmer och serier från alla spellistor du visar. Välj ett resultat för att gå direkt dit och spela upp, ladda ner eller öppna alternativen där. Tv-program som sänds nu eller senare i dag hittas också på sin titel.</string>
     <string name="search_nothing_found">Inget hittades för ”<xliff:g id="query">%1$s</xliff:g>”</string>

@@ -1060,6 +1060,19 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         }
 
         /**
+         * [cmd] without its `play_token` query value. Portals that embed the playable URL in the
+         * channel list mint a new token on every `get_all_channels`, so a cmd compared with it in
+         * place differs on every re-sync and the whole live list is rewritten each time. It is left
+         * out of the comparison only; the newest token is still stored (see [hasPlayToken]).
+         */
+        fun withoutPlayToken(cmd: String): String = cmd.replace(PLAY_TOKEN, "")
+
+        /** True when [cmd] carries a `play_token`, so its stored copy is renewed on each re-sync. */
+        fun hasPlayToken(cmd: String): Boolean = PLAY_TOKEN.containsMatchIn(cmd)
+
+        private val PLAY_TOKEN = Regex("(?i)[?&]play_token=[^&\\s]*(?=&|\\s|$)")
+
+        /**
          * True when a prefix-stripped channel `cmd` is ALREADY a complete, playable URL (some portals
          * embed the real stream URL — mac/stream/token — directly in the channel list, e.g.
          * `…/play/live.php?mac=…&stream=12345&…`). Those must be played AS-IS: routing them through

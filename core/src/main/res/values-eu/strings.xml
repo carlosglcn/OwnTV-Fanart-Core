@@ -155,6 +155,7 @@
     <string name="sync_error_secure">Konexio seguruak huts egin du — baliteke zerbitzariaren ziurtagiria baliogabea izatea.</string>
     <string name="sync_error_malformed_guide">Zerbitzariaren gidaren datuak gaizki osatuta zeuden. Baliteke batzuk kargatu izana — saiatu berriro, edo egiaztatu EPGaren URLa.</string>
     <string name="sync_error_guide_empty">Gida hau hutsik dago oraintxe. Baliteke hornitzaileak oraindik argitaratu ez izana — saiatu berriro geroago, mesedez.</string>
+    <string name="sync_error_guide_no_matching_channels">Gida honetako kanaletako bat ere ez dator bat oraindik zure erreprodukzio-zerrendako kanalekin. Ireki Telebista-gida eta erabili Parekatu EPGa automatikoki izenaren arabera parekatzeko.</string>
     <string name="common_minutes">Minutuak</string>
     <string name="common_size_mb"><xliff:g id="size">%1$s</xliff:g> MB</string>
     <string name="common_size_gb"><xliff:g id="size">%1$s</xliff:g> GB</string>

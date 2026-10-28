@@ -70,6 +70,23 @@
     <string name="settings_remote_shortcuts_long_press">Pressão longa</string>
     <string name="settings_remote_shortcuts_unknown_button">Botão do comando %1$d</string>
     <string name="settings_remote_shortcuts_help">• Por predefinição, CH+/CH− e recuar/avançar percorrem listas; manter salta para o primeiro ou último item.\n• Pressões curtas e longas podem ser atribuídas separadamente.\n• Ir ao último continua desativado em listas «Tudo» muito grandes.\n• Manter Voltar foca sempre A reproduzir e não pode ser alterado.\n• Botões normalmente atribuíveis: vermelho/verde/amarelo/azul, números, CH+/CH− e recuar/avançar.\n• Voltar, direcional, OK, volume, Início e energia continuam protegidos.\n• Atalhos numéricos funcionam ao navegar; em ecrã inteiro, a introdução do canal tem prioridade.</string>
+    <string name="settings_player_buttons">Botões do leitor</string>
+    <string name="settings_player_hold_ok">Manter OK no leitor</string>
+    <string name="settings_player_hold_ok_description">O que manter OK premido abre enquanto os controlos estão ocultos</string>
+    <string name="settings_help_player_hold_ok">Mantenha OK premido no leitor em direto em ecrã inteiro, com os controlos ocultos, para abrir a lista de canais, o guia ou as informações do programa. Desativado deixa o OK como sempre. Enquanto estiver ativado, um toque curto em OK atua ao largar. Filmes e episódios mantêm o OK habitual.</string>
+    <string name="settings_player_short_ok">OK com os controlos ocultos</string>
+    <string name="settings_player_short_ok_description">O que um toque curto em OK faz no leitor em ecrã inteiro</string>
+    <string name="settings_help_player_short_ok">Um toque curto em OK no leitor em ecrã inteiro mostra os controlos. Escolha Lista de canais ou Guia para abrir isso nos canais em direto; qualquer outro botão que o leitor não use continua a mostrar os controlos. Filmes e episódios mostram sempre os controlos.</string>
+    <string name="settings_player_swap_channel_keys">Inverter canal acima/abaixo</string>
+    <string name="settings_player_swap_channel_keys_description">CH+ e Cima vão para o canal anterior</string>
+    <string name="settings_help_player_swap_channel_keys">Normalmente CH+ e Cima vão para o canal seguinte, e CH− e Baixo para o anterior. Ative para os inverter enquanto vê, em ecrã inteiro e no minileitor. As listas de navegação não mudam.</string>
+    <string name="settings_player_number_keys_tune">Números mudam de canal</string>
+    <string name="settings_player_number_keys_tune_description">Escrever um número de canal no leitor em direto</string>
+    <string name="settings_help_player_number_keys_tune">Escreva um número de canal no comando no leitor em direto em ecrã inteiro para ir para esse canal. Desative para deixar os botões numéricos livres para os seus atalhos do comando. Escrever um número também exige Números dos canais ativado nas definições de TV em direto.</string>
+    <string name="settings_player_ok_channel_list">Lista de canais</string>
+    <string name="settings_player_ok_guide">Guia</string>
+    <string name="settings_player_ok_programme_info">Informações do programa</string>
+    <string name="settings_player_ok_show_controls">Mostrar controlos</string>
     <string name="settings_remote_button_channel_up">Canal +</string>
     <string name="settings_remote_button_channel_down">Canal −</string>
     <string name="settings_remote_button_rewind">Recuar</string>
@@ -266,6 +283,8 @@
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">Ecrã principal</string>
     <string name="settings_startup_last_channel">Último canal</string>
+    <string name="settings_startup_last_channel_guide">Último canal · Guia de TV</string>
+    <string name="settings_startup_last_channel_live">Último canal · TV em direto</string>
     <string name="settings_startup_favorites">Em direto · Favoritos</string>
     <string name="settings_startup_specific_channel">Canal específico</string>
     <string name="settings_startup_channel_unavailable">O canal de arranque não está disponível. Foi aberto o ecrã inicial.</string>
@@ -687,6 +706,13 @@
     <string name="settings_sources_test_trial">Conta de experimentação</string>
     <string name="settings_sources_test_expiry_none">Nenhuma data de validade indicada</string>
     <string name="settings_sources_info">Informações</string>
+    <string name="settings_sources_clean_names">Nomes</string>
+    <string name="settings_sources_clean_names_title">Nomes dos canais em «<xliff:g id="name">%1$s</xliff:g>»</string>
+    <string name="settings_sources_clean_names_description">Nomes de canal mais curtos em todos os ecrãs. O guia continua a usar os nomes enviados pelo seu fornecedor, e os canais a que mudou o nome em Personalizar mantêm o seu nome. Guardar atualiza a playlist.</string>
+    <string name="settings_sources_clean_names_toggle">Limpar nomes dos canais</string>
+    <string name="settings_sources_clean_names_example">Remove um prefixo de país e uma indicação de qualidade no fim: «UK| News One HD» aparece como «News One»</string>
+    <string name="settings_sources_clean_names_custom">Remover também</string>
+    <string name="settings_sources_clean_names_custom_hint">Palavras separadas por ; p. ex. VIP; Backup</string>
     <string name="settings_sources_retest">Testar de novo</string>
     <string name="settings_sources_probe_title">Testar esta lista?</string>
     <string name="settings_sources_probe_warning">Muitos fornecedores nunca indicam quantos canais pode ver em simultâneo, por isso o OwnTV descobre abrindo alguns e vendo quais resistem. Tudo o que estiver a ser reproduzido vai parar, e isto pode demorar até dois minutos.</string>
@@ -756,6 +782,7 @@
     <string name="settings_epg_sources_auto_refresh_title">Atualização automática</string>
     <string name="settings_epg_sources_auto_refresh_description">Desativada, ao iniciar ou quando os dados estiverem desatualizados</string>
     <string name="settings_epg_sources_not_synced">Ainda não sincronizada</string>
+    <string name="settings_epg_sources_priority">Prioridade do guia: <xliff:g id="position">%1$d</xliff:g> de <xliff:g id="total">%2$d</xliff:g>. Quando duas fontes incluem o mesmo canal, é usada a que está mais acima nesta lista.</string>
     <string name="settings_epg_refresh_1h">1 hora</string>
     <string name="settings_epg_refresh_3h">3 horas</string>
     <string name="settings_epg_refresh_6h">6 horas</string>
@@ -1310,6 +1337,12 @@
     <string name="settings_nav_hide_after_desc">Só flutuante: quanto tempo a barra espera depois de o foco sair dela</string>
     <string name="settings_nav_widen">Alargar ao focar</string>
     <string name="settings_nav_widen_desc">Fixo e compacto: mostra os nomes sobre o conteúdo enquanto o menu tem o foco</string>
+    <string name="settings_nav_menu_labels">Etiquetas do menu</string>
+    <string name="settings_nav_menu_labels_desc">Os nomes das secções ao lado dos ícones: nunca, enquanto a barra tem o foco, ou sempre</string>
+    <string name="settings_nav_menu_labels_focused">Com foco</string>
+    <string name="settings_nav_menu_labels_always">Sempre</string>
+    <string name="settings_nav_menu_labels_summary">Etiquetas: <xliff:g id="choice">%1$s</xliff:g></string>
+    <string name="settings_search_keywords_menu_labels">etiquetas, nomes, texto, só ícones, barra, barra lateral, menu, alargar, larga</string>
     <string name="settings_nav_menu_items">Itens do menu</string>
     <string name="settings_nav_menu_items_desc">Dinâmico: segue o conteúdo da lista · Estático: escolhe o utilizador</string>
     <string name="settings_nav_bar">Barra</string>

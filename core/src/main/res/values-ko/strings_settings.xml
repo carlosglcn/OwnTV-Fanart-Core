@@ -70,6 +70,23 @@
     <string name="settings_remote_shortcuts_long_press">길게 누르기</string>
     <string name="settings_remote_shortcuts_unknown_button">리모컨 버튼 %1$d</string>
     <string name="settings_remote_shortcuts_help">• 기본적으로 CH+/CH−와 되감기/빨리 감기는 목록을 페이지 이동하며, 길게 누르면 처음이나 끝으로 이동합니다.\n• 짧게 누르기와 길게 누르기는 따로 지정할 수 있습니다.\n• 매우 큰 ‘전체’ 목록에서는 끝으로 이동이 비활성화됩니다.\n• 뒤로 길게 누르기는 항상 지금 재생 중에 포커스를 두며 변경할 수 없습니다.\n• 일반적으로 빨강/초록/노랑/파랑, 숫자, CH+/CH−, 되감기/빨리 감기를 지정할 수 있습니다.\n• 뒤로, 방향, OK, 음량, 홈, 전원 버튼은 보호됩니다.\n• 숫자 단축키는 탐색 중 작동하며, 전체 화면에서는 채널 번호 입력이 우선합니다.</string>
+    <string name="settings_player_buttons">플레이어 버튼</string>
+    <string name="settings_player_hold_ok">플레이어에서 OK 길게 누르기</string>
+    <string name="settings_player_hold_ok_description">조작 화면이 숨겨져 있을 때 OK를 길게 누르면 여는 항목</string>
+    <string name="settings_help_player_hold_ok">전체 화면 실시간 플레이어에서 조작 화면이 숨겨져 있을 때 OK를 길게 누르면 채널 목록, 편성표 또는 프로그램 정보를 엽니다. 꺼짐은 OK를 기존대로 둡니다. 켜져 있는 동안 OK를 짧게 누르면 손을 뗄 때 동작합니다. 영화와 에피소드는 평소의 OK를 유지합니다.</string>
+    <string name="settings_player_short_ok">조작 화면이 숨겨져 있을 때 OK</string>
+    <string name="settings_player_short_ok_description">전체 화면 플레이어에서 OK를 짧게 눌렀을 때의 동작</string>
+    <string name="settings_help_player_short_ok">전체 화면 플레이어에서 OK를 짧게 누르면 조작 화면이 표시됩니다. 채널 목록이나 편성표를 고르면 실시간 채널에서는 대신 그것을 엽니다. 플레이어가 쓰지 않는 다른 버튼은 계속 조작 화면을 표시합니다. 영화와 에피소드는 항상 조작 화면을 표시합니다.</string>
+    <string name="settings_player_swap_channel_keys">채널 위/아래 바꾸기</string>
+    <string name="settings_player_swap_channel_keys_description">CH+와 위쪽이 이전 채널로 이동</string>
+    <string name="settings_help_player_swap_channel_keys">보통 CH+와 방향키 위쪽은 다음 채널로, CH−와 아래쪽은 이전 채널로 이동합니다. 켜면 시청 중 전체 화면과 미니 플레이어에서 이를 바꿉니다. 둘러보기 목록에는 영향이 없습니다.</string>
+    <string name="settings_player_number_keys_tune">숫자 키로 채널 변경</string>
+    <string name="settings_player_number_keys_tune_description">실시간 플레이어에서 채널 번호 입력</string>
+    <string name="settings_help_player_number_keys_tune">전체 화면 실시간 플레이어에서 리모컨으로 채널 번호를 입력하면 그 채널로 이동합니다. 끄면 숫자 버튼을 리모컨 바로가기용으로 남겨 둡니다. 번호를 입력하려면 실시간 TV 설정의 채널 번호도 켜져 있어야 합니다.</string>
+    <string name="settings_player_ok_channel_list">채널 목록</string>
+    <string name="settings_player_ok_guide">편성표</string>
+    <string name="settings_player_ok_programme_info">프로그램 정보</string>
+    <string name="settings_player_ok_show_controls">조작 화면 표시</string>
     <string name="settings_remote_button_channel_up">채널 +</string>
     <string name="settings_remote_button_channel_down">채널 −</string>
     <string name="settings_remote_button_rewind">되감기</string>
@@ -262,6 +279,8 @@
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">홈</string>
     <string name="settings_startup_last_channel">마지막 채널</string>
+    <string name="settings_startup_last_channel_guide">마지막 채널 · 편성표</string>
+    <string name="settings_startup_last_channel_live">마지막 채널 · 실시간 TV</string>
     <string name="settings_startup_favorites">실시간 · 즐겨찾기</string>
     <string name="settings_startup_specific_channel">지정 채널</string>
     <string name="settings_startup_channel_unavailable">시작 채널을 사용할 수 없어 홈을 열었습니다.</string>
@@ -677,6 +696,13 @@
     <string name="settings_sources_test_trial">체험 계정</string>
     <string name="settings_sources_test_expiry_none">만료일이 제공되지 않음</string>
     <string name="settings_sources_info">정보</string>
+    <string name="settings_sources_clean_names">이름</string>
+    <string name="settings_sources_clean_names_title">“<xliff:g id="name">%1$s</xliff:g>”의 채널 이름</string>
+    <string name="settings_sources_clean_names_description">모든 화면에서 채널 이름을 더 짧게 표시합니다. 편성표는 계속 제공업체가 보내는 이름으로 연결되며, 사용자 지정에서 바꾼 채널 이름은 그대로 유지됩니다. 저장하면 재생목록을 새로 고칩니다.</string>
+    <string name="settings_sources_clean_names_toggle">채널 이름 정리</string>
+    <string name="settings_sources_clean_names_example">앞의 국가 접두어와 끝의 화질 표시를 없앱니다: “UK| News One HD” → “News One”</string>
+    <string name="settings_sources_clean_names_custom">추가로 제거할 단어</string>
+    <string name="settings_sources_clean_names_custom_hint">; 로 구분한 단어, 예: VIP; Backup</string>
     <string name="settings_sources_retest">다시 테스트</string>
     <string name="settings_sources_probe_title">이 재생목록을 테스트할까요?</string>
     <string name="settings_sources_probe_warning">동시에 시청할 수 있는 채널 수를 알려 주지 않는 공급자가 많습니다. 그래서 OwnTV는 몇 개를 직접 열어 어느 것이 유지되는지 확인합니다. 지금 재생 중인 항목은 모두 멈추며, 최대 2분이 걸릴 수 있습니다.</string>
@@ -740,6 +766,7 @@
     <string name="settings_epg_sources_auto_refresh_title">자동 새로 고침</string>
     <string name="settings_epg_sources_auto_refresh_description">꺼짐, 앱 시작 시 또는 데이터가 오래되었을 때</string>
     <string name="settings_epg_sources_not_synced">아직 동기화되지 않음</string>
+    <string name="settings_epg_sources_priority">편성표 우선순위 <xliff:g id="position">%1$d</xliff:g>/<xliff:g id="total">%2$d</xliff:g>. 두 소스에 같은 채널이 있으면 이 목록에서 더 위에 있는 소스가 사용됩니다.</string>
     <string name="settings_epg_refresh_1h">1시간</string>
     <string name="settings_epg_refresh_3h">3시간</string>
     <string name="settings_epg_refresh_6h">6시간</string>
@@ -1256,6 +1283,12 @@
     <string name="settings_nav_hide_after_desc">플로팅 전용: 포커스가 벗어난 뒤 메뉴가 기다리는 시간</string>
     <string name="settings_nav_widen">포커스 시 넓히기</string>
     <string name="settings_nav_widen_desc">고정 및 컴팩트: 레일에 포커스가 있는 동안 콘텐츠 위에 이름 표시</string>
+    <string name="settings_nav_menu_labels">메뉴 이름표</string>
+    <string name="settings_nav_menu_labels_desc">아이콘 옆 섹션 이름: 표시 안 함, 바에 포커스가 있는 동안, 항상</string>
+    <string name="settings_nav_menu_labels_focused">포커스 시</string>
+    <string name="settings_nav_menu_labels_always">항상</string>
+    <string name="settings_nav_menu_labels_summary">이름표: <xliff:g id="choice">%1$s</xliff:g></string>
+    <string name="settings_search_keywords_menu_labels">이름표, 이름, 텍스트, 아이콘만, 바, 사이드바, 메뉴, 넓히기, 넓게</string>
     <string name="settings_nav_menu_items">메뉴 항목</string>
     <string name="settings_nav_menu_items_desc">동적: 재생목록 내용에 맞춤 · 고정: 직접 선택</string>
     <string name="settings_nav_bar">바</string>

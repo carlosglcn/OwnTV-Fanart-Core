@@ -45,6 +45,8 @@
     <string name="search_go_to_movie">फ़िल्म पर जाएँ</string>
     <string name="search_clear_recent">हाल की खोजें साफ़ करें</string>
     <string name="search_field_hint">चैनल, फ़िल्में और सीरीज़</string>
+    <string name="search_voice">आवाज़ से खोज</string>
+    <string name="search_voice_prompt">किसी चैनल, फ़िल्म या सीरीज़ का नाम बोलें</string>
     <string name="search_card_title">अपनी प्लेलिस्ट में कुछ भी खोजें</string>
     <string name="search_card_body">आपकी दिखाई गई सभी प्लेलिस्ट से चैनल, फ़िल्में और सीरीज़। सीधे वहाँ जाने के लिए कोई परिणाम चुनें, फिर वहीं चलाएँ, डाउनलोड करें या उसके विकल्प खोलें। अभी या आज बाद में आने वाले टीवी कार्यक्रम भी उनके शीर्षक से मिलते हैं।</string>
     <string name="search_nothing_found">“<xliff:g id="query">%1$s</xliff:g>” के लिए कुछ नहीं मिला</string>

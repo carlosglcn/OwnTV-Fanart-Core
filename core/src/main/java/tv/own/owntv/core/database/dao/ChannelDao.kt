@@ -10,6 +10,7 @@ import androidx.room.Transaction
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import tv.own.owntv.core.database.entity.ChannelEntity
+import tv.own.owntv.core.database.entity.ChannelNumberProjection
 import tv.own.owntv.core.database.entity.ContentHashProjection
 
 /** A channel plus its category name, for richer global-search results ("category · #number"). */
@@ -168,6 +169,14 @@ interface ChannelDao {
     suspend fun remoteIdsForSource(sourceId: Long): List<String>
 
     /**
+     * A few of the source's live URLs containing [pattern] (a `LIKE` pattern such as `%.mp4%`). A
+     * coarse filter so the startup check never loads the whole catalogue; the caller confirms each
+     * with `ProgressiveVideoUrl`.
+     */
+    @Query("SELECT streamUrl FROM channels WHERE sourceId = :sourceId AND streamUrl LIKE :pattern LIMIT :limit")
+    suspend fun streamUrlsLike(sourceId: Long, pattern: String, limit: Int): List<String>
+
+    /**
      * Each channel's provider id alongside the guide key it is actually stored under — what a Stalker
      * portal's own guide needs to line up.
      *
@@ -208,6 +217,19 @@ interface ChannelDao {
         for (i in ids.indices) setSortOrder(ids[i], sortOrders[i])
     }
 
+    /** Every channel of a source in playlist order, with its number — what `PlaylistNumbering` works from. */
+    @Query("SELECT id, remoteId, sortOrder, number FROM channels WHERE sourceId = :sourceId ORDER BY sortOrder ASC, id ASC")
+    suspend fun numbersForSource(sourceId: Long): List<ChannelNumberProjection>
+
+    /** Sets only the number, for the same reason [setSortOrder] sets only the position. */
+    @Query("UPDATE channels SET number = :number WHERE id = :id")
+    suspend fun setNumber(id: Long, number: Int?)
+
+    @Transaction
+    suspend fun applyNumbers(ids: List<Long>, numbers: List<Int?>) {
+        for (i in ids.indices) setNumber(ids[i], numbers[i])
+    }
+
     /**
      * Shift every row of this source whose position lies in a span.
      *
@@ -218,9 +240,15 @@ interface ChannelDao {
     @Query("UPDATE channels SET sortOrder = sortOrder + :delta WHERE sourceId = :sourceId AND sortOrder BETWEEN :fromSortOrder AND :toSortOrder")
     suspend fun shiftSortOrders(sourceId: Long, fromSortOrder: Int, toSortOrder: Int, delta: Int)
 
+    /** Takes [PARKED_SORT_ORDER] off the rows [applyPositionRanges] parked. */
+    @Query("UPDATE channels SET sortOrder = sortOrder - :parked WHERE sourceId = :sourceId AND sortOrder >= :parked / 2")
+    suspend fun unparkSortOrders(sourceId: Long, parked: Int = PARKED_SORT_ORDER)
+
+    /** Every range parks its rows (see [PARKED_SORT_ORDER]), so no range shifts a row twice. */
     @Transaction
     suspend fun applyPositionRanges(sourceId: Long, froms: List<Int>, tos: List<Int>, deltas: List<Int>) {
-        for (i in froms.indices) shiftSortOrders(sourceId, froms[i], tos[i], deltas[i])
+        for (i in froms.indices) shiftSortOrders(sourceId, froms[i], tos[i], deltas[i] + PARKED_SORT_ORDER)
+        unparkSortOrders(sourceId)
     }
 
 

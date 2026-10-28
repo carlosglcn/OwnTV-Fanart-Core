@@ -163,6 +163,7 @@
     <string name="common_show">Megjelenítés</string>
     <string name="common_qr_code_companion_url">QR-kód a társalkalmazás URL-jéhez</string>
     <string name="sync_error_guide_empty">Ez a műsorújság jelenleg üres. Lehet, hogy a szolgáltató még nem tette közzé — próbáld meg később.</string>
+    <string name="sync_error_guide_no_matching_channels">A műsorújság egyik csatornája sem egyezik még a lejátszási listád csatornáival. Nyisd meg a Műsorújságot, és az EPG automatikus párosítása gombbal párosítsd őket név szerint.</string>
     <string name="shell_rail_profile_line"><xliff:g id="playlist">%1$s</xliff:g> · váltás</string>
     <string name="shell_rail_detail_last">Utoljára: <xliff:g id="title">%1$s</xliff:g></string>
     <string name="shell_rail_detail_resume">Folytatás: <xliff:g id="title">%1$s</xliff:g></string>

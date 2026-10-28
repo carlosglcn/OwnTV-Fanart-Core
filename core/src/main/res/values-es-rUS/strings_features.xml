@@ -45,6 +45,8 @@
     <string name="search_go_to_movie">Ir a la película</string>
     <string name="search_clear_recent">Borrar búsquedas recientes</string>
     <string name="search_field_hint">Canales, películas y series</string>
+    <string name="search_voice">Búsqueda por voz</string>
+    <string name="search_voice_prompt">Di un canal, una película o una serie</string>
     <string name="search_card_title">Encuentra todo en tus listas</string>
     <string name="search_card_body">Canales, películas y series de todas las listas que muestras. Elige un resultado para ir directamente y luego reproducir, descargar o abrir sus opciones. También encuentra programas de TV que se emiten ahora o más tarde hoy por su título.</string>
     <string name="search_nothing_found">No se encontró nada para “<xliff:g id="query">%1$s</xliff:g>”</string>

@@ -70,6 +70,23 @@
     <string name="settings_remote_shortcuts_long_press">Sakatze luzea</string>
     <string name="settings_remote_shortcuts_unknown_button"><xliff:g id="number">%1$d</xliff:g>. urrutiko aginteko botoia</string>
     <string name="settings_remote_shortcuts_help">• Lehenespenez, CH+/CH− eta atzeratu/aurreratu botoiek arakatze-zerrendak orrikatzen dituzte; eutsita, lehen edo azken elementura saltatzen dute. • Sakatze laburrak eta luzeak bereizita esleitu daitezke. • Azkenera saltatzea desgaituta geratzen da Denak zerrenda oso handietan. • Atzera luze sakatzeak beti Orain erreproduzitzen fokuratzen du eta ezin da berresleitu. • Esleitu daitezkeen botoi arruntak gorria/berdea/horia/urdina, zenbakiak, CH+/CH− eta atzeratu/aurreratu dira. • Atzera, norabide-teklak, Ados, bolumena, Hasiera eta piztu/itzali botoiak babestuta geratzen dira. • Zenbaki-lasterbideek arakatzean funtzionatzen dute; pantaila osoko zenbaki-sarrerak kanal-nabigazioaren lehentasuna mantentzen du.</string>
+    <string name="settings_player_buttons">Erreproduzigailuaren botoiak</string>
+    <string name="settings_player_hold_ok">Eutsi OK sakatuta erreproduzigailuan</string>
+    <string name="settings_player_hold_ok_description">Kontrolak ezkutatuta daudenean OK sakatuta edukitzeak irekitzen duena</string>
+    <string name="settings_help_player_hold_ok">Eutsi OK sakatuta pantaila osoko zuzeneko erreproduzigailuan, kontrolak ezkutatuta daudela, kanal-zerrenda, gida edo saioaren informazioa irekitzeko. Desaktibatuta aukerak OK beti bezala uzten du. Aktibatuta dagoen bitartean, OK labur batek askatzean egiten du lan. Filmek eta atalek ohiko OK mantentzen dute.</string>
+    <string name="settings_player_short_ok">OK kontrolak ezkutatuta daudenean</string>
+    <string name="settings_player_short_ok_description">OK labur batek pantaila osoko erreproduzigailuan egiten duena</string>
+    <string name="settings_help_player_short_ok">Pantaila osoko erreproduzigailuan OK labur batek kontrolak erakusten ditu. Aukeratu Kanal-zerrenda edo Gida zuzeneko kanaletan hori irekitzeko; erreproduzigailuak erabiltzen ez duen beste edozein botoik kontrolak erakusten jarraitzen du. Filmek eta atalek beti erakusten dituzte kontrolak.</string>
+    <string name="settings_player_swap_channel_keys">Trukatu kanala gora/behera</string>
+    <string name="settings_player_swap_channel_keys_description">CH+ eta Gora aurreko kanalera doaz</string>
+    <string name="settings_help_player_swap_channel_keys">Normalean CH+ eta Gora hurrengo kanalera doaz, eta CH− eta Behera aurrekora. Aktibatu ikusten ari zarela trukatzeko, pantaila osoan eta mini erreproduzigailuan. Arakatze-zerrendak ez dira aldatzen.</string>
+    <string name="settings_player_number_keys_tune">Zenbaki-teklek kanala aldatzen dute</string>
+    <string name="settings_player_number_keys_tune_description">Idatzi kanal-zenbaki bat zuzeneko erreproduzigailuan</string>
+    <string name="settings_help_player_number_keys_tune">Idatzi kanal-zenbaki bat urrutiko agintean pantaila osoko zuzeneko erreproduzigailuan kanal horretara joateko. Desaktibatu zenbaki-botoiak urrutiko aginteko lasterbideetarako libre uzteko. Zenbaki bat idazteko, Kanal-zenbakiak ere aktibatuta egon behar du Zuzeneko telebistaren ezarpenetan.</string>
+    <string name="settings_player_ok_channel_list">Kanal-zerrenda</string>
+    <string name="settings_player_ok_guide">Gida</string>
+    <string name="settings_player_ok_programme_info">Saioaren informazioa</string>
+    <string name="settings_player_ok_show_controls">Erakutsi kontrolak</string>
     <string name="settings_remote_button_channel_up">Kanala +</string>
     <string name="settings_remote_button_channel_down">Kanala −</string>
     <string name="settings_remote_button_rewind">Atzeratu</string>
@@ -339,6 +356,8 @@
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">Hasiera</string>
     <string name="settings_startup_last_channel">Azken kanala</string>
+    <string name="settings_startup_last_channel_guide">Azken kanala · Gida</string>
+    <string name="settings_startup_last_channel_live">Azken kanala · Zuzeneko telebista</string>
     <string name="settings_startup_favorites">Zuzena · Gogokoak</string>
     <string name="settings_startup_specific_channel">Kanal zehatza</string>
     <string name="settings_startup_channel_unavailable">Abioko kanala ez dago erabilgarri. Hasiera ireki da.</string>
@@ -780,6 +799,13 @@
     <string name="settings_sources_test_trial">Proba-kontua</string>
     <string name="settings_sources_test_expiry_none">Ez da iraungitze-datarik jakinarazi</string>
     <string name="settings_sources_info">Informazioa</string>
+    <string name="settings_sources_clean_names">Izenak</string>
+    <string name="settings_sources_clean_names_title">Kanal-izenak “<xliff:g id="name">%1$s</xliff:g>” zerrendan</string>
+    <string name="settings_sources_clean_names_description">Kanal-izen laburragoak pantaila guztietan. Gidak hornitzaileak bidaltzen dituen izenekin lotzen jarraitzen du, eta Pertsonalizatu atalean izena aldatu diezun kanalek zure izena gordetzen dute. Gordetzeak zerrenda freskatzen du.</string>
+    <string name="settings_sources_clean_names_toggle">Garbitu kanal-izenak</string>
+    <string name="settings_sources_clean_names_example">Herrialde-aurrizkia eta amaierako kalitate-etiketa kentzen ditu: “UK| News One HD” “News One” gisa ageri da</string>
+    <string name="settings_sources_clean_names_custom">Kendu hauek ere</string>
+    <string name="settings_sources_clean_names_custom_hint">; bidez bereizitako hitzak, adib. VIP; Backup</string>
     <string name="settings_sources_retest">Probatu berriro</string>
     <string name="settings_sources_probe_title">Erreprodukzio-zerrenda hau probatu?</string>
     <string name="settings_sources_probe_warning">Hornitzaile askok ez dute inoiz esaten zenbat kanal ikus ditzakezun aldi berean, beraz OwnTVk hainbat ireki eta zeintzuk irauten duten ikusiz jakiten du. Orain erreproduzitzen ari den guztia gelditu egingo da, eta honek bi minutu arte iraun dezake.</string>
@@ -846,6 +872,7 @@
     <string name="settings_epg_sources_auto_refresh_title">Freskatze automatikoa</string>
     <string name="settings_epg_sources_auto_refresh_description">Desaktibatuta, abiatzean, edo datuak zaharkituta daudenean</string>
     <string name="settings_epg_sources_not_synced">Oraindik ez da sinkronizatu</string>
+    <string name="settings_epg_sources_priority">Gidaren lehentasuna: <xliff:g id="position">%1$d</xliff:g>/<xliff:g id="total">%2$d</xliff:g>. Bi iturrik kanal bera badute, zerrenda honetan gorago dagoena erabiltzen da.</string>
     <string name="settings_epg_refresh_1h">ordu 1</string>
     <string name="settings_epg_refresh_3h">3 ordu</string>
     <string name="settings_epg_refresh_6h">6 ordu</string>
@@ -1282,6 +1309,12 @@
     <string name="settings_nav_hide_after_desc">Flotatzailea soilik: fokua uzten duenetik barra zenbat denbora itxaroten duen</string>
     <string name="settings_nav_widen">Zabaldu fokuan</string>
     <string name="settings_nav_widen_desc">Ainguratua eta Trinkoa: izenak edukiaren gainean erakusten ditu barrak fokua duen bitartean</string>
+    <string name="settings_nav_menu_labels">Menuko etiketak</string>
+    <string name="settings_nav_menu_labels_desc">Atalen izenak ikonoen ondoan: inoiz ez, barrak fokua duen bitartean, edo beti</string>
+    <string name="settings_nav_menu_labels_focused">Fokuan</string>
+    <string name="settings_nav_menu_labels_always">Beti</string>
+    <string name="settings_nav_menu_labels_summary">Etiketak: <xliff:g id="choice">%1$s</xliff:g></string>
+    <string name="settings_search_keywords_menu_labels">etiketak, izenak, testua, ikonoak soilik, barra, alboko barra, menua, zabaldu, zabala</string>
     <string name="settings_nav_menu_items">Menu-elementuak</string>
     <string name="settings_nav_menu_items_desc">Dinamikoa: erreprodukzio-zerrendak duenari jarraitzen dio · Estatikoa: zuk aukeratzen dituzu</string>
     <string name="settings_nav_bar">Barra</string>

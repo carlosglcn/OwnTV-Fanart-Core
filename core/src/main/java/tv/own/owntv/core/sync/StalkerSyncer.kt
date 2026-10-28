@@ -88,7 +88,9 @@ internal class StalkerSyncer(
         Log.i(TAG, "$label phase start sourceId=${s.id} fresh=$freshSource")
         progress.update(SyncPhase.LIVE, 0)
 
-        val adapter = support.channelAdapter
+        // The cmd's per-call play_token is left out of the hash ([StalkerClient.withoutPlayToken]),
+        // or an unchanged channel list would rewrite every channel on every re-sync.
+        val adapter = support.channelAdapter.copy(hashOf = ::stalkerChannelHash)
         val hashDeferred = if (!freshSource) support.asyncHashLoad(this, label, s.id) { adapter.loadHashes(s.id) } else null
 
         // Genres first (one auth round trip, reused for every page below).
@@ -103,7 +105,19 @@ internal class StalkerSyncer(
         val insertFn: suspend (List<ChannelEntity>) -> UpsertStats = if (freshSource) {
             { rows -> support.insertFresh(rows, adapter) }
         } else {
-            { rows -> support.upsertStable(rows, hashDeferred!!, adapter) }
+            { rows ->
+                support.upsertStable(rows, hashDeferred!!, adapter).also {
+                    // A channel whose token alone is new was skipped above. Its newest token is still
+                    // stored, URL only, so a portal that does check it gets one as fresh as the last
+                    // re-sync — as before, without rewriting the whole row.
+                    bulkInsertHelper.updateChannelStreamUrls(
+                        s.id,
+                        rows.filter { StalkerClient.hasPlayToken(it.streamUrl) }
+                            .mapNotNull { row -> row.remoteId?.let { it to row.streamUrl } }
+                            .toMap(),
+                    )
+                }
+            }
         }
         val total = intArrayOf(0)
         val remoteIds = if (freshSource) null else HashSet<String>()
@@ -122,7 +136,7 @@ internal class StalkerSyncer(
         bulkInsertHelper.withOptimizedBulkInsert("channels", "channels_fts", eligible = freshSource, ftsOnly = true) {
             support.chunked<ChannelEntity, Unit>(ctx, SyncPhase.LIVE, label, progress, insertFn, total, remoteIds, adapter.remoteIdOf, chunkSize) { add ->
                 val emit: suspend (StalkerClient.Channel, String?) -> Unit = { ch, fallbackGenreId ->
-                    val entity = ChannelEntity(
+                    val entity = tv.own.owntv.core.customize.ChannelNameCleanup.apply(s, ChannelEntity(
                             sourceId = s.id,
                             // A channel's own tv_genre_id wins; fall back to the genre we asked for.
                             categoryId = ch.genreId?.let { catMap[it] } ?: fallbackGenreId?.let { catMap[it] },
@@ -139,7 +153,7 @@ internal class StalkerSyncer(
                             sortOrder = order++,
                             catchup = ch.archive,
                             catchupDays = ch.archiveDuration,
-                    )
+                    ))
                     if (fieldDiffSample.size < FIELD_DIFF_SAMPLE) fieldDiffSample.add(entity)
                     add(entity)
                 }
@@ -284,13 +298,16 @@ internal class StalkerSyncer(
      * the MAC or a play token, and these lines get pasted into bug reports. Run a sync twice and diff
      * the two blocks — whichever `field=` number moves for the same `remoteId` is the culprit.
      */
+    private fun stalkerChannelHash(c: ChannelEntity): Int =
+        c.copy(streamUrl = StalkerClient.withoutPlayToken(c.streamUrl)).computeContentHash()
+
     private fun logFieldFingerprints(label: String, sourceId: Long, sample: List<ChannelEntity>) {
         sample.forEach { c ->
             Log.i(
                 TAG,
-                "$label fieldDiff sourceId=$sourceId remoteId=${c.remoteId} hash=${c.computeContentHash()} " +
+                "$label fieldDiff sourceId=$sourceId remoteId=${c.remoteId} hash=${stalkerChannelHash(c)} " +
                     "categoryId=${c.categoryId} name=${c.name.hashCode()} logoUrl=${c.logoUrl.hashCode()} " +
-                    "streamUrl=${c.streamUrl.hashCode()} epgChannelId=${c.epgChannelId.hashCode()} " +
+                    "streamUrl=${StalkerClient.withoutPlayToken(c.streamUrl).hashCode()} epgChannelId=${c.epgChannelId.hashCode()} " +
                     "number=${c.number} catchup=${c.catchup} catchupDays=${c.catchupDays} " +
                     "catchupSource=${c.catchupSource.hashCode()} sortOrder=${c.sortOrder}",
             )

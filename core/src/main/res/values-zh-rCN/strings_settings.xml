@@ -70,6 +70,23 @@
     <string name="settings_remote_shortcuts_long_press">长按</string>
     <string name="settings_remote_shortcuts_unknown_button">遥控器按键 %1$d</string>
     <string name="settings_remote_shortcuts_help">• 默认情况下，CH+/CH− 和快退/快进用于列表翻页；长按会跳到第一项或最后一项。\n• 短按和长按可以分别分配。\n• 在非常大的“全部”列表中，跳到最后一项仍会禁用。\n• 长按返回始终聚焦“正在播放”，且不能重新分配。\n• 通常可分配红/绿/黄/蓝、数字、CH+/CH− 和快退/快进键。\n• 返回、方向、确定、音量、主页和电源键会保持受保护。\n• 数字快捷键在浏览时生效；全屏时频道号码输入优先。</string>
+    <string name="settings_player_buttons">播放器按键</string>
+    <string name="settings_player_hold_ok">在播放器中长按确定</string>
+    <string name="settings_player_hold_ok_description">控制栏隐藏时长按确定打开的内容</string>
+    <string name="settings_help_player_hold_ok">在全屏直播播放器中控制栏隐藏时长按确定,可打开频道列表、节目指南或节目信息。关闭则确定键保持原样。开启期间,短按确定会在松开时生效。电影和剧集保持原来的确定键。</string>
+    <string name="settings_player_short_ok">控制栏隐藏时的确定键</string>
+    <string name="settings_player_short_ok_description">在全屏播放器中短按确定的作用</string>
+    <string name="settings_help_player_short_ok">在全屏播放器中短按确定会显示控制栏。选择频道列表或节目指南,则在直播频道上改为打开它;播放器不使用的其他按键仍会显示控制栏。电影和剧集始终显示控制栏。</string>
+    <string name="settings_player_swap_channel_keys">互换频道上/下</string>
+    <string name="settings_player_swap_channel_keys_description">CH+ 和上键转到上一个频道</string>
+    <string name="settings_help_player_swap_channel_keys">通常 CH+ 和方向上键转到下一个频道,CH− 和下键转到上一个。开启后在观看时互换它们,全屏和迷你播放器中均适用。浏览列表不受影响。</string>
+    <string name="settings_player_number_keys_tune">数字键切换频道</string>
+    <string name="settings_player_number_keys_tune_description">在直播播放器中输入频道号</string>
+    <string name="settings_help_player_number_keys_tune">在全屏直播播放器中用遥控器输入频道号即可跳到该频道。关闭后数字键留给遥控器快捷键。输入频道号还需要在直播电视设置中开启频道编号。</string>
+    <string name="settings_player_ok_channel_list">频道列表</string>
+    <string name="settings_player_ok_guide">节目指南</string>
+    <string name="settings_player_ok_programme_info">节目信息</string>
+    <string name="settings_player_ok_show_controls">显示控制栏</string>
     <string name="settings_remote_button_channel_up">频道 +</string>
     <string name="settings_remote_button_channel_down">频道 −</string>
     <string name="settings_remote_button_rewind">快退</string>
@@ -262,6 +279,8 @@
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">主屏幕</string>
     <string name="settings_startup_last_channel">上次观看的频道</string>
+    <string name="settings_startup_last_channel_guide">上次观看的频道 · 节目指南</string>
+    <string name="settings_startup_last_channel_live">上次观看的频道 · 直播电视</string>
     <string name="settings_startup_favorites">直播 · 收藏夹</string>
     <string name="settings_startup_specific_channel">指定频道</string>
     <string name="settings_startup_channel_unavailable">启动频道不可用，已打开首页。</string>
@@ -677,6 +696,13 @@
     <string name="settings_sources_test_trial">试用账号</string>
     <string name="settings_sources_test_expiry_none">未提供到期日期</string>
     <string name="settings_sources_info">信息</string>
+    <string name="settings_sources_clean_names">名称</string>
+    <string name="settings_sources_clean_names_title">“<xliff:g id="name">%1$s</xliff:g>”中的频道名称</string>
+    <string name="settings_sources_clean_names_description">所有界面显示更短的频道名称。节目指南仍按提供商发送的名称匹配,在“自定义”中改过名的频道保留你的名称。保存会刷新播放列表。</string>
+    <string name="settings_sources_clean_names_toggle">清理频道名称</string>
+    <string name="settings_sources_clean_names_example">去掉开头的国家前缀和末尾的画质标记:“UK| News One HD”显示为“News One”</string>
+    <string name="settings_sources_clean_names_custom">另外删除</string>
+    <string name="settings_sources_clean_names_custom_hint">用 ; 分隔的词,例如 VIP; Backup</string>
     <string name="settings_sources_retest">重新测试</string>
     <string name="settings_sources_probe_title">测试此播放列表？</string>
     <string name="settings_sources_probe_warning">许多运营商从不说明你可以同时观看多少个频道，因此 OwnTV 会打开几个频道，看哪些能够持续播放，以此来确定。当前正在播放的内容会停止，此过程最多需要两分钟。</string>
@@ -740,6 +766,7 @@
     <string name="settings_epg_sources_auto_refresh_title">自动刷新</string>
     <string name="settings_epg_sources_auto_refresh_description">关闭、启动时刷新或数据过期时刷新</string>
     <string name="settings_epg_sources_not_synced">尚未同步</string>
+    <string name="settings_epg_sources_priority">节目指南优先级：第 <xliff:g id="position">%1$d</xliff:g> 位，共 <xliff:g id="total">%2$d</xliff:g> 个。当两个来源包含同一频道时，使用此列表中靠上的来源。</string>
     <string name="settings_epg_refresh_1h">1 小时</string>
     <string name="settings_epg_refresh_3h">3 小时</string>
     <string name="settings_epg_refresh_6h">6 小时</string>
@@ -1256,6 +1283,12 @@
     <string name="settings_nav_hide_after_desc">仅悬浮：焦点离开后导航栏等待多久再隐藏</string>
     <string name="settings_nav_widen">获得焦点时展开</string>
     <string name="settings_nav_widen_desc">固定且紧凑：导航栏获得焦点时在内容上方显示名称</string>
+    <string name="settings_nav_menu_labels">菜单标签</string>
+    <string name="settings_nav_menu_labels_desc">图标旁的版块名称:不显示、侧栏获得焦点时、始终显示</string>
+    <string name="settings_nav_menu_labels_focused">获得焦点时</string>
+    <string name="settings_nav_menu_labels_always">始终</string>
+    <string name="settings_nav_menu_labels_summary">标签:<xliff:g id="choice">%1$s</xliff:g></string>
+    <string name="settings_search_keywords_menu_labels">标签, 名称, 文字, 仅图标, 侧栏, 侧边栏, 菜单, 展开, 宽</string>
     <string name="settings_nav_menu_items">菜单项</string>
     <string name="settings_nav_menu_items_desc">动态：跟随播放列表内容 · 静态：自行选择</string>
     <string name="settings_nav_bar">导航栏</string>

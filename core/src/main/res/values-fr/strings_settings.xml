@@ -70,6 +70,23 @@
     <string name="settings_remote_shortcuts_long_press">Appui long</string>
     <string name="settings_remote_shortcuts_unknown_button">Touche de télécommande %1$d</string>
     <string name="settings_remote_shortcuts_help">• Par défaut, CH+/CH− et retour/avance parcourent les listes ; un appui long va au premier ou au dernier élément.\n• Les appuis courts et longs sont attribuables séparément.\n• Aller au dernier reste désactivé dans les très grandes listes « Tout ».\n• Un appui long sur Retour cible toujours Lecture en cours et ne peut pas être modifié.\n• Les touches couramment attribuables sont rouge/verte/jaune/bleue, chiffres, CH+/CH− et retour/avance rapide.\n• Retour, pavé directionnel, OK, volume, Accueil et alimentation restent protégés.\n• Les raccourcis numériques fonctionnent pendant la navigation ; en plein écran, la saisie de chaîne est prioritaire.</string>
+    <string name="settings_player_buttons">Touches du lecteur</string>
+    <string name="settings_player_hold_ok">Maintenir OK dans le lecteur</string>
+    <string name="settings_player_hold_ok_description">Ce qu’un appui long sur OK ouvre quand les commandes sont masquées</string>
+    <string name="settings_help_player_hold_ok">Maintenez OK dans le lecteur en direct en plein écran, commandes masquées, pour ouvrir la liste des chaînes, le guide ou les infos du programme. Désactivé laisse OK comme avant. Tant que c’est activé, un appui court sur OK agit au relâchement. Les films et les épisodes gardent le OK habituel.</string>
+    <string name="settings_player_short_ok">OK quand les commandes sont masquées</string>
+    <string name="settings_player_short_ok_description">Ce que fait un appui court sur OK dans le lecteur plein écran</string>
+    <string name="settings_help_player_short_ok">Un appui court sur OK dans le lecteur plein écran affiche les commandes. Choisissez Liste des chaînes ou Guide pour ouvrir plutôt cela sur les chaînes en direct ; toute autre touche que le lecteur n’utilise pas affiche toujours les commandes. Les films et les épisodes affichent toujours les commandes.</string>
+    <string name="settings_player_swap_channel_keys">Inverser chaîne haut/bas</string>
+    <string name="settings_player_swap_channel_keys_description">CH+ et Haut passent à la chaîne précédente</string>
+    <string name="settings_help_player_swap_channel_keys">Normalement, CH+ et Haut passent à la chaîne suivante, CH− et Bas à la précédente. Activez cette option pour les inverser pendant le visionnage, en plein écran et dans le mini-lecteur. Les listes de navigation ne changent pas.</string>
+    <string name="settings_player_number_keys_tune">Les chiffres changent de chaîne</string>
+    <string name="settings_player_number_keys_tune_description">Saisir un numéro de chaîne dans le lecteur en direct</string>
+    <string name="settings_help_player_number_keys_tune">Tapez un numéro de chaîne sur la télécommande dans le lecteur en direct en plein écran pour aller à cette chaîne. Désactivez cette option pour laisser les touches numériques à vos raccourcis de télécommande. La saisie d’un numéro demande aussi Numéros des chaînes activé dans les réglages TV en direct.</string>
+    <string name="settings_player_ok_channel_list">Liste des chaînes</string>
+    <string name="settings_player_ok_guide">Guide</string>
+    <string name="settings_player_ok_programme_info">Infos du programme</string>
+    <string name="settings_player_ok_show_controls">Afficher les commandes</string>
     <string name="settings_remote_button_channel_up">Chaîne +</string>
     <string name="settings_remote_button_channel_down">Chaîne −</string>
     <string name="settings_remote_button_rewind">Retour rapide</string>
@@ -266,6 +283,8 @@
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">Accueil</string>
     <string name="settings_startup_last_channel">Dernière chaîne</string>
+    <string name="settings_startup_last_channel_guide">Dernière chaîne · Guide TV</string>
+    <string name="settings_startup_last_channel_live">Dernière chaîne · TV en direct</string>
     <string name="settings_startup_favorites">TV en direct · Favoris</string>
     <string name="settings_startup_specific_channel">Chaîne spécifique</string>
     <string name="settings_startup_channel_unavailable">La chaîne de démarrage est indisponible. L’accueil a été ouvert.</string>
@@ -687,6 +706,13 @@
     <string name="settings_sources_test_trial">Compte d’essai</string>
     <string name="settings_sources_test_expiry_none">Aucune date d’expiration communiquée</string>
     <string name="settings_sources_info">Infos</string>
+    <string name="settings_sources_clean_names">Noms</string>
+    <string name="settings_sources_clean_names_title">Noms des chaînes dans « <xliff:g id="name">%1$s</xliff:g> »</string>
+    <string name="settings_sources_clean_names_description">Des noms de chaînes plus courts sur tous les écrans. Le guide continue d’utiliser les noms envoyés par votre fournisseur, et les chaînes renommées dans Personnaliser gardent votre nom. Enregistrer actualise la playlist.</string>
+    <string name="settings_sources_clean_names_toggle">Nettoyer les noms des chaînes</string>
+    <string name="settings_sources_clean_names_example">Retire un préfixe de pays et une mention de qualité à la fin : « UK| News One HD » devient « News One »</string>
+    <string name="settings_sources_clean_names_custom">Retirer aussi</string>
+    <string name="settings_sources_clean_names_custom_hint">Mots séparés par ; ex. VIP; Backup</string>
     <string name="settings_sources_retest">Retester</string>
     <string name="settings_sources_probe_title">Tester cette liste ?</string>
     <string name="settings_sources_probe_warning">Beaucoup de fournisseurs n’indiquent jamais combien de chaînes vous pouvez regarder en même temps ; OwnTV le découvre donc en en ouvrant quelques-unes et en observant lesquelles tiennent. Tout ce qui est en cours de lecture s’arrêtera, et cela peut prendre jusqu’à deux minutes.</string>
@@ -756,6 +782,7 @@
     <string name="settings_epg_sources_auto_refresh_title">Actualisation automatique</string>
     <string name="settings_epg_sources_auto_refresh_description">Désactivée, au démarrage ou lorsque les données sont obsolètes</string>
     <string name="settings_epg_sources_not_synced">Pas encore synchronisée</string>
+    <string name="settings_epg_sources_priority">Priorité du guide : <xliff:g id="position">%1$d</xliff:g> sur <xliff:g id="total">%2$d</xliff:g>. Quand deux sources proposent la même chaîne, celle placée le plus haut dans cette liste est utilisée.</string>
     <string name="settings_epg_refresh_1h">1 heure</string>
     <string name="settings_epg_refresh_3h">3 heures</string>
     <string name="settings_epg_refresh_6h">6 heures</string>
@@ -1310,6 +1337,12 @@
     <string name="settings_nav_hide_after_desc">Flottante uniquement : délai d’attente de la barre une fois le focus parti</string>
     <string name="settings_nav_widen">Élargir au focus</string>
     <string name="settings_nav_widen_desc">Ancré et compact : affiche les noms par-dessus le contenu tant que le menu a le focus</string>
+    <string name="settings_nav_menu_labels">Libellés du menu</string>
+    <string name="settings_nav_menu_labels_desc">Les noms des sections à côté des icônes : jamais, quand la barre a le focus, ou toujours</string>
+    <string name="settings_nav_menu_labels_focused">Au focus</string>
+    <string name="settings_nav_menu_labels_always">Toujours</string>
+    <string name="settings_nav_menu_labels_summary">Libellés : <xliff:g id="choice">%1$s</xliff:g></string>
+    <string name="settings_search_keywords_menu_labels">libellés, noms, texte, icônes seules, barre, barre latérale, menu, élargir, large</string>
     <string name="settings_nav_menu_items">Éléments du menu</string>
     <string name="settings_nav_menu_items_desc">Dynamique : selon le contenu de la playlist · Statique : à vous de choisir</string>
     <string name="settings_nav_bar">Barre</string>

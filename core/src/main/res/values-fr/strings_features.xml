@@ -45,6 +45,8 @@
     <string name="search_go_to_movie">Aller au film</string>
     <string name="search_clear_recent">Effacer les recherches récentes</string>
     <string name="search_field_hint">Chaînes, films et séries</string>
+    <string name="search_voice">Recherche vocale</string>
+    <string name="search_voice_prompt">Dites une chaîne, un film ou une série</string>
     <string name="search_card_title">Trouvez tout dans vos playlists</string>
     <string name="search_card_body">Chaînes, films et séries de toutes les playlists affichées. Choisissez un résultat pour y aller directement, puis lancez la lecture, téléchargez ou ouvrez ses options. Les programmes TV diffusés maintenant ou plus tard dans la journée sont aussi trouvés par leur titre.</string>
     <string name="search_nothing_found">Aucun résultat pour « <xliff:g id="query">%1$s</xliff:g> »</string>

@@ -70,6 +70,23 @@
     <string name="settings_remote_shortcuts_long_press">Długie naciśnięcie</string>
     <string name="settings_remote_shortcuts_unknown_button">Przycisk pilota %1$d</string>
     <string name="settings_remote_shortcuts_help">• Domyślnie CH+/CH− oraz przewijanie stronicują listy; przytrzymanie przechodzi do pierwszego lub ostatniego elementu.\n• Krótkie i długie naciśnięcie można przypisać oddzielnie.\n• Skok na koniec pozostaje wyłączony na bardzo dużych listach „Wszystko”.\n• Długie Wstecz zawsze ustawia fokus na Teraz odtwarzane i nie można go zmienić.\n• Zwykle można przypisać czerwony/zielony/żółty/niebieski, cyfry, CH+/CH− oraz przewijanie.\n• Wstecz, D-pad, OK, głośność, Ekran główny i zasilanie pozostają chronione.\n• Skróty cyfrowe działają podczas przeglądania; na pełnym ekranie pierwszeństwo ma numer kanału.</string>
+    <string name="settings_player_buttons">Przyciski odtwarzacza</string>
+    <string name="settings_player_hold_ok">Przytrzymanie OK w odtwarzaczu</string>
+    <string name="settings_player_hold_ok_description">Co otwiera przytrzymanie OK, gdy elementy sterujące są ukryte</string>
+    <string name="settings_help_player_hold_ok">Przytrzymaj OK w odtwarzaczu na żywo na pełnym ekranie, przy ukrytych elementach sterujących, aby otworzyć listę kanałów, przewodnik lub informacje o programie. Wył. pozostawia OK jak dotąd. Gdy ta opcja jest włączona, krótkie OK działa po puszczeniu. Filmy i odcinki zachowują zwykłe OK.</string>
+    <string name="settings_player_short_ok">OK przy ukrytych elementach sterujących</string>
+    <string name="settings_player_short_ok_description">Co robi krótkie naciśnięcie OK w odtwarzaczu na pełnym ekranie</string>
+    <string name="settings_help_player_short_ok">Krótkie naciśnięcie OK w odtwarzaczu na pełnym ekranie pokazuje elementy sterujące. Wybierz Lista kanałów lub Przewodnik, aby na kanałach na żywo otwierać zamiast tego tę opcję; każdy inny przycisk, którego odtwarzacz nie używa, nadal pokazuje elementy sterujące. Filmy i odcinki zawsze pokazują elementy sterujące.</string>
+    <string name="settings_player_swap_channel_keys">Zamień kanał w górę/w dół</string>
+    <string name="settings_player_swap_channel_keys_description">CH+ i W górę przechodzą do poprzedniego kanału</string>
+    <string name="settings_help_player_swap_channel_keys">Zwykle CH+ i W górę przechodzą do następnego kanału, a CH− i W dół do poprzedniego. Włącz, aby zamienić je podczas oglądania, na pełnym ekranie i w miniodtwarzaczu. Listy przeglądania się nie zmieniają.</string>
+    <string name="settings_player_number_keys_tune">Cyfry przełączają kanały</string>
+    <string name="settings_player_number_keys_tune_description">Wpisz numer kanału w odtwarzaczu na żywo</string>
+    <string name="settings_help_player_number_keys_tune">Wpisz numer kanału na pilocie w odtwarzaczu na żywo na pełnym ekranie, aby przejść do tego kanału. Wyłącz, aby zostawić przyciski cyfr dla skrótów pilota. Wpisywanie numeru wymaga też włączenia opcji Numery kanałów w ustawieniach Telewizji na żywo.</string>
+    <string name="settings_player_ok_channel_list">Lista kanałów</string>
+    <string name="settings_player_ok_guide">Przewodnik</string>
+    <string name="settings_player_ok_programme_info">Informacje o programie</string>
+    <string name="settings_player_ok_show_controls">Pokaż sterowanie</string>
     <string name="settings_remote_button_channel_up">Kanał +</string>
     <string name="settings_remote_button_channel_down">Kanał −</string>
     <string name="settings_remote_button_rewind">Przewiń wstecz</string>
@@ -268,6 +285,8 @@
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">Ekran główny</string>
     <string name="settings_startup_last_channel">Ostatni kanał</string>
+    <string name="settings_startup_last_channel_guide">Ostatni kanał · Przewodnik TV</string>
+    <string name="settings_startup_last_channel_live">Ostatni kanał · Telewizja na żywo</string>
     <string name="settings_startup_favorites">Na żywo · Ulubione</string>
     <string name="settings_startup_specific_channel">Wybrany kanał</string>
     <string name="settings_startup_channel_unavailable">Kanał startowy jest niedostępny. Otwarto ekran główny.</string>
@@ -692,6 +711,13 @@
     <string name="settings_sources_test_trial">Konto próbne</string>
     <string name="settings_sources_test_expiry_none">Nie podano daty wygaśnięcia</string>
     <string name="settings_sources_info">Informacje</string>
+    <string name="settings_sources_clean_names">Nazwy</string>
+    <string name="settings_sources_clean_names_title">Nazwy kanałów w „<xliff:g id="name">%1$s</xliff:g>”</string>
+    <string name="settings_sources_clean_names_description">Krótsze nazwy kanałów na każdym ekranie. Przewodnik nadal dopasowuje nazwy wysyłane przez dostawcę, a kanały, którym zmieniono nazwę w Dostosuj, zachowują Twoją nazwę. Zapisanie odświeża playlistę.</string>
+    <string name="settings_sources_clean_names_toggle">Porządkuj nazwy kanałów</string>
+    <string name="settings_sources_clean_names_example">Usuwa przedrostek kraju i oznaczenie jakości na końcu: „UK| News One HD” wyświetla się jako „News One”</string>
+    <string name="settings_sources_clean_names_custom">Usuń też</string>
+    <string name="settings_sources_clean_names_custom_hint">Słowa oddzielone ; np. VIP; Backup</string>
     <string name="settings_sources_retest">Testuj ponownie</string>
     <string name="settings_sources_probe_title">Przetestować tę playlistę?</string>
     <string name="settings_sources_probe_warning">Wielu dostawców nigdy nie podaje, ile kanałów można oglądać jednocześnie, więc OwnTV sprawdza to, otwierając kilka i obserwując, które przetrwają. Wszystko, co jest teraz odtwarzane, zostanie zatrzymane, a może to potrwać do dwóch minut.</string>
@@ -764,6 +790,7 @@
     <string name="settings_epg_sources_auto_refresh_title">Automatyczne odświeżanie</string>
     <string name="settings_epg_sources_auto_refresh_description">Wyłączone, przy uruchomieniu lub gdy dane są nieaktualne</string>
     <string name="settings_epg_sources_not_synced">Jeszcze nie zsynchronizowano</string>
+    <string name="settings_epg_sources_priority">Priorytet przewodnika: <xliff:g id="position">%1$d</xliff:g> z <xliff:g id="total">%2$d</xliff:g>. Gdy dwa źródła zawierają ten sam kanał, używane jest to, które jest wyżej na tej liście.</string>
     <string name="settings_epg_refresh_1h">1 godzina</string>
     <string name="settings_epg_refresh_3h">3 godziny</string>
     <string name="settings_epg_refresh_6h">6 godzin</string>
@@ -1337,6 +1364,12 @@
     <string name="settings_nav_hide_after_desc">Tylko pływający: jak długo pasek czeka, gdy fokus go opuści</string>
     <string name="settings_nav_widen">Poszerz przy fokusie</string>
     <string name="settings_nav_widen_desc">Zadokowany i kompaktowy: pokazuje nazwy nad treścią, gdy pasek ma fokus</string>
+    <string name="settings_nav_menu_labels">Etykiety menu</string>
+    <string name="settings_nav_menu_labels_desc">Nazwy sekcji obok ikon: nigdy, gdy pasek ma fokus, albo zawsze</string>
+    <string name="settings_nav_menu_labels_focused">Przy fokusie</string>
+    <string name="settings_nav_menu_labels_always">Zawsze</string>
+    <string name="settings_nav_menu_labels_summary">Etykiety: <xliff:g id="choice">%1$s</xliff:g></string>
+    <string name="settings_search_keywords_menu_labels">etykiety, nazwy, tekst, tylko ikony, pasek, pasek boczny, menu, poszerz, szeroki</string>
     <string name="settings_nav_menu_items">Elementy menu</string>
     <string name="settings_nav_menu_items_desc">Dynamiczne: według zawartości playlisty · Stałe: wybierasz sam</string>
     <string name="settings_nav_bar">Pasek</string>

@@ -45,6 +45,8 @@
     <string name="search_go_to_movie">Filme git</string>
     <string name="search_clear_recent">Son aramaları temizle</string>
     <string name="search_field_hint">Kanallar, filmler ve diziler</string>
+    <string name="search_voice">Sesli arama</string>
+    <string name="search_voice_prompt">Bir kanal, film veya dizi söyleyin</string>
     <string name="search_card_title">Oynatma listelerinizdeki her şeyi bulun</string>
     <string name="search_card_body">Gösterdiğiniz tüm oynatma listelerinden kanallar, filmler ve diziler. Doğrudan ona gitmek için bir sonuç seçin; orada oynatın, indirin veya seçeneklerini açın. Şu an veya bugün daha sonra yayınlanan TV programları da adlarıyla bulunur.</string>
     <string name="search_nothing_found">“<xliff:g id="query">%1$s</xliff:g>” için hiçbir şey bulunamadı</string>

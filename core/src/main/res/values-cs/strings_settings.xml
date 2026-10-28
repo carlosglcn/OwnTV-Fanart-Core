@@ -70,6 +70,23 @@
     <string name="settings_remote_shortcuts_long_press">Dlouhý stisk</string>
     <string name="settings_remote_shortcuts_unknown_button">Tlačítko ovladače %1$d</string>
     <string name="settings_remote_shortcuts_help">• Ve výchozím stavu CH+/CH− a zpět/vpřed stránkují seznamy; podržení skočí na první nebo poslední položku.\n• Krátký a dlouhý stisk lze přiřadit zvlášť.\n• Skok na konec zůstává vypnutý ve velmi velkých seznamech „Vše“.\n• Dlouhé podržení Zpět vždy zaměří Právě se přehrává a nelze je změnit.\n• Běžně lze přiřadit červené/zelené/žluté/modré, čísla, CH+/CH− a převíjení zpět/vpřed.\n• Zpět, D-pad, OK, hlasitost, Domů a napájení zůstávají chráněné.\n• Číselné zkratky fungují při procházení; na celé obrazovce má přednost zadání kanálu.</string>
+    <string name="settings_player_buttons">Tlačítka přehrávače</string>
+    <string name="settings_player_hold_ok">Podržení OK v přehrávači</string>
+    <string name="settings_player_hold_ok_description">Co otevře podržení OK, když jsou ovládací prvky skryté</string>
+    <string name="settings_help_player_hold_ok">Podržte OK v živém přehrávači na celé obrazovce se skrytými ovládacími prvky a otevře se seznam kanálů, průvodce nebo informace o pořadu. Vypnuto ponechá OK jako dosud. Dokud je to zapnuté, krátké OK zareaguje po uvolnění. Filmy a epizody si ponechají obvyklé OK.</string>
+    <string name="settings_player_short_ok">OK při skrytých ovládacích prvcích</string>
+    <string name="settings_player_short_ok_description">Co udělá krátké stisknutí OK v přehrávači na celé obrazovce</string>
+    <string name="settings_help_player_short_ok">Krátké stisknutí OK v přehrávači na celé obrazovce zobrazí ovládací prvky. Zvolte Seznam kanálů nebo Průvodce a u živých kanálů se otevře to místo nich; jakékoli jiné tlačítko, které přehrávač nepoužívá, ovládací prvky dál zobrazí. Filmy a epizody vždy zobrazí ovládací prvky.</string>
+    <string name="settings_player_swap_channel_keys">Prohodit kanál nahoru/dolů</string>
+    <string name="settings_player_swap_channel_keys_description">CH+ a Nahoru přejdou na předchozí kanál</string>
+    <string name="settings_help_player_swap_channel_keys">Obvykle CH+ a Nahoru přejdou na další kanál a CH− a Dolů na předchozí. Zapněte, chcete-li je při sledování prohodit, na celé obrazovce i v mini přehrávači. Seznamy při procházení se nemění.</string>
+    <string name="settings_player_number_keys_tune">Číslice přepínají kanály</string>
+    <string name="settings_player_number_keys_tune_description">Zadat číslo kanálu v živém přehrávači</string>
+    <string name="settings_help_player_number_keys_tune">Zadejte číslo kanálu na ovladači v živém přehrávači na celé obrazovce a přejdete na tento kanál. Vypněte, chcete-li číselná tlačítka nechat pro zkratky ovladače. Zadání čísla také vyžaduje zapnutá Čísla kanálů v nastavení Živého vysílání.</string>
+    <string name="settings_player_ok_channel_list">Seznam kanálů</string>
+    <string name="settings_player_ok_guide">Průvodce</string>
+    <string name="settings_player_ok_programme_info">Informace o pořadu</string>
+    <string name="settings_player_ok_show_controls">Zobrazit ovládání</string>
     <string name="settings_remote_button_channel_up">Kanál +</string>
     <string name="settings_remote_button_channel_down">Kanál −</string>
     <string name="settings_remote_button_rewind">Zpět</string>
@@ -268,6 +285,8 @@
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">Domů</string>
     <string name="settings_startup_last_channel">Poslední kanál</string>
+    <string name="settings_startup_last_channel_guide">Poslední kanál · TV program</string>
+    <string name="settings_startup_last_channel_live">Poslední kanál · Živé vysílání</string>
     <string name="settings_startup_favorites">Živé vysílání · Oblíbené</string>
     <string name="settings_startup_specific_channel">Konkrétní kanál</string>
     <string name="settings_startup_channel_unavailable">Spouštěcí kanál není dostupný. Byla otevřena domovská obrazovka.</string>
@@ -692,6 +711,13 @@
     <string name="settings_sources_test_trial">Zkušební účet</string>
     <string name="settings_sources_test_expiry_none">Datum vypršení nebylo uvedeno</string>
     <string name="settings_sources_info">Informace</string>
+    <string name="settings_sources_clean_names">Názvy</string>
+    <string name="settings_sources_clean_names_title">Názvy kanálů v „<xliff:g id="name">%1$s</xliff:g>“</string>
+    <string name="settings_sources_clean_names_description">Kratší názvy kanálů na všech obrazovkách. Průvodce dál páruje názvy, které posílá váš poskytovatel, a kanály přejmenované v Přizpůsobení si ponechají váš název. Uložení obnoví playlist.</string>
+    <string name="settings_sources_clean_names_toggle">Vyčistit názvy kanálů</string>
+    <string name="settings_sources_clean_names_example">Odstraní předponu země a značku kvality na konci: „UK| News One HD“ se zobrazí jako „News One“</string>
+    <string name="settings_sources_clean_names_custom">Odstranit také</string>
+    <string name="settings_sources_clean_names_custom_hint">Slova oddělená ; např. VIP; Backup</string>
     <string name="settings_sources_retest">Otestovat znovu</string>
     <string name="settings_sources_probe_title">Otestovat tento seznam?</string>
     <string name="settings_sources_probe_warning">Mnozí poskytovatelé nikdy neuvedou, kolik kanálů můžete sledovat najednou, a tak to OwnTV zjistí tím, že jich několik otevře a sleduje, které vydrží. Vše, co právě běží, se zastaví a může to trvat až dvě minuty.</string>
@@ -764,6 +790,7 @@
     <string name="settings_epg_sources_auto_refresh_title">Automatická aktualizace</string>
     <string name="settings_epg_sources_auto_refresh_description">Vypnuto, při spuštění nebo při zastaralých datech</string>
     <string name="settings_epg_sources_not_synced">Zatím nesynchronizováno</string>
+    <string name="settings_epg_sources_priority">Priorita průvodce <xliff:g id="position">%1$d</xliff:g> z <xliff:g id="total">%2$d</xliff:g>. Když dva zdroje obsahují stejný kanál, použije se ten, který je v tomto seznamu výš.</string>
     <string name="settings_epg_refresh_1h">1 hodina</string>
     <string name="settings_epg_refresh_3h">3 hodiny</string>
     <string name="settings_epg_refresh_6h">6 hodin</string>
@@ -1337,6 +1364,12 @@
     <string name="settings_nav_hide_after_desc">Jen plovoucí: jak dlouho lišta čeká, když ji fokus opustí</string>
     <string name="settings_nav_widen">Rozšířit při výběru</string>
     <string name="settings_nav_widen_desc">Ukotvená a kompaktní: při výběru lišty ukáže názvy přes obsah</string>
+    <string name="settings_nav_menu_labels">Popisky nabídky</string>
+    <string name="settings_nav_menu_labels_desc">Názvy sekcí vedle ikon: nikdy, když má lišta výběr, nebo vždy</string>
+    <string name="settings_nav_menu_labels_focused">Při výběru</string>
+    <string name="settings_nav_menu_labels_always">Vždy</string>
+    <string name="settings_nav_menu_labels_summary">Popisky: <xliff:g id="choice">%1$s</xliff:g></string>
+    <string name="settings_search_keywords_menu_labels">popisky, názvy, text, jen ikony, lišta, postranní panel, nabídka, rozšířit, široká</string>
     <string name="settings_nav_menu_items">Položky nabídky</string>
     <string name="settings_nav_menu_items_desc">Dynamické: podle obsahu playlistu · Pevné: vyberete si sami</string>
     <string name="settings_nav_bar">Lišta</string>

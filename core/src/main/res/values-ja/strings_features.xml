@@ -45,6 +45,8 @@
     <string name="search_go_to_movie">映画へ移動</string>
     <string name="search_clear_recent">最近の検索を消去</string>
     <string name="search_field_hint">チャンネル、映画、シリーズ</string>
+    <string name="search_voice">音声検索</string>
+    <string name="search_voice_prompt">チャンネル、映画、シリーズ名を話してください</string>
     <string name="search_card_title">プレイリストのすべてを検索</string>
     <string name="search_card_body">表示しているすべてのプレイリストのチャンネル、映画、シリーズ。結果を選ぶとその場所へ直接移動し、そこで再生、ダウンロード、オプションの表示ができます。放送中や今日この後のテレビ番組もタイトルで見つかります。</string>
     <string name="search_nothing_found">「<xliff:g id="query">%1$s</xliff:g>」 は見つかりませんでした</string>

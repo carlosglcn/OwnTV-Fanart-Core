@@ -70,6 +70,23 @@
     <string name="settings_remote_shortcuts_long_press">लॉन्ग प्रेस</string>
     <string name="settings_remote_shortcuts_unknown_button">रिमोट बटन %1$d</string>
     <string name="settings_remote_shortcuts_help">• डिफ़ॉल्ट रूप से CH+/CH− और रिवाइंड/फ़ास्ट-फ़ॉरवर्ड सूचियों में पेज करते हैं; थामने पर पहले या आखिरी आइटम पर जाते हैं।\n• शॉर्ट और लॉन्ग प्रेस अलग-अलग असाइन किए जा सकते हैं।\n• बहुत बड़ी “सभी” सूची में आखिरी पर जाना बंद रहता है।\n• बैक को देर तक दबाने पर हमेशा अभी चल रहा पर फ़ोकस जाता है और इसे बदला नहीं जा सकता।\n• आम तौर पर लाल/हरा/पीला/नीला, नंबर, CH+/CH− और रिवाइंड/फ़ास्ट-फ़ॉरवर्ड असाइन किए जा सकते हैं।\n• बैक, डी-पैड, OK, वॉल्यूम, होम और पावर सुरक्षित रहते हैं।\n• ब्राउज़ करते समय नंबर शॉर्टकट काम करते हैं; फ़ुलस्क्रीन में चैनल नंबर को प्राथमिकता मिलती है।</string>
+    <string name="settings_player_buttons">प्लेयर बटन</string>
+    <string name="settings_player_hold_ok">प्लेयर में OK दबाकर रखें</string>
+    <string name="settings_player_hold_ok_description">नियंत्रण छिपे होने पर OK दबाकर रखने से क्या खुलता है</string>
+    <string name="settings_help_player_hold_ok">फ़ुल-स्क्रीन लाइव प्लेयर में, नियंत्रण छिपे होने पर, चैनल सूची, गाइड या कार्यक्रम जानकारी खोलने के लिए OK दबाकर रखें। बंद होने पर OK पहले जैसा रहता है। यह चालू रहने तक छोटा OK छोड़ने पर काम करता है। फ़िल्मों और एपिसोड में OK सामान्य रहता है।</string>
+    <string name="settings_player_short_ok">नियंत्रण छिपे होने पर OK</string>
+    <string name="settings_player_short_ok_description">फ़ुल-स्क्रीन प्लेयर में OK को छोटा दबाने से क्या होता है</string>
+    <string name="settings_help_player_short_ok">फ़ुल-स्क्रीन प्लेयर में OK को छोटा दबाने से नियंत्रण दिखते हैं। लाइव चैनलों पर इसकी जगह वह खोलने के लिए चैनल सूची या गाइड चुनें; प्लेयर जिस बटन का उपयोग नहीं करता, वह अब भी नियंत्रण दिखाता है। फ़िल्मों और एपिसोड में हमेशा नियंत्रण दिखते हैं।</string>
+    <string name="settings_player_swap_channel_keys">चैनल ऊपर/नीचे अदला-बदली</string>
+    <string name="settings_player_swap_channel_keys_description">CH+ और ऊपर पिछले चैनल पर जाते हैं</string>
+    <string name="settings_help_player_swap_channel_keys">सामान्यतः CH+ और D-pad ऊपर अगले चैनल पर, और CH− और नीचे पिछले चैनल पर जाते हैं। देखते समय, फ़ुल स्क्रीन और मिनी प्लेयर में इन्हें अदला-बदली करने के लिए इसे चालू करें। ब्राउज़ सूचियों पर असर नहीं पड़ता।</string>
+    <string name="settings_player_number_keys_tune">नंबर बटन चैनल बदलते हैं</string>
+    <string name="settings_player_number_keys_tune_description">लाइव प्लेयर में चैनल नंबर टाइप करें</string>
+    <string name="settings_help_player_number_keys_tune">उस चैनल पर जाने के लिए फ़ुल-स्क्रीन लाइव प्लेयर में रिमोट से चैनल नंबर टाइप करें। नंबर बटन अपने रिमोट शॉर्टकट के लिए खाली रखने के लिए इसे बंद करें। नंबर टाइप करने के लिए लाइव टीवी सेटिंग में चैनल नंबर भी चालू होना चाहिए।</string>
+    <string name="settings_player_ok_channel_list">चैनल सूची</string>
+    <string name="settings_player_ok_guide">गाइड</string>
+    <string name="settings_player_ok_programme_info">कार्यक्रम जानकारी</string>
+    <string name="settings_player_ok_show_controls">नियंत्रण दिखाएँ</string>
     <string name="settings_remote_button_channel_up">चैनल +</string>
     <string name="settings_remote_button_channel_down">चैनल −</string>
     <string name="settings_remote_button_rewind">रिवाइंड</string>
@@ -264,6 +281,8 @@
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">होम</string>
     <string name="settings_startup_last_channel">पिछला चैनल</string>
+    <string name="settings_startup_last_channel_guide">पिछला चैनल · कार्यक्रम गाइड</string>
+    <string name="settings_startup_last_channel_live">पिछला चैनल · लाइव टीवी</string>
     <string name="settings_startup_favorites">लाइव · पसंदीदा</string>
     <string name="settings_startup_specific_channel">विशिष्ट चैनल</string>
     <string name="settings_startup_channel_unavailable">स्टार्टअप चैनल उपलब्ध नहीं है। होम खोला गया।</string>
@@ -682,6 +701,13 @@
     <string name="settings_sources_test_trial">ट्रायल खाता</string>
     <string name="settings_sources_test_expiry_none">कोई समाप्ति तिथि नहीं बताई गई</string>
     <string name="settings_sources_info">जानकारी</string>
+    <string name="settings_sources_clean_names">नाम</string>
+    <string name="settings_sources_clean_names_title">“<xliff:g id="name">%1$s</xliff:g>” में चैनल के नाम</string>
+    <string name="settings_sources_clean_names_description">हर स्क्रीन पर छोटे चैनल नाम। गाइड अब भी आपके प्रदाता के भेजे नामों से ही मिलान करती है, और कस्टमाइज़ में बदले गए चैनल नाम आपके ही रहते हैं। सहेजने पर प्लेलिस्ट रीफ़्रेश होती है।</string>
+    <string name="settings_sources_clean_names_toggle">चैनल नाम साफ़ करें</string>
+    <string name="settings_sources_clean_names_example">देश का उपसर्ग और अंत का क्वालिटी टैग हटाता है: “UK| News One HD” दिखेगा “News One”</string>
+    <string name="settings_sources_clean_names_custom">यह भी हटाएँ</string>
+    <string name="settings_sources_clean_names_custom_hint">; से अलग किए शब्द, जैसे VIP; Backup</string>
     <string name="settings_sources_retest">फिर से जाँचें</string>
     <string name="settings_sources_probe_title">इस प्लेलिस्ट की जाँच करें?</string>
     <string name="settings_sources_probe_warning">कई प्रदाता कभी नहीं बताते कि आप एक साथ कितने चैनल देख सकते हैं, इसलिए OwnTV कुछ चैनल खोलकर और यह देखकर पता लगाता है कि कौन से चलते रहते हैं। अभी जो कुछ चल रहा है वह रुक जाएगा, और इसमें दो मिनट तक लग सकते हैं।</string>
@@ -748,6 +774,7 @@
     <string name="settings_epg_sources_auto_refresh_title">अपने-आप रीफ़्रेश</string>
     <string name="settings_epg_sources_auto_refresh_description">बंद, स्टार्टअप पर या डेटा पुराना होने पर</string>
     <string name="settings_epg_sources_not_synced">अभी तक सिंक नहीं हुआ</string>
+    <string name="settings_epg_sources_priority">गाइड प्राथमिकता: <xliff:g id="total">%2$d</xliff:g> में से <xliff:g id="position">%1$d</xliff:g>। जब दो स्रोतों में एक ही चैनल हो, तो इस सूची में ऊपर वाला स्रोत उपयोग होता है।</string>
     <string name="settings_epg_refresh_1h">1 घंटा</string>
     <string name="settings_epg_refresh_3h">3 घंटे</string>
     <string name="settings_epg_refresh_6h">6 घंटे</string>
@@ -1283,6 +1310,12 @@
     <string name="settings_nav_hide_after_desc">केवल फ़्लोटिंग: फ़ोकस हटने के बाद रेल कितनी देर रुके</string>
     <string name="settings_nav_widen">फ़ोकस पर चौड़ा करें</string>
     <string name="settings_nav_widen_desc">डॉक और कॉम्पैक्ट: रेल पर फ़ोकस रहते समय सामग्री के ऊपर नाम दिखाता है</string>
+    <string name="settings_nav_menu_labels">मेनू लेबल</string>
+    <string name="settings_nav_menu_labels_desc">आइकन के पास अनुभागों के नाम: कभी नहीं, रेल पर फ़ोकस रहते हुए, या हमेशा</string>
+    <string name="settings_nav_menu_labels_focused">फ़ोकस पर</string>
+    <string name="settings_nav_menu_labels_always">हमेशा</string>
+    <string name="settings_nav_menu_labels_summary">लेबल: <xliff:g id="choice">%1$s</xliff:g></string>
+    <string name="settings_search_keywords_menu_labels">लेबल, नाम, टेक्स्ट, केवल आइकन, रेल, साइडबार, मेनू, चौड़ा करें, चौड़ा</string>
     <string name="settings_nav_menu_items">मेनू आइटम</string>
     <string name="settings_nav_menu_items_desc">डायनेमिक: प्लेलिस्ट की सामग्री के अनुसार · स्टैटिक: आप खुद चुनें</string>
     <string name="settings_nav_bar">बार</string>

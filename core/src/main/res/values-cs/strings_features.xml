@@ -45,6 +45,8 @@
     <string name="search_go_to_movie">Přejít na film</string>
     <string name="search_clear_recent">Vymazat nedávná hledání</string>
     <string name="search_field_hint">Kanály, filmy a seriály</string>
+    <string name="search_voice">Hlasové vyhledávání</string>
+    <string name="search_voice_prompt">Řekněte kanál, film nebo seriál</string>
     <string name="search_card_title">Najděte cokoli ve svých playlistech</string>
     <string name="search_card_body">Kanály, filmy a seriály ze všech zobrazených playlistů. Vyberte výsledek a přejděte rovnou k němu – tam ho přehrajete, stáhnete nebo otevřete jeho možnosti. Najde i televizní pořady, které běží teď nebo později dnes, podle jejich názvu.</string>
     <string name="search_nothing_found">Pro „<xliff:g id="query">%1$s</xliff:g>“ nic nenalezeno</string>

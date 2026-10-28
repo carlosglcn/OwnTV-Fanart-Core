@@ -9,6 +9,35 @@
 > in one bolded line of its own (e.g. **Database v46 · Backup v24 · Breaking**). The detail — what,
 > why, files and verification — belongs in the commit message, never here.
 
+## core-1.0.70 — unreleased
+
+**Database v52 · Backup: two new playlist fields**
+
+### ✨ New features
+
+- **✨ Clean channel names, per playlist** (community PR #46 by @Kevsosmooth)
+- **🔢 M3U playlists without channel numbers are numbered in playlist order** (community PR #43 by @Kevsosmooth)
+- **🎬 M3U entries that point at a video file go to Movies** (community PR #45 by @Kevsosmooth)
+- **📋 Guide priority follows the EPG Sources order** (community PR #38 by @Kevsosmooth)
+- **🔎 A guide whose channels match none of the playlist's says so** (community PR #58 by @arch-fan)
+- **🎛️ Player buttons: hold OK, short OK, swap channel up/down, number keys** (community PR #48 by @Kevsosmooth)
+- **🚀 Start on the last channel in the TV Guide or Live TV** (community PR #49 by @Kevsosmooth)
+- **🏷️ Menu labels: off, when focused or always** (community PR #41 by @Kevsosmooth)
+- **🎤 Voice search** (community PR #42 by @Kevsosmooth)
+
+### 🐛 Fixes
+
+- **TV guide sync up to 14× faster: adding a guide takes minutes, not a quarter of an hour**
+- **M3U entries the playlist now tags as films or series leave Live TV** (community PR #36 by @Kevsosmooth)
+- **M3U download retried once after a dropped connection** (community PR #44 by @Kevsosmooth)
+- **Playlist re-sync keeps titles in the provider's order; an unchanged re-sync is about 4× faster**
+- **Smaller database: seven redundant catalogue indexes dropped**
+- **Faster playlist import: title tags read only when present**
+- **Guide re-sync looks up what it already has in one read**
+- **Catch-up works with `${(b)…}` / `${(e)…}` templates** (community PR #53 by @sarmadsoomro)
+- **Xtream passwords with special characters play; short Xtream links and Stalker MACs masked in logs** (community PR #54 by @sarmadsoomro)
+- **Stalker re-sync no longer rewrites every live channel**
+
 ## core-1.0.69 — 2026-10-21
 
 ### ✨ New features

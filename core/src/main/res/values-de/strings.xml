@@ -121,6 +121,7 @@
     <string name="sync_error_secure">Sichere Verbindung fehlgeschlagen — das Zertifikat des Servers ist möglicherweise ungültig.</string>
     <string name="sync_error_malformed_guide">Die Daten der Programmübersicht vom Server waren fehlerhaft. Ein Teil davon wurde möglicherweise trotzdem geladen — bitte versuchen Sie es erneut oder prüfen Sie die EPG-URL.</string>
     <string name="sync_error_guide_empty">Diese Programmübersicht ist derzeit leer. Der Anbieter hat sie möglicherweise noch nicht veröffentlicht — bitte versuchen Sie es später erneut.</string>
+    <string name="sync_error_guide_no_matching_channels">Keiner der Sender dieser Programmübersicht passt bisher zu den Sendern deiner Playlist. Öffne die Programmübersicht und nutze „EPG automatisch zuordnen“, um sie nach Namen zuzuordnen.</string>
     <string name="common_minutes">Minuten</string>
     <string name="common_size_mb"><xliff:g id="size">%1$s</xliff:g> MB</string>
     <string name="common_size_gb"><xliff:g id="size">%1$s</xliff:g> GB</string>

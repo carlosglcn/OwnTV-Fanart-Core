@@ -70,6 +70,23 @@
     <string name="settings_remote_shortcuts_long_press">Hosszú nyomás</string>
     <string name="settings_remote_shortcuts_unknown_button">Távirányítógomb: <xliff:g id="number">%1$d</xliff:g></string>
     <string name="settings_remote_shortcuts_help">• Alapból a CH+/CH− és a vissza-/előretekerés lapoz a böngészőlistákban; lenyomva tartva az első vagy az utolsó elemre ugrik.\n• A rövid és a hosszú nyomás külön rendelhető hozzá.\n• Az ugrás az utolsóra a nagyon nagy „Összes” listákon kikapcsolva marad.\n• A hosszú Vissza nyomás mindig a Most játszott elemre fókuszál, és nem rendelhető át.\n• A jellemzően hozzárendelhető gombok: piros/zöld/sárga/kék, számok, CH+/CH− és vissza-/előretekerés.\n• A Vissza, az iránygombok, az OK, a hangerő, a Kezdőlap és a bekapcsológomb védett marad.\n• A számgombos gyorsbillentyűk böngészés közben működnek; teljes képernyőn a számbevitel a csatornaváltást élvezi elsőbbségben.</string>
+    <string name="settings_player_buttons">Lejátszó gombjai</string>
+    <string name="settings_player_hold_ok">OK nyomva tartása a lejátszóban</string>
+    <string name="settings_player_hold_ok_description">Mit nyit meg az OK nyomva tartása, amíg a vezérlők rejtve vannak</string>
+    <string name="settings_help_player_hold_ok">Tartsa nyomva az OK gombot a teljes képernyős élő lejátszóban, rejtett vezérlőkkel, és megnyílik a csatornalista, a műsor vagy a műsorinfó. A Ki meghagyja az OK-t a megszokottnak. Amíg ez be van kapcsolva, a rövid OK felengedéskor hat. A filmeknél és epizódoknál marad a megszokott OK.</string>
+    <string name="settings_player_short_ok">OK rejtett vezérlőkkel</string>
+    <string name="settings_player_short_ok_description">Mit tesz egy rövid OK a teljes képernyős lejátszóban</string>
+    <string name="settings_help_player_short_ok">Egy rövid OK a teljes képernyős lejátszóban megjeleníti a vezérlőket. Válassza a Csatornalista vagy a Műsor lehetőséget, hogy élő csatornákon inkább azt nyissa meg; minden más gomb, amelyet a lejátszó nem használ, továbbra is a vezérlőket jeleníti meg. Filmeknél és epizódoknál mindig a vezérlők jelennek meg.</string>
+    <string name="settings_player_swap_channel_keys">Csatorna fel/le felcserélése</string>
+    <string name="settings_player_swap_channel_keys_description">A CH+ és a Fel az előző csatornára vált</string>
+    <string name="settings_help_player_swap_channel_keys">Általában a CH+ és a Fel a következő csatornára, a CH− és a Le az előzőre vált. Kapcsolja be, hogy nézés közben felcserélje őket, teljes képernyőn és a mini lejátszóban is. A böngészési listák nem változnak.</string>
+    <string name="settings_player_number_keys_tune">Számgombok csatornát váltanak</string>
+    <string name="settings_player_number_keys_tune_description">Csatornaszám beírása az élő lejátszóban</string>
+    <string name="settings_help_player_number_keys_tune">Írjon be egy csatornaszámot a távirányítón a teljes képernyős élő lejátszóban, és arra a csatornára ugrik. Kapcsolja ki, hogy a számgombok szabadon maradjanak a távirányító-gyorsbillentyűknek. A szám beírásához a Csatornaszámok beállításnak is bekapcsolva kell lennie az Élő TV beállításaiban.</string>
+    <string name="settings_player_ok_channel_list">Csatornalista</string>
+    <string name="settings_player_ok_guide">Műsor</string>
+    <string name="settings_player_ok_programme_info">Műsorinfó</string>
+    <string name="settings_player_ok_show_controls">Vezérlők megjelenítése</string>
     <string name="settings_remote_button_channel_up">Csatorna +</string>
     <string name="settings_remote_button_channel_down">Csatorna −</string>
     <string name="settings_remote_button_rewind">Visszatekerés</string>
@@ -316,6 +333,8 @@
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">Kezdőlap</string>
     <string name="settings_startup_last_channel">Utolsó csatorna</string>
+    <string name="settings_startup_last_channel_guide">Utolsó csatorna · Műsorújság</string>
+    <string name="settings_startup_last_channel_live">Utolsó csatorna · Élő TV</string>
     <string name="settings_startup_favorites">Élő · Kedvencek</string>
     <string name="settings_startup_specific_channel">Adott csatorna</string>
     <string name="settings_startup_channel_unavailable">Az indítási csatorna nem érhető el. A kezdőlap nyílt meg.</string>
@@ -721,6 +740,13 @@
     <string name="settings_sources_test_trial">Próbafiók</string>
     <string name="settings_sources_test_expiry_none">Nincs megadva lejárati dátum</string>
     <string name="settings_sources_info">Információ</string>
+    <string name="settings_sources_clean_names">Nevek</string>
+    <string name="settings_sources_clean_names_title">Csatornanevek itt: „<xliff:g id="name">%1$s</xliff:g>”</string>
+    <string name="settings_sources_clean_names_description">Rövidebb csatornanevek minden képernyőn. A műsorújság továbbra is a szolgáltató által küldött nevekkel párosít, a Testreszabásban átnevezett csatornák pedig megtartják az általad adott nevet. A mentés frissíti a lejátszási listát.</string>
+    <string name="settings_sources_clean_names_toggle">Csatornanevek tisztítása</string>
+    <string name="settings_sources_clean_names_example">Eltávolítja az országelőtagot és a végén lévő minőségjelölést: „UK| News One HD” így jelenik meg: „News One”</string>
+    <string name="settings_sources_clean_names_custom">Ezeket is törölje</string>
+    <string name="settings_sources_clean_names_custom_hint">Pontosvesszővel (;) elválasztott szavak, pl. VIP; Backup</string>
     <string name="settings_sources_retest">Újratesztelés</string>
     <string name="settings_sources_probe_title">Teszteli ezt a lejátszási listát?</string>
     <string name="settings_sources_probe_warning">Sok szolgáltató soha nem árulja el, hány csatornát nézhet egyszerre, ezért az OwnTV úgy deríti ki, hogy megnyit néhányat, és megnézi, melyik marad életben. Minden, ami most szól, le fog állni, és ez akár két percig is eltarthat.</string>
@@ -787,6 +813,7 @@
     <string name="settings_epg_sources_auto_refresh_title">Automatikus frissítés</string>
     <string name="settings_epg_sources_auto_refresh_description">Ki, induláskor, vagy ha az adatok elavultak</string>
     <string name="settings_epg_sources_not_synced">Még nincs szinkronizálva</string>
+    <string name="settings_epg_sources_priority">Műsorújság-prioritás: <xliff:g id="position">%1$d</xliff:g>/<xliff:g id="total">%2$d</xliff:g>. Ha két forrás ugyanazt a csatornát tartalmazza, a listában feljebb lévő lesz használva.</string>
     <string name="settings_epg_refresh_1h">1 óra</string>
     <string name="settings_epg_refresh_3h">3 óra</string>
     <string name="settings_epg_refresh_6h">6 óra</string>
@@ -1283,6 +1310,12 @@
     <string name="settings_nav_hide_after_desc">Csak lebegő: mennyit vár a sáv, miután a fókusz elhagyta</string>
     <string name="settings_nav_widen">Szélesítés fókuszkor</string>
     <string name="settings_nav_widen_desc">Rögzített és kompakt: fókuszkor a nevek a tartalom fölött jelennek meg</string>
+    <string name="settings_nav_menu_labels">Menüfeliratok</string>
+    <string name="settings_nav_menu_labels_desc">A szakaszok nevei az ikonok mellett: soha, amíg a sáv fókuszban van, vagy mindig</string>
+    <string name="settings_nav_menu_labels_focused">Fókuszkor</string>
+    <string name="settings_nav_menu_labels_always">Mindig</string>
+    <string name="settings_nav_menu_labels_summary">Feliratok: <xliff:g id="choice">%1$s</xliff:g></string>
+    <string name="settings_search_keywords_menu_labels">feliratok, nevek, szöveg, csak ikonok, sáv, oldalsáv, menü, szélesítés, széles</string>
     <string name="settings_nav_menu_items">Menüelemek</string>
     <string name="settings_nav_menu_items_desc">Dinamikus: a lejátszási lista tartalmát követi · Statikus: te választod ki</string>
     <string name="settings_nav_bar">Sáv</string>

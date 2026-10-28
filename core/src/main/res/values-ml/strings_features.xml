@@ -45,6 +45,8 @@
     <string name="search_go_to_movie">സിനിമയിലേക്ക് പോകുക</string>
     <string name="search_clear_recent">സമീപകാല തിരയലുകൾ മായ്ക്കുക</string>
     <string name="search_field_hint">ചാനലുകൾ, സിനിമകൾ, സീരീസുകൾ</string>
+    <string name="search_voice">ശബ്ദ തിരയൽ</string>
+    <string name="search_voice_prompt">ഒരു ചാനലിന്റെയോ സിനിമയുടെയോ സീരീസിന്റെയോ പേര് പറയുക</string>
     <string name="search_card_title">നിങ്ങളുടെ പ്ലേലിസ്റ്റുകളിൽ എന്തും കണ്ടെത്തുക</string>
     <string name="search_card_body">നിങ്ങൾ കാണിക്കുന്ന എല്ലാ പ്ലേലിസ്റ്റുകളിൽ നിന്നുമുള്ള ചാനലുകൾ, സിനിമകൾ, സീരീസുകൾ. നേരിട്ട് അവിടേക്ക് പോകാൻ ഒരു ഫലം തിരഞ്ഞെടുക്കുക, തുടർന്ന് അവിടെ പ്ലേ ചെയ്യുക, ഡൗൺലോഡ് ചെയ്യുക അല്ലെങ്കിൽ അതിന്റെ ഓപ്ഷനുകൾ തുറക്കുക. ഇപ്പോഴോ ഇന്ന് പിന്നീടോ ഉള്ള ടിവി പരിപാടികളും പേരിലൂടെ കണ്ടെത്താം.</string>
     <string name="search_nothing_found">“<xliff:g id="query">%1$s</xliff:g>” എന്നതിന് ഒന്നും കണ്ടെത്തിയില്ല</string>

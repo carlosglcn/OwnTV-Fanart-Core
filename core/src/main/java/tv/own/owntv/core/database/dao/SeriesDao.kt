@@ -99,9 +99,15 @@ interface SeriesDao {
     @Query("UPDATE series SET sortOrder = sortOrder + :delta WHERE sourceId = :sourceId AND sortOrder BETWEEN :fromSortOrder AND :toSortOrder")
     suspend fun shiftSortOrders(sourceId: Long, fromSortOrder: Int, toSortOrder: Int, delta: Int)
 
+    /** Takes [PARKED_SORT_ORDER] off the rows [applyPositionRanges] parked. */
+    @Query("UPDATE series SET sortOrder = sortOrder - :parked WHERE sourceId = :sourceId AND sortOrder >= :parked / 2")
+    suspend fun unparkSortOrders(sourceId: Long, parked: Int = PARKED_SORT_ORDER)
+
+    /** Every range parks its rows (see [PARKED_SORT_ORDER]), so no range shifts a row twice. */
     @Transaction
     suspend fun applyPositionRanges(sourceId: Long, froms: List<Int>, tos: List<Int>, deltas: List<Int>) {
-        for (i in froms.indices) shiftSortOrders(sourceId, froms[i], tos[i], deltas[i])
+        for (i in froms.indices) shiftSortOrders(sourceId, froms[i], tos[i], deltas[i] + PARKED_SORT_ORDER)
+        unparkSortOrders(sourceId)
     }
 
 

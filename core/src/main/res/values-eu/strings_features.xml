@@ -45,6 +45,8 @@
     <string name="search_go_to_movie">Joan filmera</string>
     <string name="search_clear_recent">Garbitu azken bilaketak</string>
     <string name="search_field_hint">Kanalak, filmak eta telesailak</string>
+    <string name="search_voice">Ahots bidezko bilaketa</string>
+    <string name="search_voice_prompt">Esan kanal, film edo telesail bat</string>
     <string name="search_card_title">Aurkitu edozer zure erreprodukzio-zerrendetan</string>
     <string name="search_card_body">Erakusten dituzun erreprodukzio-zerrenda guztietako kanalak, filmak eta telesailak. Aukeratu emaitza bat zuzenean joateko, eta bertan erreproduzitu, deskargatu edo ireki bere aukerak. Orain edo gaur beranduago emititzen diren telebista-programak ere izenburuaren arabera aurkitzen dira.</string>
     <string name="search_nothing_found">Ez da ezer aurkitu “<xliff:g id="query">%1$s</xliff:g>” bilaketarako</string>

@@ -23,6 +23,12 @@ sealed interface FriendlySyncFailure {
      * provider has not published this week's guide yet, so it is worth trying again another day.
      */
     data object GuideEmpty : FriendlySyncFailure
+
+    /**
+     * The guide answered in full and has programmes, but none of its channels is one the playlists
+     * use, so nothing was kept. Trying again later does not help; Auto-match in the Guide does.
+     */
+    data object GuideMatchesNoChannel : FriendlySyncFailure
     data object PlaylistFileUnavailable : FriendlySyncFailure
     data object PlaylistPathUnsupported : FriendlySyncFailure
     data class Unknown(val rawMessage: String) : FriendlySyncFailure
@@ -51,6 +57,7 @@ fun classifySyncFailure(raw: String?, online: Boolean): FriendlySyncFailure = wh
     raw.containsAny("HTTP 500", "HTTP 502", "HTTP 503", "HTTP 504") -> FriendlySyncFailure.ServerError
     raw.containsAny("CertPath", "SSLHandshake", "trust anchor", "CertificateException") -> FriendlySyncFailure.SecureConnectionFailed
     raw.containsAny("END_TAG", "START_TAG", "XmlPull", "PullParser", "ParserException") -> FriendlySyncFailure.MalformedGuide
+    raw.contains("Guide channels match no playlist channel") -> FriendlySyncFailure.GuideMatchesNoChannel
     raw.containsAny("Portal returned no guide", "no programmes in the guide window") -> FriendlySyncFailure.GuideEmpty
     raw.contains("playlist_file_unavailable", ignoreCase = true) -> FriendlySyncFailure.PlaylistFileUnavailable
     raw.contains("playlist_path_unsupported", ignoreCase = true) -> FriendlySyncFailure.PlaylistPathUnsupported

@@ -46,9 +46,11 @@ import tv.own.owntv.core.theme.UiZoom
 import tv.own.owntv.core.timeshift.TimeshiftRules
 
 /** Per-profile startup landing. LAST_CHANNEL also covers "auto-play my channel" since
- *  it's always the one you last watched. */
+ *  it's always the one you last watched. LAST_CHANNEL_GUIDE and LAST_CHANNEL_LIVE open the TV Guide
+ *  or Live TV instead, on that channel's category with the channel focused in the preview.
+ *  Saved by name, so the order here is only the order the choices are listed in. */
 enum class StartupMode {
-    HOME, LAST_CHANNEL, FAVORITES, SPECIFIC_CHANNEL
+    HOME, LAST_CHANNEL, LAST_CHANNEL_GUIDE, LAST_CHANNEL_LIVE, FAVORITES, SPECIFIC_CHANNEL
 }
 
 data class StartupChannelRef(
@@ -148,24 +150,6 @@ data class PlaylistRefresh(
             }
         }
     }
-}
-
-/**
- * Bounds for "Guide days to keep" — how much *future* guide is stored, forward from now.
- *
- * The maximum is deliberately lower than the playlist picker's 99 days, and the reason is measured
- * rather than cautious: a large lineup carries roughly 200,000 programme rows per day (7,083 channels
- * on the maintainer's television), so seven days is about 1.4 million rows and fourteen is 2.8
- * million, on a device whose heap ceiling is 192 MB. Beyond a fortnight no provider sends anything
- * anyway, so a larger number would only promise storage the feed cannot fill.
- */
-object GuideRetention {
-    const val MIN_DAYS = 1
-    const val MAX_DAYS = 14
-    const val DEFAULT_DAYS = 7
-
-    /** The day counts the picker offers directly; any other value is still valid and is shown. */
-    val PRESET_DAYS = listOf(1, 2, 3, 5, 7, 10, 14)
 }
 
 /**
@@ -364,6 +348,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val EPG_AUTO_REFRESH = stringPreferencesKey("epg_auto_refresh")
         // Per-EPG-source: use that feed's own <icon src> channel logos instead of the playlist's.
         val EPG_USE_LOGOS = stringPreferencesKey("epg_use_logos")
+        val M3U_VOD_RESORT_CHECKED = booleanPreferencesKey("m3u_vod_resort_checked")
         val REFRESH_MIGRATED = booleanPreferencesKey("refresh_migration_done")
         val EPG_REFILL_CHECKED = booleanPreferencesKey("epg_refill_checked")
         // Set while a backup restore is applying, cleared only when it completes. A value that
@@ -618,6 +603,11 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val CH_NAV_UP_SKIP = intPreferencesKey("ch_nav_up_skip")
         val CH_NAV_DOWN_SKIP = intPreferencesKey("ch_nav_down_skip")
         val REMOTE_SHORTCUT_BINDINGS = stringSetPreferencesKey("remote_shortcut_bindings")
+        // Player buttons (PlayerRemoteOptions): unset means the player's own behaviour.
+        val PLAYER_HOLD_OK = stringPreferencesKey("player_hold_ok")
+        val PLAYER_SHORT_OK = stringPreferencesKey("player_short_ok")
+        val PLAYER_SWAP_CHANNEL_KEYS = booleanPreferencesKey("player_swap_channel_keys")
+        val PLAYER_NUMBER_KEYS_TUNE = booleanPreferencesKey("player_number_keys_tune")
         // Manual panel-width adjustment (v4.3.x): per section (Live/Movies/Series) a master toggle plus
         // one percentage per panel (category rail · item list/grid · preview). 100 = stock width; the
         // three are normalized across the row, so they always fill the screen. See PanelWidths.kt.
@@ -2162,6 +2152,14 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         context.dataStore.edit { it[Keys.CH_NAV_DOWN_SKIP] = n.coerceIn(1, ChNavLimits.HARD_MAX) }
     }
 
+    /** The player's remote-button options; see [PlayerRemoteOptions]. */
+    val playerRemoteOptions: Flow<PlayerRemoteOptions> = prefsFlow(::readPlayerRemoteOptions)
+
+    /** Changes the options from their stored values in one write, so two quick changes cannot undo each other. */
+    suspend fun updatePlayerRemoteOptions(change: (PlayerRemoteOptions) -> PlayerRemoteOptions) {
+        context.dataStore.edit { writePlayerRemoteOptions(it, change(readPlayerRemoteOptions(it))) }
+    }
+
     /** Configurable remote shortcuts. An absent key means factory defaults; an empty set means none. */
     val remoteShortcutBindings: Flow<List<RemoteShortcutBinding>> = parsedFlow(Keys.REMOTE_SHORTCUT_BINDINGS) { raw ->
         if (raw != null) {
@@ -2537,6 +2535,13 @@ class SettingsRepository(private val context: Context, private val localeStore: 
 
     suspend fun markEpgRefillChecked() {
         context.dataStore.edit { prefs -> prefs[Keys.EPG_REFILL_CHECKED] = true }
+    }
+
+    /** Whether the one-time re-sort of playlists saved before video files went to Movies ran ([tv.own.owntv.core.sync.M3uVodResort]). */
+    val m3uVodResortChecked: Flow<Boolean> = prefsFlow { it[Keys.M3U_VOD_RESORT_CHECKED] == true }
+
+    suspend fun markM3uVodResortChecked() {
+        context.dataStore.edit { prefs -> prefs[Keys.M3U_VOD_RESORT_CHECKED] = true }
     }
 
     /**
@@ -3298,7 +3303,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
             Keys.MAIN_FONT_FAMILY, Keys.POPUP_FONT_FAMILY,
             Keys.PREF_AUDIO_LANG, Keys.PREF_SUB_LANG, Keys.SUB_SEARCH_LANGS, Keys.SORT_LIVE, Keys.SORT_GUIDE, Keys.SORT_MOVIES,
             Keys.SORT_SERIES, Keys.RESUME_MODE, Keys.TIMESHIFT_RESUME_MODE, Keys.DOWNLOAD_WATCH_CHOICE, Keys.CATCHUP_TZ, Keys.CATCHUP_PLAYER, Keys.ANIMATION_LEVEL, Keys.VOD_VIEW_MODE, Keys.GUIDE_VIEW,
-            Keys.EPISODE_VIEW_MODE, Keys.VOD_LAYOUT, Keys.LIVE_LAYOUT, Keys.LIVE_VIEW, Keys.REMINDER_MODE,
+            Keys.EPISODE_VIEW_MODE, Keys.VOD_LAYOUT, Keys.LIVE_LAYOUT, Keys.LIVE_VIEW, Keys.REMINDER_MODE, Keys.PLAYER_HOLD_OK, Keys.PLAYER_SHORT_OK,
             Keys.WEATHER_LOCATION, Keys.RECENT_SEARCHES,
             Keys.CLOCK_TIME_COLOR, Keys.CLOCK_DATE_COLOR, Keys.CLOCK_WEATHER_COLOR,
             // Global proxy — non-secret fields only. The proxy password (Keys.PROXY_PASS) is NEVER part of
@@ -3375,7 +3380,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
             Keys.LIVE_PREVIEW, Keys.LIVE_PREVIEW_AUDIO, Keys.HERO_PREVIEW, Keys.PREFER_SDR, Keys.AUTO_FRAME_RATE, Keys.AFR_MATCH_RESOLUTION, Keys.AUTO_FRAME_RATE_PROMPTED, Keys.ANDROID_TV_HOME, Keys.HW_DECODING, Keys.SOFTWARE_DECODE_ABOVE_1080P,
             Keys.VOD_PREFER_EXO, Keys.MEASURED_STREAM_STATS, Keys.DETAILED_DIAGNOSTICS, Keys.DIRECT_TUNE, Keys.LIVE_LEFT_RIGHT_REWINDS, Keys.EXTERNAL_PLAYER,
             Keys.EXTERNAL_PLAYER_LIVE, Keys.EXTERNAL_PLAYER_MOVIES, Keys.EXTERNAL_PLAYER_SERIES, Keys.UPDATE_CHECK_ON_START, Keys.SURROUND_SOUND, Keys.AUTO_PLAY_NEXT, Keys.PROXY_ENABLED,
-            Keys.WEATHER_ENABLED, Keys.WEATHER_FAHRENHEIT, Keys.RESUME_LAST_CHANNEL, Keys.METADATA_ENABLED, Keys.CH_NAV_ENABLED,
+            Keys.WEATHER_ENABLED, Keys.WEATHER_FAHRENHEIT, Keys.RESUME_LAST_CHANNEL, Keys.METADATA_ENABLED, Keys.CH_NAV_ENABLED, Keys.PLAYER_SWAP_CHANNEL_KEYS, Keys.PLAYER_NUMBER_KEYS_TUNE,
             Keys.DNS_ENABLED,
             Keys.REMEMBER_LAST_LIVE, Keys.REMEMBER_LAST_MOVIES, Keys.REMEMBER_LAST_SERIES,
             Keys.REMEMBER_CAT_LIVE, Keys.REMEMBER_CAT_MOVIES, Keys.REMEMBER_CAT_SERIES,

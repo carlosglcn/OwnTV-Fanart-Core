@@ -45,6 +45,8 @@
     <string name="search_go_to_movie">Przejdź do filmu</string>
     <string name="search_clear_recent">Wyczyść ostatnie wyszukiwania</string>
     <string name="search_field_hint">Kanały, filmy i seriale</string>
+    <string name="search_voice">Wyszukiwanie głosowe</string>
+    <string name="search_voice_prompt">Powiedz nazwę kanału, filmu lub serialu</string>
     <string name="search_card_title">Znajdź wszystko w swoich playlistach</string>
     <string name="search_card_body">Kanały, filmy i seriale ze wszystkich wyświetlanych playlist. Wybierz wynik, aby przejść prosto do niego i tam odtworzyć, pobrać lub otworzyć opcje. Znajduje też po tytule programy TV nadawane teraz lub później dzisiaj.</string>
     <string name="search_nothing_found">Nic nie znaleziono dla „<xliff:g id="query">%1$s</xliff:g>”</string>

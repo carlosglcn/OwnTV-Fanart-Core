@@ -972,6 +972,8 @@ class BackupManager(
                                         vodEnginePreference = if (srcJson.has("vodEnginePreference")) incoming.vodEnginePreference else existing.vodEnginePreference,
                                         liveTuneTimeoutSecs = if (srcJson.has("liveTuneTimeoutSecs")) incoming.liveTuneTimeoutSecs else existing.liveTuneTimeoutSecs,
                                         httpReferer = if (srcJson.has("httpReferer")) incoming.httpReferer else existing.httpReferer,
+                                        cleanChannelNames = if (srcJson.has("cleanChannelNames")) incoming.cleanChannelNames else existing.cleanChannelNames,
+                                        channelNameStrip = if (srcJson.has("channelNameStrip")) incoming.channelNameStrip else existing.channelNameStrip,
                                         liveLatencyCustomSecs = if (srcJson.has("liveLatencyCustomSecs")) incoming.liveLatencyCustomSecs else existing.liveLatencyCustomSecs,
                                         // A measurement this device already took beats the file's: it
                                         // was taken on this network, against this provider, now.
@@ -1563,6 +1565,8 @@ class BackupManager(
         put("vodEnginePreference", s.vodEnginePreference ?: JSONObject.NULL)
         put("liveTuneTimeoutSecs", s.liveTuneTimeoutSecs ?: JSONObject.NULL)
         put("httpReferer", s.httpReferer ?: JSONObject.NULL)
+        put("cleanChannelNames", s.cleanChannelNames)
+        put("channelNameStrip", s.channelNameStrip ?: JSONObject.NULL)
         put("liveLatencyCustomSecs", s.liveLatencyCustomSecs)
         // v22: the measured stream limit and when it was measured.
         //
@@ -1623,6 +1627,8 @@ class BackupManager(
             vodEnginePreference = o.optStringOrNull("vodEnginePreference"),
             liveTuneTimeoutSecs = o.optIntOrNull("liveTuneTimeoutSecs"),
             httpReferer = o.optStringOrNull("httpReferer"),
+            cleanChannelNames = o.optBoolean("cleanChannelNames", false),
+            channelNameStrip = o.optStringOrNull("channelNameStrip"),
             // Pre-v22 backups omit both, which restores as "nothing known, never measured" — exactly
             // what those installs had, and what makes a Re-test the obvious next step.
             maxConnections = o.optInt("maxConnections", 0),
