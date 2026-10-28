@@ -902,6 +902,11 @@
     <string name="glcn_pi_ends_left">Ends at <xliff:g id="end">%1$s</xliff:g> \u00b7 <xliff:g id="minutes">%2$d</xliff:g> min left</string>
     <string name="glcn_epg_show_empty">Show channels without guide</string>
     <string name="glcn_yes">Yes</string>
+    <string name="glcn_fps_title">Fluency meter</string>
+    <string name="glcn_fps_desc">Shows in a corner how many frames run late on each screen, to fine-tune smoothness</string>
+    <string name="glcn_fps_line">%1$s · %2$d fps · slow %3$.1f %% · worst %4$d ms · stutters %5$d</string>
+    <string name="glcn_fps_memory">Memory: Java %1$d MB · native %2$d MB</string>
+    <string name="glcn_fps_player">Player</string>
     <string name="glcn_pi_technical">Technical data</string>
     <string name="glcn_pi_hide_technical">Hide technical data</string>
     <string name="glcn_pi_no_guide">The guide has nothing for this channel right now</string>

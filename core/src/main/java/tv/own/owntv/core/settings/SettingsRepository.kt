@@ -509,6 +509,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_ANIM_STYLE = intPreferencesKey("glcn_anim_style")
         val GLCN_LOGO_PLATE = intPreferencesKey("glcn_logo_plate")
         val GLCN_HABIT_LEARNING = booleanPreferencesKey("glcn_habit_learning")
+        val GLCN_FRAME_METER = booleanPreferencesKey("glcn_frame_meter")
         val GLCN_OSD_SECONDS = intPreferencesKey("glcn_osd_seconds")
         val GLCN_HOME_COVER = intPreferencesKey("glcn_home_cover")
         val GLCN_HOME_COVER_DIM = intPreferencesKey("glcn_home_cover_dim")
@@ -934,6 +935,10 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     /** glcn: learn what is usually watched (programme, channel) and warn when it is about to start. On by default. */
     val habitLearning: Flow<Boolean> = prefsFlow { it[Keys.GLCN_HABIT_LEARNING] ?: true }
     suspend fun setHabitLearning(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_HABIT_LEARNING] = on } }
+
+    /** glcn: the fluency meter in a corner of the screen (off unless turned on). */
+    val frameMeter: Flow<Boolean> = prefsFlow { it[Keys.GLCN_FRAME_METER] ?: false }
+    suspend fun setFrameMeter(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_FRAME_METER] = on } }
     /** glcn: the viewing log behind [habitLearning] — see [tv.own.owntv.core.reminder.HabitRules]. Stays on the device. */
     val habitLog: Flow<String> = prefsFlow { it[Keys.GLCN_HABIT_LOG] ?: "" }
     suspend fun setHabitLog(text: String) { context.dataStore.edit { it[Keys.GLCN_HABIT_LOG] = text } }
