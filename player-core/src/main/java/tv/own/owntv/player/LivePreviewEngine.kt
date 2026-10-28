@@ -114,7 +114,7 @@ class LivePreviewEngine(
     fun onMemoryPressure() {
         if (memoryPressure) return
         memoryPressure = true
-        LiveDiagnosticsLog.event("critical memory pressure — next tune rebuilds with the low-RAM buffer")
+        LiveDiagnosticsLog.event("critical memory pressure — next tune rebuilds with the low-RAM buffer" + (MemoryBreakdown.read()?.let { " · " + it.line() } ?: ""))
     }
     /** The pre-roll this tune should use — zero for a stream already caught unable to satisfy one
      *  ([LiveStreamQuirks.defeatsPreroll]), otherwise the per-playlist override or the global setting. */

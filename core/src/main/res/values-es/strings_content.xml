@@ -598,7 +598,7 @@
     <string name="glcn_fps_title">Medidor de fluidez</string>
     <string name="glcn_fps_desc">Muestra en una esquina cuántos fotogramas van lentos en cada pantalla, para afinar la fluidez</string>
     <string name="glcn_fps_line">%1$s · %2$d fps · lentos %3$.1f %% · peor %4$d ms · tirones %5$d</string>
-    <string name="glcn_fps_memory">Memoria: Java %1$d MB · nativa %2$d MB</string>
+    <string name="glcn_fps_memory">Memoria: Java %1$d MB · nativa %2$d MB · gráficos %3$d MB · total %4$d MB</string>
     <string name="glcn_fps_player">Reproductor</string>
     <string name="glcn_pi_technical">Datos técnicos</string>
     <string name="glcn_pi_hide_technical">Ocultar datos técnicos</string>

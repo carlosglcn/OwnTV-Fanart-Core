@@ -909,7 +909,7 @@
     <string name="glcn_fps_title">Fluency meter</string>
     <string name="glcn_fps_desc">Shows in a corner how many frames run late on each screen, to fine-tune smoothness</string>
     <string name="glcn_fps_line">%1$s · %2$d fps · slow %3$.1f %% · worst %4$d ms · stutters %5$d</string>
-    <string name="glcn_fps_memory">Memory: Java %1$d MB · native %2$d MB</string>
+    <string name="glcn_fps_memory">Memory: Java %1$d MB · native %2$d MB · graphics %3$d MB · total %4$d MB</string>
     <string name="glcn_fps_player">Player</string>
     <string name="glcn_pi_technical">Technical data</string>
     <string name="glcn_pi_hide_technical">Hide technical data</string>
