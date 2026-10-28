@@ -1046,7 +1046,7 @@
     <!-- Translators: TV setting (Settings › Live TV). Left/Right on the remote while the player's controls are hidden. -->
     <string name="settings_live_left_right_rewinds">Left and right rewind live TV</string>
     <!-- Translators: Description of settings_live_left_right_rewinds. "Catch-up" = channels whose provider keeps an archive. -->
-    <string name="settings_live_left_right_rewinds_description">With the controls hidden, Left and Right rewind and go forward on channels you can rewind (catch-up, or saved by Pause and rewind live TV), instead of opening the channel list and history.</string>
+    <string name="settings_live_left_right_rewinds_description">With the controls hidden, Right goes forward on channels you can rewind (catch-up, or saved by Pause and rewind live TV) instead of opening the history. Left always opens the channel list: to rewind, press OK and use Left on the bar, or the remote\'s rewind button.</string>
     <!-- Translators: Setting (Settings › Live TV). Local timeshift: saving channels that have no provider catch-up archive, so they can be paused and rewound. -->
     <string name="settings_timeshift">Pause and rewind live TV</string>
     <!-- Translators: Description of settings_timeshift. "Catch-up" = channels whose provider keeps an archive. 1 GB = one gigabyte. -->
