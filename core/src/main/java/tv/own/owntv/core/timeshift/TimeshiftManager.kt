@@ -53,6 +53,9 @@ class TimeshiftManager(
         var leftAtWallMs: Long? = null
         /** When it was parked, on the wall clock — see [outlived]. */
         var parkedAtWallMs: Long? = null
+        /** glcn: parked because no player read it for a while (the preview handing over to full screen and back),
+         *  not because the user changed channel — a return to it is the same viewing, at the live edge. */
+        var parkedIdle: Boolean = false
         val parked: Boolean get() = download == null
     }
 
@@ -115,7 +118,7 @@ class TimeshiftManager(
                 back.session.markGap()
                 startDownloadLocked(back)
                 active = back
-                return Opened(back.session, back.leftAtWallMs)
+                return Opened(back.session, if (back.parkedIdle) null else back.leftAtWallMs)
             }
         }
         val folder = root()
@@ -213,8 +216,9 @@ class TimeshiftManager(
         }
     }
 
-    private fun parkLocked(buffer: Buffer, leftAtWallMs: Long?) {
+    private fun parkLocked(buffer: Buffer, leftAtWallMs: Long?, idle: Boolean = false) {
         if (active === buffer) active = null
+        buffer.parkedIdle = idle
         buffer.download?.cancel()
         buffer.download = null
         buffer.idleJob?.cancel()
@@ -276,7 +280,7 @@ class TimeshiftManager(
                     buffer.idleJob = scope.launch {
                         delay(idleParkMs)
                         synchronized(lock) {
-                            if (active === buffer && buffer.session.readerCount == 0) parkLocked(buffer, leftAtWallMs = null)
+                            if (active === buffer && buffer.session.readerCount == 0) parkLocked(buffer, leftAtWallMs = null, idle = true)
                         }
                     }
                 }
