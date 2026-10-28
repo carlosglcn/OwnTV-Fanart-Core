@@ -265,9 +265,11 @@ internal object EspnParser {
                     statusText = statusText(status),
                     title = e.optString("name"),
                     subtitle = c.optJSONObject("type")?.optString("abbreviation")?.takeIf { it.isNotEmpty() },
-                    // The podium only; a session lists the whole grid.
+                    // The podium only; a session lists the whole grid. glcn: while it runs, the whole order — the
+                    // live classification on the match page (the board's header still shows the first three).
                     competitors = objects(c.optJSONArray("competitors"))
-                        .sortedBy { it.optInt("order", Int.MAX_VALUE) }.take(3).map { competitor(it, Sport.RACING) },
+                        .sortedBy { it.optInt("order", Int.MAX_VALUE) }
+                        .take(if (state(status) == MatchState.IN) LIVE_ORDER_MAX else 3).map { competitor(it, Sport.RACING) },
                     venue = venueOf(e.optJSONObject("circuit")),
                     broadcasts = broadcasts(c),
                 )
@@ -554,3 +556,6 @@ internal object EspnParser {
     private val RUNS = Regex("^\\d+")
     private val OVERS = Regex("\\((\\d+(?:\\.\\d)?)(?:/\\d+)? ov")
 }
+
+/** glcn: how much of a live session's order is kept (a full F1 or IndyCar field). */
+private const val LIVE_ORDER_MAX = 30

@@ -195,9 +195,10 @@ class SportsCalendar(
      * [month] for the followed leagues among [leagueKeys] (the caller's sport and league choice), kept
      * up to date while collected. [focus] is the selected day, fetched first where the feed is per day.
      */
-    fun month(leagueKeys: Set<String>, month: YearMonth, focus: LocalDate? = null): Flow<CalendarMonth> = flow {
+    fun month(leagueKeys: Set<String>, month: YearMonth, focus: LocalDate? = null, anyLeague: Boolean = false): Flow<CalendarMonth> = flow {
         val follow = followed.first()
-        val leagues = leagueKeys.filter { it in follow }.mapNotNull(SportsCatalog::league)
+        // glcn: [anyLeague] — a league's own page shows its fixtures and results whether it is followed or not.
+        val leagues = leagueKeys.filter { anyLeague || it in follow }.mapNotNull(SportsCatalog::league)
         val shown = leagues.mapTo(HashSet()) { Slot(it.key, month) }
         val refreshMs = refreshDays.first() * DAY_MS
         withContext(serial) {
