@@ -372,9 +372,9 @@ internal object EspnParser {
 
     private fun team(t: JSONObject): Team = Team(
         id = t.getString("id"),
-        name = t.optString("displayName").ifEmpty { t.optString("name") },
-        shortName = t.optString("shortDisplayName").ifEmpty { t.optString("displayName") },
-        abbreviation = t.optString("abbreviation"),
+        name = EspnNameFixes.name(t.optString("displayName").ifEmpty { t.optString("name") }),
+        shortName = EspnNameFixes.name(t.optString("shortDisplayName").ifEmpty { t.optString("displayName") }),
+        abbreviation = EspnNameFixes.abbreviation(t.optString("displayName"), t.optString("abbreviation")),
         location = t.optString("location").takeIf { it.isNotEmpty() },
         logoUrl = logo(t.optString("logo").ifEmpty { t.optJSONArray("logos")?.optJSONObject(0)?.optString("href").orEmpty() }),
     )
