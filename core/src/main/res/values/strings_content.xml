@@ -710,6 +710,7 @@
     <string name="glcn_widget_favorites_name">OwnTV · On now in your favourites</string>
     <string name="glcn_widget_favorites_title">On now in your favourites</string>
     <string name="glcn_widget_favorites_empty">Add channels to Favourites to see what they are showing here</string>
+    <string name="glcn_widget_row">%1$s\n%2$s · %3$s–%4$s</string>
     <string name="glcn_sports_now_description">Channels showing sport right now</string>
     <string name="glcn_recent_movies">Recently added movies</string>
     <string name="glcn_recent_movies_description">The newest movies in your libraries</string>

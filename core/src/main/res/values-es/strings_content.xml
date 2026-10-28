@@ -411,6 +411,7 @@
     <string name="glcn_widget_favorites_name">OwnTV · Ahora en tus favoritos</string>
     <string name="glcn_widget_favorites_title">Ahora en tus favoritos</string>
     <string name="glcn_widget_favorites_empty">Añade canales a Favoritos para ver aquí qué emiten</string>
+    <string name="glcn_widget_row">%1$s\n%2$s · %3$s–%4$s</string>
     <string name="glcn_sports_now_description">Canales con deporte en emisión ahora</string>
     <string name="glcn_recent_movies">Películas añadidas recientemente</string>
     <string name="glcn_recent_movies_description">Lo último que ha llegado a tus bibliotecas</string>
