@@ -906,6 +906,11 @@
     <string name="sports_empty_nothing_followed">No sports or leagues chosen yet</string>
     <!-- Translators: Under that title: where to choose them. Use the same names as the menus (the Settings tab, the Sports page, its Sports and leagues row). -->
     <string name="sports_empty_choose_in">Choose them in Settings → App → Sports → Sports and leagues.</string>
+    <string name="glcn_sports_preset_button">Follow the usual for %1$s</string>
+    <string name="glcn_sports_preset_other">Another country</string>
+    <string name="glcn_sports_preset_title">Leagues of a country</string>
+    <string name="glcn_sports_preset_desc">Adds the competitions usually followed there; nothing you follow is removed</string>
+    <string name="glcn_sports_preset_done">Added %1$d competitions</string>
     <!-- Translators: Note in the empty hub and under Sport buttons: choosing more makes fetching ("loading") and building the sports board take longer. -->
     <string name="sports_load_time_warning">The more sports and leagues you choose, the longer loading and building take.</string>
     <!-- Translators: Setting in Settings → Sports: which sports get a chip (button) in the hub, and so which leagues are fetched. -->

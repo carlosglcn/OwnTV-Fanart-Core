@@ -512,6 +512,11 @@
     <string name="sports_home_row_description">Partidos seguidos, mientras uno está en directo o a punto de empezar</string>
     <string name="sports_empty_nothing_followed">Todavía no has elegido deportes ni ligas</string>
     <string name="sports_empty_choose_in">Elígelos en Ajustes → Aplicación → Deportes → Deportes y ligas.</string>
+    <string name="glcn_sports_preset_button">Seguir lo habitual en %1$s</string>
+    <string name="glcn_sports_preset_other">Otro país</string>
+    <string name="glcn_sports_preset_title">Ligas de un país</string>
+    <string name="glcn_sports_preset_desc">Añade las competiciones que se suelen seguir allí; no quita nada de lo que ya sigues</string>
+    <string name="glcn_sports_preset_done">Añadidas %1$d competiciones</string>
     <string name="sports_load_time_warning">Cuantos más deportes y ligas elijas, más tardan la carga y la creación.</string>
     <string name="sports_sport_buttons">Botones de deportes</string>
     <string name="sports_sport_buttons_mine">Mis deportes</string>
