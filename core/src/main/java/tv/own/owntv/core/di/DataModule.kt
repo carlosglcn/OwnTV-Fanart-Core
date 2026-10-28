@@ -128,7 +128,7 @@ val dataModule = module {
     // glcn: a wide TMDB picture for guide programmes whose own is a poster.
     single { tv.own.owntv.core.metadata.ProgrammeArtResolver(androidContext(), get(), get(), get()) }
     // provider, metadataDao, settings, overrideStore — the on-demand resolve + cache orchestrator (plan §7, §11.2 U5b).
-    single { tv.own.owntv.core.metadata.MetadataRepository(get(), get(), get(), get(), get()) }
+    single { tv.own.owntv.core.metadata.MetadataRepository(get(), get(), get(), get(), get(), get()) }
     single { tv.own.owntv.core.metadata.OriginalLanguageLookup(get(), get(), get()) }
     // glcn: Netflix/HBO… badge beside a title's details (side cache, no schema change).
     single { tv.own.owntv.core.metadata.PlatformBadgeRepository(androidContext(), get(), get()) }
@@ -235,6 +235,7 @@ val dataModule = module {
             bulkInsertHelper = get(),
             metadataDao = get(),
             epgSourceStore = get(),
+            overrides = get(),
         )
     }
     // context, channelDao, movieDao, seriesDao, profileDao, favoriteDao, historyDao, progressDao,

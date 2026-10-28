@@ -29,6 +29,8 @@ class MetadataRepository(
     private val settings: SettingsRepository,
     private val overrideStore: MetadataOverrideStore,
     private val profileDao: ProfileDao,
+    /** glcn: to put a typed TMDB id's poster on the item's own row ([OverridePosters]). */
+    private val db: tv.own.owntv.core.database.OwnTVDatabase? = null,
 ) {
     /** Guards [healNegativeMatchesOnce] so the DataStore read happens once per process, not per resolve. */
     private val healNeeded = java.util.concurrent.atomic.AtomicBoolean(true)
@@ -73,6 +75,10 @@ class MetadataRepository(
         healNegativeMatchesOnce()
 
         val localKey = movieLocalKey(movie)
+        // glcn: a TMDB id typed by the user decides it outright — no search by name — and its poster replaces the provider's.
+        overrideStore.get(localKey)?.let { o ->
+            o.tmdbId?.let { id -> return resolveKnownMovie(movie, id).also { usePoster(localKey, movie.posterUrl, o, it) } }
+        }
         val includeAdult = currentProfileAllowsAdult()
         val matchKey = maturityMatchKey(localKey, includeAdult)
         val lang = currentLang()
@@ -89,8 +95,6 @@ class MetadataRepository(
             }
         }
 
-        // glcn: a TMDB id typed by the user decides it outright — no search by name.
-        overrideStore.get(localKey)?.tmdbId?.let { return resolveKnownMovie(movie, it) }
 
         // 2. Build the search query: a user override wins over the auto-normalizer.
         val q = resolveQuery(localKey, movie.name, movie.year)
@@ -148,6 +152,9 @@ class MetadataRepository(
         healNegativeMatchesOnce()
 
         val localKey = seriesLocalKey(series)
+        overrideStore.get(localKey)?.let { o ->
+            o.tmdbId?.let { id -> return resolveKnownSeries(series, id).also { usePoster(localKey, series.posterUrl, o, it) } }
+        }
         val includeAdult = currentProfileAllowsAdult()
         val matchKey = maturityMatchKey(localKey, includeAdult)
         val lang = currentLang()
@@ -162,8 +169,6 @@ class MetadataRepository(
             }
         }
 
-        // glcn: a TMDB id typed by the user decides it outright — no search by name.
-        overrideStore.get(localKey)?.tmdbId?.let { return resolveKnownSeries(series, it) }
 
         val q = resolveQuery(localKey, series.name, series.year)
         if (q.query.isBlank()) return null
@@ -582,6 +587,14 @@ class MetadataRepository(
             }
         }
         matchKeys.forEach { dao.deleteMatch(it) } // show match (negative OR positive)
+    }
+
+    /** glcn: the TMDB poster of a typed id goes on the item's row, once (and is remembered for after a re-sync). */
+    private suspend fun usePoster(localKey: String, current: String?, o: TmdbOverride, meta: MetadataCacheEntity?) {
+        val url = MetadataImages.poster(meta?.posterPath, size = "w500") ?: return
+        val database = db ?: return
+        if (current != url) OverridePosters.write(database, localKey, url)
+        if (o.poster != url) overrideStore.setPoster(localKey, url)
     }
 
     // --- TMDB name overrides ---

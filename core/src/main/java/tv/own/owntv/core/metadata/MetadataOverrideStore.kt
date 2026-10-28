@@ -13,7 +13,13 @@ private val Context.metadataOverrideStore: DataStore<Preferences> by
     preferencesDataStore(name = "owntv_tmdb_overrides")
 
 /** A user-set TMDB search override: a custom title (and optional year) used instead of the auto-normalized one. */
-data class TmdbOverride(val title: String, val year: Int?, val tmdbId: Int? = null)
+data class TmdbOverride(
+    val title: String,
+    val year: Int?,
+    val tmdbId: Int? = null,
+    /** glcn: the TMDB poster put on the item's card in place of the provider's (only for a typed TMDB id). */
+    val poster: String? = null,
+)
 
 /**
  * Per-content TMDB name overrides, stored as JSON in DataStore — deliberately NOT a Room
@@ -45,6 +51,20 @@ class MetadataOverrideStore(private val context: Context) {
             prefs[mapKey] = serializeMap(map)
         }
     }
+
+    /** glcn: remembers the TMDB poster an override put on its item, so a re-sync can put it back. */
+    suspend fun setPoster(localKey: String, url: String) {
+        context.metadataOverrideStore.edit { prefs ->
+            val map = parseMap(prefs[mapKey])
+            val entry = map[localKey] ?: return@edit
+            if (entry.poster == url) return@edit
+            map[localKey] = entry.copy(poster = url)
+            prefs[mapKey] = serializeMap(map)
+        }
+    }
+
+    /** glcn: every override, keyed as stored. */
+    suspend fun all(): Map<String, TmdbOverride> = parseMap(context.metadataOverrideStore.data.first()[mapKey])
 
     suspend fun clear(localKey: String) {
         context.metadataOverrideStore.edit { prefs ->
@@ -82,7 +102,7 @@ class MetadataOverrideStore(private val context: Context) {
                 val entry = o.optJSONObject(k) ?: return@forEach
                 val title = entry.optString("t").takeIf { it.isNotBlank() } ?: return@forEach
                 val year = entry.optInt("y", 0).takeIf { it > 0 }
-                out[k] = TmdbOverride(title, year, entry.optInt("i", 0).takeIf { it > 0 })
+                out[k] = TmdbOverride(title, year, entry.optInt("i", 0).takeIf { it > 0 }, entry.optString("p").takeIf { it.isNotBlank() })
             }
             out
         }.getOrDefault(HashMap())
@@ -93,6 +113,7 @@ class MetadataOverrideStore(private val context: Context) {
             val entry = JSONObject().put("t", v.title)
             if (v.year != null) entry.put("y", v.year)
             if (v.tmdbId != null) entry.put("i", v.tmdbId)
+            if (v.poster != null) entry.put("p", v.poster)
             put(k, entry)
         }
     }.toString()

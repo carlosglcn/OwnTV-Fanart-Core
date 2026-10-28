@@ -30,8 +30,11 @@ class ImportFinalizer(
     private val bulkInsertHelper: BulkInsertHelper,
     private val metadataDao: tv.own.owntv.core.database.dao.MetadataDao,
     private val epgSourceStore: tv.own.owntv.core.epg.EpgSourceStore,
+    /** glcn: TMDB posters the user's typed ids put on items, put back after the sync rewrote them. */
+    private val overrides: tv.own.owntv.core.metadata.MetadataOverrideStore? = null,
 ) {
     suspend fun finalize(source: SourceEntity, deferIndexes: Boolean = false): SyncCounts {
+        overrides?.let { runCatching { tv.own.owntv.core.metadata.OverridePosters.restore(db, it, source.id) } }
         val counts = contentCounts(source.id)
         registerPortalGuide(source)
         // Bounded TTL eviction of the TMDB caches — they grow without limit as the user

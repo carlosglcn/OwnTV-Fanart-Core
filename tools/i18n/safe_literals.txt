@@ -2170,6 +2170,7 @@
 2	json	core/src/main/java/tv/own/owntv/core/metadata/MetadataOverrideStore.kt	i
 1	preference-key	core/src/main/java/tv/own/owntv/core/metadata/MetadataOverrideStore.kt	overrides
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/MetadataOverrideStore.kt	owntv_tmdb_overrides
+2	technical	core/src/main/java/tv/own/owntv/core/metadata/MetadataOverrideStore.kt	p
 2	json	core/src/main/java/tv/own/owntv/core/metadata/MetadataOverrideStore.kt	t
 2	json	core/src/main/java/tv/own/owntv/core/metadata/MetadataOverrideStore.kt	y
 5	empty	core/src/main/java/tv/own/owntv/core/metadata/MetadataProvider.kt	\0
@@ -2191,8 +2192,16 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/metadata/MetadataRepository.kt	resolveSeries search failed: ${it.message}
 1	json	core/src/main/java/tv/own/owntv/core/metadata/MetadataRepository.kt	season_fetched
 1	protocol	core/src/main/java/tv/own/owntv/core/metadata/MetadataRepository.kt	tv
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/MetadataRepository.kt	w500
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/OriginalLanguageLookup.kt	MOVIE
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/OriginalLanguageLookup.kt	SERIES
+2	technical	core/src/main/java/tv/own/owntv/core/metadata/OverridePosters.kt	:
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/OverridePosters.kt	UPDATE `
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/OverridePosters.kt	` SET `posterUrl` = ? WHERE `sourceId` = ? AND (`remoteId` = ? OR (`remoteId` IS NULL AND `name` = ?))
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/OverridePosters.kt	movie
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/OverridePosters.kt	movies
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/OverridePosters.kt	series
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/OverridePosters.kt	tv
 1	preference-key	core/src/main/java/tv/own/owntv/core/metadata/OwnTVClientId.kt	client_id
 1	preference-key	core/src/main/java/tv/own/owntv/core/metadata/OwnTVClientId.kt	owntv_client_id
 1	preference-key	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	$now|1|${if (badge.original) 1 else 0}|${badge.name.replace('|', ' ')}|${badge.logoPath.orEmpty()}|${badge.iconPath.orEmpty()}
