@@ -4,6 +4,7 @@ import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import tv.own.owntv.core.database.dao.EpgDao
 import tv.own.owntv.core.settings.SettingsRepository
@@ -42,6 +43,39 @@ class ProgrammeArtResolver(
         val hint = Hint(programme.categories, programme.year, programme.lengthMin, programme.episode)
         if (hint.kind(programme.title) == Kind.UNKNOWN) return@withContext null
         infoFor(programme.title, hint)?.backdropUrl
+    }
+
+    /**
+     * glcn: a wide picture for a guide programme that has none of its own — only what is already known (memory or
+     * the saved answers), so a card is never held up. A film or series not asked about yet is looked up in the
+     * background by [warm]; the next time it is drawn it has its picture.
+     */
+    fun knownBackdrop(p: tv.own.owntv.core.database.entity.EpgProgrammeEntity): String? {
+        val hint = Hint(p.categories, p.year, p.lengthMin, p.episode)
+        if (hint.kind(p.title) == Kind.UNKNOWN) return null
+        val key = keyFor(p.title, hint, loose = false) ?: return null
+        memory[key]?.let { return it.backdropUrl }
+        val stored = runCatching { prefs.getString(key, null) }.getOrNull() ?: return null
+        return decode(stored).also { memory[key] = it }.backdropUrl
+    }
+
+    private val warmScope = kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.SupervisorJob() + Dispatchers.IO)
+    private val warming = java.util.Collections.newSetFromMap(ConcurrentHashMap<String, Boolean>())
+
+    /** glcn: asks TMDB, in the background and within the hourly allowance, for a film or series with no picture. */
+    fun warm(p: tv.own.owntv.core.database.entity.EpgProgrammeEntity) {
+        val hint = Hint(p.categories, p.year, p.lengthMin, p.episode)
+        if (hint.kind(p.title) == Kind.UNKNOWN) return
+        val key = keyFor(p.title, hint, loose = false) ?: return
+        if (memory.containsKey(key) || !warming.add(key)) return
+        warmScope.launch { try { infoFor(p.title, hint) } finally { warming.remove(key) } }
+    }
+
+    private fun keyFor(title: String, hint: Hint?, loose: Boolean): String? {
+        val query = clean(title)
+        if (query.length < 2 || fold(query).isEmpty()) return null
+        val kind = hint?.kind(title) ?: Kind.UNKNOWN
+        return fold(query) + "|" + kind.name.first() + listOfNotNull(hint?.year, '~'.takeIf { loose }).joinToString(separator = "")
     }
 
     /** TMDB's average rating for the programme called [title]; null for none. */
