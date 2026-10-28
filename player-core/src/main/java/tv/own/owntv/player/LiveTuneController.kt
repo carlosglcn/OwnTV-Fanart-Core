@@ -55,6 +55,13 @@ class LiveTuneController(
 ) {
 
     /** What the controller needs from outside the engines. [CoreHost] is the one both apps use. */
+    /**
+     * glcn: a channel neither engine could play (or one ExoPlayer keeps reconnecting without a picture): the app may
+     * move to another copy of it — in the same playlist at once, in another one after saying so.
+     */
+    private val _gaveUp = kotlinx.coroutines.flow.MutableSharedFlow<ChannelEntity>(extraBufferCapacity = 1)
+    val gaveUp: kotlinx.coroutines.flow.SharedFlow<ChannelEntity> = _gaveUp
+
     interface Host {
         suspend fun sourceOf(sourceId: Long): SourceEntity?
         /** A Stalker playlist stores a portal command, minted into a URL per play. */
@@ -867,6 +874,7 @@ class LiveTuneController(
             // itself once its own ladder is spent.
             if (_liveOnExo.value && engines.exoStillReconnecting) {
                 engineLog("'${channel.name}' — no fallback left ($detail); leaving ExoPlayer's own reconnects running")
+                _gaveUp.tryEmit(channel)
                 return
             }
             // glcn: the channel was playing from its saved copy and neither engine could open that copy
@@ -885,6 +893,7 @@ class LiveTuneController(
             engineLog("'${channel.name}' — no fallback left ($detail)")
             host.recordLadderEvent(_liveOnExo.value, PlayerFailureReason.LIVE_NO_FALLBACK, "'${channel.name}': $detail")
             abandon(channel, detail)
+            _gaveUp.tryEmit(channel)
             return
         }
         val label = ladder.label(next)

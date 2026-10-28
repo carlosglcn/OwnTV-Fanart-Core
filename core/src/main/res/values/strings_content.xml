@@ -921,4 +921,8 @@
     <string name="glcn_share_log_body">On your phone, connected to the same Wi-Fi, scan the code (or open the address) and type the PIN. You can read the report there, copy it or save it.</string>
     <string name="glcn_lowram_slow_title">Running slowly</string>
     <string name="glcn_lowram_slow_body">The screen keeps stuttering on this device. Light mode asks less of it — no moving text, no picture fades, a smaller picture cache — and usually runs much more smoothly. Switch it on? You can change it later in Settings.</string>
+    <string name="glcn_cross_copy_title">No picture on this channel</string>
+    <string name="glcn_cross_copy_body">Switching to %1$s from your %2$s playlist in %3$d s</string>
+    <string name="glcn_cross_copy_now">Switch now</string>
+    <string name="glcn_cross_copy_stay">Stay</string>
 </resources>

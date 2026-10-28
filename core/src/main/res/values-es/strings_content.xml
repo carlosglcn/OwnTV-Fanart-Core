@@ -610,4 +610,8 @@
     <string name="glcn_share_log_body">En el móvil, conectado a la misma wifi, escanea el código (o abre la dirección) y escribe el PIN. Allí podrás leer el informe, copiarlo o guardarlo.</string>
     <string name="glcn_lowram_slow_title">Va a tirones</string>
     <string name="glcn_lowram_slow_body">En este aparato la pantalla va a tirones a menudo. El modo ligero le pide menos (sin texto en movimiento, sin fundidos de imagen y con menos caché de imágenes) y suele ir mucho más fluido. ¿Lo activo? Luego puedes cambiarlo en Ajustes.</string>
+    <string name="glcn_cross_copy_title">Este canal no da imagen</string>
+    <string name="glcn_cross_copy_body">Cambiando a %1$s de tu lista %2$s en %3$d s</string>
+    <string name="glcn_cross_copy_now">Cambiar ya</string>
+    <string name="glcn_cross_copy_stay">Quedarme</string>
 </resources>
