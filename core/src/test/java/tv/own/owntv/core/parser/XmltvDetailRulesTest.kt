@@ -61,4 +61,13 @@ class XmltvDetailRulesTest {
         assertEquals(listOf("Animation", "Family", "Kids, Teens"), EpgDetails(categories = joined).categoryList)
         assertNull(XmltvDetailRules.categories(listOf(" ", "")))
     }
+
+    @Test fun `a backdrop beats a still beats a landscape picture, posters and people never count`() {
+        assertEquals(3, XmltvDetailRules.imageRank("backdrop", null))
+        assertEquals(2, XmltvDetailRules.imageRank("still", "L"))
+        assertEquals(1, XmltvDetailRules.imageRank(null, "L"))
+        assertEquals(0, XmltvDetailRules.imageRank("poster", "L"))
+        assertEquals(0, XmltvDetailRules.imageRank("person", null))
+        assertEquals(0, XmltvDetailRules.imageRank(null, "P"))
+    }
 }

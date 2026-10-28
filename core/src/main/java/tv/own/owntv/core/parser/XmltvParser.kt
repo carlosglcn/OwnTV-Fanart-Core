@@ -226,6 +226,7 @@ object XmltvParser {
                     XmlPullParser.END_TAG -> when (parser.name) {
                         "programme" -> break
                         "rating" -> details?.inRating = false
+                        "credits" -> details?.inCredits = false
                     }
                     XmlPullParser.END_DOCUMENT -> break
                 }
@@ -260,7 +261,18 @@ object XmltvParser {
         var inRating = false
         private var lengthMin: Int? = null
         private var episode: String? = null
-        private var imageUrl: String? = null
+        // glcn: the programme's picture. A wide one (XMLTV <image type="backdrop">, a still, a landscape icon)
+        // beats the plain <icon>, which is often the upright poster with the title printed on it — the guide's
+        // own title then sat on top of the poster's and neither could be read.
+        private var iconUrl: String? = null
+        private var wideUrl: String? = null
+        private var wideRank = 0
+        /** Inside <credits>: an actor's <image> is a person, not the programme. */
+        var inCredits = false
+
+        private fun offerWide(url: String?, rank: Int) {
+            if (url != null && rank > wideRank) { wideUrl = url; wideRank = rank }
+        }
 
         suspend fun start(parser: XmlPullParser) {
             when (parser.name) {
@@ -268,7 +280,17 @@ object XmltvParser {
                     val list = categories ?: ArrayList<String>(2).also { categories = it }
                     if (list.size < EpgDetails.MAX_CATEGORIES * 2) list.add(readText(parser))
                 }
-                "icon" -> if (imageUrl == null) imageUrl = XmltvDetailRules.imageUrl(parser.getAttributeValue(null, "src"))
+                "credits" -> inCredits = true
+                "icon" -> if (!inCredits) {
+                    val url = XmltvDetailRules.imageUrl(parser.getAttributeValue(null, "src"))
+                    val w = parser.getAttributeValue(null, "width")?.trim()?.toIntOrNull()
+                    val h = parser.getAttributeValue(null, "height")?.trim()?.toIntOrNull()
+                    if (w != null && h != null && w > h) offerWide(url, 1) else if (iconUrl == null) iconUrl = url
+                }
+                "image" -> if (!inCredits) {
+                    val rank = XmltvDetailRules.imageRank(parser.getAttributeValue(null, "type"), parser.getAttributeValue(null, "orient"))
+                    if (rank > 0) offerWide(XmltvDetailRules.imageUrl(readText(parser)), rank)
+                }
                 "date" -> if (year == null) year = XmltvDetailRules.year(readText(parser))
                 "rating" -> if (rating == null) {
                     inRating = true
@@ -290,10 +312,12 @@ object XmltvParser {
         }
 
         fun result(): EpgDetails =
-            if (categories == null && year == null && rating == null && lengthMin == null && episode == null && imageUrl == null) {
-                EpgDetails.NONE
-            } else {
-                EpgDetails(categories?.let(XmltvDetailRules::categories), year, rating, lengthMin, episode, imageUrl)
+            (wideUrl ?: iconUrl).let { imageUrl ->
+                if (categories == null && year == null && rating == null && lengthMin == null && episode == null && imageUrl == null) {
+                    EpgDetails.NONE
+                } else {
+                    EpgDetails(categories?.let(XmltvDetailRules::categories), year, rating, lengthMin, episode, imageUrl)
+                }
             }
     }
 

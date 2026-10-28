@@ -2485,13 +2485,19 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/ProgressiveVideoUrl.kt	wmv
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	$s $v
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	E${episode + 1}
+1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	L
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	S${season + 1}
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	S${season + 1} E${episode + 1}
+1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	backdrop
+1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	character
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	hours
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	http://
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	https://
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	onscreen
+1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	person
+1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	poster
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	seconds
+1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	still
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvDetails.kt	xmltv_ns
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	\0
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	Skipping malformed <channel> element
@@ -2501,18 +2507,22 @@
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	category
 3	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	channel
 2	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	channelFilterHit=${metrics.channelFilterHit} channelFilterMiss=${metrics.channelFilterMiss}
+2	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	credits
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	date
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	deltaMs=${now - lastLogAt}
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	desc
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	display-name
 2	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	duplicateChannelsSkipped=${metrics.duplicateChannelsSkipped}
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	episode-num
+1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	height
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	http://
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	http://xmlpull.org/v1/doc/features.html#relaxed
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	https://
 2	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	icon
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	id
+1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	image
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	length
+1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	orient
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	parse end channels=$channels programmes=$programmes skipped=${metrics.skippedProgrammes}
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	parse progress items=$items channels=$channels programmes=$programmes skipped=${metrics.skippedProgrammes}
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	parse start channelFilterSize=${normalizedFilter?.size ?: 0}
@@ -2528,8 +2538,10 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	title
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	totalMs=${now - startedAt}
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	totalParseOrReadMs=${metrics.parseOrReadMs} totalCallbackMs=${metrics.callbackMs}
+1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	type
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	units
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	value
+1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	width
 1	technical	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	xmltv_ns
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvParser.kt	—
 2	protocol	core/src/main/java/tv/own/owntv/core/parser/XmltvTime.kt	\0

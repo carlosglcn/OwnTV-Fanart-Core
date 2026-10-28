@@ -54,6 +54,22 @@ internal object XmltvDetailRules {
         return s.takeIf { it.startsWith("http://", true) || it.startsWith("https://", true) }
     }
 
+    /**
+     * glcn: how good an XMLTV <image> is as the programme's wide picture: a backdrop (3) over a still (2) over
+     * any other landscape picture (1); 0 for a poster, a person or a character, which are not wanted there.
+     */
+    fun imageRank(type: String?, orient: String?): Int {
+        val t = type?.trim()?.lowercase().orEmpty()
+        val landscape = orient?.trim().equals("L", ignoreCase = true)
+        return when {
+            t == "backdrop" -> 3
+            t == "still" -> 2
+            t == "poster" || t == "person" || t == "character" -> 0
+            landscape -> 1
+            else -> 0
+        }
+    }
+
     fun lengthMinutes(value: String?, units: String?): Int? {
         val n = value?.trim()?.toIntOrNull()?.takeIf { it > 0 } ?: return null
         val minutes = when (units?.trim()?.lowercase()) {
