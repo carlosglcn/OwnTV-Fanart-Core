@@ -2975,7 +2975,6 @@
 1	log	core/src/main/java/tv/own/owntv/core/repository/EpgRepository.kt	Unable to read catch-up channels — keeping all history this run
 1	log	core/src/main/java/tv/own/owntv/core/repository/EpgRepository.kt	Unable to read channel EPG ids — using unfiltered guide sync
 1	log	core/src/main/java/tv/own/owntv/core/repository/EpgRepository.kt	Unable to read custom EPG matches — using unfiltered guide sync
-1	sql	core/src/main/java/tv/own/owntv/core/repository/EpgRepository.kt	`contentHash`,`categories`,`year`,`rating`,`lengthMin`,`episode`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?,?,?,?,?)
 1	log	core/src/main/java/tv/own/owntv/core/repository/EpgRepository.kt	accepted=$processedCount written=$writtenCount ms=${SystemClock.elapsedRealtime() - startedAt}
 1	log	core/src/main/java/tv/own/owntv/core/repository/EpgRepository.kt	analyzeMs=${totalMs - (parsedAt - startedAt) - pruneMs} totalMs=$totalMs
 1	log	core/src/main/java/tv/own/owntv/core/repository/EpgRepository.kt	cacheFill parse failed storeId=$storeId (other sources unaffected)
