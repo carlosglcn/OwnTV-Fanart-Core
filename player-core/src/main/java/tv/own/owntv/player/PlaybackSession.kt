@@ -151,7 +151,7 @@ class PlaybackSession(
         get() = runCatching { session?.sessionToken }.getOrNull()
 
     /** The parts of [State] that actually reach `MediaMetadata`; see [publish]. */
-    private data class MetaKey(val title: String, val subtitle: String, val durationMs: Long)
+    private data class MetaKey(val title: String, val subtitle: String, val durationMs: Long, val art: String? = null)
 
     private var lastMetaKey: MetaKey? = null
 
@@ -183,16 +183,15 @@ class PlaybackSession(
                 subtitle = state.meta.subtitle.orEmpty(),
                 // Live has no meaningful duration; -1 tells a controller "not seekable/unknown".
                 durationMs = if (state.live) -1L else state.durationMs,
+                art = state.meta.logoUrl?.takeIf { it.startsWith("http") },
             )
             if (metaKey != lastMetaKey) {
                 lastMetaKey = metaKey
-                s.setMetadata(
-                    MediaMetadata.Builder()
-                        .putString(MediaMetadata.METADATA_KEY_TITLE, metaKey.title)
-                        .putString(MediaMetadata.METADATA_KEY_ARTIST, metaKey.subtitle)
-                        .putLong(MediaMetadata.METADATA_KEY_DURATION, metaKey.durationMs)
-                        .build(),
-                )
+                s.setMetadata(metadataOf(metaKey, null))
+                // glcn: the channel's (or title's) picture for whatever shows "Now playing" — launchers such as
+                // Projectivy and the TV's own card drew a generic icon without it. Its address goes at once; the
+                // picture itself, which most launchers want, follows once read (small, off the main thread).
+                metaKey.art?.let { url -> loadArt(url) { bmp -> if (lastMetaKey == metaKey) runCatching { session?.setMetadata(metadataOf(metaKey, bmp)) } } }
             }
             var actions = PlaybackState.ACTION_PLAY or PlaybackState.ACTION_PAUSE or
                 PlaybackState.ACTION_PLAY_PAUSE or PlaybackState.ACTION_STOP or
@@ -212,6 +211,48 @@ class PlaybackSession(
                     .build(),
             )
         }
+    }
+
+    private fun metadataOf(k: MetaKey, art: android.graphics.Bitmap?): MediaMetadata = MediaMetadata.Builder()
+        .putString(MediaMetadata.METADATA_KEY_TITLE, k.title)
+        .putString(MediaMetadata.METADATA_KEY_DISPLAY_TITLE, k.title)
+        .putString(MediaMetadata.METADATA_KEY_ARTIST, k.subtitle)
+        .putString(MediaMetadata.METADATA_KEY_DISPLAY_SUBTITLE, k.subtitle)
+        .putLong(MediaMetadata.METADATA_KEY_DURATION, k.durationMs)
+        .apply {
+            k.art?.let {
+                putString(MediaMetadata.METADATA_KEY_ART_URI, it)
+                putString(MediaMetadata.METADATA_KEY_ALBUM_ART_URI, it)
+                putString(MediaMetadata.METADATA_KEY_DISPLAY_ICON_URI, it)
+            }
+            art?.let {
+                putBitmap(MediaMetadata.METADATA_KEY_ART, it)
+                putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, it)
+                putBitmap(MediaMetadata.METADATA_KEY_DISPLAY_ICON, it)
+            }
+        }
+        .build()
+
+    /** The last picture read, so pausing and resuming the same channel does not read it again. */
+    @Volatile private var artCache: Pair<String, android.graphics.Bitmap>? = null
+
+    private fun loadArt(url: String, onLoaded: (android.graphics.Bitmap) -> Unit) {
+        artCache?.takeIf { it.first == url }?.let { onLoaded(it.second); return }
+        Thread {
+            runCatching {
+                val conn = (java.net.URL(url).openConnection() as java.net.HttpURLConnection).apply {
+                    connectTimeout = ART_TIMEOUT_MS; readTimeout = ART_TIMEOUT_MS
+                }
+                val bytes = conn.inputStream.use { it.readBytes() }
+                conn.disconnect()
+                val bounds = android.graphics.BitmapFactory.Options().apply { inJustDecodeBounds = true }
+                android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size, bounds)
+                var sample = 1
+                while (maxOf(bounds.outWidth, bounds.outHeight) / (sample * 2) >= ART_MAX_PX) sample *= 2
+                val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size, android.graphics.BitmapFactory.Options().apply { inSampleSize = sample })
+                if (bmp != null) { artCache = url to bmp; onLoaded(bmp) }
+            }
+        }.apply { isDaemon = true; name = "session-art" }.start()
     }
 
     private fun createSession(): MediaSession = MediaSession(context, SESSION_TAG).apply {
@@ -434,3 +475,7 @@ class PlaybackSession(
         const val DUCK_DB = -12.0
     }
 }
+
+/** glcn: the "Now playing" picture — small: a launcher draws it as a tile. */
+private const val ART_MAX_PX = 320
+private const val ART_TIMEOUT_MS = 6_000

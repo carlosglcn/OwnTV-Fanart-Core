@@ -1469,8 +1469,8 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     /** All three browse sections (Live/Movies/Series) default to the playlist/provider's own order — the
      *  natural grouping a user expects right after a sync. A–Z is one tap away (toggleSort). */
     val sortLive: Flow<SortMode> = prefsFlow { parseSort(it[Keys.SORT_LIVE], SortMode.PLAYLIST) }
-    val sortMovies: Flow<SortMode> = prefsFlow { parseSort(it[Keys.SORT_MOVIES], SortMode.PLAYLIST) }
-    val sortSeries: Flow<SortMode> = prefsFlow { parseSort(it[Keys.SORT_SERIES], SortMode.PLAYLIST) }
+    val sortMovies: Flow<SortMode> = prefsFlow { parseSort(it[Keys.SORT_MOVIES], SortMode.DATE_ADDED) } // glcn: newest first by default
+    val sortSeries: Flow<SortMode> = prefsFlow { parseSort(it[Keys.SORT_SERIES], SortMode.DATE_ADDED) } // glcn: newest first by default
 
     suspend fun setSortLive(mode: SortMode) {
         context.dataStore.edit { it[Keys.SORT_LIVE] = mode.name }
