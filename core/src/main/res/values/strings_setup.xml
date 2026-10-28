@@ -530,4 +530,7 @@
     <string name="setup_add_guide">Add a TV guide</string>
     <!-- Translators: Line under Add a TV guide. -->
     <string name="setup_add_guide_line">A fresh install has no guide yet</string>
+    <string name="companion_log_page_title">Playback report</string>
+    <string name="companion_log_description">Download it or copy the text below to send it.</string>
+    <string name="companion_log_download">Download report</string>
 </resources>

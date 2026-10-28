@@ -427,7 +427,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpProtocol.kt	username
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpProtocol.kt	yes
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpProtocol.kt	{
-7	empty	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	\0
+10	empty	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	\0
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	"
 2	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/background
@@ -437,6 +437,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/index.html
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/lora.ttf
 2	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/m3u
+1	technical	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/report.txt
 2	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/stalker
 1	json	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/sync/command
 1	uri	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/sync/hello
@@ -452,9 +453,9 @@
 2	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	Connection: close
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	Content-Disposition: attachment; filename="
 2	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	Content-Length:
-1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	Content-Type:
+2	technical	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	Content-Type:
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	Content-Type: application/json; charset=utf-8
-4	uri	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	GET
+5	technical	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	GET
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	HTTP/1.1
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	HTTP/1.1 200 OK
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	Not Found
@@ -463,7 +464,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	Payload Too Large
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	Unauthorized
 1	regex	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	^data:image/([a-zA-Z0-9.+-]+);base64,
-1	uri	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	application/json; charset=utf-8
+2	technical	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	application/json; charset=utf-8
 2	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	bmp
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	content-type
 1	mime	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	font/ttf
@@ -475,9 +476,9 @@
 2	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	png
 1	uri	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	secret
 1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	text/html; charset=utf-8
-1	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	text/plain; charset=utf-8
+2	technical	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	text/plain; charset=utf-8
 2	protocol	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	webp
-8	json	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	x-companion-pin
+9	technical	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	x-companion-pin
 4	json	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	{}
 1	technical	core/src/main/java/tv/own/owntv/core/companion/CompanionLink.kt	10.
 2	technical	core/src/main/java/tv/own/owntv/core/companion/CompanionLink.kt	127.0.0.1

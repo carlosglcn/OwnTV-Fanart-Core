@@ -325,6 +325,16 @@ class CompanionHttpServer(
                 return sendDownload(socket, bytes, file.name)
             }
 
+            // glcn: the playback report (LOG_DOWNLOAD mode) — PIN required, plain text.
+            if (method == "GET" && path == "/report.txt" && mode == CompanionMode.LOG_DOWNLOAD) {
+                val headerPin = headers["x-companion-pin"].orEmpty()
+                if (!requireSyncAuth(queryPin.ifBlank { headerPin })) return sendText(socket, 401, localized(R.string.companion_error_unauthorized))
+                val file = downloadFile
+                val bytes = file?.takeIf { it.exists() }?.let { runCatching { it.readBytes() }.getOrNull() }
+                    ?: return sendText(socket, 404, localized(R.string.companion_error_not_found))
+                return sendDownload(socket, bytes, file.name, "text/plain; charset=utf-8")
+            }
+
             // Backup upload (BACKUP_RESTORE mode) — PIN required, JSON body is the backup file.
             if (method == "POST" && path == "/backup") {
                 val headerPin = headers["x-companion-pin"].orEmpty()
@@ -470,6 +480,9 @@ class CompanionHttpServer(
         // Local sync has no browser side. Someone who opens the address in a browser and types the
         // PIN gets told so rather than a blank page.
         CompanionMode.LOCAL_SYNC -> CompanionHtml.localSyncPage(context)
+        CompanionMode.LOG_DOWNLOAD -> CompanionHtml.logDownloadPage(
+            context, pin, downloadFile?.takeIf { it.exists() }?.let { f -> runCatching { f.readText().take(LOG_PAGE_MAX_CHARS) }.getOrNull() }.orEmpty(),
+        )
     }
 
     /**
@@ -501,12 +514,12 @@ class CompanionHttpServer(
         sendBytes(socket, code, "text/plain; charset=utf-8", body.toByteArray(StandardCharsets.UTF_8))
 
     /** Streams [bytes] as a file download so the browser saves it rather than rendering it. */
-    private fun sendDownload(socket: Socket, bytes: ByteArray, filename: String) {
+    private fun sendDownload(socket: Socket, bytes: ByteArray, filename: String, contentType: String = "application/json; charset=utf-8") {
         runCatching {
             socket.getOutputStream().use { out ->
                 val header = buildString {
                     append("HTTP/1.1 200 OK\r\n")
-                    append("Content-Type: application/json; charset=utf-8\r\n")
+                    append("Content-Type: ").append(contentType).append("\r\n")
                     append("Content-Disposition: attachment; filename=\"").append(filename).append("\"\r\n")
                     append("Content-Length: ").append(bytes.size).append("\r\n")
                     append("Cache-Control: no-store\r\n")
@@ -593,3 +606,6 @@ class CompanionHttpServer(
         fun parseQuery(query: String): Map<String, String> = CompanionHttpProtocol.parseQuery(query)
     }
 }
+
+/** glcn: how much of the playback report the phone page shows inline (the download has it all). */
+private const val LOG_PAGE_MAX_CHARS = 200_000

@@ -275,4 +275,7 @@
     <string name="setup_importing_title">Importando <xliff:g id="name">%1$s</xliff:g></string>
     <string name="setup_add_guide">Añadir una guía de TV</string>
     <string name="setup_add_guide_line">Una instalación nueva aún no tiene guía</string>
+    <string name="companion_log_page_title">Informe de reproducción</string>
+    <string name="companion_log_description">Descárgalo o copia el texto de abajo para enviarlo.</string>
+    <string name="companion_log_download">Descargar informe</string>
 </resources>

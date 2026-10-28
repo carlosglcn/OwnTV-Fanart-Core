@@ -492,6 +492,18 @@ internal object CompanionHtml {
         """.trimIndent())
     }
 
+    /** glcn: the playback report on the phone — a download button and the text itself, ready to copy. */
+    fun logDownloadPage(context: Context, pin: String, text: String): String {
+        val title = s(R.string.companion_log_page_title, context)
+        return page(context, title, """
+            <div class="card"><h1>${title.h()}</h1>
+              <p>${s(R.string.companion_log_description, context).h()}</p>
+              <a class="go" href="/report.txt?pin=$pin" download="owntv-playback-report.txt" style="display:block;text-align:center;text-decoration:none">${s(R.string.companion_log_download, context).h()}</a>
+              <pre style="white-space:pre-wrap;word-break:break-word;font-size:12px;line-height:1.4;margin-top:16px;max-height:60vh;overflow:auto">${text.h()}</pre>
+            </div>
+        """.trimIndent())
+    }
+
     private fun autoRefreshSelect(c: Copy): String = """
         <label>${c.autoRefresh.h()} <select name="autoRefresh">
           <option value="OFF" selected>${c.off.h()}</option>

@@ -606,4 +606,6 @@
     <string name="glcn_sports_tab_draw">Cuadro</string>
     <string name="glcn_sports_draw_loading">Cargando el cuadro…</string>
     <string name="glcn_sports_draw_empty">Aún no hay cuadro de este torneo</string>
+    <string name="glcn_share_log_title">Pasar el informe al móvil</string>
+    <string name="glcn_share_log_body">En el móvil, conectado a la misma wifi, escanea el código (o abre la dirección) y escribe el PIN. Allí podrás leer el informe, copiarlo o guardarlo.</string>
 </resources>

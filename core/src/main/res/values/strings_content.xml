@@ -917,4 +917,6 @@
     <string name="glcn_sports_tab_draw">Draw</string>
     <string name="glcn_sports_draw_loading">Loading the draw…</string>
     <string name="glcn_sports_draw_empty">No draw for this tournament yet</string>
+    <string name="glcn_share_log_title">Send the report to your phone</string>
+    <string name="glcn_share_log_body">On your phone, connected to the same Wi-Fi, scan the code (or open the address) and type the PIN. You can read the report there, copy it or save it.</string>
 </resources>

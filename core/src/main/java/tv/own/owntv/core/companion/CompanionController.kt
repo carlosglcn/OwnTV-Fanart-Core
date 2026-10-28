@@ -83,6 +83,9 @@ class CompanionController(context: Context, localeStore: LocaleStore) {
     /** Starts the companion server in backup-download mode, serving [file] for the remote device to download. */
     fun startForBackupDownload(port: Int, file: File) = startInternal(port, CompanionMode.BACKUP_DOWNLOAD, file)
 
+    /** glcn: serves the playback report [file] — shown as text on the phone, with a download button. */
+    fun startForLogDownload(port: Int, file: File) = startInternal(port, CompanionMode.LOG_DOWNLOAD, file)
+
     /**
      * Starts the companion server for local sync between two OwnTV devices.
      *
