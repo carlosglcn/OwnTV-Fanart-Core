@@ -54,6 +54,8 @@ data class WatchOption(
     val tier: WatchTier,
     val guideTitle: String? = null,
     val facets: ChannelFacets = ChannelFacets.of(channel.matchName),
+    /** glcn: how closely the guide's title names the match ([WatchMatcher.fit]); 0 without a guide title. */
+    val fit: Int = 0,
 )
 
 /**
@@ -115,6 +117,18 @@ object WatchMatcher {
                 addAll(asciiWords(t.shortName)); addAll(asciiWords(t.name))
             }
         }.distinct()
+    }
+
+    /**
+     * glcn: how surely a guide title is this match, for ordering channels that all show it: each side it names
+     * counts two, the competition one ("Djokovic - Humbert · Basilea" above "Torneo de Basilea").
+     */
+    fun fit(keys: Keys, title: String?): Int {
+        if (title.isNullOrBlank()) return 0
+        val tokens = TeamNames.tokens(title).toSet()
+        return (if (keys.home?.foundIn(tokens) == true) 2 else 0) +
+            (if (keys.away?.foundIn(tokens) == true) 2 else 0) +
+            (if (keys.league.foundIn(tokens) || keys.tournamentGroups.isNotEmpty() && keys.tournamentGroups.all { g -> tokens.any { it in g } }) 1 else 0)
     }
 
     /**

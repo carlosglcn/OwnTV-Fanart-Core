@@ -143,7 +143,7 @@ class WatchReader(private val data: WatchData) {
         for (k in keys) {
             val m = k.match
             val guide = confirmed[m.key].orEmpty().flatMap { p ->
-                channelsByKey[p.epgChannelId].orEmpty().map { WatchOption(it, WatchTier.GUIDE, p.title) }
+                channelsByKey[p.epgChannelId].orEmpty().map { WatchOption(it, WatchTier.GUIDE, p.title, fit = WatchMatcher.fit(k, p.title)) }
             }
             val event = if (k.searchWords.isEmpty()) emptyList()
             else data.channelsNamingAny(k.searchWords).filter { WatchMatcher.isEventChannel(k, it.name) }

@@ -914,4 +914,7 @@
     <string name="glcn_pi_technical">Technical data</string>
     <string name="glcn_pi_hide_technical">Hide technical data</string>
     <string name="glcn_pi_no_guide">The guide has nothing for this channel right now</string>
+    <string name="glcn_sports_tab_draw">Draw</string>
+    <string name="glcn_sports_draw_loading">Loading the draw…</string>
+    <string name="glcn_sports_draw_empty">No draw for this tournament yet</string>
 </resources>

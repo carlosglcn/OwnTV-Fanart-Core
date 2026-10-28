@@ -19,7 +19,7 @@ class WatchFilterTest {
     private val uk = opt("UK| SKY SPORTS FOOTBALL FHD", WatchTier.REMEMBERED)
     private val arabic = opt("AR| BEIN SPORTS 3 HD", WatchTier.LIKELY, source = 2)
     private val unknown = opt("BUNDESLIGA LIVE 720p", WatchTier.LIKELY)
-    private val seven = listOf(bl1, uhd, austria, event, uk, arabic, unknown)
+    private val seven = listOf(uhd, bl1, austria, event, uk, arabic, unknown)
 
     @Test fun `German and English, any country, HD and better - showing 5 of 7`() {
         val list = WatchList.of(
@@ -31,7 +31,7 @@ class WatchFilterTest {
         assertEquals(5, list.shown.size)
         assertEquals(7, list.total)
         assertEquals(2, list.hidden)
-        assertEquals(listOf(bl1, uhd, austria, event, uk), list.shown)
+        assertEquals(listOf(uhd, bl1, austria, event, uk), list.shown)
         assertEquals(linkedMapOf("DE" to 4, "EN" to 1, "AR" to 1, "ES" to 0, "" to 1), list.languageCounts)
         assertEquals(listOf("DE" to 3, "AT" to 1, "UK" to 1, "AR" to 1), list.countryCounts.toList())
         assertEquals(mapOf(1L to 5, 2L to 2), list.sourceCounts)
@@ -40,7 +40,7 @@ class WatchFilterTest {
 
     @Test fun `only confirmed keeps guide and event channels`() {
         val list = WatchList.of(seven, WatchFilter(onlyConfirmed = true))
-        assertEquals(listOf(bl1, uhd, austria, event), list.shown)
+        assertEquals(listOf(uhd, bl1, austria, event), list.shown)
     }
 
     @Test fun `quality - unknown never hides, 4K only keeps UHD`() {
@@ -76,11 +76,11 @@ class WatchFilterTest {
     @Test fun `strict on - only passing channels, off - every channel with the passing ones first`() {
         val german = WatchFilter(languages = setOf("DE"))
         val strict = WatchList.of(seven, german)
-        assertEquals("AT| counts as German", listOf(bl1, uhd, austria, event), strict.shown)
+        assertEquals("AT| counts as German", listOf(uhd, bl1, austria, event), strict.shown)
         assertEquals(3, strict.hidden)
 
         val all = WatchList.of(seven, german.copy(strict = false))
-        assertEquals("passing first, then the rest, each in tier order", listOf(bl1, uhd, austria, event, uk, arabic, unknown), all.shown)
+        assertEquals("passing first, then the rest, each in tier order", listOf(uhd, bl1, austria, event, uk, arabic, unknown), all.shown)
         assertEquals(0, all.hidden)
         assertEquals(emptyList<String>(), all.hiddenLanguages)
     }

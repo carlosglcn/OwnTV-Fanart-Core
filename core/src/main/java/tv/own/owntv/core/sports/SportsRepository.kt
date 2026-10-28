@@ -233,6 +233,38 @@ class SportsRepository(
         return policy.rebuildDue(mode, follow, b.rebuiltAt, b.builtFor, rebuildTriedAt, rebuiltThisRun, now)
     }
 
+    /** glcn: a tennis tournament's draw so far, read once per tournament and kept ten minutes. */
+    private val drawCache = java.util.concurrent.ConcurrentHashMap<String, Pair<Long, List<DrawRound>>>()
+
+    /**
+     * glcn: the draw of [match]'s tournament — every match of its event (singles or doubles, as [match] is) from
+     * the first day up to tomorrow, by round in the order they were played. ESPN lists a tennis tournament per
+     * day, so this reads each of its days (two weeks at most), at the pace of the other reads.
+     */
+    suspend fun tennisDraw(match: Match): List<DrawRound> {
+        if (match.sport != tv.own.owntv.core.sports.model.Sport.TENNIS) return emptyList()
+        val event = match.subtitle?.substringBefore(" · ").orEmpty()
+        val key = match.feed + "|" + match.leagueName + "|" + event
+        drawCache[key]?.takeIf { clock() - it.first < DRAW_CACHE_MS }?.let { return it.second }
+        val league = SportsCatalog.league(match.feed) ?: return emptyList()
+        val zone = java.time.ZoneId.systemDefault()
+        val today = java.time.LocalDate.now(zone)
+        val start = java.time.Instant.ofEpochMilli(match.startMs).atZone(zone).toLocalDate()
+        val first = start.minusDays(DRAW_LOOKBACK_DAYS)
+        val last = minOf(start.plusDays(DRAW_LOOKBACK_DAYS), today.plusDays(1))
+        val days = generateSequence(first) { it.plusDays(1) }.takeWhile { !it.isAfter(last) }.toList()
+        val found = coroutineScope {
+            days.map { d -> async { attempt { source.scoreboard(league, d) }.orEmpty() } }.awaitAll()
+        }.flatten()
+            .filter { it.leagueName == match.leagueName && it.subtitle?.substringBefore(" · ").orEmpty() == event }
+            .distinctBy { it.id }
+        val rounds = found.groupBy { it.subtitle?.substringAfter(" · ", "").orEmpty() }
+            .map { (round, ms) -> DrawRound(round, ms.sortedBy { it.startMs }) }
+            .sortedBy { r -> r.matches.minOf { it.startMs } }
+        drawCache[key] = clock() to rounds
+        return rounds
+    }
+
     /**
      * [match] fetched afresh now (its summary), for a page that must judge it on current data — Find
      * channels' window. Updates the board; null when the fetch fails (the caller keeps the copy it has).
@@ -512,3 +544,10 @@ class SportsRepository(
         val ESPN_ZONE: ZoneId = ZoneId.of("America/New_York")
     }
 }
+
+/** glcn: one round of a tennis draw ("Quarterfinal") and its matches. */
+data class DrawRound(val name: String, val matches: List<Match>)
+
+private const val DRAW_CACHE_MS = 10 * 60_000L
+/** A Grand Slam runs two weeks; the first round is at most this far before the match the draw was opened from. */
+private const val DRAW_LOOKBACK_DAYS = 13L
