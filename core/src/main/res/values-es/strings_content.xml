@@ -543,6 +543,7 @@
     <string name="glcn_about_community_fanart">Comunidad de OwnTV Fanart en Telegram (esta versión)</string>
     <string name="glcn_quick_zap_search">Buscar canal</string>
     <string name="glcn_quick_zap_none">Ningún canal con ese nombre</string>
+    <string name="glcn_refresh_guide">Actualizar guía</string>
     <string name="content_poster_size">Tamaño de los carteles</string>
     <string name="content_vod_more_in">Más en <xliff:g id="category">%1$s</xliff:g></string>
     <string name="glcn_start_time">Arranque del canal</string>

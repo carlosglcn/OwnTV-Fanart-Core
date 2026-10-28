@@ -852,6 +852,7 @@
     <string name="glcn_about_community_fanart">OwnTV Fanart community on Telegram (this version)</string>
     <string name="glcn_quick_zap_search">Search channel</string>
     <string name="glcn_quick_zap_none">No channel with that name</string>
+    <string name="glcn_refresh_guide">Refresh guide</string>
     <!-- Translators: Heading above the poster-size slider in the Movies / Series sort sheet. Shown in capitals by the style. -->
     <string name="content_poster_size">Poster size</string>
     <!-- Translators: Small heading on a movie's page above more posters from the same category: "More in Disney+ Kids Movies". Shown in capitals by the style. -->
