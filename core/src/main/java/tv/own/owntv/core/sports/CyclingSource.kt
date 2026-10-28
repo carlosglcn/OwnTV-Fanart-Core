@@ -11,7 +11,6 @@ import tv.own.owntv.core.sports.model.League
 import tv.own.owntv.core.sports.model.Match
 import tv.own.owntv.core.sports.model.MatchState
 import tv.own.owntv.core.sports.model.MatchSummary
-import tv.own.owntv.core.sports.model.MonthBoard
 import tv.own.owntv.core.sports.model.Ranking
 import tv.own.owntv.core.sports.model.RankingGroup
 import tv.own.owntv.core.sports.model.RankingKind
