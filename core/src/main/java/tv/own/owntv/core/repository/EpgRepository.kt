@@ -705,6 +705,7 @@ class EpgRepository(
                         p.rating?.let { statement.bindText(11, it) } ?: statement.bindNull(11)
                         p.lengthMin?.let { statement.bindLong(12, it.toLong()) } ?: statement.bindNull(12)
                         p.episode?.let { statement.bindText(13, it) } ?: statement.bindNull(13)
+                        p.imageUrl?.let { statement.bindText(14, it) } ?: statement.bindNull(14)
                         statement.step()
                         statement.reset()
                     }
@@ -920,7 +921,8 @@ class EpgRepository(
         private const val QUERY_CHUNK = 500
         private const val UPSERT_PROGRAMME_SQL =
             "INSERT OR REPLACE INTO `epg_programmes` (`id`,`sourceId`,`epgChannelId`,`startMs`,`stopMs`,`title`,`description`," +
-                "`contentHash`,`categories`,`year`,`rating`,`lengthMin`,`episode`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?,?,?,?,?)"
+                // glcn: and the programme's picture — without it every guide update stored programmes with no fanart.
+                "`contentHash`,`categories`,`year`,`rating`,`lengthMin`,`episode`,`imageUrl`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?,?,?,?,?,?)"
         private const val CACHE_TTL_MS = 24L * 60 * 60 * 1000 // reuse a cached XMLTV for incremental matches up to 24h
         private const val PROGRESS_PROGRAMME_STEP = 500
         private const val EPG_DOWNLOAD_ATTEMPTS = 3

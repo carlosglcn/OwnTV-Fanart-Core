@@ -140,4 +140,6 @@ data class EpgHashProjection(
 // The details are part of the hash, so a feed that starts sending them (or the first sync after v47)
 // rewrites the rows instead of skipping them as unchanged.
 fun EpgProgrammeEntity.computeContentHash(): Int =
-    Objects.hash(title, description, stopMs, categories, year, rating, lengthMin, episode, imageUrl)
+    // glcn: the trailing 2 changes every stored hash once, so the next guide update writes every programme again —
+    // with its picture, which the bulk insert had been leaving out while recording a hash that included it.
+    Objects.hash(title, description, stopMs, categories, year, rating, lengthMin, episode, imageUrl, 2)
