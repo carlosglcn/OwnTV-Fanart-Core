@@ -23,11 +23,22 @@ class GuidePriority private constructor(private val rankBySource: Map<Long, Int>
         val firstRank = rankOf(rows[0].sourceId)
         if (rows.all { rankOf(it.sourceId) == firstRank }) return EpgDedupe.collapse(rows)
         val kept = ArrayList<EpgProgrammeEntity>(rows.size)
+        val dropped = ArrayList<EpgProgrammeEntity>()
         for ((_, group) in rows.groupBy { rankOf(it.sourceId) }.toSortedMap()) {
             // A whole rank is taken at once, so a feed's own rows never push each other out; only a
             // higher feed's rows can.
             val higher = kept.toList()
-            group.filterTo(kept) { row -> higher.none { it.overlaps(row) } }
+            for (row in group) if (higher.none { it.overlaps(row) }) kept += row else dropped += row
+        }
+        // glcn: the winning feed decides what is on; a lower one that has the same broadcast with a picture
+        // (or a synopsis) still lends it — a guide with the times but no fanart must not wipe out the fanart.
+        if (dropped.any { it.imageUrl != null || it.description != null }) {
+            for (i in kept.indices) {
+                val row = kept[i]
+                if (row.imageUrl != null && row.description != null) continue
+                val donor = dropped.firstOrNull { (it.imageUrl != null || it.description != null) && EpgDedupe.sameBroadcast(row, it) } ?: continue
+                kept[i] = with(EpgDedupe) { row.borrowFrom(donor) }
+            }
         }
         return EpgDedupe.collapse(kept)
     }

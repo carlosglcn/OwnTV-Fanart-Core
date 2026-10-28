@@ -37,8 +37,9 @@ object EpgDedupe {
         for (row in sorted) {
             val previous = kept.lastOrNull()
             if (previous != null && isSameProgramme(previous, row)) {
-                // Same programme, written twice. Keep whichever spans more of it.
-                if (row.durationMs > previous.durationMs) kept[kept.lastIndex] = row
+                // Same programme, written twice. Keep whichever spans more of it — glcn: with the other's
+                // picture and synopsis when it has none (one feed brings the times, another the fanart).
+                kept[kept.lastIndex] = if (row.durationMs > previous.durationMs) row.borrowFrom(previous) else previous.borrowFrom(row)
                 continue
             }
             kept += row
@@ -59,6 +60,19 @@ object EpgDedupe {
         title.trim().lowercase().replace(WHITESPACE, " ")
 
     private val EpgProgrammeEntity.durationMs: Long get() = (stopMs - startMs).coerceAtLeast(0L)
+
+    /** glcn: this row, with [other]'s picture and synopsis where this one has none. */
+    internal fun EpgProgrammeEntity.borrowFrom(other: EpgProgrammeEntity): EpgProgrammeEntity =
+        if ((imageUrl != null || other.imageUrl == null) && (description != null || other.description == null)) this
+        else copy(imageUrl = imageUrl ?: other.imageUrl, description = description ?: other.description)
+
+    /** glcn: the same broadcast in two feeds — same title, or nearly the same stretch of time. */
+    internal fun sameBroadcast(a: EpgProgrammeEntity, b: EpgProgrammeEntity): Boolean {
+        if (!(a.startMs < b.stopMs && b.startMs < a.stopMs)) return false
+        if (normalise(a.title) == normalise(b.title)) return true
+        val overlap = minOf(a.stopMs, b.stopMs) - maxOf(a.startMs, b.startMs)
+        return overlap >= 0.8 * a.durationMs && overlap >= 0.8 * b.durationMs
+    }
 
     private val WHITESPACE = Regex("\\s+")
 }
