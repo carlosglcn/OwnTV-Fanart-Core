@@ -98,6 +98,12 @@ object SportsCatalog {
         League(Sport.BASKETBALL, BasketDataSource.EUROLEAGUE, "EuroLeague", "EL", "EU"),
         // glcn: handball is not on ESPN either; served by BasketDataSource from the league's own site.
         League(Sport.HANDBALL, BasketDataSource.ASOBAL, "Liga ASOBAL", "ASOBAL", "ES"),
+        League(Sport.HANDBALL, BasketDataSource.EHF_CL, "EHF Champions League", "EHF CL", "EU"),
+        League(Sport.HANDBALL, BasketDataSource.EHF_EL, "EHF European League", "EHF EL", "EU"),
+        League(Sport.HANDBALL, BasketDataSource.HBL, "Handball-Bundesliga", "HBL", "DE"),
+        League(Sport.HANDBALL, BasketDataSource.LNH, "StarLigue", "LNH", "FR"),
+        League(Sport.HANDBALL, BasketDataSource.HHL, "Herreligaen", "HHL", "DK"),
+        League(Sport.HANDBALL, BasketDataSource.KHL, "K&H Férfi Liga", "K&H", "HU"),
         League(Sport.BASKETBALL, "mens-college-basketball", "NCAA Basketball", "NCAAM", "US"),
         League(Sport.BASKETBALL, "womens-college-basketball", "NCAA Women's Basketball", "NCAAW", "US"),
         League(Sport.BASKETBALL, "fiba", "FIBA World Cup"),
@@ -193,6 +199,12 @@ object SportsCatalog {
         League.keyOf(Sport.BASKETBALL, BasketDataSource.ACB) to listOf("Liga Endesa", "ACB"),
         League.keyOf(Sport.BASKETBALL, BasketDataSource.EUROLEAGUE) to listOf("Euroliga", "Turkish Airlines EuroLeague", "Euroleague"),
         League.keyOf(Sport.HANDBALL, BasketDataSource.ASOBAL) to listOf("ASOBAL", "Liga Nexus Energia ASOBAL"),
+        League.keyOf(Sport.HANDBALL, BasketDataSource.EHF_CL) to listOf("Liga de Campeones EHF", "Machineseeker EHF Champions League", "EHF Champions League"),
+        League.keyOf(Sport.HANDBALL, BasketDataSource.EHF_EL) to listOf("Liga Europea EHF", "EHF European League", "EHF Europa League"),
+        League.keyOf(Sport.HANDBALL, BasketDataSource.HBL) to listOf("Handball Bundesliga", "Daikin HBL", "Opel HBL", "LIQUI MOLY HBL", "Bundesliga de balonmano"),
+        League.keyOf(Sport.HANDBALL, BasketDataSource.LNH) to listOf("Starligue", "Daikin StarLigue", "Liqui Moly StarLigue", "Liga francesa de balonmano"),
+        League.keyOf(Sport.HANDBALL, BasketDataSource.HHL) to listOf("Betoro Herreligaen", "Herreligaen", "Liga danesa de balonmano"),
+        League.keyOf(Sport.HANDBALL, BasketDataSource.KHL) to listOf("K&H Liga", "K&H férfi liga", "Liga húngara de balonmano"),
         // A guide calls the series "Mundial F1": its own word, which "Formula 1" never contains once digits are dropped.
         League.keyOf(Sport.RACING, "f1") to listOf("F1"),
     )

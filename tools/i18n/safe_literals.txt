@@ -3224,10 +3224,11 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	$ASOBAL_SITE/liga/calendario/$round/
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	$BASE/${league.slug}.json
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	+$diff
+1	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	-
 1	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	<[^>]+>
 1	regex	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	<b>\\s*(\\d+)\\s*</b>\\s*-\\s*<b>\\s*(\\d+)\\s*</b>
 1	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	<li>(.*?)</li>
-2	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	FT
+3	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	FT
 2	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	Q$period
 1	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	Round
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	Round $it
@@ -3239,20 +3240,36 @@
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	away
 1	regex	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	class="enlaces">(.*?)(?:\\||</span>)
 1	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	d
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	days
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	diff
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	ehfcl
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	ehfel
 1	regex	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	estadisticas/(\\d+)/
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	euroleague
 3	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	final
 1	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	finalizado
+2	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	group
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	guestStats
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	hbl
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	hhl
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	home
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	homeStats
 2	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	hs
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	https://raw.githubusercontent.com/carlosglcn/owntv-sports-data/main
 1	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	https://www.asobal.es
-2	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	id
+1	url	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	https://www.eurohandball.com/umbraco/api/livescoreapi/GetLiveScoreMatches/1069
+3	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	id
 1	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	info-results
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	isLive
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	khl
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	l
 3	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	live
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	liveScoreMatches
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	lnh
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	logo
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	match
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	matchID
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	matchStats
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	matches
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	name
 1	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	no ha comenzado
@@ -3266,11 +3283,14 @@
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	round
 1	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	scheduled
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	short
+2	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	stage
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	standings
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	start
 2	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	status
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	team
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	teams
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	time
+1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	totalGoals
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	tv
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	v
 2	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	w
@@ -3714,9 +3734,11 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Austrian Bundesliga
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	BE
 2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	BR
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Betoro Herreligaen
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Brasileirão
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	British & Irish Lions Tour
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Bundesliga
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Bundesliga de balonmano
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	CAF Champions League
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	CH
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Carabao Cup
@@ -3736,13 +3758,20 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Coppa Italia
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Coupe de France
 1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Cricket
-3	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	DE
+4	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	DE
 1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	DFB-Pokal
-1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	DK
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	DK
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	DP World Tour
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Daikin HBL
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Daikin StarLigue
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EHF CL
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EHF Champions League
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EHF EL
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EHF Europa League
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EHF European League
 1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EL
 6	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ES
-1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EU
+3	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EU
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EURO
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Eliteserien
 1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Eredivisie
@@ -3757,11 +3786,16 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	FIFA Club World Cup
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	FIFA Women's World Cup
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	FIFA World Cup
-4	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	FR
+5	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	FR
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Formula 1
 11	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	GB
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	GR
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Greek Super League
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	HBL
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	HHL
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	HU
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Handball Bundesliga
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Handball-Bundesliga
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	IN
 4	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	IT
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Indian Super League

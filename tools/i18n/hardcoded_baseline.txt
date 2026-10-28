@@ -473,9 +473,26 @@
 2	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	status
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	yyyy-MM-dd'T'HH:mm:ssxx
 2	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ACB
+2	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Herreligaen
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	K&H
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	K&H Férfi Liga
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	K&H Liga
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	K&H férfi liga
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	LIQUI MOLY HBL
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	LNH
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga ACB
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga Endesa
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga Europea EHF
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga danesa de balonmano
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga de Campeones EHF
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga francesa de balonmano
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga húngara de balonmano
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liqui Moly StarLigue
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Machineseeker EHF Champions League
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	MotoGP
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Opel HBL
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	StarLigue
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Starligue
 2	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	alaves
 3	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	athletic
 1	core/src/main/java/tv/own/owntv/core/sports/TeamNames.kt	atleti

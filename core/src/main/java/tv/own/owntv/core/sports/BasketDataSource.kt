@@ -38,7 +38,7 @@ class BasketDataSource(client: OkHttpClient) {
     private val zone get() = ZoneId.systemDefault()
     private val cache = HashMap<String, Pair<Long, Feed>>()
 
-    private class Feed(val teams: List<Team>, val matches: List<Match>, val standings: List<StandingsRow>)
+    private class Feed(val teams: List<Team>, val matches: List<Match>, val groups: List<StandingsGroup>)
 
     suspend fun scoreboard(league: League, day: LocalDate?): List<Match> {
         val date = day ?: LocalDate.now(zone)
@@ -50,8 +50,7 @@ class BasketDataSource(client: OkHttpClient) {
 
     suspend fun teams(league: League): List<Team> = feed(league).teams
 
-    suspend fun standings(league: League): StandingsTable =
-        StandingsTable(league.key, listOf(StandingsGroup(league.name, feed(league).standings)))
+    suspend fun standings(league: League): StandingsTable = StandingsTable(league.key, feed(league).groups)
 
     suspend fun teamSchedule(league: League, teamId: String, fixtures: Boolean): List<Match> {
         val mine = matches(league).filter { m -> m.competitors.any { it.team.id == teamId } }
@@ -63,6 +62,7 @@ class BasketDataSource(client: OkHttpClient) {
     /** The league's matches, with a live ASOBAL match read from the league's own round page. */
     private suspend fun matches(league: League): List<Match> {
         val base = feed(league).matches
+        if (league.slug in EHF_SLUGS) return ehfLive(base)
         if (league.slug != ASOBAL) return base
         val now = System.currentTimeMillis()
         val rounds = base.filter { it.state != MatchState.POST && now in (it.startMs - LIVE_LEAD_MS)..(it.startMs + LIVE_WINDOW_MS) }
@@ -85,6 +85,69 @@ class BasketDataSource(client: OkHttpClient) {
                 },
             )
         }
+    }
+
+    /**
+     * glcn: the EHF's live board (every competition at once): while one of [base]'s matches is on, its score and
+     * clock come from there, read at most every half minute, instead of from the ten-minute file.
+     */
+    private suspend fun ehfLive(base: List<Match>): List<Match> {
+        val now = System.currentTimeMillis()
+        if (base.none { it.state != MatchState.POST && now in (it.startMs - LIVE_LEAD_MS)..(it.startMs + LIVE_WINDOW_MS) }) return base
+        val live = ehfBoard()
+        if (live.isEmpty()) return base
+        return base.map { m ->
+            val l = live[m.id] ?: return@map m
+            if (!l.live && m.state != MatchState.IN) return@map m
+            val state = if (l.live) MatchState.IN else MatchState.POST
+            val homeGoals = l.goals[m.competitors.firstOrNull { it.home }?.team?.id] ?: return@map m
+            val awayGoals = l.goals[m.competitors.firstOrNull { !it.home }?.team?.id] ?: return@map m
+            val decided = state == MatchState.POST && homeGoals != awayGoals
+            m.copy(
+                state = state,
+                statusText = if (state == MatchState.POST) "FT" else l.clock,
+                clock = if (state == MatchState.IN && l.clock.isNotEmpty()) MatchClock(display = l.clock, period = 0) else null,
+                competitors = m.competitors.map { c ->
+                    val goals = if (c.home) homeGoals else awayGoals
+                    c.copy(score = Score(goals.toString(), goals), winner = if (decided) (if (c.home) homeGoals > awayGoals else awayGoals > homeGoals) else null)
+                },
+            )
+        }
+    }
+
+    private class EhfLine(val live: Boolean, val goals: Map<String, Int>, val clock: String)
+
+    private var ehfCache: Pair<Long, Map<String, EhfLine>>? = null
+
+    private suspend fun ehfBoard(): Map<String, EhfLine> {
+        val now = System.currentTimeMillis()
+        ehfCache?.takeIf { now - it.first < LIVE_CACHE_MS }?.let { return it.second }
+        val lines = runCatching {
+            val body = withContext(Dispatchers.IO) {
+                http.newCall(Request.Builder().url(EHF_LIVE).build()).execute().use { r ->
+                    if (!r.isSuccessful) throw SportsHttpException(r.code)
+                    r.body.string()
+                }
+            }
+            val out = HashMap<String, EhfLine>()
+            val days = JSONObject(body).optJSONArray("days")
+            for (d in 0 until (days?.length() ?: 0)) {
+                val list = days!!.optJSONObject(d)?.optJSONArray("liveScoreMatches") ?: continue
+                for (i in 0 until list.length()) {
+                    val e = list.optJSONObject(i) ?: continue
+                    val id = e.optJSONObject("match")?.optString("matchID")?.takeIf { it.isNotEmpty() } ?: continue
+                    // The two stats blocks name their own team: they are not always in home/away order.
+                    val goals = listOfNotNull(e.optJSONObject("homeStats"), e.optJSONObject("guestStats"))
+                        .mapNotNull { s -> s.optString("id").takeIf { it.isNotEmpty() }?.let { it to s.optInt("totalGoals") } }.toMap()
+                    val stats = e.optJSONObject("matchStats")
+                    val time = stats?.optString("time").orEmpty().takeIf { it != "-" }.orEmpty()
+                    out[id] = EhfLine(stats?.optBoolean("isLive") == true, goals, time)
+                }
+            }
+            out
+        }.getOrDefault(emptyMap())
+        ehfCache = now to lines
+        return lines
     }
 
     private class LiveLine(val id: String, val status: String, val home: Int, val away: Int, val label: String)
@@ -162,13 +225,15 @@ class BasketDataSource(client: OkHttpClient) {
             val r = tableArray!!.optJSONObject(i) ?: return@mapNotNull null
             val team = byId[r.optString("team")] ?: return@mapNotNull null
             val diff = r.optInt("diff")
-            StandingsRow(
+            r.optString("group").takeUnless { r.isNull("group") }.orEmpty() to StandingsRow(
                 rank = r.optInt("pos", i + 1), team = team, played = r.optInt("p"), won = r.optInt("w"), drawn = r.optInt("d"),
                 lost = r.optInt("l"), scored = r.optInt("pf"), conceded = r.optInt("pa"),
                 difference = if (diff > 0) "+$diff" else diff.toString(), points = if (r.has("pts")) r.optInt("pts") else r.optInt("w"),
             )
         }
-        return Feed(teams, matches, standings)
+        // glcn: a competition played in groups (the EHF's) has one table per group, in the file's order.
+        val groups = standings.groupBy({ it.first }, { it.second }).map { (name, rows) -> StandingsGroup(name.ifEmpty { league.name }, rows) }
+        return Feed(teams, matches, groups)
     }
 
     private fun toMatch(league: League, m: JSONObject, byId: Map<String, Team>, now: Long): Match? {
@@ -206,7 +271,8 @@ class BasketDataSource(client: OkHttpClient) {
                 else -> null.orEmpty()
             },
             title = home.name + " v " + away.name,
-            subtitle = m.optInt("round").takeIf { it > 0 }?.let { "Round $it" },
+            // glcn: a phase name where the competition has one ("Fase de grupos · Grupo A"), else the round.
+            subtitle = m.optString("stage").takeIf { it.isNotEmpty() && !m.isNull("stage") } ?: m.optInt("round").takeIf { it > 0 }?.let { "Round $it" },
             clock = when {
                 state != MatchState.IN -> null
                 league.sport == Sport.HANDBALL -> periodText.takeIf { it.isNotEmpty() }?.let { MatchClock(display = it, period = 0) }
@@ -226,7 +292,15 @@ class BasketDataSource(client: OkHttpClient) {
         const val ACB = "acb"
         const val EUROLEAGUE = "euroleague"
         const val ASOBAL = "asobal"
-        val SLUGS = setOf(ACB, EUROLEAGUE, ASOBAL)
+        const val EHF_CL = "ehfcl"
+        const val EHF_EL = "ehfel"
+        const val HBL = "hbl"
+        const val LNH = "lnh"
+        const val HHL = "hhl"
+        const val KHL = "khl"
+        private val EHF_SLUGS = setOf(EHF_CL, EHF_EL)
+        val SLUGS = setOf(ACB, EUROLEAGUE, ASOBAL, EHF_CL, EHF_EL, HBL, LNH, HHL, KHL)
+        private const val EHF_LIVE = "https://www.eurohandball.com/umbraco/api/livescoreapi/GetLiveScoreMatches/1069"
         private const val ASOBAL_SITE = "https://www.asobal.es"
         private const val LIVE_CACHE_MS = 30_000L
         private const val LIVE_LEAD_MS = 15 * 60_000L
