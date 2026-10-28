@@ -615,4 +615,8 @@
     <string name="glcn_cross_copy_now">Cambiar ya</string>
     <string name="glcn_cross_copy_stay">Quedarme</string>
     <string name="glcn_race_live_order">Clasificación en directo</string>
+    <string name="glcn_dock_resume">Continuar</string>
+    <string name="glcn_dock_watch">Ver</string>
+    <string name="glcn_dock_details">Ficha</string>
+    <string name="glcn_dock_trailer">Tráiler</string>
 </resources>

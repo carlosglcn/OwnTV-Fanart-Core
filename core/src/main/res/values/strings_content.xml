@@ -926,4 +926,8 @@
     <string name="glcn_cross_copy_now">Switch now</string>
     <string name="glcn_cross_copy_stay">Stay</string>
     <string name="glcn_race_live_order">Live order</string>
+    <string name="glcn_dock_resume">Resume</string>
+    <string name="glcn_dock_watch">Watch</string>
+    <string name="glcn_dock_details">Details</string>
+    <string name="glcn_dock_trailer">Trailer</string>
 </resources>
