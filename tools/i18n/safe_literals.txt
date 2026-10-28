@@ -5459,11 +5459,31 @@
 1	technical	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	v
 1	log	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	wrong package ${info.packageName}
 2	technical	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	x86_64
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	$it
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	${it.take(300)}
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	CLOSED BY USER
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	CRASH
 1	technical	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	Crashed $stamp on thread "${thread.name}"
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	DEPENDENCY DIED
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	EXCESSIVE RESOURCE USE
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	EXITED
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	FROZEN (ANR)
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	INIT FAILURE
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	KILLED (signal)
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	LOW MEMORY (system)
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	NATIVE CRASH
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	OTHER
 1	technical	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	OwnTV ${CoreBuildInfo.versionName} (${CoreBuildInfo.versionCode})
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	PERMISSION CHANGE
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	STOPPED BY USER
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	UNKNOWN ($reason)
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	[${stamp.format(java.util.Date(e.timestamp))}] ${reasonName(e.reason)}
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	background
 1	file-path	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	diagnostics
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	foreground
 1	file-path	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	last_crash.txt
-1	technical	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	yyyy-MM-dd HH:mm:ss
+2	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	yyyy-MM-dd HH:mm:ss
+1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	· pss ${e.pss / 1024} MB · rss ${e.rss / 1024} MB
 1	protocol	core/src/main/java/tv/own/owntv/core/util/ErrorMessages.kt	CertPath
 1	protocol	core/src/main/java/tv/own/owntv/core/util/ErrorMessages.kt	CertificateException
 2	protocol	core/src/main/java/tv/own/owntv/core/util/ErrorMessages.kt	Connection refused
@@ -6580,6 +6600,7 @@
 1	file-path	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	${Environment.DIRECTORY_DOWNLOADS}/$EXPORT_NAME
 1	sql	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	${MediaStore.MediaColumns.DISPLAY_NAME}=? AND ${MediaStore.MediaColumns.RELATIVE_PATH}=?
 1	sql	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	${MediaStore.MediaColumns._ID} DESC
+1	log	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	--- how the app last closed ---
 1	technical	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	--- last crash ---
 1	technical	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	--- live diagnostics (most recent) ---
 1	protocol	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	:direct

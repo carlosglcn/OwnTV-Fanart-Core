@@ -69,6 +69,58 @@ object CrashRecorder {
         f.writeText(text)
     }
 
+    /**
+     * glcn: why the app's last few processes ended, as Android itself recorded it (Android 11+): a crash, a
+     * freeze the system closed ("ANR", with the threads' state at that moment), a native crash in a player
+     * engine, or the system reclaiming memory. The recorder above only sees the first kind; a box where the
+     * app "just closes" is usually one of the others, and that left no trace at all.
+     */
+    fun exitReasons(context: Context, max: Int = 6): String? {
+        if (Build.VERSION.SDK_INT < 30) return null
+        return exitReasons30(context, max)
+    }
+
+    @androidx.annotation.RequiresApi(30)
+    private fun exitReasons30(context: Context, max: Int): String? = runCatching {
+        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as android.app.ActivityManager
+        val exits = am.getHistoricalProcessExitReasons(context.packageName, 0, max)
+        if (exits.isEmpty()) return null
+        val stamp = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.US)
+        buildString {
+            exits.forEachIndexed { i, e ->
+                appendLine("[${stamp.format(java.util.Date(e.timestamp))}] ${reasonName(e.reason)}" +
+                    " · ${if (e.importance <= android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) "foreground" else "background"}" +
+                    " · pss ${e.pss / 1024} MB · rss ${e.rss / 1024} MB")
+                e.description?.takeIf { it.isNotBlank() }?.let { appendLine("  ${it.take(300)}") }
+                // The threads at the moment of a freeze, or the native backtrace: only for the most recent ones.
+                val traced = e.reason == android.app.ApplicationExitInfo.REASON_ANR || e.reason == android.app.ApplicationExitInfo.REASON_CRASH_NATIVE
+                if (traced && i < 2) runCatching {
+                    e.traceInputStream?.bufferedReader()?.useLines { lines -> lines.take(TRACE_LINES).forEach { appendLine("    $it") } }
+                }
+            }
+        }.takeIf { it.isNotBlank() }
+    }.getOrNull()
+
+    @androidx.annotation.RequiresApi(30)
+    private fun reasonName(reason: Int): String = when (reason) {
+        android.app.ApplicationExitInfo.REASON_ANR -> "FROZEN (ANR)"
+        android.app.ApplicationExitInfo.REASON_CRASH -> "CRASH"
+        android.app.ApplicationExitInfo.REASON_CRASH_NATIVE -> "NATIVE CRASH"
+        android.app.ApplicationExitInfo.REASON_LOW_MEMORY -> "LOW MEMORY (system)"
+        android.app.ApplicationExitInfo.REASON_EXCESSIVE_RESOURCE_USAGE -> "EXCESSIVE RESOURCE USE"
+        android.app.ApplicationExitInfo.REASON_SIGNALED -> "KILLED (signal)"
+        android.app.ApplicationExitInfo.REASON_EXIT_SELF -> "EXITED"
+        android.app.ApplicationExitInfo.REASON_USER_REQUESTED -> "CLOSED BY USER"
+        android.app.ApplicationExitInfo.REASON_USER_STOPPED -> "STOPPED BY USER"
+        android.app.ApplicationExitInfo.REASON_PERMISSION_CHANGE -> "PERMISSION CHANGE"
+        android.app.ApplicationExitInfo.REASON_DEPENDENCY_DIED -> "DEPENDENCY DIED"
+        android.app.ApplicationExitInfo.REASON_INITIALIZATION_FAILURE -> "INIT FAILURE"
+        android.app.ApplicationExitInfo.REASON_OTHER -> "OTHER"
+        else -> "UNKNOWN ($reason)"
+    }
+
+    private const val TRACE_LINES = 120
+
     private fun file(context: Context): File =
         File(File(context.filesDir, "diagnostics"), FILE_NAME)
 }

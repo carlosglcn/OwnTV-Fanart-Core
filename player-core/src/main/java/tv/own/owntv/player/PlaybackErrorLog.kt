@@ -305,6 +305,12 @@ object PlaybackErrorLog {
                 appendLine(it)
                 appendLine()
             }
+            // glcn: how the last processes ended (freezes, native crashes, memory) — Android 11+.
+            tv.own.owntv.core.util.CrashRecorder.exitReasons(appContext)?.let {
+                appendLine("--- how the app last closed ---")
+                appendLine(it)
+                appendLine()
+            }
             read(appContext).forEach { e ->
                 appendLine("[${stamp.format(java.util.Date(e.atMs))}] ${e.kind} · ${e.engine} · ${if (e.live) "live" else "vod"}")
                 e.reason?.let { appendLine("  reason: $it") }
