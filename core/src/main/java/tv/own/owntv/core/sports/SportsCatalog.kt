@@ -116,6 +116,8 @@ object SportsCatalog {
         League(Sport.RACING, "f1", "Formula 1", "F1"),
         // glcn: not on ESPN; served by MotoGpSource.
         League(Sport.RACING, CompositeSportsSource.MOTOGP, "MotoGP"),
+        // glcn: not on ESPN; served by CyclingSource.
+        League(Sport.CYCLING, CyclingSource.WORLD_TOUR, "UCI WorldTour", "UWT", hasTable = false),
         League(Sport.RACING, "irl", "IndyCar", country = "US"),
         League(Sport.RACING, "nascar-premier", "NASCAR Cup Series", "NASCAR", "US"),
         League(Sport.RACING, "nascar-secondary", "NASCAR O'Reilly Auto Parts Series", "NASCAR O'Reilly", "US"),
@@ -192,7 +194,7 @@ object SportsCatalog {
      */
     fun competitionNames(match: Match): List<String> =
         (listOfNotNull(league(League.keyOf(match.sport, match.leagueSlug))?.name, match.leagueName) +
-            ALSO_CALLED[League.keyOf(match.sport, match.leagueSlug)].orEmpty()).distinct()
+            ALSO_CALLED[League.keyOf(match.sport, match.leagueSlug)].orEmpty() + CyclingSource.aliases(match)).distinct()
 
     /** glcn: other names guides use for a competition (the ACB is "Liga Endesa" on TV). */
     private val ALSO_CALLED = mapOf(

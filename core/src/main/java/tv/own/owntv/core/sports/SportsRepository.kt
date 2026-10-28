@@ -153,7 +153,7 @@ object SportsWindow {
     private val NO_TABLE = setOf(Sport.TENNIS, Sport.RACING, Sport.GOLF, Sport.MMA, Sport.CRICKET)
 
     /** The leagues ranked instead of tabled: every racing series' drivers (F1's constructors too), the tennis tours' players. ESPN ranks no golfers. */
-    fun hasRanking(league: League): Boolean = league.sport == Sport.RACING || league.key in RANKED_TOURS
+    fun hasRanking(league: League): Boolean = league.sport == Sport.RACING || league.sport == Sport.CYCLING || league.key in RANKED_TOURS
 
     private val RANKED_TOURS = setOf("tennis/atp", "tennis/wta")
 }

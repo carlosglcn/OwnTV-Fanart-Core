@@ -154,6 +154,7 @@ val dataModule = module {
             tv.own.owntv.core.sports.MotoGpSource(get()),
             tv.own.owntv.core.sports.BasketDataSource(get()),
             tv.own.owntv.core.sports.OpenF1Source(get()),
+            tv.own.owntv.core.sports.CyclingSource(get()),
         )
     }
     single { tv.own.owntv.core.sports.SportsRefreshPolicy() }

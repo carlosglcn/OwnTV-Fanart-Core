@@ -21,6 +21,8 @@ enum class Sport(val path: String) {
     AUSSIE_RULES("australian-football"),
     VOLLEYBALL("volleyball"),
     LACROSSE("lacrosse"),
+    /** glcn: not on ESPN — served by [tv.own.owntv.core.sports.CyclingSource]. */
+    CYCLING("cycling"),
     ;
 
     companion object {
@@ -48,3 +50,6 @@ data class League(
         fun keyOf(sport: Sport, slug: String): String = "${sport.path}/$slug"
     }
 }
+
+/** glcn: a sport raced rather than played between two sides (motor racing, cycling): no home and away, a podium, a ranking. */
+val Sport.isRace: Boolean get() = this == Sport.RACING || this == Sport.CYCLING

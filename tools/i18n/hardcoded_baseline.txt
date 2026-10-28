@@ -448,6 +448,36 @@
 1	core/src/main/java/tv/own/owntv/core/settings/SubtitleStyle.kt	top_center
 1	core/src/main/java/tv/own/owntv/core/settings/SubtitleStyle.kt	top_left
 1	core/src/main/java/tv/own/owntv/core/settings/SubtitleStyle.kt	top_right
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	giro d'italia
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	milano-sanremo
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	mountains-flat
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	mountains-uphill
+4	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	name
+2	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	oneday
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	paris-nice
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	paris-roubaix
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	pos
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	profile
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	races
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	ronde van vlaanderen
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	stages
+3	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	start
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	status
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	strade bianche
+2	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	team
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	tirreno
+2	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	to
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	top
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	tour de france
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	tour de suisse
+2	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	tt
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	uwt
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	vuelta
+2	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	·
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	–
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	▁
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	▂▄
+1	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	▃▆█
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	$BASE/events/$id
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	$BASE/events?seasonYear=$year
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	$id-$i
@@ -493,6 +523,8 @@
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Opel HBL
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	StarLigue
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Starligue
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	UCI WorldTour
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	UWT
 1	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	handball/khl
 1	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	handball/lnh
 3	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	hockey/nhl
@@ -630,6 +662,7 @@
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	trophy
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	womens
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	wta
+1	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	cycling
 1	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	$apiBase?type=epg&action=get_simple_data_table&ch_id=${enc(channelId)}
 1	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	&date=${enc(date)}&p=$page&JsHttpRequest=1-xml
 1	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	data

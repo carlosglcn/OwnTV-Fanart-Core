@@ -3295,6 +3295,45 @@
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	tv
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	v
 2	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	w
+1	empty	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	\0
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	%.1f km
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Amstel Gold Race
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Flecha Valona
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Giro de Italia
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Giro de Lombardía
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Itzulia
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	La Vuelta
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Lieja-Bastoña-Lieja
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Milán-San Remo
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	París-Niza
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	París-Roubaix
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Strade Bianche
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Tirreno-Adriático
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Tour de Flandes
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Tour de Francia
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Volta a Catalunya
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Volta a Cataluña
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Vuelta a España
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Vuelta a Suiza
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Vuelta al País Vasco
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	amstel
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	catalunya
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	final
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	flat
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	flèche wallonne
+2	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	frm
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	gap
+2	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	gc
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	hills-flat
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	hills-uphill
+1	url	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	https://raw.githubusercontent.com/carlosglcn/owntv-sports-data/main/cycling.json
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	id
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	il lombardia
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	itzulia
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	km
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	label
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	live
+1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	liège-bastogne-liège
 6	technical	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	\0
 1	technical	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	$id-$i
 1	technical	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	(

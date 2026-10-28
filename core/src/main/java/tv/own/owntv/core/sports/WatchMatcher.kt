@@ -6,6 +6,7 @@ import tv.own.owntv.core.epg.EpgMatcher
 import tv.own.owntv.core.live.ProviderTags
 import tv.own.owntv.core.sports.model.Match
 import tv.own.owntv.core.sports.model.Sport
+import tv.own.owntv.core.sports.model.isRace
 
 /** Why a channel is listed under "Watch live", best first. */
 enum class WatchTier { GUIDE, EVENT, REMEMBERED, LIKELY }
@@ -67,7 +68,7 @@ object WatchMatcher {
     class Keys(val match: Match) {
         // glcn: a racing session has no sides — the drivers on its podium are never in the guide's title —
         // so it is found by its competition alone, also once it is live and ESPN lists the leaders.
-        private val sided = match.sport != Sport.RACING
+        private val sided = !match.sport.isRace
         val home: TeamNames.Key? = match.home?.team?.takeIf { sided }?.let(TeamNames::keyOf)
         val away: TeamNames.Key? = match.away?.team?.takeIf { sided }?.let(TeamNames::keyOf)
         val competitionNames: List<String> = SportsCatalog.competitionNames(match)
@@ -77,7 +78,7 @@ object WatchMatcher {
          * a guide that leaves the series out must still be found. The circuit's own words — the city and
          * country, minus "circuit", "island"... — are the other half.
          */
-        val placeWords: Set<String> = if (match.sport != Sport.RACING) emptySet()
+        val placeWords: Set<String> = if (!match.sport.isRace) emptySet()
         else TeamNames.tokens(match.venue.orEmpty()).filter { it.length >= 4 && it !in GENERIC_VENUE }.toSet()
         // "Formula 1" loses its digit in a title, leaving "formula" — which a cartoon's "Amenaza en la fórmula" also holds.
         // For racing that bare word is no evidence: "F1", or a Grand Prix with its place, are.

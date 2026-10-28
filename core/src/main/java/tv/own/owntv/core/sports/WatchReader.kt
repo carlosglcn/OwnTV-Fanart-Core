@@ -22,6 +22,7 @@ import tv.own.owntv.core.repository.activeProfileSources
 import tv.own.owntv.core.settings.SettingsRepository
 import tv.own.owntv.core.sports.model.Match
 import tv.own.owntv.core.sports.model.Sport
+import tv.own.owntv.core.sports.model.isRace
 
 /**
  * The reads "Watch live" needs, behind an interface so [WatchReader] is unit-tested on a fake.
@@ -108,7 +109,7 @@ class WatchReader(private val data: WatchData) {
         runs++
         val keys = slot.map { WatchMatcher.Keys(it) }
         // glcn: a motor race's guide entry drifts more than a match's (a feed in another time zone, a clock change).
-        val racing = slot.any { it.sport == Sport.RACING }
+        val racing = slot.any { it.sport.isRace }
         val programmes = data.programmes(
             start - if (racing) RACING_BEFORE_MS else SLOT_BEFORE_MS,
             start + if (racing) RACING_AFTER_MS else SLOT_AFTER_MS,

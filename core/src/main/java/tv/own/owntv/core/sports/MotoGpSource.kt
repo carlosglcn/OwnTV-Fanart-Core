@@ -148,12 +148,15 @@ class CompositeSportsSource(
     private val motoGp: MotoGpSource,
     private val tsdb: BasketDataSource? = null,
     private val openF1: OpenF1Source? = null,
+    private val cycling: CyclingSource? = null,
 ) : SportsSource {
+    private fun League.isCycling() = cycling != null && sport == Sport.CYCLING
     private fun League.isMotoGp() = slug == MOTOGP
     private fun League.isTsdb() = tsdb != null && slug in BasketDataSource.SLUGS
 
     override suspend fun scoreboard(league: League, day: LocalDate?): List<Match> =
         when {
+            league.isCycling() -> cycling!!.scoreboard(league, day)
             league.isMotoGp() -> motoGp.scoreboard(league, day)
             league.isTsdb() -> tsdb!!.scoreboard(league, day)
             else -> espn.scoreboard(league, day)
@@ -161,6 +164,7 @@ class CompositeSportsSource(
 
     override suspend fun summary(match: Match): MatchSummary =
         when {
+            match.sport == Sport.CYCLING && cycling != null -> cycling.summary(match)
             match.leagueSlug == MOTOGP -> motoGp.summary(match)
             match.leagueSlug in BasketDataSource.SLUGS -> tsdb!!.summary(match)
             else -> espn.summary(match).let { base ->
@@ -175,13 +179,13 @@ class CompositeSportsSource(
     override suspend fun standings(league: League): StandingsTable =
         when {
             league.isTsdb() -> tsdb!!.standings(league)
-            league.isMotoGp() -> throw IllegalArgumentException("no table")
+            league.isMotoGp() || league.isCycling() -> throw IllegalArgumentException("no table")
             else -> espn.standings(league)
         }
 
     override suspend fun teams(league: League): List<Team> =
         when {
-            league.isMotoGp() -> emptyList()
+            league.isMotoGp() || league.isCycling() -> emptyList()
             league.isTsdb() -> tsdb!!.teams(league)
             else -> espn.teams(league)
         }
@@ -190,18 +194,23 @@ class CompositeSportsSource(
     // so they answer with what their scoreboard holds, no ranking, and no team schedule.
     override suspend fun month(league: League, month: java.time.YearMonth): MonthBoard =
         when {
+            league.isCycling() -> cycling!!.month(league, month)
             league.isTsdb() -> tsdb!!.month(league, month)
             league.isMotoGp() -> MonthBoard(scoreboard(league, null), null)
             else -> espn.month(league, month)
         }
 
     override suspend fun rankings(league: League): Ranking =
-        if (league.isMotoGp() || league.isTsdb()) throw IllegalArgumentException("no ranking") else espn.rankings(league)
+        when {
+            league.isCycling() -> cycling!!.rankings(league)
+            league.isMotoGp() || league.isTsdb() -> throw IllegalArgumentException("no ranking")
+            else -> espn.rankings(league)
+        }
 
     override suspend fun teamSchedule(league: League, teamId: String, fixtures: Boolean): List<Match> =
         when {
             league.isTsdb() -> tsdb!!.teamSchedule(league, teamId, fixtures)
-            league.isMotoGp() -> emptyList()
+            league.isMotoGp() || league.isCycling() -> emptyList()
             else -> espn.teamSchedule(league, teamId, fixtures)
         }
 
