@@ -589,6 +589,8 @@
     <string name="glcn_pi_airs_again">Se emite de nuevo esta semana</string>
     <string name="glcn_pi_no_repeats">No se repite esta semana, según la guía</string>
     <string name="glcn_pi_ends_left">Termina a las <xliff:g id="end">%1$s</xliff:g> · quedan <xliff:g id="minutes">%2$d</xliff:g> min</string>
+    <string name="glcn_epg_show_empty">Mostrar canales sin guía</string>
+    <string name="glcn_yes">Sí</string>
     <string name="glcn_pi_technical">Datos técnicos</string>
     <string name="glcn_pi_hide_technical">Ocultar datos técnicos</string>
     <string name="glcn_pi_no_guide">La guía no tiene nada de este canal ahora mismo</string>

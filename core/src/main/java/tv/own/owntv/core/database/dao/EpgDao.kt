@@ -177,6 +177,14 @@ interface EpgDao {
      * after a smart match) inserts rows with new ids, so the Sports hub knows its cached channel
      * matches are stale when this moves, without a sync event of its own.
      */
+    /**
+     * glcn: which of these guide ids still have something from [now] on — the guide's "Show channels without
+     * guide: No". A channel whose data ended yesterday is kept in the table for catch-up, yet has no guide
+     * today. Per id through the (epgChannelId, startMs) index; ids as stored (normalised).
+     */
+    @Query("SELECT DISTINCT epgChannelId FROM epg_programmes WHERE epgChannelId IN (:keys) AND startMs > :from AND stopMs > :now")
+    suspend fun keysWithGuideFrom(keys: List<String>, from: Long, now: Long): List<String>
+
     @Query("SELECT MAX(id) FROM epg_programmes")
     suspend fun newestProgrammeId(): Long?
 
