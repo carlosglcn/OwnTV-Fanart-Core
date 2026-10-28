@@ -12,7 +12,8 @@ enum class PlayerHoldOkAction {
     PROGRAMME_INFO;
 
     companion object {
-        fun fromName(name: String?): PlayerHoldOkAction = entries.firstOrNull { it.name == name } ?: OFF
+        // glcn: held OK opens the channel list unless the person picks otherwise (the fork has always done this).
+        fun fromName(name: String?): PlayerHoldOkAction = entries.firstOrNull { it.name == name } ?: CHANNEL_LIST
     }
 }
 
@@ -35,7 +36,7 @@ enum class PlayerShortOkAction {
  * exactly the player's behaviour before the options existed, so an unset value changes nothing.
  */
 data class PlayerRemoteOptions(
-    val holdOk: PlayerHoldOkAction = PlayerHoldOkAction.OFF,
+    val holdOk: PlayerHoldOkAction = PlayerHoldOkAction.CHANNEL_LIST, // glcn: see PlayerHoldOkAction.fromName
     val shortOk: PlayerShortOkAction = PlayerShortOkAction.SHOW_CONTROLS,
     /** CH+ / CH− and D-pad Up / Down change channel the other way round. */
     val swapChannelKeys: Boolean = false,

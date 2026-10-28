@@ -14,7 +14,7 @@ class PlayerRemoteOptionsPrefsTest {
     fun `nothing stored reads as the player's own behaviour`() {
         val options = readPlayerRemoteOptions(emptyPreferences())
         assertEquals(PlayerRemoteOptions(), options)
-        assertEquals(PlayerHoldOkAction.OFF, options.holdOk)
+        assertEquals(PlayerHoldOkAction.CHANNEL_LIST, options.holdOk)
         assertEquals(PlayerShortOkAction.SHOW_CONTROLS, options.shortOk)
         assertEquals(false, options.swapChannelKeys)
         assertEquals(true, options.numberKeysTune)
@@ -37,7 +37,7 @@ class PlayerRemoteOptionsPrefsTest {
     fun `a name this build does not know falls back to the default`() {
         val prefs = mutablePreferencesOf(Keys.PLAYER_HOLD_OK to "TELETEXT", Keys.PLAYER_SHORT_OK to "MENU")
         val options = readPlayerRemoteOptions(prefs)
-        assertEquals(PlayerHoldOkAction.OFF, options.holdOk)
+        assertEquals(PlayerHoldOkAction.CHANNEL_LIST, options.holdOk)
         assertEquals(PlayerShortOkAction.SHOW_CONTROLS, options.shortOk)
     }
 
