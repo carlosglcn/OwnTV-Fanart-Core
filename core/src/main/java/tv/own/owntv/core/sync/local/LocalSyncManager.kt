@@ -135,6 +135,9 @@ class LocalSyncManager(
     /** The listener's own state — the PIN, the QR and the addresses to show while hosting. */
     val hostState: Flow<tv.own.owntv.core.companion.CompanionServerState> = companion.state
 
+    /** glcn: whether the listener is still the sync one — a screen (the report for the phone, a form) may have taken it. */
+    val hostingSync: Boolean get() = companion.mode == tv.own.owntv.core.companion.CompanionMode.LOCAL_SYNC
+
     /** What the other device will call this one. The name the user gave the phone, if they gave one. */
     val deviceName: String by lazy {
         val configured = runCatching { Settings.Global.getString(appContext.contentResolver, Settings.Global.DEVICE_NAME) }

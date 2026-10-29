@@ -88,6 +88,9 @@ class AutoSyncManager(
         if (devices.isEmpty()) return
         if (!mutex.tryLock()) return
         try {
+            // glcn: a screen took the listener over since (the report for the phone): it is not ours any more, and
+            // hosting again would swap its page and PIN for the sync's under the person's phone.
+            if (hostingByUs && !sync.hostingSync) hostingByUs = false
             // Another companion flow (a manual sync, a remote form) owns the listener: not ours to take.
             if (!hostingByUs && sync.hostState.firstOrNull().let { it != null && it !is CompanionServerState.Idle }) return
             if (!host()) return

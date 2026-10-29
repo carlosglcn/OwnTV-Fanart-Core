@@ -63,6 +63,10 @@ class CompanionController(context: Context, localeStore: LocaleStore) {
     /** A fresh 6-digit PIN per [start], so a leaked code is short-lived. */
     @Volatile private var currentPin: String = ""
 
+    /** glcn: what the listener is serving now (null when stopped) — so the background sync knows a screen took it over. */
+    @Volatile var mode: CompanionMode? = null
+        private set
+
     /** Bundled Lora TTF bytes, loaded once and served on the web form; null if the resource can't be read. */
     private val loraBytes: ByteArray? by lazy {
         // openRawResource serves any file-backed resource, not just res/raw; a font is exactly that,
@@ -131,6 +135,7 @@ class CompanionController(context: Context, localeStore: LocaleStore) {
             return
         }
         _state.value = CompanionServerState.Starting
+        this.mode = mode
         try {
             currentPin = generatePin()
             _lastPayload.value = null
@@ -262,6 +267,7 @@ class CompanionController(context: Context, localeStore: LocaleStore) {
     }
 
     fun stop() {
+        mode = null
         server.stop()
         currentPin = ""
         _state.value = CompanionServerState.Idle
