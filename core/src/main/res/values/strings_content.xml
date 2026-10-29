@@ -944,6 +944,10 @@
     <string name="glcn_dock_double_row">Dock: double row</string>
     <string name="glcn_dock_double_row_description">The next tab’s cards peek under the row; ▼ brings them up.</string>
     <string name="glcn_cinema_cast">With %1$s</string>
+    <string name="glcn_profile_tv">TV profile</string>
+    <string name="glcn_profile_tv_description">For watching TV: starts on the last channel, full screen; ▼ raises the TV strip with your channels and what is on.</string>
+    <string name="glcn_profile_tv_tag">TV</string>
+    <string name="glcn_strip_my_channels">Your channels</string>
     <string name="glcn_recent_none">No channels watched yet</string>
     <string name="glcn_starting_soon">Starting soon</string>
     <string name="glcn_starting_soon_description">What starts within the half hour on your favourite and recent channels; OK sets a reminder, or tunes in when it is about to begin.</string>

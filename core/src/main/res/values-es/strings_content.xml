@@ -633,6 +633,10 @@
     <string name="glcn_dock_double_row">Dock: fila doble</string>
     <string name="glcn_dock_double_row_description">Las tarjetas de la pestaña siguiente asoman debajo de la fila; ▼ las sube.</string>
     <string name="glcn_cinema_cast">Con %1$s</string>
+    <string name="glcn_profile_tv">Perfil TV</string>
+    <string name="glcn_profile_tv_description">Para ver la tele: arranca en el último canal a pantalla completa; ▼ sube la franja de tele con tus canales y lo que emiten.</string>
+    <string name="glcn_profile_tv_tag">TV</string>
+    <string name="glcn_strip_my_channels">Mis canales</string>
     <string name="glcn_recent_none">Aún no has visto ningún canal</string>
     <string name="glcn_starting_soon">Empieza pronto</string>
     <string name="glcn_starting_soon_description">Lo que empieza en la próxima media hora en tus canales favoritos y recientes; OK pone un recordatorio, o entra al canal si está a punto de empezar.</string>
