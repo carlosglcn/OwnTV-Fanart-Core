@@ -961,6 +961,9 @@
     <string name="glcn_recent_unpin">Unpin</string>
     <string name="glcn_trailer_sound">Sound</string>
     <string name="glcn_trailer_mute">Mute</string>
+    <string name="glcn_trailer_sound_hint">Vol + for sound</string>
+    <string name="glcn_trailer_sound_on">Trailer sound on</string>
+    <string name="glcn_trailer_sound_off">Mute the trailer</string>
     <string name="glcn_auto_trailers">Trailers by themselves</string>
     <string name="glcn_auto_trailers_description">The trailer of a film or series plays silently behind Home and its page after a few seconds; Play/Pause turns the sound on.</string>
     <string name="glcn_remote_title">TV remote</string>

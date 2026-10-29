@@ -650,6 +650,9 @@
     <string name="glcn_recent_unpin">Dejar de fijar</string>
     <string name="glcn_trailer_sound">Sonido</string>
     <string name="glcn_trailer_mute">Silenciar</string>
+    <string name="glcn_trailer_sound_hint">Vol + para sonido</string>
+    <string name="glcn_trailer_sound_on">Activar sonido del tráiler</string>
+    <string name="glcn_trailer_sound_off">Silenciar el tráiler</string>
     <string name="glcn_auto_trailers">Tráileres automáticos</string>
     <string name="glcn_auto_trailers_description">El tráiler de la película o serie suena en silencio detrás del Inicio y de su página tras unos segundos; Play/Pausa activa el sonido.</string>
     <string name="glcn_remote_title">Mando de la tele</string>
