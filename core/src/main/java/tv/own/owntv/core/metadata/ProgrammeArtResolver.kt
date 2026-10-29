@@ -130,6 +130,40 @@ class ProgrammeArtResolver(
         }
     }
 
+    private val filmPrefs = context.getSharedPreferences("glcn_programme_film_v1", Context.MODE_PRIVATE)
+    private val filmMemory = ConcurrentHashMap<String, MovieDetails>()
+
+    /**
+     * glcn: a film on a TV channel, in full — TMDB's details (lettering, year, genres, rating, synopsis, cast, the wide
+     * picture) for the programme's info screen. The match (the TMDB id, or none) is kept on the device; the details
+     * are kept in memory, so a film already looked at — or warmed when its channel was tuned — opens at once.
+     */
+    suspend fun filmFor(title: String, categories: String?): MovieDetails? = withContext(Dispatchers.IO) {
+        if (!worthRating(title, categories)) return@withContext null
+        if (!runCatching { settings.metadataConfig().enabled }.getOrDefault(false)) return@withContext null
+        if (Hint(categories, null, null, null).kind(title) == Kind.SERIES) return@withContext null
+        val query = clean(title)
+        val want = fold(query)
+        if (want.isEmpty()) return@withContext null
+        filmMemory[want]?.let { return@withContext it }
+        var id = filmPrefs.getInt(want, -1)
+        if (id == 0) return@withContext null
+        if (id < 0) {
+            val found = mutex.withLock {
+                if (!allowLookup()) return@withLock null
+                val hits = runCatching { provider.searchMovie(query, null, false) }.getOrNull() ?: return@withLock null
+                hits.filter { r -> fold(r.title) == want || r.originalTitle?.let(::fold) == want }.maxByOrNull { it.popularity }?.tmdbId ?: 0
+            } ?: return@withContext null
+            if (filmPrefs.all.size > MAX_STORED) filmPrefs.edit().clear().apply()
+            filmPrefs.edit().putInt(want, found).apply()
+            id = found
+        }
+        if (id <= 0) return@withContext null
+        val details = runCatching { provider.movieDetails(id) }.getOrNull() ?: return@withContext null
+        filmMemory[want] = details
+        details
+    }
+
     /** What tells a film from a series in the guide: the feed's categories, year, length and episode mark. */
     data class Hint(val categories: String?, val year: Int?, val lengthMin: Int?, val episode: String?) {
         /** FILM / SERIES when the feed says so, else UNKNOWN. */

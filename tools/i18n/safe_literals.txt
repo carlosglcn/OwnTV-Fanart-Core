@@ -2231,6 +2231,7 @@
 2	preference-key	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	mv5_
 2	preference-key	core/src/main/java/tv/own/owntv/core/metadata/PlatformBadgeRepository.kt	tv5_
 12	empty	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	\0
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	glcn_programme_film_v1
 1	preference-key	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	glcn_programme_info_v3
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	glcn_programme_logo_v1
 3	technical	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	|
