@@ -533,4 +533,6 @@
     <string name="companion_log_page_title">Playback report</string>
     <string name="companion_log_description">Download it or copy the text below to send it.</string>
     <string name="companion_log_download">Download report</string>
+    <string name="companion_log_copy">Copy text</string>
+    <string name="companion_log_copied">Copied</string>
 </resources>

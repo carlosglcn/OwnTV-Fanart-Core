@@ -495,12 +495,35 @@ internal object CompanionHtml {
     /** glcn: the playback report on the phone — a download button and the text itself, ready to copy. */
     fun logDownloadPage(context: Context, pin: String, text: String): String {
         val title = s(R.string.companion_log_page_title, context)
+        // glcn: everything happens on the page itself. A second request for the file failed on phones (Chrome turns
+        // a plain-http download down), and copying must work without https, so: the text in a box, "Copy" selects it
+        // and copies the old way, and "Download" saves the very same text from the page (no new request).
         return page(context, title, """
             <div class="card"><h1>${title.h()}</h1>
               <p>${s(R.string.companion_log_description, context).h()}</p>
-              <a class="go" href="/report.txt?pin=$pin" download="owntv-playback-report.txt" style="display:block;text-align:center;text-decoration:none">${s(R.string.companion_log_download, context).h()}</a>
-              <pre style="white-space:pre-wrap;word-break:break-word;font-size:12px;line-height:1.4;margin-top:16px;max-height:60vh;overflow:auto">${text.h()}</pre>
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button type="button" class="go" id="copy" style="flex:1">${s(R.string.companion_log_copy, context).h()}</button>
+                <button type="button" class="go" id="save" style="flex:1">${s(R.string.companion_log_download, context).h()}</button>
+              </div>
+              <textarea id="report" readonly style="width:100%;box-sizing:border-box;height:60vh;margin-top:16px;font-family:monospace;font-size:12px;line-height:1.4">${text.h()}</textarea>
             </div>
+            <script>
+              (function(){
+                var box=document.getElementById('report');
+                document.getElementById('copy').onclick=function(){
+                  box.focus(); box.select(); box.setSelectionRange(0, box.value.length);
+                  var ok=false; try { ok=document.execCommand('copy'); } catch(e) {}
+                  if (!ok && navigator.clipboard) { navigator.clipboard.writeText(box.value).then(function(){ ok=true; }); ok=true; }
+                  if (ok) this.textContent=${s(R.string.companion_log_copied, context).js()};
+                };
+                document.getElementById('save').onclick=function(){
+                  var a=document.createElement('a');
+                  a.href=URL.createObjectURL(new Blob([box.value],{type:'text/plain'}));
+                  a.download='owntv-playback-report.txt';
+                  document.body.appendChild(a); a.click(); a.remove();
+                };
+              })();
+            </script>
         """.trimIndent())
     }
 

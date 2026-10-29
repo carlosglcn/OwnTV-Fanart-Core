@@ -278,4 +278,6 @@
     <string name="companion_log_page_title">Informe de reproducción</string>
     <string name="companion_log_description">Descárgalo o copia el texto de abajo para enviarlo.</string>
     <string name="companion_log_download">Descargar informe</string>
+    <string name="companion_log_copy">Copiar texto</string>
+    <string name="companion_log_copied">Copiado</string>
 </resources>
