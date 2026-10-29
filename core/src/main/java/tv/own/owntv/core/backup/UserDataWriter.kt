@@ -35,6 +35,17 @@ class UserDataWriter(
     suspend fun removeFavorite(profileId: Long, type: MediaType, itemId: Long) = db.transaction {
         userData.recordDeletion(profileId, "fav", type, itemId)
         favoriteDao.remove(profileId, type, itemId)
+        if (type == MediaType.LIVE) leaveFavoriteGroups(profileId, itemId)
+    }
+
+    /** glcn: an unfavourited channel leaves its group inside Favourites ([tv.own.owntv.core.live.FavoriteGroups]). */
+    private suspend fun leaveFavoriteGroups(profileId: Long, itemId: Long) {
+        customCategoryDao.contextsOf(profileId, MediaType.LIVE, itemId)
+            .filter { tv.own.owntv.core.live.FavoriteGroups.isGroup(it) }
+            .forEach {
+                userData.recordDeletion(profileId, "member", MediaType.LIVE, itemId, contextKey = it)
+                customCategoryDao.deleteItem(profileId, MediaType.LIVE, it, itemId)
+            }
     }
 
     /** "Remove from history" for one item. */
@@ -119,6 +130,7 @@ class UserDataWriter(
     suspend fun clearFavorites(profileId: Long, type: MediaType? = null) = db.transaction {
         val rows = if (type == null) favoriteDao.getForProfile(profileId) else favoriteDao.getForProfileType(profileId, type)
         rows.forEach { userData.recordDeletion(profileId, "fav", it.mediaType, it.itemId) }
+        rows.filter { it.mediaType == MediaType.LIVE }.forEach { leaveFavoriteGroups(profileId, it.itemId) }
         if (type == null) favoriteDao.clearProfile(profileId) else favoriteDao.clearProfileType(profileId, type)
         userData.pruneTombstones()
     }

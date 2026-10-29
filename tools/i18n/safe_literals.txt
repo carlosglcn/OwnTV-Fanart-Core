@@ -233,7 +233,7 @@
 16	json	core/src/main/java/tv/own/owntv/core/backup/UserDataResolver.kt	t
 2	json	core/src/main/java/tv/own/owntv/core/backup/UserDataWriter.kt	fav
 4	json	core/src/main/java/tv/own/owntv/core/backup/UserDataWriter.kt	his
-1	json	core/src/main/java/tv/own/owntv/core/backup/UserDataWriter.kt	member
+2	technical	core/src/main/java/tv/own/owntv/core/backup/UserDataWriter.kt	member
 3	json	core/src/main/java/tv/own/owntv/core/backup/UserDataWriter.kt	prog
 1	empty	core/src/main/java/tv/own/owntv/core/brand/AppIcon.kt	\0
 1	technical	core/src/main/java/tv/own/owntv/core/brand/AppIcon.kt	Board
@@ -2112,6 +2112,7 @@
 1	log	core/src/main/java/tv/own/owntv/core/live/ConnectionProbe.kt	out of channels at stream ${open.slot}
 1	log	core/src/main/java/tv/own/owntv/core/live/ConnectionProbe.kt	stream ${open.slot} attempt ${open.attempt} -> $outcome
 1	log	core/src/main/java/tv/own/owntv/core/live/ConnectionProbe.kt	stream ended: ${it.message}
+1	technical	core/src/main/java/tv/own/owntv/core/live/FavoriteGroups.kt	favgroup:
 1	log	core/src/main/java/tv/own/owntv/core/live/GuideReader.kt	answered=${ordered.size} spanH=${(to - from) / 3_600_000}
 1	log	core/src/main/java/tv/own/owntv/core/live/GuideReader.kt	guide_row source=provider channelId=${channel.id} key=$epgKey shift=$shift
 1	log	core/src/main/java/tv/own/owntv/core/live/GuideReader.kt	guide_row source=stored channelId=${channel.id} key=$epgKey shift=$shift
