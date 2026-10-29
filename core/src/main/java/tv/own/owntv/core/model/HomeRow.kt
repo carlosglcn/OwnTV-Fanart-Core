@@ -23,7 +23,9 @@ enum class HomeRow {
     RECENT_SERIES,
     FEATURED,
     TONIGHT,
-    GENRES;
+    GENRES,
+    /** glcn: what starts within the half hour on the favourite and recent channels. */
+    STARTING_SOON;
 
     val implemented: Boolean get() = true
 }
@@ -148,6 +150,15 @@ fun mergeOrder(stored: List<HomeRow>): List<HomeRow> {
         if (anchor != null) {
             val list = result.toMutableList()
             list.add(list.indexOf(anchor) + 1, HomeRow.TONIGHT)
+            result.clear(); result += list
+        }
+    }
+    // glcn: "Starting soon" goes right after the recent channels the first time it appears.
+    if (HomeRow.STARTING_SOON !in result) {
+        val anchor = listOf(HomeRow.RECENT_CHANNELS, HomeRow.SPORTS_NOW, HomeRow.FAVORITE_CHANNELS).firstOrNull { it in result }
+        if (anchor != null) {
+            val list = result.toMutableList()
+            list.add(list.indexOf(anchor) + 1, HomeRow.STARTING_SOON)
             result.clear(); result += list
         }
     }

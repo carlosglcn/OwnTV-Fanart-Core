@@ -944,6 +944,17 @@
     <string name="glcn_dock_double_row">Dock: double row</string>
     <string name="glcn_dock_double_row_description">The next tab’s cards peek under the row; ▼ brings them up.</string>
     <string name="glcn_cinema_cast">With %1$s</string>
+    <string name="glcn_recent_none">No channels watched yet</string>
+    <string name="glcn_starting_soon">Starting soon</string>
+    <string name="glcn_starting_soon_description">What starts within the half hour on your favourite and recent channels; OK sets a reminder, or tunes in when it is about to begin.</string>
+    <string name="glcn_starts_in">In %1$d min</string>
+    <string name="glcn_starting_now">Starting now</string>
+    <string name="glcn_watched_just_now">watched just now</string>
+    <string name="glcn_watched_minutes_ago">watched %1$d min ago</string>
+    <string name="glcn_watched_hours_ago">watched %1$d h ago</string>
+    <string name="glcn_watched_days_ago">watched %1$d d ago</string>
+    <string name="glcn_recent_pin">Pin to the front</string>
+    <string name="glcn_recent_unpin">Unpin</string>
     <string name="glcn_trailer_sound">Sound</string>
     <string name="glcn_trailer_mute">Mute</string>
     <string name="glcn_auto_trailers">Trailers by themselves</string>

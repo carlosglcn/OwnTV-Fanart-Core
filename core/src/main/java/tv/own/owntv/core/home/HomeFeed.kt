@@ -183,6 +183,8 @@ data class HomeFeed(
     val continueMovies: List<LauncherContinuationItem> = emptyList(),
     val continueSeries: List<LauncherContinuationItem> = emptyList(),
     val recentLive: List<ChannelEntity> = emptyList(),
+    /** glcn: when each recent channel was last watched (channel id → epoch ms). */
+    val recentWatchedAt: Map<Long, Long> = emptyMap(),
     val favoriteLive: List<ChannelEntity> = emptyList(),
     val favoriteMovies: List<MovieEntity> = emptyList(),
     val favoriteSeries: List<SeriesEntity> = emptyList(),
@@ -196,6 +198,8 @@ data class HomeFeed(
     val recentSeries: List<SeriesEntity> = emptyList(),
     val featured: List<FeaturedItem> = emptyList(),
     val tonight: List<TonightItem> = emptyList(),
+    /** glcn: programmes starting within [STARTING_SOON_MS] on the favourite and recent channels, soonest first. */
+    val startingSoon: List<TonightItem> = emptyList(),
     val genres: List<GenreRow> = emptyList(),
     /** The active profile's name, for the greeting. */
     val profileName: String? = null,
@@ -452,6 +456,24 @@ class HomeFeedReader(
                         .take(TONIGHT_LIMIT)
                 }.getOrDefault(emptyList())
             }
+            // glcn: what starts within the half hour on the user's own channels — the favourites and the recent ones.
+            val soonAsync = async {
+                if (HomeRow.STARTING_SOON !in config.visibleOrder) emptyList()
+                else runCatching {
+                    val channels = (favLive + live).distinctBy { it.id }.filterNot(::isBarChannel).take(80)
+                    if (channels.isEmpty()) return@runCatching emptyList()
+                    val t = System.currentTimeMillis()
+                    val byId = channels.associateBy { it.id }
+                    guide.slice(channels, hidden.live, shiftAsync.await(), t, t + STARTING_SOON_MS).flatMap { (id, rows) ->
+                        val ch = byId[id] ?: return@flatMap emptyList()
+                        rows.filter { it.startMs in (t + 60_000L) until (t + STARTING_SOON_MS) && it.stopMs - it.startMs >= 10 * 60_000L }
+                            .take(1).map { TonightItem(ch, it) }
+                    }
+                        .distinctBy { tv.own.owntv.core.metadata.ProgrammeArtResolver.fold(it.programme.title) + "|" + it.programme.startMs }
+                        .sortedBy { it.programme.startMs }
+                        .take(STARTING_SOON_LIMIT)
+                }.getOrDefault(emptyList())
+            }
             // glcn: the biggest film genres (Emby's genres are its categories).
             val genresAsync = async {
                 if (HomeRow.GENRES !in config.visibleOrder || movieIds.isEmpty()) emptyList()
@@ -494,6 +516,7 @@ class HomeFeedReader(
                 continueMovies = movies,
                 continueSeries = series,
                 recentLive = live,
+                recentWatchedAt = liveWithTs.associate { it.channel.id to it.watchedAt },
                 favoriteLive = favLive,
                 favoriteMovies = favMoviesAsync.await(),
                 favoriteSeries = favSeriesAsync.await(),
@@ -514,6 +537,7 @@ class HomeFeedReader(
                     enabled = HomeRow.FEATURED in config.visibleOrder,
                 ),
                 tonight = tonightAsync.await(),
+                startingSoon = soonAsync.await(),
                 genres = genresAsync.await(),
                 profileName = profileNameAsync.await(),
             )
@@ -797,6 +821,8 @@ private const val FAVORITE_VOD_ROW_LIMIT = 50
 private const val RECENT_VOD_ROW_LIMIT = 30
 private const val SPORTS_ROW_LIMIT = 20
 private const val TONIGHT_LIMIT = 24
+private const val STARTING_SOON_MS = 30 * 60_000L
+private const val STARTING_SOON_LIMIT = 16
 private const val GENRE_ROWS = 4
 
 private val TONIGHT_PREMIERE = Regex("""\b(estreno|premiere|stream premiere)\b""")

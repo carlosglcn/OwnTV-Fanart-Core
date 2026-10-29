@@ -633,6 +633,17 @@
     <string name="glcn_dock_double_row">Dock: fila doble</string>
     <string name="glcn_dock_double_row_description">Las tarjetas de la pestaña siguiente asoman debajo de la fila; ▼ las sube.</string>
     <string name="glcn_cinema_cast">Con %1$s</string>
+    <string name="glcn_recent_none">Aún no has visto ningún canal</string>
+    <string name="glcn_starting_soon">Empieza pronto</string>
+    <string name="glcn_starting_soon_description">Lo que empieza en la próxima media hora en tus canales favoritos y recientes; OK pone un recordatorio, o entra al canal si está a punto de empezar.</string>
+    <string name="glcn_starts_in">En %1$d min</string>
+    <string name="glcn_starting_now">Empieza ya</string>
+    <string name="glcn_watched_just_now">visto ahora mismo</string>
+    <string name="glcn_watched_minutes_ago">visto hace %1$d min</string>
+    <string name="glcn_watched_hours_ago">visto hace %1$d h</string>
+    <string name="glcn_watched_days_ago">visto hace %1$d d</string>
+    <string name="glcn_recent_pin">Fijar al principio</string>
+    <string name="glcn_recent_unpin">Dejar de fijar</string>
     <string name="glcn_trailer_sound">Sonido</string>
     <string name="glcn_trailer_mute">Silenciar</string>
     <string name="glcn_auto_trailers">Tráileres automáticos</string>
