@@ -291,6 +291,15 @@ object PlaybackErrorLog {
      * the directory directly. Runs synchronously on the caller's IO dispatcher; the file is a few kB.
      */
     fun export(context: Context): String? = runCatching {
+        writeToDownloads(context.applicationContext, reportText(context))
+    }.getOrNull()
+
+    /**
+     * glcn: the report as text — what [export] writes. The phone page reads this straight away: the exported file's
+     * path is a public Download one that this app may not be able to read back (Android 11's scoped storage), and the
+     * phone got an empty report.
+     */
+    fun reportText(context: Context): String {
         val appContext = context.applicationContext
         val stamp = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.US)
         val text = buildString {
@@ -324,8 +333,8 @@ object PlaybackErrorLog {
                 appendLine(live)
             }
         }
-        writeToDownloads(appContext, text)
-    }.getOrNull()
+        return text
+    }
 
     private fun writeToDownloads(context: Context, text: String): String {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

@@ -505,7 +505,7 @@ internal object CompanionHtml {
                 <button type="button" class="go" id="copy" style="flex:1">${s(R.string.companion_log_copy, context).h()}</button>
                 <button type="button" class="go" id="save" style="flex:1">${s(R.string.companion_log_download, context).h()}</button>
               </div>
-              <textarea id="report" readonly style="width:100%;box-sizing:border-box;height:60vh;margin-top:16px;font-family:monospace;font-size:12px;line-height:1.4">${text.h()}</textarea>
+              <textarea id="report" readonly style="width:100%;box-sizing:border-box;height:60vh;margin-top:16px;font-family:monospace;font-size:12px;line-height:1.4;color:inherit;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px">${text.h()}</textarea>
             </div>
             <script>
               (function(){
