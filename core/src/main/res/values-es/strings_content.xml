@@ -658,6 +658,7 @@
     <string name="glcn_title_pick_subtitles">Idioma de los subtítulos</string>
     <string name="glcn_title_page">Página antes de ver</string>
     <string name="glcn_title_page_description">Al elegir una película se abre su página: tráiler, audio, subtítulos y Reproducir. Apagado, empieza a reproducirse al momento.</string>
+    <string name="glcn_title_versions">Versiones (%1$d)</string>
     <string name="glcn_trailer_sound_hint">Vol + para sonido</string>
     <string name="glcn_trailer_sound_on">Activar sonido del tráiler</string>
     <string name="glcn_trailer_sound_off">Silenciar el tráiler</string>

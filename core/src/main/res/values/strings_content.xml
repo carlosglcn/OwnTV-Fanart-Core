@@ -969,6 +969,7 @@
     <string name="glcn_title_pick_subtitles">Subtitle language</string>
     <string name="glcn_title_page">Page before watching</string>
     <string name="glcn_title_page_description">Choosing a film opens its page: trailer, audio, subtitles and Play. Off, it starts playing at once.</string>
+    <string name="glcn_title_versions">Versions (%1$d)</string>
     <string name="glcn_trailer_sound_hint">Vol + for sound</string>
     <string name="glcn_trailer_sound_on">Trailer sound on</string>
     <string name="glcn_trailer_sound_off">Mute the trailer</string>
