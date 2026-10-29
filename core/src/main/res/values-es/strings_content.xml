@@ -650,6 +650,14 @@
     <string name="glcn_recent_unpin">Dejar de fijar</string>
     <string name="glcn_trailer_sound">Sonido</string>
     <string name="glcn_trailer_mute">Silenciar</string>
+    <string name="glcn_title_resume">Reanudar desde %1$s</string>
+    <string name="glcn_title_start_over">Desde el principio</string>
+    <string name="glcn_title_audio">Audio: %1$s</string>
+    <string name="glcn_title_subtitles">Subtítulos: %1$s</string>
+    <string name="glcn_title_pick_audio">Idioma del audio</string>
+    <string name="glcn_title_pick_subtitles">Idioma de los subtítulos</string>
+    <string name="glcn_title_page">Página antes de ver</string>
+    <string name="glcn_title_page_description">Al elegir una película se abre su página: tráiler, audio, subtítulos y Reproducir. Apagado, empieza a reproducirse al momento.</string>
     <string name="glcn_trailer_sound_hint">Vol + para sonido</string>
     <string name="glcn_trailer_sound_on">Activar sonido del tráiler</string>
     <string name="glcn_trailer_sound_off">Silenciar el tráiler</string>

@@ -961,6 +961,14 @@
     <string name="glcn_recent_unpin">Unpin</string>
     <string name="glcn_trailer_sound">Sound</string>
     <string name="glcn_trailer_mute">Mute</string>
+    <string name="glcn_title_resume">Resume from %1$s</string>
+    <string name="glcn_title_start_over">Start over</string>
+    <string name="glcn_title_audio">Audio: %1$s</string>
+    <string name="glcn_title_subtitles">Subtitles: %1$s</string>
+    <string name="glcn_title_pick_audio">Audio language</string>
+    <string name="glcn_title_pick_subtitles">Subtitle language</string>
+    <string name="glcn_title_page">Page before watching</string>
+    <string name="glcn_title_page_description">Choosing a film opens its page: trailer, audio, subtitles and Play. Off, it starts playing at once.</string>
     <string name="glcn_trailer_sound_hint">Vol + for sound</string>
     <string name="glcn_trailer_sound_on">Trailer sound on</string>
     <string name="glcn_trailer_sound_off">Mute the trailer</string>
