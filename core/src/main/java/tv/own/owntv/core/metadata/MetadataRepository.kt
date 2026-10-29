@@ -506,7 +506,10 @@ class MetadataRepository(
     private suspend fun healNegativeMatchesOnce() {
         if (!healNeeded.get()) return
         runCatching {
-            if (settings.metadataMatchHealVersion() < MATCH_HEURISTICS_VERSION) {
+            val healed = settings.metadataMatchHealVersion()
+            if (healed < MATCH_HEURISTICS_VERSION) {
+                // glcn (2): trailers are now picked in your language first — the ones cached English-first are re-read.
+                if (healed < 2) dao.expireTrailerRows()
                 dao.clearNegativeMatches()
                 settings.setMetadataMatchHealVersion(MATCH_HEURISTICS_VERSION)
             }
@@ -732,7 +735,7 @@ class MetadataRepository(
          * Bump when a matcher change makes previously cached misses wrong — existing installs then drop
          * their negative rows once ([healNegativeMatchesOnce]). 1 = scoring against `original_title`.
          */
-        private const val MATCH_HEURISTICS_VERSION = 1
+        private const val MATCH_HEURISTICS_VERSION = 2
 
         /**
          * Focus debounce for on-demand metadata resolves, shared by the movie / series / episode panes.

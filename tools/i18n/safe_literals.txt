@@ -1235,6 +1235,7 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	SELECT * FROM metadata_cache WHERE key IN (:keys)
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	SELECT * FROM metadata_match WHERE localKey = :localKey LIMIT 1
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	SELECT * FROM metadata_match WHERE localKey IN (:keys)
+1	technical	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	UPDATE metadata_cache SET updatedAt = 0 WHERE trailerKey IS NOT NULL
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	(SELECT rowid FROM movies_fts WHERE movies_fts MATCH :ftsQuery)
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	AND (categoryId IS NULL OR categoryId NOT IN (:excludedCategoryIds))
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	AND id IN (SELECT rowid FROM movies_fts WHERE movies_fts MATCH :ftsQuery) ORDER BY name ASC LIMIT :limit
@@ -2287,7 +2288,7 @@
 2	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	backdrop_path
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	cast
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	credits
-4	locale	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	en
+5	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	en
 2	uri	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	en,null
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	episode_number
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	episodes
@@ -2308,7 +2309,7 @@
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	logos
 3	url	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	movie
 8	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	name
-19	protocol	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	null
+20	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	null
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	official
 2	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	original_language
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	original_name

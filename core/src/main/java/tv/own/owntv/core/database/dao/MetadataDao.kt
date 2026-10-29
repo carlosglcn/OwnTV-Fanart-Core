@@ -65,6 +65,10 @@ interface MetadataDao {
     @Query("DELETE FROM metadata_match WHERE tmdbId IS NULL")
     suspend fun clearNegativeMatches()
 
+    /** glcn: details that carry a trailer are made stale, so the next look re-reads them (trailers in your language). */
+    @Query("UPDATE metadata_cache SET updatedAt = 0 WHERE trailerKey IS NOT NULL")
+    suspend fun expireTrailerRows()
+
     // --- bounded eviction: both tables grow unbounded as the user browses a ~220k-item
     //     catalog. TTL delete rides the existing Index("updatedAt"); rows re-fetch on next focus.
     //     Run off the cold-start path (after a sync completes — ImportFinalizer.finalize). ---

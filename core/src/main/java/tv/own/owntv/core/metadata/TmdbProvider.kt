@@ -112,8 +112,15 @@ class TmdbProvider(
      * Trailers in the user's language AND English / no language: with only the user's language TMDB
      * often has one video, and when its owner blocks embedding there is nothing to fall back to.
      */
+    /**
+     * glcn: the language a trailer is wanted in — the metadata language when one is chosen, else the app's (or the
+     * system's) language; English is the fallback either way.
+     */
+    private fun Endpoint.trailerLang(): String =
+        language.substringBefore('-').ifBlank { java.util.Locale.getDefault().language.orEmpty() }
+
     private fun Endpoint.videoLangParam(): String {
-        val base = language.substringBefore('-').takeIf { it.isNotBlank() && it != "en" }
+        val base = trailerLang().takeIf { it.isNotBlank() && it != "en" }
         return "&include_video_language=" + (if (base != null) "$base,en,null" else "en,null")
     }
 
@@ -171,7 +178,7 @@ class TmdbProvider(
             ep.apiKey?.takeIf { it.isNotBlank() }?.let { append("&api_key=").append(enc(it)) }
         }
         val json = fetch(ep, url, "movie details id=$tmdbId") ?: return null
-        return runCatching { parseMovieDetails(json, ep.language.substringBefore('-')) }.getOrNull()
+        return runCatching { parseMovieDetails(json, ep.language.substringBefore('-'), ep.trailerLang()) }.getOrNull()
     }
 
     override suspend fun tvDetails(tmdbId: Int): MovieDetails? {
@@ -186,7 +193,7 @@ class TmdbProvider(
             ep.apiKey?.takeIf { it.isNotBlank() }?.let { append("&api_key=").append(enc(it)) }
         }
         val json = fetch(ep, url, "tv details id=$tmdbId") ?: return null
-        return runCatching { parseTvDetails(json, ep.language.substringBefore('-')) }.getOrNull()
+        return runCatching { parseTvDetails(json, ep.language.substringBefore('-'), ep.trailerLang()) }.getOrNull()
     }
 
     override suspend fun platform(tmdbId: Int, isTv: Boolean): PlatformBadge? {
@@ -303,7 +310,7 @@ class TmdbProvider(
             rating = o.optDouble("vote_average", 0.0).takeIf { it > 0.0 },
         )
 
-    private fun parseTvDetails(body: String, preferredLang: String): MovieDetails? {
+    private fun parseTvDetails(body: String, preferredLang: String, trailerLang: String = preferredLang): MovieDetails? {
         val o = JSONObject(body)
         val id = o.optInt("id", 0)
         if (id == 0) return null
@@ -323,13 +330,13 @@ class TmdbProvider(
             rating = o.optDouble("vote_average", 0.0).takeIf { it > 0.0 },
             genres = genres,
             cast = cast,
-            trailerKey = parseTrailerKey(o, preferredLang),
+            trailerKey = parseTrailerKey(o, trailerLang),
             logoPath = parseLogoPath(o, preferredLang),
             originalLanguage = o.optString("original_language").takeIf { it.isNotBlank() && it != "null" },
         )
     }
 
-    private fun parseMovieDetails(body: String, preferredLang: String): MovieDetails? {
+    private fun parseMovieDetails(body: String, preferredLang: String, trailerLang: String = preferredLang): MovieDetails? {
         val o = JSONObject(body)
         val id = o.optInt("id", 0)
         if (id == 0) return null
@@ -350,7 +357,7 @@ class TmdbProvider(
             rating = o.optDouble("vote_average", 0.0).takeIf { it > 0.0 },
             genres = genres,
             cast = cast,
-            trailerKey = parseTrailerKey(o, preferredLang),
+            trailerKey = parseTrailerKey(o, trailerLang),
             logoPath = parseLogoPath(o, preferredLang),
             originalLanguage = o.optString("original_language").takeIf { it.isNotBlank() && it != "null" },
         )
@@ -364,6 +371,7 @@ class TmdbProvider(
      */
     private fun parseTrailerKey(details: JSONObject, preferredLang: String): String? {
         val arr = details.optJSONObject("videos")?.optJSONArray("results") ?: return null
+        // glcn: the wanted language first, then English, then a video with no language, then the rest.
         data class Video(val key: String, val tier: Int, val otherLang: Int)
         val videos = ArrayList<Video>()
         for (i in 0 until arr.length()) {
@@ -375,7 +383,14 @@ class TmdbProvider(
                 "Teaser" -> 2
                 else -> continue
             }
-            videos += Video(key, tier, if (v.optString("iso_639_1") == preferredLang) 0 else 1)
+            val lang = v.optString("iso_639_1").takeIf { it.isNotBlank() && it != "null" }
+            val rank = when {
+                lang != null && lang == preferredLang -> 0
+                lang == "en" -> 1
+                lang == null -> 2
+                else -> 3
+            }
+            videos += Video(key, tier, rank)
         }
         return TrailerKeys.join(videos.sortedWith(compareBy({ it.otherLang }, { it.tier })).map { it.key })
     }
