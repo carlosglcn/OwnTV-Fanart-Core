@@ -897,6 +897,7 @@
     <string name="glcn_reset_saved_all">Reset everything</string>
     <string name="glcn_ui_sound_style_soft">Soft</string>
     <string name="glcn_ui_sound_style_air">Kalimba</string>
+    <string name="glcn_ui_sound_style_natural">Natural</string>
     <string name="glcn_preview_ok_title">Preview with OK</string>
     <string name="glcn_preview_ok_desc">Nothing plays while you move through the list. OK starts the preview of the channel; OK again opens it full screen. Kinder to boxes with little memory.</string>
     <string name="glcn_light_mode_title">Light mode</string>
