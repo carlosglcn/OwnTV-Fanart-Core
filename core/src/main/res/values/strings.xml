@@ -320,4 +320,6 @@
     <string name="glcn_setup_nfs_export_example">/volume1/video</string>
     <string name="glcn_setup_nfs_help">The folder the NAS shares over NFS, as a full path. On a Synology, the shared folder\'s NFS rule must allow this device\'s address and tick \"Allow connections from non-privileged ports\".</string>
     <string name="glcn_setup_nfs_uid">User id (optional, e.g. 1026 or 1026:100)</string>
+    <string name="glcn_accessible_title">Accessible mode</string>
+    <string name="glcn_accessible_desc">For this profile: larger text, a thick ring round the focus and calm motion</string>
 </resources>

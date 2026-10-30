@@ -215,4 +215,6 @@
     <string name="glcn_setup_nfs_export_example">/volume1/video</string>
     <string name="glcn_setup_nfs_help">La carpeta que el NAS comparte por NFS, con su ruta completa. En un Synology, la regla NFS de la carpeta debe permitir la dirección de este aparato y tener marcado \"Permitir conexiones desde puertos no privilegiados\".</string>
     <string name="glcn_setup_nfs_uid">Id de usuario (opcional, p. ej. 1026 o 1026:100)</string>
+    <string name="glcn_accessible_title">Modo accesible</string>
+    <string name="glcn_accessible_desc">Para este perfil: letra más grande, foco muy marcado y movimiento tranquilo</string>
 </resources>
