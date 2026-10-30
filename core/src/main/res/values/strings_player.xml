@@ -593,4 +593,28 @@
     <string name="player_trailer_blocked_body">Its owner only allows it to be played on YouTube.</string>
     <!-- Translators: Popup button: open the trailer in the YouTube app instead. Keep "YouTube" as is. -->
     <string name="player_trailer_open_youtube">Open in YouTube</string>
+    <string name="glcn_cine_audio_subs">Audio and subtitles</string>
+    <string name="glcn_cine_episodes">Episodes</string>
+    <string name="glcn_cine_info">Info</string>
+    <string name="glcn_cine_settings">Settings</string>
+    <string name="glcn_cine_play">Play</string>
+    <string name="glcn_cine_pause">Pause</string>
+    <string name="glcn_cine_next">Next episode</string>
+    <string name="glcn_cine_ends_at">Ends at %1$s</string>
+    <string name="glcn_cine_episode_code">S%1$d · E%2$d</string>
+    <string name="glcn_cine_now_playing">Playing</string>
+    <string name="glcn_cine_tech">Playback</string>
+    <string name="glcn_cine_tech_player">Player</string>
+    <string name="glcn_cine_tech_picture">Picture</string>
+    <string name="glcn_cine_tech_sound">Sound</string>
+    <string name="glcn_cine_sound_passthrough">%1$s, sent untouched to your receiver</string>
+    <string name="glcn_cine_sound_decoded">%1$s, decoded by the app</string>
+    <string name="glcn_cine_dv_converted">Dolby Vision (profile 7 played as 8.1)</string>
+    <string name="glcn_cine_sync_audio">Audio sync</string>
+    <string name="glcn_cine_subs_more">Timing, search and file</string>
+    <string name="glcn_cine_subs_off">Off</string>
+    <string name="glcn_cine_details">Technical details</string>
+    <string name="glcn_cine_rating">Rating</string>
+    <string name="glcn_cine_cast">Cast</string>
+    <string name="glcn_cine_paused">Paused</string>
 </resources>

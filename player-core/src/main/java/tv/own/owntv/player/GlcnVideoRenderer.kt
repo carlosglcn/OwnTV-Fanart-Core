@@ -43,12 +43,18 @@ internal class GlcnVideoRenderer(
     override fun onInputFormatChanged(formatHolder: FormatHolder): DecoderReuseEvaluation? {
         val f = formatHolder.format
         doviConvert = f != null && DoviProfile7.shouldConvert(f)
+        DolbyVisionNow.set(dolbyVision = f?.sampleMimeType == MimeTypes.VIDEO_DOLBY_VISION, converted = doviConvert)
         if (doviConvert && f != null) {
             formatHolder.format = DoviProfile7.toProfile8(f)
             failures = 0
             LiveDiagnosticsLog.event("Dolby Vision profile 7 (${f.codecs}) played as profile 8.1 — enhancement layer dropped, RPU rewritten")
         }
         return super.onInputFormatChanged(formatHolder)
+    }
+
+    override fun onDisabled() {
+        DolbyVisionNow.set(dolbyVision = false, converted = false)
+        super.onDisabled()
     }
 
     override fun onQueueInputBuffer(buffer: DecoderInputBuffer) {
@@ -120,4 +126,19 @@ internal object DoviProfile7 {
     }
 
     fun forDecoder(f: Format): Format = if (shouldConvert(f)) toProfile8(f) else f
+}
+
+/**
+ * glcn: whether ExoPlayer is playing a Dolby Vision track right now, and whether it is a profile 7 rewritten as
+ * 8.1 — for the film player's quality badges and its technical panel (mpv never shows Dolby Vision).
+ */
+object DolbyVisionNow {
+    data class State(val dolbyVision: Boolean = false, val converted: Boolean = false)
+
+    private val _state = kotlinx.coroutines.flow.MutableStateFlow(State())
+    val state: kotlinx.coroutines.flow.StateFlow<State> = _state
+
+    internal fun set(dolbyVision: Boolean, converted: Boolean) {
+        _state.value = State(dolbyVision, converted)
+    }
 }
