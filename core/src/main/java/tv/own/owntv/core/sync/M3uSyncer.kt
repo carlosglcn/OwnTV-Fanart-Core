@@ -484,8 +484,15 @@ internal class M3uSyncer(
                     Log.i(TAG, "Emby playlist entries=${text.lineSequence().count { it.startsWith("#EXTINF") }}")
                 }
             }
+            // glcn: "smb://user:password@nas/share?movies=…&series=…" is a folder shared on the home network.
+            val shareText = if (isLocal) null else tv.own.owntv.core.netshare.NetShare.parse(s.url)?.let { target ->
+                tv.own.owntv.core.netshare.SmbLibrary.playlist(target).also { text ->
+                    Log.i(TAG, "SMB share entries=${text.lineSequence().count { it.startsWith("#EXTINF") }}")
+                }
+            }
             val header = when {
                 isLocal -> localFile.open(s.url).use { input -> m3u.parse(input, onEntry) }
+                shareText != null -> shareText.byteInputStream(Charsets.UTF_8).use { input -> m3u.parse(input, onEntry) }
                 embyText != null -> embyText.byteInputStream(Charsets.UTF_8).use { input -> m3u.parse(input, onEntry) }
                 else -> http.get(s.url, s.userAgent, reportBytes, maxAttempts = M3U_DOWNLOAD_ATTEMPTS) { input -> m3u.parse(input, onEntry) }
             }

@@ -232,6 +232,7 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.zxing.core) // QR generation for the Remote (companion) add-source flow
     implementation(libs.juniversalchardet) // local subtitle charset detection
+    implementation(libs.smbj) // glcn: NAS shares over SMB 2/3 (NetShare)
 
     // Dependency injection
     implementation(platform(libs.koin.bom))

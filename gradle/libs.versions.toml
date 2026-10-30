@@ -61,6 +61,8 @@ zxing = "3.5.4"
 # Charset detection for local subtitle files — tiny, pure-Java
 # Mozilla universalchardet port; local .srt files are frequently Windows-125x, not UTF-8.
 juniversalchardet = "2.5.0"
+# glcn: SMB 2/3 client for NAS shares (films and series from the home network).
+smbj = "0.14.0"
 
 # --- Test ---
 junit = "4.13.2"
@@ -118,6 +120,7 @@ zxing-core = { group = "com.google.zxing", name = "core", version.ref = "zxing" 
 
 # Charset detection for local subtitle files.
 juniversalchardet = { group = "com.github.albfernandez", name = "juniversalchardet", version.ref = "juniversalchardet" }
+smbj = { group = "com.hierynomus", name = "smbj", version.ref = "smbj" }
 
 # Networking (M3U/Xtream fetch)
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }

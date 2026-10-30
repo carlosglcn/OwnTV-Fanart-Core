@@ -2378,6 +2378,178 @@
 2	json	core/src/main/java/tv/own/owntv/core/model/HomeRow.kt	order
 2	preference-key	core/src/main/java/tv/own/owntv/core/model/HomeRow.kt	recentLiveMode
 2	json	core/src/main/java/tv/own/owntv/core/model/HomeRow.kt	trendingStyle
+5	empty	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	\0
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	#
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	#recycle
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	#snapshot
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	$recycle.bin
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	${film.title} (${film.year})
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	(?i)(?:^|[\\s(\\[-])(?:2160p|1080p|1080i|720p|576p|480p|4k|uhd|hdr10\\+?|hdr|dovi|dolby\\s?vision|bluray|blu-ray|bdrip|brrip|bdremux|
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	(?i)(?:season|temporada|temp|staffel|saison|stagione|serie|s)\\s*[._-]?\\s*(\\d{1,2})
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	(?i)\\b(?:ep|episode|episodio|episodi|folge)\\.?\\s*(\\d{1,3})\\b
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	(?i)\\b(\\d{1,2})x(\\d{2,3})\\b
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	(?i)\\bS(\\d{1,2})\\s*[._-]?\\s*E(\\d{1,3})(?:\\s*-?\\s*E\\d{1,3})?\\b
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	(?i)\\bcap(?:itulo|ítulo)?\\.?\\s*(\\d{1,4})\\b
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	-behindthescenes
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	-deleted
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	-extra
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	-featurette
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	-interview
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	-sample
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	-scene
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	-short
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	-trailer
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	.
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	.sample
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	.trailer
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	3gp
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	@
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	@eadir
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	[\\s(.\\[]((?:19|20)\\d{2})(?=[\\s).\\]]|$)
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	\\[[^\\]]*]|\\{[^}]*}
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	\\s+
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	^\\s*(\\d{1,3})(?=\\s|[-.]|$)
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	avi
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	behind the scenes
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	cd1
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	cd2
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	ddp?5\\.?1|aac|flac|5\\.1|7\\.1|proper|repack|extended|unrated|remastered|imax|multi|dual|castellano|spanish|español|latino|vose|
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	deleted scenes
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	disc1
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	divx
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	especiales
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	extra
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	extras
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	extras de temporada
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	featurettes
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	film
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	flv
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	interviews
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	iso
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	lost+found
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	m2ts
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	m4v
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	main
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	mkv
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	mov
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	movie
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	mp4
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	mpeg
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	mpg
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	mts
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	ogm
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	part 1
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	part1
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	pelicula
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	película
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	remux|web-?dl|webrip|hdtv|dvdrip|dvd|hdrip|x264|x265|h\\s?264|h\\s?265|hevc|avc|xvid|divx|10bit|8bit|dts(?:-hd)?|truehd|atmos|ac3|eac3|
+2	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	sample
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	sample-
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	samples
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	scenes
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	shorts
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	specials
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	subs
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	subs?|subtitulado|screener|hdcam)(?=$|[\\s)\\].-])
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	subtitles
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	subtitulos
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	subtítulos
+2	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	trailer
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	trailers
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	ts
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	video
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	vob
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	webm
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	wmv
+8	empty	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	\0
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	$h:$port
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	%20
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	%2B
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	&
+2	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	+
+6	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	/
+3	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	:
+2	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	=
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	?$q
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	@
+2	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	[
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	[$host]
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	movies
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	series
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	smb://
+4	empty	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	\0
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	/smb/
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	127.0.0.1
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	Accept-Ranges: bytes
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	Bad Gateway
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	Bad Request
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	Connection: close
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	Content-Length:
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	Content-Range: bytes
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	Content-Type:
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	Forbidden
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	GET
+2	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	HEAD
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	HTTP/1.1 $code $text Content-Length: 0 Connection: close
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	HTTP/1.1 200 OK
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	HTTP/1.1 206 Partial Content
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	HTTP/1.1 416 Range Not Satisfiable Content-Range: bytes */$size Content-Length: 0 Connection: close
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	NetShareProxy
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	Not Found
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	application/octet-stream
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	avi
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	bytes=
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	flv
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	http://127.0.0.1:
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	http://127.0.0.1:$port$PREFIX
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	m2ts
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	m4v
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	mkv
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	mov
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	mp4
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	mpeg
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	mpg
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	mts
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	netshare
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	netshare-accept
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	proxy did not start
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	range
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	serving ${ref.host}/${ref.share} failed: ${e.javaClass.simpleName}: ${e.message}
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	ts
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	video/mp2t
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	video/mp4
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	video/mpeg
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	video/quicktime
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	video/webm
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	video/x-flv
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	video/x-matroska
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	video/x-ms-wmv
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	video/x-msvideo
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	vob
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	webm
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	wmv
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbAccess.kt	$host:$port/$share|${login?.domain}\\${login?.user}|${login?.password.hashCode()}
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbAccess.kt	.
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbAccess.kt	..
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbAccess.kt	Not a disk share: $shareName
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbAccess.kt	SMB login refused
+2	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	",
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	#EXTINF
+2	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	#EXTINF:-1
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	#EXTM3U
+2	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	$path/${e.name}
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	${film.title} (${film.year})
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	${t.series}/${e.name}
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	%s S%02dE%02d %s
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	="
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	Películas
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	SMB folder not found: $folder
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	Series
+2	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	glcn-added
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	glcn-year
+2	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	group-title="
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	type="movie"
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	type="series"
 1	log	core/src/main/java/tv/own/owntv/core/network/BoundedDns.kt	${HttpClient.redactHost(hostname)}: no DNS answer in time
 1	log	core/src/main/java/tv/own/owntv/core/network/BoundedDns.kt	dns ${HttpClient.redactHost(hostname)} failed (${failure.javaClass.simpleName}) — using its last known addresses
 1	technical	core/src/main/java/tv/own/owntv/core/network/BoundedDns.kt	owntv-dns
@@ -3070,6 +3242,8 @@
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	userData relink sourceId=${source.id} rows=${snapshot?.length() ?: 0} purge=$purge ms=${SystemClock.elapsedRealtime() - relinkStartedAt}
 1	protocol	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	#EXTM3U
 1	protocol	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	Expired
+1	technical	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	SMB folder not found: ${e.folder}
+1	technical	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	SMB: ${e.javaClass.simpleName}: ${e.message}
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	SourceTester
 1	protocol	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	http
 1	json	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	max_connections
@@ -5026,6 +5200,7 @@
 1	log	core/src/main/java/tv/own/owntv/core/sync/M3uReclassifiedLive.kt	M3U reclassified live prune sourceId=$sourceId removed=${stale.size} ms=${SystemClock.elapsedRealtime() - start}
 1	log	core/src/main/java/tv/own/owntv/core/sync/M3uReclassifiedLive.kt	M3uReclassified
 1	preference-key	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	
+1	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	#EXTINF
 1	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	$base$KEY_SEPARATOR#$n
 1	log	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	$label hash map loaded sourceId=$sourceId size=${it.byRemoteId.size} ms=${SystemClock.elapsedRealtime() - start}
 1	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	$name$KEY_SEPARATOR${group.orEmpty()}
@@ -5047,6 +5222,7 @@
 3	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	M3U series
 1	log	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	M3U series flush sourceId=${s.id} final=$final shows=${shows.size} dbInserted=${inserts.size}
 1	log	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	M3U truncated-name rescue: ${rescued.size} row(s) relinked to their full name
+1	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	SMB share entries=${text.lineSequence().count { it.startsWith("#EXTINF") }}
 3	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	channels
 1	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	channels_fts
 1	url	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	content://

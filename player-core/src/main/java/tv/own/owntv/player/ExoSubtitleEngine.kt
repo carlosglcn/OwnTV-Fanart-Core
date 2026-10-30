@@ -454,7 +454,8 @@ class ExoSubtitleEngine(
     }
 
     private fun buildMediaItem(url: String): MediaItem {
-        val builder = MediaItem.Builder().setUri(url)
+        // glcn: a file on a home-network share plays through its loopback address.
+        val builder = MediaItem.Builder().setUri(tv.own.owntv.core.netshare.NetShareProxy.playable(url))
         // A protected item. Single-session: a film's content key does not rotate, unlike a live
         // channel's, so there is nothing to renew mid-playback.
         drmConfig?.let { builder.setDrmConfiguration(it.toMediaDrmConfiguration(multiSession = false)) }

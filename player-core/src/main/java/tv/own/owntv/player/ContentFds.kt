@@ -34,6 +34,11 @@ internal class ContentFds(private val context: Context) {
      * read — which is a far better outcome than an exception escaping the load.
      */
     fun playable(url: String): String {
+        // glcn: a file on a home-network share is served to mpv over a loopback address.
+        if (tv.own.owntv.core.netshare.NetShare.isShare(url)) {
+            closeOpen()
+            return tv.own.owntv.core.netshare.NetShareProxy.playable(url)
+        }
         if (!isDocument(url)) {
             // Only a document can leave a descriptor behind, so anything else means the previous one
             // is finished with.

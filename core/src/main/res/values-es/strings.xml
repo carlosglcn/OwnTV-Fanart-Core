@@ -192,4 +192,15 @@
     <string name="shell_now_playing_audio">Audio</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">Descartar</string>
+    <string name="glcn_setup_smb">Carpeta de red (NAS)</string>
+    <string name="glcn_setup_smb_server">Servidor</string>
+    <string name="glcn_setup_smb_server_example">192.168.1.20 o nas.local</string>
+    <string name="glcn_setup_smb_help">Una carpeta compartida por SMB en tu NAS o PC. Las películas y series aparecen en sus secciones con carátula, ficha y tráiler, reconocidas por el nombre del archivo.</string>
+    <string name="glcn_setup_smb_share">Carpeta compartida</string>
+    <string name="glcn_setup_smb_share_example">video</string>
+    <string name="glcn_setup_smb_user">Usuario (vacío para invitado)</string>
+    <string name="glcn_setup_smb_movies">Carpeta de películas</string>
+    <string name="glcn_setup_smb_movies_example">Peliculas</string>
+    <string name="glcn_setup_smb_series">Carpeta de series</string>
+    <string name="glcn_setup_smb_series_example">Series</string>
 </resources>

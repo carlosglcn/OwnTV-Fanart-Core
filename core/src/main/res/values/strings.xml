@@ -295,4 +295,15 @@
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <!-- Translators: Button that closes a prompt without acting on it, e.g. a programme reminder. -->
     <string name="common_dismiss">Dismiss</string>
+    <string name="glcn_setup_smb">Network folder (NAS)</string>
+    <string name="glcn_setup_smb_server">Server</string>
+    <string name="glcn_setup_smb_server_example">192.168.1.20 or nas.local</string>
+    <string name="glcn_setup_smb_help">A folder shared over SMB on your NAS or PC. Films and series appear in their sections with posters, page and trailer, matched by their file names.</string>
+    <string name="glcn_setup_smb_share">Shared folder</string>
+    <string name="glcn_setup_smb_share_example">video</string>
+    <string name="glcn_setup_smb_user">User (blank for guest)</string>
+    <string name="glcn_setup_smb_movies">Films folder</string>
+    <string name="glcn_setup_smb_movies_example">Movies</string>
+    <string name="glcn_setup_smb_series">Series folder</string>
+    <string name="glcn_setup_smb_series_example">TV Shows</string>
 </resources>

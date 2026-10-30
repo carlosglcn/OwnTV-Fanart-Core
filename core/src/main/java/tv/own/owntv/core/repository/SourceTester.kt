@@ -104,6 +104,19 @@ class SourceTester(
      * megabytes to answer a yes/no question.
      */
     private suspend fun testM3u(source: SourceEntity): SourceTestResult {
+        // glcn: a folder shared on the home network — "reachable" means the share opens and its folders exist.
+        tv.own.owntv.core.netshare.NetShare.parse(source.url)?.let { target ->
+            return try {
+                tv.own.owntv.core.netshare.SmbLibrary.test(target)
+                SourceTestResult.Ok()
+            } catch (e: tv.own.owntv.core.netshare.SmbAccess.AuthFailed) {
+                SourceTestResult.AuthFailed
+            } catch (e: tv.own.owntv.core.netshare.SmbLibrary.FolderMissing) {
+                SourceTestResult.Unreachable("SMB folder not found: ${e.folder}")
+            } catch (e: Exception) {
+                SourceTestResult.Unreachable("SMB: ${e.javaClass.simpleName}: ${e.message}")
+            }
+        }
         // A local-file playlist has no host; if the sync could read it, there is nothing to reach.
         if (!source.url.startsWith("http", ignoreCase = true)) return SourceTestResult.Ok()
         // glcn: an Emby/Jellyfin server link — "reachable" means signing in works.

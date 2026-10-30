@@ -1,0 +1,149 @@
+package tv.own.owntv.core.netshare
+
+import java.net.URLDecoder
+import java.net.URLEncoder
+import java.util.concurrent.ConcurrentHashMap
+
+/**
+ * glcn: a folder shared on the home network (a NAS, a PC) added as a playlist.
+ *
+ * The source's link is `smb://user:password@host[:port]/share?movies=Films&series=TV%20Shows` — the share, and
+ * inside it the folder of films and the folder of series. The sync walks those folders ([SmbLibrary]) and turns
+ * the files into the M3U the existing pipeline understands, so they land in Movies and Series, are matched
+ * with TMDB like any other title and get their pictures, page and trailer.
+ *
+ * Each file's address in the library is `smb://host/share/path` — no password in it. When a file is played,
+ * [NetShareProxy] serves it to the player over a loopback HTTP address, asking [credentialsFor] for the login.
+ */
+object NetShare {
+
+    /** A share and how to sign in to it; [movies] / [series] are folders inside the share ("" = none). */
+    data class Target(
+        val host: String,
+        val port: Int,
+        val share: String,
+        val user: String,
+        val password: String,
+        val domain: String,
+        val movies: String,
+        val series: String,
+    ) {
+        /** `smb://host[:port]/share` — the start of every file address in this share. */
+        val root: String get() = SCHEME + hostPort(host, port) + "/" + encodeSegment(share)
+    }
+
+    data class Login(val user: String, val password: String, val domain: String)
+
+    fun isShare(url: String): Boolean = url.trim().startsWith(SCHEME, ignoreCase = true)
+
+    /** The source link → its share; null when it is not an `smb://` link with a host and a share. */
+    fun parse(url: String): Target? {
+        val raw = url.trim()
+        if (!isShare(raw)) return null
+        val rest = raw.substring(SCHEME.length)
+        val query = rest.substringAfter('?', "")
+        val beforeQuery = rest.substringBefore('?')
+        val slash = beforeQuery.indexOf('/')
+        val authority = if (slash >= 0) beforeQuery.substring(0, slash) else beforeQuery
+        val path = if (slash >= 0) beforeQuery.substring(slash + 1) else ""
+        val at = authority.lastIndexOf('@')
+        val info = if (at >= 0) authority.substring(0, at) else ""
+        val hostPort = if (at >= 0) authority.substring(at + 1) else authority
+        val (host, port) = splitHostPort(hostPort) ?: return null
+        val share = decode(path.substringBefore('/')).takeIf { it.isNotBlank() } ?: return null
+        var user = decode(info.substringBefore(':'))
+        val password = if (':' in info) decode(info.substringAfter(':')) else ""
+        var domain = ""
+        // "OFFICE\ana" or "OFFICE;ana": a Windows domain before the user.
+        val sep = user.indexOfFirst { it == '\\' || it == ';' }
+        if (sep > 0) { domain = user.substring(0, sep); user = user.substring(sep + 1) }
+        val params = query.split('&').filter { '=' in it }.associate { decode(it.substringBefore('=')) to decode(it.substringAfter('=')) }
+        return Target(
+            host = host, port = port, share = share, user = user, password = password, domain = domain,
+            movies = cleanFolder(params[PARAM_MOVIES].orEmpty()), series = cleanFolder(params[PARAM_SERIES].orEmpty()),
+        )
+    }
+
+    /** The source link for a share, as the add-source form saves it. */
+    fun link(host: String, share: String, user: String, password: String, movies: String, series: String): String {
+        val (h, p) = splitHostPort(host.trim().removePrefix(SCHEME).trim('/')) ?: (host.trim() to DEFAULT_PORT)
+        val info = if (user.isBlank()) "" else encodeSegment(user.trim()) + (if (password.isNotEmpty()) ":" + encodeSegment(password) else "") + "@"
+        val q = listOfNotNull(
+            cleanFolder(movies).takeIf { it.isNotEmpty() }?.let { PARAM_MOVIES + "=" + encodeSegment(it) },
+            cleanFolder(series).takeIf { it.isNotEmpty() }?.let { PARAM_SERIES + "=" + encodeSegment(it) },
+        ).joinToString("&")
+        return SCHEME + info + hostPort(h, p) + "/" + encodeSegment(share.trim().trim('/', '\\')) + (if (q.isNotEmpty()) "?$q" else "")
+    }
+
+    // ---- Logins for playback -----------------------------------------------------------------------------------
+
+    private val logins = ConcurrentHashMap<String, Login>()
+
+    /** Keeps the login of every share source in [urls] (the app passes all its sources, at start and on change). */
+    fun rememberSources(urls: List<String>) {
+        for (u in urls) parse(u)?.let { remember(it) }
+    }
+
+    fun remember(t: Target) {
+        logins[key(t.host, t.port, t.share)] = Login(t.user, t.password, t.domain)
+    }
+
+    fun credentialsFor(host: String, port: Int, share: String): Login? = logins[key(host, port, share)]
+
+    private fun key(host: String, port: Int, share: String) = host.lowercase() + ":" + port + "/" + share.lowercase()
+
+    // ---- Addresses --------------------------------------------------------------------------------------------
+
+    /** A file's address: `smb://host[:port]/share/a/b.mkv`, each part encoded. */
+    fun fileUrl(t: Target, path: String): String =
+        t.root + "/" + path.split('/', '\\').filter { it.isNotEmpty() }.joinToString("/") { encodeSegment(it) }
+
+    /** A file address → host, port, share and the path inside the share (decoded, '/'-separated). */
+    data class FileRef(val host: String, val port: Int, val share: String, val path: String)
+
+    fun fileRef(url: String): FileRef? {
+        if (!isShare(url)) return null
+        val rest = url.trim().substring(SCHEME.length).substringBefore('?')
+        val parts = rest.split('/')
+        if (parts.size < 3) return null
+        val authority = parts[0].substringAfterLast('@')
+        val (host, port) = splitHostPort(authority) ?: return null
+        val share = decode(parts[1])
+        val path = parts.drop(2).filter { it.isNotEmpty() }.joinToString("/") { decode(it) }
+        if (share.isBlank() || path.isBlank()) return null
+        return FileRef(host, port, share, path)
+    }
+
+    fun hostPort(host: String, port: Int): String {
+        val h = if (host.contains(':') && !host.startsWith("[")) "[$host]" else host
+        return if (port == DEFAULT_PORT) h else "$h:$port"
+    }
+
+    private fun splitHostPort(s: String): Pair<String, Int>? {
+        if (s.isBlank()) return null
+        if (s.startsWith("[")) {
+            val end = s.indexOf(']')
+            if (end < 0) return null
+            val port = s.substring(end + 1).removePrefix(":").toIntOrNull() ?: DEFAULT_PORT
+            return s.substring(1, end) to port
+        }
+        val colon = s.lastIndexOf(':')
+        if (colon > 0 && s.indexOf(':') == colon) {
+            val port = s.substring(colon + 1).toIntOrNull() ?: return null
+            return s.substring(0, colon) to port
+        }
+        return s to DEFAULT_PORT
+    }
+
+    private fun cleanFolder(f: String): String = f.replace('\\', '/').trim().trim('/')
+
+    fun encodeSegment(s: String): String = URLEncoder.encode(s, Charsets.UTF_8.name()).replace("+", "%20")
+
+    private fun decode(s: String): String =
+        runCatching { URLDecoder.decode(s.replace("+", "%2B"), Charsets.UTF_8.name()) }.getOrDefault(s)
+
+    const val SCHEME = "smb://"
+    const val DEFAULT_PORT = 445
+    private const val PARAM_MOVIES = "movies"
+    private const val PARAM_SERIES = "series"
+}
