@@ -693,4 +693,5 @@
     <string name="glcn_remote_vol">VOL</string>
     <string name="glcn_remote_mute">Silenciar</string>
     <string name="glcn_remote_type_hint">Escribe para buscar en la tele</string>
+    <string name="glcn_zap_coming_up">Próximamente</string>
 </resources>
