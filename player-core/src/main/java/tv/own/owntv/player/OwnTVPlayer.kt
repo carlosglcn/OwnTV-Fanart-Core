@@ -3273,6 +3273,19 @@ class OwnTVPlayer(
                             // Frozen again after a fresh core: for an archive, the engine that waits for a keyframe.
                             if (item.archiveThisItem && fallbackToExoVod(PlaybackFailure.MpvOpenDecode, mpvStuck = true)) {
                                 android.util.Log.w(TAG, "watchdog — archive froze twice on mpv, handing to ExoPlayer")
+                                return@launch
+                            }
+                            // glcn: a film frozen on its first frame twice — the file opens and fills the cache, but the
+                            // direct hardware output never moves (seen on the SHIELD with a cropped 4K HDR10 HEVC,
+                            // 3236×2152). It used to stay black for good. ExoPlayer first (it keeps HDR and the direct
+                            // path); with the engine pinned to mpv, mpv's own GL path (copy mode) instead.
+                            if (!item.archiveThisItem) {
+                                LiveDiagnosticsLog.event("mpv film frozen on its first frame twice (${load.currentHeightPx}p) — trying another way")
+                                if (fallbackToExoVod(PlaybackFailure.MpvOpenDecode, mpvStuck = true)) {
+                                    android.util.Log.w(TAG, "watchdog — film froze twice on mpv, handing to ExoPlayer")
+                                } else {
+                                    tryDecodeRescue("watchdog — film froze twice on the direct path")
+                                }
                             }
                             return@launch
                         }
