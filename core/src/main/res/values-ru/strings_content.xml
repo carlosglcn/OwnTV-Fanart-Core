@@ -75,6 +75,14 @@
     </plurals>
     <string name="content_category_restore_order">Ваш порядок будет сброшен</string>
     <string name="content_category_restore_nothing">Категория уже в исходном состоянии плейлиста</string>
+    <string name="content_category_lock">Заблокировать PIN-кодом</string>
+    <string name="content_category_locked_placeholder">Эта категория заблокирована</string>
+    <plurals name="content_category_pin_wait">
+        <item quantity="one">Слишком много неверных PIN-кодов. Повторите через <xliff:g id="count">%1$d</xliff:g> секунду</item>
+        <item quantity="few">Слишком много неверных PIN-кодов. Повторите через <xliff:g id="count">%1$d</xliff:g> секунды</item>
+        <item quantity="many">Слишком много неверных PIN-кодов. Повторите через <xliff:g id="count">%1$d</xliff:g> секунд</item>
+        <item quantity="other">Слишком много неверных PIN-кодов. Повторите через <xliff:g id="count">%1$d</xliff:g> секунд</item>
+    </plurals>
     <string name="content_move_to_category">Переместить в категорию…</string>
     <string name="content_remove_from_category">Удалить из этой категории</string>
     <string name="content_download">Скачать</string>
@@ -188,6 +196,8 @@
     <string name="content_downloads_ready">Можно смотреть</string>
     <string name="content_downloads_paused">Приостановлено</string>
     <string name="content_downloads_file_missing">Файл отсутствует: его больше нет на накопителе</string>
+    <string name="content_downloads_delete_title">Удалить «<xliff:g id="name">%1$s</xliff:g>»?</string>
+    <string name="content_downloads_delete_message">Файл будет удалён с этого устройства. Его можно будет скачать снова позже.</string>
     <string name="content_downloads_reason_account_busy">Аккаунт занят: соединение использует другой поток</string>
     <string name="content_downloads_reason_refused">Сервер отклонил ссылку</string>
     <string name="content_downloads_reason_not_found">На сервере больше нет этого файла</string>

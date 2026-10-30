@@ -234,6 +234,8 @@
     <string name="settings_preview_audio_description">تشغيل الصوت في المعاينة المباشرة</string>
     <string name="settings_mini_player_root">المشغّل المصغّر</string>
     <string name="settings_mini_player_root_description">حجم المشغّل المصغّر المُرسى وموضعه</string>
+    <string name="settings_pip_on_leave">صورة داخل صورة عند مغادرة التطبيق</string>
+    <string name="settings_pip_on_leave_description">يستمر تشغيل الفيديو في نافذة صغيرة عند الضغط على الرئيسية</string>
     <string name="settings_prefer_sdr_description">عندما يوفّر البث صورة SDR وصورة HDR معًا، تُشغَّل صورة SDR: للتلفاز الذي تبدو فيه صورة HDR باهتة أو داكنة جدًا. البث الذي يوفّر HDR فقط يبقى HDR. مع ExoPlayer فقط.</string>
     <string name="settings_auto_frame_rate">معدل الإطارات التلقائي</string>
     <string name="settings_auto_frame_rate_description">مطابقة معدل تحديث التلفزيون مع الفيديو (24/25/50/60 إطارًا في الثانية) في وضع ملء الشاشة، للبث التلفزيوني المباشر والفيديو حسب الطلب، واستعادته عند الخروج. عطّل هذا الخيار إذا كان التلفزيون أو جهاز الاستقبال يعيد مصافحة HDMI بصورة مزعجة عند كل تغيير للقناة.</string>
@@ -286,6 +288,7 @@
     <string name="settings_about">حول</string>
     <string name="settings_live_latency">زمن استجابة البث المباشر</string>
     <string name="settings_no_settings_match">لا توجد إعدادات تطابق “<xliff:g id="query">%1$s</xliff:g>”</string>
+    <string name="settings_search_empty_hint">اكتب اسم الإعداد</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">الشاشة الرئيسية</string>
     <string name="settings_startup_last_channel">آخر قناة</string>
@@ -626,6 +629,8 @@
     <string name="settings_customize_set_pin">🔒 تعيين PIN</string>
     <string name="settings_customize_change_pin">🔒 تغيير PIN</string>
     <string name="settings_customize_remove_lock">إزالة القفل</string>
+    <string name="settings_customize_settings_pin">طلب رمز PIN لفتح الإعدادات</string>
+    <string name="settings_customize_settings_pin_button">طلب رمز PIN لفتح الإعدادات: <xliff:g id="state">%1$s</xliff:g></string>
     <string name="settings_customize_description">أخفِ القنوات والأفلام والمسلسلات أو أظهرها، وأعد تسمية الفئات أو ترتيبها لهذا الملف الشخصي. تبقى هذه التخصيصات بعد عمليات إعادة المزامنة.</string>
     <string name="settings_customize_new_category_behavior">سلوك الفئات الجديدة</string>
     <string name="settings_customize_hide">إخفاء</string>
@@ -675,6 +680,7 @@
     <string name="settings_customize_rename_hint">لهذا الملف الشخصي فقط. اتركه فارغًا لاستعادة «<xliff:g id="name">%1$s</xliff:g>».</string>
     <string name="settings_customize_remove_pin_title">هل تريد إزالة قفل PIN؟</string>
     <string name="settings_customize_remove_pin_message">ستُفتح شاشة التخصيص دون طلب رمز PIN مرة أخرى.</string>
+    <string name="settings_customize_remove_pin_locks">سيُلغى أيضًا قفل كل فئة مقفلة بهذا الرمز.</string>
     <string name="settings_customize_remove">إزالة</string>
     <string name="settings_customize_confirm_pin">تأكيد PIN الجديد</string>
     <string name="settings_customize_pin_mismatch">رمزا PIN غير متطابقين — أعد الإدخال</string>
@@ -1567,6 +1573,7 @@
     <string name="settings_line_autoplay">وإلى الموسم التالي</string>
     <string name="settings_line_tiles">كل خانة بث إضافي</string>
     <string name="settings_line_mini">الحجم والموضع</string>
+    <string name="settings_line_pip">تابع المشاهدة في نافذة صغيرة</string>
     <string name="settings_line_rec_reserve">عدم التسجيل على كل الاتصالات</string>
     <string name="settings_line_rec_watching">ليس بثًا ثانيًا</string>
     <string name="settings_line_rec_pre_roll">قبل بدء البرنامج</string>
@@ -1609,6 +1616,7 @@
     <string name="settings_help_timeshift_window">إلى أي مدى يمكن لميزة الإيقاف المؤقت والترجيع الرجوع في قناة بلا مشاهدة استدراكية. المدة الأطول تحفظ جزءًا أكبر من القناة في تخزين هذا الجهاز.</string>
     <string name="settings_help_resume">يعرض السؤال عن الاستئناف خيارَي استئناف أو البدء من جديد عندما يكون للفيلم أو الحلقة موضع محفوظ. الاستئناف دائمًا يكمل من حيث توقفت، وعدم الاستئناف يبدأ من البداية.</string>
     <string name="settings_help_mini">المشغّل الصغير الذي يُبقي القناة تعمل في زاوية أثناء التصفح. اختر حجمه والزاوية التي يظهر فيها.</string>
+    <string name="settings_help_pip">اضغط على الرئيسية أو افتح تطبيقًا آخر أثناء تشغيل فيديو بملء الشاشة أو في المشغّل المصغّر، فيستمر تشغيله في نافذة صغيرة فوق باقي شاشة التلفزيون. افتح OwnTV مجددًا لإعادته إلى ملء الشاشة، وأغلق النافذة لإيقاف التشغيل. يبقى العرض المتعدد داخل OwnTV.</string>
     <string name="settings_key_palette">لوحة الألوان</string>
     <string name="settings_live_preview_note">تظهر التغييرات هنا أثناء التنقل، قبل أن تغادر الصف.</string>
     <string name="settings_synced_at">المزامنة: <xliff:g id="when">%1$s</xliff:g></string>

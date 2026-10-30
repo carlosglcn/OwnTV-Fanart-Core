@@ -195,6 +195,7 @@
     <string name="recording_group_missed">छूट गया</string>
     <string name="recording_record">रिकॉर्ड करें</string>
     <string name="recording_stop">रिकॉर्डिंग रोकें</string>
+    <string name="recording_delete_message">इस डिवाइस से रिकॉर्डिंग और उसकी फ़ाइल हटाता है। इसे पूर्ववत नहीं किया जा सकता।</string>
     <string name="recording_record_series">हर प्रसारण रिकॉर्ड करें</string>
     <string name="recording_stop_series">हर प्रसारण रिकॉर्ड करना बंद करें</string>
     <string name="recording_from_archive">आर्काइव से रिकॉर्ड करें</string>
@@ -207,6 +208,7 @@
     <string name="recording_scheduled_for"><xliff:g id="time">%1$s</xliff:g> को रिकॉर्ड होगा</string>
     <string name="recording_badge">REC</string>
     <string name="recording_pill_line"><xliff:g id="title">%1$s</xliff:g> रिकॉर्ड हो रहा है</string>
+    <string name="recording_pill_line_locked">लॉक की गई श्रेणी से रिकॉर्ड हो रहा है</string>
     <string name="recording_clash_with"><xliff:g id="programme">%1$s</xliff:g> से टकराव है</string>
     <string name="recording_settings_group">रिकॉर्डिंग</string>
     <string name="settings_recording_reserve">देखने के लिए एक स्ट्रीम खाली रखें</string>

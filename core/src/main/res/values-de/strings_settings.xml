@@ -230,6 +230,8 @@
     <string name="settings_preview_audio_description">Ton in der Live-Vorschau wiedergeben</string>
     <string name="settings_mini_player_root">Mini-Player</string>
     <string name="settings_mini_player_root_description">Größe und Position des angedockten Mini-Players</string>
+    <string name="settings_pip_on_leave">Bild-im-Bild beim Verlassen der App</string>
+    <string name="settings_pip_on_leave_description">Das Video läuft in einem kleinen Fenster weiter, wenn Sie Home drücken</string>
     <string name="settings_prefer_sdr_description">Bietet ein Stream ein SDR- und ein HDR-Bild, wird das SDR-Bild abgespielt: für Fernseher, auf denen HDR blass oder zu dunkel aussieht. Ein Stream nur mit HDR bleibt HDR. Nur ExoPlayer.</string>
     <string name="settings_auto_frame_rate">Automatische Bildrate</string>
     <string name="settings_auto_frame_rate_description">Die Bildwiederholfrequenz des Fernsehers im Vollbild für Live-TV und VOD an das Video anpassen (24/25/50/60 Bilder/s) und beim Beenden wiederherstellen. Deaktivieren Sie dies, wenn Ihr Fernseher oder Receiver bei jedem Senderwechsel geräuschvoll einen neuen HDMI-Handshake durchführt.</string>
@@ -278,6 +280,7 @@
     <string name="settings_about">Über</string>
     <string name="settings_live_latency">Live-Latenz</string>
     <string name="settings_no_settings_match">Keine Einstellungen entsprechen „<xliff:g id="query">%1$s</xliff:g>“</string>
+    <string name="settings_search_empty_hint">Geben Sie den Namen einer Einstellung ein</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">Startseite</string>
     <string name="settings_startup_last_channel">Letzter Sender</string>
@@ -614,6 +617,8 @@
     <string name="settings_customize_set_pin">🔒 PIN festlegen</string>
     <string name="settings_customize_change_pin">🔒 PIN ändern</string>
     <string name="settings_customize_remove_lock">Sperre entfernen</string>
+    <string name="settings_customize_settings_pin">PIN zum Öffnen der Einstellungen verlangen</string>
+    <string name="settings_customize_settings_pin_button">PIN zum Öffnen der Einstellungen verlangen: <xliff:g id="state">%1$s</xliff:g></string>
     <string name="settings_customize_description">Sender, Filme und Serien für dieses Profil ein- oder ausblenden sowie Kategorien umbenennen oder neu anordnen. Bleibt auch nach erneuten Synchronisierungen erhalten.</string>
     <string name="settings_customize_new_category_behavior">Verhalten bei neuen Kategorien</string>
     <string name="settings_customize_hide">Ausblenden</string>
@@ -659,6 +664,7 @@
     <string name="settings_customize_rename_hint">Gilt nur für dieses Profil. Leer lassen, um „<xliff:g id="name">%1$s</xliff:g>“ wiederherzustellen.</string>
     <string name="settings_customize_remove_pin_title">PIN-Sperre entfernen?</string>
     <string name="settings_customize_remove_pin_message">Der Anpassungsbildschirm wird künftig geöffnet, ohne erneut nach einer PIN zu fragen.</string>
+    <string name="settings_customize_remove_pin_locks">Alle mit dieser PIN gesperrten Kategorien werden ebenfalls entsperrt.</string>
     <string name="settings_customize_remove">Entfernen</string>
     <string name="settings_customize_confirm_pin">Neue PIN bestätigen</string>
     <string name="settings_customize_pin_mismatch">PINs stimmen nicht überein – erneut eingeben</string>
@@ -1455,6 +1461,7 @@
     <string name="settings_line_autoplay">Und weiter in die nächste Staffel</string>
     <string name="settings_line_tiles">Jede Kachel ist ein weiterer Stream</string>
     <string name="settings_line_mini">Größe und Position</string>
+    <string name="settings_line_pip">In einem kleinen Fenster weiterschauen</string>
     <string name="settings_line_rec_reserve">Nie auf allen Verbindungen aufnehmen</string>
     <string name="settings_line_rec_watching">Kein zweiter Stream</string>
     <string name="settings_line_rec_pre_roll">Vor Beginn der Sendung</string>
@@ -1497,6 +1504,7 @@
     <string name="settings_help_timeshift_window">Wie weit „Live-TV pausieren und zurückspulen“ bei einem Sender ohne Catch-up zurückgehen kann. Länger hält mehr vom Sender im Speicher dieses Geräts.</string>
     <string name="settings_help_resume">Fragen bietet Fortsetzen oder Von vorn an, wenn ein Film oder eine Folge eine gespeicherte Position hat. Immer fortsetzen macht dort weiter, wo Sie aufgehört haben; Nie fortsetzen beginnt von vorn.</string>
     <string name="settings_help_mini">Der kleine Player, der einen Sender in einer Ecke weiterlaufen lässt, während Sie stöbern. Wählen Sie Größe und Ecke.</string>
+    <string name="settings_help_pip">Drücken Sie Home oder öffnen Sie eine andere App, während ein Video im Vollbild oder im Mini-Player läuft, und es spielt in einem kleinen Fenster über dem Rest des Fernsehers weiter. Öffnen Sie OwnTV erneut, um es wieder im Vollbild zu sehen; schließen Sie das Fenster, um die Wiedergabe zu beenden. Multiview bleibt in OwnTV.</string>
     <string name="settings_key_palette">Palette</string>
     <string name="settings_live_preview_note">Änderungen erscheinen hier schon beim Durchgehen, bevor Sie die Zeile verlassen.</string>
     <string name="settings_synced_at">Synchronisiert <xliff:g id="when">%1$s</xliff:g></string>

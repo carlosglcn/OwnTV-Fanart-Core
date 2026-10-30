@@ -70,6 +70,13 @@
     </plurals>
     <string name="content_category_restore_order">limpar a ordem personalizada</string>
     <string name="content_category_restore_nothing">A categoria já está na predefinição da lista</string>
+    <string name="content_category_lock">Bloquear com PIN</string>
+    <string name="content_category_locked_placeholder">Esta categoria está bloqueada</string>
+    <plurals name="content_category_pin_wait">
+        <item quantity="one">Demasiados PIN errados. Tente novamente dentro de <xliff:g id="count">%1$d</xliff:g> segundo</item>
+        <item quantity="many">Demasiados PIN errados. Tente novamente dentro de <xliff:g id="count">%1$d</xliff:g> segundos</item>
+        <item quantity="other">Demasiados PIN errados. Tente novamente dentro de <xliff:g id="count">%1$d</xliff:g> segundos</item>
+    </plurals>
     <string name="content_move_to_category">Mover para categoria…</string>
     <string name="content_remove_from_category">Remover desta categoria</string>
     <string name="content_download">Transferir</string>
@@ -182,6 +189,8 @@
     <string name="content_downloads_ready">Pronto a ver</string>
     <string name="content_downloads_paused">Em pausa</string>
     <string name="content_downloads_file_missing">Ficheiro em falta: já não está na unidade</string>
+    <string name="content_downloads_delete_title">Eliminar “<xliff:g id="name">%1$s</xliff:g>”?</string>
+    <string name="content_downloads_delete_message">Remove o ficheiro deste dispositivo. Pode ser transferido novamente mais tarde.</string>
     <string name="content_downloads_reason_account_busy">Conta ocupada: outra transmissão está a usar a ligação</string>
     <string name="content_downloads_reason_refused">O servidor recusou a ligação</string>
     <string name="content_downloads_reason_not_found">O servidor já não tem este ficheiro</string>

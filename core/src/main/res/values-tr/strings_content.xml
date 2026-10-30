@@ -65,6 +65,12 @@
     </plurals>
     <string name="content_category_restore_order">Özel sıralama temizlenir</string>
     <string name="content_category_restore_nothing">Kategori zaten oynatma listesi varsayılanında</string>
+    <string name="content_category_lock">PIN ile kilitle</string>
+    <string name="content_category_locked_placeholder">Bu kategori kilitli</string>
+    <plurals name="content_category_pin_wait">
+        <item quantity="one">Çok fazla yanlış PIN. <xliff:g id="count">%1$d</xliff:g> saniye sonra tekrar deneyin</item>
+        <item quantity="other">Çok fazla yanlış PIN. <xliff:g id="count">%1$d</xliff:g> saniye sonra tekrar deneyin</item>
+    </plurals>
     <string name="content_move_to_category">Kategoriye taşı…</string>
     <string name="content_remove_from_category">Bu kategoriden kaldır</string>
     <string name="content_download">İndir</string>
@@ -176,6 +182,8 @@
     <string name="content_downloads_ready">İzlemeye hazır</string>
     <string name="content_downloads_paused">Duraklatıldı</string>
     <string name="content_downloads_file_missing">Dosya yok: artık sürücüde değil</string>
+    <string name="content_downloads_delete_title">“<xliff:g id="name">%1$s</xliff:g>” silinsin mi?</string>
+    <string name="content_downloads_delete_message">Dosyayı bu cihazdan kaldırır. Daha sonra yeniden indirilebilir.</string>
     <string name="content_downloads_reason_account_busy">Hesap meşgul: bağlantıyı başka bir akış kullanıyor</string>
     <string name="content_downloads_reason_refused">Sunucu bağlantıyı reddetti</string>
     <string name="content_downloads_reason_not_found">Sunucuda artık bu dosya yok</string>

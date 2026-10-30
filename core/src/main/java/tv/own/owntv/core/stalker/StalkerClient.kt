@@ -120,14 +120,19 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
      * Probe the API-endpoint candidates for [portalUrl] (`portal.php`, `stalker_portal/server/
      * load.php`, `server/load.php`) and return the first that completes a handshake. The winning
      * [Handshake.apiBase] should be reused for every later call on this source.
+     *
+     * A portal that redirects the handshake to another host is used at that host from then on.
+     * OkHttp drops `Authorization` on a cross-host redirect, so every later call sent to the first
+     * address would reach the real portal without its token and be refused.
      */
     open suspend fun resolveHandshake(portalUrl: String, mac: String, userAgent: String? = null): Handshake {
         var lastError: Exception? = null
         apiCandidates(portalUrl).forEach { apiBase ->
             try {
-                val token = handshake(apiBase, mac, userAgent)
-                Log.i(TAG, "handshake ok apiBase=$apiBase")
-                return Handshake(apiBase, token)
+                var landed = apiBase
+                val token = handshake(apiBase, mac, userAgent) { landed = it }
+                Log.i(TAG, "handshake ok apiBase=$landed" + if (landed != apiBase) " redirectedFrom=$apiBase" else "")
+                return Handshake(landed, token)
             } catch (c: CancellationException) {
                 throw c
             } catch (e: Exception) {
@@ -139,9 +144,9 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
     }
 
     /** `?type=stb&action=handshake` → the Bearer token used by every authorized call. */
-    suspend fun handshake(apiBase: String, mac: String, userAgent: String? = null): String {
+    suspend fun handshake(apiBase: String, mac: String, userAgent: String? = null, onLanded: (String) -> Unit = {}): String {
         val url = "$apiBase?type=stb&action=handshake&token=&JsHttpRequest=1-xml"
-        val js = request(url, mac, token = null, userAgent = userAgent) { readScalarFields(it) }
+        val js = request(url, mac, token = null, userAgent = userAgent, onLanded = onLanded) { readScalarFields(it) }
         return js["token"]?.takeIf { it.isNotBlank() }
             ?: throw IOException("Portal handshake returned no token")
     }
@@ -402,7 +407,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         apiBase: String, mac: String, token: String, userAgent: String?, categoryId: String, page: Int,
     ): Page<VodItem> {
         val url = "$apiBase?type=vod&action=get_ordered_list&category=${enc(categoryId)}&sortby=added&p=$page&JsHttpRequest=1-xml"
-        return request(url, mac, token, userAgent) { readVodPage(it) }
+        return request(url, mac, token, userAgent) { readVodPage(it, apiBase) }
     }
 
     /** `?type=series&action=get_ordered_list&category=<id>&p=<page>` → one page of series shows + totals. */
@@ -410,7 +415,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         apiBase: String, mac: String, token: String, userAgent: String?, categoryId: String, page: Int,
     ): Page<VodItem> {
         val url = "$apiBase?type=series&action=get_ordered_list&category=${enc(categoryId)}&sortby=added&p=$page&JsHttpRequest=1-xml"
-        return request(url, mac, token, userAgent) { readVodPage(it) }
+        return request(url, mac, token, userAgent) { readVodPage(it, apiBase) }
     }
 
     /**
@@ -500,7 +505,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         return out
     }
 
-    private fun readVodPage(reader: JsonReader): Page<VodItem> {
+    private fun readVodPage(reader: JsonReader, apiBase: String): Page<VodItem> {
         var total = 0
         var maxPer = 0
         val items = ArrayList<VodItem>()
@@ -512,7 +517,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
                 "max_page_items" -> maxPer = nextIntLenient(reader) ?: 0
                 "data" -> if (reader.peek() == JsonToken.BEGIN_ARRAY) {
                     reader.beginArray()
-                    while (reader.hasNext()) readVodItem(reader)?.let { items.add(it) }
+                    while (reader.hasNext()) readVodItem(reader, apiBase)?.let { items.add(it) }
                     reader.endArray()
                 } else {
                     reader.skipValue()
@@ -524,7 +529,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         return Page(total, maxPer, items)
     }
 
-    private fun readVodItem(reader: JsonReader): VodItem? {
+    private fun readVodItem(reader: JsonReader, apiBase: String): VodItem? {
         if (reader.peek() != JsonToken.BEGIN_OBJECT) { reader.skipValue(); return null }
         // Nested fields (the series episode list, actors arrays) are skipped by readScalarFields — the
         // show/movie row only needs the scalar metadata; episodes are fetched lazily on open.
@@ -534,7 +539,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
             id = id,
             name = f["name"] ?: f["o_name"] ?: id,
             cmd = f["cmd"]?.takeIf { it.isNotBlank() },
-            poster = (f["screenshot_uri"] ?: f["poster"] ?: f["cover"])?.takeIf { it.isNotBlank() && it != "0" },
+            poster = absoluteArt(f["screenshot_uri"] ?: f["poster"] ?: f["cover"], apiBase),
             year = parseYear(f["year"]),
             plot = f["description"]?.takeIf { it.isNotBlank() },
             rating = (f["rating_imdb"] ?: f["rating"])?.trim()?.toDoubleOrNull()?.takeIf { it > 0 },
@@ -749,7 +754,10 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
     }
 
     private suspend fun <T> request(
-        url: String, mac: String, token: String?, userAgent: String?, parseJs: suspend (JsonReader) -> T,
+        url: String, mac: String, token: String?, userAgent: String?,
+        /** Told the URL the answer came from once redirects are followed, without its query. */
+        onLanded: (String) -> Unit = {},
+        parseJs: suspend (JsonReader) -> T,
     ): T = withContext(Dispatchers.IO) {
         val httpRequest = portalRequest(url, mac, token, userAgent)
 
@@ -765,6 +773,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         try {
             call.execute().use { response ->
                 if (!response.isSuccessful) throw httpFailure(response.code, safeUrl)
+                onLanded(response.request.url.newBuilder().query(null).build().toString())
                 val body = response.body
                 body.byteStream().use { input ->
                     parseEnvelope(input, parseJs).also {
@@ -863,6 +872,19 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
 
         /** "Specials", "Special", "Season 0 - Specials": the provider's season 0. */
         private val SPECIALS = Regex("""\bspecials?\b""", RegexOption.IGNORE_CASE)
+
+        /**
+         * A poster or cover as a loadable URL. Many portals send a server path
+         * (`/stalker_portal/screenshots/…`), which is resolved against the API base's origin — not
+         * its path, which would double `/stalker_portal`. Absolute URLs are kept; blank and `"0"`
+         * mean none.
+         */
+        internal fun absoluteArt(raw: String?, apiBase: String): String? {
+            val value = raw?.trim()?.takeIf { it.isNotEmpty() && it != "0" } ?: return null
+            if (value.toHttpUrlOrNull() != null) return value
+            val origin = apiBase.toHttpUrlOrNull()?.newBuilder()?.encodedPath("/")?.query(null)?.build() ?: return value
+            return origin.resolve(value)?.toString() ?: value
+        }
 
 
         /** Ministra states an archive length in hours; the app stores and shows days. */

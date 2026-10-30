@@ -82,6 +82,8 @@
     <string name="sync_status_cancelled">सिंक रद्द किया गया · <xliff:g id="source">%1$s</xliff:g></string>
     <string name="sync_status_download"><xliff:g id="title">%1$s</xliff:g> डाउनलोड हो रहा है</string>
     <string name="sync_status_download_with_progress"><xliff:g id="title">%1$s</xliff:g> डाउनलोड हो रहा है · <xliff:g id="percent">%2$d</xliff:g>%%</string>
+    <string name="sync_status_download_locked">लॉक की गई श्रेणी से डाउनलोड हो रहा है</string>
+    <string name="sync_status_download_locked_with_progress">लॉक की गई श्रेणी से डाउनलोड हो रहा है · <xliff:g id="percent">%1$d</xliff:g>%%</string>
     <string name="sync_phase_live">लाइव टीवी</string>
     <string name="sync_phase_movies">फ़िल्में</string>
     <string name="sync_phase_series">सीरीज़</string>

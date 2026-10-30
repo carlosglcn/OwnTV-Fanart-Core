@@ -41,6 +41,14 @@ class ErrorMessagesTest {
     }
 
     @Test
+    fun `a panel answering 513 refused the login`() {
+        assertEquals(
+            FriendlySyncFailure.AuthenticationRejected,
+            classifySyncFailure("HTTP 513 for http://panel.test/player_api.php?username=***&password=***", online = true),
+        )
+    }
+
+    @Test
     fun `unmapped external failure preserves its raw text`() {
         val raw = "Provider-specific failure code X17"
 

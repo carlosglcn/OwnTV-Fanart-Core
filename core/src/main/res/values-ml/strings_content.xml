@@ -65,6 +65,12 @@
     </plurals>
     <string name="content_category_restore_order">ഇഷ്ടാനുസൃത ക്രമം നീക്കം ചെയ്യും</string>
     <string name="content_category_restore_nothing">വിഭാഗം ഇതിനകം പ്ലേലിസ്റ്റ് ഡിഫോൾട്ടിലാണ്</string>
+    <string name="content_category_lock">PIN ഉപയോഗിച്ച് ലോക്ക് ചെയ്യുക</string>
+    <string name="content_category_locked_placeholder">ഈ വിഭാഗം ലോക്ക് ചെയ്തിരിക്കുന്നു</string>
+    <plurals name="content_category_pin_wait">
+        <item quantity="one">തെറ്റായ PIN വളരെയധികം തവണ നൽകി. <xliff:g id="count">%1$d</xliff:g> സെക്കൻഡിന് ശേഷം വീണ്ടും ശ്രമിക്കുക</item>
+        <item quantity="other">തെറ്റായ PIN വളരെയധികം തവണ നൽകി. <xliff:g id="count">%1$d</xliff:g> സെക്കൻഡിന് ശേഷം വീണ്ടും ശ്രമിക്കുക</item>
+    </plurals>
     <string name="content_move_to_category">വിഭാഗത്തിലേക്ക് നീക്കുക…</string>
     <string name="content_remove_from_category">ഈ വിഭാഗത്തിൽ നിന്ന് നീക്കുക</string>
     <string name="content_download">ഡൗൺലോഡ് ചെയ്യുക</string>
@@ -176,6 +182,8 @@
     <string name="content_downloads_ready">കാണാൻ തയ്യാർ</string>
     <string name="content_downloads_paused">താൽക്കാലികമായി നിർത്തി</string>
     <string name="content_downloads_file_missing">ഫയൽ കാണുന്നില്ല: ഇത് ഇനി ഡ്രൈവിൽ ഇല്ല</string>
+    <string name="content_downloads_delete_title">“<xliff:g id="name">%1$s</xliff:g>” ഇല്ലാതാക്കണോ?</string>
+    <string name="content_downloads_delete_message">ഈ ഉപകരണത്തിൽ നിന്ന് ഫയൽ നീക്കംചെയ്യും. പിന്നീട് വീണ്ടും ഡൗൺലോഡ് ചെയ്യാം.</string>
     <string name="content_downloads_reason_account_busy">അക്കൗണ്ട് തിരക്കിലാണ്: മറ്റൊരു സ്ട്രീം കണക്ഷൻ ഉപയോഗിക്കുന്നു</string>
     <string name="content_downloads_reason_refused">സെർവർ ലിങ്ക് നിരസിച്ചു</string>
     <string name="content_downloads_reason_not_found">ഈ ഫയൽ ഇനി സെർവറിൽ ഇല്ല</string>

@@ -80,6 +80,8 @@
     <string name="sync_status_cancelled">同步已取消 · <xliff:g id="source">%1$s</xliff:g></string>
     <string name="sync_status_download">正在下载 <xliff:g id="title">%1$s</xliff:g></string>
     <string name="sync_status_download_with_progress">正在下载 <xliff:g id="title">%1$s</xliff:g> · <xliff:g id="percent">%2$d</xliff:g>%%</string>
+    <string name="sync_status_download_locked">正在从已锁定的分类下载</string>
+    <string name="sync_status_download_locked_with_progress">正在从已锁定的分类下载 · <xliff:g id="percent">%1$d</xliff:g>%%</string>
     <string name="sync_phase_live">直播电视</string>
     <string name="sync_phase_movies">电影</string>
     <string name="sync_phase_series">剧集</string>

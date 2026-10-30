@@ -195,6 +195,7 @@
     <string name="recording_group_missed">Kimaradt</string>
     <string name="recording_record">Felvétel</string>
     <string name="recording_stop">Felvétel leállítása</string>
+    <string name="recording_delete_message">Eltávolítja a felvételt és a fájlját erről az eszközről. Ez nem vonható vissza.</string>
     <string name="recording_record_series">Minden adás felvétele</string>
     <string name="recording_stop_series">Ne vegye fel minden adását</string>
     <string name="recording_from_archive">Felvétel az archívumból</string>
@@ -207,6 +208,7 @@
     <string name="recording_scheduled_for">Rögzíti: <xliff:g id="time">%1$s</xliff:g></string>
     <string name="recording_badge">REC</string>
     <string name="recording_pill_line"><xliff:g id="title">%1$s</xliff:g> rögzítése</string>
+    <string name="recording_pill_line_locked">Rögzítés zárolt kategóriából</string>
     <string name="recording_clash_with">Ütközik ezzel: <xliff:g id="programme">%1$s</xliff:g></string>
     <string name="recording_settings_group">Felvétel</string>
     <string name="settings_recording_reserve">Egy adatfolyam maradjon szabadon a nézéshez</string>

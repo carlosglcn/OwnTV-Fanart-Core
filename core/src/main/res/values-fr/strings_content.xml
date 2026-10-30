@@ -70,6 +70,13 @@
     </plurals>
     <string name="content_category_restore_order">Votre ordre personnalisé sera effacé</string>
     <string name="content_category_restore_nothing">La catégorie est déjà conforme à la liste de lecture</string>
+    <string name="content_category_lock">Verrouiller avec un PIN</string>
+    <string name="content_category_locked_placeholder">Cette catégorie est verrouillée</string>
+    <plurals name="content_category_pin_wait">
+        <item quantity="one">Trop de PIN erronés. Réessayez dans <xliff:g id="count">%1$d</xliff:g> seconde</item>
+        <item quantity="many">Trop de PIN erronés. Réessayez dans <xliff:g id="count">%1$d</xliff:g> secondes</item>
+        <item quantity="other">Trop de PIN erronés. Réessayez dans <xliff:g id="count">%1$d</xliff:g> secondes</item>
+    </plurals>
     <string name="content_move_to_category">Déplacer vers une catégorie…</string>
     <string name="content_remove_from_category">Retirer de cette catégorie</string>
     <string name="content_download">Télécharger</string>
@@ -182,6 +189,8 @@
     <string name="content_downloads_ready">Prêt à regarder</string>
     <string name="content_downloads_paused">En pause</string>
     <string name="content_downloads_file_missing">Fichier manquant : il n\'est plus sur le disque</string>
+    <string name="content_downloads_delete_title">Supprimer « <xliff:g id="name">%1$s</xliff:g> » ?</string>
+    <string name="content_downloads_delete_message">Supprime le fichier de cet appareil. Il pourra être téléchargé de nouveau plus tard.</string>
     <string name="content_downloads_reason_account_busy">Compte occupé : un autre flux utilise la connexion</string>
     <string name="content_downloads_reason_refused">Le serveur a refusé le lien</string>
     <string name="content_downloads_reason_not_found">Le serveur n\'a plus ce fichier</string>

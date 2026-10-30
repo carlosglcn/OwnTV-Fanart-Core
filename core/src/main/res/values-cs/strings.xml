@@ -86,6 +86,8 @@
     <string name="sync_status_cancelled">Synchronizace zrušena · <xliff:g id="source">%1$s</xliff:g></string>
     <string name="sync_status_download">Stahování <xliff:g id="title">%1$s</xliff:g></string>
     <string name="sync_status_download_with_progress">Stahování <xliff:g id="title">%1$s</xliff:g> · <xliff:g id="percent">%2$d</xliff:g>%%</string>
+    <string name="sync_status_download_locked">Stahování z uzamčené kategorie</string>
+    <string name="sync_status_download_locked_with_progress">Stahování z uzamčené kategorie · <xliff:g id="percent">%1$d</xliff:g>%%</string>
     <string name="sync_phase_live">Živé vysílání</string>
     <string name="sync_phase_movies">Filmy</string>
     <string name="sync_phase_series">Seriály</string>

@@ -518,6 +518,10 @@
     <string name="settings_mini_player_root_description">Size and position of the docked mini-player</string>
     <!-- Translators: Description of the Prefer SDR setting. 'ExoPlayer' is an engine brand name. -->
     <string name="settings_prefer_sdr_description">When a stream offers both an SDR and an HDR picture, play the SDR one: for a TV whose HDR looks washed out or too dark. A stream with HDR only stays HDR. ExoPlayer only.</string>
+    <!-- Translators: Name of the Video player setting that keeps a playing video in a small floating window (Android picture-in-picture) when the user leaves the app with Home. -->
+    <string name="settings_pip_on_leave">Picture-in-picture when leaving the app</string>
+    <!-- Translators: Description of the picture-in-picture setting. -->
+    <string name="settings_pip_on_leave_description">Keep the video playing in a small window when you press Home</string>
     <!-- Translators: Setting label for auto frame rate matching. -->
     <string name="settings_auto_frame_rate">Auto frame rate</string>
     <!-- Translators: Description of the auto frame rate setting. Explains when to turn it off. -->
@@ -623,6 +627,8 @@
     <string name="settings_live_latency">Live latency</string>
     <!-- Translators: Empty-state message when a settings search returns no results. 'query' is the search text. -->
     <string name="settings_no_settings_match">No settings match “<xliff:g id="query">%1$s</xliff:g>”</string>
+    <!-- Translators: Shown on the Settings search page while the search field is still empty. -->
+    <string name="settings_search_empty_hint">Type the name of a setting</string>
     <!-- Translators: Settings breadcrumb navigation display. 'group' is the group name, 'title' is the section title. -->
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <!-- Translators: App startup option: open to the Home screen. -->
@@ -1266,6 +1272,10 @@
     <string name="settings_customize_change_pin">🔒 Change PIN</string>
     <!-- Translators: Button to remove the PIN lock from the Customize screen. -->
     <string name="settings_customize_remove_lock">Remove lock</string>
+    <!-- Translators: Name of the option, in the Customize screen menu, that makes opening Settings ask for the Customize PIN. Also a Settings search result. -->
+    <string name="settings_customize_settings_pin">Ask for PIN to open Settings</string>
+    <!-- Translators: The same option as a Customize menu entry showing its state. "state" is On or Off. -->
+    <string name="settings_customize_settings_pin_button">Ask for PIN to open Settings: <xliff:g id="state">%1$s</xliff:g></string>
     <!-- Translators: Description of the Customize Categories & Items feature. -->
     <string name="settings_customize_description">Hide &amp; unhide channels, movies and series, and rename or reorder categories for this profile. Survives re-syncs.</string>
     <!-- Translators: Setting label for new-category visibility behavior. -->
@@ -1354,6 +1364,8 @@
     <string name="settings_customize_remove_pin_title">Remove PIN lock?</string>
     <!-- Translators: Description of what removing the PIN lock does. -->
     <string name="settings_customize_remove_pin_message">The Customize screen will open without asking for a PIN again.</string>
+    <!-- Translators: Second sentence of the remove-PIN confirmation: categories locked from the Live TV, Movies or Series menu lose their lock as well. -->
+    <string name="settings_customize_remove_pin_locks">Every category locked with this PIN is unlocked too.</string>
     <!-- Translators: Button to confirm removal. -->
     <string name="settings_customize_remove">Remove</string>
     <!-- Translators: Heading for the PIN confirmation entry. -->
@@ -2757,6 +2769,8 @@
     <!-- Translators: One-line description under a setting's name on a Settings page; keep it short, it is cut to one line. -->
     <string name="settings_line_mini">Size and position</string>
     <!-- Translators: One-line description under a setting's name on a Settings page; keep it short, it is cut to one line. -->
+    <string name="settings_line_pip">Keep watching in a small window</string>
+    <!-- Translators: One-line description under a setting's name on a Settings page; keep it short, it is cut to one line. -->
     <string name="settings_line_rec_reserve">Never record on every connection</string>
     <!-- Translators: One-line description under a setting's name on a Settings page; keep it short, it is cut to one line. -->
     <string name="settings_line_rec_watching">Not a second stream</string>
@@ -2840,6 +2854,8 @@
     <string name="settings_help_resume">Ask to resume offers Resume or Start over when a film or episode has a saved position. Always resume carries on where you stopped; Never resume starts from the beginning.</string>
     <!-- Translators: Explanation shown in the panel beside the Settings rows while this setting has focus. -->
     <string name="settings_help_mini">The small player that keeps a channel going in a corner while you browse. Choose its size and the corner it sits in.</string>
+    <!-- Translators: Explanation shown in the panel beside the Settings rows while this setting has focus. -->
+    <string name="settings_help_pip">Press Home or open another app while a video plays full screen or in the mini-player, and it keeps playing in a small window over the rest of the TV. Open OwnTV again to bring it back full screen; close the window to stop playback. Multiview stays in OwnTV.</string>
     <!-- Translators: Remote-key hint in the Settings explanation panel. OK opens the color palette. -->
     <string name="settings_key_palette">Palette</string>
     <!-- Translators: Note under the live preview in Settings › Appearance. -->

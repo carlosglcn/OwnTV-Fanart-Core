@@ -65,6 +65,12 @@
     </plurals>
     <string name="content_category_restore_order">Az egyéni sorrend törlődik</string>
     <string name="content_category_restore_nothing">A kategória már a lista alapértelmezésén áll</string>
+    <string name="content_category_lock">Zárolás PIN-kóddal</string>
+    <string name="content_category_locked_placeholder">Ez a kategória zárolva van</string>
+    <plurals name="content_category_pin_wait">
+        <item quantity="one">Túl sok hibás PIN-kód. Próbáld újra <xliff:g id="count">%1$d</xliff:g> másodperc múlva</item>
+        <item quantity="other">Túl sok hibás PIN-kód. Próbáld újra <xliff:g id="count">%1$d</xliff:g> másodperc múlva</item>
+    </plurals>
     <string name="content_move_to_category">Áthelyezés kategóriába…</string>
     <string name="content_remove_from_category">Eltávolítás ebből a kategóriából</string>
     <string name="content_download">Letöltés</string>
@@ -176,6 +182,8 @@
     <string name="content_downloads_ready">Megtekinthető</string>
     <string name="content_downloads_paused">Szüneteltetve</string>
     <string name="content_downloads_file_missing">Hiányzó fájl: már nincs a meghajtón</string>
+    <string name="content_downloads_delete_title">Törlöd ezt: „<xliff:g id="name">%1$s</xliff:g>”?</string>
+    <string name="content_downloads_delete_message">Eltávolítja a fájlt erről az eszközről. Később újra letölthető.</string>
     <string name="content_downloads_reason_account_busy">A fiók foglalt: egy másik adatfolyam használja a kapcsolatot</string>
     <string name="content_downloads_reason_refused">A szerver elutasította a hivatkozást</string>
     <string name="content_downloads_reason_not_found">A szerveren már nincs meg ez a fájl</string>

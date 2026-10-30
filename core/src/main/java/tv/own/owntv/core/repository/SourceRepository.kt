@@ -107,8 +107,6 @@ class SourceRepository(
             .forEach { categoryDao.clear(sourceId, it) }
     }
 
-    suspend fun updateSource(source: SourceEntity) = sourceDao.update(source)
-
     /**
      * [onProgress] is deliberately **last**: Kotlin binds a trailing lambda to the final parameter,
      * so while `forcePrune` sat there `sync(source) { … }` aimed the progress callback at a Boolean

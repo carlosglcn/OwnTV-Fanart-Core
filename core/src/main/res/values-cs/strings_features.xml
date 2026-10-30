@@ -213,6 +213,7 @@
     <string name="recording_group_missed">Zmeškáno</string>
     <string name="recording_record">Nahrát</string>
     <string name="recording_stop">Zastavit nahrávání</string>
+    <string name="recording_delete_message">Odstraní nahrávku a její soubor z tohoto zařízení. Tuto akci nelze vrátit zpět.</string>
     <string name="recording_record_series">Nahrávat každé uvedení</string>
     <string name="recording_stop_series">Přestat nahrávat každé uvedení</string>
     <string name="recording_from_archive">Nahrát z archivu</string>
@@ -225,6 +226,7 @@
     <string name="recording_scheduled_for">Nahraje se <xliff:g id="time">%1$s</xliff:g></string>
     <string name="recording_badge">REC</string>
     <string name="recording_pill_line">Nahrává se <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="recording_pill_line_locked">Nahrávání z uzamčené kategorie</string>
     <string name="recording_clash_with">Koliduje s <xliff:g id="programme">%1$s</xliff:g></string>
     <string name="recording_settings_group">Nahrávání</string>
     <string name="settings_recording_reserve">Ponechat jeden stream volný pro sledování</string>

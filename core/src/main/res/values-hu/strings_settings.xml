@@ -275,6 +275,8 @@
     <string name="settings_preview_audio_description">Hang lejátszása az élő előnézetben</string>
     <string name="settings_mini_player_root">Mini lejátszó</string>
     <string name="settings_mini_player_root_description">A dokkolt mini lejátszó mérete és pozíciója</string>
+    <string name="settings_pip_on_leave">Kép a képben az alkalmazás elhagyásakor</string>
+    <string name="settings_pip_on_leave_description">A videó egy kis ablakban folytatódik, ha megnyomod a Kezdőlap gombot</string>
     <string name="settings_prefer_sdr_description">Ha egy stream SDR és HDR képet is kínál, az SDR kép játszódik le: olyan tévéhez, amelyen a HDR fakónak vagy túl sötétnek tűnik. A csak HDR-es stream HDR marad. Csak ExoPlayer.</string>
     <string name="settings_auto_frame_rate">Automatikus képkockasebesség</string>
     <string name="settings_auto_frame_rate_description">Teljes képernyőn a TV frissítési frekvenciáját a videóhoz igazítja (24/25/50/60 fps) élő TV és VOD esetén is, kilépéskor pedig visszaállítja. Kapcsold ki, ha a TV-d vagy a vevőd minden csatornaváltásnál zajosan újraegyezteti a HDMI-t.</string>
@@ -330,6 +332,7 @@
     <string name="settings_about">Névjegy</string>
     <string name="settings_live_latency">Élő késleltetés</string>
     <string name="settings_no_settings_match">Egyetlen beállítás sem egyezik ezzel: „<xliff:g id="query">%1$s</xliff:g>”</string>
+    <string name="settings_search_empty_hint">Írd be egy beállítás nevét</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">Kezdőlap</string>
     <string name="settings_startup_last_channel">Utolsó csatorna</string>
@@ -653,6 +656,8 @@
     <string name="settings_customize_set_pin">🔒 PIN beállítása</string>
     <string name="settings_customize_change_pin">🔒 PIN módosítása</string>
     <string name="settings_customize_remove_lock">Zár eltávolítása</string>
+    <string name="settings_customize_settings_pin">PIN-kód kérése a Beállítások megnyitásához</string>
+    <string name="settings_customize_settings_pin_button">PIN-kód kérése a Beállítások megnyitásához: <xliff:g id="state">%1$s</xliff:g></string>
     <string name="settings_customize_description">Csatornák, filmek és sorozatok elrejtése és megjelenítése, valamint kategóriák átnevezése vagy átrendezése ehhez a profilhoz. Az újraszinkronizálást is túléli.</string>
     <string name="settings_customize_new_category_behavior">Új kategóriák kezelése</string>
     <string name="settings_customize_hide">Elrejtés</string>
@@ -698,6 +703,7 @@
     <string name="settings_customize_rename_hint">Csak ehhez a profilhoz. Hagyd üresen a(z) „<xliff:g id="name">%1$s</xliff:g>” visszaállításához.</string>
     <string name="settings_customize_remove_pin_title">Eltávolítod a PIN-zárat?</string>
     <string name="settings_customize_remove_pin_message">A Testreszabás képernyő ezután PIN-kód kérése nélkül nyílik meg.</string>
+    <string name="settings_customize_remove_pin_locks">Az ezzel a PIN-kóddal zárolt összes kategória zárolása is feloldódik.</string>
     <string name="settings_customize_remove">Eltávolítás</string>
     <string name="settings_customize_confirm_pin">Erősítsd meg az új PIN-kódot</string>
     <string name="settings_customize_pin_mismatch">A PIN-kódok nem egyeznek — add meg újra</string>
@@ -1455,6 +1461,7 @@
     <string name="settings_line_autoplay">És tovább a következő évadba</string>
     <string name="settings_line_tiles">Minden csempe egy újabb adás</string>
     <string name="settings_line_mini">Méret és pozíció</string>
+    <string name="settings_line_pip">Nézd tovább egy kis ablakban</string>
     <string name="settings_line_rec_reserve">Soha ne rögzítsen minden kapcsolaton</string>
     <string name="settings_line_rec_watching">Nem egy második adás</string>
     <string name="settings_line_rec_pre_roll">A műsor kezdete előtt</string>
@@ -1497,6 +1504,7 @@
     <string name="settings_help_timeshift_window">Mennyit tud visszamenni az Élő tévé szüneteltetése és visszatekerése visszanézés nélküli csatornán. A hosszabb több tartalmat tárol a készüléken.</string>
     <string name="settings_help_resume">A Kérdezzen felajánlja a Folytatást vagy az Elölről kezdést, ha a filmnek vagy résznek van mentett pozíciója. A Mindig folytassa ott folytatja, ahol abbahagyta; a Soha ne folytassa az elejéről indít.</string>
     <string name="settings_help_mini">A kis lejátszó, amely böngészés közben egy sarokban tovább viszi a csatornát. Válassza ki a méretét és a sarkot.</string>
+    <string name="settings_help_pip">Nyomd meg a Kezdőlap gombot, vagy nyiss meg egy másik alkalmazást, miközben egy videó teljes képernyőn vagy a mini lejátszóban fut, és egy kis ablakban folytatódik a tévé többi része fölött. Nyisd meg újra az OwnTV-t, hogy visszakerüljön teljes képernyőre; zárd be az ablakot a lejátszás leállításához. A Többnézet az OwnTV-ben marad.</string>
     <string name="settings_key_palette">Paletta</string>
     <string name="settings_live_preview_note">A változások itt látszanak, még mielőtt elhagyná a sort.</string>
     <string name="settings_synced_at">Szinkronizálva: <xliff:g id="when">%1$s</xliff:g></string>

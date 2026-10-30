@@ -229,6 +229,8 @@
     <string name="settings_preview_audio_description">ライブプレビューで音声を再生</string>
     <string name="settings_mini_player_root">ミニプレーヤー</string>
     <string name="settings_mini_player_root_description">ドッキングしたミニプレーヤーのサイズと位置</string>
+    <string name="settings_pip_on_leave">アプリを離れたときのピクチャー イン ピクチャー</string>
+    <string name="settings_pip_on_leave_description">ホームを押すと、動画が小さなウィンドウで再生され続けます</string>
     <string name="settings_prefer_sdr_description">ストリームに SDR と HDR の両方の映像がある場合、SDR を再生します。HDR が白っぽく、または暗すぎて見えるテレビ向けです。HDR のみのストリームは HDR のままです。ExoPlayer のみ。</string>
     <string name="settings_auto_frame_rate">自動フレームレート</string>
     <string name="settings_auto_frame_rate_description">全画面表示でライブTVとVODの再生時にTVのリフレッシュレートを動画（24/25/50/60 fps）に合わせ、終了時に元に戻します。チャンネルを切り替えるたびにTVやレシーバーが大きな音を伴ってHDMIを再ハンドシェイクする場合はオフにしてください。</string>
@@ -276,6 +278,7 @@
     <string name="settings_about">アプリについて</string>
     <string name="settings_live_latency">ライブ遅延</string>
     <string name="settings_no_settings_match">「<xliff:g id="query">%1$s</xliff:g>」に一致する設定はありません</string>
+    <string name="settings_search_empty_hint">設定の名前を入力してください</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">ホーム</string>
     <string name="settings_startup_last_channel">最後のチャンネル</string>
@@ -611,6 +614,8 @@
     <string name="settings_customize_set_pin">🔒 PINを設定</string>
     <string name="settings_customize_change_pin">🔒 PINを変更</string>
     <string name="settings_customize_remove_lock">ロックを解除</string>
+    <string name="settings_customize_settings_pin">設定を開くときにPINを要求</string>
+    <string name="settings_customize_settings_pin_button">設定を開くときにPINを要求: <xliff:g id="state">%1$s</xliff:g></string>
     <string name="settings_customize_description">このプロフィールのチャンネル、映画、シリーズの表示／非表示を切り替え、カテゴリの名前や順序を変更します。再同期後も設定は維持されます。</string>
     <string name="settings_customize_new_category_behavior">新しいカテゴリの動作</string>
     <string name="settings_customize_hide">非表示にする</string>
@@ -655,6 +660,7 @@
     <string name="settings_customize_rename_hint">このプロフィールにのみ適用されます。空欄にすると「<xliff:g id="name">%1$s</xliff:g>」に戻ります。</string>
     <string name="settings_customize_remove_pin_title">PINロックを解除しますか？</string>
     <string name="settings_customize_remove_pin_message">今後、カスタマイズ画面を開くときにPINの入力を求められなくなります。</string>
+    <string name="settings_customize_remove_pin_locks">このPINでロックしたカテゴリもすべてロックが解除されます。</string>
     <string name="settings_customize_remove">解除</string>
     <string name="settings_customize_confirm_pin">新しいPINを確認</string>
     <string name="settings_customize_pin_mismatch">PINが一致しません — 入力し直してください</string>
@@ -1427,6 +1433,7 @@
     <string name="settings_line_autoplay">次のシーズンへも続けて</string>
     <string name="settings_line_tiles">タイル1つごとにストリームが1つ</string>
     <string name="settings_line_mini">サイズと位置</string>
+    <string name="settings_line_pip">小さなウィンドウで視聴を続ける</string>
     <string name="settings_line_rec_reserve">全接続で録画しない</string>
     <string name="settings_line_rec_watching">2本目のストリームは使わない</string>
     <string name="settings_line_rec_pre_roll">番組の開始前に</string>
@@ -1469,6 +1476,7 @@
     <string name="settings_help_timeshift_window">キャッチアップのないチャンネルで、ライブ TV の一時停止と巻き戻しがどこまで戻れるか。長いほど、このデバイスのストレージにチャンネルを多く保存します。</string>
     <string name="settings_help_resume">「再開を確認」では、映画やエピソードに保存位置があると「再開」か「最初から」を選べます。「常に再開」は止めた位置から、「再開しない」は最初から再生します。</string>
     <string name="settings_help_mini">閲覧中も隅でチャンネルを流し続ける小さなプレーヤーです。サイズと置く隅を選べます。</string>
+    <string name="settings_help_pip">全画面またはミニプレーヤーで動画を再生中にホームを押すか別のアプリを開くと、テレビの他の画面の上に小さなウィンドウで再生が続きます。OwnTV をもう一度開くと全画面に戻り、ウィンドウを閉じると再生が止まります。マルチビューは OwnTV の中だけです。</string>
     <string name="settings_key_palette">パレット</string>
     <string name="settings_live_preview_note">行を離れる前から、変更がここに表示されます。</string>
     <string name="settings_synced_at"><xliff:g id="when">%1$s</xliff:g> に同期</string>

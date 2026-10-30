@@ -204,6 +204,7 @@
     <string name="recording_group_missed">Perdida</string>
     <string name="recording_record">Grabar</string>
     <string name="recording_stop">Detener la grabación</string>
+    <string name="recording_delete_message">Elimina la grabación y su archivo de este dispositivo. No se puede deshacer.</string>
     <string name="recording_record_series">Grabar todas las emisiones</string>
     <string name="recording_stop_series">Dejar de grabar todas las emisiones</string>
     <string name="recording_from_archive">Grabar desde el archivo</string>
@@ -216,6 +217,7 @@
     <string name="recording_scheduled_for">Se grabará <xliff:g id="time">%1$s</xliff:g></string>
     <string name="recording_badge">REC</string>
     <string name="recording_pill_line">Grabando <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="recording_pill_line_locked">Grabando de una categoría bloqueada</string>
     <string name="recording_clash_with">Coincide con <xliff:g id="programme">%1$s</xliff:g></string>
     <string name="recording_settings_group">Grabación</string>
     <string name="settings_recording_reserve">Dejar una conexión libre para ver</string>

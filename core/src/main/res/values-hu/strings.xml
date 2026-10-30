@@ -82,6 +82,8 @@
     <string name="sync_status_cancelled">Szinkronizálás megszakítva · <xliff:g id="source">%1$s</xliff:g></string>
     <string name="sync_status_download"><xliff:g id="title">%1$s</xliff:g> letöltése</string>
     <string name="sync_status_download_with_progress"><xliff:g id="title">%1$s</xliff:g> letöltése · <xliff:g id="percent">%2$d</xliff:g>%%</string>
+    <string name="sync_status_download_locked">Letöltés zárolt kategóriából</string>
+    <string name="sync_status_download_locked_with_progress">Letöltés zárolt kategóriából · <xliff:g id="percent">%1$d</xliff:g>%%</string>
     <string name="sync_status_trending_starting">Szinkronizálás kész · <xliff:g id="source">%1$s</xliff:g> · Most felkapott összeállítása</string>
     <string name="sync_status_trending_detail_waiting">Várakozás a TMDB jelöltek válaszára</string>
     <string name="sync_status_trending_detail_received">TMDB-jelöltek · Filmek: <xliff:g id="movies">%1$d</xliff:g> · Sorozatok: <xliff:g id="series">%2$d</xliff:g></string>

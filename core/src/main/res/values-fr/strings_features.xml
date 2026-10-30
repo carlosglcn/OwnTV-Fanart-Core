@@ -204,6 +204,7 @@
     <string name="recording_group_missed">Manqué</string>
     <string name="recording_record">Enregistrer</string>
     <string name="recording_stop">Arrêter l’enregistrement</string>
+    <string name="recording_delete_message">Supprime l\'enregistrement et son fichier de cet appareil. Cette action est irréversible.</string>
     <string name="recording_record_series">Enregistrer chaque diffusion</string>
     <string name="recording_stop_series">Ne plus enregistrer chaque diffusion</string>
     <string name="recording_from_archive">Enregistrer depuis le replay</string>
@@ -216,6 +217,7 @@
     <string name="recording_scheduled_for">Enregistrera <xliff:g id="time">%1$s</xliff:g></string>
     <string name="recording_badge">REC</string>
     <string name="recording_pill_line">Enregistrement de <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="recording_pill_line_locked">Enregistrement depuis une catégorie verrouillée</string>
     <string name="recording_clash_with">En conflit avec <xliff:g id="programme">%1$s</xliff:g></string>
     <string name="recording_settings_group">Enregistrement</string>
     <string name="settings_recording_reserve">Garder une connexion libre pour regarder</string>

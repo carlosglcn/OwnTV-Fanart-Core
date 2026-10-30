@@ -82,6 +82,8 @@
     <string name="sync_status_cancelled">Synkroniseringen avbröts · <xliff:g id="source">%1$s</xliff:g></string>
     <string name="sync_status_download">Laddar ner <xliff:g id="title">%1$s</xliff:g></string>
     <string name="sync_status_download_with_progress">Laddar ner <xliff:g id="title">%1$s</xliff:g> · <xliff:g id="percent">%2$d</xliff:g>%%</string>
+    <string name="sync_status_download_locked">Laddar ner från en låst kategori</string>
+    <string name="sync_status_download_locked_with_progress">Laddar ner från en låst kategori · <xliff:g id="percent">%1$d</xliff:g>%%</string>
     <string name="sync_phase_live">Live-tv</string>
     <string name="sync_phase_movies">Filmer</string>
     <string name="sync_phase_series">Serier</string>

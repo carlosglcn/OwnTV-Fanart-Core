@@ -229,6 +229,8 @@
     <string name="settings_preview_audio_description">在直播預覽中播放聲音</string>
     <string name="settings_mini_player_root">迷你播放器</string>
     <string name="settings_mini_player_root_description">已停駐迷你播放器的大小和位置</string>
+    <string name="settings_pip_on_leave">離開應用程式時使用子母畫面</string>
+    <string name="settings_pip_on_leave_description">按首頁鍵時，影片會在小視窗中繼續播放</string>
     <string name="settings_prefer_sdr_description">當串流同時提供 SDR 和 HDR 畫面時，播放 SDR 畫面：適合 HDR 看起來泛白或過暗的電視。僅有 HDR 的串流仍為 HDR。僅限 ExoPlayer。</string>
     <string name="settings_auto_frame_rate">自動影格率</string>
     <string name="settings_auto_frame_rate_description">在全螢幕播放電視直播和隨選影片時，將電視更新率配合影片調整為 24/25/50/60 fps，並在結束時還原。如果您的電視或接收器每次切換頻道時都會重新進行 HDMI 交握並產生明顯干擾，請關閉此功能。</string>
@@ -276,6 +278,7 @@
     <string name="settings_about">關於</string>
     <string name="settings_live_latency">直播延遲</string>
     <string name="settings_no_settings_match">沒有符合「<xliff:g id="query">%1$s</xliff:g>」的設定</string>
+    <string name="settings_search_empty_hint">輸入設定的名稱</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">主畫面</string>
     <string name="settings_startup_last_channel">上一個頻道</string>
@@ -611,6 +614,8 @@
     <string name="settings_customize_set_pin">🔒 設定 PIN</string>
     <string name="settings_customize_change_pin">🔒 變更 PIN</string>
     <string name="settings_customize_remove_lock">移除鎖定</string>
+    <string name="settings_customize_settings_pin">開啟設定時要求輸入 PIN</string>
+    <string name="settings_customize_settings_pin_button">開啟設定時要求輸入 PIN：<xliff:g id="state">%1$s</xliff:g></string>
     <string name="settings_customize_description">為此使用者檔案隱藏或取消隱藏頻道、電影及影集，並重新命名或排列分類。重新同步後仍會保留。</string>
     <string name="settings_customize_new_category_behavior">新分類的顯示方式</string>
     <string name="settings_customize_hide">隱藏</string>
@@ -655,6 +660,7 @@
     <string name="settings_customize_rename_hint">僅適用於此使用者檔案。留白即可還原為「<xliff:g id="name">%1$s</xliff:g>」。</string>
     <string name="settings_customize_remove_pin_title">要移除 PIN 鎖定嗎？</string>
     <string name="settings_customize_remove_pin_message">之後開啟「自訂」畫面時，將不會再要求輸入 PIN。</string>
+    <string name="settings_customize_remove_pin_locks">以此 PIN 鎖定的所有分類也會一併解除鎖定。</string>
     <string name="settings_customize_remove">移除</string>
     <string name="settings_customize_confirm_pin">確認新的 PIN</string>
     <string name="settings_customize_pin_mismatch">PIN 不相符，請重新輸入</string>
@@ -1427,6 +1433,7 @@
     <string name="settings_line_autoplay">並接著播下一季</string>
     <string name="settings_line_tiles">每個畫面都占一路串流</string>
     <string name="settings_line_mini">大小和位置</string>
+    <string name="settings_line_pip">在小視窗中繼續觀看</string>
     <string name="settings_line_rec_reserve">絕不占滿所有連線錄製</string>
     <string name="settings_line_rec_watching">不占用第二路串流</string>
     <string name="settings_line_rec_pre_roll">節目開始之前</string>
@@ -1469,6 +1476,7 @@
     <string name="settings_help_timeshift_window">在沒有回看的頻道上，「暫停和倒轉直播電視」最多能倒轉多久。越長，此裝置儲存空間中保留的頻道內容越多。</string>
     <string name="settings_help_resume">「詢問是否繼續」會在電影或集數有已儲存位置時提供「繼續」或「從頭開始」。「一律繼續」從上次停止處播放；「永不繼續」從頭開始。</string>
     <string name="settings_help_mini">瀏覽時在角落繼續播放頻道的小播放器。可選擇大小和所在角落。</string>
+    <string name="settings_help_pip">影片以全螢幕或在迷你播放器中播放時，按首頁鍵或開啟其他應用程式，影片會在電視其他畫面上方的小視窗中繼續播放。再次開啟 OwnTV 即可回到全螢幕；關閉視窗即停止播放。多畫面只在 OwnTV 內使用。</string>
     <string name="settings_key_palette">調色盤</string>
     <string name="settings_live_preview_note">移動時變更就會顯示在這裡，無需離開該列。</string>
     <string name="settings_synced_at"><xliff:g id="when">%1$s</xliff:g>同步</string>

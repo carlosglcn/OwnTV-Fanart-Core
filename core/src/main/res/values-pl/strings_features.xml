@@ -213,6 +213,7 @@
     <string name="recording_group_missed">Pominięte</string>
     <string name="recording_record">Nagraj</string>
     <string name="recording_stop">Zatrzymaj nagrywanie</string>
+    <string name="recording_delete_message">Usuwa nagranie i jego plik z tego urządzenia. Tej operacji nie można cofnąć.</string>
     <string name="recording_record_series">Nagrywaj każdą emisję</string>
     <string name="recording_stop_series">Przestań nagrywać każdą emisję</string>
     <string name="recording_from_archive">Nagraj z archiwum</string>
@@ -225,6 +226,7 @@
     <string name="recording_scheduled_for">Nagra <xliff:g id="time">%1$s</xliff:g></string>
     <string name="recording_badge">REC</string>
     <string name="recording_pill_line">Nagrywanie: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="recording_pill_line_locked">Nagrywanie z zablokowanej kategorii</string>
     <string name="recording_clash_with">Koliduje z <xliff:g id="programme">%1$s</xliff:g></string>
     <string name="recording_settings_group">Nagrywanie</string>
     <string name="settings_recording_reserve">Zostaw jedno połączenie wolne do oglądania</string>

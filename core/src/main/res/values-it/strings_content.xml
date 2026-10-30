@@ -70,6 +70,13 @@
     </plurals>
     <string name="content_category_restore_order">cancella l’ordine personalizzato</string>
     <string name="content_category_restore_nothing">La categoria è già ai valori predefiniti della playlist</string>
+    <string name="content_category_lock">Blocca con PIN</string>
+    <string name="content_category_locked_placeholder">Questa categoria è bloccata</string>
+    <plurals name="content_category_pin_wait">
+        <item quantity="one">Troppi PIN errati. Riprova tra <xliff:g id="count">%1$d</xliff:g> secondo</item>
+        <item quantity="many">Troppi PIN errati. Riprova tra <xliff:g id="count">%1$d</xliff:g> secondi</item>
+        <item quantity="other">Troppi PIN errati. Riprova tra <xliff:g id="count">%1$d</xliff:g> secondi</item>
+    </plurals>
     <string name="content_move_to_category">Sposta nella categoria…</string>
     <string name="content_remove_from_category">Rimuovi da questa categoria</string>
     <string name="content_download">Scarica</string>
@@ -182,6 +189,8 @@
     <string name="content_downloads_ready">Pronto da guardare</string>
     <string name="content_downloads_paused">In pausa</string>
     <string name="content_downloads_file_missing">File mancante: non è più sull\'unità</string>
+    <string name="content_downloads_delete_title">Eliminare “<xliff:g id="name">%1$s</xliff:g>”?</string>
+    <string name="content_downloads_delete_message">Rimuove il file da questo dispositivo. Potrà essere scaricato di nuovo in seguito.</string>
     <string name="content_downloads_reason_account_busy">Account occupato: un altro flusso sta usando la connessione</string>
     <string name="content_downloads_reason_refused">Il server ha rifiutato il link</string>
     <string name="content_downloads_reason_not_found">Il server non ha più questo file</string>

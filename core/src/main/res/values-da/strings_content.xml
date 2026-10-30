@@ -65,6 +65,12 @@
     </plurals>
     <string name="content_category_restore_order">rydde din egen rækkefølge</string>
     <string name="content_category_restore_nothing">Kategorien har allerede afspilningslistens standard</string>
+    <string name="content_category_lock">Lås med PIN</string>
+    <string name="content_category_locked_placeholder">Denne kategori er låst</string>
+    <plurals name="content_category_pin_wait">
+        <item quantity="one">For mange forkerte PIN-koder. Prøv igen om <xliff:g id="count">%1$d</xliff:g> sekund</item>
+        <item quantity="other">For mange forkerte PIN-koder. Prøv igen om <xliff:g id="count">%1$d</xliff:g> sekunder</item>
+    </plurals>
     <string name="content_move_to_category">Flyt til kategori…</string>
     <string name="content_remove_from_category">Fjern fra denne kategori</string>
     <string name="content_download">Download</string>
@@ -176,6 +182,8 @@
     <string name="content_downloads_ready">Klar til at se</string>
     <string name="content_downloads_paused">Sat på pause</string>
     <string name="content_downloads_file_missing">Filen mangler: den er ikke længere på drevet</string>
+    <string name="content_downloads_delete_title">Slet “<xliff:g id="name">%1$s</xliff:g>”?</string>
+    <string name="content_downloads_delete_message">Fjerner filen fra denne enhed. Den kan downloades igen senere.</string>
     <string name="content_downloads_reason_account_busy">Kontoen er optaget: en anden stream bruger forbindelsen</string>
     <string name="content_downloads_reason_refused">Serveren afviste linket</string>
     <string name="content_downloads_reason_not_found">Serveren har ikke længere denne fil</string>

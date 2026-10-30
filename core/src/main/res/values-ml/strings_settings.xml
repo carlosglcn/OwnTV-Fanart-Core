@@ -230,6 +230,8 @@
     <string name="settings_preview_audio_description">തത്സമയ പ്രിവ്യൂവിൽ ശബ്ദം പ്ലേ ചെയ്യുക</string>
     <string name="settings_mini_player_root">മിനി പ്ലെയർ</string>
     <string name="settings_mini_player_root_description">ഡോക്ക് ചെയ്ത മിനി പ്ലെയറിന്റെ വലുപ്പവും സ്ഥാനവും</string>
+    <string name="settings_pip_on_leave">ആപ്പ് വിടുമ്പോൾ പിക്ചർ-ഇൻ-പിക്ചർ</string>
+    <string name="settings_pip_on_leave_description">ഹോം അമർത്തുമ്പോൾ വീഡിയോ ഒരു ചെറിയ വിൻഡോയിൽ തുടരും</string>
     <string name="settings_prefer_sdr_description">ഒരു സ്ട്രീമിൽ SDR, HDR ചിത്രങ്ങൾ രണ്ടും ഉണ്ടെങ്കിൽ SDR പ്ലേ ചെയ്യും: HDR മങ്ങിയോ വളരെ ഇരുണ്ടോ കാണുന്ന ടിവിക്കായി. HDR മാത്രമുള്ള സ്ട്രീം HDR ആയി തുടരും. ExoPlayer-ൽ മാത്രം.</string>
     <string name="settings_auto_frame_rate">സ്വയമേവയുള്ള ഫ്രെയിം നിരക്ക്</string>
     <string name="settings_auto_frame_rate_description">തത്സമയ ടിവിക്കും VOD-ക്കും പൂർണ്ണ സ്ക്രീനിൽ ടിവിയുടെ പുതുക്കൽ നിരക്ക് വീഡിയോയുമായി (24/25/50/60 fps) പൊരുത്തപ്പെടുത്തി, പുറത്തുകടക്കുമ്പോൾ പഴയ നിലയിലാക്കുക. ഓരോ ചാനൽ മാറ്റത്തിലും നിങ്ങളുടെ ടിവിയോ റിസീവറോ HDMI ഹാൻഡ്‌ഷേക്ക് ശബ്ദത്തോടെ വീണ്ടും നടത്തുകയാണെങ്കിൽ ഇത് പ്രവർത്തനരഹിതമാക്കുക.</string>
@@ -278,6 +280,7 @@
     <string name="settings_about">ആപ്പിനെക്കുറിച്ച്</string>
     <string name="settings_live_latency">തത്സമയ കാലതാമസം</string>
     <string name="settings_no_settings_match">“<xliff:g id="query">%1$s</xliff:g>” എന്നതിനോട് പൊരുത്തപ്പെടുന്ന ക്രമീകരണങ്ങളില്ല</string>
+    <string name="settings_search_empty_hint">ഒരു ക്രമീകരണത്തിന്റെ പേര് ടൈപ്പ് ചെയ്യുക</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">ഹോം</string>
     <string name="settings_startup_last_channel">അവസാന ചാനൽ</string>
@@ -614,6 +617,8 @@
     <string name="settings_customize_set_pin">🔒 PIN സജ്ജമാക്കുക</string>
     <string name="settings_customize_change_pin">🔒 PIN മാറ്റുക</string>
     <string name="settings_customize_remove_lock">ലോക്ക് നീക്കംചെയ്യുക</string>
+    <string name="settings_customize_settings_pin">ക്രമീകരണങ്ങൾ തുറക്കാൻ PIN ചോദിക്കുക</string>
+    <string name="settings_customize_settings_pin_button">ക്രമീകരണങ്ങൾ തുറക്കാൻ PIN ചോദിക്കുക: <xliff:g id="state">%1$s</xliff:g></string>
     <string name="settings_customize_description">ഈ പ്രൊഫൈലിനായി ചാനലുകൾ, സിനിമകൾ, സീരീസ് എന്നിവ മറയ്ക്കുകയോ വീണ്ടും കാണിക്കുകയോ ചെയ്യുക; വിഭാഗങ്ങളുടെ പേര് മാറ്റുകയോ ക്രമം മാറ്റുകയോ ചെയ്യുക. വീണ്ടും സമന്വയിപ്പിച്ചാലും മാറ്റങ്ങൾ നിലനിൽക്കും.</string>
     <string name="settings_customize_new_category_behavior">പുതിയ വിഭാഗങ്ങളുടെ പ്രവർത്തനം</string>
     <string name="settings_customize_hide">മറയ്ക്കുക</string>
@@ -659,6 +664,7 @@
     <string name="settings_customize_rename_hint">ഈ പ്രൊഫൈലിന് മാത്രം. “<xliff:g id="name">%1$s</xliff:g>” പുനഃസ്ഥാപിക്കാൻ ശൂന്യമായി വിടുക.</string>
     <string name="settings_customize_remove_pin_title">PIN ലോക്ക് നീക്കംചെയ്യണോ?</string>
     <string name="settings_customize_remove_pin_message">ഇനി PIN ചോദിക്കാതെ ഇഷ്ടാനുസൃതമാക്കൽ സ്ക്രീൻ തുറക്കും.</string>
+    <string name="settings_customize_remove_pin_locks">ഈ PIN ഉപയോഗിച്ച് ലോക്ക് ചെയ്ത എല്ലാ വിഭാഗങ്ങളും അൺലോക്ക് ആകും.</string>
     <string name="settings_customize_remove">നീക്കംചെയ്യുക</string>
     <string name="settings_customize_confirm_pin">പുതിയ PIN സ്ഥിരീകരിക്കുക</string>
     <string name="settings_customize_pin_mismatch">PIN-കൾ പൊരുത്തപ്പെടുന്നില്ല — വീണ്ടും നൽകുക</string>
@@ -1455,6 +1461,7 @@
     <string name="settings_line_autoplay">അടുത്ത സീസണിലേക്കും</string>
     <string name="settings_line_tiles">ഓരോ ടൈലും മറ്റൊരു സ്ട്രീം</string>
     <string name="settings_line_mini">വലുപ്പവും സ്ഥാനവും</string>
+    <string name="settings_line_pip">ചെറിയ വിൻഡോയിൽ കാണുന്നത് തുടരുക</string>
     <string name="settings_line_rec_reserve">ഒരിക്കലും എല്ലാ കണക്ഷനിലും റെക്കോർഡ് ചെയ്യില്ല</string>
     <string name="settings_line_rec_watching">രണ്ടാമതൊരു സ്ട്രീം ഇല്ലാതെ</string>
     <string name="settings_line_rec_pre_roll">പരിപാടി തുടങ്ങുന്നതിന് മുമ്പ്</string>
@@ -1497,6 +1504,7 @@
     <string name="settings_help_timeshift_window">ക്യാച്ച്-അപ്പ് ഇല്ലാത്ത ചാനലിൽ ലൈവ് ടിവി നിർത്തലും പിന്നോട്ടാക്കലും എത്ര പിന്നോട്ട് പോകാം. കൂടുതലാണെങ്കിൽ ചാനലിന്റെ കൂടുതൽ ഭാഗം ഈ ഉപകരണത്തിന്റെ സ്റ്റോറേജിൽ സൂക്ഷിക്കും.</string>
     <string name="settings_help_resume">സിനിമയ്ക്കോ എപ്പിസോഡിനോ സേവ് ചെയ്ത സ്ഥാനമുണ്ടെങ്കിൽ \'ചോദിക്കുക\' തുടരാനോ ആദ്യം മുതൽ തുടങ്ങാനോ അവസരം നൽകും. \'എപ്പോഴും തുടരുക\' നിർത്തിയിടത്ത് നിന്ന് തുടരും; \'ഒരിക്കലും തുടരരുത്\' ആദ്യം മുതൽ തുടങ്ങും.</string>
     <string name="settings_help_mini">ബ്രൗസ് ചെയ്യുമ്പോൾ ഒരു മൂലയിൽ ചാനൽ തുടരുന്ന ചെറിയ പ്ലെയർ. അതിന്റെ വലുപ്പവും മൂലയും തിരഞ്ഞെടുക്കുക.</string>
+    <string name="settings_help_pip">ഫുൾ സ്ക്രീനിലോ മിനി പ്ലെയറിലോ വീഡിയോ പ്ലേ ചെയ്യുമ്പോൾ ഹോം അമർത്തുകയോ മറ്റൊരു ആപ്പ് തുറക്കുകയോ ചെയ്താൽ, ടിവിയുടെ ബാക്കി ഭാഗത്തിന് മുകളിൽ ഒരു ചെറിയ വിൻഡോയിൽ അത് പ്ലേ ചെയ്യുന്നത് തുടരും. ഫുൾ സ്ക്രീനിലേക്ക് തിരികെ കൊണ്ടുവരാൻ OwnTV വീണ്ടും തുറക്കുക; പ്ലേബാക്ക് നിർത്താൻ വിൻഡോ അടയ്ക്കുക. മൾട്ടിവ്യൂ OwnTV-യിൽ മാത്രം.</string>
     <string name="settings_key_palette">പാലറ്റ്</string>
     <string name="settings_live_preview_note">നിര വിടും മുമ്പേ, നീങ്ങുമ്പോൾ തന്നെ മാറ്റങ്ങൾ ഇവിടെ കാണാം.</string>
     <string name="settings_synced_at"><xliff:g id="when">%1$s</xliff:g> സിങ്ക് ചെയ്തു</string>

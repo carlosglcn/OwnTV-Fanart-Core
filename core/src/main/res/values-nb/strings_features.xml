@@ -195,6 +195,7 @@
     <string name="recording_group_missed">Gikk glipp av</string>
     <string name="recording_record">Ta opp</string>
     <string name="recording_stop">Stopp opptaket</string>
+    <string name="recording_delete_message">Fjerner opptaket og filen fra denne enheten. Dette kan ikke angres.</string>
     <string name="recording_record_series">Ta opp alle visninger</string>
     <string name="recording_stop_series">Slutt å ta opp alle visninger</string>
     <string name="recording_from_archive">Ta opp fra arkivet</string>
@@ -207,6 +208,7 @@
     <string name="recording_scheduled_for">Tar opp <xliff:g id="time">%1$s</xliff:g></string>
     <string name="recording_badge">REC</string>
     <string name="recording_pill_line">Tar opp <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="recording_pill_line_locked">Tar opp fra en låst kategori</string>
     <string name="recording_clash_with">Kolliderer med <xliff:g id="programme">%1$s</xliff:g></string>
     <string name="recording_settings_group">Opptak</string>
     <string name="settings_recording_reserve">Hold én strøm ledig til å se på</string>

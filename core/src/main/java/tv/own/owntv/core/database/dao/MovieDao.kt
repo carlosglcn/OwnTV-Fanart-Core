@@ -175,22 +175,19 @@ interface MovieDao {
     fun searchInCategoryDateAdded(query: String, categoryId: Long): PagingSource<Int, MovieEntity>
 
     // --- Manual order (Move) — see ChannelDao for the join shape. ---
+    /** Moved rows keep their saved position; the rest follow [alpha] (A–Z) or the playlist order
+     *  around them — the same rule as `placePinned` for categories. */
     @Query(
-        "SELECT m.* FROM movies m " +
+            "WITH base AS (SELECT m.id AS id, m.sortOrder AS so, m.name AS nm, 0 AS mp, o.position AS pos " +
+            "FROM movies m " +
             "LEFT JOIN content_order o ON o.itemId = m.id AND o.profileId = :profileId AND o.mediaType = 'MOVIE' AND o.contextKey = :contextKey " +
-            "WHERE m.categoryId = :categoryId " +
-            "ORDER BY (CASE WHEN o.position IS NULL THEN 1 ELSE 0 END), o.position, m.sortOrder, m.name",
+            "WHERE m.categoryId = :categoryId), " +
+            "slots AS (SELECT id, pos - (ROW_NUMBER() OVER (ORDER BY pos, id) - 1) AS slot, 0 AS grp, pos AS tie FROM base WHERE pos IS NOT NULL " +
+            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nm END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
+            "SELECT m.* FROM movies m INNER JOIN slots sl ON sl.id = m.id ORDER BY sl.slot, sl.grp, sl.tie",
     )
-    fun pagingByCategoryManual(categoryId: Long, profileId: Long, contextKey: String): PagingSource<Int, MovieEntity>
+    fun pagingByCategoryManual(categoryId: Long, profileId: Long, contextKey: String, alpha: Boolean): PagingSource<Int, MovieEntity>
 
-    /** A–Z variant of [pagingByCategoryManual] — see `ChannelDao.pagingByCategoryManualAlpha`. */
-    @Query(
-        "SELECT m.* FROM movies m " +
-            "LEFT JOIN content_order o ON o.itemId = m.id AND o.profileId = :profileId AND o.mediaType = 'MOVIE' AND o.contextKey = :contextKey " +
-            "WHERE m.categoryId = :categoryId " +
-            "ORDER BY (CASE WHEN o.position IS NULL THEN 1 ELSE 0 END), o.position, m.name",
-    )
-    fun pagingByCategoryManualAlpha(categoryId: Long, profileId: Long, contextKey: String): PagingSource<Int, MovieEntity>
 
     @Query(
         "SELECT m.* FROM movies m " +
@@ -201,13 +198,18 @@ interface MovieDao {
     )
     fun pagingFavoritesManual(profileId: Long, contextKey: String, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
 
+    /** Moved rows keep their saved position; the rest follow [alpha] (A–Z) or the playlist order
+     *  around them — the same rule as `placePinned` for categories. */
     @Query(
-        "SELECT m.* FROM movies m " +
+            "WITH base AS (SELECT m.id AS id, m.sortOrder AS so, m.name AS nm, 0 AS mp, o.position AS pos " +
+            "FROM movies m " +
             "LEFT JOIN content_order o ON o.itemId = m.id AND o.profileId = :profileId AND o.mediaType = 'MOVIE' AND o.contextKey = :contextKey " +
-            "WHERE m.categoryId = :categoryId " +
-            "ORDER BY (CASE WHEN o.position IS NULL THEN 1 ELSE 0 END), o.position, m.sortOrder, m.name LIMIT :limit",
+            "WHERE m.categoryId = :categoryId), " +
+            "slots AS (SELECT id, pos - (ROW_NUMBER() OVER (ORDER BY pos, id) - 1) AS slot, 0 AS grp, pos AS tie FROM base WHERE pos IS NOT NULL " +
+            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nm END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
+            "SELECT m.* FROM movies m INNER JOIN slots sl ON sl.id = m.id ORDER BY sl.slot, sl.grp, sl.tie LIMIT :limit",
     )
-    suspend fun snapshotByCategoryManual(categoryId: Long, profileId: Long, contextKey: String, limit: Int): List<MovieEntity>
+    suspend fun snapshotByCategoryManual(categoryId: Long, profileId: Long, contextKey: String, alpha: Boolean, limit: Int): List<MovieEntity>
 
     @Query(
         "SELECT m.* FROM movies m " +
@@ -321,6 +323,20 @@ interface MovieDao {
             "WHERE h.profileId = :profileId AND h.mediaType = 'MOVIE' AND m.sourceId IN (:sourceIds)",
     )
     fun countHistory(profileId: Long, sourceIds: List<Long>): Flow<Int>
+
+    /** [countFavorites] without the films filed under [excluded] (locked categories). */
+    @Query(
+        "SELECT COUNT(*) FROM favorites f INNER JOIN movies m ON m.id = f.itemId WHERE f.profileId = :profileId " +
+            "AND f.mediaType = 'MOVIE' AND m.sourceId IN (:sourceIds) AND (m.categoryId IS NULL OR m.categoryId NOT IN (:excluded))",
+    )
+    fun countFavoritesExcluding(profileId: Long, sourceIds: List<Long>, excluded: List<Long>): Flow<Int>
+
+    /** [countHistory] without the films filed under [excluded] (locked categories). */
+    @Query(
+        "SELECT COUNT(*) FROM watch_history h INNER JOIN movies m ON m.id = h.itemId WHERE h.profileId = :profileId " +
+            "AND h.mediaType = 'MOVIE' AND m.sourceId IN (:sourceIds) AND (m.categoryId IS NULL OR m.categoryId NOT IN (:excluded))",
+    )
+    fun countHistoryExcluding(profileId: Long, sourceIds: List<Long>, excluded: List<Long>): Flow<Int>
 
     @Query(
         "SELECT m.* FROM movies m " +

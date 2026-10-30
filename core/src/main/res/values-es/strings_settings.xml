@@ -231,6 +231,8 @@
     <string name="settings_preview_audio_description">Reproduce sonido en la vista previa en directo</string>
     <string name="settings_mini_player_root">Minirreproductor</string>
     <string name="settings_mini_player_root_description">Tamaño y posición del minirreproductor acoplado</string>
+    <string name="settings_pip_on_leave">Imagen en imagen al salir de la app</string>
+    <string name="settings_pip_on_leave_description">El vídeo sigue en una ventana pequeña al pulsar Inicio</string>
     <string name="settings_prefer_sdr_description">Si una emisión ofrece imagen SDR y HDR, se reproduce la SDR: para televisores en los que el HDR se ve apagado o demasiado oscuro. Una emisión solo en HDR sigue en HDR. Solo ExoPlayer.</string>
     <string name="settings_auto_frame_rate">Frecuencia de fotogramas automática</string>
     <string name="settings_auto_frame_rate_description">Ajusta la frecuencia de refresco del televisor a la del vídeo (24/25/50/60 fps) en pantalla completa, tanto para TV en directo como para VOD, y la restaura al salir. Desactívalo si tu televisor o receptor vuelve a establecer la conexión HDMI de forma molesta cada vez que cambias de canal.</string>
@@ -280,6 +282,7 @@
     <string name="settings_about">Acerca de</string>
     <string name="settings_live_latency">Latencia de la emisión en directo</string>
     <string name="settings_no_settings_match">Ningún ajuste coincide con «<xliff:g id="query">%1$s</xliff:g>»</string>
+    <string name="settings_search_empty_hint">Escribe el nombre de un ajuste</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">Inicio</string>
     <string name="settings_startup_last_channel">Último canal</string>
@@ -617,6 +620,8 @@
     <string name="settings_customize_set_pin">🔒 Configurar PIN</string>
     <string name="settings_customize_change_pin">🔒 Cambiar PIN</string>
     <string name="settings_customize_remove_lock">Quitar bloqueo</string>
+    <string name="settings_customize_settings_pin">Pedir PIN para abrir los Ajustes</string>
+    <string name="settings_customize_settings_pin_button">Pedir PIN para abrir los Ajustes: <xliff:g id="state">%1$s</xliff:g></string>
     <string name="settings_customize_description">Oculta y vuelve a mostrar canales, películas y series, y cambia el nombre o el orden de las categorías de este perfil. Los cambios se conservan al volver a sincronizar.</string>
     <string name="settings_customize_new_category_behavior">Comportamiento de las categories nuevas</string>
     <string name="settings_customize_hide">Ocultar</string>
@@ -663,6 +668,7 @@
     <string name="settings_customize_rename_hint">Solo para este perfil. Déjalo en blanco para restaurar «<xliff:g id="name">%1$s</xliff:g>».</string>
     <string name="settings_customize_remove_pin_title">¿Quitar el bloqueo con PIN?</string>
     <string name="settings_customize_remove_pin_message">La pantalla Personalizar volverá a abrirse sin solicitar un PIN.</string>
+    <string name="settings_customize_remove_pin_locks">Todas las categorías bloqueadas con este PIN también se desbloquean.</string>
     <string name="settings_customize_remove">Quitar</string>
     <string name="settings_customize_confirm_pin">Confirma el PIN nuevo</string>
     <string name="settings_customize_pin_mismatch">Los PIN no coinciden — vuelve a introducirlos</string>
@@ -1486,6 +1492,7 @@
     <string name="settings_line_autoplay">Y también a la siguiente temporada</string>
     <string name="settings_line_tiles">Cada recuadro es otra emisión</string>
     <string name="settings_line_mini">Tamaño y posición</string>
+    <string name="settings_line_pip">Sigue viendo en una ventana pequeña</string>
     <string name="settings_line_rec_reserve">Nunca grabar en todas las conexiones</string>
     <string name="settings_line_rec_watching">Sin una segunda emisión</string>
     <string name="settings_line_rec_pre_roll">Antes de que empiece el programa</string>
@@ -1528,6 +1535,7 @@
     <string name="settings_help_timeshift_window">Hasta dónde puede retroceder Pausar y rebobinar la TV en directo en un canal sin catch-up. Más tiempo guarda más del canal en el almacenamiento del dispositivo.</string>
     <string name="settings_help_resume">Preguntar ofrece Reanudar o Empezar de nuevo cuando una película o episodio tiene una posición guardada. Reanudar siempre sigue donde lo dejaste; No reanudar nunca empieza desde el principio.</string>
     <string name="settings_help_mini">El reproductor pequeño que mantiene un canal en una esquina mientras navegas. Elige su tamaño y la esquina donde va.</string>
+    <string name="settings_help_pip">Pulsa Inicio o abre otra app mientras un vídeo se reproduce a pantalla completa o en el minirreproductor y seguirá en una ventana pequeña sobre el resto de la TV. Abre OwnTV de nuevo para volver a pantalla completa; cierra la ventana para detener la reproducción. Multivista se queda en OwnTV.</string>
     <string name="settings_key_palette">Paleta</string>
     <string name="settings_live_preview_note">Los cambios se ven aquí mientras te mueves, antes de salir de la fila.</string>
     <string name="settings_synced_at">Sincronizada <xliff:g id="when">%1$s</xliff:g></string>

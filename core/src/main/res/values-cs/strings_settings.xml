@@ -232,6 +232,8 @@
     <string name="settings_preview_audio_description">Přehrávat zvuk v živém náhledu</string>
     <string name="settings_mini_player_root">Minipřehrávač</string>
     <string name="settings_mini_player_root_description">Velikost a umístění ukotveného minipřehrávače</string>
+    <string name="settings_pip_on_leave">Obraz v obraze při opuštění aplikace</string>
+    <string name="settings_pip_on_leave_description">Po stisknutí Domů hraje video dál v malém okně</string>
     <string name="settings_prefer_sdr_description">Když stream nabízí obraz SDR i HDR, přehraje se SDR: pro televizor, na kterém HDR vypadá vybledle nebo příliš tmavě. Stream jen s HDR zůstane v HDR. Pouze ExoPlayer.</string>
     <string name="settings_auto_frame_rate">Automatická snímková frekvence</string>
     <string name="settings_auto_frame_rate_description">Při zobrazení na celé obrazovce přizpůsobit obnovovací frekvenci televizoru videu (24/25/50/60 sn./s) pro živé vysílání i VOD a při ukončení ji obnovit. Vypněte, pokud televizor nebo přijímač při každé změně kanálu rušivě znovu navazuje spojení HDMI.</string>
@@ -282,6 +284,7 @@
     <string name="settings_about">O aplikaci</string>
     <string name="settings_live_latency">Zpoždění živého vysílání</string>
     <string name="settings_no_settings_match">Výrazu „<xliff:g id="query">%1$s</xliff:g>“ neodpovídá žádné nastavení</string>
+    <string name="settings_search_empty_hint">Napište název nastavení</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">Domů</string>
     <string name="settings_startup_last_channel">Poslední kanál</string>
@@ -620,6 +623,8 @@
     <string name="settings_customize_set_pin">🔒 Nastavit PIN</string>
     <string name="settings_customize_change_pin">🔒 Změnit PIN</string>
     <string name="settings_customize_remove_lock">Odstranit zámek</string>
+    <string name="settings_customize_settings_pin">Vyžadovat PIN pro otevření Nastavení</string>
+    <string name="settings_customize_settings_pin_button">Vyžadovat PIN pro otevření Nastavení: <xliff:g id="state">%1$s</xliff:g></string>
     <string name="settings_customize_description">Skrývejte a znovu zobrazujte kanály, filmy a seriály a přejmenovávejte nebo měňte pořadí kategorií pro tento profil. Změny se zachovají i po opětovné synchronizaci.</string>
     <string name="settings_customize_new_category_behavior">Chování nových kategorií</string>
     <string name="settings_customize_hide">Skrýt</string>
@@ -667,6 +672,7 @@
     <string name="settings_customize_rename_hint">Platí pouze pro tento profil. Ponecháním prázdného pole obnovíte název „<xliff:g id="name">%1$s</xliff:g>“.</string>
     <string name="settings_customize_remove_pin_title">Odstranit zámek PIN?</string>
     <string name="settings_customize_remove_pin_message">Obrazovka přizpůsobení se příště otevře bez požadavku na PIN.</string>
+    <string name="settings_customize_remove_pin_locks">Odemknou se také všechny kategorie uzamčené tímto PINem.</string>
     <string name="settings_customize_remove">Odstranit</string>
     <string name="settings_customize_confirm_pin">Potvrďte nový PIN</string>
     <string name="settings_customize_pin_mismatch">PIN se neshoduje — zadejte jej znovu</string>
@@ -1511,6 +1517,7 @@
     <string name="settings_line_autoplay">A do další řady</string>
     <string name="settings_line_tiles">Každá dlaždice je další stream</string>
     <string name="settings_line_mini">Velikost a poloha</string>
+    <string name="settings_line_pip">Sledujte dál v malém okně</string>
     <string name="settings_line_rec_reserve">Nikdy nenahrávat na všech připojeních</string>
     <string name="settings_line_rec_watching">Bez druhého streamu</string>
     <string name="settings_line_rec_pre_roll">Před začátkem pořadu</string>
@@ -1553,6 +1560,7 @@
     <string name="settings_help_timeshift_window">Jak daleko zpět může Pozastavit a přetočit živou TV jít u kanálu bez archivu. Delší uchová víc z kanálu v úložišti zařízení.</string>
     <string name="settings_help_resume">Zeptat se nabídne Pokračovat nebo Začít znovu, když má film nebo díl uloženou pozici. Vždy pokračovat naváže tam, kde jste skončili; Nikdy nepokračovat začne od začátku.</string>
     <string name="settings_help_mini">Malý přehrávač, který při procházení nechá kanál běžet v rohu. Zvolte jeho velikost a roh, ve kterém je.</string>
+    <string name="settings_help_pip">Stiskněte Domů nebo otevřete jinou aplikaci, když video hraje na celou obrazovku nebo v minipřehrávači, a bude hrát dál v malém okně nad zbytkem televize. Znovu otevřete OwnTV a video se vrátí na celou obrazovku; zavřením okna přehrávání zastavíte. Multiview zůstává v OwnTV.</string>
     <string name="settings_key_palette">Paleta</string>
     <string name="settings_live_preview_note">Změny se tu ukazují hned, ještě než řádek opustíte.</string>
     <string name="settings_synced_at">Synchronizováno <xliff:g id="when">%1$s</xliff:g></string>

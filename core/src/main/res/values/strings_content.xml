@@ -116,6 +116,15 @@
     <string name="content_category_restore_order">Custom order cleared</string>
     <!-- Translators: Confirmation text when the category has no changes to undo (the only button is Cancel). -->
     <string name="content_category_restore_nothing">Category is already at the playlist default</string>
+    <!-- Translators: Long-press menu entry on a category: put it behind the profile's Customize PIN. -->
+    <string name="content_category_lock">Lock with PIN</string>
+    <!-- Translators: Shown instead of a locked category's channels, movies or series until the PIN is entered. -->
+    <string name="content_category_locked_placeholder">This category is locked</string>
+    <!-- Translators: PIN prompt title after too many wrong PINs. "count" is how many seconds are left before the next try. -->
+    <plurals name="content_category_pin_wait">
+        <item quantity="one">Too many wrong PINs. Try again in <xliff:g id="count">%1$d</xliff:g> second</item>
+        <item quantity="other">Too many wrong PINs. Try again in <xliff:g id="count">%1$d</xliff:g> seconds</item>
+    </plurals>
     <!-- Translators: Context-menu option that opens the picker for moving an item into a combined category. -->
     <string name="content_move_to_category">Move to category…</string>
     <!-- Translators: Context-menu option on a channel inside a category the user created: take it out of that category only. The channel itself and its own provider category are unaffected. -->
@@ -337,6 +346,10 @@
     <string name="content_downloads_paused">Paused</string>
     <!-- Translators: Shown on a finished download or recording whose file is gone - the USB drive was formatted, swapped or unplugged, or the file was deleted outside the app. -->
     <string name="content_downloads_file_missing">File missing: it is no longer on the drive</string>
+    <!-- Translators: Title of the question before a download or a recording is deleted. The placeholder is its title. -->
+    <string name="content_downloads_delete_title">Delete “<xliff:g id="name">%1$s</xliff:g>”?</string>
+    <!-- Translators: Body of the question before a film or episode download is deleted from the device. -->
+    <string name="content_downloads_delete_message">Removes the file from this device. It can be downloaded again later.</string>
     <!-- Translators: Why a download failed: the TV provider says every connection the account allows is in use. -->
     <string name="content_downloads_reason_account_busy">Account busy: another stream is using the connection</string>
     <!-- Translators: Why a download failed: the server refused the link (expired, blocked or busy; it does not say which). -->

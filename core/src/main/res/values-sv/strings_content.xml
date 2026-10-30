@@ -65,6 +65,12 @@
     </plurals>
     <string name="content_category_restore_order">rensa din egen ordning</string>
     <string name="content_category_restore_nothing">Kategorin har redan spellistans standard</string>
+    <string name="content_category_lock">Lås med PIN</string>
+    <string name="content_category_locked_placeholder">Den här kategorin är låst</string>
+    <plurals name="content_category_pin_wait">
+        <item quantity="one">För många felaktiga PIN-koder. Försök igen om <xliff:g id="count">%1$d</xliff:g> sekund</item>
+        <item quantity="other">För många felaktiga PIN-koder. Försök igen om <xliff:g id="count">%1$d</xliff:g> sekunder</item>
+    </plurals>
     <string name="content_move_to_category">Flytta till kategori…</string>
     <string name="content_remove_from_category">Ta bort från den här kategorin</string>
     <string name="content_download">Ladda ned</string>
@@ -176,6 +182,8 @@
     <string name="content_downloads_ready">Klar att titta</string>
     <string name="content_downloads_paused">Pausad</string>
     <string name="content_downloads_file_missing">Filen saknas: den finns inte längre på enheten</string>
+    <string name="content_downloads_delete_title">Ta bort ”<xliff:g id="name">%1$s</xliff:g>”?</string>
+    <string name="content_downloads_delete_message">Tar bort filen från den här enheten. Den kan laddas ned igen senare.</string>
     <string name="content_downloads_reason_account_busy">Kontot är upptaget: en annan ström använder anslutningen</string>
     <string name="content_downloads_reason_refused">Servern nekade länken</string>
     <string name="content_downloads_reason_not_found">Servern har inte längre den här filen</string>

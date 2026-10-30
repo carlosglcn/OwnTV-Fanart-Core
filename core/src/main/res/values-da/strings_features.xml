@@ -195,6 +195,7 @@
     <string name="recording_group_missed">Gik glip af</string>
     <string name="recording_record">Optag</string>
     <string name="recording_stop">Stop optagelsen</string>
+    <string name="recording_delete_message">Fjerner optagelsen og dens fil fra denne enhed. Det kan ikke fortrydes.</string>
     <string name="recording_record_series">Optag alle visninger</string>
     <string name="recording_stop_series">Stop med at optage alle visninger</string>
     <string name="recording_from_archive">Optag fra arkivet</string>
@@ -207,6 +208,7 @@
     <string name="recording_scheduled_for">Optager <xliff:g id="time">%1$s</xliff:g></string>
     <string name="recording_badge">REC</string>
     <string name="recording_pill_line">Optager <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="recording_pill_line_locked">Optager fra en låst kategori</string>
     <string name="recording_clash_with">Overlapper med <xliff:g id="programme">%1$s</xliff:g></string>
     <string name="recording_settings_group">Optagelse</string>
     <string name="settings_recording_reserve">Hold én stream fri til at se på</string>

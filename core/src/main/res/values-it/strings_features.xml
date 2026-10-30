@@ -204,6 +204,7 @@
     <string name="recording_group_missed">Persa</string>
     <string name="recording_record">Registra</string>
     <string name="recording_stop">Interrompi la registrazione</string>
+    <string name="recording_delete_message">Rimuove la registrazione e il relativo file da questo dispositivo. L\'operazione non può essere annullata.</string>
     <string name="recording_record_series">Registra ogni trasmissione</string>
     <string name="recording_stop_series">Non registrare più ogni trasmissione</string>
     <string name="recording_from_archive">Registra dall’archivio</string>
@@ -216,6 +217,7 @@
     <string name="recording_scheduled_for">Registrerà <xliff:g id="time">%1$s</xliff:g></string>
     <string name="recording_badge">REC</string>
     <string name="recording_pill_line">Registrazione di <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="recording_pill_line_locked">Registrazione da una categoria bloccata</string>
     <string name="recording_clash_with">In conflitto con <xliff:g id="programme">%1$s</xliff:g></string>
     <string name="recording_settings_group">Registrazione</string>
     <string name="settings_recording_reserve">Tieni libera una connessione per guardare</string>

@@ -82,6 +82,8 @@
     <string name="sync_status_cancelled">Sinkronizazioa bertan behera utzi da · <xliff:g id="source">%1$s</xliff:g></string>
     <string name="sync_status_download"><xliff:g id="title">%1$s</xliff:g> deskargatzen</string>
     <string name="sync_status_download_with_progress"><xliff:g id="title">%1$s</xliff:g> deskargatzen · <xliff:g id="percent">%2$d</xliff:g>%%</string>
+    <string name="sync_status_download_locked">Blokeatutako kategoria batetik deskargatzen</string>
+    <string name="sync_status_download_locked_with_progress">Blokeatutako kategoria batetik deskargatzen · <xliff:g id="percent">%1$d</xliff:g>%%</string>
     <string name="sync_status_trending_starting">Sinkronizazioa amaituta · <xliff:g id="source">%1$s</xliff:g> · Orain joeran dagoena sortzen</string>
     <string name="sync_status_trending_detail_waiting">TMDBren hautagaien erantzunaren zain</string>
     <string name="sync_status_trending_detail_received">TMDBren hautagaiak · Filmak: <xliff:g id="movies">%1$d</xliff:g> · Telesailak: <xliff:g id="series">%2$d</xliff:g></string>

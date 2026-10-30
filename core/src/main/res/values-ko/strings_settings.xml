@@ -229,6 +229,8 @@
     <string name="settings_preview_audio_description">실시간 미리보기에서 소리를 재생합니다</string>
     <string name="settings_mini_player_root">미니 플레이어</string>
     <string name="settings_mini_player_root_description">고정된 미니 플레이어의 크기와 위치</string>
+    <string name="settings_pip_on_leave">앱을 나갈 때 화면 속 화면</string>
+    <string name="settings_pip_on_leave_description">홈을 누르면 동영상이 작은 창에서 계속 재생됩니다</string>
     <string name="settings_prefer_sdr_description">스트림에 SDR과 HDR 화면이 모두 있으면 SDR을 재생합니다. HDR이 바래 보이거나 너무 어둡게 보이는 TV를 위한 설정입니다. HDR만 있는 스트림은 HDR로 유지됩니다. ExoPlayer 전용.</string>
     <string name="settings_auto_frame_rate">자동 프레임 레이트</string>
     <string name="settings_auto_frame_rate_description">전체 화면에서 실시간 TV와 VOD의 동영상에 맞게 TV 화면 주사율(24/25/50/60fps)을 조정하고 종료할 때 복원합니다. 채널을 바꿀 때마다 TV 또는 리시버가 HDMI 핸드셰이크를 다시 수행해 소음이 발생하면 끄세요.</string>
@@ -276,6 +278,7 @@
     <string name="settings_about">정보</string>
     <string name="settings_live_latency">실시간 지연 시간</string>
     <string name="settings_no_settings_match">“<xliff:g id="query">%1$s</xliff:g>”과 일치하는 설정이 없습니다</string>
+    <string name="settings_search_empty_hint">설정 이름을 입력하세요</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">홈</string>
     <string name="settings_startup_last_channel">마지막 채널</string>
@@ -611,6 +614,8 @@
     <string name="settings_customize_set_pin">🔒 PIN 설정</string>
     <string name="settings_customize_change_pin">🔒 PIN 변경</string>
     <string name="settings_customize_remove_lock">잠금 해제</string>
+    <string name="settings_customize_settings_pin">설정을 열 때 PIN 요청</string>
+    <string name="settings_customize_settings_pin_button">설정을 열 때 PIN 요청: <xliff:g id="state">%1$s</xliff:g></string>
     <string name="settings_customize_description">이 프로필의 채널, 영화 및 시리즈를 숨기거나 다시 표시하고 카테고리의 이름이나 순서를 변경합니다. 다시 동기화한 후에도 유지됩니다.</string>
     <string name="settings_customize_new_category_behavior">새 카테고리 동작</string>
     <string name="settings_customize_hide">숨기기</string>
@@ -655,6 +660,7 @@
     <string name="settings_customize_rename_hint">이 프로필에만 적용됩니다. 비워 두면 “<xliff:g id="name">%1$s</xliff:g>”(으)로 복원됩니다.</string>
     <string name="settings_customize_remove_pin_title">PIN 잠금을 해제하시겠습니까?</string>
     <string name="settings_customize_remove_pin_message">앞으로 맞춤 설정 화면을 열 때 PIN을 묻지 않습니다.</string>
+    <string name="settings_customize_remove_pin_locks">이 PIN으로 잠근 모든 카테고리도 잠금 해제됩니다.</string>
     <string name="settings_customize_remove">해제</string>
     <string name="settings_customize_confirm_pin">새 PIN 확인</string>
     <string name="settings_customize_pin_mismatch">PIN이 일치하지 않습니다. 다시 입력하세요</string>
@@ -1427,6 +1433,7 @@
     <string name="settings_line_autoplay">다음 시즌까지 이어서</string>
     <string name="settings_line_tiles">타일마다 스트림이 하나씩</string>
     <string name="settings_line_mini">크기와 위치</string>
+    <string name="settings_line_pip">작은 창에서 계속 시청</string>
     <string name="settings_line_rec_reserve">모든 연결로 녹화하지 않음</string>
     <string name="settings_line_rec_watching">두 번째 스트림 없이</string>
     <string name="settings_line_rec_pre_roll">프로그램 시작 전</string>
@@ -1469,6 +1476,7 @@
     <string name="settings_help_timeshift_window">다시보기가 없는 채널에서 실시간 TV 일시정지 및 되감기가 얼마나 뒤로 갈 수 있는지 정합니다. 길수록 이 기기 저장공간에 더 많이 보관합니다.</string>
     <string name="settings_help_resume">이어 보기 묻기는 영화나 에피소드에 저장된 위치가 있으면 이어 보기와 처음부터를 제안합니다. 항상 이어 보기는 멈춘 곳부터, 이어 보지 않기는 처음부터 재생합니다.</string>
     <string name="settings_help_mini">둘러보는 동안 모서리에서 채널을 계속 재생하는 작은 플레이어입니다. 크기와 위치할 모서리를 고르세요.</string>
+    <string name="settings_help_pip">전체 화면이나 미니 플레이어에서 동영상이 재생되는 동안 홈을 누르거나 다른 앱을 열면, TV의 다른 화면 위 작은 창에서 계속 재생됩니다. OwnTV를 다시 열면 전체 화면으로 돌아오고, 창을 닫으면 재생이 멈춥니다. 멀티뷰는 OwnTV 안에서만 됩니다.</string>
     <string name="settings_key_palette">팔레트</string>
     <string name="settings_live_preview_note">행을 벗어나기 전에도 변경 사항이 여기에 바로 보입니다.</string>
     <string name="settings_synced_at"><xliff:g id="when">%1$s</xliff:g> 동기화됨</string>

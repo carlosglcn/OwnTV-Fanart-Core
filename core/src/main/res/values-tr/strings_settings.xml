@@ -230,6 +230,8 @@
     <string name="settings_preview_audio_description">Canlı önizlemede ses çalın</string>
     <string name="settings_mini_player_root">Mini oynatıcı</string>
     <string name="settings_mini_player_root_description">Sabitlenmiş mini oynatıcının boyutu ve konumu</string>
+    <string name="settings_pip_on_leave">Uygulamadan çıkınca pencere içinde pencere</string>
+    <string name="settings_pip_on_leave_description">Ana Ekran’a bastığınızda video küçük bir pencerede oynamaya devam eder</string>
     <string name="settings_prefer_sdr_description">Bir yayın hem SDR hem HDR görüntü sunuyorsa SDR oynatılır: HDR görüntünün soluk veya çok karanlık göründüğü TV’ler için. Yalnızca HDR olan yayın HDR kalır. Yalnızca ExoPlayer.</string>
     <string name="settings_auto_frame_rate">Otomatik kare hızı</string>
     <string name="settings_auto_frame_rate_description">Canlı TV ve VOD içeriklerinde tam ekrandayken TV\'nin yenileme hızını videoyla (24/25/50/60 fps) eşleştirin ve çıkışta eski hâline getirin. TV\'niz veya alıcınız her kanal değişikliğinde HDMI el sıkışmasını gürültülü biçimde tekrarlıyorsa bu seçeneği kapatın.</string>
@@ -278,6 +280,7 @@
     <string name="settings_about">Hakkında</string>
     <string name="settings_live_latency">Canlı yayın gecikmesi</string>
     <string name="settings_no_settings_match">“<xliff:g id="query">%1$s</xliff:g>” ile eşleşen ayar yok</string>
+    <string name="settings_search_empty_hint">Bir ayarın adını yazın</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">Ana ekran</string>
     <string name="settings_startup_last_channel">Son kanal</string>
@@ -614,6 +617,8 @@
     <string name="settings_customize_set_pin">🔒 PIN ayarla</string>
     <string name="settings_customize_change_pin">🔒 PIN\'i değiştir</string>
     <string name="settings_customize_remove_lock">Kilidi kaldır</string>
+    <string name="settings_customize_settings_pin">Ayarları açmak için PIN iste</string>
+    <string name="settings_customize_settings_pin_button">Ayarları açmak için PIN iste: <xliff:g id="state">%1$s</xliff:g></string>
     <string name="settings_customize_description">Bu profil için kanalları, filmleri ve dizileri gizleyin veya yeniden gösterin; kategorileri yeniden adlandırın ya da sıralayın. Yeniden eşitlemelerden etkilenmez.</string>
     <string name="settings_customize_new_category_behavior">Yeni kategori davranışı</string>
     <string name="settings_customize_hide">Gizle</string>
@@ -659,6 +664,7 @@
     <string name="settings_customize_rename_hint">Yalnızca bu profil için geçerlidir. “<xliff:g id="name">%1$s</xliff:g>” adını geri yüklemek için boş bırakın.</string>
     <string name="settings_customize_remove_pin_title">PIN kilidi kaldırılsın mı?</string>
     <string name="settings_customize_remove_pin_message">Özelleştirme ekranı artık PIN sormadan açılacak.</string>
+    <string name="settings_customize_remove_pin_locks">Bu PIN ile kilitlenen tüm kategorilerin kilidi de açılır.</string>
     <string name="settings_customize_remove">Kaldır</string>
     <string name="settings_customize_confirm_pin">Yeni PIN\'i doğrulayın</string>
     <string name="settings_customize_pin_mismatch">PIN\'ler eşleşmiyor — yeniden girin</string>
@@ -1455,6 +1461,7 @@
     <string name="settings_line_autoplay">Ve sonraki sezona da</string>
     <string name="settings_line_tiles">Her döşeme başka bir yayındır</string>
     <string name="settings_line_mini">Boyut ve konum</string>
+    <string name="settings_line_pip">Küçük bir pencerede izlemeye devam edin</string>
     <string name="settings_line_rec_reserve">Asla tüm bağlantılarda kayıt yapma</string>
     <string name="settings_line_rec_watching">İkinci bir yayın olmadan</string>
     <string name="settings_line_rec_pre_roll">Program başlamadan önce</string>
@@ -1497,6 +1504,7 @@
     <string name="settings_help_timeshift_window">Canlı TV’yi duraklat ve geri sar özelliğinin geriye dönük izlemesi olmayan bir kanalda ne kadar geri gidebileceği. Daha uzun süre, kanalın daha fazlasını cihaz depolamasında tutar.</string>
     <string name="settings_help_resume">Sor seçeneği, film veya bölümün kaydedilmiş konumu varsa Devam et ya da Baştan başlat sunar. Her zaman devam et kaldığınız yerden sürdürür; Asla devam etme baştan başlatır.</string>
     <string name="settings_help_mini">Gezinirken bir köşede kanalı oynatmaya devam eden küçük oynatıcı. Boyutunu ve köşesini seçin.</string>
+    <string name="settings_help_pip">Bir video tam ekranda veya mini oynatıcıda oynarken Ana Ekran’a basın ya da başka bir uygulama açın; video, TV’nin geri kalanının üzerinde küçük bir pencerede oynamaya devam eder. Tam ekrana döndürmek için OwnTV’yi yeniden açın; oynatmayı durdurmak için pencereyi kapatın. Çoklu görünüm OwnTV’de kalır.</string>
     <string name="settings_key_palette">Palet</string>
     <string name="settings_live_preview_note">Değişiklikler, satırdan ayrılmadan önce siz ilerlerken burada görünür.</string>
     <string name="settings_synced_at"><xliff:g id="when">%1$s</xliff:g> eşitlendi</string>

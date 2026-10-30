@@ -11,7 +11,7 @@
 
 ## core-1.0.70 — unreleased
 
-**Database v52 · Backup: two new playlist fields**
+**Database v52 · Backup v26 · Backup: two new playlist fields · Moved items keep their place**
 
 ### ✨ New features
 
@@ -24,9 +24,15 @@
 - **🚀 Start on the last channel in the TV Guide or Live TV** (community PR #49 by @Kevsosmooth)
 - **🏷️ Menu labels: off, when focused or always** (community PR #41 by @Kevsosmooth)
 - **🎤 Voice search** (community PR #42 by @Kevsosmooth)
+- **🔒 Lock a category with the Customize PIN** (community PR #37 by @Kevsosmooth)
+- **🔐 Ask for the PIN to open Settings** (community PR #47 by @Kevsosmooth)
+- **🪟 Picture-in-picture when leaving the app** (community PR #39 by @Kevsosmooth)
 
 ### 🐛 Fixes
 
+- **🗑️ Delete confirmation strings for downloads and recordings**
+- **↕️ A Move keeps only the moved items' positions; A–Z sorts everything else (TV #312)**
+- **🔁 Older saved list orders are dropped once, Favorites kept**
 - **TV guide sync up to 14× faster: adding a guide takes minutes, not a quarter of an hour**
 - **M3U entries the playlist now tags as films or series leave Live TV** (community PR #36 by @Kevsosmooth)
 - **M3U download retried once after a dropped connection** (community PR #44 by @Kevsosmooth)
@@ -36,7 +42,16 @@
 - **Guide re-sync looks up what it already has in one read**
 - **Catch-up works with `${(b)…}` / `${(e)…}` templates** (community PR #53 by @sarmadsoomro)
 - **Xtream passwords with special characters play; short Xtream links and Stalker MACs masked in logs** (community PR #54 by @sarmadsoomro)
+- **Settings search: a hint while nothing is typed**
 - **Stalker re-sync no longer rewrites every live channel**
+- **An Xtream playlist with a refused password says so instead of syncing empty**
+- **A refused login answered with HTTP 513 shows the wrong-password message**
+- **A changed password, server, username or MAC re-syncs the playlist on save**
+- **Restore leaves Xtream playlists without a password unsynced and names them**
+- **A new playlist with a name already in use is numbered: "My IPTV 2"**
+- **Renamed channels, films and series keep their name on Home and in Continue**
+- **Stalker portals behind a redirect to another host stay signed in**
+- **Stalker posters sent as server paths load**
 
 ## core-1.0.69 — 2026-10-21
 

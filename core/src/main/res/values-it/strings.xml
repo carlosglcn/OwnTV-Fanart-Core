@@ -84,6 +84,8 @@
     <string name="sync_status_cancelled">Sincronizzazione annullata · <xliff:g id="source">%1$s</xliff:g></string>
     <string name="sync_status_download">Download di <xliff:g id="title">%1$s</xliff:g></string>
     <string name="sync_status_download_with_progress">Download di <xliff:g id="title">%1$s</xliff:g> · <xliff:g id="percent">%2$d</xliff:g>%%</string>
+    <string name="sync_status_download_locked">Download da una categoria bloccata</string>
+    <string name="sync_status_download_locked_with_progress">Download da una categoria bloccata · <xliff:g id="percent">%1$d</xliff:g>%%</string>
     <string name="sync_phase_live">TV in diretta</string>
     <string name="sync_phase_movies">Film</string>
     <string name="sync_phase_series">Serie</string>

@@ -70,6 +70,13 @@
     </plurals>
     <string name="content_category_restore_order">limpar a ordem personalizada</string>
     <string name="content_category_restore_nothing">A categoria já está no padrão da lista</string>
+    <string name="content_category_lock">Bloquear com PIN</string>
+    <string name="content_category_locked_placeholder">Esta categoria está bloqueada</string>
+    <plurals name="content_category_pin_wait">
+        <item quantity="one">Muitos PINs incorretos. Tente novamente em <xliff:g id="count">%1$d</xliff:g> segundo</item>
+        <item quantity="many">Muitos PINs incorretos. Tente novamente em <xliff:g id="count">%1$d</xliff:g> segundos</item>
+        <item quantity="other">Muitos PINs incorretos. Tente novamente em <xliff:g id="count">%1$d</xliff:g> segundos</item>
+    </plurals>
     <string name="content_move_to_category">Mover para a categoria…</string>
     <string name="content_remove_from_category">Remover desta categoria</string>
     <string name="content_download">Baixar</string>
@@ -182,6 +189,8 @@
     <string name="content_downloads_ready">Pronto para assistir</string>
     <string name="content_downloads_paused">Pausado</string>
     <string name="content_downloads_file_missing">Arquivo ausente: ele não está mais na unidade</string>
+    <string name="content_downloads_delete_title">Excluir “<xliff:g id="name">%1$s</xliff:g>”?</string>
+    <string name="content_downloads_delete_message">Remove o arquivo deste dispositivo. Ele pode ser baixado novamente depois.</string>
     <string name="content_downloads_reason_account_busy">Conta ocupada: outra transmissão está usando a conexão</string>
     <string name="content_downloads_reason_refused">O servidor recusou o link</string>
     <string name="content_downloads_reason_not_found">O servidor não tem mais este arquivo</string>

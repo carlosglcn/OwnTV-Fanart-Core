@@ -232,6 +232,8 @@
     <string name="settings_preview_audio_description">Воспроизводить звук при предпросмотре эфира</string>
     <string name="settings_mini_player_root">Мини-плеер</string>
     <string name="settings_mini_player_root_description">Размер и положение закреплённого мини-плеера</string>
+    <string name="settings_pip_on_leave">Картинка в картинке при выходе из приложения</string>
+    <string name="settings_pip_on_leave_description">Видео продолжает играть в маленьком окне, когда вы нажимаете «Главная»</string>
     <string name="settings_prefer_sdr_description">Если поток предлагает и SDR, и HDR изображение, воспроизводится SDR: для телевизора, на котором HDR выглядит блёклым или слишком тёмным. Поток только с HDR остаётся в HDR. Только ExoPlayer.</string>
     <string name="settings_auto_frame_rate">Автоматическая частота кадров</string>
     <string name="settings_auto_frame_rate_description">Согласовывать частоту обновления телевизора с видео (24/25/50/60 кадров/с) в полноэкранном режиме для прямого эфира и VOD и восстанавливать её при выходе. Отключите, если телевизор или ресивер при каждой смене канала заново устанавливает соединение HDMI с заметными помехами.</string>
@@ -282,6 +284,7 @@
     <string name="settings_about">О приложении</string>
     <string name="settings_live_latency">Задержка прямого эфира</string>
     <string name="settings_no_settings_match">Нет настроек, соответствующих запросу «<xliff:g id="query">%1$s</xliff:g>»</string>
+    <string name="settings_search_empty_hint">Введите название настройки</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">Главный экран</string>
     <string name="settings_startup_last_channel">Последний канал</string>
@@ -620,6 +623,8 @@
     <string name="settings_customize_set_pin">🔒 Установить PIN</string>
     <string name="settings_customize_change_pin">🔒 Изменить PIN</string>
     <string name="settings_customize_remove_lock">Снять блокировку</string>
+    <string name="settings_customize_settings_pin">Запрашивать PIN для открытия настроек</string>
+    <string name="settings_customize_settings_pin_button">Запрашивать PIN для открытия настроек: <xliff:g id="state">%1$s</xliff:g></string>
     <string name="settings_customize_description">Скрывайте и показывайте каналы, фильмы и сериалы, а также переименовывайте или меняйте порядок категорий для этого профиля. Изменения сохраняются после повторной синхронизации.</string>
     <string name="settings_customize_new_category_behavior">Поведение новых категорий</string>
     <string name="settings_customize_hide">Скрыть</string>
@@ -667,6 +672,7 @@
     <string name="settings_customize_rename_hint">Только для этого профиля. Оставьте поле пустым, чтобы восстановить «<xliff:g id="name">%1$s</xliff:g>».</string>
     <string name="settings_customize_remove_pin_title">Снять блокировку с помощью PIN?</string>
     <string name="settings_customize_remove_pin_message">Экран настройки категорий и элементов будет открываться без запроса PIN.</string>
+    <string name="settings_customize_remove_pin_locks">Все категории, заблокированные этим PIN-кодом, тоже будут разблокированы.</string>
     <string name="settings_customize_remove">Удалить</string>
     <string name="settings_customize_confirm_pin">Подтвердите новый PIN</string>
     <string name="settings_customize_pin_mismatch">PIN не совпадают — введите снова</string>
@@ -1511,6 +1517,7 @@
     <string name="settings_line_autoplay">И дальше в следующий сезон</string>
     <string name="settings_line_tiles">Каждая плитка — отдельный поток</string>
     <string name="settings_line_mini">Размер и положение</string>
+    <string name="settings_line_pip">Смотреть дальше в маленьком окне</string>
     <string name="settings_line_rec_reserve">Не записывать на всех подключениях</string>
     <string name="settings_line_rec_watching">Без второго потока</string>
     <string name="settings_line_rec_pre_roll">До начала передачи</string>
@@ -1553,6 +1560,7 @@
     <string name="settings_help_timeshift_window">Насколько далеко назад можно отмотать паузой и перемоткой эфира на канале без архива. Чем больше, тем больше канала хранится на этом устройстве.</string>
     <string name="settings_help_resume">«Спрашивать» предлагает «Продолжить» или «Сначала», если у фильма или серии есть сохранённая позиция. «Всегда продолжать» продолжает с места остановки; «Никогда не продолжать» начинает сначала.</string>
     <string name="settings_help_mini">Маленький плеер, который продолжает показывать канал в углу, пока вы листаете. Выберите размер и угол.</string>
+    <string name="settings_help_pip">Нажмите «Главная» или откройте другое приложение, пока видео идёт на весь экран или в мини-плеере, и оно продолжит играть в маленьком окне поверх остального экрана телевизора. Откройте OwnTV снова, чтобы вернуть его на весь экран; закройте окно, чтобы остановить воспроизведение. Мультиэкран остаётся в OwnTV.</string>
     <string name="settings_key_palette">Палитра</string>
     <string name="settings_live_preview_note">Изменения видны здесь сразу, ещё до того, как вы уйдёте со строки.</string>
     <string name="settings_synced_at">Синхронизировано: <xliff:g id="when">%1$s</xliff:g></string>

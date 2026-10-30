@@ -195,6 +195,7 @@
     <string name="recording_group_missed">Missad</string>
     <string name="recording_record">Spela in</string>
     <string name="recording_stop">Stoppa inspelningen</string>
+    <string name="recording_delete_message">Tar bort inspelningen och dess fil från den här enheten. Det går inte att ångra.</string>
     <string name="recording_record_series">Spela in varje sändning</string>
     <string name="recording_stop_series">Sluta spela in varje sändning</string>
     <string name="recording_from_archive">Spela in från arkivet</string>
@@ -207,6 +208,7 @@
     <string name="recording_scheduled_for">Spelar in <xliff:g id="time">%1$s</xliff:g></string>
     <string name="recording_badge">REC</string>
     <string name="recording_pill_line">Spelar in <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="recording_pill_line_locked">Spelar in från en låst kategori</string>
     <string name="recording_clash_with">Krockar med <xliff:g id="programme">%1$s</xliff:g></string>
     <string name="recording_settings_group">Inspelning</string>
     <string name="settings_recording_reserve">Håll en ström ledig att titta på</string>

@@ -91,7 +91,17 @@ val dataModule = module {
     }
     single { HttpClient(get()) }
     single { ConnectivityObserver(androidContext()) }
-    single { CustomizationStore(androidContext()) }
+    // Category locks: the in-memory unlocks of this session, and the view that applies them (settings,
+    // session, categoryDao).
+    single { tv.own.owntv.core.customize.CategoryUnlockSession() }
+    single { tv.own.owntv.core.customize.CategoryLockView(get(), get(), get()) }
+    // One count of wrong Customize PINs for the whole app, so moving to another category, section or
+    // PIN door does not start a fresh run of guesses. Monotonic clock: changing the time cannot end a wait.
+    single { tv.own.owntv.core.categorylock.PinAttemptLimiter(android.os.SystemClock::elapsedRealtime) }
+    // Which locked category a downloaded or recorded file the player is on belongs to, for the relock.
+    single { tv.own.owntv.core.categorylock.PlayingFileCategory() }
+    single { CustomizationStore(androidContext(), get()) }
+    single { tv.own.owntv.core.customize.LockedNotificationTitles(get(), get(), get(), get(), get(), get()) }
     single { tv.own.owntv.core.epg.EpgSourceStore(androidContext()) }
     single { tv.own.owntv.core.player.ForceMpvStore(androidContext(), get()) }
     // Per-channel "watched without a picture" memory, for the mobile audio-only mode.
@@ -247,6 +257,8 @@ val dataModule = module {
     single { tv.own.owntv.core.live.FavoriteGroups(get(), get()) }
     // sourceDao, syncManager, userDataResolver, channelDao, movieDao, seriesDao, categoryDao
     single { SourceRepository(get(), get(), get(), get(), get(), get(), get(), playbackQuirkDao = get(), playbackPrefsDao = get(), progressDao = get()) }
+    // sourceDao, stalkerAuthManager, catalogSyncScheduler, importFinalizer
+    single { tv.own.owntv.core.repository.SourceEditor(get(), get(), get(), get()) }
     // settings, sourceRepository, channelDao, movieDao, seriesDao
     single { tv.own.owntv.core.nav.NavVisibility(get(), get(), get(), get(), get(), get()) }
     single {
@@ -299,9 +311,9 @@ val dataModule = module {
     // seriesDao, sourceDao, xtreamClient, userDataResolver, stalkerClient, stalkerAuthManager
     single { SeriesRepository(get(), get(), get(), get(), get(), get()) }
     // sourceDao, movieDao, seriesDao, progressDao
-    single { LauncherRecommendationPlanner(get(), get(), get(), get(), get(), get()) }
+    single { LauncherRecommendationPlanner(get(), get(), get(), get(), get(), get(), get()) }
     // sourceDao, channelDao, movieDao, seriesDao, progressDao
-    single { LauncherLaunchResolver(get(), get(), get(), get(), get(), get(), get()) }
+    single { LauncherLaunchResolver(get(), get(), get(), get(), get(), get(), get(), get()) }
     // context, sourceDao, channelDao, movieDao, seriesDao, progressDao, tvProviderProgramDao, customize, settings, localeStore
     single { TvHomeRepository(androidContext(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), LiveLogoPosterArt(androidContext(), get()), get(), get()) }
     // planner, resolver, tvHomeRepository
@@ -386,7 +398,7 @@ val dataModule = module {
     // settings, sourceDao, channelDao, catalogSyncScheduler, importFinalizer
     single { tv.own.owntv.core.sync.M3uVodResort(get(), get(), get(), get(), get()) }
     // profileDao, sourceDao, sourceRepository, backup, settings, connectivity, importFinalizer,
-    // launcherIntegration, catalogSyncScheduler, stalkerAuth — onboarding: add a source, sync it,
-    // undo it when it fails. Factory, not single: each wizard run owns its own state machine.
-    factory { tv.own.owntv.core.setup.SourceImporter(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+    // launcherIntegration, catalogSyncScheduler, stalkerAuth, xtreamClient, context — onboarding: add a
+    // source, sync it, undo it when it fails. Factory, not single: each wizard run owns its own state machine.
+    factory { tv.own.owntv.core.setup.SourceImporter(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), androidContext()) }
 }

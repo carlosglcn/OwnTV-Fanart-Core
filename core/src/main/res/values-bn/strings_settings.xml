@@ -230,6 +230,8 @@
     <string name="settings_preview_audio_description">লাইভ প্রিভিউতে শব্দ চালান</string>
     <string name="settings_mini_player_root">মিনি-প্লেয়ার</string>
     <string name="settings_mini_player_root_description">ডক করা মিনি-প্লেয়ারের আকার ও অবস্থান</string>
+    <string name="settings_pip_on_leave">অ্যাপ ছাড়লে পিকচার-ইন-পিকচার</string>
+    <string name="settings_pip_on_leave_description">হোম চাপলে ভিডিওটি একটি ছোট উইন্ডোতে চলতে থাকে</string>
     <string name="settings_prefer_sdr_description">কোনো স্ট্রিমে SDR ও HDR দুই ধরনের ছবি থাকলে SDR ছবিটি চালানো হয়: যে টিভিতে HDR ফ্যাকাশে বা খুব অন্ধকার দেখায় তার জন্য। শুধু HDR থাকা স্ট্রিম HDR-ই থাকে। শুধু ExoPlayer-এ।</string>
     <string name="settings_auto_frame_rate">স্বয়ংক্রিয় ফ্রেম রেট</string>
     <string name="settings_auto_frame_rate_description">পূর্ণ পর্দায় লাইভ টিভি ও VOD-এর জন্য ভিডিওর সঙ্গে TV-এর রিফ্রেশ রেট (24/25/50/60 fps) মিলিয়ে নিন এবং বের হলে আগের অবস্থায় ফিরিয়ে দিন। প্রতিবার চ্যানেল বদলালে আপনার TV বা রিসিভার HDMI-তে শব্দসহ আবার হ্যান্ডশেক করলে এটি বন্ধ করুন।</string>
@@ -278,6 +280,7 @@
     <string name="settings_about">সম্পর্কে</string>
     <string name="settings_live_latency">লাইভ বিলম্ব</string>
     <string name="settings_no_settings_match">“<xliff:g id="query">%1$s</xliff:g>”-এর সঙ্গে কোনো সেটিংস মেলেনি</string>
+    <string name="settings_search_empty_hint">একটি সেটিংয়ের নাম লিখুন</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">হোম</string>
     <string name="settings_startup_last_channel">সর্বশেষ চ্যানেল</string>
@@ -614,6 +617,8 @@
     <string name="settings_customize_set_pin">🔒 PIN সেট করুন</string>
     <string name="settings_customize_change_pin">🔒 PIN পরিবর্তন করুন</string>
     <string name="settings_customize_remove_lock">লক সরান</string>
+    <string name="settings_customize_settings_pin">সেটিংস খুলতে PIN চাওয়া হবে</string>
+    <string name="settings_customize_settings_pin_button">সেটিংস খুলতে PIN চাওয়া হবে: <xliff:g id="state">%1$s</xliff:g></string>
     <string name="settings_customize_description">এই প্রোফাইলের জন্য চ্যানেল, সিনেমা ও সিরিজ লুকান বা আবার দেখান এবং বিভাগগুলোর নাম পরিবর্তন বা ক্রম বদলান। পুনরায় সিঙ্ক করলেও এগুলো বজায় থাকবে।</string>
     <string name="settings_customize_new_category_behavior">নতুন বিভাগের আচরণ</string>
     <string name="settings_customize_hide">লুকান</string>
@@ -659,6 +664,7 @@
     <string name="settings_customize_rename_hint">শুধু এই প্রোফাইলের জন্য। “<xliff:g id="name">%1$s</xliff:g>” ফিরিয়ে আনতে ফাঁকা রাখুন।</string>
     <string name="settings_customize_remove_pin_title">PIN লক সরাবেন?</string>
     <string name="settings_customize_remove_pin_message">নিজের মতো সাজানোর স্ক্রিনটি আবার PIN না চেয়েই খুলবে।</string>
+    <string name="settings_customize_remove_pin_locks">এই PIN দিয়ে লক করা সব বিভাগও আনলক হয়ে যাবে।</string>
     <string name="settings_customize_remove">সরান</string>
     <string name="settings_customize_confirm_pin">নতুন PIN নিশ্চিত করুন</string>
     <string name="settings_customize_pin_mismatch">PIN দুটি মিলছে না—আবার লিখুন</string>
@@ -1455,6 +1461,7 @@
     <string name="settings_line_autoplay">এবং পরের সিজনেও</string>
     <string name="settings_line_tiles">প্রতিটি টাইল আরেকটি স্ট্রিম</string>
     <string name="settings_line_mini">আকার ও অবস্থান</string>
+    <string name="settings_line_pip">ছোট উইন্ডোতে দেখা চালিয়ে যান</string>
     <string name="settings_line_rec_reserve">সব সংযোগে কখনো রেকর্ড নয়</string>
     <string name="settings_line_rec_watching">দ্বিতীয় স্ট্রিম নয়</string>
     <string name="settings_line_rec_pre_roll">অনুষ্ঠান শুরুর আগে</string>
@@ -1497,6 +1504,7 @@
     <string name="settings_help_timeshift_window">ক্যাচ-আপ ছাড়া চ্যানেলে লাইভ টিভি থামানো ও পেছানো কতটা পেছনে যেতে পারে। বেশি হলে চ্যানেলের বেশি অংশ এই ডিভাইসের স্টোরেজে থাকে।</string>
     <string name="settings_help_resume">মুভি বা পর্বের সংরক্ষিত অবস্থান থাকলে \'জিজ্ঞাসা করুন\' আবার শুরু বা গোড়া থেকে বেছে নিতে দেয়। \'সবসময়\' থামা জায়গা থেকে চালায়; \'কখনো না\' শুরু থেকে চালায়।</string>
     <string name="settings_help_mini">ছোট প্লেয়ার, যা ব্রাউজ করার সময় কোণায় চ্যানেল চালু রাখে। এর আকার ও কোন কোণে থাকবে বেছে নিন।</string>
+    <string name="settings_help_pip">পূর্ণ স্ক্রিনে বা মিনি-প্লেয়ারে ভিডিও চলার সময় হোম চাপুন বা অন্য অ্যাপ খুলুন, ভিডিওটি টিভির বাকি অংশের উপরে একটি ছোট উইন্ডোতে চলতে থাকবে। পূর্ণ স্ক্রিনে ফেরাতে আবার OwnTV খুলুন; প্লেব্যাক থামাতে উইন্ডোটি বন্ধ করুন। মাল্টিভিউ OwnTV-এর ভিতরেই থাকে।</string>
     <string name="settings_key_palette">প্যালেট</string>
     <string name="settings_live_preview_note">আপনি সরাতেই পরিবর্তন এখানে দেখা যায়, সারি ছাড়ার আগেই।</string>
     <string name="settings_synced_at"><xliff:g id="when">%1$s</xliff:g> সিঙ্ক হয়েছে</string>

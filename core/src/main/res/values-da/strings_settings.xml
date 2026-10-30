@@ -230,6 +230,8 @@
     <string name="settings_preview_audio_description">Afspil lyd i liveforhåndsvisningen</string>
     <string name="settings_mini_player_root">Miniafspiller</string>
     <string name="settings_mini_player_root_description">Den forankrede miniafspillers størrelse og placering</string>
+    <string name="settings_pip_on_leave">Billede-i-billede, når du forlader appen</string>
+    <string name="settings_pip_on_leave_description">Videoen bliver ved med at spille i et lille vindue, når du trykker på Hjem</string>
     <string name="settings_prefer_sdr_description">Når en stream har både et SDR- og et HDR-billede, afspilles SDR: til et tv, hvor HDR ser udvasket eller for mørkt ud. En stream med kun HDR forbliver HDR. Kun ExoPlayer.</string>
     <string name="settings_auto_frame_rate">Automatisk billedfrekvens</string>
     <string name="settings_auto_frame_rate_description">Tilpas tv\'ets opdateringshastighed til videoen (24/25/50/60 fps) på fuld skærm for Live-tv og VOD, og gendan den ved afslutning. Slå dette fra, hvis dit tv eller din receiver foretager et støjende nyt HDMI-handshake ved hvert kanalskift.</string>
@@ -278,6 +280,7 @@
     <string name="settings_about">Om</string>
     <string name="settings_live_latency">Liveforsinkelse</string>
     <string name="settings_no_settings_match">Ingen indstillinger matcher “<xliff:g id="query">%1$s</xliff:g>”</string>
+    <string name="settings_search_empty_hint">Skriv navnet på en indstilling</string>
     <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
     <string name="settings_startup_home">Start</string>
     <string name="settings_startup_last_channel">Seneste kanal</string>
@@ -614,6 +617,8 @@
     <string name="settings_customize_set_pin">🔒 Angiv PIN</string>
     <string name="settings_customize_change_pin">🔒 Skift PIN</string>
     <string name="settings_customize_remove_lock">Fjern lås</string>
+    <string name="settings_customize_settings_pin">Bed om PIN for at åbne Indstillinger</string>
+    <string name="settings_customize_settings_pin_button">Bed om PIN for at åbne Indstillinger: <xliff:g id="state">%1$s</xliff:g></string>
     <string name="settings_customize_description">Skjul og vis kanaler, film og serier, og omdøb eller omarranger kategorier for denne profil. Bevares ved synkronisering igen.</string>
     <string name="settings_customize_new_category_behavior">Adfærd for nye kategorier</string>
     <string name="settings_customize_hide">Skjul</string>
@@ -659,6 +664,7 @@
     <string name="settings_customize_rename_hint">Kun for denne profil. Lad feltet være tomt for at gendanne “<xliff:g id="name">%1$s</xliff:g>”.</string>
     <string name="settings_customize_remove_pin_title">Fjern PIN-lås?</string>
     <string name="settings_customize_remove_pin_message">Skærmen Tilpas åbnes fremover uden at bede om en PIN.</string>
+    <string name="settings_customize_remove_pin_locks">Alle kategorier, der er låst med denne PIN, låses også op.</string>
     <string name="settings_customize_remove">Fjern</string>
     <string name="settings_customize_confirm_pin">Bekræft ny PIN</string>
     <string name="settings_customize_pin_mismatch">PIN-koderne stemmer ikke overens — indtast igen</string>
@@ -1455,6 +1461,7 @@
     <string name="settings_line_autoplay">Og videre til næste sæson</string>
     <string name="settings_line_tiles">Hver flise er endnu en stream</string>
     <string name="settings_line_mini">Størrelse og placering</string>
+    <string name="settings_line_pip">Se videre i et lille vindue</string>
     <string name="settings_line_rec_reserve">Optag aldrig på alle forbindelser</string>
     <string name="settings_line_rec_watching">Ikke en ekstra stream</string>
     <string name="settings_line_rec_pre_roll">Før udsendelsen begynder</string>
@@ -1497,6 +1504,7 @@
     <string name="settings_help_timeshift_window">Hvor langt tilbage Sæt på pause og spol tilbage i live-tv kan gå på en kanal uden catch-up. Længere gemmer mere af kanalen på enhedens lager.</string>
     <string name="settings_help_resume">Spørg om genoptagelse tilbyder Genoptag eller Start forfra, når en film eller et afsnit har en gemt position. Genoptag altid fortsætter, hvor du slap; Genoptag aldrig starter forfra.</string>
     <string name="settings_help_mini">Den lille afspiller, der holder en kanal kørende i et hjørne, mens du browser. Vælg størrelse og hjørne.</string>
+    <string name="settings_help_pip">Tryk på Hjem, eller åbn en anden app, mens en video afspilles i fuld skærm eller i miniafspilleren, så fortsætter den i et lille vindue oven på resten af tv’et. Åbn OwnTV igen for at få den tilbage i fuld skærm; luk vinduet for at stoppe afspilningen. Multivisning bliver i OwnTV.</string>
     <string name="settings_key_palette">Palet</string>
     <string name="settings_live_preview_note">Ændringer vises her, mens du bevæger dig, før du forlader rækken.</string>
     <string name="settings_synced_at">Synkroniseret <xliff:g id="when">%1$s</xliff:g></string>
