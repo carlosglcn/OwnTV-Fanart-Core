@@ -47,7 +47,7 @@ internal object EmbyBridge {
     private const val FIELDS =
         "ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId," +
             "Container,Genres,Overview,CommunityRating,BackdropImageTags," +
-            "DateCreated,ProviderIds,RunTimeTicks,UserData"
+            "DateCreated,ProviderIds,RunTimeTicks,UserData,MediaStreams"
 
     /**
      * `http(s)://user[:password]@host[:port][/path]` with no file name in the path → a possible server.
@@ -164,6 +164,12 @@ internal object EmbyBridge {
             if (!value.isNullOrBlank()) append(' ').append(key).append("=\"").append(attr(value)).append('"')
             return this
         }
+        /** glcn: the file's real quality from its streams — resolution, HDR format, Atmos / surround. */
+        fun StringBuilder.quality(it: JSONObject): StringBuilder {
+            val q = qualityOf(it) ?: return this
+            extra("glcn-rank", q.first.toString())
+            return extra("glcn-quality", q.second)
+        }
         /** When the item reached the library, as epoch ms — what "Recently added" sorts by. */
         fun added(it: JSONObject): String? {
             val raw = it.optString("DateCreated").takeIf { d -> d.length >= 19 } ?: return null
@@ -191,6 +197,7 @@ internal object EmbyBridge {
                 .extra("glcn-year", year.takeIf { it > 0 }?.toString())
                 .extra("glcn-rating", rating?.let { String.format(java.util.Locale.ROOT, "%.1f", it) })
                 .extra("glcn-added", added(m))
+                .quality(m)
                 .append(" group-title=\"").append(attr(group)).append("\",").append(line(label)).append('\n')
                 .append(stream(m)).append('\n')
         }
@@ -212,10 +219,59 @@ internal object EmbyBridge {
                 .extra("glcn-series-plot", series?.optString("Overview"))
                 .extra("glcn-series-backdrop", series?.let(::backdrop))
                 .extra("glcn-added", added(e))
+                .quality(e)
                 .append(" group-title=\"").append(SERIES_GROUP).append("\",").append(line(label)).append('\n')
                 .append(stream(e)).append('\n')
         }
         sb.toString()
+    }
+
+    /**
+     * glcn: (resolution rank, capability marks) from an item's MediaStreams — the same rank and marks a name like
+     * "4K DV Atmos" gives (see ProviderCatalogMetadataParser): 4 = 4K, 3 = 1080p, 2 = 720p, 1 = SD.
+     */
+    private fun qualityOf(item: JSONObject): Pair<Int, String>? {
+        val streams = item.optJSONArray("MediaStreams") ?: return null
+        var rank = 0
+        var picture: String? = null
+        var audio: String? = null
+        var audioScore = 0
+        for (i in 0 until streams.length()) {
+            val st = streams.optJSONObject(i) ?: continue
+            when (st.optString("Type")) {
+                "Video" -> {
+                    val w = st.optInt("Width", 0)
+                    val h = st.optInt("Height", 0)
+                    val r = when { w >= 7000 || h >= 4000 -> 5; w >= 3200 || h >= 1800 -> 4; w >= 1800 || h >= 1000 -> 3; w >= 1200 || h >= 700 -> 2; w > 0 -> 1; else -> 0 }
+                    if (r > rank) rank = r
+                    val range = (st.optString("VideoRange") + " " + st.optString("VideoRangeType") + " " + st.optString("ExtendedVideoType") +
+                        " " + st.optString("DisplayTitle")).lowercase()
+                    val p = when {
+                        "dolby vision" in range || "dovi" in range || "dolbyvision" in range -> "Dolby Vision"
+                        "hdr10+" in range || "hdr10plus" in range -> "HDR10+"
+                        "hdr10" in range || "hdr 10" in range -> "HDR10"
+                        "hdr" in range || "hlg" in range -> "HDR"
+                        else -> null
+                    }
+                    if (p != null && picture == null) picture = p
+                }
+                "Audio" -> {
+                    val title = (st.optString("DisplayTitle") + " " + st.optString("Profile") + " " + st.optString("Codec")).lowercase()
+                    val ch = st.optInt("Channels", 0)
+                    val (score, mark) = when {
+                        "atmos" in title || ("eac3" in title && "joc" in title) -> 4 to "Dolby Atmos"
+                        ch >= 8 -> 3 to "7.1 Audio"
+                        ch >= 6 -> 2 to "5.1 Audio"
+                        ch == 2 -> 1 to "2.0 Audio"
+                        else -> 0 to null
+                    }
+                    if (score > audioScore && mark != null) { audioScore = score; audio = mark }
+                }
+            }
+        }
+        val marks = listOfNotNull(picture, audio)
+        if (rank == 0 && marks.isEmpty()) return null
+        return rank to marks.joinToString(" • ")
     }
 
     /** The stream URL the playlist gives an item — the key the watch state is matched on. */

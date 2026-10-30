@@ -365,17 +365,23 @@ fun ChannelEntity.computeContentHash(): Int {
  *  movie actually carries them — same reasoning as [ChannelEntity.computeContentHash]: no full-catalog
  *  rewrite for the 99% that don't. */
 fun MovieEntity.computeContentHash(): Int {
-    val base = Objects.hash(
+    val plain = Objects.hash(
         sourceId, categoryId, name, posterUrl, backdropUrl,
         year, rating, durationSecs, plot, streamUrl, containerExt, remoteId, addedAt,
     )
+    // glcn: quality a source gives outright (Emby, a NAS share) counts too; a plain playlist sets none, so its hash is unchanged.
+    val base = if (qualityRank == 0 && advertisedCapabilities == null) plain else Objects.hash(plain, qualityRank, advertisedCapabilities)
     if (httpHeaders == null && drmConfig == null && manifestType == null) return base
     val withHeaders = Objects.hash(base, httpHeaders)
     val withDrm = if (drmConfig == null) withHeaders else Objects.hash(withHeaders, drmConfig)
     return if (manifestType == null) withDrm else Objects.hash(withDrm, manifestType)
 }
 
-fun SeriesEntity.computeContentHash(): Int = Objects.hash(
-    sourceId, categoryId, name, posterUrl, backdropUrl,
-    year, rating, plot, remoteId, addedAt,
-)
+fun SeriesEntity.computeContentHash(): Int {
+    val plain = Objects.hash(
+        sourceId, categoryId, name, posterUrl, backdropUrl,
+        year, rating, plot, remoteId, addedAt,
+    )
+    // glcn: as for films — quality given outright counts; none set keeps the hash as it was.
+    return if (qualityRank == 0 && advertisedCapabilities == null) plain else Objects.hash(plain, qualityRank, advertisedCapabilities)
+}

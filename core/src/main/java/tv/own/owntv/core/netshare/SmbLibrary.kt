@@ -68,6 +68,7 @@ object SmbLibrary {
                 if (film.title.isBlank()) continue
                 val label = if (film.year != null) "${film.title} (${film.year})" else film.title
                 sb.append("#EXTINF:-1 ").append(TYPE_MOVIE)
+                    .quality(e.name)
                     .extra("glcn-year", film.year?.toString())
                     .extra("glcn-added", e.changedMs.takeIf { it > 0 }?.toString())
                     .append(" group-title=\"").append(attr(group ?: MOVIES_GROUP)).append("\",").append(line(label)).append('\n')
@@ -81,6 +82,7 @@ object SmbLibrary {
         fun emit(show: String, ep: MediaFileNames.Episode, path: String, changedMs: Long) {
             val label = String.format(java.util.Locale.ROOT, "%s S%02dE%02d %s", show, ep.season, ep.episode, ep.title.orEmpty()).trim()
             sb.append("#EXTINF:-1 ").append(TYPE_SERIES)
+                .quality(path.substringAfterLast('/'))
                 .extra("glcn-added", changedMs.takeIf { it > 0 }?.toString())
                 .append(" group-title=\"").append(SERIES_GROUP).append("\",").append(line(label)).append('\n')
                 .append(NetShare.fileUrl(t, path)).append('\n')
@@ -115,6 +117,13 @@ object SmbLibrary {
                 emit(show, ep, child, e.changedMs)
             }
         }
+    }
+
+    /** The quality the file's own name advertises (4K, HDR, Atmos…) — the clean title shown loses it. */
+    private fun StringBuilder.quality(fileName: String): StringBuilder {
+        val q = tv.own.owntv.core.catalog.ProviderCatalogMetadataParser.parse(fileName.substringBeforeLast('.'), null)
+        if (q.qualityRank > 0) extra("glcn-rank", q.qualityRank.toString())
+        return extra("glcn-quality", q.capabilities)
     }
 
     private fun StringBuilder.extra(key: String, value: String?): StringBuilder {

@@ -259,6 +259,9 @@ internal class M3uSyncer(
                         year = entry.extra["glcn-year"]?.toIntOrNull(),
                         rating = entry.extra["glcn-rating"]?.toDoubleOrNull(),
                         addedAt = entry.extra["glcn-added"]?.toLongOrNull(),
+                        // glcn: the file's real quality, when the source knows it (Emby, a NAS share).
+                        qualityRank = entry.extra["glcn-rank"]?.toIntOrNull() ?: 0,
+                        advertisedCapabilities = entry.extra["glcn-quality"]?.takeIf { it.isNotBlank() },
                     )
                 }
                 movies.forEach { seenMovieKeys.add(it.remoteId!!) }
@@ -355,6 +358,8 @@ internal class M3uSyncer(
                         backdropUrl = show.backdrop,
                         // glcn: the newest episode's arrival, so a new episode brings the show forward.
                         addedAt = show.addedAt,
+                        qualityRank = show.qualityRank,
+                        advertisedCapabilities = show.quality,
                     )
                     // The series hash folds in the episode list: a playlist that only adds S01E06
                     // must count as changed even though the show row itself is identical.
@@ -440,6 +445,8 @@ internal class M3uSyncer(
                             )
                         }
                         e.extra["glcn-added"]?.toLongOrNull()?.let { a -> if ((show.addedAt ?: 0L) < a) show.addedAt = a }
+                        // glcn: a show's quality is its best episode's.
+                        e.extra["glcn-rank"]?.toIntOrNull()?.let { r -> if (r > show.qualityRank) { show.qualityRank = r; show.quality = e.extra["glcn-quality"] } }
                         val episode = if (parsed.episode > 0) parsed.episode else show.episodes.count { it.season == parsed.season } + 1
                         show.episodes.add(
                             M3uEpisodeRow(
@@ -584,6 +591,8 @@ internal class M3uSyncer(
     ) {
         val episodes = ArrayList<M3uEpisodeRow>()
         var addedAt: Long? = null
+        var qualityRank = 0
+        var quality: String? = null
     }
 
     private data class M3uEpisodeRow(

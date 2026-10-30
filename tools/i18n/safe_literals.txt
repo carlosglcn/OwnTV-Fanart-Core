@@ -2546,6 +2546,8 @@
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	SMB folder not found: $folder
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	Series
 2	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	glcn-added
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	glcn-quality
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	glcn-rank
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	glcn-year
 2	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	group-title="
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	type="movie"
@@ -5137,7 +5139,7 @@
 1	log	core/src/main/java/tv/own/owntv/core/sync/CatalogPriority.kt	CatalogPriority
 1	log	core/src/main/java/tv/own/owntv/core/sync/CatalogPriority.kt	pagesLeft=${row.lastPage - row.nextPage + 1}
 1	log	core/src/main/java/tv/own/owntv/core/sync/CatalogPriority.kt	priority category sourceId=${row.sourceId} type=${row.mediaType} cat=${row.categoryRemoteId}
-5	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	\0
+10	empty	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	\0
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	",
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTINF:-1 type="movie" tvg-logo="
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTINF:-1 type="series" tvg-logo="
@@ -5153,32 +5155,68 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	&SortBy=$sort&IsMissing=false&StartIndex=$start&Limit=$PAGE
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	.$c
 1	url	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	/emby
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	2.0 Audio
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	5.1 Audio
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	7.1 Audio
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	:${uri.port}
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	?static=true&api_key=${s.token}
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	AccessToken
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Audio
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Authorization
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Channels
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Codec
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Container
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Container,Genres,Overview,CommunityRating,BackdropImageTags,
-1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DateCreated,ProviderIds,RunTimeTicks,UserData
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DateCreated,ProviderIds,RunTimeTicks,UserData,MediaStreams
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DisplayTitle
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Dolby Atmos
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Dolby Vision
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Emby: HTTP ${r.code}
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Emby: token refused
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Emby: usuario o contraseña incorrectos
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Episode
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ExtendedVideoType
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Genres
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HDR
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HDR10
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HDR10+
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Height
 5	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Id
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IndexNumber
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IsPlayed
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IsResumable
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Items
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	MediaStreams
 3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Movie
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Name
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ParentIndexNumber
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Películas
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Profile
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Pw
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Series
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Type
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Video
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	VideoRange
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	VideoRangeType
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Width
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	atmos
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dolby vision
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dolbyvision
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dovi
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	eac3
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-quality
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-rank
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hdr
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hdr 10
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hdr10
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hdr10+
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hdr10plus
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hlg
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	joc
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	|
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	•
 1	log	core/src/main/java/tv/own/owntv/core/sync/ImportFinalizer.kt	ImportFinalizer
 1	log	core/src/main/java/tv/own/owntv/core/sync/ImportFinalizer.kt	Metadata eviction: cache=$cache matches=$matches
 1	log	core/src/main/java/tv/own/owntv/core/sync/ImportFinalizer.kt	Unable to register the portal guide for sourceId=${source.id}
@@ -5230,6 +5268,8 @@
 1	log	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	dbUpdated=${upsert.updated} dbSkipped=${upsert.skippedUnchanged} processed=$moviesProcessed
 1	log	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	dbUpdated=${upsert.updated} dbSkipped=${upsert.skippedUnchanged} processed=$processed
 1	url	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	file://
+2	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	glcn-quality
+2	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	glcn-rank
 1	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	movies
 2	log	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	ms=${SystemClock.elapsedRealtime() - start}
 1	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	series

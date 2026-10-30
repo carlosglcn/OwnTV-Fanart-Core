@@ -195,8 +195,10 @@ fun MovieEntity.withProviderCatalogMetadata(): MovieEntity {
         titleSignature = parsed.titleSignature,
         parsedYear = parsed.parsedYear,
         providerLanguage = parsed.language,
-        qualityRank = parsed.qualityRank,
-        advertisedCapabilities = parsed.capabilities,
+        // glcn: a source that knows the file's real quality (Emby, a NAS share) says it outright; the name wins
+        // only when it says something itself.
+        qualityRank = if (parsed.qualityRank > 0) parsed.qualityRank else qualityRank,
+        advertisedCapabilities = parsed.capabilities ?: advertisedCapabilities,
     )
 }
 
@@ -207,7 +209,9 @@ fun SeriesEntity.withProviderCatalogMetadata(): SeriesEntity {
         titleSignature = parsed.titleSignature,
         parsedYear = parsed.parsedYear,
         providerLanguage = parsed.language,
-        qualityRank = parsed.qualityRank,
-        advertisedCapabilities = parsed.capabilities,
+        // glcn: a source that knows the file's real quality (Emby, a NAS share) says it outright; the name wins
+        // only when it says something itself.
+        qualityRank = if (parsed.qualityRank > 0) parsed.qualityRank else qualityRank,
+        advertisedCapabilities = parsed.capabilities ?: advertisedCapabilities,
     )
 }
