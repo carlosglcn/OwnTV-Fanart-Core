@@ -311,8 +311,6 @@
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	w780
 2	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	·
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	,
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/3/movie/
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/3/tv/
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	20th century
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	TMDB $label failed: ${it.message}
 1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	Trending type=$type page=$page

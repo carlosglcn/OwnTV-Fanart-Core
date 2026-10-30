@@ -170,6 +170,9 @@ data class MetadataConfig(
  * Full movie details (TMDB `/movie/{id}?append_to_response=credits,external_ids`). Everything IPTV rarely
  * carries — imdb_id (Trakt), backdrop, genres, cast, rating — plus the fields already in the search hit.
  */
+/** glcn: one of a title's videos on YouTube ([key]), with its own name and TMDB type (Trailer, Teaser, Featurette…). */
+data class VideoExtra(val key: String, val name: String, val type: String)
+
 data class MovieDetails(
     val tmdbId: Int,
     val imdbId: String?,
@@ -243,6 +246,9 @@ interface MetadataProvider {
 
     /** glcn: the platform behind a title (see [PlatformBadge]); null when unknown or on failure. */
     suspend fun platform(tmdbId: Int, isTv: Boolean): PlatformBadge? = null
+
+    /** glcn: a title's videos beyond its trailer — teasers, clips, featurettes, behind the scenes (YouTube), best first. */
+    suspend fun videos(tmdbId: Int, isTv: Boolean): List<VideoExtra>? = null
 }
 
 /**

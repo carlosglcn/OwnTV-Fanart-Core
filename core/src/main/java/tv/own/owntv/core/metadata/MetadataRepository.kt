@@ -32,6 +32,18 @@ class MetadataRepository(
     /** glcn: to put a typed TMDB id's poster on the item's own row ([OverridePosters]). */
     private val db: tv.own.owntv.core.database.OwnTVDatabase? = null,
 ) {
+    private val extras = java.util.concurrent.ConcurrentHashMap<String, List<VideoExtra>>()
+
+    /** glcn: a title's extras (teasers, clips, featurettes…) for its page; asked once per title and kept in memory. */
+    suspend fun extrasFor(tmdbId: Int, isTv: Boolean): List<VideoExtra> {
+        if (tmdbId <= 0 || !settings.metadataConfig().enabled) return emptyList()
+        val k = (if (isTv) "tv:" else "movie:") + tmdbId
+        extras[k]?.let { return it }
+        val got = runCatching { provider.videos(tmdbId, isTv) }.getOrNull() ?: return emptyList()
+        extras[k] = got
+        return got
+    }
+
     /** Guards [healNegativeMatchesOnce] so the DataStore read happens once per process, not per resolve. */
     private val healNeeded = java.util.concurrent.atomic.AtomicBoolean(true)
 

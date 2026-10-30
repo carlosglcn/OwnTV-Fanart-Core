@@ -212,6 +212,28 @@ class TmdbProvider(
         return badge.copy(iconPath = icon)
     }
 
+    override suspend fun videos(tmdbId: Int, isTv: Boolean): List<VideoExtra>? {
+        if (tmdbId <= 0) return null
+        val ep = resolveEndpoint()
+        val url = buildString {
+            append(ep.baseUrl).append(if (isTv) "/3/tv/" else "/3/movie/").append(tmdbId).append("/videos")
+            append("?").append(ep.videoLangParam().removePrefix("&"))
+            ep.apiKey?.takeIf { it.isNotBlank() }?.let { append("&api_key=").append(enc(it)) }
+        }
+        val json = fetch(ep, url, "videos id=$tmdbId") ?: return null
+        return runCatching {
+            val arr = JSONObject(json).optJSONArray("results") ?: return@runCatching emptyList()
+            val lang = ep.trailerLang()
+            val order = listOf("Trailer", "Teaser", "Clip", "Featurette", "Behind the Scenes", "Bloopers")
+            (0 until arr.length()).mapNotNull { i -> arr.optJSONObject(i) }
+                .filter { it.optString("site").equals("YouTube", true) && it.optString("key").isNotBlank() && it.optString("type") in order }
+                .sortedWith(compareBy({ if (it.optString("iso_639_1") == lang) 0 else 1 }, { order.indexOf(it.optString("type")) }))
+                .map { VideoExtra(it.optString("key"), it.optString("name").ifBlank { it.optString("type") }, it.optString("type")) }
+                .distinctBy { it.key }
+                .take(EXTRAS_MAX)
+        }.getOrNull()
+    }
+
     @Volatile private var providerCatalogue = mutableMapOf<Boolean, List<Pair<String, String>>>()
 
     private suspend fun providerIcon(ep: Endpoint, name: String, isTv: Boolean): String? {
@@ -539,3 +561,6 @@ class TmdbProvider(
         }
     }
 }
+
+/** glcn: how many of a title's videos its page offers. */
+private const val EXTRAS_MAX = 12
