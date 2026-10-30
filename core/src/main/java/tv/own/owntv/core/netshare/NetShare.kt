@@ -31,7 +31,8 @@ object NetShare {
         val scheme: String = SCHEME,
     ) {
         /** `smb://host[:port]/share` — the start of every file address in this share. */
-        val root: String get() = SCHEME + hostPort(host, port) + "/" + encodeSegment(share)
+        val root: String get() = scheme + (if (port == defaultPort(scheme)) hostPort(host, DEFAULT_PORT) else hostPort(host, port).let { if (port == DEFAULT_PORT) "$it:$port" else it }) +
+            "/" + encodeSegment(share)
     }
 
     data class Login(val user: String, val password: String, val domain: String)
@@ -41,13 +42,19 @@ object NetShare {
     /** glcn: the link's protocol when it is a network folder (SMB or WebDAV); null otherwise. */
     fun schemeOf(url: String): String? {
         val u = url.trim()
-        return listOf(SCHEME, DAVS, DAV).firstOrNull { u.startsWith(it, ignoreCase = true) }
+        return listOf(SCHEME, DAVS, DAV, NFS).firstOrNull { u.startsWith(it, ignoreCase = true) }
+    }
+
+    /** glcn: a file the players cannot open themselves (SMB, NFS): it plays through [NetShareProxy]. */
+    fun needsProxy(url: String): Boolean {
+        val u = url.trim()
+        return u.startsWith(SCHEME, ignoreCase = true) || u.startsWith(NFS, ignoreCase = true)
     }
 
     /** A network folder of any kind (SMB or WebDAV) — what the add-source form edits as one. */
     fun isNetworkFolder(url: String): Boolean = schemeOf(url) != null
 
-    fun defaultPort(scheme: String): Int = when (scheme) { DAV -> 80; DAVS -> 443; else -> DEFAULT_PORT }
+    fun defaultPort(scheme: String): Int = when (scheme) { DAV -> 80; DAVS -> 443; NFS -> NFS_PORT; else -> DEFAULT_PORT }
 
     /** The source link → its share; null when it is not an `smb://` link with a host and a share. */
     fun parse(url: String): Target? {
@@ -89,7 +96,8 @@ object NetShare {
             cleanFolder(series).takeIf { it.isNotEmpty() }?.let { PARAM_SERIES + "=" + encodeSegment(it) },
         ).joinToString("&")
         val auth = if (p == def) hostPort(h, DEFAULT_PORT) else hostPort(h, p).let { if (p == DEFAULT_PORT) "$it:$p" else it }
-        return scheme + info + auth + "/" + encodeSegment(share.trim().trim('/', '\\')) + (if (q.isNotEmpty()) "?$q" else "")
+        val shareText = if (scheme == NFS) "/" + share.trim().replace('\\', '/').trim('/') else share.trim().trim('/', '\\')
+        return scheme + info + auth + "/" + encodeSegment(shareText) + (if (q.isNotEmpty()) "?$q" else "")
     }
 
     // ---- Logins for playback -----------------------------------------------------------------------------------
@@ -116,19 +124,20 @@ object NetShare {
         t.root + "/" + path.split('/', '\\').filter { it.isNotEmpty() }.joinToString("/") { encodeSegment(it) }
 
     /** A file address → host, port, share and the path inside the share (decoded, '/'-separated). */
-    data class FileRef(val host: String, val port: Int, val share: String, val path: String)
+    data class FileRef(val host: String, val port: Int, val share: String, val path: String, val scheme: String = SCHEME)
 
     fun fileRef(url: String): FileRef? {
-        if (!isShare(url)) return null
-        val rest = url.trim().substring(SCHEME.length).substringBefore('?')
+        if (!needsProxy(url)) return null
+        val scheme = schemeOf(url) ?: return null
+        val rest = url.trim().substring(scheme.length).substringBefore('?')
         val parts = rest.split('/')
         if (parts.size < 3) return null
         val authority = parts[0].substringAfterLast('@')
-        val (host, port) = splitHostPort(authority) ?: return null
+        val (host, port) = splitHostPort(authority, defaultPort(scheme)) ?: return null
         val share = decode(parts[1])
         val path = parts.drop(2).filter { it.isNotEmpty() }.joinToString("/") { decode(it) }
         if (share.isBlank() || path.isBlank()) return null
-        return FileRef(host, port, share, path)
+        return FileRef(host, port, share, path, scheme)
     }
 
     fun hostPort(host: String, port: Int): String {
@@ -163,6 +172,9 @@ object NetShare {
     const val DEFAULT_PORT = 445
     /** glcn: WebDAV over http and https (a NAS's WebDAV server; a Synology answers on 5005 / 5006). */
     const val DAV = "webdav://"
+    /** glcn: NFS v3 — the share is the export path ("/volume1/video"), kept as one encoded part of the link. */
+    const val NFS = "nfs://"
+    const val NFS_PORT = 2049
     const val DAVS = "webdavs://"
     private const val PARAM_MOVIES = "movies"
     private const val PARAM_SERIES = "series"

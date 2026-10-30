@@ -22,15 +22,17 @@ object NetShareProxy {
 
     /** What the player should open: a share file's loopback address, anything else untouched. */
     fun playable(url: String): String {
-        if (!NetShare.isShare(url)) return url
+        if (!NetShare.needsProxy(url)) return url
         val port = runCatching { ensureStarted() }.getOrElse {
             Log.w(TAG, "proxy did not start", it)
             return url
         }
-        return "http://127.0.0.1:$port$PREFIX" + url.trim().substring(NetShare.SCHEME.length).substringAfterLast('@').substringBefore('?')
+        val scheme = NetShare.schemeOf(url) ?: return url
+        val prefix = if (scheme == NetShare.NFS) PREFIX_NFS else PREFIX
+        return "http://127.0.0.1:$port$prefix" + url.trim().substring(scheme.length).substringAfterLast('@').substringBefore('?')
     }
 
-    fun isProxied(url: String): Boolean = url.startsWith("http://127.0.0.1:") && url.contains(PREFIX)
+    fun isProxied(url: String): Boolean = url.startsWith("http://127.0.0.1:") && (url.contains(PREFIX) || url.contains(PREFIX_NFS))
 
     @Synchronized
     private fun ensureStarted(): Int {
@@ -62,9 +64,12 @@ object NetShareProxy {
             val parts = requestLine.split(' ')
             val method = parts.getOrNull(0).orEmpty()
             val target = parts.getOrNull(1).orEmpty()
-            if ((method != "GET" && method != "HEAD") || !target.startsWith(PREFIX)) return status(out, 400, "Bad Request")
-            val ref = NetShare.fileRef(NetShare.SCHEME + target.removePrefix(PREFIX)) ?: return status(out, 404, "Not Found")
+            val nfsTarget = target.startsWith(PREFIX_NFS)
+            if ((method != "GET" && method != "HEAD") || !(target.startsWith(PREFIX) || nfsTarget)) return status(out, 400, "Bad Request")
+            val ref = (if (nfsTarget) NetShare.fileRef(NetShare.NFS + target.removePrefix(PREFIX_NFS)) else NetShare.fileRef(NetShare.SCHEME + target.removePrefix(PREFIX)))
+                ?: return status(out, 404, "Not Found")
             val login = NetShare.credentialsFor(ref.host, ref.port, ref.share)
+            if (nfsTarget) { serveNfs(ref, login, method, headers, out); return }
             try {
                 SmbAccess.withShare(ref.host, ref.port, ref.share, login) { share ->
                     SmbAccess.openRead(share, ref.path).use { file ->
@@ -107,6 +112,48 @@ object NetShareProxy {
                 Log.w(TAG, "serving ${ref.host}/${ref.share} failed: ${e.javaClass.simpleName}: ${e.message}")
                 runCatching { status(out, 502, "Bad Gateway") }
             }
+        }
+    }
+
+    /** glcn: the same answer for a file on an NFS export. */
+    private fun serveNfs(ref: NetShare.FileRef, login: NetShare.Login?, method: String, headers: Map<String, String>, out: OutputStream) {
+        try {
+            val nfs = NfsAccess.mount(ref.host, ref.share, login?.user.orEmpty())
+            val file = NfsAccess.file(nfs, ref.path)
+            val size = file.length()
+            val range = parseRange(headers["range"], size)
+            val start = range?.first ?: 0L
+            val end = range?.second ?: (size - 1)
+            if (range != null && (start >= size || start > end)) {
+                write(out, "HTTP/1.1 416 Range Not Satisfiable\r\nContent-Range: bytes */$size\r\nContent-Length: 0\r\nConnection: close\r\n\r\n")
+                return
+            }
+            val length = end - start + 1
+            val head = StringBuilder()
+                .append(if (range != null) "HTTP/1.1 206 Partial Content\r\n" else "HTTP/1.1 200 OK\r\n")
+                .append("Content-Type: ").append(mimeOf(ref.path)).append("\r\n")
+                .append("Accept-Ranges: bytes\r\n")
+                .append("Content-Length: ").append(length).append("\r\n")
+            if (range != null) head.append("Content-Range: bytes ").append(start).append('-').append(end).append('/').append(size).append("\r\n")
+            head.append("Connection: close\r\n\r\n")
+            write(out, head.toString())
+            if (method == "HEAD") return
+            val buf = ByteArray(NFS_CHUNK)
+            var pos = start
+            while (pos <= end) {
+                val want = minOf(NFS_CHUNK.toLong(), end - pos + 1).toInt()
+                val n = file.read(pos, want, buf, 0).bytesRead
+                if (n <= 0) break
+                out.write(buf, 0, n)
+                pos += n
+            }
+            out.flush()
+        } catch (e: java.net.SocketException) {
+            // The player let go: nothing to say.
+        } catch (e: Exception) {
+            Log.w(TAG, "serving NFS ${ref.host}${ref.share} failed: ${e.javaClass.simpleName}: ${e.message}")
+            NfsAccess.forget(ref.host, ref.share, login?.user.orEmpty())
+            runCatching { status(out, 502, "Bad Gateway") }
         }
     }
 
@@ -164,6 +211,8 @@ object NetShareProxy {
 
     private const val TAG = "NetShareProxy"
     private const val PREFIX = "/smb/"
+    private const val PREFIX_NFS = "/nfs/"
+    private const val NFS_CHUNK = 256 * 1024
     private const val BACKLOG = 16
     private const val CLIENT_TIMEOUT_MS = 30_000
     private const val MAX_LINE = 8_192

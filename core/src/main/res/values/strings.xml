@@ -311,4 +311,9 @@
     <string name="glcn_setup_net_protocol_dav">WebDAV: also works from outside home</string>
     <string name="glcn_setup_net_protocol_help">SMB is the usual way to share folders at home. WebDAV (a Synology\'s WebDAV Server, Nextcloud…) also works from outside: write the server with http:// or https:// and its port (a Synology uses 5005 and 5006).</string>
     <string name="glcn_setup_dav_server_example">https://nas.example.com:5006</string>
+    <string name="glcn_setup_net_protocol_nfs">NFS: Linux/NAS sharing, fast at home</string>
+    <string name="glcn_setup_nfs_export">Exported folder</string>
+    <string name="glcn_setup_nfs_export_example">/volume1/video</string>
+    <string name="glcn_setup_nfs_help">The folder the NAS shares over NFS, as a full path. On a Synology, the shared folder\'s NFS rule must allow this device\'s address and tick \"Allow connections from non-privileged ports\".</string>
+    <string name="glcn_setup_nfs_uid">User id (optional, e.g. 1026 or 1026:100)</string>
 </resources>

@@ -30,8 +30,21 @@ object SmbLibrary {
     }
 
     suspend fun playlist(t: NetShare.Target): String = withContext(Dispatchers.IO) {
-        if (t.scheme != NetShare.SCHEME) return@withContext build(WebDav.lister(t), t)
+        if (t.scheme == NetShare.DAV || t.scheme == NetShare.DAVS) return@withContext build(WebDav.lister(t), t)
         NetShare.remember(t)
+        if (t.scheme == NetShare.NFS) {
+            val nfs = try {
+                NfsAccess.mount(t.host, t.share, t.user)
+            } catch (e: Exception) {
+                NfsAccess.forget(t.host, t.share, t.user)
+                throw java.io.IOException("NFS mount failed: ${e.javaClass.simpleName}: ${e.message}", e)
+            }
+            return@withContext build(object : Lister {
+                override fun list(path: String) = NfsAccess.list(nfs, path)
+                override fun exists(path: String) = NfsAccess.folderExists(nfs, path)
+                override fun url(path: String) = NetShare.fileUrl(t, path)
+            }, t)
+        }
         val login = NetShare.Login(t.user, t.password, t.domain)
         SmbAccess.withShare(t.host, t.port, t.share, login) { share ->
             build(object : Lister {

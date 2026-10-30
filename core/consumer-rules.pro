@@ -11,3 +11,9 @@
 -dontwarn javax.security.auth.kerberos.**
 -dontwarn com.sun.security.auth.module.**
 -keep class com.hierynomus.security.bc.** { *; }
+
+# glcn: nfs-client (NAS shares over NFS) and its Netty 3: optional integrations are absent on Android.
+-dontwarn org.jboss.netty.**
+-dontwarn org.apache.commons.lang3.**
+-keep class com.emc.ecs.nfsclient.** { *; }
+-keep class org.jboss.netty.channel.socket.nio.** { *; }
