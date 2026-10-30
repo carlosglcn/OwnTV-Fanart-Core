@@ -3483,6 +3483,7 @@
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glass_alpha
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glass_scope
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_frame_meter
+1	technical	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_look_
 1	log	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	guide_days_to_keep
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	guide_density_pct
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	guide_preview

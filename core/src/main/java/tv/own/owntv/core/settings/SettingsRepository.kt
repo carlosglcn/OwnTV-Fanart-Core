@@ -987,6 +987,39 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     /** glcn: the ready-made style in use (its page tones), or null for the user's own choices. */
     val glcnStyle: Flow<tv.own.owntv.core.theme.GlcnStyle?> = prefsFlow { tv.own.owntv.core.theme.GlcnStyle.of(it[Keys.GLCN_STYLE]) }
 
+    /**
+     * glcn: each profile keeps its own colours — theme, accent, highlight, ready-made style, glass and the
+     * clock's colours. The app reads them from the usual keys; switching profile files the outgoing profile's
+     * set under its id and puts back the incoming one's (a profile that never had its own keeps the current
+     * look, which becomes its own from then on).
+     */
+    suspend fun swapLookForProfile(from: Long?, to: Long) {
+        context.dataStore.edit { p ->
+            if (from != null && from != to) p[stringPreferencesKey(LOOK_PREFIX + from)] = encodeLook(p)
+            val saved = p[stringPreferencesKey(LOOK_PREFIX + to)] ?: return@edit
+            decodeLook(saved, p)
+        }
+    }
+
+    private val lookStringKeys get() = listOf(
+        Keys.THEME_MODE, Keys.ACCENT, Keys.ACCENT_CUSTOM, Keys.FOCUS_HIGHLIGHT, Keys.GLCN_STYLE,
+        Keys.CLOCK_TIME_COLOR, Keys.CLOCK_DATE_COLOR, Keys.CLOCK_WEATHER_COLOR,
+    )
+    private val lookIntKeys get() = listOf(Keys.GLASS_SCOPE, Keys.GLASS_ALPHA)
+
+    private fun encodeLook(p: Preferences): String {
+        val o = org.json.JSONObject()
+        for (k in lookStringKeys) p[k]?.let { o.put(k.name, it) }
+        for (k in lookIntKeys) p[k]?.let { o.put(k.name, it) }
+        return o.toString()
+    }
+
+    private fun decodeLook(json: String, p: MutablePreferences) {
+        val o = runCatching { org.json.JSONObject(json) }.getOrNull() ?: return
+        for (k in lookStringKeys) if (o.has(k.name)) p[k] = o.optString(k.name) else p.remove(k)
+        for (k in lookIntKeys) if (o.has(k.name)) p[k] = o.optInt(k.name) else p.remove(k)
+    }
+
     /** glcn: apply a ready-made style — its theme, its accent and (glass styles) the translucent surfaces;
      *  null goes back to the user's own choices, keeping what they are now. */
     suspend fun applyGlcnStyle(style: tv.own.owntv.core.theme.GlcnStyle?) {
@@ -3908,3 +3941,6 @@ object ZapViews {
     fun next(panel: Int, mask: Int): Int =
         (1..3).map { (panel + it) % 3 }.firstOrNull { has(mask, it) } ?: panel
 }
+
+/** glcn: where each profile's colours are filed — see [SettingsRepository.swapLookForProfile]. */
+private const val LOOK_PREFIX = "glcn_look_"
