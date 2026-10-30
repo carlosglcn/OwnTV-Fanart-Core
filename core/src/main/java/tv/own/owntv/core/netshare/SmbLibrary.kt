@@ -20,21 +20,39 @@ object SmbLibrary {
     /** What a test found: the share opened, and how many films and episodes its folders hold (-1 = not asked). */
     data class Count(val films: Int, val episodes: Int)
 
+    /** What the walk needs from a share, whatever speaks to it (SMB, WebDAV). */
+    internal interface Lister {
+        fun list(path: String): List<SmbAccess.Entry>
+        fun exists(path: String): Boolean
+        fun url(path: String): String
+        /** An `#EXTHTTP` line (with its newline) the player needs for each file — a WebDAV login — or "". */
+        val headerLine: String get() = ""
+    }
+
     suspend fun playlist(t: NetShare.Target): String = withContext(Dispatchers.IO) {
+        if (t.scheme != NetShare.SCHEME) return@withContext build(WebDav.lister(t), t)
         NetShare.remember(t)
         val login = NetShare.Login(t.user, t.password, t.domain)
         SmbAccess.withShare(t.host, t.port, t.share, login) { share ->
-            val sb = StringBuilder("#EXTM3U\n")
-            if (t.movies.isNotEmpty()) {
-                if (!SmbAccess.folderExists(share, t.movies)) throw FolderMissing(t.movies)
-                films(share, t, sb)
-            }
-            if (t.series.isNotEmpty()) {
-                if (!SmbAccess.folderExists(share, t.series)) throw FolderMissing(t.series)
-                series(share, t, sb)
-            }
-            sb.toString()
+            build(object : Lister {
+                override fun list(path: String) = SmbAccess.list(share, path)
+                override fun exists(path: String) = SmbAccess.folderExists(share, path)
+                override fun url(path: String) = NetShare.fileUrl(t, path)
+            }, t)
         }
+    }
+
+    private fun build(lister: Lister, t: NetShare.Target): String {
+        val sb = StringBuilder("#EXTM3U\n")
+        if (t.movies.isNotEmpty()) {
+            if (!lister.exists(t.movies)) throw FolderMissing(t.movies)
+            films(lister, t, sb)
+        }
+        if (t.series.isNotEmpty()) {
+            if (!lister.exists(t.series)) throw FolderMissing(t.series)
+            series(lister, t, sb)
+        }
+        return sb.toString()
     }
 
     /** Opens the share and counts what the folders hold, for the form's Test button. */
@@ -49,11 +67,11 @@ object SmbLibrary {
         return Count(if (t.movies.isEmpty()) -1 else films, if (t.series.isEmpty()) -1 else episodes)
     }
 
-    private fun films(share: com.hierynomus.smbj.share.DiskShare, t: NetShare.Target, sb: StringBuilder) {
+    private fun films(lister: Lister, t: NetShare.Target, sb: StringBuilder) {
         // (path, the category it is under, the folder it sits in)
         fun walk(path: String, depth: Int, group: String?, folder: String?) {
             if (depth > MAX_DEPTH) return
-            val entries = runCatching { SmbAccess.list(share, path) }.getOrDefault(emptyList())
+            val entries = runCatching { lister.list(path) }.getOrDefault(emptyList())
             for (e in entries.sortedBy { it.name.lowercase() }) {
                 val child = "$path/${e.name}"
                 if (e.folder) {
@@ -72,25 +90,25 @@ object SmbLibrary {
                     .extra("glcn-year", film.year?.toString())
                     .extra("glcn-added", e.changedMs.takeIf { it > 0 }?.toString())
                     .append(" group-title=\"").append(attr(group ?: MOVIES_GROUP)).append("\",").append(line(label)).append('\n')
-                    .append(NetShare.fileUrl(t, child)).append('\n')
+                    .append(lister.headerLine).append(lister.url(child)).append('\n')
             }
         }
         walk(t.movies, 0, null, null)
     }
 
-    private fun series(share: com.hierynomus.smbj.share.DiskShare, t: NetShare.Target, sb: StringBuilder) {
+    private fun series(lister: Lister, t: NetShare.Target, sb: StringBuilder) {
         fun emit(show: String, ep: MediaFileNames.Episode, path: String, changedMs: Long) {
             val label = String.format(java.util.Locale.ROOT, "%s S%02dE%02d %s", show, ep.season, ep.episode, ep.title.orEmpty()).trim()
             sb.append("#EXTINF:-1 ").append(TYPE_SERIES)
                 .quality(path.substringAfterLast('/'))
                 .extra("glcn-added", changedMs.takeIf { it > 0 }?.toString())
                 .append(" group-title=\"").append(SERIES_GROUP).append("\",").append(line(label)).append('\n')
-                .append(NetShare.fileUrl(t, path)).append('\n')
+                .append(lister.headerLine).append(lister.url(path)).append('\n')
         }
         /** A show's folder: every video inside it, at any depth, with the season its folder names. */
         fun walkShow(show: String, path: String, depth: Int, folderSeason: Int?) {
             if (depth > MAX_DEPTH) return
-            val entries = runCatching { SmbAccess.list(share, path) }.getOrDefault(emptyList())
+            val entries = runCatching { lister.list(path) }.getOrDefault(emptyList())
             for (e in entries.sortedBy { it.name.lowercase() }) {
                 val child = "$path/${e.name}"
                 if (e.folder) {
@@ -103,7 +121,7 @@ object SmbLibrary {
                 emit(show, ep, child, e.changedMs)
             }
         }
-        val top = runCatching { SmbAccess.list(share, t.series) }.getOrDefault(emptyList())
+        val top = runCatching { lister.list(t.series) }.getOrDefault(emptyList())
         for (e in top.sortedBy { it.name.lowercase() }) {
             val child = "${t.series}/${e.name}"
             if (e.folder) {

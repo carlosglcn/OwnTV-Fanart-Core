@@ -27,6 +27,8 @@ object NetShare {
         val domain: String,
         val movies: String,
         val series: String,
+        /** glcn: how the share is reached — [SCHEME] (SMB), [DAV] or [DAVS] (WebDAV over http / https). */
+        val scheme: String = SCHEME,
     ) {
         /** `smb://host[:port]/share` — the start of every file address in this share. */
         val root: String get() = SCHEME + hostPort(host, port) + "/" + encodeSegment(share)
@@ -36,11 +38,22 @@ object NetShare {
 
     fun isShare(url: String): Boolean = url.trim().startsWith(SCHEME, ignoreCase = true)
 
+    /** glcn: the link's protocol when it is a network folder (SMB or WebDAV); null otherwise. */
+    fun schemeOf(url: String): String? {
+        val u = url.trim()
+        return listOf(SCHEME, DAVS, DAV).firstOrNull { u.startsWith(it, ignoreCase = true) }
+    }
+
+    /** A network folder of any kind (SMB or WebDAV) — what the add-source form edits as one. */
+    fun isNetworkFolder(url: String): Boolean = schemeOf(url) != null
+
+    fun defaultPort(scheme: String): Int = when (scheme) { DAV -> 80; DAVS -> 443; else -> DEFAULT_PORT }
+
     /** The source link → its share; null when it is not an `smb://` link with a host and a share. */
     fun parse(url: String): Target? {
         val raw = url.trim()
-        if (!isShare(raw)) return null
-        val rest = raw.substring(SCHEME.length)
+        val scheme = schemeOf(raw) ?: return null
+        val rest = raw.substring(scheme.length)
         val query = rest.substringAfter('?', "")
         val beforeQuery = rest.substringBefore('?')
         val slash = beforeQuery.indexOf('/')
@@ -49,7 +62,7 @@ object NetShare {
         val at = authority.lastIndexOf('@')
         val info = if (at >= 0) authority.substring(0, at) else ""
         val hostPort = if (at >= 0) authority.substring(at + 1) else authority
-        val (host, port) = splitHostPort(hostPort) ?: return null
+        val (host, port) = splitHostPort(hostPort, defaultPort(scheme)) ?: return null
         val share = decode(path.substringBefore('/')).takeIf { it.isNotBlank() } ?: return null
         var user = decode(info.substringBefore(':'))
         val password = if (':' in info) decode(info.substringAfter(':')) else ""
@@ -61,18 +74,22 @@ object NetShare {
         return Target(
             host = host, port = port, share = share, user = user, password = password, domain = domain,
             movies = cleanFolder(params[PARAM_MOVIES].orEmpty()), series = cleanFolder(params[PARAM_SERIES].orEmpty()),
+            scheme = scheme,
         )
     }
 
     /** The source link for a share, as the add-source form saves it. */
-    fun link(host: String, share: String, user: String, password: String, movies: String, series: String): String {
-        val (h, p) = splitHostPort(host.trim().removePrefix(SCHEME).trim('/')) ?: (host.trim() to DEFAULT_PORT)
+    fun link(host: String, share: String, user: String, password: String, movies: String, series: String, scheme: String = SCHEME): String {
+        val def = defaultPort(scheme)
+        val bare = host.trim().replace(Regex("^[a-zA-Z]+://"), "").trim('/')
+        val (h, p) = splitHostPort(bare, def) ?: (bare to def)
         val info = if (user.isBlank()) "" else encodeSegment(user.trim()) + (if (password.isNotEmpty()) ":" + encodeSegment(password) else "") + "@"
         val q = listOfNotNull(
             cleanFolder(movies).takeIf { it.isNotEmpty() }?.let { PARAM_MOVIES + "=" + encodeSegment(it) },
             cleanFolder(series).takeIf { it.isNotEmpty() }?.let { PARAM_SERIES + "=" + encodeSegment(it) },
         ).joinToString("&")
-        return SCHEME + info + hostPort(h, p) + "/" + encodeSegment(share.trim().trim('/', '\\')) + (if (q.isNotEmpty()) "?$q" else "")
+        val auth = if (p == def) hostPort(h, DEFAULT_PORT) else hostPort(h, p).let { if (p == DEFAULT_PORT) "$it:$p" else it }
+        return scheme + info + auth + "/" + encodeSegment(share.trim().trim('/', '\\')) + (if (q.isNotEmpty()) "?$q" else "")
     }
 
     // ---- Logins for playback -----------------------------------------------------------------------------------
@@ -119,12 +136,12 @@ object NetShare {
         return if (port == DEFAULT_PORT) h else "$h:$port"
     }
 
-    private fun splitHostPort(s: String): Pair<String, Int>? {
+    private fun splitHostPort(s: String, defaultPort: Int = DEFAULT_PORT): Pair<String, Int>? {
         if (s.isBlank()) return null
         if (s.startsWith("[")) {
             val end = s.indexOf(']')
             if (end < 0) return null
-            val port = s.substring(end + 1).removePrefix(":").toIntOrNull() ?: DEFAULT_PORT
+            val port = s.substring(end + 1).removePrefix(":").toIntOrNull() ?: defaultPort
             return s.substring(1, end) to port
         }
         val colon = s.lastIndexOf(':')
@@ -132,7 +149,7 @@ object NetShare {
             val port = s.substring(colon + 1).toIntOrNull() ?: return null
             return s.substring(0, colon) to port
         }
-        return s to DEFAULT_PORT
+        return s to defaultPort
     }
 
     private fun cleanFolder(f: String): String = f.replace('\\', '/').trim().trim('/')
@@ -144,6 +161,9 @@ object NetShare {
 
     const val SCHEME = "smb://"
     const val DEFAULT_PORT = 445
+    /** glcn: WebDAV over http and https (a NAS's WebDAV server; a Synology answers on 5005 / 5006). */
+    const val DAV = "webdav://"
+    const val DAVS = "webdavs://"
     private const val PARAM_MOVIES = "movies"
     private const val PARAM_SERIES = "series"
 }

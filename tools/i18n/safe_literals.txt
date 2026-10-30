@@ -2461,8 +2461,9 @@
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	vob
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	webm
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/MediaFileNames.kt	wmv
-8	empty	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	\0
+9	empty	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	\0
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	$h:$port
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	$it:$p
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	%20
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	%2B
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	&
@@ -2474,9 +2475,12 @@
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	@
 2	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	[
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	[$host]
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	^[a-zA-Z]+://
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	movies
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	series
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	smb://
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	webdav://
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShare.kt	webdavs://
 4	empty	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	\0
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	/smb/
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/NetShareProxy.kt	127.0.0.1
@@ -2533,6 +2537,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbAccess.kt	..
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbAccess.kt	Not a disk share: $shareName
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbAccess.kt	SMB login refused
+1	empty	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	\0
 2	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	",
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	#EXTINF
 2	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	#EXTINF:-1
@@ -2552,6 +2557,33 @@
 2	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	group-title="
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	type="movie"
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/SmbLibrary.kt	type="series"
+2	empty	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	\0
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	"}
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	#EXTHTTP:{"Authorization":"
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	$h:${t.port}
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	%2B
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	+
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	.
+3	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	/
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	/$it
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	://
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	<?xml version="1.0" encoding="utf-8"?><d:propfind xmlns:d="DAV:"><d:prop>
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	<d:resourcetype/><d:getcontentlength/><d:getlastmodified/></d:prop></d:propfind>
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	Authorization
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	Depth
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	EEE, dd MMM yyyy HH:mm:ss zzz
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	PROPFIND
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	[
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	[${t.host}]
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	application/xml; charset=utf-8
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	collection
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	getcontentlength
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	getlastmodified
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	href
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	http
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	http://
+1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	https://
+2	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	response
 1	log	core/src/main/java/tv/own/owntv/core/network/BoundedDns.kt	${HttpClient.redactHost(hostname)}: no DNS answer in time
 1	log	core/src/main/java/tv/own/owntv/core/network/BoundedDns.kt	dns ${HttpClient.redactHost(hostname)} failed (${failure.javaClass.simpleName}) — using its last known addresses
 1	technical	core/src/main/java/tv/own/owntv/core/network/BoundedDns.kt	owntv-dns

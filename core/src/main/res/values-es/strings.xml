@@ -203,4 +203,9 @@
     <string name="glcn_setup_smb_movies_example">Peliculas</string>
     <string name="glcn_setup_smb_series">Carpeta de series</string>
     <string name="glcn_setup_smb_series_example">Series</string>
+    <string name="glcn_setup_net_protocol">Protocolo</string>
+    <string name="glcn_setup_net_protocol_smb">SMB: lo habitual en casa (compartir de Windows)</string>
+    <string name="glcn_setup_net_protocol_dav">WebDAV: funciona también fuera de casa</string>
+    <string name="glcn_setup_net_protocol_help">SMB es lo habitual para compartir carpetas en casa. WebDAV (el servidor WebDAV de Synology, Nextcloud…) funciona también desde fuera: escribe el servidor con http:// o https:// y su puerto (Synology usa 5005 y 5006).</string>
+    <string name="glcn_setup_dav_server_example">https://nas.ejemplo.com:5006</string>
 </resources>

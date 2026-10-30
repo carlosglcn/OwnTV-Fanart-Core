@@ -306,4 +306,9 @@
     <string name="glcn_setup_smb_movies_example">Movies</string>
     <string name="glcn_setup_smb_series">Series folder</string>
     <string name="glcn_setup_smb_series_example">TV Shows</string>
+    <string name="glcn_setup_net_protocol">Protocol</string>
+    <string name="glcn_setup_net_protocol_smb">SMB: the usual way at home (Windows sharing)</string>
+    <string name="glcn_setup_net_protocol_dav">WebDAV: also works from outside home</string>
+    <string name="glcn_setup_net_protocol_help">SMB is the usual way to share folders at home. WebDAV (a Synology\'s WebDAV Server, Nextcloud…) also works from outside: write the server with http:// or https:// and its port (a Synology uses 5005 and 5006).</string>
+    <string name="glcn_setup_dav_server_example">https://nas.example.com:5006</string>
 </resources>
