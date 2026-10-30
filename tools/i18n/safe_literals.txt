@@ -6260,6 +6260,17 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/HttpDiagnostics.kt	stream
 1	technical	player-core/src/main/java/tv/own/owntv/player/HttpDiagnostics.kt	unknown
 1	technical	player-core/src/main/java/tv/own/owntv/player/HttpDiagnostics.kt	{
+2	empty	player-core/src/main/java/tv/own/owntv/player/KeyLog.kt	\0
+1	log	player-core/src/main/java/tv/own/owntv/player/KeyLog.kt	${d.name} (${hex(d.vendorId)}:${hex(d.productId)})
+1	log	player-core/src/main/java/tv/own/owntv/player/KeyLog.kt	${p.heldMs} ms
+1	log	player-core/src/main/java/tv/own/owntv/player/KeyLog.kt	${stamp.format(java.util.Date(p.atMs))} $name (${p.code}) scan=${p.scan} · $held
+1	log	player-core/src/main/java/tv/own/owntv/player/KeyLog.kt	%04x
+2	log	player-core/src/main/java/tv/own/owntv/player/KeyLog.kt	?
+1	log	player-core/src/main/java/tv/own/owntv/player/KeyLog.kt	HH:mm:ss.SSS
+1	log	player-core/src/main/java/tv/own/owntv/player/KeyLog.kt	KEYCODE_
+1	log	player-core/src/main/java/tv/own/owntv/player/KeyLog.kt	held
+1	log	player-core/src/main/java/tv/own/owntv/player/KeyLog.kt	· ${p.device} · src=0x${Integer.toHexString(p.source)}
+1	log	player-core/src/main/java/tv/own/owntv/player/KeyLog.kt	· repeats=${p.repeats}
 4	empty	player-core/src/main/java/tv/own/owntv/player/LiveDiagnosticsLog.kt	\0
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveDiagnosticsLog.kt	${timeFmt.format(LocalDateTime.now())} $message
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveDiagnosticsLog.kt	MM-dd HH:mm:ss.SSS
@@ -7045,6 +7056,7 @@
 1	log	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	--- how the app last closed ---
 1	technical	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	--- last crash ---
 1	technical	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	--- live diagnostics (most recent) ---
+1	log	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	--- remote keys (most recent) ---
 1	protocol	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	:direct
 1	protocol	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	:gpu
 2	protocol	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	:hardware

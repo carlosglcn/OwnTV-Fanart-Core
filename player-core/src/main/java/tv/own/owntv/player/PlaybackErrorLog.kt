@@ -320,6 +320,12 @@ object PlaybackErrorLog {
                 appendLine(it)
                 appendLine()
             }
+            // glcn: the last remote presses — the codes each button sends, for remotes that do not send the usual ones.
+            KeyLog.snapshot().takeIf { it.isNotBlank() }?.let {
+                appendLine("--- remote keys (most recent) ---")
+                appendLine(it)
+                appendLine()
+            }
             read(appContext).forEach { e ->
                 appendLine("[${stamp.format(java.util.Date(e.atMs))}] ${e.kind} · ${e.engine} · ${if (e.live) "live" else "vod"}")
                 e.reason?.let { appendLine("  reason: $it") }
