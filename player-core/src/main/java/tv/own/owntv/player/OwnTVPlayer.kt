@@ -92,6 +92,8 @@ data class MediaMeta(
     /** v44 — what the remembered audio/subtitle language is keyed on: the SERIES for an episode,
      *  so every episode starts on the tracks last picked in that show. Null = [contentKey]. */
     val trackKey: String? = null,
+    /** glcn: the engine this file suits — [tv.own.owntv.core.player.EngineHint]; null = no opinion. */
+    val enginePick: tv.own.owntv.core.player.EngineHint.Pick? = null,
 )
 
 /** An item in a play queue (e.g. a season's episodes), for prev/next.
@@ -1791,6 +1793,19 @@ class OwnTVPlayer(
         return verdict.safe
     }
 
+    /** glcn: ExoPlayer may bitstream and the receiver takes Atmos (TrueHD or E-AC-3) or DTS-HD undecoded. */
+    private fun receiverTakesLosslessSurround(): Boolean {
+        val allowed = multichannelAllowed() && playbackSettings.value?.let {
+            AudioDynamics.passthroughAllowed(it.audioPassthrough, it.nightMode, it.volumeLevelling)
+        } == true
+        if (!allowed) return false
+        return listOf(
+            androidx.media3.common.MimeTypes.AUDIO_TRUEHD,
+            androidx.media3.common.MimeTypes.AUDIO_E_AC3_JOC,
+            androidx.media3.common.MimeTypes.AUDIO_DTS_HD,
+        ).any { outputTakesPassthrough(it) }
+    }
+
     /** The current audio output (HDMI/ARC receiver) can bitstream [mime] undecoded. */
     private fun outputTakesPassthrough(mime: String): Boolean = runCatching {
         val attributes = OWNTV_MEDIA_AUDIO
@@ -2778,6 +2793,8 @@ class OwnTVPlayer(
         vodEngineOverride: tv.own.owntv.core.player.EnginePreference? = null,
         /** v44 — see [MediaMeta.trackKey]; null keys the remembered tracks on [contentKey]. */
         trackKey: String? = null,
+        /** glcn: see [MediaMeta.enginePick]. */
+        enginePick: tv.own.owntv.core.player.EngineHint.Pick? = null,
     ) {
         this.vodEngineOverride = vodEngineOverride
         // The provider belongs to the load. A VOD load with none clears whatever the previous
@@ -2801,7 +2818,7 @@ class OwnTVPlayer(
         if (!muted) setVolume(defaultVolume) // …and at the default volume; loadUrl re-applies any per-item override
         loadUrl(
             url,
-            MediaMeta(title, subtitle, year, logoUrl, contentKey, seasonNumber, episodeNumber, rewindStartMs, trackKey),
+            MediaMeta(title, subtitle, year, logoUrl, contentKey, seasonNumber, episodeNumber, rewindStartMs, trackKey, enginePick),
             isLive,
             startPositionMs,
             muted,
@@ -3115,7 +3132,24 @@ class OwnTVPlayer(
         val drmProtected = currentDrm != null
         // v44 — the playlist's own Movies & Series engine wins over the global one.
         val vodEngine = vodEngineOverride ?: vodEngine
-        val startOnExo = if (drmProtected) true else pinnedToExo ?: !vodEngine.startsOnMpv
+        // glcn: under an "…first" setting the file itself may pick the engine it suits (EngineHint) — the other
+        // engine stays the automatic fallback. Never over an "…only" setting, a pin, DRM or catch-up.
+        val pick = meta.enginePick?.takeIf { vodEngine.allowsHandover && !isLive && !isArchive }
+        val fileHint: Boolean? = when (pick) {
+            tv.own.owntv.core.player.EngineHint.Pick.EXO -> true
+            tv.own.owntv.core.player.EngineHint.Pick.EXO_FOR_SOUND -> if (receiverTakesLosslessSurround()) true else null
+            tv.own.owntv.core.player.EngineHint.Pick.MPV -> false
+            null -> null
+        }
+        val startOnExo = if (drmProtected) true else pinnedToExo ?: fileHint ?: !vodEngine.startsOnMpv
+        if (pinnedToExo == null && !drmProtected && fileHint != null && fileHint != !vodEngine.startsOnMpv) {
+            val why = when (pick) {
+                tv.own.owntv.core.player.EngineHint.Pick.EXO_FOR_SOUND -> "ExoPlayer (Atmos / TrueHD / DTS-HD to the receiver)"
+                tv.own.owntv.core.player.EngineHint.Pick.MPV -> "mpv (container or codec ExoPlayer reads poorly)"
+                else -> "ExoPlayer (4K / HDR / Dolby Vision)"
+            }
+            LiveDiagnosticsLog.event("engine chosen by the file: $why")
+        }
         // A pin that contradicts an "only" setting re-opens the handover for this one item: the user
         // named an engine for it *against* the global rule, so locking that item to the engine they
         // overrode would leave it with no way to reach the one that plays it. Everything else keeps the

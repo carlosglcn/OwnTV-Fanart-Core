@@ -15,7 +15,6 @@ import androidx.media3.exoplayer.audio.AudioRendererEventListener
 import androidx.media3.exoplayer.audio.AudioSink
 import androidx.media3.exoplayer.audio.DefaultAudioSink
 import androidx.media3.exoplayer.audio.ForwardingAudioSink
-import androidx.media3.exoplayer.mediacodec.MediaCodecInfo
 import androidx.media3.exoplayer.mediacodec.MediaCodecSelector
 import androidx.media3.exoplayer.video.MediaCodecVideoRenderer
 import androidx.media3.exoplayer.video.VideoRendererEventListener
@@ -129,11 +128,11 @@ class OwnTVRenderersFactory(
             context, extensionRendererMode, mediaCodecSelector, enableDecoderFallback,
             eventHandler, eventListener, allowedVideoJoiningTimeMs, out,
         )
-        if (!onSurfaceOnly) return
         val i = out.indexOfFirst { it is MediaCodecVideoRenderer }
         if (i < 0) return
         // Built as DefaultRenderersFactory builds its own; the options it adds are ones this factory never sets.
-        out[i] = OnSurfaceVideoRenderer(
+        // glcn: always ours now — it also turns Dolby Vision profile 7 into 8.1 ([GlcnVideoRenderer]).
+        out[i] = GlcnVideoRenderer(
             MediaCodecVideoRenderer.Builder(context)
                 .setCodecAdapterFactory(codecAdapterFactory)
                 .setMediaCodecSelector(mediaCodecSelector)
@@ -142,18 +141,8 @@ class OwnTVRenderersFactory(
                 .setEventHandler(eventHandler)
                 .setEventListener(eventListener)
                 .setMaxDroppedFramesToNotify(MAX_DROPPED_VIDEO_FRAME_COUNT_TO_NOTIFY),
+            onSurfaceOnly,
         )
-    }
-
-    private class OnSurfaceVideoRenderer(builder: MediaCodecVideoRenderer.Builder) : MediaCodecVideoRenderer(builder) {
-        // Only a codec still to be started is refused the stand-in: a running one keeps being moved, because
-        // releasing it instead costs a black screen until the next keyframe (up to 2 s measured on the TCL).
-        override fun shouldUsePlaceholderSurface(codecInfo: MediaCodecInfo): Boolean =
-            codec != null && super.shouldUsePlaceholderSurface(codecInfo)
-
-        // Android 15's surface-less mode is the same start, moved later.
-        override fun shouldUseDetachedSurface(codecInfo: MediaCodecInfo): Boolean =
-            codec != null && super.shouldUseDetachedSurface(codecInfo)
     }
 
     override fun buildAudioSink(

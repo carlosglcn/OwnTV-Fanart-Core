@@ -2987,6 +2987,29 @@
 1	technical	core/src/main/java/tv/own/owntv/core/player/AudioOutputDelay.kt	${it.key.name}=${it.value}
 1	technical	core/src/main/java/tv/own/owntv/core/player/AudioOutputDelay.kt	,
 1	compiler	core/src/main/java/tv/own/owntv/core/player/AudioOutputDelay.kt	InlinedApi
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	\0
+1	regex	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	(?i)\\b(?:4k|uhd|2160p|dovi|dv|hdr10\\+?|hdr)\\b
+1	regex	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	(?i)\\b(?:atmos|truehd|dts-?hd(?:[ .-]?ma)?|dts[ :-]?x)\\b
+1	regex	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	(?i)\\b(?:xvid|divx|vc-?1|wmv\\d?|rmvb|mpeg-?2)\\b
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	3gp
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	asf
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	atmos
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	avi
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	dat
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	divx
+1	log	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	dolby vision
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	hdr
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	img
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	iso
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	m2v
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	mpeg
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	mpg
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	ogm
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	rm
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	rmvb
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	vob
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	wmv
+1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	xvid
 1	technical	core/src/main/java/tv/own/owntv/core/player/EnginePinKey.kt	$sourceId:$mediaType:$it
 1	preference-key	core/src/main/java/tv/own/owntv/core/player/EnginePinKey.kt	CATCHUP
 2	empty	core/src/main/java/tv/own/owntv/core/player/ExternalPlayerLauncher.kt	\0
@@ -6381,6 +6404,11 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/ExoSubtitleEngine.kt	vtt
 1	technical	player-core/src/main/java/tv/own/owntv/player/ExoSubtitleEngine.kt	webvtt
 1	technical	player-core/src/main/java/tv/own/owntv/player/ExoSubtitleEngine.kt	x-vnd.on2.vp9
+1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	.07
+1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	08
+1	log	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	Dolby Vision profile 7 (${f.codecs}) played as profile 8.1 — enhancement layer dropped, RPU rewritten
+1	log	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	Dolby Vision rewrite failed: ${e.javaClass.simpleName}: ${e.message}
+1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	GlcnVideoRenderer
 1	log	player-core/src/main/java/tv/own/owntv/player/HeroPreviewEngine.kt	Hero preview error: ${error.errorCodeName}
 1	log	player-core/src/main/java/tv/own/owntv/player/HeroPreviewEngine.kt	Hero preview play failed for ${HttpClient.redactUrl(url)}
 1	log	player-core/src/main/java/tv/own/owntv/player/HeroPreviewEngine.kt	Hero preview produced no frame in ${NO_FRAME_TIMEOUT_MS}ms — falling back to the poster
@@ -6837,6 +6865,8 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	EXO
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	Emulator
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	Exo codec gate: audio codec='$codec' → $verdict
+1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	ExoPlayer (4K / HDR / Dolby Vision)
+1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	ExoPlayer (Atmos / TrueHD / DTS-HD to the receiver)
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	FILE_LOADED with pendingStopEndFiles=$pendingStops generation=$loadGeneration
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	Genymotion
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	HTTP error (4\\d\\d)
@@ -6947,6 +6977,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	emb:${sub.typeIndex}:${sub.lang ?: ""}
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	emb:${t.typeIndex}:${t.lang ?: ""}
 2	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	emulator
+1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	engine chosen by the file: $why
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	eof
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	err_detect=ignore_err
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	error
@@ -7034,6 +7065,7 @@
 6	protocol	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpv
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpv $line
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpv $why — reopening with tolerant demuxing (discardcorrupt/genpts/ignore_err)
+1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpv (container or codec ExoPlayer reads poorly)
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpv film frozen on its first frame twice (${load.currentHeightPx}p) — trying another way
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpv frames: est-vf-fps=${m.getPropertyString("estimated-vf-fps")}
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpv live first position after ${now - l.loadStartTime}ms
