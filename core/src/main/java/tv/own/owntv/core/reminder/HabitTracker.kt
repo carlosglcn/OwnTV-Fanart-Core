@@ -85,6 +85,19 @@ class HabitTracker(
         if (habits.isEmpty()) return@withLock
         val done = settings.habitDone.first().lineSequence().filter { it.isNotBlank() }.toMutableSet()
         var changed = false
+        // glcn: one suggestion at a time. Two learned programmes that air together used to prompt one after the
+        // other; now the most watched keeps its reminder and the other is left out (or dropped, if already set).
+        val rank = habits.withIndex().associate { (i, h) -> (h.channelId to h.key) to i }
+        fun rankOf(r: tv.own.owntv.core.database.entity.ReminderEntity): Int? = rank[r.channelId to HabitRules.titleKey(r.title)]
+        val armed = runCatching { reminders.observe(profileId).first() }.getOrDefault(emptyList())
+            .filter { it.stopMs > now }.toMutableList()
+        for (r in armed.filter { rankOf(it) != null }.sortedByDescending { rankOf(it) }) {
+            val mine = rankOf(r) ?: continue
+            // Yields to one set by hand (no rank) or to a more watched one (a lower rank) at the same time.
+            val better = armed.any { o -> o.id != r.id && overlaps(o.startMs, o.stopMs, r.startMs, r.stopMs) && (rankOf(o)?.let { it < mine } ?: true) }
+            if (better) { runCatching { reminders.dismiss(r.id) }; armed.remove(r) }
+        }
+        val kept = armed.map { it.startMs to it.stopMs }.toMutableList()
         for (habit in habits) {
             val coming = runCatching {
                 epg.programmesForChannel(HabitRules.epgKey(habit.epgChannelId), now, now + HabitRules.LOOKAHEAD_MS)
@@ -93,6 +106,9 @@ class HabitTracker(
                 if (p.startMs <= now || HabitRules.titleKey(p.title) != habit.key) continue
                 val marker = HabitRules.doneKey(habit.channelId, p.startMs)
                 if (marker in done) continue
+                // Something already set (a reminder of its own, or a more watched programme) airs at the same time.
+                if (kept.any { (a, b) -> overlaps(a, b, p.startMs, p.stopMs) }) continue
+                kept += p.startMs to p.stopMs
                 // Marked first: a prompt the viewer dismisses must never be armed again.
                 done += marker
                 changed = true
@@ -107,4 +123,6 @@ class HabitTracker(
         settings.setHabitLog("")
         settings.setHabitDone("")
     }
+
+    private fun overlaps(a1: Long, a2: Long, b1: Long, b2: Long): Boolean = a1 < b2 && b1 < a2
 }
