@@ -35,7 +35,7 @@ internal object EmbyBridge {
     class AuthFailed : IOException("Emby: usuario o contraseña incorrectos")
 
     private val client by lazy {
-        OkHttpClient.Builder()
+        tv.own.owntv.core.network.SharedHttp.builder()
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(90, TimeUnit.SECONDS)
             .build()

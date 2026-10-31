@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 internal object WebDav {
 
     private val client by lazy {
-        OkHttpClient.Builder()
+        tv.own.owntv.core.network.SharedHttp.builder()
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .build()
