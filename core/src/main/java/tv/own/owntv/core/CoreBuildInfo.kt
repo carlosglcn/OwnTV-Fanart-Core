@@ -79,4 +79,8 @@ object CoreBuildInfo {
     /** glcn: a fixed release tag to follow instead of the latest release — the beta's "beta-latest",
      *  whose version is the last word of the release's name. Null follows releases/latest. */
     var releaseTag: String? = null
+
+    /** glcn: the releases live in a private repository (the beta's), so the updater can only reach them
+     *  with the access token the person pasted once — see [tv.own.owntv.core.update.UpdateManager.accessToken]. */
+    var releaseNeedsToken: Boolean = false
 }

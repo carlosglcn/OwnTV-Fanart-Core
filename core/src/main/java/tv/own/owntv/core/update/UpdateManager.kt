@@ -36,10 +36,13 @@ class UpdateManager(
     private val client: OkHttpClient,
     private val settings: tv.own.owntv.core.settings.SettingsRepository,
 ) {
-    data class UpdateInfo(val version: String, val notes: String, val apkUrl: String)
+    data class UpdateInfo(val version: String, val notes: String, val apkUrl: String, val authenticated: Boolean = false)
 
     sealed interface Failure {
         data class CheckHttp(val code: Int) : Failure
+
+        /** glcn: the releases are private and no token is saved yet, or the saved one is refused. */
+        data class TokenNeeded(val rejected: Boolean) : Failure
         data object NoCompatibleApk : Failure
         data object InvalidReleaseResponse : Failure
         data object CheckNetwork : Failure
@@ -73,6 +76,7 @@ class UpdateManager(
     val state: StateFlow<State> = _state.asStateFlow()
 
     private class CheckHttpException(val code: Int) : IOException()
+    private class TokenNeededException(val rejected: Boolean) : IOException()
     private class DownloadHttpException(val code: Int) : IOException()
     private class NoCompatibleApkException : IOException()
     private class InvalidReleaseResponseException : IOException()
@@ -82,6 +86,7 @@ class UpdateManager(
 
     private fun failureFor(error: Throwable, checking: Boolean): Failure = when (error) {
         is CheckHttpException -> Failure.CheckHttp(error.code)
+        is TokenNeededException -> Failure.TokenNeeded(error.rejected)
         is DownloadHttpException -> Failure.DownloadHttp(error.code)
         is NoCompatibleApkException -> Failure.NoCompatibleApk
         is InvalidReleaseResponseException -> Failure.InvalidReleaseResponse
@@ -93,6 +98,22 @@ class UpdateManager(
 
     val currentVersion: String = CoreBuildInfo.versionName
 
+    /**
+     * glcn: the read-only GitHub token that opens the beta's private releases. Pasted once by the person
+     * and kept only on this device, in the app's private storage: it is never part of the APK or of a backup.
+     */
+    var accessToken: String?
+        get() = tokenStore.getString(TOKEN_KEY, null)?.takeIf { it.isNotBlank() }
+        set(value) {
+            val clean = value?.trim()?.takeIf { it.isNotEmpty() }
+            tokenStore.edit().apply { if (clean == null) remove(TOKEN_KEY) else putString(TOKEN_KEY, clean) }.apply()
+            // The cached answer belongs to the old token; a new one asks again from scratch.
+            context.getSharedPreferences(CACHE_PREFS, Context.MODE_PRIVATE).edit().clear().apply()
+            if (_state.value is State.Failed) _state.value = State.Idle
+        }
+
+    private val tokenStore get() = context.getSharedPreferences(TOKEN_PREFS, Context.MODE_PRIVATE)
+
     /** Queries GitHub's latest release; moves to Available / UpToDate / a semantic failure. */
     fun check() {
         if (_state.value is State.Checking || _state.value is State.Downloading) return
@@ -103,18 +124,23 @@ class UpdateManager(
                 // device (and every other app asking GitHub) at home. A conditional request that answers
                 // "not modified" (304) does not count, so the last answer and its ETag are kept and sent back.
                 val cacheKey = "${CoreBuildInfo.releaseRepo}|${CoreBuildInfo.releaseTag ?: "latest"}"
-                val cache = context.getSharedPreferences("owntv_update_cache", android.content.Context.MODE_PRIVATE)
+                val token = accessToken
+                if (CoreBuildInfo.releaseNeedsToken && token == null) throw TokenNeededException(rejected = false)
+                val cache = context.getSharedPreferences(CACHE_PREFS, android.content.Context.MODE_PRIVATE)
                 val cachedEtag = cache.getString("etag:$cacheKey", null)
                 val cachedBody = cache.getString("body:$cacheKey", null)
                 val request = Request.Builder()
                     .url("https://api.github.com/repos/${CoreBuildInfo.releaseRepo}/releases/" + (CoreBuildInfo.releaseTag?.let { "tags/$it" } ?: "latest"))
                     .header("Accept", "application/vnd.github+json")
                     .header("User-Agent", "OwnTV")
+                    .apply { if (token != null) header(AUTH_HEADER, BEARER + token) }
                     .apply { if (cachedEtag != null && !cachedBody.isNullOrBlank()) header("If-None-Match", cachedEtag) }
                     .build()
                 client.newCall(request).execute().use { resp ->
                     val body = when {
                         resp.code == 304 && !cachedBody.isNullOrBlank() -> cachedBody
+                        // A private repository answers 404 to a wrong token, not 401.
+                        CoreBuildInfo.releaseNeedsToken && resp.code in TOKEN_REFUSED -> throw TokenNeededException(rejected = true)
                         !resp.isSuccessful -> throw CheckHttpException(resp.code)
                         else -> resp.body.string().also { fresh ->
                             val etag = resp.header("ETag")
@@ -138,14 +164,16 @@ class UpdateManager(
                         .mapNotNull { assets.optJSONObject(it) }
                         .mapNotNull { asset ->
                             val name = asset.optString("name")
-                            val url = asset.optString("browser_download_url")
+                            // A private release's public link needs a browser session; the API's asset link
+                            // takes the token instead.
+                            val url = asset.optString(if (token != null) "url" else "browser_download_url")
                             if (!name.endsWith(".apk") || url.isBlank()) return@mapNotNull null
                             val isX86 = name.contains("x86_64", ignoreCase = true)
                             if (isX86 == wantX86) url else null
                         }
                         .firstOrNull()
                         ?: throw NoCompatibleApkException()
-                    val info = UpdateInfo(version, notes, apkUrl)
+                    val info = UpdateInfo(version, notes, apkUrl, authenticated = token != null)
                     settings.recordUpdateCheck(System.currentTimeMillis())
                     if (isNewer(version, currentVersion)) _state.value = State.Available(info)
                     else _state.value = State.UpToDate
@@ -166,7 +194,13 @@ class UpdateManager(
                 val dir = File(context.filesDir, "updates").apply { mkdirs() }
                 val out = File(dir, "owntv-update.apk")
                 out.delete() // never build on top of a previous half-download
-                val request = Request.Builder().url(info.apkUrl).header("User-Agent", "OwnTV").build()
+                val token = accessToken
+                val request = Request.Builder().url(info.apkUrl).header("User-Agent", "OwnTV")
+                    .apply {
+                        // OkHttp drops the token itself when GitHub redirects the download to its file host.
+                        if (info.authenticated && token != null) header(AUTH_HEADER, BEARER + token).header("Accept", OCTET_STREAM)
+                    }
+                    .build()
                 try {
                     client.newCall(request).execute().use { resp ->
                         if (!resp.isSuccessful) throw DownloadHttpException(resp.code)
@@ -323,5 +357,12 @@ class UpdateManager(
         private const val TAG = "UpdateManager"
         private const val SESSION_ENTRY = "owntv-update"
         private const val INSTALL_STATUS_ACTION = "tv.own.owntv.UPDATE_INSTALL_STATUS"
+        private const val CACHE_PREFS = "owntv_update_cache"
+        private const val TOKEN_PREFS = "owntv_update_token"
+        private const val TOKEN_KEY = "token"
+        private const val AUTH_HEADER = "Authorization"
+        private const val BEARER = "Bearer "
+        private const val OCTET_STREAM = "application/octet-stream"
+        private val TOKEN_REFUSED = setOf(401, 403, 404)
     }
 }
