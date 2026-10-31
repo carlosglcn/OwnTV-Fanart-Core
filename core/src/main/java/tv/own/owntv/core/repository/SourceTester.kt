@@ -103,6 +103,18 @@ class SourceTester(
      * first bytes and check for the `#EXTM3U` header. Reading the whole file would download hundreds of
      * megabytes to answer a yes/no question.
      */
+    /** glcn: after a certificate failure, what the server actually presented (see CertProbe). */
+    private suspend fun certNote(root: String, error: String?): String {
+        if (error == null || !(error.contains("Cert") || error.contains("SSL") || error.contains("Trust"))) return ""
+        val uri = runCatching { java.net.URI(root) }.getOrNull() ?: return ""
+        if (uri.scheme != "https") return ""
+        val port = if (uri.port > 0) uri.port else DEFAULT_HTTPS_PORT
+        val note = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+            tv.own.owntv.core.network.CertProbe.describe(uri.host, port)
+        }
+        return note?.let { "\n$it" }.orEmpty()
+    }
+
     private suspend fun testM3u(source: SourceEntity): SourceTestResult {
         // glcn: a folder shared on the home network — "reachable" means the share opens and its folders exist.
         tv.own.owntv.core.netshare.NetShare.parse(source.url)?.let { target ->
@@ -125,7 +137,8 @@ class SourceTester(
             // answer as one, instead of falling through to the playlist check and reporting a bad login.
             val api = runCatching { tv.own.owntv.core.sync.EmbyBridge.detect(target) }.getOrNull()
                 ?: return SourceTestResult.Unreachable(
-                    "Emby/Jellyfin · ${target.root} · ${tv.own.owntv.core.sync.EmbyBridge.lastDetectError ?: "?"}",
+                    "Emby/Jellyfin · ${target.root} · ${tv.own.owntv.core.sync.EmbyBridge.lastDetectError ?: "?"}" +
+                        certNote(target.root, tv.own.owntv.core.sync.EmbyBridge.lastDetectError),
                 )
             run {
                 return try {
@@ -210,3 +223,5 @@ class SourceTester(
         const val PLAYLIST_PROBE_BYTES = 1024
     }
 }
+
+private const val DEFAULT_HTTPS_PORT = 443

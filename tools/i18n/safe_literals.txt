@@ -2667,6 +2667,17 @@
 1	log	core/src/main/java/tv/own/owntv/core/network/BoundedDns.kt	${HttpClient.redactHost(hostname)}: no DNS answer in time
 1	log	core/src/main/java/tv/own/owntv/core/network/BoundedDns.kt	dns ${HttpClient.redactHost(hostname)} failed (${failure.javaClass.simpleName}) — using its last known addresses
 1	technical	core/src/main/java/tv/own/owntv/core/network/BoundedDns.kt	owntv-dns
+2	log	core/src/main/java/tv/own/owntv/core/network/CertProbe.kt	,
+1	log	core/src/main/java/tv/own/owntv/core/network/CertProbe.kt	-
+2	log	core/src/main/java/tv/own/owntv/core/network/CertProbe.kt	CN=
+1	log	core/src/main/java/tv/own/owntv/core/network/CertProbe.kt	TLS
+1	log	core/src/main/java/tv/own/owntv/core/network/CertProbe.kt	cert ${chain.size}:
+1	log	core/src/main/java/tv/own/owntv/core/network/CertProbe.kt	yyyy-MM-dd
+1	log	core/src/main/java/tv/own/owntv/core/network/CertProbe.kt	· AIA
+1	log	core/src/main/java/tv/own/owntv/core/network/CertProbe.kt	· issuer
+1	log	core/src/main/java/tv/own/owntv/core/network/CertProbe.kt	· names
+1	log	core/src/main/java/tv/own/owntv/core/network/CertProbe.kt	· until
+1	log	core/src/main/java/tv/own/owntv/core/network/CertProbe.kt	←
 1	url	core/src/main/java/tv/own/owntv/core/network/DnsConfig.kt	$base${if ('?' in base) '&' else '?'}dns=$query
 1	technical	core/src/main/java/tv/own/owntv/core/network/DnsConfig.kt	${cfg.dohUrl}|${cfg.host}:${cfg.port}|$hostname
 2	technical	core/src/main/java/tv/own/owntv/core/network/DnsConfig.kt	Accept
@@ -3378,14 +3389,20 @@
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	userData export sourceId=${source.id} rows=${it.length()} ${it.typeCounts()} ms=${SystemClock.elapsedRealtime() - snapshotStartedAt}
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	userData relink failed sourceId=${source.id} ms=${SystemClock.elapsedRealtime() - relinkStartedAt}
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	userData relink sourceId=${source.id} rows=${snapshot?.length() ?: 0} purge=$purge ms=${SystemClock.elapsedRealtime() - relinkStartedAt}
+3	log	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	\0
 1	protocol	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	#EXTM3U
+1	log	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	$it
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	?
+1	log	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	Cert
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	Emby/Jellyfin · ${target.root} · ${tv.own.owntv.core.sync.EmbyBridge.lastDetectError ?: "?"}
 1	protocol	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	Expired
 1	technical	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	SMB folder not found: ${e.folder}
 1	technical	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	SMB: ${e.javaClass.simpleName}: ${e.message}
+1	log	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	SSL
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	SourceTester
+1	log	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	Trust
 1	protocol	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	http
+1	log	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	https
 1	json	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	max_connections
 1	json	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	max_online
 1	json	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	num_of_devices
