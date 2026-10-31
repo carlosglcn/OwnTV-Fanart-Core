@@ -2660,6 +2660,10 @@
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	http://
 1	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	https://
 2	technical	core/src/main/java/tv/own/owntv/core/netshare/WebDav.kt	response
+1	protocol	core/src/main/java/tv/own/owntv/core/network/AiaChainCompleter.kt	1.3.6.1.5.5.7.1.1
+1	protocol	core/src/main/java/tv/own/owntv/core/network/AiaChainCompleter.kt	X.509
+1	protocol	core/src/main/java/tv/own/owntv/core/network/AiaChainCompleter.kt	http://
+1	protocol	core/src/main/java/tv/own/owntv/core/network/AiaChainCompleter.kt	https://
 1	log	core/src/main/java/tv/own/owntv/core/network/BoundedDns.kt	${HttpClient.redactHost(hostname)}: no DNS answer in time
 1	log	core/src/main/java/tv/own/owntv/core/network/BoundedDns.kt	dns ${HttpClient.redactHost(hostname)} failed (${failure.javaClass.simpleName}) — using its last known addresses
 1	technical	core/src/main/java/tv/own/owntv/core/network/BoundedDns.kt	owntv-dns

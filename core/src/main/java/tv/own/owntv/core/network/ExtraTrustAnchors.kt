@@ -42,7 +42,14 @@ class ExtraTrustAnchors(pems: InputStream) {
                 try {
                     system.checkServerTrusted(chain, authType)
                 } catch (e: CertificateException) {
-                    runCatching { bundled.checkServerTrusted(chain, authType) }.getOrElse { throw e }
+                    runCatching { bundled.checkServerTrusted(chain, authType) }.getOrElse {
+                        // glcn: a chain sent without its intermediate — fetched from the certificate's own
+                        // CA Issuers address and checked again, against the platform and these roots.
+                        val completed = AiaChainCompleter.complete(chain) ?: throw e
+                        runCatching { system.checkServerTrusted(completed, authType) }
+                            .recoverCatching { bundled.checkServerTrusted(completed, authType) }
+                            .getOrElse { throw e }
+                    }
                 }
             }
 
