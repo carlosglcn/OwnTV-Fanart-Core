@@ -1014,4 +1014,8 @@
     <string name="glcn_remote_mute">Mute</string>
     <string name="glcn_remote_type_hint">Type to search on the TV</string>
     <string name="glcn_zap_coming_up">Coming up</string>
+    <string name="glcn_tvhome_starting">Starting now</string>
+    <string name="glcn_tvhome_films">Films on air</string>
+    <string name="glcn_tvhome_sports">Sport on air</string>
+    <string name="glcn_tvhome_tonight">Tonight, 22:00</string>
 </resources>
