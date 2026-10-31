@@ -810,7 +810,7 @@ class HomeFeedReader(
         }.getOrNull() ?: return items
         return items.map { item ->
             if (item is HeroItem.LiveHero) {
-                item.copy(now = found[item.channel.id]?.firstOrNull { now in it.startMs until it.stopMs })
+                item.copy(now = found[item.channel.id]?.filter { now in it.startMs until it.stopMs }?.maxByOrNull { it.startMs })
             } else item
         }
     }

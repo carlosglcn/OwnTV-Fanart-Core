@@ -34,7 +34,7 @@ class SportsNow(
         val slice = guide.slice(channels, cust, globalShiftMinutes, now, now + 1)
         return slice.mapNotNull { (id, rows) ->
             val ch = byId[id] ?: return@mapNotNull null
-            val p = rows.firstOrNull { now in it.startMs until it.stopMs } ?: return@mapNotNull null
+            val p = rows.filter { now in it.startMs until it.stopMs }.maxByOrNull { it.startMs } ?: return@mapNotNull null
             if (isSport(p)) Entry(ch, p) else null
         }
             // One row per programme: the same match on an HD and an SD copy shows once.

@@ -109,7 +109,9 @@ class LiveEpgReader(
                 val rows = epgSourceStore.priority().resolve(epgDao.upcoming(epgKey, at, UPCOMING_LIMIT).first())
                 val nowProg = rows.onAirAt(at)
                 val future = rows.filter { it.startMs > (nowProg?.startMs ?: 0) }
-                val nextProg = future.firstOrNull()
+                // glcn: next is what starts once this one ends — a programme that only overlaps it (a guide
+                // listing two at once) is not "up next"; it is still listed under Later.
+                val nextProg = nowProg?.let { n -> future.firstOrNull { it.startMs >= n.stopMs } } ?: future.firstOrNull()
                 if (nowProg != null || nextProg != null) {
                     val prevProg = epgDao.previousProgramme(epgKey, nowProg?.startMs ?: at)
                     // Days of stored guide — accurate for bulk-guide channels (the short-EPG API path
@@ -285,7 +287,9 @@ class LiveEpgReader(
             for ((channelId, epgKey, _) in group) {
                 rowsByKey[epgKey]
                     ?.let { priority.resolve(it) }
-                    ?.firstOrNull { at in it.startMs until it.stopMs }
+                    // glcn: the same programme [nowNext] calls on air — the one that started last of those
+                    // covering now, when a guide lists two that overlap (the row and the banner disagreed).
+                    ?.filter { at in it.startMs until it.stopMs }?.maxByOrNull { it.startMs }
                     ?.let { result[channelId] = XtEpgEntry(it.title, null, it.startMs + delta, it.stopMs + delta) }
             }
         }
