@@ -95,7 +95,11 @@ object CrashRecorder {
                 // The threads at the moment of a freeze, or the native backtrace: only for the most recent ones.
                 val traced = e.reason == android.app.ApplicationExitInfo.REASON_ANR || e.reason == android.app.ApplicationExitInfo.REASON_CRASH_NATIVE
                 if (traced && i < 2) runCatching {
-                    e.traceInputStream?.bufferedReader()?.useLines { lines -> lines.take(TRACE_LINES).forEach { appendLine("    $it") } }
+                    e.traceInputStream?.bufferedReader()?.useLines { lines ->
+                        val picked = if (e.reason == android.app.ApplicationExitInfo.REASON_ANR) anrDigest(lines.toList())
+                            else lines.take(TRACE_LINES).toList()
+                        picked.forEach { appendLine("    $it") }
+                    }
                 }
             }
         }.takeIf { it.isNotBlank() }
@@ -120,6 +124,38 @@ object CrashRecorder {
     }
 
     private const val TRACE_LINES = 120
+
+    /**
+     * glcn: what matters in a freeze's thread dump. The dump opens with hundreds of lines of runtime
+     * statistics, so its first [TRACE_LINES] never reached the threads — the report showed GC histograms
+     * and not the reason. Kept: the process header, the heap and GC totals, the whole "main" thread, and
+     * the app's own threads that were running or blocked at that moment (each one capped).
+     */
+    internal fun anrDigest(lines: List<String>): List<String> {
+        val out = ArrayList<String>()
+        out += lines.take(6)
+        lines.filter { l ->
+            ANR_STAT_KEYS.any { l.trimStart().startsWith(it) }
+        }.forEach { out += it }
+        // Thread blocks start with `"name" ...` and end at a blank line.
+        val blocks = ArrayList<List<String>>()
+        var cur: ArrayList<String>? = null
+        for (l in lines) {
+            if (l.startsWith("\"")) { cur?.let { blocks += it }; cur = arrayListOf(l) }
+            else if (l.isBlank()) { cur?.let { blocks += it }; cur = null }
+            else cur?.add(l)
+        }
+        cur?.let { blocks += it }
+        blocks.firstOrNull { it.first().startsWith("\"main\"") }?.let { out += ""; out += it.take(80) }
+        blocks.filter { b ->
+            !b.first().startsWith("\"main\"") &&
+                (b.any { it.contains("state=R") || it.contains("Blocked") || it.contains("waiting to lock") }) &&
+                b.any { it.contains("tv.own.owntv") }
+        }.take(4).forEach { out += ""; out += it.take(30) }
+        return out
+    }
+
+    private val ANR_STAT_KEYS = listOf("Heap:", "Total time spent in GC", "Total bytes allocated", "Free memory until OOME", "Peak regions allocated")
 
     private fun file(context: Context): File =
         File(File(context.filesDir, "diagnostics"), FILE_NAME)

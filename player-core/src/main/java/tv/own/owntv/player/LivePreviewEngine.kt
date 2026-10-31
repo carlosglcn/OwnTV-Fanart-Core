@@ -3024,6 +3024,10 @@ class LivePreviewEngine(
         }
         val audio = ArrayList<TrackOption>(); val aSel = ArrayList<AudioSel>(); var aId = 0
         val text = ArrayList<TrackOption>(); val tSel = ArrayList<TextSel>(); var tId = 0
+        val hasTeletext = tracks.groups.any { g ->
+            g.type == androidx.media3.common.C.TRACK_TYPE_TEXT &&
+                (0 until g.length).any { g.getTrackFormat(it).let { f -> f.codecs == Teletext.MIME || f.sampleMimeType == Teletext.MIME } }
+        }
         for (group in tracks.groups) {
             when (group.type) {
                 androidx.media3.common.C.TRACK_TYPE_AUDIO -> for (i in 0 until group.length) {
@@ -3043,6 +3047,9 @@ class LivePreviewEngine(
                 }
                 androidx.media3.common.C.TRACK_TYPE_TEXT -> for (i in 0 until group.length) {
                     val f = group.getTrackFormat(i)
+                    // glcn: the CC1 track is forced on every raw TS (see httpDataSourceFor) and is empty on
+                    // channels that caption through teletext — with a teletext page present it only misleads.
+                    if (hasTeletext && f.sampleMimeType == androidx.media3.common.MimeTypes.APPLICATION_CEA608) continue
                     val lang = f.language?.takeIf { it.isNotBlank() && it != "und" }
                     // glcn: which subtitle formats a channel carries, and whether ExoPlayer can draw them
                     // (DVB bitmaps yes, teletext no) — the support report is how a blank one is explained.
@@ -3335,13 +3342,15 @@ class LivePreviewEngine(
                 .setSampleMimeType(androidx.media3.common.MimeTypes.APPLICATION_CEA608)
                 .setAccessibilityChannel(1) // CC1 — the standard primary caption channel
                 .build()
+            val tsReaderFlags = androidx.media3.extractor.ts.DefaultTsPayloadReaderFactory.FLAG_OVERRIDE_CAPTION_DESCRIPTORS or tsFlags
             cachedDefaultFactory = DefaultMediaSourceFactory(
                 cachedHttpDataSource!!,
-                androidx.media3.extractor.DefaultExtractorsFactory()
-                    .setTsExtractorFlags(
-                        androidx.media3.extractor.ts.DefaultTsPayloadReaderFactory.FLAG_OVERRIDE_CAPTION_DESCRIPTORS or tsFlags,
-                    )
-                    .setTsSubtitleFormats(listOf(cc1)),
+                // glcn: teletext subtitle pages (888…) as a subtitle track — see [Teletext].
+                TeletextExtractorsFactory(
+                    androidx.media3.extractor.DefaultExtractorsFactory()
+                        .setTsExtractorFlags(tsReaderFlags)
+                        .setTsSubtitleFormats(listOf(cc1)),
+                ) { androidx.media3.extractor.ts.DefaultTsPayloadReaderFactory(tsReaderFlags, listOf(cc1)) },
             ).setLoadErrorHandlingPolicy(playedLivePolicy)
                 .setDrmSessionManagerProvider(tv.own.owntv.core.drm.InlineClearKeyDrmProvider)
             cachedHlsCcFactory = HlsMediaSource.Factory(cachedHttpDataSource!!)

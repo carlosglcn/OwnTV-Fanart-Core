@@ -6078,8 +6078,11 @@
 1	technical	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	v
 1	log	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	wrong package ${info.packageName}
 2	technical	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	x86_64
+1	protocol	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	"
+2	protocol	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	"main"
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	$it
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	${it.take(300)}
+1	protocol	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	Blocked
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	CLOSED BY USER
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	CRASH
 1	technical	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	Crashed $stamp on thread "${thread.name}"
@@ -6087,6 +6090,8 @@
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	EXCESSIVE RESOURCE USE
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	EXITED
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	FROZEN (ANR)
+1	protocol	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	Free memory until OOME
+1	protocol	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	Heap:
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	INIT FAILURE
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	KILLED (signal)
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	LOW MEMORY (system)
@@ -6094,13 +6099,19 @@
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	OTHER
 1	technical	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	OwnTV ${CoreBuildInfo.versionName} (${CoreBuildInfo.versionCode})
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	PERMISSION CHANGE
+1	protocol	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	Peak regions allocated
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	STOPPED BY USER
+1	protocol	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	Total bytes allocated
+1	protocol	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	Total time spent in GC
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	UNKNOWN ($reason)
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	[${stamp.format(java.util.Date(e.timestamp))}] ${reasonName(e.reason)}
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	background
 1	file-path	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	diagnostics
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	foreground
 1	file-path	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	last_crash.txt
+1	protocol	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	state=R
+1	protocol	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	tv.own.owntv
+1	protocol	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	waiting to lock
 2	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	yyyy-MM-dd HH:mm:ss
 1	log	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	· pss ${e.pss / 1024} MB · rss ${e.rss / 1024} MB
 1	protocol	core/src/main/java/tv/own/owntv/core/util/ErrorMessages.kt	CertPath
@@ -6930,6 +6941,8 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audio-params/samplerate
 2	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audio-pts
 3	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audio-samplerate
+2	protocol	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audio-spdif
+1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audio-spdif=${spdif.ifEmpty { "off" }}
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audioFormat=${getPropertyString("audio-format")}
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audiotrack
 4	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	auto
@@ -7098,7 +7111,7 @@
 3	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	none
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	nonref
 5	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	null
-1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	off
+3	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	off
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	on
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	on2 vp8
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	output audio delay: $ms ms, engine total ${_audioDelayMs.value + ms} ms
@@ -7489,6 +7502,33 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/SubtitleShift.kt	vtt
 1	technical	player-core/src/main/java/tv/own/owntv/player/SubtitleShift.kt	webvtt
 2	technical	player-core/src/main/java/tv/own/owntv/player/SurfaceFrameRate.kt	DEPRECATION
+1	compiler	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	DEPRECATION
+1	compiler	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	Media3 legacy subtitle path
+1	mime	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	application/x-glcn-teletext
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	baq
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	ca
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	cat
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	de
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	deu
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	es
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	esp
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	eu
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	eus
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	fi
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	fin
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	fr
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	fra
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	fre
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	ger
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	gl
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	glg
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	it
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	ita
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	por
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	pt
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	spa
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	sv
+1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	swe
 1	technical	player-core/src/main/java/tv/own/owntv/player/VideoQuality.kt	video/
 1	log	player-core/src/main/java/tv/own/owntv/player/VolumeBoost.kt	volume boost failed: ${it.javaClass.simpleName}
 1	log	player-core/src/main/java/tv/own/owntv/player/VolumeBoost.kt	volume boost unavailable: ${it.javaClass.simpleName}

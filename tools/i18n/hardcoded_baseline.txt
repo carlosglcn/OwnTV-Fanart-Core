@@ -745,6 +745,7 @@
 1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	name
 1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	owntv_update_cache
 1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	tags/$it
+2	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	\0
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	${Build.MANUFACTURER} ${Build.MODEL} · Android ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	--- live diagnostics leading up to the crash ---
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	· ${if (e.importance <= android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) "foreground" else "background"}
@@ -782,7 +783,6 @@
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	.m3u8
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	NVIDIA
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	ac3,eac3,dts,dts-hd,truehd
-1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audio-spdif
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audio-spdif=${it.ifEmpty { "off" }}
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	auto
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	demuxer
@@ -795,7 +795,6 @@
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpegts
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpv live open timed out after ${openingMs}ms on the full probe — retrying with the fast probe
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	no
-1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	off
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	playback failed — retrying once as ${HttpClient.FALLBACK_USER_AGENT}
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	software-decoded video can't use the direct surface
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	sub-align-x
@@ -810,6 +809,7 @@
 1	player-core/src/main/java/tv/own/owntv/player/PlayerDiagnostics.kt	\0
 1	player-core/src/main/java/tv/own/owntv/player/PlayerDiagnostics.kt	429
 1	player-core/src/main/java/tv/own/owntv/player/PlayerDiagnostics.kt	458
+1	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	\0
 1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	aac
 1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	ac3
 1	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	comentario

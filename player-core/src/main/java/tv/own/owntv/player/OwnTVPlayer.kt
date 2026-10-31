@@ -871,7 +871,10 @@ class OwnTVPlayer(
      *  [AudioOutputPolicy] and every engine forces stereo for the rest of the session. Always decoded
      *  PCM, so the audio clock stays alive. */
     private fun audioChannelsValue(): String =
-        if (AudioOutputPolicy.allowsMultichannel(surroundMode)) {
+        // glcn: live TV on mpv is always stereo. Dolby 5.1 channels (Movistar+ AC3) decoded to 5.1 PCM left mpv's
+        // audio clock standing on the SHIELD — one frame, then nothing — and live is ExoPlayer's job anyway; films
+        // on mpv keep their surround.
+        if (!isLiveContent && AudioOutputPolicy.allowsMultichannel(surroundMode)) {
             MpvAudioChannels.listFor(MpvAudioChannels.outputPcmChannelCounts(context))
         } else {
             "stereo"
@@ -882,7 +885,7 @@ class OwnTVPlayer(
     private fun mpvSpdifValue(): String {
         val p = playbackSettings.value ?: return ""
         val nvidia = android.os.Build.MANUFACTURER.equals("NVIDIA", ignoreCase = true)
-        val ok = nvidia && p.mpvPassthrough && !p.dialogueBoost && multichannelAllowed() &&
+        val ok = nvidia && !isLiveContent && p.mpvPassthrough && !p.dialogueBoost && multichannelAllowed() &&
             AudioDynamics.passthroughAllowed(p.audioPassthrough, p.nightMode, p.volumeLevelling)
         return if (ok) "ac3,eac3,dts,dts-hd,truehd" else ""
     }
@@ -890,8 +893,19 @@ class OwnTVPlayer(
     /** The `audio-channels` this mpv instance was last given; a write re-inits audio, so only a change is written. */
     @Volatile private var appliedAudioChannels: String? = null
 
+    /** glcn: the `audio-spdif` last written, so a load only touches it on a change (a write re-inits audio). */
+    @Volatile private var appliedSpdif: String? = null
+
     /** Follow the output (a soundbar switched on mid-session moves the route) — see [audioChannelsValue]. */
     private fun MPVLib.applyAudioChannels() {
+        // glcn: bitstreaming follows the load too (films may, live never) — written only when it changes.
+        mpvSpdifValue().let { spdif ->
+            if (spdif != appliedSpdif) {
+                runCatching { setPropertyString("audio-spdif", spdif) }
+                appliedSpdif = spdif
+                android.util.Log.i(TAG, "audio-spdif=${spdif.ifEmpty { "off" }}")
+            }
+        }
         val value = audioChannelsValue()
         if (value == appliedAudioChannels) return
         setPropertyString("audio-channels", value)
@@ -2619,6 +2633,7 @@ class OwnTVPlayer(
             // which Kodi bitstreams on the same way): Dolby and DTS reach the receiver untouched.
             mpvSpdifValue().let {
                 setOptionString("audio-spdif", it)
+                appliedSpdif = it
                 android.util.Log.i(TAG, "audio-spdif=${it.ifEmpty { "off" }}")
             }
             // Compatibility for multichannel: some HALs choke on Float / 44.1 kHz 5.1 PCM (mis-sized buffer
@@ -5153,7 +5168,9 @@ class OwnTVPlayer(
                     val sgen = loadGeneration
                     scope.launch {
                         delay(SURROUND_CHECK_MS)
-                        if (sgen != loadGeneration || !multichannelAllowed()) return@launch
+                        // glcn: live is stereo (see audioChannelsValue) — and a deinterlaced 1080i channel shows
+                        // estimated-vf-fps at twice container-fps, which read as a runaway sink and reloaded it.
+                        if (sgen != loadGeneration || isLiveContent || !multichannelAllowed()) return@launch
                         // Two independent tells, because the two ways an output fails look nothing alike:
                         //
                         //  1. RUNAWAY — the sink drains multichannel PCM ~2× fast, so mpv's audio-master
@@ -5177,7 +5194,7 @@ class OwnTVPlayer(
                         val (startAudioPts, startTimePos) =
                             kotlinx.coroutines.withTimeoutOrNull(1_000) { baseline.await() } ?: (null to null)
                         delay(SURROUND_SILENCE_CHECK_MS)
-                        if (sgen != loadGeneration || !multichannelAllowed()) return@launch
+                        if (sgen != loadGeneration || isLiveContent || !multichannelAllowed()) return@launch
                         mpvAsync {
                             if (getPropertyString("seeking") == "yes") return@mpvAsync // catching up — not a real runaway
                             if (getPropertyString("pause") == "yes") return@mpvAsync    // paused audio is not stalled audio
