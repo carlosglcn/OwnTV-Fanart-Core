@@ -1279,6 +1279,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/HistoryDao.kt	h.watchedAt AS at, 0 AS positionMs, 0 AS durationMs
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	DELETE FROM metadata_cache
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	DELETE FROM metadata_cache WHERE key = :key
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	DELETE FROM metadata_cache WHERE type IN ('movie', 'tv') AND imdbId IS NULL AND castJson IS NULL AND genresJson IS NULL AND backdropPath IS NULL AND trailerKey IS NULL AND logoPath IS NULL
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	DELETE FROM metadata_cache WHERE updatedAt < :cutoff
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	DELETE FROM metadata_match WHERE localKey = :localKey
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	DELETE FROM metadata_match WHERE tmdbId IS NULL
