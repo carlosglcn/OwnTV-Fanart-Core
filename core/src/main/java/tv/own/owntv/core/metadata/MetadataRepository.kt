@@ -78,17 +78,7 @@ class MetadataRepository(
      */
     private fun MetadataCacheEntity.isShowable(): Boolean = !MetadataCast.isLegacyFormat(castJson)
 
-    /**
-     * glcn: fit to stand in for a fresh fetch. A film or series row written from the search hit alone (its details
-     * call failed: allowance spent, network down) has no cast, genres, picture, logo or trailer; it shows, but is asked
-     * for again — at most every few hours — instead of standing in for the full details for months.
-     */
-    private fun MetadataCacheEntity.isUsable(): Boolean {
-        if (!isShowable()) return false
-        val thin = (type == TYPE_MOVIE || type == TYPE_TV) && imdbId == null && castJson == null &&
-            genresJson == null && backdropPath == null && trailerKey == null && logoPath == null
-        return !thin || System.currentTimeMillis() - updatedAt < THIN_RETRY_MS
-    }
+    private fun MetadataCacheEntity.isUsable(): Boolean = isShowable()
 
     /**
      * Resolve TMDB metadata for a movie. Returns the cached row (fresh or freshly fetched), or null when
@@ -537,6 +527,8 @@ class MetadataRepository(
                 // glcn (2): trailers are now picked in your language first — the ones cached English-first are re-read.
                 // (Not by expiring the rows: an updatedAt of 0 let the cache eviction after the next sync delete every
                 // row with a trailer — cast, logo and trailer gone until fetched again within the allowance.)
+                // glcn (3): titles left with only the search hit after that eviction are fetched whole again.
+                if (healed < 3) dao.deleteSearchOnlyRows()
                 dao.clearNegativeMatches()
                 settings.setMetadataMatchHealVersion(MATCH_HEURISTICS_VERSION)
             }
@@ -764,7 +756,7 @@ class MetadataRepository(
          * Bump when a matcher change makes previously cached misses wrong — existing installs then drop
          * their negative rows once ([healNegativeMatchesOnce]). 1 = scoring against `original_title`.
          */
-        private const val MATCH_HEURISTICS_VERSION = 2
+        private const val MATCH_HEURISTICS_VERSION = 3
 
         /**
          * Focus debounce for on-demand metadata resolves, shared by the movie / series / episode panes.
@@ -778,8 +770,6 @@ class MetadataRepository(
         // 180 days, not 60: TMDB details for a released title barely change, and a shorter TTL just buys
         // a re-download of identical JSON. Negative stays at 7 days — a miss is worth retrying sooner.
         private const val POSITIVE_TTL_MS = 180L * 24 * 3600 * 1000 // 180 days
-        /** glcn: how soon a film or series row made from the search hit alone is asked for again. */
-        private const val THIN_RETRY_MS = 6L * 3600 * 1000
         private const val NEGATIVE_TTL_MS = 7L * 24 * 3600 * 1000   // 7 days
 
         /** Stable, re-sync-proof local key (mirrors CustomizeKeys): sourceId + remoteId, or name fallback. */

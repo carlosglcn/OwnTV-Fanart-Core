@@ -69,6 +69,10 @@ interface MetadataDao {
     @Query("UPDATE metadata_cache SET updatedAt = 0 WHERE trailerKey IS NOT NULL")
     suspend fun expireTrailerRows()
 
+    /** glcn: films and series cached from the search hit alone (their details call failed) — dropped once, so the next look fetches them whole. */
+    @Query("DELETE FROM metadata_cache WHERE type IN ('movie', 'tv') AND imdbId IS NULL AND castJson IS NULL AND genresJson IS NULL AND backdropPath IS NULL AND trailerKey IS NULL AND logoPath IS NULL")
+    suspend fun deleteSearchOnlyRows(): Int
+
     // --- bounded eviction: both tables grow unbounded as the user browses a ~220k-item
     //     catalog. TTL delete rides the existing Index("updatedAt"); rows re-fetch on next focus.
     //     Run off the cold-start path (after a sync completes — ImportFinalizer.finalize). ---
