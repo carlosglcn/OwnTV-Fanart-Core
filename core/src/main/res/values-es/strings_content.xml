@@ -470,6 +470,11 @@
     <string name="glcn_home_backdrop_panel">Panel</string>
     <string name="glcn_home_backdrop_dock">Dock</string>
     <string name="glcn_about_fork">OwnTV Fanart es una versión modificada y no oficial de OwnTV, la app creada por ahXN00. Añade el diseño centrado en las imágenes, el fanart de la guía y otros cambios, y la mantiene Carlos (carlosglcn) desde octubre de 2026. Los fallos de esta versión se comunican en su propio GitHub, no al autor original.</string>
+    <string name="glcn_beta_token">Acceso a la beta</string>
+    <string name="glcn_beta_token_title">Token de acceso a la beta</string>
+    <string name="glcn_beta_token_label">Token</string>
+    <string name="glcn_beta_token_hint">Esta beta se actualiza desde un repositorio privado. Pega su token de solo lectura: solo se guarda en este dispositivo.</string>
+    <string name="glcn_beta_token_saved">Token guardado</string>
     <string name="glcn_about_original">Proyecto original</string>
     <string name="glcn_about_this">Esta versión</string>
     <string name="glcn_about_by">por %1$s</string>

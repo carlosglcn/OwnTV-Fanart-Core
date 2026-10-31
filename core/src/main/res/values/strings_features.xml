@@ -275,6 +275,8 @@
     <string name="update_failed_check">Couldn\'t check for updates.</string>
     <!-- Translators: Error when the update server returns an HTTP error. "code" is the HTTP status code such as 404. Keep this as a full sentence. -->
     <string name="update_failed_check_http">The update server returned HTTP <xliff:g id="code">%1$s</xliff:g> while checking.</string>
+    <string name="update_token_needed">This beta updates from a private repository. Add the access token in About › Beta access.</string>
+    <string name="update_token_rejected">GitHub refused the beta access token. Check it in About › Beta access.</string>
     <!-- Translators: Error when no compatible APK is found in the release for this device. -->
     <string name="update_no_compatible_apk">No update package for this device was found in the release.</string>
     <!-- Translators: Error when the update server returns an invalid release description. -->

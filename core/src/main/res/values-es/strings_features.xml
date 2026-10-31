@@ -117,6 +117,8 @@
     <string name="update_try_again">Intentar de nuevo</string>
     <string name="update_failed_check">No se ha podido comprobar si hay actualizaciones.</string>
     <string name="update_failed_check_http">El servidor de actualizaciones ha devuelto HTTP <xliff:g id="code">%1$s</xliff:g> durante la comprobación.</string>
+    <string name="update_token_needed">Esta beta se actualiza desde un repositorio privado. Añade el token en Acerca de › Acceso a la beta.</string>
+    <string name="update_token_rejected">GitHub ha rechazado el token de la beta. Revísalo en Acerca de › Acceso a la beta.</string>
     <string name="update_no_compatible_apk">No se ha encontrado en la versión ningún paquete de actualización compatible con este dispositivo.</string>
     <string name="update_invalid_release_response">El servidor de actualizaciones ha devuelto una descripción de versión no válida.</string>
     <string name="update_failed_download">No se ha podido descargar la actualización porque ha fallado la solicitud de red.</string>
