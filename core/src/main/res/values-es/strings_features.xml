@@ -560,4 +560,8 @@
     <string name="sports_broadcasts_find_first">Usa Buscar canales para ver los canales de tu guía que dan este partido.</string>
     <string name="sports_broadcasts_none">Ninguna</string>
     <string name="sports_move_instructions">▲/▼ para elegir · OK para coger o soltar · Guardar al terminar</string>
+    <string name="glcn_greet_morning">Buenos días</string>
+    <string name="glcn_greet_afternoon">Buenas tardes</string>
+    <string name="glcn_greet_evening">Buenas noches</string>
+    <string name="glcn_gate_continue">Seguir viendo: %1$s</string>
 </resources>
