@@ -564,4 +564,8 @@
     <string name="glcn_greet_afternoon">Buenas tardes</string>
     <string name="glcn_greet_evening">Buenas noches</string>
     <string name="glcn_gate_continue">Seguir viendo: %1$s</string>
+    <string name="glcn_crash_title">La app se cerró por un error</string>
+    <string name="glcn_crash_body">Comparte este informe para que se pueda arreglar. Después la app se abre con normalidad.</string>
+    <string name="glcn_crash_open">Abrir la app</string>
+    <string name="glcn_crash_share">Compartir informe</string>
 </resources>
