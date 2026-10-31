@@ -7521,6 +7521,7 @@
 1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	fre
 1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	ger
 1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	gl
+1	mime	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	glcn-teletext
 1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	glg
 1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	it
 1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	ita

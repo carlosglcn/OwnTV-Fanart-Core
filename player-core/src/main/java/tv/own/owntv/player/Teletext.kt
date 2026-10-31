@@ -47,6 +47,17 @@ object Teletext {
     /** Sample MIME type of a teletext subtitle page before transcoding (the track's `codecs` after it). */
     const val MIME = "application/x-glcn-teletext"
 
+    /**
+     * Media3 only accepts a text track whose MIME type it knows as text: an unknown `application/…`
+     * type fails the extractor's `checkArgument` and with it the whole channel. Registered once,
+     * before the first track is created.
+     */
+    private val registered: Unit by lazy {
+        androidx.media3.common.MimeTypes.registerCustomMimeType(MIME, "glcn-teletext", C.TRACK_TYPE_TEXT)
+    }
+
+    fun ensureRegistered() = registered
+
     private const val DESCRIPTOR_TELETEXT = 0x56
     private const val TYPE_SUBTITLE = 0x02
     private const val TYPE_SUBTITLE_HEARING_IMPAIRED = 0x05
@@ -183,6 +194,7 @@ class TeletextReader(private val pages: List<Teletext.Page>) : ElementaryStreamR
     override fun seek() { writing = false; sampleTimeUs = C.TIME_UNSET }
 
     override fun createTracks(extractorOutput: ExtractorOutput, idGenerator: TsPayloadReader.TrackIdGenerator) {
+        Teletext.ensureRegistered()
         pages.forEachIndexed { i, p ->
             idGenerator.generateNewId()
             val out = extractorOutput.track(idGenerator.trackId, C.TRACK_TYPE_TEXT)
@@ -355,7 +367,7 @@ class TeletextExtractorsFactory(
         TeletextParserFactory(androidx.media3.extractor.text.DefaultSubtitleParserFactory())
     private var transcoding = true
 
-    init { base.setSubtitleParserFactory(parserFactory) }
+    init { Teletext.ensureRegistered(); base.setSubtitleParserFactory(parserFactory) }
 
     @Deprecated("Media3 legacy subtitle path")
     override fun experimentalSetTextTrackTranscodingEnabled(textTrackTranscodingEnabled: Boolean): ExtractorsFactory {
