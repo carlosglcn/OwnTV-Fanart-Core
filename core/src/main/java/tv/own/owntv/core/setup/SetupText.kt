@@ -115,6 +115,9 @@ fun SourceTestResult.detailLines(
     val expiryMs = ok?.expiryMs ?: (this as? SourceTestResult.Expired)?.expiryMs
     return buildList {
         ok?.status?.takeIf { it.isNotBlank() }?.let { add(res.getString(R.string.settings_sources_test_status, it)) }
+        // glcn: what actually failed, technical and untranslated like the status word — "cannot reach the
+        // server" alone left no way to tell a certificate from a name that does not resolve.
+        (this@detailLines as? SourceTestResult.Unreachable)?.detail?.takeIf { it.isNotBlank() }?.let { add(it) }
         if (ok?.trial == true) add(res.getString(R.string.settings_sources_test_trial))
         if (this@detailLines !is SourceTestResult.Unreachable && this@detailLines !== SourceTestResult.AuthFailed) {
             // A portal's own wording first, then a timestamp, then "none reported".

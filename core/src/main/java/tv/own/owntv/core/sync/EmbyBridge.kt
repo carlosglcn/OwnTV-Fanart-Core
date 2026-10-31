@@ -90,7 +90,12 @@ internal object EmbyBridge {
      * The API prefix this server answers on, or null when it is not Emby/Jellyfin at all (then the
      * link is treated as an ordinary playlist).
      */
+    /** glcn: why the last [detect] found no server — shown under "Test connection" (exception or HTTP status). */
+    @Volatile var lastDetectError: String? = null
+        private set
+
     suspend fun detect(t: Target): String? = withContext(Dispatchers.IO) {
+        lastDetectError = null
         for (prefix in listOf("/emby", "")) {
             val api = runCatching {
                 client.newCall(Request.Builder().url("${t.root}$prefix/System/Info/Public").get().build()).execute().use { r ->
@@ -99,8 +104,14 @@ internal object EmbyBridge {
                     // redirected POST arrives as a GET and the server refuses it.
                     if (r.isSuccessful && JSONObject(r.body?.string().orEmpty()).has("Id")) {
                         r.request.url.toString().substringBefore("?").removeSuffix("/System/Info/Public")
-                    } else null
+                    } else {
+                        lastDetectError = "HTTP ${r.code}"
+                        null
+                    }
                 }
+            }.onFailure { e ->
+                val cause = generateSequence(e) { it.cause }.last()
+                lastDetectError = "${cause.javaClass.simpleName}: ${cause.message.orEmpty().take(160)}"
             }.getOrNull()
             if (api != null) return@withContext api
         }

@@ -124,7 +124,9 @@ class SourceTester(
             // A link with a user and no playlist file is meant as a server: say plainly when it does not
             // answer as one, instead of falling through to the playlist check and reporting a bad login.
             val api = runCatching { tv.own.owntv.core.sync.EmbyBridge.detect(target) }.getOrNull()
-                ?: return SourceTestResult.Unreachable("Emby/Jellyfin no responde en ${target.root}")
+                ?: return SourceTestResult.Unreachable(
+                    "Emby/Jellyfin · ${target.root} · ${tv.own.owntv.core.sync.EmbyBridge.lastDetectError ?: "?"}",
+                )
             run {
                 return try {
                     tv.own.owntv.core.sync.EmbyBridge.login(target, api)

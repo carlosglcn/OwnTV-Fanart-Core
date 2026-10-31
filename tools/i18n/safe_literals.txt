@@ -3375,6 +3375,8 @@
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	userData relink failed sourceId=${source.id} ms=${SystemClock.elapsedRealtime() - relinkStartedAt}
 1	log	core/src/main/java/tv/own/owntv/core/repository/SourceRepository.kt	userData relink sourceId=${source.id} rows=${snapshot?.length() ?: 0} purge=$purge ms=${SystemClock.elapsedRealtime() - relinkStartedAt}
 1	protocol	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	#EXTM3U
+1	log	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	?
+1	log	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	Emby/Jellyfin · ${target.root} · ${tv.own.owntv.core.sync.EmbyBridge.lastDetectError ?: "?"}
 1	protocol	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	Expired
 1	technical	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	SMB folder not found: ${e.folder}
 1	technical	core/src/main/java/tv/own/owntv/core/repository/SourceTester.kt	SMB: ${e.javaClass.simpleName}: ${e.message}
@@ -5282,6 +5284,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTM3U
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$scheme://$hostPart$port$path
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$title ($year)
+1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${cause.javaClass.simpleName}: ${cause.message.orEmpty().take(160)}
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${s.api}/Items/$id/Images/Primary?maxWidth=500&api_key=${s.token}
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${s.api}/Users/${s.userId}/Items?Recursive=true&IncludeItemTypes=$kind&Fields=$FIELDS
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${s.api}/Videos/${it.getString("Id")}/stream
@@ -5316,6 +5319,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HDR
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HDR10
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HDR10+
+1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HTTP ${r.code}
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Height
 5	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Id
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IndexNumber
