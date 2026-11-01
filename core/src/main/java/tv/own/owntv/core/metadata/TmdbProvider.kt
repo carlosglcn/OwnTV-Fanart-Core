@@ -216,7 +216,7 @@ class TmdbProvider(
             ep.apiKey?.takeIf { it.isNotBlank() }?.let { append("api_key=").append(enc(it)) }
         }
         val json = fetch(ep, url, "network id=$networkId") ?: return null
-        return runCatching { json.optString("logo_path").takeIf { it.startsWith("/") } }.getOrNull()
+        return runCatching { org.json.JSONObject(json).optString("logo_path").takeIf { it.startsWith("/") } }.getOrNull()
     }
 
     override suspend fun platform(tmdbId: Int, isTv: Boolean): PlatformBadge? {
