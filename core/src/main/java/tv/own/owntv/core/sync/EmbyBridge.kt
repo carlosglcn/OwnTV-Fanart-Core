@@ -203,6 +203,7 @@ internal object EmbyBridge {
         }
         val sb = StringBuilder("#EXTM3U\n")
         val filmPlatforms = HashSet<String>()
+        val filmTmdb = HashMap<String, Int>()
         forEachItem(s, "Movie") { m ->
             // A file the library could not identify — no year and no IMDb/TMDB id — is not a film:
             // calibration clips ("100% Blanco", "5% Gris"), samples, home videos. Left out.
@@ -218,6 +219,7 @@ internal object EmbyBridge {
                 ?: groupOf(m, MOVIES_GROUP, films = true)
             val rating = m.optDouble("CommunityRating", Double.NaN).takeIf { !it.isNaN() && it > 0 }
             tv.own.owntv.core.emby.EmbyWatchState.record(stream(m), m)
+            ids?.optString("Tmdb")?.toIntOrNull()?.takeIf { it > 0 }?.let { filmTmdb[stream(m)] = it }
             sb.append("#EXTINF:-1 type=\"movie\" tvg-logo=\"").append(attr(image(m.getString("Id")))).append('"')
                 .extra("glcn-plot", m.optString("Overview"))
                 .extra("glcn-backdrop", backdrop(m))
@@ -230,6 +232,14 @@ internal object EmbyBridge {
         }
         // The shows themselves, for their synopsis and backdrop.
         val shows = runCatching { items(s, "Series") }.getOrDefault(emptyList()).associateBy { it.optString("Id") }
+        // glcn: the server's own TMDB ids, so the app does not search TMDB by name for what Emby already identified.
+        runCatching {
+            val showTmdb = shows.values.mapNotNull { sh ->
+                val id = sh.optJSONObject("ProviderIds")?.optString("Tmdb")?.toIntOrNull()?.takeIf { it > 0 }
+                sh.optString("Name").takeIf { it.isNotBlank() && id != null }?.let { it to id!! }
+            }.toMap()
+            tv.own.owntv.core.emby.EmbyTmdb.replace(filmTmdb, showTmdb)
+        }
         // glcn: by platform — each show's network, variants joined (HBO Nordic → HBO), and the ones with only a show or
         // two gathered in "Other networks"; then each platform's logo, found once through TMDB.
         val platformOf: Map<String, String> = if (EmbyGroups.mode != EmbyGroups.Mode.PLATFORM) emptyMap() else {

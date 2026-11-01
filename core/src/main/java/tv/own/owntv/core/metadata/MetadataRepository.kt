@@ -112,7 +112,7 @@ class MetadataRepository(
 
 
         // glcn: 1b. An Xtream panel often keeps the film's TMDB id itself (get_vod_info): then no guessing by name.
-        val hints = providerHints(movie.sourceId, movie.remoteId, isTv = false)
+        val hints = providerHints(movie.sourceId, movie.remoteId, isTv = false, streamUrl = movie.streamUrl)
         hints?.tmdbId?.let { id ->
             dao.upsertMatch(MetadataMatchEntity(matchKey, TYPE_MOVIE, tmdbId = id, confidence = 1.0, updatedAt = now))
             return fetchAndCache(id, lang, matchKey, confidence = 1.0, extraTrailer = hints.trailerKey)
@@ -193,7 +193,7 @@ class MetadataRepository(
 
 
         // glcn: the panel's own TMDB id for the show, when it kept one (get_series_info › info).
-        val hints = providerHints(series.sourceId, series.remoteId, isTv = true)
+        val hints = providerHints(series.sourceId, series.remoteId, isTv = true, name = series.name)
         hints?.tmdbId?.let { id ->
             dao.upsertMatch(MetadataMatchEntity(matchKey, TYPE_TV, tmdbId = id, confidence = 1.0, updatedAt = now))
             return fetchAndCacheTv(id, lang, null, extraTrailer = hints.trailerKey)
@@ -221,7 +221,16 @@ class MetadataRepository(
      * glcn: an Xtream panel's own TMDB id and trailer for a film or show ([remoteId] = its stream or series id), asked
      * once per title — the match it leads to is kept like any other. Null for other sources or on any failure.
      */
-    private suspend fun providerHints(sourceId: Long, remoteId: String?, isTv: Boolean): tv.own.owntv.core.parser.XtTitleHints? {
+    private suspend fun providerHints(
+        sourceId: Long,
+        remoteId: String?,
+        isTv: Boolean,
+        streamUrl: String? = null,
+        name: String? = null,
+    ): tv.own.owntv.core.parser.XtTitleHints? {
+        // An Emby / Jellyfin library already said which TMDB title each item is (nothing asked over the network).
+        val emby = if (isTv) name?.let { tv.own.owntv.core.emby.EmbyTmdb.show(it) } else streamUrl?.let { tv.own.owntv.core.emby.EmbyTmdb.film(it) }
+        if (emby != null) return tv.own.owntv.core.parser.XtTitleHints(emby, null)
         val id = remoteId?.takeIf { it.isNotBlank() } ?: return null
         val source = runCatching { db?.sourceDao()?.getById(sourceId) }.getOrNull() ?: return null
         if (source.type != tv.own.owntv.core.model.SourceType.XTREAM) return null
