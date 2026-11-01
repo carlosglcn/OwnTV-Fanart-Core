@@ -617,6 +617,7 @@
     <string name="glcn_pi_on_air">En emisión ahora</string>
     <string name="glcn_pi_next">A continuación</string>
     <string name="glcn_pi_airs_again">Se emite de nuevo esta semana</string>
+    <string name="glcn_pi_start_over">Desde el principio</string>
     <string name="glcn_pi_no_repeats">No se repite esta semana, según la guía</string>
     <string name="glcn_pi_ends_left">Termina a las <xliff:g id="end">%1$s</xliff:g> · quedan <xliff:g id="minutes">%2$d</xliff:g> min</string>
     <string name="glcn_epg_show_empty">Mostrar canales sin guía</string>
