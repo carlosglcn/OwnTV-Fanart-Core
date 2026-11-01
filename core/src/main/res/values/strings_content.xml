@@ -1026,6 +1026,8 @@
     <string name="glcn_tvhome_tonight">Tonight, 22:00</string>
     <string name="glcn_tvhome_move_hint">◀ ▶ move the row · OK to leave it there</string>
     <string name="glcn_tvhome_remind_hint">OK reminds you · hold OK to watch the channel now</string>
+    <string name="glcn_settings_playback">Playback</string>
+    <string name="glcn_settings_playback_card">Player, picture, sound, subtitles, recording</string>
     <string name="glcn_view_list">List</string>
     <string name="glcn_view_cards">Cards</string>
     <string name="glcn_tvhome_apps">Apps</string>
