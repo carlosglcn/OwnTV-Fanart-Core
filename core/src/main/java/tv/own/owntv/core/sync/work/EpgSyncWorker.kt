@@ -53,7 +53,10 @@ class EpgSyncWorker(
 
         // An automatic refresh never runs under a film or channel: it waits until playback stops
         // (WorkManager restarts it later if the wait outlives the job's time limit).
-        if (reason == tv.own.owntv.core.sync.AutoRefresh.REASON && watchSession.watching.value.isNotEmpty()) {
+        // glcn: except on a device with room to spare (not a low-RAM box) — there it goes ahead, and as it first asks
+        // the server whether the guide changed, an unchanged guide costs one small request under the picture.
+        val auto = reason == tv.own.owntv.core.sync.AutoRefresh.REASON
+        if (auto && watchSession.watching.value.isNotEmpty() && !roomyDevice(applicationContext)) {
             Log.i(TAG, "auto refresh waiting for playback to stop sourceId=$sourceId")
             watchSession.awaitIdle()
         }
@@ -71,7 +74,7 @@ class EpgSyncWorker(
             .onFailure { Log.i(TAG, "EPG sync stays in the background: ${it.message}") }
 
         try {
-            val programmes = epgRepository.refreshUrl(source.id, source.url, source.userAgent) { channels, count ->
+            val programmes = epgRepository.refreshUrl(source.id, source.url, source.userAgent, onlyIfChanged = auto) { channels, count ->
                 progress.publish(channels, count)
             }
             progress.flush()
@@ -228,3 +231,12 @@ internal fun shouldRetryEpgSync(error: Throwable, online: Boolean, runAttemptCou
     val transient = error is java.io.IOException || isTransientSyncError(error.message, online)
     return transient && runAttemptCount < MAX_EPG_RETRY_ATTEMPTS
 }
+
+/** glcn: a device with room to refresh the guide while something plays — not a low-RAM box, 2.5 GB or more. */
+private fun roomyDevice(context: android.content.Context): Boolean = runCatching {
+    val am = context.getSystemService(android.content.Context.ACTIVITY_SERVICE) as android.app.ActivityManager
+    val info = android.app.ActivityManager.MemoryInfo().also { am.getMemoryInfo(it) }
+    !am.isLowRamDevice && info.totalMem >= ROOMY_RAM_BYTES
+}.getOrDefault(false)
+
+private const val ROOMY_RAM_BYTES = 2_500L * 1024 * 1024

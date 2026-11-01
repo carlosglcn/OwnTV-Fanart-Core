@@ -309,6 +309,8 @@ class EpgRepository(
         url: String,
         userAgent: String?,
         onProgress: (channels: Int, programmes: Int) -> Unit = { _, _ -> },
+        /** glcn: an automatic refresh — skipped when the file has not changed since the last download. */
+        onlyIfChanged: Boolean = false,
     ): Int = withContext(Dispatchers.IO) {
         // A portal guide is not a download, so it cannot go through the XMLTV path below — but it is
         // stored, pruned, matched and read exactly like one, which is why it is addressed as a URL
@@ -324,6 +326,19 @@ class EpgRepository(
         val globallyEmpty = bulkInsertHelper.tableIsEmpty("epg_programmes")
         val sourceEmpty = epgDao.countForSources(listOf(storeId)) == 0
         val freshSource = sourceEmpty
+
+        // glcn: an automatic refresh first asks whether the file changed (ETag / Last-Modified of the last full
+        // download) and stops there when it did not — no download, no parse, no writes. Never for an empty guide,
+        // and at least one full read a day, so the window still moves forward over an unchanged file.
+        if (onlyIfChanged && !sourceEmpty && cacheFile(storeId).exists()) {
+            val v = EpgValidators.read(context, storeId)
+            if (v != null && now - v.savedAt < EpgValidators.MAX_AGE_MS && http.notModified(url, userAgent, v.headers())) {
+                Log.i("EpgRepository", "EPG unchanged sourceId=$storeId — skipped (validators from ${(now - v.savedAt) / 60_000} min ago)")
+                return@withContext 0
+            }
+        }
+        var etag: String? = null
+        var lastModified: String? = null
 
         // Filter programmes to the channels the user actually has (tvg-ids + persisted matches). Public
         // feeds carry far more channels than the user owns, so this is the single biggest sync speedup —
@@ -391,7 +406,10 @@ class EpgRepository(
                 ftsOnly = false,
             ) {
                 tmpFile.outputStream().use { out ->
-                    http.get(url, userAgent, maxAttempts = EPG_DOWNLOAD_ATTEMPTS) { input ->
+                    http.get(
+                        url, userAgent, maxAttempts = EPG_DOWNLOAD_ATTEMPTS,
+                        onHeaders = { h -> etag = h["ETag"]; lastModified = h["Last-Modified"] },
+                    ) { input ->
                         XmltvParser.parse(
                             TeeInputStream(input, out),
                             onChannel = { id, name, icon ->
@@ -523,6 +541,8 @@ class EpgRepository(
         // Everything above is download + parse + the writes interleaved with it; everything below is
         // retention. Splitting the wall clock here is what makes parseMs and pruneMs mean something.
         val parsedAt = SystemClock.elapsedRealtime()
+        // glcn: what the next automatic refresh asks about; a partial read keeps no validators (so it downloads again).
+        if (parseCompleted) EpgValidators.write(context, storeId, etag, lastModified, now) else EpgValidators.clear(context, storeId)
         if (parseCompleted) {
             removedProgrammes = pruneRemovedProgrammes(storeId, hashTracker)
             removedChannels = pruneRemovedChannels(storeId, channels.keys)
@@ -1083,4 +1103,50 @@ fun splitGuideUrls(raw: String?): List<String> {
     val parts = url.split(',').map { it.trim() }
     if (parts.any { !it.startsWith("http://", true) && !it.startsWith("https://", true) }) return listOf(url)
     return parts.distinct()
+}
+
+/**
+ * glcn: the ETag and Last-Modified of each guide's last complete download, so an automatic refresh can ask the
+ * server "changed since?" and skip an unchanged file. Kept per EPG source on the device.
+ */
+internal object EpgValidators {
+    data class Saved(val etag: String?, val lastModified: String?, val savedAt: Long) {
+        fun headers(): Map<String, String> = buildMap {
+            etag?.let { put(IF_NONE_MATCH, it) }
+            lastModified?.let { put(IF_MODIFIED_SINCE, it) }
+        }
+    }
+
+    /** After this long the file is read in full again whatever the server says, so the guide's window moves on. */
+    const val MAX_AGE_MS = 20L * 60 * 60 * 1000
+
+    fun read(context: android.content.Context, storeId: Long): Saved? {
+        val p = prefs(context)
+        val at = p.getLong("$storeId$AT", 0L).takeIf { it > 0 } ?: return null
+        val etag = p.getString("$storeId$ETAG", null)
+        val lm = p.getString("$storeId$LM", null)
+        if (etag == null && lm == null) return null
+        return Saved(etag, lm, at)
+    }
+
+    fun write(context: android.content.Context, storeId: Long, etag: String?, lastModified: String?, at: Long) {
+        if (etag.isNullOrBlank() && lastModified.isNullOrBlank()) { clear(context, storeId); return }
+        prefs(context).edit()
+            .putString("$storeId$ETAG", etag?.takeIf { it.isNotBlank() })
+            .putString("$storeId$LM", lastModified?.takeIf { it.isNotBlank() })
+            .putLong("$storeId$AT", at)
+            .apply()
+    }
+
+    fun clear(context: android.content.Context, storeId: Long) {
+        prefs(context).edit().remove("$storeId$ETAG").remove("$storeId$LM").remove("$storeId$AT").apply()
+    }
+
+    private fun prefs(context: android.content.Context) = context.getSharedPreferences(PREFS, android.content.Context.MODE_PRIVATE)
+    private const val PREFS = "glcn_epg_validators"
+    private const val ETAG = ".etag"
+    private const val LM = ".lm"
+    private const val AT = ".at"
+    private const val IF_NONE_MATCH = "If-None-Match"
+    private const val IF_MODIFIED_SINCE = "If-Modified-Since"
 }

@@ -22,6 +22,21 @@ import java.io.InputStream
  */
 class HttpClient(private val client: OkHttpClient) {
 
+    /**
+     * glcn: whether [url] is unchanged since the copy described by [validators] (If-None-Match / If-Modified-Since):
+     * true only on a 304. The answer's body is never read — a changed file costs its headers, nothing more. Any
+     * failure is "changed", so the caller downloads as before.
+     */
+    suspend fun notModified(url: String, userAgent: String?, validators: Map<String, String>): Boolean = withContext(Dispatchers.IO) {
+        if (validators.values.none { it.isNotBlank() }) return@withContext false
+        val request = Request.Builder()
+            .url(url)
+            .header("User-Agent", userAgent?.takeIf { it.isNotBlank() } ?: DEFAULT_USER_AGENT)
+            .apply { validators.forEach { (name, value) -> if (value.isNotBlank()) header(name, value) } }
+            .build()
+        runCatching { client.newCall(request).execute().use { it.code == HTTP_NOT_MODIFIED } }.getOrDefault(false)
+    }
+
     /** Non-2xx response. Thrown before the body block runs, so retrying it never re-emits parsed items. */
     class HttpStatusException(val code: Int, message: String) : IOException(message)
 
@@ -31,6 +46,8 @@ class HttpClient(private val client: OkHttpClient) {
         onProgress: ((Long, Long?) -> Unit)? = null,
         maxAttempts: Int = 1,
         headers: Map<String, String> = emptyMap(),
+        /** glcn: the response's headers, before the body is read (a guide's ETag / Last-Modified). */
+        onHeaders: ((okhttp3.Headers) -> Unit)? = null,
         block: suspend (InputStream) -> T,
     ): T = withContext(Dispatchers.IO) {
         val ua = userAgent?.takeIf { it.isNotBlank() } ?: DEFAULT_USER_AGENT
@@ -60,6 +77,7 @@ class HttpClient(private val client: OkHttpClient) {
                     responseReceived = true
                     val headersAt = SystemClock.elapsedRealtime()
                     if (!response.isSuccessful) throw HttpStatusException(response.code, "HTTP ${response.code} for ${redactUrl(url)}")
+                    onHeaders?.invoke(response.headers)
                     val body = response.body
                     val totalBytes = body.contentLength().takeIf { it >= 0 }
                     // Info, not debug, and deliberately so: release builds strip Log.d, and this one
@@ -118,6 +136,7 @@ class HttpClient(private val client: OkHttpClient) {
 
     companion object {
         private const val TAG = "HttpClient"
+        private const val HTTP_NOT_MODIFIED = 304
 
         /** Player-style UA that IPTV panels broadly accept. Overridable per source. */
         const val DEFAULT_USER_AGENT = "VLC/3.0.20 LibVLC/3.0.20"
