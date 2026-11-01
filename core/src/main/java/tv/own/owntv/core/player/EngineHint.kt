@@ -55,7 +55,7 @@ object EngineHint {
     }
 
     private const val RANK_4K = 4
-    private val MPV_CONTAINERS = setOf("avi", "wmv", "asf", "iso", "img", "vob", "rm", "rmvb", "divx", "xvid", "ogm", "3gp", "m2v", "mpg", "mpeg", "dat")
+    private val MPV_CONTAINERS = setOf("avi", "wmv", "asf", "iso", "img", "vob", "m2ts", "mts", "rm", "rmvb", "divx", "xvid", "ogm", "3gp", "m2v", "mpg", "mpeg", "dat")
     private val MPV_CODECS = Regex("""(?i)\b(?:xvid|divx|vc-?1|wmv\d?|rmvb|mpeg-?2)\b""")
     private val EXO_CAPABILITIES = listOf("dolby vision", "hdr")
     private val SOUND_MARKS = Regex("""(?i)\b(?:atmos|truehd|dts-?hd(?:[ .-]?ma)?|dts[ :-]?x)\b""")

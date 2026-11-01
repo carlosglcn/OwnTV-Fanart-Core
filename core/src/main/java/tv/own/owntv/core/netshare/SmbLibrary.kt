@@ -85,6 +85,8 @@ object SmbLibrary {
         fun walk(path: String, depth: Int, group: String?, folder: String?) {
             if (depth > MAX_DEPTH) return
             val entries = runCatching { lister.list(path) }.getOrDefault(emptyList())
+            // glcn: a disc copied as folders (BDMV for Blu-ray, VIDEO_TS for DVD) is one film: its main title plays.
+            if (depth > 0 && discFilm(lister, path, entries, group, sb)) return
             for (e in entries.sortedBy { it.name.lowercase() }) {
                 val child = "$path/${e.name}"
                 if (e.folder) {
@@ -107,6 +109,44 @@ object SmbLibrary {
             }
         }
         walk(t.movies, 0, null, null)
+    }
+
+    /**
+     * glcn: [path] holds a disc copied as folders — Blu-ray (BDMV/STREAM/*.m2ts) or DVD (VIDEO_TS/VTS_nn_k.VOB).
+     * The main title is the biggest: the largest .m2ts, or the DVD title set with the most data, its parts joined
+     * in order (mpv's EDL). Named after the folder ("Avatar (2009)"). False when there is no disc here.
+     */
+    private fun discFilm(lister: Lister, path: String, entries: List<SmbAccess.Entry>, group: String?, sb: StringBuilder): Boolean {
+        val folderName = path.substringAfterLast('/')
+        val bdmv = entries.firstOrNull { it.folder && it.name.equals(BDMV, ignoreCase = true) }
+        val videoTs = entries.firstOrNull { it.folder && it.name.equals(VIDEO_TS, ignoreCase = true) }
+        val url: String = when {
+            bdmv != null -> {
+                val streamDir = "$path/${bdmv.name}/$BDMV_STREAM"
+                val main = runCatching { lister.list(streamDir) }.getOrDefault(emptyList())
+                    .filter { !it.folder && it.name.endsWith(M2TS, ignoreCase = true) }
+                    .maxByOrNull { it.size } ?: return false
+                lister.url("$streamDir/${main.name}")
+            }
+            videoTs != null -> {
+                val dir = "$path/${videoTs.name}"
+                val parts = runCatching { lister.list(dir) }.getOrDefault(emptyList())
+                    .mapNotNull { e -> VOB_PART.matchEntire(e.name.uppercase())?.let { m -> Triple(m.groupValues[1].toInt(), m.groupValues[2].toInt(), e) } }
+                    .filter { it.second >= 1 } // _0 is the title set's menu
+                val title = parts.groupBy { it.first }.maxByOrNull { (_, p) -> p.sumOf { it.third.size } }?.value ?: return false
+                val urls = title.sortedBy { it.second }.map { lister.url("$dir/${it.third.name}") }
+                if (urls.size == 1) urls.first() else EDL_PREFIX + urls.joinToString(";") { u -> "%${u.length}%$u" }
+            }
+            else -> return false
+        }
+        val film = MediaFileNames.parseFilm(folderName)
+        val name = film.title.ifBlank { folderName }
+        val label = if (film.year != null) "$name (${film.year})" else name
+        sb.append("#EXTINF:-1 ").append(TYPE_MOVIE)
+            .extra("glcn-year", film.year?.toString())
+            .append(" group-title=\"").append(attr(group ?: MOVIES_GROUP)).append("\",").append(line(label)).append('\n')
+            .append(lister.headerLine).append(url).append('\n')
+        return true
     }
 
     private fun series(lister: Lister, t: NetShare.Target, sb: StringBuilder) {
@@ -168,6 +208,12 @@ object SmbLibrary {
     private const val TYPE_MOVIE = "type=\"movie\""
     private const val TYPE_SERIES = "type=\"series\""
     private const val MAX_DEPTH = 6
+    private const val BDMV = "BDMV"
+    private const val BDMV_STREAM = "STREAM"
+    private const val VIDEO_TS = "VIDEO_TS"
+    private const val M2TS = ".m2ts"
+    private const val EDL_PREFIX = "edl://"
+    private val VOB_PART = Regex("""VTS_(\d{2})_(\d)\.VOB""")
     /** Smaller than this is a clip, not a film (when the share says the size). */
     private const val MIN_FILM_BYTES = 40L * 1024 * 1024
     private const val MOVIES_GROUP = "Películas"
