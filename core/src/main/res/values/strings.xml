@@ -329,7 +329,7 @@
     <string name="glcn_category_icon_auto">Automatic</string>
     <string name="glcn_category_icon_none">No icon</string>
     <string name="glcn_category_icons_title">Category icons</string>
-    <string name="glcn_category_icons_desc">How the category lists show each group: words only; a picture beside the name (sport, cinema, a country, the quality mark, a platform's logo); or, for the platforms, their logo instead of the name. Hold OK on a group to choose another icon.</string>
+    <string name="glcn_category_icons_desc">How the category lists show each group: words only; a picture beside the name (sport, cinema, a country, the quality mark, a platform\'s logo); or, for the platforms, their logo instead of the name. Hold OK on a group to choose another icon.</string>
     <string name="glcn_category_icons_text">Text only</string>
     <string name="glcn_category_icons_icons">Icons and text</string>
     <string name="glcn_category_icons_logos">Logos</string>
