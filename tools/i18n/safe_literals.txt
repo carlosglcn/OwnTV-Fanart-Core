@@ -5344,7 +5344,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTINF:-1 type="series" tvg-logo="
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTM3U
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$api/Users/AuthenticateByName?$query
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$prefix
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$prefix
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$prefix+
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$scheme://$hostPart$port$path
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$title ($year)
@@ -5370,7 +5370,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	?static=true&api_key=${s.token}
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	AMC
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	AccessToken
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Apple TV+
+5	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Apple TV+
 5	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Atresmedia
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Audio
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Authorization
@@ -5385,7 +5385,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DateCreated
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DateCreated,ProviderIds,RunTimeTicks,UserData,MediaStreams,Studios
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Discovery
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Disney+
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Disney+
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DisplayTitle
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Dolby Atmos
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Dolby Vision
@@ -5396,13 +5396,13 @@
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Episode
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ExtendedVideoType
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Genres
-2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HBO
+4	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HBO
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HDR
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HDR10
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HDR10+
 1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HTTP ${r.code}
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Height
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Hulu
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Hulu
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ITV
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Id
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IndexNumber
@@ -5413,18 +5413,18 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	MediaStreams
 3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Mediaset
 3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Movie
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Movistar+
-3	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Name
+3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Movistar+
+4	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Name
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	National Geographic
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Netflix
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Netflix
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Other networks
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Otras cadenas
 3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Overview
-2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Paramount+
+3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Paramount+
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ParentIndexNumber
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Peacock
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Peacock
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Películas
-2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Prime Video
+4	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Prime Video
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Profile
@@ -5438,7 +5438,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Sky
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	SortName
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Starz
-1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Studios
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Studios
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Tmdb
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	TotalRecordCount
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Type
@@ -5457,9 +5457,13 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	[$host]
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	action=Acción adventure=Aventura action & adventure=Acción y aventura animation=Animación anime=Anime biography=Biografía children=Infantil kids=Infantil comedy=Comedia crime=Crimen documentary=Documental drama=Drama family=Familia fantasy=Fantasía food=Cocina game show=Concursos history=Historia horror=Terror mini-series=Miniseries miniseries=Miniseries music=Música musical=Musical mystery=Misterio news=Noticias reality=Reality romance=Romance science fiction=Ciencia ficción sci-fi=Ciencia ficción sci-fi & fantasy=Ciencia ficción y fantasía soap=Telenovela sport=Deporte sports=Deporte suspense=Suspense talk=Tertulia talk show=Tertulia thriller=Thriller tv movie=Telefilm war=Bélica war & politics=Bélica y política western=Western
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	amazon
+1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	amazon prime video
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	amc
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	antena 3
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	apple tv
+1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	apple original films
+1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	apple studios
+2	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	apple tv
+1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	apple tv+
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	application/json
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	atmos
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	atresmedia
@@ -5468,6 +5472,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	cuatro
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	discovery
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	disney
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	disney+
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dolby vision
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dolbyvision
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dovi
@@ -5485,6 +5490,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn_platform_logos
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	group-title="
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hbo
+1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hbo max
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hdr
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hdr 10
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hdr10
@@ -5493,7 +5499,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hlg
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	http
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	https
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hulu
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hulu
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	itv
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	joc
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	la 1
@@ -5501,14 +5507,18 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	la sexta
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	lasexta
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	max
+1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	max original
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	mitele
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	movistar
+1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	movistar plus+
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	movistar+
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	nat geo
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	national geographic
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	netflix
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	netflix
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	paramount
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	peacock
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	prime video
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	paramount+
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	peacock
+2	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	prime video
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	rtve
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	showtime
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	sky

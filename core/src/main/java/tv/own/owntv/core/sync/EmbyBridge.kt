@@ -202,6 +202,7 @@ internal object EmbyBridge {
             }.getOrNull()
         }
         val sb = StringBuilder("#EXTM3U\n")
+        val filmPlatforms = HashSet<String>()
         forEachItem(s, "Movie") { m ->
             // A file the library could not identify — no year and no IMDb/TMDB id — is not a film:
             // calibration clips ("100% Blanco", "5% Gris"), samples, home videos. Left out.
@@ -210,8 +211,11 @@ internal object EmbyBridge {
             val title = m.optString("Name")
             val year = m.optInt("ProductionYear", 0)
             val label = if (year > 0) "$title ($year)" else title
-            // glcn: a film's "studios" are its makers (Warner, Universal), not where it streams: films keep their genre.
-            val group = groupOf(m, MOVIES_GROUP, films = true)
+            // glcn: a film's "studios" are mostly its makers (Warner, Universal), not where it streams: films keep their
+            // genre — unless one of them is a streaming platform's own label (a Netflix or Apple film), by platform.
+            val group = (if (EmbyGroups.mode == EmbyGroups.Mode.PLATFORM) PlatformNames.filmPlatform(m.optJSONArray("Studios")) else null)
+                ?.also { filmPlatforms += it }
+                ?: groupOf(m, MOVIES_GROUP, films = true)
             val rating = m.optDouble("CommunityRating", Double.NaN).takeIf { !it.isNaN() && it > 0 }
             tv.own.owntv.core.emby.EmbyWatchState.record(stream(m), m)
             sb.append("#EXTINF:-1 type=\"movie\" tvg-logo=\"").append(attr(image(m.getString("Id")))).append('"')
@@ -235,7 +239,11 @@ internal object EmbyBridge {
             val counts = raw.values.filterNotNull().groupingBy { it }.eachCount()
             val other = PlatformNames.other()
             raw.mapNotNull { (id, name) -> name?.let { id to (if ((counts[it] ?: 0) >= PLATFORM_MIN_SHOWS) it else other) } }.toMap()
-                .also { map -> runCatching { PlatformLogos.findMissing(map, shows, other) } }
+                .also { map ->
+                    // The films' platforms find their logo through any show of the same platform, however few.
+                    val forLogos = map + raw.mapNotNull { (id, name) -> name?.takeIf { it in filmPlatforms && it !in map.values }?.let { id to it } }
+                    runCatching { PlatformLogos.findMissing(forLogos, shows, other) }
+                }
         }
         forEachItem(s, "Episode") { e ->
             if (!e.has("ParentIndexNumber") || !e.has("IndexNumber")) return@forEachItem
@@ -477,6 +485,30 @@ object PlatformNames {
         val n = name.trim().lowercase(java.util.Locale.ROOT)
         return JOIN.firstOrNull { (prefix, _) -> n == prefix || n.startsWith("$prefix ") || n.startsWith("$prefix+") }?.second ?: name.trim()
     }
+
+    /**
+     * A film's platform, when one of its studios is a streaming platform's own label ("Netflix", "Apple Original
+     * Films", "Amazon Prime Video"…) — never a maker that merely shares the name (Walt Disney Pictures, Amazon MGM).
+     */
+    fun filmPlatform(studios: org.json.JSONArray?): String? {
+        studios ?: return null
+        for (i in 0 until studios.length()) {
+            val n = studios.optJSONObject(i)?.optString("Name")?.trim()?.lowercase(java.util.Locale.ROOT) ?: continue
+            FILM_LABELS.firstOrNull { (prefix, _) -> n == prefix || n.startsWith("$prefix ") }?.let { return it.second }
+        }
+        return null
+    }
+
+    private val FILM_LABELS: List<Pair<String, String>> = listOf(
+        "netflix" to "Netflix",
+        "apple original films" to "Apple TV+", "apple tv+" to "Apple TV+", "apple tv" to "Apple TV+", "apple studios" to "Apple TV+",
+        "amazon prime video" to "Prime Video", "prime video" to "Prime Video",
+        "disney+" to "Disney+",
+        "hbo max" to "HBO", "max original" to "HBO",
+        "movistar+" to "Movistar+", "movistar plus+" to "Movistar+",
+        "paramount+" to "Paramount+",
+        "hulu" to "Hulu", "peacock" to "Peacock",
+    )
 
     /** The category the small networks share, in the app's language. */
     fun other(): String = if (java.util.Locale.getDefault().language == "es") OTHER_ES else OTHER_EN
