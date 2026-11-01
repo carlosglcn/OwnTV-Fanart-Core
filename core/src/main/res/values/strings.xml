@@ -329,7 +329,10 @@
     <string name="glcn_category_icon_auto">Automatic</string>
     <string name="glcn_category_icon_none">No icon</string>
     <string name="glcn_category_icons_title">Category icons</string>
-    <string name="glcn_category_icons_desc">A picture beside each group in the category lists — sport, cinema, a country\'s flag, or the quality mark (4K, HDR, Dolby Vision). Hold OK on a group to choose another.</string>
+    <string name="glcn_category_icons_desc">How the category lists show each group: words only; a picture beside the name (sport, cinema, a country, the quality mark, a platform's logo); or, for the platforms, their logo instead of the name. Hold OK on a group to choose another icon.</string>
+    <string name="glcn_category_icons_text">Text only</string>
+    <string name="glcn_category_icons_icons">Icons and text</string>
+    <string name="glcn_category_icons_logos">Logos</string>
     <string name="glcn_accessible_title">Accessible mode</string>
     <string name="glcn_accessible_desc">For this profile: larger text, a thick ring round the focus and calm motion</string>
 </resources>

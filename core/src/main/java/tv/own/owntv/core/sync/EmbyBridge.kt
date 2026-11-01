@@ -242,7 +242,7 @@ internal object EmbyBridge {
                 .also { map ->
                     // The films' platforms find their logo through any show of the same platform, however few.
                     val forLogos = map + raw.mapNotNull { (id, name) -> name?.takeIf { it in filmPlatforms && it !in map.values }?.let { id to it } }
-                    runCatching { PlatformLogos.findMissing(forLogos, shows, other) }
+                    runCatching { PlatformLogos.findMissing(forLogos, shows, other, extra = filmPlatforms) }
                 }
         }
         forEachItem(s, "Episode") { e ->
@@ -528,12 +528,12 @@ object PlatformLogos {
     /** The logo URL kept for [platform], or null. */
     fun logoFor(platform: String): String? { ensure(); return logos[platform] }
 
-    internal suspend fun findMissing(platformOf: Map<String, String>, shows: Map<String, JSONObject>, other: String) {
+    internal suspend fun findMissing(platformOf: Map<String, String>, shows: Map<String, JSONObject>, other: String, extra: Set<String> = emptySet()) {
         ensure()
         val provider = runCatching {
             org.koin.core.context.GlobalContext.get().get<tv.own.owntv.core.metadata.MetadataProvider>()
         }.getOrNull() ?: return
-        val wanted = platformOf.values.toSet() - other - logos.keys
+        val wanted = platformOf.values.toSet() + extra - other - logos.keys
         var changed = false
         for (platform in wanted) {
             val tmdbIds = platformOf.filterValues { it == platform }.keys.asSequence()
@@ -549,8 +549,23 @@ object PlatformLogos {
                 break
             }
         }
+        // What no show of the library gave: the platform's own network page on TMDB, for the well-known ones.
+        for (platform in wanted - logos.keys) {
+            val id = NETWORK_IDS[platform] ?: continue
+            val path = runCatching { provider.networkLogo(id) }.getOrNull()
+            val url = tv.own.owntv.core.metadata.MetadataImages.logo(path, "w300") ?: continue
+            logos[platform] = url
+            changed = true
+        }
         if (changed) save()
     }
+
+    /** TMDB network ids of the platforms [PlatformNames] joins to, for a logo when no show carries it. */
+    private val NETWORK_IDS: Map<String, Int> = mapOf(
+        "Netflix" to 213, "HBO" to 49, "Disney+" to 2739, "Apple TV+" to 2552, "Prime Video" to 1024,
+        "Paramount+" to 4330, "Hulu" to 453, "Peacock" to 3353, "AMC" to 174, "Starz" to 318,
+        "BBC" to 4, "ITV" to 9, "National Geographic" to 43, "Discovery" to 64,
+    )
 
     private fun prefs() = runCatching {
         org.koin.core.context.GlobalContext.get().get<android.content.Context>()

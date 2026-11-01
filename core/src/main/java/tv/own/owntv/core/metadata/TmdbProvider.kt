@@ -208,6 +208,17 @@ class TmdbProvider(
         return runCatching { parseTvDetails(json, ep.language.substringBefore('-'), ep.trailerLang()) }.getOrNull()
     }
 
+    override suspend fun networkLogo(networkId: Int): String? {
+        if (networkId <= 0) return null
+        val ep = resolveEndpoint()
+        val url = buildString {
+            append(ep.baseUrl).append("/3/network/").append(networkId).append("?")
+            ep.apiKey?.takeIf { it.isNotBlank() }?.let { append("api_key=").append(enc(it)) }
+        }
+        val json = fetch(ep, url, "network id=$networkId") ?: return null
+        return runCatching { json.optString("logo_path").takeIf { it.startsWith("/") } }.getOrNull()
+    }
+
     override suspend fun platform(tmdbId: Int, isTv: Boolean): PlatformBadge? {
         if (tmdbId <= 0) return null
         val ep = resolveEndpoint()

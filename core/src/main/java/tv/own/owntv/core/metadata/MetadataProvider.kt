@@ -238,6 +238,9 @@ interface MetadataProvider {
     /** Full details for a resolved TV show id (reuses [MovieDetails]: title=name, year=first air); null on failure. */
     suspend fun tvDetails(tmdbId: Int): MovieDetails?
 
+    /** glcn: a TV network's logo path on TMDB (`/network/{id}`), or null. */
+    suspend fun networkLogo(networkId: Int): String? = null
+
     /** Per-episode details for a resolved show; null on failure or if that episode isn't on TMDB. */
     /**
      * Every episode of [seasons] in ONE request, or null on transport/parse failure.
