@@ -16,6 +16,8 @@ object ProviderTags {
 
     // "UK: Sky Sports", "IT: DAZN 1" — some providers write a colon. A colon also ends plain labels
     // ("TV:", "VIP:", "PRIME:"), so it counts only after a real country code, and "TV" (Tuvalu) never.
+    // glcn: compiled once — parse runs for every row of every list.
+    private val SPACES = Regex("""\s+""")
     private val colonPrefix = Regex("""^([A-Z]{2}):\s*""")
     private val colonCountries: Set<String> =
         java.util.Locale.getISOCountries().toSet() + "UK" - "TV"
@@ -43,7 +45,7 @@ object ProviderTags {
             if (isSuperscript(ch)) run.append(ch) else { endRun(); name.append(ch) }
         }
         endRun()
-        rest = name.toString().replace(Regex("""\s+"""), " ").trim()
+        rest = name.toString().replace(SPACES, " ").trim()
         // A name that was nothing but a prefix and tags keeps the provider's own spelling.
         if (rest.isEmpty()) return ProviderName(raw.trim(), emptyList(), null)
         return ProviderName(rest, tags, prefix?.groupValues?.get(1))

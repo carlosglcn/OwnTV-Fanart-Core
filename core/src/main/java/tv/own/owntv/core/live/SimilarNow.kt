@@ -71,11 +71,14 @@ class SimilarNow(
     companion object {
         private const val MAX_CHANNELS = 5_000
         private val QUALITY = Regex("(?i)\\b(uhd|fhd|hd|4k)\\b")
+        // glcn: compiled once — these run for thousands of channels and titles on each look.
+        private val NON_ALNUM = Regex("[^a-z0-9]+")
+        private val MARKS = Regex("\\p{M}+")
         private val QUALITY_WORDS = Regex("\\b(uhd|fhd|hd|sd|4k|hevc|h265|1080p?|720p?|50fps|60fps)\\b")
 
         /** A channel's name without its provider tag or quality, so La 2 HD and La 2 SD are one family. */
         fun family(name: String): String =
-            QUALITY_WORDS.replace(fold(ProviderTags.parse(name).name), "").replace(Regex("[^a-z0-9]+"), "")
+            QUALITY_WORDS.replace(fold(ProviderTags.parse(name).name), "").replace(NON_ALNUM, "")
         private const val AHEAD_MS = 4 * 3_600_000L
 
         /** Genres too broad to say anything ("Series", "Movie"…): they never count as a match on their own. */
@@ -85,7 +88,7 @@ class SimilarNow(
         )
 
         private fun fold(s: String): String =
-            Normalizer.normalize(s, Normalizer.Form.NFD).replace(Regex("\\p{M}+"), "").lowercase().trim()
+            Normalizer.normalize(s, Normalizer.Form.NFD).replace(MARKS, "").lowercase().trim()
 
         /** The folded genres of a joined categories string, without the generic ones. */
         fun genres(categories: String?): Set<String> {

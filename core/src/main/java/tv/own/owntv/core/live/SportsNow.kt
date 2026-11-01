@@ -40,7 +40,7 @@ class SportsNow(
             // One row per programme: the same match on an HD and an SD copy shows once.
             // glcn: one card per event — the same match on an HD and an SD channel, or on two channels of the
             // same family ("M+DEPORTESHD", "M+ DEPORTES"), shows once, on its HD channel.
-            .sortedByDescending { Regex("(?i)(uhd|fhd|hd|4k)").containsMatchIn(it.channel.name) }
+            .sortedByDescending { HD_NAME.containsMatchIn(it.channel.name) }
             .distinctBy { it.programme.title.lowercase().trim() + "|" + it.programme.startMs }
             .sortedWith(compareByDescending<Entry> { isLive(it.programme) }.thenBy { it.programme.startMs })
     }
@@ -55,10 +55,13 @@ class SportsNow(
             "europa league", "conference league", "copa del rey", "nba", "euroliga", "euroleague", "acb",
             "nfl", "ufc", "sport", "wwe", "hipica", "esqui", "dardos", "snooker",
         )
+        // glcn: compiled once — the sort compiled one per comparison, and fold runs twice per programme.
+        private val HD_NAME = Regex("(?i)(uhd|fhd|hd|4k)")
+        private val MARKS = Regex("\\p{M}+")
         private val WORD_RE = Regex("\\b(" + SPORT_WORDS.joinToString("|") { Regex.escape(it) } + ")")
 
         private fun fold(s: String): String =
-            Normalizer.normalize(s, Normalizer.Form.NFD).replace(Regex("\\p{M}+"), "").lowercase()
+            Normalizer.normalize(s, Normalizer.Form.NFD).replace(MARKS, "").lowercase()
 
         fun isSport(p: EpgProgrammeEntity): Boolean {
             val cats = p.categories?.let(::fold).orEmpty()

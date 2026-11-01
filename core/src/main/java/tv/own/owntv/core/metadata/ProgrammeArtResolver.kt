@@ -172,8 +172,8 @@ class ProgrammeArtResolver(
             val episodic = !episode.isNullOrBlank() || EPISODE.containsMatchIn(title) || title.contains(" · ")
             return when {
                 episodic -> Kind.SERIES
-                Regex("""\b(cine|pelicula|peliculas|film|movie|movies)\b""").containsMatchIn(cats) -> Kind.FILM
-                Regex("""\b(serie|series|telenovela|miniserie)\b""").containsMatchIn(cats) -> Kind.SERIES
+                FILM_KIND.containsMatchIn(cats) -> Kind.FILM
+                SERIES_KIND.containsMatchIn(cats) -> Kind.SERIES
                 (lengthMin ?: 0) >= 80 -> Kind.FILM
                 else -> Kind.UNKNOWN
             }
@@ -277,6 +277,11 @@ class ProgrammeArtResolver(
             )
         }
 
+        // glcn: compiled once — kind() and fold() run for every programme a screen shows.
+        private val FILM_KIND = Regex("""\b(cine|pelicula|peliculas|film|movie|movies)\b""")
+        private val SERIES_KIND = Regex("""\b(serie|series|telenovela|miniserie)\b""")
+        private val MARKS = Regex("\\p{M}+")
+        private val NON_ALNUM = Regex("[^a-z0-9]+")
         private val EPISODE = Regex("""\s+(T\d+(\s*E\d+)?|S\d+\s*E\d+|Temporada\s+\d+|Ep\.?\s*\d+|Episodio\s+\d+)\b.*$""", RegexOption.IGNORE_CASE)
         private val LIVE_PREFIX = Regex("""^\s*\(?(EN\s+)?DIRECTO\)?\s*[:\-]?\s*""", RegexOption.IGNORE_CASE)
         private val PARENS = Regex("""\s*[\(\[][^)\]]*[\)\]]""")
@@ -290,9 +295,9 @@ class ProgrammeArtResolver(
             .trim()
 
         fun fold(s: String): String = Normalizer.normalize(s, Normalizer.Form.NFD)
-            .replace(Regex("\\p{M}+"), "")
+            .replace(MARKS, "")
             .lowercase()
-            .replace(Regex("[^a-z0-9]+"), " ")
+            .replace(NON_ALNUM, " ")
             .trim()
 
         private val FILM_CATS = Regex("""\b(cine|pelicula|peliculas|film|movie|movies|serie|series|drama|comedia|comedy|thriller|terror|horror|accion|action|animacion|animation|ciencia ficcion|sci fi|fantasia|fantasy|western|suspense|romance|aventura|adventure|crimen|crime|policiaca|misterio|mystery|documental|documentary)\b""")
