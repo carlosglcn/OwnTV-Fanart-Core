@@ -707,4 +707,5 @@
     <string name="glcn_tvhome_sports">Deporte en directo</string>
     <string name="glcn_tvhome_tonight">Esta noche, 22:00</string>
     <string name="glcn_tvhome_move_hint">◀ ▶ mueven la fila · OK para dejarla ahí</string>
+    <string name="glcn_tvhome_remind_hint">OK te lo recuerda · mantén OK para ver el canal ya</string>
 </resources>

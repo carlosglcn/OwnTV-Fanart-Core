@@ -1022,4 +1022,5 @@
     <string name="glcn_tvhome_sports">Sport on air</string>
     <string name="glcn_tvhome_tonight">Tonight, 22:00</string>
     <string name="glcn_tvhome_move_hint">◀ ▶ move the row · OK to leave it there</string>
+    <string name="glcn_tvhome_remind_hint">OK reminds you · hold OK to watch the channel now</string>
 </resources>
