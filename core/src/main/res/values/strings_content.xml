@@ -1027,4 +1027,6 @@
     <string name="glcn_apps_add">Add apps</string>
     <string name="glcn_apps_pick_title">Apps on Home</string>
     <string name="glcn_apps_hint">Tick the ones you want · hold OK on an app in the row to take it off</string>
+    <string name="glcn_labs_on">Test features on</string>
+    <string name="glcn_labs_off">Test features off</string>
 </resources>

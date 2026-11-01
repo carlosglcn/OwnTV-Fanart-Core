@@ -712,4 +712,6 @@
     <string name="glcn_apps_add">Añadir apps</string>
     <string name="glcn_apps_pick_title">Apps en Inicio</string>
     <string name="glcn_apps_hint">Marca las que quieras · mantén OK en una app de la fila para quitarla</string>
+    <string name="glcn_labs_on">Funciones de prueba activadas</string>
+    <string name="glcn_labs_off">Funciones de prueba desactivadas</string>
 </resources>
