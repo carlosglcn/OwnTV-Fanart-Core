@@ -781,6 +781,9 @@
     <string name="glcn_home_backdrop_cinema">Cinema</string>
     <string name="glcn_home_backdrop_panel">Panel</string>
     <string name="glcn_home_backdrop_dock">Dock</string>
+    <string name="glcn_tv_home_title">TV profile Home</string>
+    <string name="glcn_tv_home_desc">Full picture: the focused programme fills the screen with the rows below. Dock: the Dock layout, TV only. Just for this profile.</string>
+    <string name="glcn_tv_home_full">Full picture</string>
     <string name="glcn_about_fork">OwnTV Fanart is a modified, unofficial version of OwnTV, the app created by ahXN00. It adds the picture-led design, the guide\'s fanart and other changes, maintained by Carlos (carlosglcn) since October 2026. Report problems with this version on its own GitHub, not to the original author.</string>
     <string name="glcn_beta_token">Beta access</string>
     <string name="glcn_beta_token_title">Beta access token</string>
