@@ -143,21 +143,34 @@ class SeriesRepository(
     private suspend fun fetchStalkerEpisodes(series: SeriesEntity, source: SourceEntity, remoteId: String): List<EpisodeEntity>? {
         val mac = source.mac?.let { StalkerClient.canonicalizeMac(it) } ?: return null
         val creds = source.stalkerCredentials(mac)
-        val seasons = ArrayList<StalkerClient.SeasonItem>()
-        var page = 1
-        while (page <= MAX_SEASON_PAGES) {
-            val p = stalkerAuth.withAuthRetry(creds) { session ->
-                stalkerClient.getSeriesSeasons(
-                    session.apiBase, mac, session.token, creds.userAgent,
-                    categoryId = null, movieId = remoteId, page = page,
-                )
+        suspend fun seasonsFrom(type: String): List<StalkerClient.SeasonItem> {
+            val seasons = ArrayList<StalkerClient.SeasonItem>()
+            var page = 1
+            while (page <= MAX_SEASON_PAGES) {
+                val p = stalkerAuth.withAuthRetry(creds) { session ->
+                    stalkerClient.getSeriesSeasons(
+                        session.apiBase, mac, session.token, creds.userAgent,
+                        categoryId = null, movieId = remoteId, page = page, type = type,
+                    )
+                }
+                seasons += p.items
+                val maxPer = p.maxPageItems.takeIf { it > 0 } ?: p.items.size
+                val pages = if (maxPer > 0) (p.totalItems + maxPer - 1) / maxPer else 1
+                if (p.items.isEmpty() || page >= pages) break
+                page++
             }
-            seasons += p.items
-            val maxPer = p.maxPageItems.takeIf { it > 0 } ?: p.items.size
-            val pages = if (maxPer > 0) (p.totalItems + maxPer - 1) / maxPer else 1
-            if (p.items.isEmpty() || page >= pages) break
-            page++
+            return seasons
         }
+        // A portal with no series section files its shows in the film catalogue, and lists their
+        // seasons there too; the series listing is asked first, as it always was.
+        val seasons = try {
+            seasonsFrom("series")
+        } catch (c: kotlinx.coroutines.CancellationException) {
+            throw c
+        } catch (e: Exception) {
+            android.util.Log.i(TAG, "stalker seasons via type=series failed remoteId=$remoteId (${e.message})")
+            emptyList()
+        }.ifEmpty { seasonsFrom("vod") }
         val episodes = ArrayList<EpisodeEntity>()
         seasons.forEachIndexed { index, season ->
             val cmd = season.cmd ?: return@forEachIndexed

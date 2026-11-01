@@ -8,8 +8,11 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import tv.own.owntv.core.sync.SyncContentTypes
 
 class CatalogSyncScheduler(private val context: Context) {
@@ -170,6 +173,24 @@ class CatalogSyncScheduler(private val context: Context) {
                 }
             }
             .distinctUntilChanged()
+
+    /**
+     * Emits at once, and again each time the playlist's catalogue work goes quiet — the moments its
+     * stored counts may have changed. The background backfill counts as catalogue work: it keeps
+     * adding titles for many minutes after the sync itself has finished, and a Playlists row that
+     * re-counted only after the sync went on showing the few per cent stored by setup.
+     */
+    fun catalogueSettled(sourceId: Long): Flow<Unit> {
+        val syncing = observeSync(sourceId).map { it.isActive }.onStart { emit(false) }
+        val backfilling = WorkManager.getInstance(context)
+            .getWorkInfosForUniqueWorkFlow(CatalogBackfillWorker.workName(sourceId))
+            .map { infos -> infos.any { !it.state.isFinished } }
+            .onStart { emit(false) }
+        return combine(syncing, backfilling) { a, b -> a || b }
+            .distinctUntilChanged()
+            .filter { busy -> !busy }
+            .map { }
+    }
 
     companion object {
         const val TAG_CATALOG_SYNC = "catalog-sync"

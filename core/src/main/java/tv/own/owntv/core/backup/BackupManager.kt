@@ -952,6 +952,8 @@ class BackupManager(
                                 sourceDao.update(
                                     existing.copy(
                                         name = if (srcJson.has("name")) incoming.name else existing.name,
+                                        // A Stalker login is not part of its match key (see sourceMatchKey).
+                                        username = incoming.username ?: existing.username,
                                         password = incoming.password ?: existing.password,
                                         mac = incoming.mac ?: existing.mac,
                                         stalkerSerialNumber = incoming.stalkerSerialNumber ?: existing.stalkerSerialNumber,
@@ -1741,15 +1743,17 @@ internal fun profileMatchKey(name: String) = name.trim().lowercase()
  * serves several accounts; the password is not, so a re-exported backup with a rotated password
  * still updates the existing row instead of duplicating it.
  *
- * The MAC joins the key for **Stalker only**. A Stalker source has no username, and several
- * playlists routinely share one portal URL, so type+url+username made every Stalker playlist in a
- * backup the same source: they all merged onto one device row, each one overwriting its MAC, and
- * every playlist's favorites/history/customizations collapsed onto that single row. Other source
- * types ignore the argument, so their keys are unchanged.
+ * The MAC joins the key for **Stalker only**. Several Stalker playlists routinely share one portal
+ * URL, so type+url made every Stalker playlist in a backup the same source: they all merged onto one
+ * device row, each one overwriting its MAC, and every playlist's favorites/history/customizations
+ * collapsed onto that single row. Other source types ignore the argument, so their keys are unchanged.
+ *
+ * A Stalker key leaves the username out: a portal login is a setting of the MAC's playlist, not its
+ * identity, so adding or changing one must not turn the playlist into a different one on restore.
  */
 internal fun sourceMatchKey(type: String, url: String, username: String?, mac: String? = null): String {
-    val base = "$type|${url.trim()}|${username.orEmpty()}"
-    return if (type == SourceType.STALKER.name) "$base|${normalizeMacForMatch(mac)}" else base
+    if (type == SourceType.STALKER.name) return "$type|${url.trim()}||${normalizeMacForMatch(mac)}"
+    return "$type|${url.trim()}|${username.orEmpty()}"
 }
 
 /** Compare MACs by value, not by punctuation: `aabb…` and `AA:BB:…` are the same portal login. */

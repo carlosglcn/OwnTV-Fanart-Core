@@ -49,7 +49,10 @@ fun classifySyncFailure(raw: String?, online: Boolean): FriendlySyncFailure = wh
     raw.containsAny("Unable to resolve host", "UnknownHost", "No address associated") -> FriendlySyncFailure.Unreachable
     raw.containsAny("Failed to connect", "ECONNREFUSED", "Connection refused", "Connection reset") -> FriendlySyncFailure.ConnectionFailed
     raw.containsAny("stream was reset", "PROTOCOL_ERROR", "StreamReset") -> FriendlySyncFailure.StreamInterrupted
+    raw.contains("Portal login rejected", ignoreCase = true) -> FriendlySyncFailure.AuthenticationRejected
     raw.containsAny("MAC may not be authorized", "MAC not authorized", "Portal rejected", "no valid MAC") -> FriendlySyncFailure.MacNotAuthorised
+    // A portal's bare-text refusal of a MAC asking too fast — busy, not a bad login.
+    raw.contains("Authorization failed", ignoreCase = true) -> FriendlySyncFailure.ServerError
     raw.containsAny("Portal handshake", "portal API endpoint") -> FriendlySyncFailure.PortalHandshakeFailed
     raw.containsAny("token may have expired", "returned no cmd") -> FriendlySyncFailure.PortalSessionExpired
     // 513 is not a standard status; Xtream panels on that software answer it, with an empty body, to
@@ -81,6 +84,7 @@ fun isTransientSyncError(raw: String?, online: Boolean): Boolean = when {
         "Software caused connection abort", "unexpected end of stream",
         "stream was reset", "PROTOCOL_ERROR", "StreamReset",
         "HTTP 429", "HTTP 500", "HTTP 502", "HTTP 503", "HTTP 504",
+        "Authorization failed",
     )
 }
 

@@ -27,6 +27,8 @@
 - **🔒 Lock a category with the Customize PIN** (community PR #37 by @Kevsosmooth)
 - **🔐 Ask for the PIN to open Settings** (community PR #47 by @Kevsosmooth)
 - **🪟 Picture-in-picture when leaving the app** (community PR #39 by @Kevsosmooth)
+- **🔑 Stalker portals: an optional username and password**
+- **🔑 Stalker portals: an optional username and password**
 
 ### 🐛 Fixes
 
@@ -52,6 +54,12 @@
 - **Renamed channels, films and series keep their name on Home and in Continue**
 - **Stalker portals behind a redirect to another host stay signed in**
 - **Stalker posters sent as server paths load**
+- **Stalker sync slows down on portals that refuse parallel requests, remembers it per playlist and loses no page; fast portals keep full speed**
+- **Stalker series listed among the films go to Series when the portal has no series section**
+- **Playlist rows show the full catalogue once the background download finishes**
+- **Stalker sync slows down on portals that refuse parallel requests, remembers it per playlist, and loses no page; fast portals keep full speed**
+- **Stalker series listed among the films go to Series when the portal has no series section**
+- **Playlist rows show the full catalogue once the background download finishes**
 
 ## core-1.0.69 — 2026-10-21
 

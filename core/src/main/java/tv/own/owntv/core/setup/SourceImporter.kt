@@ -190,8 +190,13 @@ class SourceImporter(
         series: SyncScopeChoice = SyncScopeChoice.Later,
         makeDefault: Boolean = false,
         httpReferer: String = "",
+        /** The optional portal login on top of the MAC; blank for the usual MAC-only portal. */
+        login: String = "",
+        password: String = "",
     ) {
         val canonicalMac = StalkerClient.canonicalizeMac(mac)
+        val portalLogin = login.trim().takeIf { it.isNotBlank() }
+        val portalPassword = password.takeIf { portalLogin != null }
         if (canonicalMac == null) {
             _state.value = ImportState.Failed(SetupFailure.InvalidMac)
             return
@@ -214,6 +219,8 @@ class SourceImporter(
                         deviceId2 = deviceId2.trim().takeIf { it.isNotBlank() },
                         signature = signature.trim().takeIf { it.isNotBlank() },
                     ),
+                    login = portalLogin,
+                    password = portalPassword,
                 ),
             )
             sourceRepository.addStalkerSource(
@@ -225,6 +232,7 @@ class SourceImporter(
                 userAgent.trim().takeIf { it.isNotBlank() },
                 syncLive = enabled.live, syncMovies = enabled.movies, syncSeries = enabled.series,
                 httpReferer = httpReferer.trim().takeIf { it.isNotBlank() },
+                login = portalLogin, password = portalPassword,
             )
         }
     }
@@ -477,16 +485,19 @@ class SourceImporter(
      * ordinary background sync — instead of an app that opens empty until someone thinks to re-sync.
      * Playlists that already hold content (a restore onto a set-up device) are left alone.
      *
-     * An Xtream playlist restored without its password (a backup made with no backup password) is not
-     * fetched: the panel would refuse it. Returns those playlists' names so the result can say which
-     * ones wait for a password; entering it in the playlist's edit form fetches it.
+     * An Xtream playlist, or a Stalker playlist with a portal login, restored without its password (a
+     * backup made with no backup password) is not fetched: the panel would refuse it. Returns those
+     * playlists' names so the result can say which ones wait for a password; entering it in the
+     * playlist's edit form fetches it.
      */
     private suspend fun syncRestoredSources(): List<String> {
         val needPassword = mutableListOf<String>()
         sourceDao.getAllOnce().forEach { source ->
             val counts = importFinalizer.contentCounts(source.id)
             if (counts.channels + counts.movies + counts.series > 0) return@forEach
-            if (source.type == SourceType.XTREAM && source.password.isNullOrBlank()) {
+            val needsLogin = source.type == SourceType.XTREAM ||
+                (source.type == SourceType.STALKER && !source.username.isNullOrBlank())
+            if (needsLogin && source.password.isNullOrBlank()) {
                 needPassword += source.name
                 return@forEach
             }

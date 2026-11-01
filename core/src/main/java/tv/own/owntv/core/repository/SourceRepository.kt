@@ -64,10 +64,12 @@ class SourceRepository(
         signature: String? = null, userAgent: String? = null,
         syncLive: Boolean = true, syncMovies: Boolean = true, syncSeries: Boolean = true,
         httpReferer: String? = null,
+        login: String? = null, password: String? = null,
     ): SourceEntity = addAndLink(
         profileId,
         SourceEntity(
             name = name, type = SourceType.STALKER, url = portalUrl, mac = mac,
+            username = login, password = password,
             stalkerSerialNumber = serialNumber, stalkerDeviceId = deviceId,
             stalkerDeviceId2 = deviceId2, stalkerSignature = signature, userAgent = userAgent,
             syncLive = syncLive, syncMovies = syncMovies, syncSeries = syncSeries,

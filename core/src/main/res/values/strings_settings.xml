@@ -73,9 +73,9 @@
     <string name="settings_port">Port</string>
     <!-- Translators: Placeholder example in the proxy port field. -->
     <string name="settings_proxy_port_hint">8080</string>
-    <!-- Translators: Text-field label for an optional proxy username. -->
+    <!-- Translators: Text-field label for an optional username — a proxy's, or a Stalker portal's login on top of the MAC address. -->
     <string name="settings_username_optional">Username (optional)</string>
-    <!-- Translators: Text-field label for an optional proxy password. -->
+    <!-- Translators: Text-field label for an optional password — a proxy's, or a Stalker portal's login on top of the MAC address. -->
     <string name="settings_password_optional">Password (optional)</string>
     <!-- Translators: Button to test the proxy connection. -->
     <string name="settings_test_proxy">Test proxy</string>

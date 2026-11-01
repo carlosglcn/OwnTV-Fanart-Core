@@ -40,8 +40,18 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
     /** The MAC is not authorized / the token expired / the portal answered `{"js":false}`. */
     class StalkerAuthException(message: String) : IOException(message)
 
-    /** Non-2xx portal response, carrying the status so callers can retry transient 429/5xx. */
-    class StalkerHttpException(val code: Int, message: String) : IOException(message)
+    /**
+     * Non-2xx portal response, carrying the status so callers can retry transient 429/5xx, and the
+     * portal's own `Retry-After` (seconds → ms) when it sent one.
+     */
+    class StalkerHttpException(val code: Int, message: String, val retryAfterMs: Long? = null) : IOException(message)
+
+    /**
+     * The portal answered a request with the bare text `Authorization failed.` instead of JSON. On a
+     * session that had been working, this is how Ministra tells a MAC it is asking too fast — so it is
+     * a throttle (back off, then try again on a fresh handshake), not a login refused for good.
+     */
+    class StalkerRefusedException(message: String) : IOException(message)
 
     /** A successful probe: which API endpoint answered, and the token it handed out. */
     data class Handshake(val apiBase: String, val token: String)
@@ -86,6 +96,9 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         // Epoch ms for the "Date added" sort, from Ministra's `video.added` column. Null on trimmed
         // reseller panels that omit it — the sort then falls through to playlist order.
         val addedAt: Long?,
+        // `is_series` on a `type=vod` row: a show filed in the film catalogue. Portals with no series
+        // section of their own list every show this way.
+        val isSeries: Boolean = false,
     )
 
     /** One page of `get_ordered_list`: the items plus the totals needed to page through the rest. */
@@ -178,6 +191,23 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         identity: StalkerDeviceIdentity = StalkerDeviceIdentity(),
     ): Map<String, String> = resolveProfile(identity, userAgent) { stbType ->
         request(profileUrl(apiBase, identity, stbType), mac, token, userAgent) { readScalarFields(it) }
+    }
+
+    /**
+     * `?type=stb&action=do_auth` — the login some portals ask for on top of the MAC, sent between the
+     * handshake and `get_profile`, and only when the playlist has a login. `{"js":true}` (or any
+     * object) is a yes; `{"js":false}` is a refused login, reported as such rather than as a MAC
+     * problem so the user is pointed at the right field.
+     */
+    open suspend fun doAuth(
+        apiBase: String, mac: String, token: String, userAgent: String?,
+        login: String, password: String, identity: StalkerDeviceIdentity = StalkerDeviceIdentity(),
+    ) {
+        val url = doAuthUrl(apiBase, login, password, identity)
+        val accepted = request(url, mac, token, userAgent, scalarJs = true) { reader ->
+            if (reader.peek() == JsonToken.BOOLEAN) reader.nextBoolean() else { reader.skipValue(); true }
+        }
+        if (!accepted) throw StalkerAuthException("Portal login rejected — check the username and password")
     }
 
     /**
@@ -351,7 +381,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
      * Entries with no readable start/stop or no title are skipped rather than failing the crawl.
      */
     open suspend fun parseEpgInfoFile(file: File, onEntry: suspend (channelId: String, entry: ShortEpgEntry) -> Unit) {
-        file.inputStream().buffered().use { input -> parseEnvelope(input) { reader -> readEpgInfo(reader, onEntry) } }
+        file.inputStream().buffered().use { input -> parseEnvelope(input, scalarJs = false) { reader -> readEpgInfo(reader, onEntry) } }
     }
 
     private suspend fun readEpgInfo(reader: JsonReader, onEntry: suspend (String, ShortEpgEntry) -> Unit) {
@@ -421,13 +451,15 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
     /**
      * `?type=series&action=get_ordered_list&movie_id=<show remoteId>&p=<page>` → one page of the
      * show's SEASONS, each carrying its `series` episode-number array. Category is included
-     * because some portals require it alongside movie_id.
+     * because some portals require it alongside movie_id. [type] is `vod` for a show the portal
+     * files in its film catalogue (see [VodItem.isSeries]).
      */
     suspend fun getSeriesSeasons(
         apiBase: String, mac: String, token: String, userAgent: String?, categoryId: String?, movieId: String, page: Int,
+        type: String = "series",
     ): Page<SeasonItem> {
         val cat = categoryId?.takeIf { it.isNotBlank() }?.let { "&category=${enc(it)}" } ?: ""
-        val url = "$apiBase?type=series&action=get_ordered_list$cat&movie_id=${enc(movieId)}&p=$page&JsHttpRequest=1-xml"
+        val url = "$apiBase?type=${enc(type)}&action=get_ordered_list$cat&movie_id=${enc(movieId)}&p=$page&JsHttpRequest=1-xml"
         return request(url, mac, token, userAgent) { readSeasonPage(it) }
     }
 
@@ -545,6 +577,7 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
             rating = (f["rating_imdb"] ?: f["rating"])?.trim()?.toDoubleOrNull()?.takeIf { it > 0 },
             categoryId = (f["category_id"] ?: f["category"])?.takeIf { it.isNotBlank() && it != "*" },
             addedAt = parseAddedAt(f["added"]),
+            isSeries = isFlagSet(f["is_series"]),
         )
     }
 
@@ -757,6 +790,8 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         url: String, mac: String, token: String?, userAgent: String?,
         /** Told the URL the answer came from once redirects are followed, without its query. */
         onLanded: (String) -> Unit = {},
+        /** Hand a `true`/`false` payload to [parseJs] instead of reading `false` as a dead token. */
+        scalarJs: Boolean = false,
         parseJs: suspend (JsonReader) -> T,
     ): T = withContext(Dispatchers.IO) {
         val httpRequest = portalRequest(url, mac, token, userAgent)
@@ -772,11 +807,11 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         Log.d(TAG, "GET start url=$safeUrl action=$action")
         try {
             call.execute().use { response ->
-                if (!response.isSuccessful) throw httpFailure(response.code, safeUrl)
+                if (!response.isSuccessful) throw httpFailure(response.code, safeUrl, response.header("Retry-After"))
                 onLanded(response.request.url.newBuilder().query(null).build().toString())
                 val body = response.body
                 body.byteStream().use { input ->
-                    parseEnvelope(input, parseJs).also {
+                    parseEnvelope(input, scalarJs, parseJs).also {
                         Log.d(TAG, "GET done url=$safeUrl action=$action totalMs=${SystemClock.elapsedRealtime() - startedAt}")
                     }
                 }
@@ -799,13 +834,14 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
      * whether the response parses, not this peek. The quote goes to the log, not into the exception:
      * an exception's message reaches the sync error and warning text the user reads.
      */
-    private suspend fun <T> parseEnvelope(input: InputStream, parseJs: suspend (JsonReader) -> T): T {
+    private suspend fun <T> parseEnvelope(input: InputStream, scalarJs: Boolean, parseJs: suspend (JsonReader) -> T): T {
         val peeking = HeadPeekingInputStream(input, RESPONSE_PEEK_BYTES)
         JsonReader(peeking.reader(Charsets.UTF_8)).use { reader ->
             reader.isLenient = true // some portals prefix/pad the JSON
             if (reader.peek() != JsonToken.BEGIN_OBJECT) {
                 val got = reader.peek()
                 Log.w(TAG, "portal response is not JSON (got $got): ${redactForLog(peeking.head())}")
+                if (isRefusal(peeking.head())) throw StalkerRefusedException("Portal refused the request (Authorization failed)")
                 throw IOException("Portal response is not JSON (got $got)")
             }
             reader.beginObject()
@@ -815,6 +851,11 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
                 if (reader.nextName() == "js") {
                     when (reader.peek()) {
                         JsonToken.BEGIN_OBJECT, JsonToken.BEGIN_ARRAY -> { result = parseJs(reader); found = true }
+                        JsonToken.BOOLEAN -> if (scalarJs) {
+                            result = parseJs(reader); found = true
+                        } else {
+                            reader.skipValue(); throw StalkerAuthException("Portal returned an empty payload — token expired or MAC not authorized")
+                        }
                         // {"js":false} / {"js":null} / {"js":""} — token expired / MAC not authorized.
                         else -> { reader.skipValue(); throw StalkerAuthException("Portal returned an empty payload — token expired or MAC not authorized") }
                     }
@@ -931,6 +972,17 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
          * original request shape (see [getProfile]'s kdoc), so it is omitted whenever [identity] is
          * empty, same as the identity fields themselves.
          */
+        /** [doAuth]'s request: the login, plus the device ids when the playlist has them. */
+        internal fun doAuthUrl(apiBase: String, login: String, password: String, identity: StalkerDeviceIdentity): String = buildString {
+            append(apiBase)
+            append("?type=stb&action=do_auth")
+            append("&login=${URLEncoder.encode(login, "UTF-8")}")
+            append("&password=${URLEncoder.encode(password, "UTF-8")}")
+            append("&device_id=${URLEncoder.encode(identity.deviceId.orEmpty(), "UTF-8")}")
+            append("&device_id2=${URLEncoder.encode(identity.deviceId2.orEmpty(), "UTF-8")}")
+            append("&JsHttpRequest=1-xml")
+        }
+
         internal fun profileUrl(apiBase: String, identity: StalkerDeviceIdentity, stbType: String? = null): String = buildString {
             append(apiBase)
             append("?type=stb&action=get_profile&hd=1&auth_second_step=")
@@ -1020,9 +1072,20 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
             return if (value < HOURS_PER_DAY) value else value / HOURS_PER_DAY
         }
 
-        internal fun httpFailure(code: Int, safeUrl: String): IOException =
+        internal fun httpFailure(code: Int, safeUrl: String, retryAfter: String? = null): IOException =
             if (code == 401) StalkerAuthException("Portal rejected the request (HTTP $code)")
-            else StalkerHttpException(code, "HTTP $code for $safeUrl")
+            else StalkerHttpException(code, "HTTP $code for $safeUrl", retryAfterMs(retryAfter))
+
+        /** `Retry-After` in seconds → ms. The HTTP-date form is not used by portals and is ignored. */
+        internal fun retryAfterMs(header: String?): Long? =
+            header?.trim()?.toLongOrNull()?.takeIf { it >= 0 }?.let { it * 1_000L }
+
+        /** A portal flag: `1`, `"1"` or `true`. */
+        internal fun isFlagSet(raw: String?): Boolean = raw?.trim()?.let { it == "1" || it.equals("true", ignoreCase = true) } == true
+
+        /** Ministra's bare-text refusal, `Authorization failed.`, as opposed to any other non-JSON body. */
+        internal fun isRefusal(body: String): Boolean =
+            body.trim().startsWith("Authorization failed", ignoreCase = true)
 
         /** Play-command prefixes minted by `create_link` — everything after them is the playable URL. */
         private val CMD_PREFIXES = listOf("ffmpeg ", "ffrt2 ", "ffrt3 ", "ffrt ", "auto ")
