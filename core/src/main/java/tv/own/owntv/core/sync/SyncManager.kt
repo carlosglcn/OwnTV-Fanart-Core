@@ -245,8 +245,8 @@ class SyncManager(
     }
 
     companion object {
-        /** glcn: below this heap, playlists sync one after another. */
-        private const val ROOMY_HEAP_BYTES = 384L * 1024 * 1024
+        /** glcn: below this heap, playlists sync one after another — 1 GB: even the large heap a TV box gives (512 MB) filled with two big lists side by side. */
+        private const val ROOMY_HEAP_BYTES = 1024L * 1024 * 1024
         /** glcn: the turn the playlists take on a small heap. */
         private val syncTurn = kotlinx.coroutines.sync.Mutex()
 
