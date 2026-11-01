@@ -2324,7 +2324,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TitleNormalizer.kt	imax|extended|uncut|remastered|vip|
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TitleNormalizer.kt	multi[- ]?sub|multisub|dual[- ]?audio|remux|web[- ]?dl|webrip|bluray|bdrip|dvdrip|hdrip|
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TitleNormalizer.kt	vostfr|vost|vf|subbed|dubbed|dublado|legendado|castellano|truefrench|hdlight|
-3	empty	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	\0
+4	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	\0
 2	uri	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	$base,en,null
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	&
 8	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	&api_key=
@@ -2399,6 +2399,7 @@
 3	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	id
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	images
 3	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	imdb_id
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	iso_3166_1
 3	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	iso_639_1
 3	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	key
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	legendary
@@ -2417,7 +2418,7 @@
 1	log	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	network id=$networkId
 2	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	networks
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	new line
-1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	null
+2	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	null
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	official
 2	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	original_language
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	original_name
@@ -2454,7 +2455,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	universal
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	videos
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	videos id=$tmdbId
-1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_average
+2	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_average
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_count
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	walt disney
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	warner bros

@@ -190,7 +190,7 @@ class TmdbProvider(
             ep.apiKey?.takeIf { it.isNotBlank() }?.let { append("&api_key=").append(enc(it)) }
         }
         val json = fetch(ep, url, "movie details id=$tmdbId") ?: return null
-        return runCatching { parseMovieDetails(json, ep.language.substringBefore('-'), ep.trailerLang()) }.getOrNull()
+        return runCatching { parseMovieDetails(json, ep.language.substringBefore('-'), ep.trailerLang(), ep.region()) }.getOrNull()
     }
 
     override suspend fun tvDetails(tmdbId: Int): MovieDetails? {
@@ -205,7 +205,7 @@ class TmdbProvider(
             ep.apiKey?.takeIf { it.isNotBlank() }?.let { append("&api_key=").append(enc(it)) }
         }
         val json = fetch(ep, url, "tv details id=$tmdbId") ?: return null
-        return runCatching { parseTvDetails(json, ep.language.substringBefore('-'), ep.trailerLang()) }.getOrNull()
+        return runCatching { parseTvDetails(json, ep.language.substringBefore('-'), ep.trailerLang(), ep.region()) }.getOrNull()
     }
 
     override suspend fun networkLogo(networkId: Int): String? {
@@ -355,7 +355,7 @@ class TmdbProvider(
             rating = o.optDouble("vote_average", 0.0).takeIf { it > 0.0 },
         )
 
-    private fun parseTvDetails(body: String, preferredLang: String, trailerLang: String = preferredLang): MovieDetails? {
+    private fun parseTvDetails(body: String, preferredLang: String, trailerLang: String = preferredLang, region: String? = null): MovieDetails? {
         val o = JSONObject(body)
         val id = o.optInt("id", 0)
         if (id == 0) return null
@@ -376,7 +376,7 @@ class TmdbProvider(
             genres = genres,
             cast = cast,
             trailerKey = parseTrailerKey(o, trailerLang),
-            logoPath = parseLogoPath(o, preferredLang),
+            logoPath = parseLogoPath(o, preferredLang, region),
             originalLanguage = o.optString("original_language").takeIf { it.isNotBlank() && it != "null" },
             networks = o.optJSONArray("networks")?.let { arr ->
                 (0 until arr.length()).mapNotNull { k ->
@@ -390,7 +390,7 @@ class TmdbProvider(
         )
     }
 
-    private fun parseMovieDetails(body: String, preferredLang: String, trailerLang: String = preferredLang): MovieDetails? {
+    private fun parseMovieDetails(body: String, preferredLang: String, trailerLang: String = preferredLang, region: String? = null): MovieDetails? {
         val o = JSONObject(body)
         val id = o.optInt("id", 0)
         if (id == 0) return null
@@ -412,7 +412,7 @@ class TmdbProvider(
             genres = genres,
             cast = cast,
             trailerKey = parseTrailerKey(o, trailerLang),
-            logoPath = parseLogoPath(o, preferredLang),
+            logoPath = parseLogoPath(o, preferredLang, region),
             originalLanguage = o.optString("original_language").takeIf { it.isNotBlank() && it != "null" },
         )
     }
@@ -465,29 +465,45 @@ class TmdbProvider(
         return out
     }
 
-    private data class LogoCandidate(val path: String, val languageRank: Int, val width: Int)
+    private data class LogoCandidate(val path: String, val languageRank: Int, val votes: Double, val width: Int)
 
     /**
      * Best title logo. [preferredLang] (base ISO 639-1 of the user's chosen metadata language, blank when
      * unset) ranks first so a localized logo wins; English and textless art stay as the fallbacks.
+     * glcn: within the language, the user's own country first ([region], "ES" for es-ES): TMDB files Spain's
+     * and Mexico's Spanish logos under the same "es", and the widest — often Mexico's — used to win. Then
+     * the best voted, then the widest.
      */
-    private fun parseLogoPath(details: JSONObject, preferredLang: String): String? {
+    private fun parseLogoPath(details: JSONObject, preferredLang: String, region: String? = null): String? {
         val arr = details.optJSONObject("images")?.optJSONArray("logos") ?: return null
         val candidates = ArrayList<LogoCandidate>(arr.length())
+        val own = preferredLang.takeIf { it.isNotBlank() && it != "en" }
         for (i in 0 until arr.length()) {
             val logo = arr.optJSONObject(i) ?: continue
             val path = logo.optString("file_path").takeIf { it.isNotBlank() && it != "null" } ?: continue
             if (path.endsWith(".svg", ignoreCase = true)) continue
+            val country = logo.optString("iso_3166_1").takeIf { it.isNotBlank() && it != "null" }
             val languageRank = when (logo.optString("iso_639_1").takeIf { it.isNotBlank() && it != "null" }) {
-                preferredLang.takeIf { it.isNotBlank() && it != "en" } -> 0
-                "en" -> 1
-                null -> 2
-                else -> 3
+                own -> when {
+                    region == null -> 0
+                    country.equals(region, ignoreCase = true) -> 0
+                    country == null -> 1
+                    else -> 2
+                }
+                "en" -> 3
+                null -> 4
+                else -> 5
             }
-            candidates += LogoCandidate(path = path, languageRank = languageRank, width = logo.optInt("width", 0))
+            candidates += LogoCandidate(path, languageRank, logo.optDouble("vote_average", 0.0).takeIf { !it.isNaN() } ?: 0.0, logo.optInt("width", 0))
         }
-        return candidates.minWithOrNull(compareBy<LogoCandidate> { it.languageRank }.thenByDescending { it.width })?.path
+        return candidates.minWithOrNull(
+            compareBy<LogoCandidate> { it.languageRank }.thenByDescending { it.votes }.thenByDescending { it.width },
+        )?.path
     }
+
+    /** "ES" for es-ES; null when the chosen language names no country. */
+    private fun Endpoint.region(): String? =
+        language.substringAfter('-', "").takeIf { it.length == 2 }?.uppercase(java.util.Locale.ROOT)
 
     private fun parseResults(type: MetadataType, body: String, includeAdult: Boolean): List<MetadataSearchResult> {
         val results = runCatching { JSONObject(body).optJSONArray("results") }.getOrNull() ?: return emptyList()
