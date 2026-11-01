@@ -348,4 +348,6 @@
     <string name="glcn_cine_rating">Valoración</string>
     <string name="glcn_cine_cast">Reparto</string>
     <string name="glcn_cine_paused">En pausa</string>
+    <string name="glcn_cine_chapters">Capítulos</string>
+    <string name="glcn_cine_chapter_n">Capítulo %1$d</string>
 </resources>

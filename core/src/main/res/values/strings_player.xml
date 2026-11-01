@@ -617,4 +617,6 @@
     <string name="glcn_cine_rating">Rating</string>
     <string name="glcn_cine_cast">Cast</string>
     <string name="glcn_cine_paused">Paused</string>
+    <string name="glcn_cine_chapters">Chapters</string>
+    <string name="glcn_cine_chapter_n">Chapter %1$d</string>
 </resources>

@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.StateFlow
  * full-screen). VOD-only controls (seek/speed/prev-next/position) have no-op defaults so a live engine need
  * only implement the live-relevant members.
  */
+/** glcn: one chapter of a film — its name ("Opening", "Chapter 3") when the file gives one, and where it starts. */
+data class PlayerChapter(val title: String?, val startMs: Long)
+
 interface PlaybackEngine {
     val isPlaying: StateFlow<Boolean>
     val buffering: StateFlow<Boolean>
@@ -118,6 +121,8 @@ interface PlaybackEngine {
      *  rather than on the caller's thread; the ExoPlayer implementations stay on the main thread, which
      *  is what Media3 requires, and simply never suspend. */
     suspend fun streamInfo(): List<StreamInfoRow> = emptyList()
+    /** glcn: the file's chapters (mpv reads them from the container); empty when it has none or the engine cannot tell. */
+    suspend fun chapters(): List<PlayerChapter> = emptyList()
 
     // VOD-only — sensible no-op / empty defaults for a live engine.
     val position: StateFlow<Long> get() = ZERO_LONG
@@ -225,6 +230,7 @@ class MpvPlaybackEngine(private val p: OwnTVPlayer) : PlaybackEngine {
     override val videoQualityPick get() = p.videoQualityPick
     override fun selectVideoQuality(height: Int?) = p.selectVideoQuality(height)
     override suspend fun streamInfo() = p.streamInfo()
+    override suspend fun chapters() = p.chapters()
     override fun setBitrateTrackingEnabled(enabled: Boolean) = p.setBitrateTrackingEnabled(enabled)
     override fun refreshStreamChips() = p.refreshStreamChips()
     override fun setSpeed(speed: Double) = p.setSpeed(speed)

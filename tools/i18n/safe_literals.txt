@@ -7205,6 +7205,9 @@
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	cache=${getPropertyString("demuxer-cache-duration")}s
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	cache=${m.getPropertyString("demuxer-cache-duration")}s
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	catch-up path URL rejected — trying timeshift.php fallback
+1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	chapter-list/$i/time
+1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	chapter-list/$i/title
+1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	chapter-list/count
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	clip
 7	protocol	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	container-fps
 1	regex	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	could not initialize video chain

@@ -4488,6 +4488,21 @@ class OwnTVPlayer(
     /** Technical readout for the stream-info overlay, read live from whichever engine owns playback —
      *  mpv (libmpv get_property is thread-safe) or ExoPlayer (image-sub handoff / engine fallback /
      *  ExoPlayer-preferred; the overlay polls from composition, i.e. the main thread Exo requires). */
+    /**
+     * glcn: the chapters mpv found in the container (MKV, MP4…). ExoPlayer does not read them, so on ExoPlayer this
+     * is empty and the chapter controls stay hidden.
+     */
+    suspend fun chapters(): List<PlayerChapter> {
+        if (exoActive) return emptyList()
+        return readOnMpv { m ->
+            val n = m.getPropertyString("chapter-list/count")?.toIntOrNull() ?: 0
+            (0 until n.coerceAtMost(MAX_CHAPTERS)).mapNotNull { i ->
+                val t = m.getPropertyString("chapter-list/$i/time")?.toDoubleOrNull() ?: return@mapNotNull null
+                PlayerChapter(m.getPropertyString("chapter-list/$i/title")?.takeIf { it.isNotBlank() }, (t * 1000).toLong())
+            }
+        }.orEmpty()
+    }
+
     suspend fun streamInfo(): List<StreamInfoRow> {
         if (exoActive) {
             val mode = when {
@@ -5831,3 +5846,6 @@ internal data class ItemState(
      *  track stays empty under hwdec. While a CC track is selected we decode in software. */
     @field:Volatile var ccSoftwareOverride: Boolean = false,
 )
+
+/** glcn: chapters read at most — a broken file can claim thousands. */
+private const val MAX_CHAPTERS = 200
