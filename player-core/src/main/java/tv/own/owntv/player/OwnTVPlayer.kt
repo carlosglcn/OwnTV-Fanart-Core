@@ -2823,6 +2823,8 @@ class OwnTVPlayer(
         trackKey: String? = null,
         /** glcn: see [MediaMeta.enginePick]. */
         enginePick: tv.own.owntv.core.player.EngineHint.Pick? = null,
+        /** glcn: see [MediaMeta.hdr]. */
+        hdr: Boolean = false,
     ) {
         this.vodEngineOverride = vodEngineOverride
         // The provider belongs to the load. A VOD load with none clears whatever the previous
@@ -2846,7 +2848,7 @@ class OwnTVPlayer(
         if (!muted) setVolume(defaultVolume) // …and at the default volume; loadUrl re-applies any per-item override
         loadUrl(
             url,
-            MediaMeta(title, subtitle, year, logoUrl, contentKey, seasonNumber, episodeNumber, rewindStartMs, trackKey, enginePick),
+            MediaMeta(title, subtitle, year, logoUrl, contentKey, seasonNumber, episodeNumber, rewindStartMs, trackKey, enginePick, hdr),
             isLive,
             startPositionMs,
             muted,
