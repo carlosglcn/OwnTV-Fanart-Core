@@ -1,5 +1,6 @@
 package tv.own.owntv.core.sync
 
+import kotlinx.coroutines.sync.withLock
 import android.os.SystemClock
 import android.util.Log
 import kotlinx.coroutines.CancellationException
@@ -132,11 +133,16 @@ class SyncManager(
                     // into a half-indexed table while the first restored it). That is now closed inside
                     // BulkInsertHelper itself — a joining sync registers as a writer and index restore
                     // waits for the last writer — so sources fetch/parse/insert fully in parallel here.
-                    when (source.type) {
-                        SourceType.XTREAM -> xtreamSyncer.sync(source, progress, stats, effective)
-                        SourceType.M3U -> m3uSyncer.sync(source, progress, stats)
-                        SourceType.LOCAL_BACKUP -> Unit
-                        SourceType.STALKER -> stalkerSyncer.sync(source, progress, stats, effective)
+                    // glcn: …but not at once where memory is tight. Two big playlists (a large Xtream list and Emby)
+                    // fetching, parsing and diffing side by side filled a 192 MB heap and the app froze. On such
+                    // a heap the sources take turns; with room to spare they still run side by side.
+                    withSyncTurn {
+                        when (source.type) {
+                            SourceType.XTREAM -> xtreamSyncer.sync(source, progress, stats, effective)
+                            SourceType.M3U -> m3uSyncer.sync(source, progress, stats)
+                            SourceType.LOCAL_BACKUP -> Unit
+                            SourceType.STALKER -> stalkerSyncer.sync(source, progress, stats, effective)
+                        }
                     }
                     // Stamp lastSyncAt only when this pass covered every enabled+constrained section.
                     // A staged partial pass leaves it null; the background remainder worker stamps via
@@ -177,6 +183,10 @@ class SyncManager(
             logStats(runStats)
             result to runStats
         }
+
+    /** glcn: one catalogue sync at a time when the app's heap is small (most TV boxes); in parallel otherwise. */
+    private suspend fun <T> withSyncTurn(block: suspend () -> T): T =
+        if (Runtime.getRuntime().maxMemory() < ROOMY_HEAP_BYTES) syncTurn.withLock { block() } else block()
 
     /**
      * Finish a Stalker catalogue whose setup deliberately stopped after the first page of every
@@ -235,6 +245,11 @@ class SyncManager(
     }
 
     companion object {
+        /** glcn: below this heap, playlists sync one after another. */
+        private const val ROOMY_HEAP_BYTES = 384L * 1024 * 1024
+        /** glcn: the turn the playlists take on a small heap. */
+        private val syncTurn = kotlinx.coroutines.sync.Mutex()
+
         private const val TAG = SyncSupport.TAG
     }
 }
