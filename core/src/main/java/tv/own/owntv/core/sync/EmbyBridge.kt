@@ -248,9 +248,22 @@ internal object EmbyBridge {
         sb.toString()
     }
 
+    /**
+     * glcn: a server whose metadata is in English names its genres in English ("Science Fiction", "Mini-Series"): in a
+     * Spanish app they are given their Spanish names, so "Fantasy" and "Fantasía" also become one category.
+     */
+    private fun localGenre(name: String): String {
+        if (java.util.Locale.getDefault().language != "es") return name
+        return GENRES_ES[name.trim().lowercase(java.util.Locale.ROOT)] ?: name
+    }
+
+    private val GENRES_ES: Map<String, String> = GENRE_TABLE_ES.lines().filter { '=' in it }.associate { l ->
+        l.substringBefore('=').trim() to l.substringAfter('=').trim()
+    }
+
     /** glcn: the category a film or a show goes in, as Settings asks ([EmbyGroups]): its first genre, its platform, or one list. */
     private fun groupOf(item: JSONObject, whole: String): String = when (EmbyGroups.mode) {
-        EmbyGroups.Mode.GENRE -> item.optJSONArray("Genres")?.optString(0)?.takeIf { it.isNotBlank() } ?: whole
+        EmbyGroups.Mode.GENRE -> item.optJSONArray("Genres")?.optString(0)?.takeIf { it.isNotBlank() }?.let(::localGenre) ?: whole
         EmbyGroups.Mode.PLATFORM -> item.optJSONArray("Studios")?.optJSONObject(0)?.optString("Name")?.takeIf { it.isNotBlank() } ?: whole
         EmbyGroups.Mode.LIBRARY -> whole
     }
@@ -376,3 +389,47 @@ object EmbyGroups {
     enum class Mode { GENRE, PLATFORM, LIBRARY }
     @Volatile var mode: Mode = Mode.GENRE
 }
+
+/** glcn: the English genre names Emby and Jellyfin take from TMDB, lower case = their Spanish name. */
+private const val GENRE_TABLE_ES = """
+action=Acción
+adventure=Aventura
+action & adventure=Acción y aventura
+animation=Animación
+anime=Anime
+biography=Biografía
+children=Infantil
+kids=Infantil
+comedy=Comedia
+crime=Crimen
+documentary=Documental
+drama=Drama
+family=Familia
+fantasy=Fantasía
+food=Cocina
+game show=Concursos
+history=Historia
+horror=Terror
+mini-series=Miniseries
+miniseries=Miniseries
+music=Música
+musical=Musical
+mystery=Misterio
+news=Noticias
+reality=Reality
+romance=Romance
+science fiction=Ciencia ficción
+sci-fi=Ciencia ficción
+sci-fi & fantasy=Ciencia ficción y fantasía
+soap=Telenovela
+sport=Deporte
+sports=Deporte
+suspense=Suspense
+talk=Tertulia
+talk show=Tertulia
+thriller=Thriller
+tv movie=Telefilm
+war=Bélica
+war & politics=Bélica y política
+western=Western
+"""
