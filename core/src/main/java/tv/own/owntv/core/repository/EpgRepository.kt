@@ -297,7 +297,7 @@ class EpgRepository(
      */
     suspend fun refresh(source: SourceEntity, onProgress: (channels: Int, programmes: Int) -> Unit = { _, _ -> }): Int {
         val url = guideUrls(source).firstOrNull() ?: return 0
-        return refreshUrl(source.id, url, source.userAgent, onProgress)
+        return refreshUrl(source.id, url, source.userAgent, onProgress = onProgress)
     }
 
     /**
@@ -308,9 +308,9 @@ class EpgRepository(
         storeId: Long,
         url: String,
         userAgent: String?,
-        onProgress: (channels: Int, programmes: Int) -> Unit = { _, _ -> },
         /** glcn: an automatic refresh — skipped when the file has not changed since the last download. */
         onlyIfChanged: Boolean = false,
+        onProgress: (channels: Int, programmes: Int) -> Unit = { _, _ -> },
     ): Int = withContext(Dispatchers.IO) {
         // A portal guide is not a download, so it cannot go through the XMLTV path below — but it is
         // stored, pruned, matched and read exactly like one, which is why it is addressed as a URL
