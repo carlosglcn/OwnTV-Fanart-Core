@@ -727,6 +727,7 @@
     <string name="glcn_apps_move_right">Mover a la derecha</string>
     <string name="glcn_apps_info">Información de la app</string>
     <string name="glcn_autostart_title">Abrir al encender la tele</string>
+    <string name="glcn_autostart_desc">OwnTV Fanart se abre al encender o despertar la tele. Desactivado salvo que lo actives; Android pide una vez “Mostrar sobre otras apps”.</string>
     <plurals name="glcn_apps_added">
         <item quantity="one">%1$d añadida</item>
         <item quantity="other">%1$d añadidas</item>

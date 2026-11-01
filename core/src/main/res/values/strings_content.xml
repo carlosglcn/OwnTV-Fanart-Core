@@ -1042,6 +1042,7 @@
     <string name="glcn_apps_move_right">Move right</string>
     <string name="glcn_apps_info">App info</string>
     <string name="glcn_autostart_title">Open when the TV starts</string>
+    <string name="glcn_autostart_desc">OwnTV Fanart comes up when the TV starts or wakes. Off unless you turn it on; Android asks once for “Display over other apps”.</string>
     <plurals name="glcn_apps_added">
         <item quantity="one">%1$d added</item>
         <item quantity="other">%1$d added</item>
