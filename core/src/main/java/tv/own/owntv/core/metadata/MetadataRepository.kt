@@ -112,7 +112,7 @@ class MetadataRepository(
 
 
         // glcn: 1b. An Xtream panel often keeps the film's TMDB id itself (get_vod_info): then no guessing by name.
-        val hints = providerHints(movie.sourceId, movie.remoteId, tv = false)
+        val hints = providerHints(movie.sourceId, movie.remoteId, isTv = false)
         hints?.tmdbId?.let { id ->
             dao.upsertMatch(MetadataMatchEntity(matchKey, TYPE_MOVIE, tmdbId = id, confidence = 1.0, updatedAt = now))
             return fetchAndCache(id, lang, matchKey, confidence = 1.0, extraTrailer = hints.trailerKey)
@@ -193,7 +193,7 @@ class MetadataRepository(
 
 
         // glcn: the panel's own TMDB id for the show, when it kept one (get_series_info › info).
-        val hints = providerHints(series.sourceId, series.remoteId, tv = true)
+        val hints = providerHints(series.sourceId, series.remoteId, isTv = true)
         hints?.tmdbId?.let { id ->
             dao.upsertMatch(MetadataMatchEntity(matchKey, TYPE_TV, tmdbId = id, confidence = 1.0, updatedAt = now))
             return fetchAndCacheTv(id, lang, null, extraTrailer = hints.trailerKey)
@@ -221,12 +221,12 @@ class MetadataRepository(
      * glcn: an Xtream panel's own TMDB id and trailer for a film or show ([remoteId] = its stream or series id), asked
      * once per title — the match it leads to is kept like any other. Null for other sources or on any failure.
      */
-    private suspend fun providerHints(sourceId: Long, remoteId: String?, tv: Boolean): tv.own.owntv.core.parser.XtTitleHints? {
+    private suspend fun providerHints(sourceId: Long, remoteId: String?, isTv: Boolean): tv.own.owntv.core.parser.XtTitleHints? {
         val id = remoteId?.takeIf { it.isNotBlank() } ?: return null
         val source = runCatching { db?.sourceDao()?.getById(sourceId) }.getOrNull() ?: return null
         if (source.type != tv.own.owntv.core.model.SourceType.XTREAM) return null
         val xtream = runCatching { org.koin.core.context.GlobalContext.get().get<tv.own.owntv.core.parser.XtreamClient>() }.getOrNull() ?: return null
-        return hintGate.withPermit { if (tv) xtream.getSeriesHints(source, id) else xtream.getVodHints(source, id) }
+        return hintGate.withPermit { if (isTv) xtream.getSeriesHints(source, id) else xtream.getVodHints(source, id) }
     }
 
     /** Two panel lookups at a time at most: Home asks for several titles at once. */
