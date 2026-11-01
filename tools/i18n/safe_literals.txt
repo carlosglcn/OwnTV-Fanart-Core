@@ -297,7 +297,7 @@
 4	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DOVI
 6	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DV
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	Dolby Atmos
-1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	Dolby Vision
+2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	Dolby Vision
 3	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	FHD
 2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	HD
 7	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	HDR
