@@ -40,6 +40,12 @@ data class XtEpisode(
 data class XtSeriesInfo(val episodes: List<XtEpisode>)
 
 /**
+ * glcn: what an Xtream panel says itself about one film or show (`get_vod_info` / `get_series_info`'s `info`): its
+ * TMDB id, when the panel kept it, and its trailer — so the app need not guess the film from its name.
+ */
+data class XtTitleHints(val tmdbId: Int?, val trailerKey: String?)
+
+/**
  * [value] as one URL path segment, for the Xtream stream paths (`…/live/{user}/{pass}/{id}.ts`).
  * Only what a segment cannot hold raw is percent-encoded — `/ ? # %`, spaces, other ASCII outside
  * RFC 3986's `pchar`, and non-ASCII bytes — so a credential made of letters, digits and the usual
@@ -838,6 +844,54 @@ class XtreamClient(private val http: HttpClient) {
         return "${base(s)}/xmltv.php?username=$u&password=$p"
     }
 
+    /** glcn: the panel's own TMDB id and trailer for a film ([vodId] = its stream id); null on any failure. */
+    suspend fun getVodHints(s: SourceEntity, vodId: String): XtTitleHints? = runCatching {
+        http.get(api(s, "get_vod_info", "&vod_id=" + URLEncoder.encode(vodId, "UTF-8")), s.userAgent) { input ->
+            JsonReader(input.reader(Charsets.UTF_8)).use { readInfoHints(it) }
+        }
+    }.getOrNull()
+
+    /** glcn: the same for a show, from `get_series_info` — read up to its `info` object only, the episodes are left unread. */
+    suspend fun getSeriesHints(s: SourceEntity, seriesId: String): XtTitleHints? = runCatching {
+        http.get(api(s, "get_series_info", "&series_id=" + URLEncoder.encode(seriesId, "UTF-8")), s.userAgent) { input ->
+            JsonReader(input.reader(Charsets.UTF_8)).use { readInfoHints(it) }
+        }
+    }.getOrNull()
+
+    private fun readInfoHints(reader: JsonReader): XtTitleHints? {
+        reader.isLenient = true
+        if (reader.peek() != JsonToken.BEGIN_OBJECT) return null
+        reader.beginObject()
+        while (reader.hasNext()) {
+            if (reader.nextName() != "info" || reader.peek() != JsonToken.BEGIN_OBJECT) { reader.skipValue(); continue }
+            var tmdb: Int? = null
+            var trailer: String? = null
+            reader.beginObject()
+            while (reader.hasNext()) {
+                when (reader.nextName()) {
+                    "tmdb_id", "tmdb" -> tmdb = reader.nextScalarStringOrNull()?.trim()?.toIntOrNull()?.takeIf { it > 0 } ?: tmdb
+                    "youtube_trailer" -> trailer = youtubeKey(reader.nextScalarStringOrNull())
+                    else -> reader.skipValue()
+                }
+            }
+            return XtTitleHints(tmdb, trailer)
+        }
+        return null
+    }
+
+    /** A YouTube video id from what panels put in `youtube_trailer`: the bare id, a watch URL or a youtu.be link. */
+    private fun youtubeKey(raw: String?): String? {
+        val v = raw?.trim().orEmpty()
+        if (v.isEmpty()) return null
+        val id = when {
+            "v=" in v -> v.substringAfter("v=").substringBefore('&')
+            "youtu.be/" in v -> v.substringAfter("youtu.be/").substringBefore('?')
+            "/embed/" in v -> v.substringAfter("/embed/").substringBefore('?')
+            else -> v
+        }
+        return id.takeIf { YOUTUBE_ID.matches(it) }
+    }
+
     // --- helpers ---
     private fun base(s: SourceEntity) = s.url.trimEnd('/')
 
@@ -963,6 +1017,7 @@ class XtreamClient(private val http: HttpClient) {
         const val SERIES_INFO_MAX_ATTEMPTS = 2
         /** Enough of an HLS response to see `#EXTM3U` (or that an HTML error page came instead). */
         const val HLS_PROBE_BYTES = 512
+        val YOUTUBE_ID = Regex("[A-Za-z0-9_-]{11}")
     }
 
     private fun <T : Any> readLiveStreamAs(

@@ -5,6 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.sync.withPermit
 import org.json.JSONArray
 import tv.own.owntv.core.database.dao.MetadataDao
 import tv.own.owntv.core.database.dao.ProfileDao
@@ -110,6 +111,13 @@ class MetadataRepository(
         }
 
 
+        // glcn: 1b. An Xtream panel often keeps the film's TMDB id itself (get_vod_info): then no guessing by name.
+        val hints = providerHints(movie.sourceId, movie.remoteId, tv = false)
+        hints?.tmdbId?.let { id ->
+            dao.upsertMatch(MetadataMatchEntity(matchKey, TYPE_MOVIE, tmdbId = id, confidence = 1.0, updatedAt = now))
+            return fetchAndCache(id, lang, matchKey, confidence = 1.0, extraTrailer = hints.trailerKey)
+        }
+
         // 2. Build the search query: a user override wins over the auto-normalizer.
         val q = resolveQuery(localKey, movie.name, movie.year)
         if (q.query.isBlank()) return null
@@ -130,7 +138,7 @@ class MetadataRepository(
         }
 
         dao.upsertMatch(MetadataMatchEntity(matchKey, TYPE_MOVIE, tmdbId = best.result.tmdbId, confidence = best.score, updatedAt = now))
-        return fetchAndCache(best.result.tmdbId, lang, matchKey, best.score, fallback = best.result)
+        return fetchAndCache(best.result.tmdbId, lang, matchKey, best.score, fallback = best.result, extraTrailer = hints?.trailerKey)
     }
 
     /**
@@ -184,6 +192,13 @@ class MetadataRepository(
         }
 
 
+        // glcn: the panel's own TMDB id for the show, when it kept one (get_series_info › info).
+        val hints = providerHints(series.sourceId, series.remoteId, tv = true)
+        hints?.tmdbId?.let { id ->
+            dao.upsertMatch(MetadataMatchEntity(matchKey, TYPE_TV, tmdbId = id, confidence = 1.0, updatedAt = now))
+            return fetchAndCacheTv(id, lang, null, extraTrailer = hints.trailerKey)
+        }
+
         val q = resolveQuery(localKey, series.name, series.year)
         if (q.query.isBlank()) return null
 
@@ -199,8 +214,23 @@ class MetadataRepository(
             return null
         }
         dao.upsertMatch(MetadataMatchEntity(matchKey, TYPE_TV, tmdbId = best.result.tmdbId, confidence = best.score, updatedAt = now))
-        return fetchAndCacheTv(best.result.tmdbId, lang, best.result)
+        return fetchAndCacheTv(best.result.tmdbId, lang, best.result, extraTrailer = hints?.trailerKey)
     }
+
+    /**
+     * glcn: an Xtream panel's own TMDB id and trailer for a film or show ([remoteId] = its stream or series id), asked
+     * once per title — the match it leads to is kept like any other. Null for other sources or on any failure.
+     */
+    private suspend fun providerHints(sourceId: Long, remoteId: String?, tv: Boolean): tv.own.owntv.core.parser.XtTitleHints? {
+        val id = remoteId?.takeIf { it.isNotBlank() } ?: return null
+        val source = runCatching { db?.sourceDao()?.getById(sourceId) }.getOrNull() ?: return null
+        if (source.type != tv.own.owntv.core.model.SourceType.XTREAM) return null
+        val xtream = runCatching { org.koin.core.context.GlobalContext.get().get<tv.own.owntv.core.parser.XtreamClient>() }.getOrNull() ?: return null
+        return hintGate.withPermit { if (tv) xtream.getSeriesHints(source, id) else xtream.getVodHints(source, id) }
+    }
+
+    /** Two panel lookups at a time at most: Home asks for several titles at once. */
+    private val hintGate = kotlinx.coroutines.sync.Semaphore(2)
 
     /** Resolve a provider movie against the exact TMDB id already confirmed by Trending. */
     suspend fun resolveKnownMovie(movie: MovieEntity, tmdbId: Int): MetadataCacheEntity? {
@@ -238,6 +268,8 @@ class MetadataRepository(
         lang: String,
         fallback: MetadataSearchResult?,
         force: Boolean = false,
+        /** glcn: the panel's trailer, used when TMDB has none. */
+        extraTrailer: String? = null,
     ): MetadataCacheEntity? {
         val now = System.currentTimeMillis()
         // Details are keyed by TMDB id, not by the local item, so a second playlist entry for the same
@@ -257,7 +289,7 @@ class MetadataRepository(
                 backdropPath = details.backdropPath, rating = details.rating,
                 genresJson = details.genres.takeIf { it.isNotEmpty() }?.let { JSONArray(it).toString() },
                 castJson = details.cast.takeIf { it.isNotEmpty() }?.let { MetadataCast.serialize(it) },
-                trailerKey = details.trailerKey,
+                trailerKey = details.trailerKey ?: extraTrailer,
                 logoPath = details.logoPath,
                 originalLanguage = details.originalLanguage,
                 updatedAt = now,
@@ -676,6 +708,8 @@ class MetadataRepository(
         confidence: Double = 1.0,
         fallback: MetadataSearchResult? = null,
         force: Boolean = false,
+        /** glcn: the panel's trailer, used when TMDB has none. */
+        extraTrailer: String? = null,
     ): MetadataCacheEntity? {
         val now = System.currentTimeMillis()
         // Same as fetchAndCacheTv: two local entries for one film share its TMDB details.
@@ -697,7 +731,7 @@ class MetadataRepository(
                 rating = details.rating,
                 genresJson = details.genres.takeIf { it.isNotEmpty() }?.let { JSONArray(it).toString() },
                 castJson = details.cast.takeIf { it.isNotEmpty() }?.let { MetadataCast.serialize(it) },
-                trailerKey = details.trailerKey,
+                trailerKey = details.trailerKey ?: extraTrailer,
                 logoPath = details.logoPath,
                 originalLanguage = details.originalLanguage,
                 updatedAt = now,
