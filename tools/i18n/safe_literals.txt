@@ -5328,7 +5328,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Codec
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Container
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Container,Genres,Overview,CommunityRating,BackdropImageTags,
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DateCreated,ProviderIds,RunTimeTicks,UserData,MediaStreams
+1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DateCreated,ProviderIds,RunTimeTicks,UserData,MediaStreams,Studios
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DisplayTitle
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Dolby Atmos
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Dolby Vision
@@ -5337,7 +5337,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Emby: usuario o contraseña incorrectos
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Episode
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ExtendedVideoType
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Genres
+1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Genres
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HDR
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HDR10
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HDR10+
@@ -5350,7 +5350,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Items
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	MediaStreams
 3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Movie
-2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Name
+3	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Name
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ParentIndexNumber
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Películas
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear
@@ -5358,6 +5358,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Profile
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Pw
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Series
+1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Studios
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Type
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Video
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	VideoRange

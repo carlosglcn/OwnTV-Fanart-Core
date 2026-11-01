@@ -47,7 +47,7 @@ internal object EmbyBridge {
     private const val FIELDS =
         "ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId," +
             "Container,Genres,Overview,CommunityRating,BackdropImageTags," +
-            "DateCreated,ProviderIds,RunTimeTicks,UserData,MediaStreams"
+            "DateCreated,ProviderIds,RunTimeTicks,UserData,MediaStreams,Studios"
 
     /**
      * `http(s)://user[:password]@host[:port][/path]` with no file name in the path → a possible server.
@@ -140,6 +140,16 @@ internal object EmbyBridge {
 
     private fun items(s: Session, kind: String, filters: String? = null): List<JSONObject> {
         val out = ArrayList<JSONObject>()
+        forEachItem(s, kind, filters) { out += it }
+        return out
+    }
+
+    /**
+     * glcn: the items one page at a time, each handed to [each] and let go — a library's thousands of episodes, each
+     * with its media streams, used to be held in memory all at once (with the playlist being written beside them),
+     * and a big library filled the heap while syncing.
+     */
+    private inline fun forEachItem(s: Session, kind: String, filters: String? = null, each: (JSONObject) -> Unit) {
         var start = 0
         while (true) {
             val sort = if (kind == "Movie") "SortName" else "SeriesSortName,ParentIndexNumber,IndexNumber"
@@ -152,11 +162,12 @@ internal object EmbyBridge {
                 JSONObject(r.body?.string().orEmpty())
             }
             val arr = page.optJSONArray("Items") ?: break
-            for (i in 0 until arr.length()) out += arr.getJSONObject(i)
-            start += arr.length()
-            if (arr.length() == 0 || start >= page.optInt("TotalRecordCount", 0)) break
+            val total = page.optInt("TotalRecordCount", 0)
+            val n = arr.length()
+            for (i in 0 until n) each(arr.getJSONObject(i))
+            start += n
+            if (n == 0 || start >= total) break
         }
-        return out
     }
 
     private fun attr(v: String) = v.replace('"', '\'').replace('\n', ' ').replace('\r', ' ').trim()
@@ -191,15 +202,15 @@ internal object EmbyBridge {
             }.getOrNull()
         }
         val sb = StringBuilder("#EXTM3U\n")
-        for (m in items(s, "Movie")) {
+        forEachItem(s, "Movie") { m ->
             // A file the library could not identify — no year and no IMDb/TMDB id — is not a film:
             // calibration clips ("100% Blanco", "5% Gris"), samples, home videos. Left out.
             val ids = m.optJSONObject("ProviderIds")
-            if (!m.has("ProductionYear") && (ids == null || ids.length() == 0)) continue
+            if (!m.has("ProductionYear") && (ids == null || ids.length() == 0)) return@forEachItem
             val title = m.optString("Name")
             val year = m.optInt("ProductionYear", 0)
             val label = if (year > 0) "$title ($year)" else title
-            val group = m.optJSONArray("Genres")?.optString(0)?.takeIf { it.isNotBlank() } ?: MOVIES_GROUP
+            val group = groupOf(m, MOVIES_GROUP)
             val rating = m.optDouble("CommunityRating", Double.NaN).takeIf { !it.isNaN() && it > 0 }
             tv.own.owntv.core.emby.EmbyWatchState.record(stream(m), m)
             sb.append("#EXTINF:-1 type=\"movie\" tvg-logo=\"").append(attr(image(m.getString("Id")))).append('"')
@@ -214,8 +225,8 @@ internal object EmbyBridge {
         }
         // The shows themselves, for their synopsis and backdrop.
         val shows = runCatching { items(s, "Series") }.getOrDefault(emptyList()).associateBy { it.optString("Id") }
-        for (e in items(s, "Episode")) {
-            if (!e.has("ParentIndexNumber") || !e.has("IndexNumber")) continue
+        forEachItem(s, "Episode") { e ->
+            if (!e.has("ParentIndexNumber") || !e.has("IndexNumber")) return@forEachItem
             val show = e.optString("SeriesName").ifBlank { SERIES_GROUP }
             val label = String.format(
                 java.util.Locale.ROOT, "%s S%02dE%02d %s",
@@ -231,10 +242,17 @@ internal object EmbyBridge {
                 .extra("glcn-series-backdrop", series?.let(::backdrop))
                 .extra("glcn-added", added(e))
                 .quality(e)
-                .append(" group-title=\"").append(SERIES_GROUP).append("\",").append(line(label)).append('\n')
+                .append(" group-title=\"").append(attr(series?.let { groupOf(it, SERIES_GROUP) } ?: SERIES_GROUP)).append("\",").append(line(label)).append('\n')
                 .append(stream(e)).append('\n')
         }
         sb.toString()
+    }
+
+    /** glcn: the category a film or a show goes in, as Settings asks ([EmbyGroups]): its first genre, its platform, or one list. */
+    private fun groupOf(item: JSONObject, whole: String): String = when (EmbyGroups.mode) {
+        EmbyGroups.Mode.GENRE -> item.optJSONArray("Genres")?.optString(0)?.takeIf { it.isNotBlank() } ?: whole
+        EmbyGroups.Mode.PLATFORM -> item.optJSONArray("Studios")?.optJSONObject(0)?.optString("Name")?.takeIf { it.isNotBlank() } ?: whole
+        EmbyGroups.Mode.LIBRARY -> whole
     }
 
     /**
@@ -343,7 +361,18 @@ internal object EmbyBridge {
     /** The kept token was refused: it expired or the server forgot it. */
     private class TokenGone : IOException("Emby: token refused")
 
-    private const val PAGE = 1000
+    /** glcn: smaller pages — each holds the items' media streams, read and let go one page at a time. */
+    private const val PAGE = 250
     private const val MOVIES_GROUP = "Películas"
     private const val SERIES_GROUP = "Series"
+}
+
+/**
+ * glcn: how an Emby or Jellyfin library is split into categories: by each title's first genre (the default), by its
+ * platform or network (Netflix, HBO… — Emby's Studios, filled from TMDB), or as one list for films and one for series.
+ * Set by the app from Settings; read at the next sync of the library.
+ */
+object EmbyGroups {
+    enum class Mode { GENRE, PLATFORM, LIBRARY }
+    @Volatile var mode: Mode = Mode.GENRE
 }

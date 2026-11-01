@@ -320,6 +320,11 @@
     <string name="glcn_setup_nfs_export_example">/volume1/video</string>
     <string name="glcn_setup_nfs_help">The folder the NAS shares over NFS, as a full path. On a Synology, the shared folder\'s NFS rule must allow this device\'s address and tick \"Allow connections from non-privileged ports\".</string>
     <string name="glcn_setup_nfs_uid">User id (optional, e.g. 1026 or 1026:100)</string>
+    <string name="glcn_emby_groups_title">Emby / Jellyfin categories</string>
+    <string name="glcn_emby_groups_desc">How an Emby or Jellyfin library is split into categories. Applies at its next sync.</string>
+    <string name="glcn_emby_groups_genre">By genre</string>
+    <string name="glcn_emby_groups_platform">By platform</string>
+    <string name="glcn_emby_groups_library">Films and series</string>
     <string name="glcn_category_icon">Icon</string>
     <string name="glcn_category_icon_auto">Automatic</string>
     <string name="glcn_category_icon_none">No icon</string>
