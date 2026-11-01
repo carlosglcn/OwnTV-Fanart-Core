@@ -128,13 +128,14 @@ object ProviderCatalogMetadataParser {
                 3 -> add("1080p")
                 2 -> add("720p")
             }
-            if (isRemux(t)) add("REMUX")
+            // glcn: the picture format before REMUX, as on the posters ("[DV R]" read "REMUX DV"), and Dolby Vision in full here.
             if (t.mayHaveCapability) when {
-                t.has("DOLBY", "DOVI", "DV") && DOLBY_VISION.containsMatchIn(t.raw) -> add("DV")
+                t.has("DOLBY", "DOVI", "DV") && DOLBY_VISION.containsMatchIn(t.raw) -> add(DOLBY_VISION_BADGE)
                 t.has("HDR10+") && HDR10_PLUS.containsMatchIn(t.raw) -> add("HDR10+")
                 t.has("HDR10") && HDR10.containsMatchIn(t.raw) -> add("HDR10")
                 t.has("HDR") && HDR.containsMatchIn(t.raw) -> add("HDR")
             }
+            if (isRemux(t)) add("REMUX")
             if (t.mayHaveAudio) when {
                 t.mayHaveAtmos && ATMOS.containsMatchIn(t.raw) -> add("ATMOS")
                 t.mayHave71 && SURROUND_7_1.containsMatchIn(t.raw) -> add("7.1")
@@ -148,7 +149,7 @@ object ProviderCatalogMetadataParser {
      * and REMUX. 1080p and audio stay on the title's page; on every poster they would only be noise.
      */
     fun posterBadges(rawName: String): List<String> {
-        val all = badges(rawName)
+        val all = badges(rawName).map { if (it == DOLBY_VISION_BADGE) "DV" else it }
         val picture = listOf("DV", "HDR10+", "HDR10", "HDR", "8K", "4K").firstOrNull { it in all }
         return listOfNotNull(picture, "REMUX".takeIf { it in all })
     }
@@ -176,6 +177,9 @@ object ProviderCatalogMetadataParser {
     private val HD = Regex("""(?i)\b(?:HD|720P)\b""")
     private val SD = Regex("""(?i)\bSD\b""")
     private val ALL_RESOLUTION_MARKERS = Regex("""(?i)\b(?:8K|4K|UHD|2160P|3840P|FHD|1080P|HD|720P|SD)\b""")
+    /** glcn: the title page spells it out; a poster corner keeps "DV". */
+    const val DOLBY_VISION_BADGE = "Dolby Vision"
+
     private val DOLBY_VISION = Regex("""(?i)\b(?:DOLBY\s*VISION|DOVI|DV)\b""")
     private val HDR10_PLUS = Regex("""(?i)\bHDR10\+(?!\w)""")
     private val HDR10 = Regex("""(?i)\bHDR10\b""")
