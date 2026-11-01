@@ -204,6 +204,7 @@ internal object EmbyBridge {
         val sb = StringBuilder("#EXTM3U\n")
         val filmPlatforms = HashSet<String>()
         val filmTmdb = HashMap<String, Int>()
+        val filmGroups = LinkedHashMap<String, StringBuilder>()
         forEachItem(s, "Movie") { m ->
             // A file the library could not identify — no year and no IMDb/TMDB id — is not a film:
             // calibration clips ("100% Blanco", "5% Gris"), samples, home videos. Left out.
@@ -220,7 +221,9 @@ internal object EmbyBridge {
             val rating = m.optDouble("CommunityRating", Double.NaN).takeIf { !it.isNaN() && it > 0 }
             tv.own.owntv.core.emby.EmbyWatchState.record(stream(m), m)
             ids?.optString("Tmdb")?.toIntOrNull()?.takeIf { it > 0 }?.let { filmTmdb[stream(m)] = it }
-            sb.append("#EXTINF:-1 type=\"movie\" tvg-logo=\"").append(attr(image(m.getString("Id")))).append('"')
+            // glcn: by platform, each group's films are kept apart and written platforms first, biggest first.
+            val out = if (EmbyGroups.mode == EmbyGroups.Mode.PLATFORM) filmGroups.getOrPut(group) { StringBuilder() } else sb
+            out.append("#EXTINF:-1 type=\"movie\" tvg-logo=\"").append(attr(image(m.getString("Id")))).append('"')
                 .extra("glcn-plot", m.optString("Overview"))
                 .extra("glcn-backdrop", backdrop(m))
                 .extra("glcn-year", year.takeIf { it > 0 }?.toString())
@@ -229,6 +232,12 @@ internal object EmbyBridge {
                 .quality(m)
                 .append(" group-title=\"").append(attr(group)).append("\",").append(line(label)).append('\n')
                 .append(stream(m)).append('\n')
+        }
+        if (filmGroups.isNotEmpty()) {
+            // Platforms first, from the one with most films down; the genres after, in the order they came.
+            val counts = filmGroups.mapValues { (_, b) -> b.split('\n').count { it.startsWith("#EXTINF") } }
+            val (platforms, rest) = filmGroups.keys.partition { it in filmPlatforms }
+            (platforms.sortedByDescending { counts[it] ?: 0 } + rest).forEach { sb.append(filmGroups.getValue(it)) }
         }
         // The shows themselves, for their synopsis and backdrop.
         val shows = runCatching { items(s, "Series") }.getOrDefault(emptyList()).associateBy { it.optString("Id") }
@@ -255,6 +264,9 @@ internal object EmbyBridge {
                     runCatching { PlatformLogos.findMissing(forLogos, shows, other, extra = filmPlatforms) }
                 }
         }
+        // glcn: by platform, the shows are written platform by platform — the one with most shows first, "Other networks"
+        // last — so the category list comes in that order.
+        val showGroups = LinkedHashMap<String, StringBuilder>()
         forEachItem(s, "Episode") { e ->
             if (!e.has("ParentIndexNumber") || !e.has("IndexNumber")) return@forEachItem
             val show = e.optString("SeriesName").ifBlank { SERIES_GROUP }
@@ -266,14 +278,22 @@ internal object EmbyBridge {
             val series = seriesId?.let { shows[it] }
             val logo = seriesId?.let(::image) ?: image(e.getString("Id"))
             tv.own.owntv.core.emby.EmbyWatchState.record(stream(e), e)
-            sb.append("#EXTINF:-1 type=\"series\" tvg-logo=\"").append(attr(logo)).append('"')
+            val group = seriesId?.let { platformOf[it] } ?: series?.let { groupOf(it, SERIES_GROUP) } ?: SERIES_GROUP
+            val out = if (platformOf.isEmpty()) sb else showGroups.getOrPut(group) { StringBuilder() }
+            out.append("#EXTINF:-1 type=\"series\" tvg-logo=\"").append(attr(logo)).append('"')
                 .extra("glcn-plot", e.optString("Overview"))
                 .extra("glcn-series-plot", series?.optString("Overview"))
                 .extra("glcn-series-backdrop", series?.let(::backdrop))
                 .extra("glcn-added", added(e))
                 .quality(e)
-                .append(" group-title=\"").append(attr(seriesId?.let { platformOf[it] } ?: series?.let { groupOf(it, SERIES_GROUP) } ?: SERIES_GROUP)).append("\",").append(line(label)).append('\n')
+                .append(" group-title=\"").append(attr(group)).append("\",").append(line(label)).append('\n')
                 .append(stream(e)).append('\n')
+        }
+        if (showGroups.isNotEmpty()) {
+            val showCount = platformOf.values.groupingBy { it }.eachCount()
+            val other = PlatformNames.other()
+            showGroups.keys.sortedWith(compareBy<String> { it == other }.thenByDescending { showCount[it] ?: 0 })
+                .forEach { sb.append(showGroups.getValue(it)) }
         }
         sb.toString()
     }
