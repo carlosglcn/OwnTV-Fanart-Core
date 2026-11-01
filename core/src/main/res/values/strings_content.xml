@@ -1023,4 +1023,8 @@
     <string name="glcn_tvhome_tonight">Tonight, 22:00</string>
     <string name="glcn_tvhome_move_hint">◀ ▶ move the row · OK to leave it there</string>
     <string name="glcn_tvhome_remind_hint">OK reminds you · hold OK to watch the channel now</string>
+    <string name="glcn_tvhome_apps">Apps</string>
+    <string name="glcn_apps_add">Add apps</string>
+    <string name="glcn_apps_pick_title">Apps on Home</string>
+    <string name="glcn_apps_hint">Tick the ones you want · hold OK on an app in the row to take it off</string>
 </resources>
