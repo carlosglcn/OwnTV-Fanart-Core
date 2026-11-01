@@ -39,6 +39,9 @@ object EngineHint {
         val text = name.orEmpty()
         if (MPV_CODECS.containsMatchIn(text)) return Pick.MPV
         val caps = capabilities.orEmpty().lowercase()
+        // glcn: styled subtitles (ASS/SSA, from an Emby/Jellyfin library) — mpv draws them as made, ExoPlayer as plain
+        // text. Not for Dolby Vision, which only ExoPlayer shows.
+        if ("dolby vision" !in caps && tv.own.owntv.core.emby.EmbyTmdb.styledSubs(url)) return Pick.MPV
         if (EXO_CAPABILITIES.any { it in caps }) return Pick.EXO
         if (qualityRank >= RANK_4K) return Pick.EXO
         if (EXO_MARKS.containsMatchIn(text)) return Pick.EXO

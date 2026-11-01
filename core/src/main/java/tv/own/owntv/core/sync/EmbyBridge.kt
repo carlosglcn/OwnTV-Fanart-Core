@@ -204,6 +204,7 @@ internal object EmbyBridge {
         val sb = StringBuilder("#EXTM3U\n")
         val filmPlatforms = HashSet<String>()
         val filmTmdb = HashMap<String, Int>()
+        val styledSubs = HashSet<String>()
         val filmGroups = LinkedHashMap<String, StringBuilder>()
         forEachItem(s, "Movie") { m ->
             // A file the library could not identify — no year and no IMDb/TMDB id — is not a film:
@@ -221,6 +222,7 @@ internal object EmbyBridge {
             val rating = m.optDouble("CommunityRating", Double.NaN).takeIf { !it.isNaN() && it > 0 }
             tv.own.owntv.core.emby.EmbyWatchState.record(stream(m), m)
             ids?.optString("Tmdb")?.toIntOrNull()?.takeIf { it > 0 }?.let { filmTmdb[stream(m)] = it }
+            if (hasStyledSubs(m)) styledSubs += stream(m)
             // glcn: by platform, each group's films are kept apart and written platforms first, biggest first.
             val out = if (EmbyGroups.mode == EmbyGroups.Mode.PLATFORM) filmGroups.getOrPut(group) { StringBuilder() } else sb
             out.append("#EXTINF:-1 type=\"movie\" tvg-logo=\"").append(attr(image(m.getString("Id")))).append('"')
@@ -278,6 +280,7 @@ internal object EmbyBridge {
             val series = seriesId?.let { shows[it] }
             val logo = seriesId?.let(::image) ?: image(e.getString("Id"))
             tv.own.owntv.core.emby.EmbyWatchState.record(stream(e), e)
+            if (hasStyledSubs(e)) styledSubs += stream(e)
             val group = seriesId?.let { platformOf[it] } ?: series?.let { groupOf(it, SERIES_GROUP) } ?: SERIES_GROUP
             val out = if (platformOf.isEmpty()) sb else showGroups.getOrPut(group) { StringBuilder() }
             out.append("#EXTINF:-1 type=\"series\" tvg-logo=\"").append(attr(logo)).append('"')
@@ -289,6 +292,7 @@ internal object EmbyBridge {
                 .append(" group-title=\"").append(attr(group)).append("\",").append(line(label)).append('\n')
                 .append(stream(e)).append('\n')
         }
+        runCatching { tv.own.owntv.core.emby.EmbyTmdb.replaceStyled(styledSubs) }
         if (showGroups.isNotEmpty()) {
             val showCount = platformOf.values.groupingBy { it }.eachCount()
             val other = PlatformNames.other()
@@ -325,6 +329,18 @@ internal object EmbyBridge {
      * glcn: (resolution rank, capability marks) from an item's MediaStreams — the same rank and marks a name like
      * "4K DV Atmos" gives (see ProviderCatalogMetadataParser): 4 = 4K, 3 = 1080p, 2 = 720p, 1 = SD.
      */
+    /** glcn: the file carries ASS/SSA subtitles (styled and positioned), which only mpv draws as made. */
+    private fun hasStyledSubs(item: JSONObject): Boolean {
+        val streams = item.optJSONArray("MediaStreams") ?: return false
+        for (i in 0 until streams.length()) {
+            val st = streams.optJSONObject(i) ?: continue
+            if (st.optString("Type") == "Subtitle" && !st.optBoolean("IsExternal", false) &&
+                st.optString("Codec").lowercase() in STYLED_SUB_CODECS
+            ) return true
+        }
+        return false
+    }
+
     private fun qualityOf(item: JSONObject): Pair<Int, String>? {
         val streams = item.optJSONArray("MediaStreams") ?: return null
         var rank = 0
@@ -431,6 +447,7 @@ internal object EmbyBridge {
     private const val PAGE = 250
     /** glcn: a platform with fewer shows than this goes in "Other networks". */
     private const val PLATFORM_MIN_SHOWS = 3
+    private val STYLED_SUB_CODECS = setOf("ass", "ssa")
     private const val MOVIES_GROUP = "Películas"
     private const val SERIES_GROUP = "Series"
 }

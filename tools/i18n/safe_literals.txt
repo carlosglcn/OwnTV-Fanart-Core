@@ -1838,6 +1838,7 @@
 1	json	core/src/main/java/tv/own/owntv/core/drm/DrmConfig.kt	scheme
 2	protocol	core/src/main/java/tv/own/owntv/core/drm/DrmConfig.kt	widevine
 1	technical	core/src/main/java/tv/own/owntv/core/drm/DrmConfig.kt	{
+1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTmdb.kt	a
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTmdb.kt	f
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTmdb.kt	glcn_emby_tmdb.json
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTmdb.kt	s
@@ -3071,7 +3072,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	avi
 1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	dat
 1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	divx
-1	log	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	dolby vision
+2	log	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	dolby vision
 1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	hdr
 1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	img
 1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	iso
@@ -5429,7 +5430,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	BackdropImageTags
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Channels
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Client="OwnTV", Device="OwnTV", DeviceId="owntv-glcn", Version="1.0"
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Codec
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Codec
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	CommunityRating
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Container
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Container,Genres,Overview,CommunityRating,BackdropImageTags,
@@ -5457,11 +5458,12 @@
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ITV
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Id
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IndexNumber
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IsExternal
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IsPlayed
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IsResumable
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Items
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	MediaBrowser $AUTH_FIELDS
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	MediaStreams
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	MediaStreams
 3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Mediaset
 3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Movie
 3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Movistar+
@@ -5490,9 +5492,10 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	SortName
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Starz
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Studios
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Subtitle
 3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Tmdb
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	TotalRecordCount
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Type
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Type
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	UTC
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	UTF-8
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	User
@@ -5516,6 +5519,7 @@
 2	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	apple tv
 1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	apple tv+
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	application/json
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ass
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	atmos
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	atresmedia
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	atresplayer
@@ -5573,6 +5577,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	rtve
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	showtime
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	sky
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ssa
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	starz
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	telecinco
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	tve

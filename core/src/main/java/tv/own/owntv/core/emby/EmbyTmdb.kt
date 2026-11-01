@@ -10,11 +10,24 @@ import java.util.concurrent.ConcurrentHashMap
 object EmbyTmdb {
     private val films = ConcurrentHashMap<String, Int>()
     private val shows = ConcurrentHashMap<String, Int>()
+    /** glcn: films and episodes whose file carries styled subtitles (ASS/SSA), by stream URL. */
+    private val styled = java.util.Collections.newSetFromMap(ConcurrentHashMap<String, Boolean>())
     @Volatile private var loaded = false
 
     fun film(streamUrl: String): Int? { ensure(); return films[EmbyWatchState.key(streamUrl)] }
 
     fun show(name: String): Int? { ensure(); return shows[showKey(name)] }
+
+    /** Whether the item at [streamUrl] has ASS/SSA subtitles (styled, positioned) — mpv draws them as made. */
+    fun styledSubs(streamUrl: String?): Boolean { if (streamUrl == null) return false; ensure(); return EmbyWatchState.key(streamUrl) in styled }
+
+    internal fun replaceStyled(urls: Set<String>) {
+        if (urls.isEmpty()) return
+        ensure()
+        // Added to, not replaced: several servers each write their own (a stale entry only nudges the engine choice).
+        urls.mapTo(styled) { EmbyWatchState.key(it) }
+        save()
+    }
 
     /** The ids read with the library this time; [filmIds] by stream URL, [showIds] by show name. */
     internal fun replace(filmIds: Map<String, Int>, showIds: Map<String, Int>) {
@@ -40,6 +53,7 @@ object EmbyTmdb {
             val o = org.json.JSONObject(f.readText())
             o.optJSONObject(FILMS)?.let { j -> j.keys().forEach { k -> films[k] = j.optInt(k) } }
             o.optJSONObject(SHOWS)?.let { j -> j.keys().forEach { k -> shows[k] = j.optInt(k) } }
+            o.optJSONArray(STYLED)?.let { a -> for (i in 0 until a.length()) styled += a.optString(i) }
         }
     }
 
@@ -50,6 +64,7 @@ object EmbyTmdb {
             val o = org.json.JSONObject()
                 .put(FILMS, org.json.JSONObject(films as Map<*, *>))
                 .put(SHOWS, org.json.JSONObject(shows as Map<*, *>))
+                .put(STYLED, org.json.JSONArray(styled.toList()))
             f.writeText(o.toString())
         }
     }
@@ -57,4 +72,5 @@ object EmbyTmdb {
     private const val FILE = "glcn_emby_tmdb.json"
     private const val FILMS = "f"
     private const val SHOWS = "s"
+    private const val STYLED = "a"
 }
