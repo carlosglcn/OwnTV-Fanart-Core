@@ -39,6 +39,8 @@ private const val NEXT_PROGRAMME_GAP_CAP_MS = 3L * 60 * 60 * 1000
  * nothing, short enough that a programme changing over is noticed.
  */
 private const val CACHE_TTL_MS = 5 * 60_000L
+/** glcn: how many channels the now/next caches keep. */
+private const val CACHE_MAX = 300
 
 /** How many entries the provider's short-EPG endpoint is asked for. Its own practical maximum. */
 private const val SHORT_EPG_LIMIT = 8
@@ -77,6 +79,21 @@ class LiveEpgReader(
 
     /** Provider-fetched guide rows per channel, so the grid and the preview share one request. */
     private val providerRows = java.util.concurrent.ConcurrentHashMap<Long, CachedRows>()
+
+    /**
+     * glcn: the caches kept every channel ever focused, expired ones only skipped — over an evening of zapping they
+     * grew without end. Past [CACHE_MAX] entries the expired ones go, then the oldest.
+     */
+    private fun trimCaches(now: Long) {
+        if (cache.size > CACHE_MAX) {
+            cache.entries.removeIf { now - it.value.at >= CACHE_TTL_MS }
+            if (cache.size > CACHE_MAX) cache.entries.sortedBy { it.value.at }.take(cache.size - CACHE_MAX).forEach { cache.remove(it.key) }
+        }
+        if (providerRows.size > CACHE_MAX) {
+            providerRows.entries.removeIf { now - it.value.at >= CACHE_TTL_MS }
+            if (providerRows.size > CACHE_MAX) providerRows.entries.sortedBy { it.value.at }.take(providerRows.size - CACHE_MAX).forEach { providerRows.remove(it.key) }
+        }
+    }
 
     /** Drop every cached now/next — the global guide offset moved, so all of them are stale. */
     fun clearCache() {
@@ -120,6 +137,7 @@ class LiveEpgReader(
                     fun EpgProgrammeEntity.shifted() = EpgShift.apply(this, shift).toXt()
                     val result = EpgNowNext(nowProg?.shifted(), nextProg?.shifted(), future.drop(1).take(4).map { it.shifted() }, previous = prevProg?.shifted(), coverageDays = days, nowDetails = nowProg?.details)
                     cache[ch.id] = CachedEpg(now, result)
+                    trimCaches(now)
                     return@withContext result
                 }
             }
@@ -130,12 +148,14 @@ class LiveEpgReader(
             // current null — picking the next entry that simply hasn't ended yet would mislabel an upcoming
             // programme as live. "Next"/"Later" are computed independently below, so a genuine
             // gap correctly shows no "Now" while the upcoming programme still appears as "Next".
-            val current = entries.firstOrNull { it.startMs <= now && it.stopMs > now }
+            // glcn: with overlapping entries, the one that started last — as the rest of the app picks it.
+            val current = entries.filter { it.startMs <= now && it.stopMs > now }.maxByOrNull { it.startMs }
             val future = entries.filter { it.startMs > (current?.startMs ?: now) }.sortedBy { it.startMs }
             // Short-EPG responses sometimes include the just-finished programme — surface it as "Before".
             val previous = entries.filter { it.stopMs <= (current?.startMs ?: now) }.maxByOrNull { it.stopMs }
             val result = EpgNowNext(current, future.firstOrNull(), future.drop(1).take(4), previous = previous)
             cache[ch.id] = CachedEpg(now, result)
+            trimCaches(now)
             result
         }
 
@@ -210,6 +230,7 @@ class LiveEpgReader(
             )
         }.sortedBy { it.startMs }
         providerRows[channel.id] = CachedRows(now, rows)
+        trimCaches(now)
         rows
     }
 
@@ -331,7 +352,7 @@ class LiveEpgReader(
             ?.takeIf { it.title.isNotBlank() }?.let { return it.copy(description = null) }
         return providerRows[channelId]
             ?.takeIf { now - it.at < CACHE_TTL_MS }
-            ?.rows?.firstOrNull { it.startMs <= now && it.stopMs > now }
+            ?.rows?.filter { it.startMs <= now && it.stopMs > now }?.maxByOrNull { it.startMs }
             ?.takeIf { it.title.isNotBlank() }
             ?.let { XtEpgEntry(it.title, null, it.startMs, it.stopMs) }
     }

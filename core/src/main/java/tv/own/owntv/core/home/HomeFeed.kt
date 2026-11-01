@@ -1,5 +1,6 @@
 package tv.own.owntv.core.home
 
+import kotlinx.coroutines.sync.withLock
 import androidx.compose.runtime.Immutable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -366,12 +367,19 @@ class HomeFeedReader(
             }
             // glcn: something worth watching on TV right now — a film, a premiere, a documentary, a series — for the
             // billboard, on the main channels (the HD copy when a channel has both), leaning to what the viewer follows.
+            // glcn: every live channel, read once for the billboard and Tonight (each used to read up to 5 000 on its own).
+            // (Not a lazy async: one never started would keep this scope from finishing.)
+            val allLiveLock = kotlinx.coroutines.sync.Mutex()
+            var allLiveRead: List<tv.own.owntv.core.database.entity.ChannelEntity>? = null
+            suspend fun allLive(): List<tv.own.owntv.core.database.entity.ChannelEntity> = allLiveLock.withLock {
+                allLiveRead ?: (if (liveIds.isEmpty()) emptyList() else channelDao.allForSources(liveIds.toList(), 5_000)).also { allLiveRead = it }
+            }
             val tvNowAsync = async {
                 if (HomeRow.FEATURED !in config.visibleOrder) emptyList()
                 else runCatching {
                     val mine = (favLive + live).distinctBy { it.id }.filterNot(::isBarChannel)
                     val mineIds = mine.map { it.id }.toSet()
-                    val pool = (mine.take(60) + channelDao.allForSources(liveIds.toList(), 5_000)
+                    val pool = (mine.take(60) + allLive()
                         .filter { it.id !in mineIds && !isChannelHidden(it, hidden) && !isBarChannel(it) && TONIGHT_CHANNEL.containsMatchIn(it.name) })
                         .distinctBy { it.id }
                     if (pool.isEmpty()) return@runCatching emptyList()
@@ -433,7 +441,7 @@ class HomeFeedReader(
                     }
                     // Every other channel: only the evening's highlights — a live match, a premiere, a film.
                     val others = runCatching {
-                        channelDao.allForSources(liveIds.toList(), 5_000)
+                        allLive()
                             .filter { it.id !in byId && !isChannelHidden(it, hidden) && !isBarChannel(it) && TONIGHT_CHANNEL.containsMatchIn(it.name) }
                     }.getOrDefault(emptyList())
                     val othersById = others.associateBy { it.id }
