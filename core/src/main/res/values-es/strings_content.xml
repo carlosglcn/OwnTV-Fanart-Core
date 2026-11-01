@@ -719,6 +719,18 @@
     <string name="glcn_apps_add">Añadir apps</string>
     <string name="glcn_apps_pick_title">Apps en Inicio</string>
     <string name="glcn_apps_hint">Marca las que quieras · mantén OK en una app de la fila para quitarla</string>
+    <string name="glcn_apps_yours">Tus apps</string>
+    <string name="glcn_apps_all">Todas las apps</string>
+    <string name="glcn_apps_remove">Quitar de Tus apps</string>
+    <string name="glcn_apps_add_one">Añadir a Tus apps</string>
+    <string name="glcn_apps_move_left">Mover a la izquierda</string>
+    <string name="glcn_apps_move_right">Mover a la derecha</string>
+    <string name="glcn_apps_info">Información de la app</string>
+    <string name="glcn_autostart_title">Abrir al encender la tele</string>
+    <plurals name="glcn_apps_added">
+        <item quantity="one">%1$d añadida</item>
+        <item quantity="other">%1$d añadidas</item>
+    </plurals>
     <string name="glcn_labs_on">Funciones de prueba activadas</string>
     <string name="glcn_labs_off">Funciones de prueba desactivadas</string>
 </resources>

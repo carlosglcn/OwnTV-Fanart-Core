@@ -1034,6 +1034,18 @@
     <string name="glcn_apps_add">Add apps</string>
     <string name="glcn_apps_pick_title">Apps on Home</string>
     <string name="glcn_apps_hint">Tick the ones you want · hold OK on an app in the row to take it off</string>
+    <string name="glcn_apps_yours">Your apps</string>
+    <string name="glcn_apps_all">All apps</string>
+    <string name="glcn_apps_remove">Take off Your apps</string>
+    <string name="glcn_apps_add_one">Add to Your apps</string>
+    <string name="glcn_apps_move_left">Move left</string>
+    <string name="glcn_apps_move_right">Move right</string>
+    <string name="glcn_apps_info">App info</string>
+    <string name="glcn_autostart_title">Open when the TV starts</string>
+    <plurals name="glcn_apps_added">
+        <item quantity="one">%1$d added</item>
+        <item quantity="other">%1$d added</item>
+    </plurals>
     <string name="glcn_labs_on">Test features on</string>
     <string name="glcn_labs_off">Test features off</string>
 </resources>
