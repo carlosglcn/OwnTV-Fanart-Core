@@ -3078,6 +3078,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	\0
 1	regex	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	(?i)\\b(?:4k|uhd|2160p|dovi|dv|hdr10\\+?|hdr)\\b
 1	regex	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	(?i)\\b(?:atmos|truehd|dts-?hd(?:[ .-]?ma)?|dts[ :-]?x)\\b
+1	regex	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	(?i)\\b(?:dovi|dv|hdr10\\+?|hdr|dolby[ .]?vision)\\b
 1	regex	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	(?i)\\b(?:xvid|divx|vc-?1|wmv\\d?|rmvb|mpeg-?2)\\b
 1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	3gp
 1	technical	core/src/main/java/tv/own/owntv/core/player/EngineHint.kt	asf
@@ -7137,7 +7138,7 @@
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	CC software-decode override ${if (on) "ON" else "OFF"} (height=${load.currentHeightPx}px)
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	CC track selected but software decode not viable (height=${load.currentHeightPx}px, gl=${!glUnsupported}) — captions may stay empty
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	Could not prepare subtitle fonts: ${it.message}
-1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	DEPRECATION
+2	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	DEPRECATION
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	Decode guard TRIPPED: ${h}px on software decoder
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	END_FILE STOP with no credit left — app-caused, not a failure
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	END_FILE before FILE_LOADED — account session in use, showing the error

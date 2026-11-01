@@ -49,6 +49,12 @@ object EngineHint {
         return null
     }
 
+    /** glcn: the file is HDR or Dolby Vision, by the catalogue's marks or its name. */
+    fun isHdr(name: String?, capabilities: String? = null): Boolean {
+        val caps = capabilities.orEmpty().lowercase()
+        return EXO_CAPABILITIES.any { it in caps } || HDR_MARKS.containsMatchIn(name.orEmpty())
+    }
+
     private fun extensionOf(url: String?): String {
         val path = url.orEmpty().substringBefore('?').substringBefore('#').substringAfterLast('/')
         return if ('.' in path) path.substringAfterLast('.') else ""
@@ -59,5 +65,6 @@ object EngineHint {
     private val MPV_CODECS = Regex("""(?i)\b(?:xvid|divx|vc-?1|wmv\d?|rmvb|mpeg-?2)\b""")
     private val EXO_CAPABILITIES = listOf("dolby vision", "hdr")
     private val SOUND_MARKS = Regex("""(?i)\b(?:atmos|truehd|dts-?hd(?:[ .-]?ma)?|dts[ :-]?x)\b""")
+    private val HDR_MARKS = Regex("""(?i)\b(?:dovi|dv|hdr10\+?|hdr|dolby[ .]?vision)\b""")
     private val EXO_MARKS = Regex("""(?i)\b(?:4k|uhd|2160p|dovi|dv|hdr10\+?|hdr)\b""")
 }

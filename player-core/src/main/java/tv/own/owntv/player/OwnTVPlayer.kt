@@ -94,6 +94,8 @@ data class MediaMeta(
     val trackKey: String? = null,
     /** glcn: the engine this file suits — [tv.own.owntv.core.player.EngineHint]; null = no opinion. */
     val enginePick: tv.own.owntv.core.player.EngineHint.Pick? = null,
+    /** glcn: an HDR / Dolby Vision film — on a TV without HDR it plays on mpv's copy path, which turns it to SDR. */
+    val hdr: Boolean = false,
 )
 
 /** An item in a play queue (e.g. a season's episodes), for prev/next.
@@ -827,6 +829,17 @@ class OwnTVPlayer(
     /** Direct decoder-to-surface output. Non-direct = software decode only (hwdec off / per-item rescue),
      *  which the direct surface can't display, so it goes through the GL renderer. */
     private fun useDirect(): Boolean = targetVo() == "mediacodec_embed"
+
+    /** glcn: whether the screen takes any HDR format (HDR10, HLG, Dolby Vision…); read once per process. */
+    private val displayHdr: Boolean by lazy {
+        runCatching {
+            val dm = context.getSystemService(Context.DISPLAY_SERVICE) as android.hardware.display.DisplayManager
+            @Suppress("DEPRECATION")
+            dm.getDisplay(android.view.Display.DEFAULT_DISPLAY)?.hdrCapabilities?.supportedHdrTypes?.isNotEmpty() == true
+        }.getOrDefault(true)
+    }
+
+    private fun displayShowsHdr(): Boolean = displayHdr
 
     /** Apply vo/hwdec for the current render path (also safe live — mpv reinits decoder/output). */
     private fun MPVLib.applyRenderConfig() {
@@ -3077,7 +3090,7 @@ class OwnTVPlayer(
             // of the direct surface. On the TCL the direct decoder froze on an archive's first frame in about
             // one open in four and took mpv's core lock with it, so nothing could reset or retry; the
             // copy path never hands the decoder the surface. Archives are ≤1080p, where the copy is cheap.
-            val wantCopy = isArchive && !wantSoftware && !glUnsupported && hwDecoding
+            val wantCopy = (isArchive || (meta.hdr && !isLive && !displayShowsHdr())) && !wantSoftware && !glUnsupported && hwDecoding
             val needReconfig = item.forceSoftwareThisLoad != wantSoftware || item.ccSoftwareOverride ||
                 item.forceCopyThisLoad != wantCopy
             // THE reset. Everything a new item must not inherit is in [ItemState]; the values that are not
@@ -3156,7 +3169,10 @@ class OwnTVPlayer(
             tv.own.owntv.core.player.EngineHint.Pick.MPV -> false
             null -> null
         }
-        val startOnExo = if (drmProtected) true else pinnedToExo ?: fileHint ?: !vodEngine.startsOnMpv
+        // glcn: an HDR film on a TV that cannot show HDR goes to mpv, whose GL path tone-maps it to SDR (colours
+        // right, not washed out) — unless the person pinned an engine or the file is DRM-protected.
+        val toneMap = meta.hdr && !isLive && !isArchive && !drmProtected && !displayShowsHdr()
+        val startOnExo = if (drmProtected) true else pinnedToExo ?: (if (toneMap) false else null) ?: fileHint ?: !vodEngine.startsOnMpv
         if (pinnedToExo == null && !drmProtected && fileHint != null && fileHint != !vodEngine.startsOnMpv) {
             val why = when (pick) {
                 tv.own.owntv.core.player.EngineHint.Pick.EXO_FOR_SOUND -> "ExoPlayer (Atmos / TrueHD / DTS-HD to the receiver)"
