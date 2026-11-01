@@ -74,9 +74,9 @@ class EpgSyncWorker(
             .onFailure { Log.i(TAG, "EPG sync stays in the background: ${it.message}") }
 
         try {
-            val programmes = epgRepository.refreshUrl(source.id, source.url, source.userAgent, onlyIfChanged = auto) { channels, count ->
+            val programmes = epgRepository.refreshUrl(source.id, source.url, source.userAgent, onlyIfChanged = auto, onProgress = { channels, count ->
                 progress.publish(channels, count)
-            }
+            })
             progress.flush()
             store.setSynced(source.id, System.currentTimeMillis(), null)
             // A series rule is a standing instruction about programmes that do not exist in the

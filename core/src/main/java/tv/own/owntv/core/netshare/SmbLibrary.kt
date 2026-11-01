@@ -112,7 +112,7 @@ object SmbLibrary {
     }
 
     /**
-     * glcn: [path] holds a disc copied as folders — Blu-ray (BDMV/STREAM/*.m2ts) or DVD (VIDEO_TS/VTS_nn_k.VOB).
+     * glcn: [path] holds a disc copied as folders — Blu-ray (BDMV, STREAM, its .m2ts files) or DVD (VIDEO_TS, its VTS_nn_k.VOB files).
      * The main title is the biggest: the largest .m2ts, or the DVD title set with the most data, its parts joined
      * in order (mpv's EDL). Named after the folder ("Avatar (2009)"). False when there is no disc here.
      */
