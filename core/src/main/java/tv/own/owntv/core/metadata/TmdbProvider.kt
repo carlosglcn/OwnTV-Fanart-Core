@@ -1,5 +1,6 @@
 package tv.own.owntv.core.metadata
 
+import kotlinx.coroutines.sync.withLock
 import android.util.Log
 import org.json.JSONObject
 import tv.own.owntv.core.CoreBuildInfo
@@ -85,6 +86,9 @@ class TmdbProvider(
             Log.w(TAG, "metadata allowance spent, skipping $label")
             return null
         }
+        // glcn: a key of the user's own has no allowance, so it is paced instead — a few calls a second is ample, and a
+        // screen or a sync asking for hundreds of titles at once no longer floods the network and the memory.
+        if (!ep.metered) paceOwnKey()
         // Dev-only accounting: the allowance counter in Settings shows a total, not what spent it. This
         // is the single choke point every metered call passes through, so one line here answers "what
         // actually consumed my allowance". Compiled out of shipping builds.
@@ -93,6 +97,14 @@ class TmdbProvider(
             .onFailure { Log.w(TAG, "TMDB $label failed: ${it.message}") }
             .getOrNull()
     }
+
+    private suspend fun paceOwnKey() = paceLock.withLock {
+        val wait = lastOwnCallAt + OWN_KEY_GAP_MS - System.nanoTime() / 1_000_000
+        if (wait > 0) kotlinx.coroutines.delay(wait)
+        lastOwnCallAt = System.nanoTime() / 1_000_000
+    }
+    private val paceLock = kotlinx.coroutines.sync.Mutex()
+    @Volatile private var lastOwnCallAt = 0L
 
     /** `&language=<code>`, or "" when no language is configured (TMDB falls back to en-US). */
     private fun Endpoint.langParam(): String =
@@ -514,6 +526,8 @@ class TmdbProvider(
          *
          *  Behind a Cloudflare edge rule that refuses anything without the right `x-owntv-key`, so only
          *  a build that carries the key can use it. */
+        /** glcn: at most about five calls a second with the user's own key or server. */
+        private const val OWN_KEY_GAP_MS = 200L
         const val DEFAULT_WORKER_BASE = "https://tmdb.owntv.me"
 
         /** The original, unprotected address. Kept as the fallback for builds with no edge key — fork CI
