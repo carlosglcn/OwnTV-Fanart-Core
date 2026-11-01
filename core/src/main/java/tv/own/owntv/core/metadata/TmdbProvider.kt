@@ -367,6 +367,15 @@ class TmdbProvider(
             trailerKey = parseTrailerKey(o, trailerLang),
             logoPath = parseLogoPath(o, preferredLang),
             originalLanguage = o.optString("original_language").takeIf { it.isNotBlank() && it != "null" },
+            networks = o.optJSONArray("networks")?.let { arr ->
+                (0 until arr.length()).mapNotNull { k ->
+                    arr.optJSONObject(k)?.let { n ->
+                        n.optString("name").takeIf { it.isNotBlank() }?.let { name ->
+                            TvNetwork(name, n.optString("logo_path").takeIf { it.isNotBlank() && it != "null" })
+                        }
+                    }
+                }
+            }.orEmpty(),
         )
     }
 

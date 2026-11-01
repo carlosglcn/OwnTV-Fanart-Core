@@ -210,7 +210,8 @@ internal object EmbyBridge {
             val title = m.optString("Name")
             val year = m.optInt("ProductionYear", 0)
             val label = if (year > 0) "$title ($year)" else title
-            val group = groupOf(m, MOVIES_GROUP)
+            // glcn: a film's "studios" are its makers (Warner, Universal), not where it streams: films keep their genre.
+            val group = groupOf(m, MOVIES_GROUP, films = true)
             val rating = m.optDouble("CommunityRating", Double.NaN).takeIf { !it.isNaN() && it > 0 }
             tv.own.owntv.core.emby.EmbyWatchState.record(stream(m), m)
             sb.append("#EXTINF:-1 type=\"movie\" tvg-logo=\"").append(attr(image(m.getString("Id")))).append('"')
@@ -225,6 +226,17 @@ internal object EmbyBridge {
         }
         // The shows themselves, for their synopsis and backdrop.
         val shows = runCatching { items(s, "Series") }.getOrDefault(emptyList()).associateBy { it.optString("Id") }
+        // glcn: by platform — each show's network, variants joined (HBO Nordic → HBO), and the ones with only a show or
+        // two gathered in "Other networks"; then each platform's logo, found once through TMDB.
+        val platformOf: Map<String, String> = if (EmbyGroups.mode != EmbyGroups.Mode.PLATFORM) emptyMap() else {
+            val raw = shows.mapValues { (_, show) ->
+                show.optJSONArray("Studios")?.optJSONObject(0)?.optString("Name")?.takeIf { it.isNotBlank() }?.let(PlatformNames::canonical)
+            }
+            val counts = raw.values.filterNotNull().groupingBy { it }.eachCount()
+            val other = PlatformNames.other()
+            raw.mapNotNull { (id, name) -> name?.let { id to (if ((counts[it] ?: 0) >= PLATFORM_MIN_SHOWS) it else other) } }.toMap()
+                .also { map -> runCatching { PlatformLogos.findMissing(map, shows, other) } }
+        }
         forEachItem(s, "Episode") { e ->
             if (!e.has("ParentIndexNumber") || !e.has("IndexNumber")) return@forEachItem
             val show = e.optString("SeriesName").ifBlank { SERIES_GROUP }
@@ -242,7 +254,7 @@ internal object EmbyBridge {
                 .extra("glcn-series-backdrop", series?.let(::backdrop))
                 .extra("glcn-added", added(e))
                 .quality(e)
-                .append(" group-title=\"").append(attr(series?.let { groupOf(it, SERIES_GROUP) } ?: SERIES_GROUP)).append("\",").append(line(label)).append('\n')
+                .append(" group-title=\"").append(attr(seriesId?.let { platformOf[it] } ?: series?.let { groupOf(it, SERIES_GROUP) } ?: SERIES_GROUP)).append("\",").append(line(label)).append('\n')
                 .append(stream(e)).append('\n')
         }
         sb.toString()
@@ -262,11 +274,14 @@ internal object EmbyBridge {
     }
 
     /** glcn: the category a film or a show goes in, as Settings asks ([EmbyGroups]): its first genre, its platform, or one list. */
-    private fun groupOf(item: JSONObject, whole: String): String = when (EmbyGroups.mode) {
-        EmbyGroups.Mode.GENRE -> item.optJSONArray("Genres")?.optString(0)?.takeIf { it.isNotBlank() }?.let(::localGenre) ?: whole
-        EmbyGroups.Mode.PLATFORM -> item.optJSONArray("Studios")?.optJSONObject(0)?.optString("Name")?.takeIf { it.isNotBlank() } ?: whole
+    private fun groupOf(item: JSONObject, whole: String, films: Boolean = false): String = when (EmbyGroups.mode) {
         EmbyGroups.Mode.LIBRARY -> whole
+        EmbyGroups.Mode.PLATFORM -> if (films) genreOf(item, whole) else whole // shows: see platformOf
+        EmbyGroups.Mode.GENRE -> genreOf(item, whole)
     }
+
+    private fun genreOf(item: JSONObject, whole: String): String =
+        item.optJSONArray("Genres")?.optString(0)?.takeIf { it.isNotBlank() }?.let(::localGenre) ?: whole
 
     /**
      * glcn: (resolution rank, capability marks) from an item's MediaStreams — the same rank and marks a name like
@@ -376,6 +391,8 @@ internal object EmbyBridge {
 
     /** glcn: smaller pages — each holds the items' media streams, read and let go one page at a time. */
     private const val PAGE = 250
+    /** glcn: a platform with fewer shows than this goes in "Other networks". */
+    private const val PLATFORM_MIN_SHOWS = 3
     private const val MOVIES_GROUP = "Películas"
     private const val SERIES_GROUP = "Series"
 }
@@ -433,3 +450,91 @@ war=Bélica
 war & politics=Bélica y política
 western=Western
 """
+
+/** glcn: one name per platform — the variants a library's networks come in are joined. */
+object PlatformNames {
+    /** Lower-case prefix (or whole name) → the platform it belongs to; the first that matches wins. */
+    private val JOIN: List<Pair<String, String>> = listOf(
+        "hbo" to "HBO", "max" to "HBO",
+        "paramount" to "Paramount+", "showtime" to "Paramount+",
+        "apple tv" to "Apple TV+",
+        "amazon" to "Prime Video", "prime video" to "Prime Video",
+        "disney" to "Disney+",
+        "netflix" to "Netflix",
+        "movistar" to "Movistar+",
+        "sky" to "Sky",
+        "bbc" to "BBC",
+        "itv" to "ITV",
+        "national geographic" to "National Geographic", "nat geo" to "National Geographic",
+        "discovery" to "Discovery",
+        "atresmedia" to "Atresmedia", "antena 3" to "Atresmedia", "atresplayer" to "Atresmedia", "la sexta" to "Atresmedia", "lasexta" to "Atresmedia",
+        "telecinco" to "Mediaset", "cuatro" to "Mediaset", "mitele" to "Mediaset",
+        "la 1" to "RTVE", "la 2" to "RTVE", "rtve" to "RTVE", "tve" to "RTVE",
+        "hulu" to "Hulu", "peacock" to "Peacock", "starz" to "Starz", "amc" to "AMC",
+    )
+
+    fun canonical(name: String): String {
+        val n = name.trim().lowercase(java.util.Locale.ROOT)
+        return JOIN.firstOrNull { (prefix, _) -> n == prefix || n.startsWith("$prefix ") || n.startsWith("$prefix+") }?.second ?: name.trim()
+    }
+
+    /** The category the small networks share, in the app's language. */
+    fun other(): String = if (java.util.Locale.getDefault().language == "es") OTHER_ES else OTHER_EN
+
+    private const val OTHER_ES = "Otras cadenas"
+    private const val OTHER_EN = "Other networks"
+}
+
+/**
+ * glcn: each platform's logo (TMDB's network logo), found once — through the TMDB details of one of its shows — and kept
+ * on the device, so the category list can show the platform's own mark. Read by the app with [logoFor].
+ */
+object PlatformLogos {
+    private val logos = java.util.concurrent.ConcurrentHashMap<String, String>()
+    @Volatile private var loaded = false
+
+    /** The logo URL kept for [platform], or null. */
+    fun logoFor(platform: String): String? { ensure(); return logos[platform] }
+
+    internal suspend fun findMissing(platformOf: Map<String, String>, shows: Map<String, JSONObject>, other: String) {
+        ensure()
+        val provider = runCatching {
+            org.koin.core.context.GlobalContext.get().get<tv.own.owntv.core.metadata.MetadataProvider>()
+        }.getOrNull() ?: return
+        val wanted = platformOf.values.toSet() - other - logos.keys
+        var changed = false
+        for (platform in wanted) {
+            val tmdbIds = platformOf.filterValues { it == platform }.keys.asSequence()
+                .mapNotNull { id -> shows[id]?.optJSONObject("ProviderIds")?.optString("Tmdb")?.toIntOrNull() }
+                .take(2).toList()
+            for (tmdb in tmdbIds) {
+                val nets = runCatching { provider.tvDetails(tmdb) }.getOrNull()?.networks.orEmpty()
+                val hit = nets.firstOrNull { PlatformNames.canonical(it.name) == platform && it.logoPath != null }
+                    ?: nets.firstOrNull { it.logoPath != null }.takeIf { nets.size == 1 }
+                val url = tv.own.owntv.core.metadata.MetadataImages.logo(hit?.logoPath, "w300") ?: continue
+                logos[platform] = url
+                changed = true
+                break
+            }
+        }
+        if (changed) save()
+    }
+
+    private fun prefs() = runCatching {
+        org.koin.core.context.GlobalContext.get().get<android.content.Context>()
+            .getSharedPreferences(PREFS, android.content.Context.MODE_PRIVATE)
+    }.getOrNull()
+
+    private fun ensure() {
+        if (loaded) return
+        loaded = true
+        prefs()?.all?.forEach { (k, v) -> if (v is String) logos[k] = v }
+    }
+
+    private fun save() {
+        val p = prefs() ?: return
+        p.edit().apply { logos.forEach { (k, v) -> putString(k, v) } }.apply()
+    }
+
+    private const val PREFS = "glcn_platform_logos"
+}

@@ -296,47 +296,11 @@
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	en directo
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	w780
 2	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	·
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	,
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	20th century
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	TMDB $label failed: ${it.message}
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	Trending type=$type page=$page
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	a24
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	amazon
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	apple
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	backdrop_path
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	bbc
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	blumhouse
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	canal+
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	columbia
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	dreamworks
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	focus features
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	hbo
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	legendary
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	lionsgate
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	lucasfilm
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	marvel
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	metadata allowance spent, skipping $label
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	metro-goldwyn
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	miramax
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	movie details id=$tmdbId
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	netflix
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	networks
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	new line
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	paramount
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	pixar
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	platform id=$tmdbId
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	profile_path
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	search type=$type
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	searchlight
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	sony pictures
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	studio ghibli
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	toho
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	tv details id=$tmdbId
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	universal
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_average
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_count
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	walt disney
-1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	warner bros
+2	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	backdrop_path
+2	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	logo_path
+9	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	name
+20	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	null
+3	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_average
 2	core/src/main/java/tv/own/owntv/core/model/HomeRow.kt	glcnGenresDefault
 2	core/src/main/java/tv/own/owntv/core/model/HomeRow.kt	glcnLayoutV2
 3	core/src/main/java/tv/own/owntv/core/network/DnsConfig.kt	\0
@@ -666,9 +630,11 @@
 1	core/src/main/java/tv/own/owntv/core/storage/MediaTarget.kt	cannot open $uri for reading
 1	core/src/main/java/tv/own/owntv/core/subtitles/OpenSubtitlesClient.kt	$method ${pathAndQuery.substringBefore('?')} via $base -> ${e.javaClass.simpleName}: ${e.message}
 1	core/src/main/java/tv/own/owntv/core/subtitles/OpenSubtitlesClient.kt	$method ${pathAndQuery.substringBefore('?')} via $base -> HTTP ${resp.code}
-2	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Id
+5	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Id
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear
+1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProviderIds
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Series
+1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	es
 1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	#EXTINF
 1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	Emby playlist entries=${text.lineSequence().count { it.startsWith("#EXTINF") }}
 1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	Emby/Jellyfin no responde en ${target.root}

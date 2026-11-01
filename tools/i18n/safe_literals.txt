@@ -2332,6 +2332,7 @@
 2	protocol	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	&language=
 1	protocol	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	&year=$year
 1	protocol	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	+
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	,
 1	protocol	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	.svg
 3	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/3/movie/
 1	protocol	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/3/search/movie
@@ -2341,6 +2342,7 @@
 1	url	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/3/watch/providers/
 1	url	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/day
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/videos
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	20th century
 4	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	?
 1	url	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	?append_to_response=
 2	protocol	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	?append_to_response=credits,external_ids,videos,images
@@ -2353,17 +2355,27 @@
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	Clip
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	Featurette
 1	log	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	OwnTVSpend
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	TMDB $label failed: ${it.message}
 1	log	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	TMDB Trending parse failed type=$type page=$page
 2	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	Teaser
 1	log	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	TmdbProvider
 2	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	Trailer
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	Trending type=$type page=$page
 3	protocol	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	UTF-8
 2	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	YouTube
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	a24
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	adult
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	air_date
-2	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	backdrop_path
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	amazon
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	apple
+1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	backdrop_path
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	bbc
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	blumhouse
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	canal+
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	cast
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	columbia
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	credits
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	dreamworks
 5	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	en
 2	uri	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	en,null
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	episode_number
@@ -2371,7 +2383,9 @@
 2	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	external_ids
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	file_path
 2	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	first_air_date
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	focus features
 2	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	genres
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	hbo
 1	url	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	https://api.themoviedb.org
 1	url	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	https://image.tmdb.org/t/p
 1	url	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	https://owntv-tmdb-meta.xiannero.workers.dev
@@ -2381,37 +2395,62 @@
 3	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	imdb_id
 3	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	iso_639_1
 3	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	key
-2	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	logo_path
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	legendary
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	lionsgate
+1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	logo_path
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	logos
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	lucasfilm
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	marvel
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	metadata allowance spent, skipping $label
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	metro-goldwyn
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	miramax
 3	url	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	movie
-9	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	name
-20	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	null
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	movie details id=$tmdbId
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	name
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	netflix
+2	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	networks
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	new line
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	null
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	official
 2	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	original_language
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	original_name
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	original_title
 4	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	overview
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	paramount
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	pixar
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	platform id=$tmdbId
 1	protocol	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	plus
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	popularity
 3	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	poster_path
 2	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	production_companies
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	profile_path
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	provider_name
 1	log	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	providers ${if (isTv) "tv" else "movie"}
 2	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	release_date
 4	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	results
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	search type=$type
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	searchlight
 1	log	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	season bundle tv=$tvId seasons=${wanted.firstOrNull()}..${wanted.lastOrNull()}
 1	url	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	season/$it
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	season/$season
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	season_number
 2	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	site
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	sony pictures
 1	log	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	spend: $label
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	still_path
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	studio ghibli
 2	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	title
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	toho
 3	url	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	tv
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	tv details id=$tmdbId
 5	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	type
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	universal
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	videos
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	videos id=$tmdbId
-3	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_average
+1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_average
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_count
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	walt disney
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	warner bros
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	width
 1	protocol	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	with Ads
 1	protocol	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	x-owntv-client
@@ -5305,6 +5344,8 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTINF:-1 type="series" tvg-logo="
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTM3U
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$api/Users/AuthenticateByName?$query
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$prefix
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$prefix+
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$scheme://$hostPart$port$path
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$title ($year)
 1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	${cause.javaClass.simpleName}: ${cause.message.orEmpty().take(160)}
@@ -5327,9 +5368,13 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	="
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	?
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	?static=true&api_key=${s.token}
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	AMC
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	AccessToken
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Apple TV+
+5	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Atresmedia
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Audio
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Authorization
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	BBC
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	BackdropImageTags
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Channels
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Client="OwnTV", Device="OwnTV", DeviceId="owntv-glcn", Version="1.0"
@@ -5339,6 +5384,8 @@
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Container,Genres,Overview,CommunityRating,BackdropImageTags,
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DateCreated
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DateCreated,ProviderIds,RunTimeTicks,UserData,MediaStreams,Studios
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Discovery
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Disney+
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DisplayTitle
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Dolby Atmos
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Dolby Vision
@@ -5349,34 +5396,50 @@
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Episode
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ExtendedVideoType
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Genres
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HBO
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HDR
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HDR10
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HDR10+
 1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	HTTP ${r.code}
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Height
-5	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Id
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Hulu
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ITV
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Id
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IndexNumber
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IsPlayed
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	IsResumable
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Items
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	MediaBrowser $AUTH_FIELDS
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	MediaStreams
+3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Mediaset
 3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Movie
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Movistar+
 3	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Name
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	National Geographic
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Netflix
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Other networks
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Otras cadenas
 3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Overview
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Paramount+
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ParentIndexNumber
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Peacock
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Películas
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Prime Video
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProductionYear,ParentIndexNumber,IndexNumber,SeriesName,SeriesId,
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Profile
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProviderIds
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Pw
+4	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	RTVE
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Series
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	SeriesId
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	SeriesName
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	SeriesSortName,ParentIndexNumber,IndexNumber
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Sky
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	SortName
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Starz
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Studios
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Tmdb
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	TotalRecordCount
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Type
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	UTC
@@ -5393,8 +5456,18 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	[
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	[$host]
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	action=Acción adventure=Aventura action & adventure=Acción y aventura animation=Animación anime=Anime biography=Biografía children=Infantil kids=Infantil comedy=Comedia crime=Crimen documentary=Documental drama=Drama family=Familia fantasy=Fantasía food=Cocina game show=Concursos history=Historia horror=Terror mini-series=Miniseries miniseries=Miniseries music=Música musical=Musical mystery=Misterio news=Noticias reality=Reality romance=Romance science fiction=Ciencia ficción sci-fi=Ciencia ficción sci-fi & fantasy=Ciencia ficción y fantasía soap=Telenovela sport=Deporte sports=Deporte suspense=Suspense talk=Tertulia talk show=Tertulia thriller=Thriller tv movie=Telefilm war=Bélica war & politics=Bélica y política western=Western
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	amazon
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	amc
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	antena 3
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	apple tv
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	application/json
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	atmos
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	atresmedia
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	atresplayer
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	bbc
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	cuatro
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	discovery
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	disney
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dolby vision
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dolbyvision
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dovi
@@ -5409,7 +5482,9 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-series-backdrop
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-series-plot
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-year
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn_platform_logos
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	group-title="
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hbo
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hdr
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hdr 10
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hdr10
@@ -5418,7 +5493,29 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hlg
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	http
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	https
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hulu
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	itv
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	joc
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	la 1
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	la 2
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	la sexta
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	lasexta
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	max
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	mitele
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	movistar
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	nat geo
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	national geographic
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	netflix
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	paramount
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	peacock
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	prime video
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	rtve
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	showtime
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	sky
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	starz
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	telecinco
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	tve
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	w300
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	yyyy-MM-dd'T'HH:mm:ss
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	|
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	•

@@ -190,7 +190,12 @@ data class MovieDetails(
     val logoPath: String?,
     /** TMDB `original_language` (ISO 639-1, e.g. "ko"): what "Original language" audio plays. */
     val originalLanguage: String? = null,
+    /** glcn: a show's networks (Netflix, HBO…) with their logos — the Emby platform categories' pictures. */
+    val networks: List<TvNetwork> = emptyList(),
 )
+
+/** glcn: a TV network as TMDB gives it, its logo a TMDB image path. */
+data class TvNetwork(val name: String, val logoPath: String?)
 
 /** Per-episode TMDB details (`/tv/{id}/season/{n}/episode/{m}`). Its own still, plot, air date, rating. */
 data class EpisodeDetails(
