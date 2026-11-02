@@ -444,6 +444,28 @@ class LivePreviewEngine(
             }
         }
 
+        /**
+         * glcn: zap timing, the network half — the first load of a tune (a playlist or the first segment) with how
+         * long it took from the press and whether the provider redirected it first (the hop a warm-up could save).
+         */
+        override fun onLoadCompleted(
+            eventTime: androidx.media3.exoplayer.analytics.AnalyticsListener.EventTime,
+            loadEventInfo: androidx.media3.exoplayer.source.LoadEventInfo,
+            mediaLoadData: androidx.media3.exoplayer.source.MediaLoadData,
+        ) {
+            val t = tune
+            if (t.firstLoadLogged || t.playStartedMs <= 0) return
+            t.firstLoadLogged = true
+            val sinceStart = android.os.SystemClock.elapsedRealtime() - t.playStartedMs
+            val asked = loadEventInfo.dataSpec.uri
+            val got = loadEventInfo.uri
+            val redirected = asked.host != null && got.host != null && asked.host != got.host
+            LiveDiagnosticsLog.event(
+                "zap: first data after ${sinceStart}ms (load ${loadEventInfo.loadDurationMs}ms, ${loadEventInfo.bytesLoaded} bytes" +
+                    (if (redirected) ", redirected ${asked.host} → ${got.host}" else ", no redirect") + ")",
+            )
+        }
+
         override fun onVideoDecoderInitialized(eventTime: androidx.media3.exoplayer.analytics.AnalyticsListener.EventTime, decoderName: String, initializedTimestampMs: Long, initializationDurationMs: Long) {
             tune.lastVideoDecoder = decoderName
             val hardware = DecoderNames.isHardware(decoderName)
@@ -3992,6 +4014,8 @@ internal data class TuneState(
     var everRendered: Boolean = false,
     /** Media3's own first-frame callback — the only frame signal a tunneled decoder gives. */
     var firstFrameRendered: Boolean = false,
+    /** glcn: the tune's first completed load is logged (zap timing). */
+    @field:Volatile var firstLoadLogged: Boolean = false,
     var lastProgressPos: Long = -1L,
     /** `SystemClock.elapsedRealtime()` of the last forward position move. */
     var lastProgressWallMs: Long = 0L,
