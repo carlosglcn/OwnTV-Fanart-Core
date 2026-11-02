@@ -65,8 +65,12 @@ object LiveBuffer {
     const val BALANCED_SECS = 8
     private const val IDLE_WINDOW_SECS = 2
 
-    /** Today's hardcoded start thresholds, and what "Pre-buffer = Off" still means. */
-    const val DEFAULT_START_MS = 1_000
+    /**
+     * Start thresholds, and what "Pre-buffer = Off" still means. Start is 500 ms: zap logs showed
+     * the provider takes 2–3 s to answer and the old 1 s threshold added ~0.5 s on top. Restart
+     * after a stall keeps 2 s so a shaky stream doesn't stutter twice.
+     */
+    const val DEFAULT_START_MS = 500
     const val DEFAULT_RESTART_MS = 2_000
 
     /** The "Pre-buffer" choices, in seconds. 0 = Off (engine defaults). */
