@@ -4510,6 +4510,14 @@ class OwnTVPlayer(
      * glcn: the chapters mpv found in the container (MKV, MP4…). ExoPlayer does not read them, so on ExoPlayer this
      * is empty and the chapter controls stay hidden.
      */
+    /** glcn: what is playing and its request headers, for reading frames of it elsewhere (chapter pictures). */
+    fun mediaSource(): PlayerMediaSource? {
+        val url = currentUrl ?: return null
+        val headers = LinkedHashMap(currentHeaders)
+        currentUserAgent?.let { ua -> if (headers.keys.none { it.equals("User-Agent", ignoreCase = true) }) headers["User-Agent"] = ua }
+        return PlayerMediaSource(url, headers)
+    }
+
     suspend fun chapters(): List<PlayerChapter> {
         if (exoActive) return emptyList()
         return readOnMpv { m ->

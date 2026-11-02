@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.StateFlow
  * full-screen). VOD-only controls (seek/speed/prev-next/position) have no-op defaults so a live engine need
  * only implement the live-relevant members.
  */
+/** glcn: what is playing — its address and the request headers (user agent, cookies) it needs. */
+data class PlayerMediaSource(val url: String, val headers: Map<String, String>)
+
 /** glcn: one chapter of a film — its name ("Opening", "Chapter 3") when the file gives one, and where it starts. */
 data class PlayerChapter(val title: String?, val startMs: Long)
 
@@ -123,6 +126,8 @@ interface PlaybackEngine {
     suspend fun streamInfo(): List<StreamInfoRow> = emptyList()
     /** glcn: the file's chapters (mpv reads them from the container); empty when it has none or the engine cannot tell. */
     suspend fun chapters(): List<PlayerChapter> = emptyList()
+    /** glcn: the address of what is playing and the headers it is fetched with (for chapter pictures); null when unknown. */
+    fun mediaSource(): PlayerMediaSource? = null
 
     // VOD-only — sensible no-op / empty defaults for a live engine.
     val position: StateFlow<Long> get() = ZERO_LONG
@@ -231,6 +236,7 @@ class MpvPlaybackEngine(private val p: OwnTVPlayer) : PlaybackEngine {
     override fun selectVideoQuality(height: Int?) = p.selectVideoQuality(height)
     override suspend fun streamInfo() = p.streamInfo()
     override suspend fun chapters() = p.chapters()
+    override fun mediaSource() = p.mediaSource()
     override fun setBitrateTrackingEnabled(enabled: Boolean) = p.setBitrateTrackingEnabled(enabled)
     override fun refreshStreamChips() = p.refreshStreamChips()
     override fun setSpeed(speed: Double) = p.setSpeed(speed)
