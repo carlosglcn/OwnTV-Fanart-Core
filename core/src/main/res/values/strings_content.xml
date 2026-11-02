@@ -1049,4 +1049,11 @@
     </plurals>
     <string name="glcn_labs_on">Test features on</string>
     <string name="glcn_labs_off">Test features off</string>
+    <string name="glcn_player_glass_title">Panels over the video</string>
+    <string name="glcn_player_glass_desc">How see-through the player and channel-change panels are</string>
+    <string name="glcn_player_glass_0">Very see-through</string>
+    <string name="glcn_player_glass_1">See-through</string>
+    <string name="glcn_player_glass_2">Normal</string>
+    <string name="glcn_player_glass_3">Solid</string>
+    <string name="glcn_player_glass_4">Very solid</string>
 </resources>

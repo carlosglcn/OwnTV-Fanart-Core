@@ -734,4 +734,11 @@
     </plurals>
     <string name="glcn_labs_on">Funciones de prueba activadas</string>
     <string name="glcn_labs_off">Funciones de prueba desactivadas</string>
+    <string name="glcn_player_glass_title">Paneles sobre el vídeo</string>
+    <string name="glcn_player_glass_desc">Cuánto se transparentan los paneles del reproductor y del zapping</string>
+    <string name="glcn_player_glass_0">Muy transparente</string>
+    <string name="glcn_player_glass_1">Transparente</string>
+    <string name="glcn_player_glass_2">Normal</string>
+    <string name="glcn_player_glass_3">Opaco</string>
+    <string name="glcn_player_glass_4">Muy opaco</string>
 </resources>
