@@ -7168,6 +7168,7 @@
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	OwnTVPlayer
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	PlayerBudget: $budget
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	STEREO
+2	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	User-Agent
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	VOD ended mid-stream at ${pos}ms of ${dur}ms — reloading from position ($next/$budget)
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	VOD ended mid-stream at ${pos}ms of ${dur}ms, reconnects spent — surfacing error
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	VOD failed on BOTH engines — exo first: '$exoErr' / mpv: '$mpvMsg'
