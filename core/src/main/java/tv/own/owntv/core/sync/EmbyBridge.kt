@@ -173,8 +173,12 @@ internal object EmbyBridge {
     private fun attr(v: String) = v.replace('"', '\'').replace('\n', ' ').replace('\r', ' ').trim()
     private fun line(v: String) = v.replace('\n', ' ').replace('\r', ' ').trim()
 
-    /** The whole library as M3U text. */
-    suspend fun playlist(s: Session): String = withContext(Dispatchers.IO) {
+    /**
+     * The whole library as M3U, written to [out]; returns how many entries. glcn: written as it is read (one entry at a
+     * time to the file, each category's entries spooled to its own file when they must be reordered) — the whole text
+     * used to be held in memory two or three times over, and a big library pushed the TV into "critical memory".
+     */
+    suspend fun playlist(s: Session, out: java.io.File): Int = withContext(Dispatchers.IO) {
         fun image(id: String) = "${s.api}/Items/$id/Images/Primary?maxWidth=500&api_key=${s.token}"
         fun backdrop(it: JSONObject): String? =
             if ((it.optJSONArray("BackdropImageTags")?.length() ?: 0) > 0) {
@@ -201,11 +205,16 @@ internal object EmbyBridge {
                     .parse(raw.substring(0, 19))?.time?.toString()
             }.getOrNull()
         }
-        val sb = StringBuilder("#EXTM3U\n")
+        val spoolDir = java.io.File(out.parentFile, out.name + ".parts").apply { deleteRecursively(); mkdirs() }
+        val w = out.bufferedWriter(Charsets.UTF_8)
+        var entries = 0
+        val films = GroupSpool(spoolDir, "f")
+        val showsOut = GroupSpool(spoolDir, "s")
+        try {
+        w.write("#EXTM3U\n")
         val filmPlatforms = HashSet<String>()
         val filmTmdb = HashMap<String, Int>()
         val styledSubs = HashSet<String>()
-        val filmGroups = LinkedHashMap<String, StringBuilder>()
         forEachItem(s, "Movie") { m ->
             // A file the library could not identify — no year and no IMDb/TMDB id — is not a film:
             // calibration clips ("100% Blanco", "5% Gris"), samples, home videos. Left out.
@@ -224,8 +233,8 @@ internal object EmbyBridge {
             ids?.optString("Tmdb")?.toIntOrNull()?.takeIf { it > 0 }?.let { filmTmdb[stream(m)] = it }
             if (hasStyledSubs(m)) styledSubs += stream(m)
             // glcn: by platform, each group's films are kept apart and written platforms first, biggest first.
-            val out = if (EmbyGroups.mode == EmbyGroups.Mode.PLATFORM) filmGroups.getOrPut(group) { StringBuilder() } else sb
-            out.append("#EXTINF:-1 type=\"movie\" tvg-logo=\"").append(attr(image(m.getString("Id")))).append('"')
+            val entry = StringBuilder(512)
+            entry.append("#EXTINF:-1 type=\"movie\" tvg-logo=\"").append(attr(image(m.getString("Id")))).append('"')
                 .extra("glcn-plot", m.optString("Overview"))
                 .extra("glcn-backdrop", backdrop(m))
                 .extra("glcn-year", year.takeIf { it > 0 }?.toString())
@@ -234,12 +243,13 @@ internal object EmbyBridge {
                 .quality(m)
                 .append(" group-title=\"").append(attr(group)).append("\",").append(line(label)).append('\n')
                 .append(stream(m)).append('\n')
+            entries++
+            if (EmbyGroups.mode == EmbyGroups.Mode.PLATFORM) films.add(group, entry) else w.append(entry)
         }
-        if (filmGroups.isNotEmpty()) {
+        if (films.isNotEmpty()) {
             // Platforms first, from the one with most films down; the genres after, in the order they came.
-            val counts = filmGroups.mapValues { (_, b) -> b.split('\n').count { it.startsWith("#EXTINF") } }
-            val (platforms, rest) = filmGroups.keys.partition { it in filmPlatforms }
-            (platforms.sortedByDescending { counts[it] ?: 0 } + rest).forEach { sb.append(filmGroups.getValue(it)) }
+            val (platforms, rest) = films.groups.partition { it in filmPlatforms }
+            films.drainTo(w, platforms.sortedByDescending { films.count(it) } + rest)
         }
         // The shows themselves, for their synopsis and backdrop.
         val shows = runCatching { items(s, "Series") }.getOrDefault(emptyList()).associateBy { it.optString("Id") }
@@ -268,7 +278,6 @@ internal object EmbyBridge {
         }
         // glcn: by platform, the shows are written platform by platform — the one with most shows first, "Other networks"
         // last — so the category list comes in that order.
-        val showGroups = LinkedHashMap<String, StringBuilder>()
         forEachItem(s, "Episode") { e ->
             if (!e.has("ParentIndexNumber") || !e.has("IndexNumber")) return@forEachItem
             val show = e.optString("SeriesName").ifBlank { SERIES_GROUP }
@@ -282,8 +291,8 @@ internal object EmbyBridge {
             tv.own.owntv.core.emby.EmbyWatchState.record(stream(e), e)
             if (hasStyledSubs(e)) styledSubs += stream(e)
             val group = seriesId?.let { platformOf[it] } ?: series?.let { groupOf(it, SERIES_GROUP) } ?: SERIES_GROUP
-            val out = if (platformOf.isEmpty()) sb else showGroups.getOrPut(group) { StringBuilder() }
-            out.append("#EXTINF:-1 type=\"series\" tvg-logo=\"").append(attr(logo)).append('"')
+            val entry = StringBuilder(512)
+            entry.append("#EXTINF:-1 type=\"series\" tvg-logo=\"").append(attr(logo)).append('"')
                 .extra("glcn-plot", e.optString("Overview"))
                 .extra("glcn-series-plot", series?.optString("Overview"))
                 .extra("glcn-series-backdrop", series?.let(::backdrop))
@@ -291,15 +300,47 @@ internal object EmbyBridge {
                 .quality(e)
                 .append(" group-title=\"").append(attr(group)).append("\",").append(line(label)).append('\n')
                 .append(stream(e)).append('\n')
+            entries++
+            if (platformOf.isEmpty()) w.append(entry) else showsOut.add(group, entry)
         }
         runCatching { tv.own.owntv.core.emby.EmbyTmdb.replaceStyled(styledSubs) }
-        if (showGroups.isNotEmpty()) {
+        if (showsOut.isNotEmpty()) {
             val showCount = platformOf.values.groupingBy { it }.eachCount()
             val other = PlatformNames.other()
-            showGroups.keys.sortedWith(compareBy<String> { it == other }.thenByDescending { showCount[it] ?: 0 })
-                .forEach { sb.append(showGroups.getValue(it)) }
+            showsOut.drainTo(w, showsOut.groups.sortedWith(compareBy<String> { it == other }.thenByDescending { showCount[it] ?: 0 }))
         }
-        sb.toString()
+        } finally {
+            films.close(); showsOut.close()
+            runCatching { w.close() }
+            spoolDir.deleteRecursively()
+        }
+        entries
+    }
+
+    /**
+     * glcn: each category's entries, kept in a file of their own until they are written out in the order wanted —
+     * so reordering a big library costs disk, not memory.
+     */
+    private class GroupSpool(private val dir: java.io.File, private val prefix: String) {
+        private val writers = LinkedHashMap<String, java.io.Writer>()
+        private val files = HashMap<String, java.io.File>()
+        private val counts = HashMap<String, Int>()
+        val groups: List<String> get() = writers.keys.toList()
+        fun isNotEmpty() = writers.isNotEmpty()
+        fun count(group: String) = counts[group] ?: 0
+        fun add(group: String, entry: CharSequence) {
+            val wr = writers.getOrPut(group) {
+                val f = java.io.File(dir, "$prefix${writers.size}.m3u").also { files[group] = it }
+                f.bufferedWriter(Charsets.UTF_8)
+            }
+            wr.append(entry)
+            counts[group] = count(group) + 1
+        }
+        fun drainTo(out: java.io.Writer, order: List<String>) {
+            writers.values.forEach { runCatching { it.close() } }
+            order.forEach { g -> files[g]?.bufferedReader(Charsets.UTF_8)?.use { it.copyTo(out) } }
+        }
+        fun close() { writers.values.forEach { runCatching { it.close() } } }
     }
 
     /**
@@ -431,13 +472,13 @@ internal object EmbyBridge {
      * watch-state refresh share one sign-in (each used to sign in on its own, so the server announced two
      * logins at every sync); a refused token signs in again once.
      */
-    suspend fun playlistFor(t: Target, api: String): String {
+    suspend fun playlistFor(t: Target, api: String, out: java.io.File): Int {
         val key = keyOf(t)
         sessions[key]?.let { kept ->
-            try { return playlist(kept) } catch (e: TokenGone) { sessions.remove(key) }
+            try { return playlist(kept, out) } catch (e: TokenGone) { sessions.remove(key) }
         }
         val s = login(t, api).also { sessions[key] = it }
-        return playlist(s)
+        return playlist(s, out)
     }
 
     /** The kept token was refused: it expired or the server forgot it. */

@@ -634,8 +634,6 @@
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ProviderIds
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Series
 1	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	es
-1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	#EXTINF
-1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	Emby playlist entries=${text.lineSequence().count { it.startsWith("#EXTINF") }}
 1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	Emby/Jellyfin no responde en ${target.root}
 1	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	M3U source ${s.id} is an Emby/Jellyfin server at $api
 2	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	glcn-added

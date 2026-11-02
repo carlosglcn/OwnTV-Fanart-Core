@@ -5407,12 +5407,12 @@
 1	log	core/src/main/java/tv/own/owntv/core/sync/CatalogPriority.kt	priority category sourceId=${row.sourceId} type=${row.mediaType} cat=${row.categoryRemoteId}
 10	empty	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	\0
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	",
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTINF
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTINF:-1 type="movie" tvg-logo="
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTINF:-1 type="series" tvg-logo="
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	#EXTM3U
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$api/Users/AuthenticateByName?$query
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$prefix
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$prefix${writers.size}.m3u
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$prefix+
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$scheme://$hostPart$port$path
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	$title ($year)
@@ -5427,6 +5427,7 @@
 1	uri	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	&Filters=$f
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	&SortBy=$sort&IsMissing=false&StartIndex=$start&Limit=$PAGE
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	.$c
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	.parts
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	/System/Info/Public
 1	url	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	/emby
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	2.0 Audio
@@ -5549,6 +5550,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dovi
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	eac3
 1	locale	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	es
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	f
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-added
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-backdrop
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-plot
@@ -5591,6 +5593,7 @@
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	peacock
 2	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	prime video
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	rtve
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	s
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	showtime
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	sky
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ssa
@@ -5633,6 +5636,7 @@
 1	regex	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	(?i)\\bS(\\d{1,4})\\s*[.\\-_ ]?\\s*E(\\d{1,4})\\b
 1	regex	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	(?i)\\bSeason\\s*(\\d{1,4})\\s*[.,:\\-_ ]*\\s*(?:Episode|Ep\\.?)\\s*(\\d{1,4})\\b
 1	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	/
+1	log	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	Emby playlist entries=$n
 1	log	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	M3U categories flush sourceId=${s.id} rows=${pendingCategories.size} ms=${SystemClock.elapsedRealtime() - start}
 1	log	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	M3U channel flush sourceId=${s.id} rows=${channels.size} dbInserted=${upsert.inserted}
 3	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	M3U live
@@ -5651,6 +5655,7 @@
 1	log	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	dbUpdated=${changed.size} dbAppended=${appended.size} dbSkipped=$skipped episodes=$episodesWritten
 1	log	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	dbUpdated=${upsert.updated} dbSkipped=${upsert.skippedUnchanged} processed=$moviesProcessed
 1	log	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	dbUpdated=${upsert.updated} dbSkipped=${upsert.skippedUnchanged} processed=$processed
+1	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	emby_${s.id}.m3u
 1	url	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	file://
 2	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	glcn-quality
 2	technical	core/src/main/java/tv/own/owntv/core/sync/M3uSyncer.kt	glcn-rank

@@ -56,6 +56,8 @@ internal class M3uSyncer(
     private val channelAdapter get() = support.channelAdapter
     private val movieAdapter get() = support.movieAdapter
     private val localFile = LocalPlaylistFile(context)
+    /** glcn: where an Emby/Jellyfin library is written before it is read (see [EmbyBridge.playlist]). */
+    private val spoolDir = context.cacheDir
 
     suspend fun sync(s: SourceEntity, progress: SyncCounters, stats: SyncStatsCollector) {
         val channelsStart = System.currentTimeMillis()
@@ -481,15 +483,17 @@ internal class M3uSyncer(
                 }
             }
             // glcn: "http://user:password@nas:8096" is an Emby/Jellyfin server, read as a playlist.
-            val embyText = if (isLocal) null else EmbyBridge.parse(s.url)?.let { target ->
+            val embyFile = if (isLocal) null else EmbyBridge.parse(s.url)?.let { target ->
                 // A link with a user and no playlist file is a server link: if no server answers, fail
                 // the sync loudly rather than "complete" it with an empty library.
                 val api = EmbyBridge.detect(target)
                     ?: throw java.io.IOException("Emby/Jellyfin no responde en ${target.root}")
                 Log.i(TAG, "M3U source ${s.id} is an Emby/Jellyfin server at $api")
-                EmbyBridge.playlistFor(target, api).also { text ->
-                    Log.i(TAG, "Emby playlist entries=${text.lineSequence().count { it.startsWith("#EXTINF") }}")
-                }
+                // glcn: written to a file and read back as a stream — never the whole library in memory.
+                val file = java.io.File(spoolDir, "emby_${s.id}.m3u")
+                val n = EmbyBridge.playlistFor(target, api, file)
+                Log.i(TAG, "Emby playlist entries=$n")
+                file
             }
             // glcn: "smb://user:password@nas/share?movies=…&series=…" is a folder shared on the home network.
             val shareText = if (isLocal) null else tv.own.owntv.core.netshare.NetShare.parse(s.url)?.let { target ->
@@ -500,7 +504,7 @@ internal class M3uSyncer(
             val header = when {
                 isLocal -> localFile.open(s.url).use { input -> m3u.parse(input, onEntry) }
                 shareText != null -> shareText.byteInputStream(Charsets.UTF_8).use { input -> m3u.parse(input, onEntry) }
-                embyText != null -> embyText.byteInputStream(Charsets.UTF_8).use { input -> m3u.parse(input, onEntry) }
+                embyFile != null -> try { embyFile.inputStream().buffered().use { input -> m3u.parse(input, onEntry) } } finally { embyFile.delete() }
                 else -> http.get(s.url, s.userAgent, reportBytes, maxAttempts = M3U_DOWNLOAD_ATTEMPTS) { input -> m3u.parse(input, onEntry) }
             }
             if (buffer.isNotEmpty()) {
