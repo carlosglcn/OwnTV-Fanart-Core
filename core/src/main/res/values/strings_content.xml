@@ -1056,4 +1056,10 @@
     <string name="glcn_player_glass_2">Normal</string>
     <string name="glcn_player_glass_3">Solid</string>
     <string name="glcn_player_glass_4">Very solid</string>
+    <string name="glcn_live_banner_title">Live banner</string>
+    <string name="glcn_live_banner_desc">How the programme on air shows when you call up the controls on a channel</string>
+    <string name="glcn_live_banner_compact">Compact</string>
+    <string name="glcn_live_banner_ficha">Card</string>
+    <string name="glcn_live_banner_cine">Cinema</string>
+    <string name="glcn_live_banner_lateral">Side</string>
 </resources>

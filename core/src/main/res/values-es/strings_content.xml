@@ -741,4 +741,10 @@
     <string name="glcn_player_glass_2">Normal</string>
     <string name="glcn_player_glass_3">Opaco</string>
     <string name="glcn_player_glass_4">Muy opaco</string>
+    <string name="glcn_live_banner_title">Banner del directo</string>
+    <string name="glcn_live_banner_desc">Cómo se muestra el programa en emisión al sacar los controles en un canal</string>
+    <string name="glcn_live_banner_compact">Compacto</string>
+    <string name="glcn_live_banner_ficha">Ficha</string>
+    <string name="glcn_live_banner_cine">Cine</string>
+    <string name="glcn_live_banner_lateral">Lateral</string>
 </resources>
