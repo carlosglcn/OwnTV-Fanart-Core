@@ -110,6 +110,18 @@ object LiveDiagnosticsLog {
     /** Oldest-first snapshot of the in-memory ring buffer (e.g. for an in-app export action). */
     fun snapshot(): String = synchronized(lock) { ring.joinToString("\n") }
 
+    /**
+     * glcn: the last [lines] of the rolling file — unlike [snapshot] (this process only), it still holds what was
+     * written before the app froze or was closed, which is what a report after a crash needs. Null without a file.
+     */
+    fun tail(lines: Int = REPORT_LINES): String? = runCatching {
+        // Lines from the last second may still be in the writer's buffer.
+        writer.submit { runCatching { out?.flush() } }.get(500, TimeUnit.MILLISECONDS)
+        logFile?.takeIf { it.length() > 0 }?.readLines()?.takeLast(lines)?.joinToString("\n")
+    }.getOrNull()
+
+    private const val REPORT_LINES = 400
+
     /** Path of the rolling diagnostic file on disk, once [init] has run. */
     fun file(): File? = logFile
 }

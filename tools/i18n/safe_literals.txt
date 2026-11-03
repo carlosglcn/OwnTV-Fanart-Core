@@ -6742,7 +6742,7 @@
 1	log	player-core/src/main/java/tv/own/owntv/player/KeyLog.kt	held
 1	log	player-core/src/main/java/tv/own/owntv/player/KeyLog.kt	· ${p.device} · src=0x${Integer.toHexString(p.source)}
 1	log	player-core/src/main/java/tv/own/owntv/player/KeyLog.kt	· repeats=${p.repeats}
-4	empty	player-core/src/main/java/tv/own/owntv/player/LiveDiagnosticsLog.kt	\0
+5	technical	player-core/src/main/java/tv/own/owntv/player/LiveDiagnosticsLog.kt	\0
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveDiagnosticsLog.kt	${timeFmt.format(LocalDateTime.now())} $message
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveDiagnosticsLog.kt	MM-dd HH:mm:ss.SSS
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveDiagnosticsLog.kt	OwnTV-LivePreviewEngine

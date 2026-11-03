@@ -333,7 +333,8 @@ object PlaybackErrorLog {
                 e.raw?.let { appendLine("  raw   : $it") }
                 appendLine()
             }
-            val live = LiveDiagnosticsLog.snapshot()
+            // glcn: from the file when there is one, so the lines from before a freeze or a crash are in the report.
+            val live = LiveDiagnosticsLog.tail()?.takeIf { it.isNotBlank() } ?: LiveDiagnosticsLog.snapshot()
             if (live.isNotBlank()) {
                 appendLine("--- live diagnostics (most recent) ---")
                 appendLine(live)
