@@ -70,6 +70,7 @@ class TvHomeRepository(
     private val resolver: ContentResolver get() = context.contentResolver
     private val channelHelper = PreviewChannelHelper(context)
     private val mutex = Mutex()
+    @Volatile private var pruned = false
 
     companion object {
         private const val TAG = "OwnTVHome"
@@ -183,6 +184,7 @@ class TvHomeRepository(
     private suspend fun refreshRecentLiveLocked(profileId: Long, allowBrowsableRequest: Boolean, force: Boolean = false) {
         val customizations = customize.observe(profileId, MediaType.LIVE).first()
         val channelRow = ensureRecentLiveChannel(profileId, allowBrowsableRequest)
+        if (!pruned) { pruned = true; pruneRecentLiveChannels() } // glcn: once per run
         val channelId = channelRow.providerProgramId ?: return
         val now = System.currentTimeMillis()
         if (!force && now - channelRow.lastPublishedAt < RECENT_LIVE_REFRESH_INTERVAL_MS) return
@@ -640,16 +642,47 @@ class TvHomeRepository(
         )
     }
 
-    private fun buildRecentLiveChannel(profileId: Long): PreviewChannel {
+    private suspend fun buildRecentLiveChannel(profileId: Long): PreviewChannel {
         val renderContext = renderContext()
+        // glcn: with several profiles each has its own row, all named the same before ("Recent live" three times on
+        // the TV's home): the profile's name tells them apart.
+        val profiles = runCatching { profileDao()?.getAllOnce().orEmpty() }.getOrDefault(emptyList())
+        val profileName = profiles.takeIf { it.size > 1 }?.firstOrNull { it.id == profileId }?.name?.takeIf { it.isNotBlank() }
+        val title = if (profileName != null) renderContext.getString(R.string.launcher_recent_live_title_for, profileName)
+        else renderContext.getString(R.string.launcher_recent_live_title)
         return PreviewChannel.Builder()
-            .setDisplayName(renderContext.getString(R.string.launcher_recent_live_title))
+            .setDisplayName(title)
             .setDescription(renderContext.getString(R.string.launcher_recent_live_description))
             .setAppLinkIntentUri(LauncherDeepLink.OpenLiveSection.toUri())
             .setInternalProviderId(platformInternalId(TvProviderSurface.RECENT_LIVE, profileId, MediaType.LIVE, RECENT_LIVE_CHANNEL_STABLE_KEY))
             // The live icon's banner, so the channel matches the app row after an icon switch.
             .setLogo(resourceUri(AppIconSwitcher.applied(context).banner))
             .build()
+    }
+
+    private fun profileDao(): tv.own.owntv.core.database.dao.ProfileDao? =
+        org.koin.core.context.GlobalContext.getOrNull()?.getOrNull<tv.own.owntv.core.database.dao.ProfileDao>()
+
+    /**
+     * glcn: the TV's home kept rows nobody owned any more — a profile's row published twice (its record lost on a
+     * reinstall) or the row of a deleted profile — all named the same. Every "recent live" row of this app that is not
+     * the one in use for an existing profile is taken off.
+     */
+    private suspend fun pruneRecentLiveChannels() {
+        val profiles = runCatching { profileDao()?.getAllOnce().orEmpty() }.getOrDefault(emptyList())
+        if (profiles.isEmpty()) return
+        val kept = profiles.mapNotNull { p ->
+            tvProviderProgramDao.find(p.id, TvProviderSurface.RECENT_LIVE, MediaType.LIVE, RECENT_LIVE_CHANNEL_GROUP_ID)?.providerProgramId
+        }.toSet()
+        val prefix = "owntv:${TvProviderSurface.RECENT_LIVE.name.lowercase()}:"
+        val own = runCatching { channelHelper.getAllChannels().filter { it.packageName == context.packageName } }.getOrDefault(emptyList())
+        for (ch in own) {
+            val internal = ch.internalProviderId ?: continue
+            if (internal.startsWith(prefix) && ch.id !in kept) {
+                logD("pruneRecentLive delete channelId=${ch.id}")
+                runCatching { channelHelper.deletePreviewChannel(ch.id) }
+            }
+        }
     }
 
     /** The launcher is a named final renderer; resolve OwnTV-authored copy at publish time. */

@@ -123,6 +123,7 @@
     <string name="profiles_default_name">Profile</string>
     <!-- Translators: Title for the Android TV home screen "Recent Live" row. -->
     <string name="launcher_recent_live_title">Recent Live</string>
+    <string name="launcher_recent_live_title_for">Recent Live · %1$s</string>
     <!-- Translators: Description for the Android TV home screen "Recent Live" row. -->
     <string name="launcher_recent_live_description">Recently watched live channels</string>
     <!-- Translators: Content type label for movies in the Android TV home screen. -->

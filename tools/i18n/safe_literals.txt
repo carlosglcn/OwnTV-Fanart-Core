@@ -6204,6 +6204,7 @@
 1	log	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	ensureRecentLiveChannel update profile=$profileId channelId=${existing.providerProgramId} allowBrowsable=$allowBrowsableRequest
 1	url	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	http://
 1	url	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	https://
+1	technical	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	owntv:${TvProviderSurface.RECENT_LIVE.name.lowercase()}:
 1	log	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	owntv:${surface.name.lowercase()}:${sha256Hex("$profileId|${mediaType.name}|$stableKey")}
 1	log	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	persistRecentLive insert failed profile=${row.profileId} row=${row.describe()}
 1	log	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	persistRecentLive insert profile=${row.profileId} programId=$providerId row=${row.describe()}
@@ -6219,6 +6220,7 @@
 1	log	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	persistWatchNext update failed profile=${row.profileId} programId=$programId row=${row.describe()}
 1	log	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	persistWatchNext update profile=${row.profileId} programId=$programId updated=$updated row=${row.describe()}
 1	log	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	providerId=${providerProgramId ?: -1} surface=$surface mediaType=$mediaType groupId=$groupId targetItemId=$targetItemId lastPositionMs=$lastPositionMs durationMs=$durationMs lastPublishedAt=$lastPublishedAt
+1	log	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	pruneRecentLive delete channelId=${ch.id}
 1	log	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	publishEpisodeProgress profile=$profileId episodeId=$episodeId positionMs=$positionMs durationMs=$durationMs
 1	log	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	publishEpisodeProgress skip profile=$profileId enabled=$enabled episodeId=$episodeId positionMs=$positionMs durationMs=$durationMs
 1	log	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	publishMovieProgress profile=$profileId movieId=$movieId positionMs=$positionMs durationMs=$durationMs
