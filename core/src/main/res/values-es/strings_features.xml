@@ -63,8 +63,8 @@
         <item quantity="other">Los <xliff:g id="count">%1$d</xliff:g> canales</item>
     </plurals>
     <string name="profiles_default_name">Perfil</string>
-    <string name="launcher_recent_live_title">Directo reciente</string>
-    <string name="launcher_recent_live_title_for">Directo reciente · %1$s</string>
+    <string name="launcher_recent_live_title">Últimos canales</string>
+    <string name="launcher_recent_live_title_for">Últimos canales · %1$s</string>
     <string name="launcher_recent_live_description">Canales en directo vistos recientemente</string>
     <string name="launcher_movie_type">Película</string>
     <string name="launcher_episode_number">Episodio <xliff:g id="episode">%1$d</xliff:g></string>
