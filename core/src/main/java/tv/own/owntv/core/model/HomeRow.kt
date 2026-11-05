@@ -67,12 +67,16 @@ data class HomeConfig(
     val favoriteLiveMode: HomeLiveRowMode = HomeLiveRowMode.ON_NOW,
     val trendingStyle: HomeTrendingStyle = HomeTrendingStyle.HERO,
 ) {
+    private val TRENDING_GROUP get() = listOf(HomeRow.TRENDING_MOVIES, HomeRow.TRENDING_SERIES)
+
     val visibleOrder: List<HomeRow>
         get() = buildList {
             // Trending is a fixed, optional Home feature rather than a reorderable content row.
             // When enabled it always owns the top position, regardless of any previously saved order.
             if (HomeRow.TRENDING !in hidden) add(HomeRow.TRENDING)
-            addAll(order.filter { it != HomeRow.TRENDING && it.implemented && it !in hidden })
+            // glcn: the films / series trending rows are set with Trending and sit right under it.
+            TRENDING_GROUP.forEach { if (it !in hidden) add(it) }
+            addAll(order.filter { it != HomeRow.TRENDING && it !in TRENDING_GROUP && it.implemented && it !in hidden })
         }
 
     /** glcn: any of the Trending rows (mixed, films, series) is shown — the snapshot is built only then. */
@@ -80,7 +84,7 @@ data class HomeConfig(
         get() = HomeRow.TRENDING !in hidden || HomeRow.TRENDING_MOVIES !in hidden || HomeRow.TRENDING_SERIES !in hidden
 
     val settingsRows: List<HomeRow>
-        get() = order.filter { it != HomeRow.TRENDING && it.implemented }
+        get() = order.filter { it != HomeRow.TRENDING && it !in TRENDING_GROUP && it.implemented }
 
     fun toJson(): JSONObject = JSONObject().apply {
         put("order", JSONArray(order.map { it.name }))
