@@ -998,4 +998,7 @@
     <string name="glcn_home_row_trending_series">Trending series</string>
     <string name="glcn_home_row_trending_movies_desc">Up to ten films from your list that are trending this week (TMDB).</string>
     <string name="glcn_home_row_trending_series_desc">Up to ten series from your list that are trending this week (TMDB).</string>
+    <string name="glcn_vod_section_platforms">Platforms</string>
+    <string name="glcn_vod_section_genres">Genres</string>
+    <string name="glcn_vod_section_more">More categories</string>
 </resources>
