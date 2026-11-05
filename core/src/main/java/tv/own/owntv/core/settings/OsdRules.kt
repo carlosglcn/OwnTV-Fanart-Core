@@ -6,7 +6,8 @@ package tv.own.owntv.core.settings
  */
 object OsdRules {
     const val STANDARD_MS = 4_500L
-    const val STANDARD_BANNER_MS = 3_000L
+    // glcn: 6 s (3 s was gone before it could be read); a run of zaps keeps it up, counted from the last press.
+    const val STANDARD_BANNER_MS = 6_000L
     const val UNTIL_BACK = -1
     val CHOICES = listOf(0, 8, 12, 20, UNTIL_BACK)
 
@@ -21,7 +22,7 @@ object OsdRules {
     fun bannerMs(setting: Int): Long = when {
         setting == UNTIL_BACK -> 20_000L
         setting <= 0 -> STANDARD_BANNER_MS
-        else -> setting * 1000L * 2 / 3
+        else -> maxOf(setting * 1000L * 2 / 3, STANDARD_BANNER_MS)
     }
 
     /** The next choice, wrapping round. */

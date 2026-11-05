@@ -7,7 +7,7 @@ import org.junit.Test
 class OsdRulesTest {
     @Test fun standardKeepsTheOldTimings() {
         assertEquals(4_500L, OsdRules.controlsMs(0))
-        assertEquals(3_000L, OsdRules.bannerMs(0))
+        assertEquals(6_000L, OsdRules.bannerMs(0))
     }
 
     @Test fun secondsAndUntilBack() {
