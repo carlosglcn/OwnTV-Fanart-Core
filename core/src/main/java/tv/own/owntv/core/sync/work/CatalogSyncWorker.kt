@@ -124,7 +124,7 @@ class CatalogSyncWorker(
                     .getOrDefault(false)
                 val trendingVisible = runCatching {
                     sourceDao.profileIdsForSource(source.id).any { profileId ->
-                        HomeRow.TRENDING !in settings.homeConfig(profileId).first().hidden
+                        settings.homeConfig(profileId).first().anyTrendingVisible
                     }
                 }
                     .onFailure { Log.w(TAG, "Trending Home visibility read failed sourceId=${source.id}; skip enqueue", it) }

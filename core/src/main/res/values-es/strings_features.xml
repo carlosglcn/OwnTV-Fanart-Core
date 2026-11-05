@@ -569,4 +569,8 @@
     <string name="glcn_crash_body">Comparte este informe para que se pueda arreglar. Después la app se abre con normalidad.</string>
     <string name="glcn_crash_open">Abrir la app</string>
     <string name="glcn_crash_share">Compartir informe</string>
+    <string name="glcn_home_row_trending_movies">Películas en tendencia</string>
+    <string name="glcn_home_row_trending_series">Series en tendencia</string>
+    <string name="glcn_home_row_trending_movies_desc">Hasta diez películas de tu lista que son tendencia esta semana (TMDB).</string>
+    <string name="glcn_home_row_trending_series_desc">Hasta diez series de tu lista que son tendencia esta semana (TMDB).</string>
 </resources>

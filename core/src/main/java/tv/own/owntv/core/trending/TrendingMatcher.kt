@@ -145,6 +145,18 @@ object TrendingMatcher {
         return TrendingMatchResult(output, exactMs, ftsMs, ftsFallbacks)
     }
 
+    /**
+     * glcn: the mixed ten first (as [assemble] has them, balanced), then every other match of each kind up to ten —
+     * the split rows ("Películas en tendencia", "Series en tendencia") read those.
+     */
+    fun assembleAll(movies: List<TrendingSelection>, series: List<TrendingSelection>): List<TrendingSelection> {
+        val m = movies.take(MAX_PER_MEDIA_TYPE)
+        val s = series.take(MAX_PER_MEDIA_TYPE)
+        val balancedSeries = s.take(if (m.size >= 5) 5 else MAX_TOTAL - m.size)
+        val mixed = assemble(m, balancedSeries)
+        return mixed + (m + s).filter { it !in mixed }
+    }
+
     /** Series are kept; the ranked movie reserve fills every remaining place up to ten. */
     fun assemble(movies: List<TrendingSelection>, series: List<TrendingSelection>): List<TrendingSelection> {
         val selectedSeries = series.take(MAX_TOTAL)

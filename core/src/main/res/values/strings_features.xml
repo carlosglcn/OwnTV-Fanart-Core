@@ -994,4 +994,8 @@
     <string name="glcn_crash_body">Share this report so it can be fixed. The app opens normally afterwards.</string>
     <string name="glcn_crash_open">Open the app</string>
     <string name="glcn_crash_share">Share report</string>
+    <string name="glcn_home_row_trending_movies">Trending films</string>
+    <string name="glcn_home_row_trending_series">Trending series</string>
+    <string name="glcn_home_row_trending_movies_desc">Up to ten films from your list that are trending this week (TMDB).</string>
+    <string name="glcn_home_row_trending_series_desc">Up to ten series from your list that are trending this week (TMDB).</string>
 </resources>

@@ -100,6 +100,6 @@ interface TrendingDao {
     companion object {
         const val MIN_ELIGIBLE_ITEMS = 4
         const val MAX_ITEMS_PER_MEDIA_TYPE = 10
-        const val MAX_TRENDING_ITEMS = 10
+        const val MAX_TRENDING_ITEMS = 20 // glcn: up to ten of each kind (the split rows); the mixed row still shows ten
     }
 }

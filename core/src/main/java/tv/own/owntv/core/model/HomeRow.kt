@@ -25,7 +25,10 @@ enum class HomeRow {
     TONIGHT,
     GENRES,
     /** glcn: what starts within the half hour on the favourite and recent channels. */
-    STARTING_SOON;
+    STARTING_SOON,
+    /** glcn: Trending split by kind — up to ten films / ten series each, off by default (the mixed row stays). */
+    TRENDING_MOVIES,
+    TRENDING_SERIES;
 
     val implemented: Boolean get() = true
 }
@@ -56,7 +59,7 @@ enum class HeroKind {
 @Immutable
 data class HomeConfig(
     val order: List<HomeRow> = GLCN_ORDER,
-    val hidden: Set<HomeRow> = setOf(HomeRow.GENRES),
+    val hidden: Set<HomeRow> = setOf(HomeRow.GENRES, HomeRow.TRENDING_MOVIES, HomeRow.TRENDING_SERIES),
     val heroIncludeLive: Boolean = false,
     val heroIncludeMovies: Boolean = true,
     val heroIncludeSeries: Boolean = true,
@@ -72,6 +75,10 @@ data class HomeConfig(
             addAll(order.filter { it != HomeRow.TRENDING && it.implemented && it !in hidden })
         }
 
+    /** glcn: any of the Trending rows (mixed, films, series) is shown — the snapshot is built only then. */
+    val anyTrendingVisible: Boolean
+        get() = HomeRow.TRENDING !in hidden || HomeRow.TRENDING_MOVIES !in hidden || HomeRow.TRENDING_SERIES !in hidden
+
     val settingsRows: List<HomeRow>
         get() = order.filter { it != HomeRow.TRENDING && it.implemented }
 
@@ -86,6 +93,7 @@ data class HomeConfig(
         put("trendingStyle", trendingStyle.name)
         put("glcnGenresDefault", true)
         put("glcnLayoutV2", true)
+        put("glcnTrendSplit", true)
     }
 
     companion object {
@@ -99,7 +107,7 @@ data class HomeConfig(
                 val old = fromJsonInner(obj)
                 return old.copy(
                     order = GLCN_ORDER,
-                    hidden = (old.hidden - HomeRow.RECENT_CHANNELS - HomeRow.FEATURED - HomeRow.SPORTS_NOW - HomeRow.TONIGHT) + HomeRow.GENRES,
+                    hidden = (old.hidden - HomeRow.RECENT_CHANNELS - HomeRow.FEATURED - HomeRow.SPORTS_NOW - HomeRow.TONIGHT) + HomeRow.GENRES + HomeRow.TRENDING_MOVIES + HomeRow.TRENDING_SERIES,
                     heroIncludeLive = false,
                     recentLiveMode = HomeLiveRowMode.ON_NOW,
                 )
@@ -113,6 +121,8 @@ data class HomeConfig(
                 else HomeConfig().hidden)
                 // glcn: the genre rows start hidden; a config saved before they existed hides them too.
                 .let { if (!obj.has("glcnGenresDefault")) it + HomeRow.GENRES else it }
+                // glcn: the split Trending rows start hidden; a config saved before they existed hides them too.
+                .let { if (!obj.has("glcnTrendSplit")) it + HomeRow.TRENDING_MOVIES + HomeRow.TRENDING_SERIES else it }
             return HomeConfig(
                 order = mergeOrder(storedOrder),
                 hidden = hidden,

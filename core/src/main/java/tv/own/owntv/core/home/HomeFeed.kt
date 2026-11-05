@@ -178,6 +178,9 @@ data class GuideSliceState(
 @Immutable
 data class HomeFeed(
     val trendingItems: List<TrendingHomeItem> = emptyList(),
+    /** glcn: the split Trending rows — up to ten films, up to ten series, in trending order. */
+    val trendingMovies: List<TrendingHomeItem> = emptyList(),
+    val trendingSeries: List<TrendingHomeItem> = emptyList(),
     val trendingPreferredLanguage: String = "EN",
     val trendingSeasonCounts: Map<Long, Int> = emptyMap(),
     val heroItems: List<HeroItem> = emptyList(),
@@ -271,7 +274,7 @@ class HomeFeedReader(
             val recentLiveAsync = async {
                 channelDao.recentlyWatchedWithTimestampFiltered(profileId, liveIds.toList(), RECENT_LIVE_ROW_LIMIT).first()
             }
-            val trending = buildTrendingItems(
+            val trendingAll = buildTrendingItems(
                 movieSourceIds = movieIds,
                 seriesSourceIds = seriesIds,
                 hidden = hidden,
@@ -279,7 +282,8 @@ class HomeFeedReader(
                 metadataEnabled = metadataConfig.enabled,
                 preferredLanguage = preferredLanguage,
             )
-            val trendingSeriesIds = trending.filterIsInstance<TrendingHomeItem.Series>().map { it.series.id }
+            val trending = trendingAll.mixed
+            val trendingSeriesIds = (trendingAll.mixed + trendingAll.series).filterIsInstance<TrendingHomeItem.Series>().map { it.series.id }
             val trendingSeasonCounts = if (trendingSeriesIds.isEmpty()) emptyMap() else {
                 seriesDao.storedSeasonCounts(trendingSeriesIds).associate { it.seriesId to it.seasonCount }
             }
@@ -521,6 +525,8 @@ class HomeFeedReader(
             val names = Names(hidden.live, hidden.movie, hidden.series)
             HomeFeed(
                 trendingItems = trending,
+                trendingMovies = trendingAll.movies,
+                trendingSeries = trendingAll.series,
                 trendingPreferredLanguage = preferredLanguage,
                 trendingSeasonCounts = trendingSeasonCounts,
                 heroItems = heroItems.map { names.of(it) },
@@ -665,12 +671,12 @@ class HomeFeedReader(
         sourceOrder: List<Long>,
         metadataEnabled: Boolean,
         preferredLanguage: String,
-    ): List<TrendingHomeItem> {
-        if (!metadataEnabled) return emptyList()
+    ): TrendingLists {
+        if (!metadataEnabled) return TrendingLists()
         val sourceIds = (movieSourceIds + seriesSourceIds).toList()
-        if (sourceIds.isEmpty()) return emptyList()
+        if (sourceIds.isEmpty()) return TrendingLists()
         val snapshots = trendingDao.getItemsForSources(sourceIds)
-        if (snapshots.isEmpty()) return emptyList()
+        if (snapshots.isEmpty()) return TrendingLists()
 
         val movieRows = movieDao.getByIds(snapshots.filter { it.mediaType == MediaType.MOVIE }.map { it.providerItemId })
             .associateBy { it.id }
@@ -716,8 +722,19 @@ class HomeFeedReader(
                 selectedSeries.getOrNull(index)?.let(::add)
             }
         }.take(TrendingMatcher.MAX_TOTAL)
-        return interleaved.takeIf { it.size >= TrendingDao.MIN_ELIGIBLE_ITEMS }.orEmpty()
+        return TrendingLists(
+            mixed = interleaved.takeIf { it.size >= TrendingDao.MIN_ELIGIBLE_ITEMS }.orEmpty(),
+            movies = movies.takeIf { it.size >= TrendingDao.MIN_ELIGIBLE_ITEMS }.orEmpty(),
+            series = series.takeIf { it.size >= TrendingDao.MIN_ELIGIBLE_ITEMS }.orEmpty(),
+        )
     }
+
+    /** glcn: the mixed Trending row and the two split ones. */
+    private data class TrendingLists(
+        val mixed: List<TrendingHomeItem> = emptyList(),
+        val movies: List<TrendingHomeItem> = emptyList(),
+        val series: List<TrendingHomeItem> = emptyList(),
+    )
 
     private fun homeLanguageRank(language: String?, preferred: String): Int = when {
         language == preferred -> 0

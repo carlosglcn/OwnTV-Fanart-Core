@@ -68,7 +68,7 @@ class TrendingRepository(
         if (!config.enabled) return TrendingRefreshOutcome.SkippedProviderMode
         val source = sourceDao.getById(sourceId) ?: return TrendingRefreshOutcome.SourceMissing
         val trendingVisible = sourceDao.profileIdsForSource(sourceId).any { profileId ->
-            HomeRow.TRENDING !in settings.homeConfig(profileId).first().hidden
+            settings.homeConfig(profileId).first().anyTrendingVisible
         }
         if (!trendingVisible) return TrendingRefreshOutcome.SkippedHidden
         val enabled = SyncContentTypes.enabledFor(source)
@@ -264,11 +264,8 @@ class TrendingRepository(
             movieResult = matchMovies(movieCandidates)
         }
 
-        val seriesTarget = if (movieResult.selections.size >= BALANCED_TARGET) {
-            BALANCED_TARGET
-        } else {
-            TrendingMatcher.MAX_TOTAL - movieResult.selections.size
-        }
+        // glcn: every series match up to ten (the "Series en tendencia" row); the mixed row still balances them.
+        val seriesTarget = TrendingMatcher.MAX_PER_MEDIA_TYPE
         var seriesResult = if (enabled.series && seriesTarget > 0) {
             matchSeries(seriesCandidates, seriesTarget)
         } else TrendingMatchResult(emptyList(), 0, 0, 0)
@@ -302,7 +299,7 @@ class TrendingRepository(
             )
         }
 
-        val selections = TrendingMatcher.assemble(movieResult.selections, seriesResult.selections)
+        val selections = TrendingMatcher.assembleAll(movieResult.selections, seriesResult.selections)
         val completedAt = System.currentTimeMillis()
         val generationId = UUID.randomUUID().toString()
         if (selections.size < TrendingDao.MIN_ELIGIBLE_ITEMS) {
@@ -518,7 +515,6 @@ class TrendingRepository(
 
     companion object {
         private const val TAG = "TrendingRepository"
-        private const val BALANCED_TARGET = 5
         private const val BACKFILL_BATCH = 1_000
         private const val ENRICHMENT_CONCURRENCY = 3
 
