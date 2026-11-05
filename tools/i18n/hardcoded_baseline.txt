@@ -675,11 +675,9 @@
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	body="$failureText"
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder failed before first frame (${error.errorCodeName}) — rebuilding the decoder and retrying once
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder rebuild failed: ${it.message}
-1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	default User-Agent refused — retrying once as ${HttpClient.FALLBACK_USER_AGENT}
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	insufficient resource
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	insufficientresources
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	no more instances
-1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	provider refused the default User-Agent — retrying as ${HttpClient.FALLBACK_USER_AGENT}
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	reclaim
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	stream didn't open — trying the ${alt.substringBefore('?').substringAfterLast('.')} form of this channel
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	subtitle on: track $id ${sel.group.getFormat(sel.trackIndex).sampleMimeType ?: "?"}
@@ -717,7 +715,6 @@
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpegts
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	mpv live open timed out after ${openingMs}ms on the full probe — retrying with the fast probe
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	no
-1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	playback failed — retrying once as ${HttpClient.FALLBACK_USER_AGENT}
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	software-decoded video can't use the direct surface
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	sub-align-x
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	sub-ass-override

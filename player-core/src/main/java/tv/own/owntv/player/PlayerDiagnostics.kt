@@ -314,7 +314,9 @@ object PlayerErrors {
         // title read as one, on live channels and films alike.
         if (raw != null && httpStatusIn(raw) == 458) return PlaybackFailure.AccountInUse
         val providerText = raw?.let { providerMessageFor(it, url) }
-        return providerText?.let(PlaybackFailure::Raw) ?: fallback
+        // A live channel refused under every identity: the one thing left for the user to try is their own.
+        val refused = fallback == PlaybackFailure.Channel && raw != null && httpStatusIn(raw) == 403
+        return providerText?.let(PlaybackFailure::Raw) ?: if (refused) PlaybackFailure.StreamUnavailable(true) else fallback
     }
 
     fun classify(raw: String): PlayerFailureReason? {

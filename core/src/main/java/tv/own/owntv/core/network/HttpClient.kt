@@ -156,6 +156,14 @@ class HttpClient(private val client: OkHttpClient) {
          */
         const val FALLBACK_USER_AGENT =
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+
+        /**
+         * The last identity to try, for a panel that refuses both of the above: traced on a
+         * Cloudflare-fronted panel that answers VLC, a desktop browser and an unknown app name with `403`
+         * but admits a UA naming TiviMate. Says who we are first, then what we are compatible with, the
+         * way browsers do. See [PanelIdentity].
+         */
+        const val COMPATIBLE_USER_AGENT = "OwnTVFanart/1.0 (compatible; TiviMate/5.1.6)"
         private const val RETRY_DELAY_MS = 750L
         private const val MAX_RETRY_DELAY_MS = 3_000L
 

@@ -38,6 +38,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import tv.own.owntv.core.network.HttpClient
+import tv.own.owntv.core.network.PanelIdentity
 import java.util.Locale
 import tv.own.owntv.core.drm.toMediaDrmConfiguration
 import tv.own.owntv.core.network.StreamHeaders
@@ -1317,6 +1318,7 @@ class LivePreviewEngine(
                     }
                 _state.value = State.PLAYING; _buffering.value = false
                 tune.hasPlayed = true; deadlineArmed = true; mainHandler.removeCallbacks(stallWatchdog)
+                if (!uaIsCustom) currentUrl?.let { PanelIdentity.remember(it, currentUa) }
                 updateAudioOnlyClassification()
                 if (activeIsHls && !tune.playlistLogged) { tune.playlistLogged = true; logHlsPlaylist("ready") }
                     // Recovery is measured, not assumed: arm the ladder reset and let it fire only if this
@@ -1464,7 +1466,7 @@ class LivePreviewEngine(
                 redirectedDashRetryDone = tune.redirectedDashRetryDone,
                 sessionLimitSeen = tune.sessionLimitSeen,
                 sessionLimitRetryDone = tune.sessionLimitRetryDone,
-                fallbackUserAgentAvailable = !tune.uaRetryDone && !uaIsCustom && currentUa != HttpClient.FALLBACK_USER_AGENT,
+                fallbackUserAgentAvailable = !uaIsCustom && PanelIdentity.next(currentUa) != null,
                 decoderRetryDone = tune.decoderRetryDone,
                 altFormatRetryDone = tune.altFormatRetryDone,
                 directSourceUseful = shouldTryDirectSource(
@@ -1493,6 +1495,10 @@ class LivePreviewEngine(
             // seconds until this channel is free again. Sit out its own countdown and ask again for the
             // identical stream (see [maybeBackOffForProvider]).
             if (maybeBackOffForProvider(error)) return
+            // Every identity refused: a saved one no longer holds, so the next tune starts from the top.
+            if (rungInput.identityRefusal && !uaIsCustom && !rungInput.fallbackUserAgentAvailable) {
+                currentUrl?.let { PanelIdentity.forget(it) }
+            }
             when (LiveStartRungs.after(rungInput)) {
                 // Refused on *who is asking* rather than on what was asked for: some panels blocklist player
                 // User-Agents by name. mpv sends the very same default UA and can only reproduce this.
@@ -1690,11 +1696,9 @@ class LivePreviewEngine(
         // A channel's own User-Agent is more specific than the playlist-wide one, so it wins.
         val configuredUa = StreamHeaders.userAgentOf(currentHeaders) ?: userAgent?.takeIf { it.isNotBlank() }
         uaIsCustom = configuredUa != null
-        // A panel already caught refusing the default identity starts on the fallback one, so only the
-        // channel that discovered the block ever pays for the retry (see [LiveStreamQuirks], quirk 3).
-        currentUa = configuredUa
-            ?: HttpClient.FALLBACK_USER_AGENT.takeIf { LiveStreamQuirks.blocksDefaultUserAgent(url) }
-            ?: HttpClient.DEFAULT_USER_AGENT
+        // A panel already caught refusing the default identity starts on the one that worked, so only the
+        // first channel ever pays for the retries (see [PanelIdentity]).
+        currentUa = configuredUa ?: PanelIdentity.startFor(url)
         diagnostics.start(); diagnostics.markLoad()
         this.muted = muted
         currentUrl = url
@@ -2525,23 +2529,23 @@ class LivePreviewEngine(
     }
 
     /**
-     * Try the same channel once more under [HttpClient.FALLBACK_USER_AGENT].
+     * Try the same channel once more under the next identity of [PanelIdentity].
      *
      * For the WAF that refuses the default player identity outright (quirk 3 in [LiveStreamQuirks]).
      * Worth answering here rather than leaving it to the fallback ladder: mpv sends the same default UA,
      * so without this the channel walks the entire ladder and dies at the far end looking exactly like a
-     * dead provider. The lesson is remembered panel-wide, so the rest of the playlist opens first time.
+     * dead provider. The identity that plays is remembered panel-wide, so the rest of the playlist opens
+     * first time.
      */
     private fun retryWithFallbackUserAgent() {
         val p = player ?: return
         val url = currentUrl ?: return
-        tune.uaRetryDone = true
-        currentUa = HttpClient.FALLBACK_USER_AGENT
-        LiveStreamQuirks.rememberBlocksDefaultUserAgent(url)
+        val nextUa = PanelIdentity.next(currentUa) ?: return
+        currentUa = nextUa
         _state.value = State.LOADING; _buffering.value = true
         _error.value = null; _errorInfo.value = null
-        LiveDiagnosticsLog.event("provider refused the default User-Agent — retrying as ${HttpClient.FALLBACK_USER_AGENT}")
-        android.util.Log.w(LiveDiagnosticsLog.TAG, "default User-Agent refused — retrying once as ${HttpClient.FALLBACK_USER_AGENT}")
+        LiveDiagnosticsLog.event("provider refused the User-Agent — retrying as $nextUa")
+        android.util.Log.w(LiveDiagnosticsLog.TAG, "User-Agent refused — retrying as $nextUa")
         mainHandler.post {
             if (currentUrl != url) return@post
             runCatching {
@@ -3990,8 +3994,6 @@ internal data class TuneState(
      *  single wait-and-retry that answers it has already been spent. */
     var sessionLimitSeen: Boolean = false,
     var sessionLimitRetryDone: Boolean = false,
-    /** Whether this load has already spent its one retry under `HttpClient.FALLBACK_USER_AGENT`. */
-    var uaRetryDone: Boolean = false,
     /** Whether this load has already tried the channel's `.ts`⇄`.m3u8` sibling. */
     var altFormatRetryDone: Boolean = false,
     /** Automatic 429 waits already spent on this tune. */

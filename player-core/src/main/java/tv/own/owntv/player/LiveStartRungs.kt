@@ -16,7 +16,7 @@ internal object LiveStartRungs {
         REDIRECT_DASH,
         /** Refused while the previous engine still holds the one session: wait it out once. */
         SESSION_WAIT,
-        /** Refused on the User-Agent: once more under the neutral one. */
+        /** Refused on the User-Agent: once more under the next identity. */
         FALLBACK_USER_AGENT,
         /** Every hardware decoder is taken: say so and stop. */
         DECODER_EXHAUSTED,
@@ -46,7 +46,7 @@ internal object LiveStartRungs {
         val redirectedDashRetryDone: Boolean,
         val sessionLimitSeen: Boolean,
         val sessionLimitRetryDone: Boolean,
-        /** No UA retry yet, the source sets no UA of its own, and the fallback is not already in use. */
+        /** The source sets no UA of its own and an identity is left to try. */
         val fallbackUserAgentAvailable: Boolean,
         val decoderRetryDone: Boolean,
         val altFormatRetryDone: Boolean,

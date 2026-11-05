@@ -34,9 +34,8 @@ import java.util.concurrent.ConcurrentHashMap
  *     carrying `VLC/3.0.20 LibVLC/3.0.20` with a `403` challenge page ("Just a moment…") and serves the
  *     identical URL `200` to a neutral UA. Both engines send the VLC identity, so such a channel fails
  *     on ExoPlayer, walks the whole fallback ladder, and fails on mpv too — indistinguishable from a
- *     dead provider. Once either engine has been refused this way we remember it here, so every other
- *     channel on the panel opens under [tv.own.owntv.core.network.HttpClient.FALLBACK_USER_AGENT]
- *     first time instead of repeating the failure.
+ *     dead provider. Either engine walks [tv.own.owntv.core.network.PanelIdentity], which keeps the
+ *     identity that played, so every other channel on the panel opens first time.
  */
 object LiveStreamQuirks {
 
@@ -132,7 +131,6 @@ object LiveStreamQuirks {
     private val tolerantDemuxStreams = urlLessonSet()
     private val prerollDefeatedStreams = urlLessonSet()
     private val softwareArchiveHosts = ConcurrentHashMap.newKeySet<String>()
-    private val uaBlockingHosts = ConcurrentHashMap.newKeySet<String>()
     private val providerMessages = ConcurrentHashMap<String, Pair<Int, String>>()
 
     /** Record that [url]'s host serves HLS even when its advertised URL says `.ts`. */
@@ -371,21 +369,6 @@ object LiveStreamQuirks {
     fun archiveNeedsSoftware(url: String): Boolean = hostKey(url) in softwareArchiveHosts
 
     /**
-     * Record that this panel refuses [tv.own.owntv.core.network.HttpClient.DEFAULT_USER_AGENT], so every
-     * later request to it — either engine, any channel — starts on the fallback identity.
-     *
-     * Panel-wide, because a WAF rule is configured for the site, not per stream. Session-only like the
-     * rest: a provider that drops the rule is back to the default identity after the next app start,
-     * which matters because the default is the one most panels actually want.
-     *
-     * Only ever recorded when the user has NOT configured a User-Agent for the source. An explicit
-     * setting is the user's decision and is never second-guessed or overwritten.
-     */
-    fun rememberBlocksDefaultUserAgent(url: String) { uaBlockingHosts += hostKey(url) }
-
-    fun blocksDefaultUserAgent(url: String): Boolean = hostKey(url) in uaBlockingHosts
-
-    /**
      * Keep the panel's own explanation of a refusal, so an error screen can quote it verbatim.
      *
      * "Channel limit has been reached. Stop one of your active streams before opening a new channel."
@@ -411,6 +394,6 @@ object LiveStreamQuirks {
         brokenTimestampStreams.clear(); softwareArchiveHosts.clear()
         noHlsVariantStreams.clear(); noHlsVariantMpvStreams.clear(); prerollDefeatedStreams.clear()
         tolerantDemuxStreams.clear()
-        uaBlockingHosts.clear(); providerMessages.clear()
+        providerMessages.clear()
     }
 }

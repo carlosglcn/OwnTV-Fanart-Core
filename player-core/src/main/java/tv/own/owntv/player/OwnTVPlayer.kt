@@ -29,6 +29,7 @@ import kotlinx.coroutines.withContext
 import tv.own.owntv.core.R
 import tv.own.owntv.core.i18n.LocaleStore
 import tv.own.owntv.core.network.HttpClient
+import tv.own.owntv.core.network.PanelIdentity
 import tv.own.owntv.core.network.StreamHeaders
 import tv.own.owntv.core.timeshift.TimeshiftServer
 import tv.own.owntv.core.player.EnginePreference
@@ -722,9 +723,15 @@ class OwnTVPlayer(
     @Volatile private var lastVideoHeightPx = 0
 
     // The raw custom User-Agent from the source settings, or null if the user left it blank.
-    // null = use DEFAULT_USER_AGENT on first attempt, FALLBACK_USER_AGENT on suspicious failure.
+    // null = open with PanelIdentity's choice for the panel, and walk its list on a refusal.
     // non-null = always use the given UA, no automatic fallback.
     private var currentUserAgent: String? = null
+    /** The identity to retry this load under, or null when the user set one or the list is spent. */
+    private fun nextPanelIdentity(): String? {
+        if (currentUserAgent != null && !item.triedUaFallback) return null
+        val url = currentUrl ?: return null
+        return PanelIdentity.next(currentUserAgent ?: PanelIdentity.startFor(url))
+    }
     // Per-channel HTTP headers for the item being played (M3U `#EXTVLCOPT`/`#EXTHTTP`/`#KODIPROP`).
     // A `User-Agent` in here overrides the per-source one — it is the more specific setting.
     private var currentHeaders: Map<String, String> = emptyMap()
@@ -2128,7 +2135,7 @@ class OwnTVPlayer(
         engine.prefSubLang = prefSubLang
         // Carry this item's request identity across the handoff — a stream that needs a custom
         // UA/Referer on mpv needs exactly the same on ExoPlayer.
-        engine.userAgent = currentUserAgent
+        engine.userAgent = currentUserAgent ?: currentUrl?.let { PanelIdentity.startFor(it) }
         engine.httpHeaders = currentHeaders
         engine.drmConfig = currentDrm
         engine.manifestType = currentManifestType
@@ -3650,8 +3657,7 @@ class OwnTVPlayer(
             setPropertyString(
                 "user-agent",
                 currentUserAgent
-                    ?: HttpClient.FALLBACK_USER_AGENT.takeIf { LiveStreamQuirks.blocksDefaultUserAgent(url) }
-                    ?: HttpClient.DEFAULT_USER_AGENT,
+                    ?: PanelIdentity.startFor(url),
             )
             // Per-channel headers. Always written, so a channel that carries none clears whatever
             // the previous item set — mpv keeps the property across loads otherwise.
@@ -5127,12 +5133,13 @@ class OwnTVPlayer(
                 errorCheckJob?.cancel()
                 _error.value = null
                 _buffering.value = false // a reconnect's spinner ends when the new file loads
-                // A load that only succeeded once the fallback identity was tried is the proof that this
-                // panel blocklists the default User-Agent. Record it panel-wide (session-only) so every
-                // other channel here — either engine — opens first time instead of repeating the failure.
+                // A load that only succeeded under another identity is the proof that this panel refuses
+                // the default User-Agent. Record it panel-wide so every other channel here, on either
+                // engine, opens first time instead of repeating the failure.
                 if (item.uaFallbackPending) {
                     item.uaFallbackPending = false
-                    currentUrl?.let { LiveStreamQuirks.rememberBlocksDefaultUserAgent(it) }
+                    val ua = currentUserAgent
+                    if (ua != null) currentUrl?.let { PanelIdentity.remember(it, ua) }
                 }
                 _audioTrackList.value = queryTracks("audio")
                 _subTrackList.value = queryTracks("sub")
@@ -5604,20 +5611,18 @@ class OwnTVPlayer(
                             // that software decoding plays fine, so the ladder's software rung takes one
                             // attempt before we error. The copy rung was already considered above and
                             // declined (this failure doesn't read as a decoder failure).
-                        } else if (currentUserAgent == null && !item.triedUaFallback &&
-                            currentUrl?.let { !LiveStreamQuirks.blocksDefaultUserAgent(it) } == true &&
+                        } else if (nextPanelIdentity() != null &&
                             ladderRungUseful(LadderRung.UA_RETRY, load.lastMpvError, isLiveContent)
                         ) {
                             // All standard retries exhausted. If the user left the source User-Agent blank,
-                            // retry once under a neutral identity — some panels sit behind a WAF that
-                            // blocklists player User-Agents by name and answers them with a challenge page
-                            // regardless of the URL. Skipped when this load already started on the fallback
-                            // because the panel is a known offender: that attempt has just been made.
+                            // retry under the next identity: some panels refuse player User-Agents by name,
+                            // others admit only the apps they know, regardless of the URL.
+                            val nextUa = nextPanelIdentity() ?: return@launch
                             item.triedUaFallback = true
-                            currentUserAgent = HttpClient.FALLBACK_USER_AGENT
+                            currentUserAgent = nextUa
                             item.uaFallbackPending = true
                             item.forceFullProbe = true
-                            android.util.Log.w(TAG, "playback failed — retrying once as ${HttpClient.FALLBACK_USER_AGENT}")
+                            android.util.Log.w(TAG, "playback failed — retrying as $nextUa")
                             _buffering.value = true
                             delay(FALLBACK_RETRY_DELAY_MS)
                             val uaUrl = currentUrl
@@ -5628,6 +5633,10 @@ class OwnTVPlayer(
                                 )
                             }
                         } else {
+                            // Every identity refused: a saved one no longer holds, so start over next time.
+                            if (httpStatusOf(load.lastMpvError) == 403 && (currentUserAgent == null || item.triedUaFallback)) {
+                                currentUrl?.let { PanelIdentity.forget(it) }
+                            }
                             // mpv's whole retry ladder is exhausted. For a VOD, retry once on ExoPlayer
                             // before erroring — it may play what mpv can't on this device/provider.
                             if (!isLiveContent && fallbackToExoVod(PlaybackFailure.MpvStreamNeverStarted, mpvStuck = false)) return@launch
@@ -5821,11 +5830,11 @@ internal data class ItemState(
      *  reject. [triedTolerantDemux] keeps it to a single attempt. */
     @field:Volatile var tolerantDemuxThisLoad: Boolean = false,
     @field:Volatile var triedTolerantDemux: Boolean = false,
-    /** With no custom User-Agent, a failed load is retried once under the neutral FALLBACK_USER_AGENT -
-     *  some panels sit behind a WAF that blocklists player identities by name. */
+    /** With no custom User-Agent, a failed load walks [PanelIdentity]'s list. Once this is set,
+     *  `currentUserAgent` holds an identity from that list rather than the user's setting. */
     @field:Volatile var triedUaFallback: Boolean = false,
     /** That retry is in flight: if it loads, the panel really was refusing the default identity, and the
-     *  lesson is recorded panel-wide in `LiveStreamQuirks`. */
+     *  lesson is recorded panel-wide in [PanelIdentity]. */
     @field:Volatile var uaFallbackPending: Boolean = false,
     /** T_OPEN first-strike: a hung open gets ONE silent hard-reset + reload of the same item before any
      *  error is shown. Covers auto-play advancing while the provider still holds the previous episode's

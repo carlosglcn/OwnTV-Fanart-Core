@@ -41,6 +41,7 @@ val dataModule = module {
     single {
         val proxyHolder = get<tv.own.owntv.core.network.ProxyConfigHolder>()
         val dnsHolder = get<tv.own.owntv.core.network.DnsConfigHolder>()
+        tv.own.owntv.core.network.PanelIdentity.attach(androidContext())
         val trust = tv.own.owntv.core.network.ExtraTrustAnchors(
             androidContext().resources.openRawResource(tv.own.owntv.core.R.raw.isrg_extra_roots),
         )

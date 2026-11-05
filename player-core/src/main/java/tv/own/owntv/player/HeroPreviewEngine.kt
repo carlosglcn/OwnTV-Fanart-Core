@@ -138,7 +138,7 @@ class HeroPreviewEngine(
         // the live and VOD engines.
         val effectiveUa = tv.own.owntv.core.network.StreamHeaders.userAgentOf(headers)
             ?: userAgent?.takeIf { it.isNotBlank() }
-            ?: HttpClient.DEFAULT_USER_AGENT
+            ?: tv.own.owntv.core.network.PanelIdentity.startFor(url)
         val requestHeaders = headers.filterKeys { !it.equals("User-Agent", ignoreCase = true) }
         currentUrl = url
         val startPositionMs = seekToMs.coerceAtLeast(0L)

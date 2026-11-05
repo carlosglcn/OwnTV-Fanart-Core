@@ -2776,6 +2776,7 @@
 1	log	core/src/main/java/tv/own/owntv/core/network/HttpClient.kt	GET start url=$safeUrl ua=${ua.take(48)} attempt=$attempt/$attempts
 1	log	core/src/main/java/tv/own/owntv/core/network/HttpClient.kt	HTTP ${response.code} for ${redactUrl(url)}
 2	log	core/src/main/java/tv/own/owntv/core/network/HttpClient.kt	HttpClient
+1	protocol	core/src/main/java/tv/own/owntv/core/network/HttpClient.kt	OwnTVFanart/1.0 (compatible; TiviMate/5.1.6)
 1	protocol	core/src/main/java/tv/own/owntv/core/network/HttpClient.kt	Transfer-Encoding
 2	technical	core/src/main/java/tv/own/owntv/core/network/HttpClient.kt	User-Agent
 1	log	core/src/main/java/tv/own/owntv/core/network/HttpClient.kt	VLC/3.0.20 LibVLC/3.0.20
@@ -2789,6 +2790,8 @@
 1	log	core/src/main/java/tv/own/owntv/core/network/HttpClient.kt	transferEncoding=${response.header("Transfer-Encoding").orEmpty()}
 1	log	core/src/main/java/tv/own/owntv/core/network/HttpClient.kt	wireEncoding=${response.networkResponse?.header("Content-Encoding").orEmpty()}
 1	log	core/src/main/java/tv/own/owntv/core/network/HttpClient.kt	•••
+1	url	core/src/main/java/tv/own/owntv/core/network/PanelIdentity.kt	://
+1	preference-key	core/src/main/java/tv/own/owntv/core/network/PanelIdentity.kt	panel_identity
 4	log	core/src/main/java/tv/own/owntv/core/network/ProxyConfig.kt	\0
 1	log	core/src/main/java/tv/own/owntv/core/network/ProxyConfig.kt	$u:$p@
 1	url	core/src/main/java/tv/own/owntv/core/network/ProxyConfig.kt	127.0.0.1
@@ -6834,6 +6837,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	UHD channel left — full decoder release+rebuild
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	UNKNOWN($playbackState)
 2	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	User-Agent
+1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	User-Agent refused — retrying as $nextUa
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	VP9
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	X-Cache
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	[
@@ -6948,6 +6952,7 @@
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	provider asked for ${secs}s (HTTP $HTTP_TOO_MANY_REQUESTS Retry-After) — waiting, then retrying the
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	provider back-off elapsed — retrying the same URL on the same engine
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	provider refused $status on ${refusedSegments.size} signed segment URLs
+1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	provider refused the User-Agent — retrying as $nextUa
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	provider refused with HTTP 458 (account session still in use) uri=${HttpClient.redactUrl(uri)}
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	provider refuses its own signed segment URLs — ExoPlayer cannot re-sign them; handing this
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	provider still refusing after ${tune.providerBackOffs} waits — letting the failure through
@@ -7411,6 +7416,7 @@
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	playback didn't start — auto-retry ${item.autoRetries}/${maxRetries()} (full probe)
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	playback didn't start — decoder failure
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	playback didn't start — offline, skipping retries
+1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	playback failed — retrying as $nextUa
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	playback stats: container-fps=${getPropertyString("container-fps")}
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	pq
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	profile

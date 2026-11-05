@@ -504,8 +504,7 @@ class LiveTuneController(
             userAgent = StreamHeaders.userAgentOf(headers)
                 ?: source?.userAgent?.takeIf { it.isNotBlank() }
                 ?: StalkerClient.DEFAULT_MAG_USER_AGENT.takeIf { stalker }
-                ?: HttpClient.FALLBACK_USER_AGENT.takeIf { LiveStreamQuirks.blocksDefaultUserAgent(channel.streamUrl) }
-                ?: HttpClient.DEFAULT_USER_AGENT,
+                ?: tv.own.owntv.core.network.PanelIdentity.startFor(channel.streamUrl),
             headers = headers,
             maxVideoHeight = host.maxVideoHeight(),
             sourceId = channel.sourceId,

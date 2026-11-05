@@ -29,6 +29,7 @@ import tv.own.owntv.core.model.DownloadReason
 import tv.own.owntv.core.model.DownloadStatus
 import tv.own.owntv.core.model.MediaType
 import tv.own.owntv.core.network.HttpClient
+import tv.own.owntv.core.network.PanelIdentity
 import tv.own.owntv.core.settings.SettingsRepository
 import tv.own.owntv.core.stalker.StalkerClient
 import tv.own.owntv.core.stalker.StreamUrlResolver
@@ -477,7 +478,8 @@ class DownloadEngine(
         val source = sourceId?.let { sourceDao.getById(it) }
         val max = source?.maxConnections ?: 0
         if (source == null || !streamUrlResolver.needsResolve(source)) {
-            return Resolved(d.streamUrl, HttpClient.DEFAULT_USER_AGENT, sourceId, max)
+            val ua = source?.userAgent?.takeIf { it.isNotBlank() } ?: PanelIdentity.startFor(d.streamUrl)
+            return Resolved(d.streamUrl, ua, sourceId, max)
         }
         val ua = source.userAgent?.takeIf { it.isNotBlank() } ?: StalkerClient.DEFAULT_MAG_USER_AGENT
         val url = withContext(Dispatchers.IO) { streamUrlResolver.resolve(source, d.streamUrl, vod = true, episode = episode) }

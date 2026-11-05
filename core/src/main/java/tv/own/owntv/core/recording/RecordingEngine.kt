@@ -24,6 +24,7 @@ import tv.own.owntv.core.model.RecordingFailure
 import tv.own.owntv.core.model.RecordingStatus
 import tv.own.owntv.core.network.ConnectivityObserver
 import tv.own.owntv.core.network.HttpClient
+import tv.own.owntv.core.network.PanelIdentity
 import tv.own.owntv.core.network.StreamHeaders
 import tv.own.owntv.core.settings.SettingsRepository
 import tv.own.owntv.core.storage.MediaTarget
@@ -838,7 +839,7 @@ class RecordingEngine(
     private suspend fun resolveTarget(row: RecordingEntity): Pair<String, String> {
         val source = sourceDao.getById(row.sourceId)
         if (source == null || !streamUrlResolver.needsResolve(source)) {
-            return row.streamUrl to (source?.userAgent?.takeIf { it.isNotBlank() } ?: HttpClient.DEFAULT_USER_AGENT)
+            return row.streamUrl to (source?.userAgent?.takeIf { it.isNotBlank() } ?: PanelIdentity.startFor(row.streamUrl))
         }
         val ua = source.userAgent?.takeIf { it.isNotBlank() } ?: StalkerClient.DEFAULT_MAG_USER_AGENT
         return streamUrlResolver.resolve(source, row.streamUrl, vod = false) to ua
