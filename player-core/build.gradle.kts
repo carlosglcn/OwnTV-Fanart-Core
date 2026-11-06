@@ -112,6 +112,8 @@ dependencies {
     implementation(libs.androidx.media3.exoplayer.hls)
     implementation(libs.androidx.media3.exoplayer.dash)
     implementation(libs.androidx.media3.ui)
+    // glcn: `api` — the app hangs the ASS layer on its SubtitleView (AssHandler, withAssSupport).
+    api(libs.ass.media)
     implementation(libs.androidx.media3.datasource.okhttp)
 
     implementation(libs.okhttp)

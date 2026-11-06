@@ -1359,6 +1359,13 @@ class OwnTVPlayer(
     /** HUD "Cancel" on the next-episode countdown: skip the automatic advance for the current item. */
     fun cancelAutoNext() { item.autoNextCancelled = true }
 
+    /** glcn: see [PlaybackEngine.advanceAtCredits]. A sleep timer waiting for the end lets the credits play out. */
+    fun advanceAtCredits() {
+        if (stopAtItemEnd || item.autoNextCancelled || !autoPlayNext) return
+        item.autoNextCancelled = true // once: the natural end that may still come must not advance a second time
+        advanceAfterNaturalEndUnchecked()
+    }
+
     // Emitted when the LAST item of an episode queue finishes naturally and auto-play is on, so the
     // series ViewModel can continue into the next season (it has the full series; the player only has
     // the current season's queue). Within-season advance is handled by the player itself.
@@ -1674,6 +1681,10 @@ class OwnTVPlayer(
     private val _exoCues = MutableStateFlow<List<androidx.media3.common.text.Cue>>(emptyList())
     /** Bitmap/text subtitle cues from the ExoPlayer handoff — drawn by the SubtitleView overlay. */
     val exoCues: StateFlow<List<androidx.media3.common.text.Cue>> = _exoCues.asStateFlow()
+
+    private val _exoAss = MutableStateFlow<io.github.peerless2012.ass.media.AssHandler?>(null)
+    /** glcn: the libass layer of the film on ExoPlayer (ASS/SSA drawn as made) — hung on the SubtitleView overlay. */
+    val exoAssHandler: StateFlow<io.github.peerless2012.ass.media.AssHandler?> = _exoAss.asStateFlow()
 
     private val _freezeFrame = MutableStateFlow<android.graphics.Bitmap?>(null)
     /** A snapshot of the last mpv frame, shown over the surface during the mpv→ExoPlayer swap so the
@@ -2106,7 +2117,10 @@ class OwnTVPlayer(
         _directRender.value = true // ExoPlayer also renders direct-to-surface → the view sizes for zoom
         _subText.value = null // mpv's text overlay is off during the handoff
         val budget = playerBudget ?: PlayerBudget.of(context).also { playerBudget = it }
-        val engine = exoEngine ?: ExoSubtitleEngine(context, streamingHttp, budget, exoCallbacks, exoAudioDelay).also { exoEngine = it }
+        val engine = exoEngine ?: ExoSubtitleEngine(context, streamingHttp, budget, exoCallbacks, exoAudioDelay).also {
+            exoEngine = it
+            scope.launch { it.assHandler.collect { h -> _exoAss.value = h } } // glcn: libass layer for the app
+        }
         // Keep the handoff engine on the same audio policy as mpv, and let its watchdog restart the item
         // on a stereo sink — the session latch is already set by the time this fires, so `start` rebuilds.
         engine.surroundMode = surroundMode
@@ -2479,6 +2493,10 @@ class OwnTVPlayer(
             return
         }
         if (!autoPlayNext || item.autoNextCancelled) return
+        advanceAfterNaturalEndUnchecked()
+    }
+
+    private fun advanceAfterNaturalEndUnchecked() {
         val advance: () -> Unit = when {
             playlist.isEmpty() -> if (item.archiveThisItem) ({ _archiveEnded.tryEmit(Unit) }) else return
             playlistIndex < playlist.size - 1 -> ({ next() })

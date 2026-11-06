@@ -63,6 +63,7 @@ object EmbyPlayback {
      */
     @Synchronized
     fun onUrlChanged(url: String?, position: () -> Long, playing: () -> Boolean) {
+        runCatching { EmbyTrickplay.onUrlChanged(url) } // glcn: the seek-bar thumbnails follow the stream
         val next = parse(url)
         val prev = current
         if (prev != null && prev == next) return

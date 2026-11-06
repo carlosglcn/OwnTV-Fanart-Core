@@ -1,5 +1,7 @@
 package tv.own.owntv.player
 
+import io.github.peerless2012.ass.media.kt.withAssMkvSupport
+import io.github.peerless2012.ass.media.kt.withAssSupport
 import android.content.Context
 import android.view.Surface
 import androidx.media3.common.C
@@ -81,6 +83,10 @@ class ExoSubtitleEngine(
     }
 
     private var player: ExoPlayer? = null
+
+    private val _assHandler = kotlinx.coroutines.flow.MutableStateFlow<io.github.peerless2012.ass.media.AssHandler?>(null)
+    /** glcn: the libass layer of the film playing, for the app's SubtitleView; null while nothing plays here. */
+    val assHandler: kotlinx.coroutines.flow.StateFlow<io.github.peerless2012.ass.media.AssHandler?> = _assHandler
     private var surface: Surface? = null
     private var pendingSubLang: String? = null
     private var pendingSubTypeIndex: Int = -1
@@ -741,11 +747,20 @@ class ExoSubtitleEngine(
         val extractors = androidx.media3.extractor.DefaultExtractorsFactory()
             .setTsExtractorFlags(androidx.media3.extractor.ts.DefaultTsPayloadReaderFactory.FLAG_ENABLE_HDMV_DTS_AUDIO_STREAMS)
             .setTsExtractorTimestampSearchBytes(TS_TIMESTAMP_SEARCH_PACKETS * androidx.media3.extractor.ts.TsExtractor.TS_PACKET_SIZE)
+        // glcn: libass — ASS/SSA tracks are drawn as made (fonts, colours, positions, animation) on a layer the
+        // app hangs on its SubtitleView, instead of as plain text. The video path is untouched (Dolby Vision stays).
+        _assHandler.value?.release()
+        val ass = io.github.peerless2012.ass.media.AssHandler(
+            io.github.peerless2012.ass.media.type.AssRenderType.OVERLAY_OPEN_GL,
+            io.github.peerless2012.ass.media.AssHandlerConfig(maxRenderPixels = ASS_MAX_RENDER_PIXELS),
+        )
+        val assParsers = io.github.peerless2012.ass.media.parser.AssSubtitleParserFactory(ass)
+        val assExtractors = extractors.withAssMkvSupport(assParsers, ass)
         return ExoPlayer.Builder(context)
-            .setRenderersFactory(renderers)
+            .setRenderersFactory(renderers.withAssSupport(ass))
             .setMediaSourceFactory(
                 SdrHlsRouting(
-                    DefaultMediaSourceFactory(dataSource, extractors),
+                    DefaultMediaSourceFactory(dataSource, assExtractors).setSubtitleParserFactory(assParsers),
                     androidx.media3.exoplayer.hls.HlsMediaSource.Factory(dataSource)
                         .setPlaylistParserFactory(SdrVariants.ParserFactory { true }),
                 ) { preferSdr }.setDrmSessionManagerProvider(tv.own.owntv.core.drm.InlineClearKeyDrmProvider),
@@ -765,6 +780,8 @@ class ExoSubtitleEngine(
                 )
                 addListener(listener); addAnalyticsListener(analytics); addAnalyticsListener(audioWatchdog)
                 setVideoFrameMetadataListener(frameRateListener)
+                ass.init(this)
+                _assHandler.value = ass
             }
     }
 
@@ -1263,6 +1280,8 @@ class ExoSubtitleEngine(
             p.release()
         }
         player = null
+        _assHandler.value?.release()
+        _assHandler.value = null
         audioSelections = emptyList()
         fallbackMode = false
         currentUrl = null
@@ -1282,6 +1301,8 @@ class ExoSubtitleEngine(
     fun release() = stop()
 
     private companion object {
+        /** glcn: libass draws at most at 1080p (the app's own resolution) and is scaled up — far less work at 4K. */
+        const val ASS_MAX_RENDER_PIXELS = 1920 * 1080
         /** About half a second of video at 50–60 fps. */
         const val FPS_CHECK_EVERY_FRAMES = 30
         const val TAG = "ExoSubtitleEngine"

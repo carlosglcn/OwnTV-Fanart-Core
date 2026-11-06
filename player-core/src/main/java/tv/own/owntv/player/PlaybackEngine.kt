@@ -167,6 +167,11 @@ interface PlaybackEngine {
     fun seekBy(deltaMs: Long) {}
     /** HUD "Cancel" on the next-episode countdown — suppress the automatic advance for the current item. */
     fun cancelAutoNext() {}
+    /**
+     * glcn: the end credits' countdown ran out — move on now, by the same rules as reaching the end (auto-play
+     * next on, not cancelled, no sleep timer waiting for the end).
+     */
+    fun advanceAtCredits() {}
 
     companion object {
         private val ZERO_INT: StateFlow<Int> = MutableStateFlow(0)
@@ -248,4 +253,5 @@ class MpvPlaybackEngine(private val p: OwnTVPlayer) : PlaybackEngine {
     override fun seekBy(deltaMs: Long) = p.seekBy(deltaMs)
     override val seekStepMs get() = p.seekStepMs
     override fun cancelAutoNext() = p.cancelAutoNext()
+    override fun advanceAtCredits() = p.advanceAtCredits()
 }
