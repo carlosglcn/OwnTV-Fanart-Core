@@ -1062,4 +1062,13 @@
     <string name="glcn_live_banner_ficha">Card</string>
     <string name="glcn_live_banner_cine">Cinema</string>
     <string name="glcn_live_banner_lateral">Side</string>
+    <string name="glcn_style_aurora" translatable="false">Aurora</string>
+    <string name="glcn_style_crepusculo" translatable="false">Crepúsculo</string>
+    <string name="glcn_style_oceano" translatable="false">Océano</string>
+    <string name="glcn_style_fanart_vivo" translatable="false">Fanart vivo</string>
+    <string name="glcn_style_group_classic">Classic</string>
+    <string name="glcn_style_group_gradient">Gradients</string>
+    <string name="glcn_style_kind_drift">Gradient · soft lights that drift</string>
+    <string name="glcn_style_kind_gradient">Gradient</string>
+    <string name="glcn_style_kind_art">Gradient · takes the focused picture's colours</string>
 </resources>
