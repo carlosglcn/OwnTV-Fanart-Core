@@ -1070,5 +1070,5 @@
     <string name="glcn_style_group_gradient">Gradients</string>
     <string name="glcn_style_kind_drift">Gradient · soft lights that drift</string>
     <string name="glcn_style_kind_gradient">Gradient</string>
-    <string name="glcn_style_kind_art">Gradient · takes the focused picture's colours</string>
+    <string name="glcn_style_kind_art">Gradient · takes the focused picture\'s colours</string>
 </resources>
