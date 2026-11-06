@@ -28,8 +28,11 @@ internal class GlcnVideoRenderer(
 ) : MediaCodecVideoRenderer(builder) {
 
     @Volatile private var doviConvert = false
+    /** Dolby Vision turned off by the user: the RPU and the enhancement layer are dropped, the HEVC base layer plays (HDR10). */
+    @Volatile private var doviStrip = false
     private var scratch = ByteArray(0)
     private var failures = 0
+    private var reportedLayer: DolbyVisionNow.Layer? = null
 
     override fun supportsFormat(mediaCodecSelector: MediaCodecSelector, format: Format): Int =
         super.supportsFormat(mediaCodecSelector, DoviProfile7.forDecoder(format))
@@ -42,9 +45,20 @@ internal class GlcnVideoRenderer(
 
     override fun onInputFormatChanged(formatHolder: FormatHolder): DecoderReuseEvaluation? {
         val f = formatHolder.format
-        doviConvert = f != null && DoviProfile7.shouldConvert(f)
-        DolbyVisionNow.set(dolbyVision = f?.sampleMimeType == MimeTypes.VIDEO_DOLBY_VISION, converted = doviConvert)
-        if (doviConvert && f != null) {
+        doviStrip = f != null && DoviProfile7.shouldStrip(f)
+        doviConvert = !doviStrip && f != null && DoviProfile7.shouldConvert(f)
+        DoviP7.lastLayer = null
+        reportedLayer = null
+        DolbyVisionNow.set(
+            dolbyVision = f?.sampleMimeType == MimeTypes.VIDEO_DOLBY_VISION && !doviStrip,
+            converted = doviConvert,
+            turnedOff = doviStrip,
+        )
+        if (doviStrip && f != null) {
+            formatHolder.format = DoviProfile7.toBaseLayer(f)
+            failures = 0
+            LiveDiagnosticsLog.event("Dolby Vision (${f.codecs}) turned off in Settings: played as plain HEVC (base layer)")
+        } else if (doviConvert && f != null) {
             formatHolder.format = DoviProfile7.toProfile8(f)
             failures = 0
             LiveDiagnosticsLog.event("Dolby Vision profile 7 (${f.codecs}) played as profile 8.1 — enhancement layer dropped, RPU rewritten")
@@ -58,7 +72,7 @@ internal class GlcnVideoRenderer(
     }
 
     override fun onQueueInputBuffer(buffer: DecoderInputBuffer) {
-        if (doviConvert && !buffer.isEncrypted) buffer.data?.let { rewrite(it) }
+        if ((doviConvert || doviStrip) && !buffer.isEncrypted) buffer.data?.let { rewrite(it) }
         super.onQueueInputBuffer(buffer)
     }
 
@@ -70,7 +84,9 @@ internal class GlcnVideoRenderer(
             if (scratch.size < n) scratch = ByteArray(n + n / 4)
             data.get(scratch, 0, n)
             data.position(0)
-            val out = DoviP7.convertAccessUnit(scratch, n) ?: return
+            val out = DoviP7.convertAccessUnit(scratch, n, dropRpu = doviStrip)
+            if (doviConvert) reportLayer()
+            if (out == null) return
             if (out.size > data.capacity()) return
             data.limit(data.capacity())
             data.put(out)
@@ -81,6 +97,15 @@ internal class GlcnVideoRenderer(
             data.limit(n)
             if (failures++ == 0) android.util.Log.w(TAG, "Dolby Vision rewrite failed: ${e.javaClass.simpleName}: ${e.message}")
         }
+    }
+
+    /** Once the first RPU has been read: FEL or MEL, for the player's technical panel and the report. */
+    private fun reportLayer() {
+        val layer = DoviP7.lastLayer ?: return
+        if (layer == reportedLayer) return
+        reportedLayer = layer
+        DolbyVisionNow.set(dolbyVision = true, converted = true, layer = layer)
+        LiveDiagnosticsLog.event("Dolby Vision profile 7 enhancement layer: ${layer.name}")
     }
 
     // Only a codec still to be started is refused the stand-in: a running one keeps being moved, because
@@ -119,13 +144,38 @@ internal object DoviProfile7 {
 
     fun shouldConvert(f: Format): Boolean = isProfile7(f) && !deviceTakesProfile7
 
+    /** "Dolby Vision" off in Settings (for a receiver or TV without it); set from [PlaybackStartup]. */
+    @Volatile var dolbyVisionOff = false
+
+    /**
+     * A Dolby Vision track whose base layer is plain HEVC on its own: profile 7 (HDR10) and profile 8 (HDR10,
+     * SDR or HLG). Profile 5 is not: its picture only looks right through the Dolby Vision decoder.
+     */
+    fun hasHevcBaseLayer(f: Format): Boolean {
+        if (f.sampleMimeType != MimeTypes.VIDEO_DOLBY_VISION) return false
+        val c = f.codecs ?: return false
+        if (c.length < 7 || !(c.startsWith("dvhe") || c.startsWith("dvh1"))) return false
+        val profile = c.substring(5, 7)
+        return profile == "07" || profile == "08"
+    }
+
+    fun shouldStrip(f: Format): Boolean = dolbyVisionOff && hasHevcBaseLayer(f)
+
+    /** The same track described as plain HEVC: any HEVC decoder takes it, and the TV gets the base layer's HDR10. */
+    fun toBaseLayer(f: Format): Format =
+        f.buildUpon().setSampleMimeType(MimeTypes.VIDEO_H265).setCodecs(null).build()
+
     /** "dvhe.07.06" → "dvhe.08.06": same level, profile 8. */
     fun toProfile8(f: Format): Format {
         val c = f.codecs ?: return f
         return f.buildUpon().setCodecs(c.substring(0, 5) + "08" + c.substring(7)).build()
     }
 
-    fun forDecoder(f: Format): Format = if (shouldConvert(f)) toProfile8(f) else f
+    fun forDecoder(f: Format): Format = when {
+        shouldStrip(f) -> toBaseLayer(f)
+        shouldConvert(f) -> toProfile8(f)
+        else -> f
+    }
 }
 
 /**
@@ -133,12 +183,28 @@ internal object DoviProfile7 {
  * 8.1 — for the film player's quality badges and its technical panel (mpv never shows Dolby Vision).
  */
 object DolbyVisionNow {
-    data class State(val dolbyVision: Boolean = false, val converted: Boolean = false)
+    /** What a profile 7 film's enhancement layer carries: real picture data (FEL) or next to nothing (MEL). */
+    enum class Layer { FEL, MEL }
+
+    /**
+     * [layer]: for a converted profile 7, whether its enhancement layer was full (FEL — some picture detail is
+     * lost, as in Kodi) or minimal (MEL — nothing lost); null until the first RPU is read.
+     * [turnedOff]: a Dolby Vision film played as HDR10 because the user turned Dolby Vision off.
+     */
+    data class State(
+        val dolbyVision: Boolean = false,
+        val converted: Boolean = false,
+        val layer: DolbyVisionNow.Layer? = null,
+        val turnedOff: Boolean = false,
+    ) {
+        val fel: Boolean get() = layer == DolbyVisionNow.Layer.FEL
+        val mel: Boolean get() = layer == DolbyVisionNow.Layer.MEL
+    }
 
     private val _state = kotlinx.coroutines.flow.MutableStateFlow(State())
     val state: kotlinx.coroutines.flow.StateFlow<State> = _state
 
-    internal fun set(dolbyVision: Boolean, converted: Boolean) {
-        _state.value = State(dolbyVision, converted)
+    internal fun set(dolbyVision: Boolean, converted: Boolean, layer: DolbyVisionNow.Layer? = null, turnedOff: Boolean = false) {
+        _state.value = State(dolbyVision, converted, layer, turnedOff)
     }
 }

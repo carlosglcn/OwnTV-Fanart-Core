@@ -15,12 +15,17 @@ package tv.own.owntv.player
  */
 internal object DoviP7 {
 
+    /** The kind of enhancement layer the last rewritten RPU described; null until one has been read. */
+    @Volatile var lastLayer: DolbyVisionNow.Layer? = null
+
     /**
      * One HEVC access unit in Annex-B form (as Media3's extractors hand it to the decoder) → the same with each
      * enhancement-layer NAL dropped and each RPU rewritten. Null when there is nothing to change, or the data
      * is not Annex-B.
+     *
+     * [dropRpu]: the RPU goes as well, leaving the plain HEVC base layer (Dolby Vision turned off by the user).
      */
-    fun convertAccessUnit(src: ByteArray, len: Int): ByteArray? {
+    fun convertAccessUnit(src: ByteArray, len: Int, dropRpu: Boolean = false): ByteArray? {
         val starts = ArrayList<Int>(8) // where each "00 00 01" begins
         var i = 0
         while (i + 2 < len) {
@@ -47,6 +52,7 @@ internal object DoviP7 {
             when (nalType(src, begin, len)) {
                 NAL_EL -> continue
                 NAL_RPU -> {
+                    if (dropRpu) continue
                     val nal = src.copyOfRange(begin, end)
                     out.write(START_CODE)
                     out.write(convertRpuNal(nal) ?: nal)
@@ -219,6 +225,7 @@ internal object DoviP7 {
                     thresholdInt != 0L || threshold != 0L
                 ) mel = false
             }
+            lastLayer = if (mel) DolbyVisionNow.Layer.MEL else DolbyVisionNow.Layer.FEL
             if (mel) {
                 w.copyBits(d, pivotsFrom, pivotsTo)
             } else {

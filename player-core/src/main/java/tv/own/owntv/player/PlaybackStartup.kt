@@ -31,6 +31,8 @@ object PlaybackStartup {
                 AudioDynamics.levelling = s.volumeLevelling
             }
         }
+        // glcn: Dolby Vision on/off is read by the video renderer for each film it opens.
+        scope.launch { settings.dolbyVision.collect { on -> DoviProfile7.dolbyVisionOff = !on } }
         // Detailed playback logging follows the setting for the whole process — not from whenever a
         // live engine first happens to be built.
         scope.launch {

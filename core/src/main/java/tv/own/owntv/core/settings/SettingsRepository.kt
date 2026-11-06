@@ -389,6 +389,8 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val MAX_VIDEO_HEIGHT = intPreferencesKey("max_video_height")
         val MOBILE_DATA_MAX_VIDEO_HEIGHT = intPreferencesKey("mobile_data_max_video_height")
         val TUNNELED_PLAYBACK = booleanPreferencesKey("tunneled_playback")
+        /** glcn: Dolby Vision to the TV (on by default); off plays such films as HDR10. */
+        val DOLBY_VISION = booleanPreferencesKey("glcn_dolby_vision")
         val TUNNELING_FAILED = booleanPreferencesKey("tunneling_failed")
         // v4.1.6 one-shot: AFR caused visible HDMI re-handshakes on some TVs. Existing installs are
         // forced Off once; subsequent user changes are preserved across every later update.
@@ -1985,6 +1987,16 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         context.dataStore.edit { it[Keys.MOBILE_DATA_MAX_VIDEO_HEIGHT] = height.takeIf { v -> v in mobileDataMaxVideoHeightChoices } ?: 0 }
     }
 
+    /**
+     * glcn: Dolby Vision sent to the TV (on by default). Off, a Dolby Vision film whose base layer stands on its
+     * own (profiles 7 and 8) plays as HDR10 — for a receiver or TV without Dolby Vision. ExoPlayer only.
+     */
+    val dolbyVision: Flow<Boolean> = prefsFlow { it[Keys.DOLBY_VISION] ?: true }
+
+    suspend fun setDolbyVision(enabled: Boolean) {
+        context.dataStore.edit { it[Keys.DOLBY_VISION] = enabled }
+    }
+
     /** Tunneled playback for live TV on ExoPlayer (experimental, off by default). */
     val tunneledPlayback: Flow<Boolean> = prefsFlow { it[Keys.TUNNELED_PLAYBACK] ?: false }
 
@@ -3422,7 +3434,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
             Keys.MULTIVIEW_ENABLED, Keys.MULTIVIEW_WARNING_ACCEPTED,
             Keys.RECORDING_RESERVE_CONNECTION, Keys.RECORD_WHAT_IM_WATCHING, Keys.RECORDING_OVER_MOBILE_DATA,
             Keys.AUDIO_PASSTHROUGH, Keys.NIGHT_MODE, Keys.VOLUME_LEVELLING, Keys.TUNNELED_PLAYBACK,
-            Keys.TIMESHIFT_ENABLED,
+            Keys.TIMESHIFT_ENABLED, Keys.DOLBY_VISION,
         )
         val floats = listOf(Keys.SUB_SCALE, Keys.SUB_SCALE_MPV, Keys.SUB_SCALE_EXO)
 
@@ -3502,7 +3514,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         Keys.LIVE_ENGINE, Keys.VOD_ENGINE, Keys.VOD_PREFER_EXO, Keys.HW_DECODING, Keys.SOFTWARE_DECODE_ABOVE_1080P, Keys.AUTO_FRAME_RATE,
         Keys.AFR_PAUSE_SECS, Keys.AFR_MATCH_RESOLUTION,
         Keys.PREFER_SDR, Keys.SURROUND_MODE, Keys.SURROUND_SOUND, Keys.AUDIO_PASSTHROUGH,
-        Keys.TUNNELED_PLAYBACK,
+        Keys.TUNNELED_PLAYBACK, Keys.DOLBY_VISION,
     ).map { it.name }.toSet()
 
     /** Whether a backup's settings block holds any of the [deviceSpecificSettings]. */

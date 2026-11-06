@@ -610,6 +610,9 @@
     <string name="glcn_cine_sound_passthrough">%1$s, sent untouched to your receiver</string>
     <string name="glcn_cine_sound_decoded">%1$s, decoded by the app</string>
     <string name="glcn_cine_dv_converted">Dolby Vision (profile 7 played as 8.1)</string>
+    <string name="glcn_cine_dv_converted_fel">Dolby Vision (profile 7 FEL as 8.1, without the enhancement layer)</string>
+    <string name="glcn_cine_dv_converted_mel">Dolby Vision (profile 7 MEL as 8.1, nothing lost)</string>
+    <string name="glcn_cine_dv_off">HDR10 (Dolby Vision turned off in Settings)</string>
     <string name="glcn_cine_sync_audio">Audio sync</string>
     <string name="glcn_cine_subs_more">Timing, search and file</string>
     <string name="glcn_cine_subs_off">Off</string>

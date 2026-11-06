@@ -1444,6 +1444,9 @@
     <string name="settings_line_preview_sound">Sonido en la vista previa en directo</string>
     <string name="settings_line_quick_channel_numbers">Escribe un número en el mando para sintonizar</string>
     <string name="settings_line_prefer_sdr">SDR cuando la emisión ofrece ambos</string>
+    <string name="glcn_settings_dolby_vision">Dolby Vision</string>
+    <string name="glcn_settings_dolby_vision_desc">Desactívalo si tu receptor o tu tele no tienen Dolby Vision: esas películas se ven en HDR10. El perfil 5 sigue en Dolby Vision porque no tiene imagen HDR10. Solo con ExoPlayer.</string>
+    <string name="glcn_settings_line_dolby_vision">Apagado: películas Dolby Vision en HDR10</string>
     <string name="settings_line_quick_autoplay">Empieza el siguiente episodio solo</string>
     <string name="settings_line_live_engine">Qué motor abre los canales y cuál es el de respaldo</string>
     <string name="settings_line_saved_live_choices">Canales que cambiaste a mano</string>

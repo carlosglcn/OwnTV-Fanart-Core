@@ -341,6 +341,9 @@
     <string name="glcn_cine_sound_passthrough">%1$s, sin procesar al equipo de sonido</string>
     <string name="glcn_cine_sound_decoded">%1$s, decodificado por la app</string>
     <string name="glcn_cine_dv_converted">Dolby Vision (perfil 7 reproducido como 8.1)</string>
+    <string name="glcn_cine_dv_converted_fel">Dolby Vision (perfil 7 FEL como 8.1, sin la capa de mejora)</string>
+    <string name="glcn_cine_dv_converted_mel">Dolby Vision (perfil 7 MEL como 8.1, sin pérdida)</string>
+    <string name="glcn_cine_dv_off">HDR10 (Dolby Vision desactivado en Ajustes)</string>
     <string name="glcn_cine_sync_audio">Sincronizar audio</string>
     <string name="glcn_cine_subs_more">Sincronía, buscar y archivo</string>
     <string name="glcn_cine_subs_off">Desactivados</string>

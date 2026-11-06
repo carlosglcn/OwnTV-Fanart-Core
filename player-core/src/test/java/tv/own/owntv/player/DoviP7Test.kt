@@ -1,6 +1,7 @@
 package tv.own.owntv.player
 
 import org.junit.Assert.assertArrayEquals
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
 
@@ -32,6 +33,22 @@ class DoviP7Test {
         val au = slice + el + byteArrayOf(0, 0, 1) + rpuNal("fel_orig.bin")
         val expected = slice + byteArrayOf(0, 0, 0, 1) + res("fel_orig_to_81.bin")
         assertArrayEquals(expected, DoviP7.convertAccessUnit(au, au.size))
+    }
+
+    @Test
+    fun `with Dolby Vision off the RPU goes too and only the base layer is left`() {
+        val slice = byteArrayOf(0, 0, 0, 1, 0x26, 0x01, 0x55, 0x66)
+        val el = byteArrayOf(0, 0, 0, 1, 0x7E, 0x01, 0x11, 0x22)
+        val au = slice + el + byteArrayOf(0, 0, 1) + rpuNal("fel_orig.bin")
+        assertArrayEquals(slice, DoviP7.convertAccessUnit(au, au.size, dropRpu = true))
+    }
+
+    @Test
+    fun `the enhancement layer is told apart`() {
+        DoviP7.convertRpuNal(rpuNal("fel_orig.bin"))
+        assertEquals(DolbyVisionNow.Layer.FEL, DoviP7.lastLayer)
+        DoviP7.convertRpuNal(rpuNal("mel_orig.bin"))
+        assertEquals(DolbyVisionNow.Layer.MEL, DoviP7.lastLayer)
     }
 
     @Test

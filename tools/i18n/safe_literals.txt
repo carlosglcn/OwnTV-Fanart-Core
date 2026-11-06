@@ -3671,6 +3671,7 @@
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	gesture_sensitivity_pct
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glass_alpha
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glass_scope
+1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_dolby_vision
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_frame_meter
 1	technical	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	glcn_look_
 1	log	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	guide_days_to_keep
@@ -6773,10 +6774,15 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/ExoSubtitleEngine.kt	webvtt
 1	technical	player-core/src/main/java/tv/own/owntv/player/ExoSubtitleEngine.kt	x-vnd.on2.vp9
 1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	.07
-1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	08
+1	protocol	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	07
+2	protocol	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	08
+1	log	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	Dolby Vision (${f.codecs}) turned off in Settings: played as plain HEVC (base layer)
 1	log	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	Dolby Vision profile 7 (${f.codecs}) played as profile 8.1 — enhancement layer dropped, RPU rewritten
+1	log	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	Dolby Vision profile 7 enhancement layer: ${layer.name}
 1	log	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	Dolby Vision rewrite failed: ${e.javaClass.simpleName}: ${e.message}
 1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	GlcnVideoRenderer
+1	protocol	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	dvh1
+1	protocol	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	dvhe
 1	log	player-core/src/main/java/tv/own/owntv/player/HeroPreviewEngine.kt	Hero preview error: ${error.errorCodeName}
 1	log	player-core/src/main/java/tv/own/owntv/player/HeroPreviewEngine.kt	Hero preview play failed for ${HttpClient.redactUrl(url)}
 1	log	player-core/src/main/java/tv/own/owntv/player/HeroPreviewEngine.kt	Hero preview produced no frame in ${NO_FRAME_TIMEOUT_MS}ms — falling back to the poster
