@@ -19,7 +19,6 @@
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionController.kt	Saved uploaded playlist (${file.length()} bytes) → ${file.name}
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionController.kt	companion-playlists
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionController.kt	playlist-${System.currentTimeMillis()}.m3u
-2	core/src/main/java/tv/own/owntv/core/companion/CompanionHtml.kt	\0
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionHtml.kt	%1$d
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionHtml.kt	,username:(document.getElementById('user').value||''),password:(document.getElementById('pass').value||'')
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionHtml.kt	<div class="card"> <h1>${title.h()}</h1><p>${description.h()}</p> <form id="f" onsubmit="return false"> $credentialFields <label>${keyLabel.h()} <input id="key" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"></label> <label>${urlLabel.h()} <input id="url" type="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="https://"></label> <button class="go" id="send" type="submit">${send.h()}</button> </form><p id="status" class="hint"></p> </div> <script> var k=document.getElementById('key'),u=document.getElementById('url'),b=document.getElementById('send'),s=document.getElementById('status'); document.getElementById('f').addEventListener('submit',function(){ var body=new URLSearchParams({apiKey:(k.value||'').trim(),serverUrl:(u.value||'').trim()$credentialBody}).toString(); b.disabled=true;s.textContent=${sending.js()}; fetch('/serviceconfig?pin=$pin',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body}) .then(function(res){if(res.ok){return res.text().then(function(t){document.open();document.write(t);document.close();});}b.disabled=false;s.textContent=${failed.js()}.replace('__STATUS__',String(res.status));}) .catch(function(){b.disabled=false;s.textContent=${unreachable.js()};});return false; }); </script>
@@ -55,6 +54,9 @@
 1	core/src/main/java/tv/own/owntv/core/customize/RenameRules.kt	^$wrapped(?![\\p{L}\\p{N}])
 1	core/src/main/java/tv/own/owntv/core/customize/RenameRules.kt	^(?:\\|?[A-Za-z]{2,4}\\s*\\||\\[[A-Za-z]{2,4}]|\\([A-Za-z]{2,4}\\))
 1	core/src/main/java/tv/own/owntv/core/customize/RenameRules.kt	{2,}
+1	core/src/main/java/tv/own/owntv/core/database/Migration53To54.kt	ALTER TABLE `sources` ADD COLUMN `ignoreConnectionLimit` INTEGER NOT NULL DEFAULT 0
+1	core/src/main/java/tv/own/owntv/core/database/Migration53To54.kt	ignoreConnectionLimit
+1	core/src/main/java/tv/own/owntv/core/database/Migration53To54.kt	sources
 1	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `playback_prefs` ADD COLUMN `audioDelayMs` INTEGER
 1	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `sources` ADD COLUMN `hlsSupported` INTEGER NOT NULL DEFAULT 0
 1	core/src/main/java/tv/own/owntv/core/database/OwnTVDatabase.kt	ALTER TABLE `sources` ADD COLUMN `liveEnginePreference` TEXT
@@ -339,8 +341,10 @@
 1	core/src/main/java/tv/own/owntv/core/reminder/HabitRules.kt	\\s+
 3	core/src/main/java/tv/own/owntv/core/reminder/HabitTracker.kt	\0
 1	core/src/main/java/tv/own/owntv/core/reminder/ReminderScheduler.kt	owntvfanart://reminder/$id
+1	core/src/main/java/tv/own/owntv/core/repository/EpgRepository.kt	EpgRepository
 1	core/src/main/java/tv/own/owntv/core/repository/EpgRepository.kt	`contentHash`,`categories`,`year`,`rating`,`lengthMin`,`episode`,`imageUrl`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?,?,?,?,?,?)
 3	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	\0
+1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	,
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	auto_frame_rate_reset_416
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	dns_doh_url
 1	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	dns_enabled
@@ -610,14 +614,11 @@
 1	core/src/main/java/tv/own/owntv/core/sports/model/Sport.kt	cycling
 1	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	$apiBase?type=epg&action=get_simple_data_table&ch_id=${enc(channelId)}
 1	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	&date=${enc(date)}&p=$page&JsHttpRequest=1-xml
-1	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	data
 1	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	mark_archive
-1	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	max_page_items
 1	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	start_timestamp
 1	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	stop_timestamp
 1	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	time
 1	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	time_to
-1	core/src/main/java/tv/own/owntv/core/stalker/StalkerClient.kt	total_items
 1	core/src/main/java/tv/own/owntv/core/stalker/StreamUrlResolver.kt	StreamUrlResolver
 1	core/src/main/java/tv/own/owntv/core/stalker/StreamUrlResolver.kt	archive guide lookup failed ch=$channelRemoteId
 1	core/src/main/java/tv/own/owntv/core/stalker/StreamUrlResolver.kt	auto /media/$programmeId.mpg
@@ -673,7 +674,6 @@
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	· ${if (e.importance <= android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) "foreground" else "background"}
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	-
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	body="$failureText"
-1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder failed before first frame (${error.errorCodeName}) — rebuilding the decoder and retrying once
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder rebuild failed: ${it.message}
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	insufficient resource
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	insufficientresources
@@ -702,6 +702,7 @@
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	,
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	.m3u8
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	NVIDIA
+1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	User-Agent
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	ac3,eac3,dts,dts-hd,truehd
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audio-spdif=${it.ifEmpty { "off" }}
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	auto

@@ -797,9 +797,10 @@ class MetadataRepository(
 
         /**
          * Bump when a matcher change makes previously cached misses wrong — existing installs then drop
-         * their negative rows once ([healNegativeMatchesOnce]). 1 = scoring against `original_title`.
+         * their negative rows once ([healNegativeMatchesOnce]). 1 = scoring against `original_title`;
+         * 2 = a trailing " - CAM" (and kin) stripped from the search title.
          */
-        private const val MATCH_HEURISTICS_VERSION = 3
+        private const val MATCH_HEURISTICS_VERSION = 4 // glcn: past both forks' bumps (ours 3, upstream 2)
 
         /**
          * Focus debounce for on-demand metadata resolves, shared by the movie / series / episode panes.

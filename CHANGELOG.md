@@ -11,10 +11,16 @@
 
 ## core-1.0.70 — unreleased
 
-**Database v52 · Backup v26 · Backup: two new playlist fields · Moved items keep their place**
+**Database v53 · Backup v26 · Backup: two new playlist fields, each profile's last categories · Moved items keep their place**
 
 ### ✨ New features
 
+- **🏆 Sports: 54 more leagues, with Volleyball and Lacrosse**
+- **📅 Sports calendar: every followed league's month, saved on the device**
+- **🏁 Driver, constructor and tennis rankings**
+- **👕 Team pages: fixtures and results, cups included**
+- **🗂️ League cards: leader and next match**
+- **🔄 Calendar refresh setting**
 - **✨ Clean channel names, per playlist** (community PR #46 by @Kevsosmooth)
 - **🔢 M3U playlists without channel numbers are numbered in playlist order** (community PR #43 by @Kevsosmooth)
 - **🎬 M3U entries that point at a video file go to Movies** (community PR #45 by @Kevsosmooth)
@@ -28,10 +34,28 @@
 - **🔐 Ask for the PIN to open Settings** (community PR #47 by @Kevsosmooth)
 - **🪟 Picture-in-picture when leaving the app** (community PR #39 by @Kevsosmooth)
 - **🔑 Stalker portals: an optional username and password**
-- **🔑 Stalker portals: an optional username and password**
+- **⌨️ Key hints for the Sports Calendar and Leagues tabs**
+- **📚 Home says the library is still loading while a large playlist fills in** (community PR #72 by @DevenP)
+- **👁️ Long-press menus: hide actions, and the default order matches the menus**
+- **📺 Hide All channels or Catch-up from the Live TV categories** (community PR #73 by @sarmadsoomro)
+- **⬇️ Allow downloads per profile; a whole show or season asks first with the episode count**
+- **📅 Catch-up channels get their past days in the guide from the provider's archive** (community PRs #64 by @Zangetsu-Sama and TV #324)
+- **⏮️ "Start of the programme" first in "Go back to…"** (community PRs #65 by @Zangetsu-Sama and TV #326)
+- **🎞️ Auto frame rate: separate switches for films and series, and Live TV (TV #318)**
+- **🔓 Ignore connection limit, per playlist (TV #244)**
+- **🔀 Sources: the other versions of the channel playing** (idea from community PR TV #317 by @Aaronnn17)
+- **🔁 Auto start on boot and on wake-up: strings in every language** (community PR #40 by @Kevsosmooth)
+- **📱 Edit a playlist from a browser on another device (TV #250)**
+- **👤 Each profile remembers its own last category and channel**
+- **🧭 TV Guide follows Live TV's category, as a switch (off by default)** (community PR TV #325 by @Zangetsu-Sama)
+- **📺 Live TV restores the remembered category once its list has loaded, and only a category you pick is remembered** (community PR TV #325 by @Zangetsu-Sama)
+- **👆 OK previews first: one switch for Live TV, one for the TV Guide (TV #344)**
+- **📄 Program details: schedule rows carry their programme (TV #345)**
+- **📄 Program details page: a channel's day with whole descriptions and details**
 
 ### 🐛 Fixes
 
+- **Cups no longer fetch a table they never have**
 - **🗑️ Delete confirmation strings for downloads and recordings**
 - **↕️ A Move keeps only the moved items' positions; A–Z sorts everything else (TV #312)**
 - **🔁 Older saved list orders are dropped once, Favorites kept**
@@ -57,20 +81,28 @@
 - **Stalker sync slows down on portals that refuse parallel requests, remembers it per playlist and loses no page; fast portals keep full speed**
 - **Stalker series listed among the films go to Series when the portal has no series section**
 - **Playlist rows show the full catalogue once the background download finishes**
-- **Stalker sync slows down on portals that refuse parallel requests, remembers it per playlist, and loses no page; fast portals keep full speed**
-- **Stalker series listed among the films go to Series when the portal has no series section**
-- **Playlist rows show the full catalogue once the background download finishes**
+- **📞 Phone: a notification sound only turns the sound down; calls, WhatsApp included, pause and resume**
+- **🔁 Live TV: a decoder that fails to start is rebuilt up to three times within "Give up after" (TV #321)**
+- **🍎 FairPlay entries: inline keys play as ClearKey; real FairPlay says it cannot play on Android**
+- **🎨 Dolby Vision profile 5 on mpv opens the device's Dolby Vision decoder (libmpv 2026.11.0, TV #313)**
+- **🏀 League cards in basketball, NFL and baseball lead with the best record**
+- **Background catalogue download keeps going after a pause; an unfinished category loads when opened** (community PR #68 by @DevenP)
+- **Background catalogue download resumes a minute after playback stops (#70)**
+- **Films tagged " - CAM" find their poster** (community PR #69 by @DevenP)
+- **Stalker series filed under films get their episodes** (community PR #67 by @DevenP)
+- **The loading note counts only the playlist Home shows**
+- **A phone with no app to save a backup file is told so**
+- **Re-test measures the connection limit on Xtream, and the next sync keeps it (TV #244)**
+- **Series whose episodes carry two dates load their episodes again (TV #342)** (community PR #78 by @maikelmj94-cpu)
+- **A guide download cut off midway no longer deletes the rest of the guide**
+- **An offline channel no longer stops a redirecting panel from opening its other channels as HLS** (community PR #76 by @SirKitboard)
+- **mpv opens a channel whose .ts address is really an HLS playlist in seconds, not after the 10 s timeout** (community PR #77 by @SirKitboard)
+- **Live comes back at the live edge when the TV is switched off and on, and after a pause of over a minute (TV #343)**
 
 ## core-1.0.69 — 2026-10-21
 
 ### ✨ New features
 
-- **🏆 Sports: 54 more leagues, with Volleyball and Lacrosse**
-- **📅 Sports calendar: every followed league's month, saved on the device**
-- **🏁 Driver, constructor and tennis rankings**
-- **👕 Team pages: fixtures and results, cups included**
-- **🗂️ League cards: leader and next match**
-- **🔄 Calendar refresh setting**
 - **🎚️ FFmpeg audio for ExoPlayer, as a switch (off by default)**
 - **💡 A hint to try MPV when a live channel keeps dropping frames**
 - **🌗 Prefer SDR when a stream offers both (replaces the HDR switch)**
@@ -79,7 +111,6 @@
 
 ### 🐛 Fixes
 
-- **Cups no longer fetch a table they never have**
 - **A saved channel plays again after the TV wakes from standby**
 - **A live channel ExoPlayer can only show as a slideshow moves to mpv by itself**
 - **Full frame rate on mpv after zapping from a 25 fps channel**
