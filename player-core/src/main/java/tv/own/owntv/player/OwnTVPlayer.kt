@@ -3646,7 +3646,7 @@ class OwnTVPlayer(
                             val timedOutUrl = currentUrl
                             if (timedOutUrl != null && !usedTrimmedProbe && !item.triedFastProbe &&
                                 !timedOutUrl.lowercase().substringBefore('?').endsWith(".m3u8") &&
-                                !LiveStreamQuirks.isKnownHlsHost(timedOutUrl)
+                                !LiveStreamQuirks.isKnownHls(timedOutUrl)
                             ) {
                                 item.triedFastProbe = true
                                 LiveStreamQuirks.rememberRawTsHost(timedOutUrl)
@@ -5266,7 +5266,7 @@ class OwnTVPlayer(
                 if (isLiveContent) currentUrl?.let { u ->
                     val fmt = runCatching { mpv?.getPropertyString("file-format") }.getOrNull()?.lowercase().orEmpty()
                     if ("mpegts" in fmt && !u.lowercase().substringBefore('?').endsWith(".m3u8") &&
-                        !LiveStreamQuirks.isKnownHlsHost(u) && !LiveStreamQuirks.isRawTsHost(u)
+                        !LiveStreamQuirks.isKnownHls(u) && !LiveStreamQuirks.isRawTsHost(u)
                     ) {
                         LiveStreamQuirks.rememberRawTsHost(u)
                         LiveDiagnosticsLog.event("host serves raw MPEG-TS — fast probe from now on")
