@@ -27,6 +27,8 @@ data class GuideCandidate(
      */
     val normName: String = "",
     val normId: String = "",
+    /** glcn: the feeds that carry this channel (playlist ids positive, standalone guides negative). */
+    val sourceIds: List<Long> = emptyList(),
 )
 
 /**
@@ -154,6 +156,8 @@ class GuideCandidates(private val epgDao: EpgDao) {
                 }
             }
 
+            val sources = HashMap<String, LinkedHashSet<Long>>(named.size)
+            for (row in named) if (row.sourceId != 0L) sources.getOrPut(row.epgChannelId) { LinkedHashSet() }.add(row.sourceId)
             val ids = LinkedHashSet<String>(named.size + withProgrammes.size)
             named.forEach { ids.add(it.epgChannelId) }
             ids.addAll(withProgrammes)
@@ -166,6 +170,7 @@ class GuideCandidates(private val epgDao: EpgDao) {
                     normName = storedNormName[id]
                         ?: displayName?.let(EpgMatcher::normalizeForEpg).orEmpty(),
                     normId = storedNormId[id] ?: EpgMatcher.normalizeForEpg(id),
+                    sourceIds = sources[id]?.toList().orEmpty(),
                 )
             }
         }

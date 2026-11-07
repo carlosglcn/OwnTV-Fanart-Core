@@ -112,6 +112,8 @@ data class EpgChannelName(
     val displayName: String?,
     val normName: String?,
     val normId: String?,
+    /** glcn: the feed that named it — shown in the picker so the person knows whose guide it is. */
+    val sourceId: Long = 0,
 )
 
 /**

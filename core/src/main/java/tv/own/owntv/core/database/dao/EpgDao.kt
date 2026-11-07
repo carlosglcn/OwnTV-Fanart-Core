@@ -227,7 +227,7 @@ interface EpgDao {
     // losing every candidate from some letter onwards.
 
     /** Every named guide channel across every feed. Duplicates are expected: two feeds, one channel. */
-    @Query("SELECT epgChannelId, displayName, normName, normId FROM epg_channels LIMIT :limit")
+    @Query("SELECT epgChannelId, displayName, normName, normId, sourceId FROM epg_channels LIMIT :limit")
     suspend fun guideChannelNames(limit: Int): List<EpgChannelName>
 
     /** Every guide id that actually has programmes stored — including ids no `<channel>` entry names. */
