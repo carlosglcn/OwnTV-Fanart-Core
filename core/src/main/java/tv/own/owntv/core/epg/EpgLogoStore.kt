@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import tv.own.owntv.core.customize.CustomizationStore
+import tv.own.owntv.core.database.entity.matchName
 import tv.own.owntv.core.customize.EpgMatchResolver
 import tv.own.owntv.core.database.dao.EpgDao
 import tv.own.owntv.core.database.entity.ChannelEntity
@@ -37,6 +38,16 @@ object EpgLogoStore {
     var icons by mutableStateOf<Map<String, String>>(emptyMap())
         internal set
 
+    /**
+     * glcn: every guide's channel icons, used only for a channel whose playlist brings no logo — so a tuner's
+     * channels or a brand-new one show the guide's picon instead of the generic TV mark.
+     */
+    var spareIcons by mutableStateOf<Map<String, String>>(emptyMap())
+        internal set
+
+    /** The same icons keyed by the guide id normalized as a name, for channels with no tvg-id (a tuner's). */
+    private var spareByName by mutableStateOf<Map<String, String>>(emptyMap())
+
     /** The active profile's Live TV matches; empty until [start] has read them. */
     internal var matches by mutableStateOf(EpgMatchResolver(emptyMap()))
 
@@ -60,6 +71,18 @@ object EpgLogoStore {
             }
         }
         scope.launch {
+            epgDao.observeAllChannelIcons().collectLatest { rows ->
+                val map = LinkedHashMap<String, String>()
+                val byName = HashMap<String, String>()
+                rows.forEach { r ->
+                    map.putIfAbsent(r.epgChannelId.trim().lowercase(), r.iconUrl)
+                    EpgMatcher.normalizeForEpg(r.epgChannelId).takeIf { it.isNotEmpty() }?.let { byName.putIfAbsent(it, r.iconUrl) }
+                }
+                spareIcons = map
+                spareByName = byName
+            }
+        }
+        scope.launch {
             settings.activeProfileId
                 .flatMapLatest { profileId -> customize.observe(profileId, MediaType.LIVE) }
                 .collectLatest { matches = it.epgMatchResolver }
@@ -80,12 +103,18 @@ object EpgLogoStore {
     }
 
     /** The feed icon for [channel], or null when there is none / no feed has logos enabled. */
-    fun iconFor(channel: ChannelEntity): String? {
-        if (icons.isEmpty()) return null
-        matches.epgIdFor(channel)?.let { id -> icons[id.trim().lowercase()]?.let { return it } }
+    fun iconFor(channel: ChannelEntity): String? = lookup(icons, channel)
+
+    /** glcn: any guide's icon for [channel] — only asked when the playlist brings no logo. */
+    fun spareFor(channel: ChannelEntity): String? = lookup(spareIcons, channel)
+        ?: spareByName.takeIf { it.isNotEmpty() }?.get(EpgMatcher.normalizeForEpg(channel.matchName))
+
+    private fun lookup(map: Map<String, String>, channel: ChannelEntity): String? {
+        if (map.isEmpty()) return null
+        matches.epgIdFor(channel)?.let { id -> map[id.trim().lowercase()]?.let { return it } }
         val own = channel.epgChannelId
         if (own.isNullOrBlank()) return null
-        return icons[own.trim().lowercase()]
+        return map[own.trim().lowercase()]
     }
 }
 
@@ -96,4 +125,4 @@ object EpgLogoStore {
  * "what the playlist said".
  */
 val ChannelEntity.displayLogoUrl: String?
-    get() = EpgLogoStore.iconFor(this) ?: logoUrl
+    get() = EpgLogoStore.iconFor(this) ?: logoUrl?.takeIf { it.isNotBlank() } ?: EpgLogoStore.spareFor(this)
