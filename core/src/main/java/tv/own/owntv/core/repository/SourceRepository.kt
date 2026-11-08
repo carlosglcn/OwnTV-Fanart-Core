@@ -210,7 +210,12 @@ class SourceRepository(
                 val duration = if (st.played) st.durationMs.takeIf { it > 0 } ?: 1L else st.durationMs
                 val position = if (st.played) duration else st.positionMs
                 if (duration <= 0L || position <= 0L) continue
+                // glcn: taken out of Keep watching by hand and not played on the server since: it stays out.
+                val seriesId = if (type == tv.own.owntv.core.model.MediaType.EPISODE) seriesDao.getEpisodeById(row.id)?.seriesId else null
                 for (pid in profiles) {
+                    val dismissedAt = if (seriesId != null) tv.own.owntv.core.emby.ContinueDismissals.series(pid, seriesId)
+                    else if (type == tv.own.owntv.core.model.MediaType.MOVIE) tv.own.owntv.core.emby.ContinueDismissals.movie(pid, row.id) else null
+                    if (dismissedAt != null && st.lastPlayedMs <= dismissedAt) continue
                     val have = progressDao.get(pid, type, row.id)
                     val haveDone = have != null && have.durationMs > 0 && have.positionMs >= (have.durationMs * 0.95f).toLong()
                     val take = when {

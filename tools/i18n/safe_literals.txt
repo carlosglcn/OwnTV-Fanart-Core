@@ -1879,6 +1879,10 @@
 1	json	core/src/main/java/tv/own/owntv/core/drm/DrmConfig.kt	scheme
 2	protocol	core/src/main/java/tv/own/owntv/core/drm/DrmConfig.kt	widevine
 1	technical	core/src/main/java/tv/own/owntv/core/drm/DrmConfig.kt	{
+1	preference-key	core/src/main/java/tv/own/owntv/core/emby/ContinueDismissals.kt	$profileId:$kind:$id
+1	preference-key	core/src/main/java/tv/own/owntv/core/emby/ContinueDismissals.kt	glcn_continue_dismissed
+1	preference-key	core/src/main/java/tv/own/owntv/core/emby/ContinueDismissals.kt	m
+1	preference-key	core/src/main/java/tv/own/owntv/core/emby/ContinueDismissals.kt	s
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTmdb.kt	a
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTmdb.kt	f
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTmdb.kt	glcn_emby_tmdb.json
@@ -1905,10 +1909,12 @@
 1	file-path	core/src/main/java/tv/own/owntv/core/emby/EmbyTrickplay.kt	r
 1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyTrickplay.kt	trickplay unavailable: ${it.javaClass.simpleName}
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTrickplay.kt	|
+1	json	core/src/main/java/tv/own/owntv/core/emby/EmbyWatchState.kt	LastPlayedDate
 1	json	core/src/main/java/tv/own/owntv/core/emby/EmbyWatchState.kt	PlaybackPositionTicks
 1	json	core/src/main/java/tv/own/owntv/core/emby/EmbyWatchState.kt	Played
 1	json	core/src/main/java/tv/own/owntv/core/emby/EmbyWatchState.kt	RunTimeTicks
 1	json	core/src/main/java/tv/own/owntv/core/emby/EmbyWatchState.kt	UserData
+1	json	core/src/main/java/tv/own/owntv/core/emby/EmbyWatchState.kt	null
 2	empty	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	\0
 1	uri	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	$base&$body
 1	uri	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	$base?$body
@@ -5665,6 +5671,7 @@
 1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	amazon prime video
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	amc
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	antena 3
+2	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	api
 1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	apple original films
 1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	apple studios
 2	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	apple tv
@@ -5694,6 +5701,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-series-backdrop
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-series-plot
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-year
+1	preference-key	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn_emby_sessions
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn_platform_logos
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	group-title="
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	hbo
@@ -5733,7 +5741,9 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ssa
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	starz
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	telecinco
+2	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	token
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	tve
+2	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	user
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	w300
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	yyyy-MM-dd'T'HH:mm:ss
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	|

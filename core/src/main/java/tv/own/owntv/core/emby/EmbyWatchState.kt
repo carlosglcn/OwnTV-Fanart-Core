@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap
 object EmbyWatchState {
 
     /** [positionMs] 0 with [played] false = untouched; [durationMs] 0 = the server did not say. */
-    data class State(val played: Boolean, val positionMs: Long, val durationMs: Long)
+    data class State(val played: Boolean, val positionMs: Long, val durationMs: Long, val lastPlayedMs: Long = 0L)
 
     private val states = ConcurrentHashMap<String, State>()
 
@@ -23,7 +23,12 @@ object EmbyWatchState {
         val played = ud.optBoolean("Played", false)
         val pos = ud.optLong("PlaybackPositionTicks", 0L) / 10_000L
         if (!played && pos <= 0L) return
-        states[key(streamUrl)] = State(played, pos, item.optLong("RunTimeTicks", 0L) / 10_000L)
+        // glcn: when the server last saw it played — a card taken out of Keep watching comes back only after this.
+        val last = ud.optString("LastPlayedDate").takeIf { it.isNotBlank() && it != "null" }?.let { iso ->
+            runCatching { java.time.OffsetDateTime.parse(iso).toInstant().toEpochMilli() }
+                .recoverCatching { java.time.Instant.parse(iso).toEpochMilli() }.getOrNull()
+        } ?: 0L
+        states[key(streamUrl)] = State(played, pos, item.optLong("RunTimeTicks", 0L) / 10_000L, last)
     }
 
     /** Takes everything recorded so far; the next sync starts from empty. */

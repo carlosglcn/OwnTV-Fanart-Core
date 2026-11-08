@@ -465,7 +465,34 @@ internal object EmbyBridge {
 
     private fun keyOf(t: Target): String = t.root + "|" + t.user + "|" + t.password.hashCode()
 
-    private val sessions = java.util.concurrent.ConcurrentHashMap<String, Session>()
+    /**
+     * glcn: kept sign-ins, also on disk — held in memory only, every start of the app (each update, each time
+     * Android closed it in the background) signed in again, and the server listed one more login each time.
+     * The token is no more than the password already stored with the playlist gives.
+     */
+    private val sessions = object {
+        private val mem = java.util.concurrent.ConcurrentHashMap<String, Session>()
+        private fun prefs() = runCatching {
+            org.koin.core.context.GlobalContext.get().get<android.content.Context>()
+                .getSharedPreferences(SESSION_PREFS, android.content.Context.MODE_PRIVATE)
+        }.getOrNull()
+        private fun diskKey(key: String) = key.hashCode().toString(16)
+
+        operator fun get(key: String): Session? = mem[key] ?: prefs()?.getString(diskKey(key), null)?.let { raw ->
+            runCatching { JSONObject(raw).let { Session(it.getString("api"), it.getString("token"), it.getString("user")) } }.getOrNull()
+        }?.also { mem[key] = it }
+
+        operator fun set(key: String, s: Session) {
+            mem[key] = s
+            prefs()?.edit()?.putString(diskKey(key), JSONObject().put("api", s.api).put("token", s.token).put("user", s.userId).toString())?.apply()
+        }
+
+        fun remove(key: String) {
+            mem.remove(key)
+            prefs()?.edit()?.remove(diskKey(key))?.apply()
+        }
+    }
+    private const val SESSION_PREFS = "glcn_emby_sessions"
 
     /**
      * glcn: the whole library as M3U text, signing in only when no kept sign-in works. The sync and the

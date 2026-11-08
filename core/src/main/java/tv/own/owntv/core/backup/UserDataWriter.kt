@@ -56,6 +56,8 @@ class UserDataWriter(
 
     /** Forget one item's resume position. */
     suspend fun clearProgress(profileId: Long, type: MediaType, itemId: Long) = db.transaction {
+        // glcn: a media server's resume point must not bring it straight back (ContinueDismissals).
+        if (type == MediaType.MOVIE) tv.own.owntv.core.emby.ContinueDismissals.dismissMovie(profileId, itemId)
         userData.recordDeletion(profileId, "prog", type, itemId)
         progressDao.clear(profileId, type, itemId)
     }
@@ -65,6 +67,7 @@ class UserDataWriter(
      * which is what the caller already did by hand, now with each deletion recorded.
      */
     suspend fun removeSeriesHistory(profileId: Long, seriesId: Long) = db.transaction {
+        tv.own.owntv.core.emby.ContinueDismissals.dismissSeries(profileId, seriesId) // glcn: see clearProgress
         userData.recordDeletion(profileId, "his", MediaType.SERIES, seriesId)
         historyDao.episodeIdsInHistory(profileId, seriesId).forEach {
             userData.recordDeletion(profileId, "his", MediaType.EPISODE, it)
