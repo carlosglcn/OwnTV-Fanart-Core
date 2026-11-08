@@ -432,7 +432,7 @@ class TmdbProvider(
             ep.apiKey?.takeIf { it.isNotBlank() }?.let { append("&api_key=").append(enc(it)) }
         }
         val json = fetch(ep, url, "videos original id=$tmdbId") ?: return this
-        val keys = runCatching { parseTrailerKey(JSONObject().put("videos", JSONObject(json)), original) }.getOrNull()
+        val keys = runCatching { parseTrailerKey(JSONObject().put("videos", JSONObject(json)), original, viewerLang = ep.trailerLang()) }.getOrNull()
         return if (keys != null) copy(trailerKey = keys) else this
     }
 
@@ -442,10 +442,10 @@ class TmdbProvider(
      * because an owner can block a video from embedded players — the in-app player then tries the next
      * one. Stored joined (see [TrailerKeys]). Null when the title has no usable video.
      */
-    private fun parseTrailerKey(details: JSONObject, preferredLang: String): String? {
+    private fun parseTrailerKey(details: JSONObject, preferredLang: String, viewerLang: String = preferredLang): String? {
         val arr = details.optJSONObject("videos")?.optJSONArray("results") ?: return null
         // glcn: the wanted language first, then English, then a video with no language, then the rest.
-        data class Video(val key: String, val tier: Int, val otherLang: Int)
+        data class Video(val key: String, val tier: Int, val otherLang: Int, val foreign: Boolean)
         val videos = ArrayList<Video>()
         for (i in 0 until arr.length()) {
             val v = arr.optJSONObject(i) ?: continue
@@ -463,9 +463,10 @@ class TmdbProvider(
                 lang == null -> 2
                 else -> 3
             }
-            videos += Video(key, tier, rank)
+            // glcn: a trailer in another language than the viewer's plays with their subtitles (when it has them).
+            videos += Video(key, tier, rank, foreign = lang != null && lang != viewerLang)
         }
-        return TrailerKeys.join(videos.sortedWith(compareBy({ it.otherLang }, { it.tier })).map { it.key })
+        return TrailerKeys.join(videos.sortedWith(compareBy({ it.otherLang }, { it.tier })).map { if (it.foreign) TrailerKeys.subtitled(it.key) else it.key })
     }
 
     /**
