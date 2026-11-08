@@ -2492,11 +2492,12 @@
 4	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/3/tv/
 1	url	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/3/watch/providers/
 1	url	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/day
-1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/videos
+2	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/videos
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	20th century
 5	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	?
 1	url	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	?append_to_response=
 2	protocol	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	?append_to_response=credits,external_ids,videos,images
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	?include_video_language=
 2	url	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	?language=en-US
 1	url	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	?page=
 1	protocol	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	?query=
@@ -2601,6 +2602,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	universal
 1	json	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	videos
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	videos id=$tmdbId
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	videos original id=$tmdbId
 2	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_average
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_count
 1	technical	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	walt disney

@@ -297,10 +297,15 @@
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	en directo
 1	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	w780
 2	core/src/main/java/tv/own/owntv/core/metadata/ProgrammeArtResolver.kt	·
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	&api_key=
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/3/movie/
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	/3/tv/
 2	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	backdrop_path
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	en
 2	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	logo_path
 9	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	name
 20	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	null
+1	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	videos
 3	core/src/main/java/tv/own/owntv/core/metadata/TmdbProvider.kt	vote_average
 2	core/src/main/java/tv/own/owntv/core/model/HomeRow.kt	glcnGenresDefault
 2	core/src/main/java/tv/own/owntv/core/model/HomeRow.kt	glcnLayoutV2

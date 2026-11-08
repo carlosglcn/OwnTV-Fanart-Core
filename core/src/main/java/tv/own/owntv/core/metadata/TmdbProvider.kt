@@ -190,7 +190,8 @@ class TmdbProvider(
             ep.apiKey?.takeIf { it.isNotBlank() }?.let { append("&api_key=").append(enc(it)) }
         }
         val json = fetch(ep, url, "movie details id=$tmdbId") ?: return null
-        return runCatching { parseMovieDetails(json, ep.language.substringBefore('-'), ep.trailerLang(), ep.region()) }.getOrNull()
+        val details = runCatching { parseMovieDetails(json, ep.language.substringBefore('-'), ep.trailerLang(), ep.region()) }.getOrNull()
+        return details?.withOriginalLanguageTrailer(ep, tmdbId, isTv = false)
     }
 
     override suspend fun tvDetails(tmdbId: Int): MovieDetails? {
@@ -205,7 +206,8 @@ class TmdbProvider(
             ep.apiKey?.takeIf { it.isNotBlank() }?.let { append("&api_key=").append(enc(it)) }
         }
         val json = fetch(ep, url, "tv details id=$tmdbId") ?: return null
-        return runCatching { parseTvDetails(json, ep.language.substringBefore('-'), ep.trailerLang(), ep.region()) }.getOrNull()
+        val details = runCatching { parseTvDetails(json, ep.language.substringBefore('-'), ep.trailerLang(), ep.region()) }.getOrNull()
+        return details?.withOriginalLanguageTrailer(ep, tmdbId, isTv = true)
     }
 
     override suspend fun networkLogo(networkId: Int): String? {
@@ -415,6 +417,23 @@ class TmdbProvider(
             logoPath = parseLogoPath(o, preferredLang, region),
             originalLanguage = o.optString("original_language").takeIf { it.isNotBlank() && it != "null" },
         )
+    }
+
+    /**
+     * glcn: a title with no trailer in the user's language or in English — a Polish or Korean series — often
+     * has one in its own language. One more request, only then, for the videos in that language.
+     */
+    private suspend fun MovieDetails.withOriginalLanguageTrailer(ep: Endpoint, tmdbId: Int, isTv: Boolean): MovieDetails {
+        if (trailerKey != null) return this
+        val original = originalLanguage?.takeIf { it.isNotBlank() && it != "en" && it != ep.trailerLang() } ?: return this
+        val url = buildString {
+            append(ep.baseUrl).append(if (isTv) "/3/tv/" else "/3/movie/").append(tmdbId).append("/videos")
+            append("?include_video_language=").append(enc(original))
+            ep.apiKey?.takeIf { it.isNotBlank() }?.let { append("&api_key=").append(enc(it)) }
+        }
+        val json = fetch(ep, url, "videos original id=$tmdbId") ?: return this
+        val keys = runCatching { parseTrailerKey(JSONObject().put("videos", JSONObject(json)), original) }.getOrNull()
+        return if (keys != null) copy(trailerKey = keys) else this
     }
 
     /**
