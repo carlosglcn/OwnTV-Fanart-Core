@@ -79,7 +79,17 @@ class MetadataRepository(
      */
     private fun MetadataCacheEntity.isShowable(): Boolean = !MetadataCast.isLegacyFormat(castJson)
 
-    private fun MetadataCacheEntity.isUsable(): Boolean = isShowable()
+    private fun MetadataCacheEntity.isUsable(): Boolean = isShowable() && !trailerWorthRechecking()
+
+    /**
+     * glcn: a title saved without a trailer is asked again — once, for the rows saved before trailers were
+     * also looked for in the title's own language, then every couple of weeks (a new title's trailer often
+     * reaches TMDB after the title itself). Titles that have one keep the long life of the cache.
+     */
+    private fun MetadataCacheEntity.trailerWorthRechecking(): Boolean {
+        if (trailerKey != null) return false
+        return updatedAt < ORIGINAL_LANGUAGE_TRAILERS_SINCE || System.currentTimeMillis() - updatedAt >= NO_TRAILER_RECHECK_MS
+    }
 
     /**
      * Resolve TMDB metadata for a movie. Returns the cached row (fresh or freshly fetched), or null when
@@ -815,6 +825,8 @@ class MetadataRepository(
         // a re-download of identical JSON. Negative stays at 7 days — a miss is worth retrying sooner.
         private const val POSITIVE_TTL_MS = 180L * 24 * 3600 * 1000 // 180 days
         private const val NEGATIVE_TTL_MS = 7L * 24 * 3600 * 1000   // 7 days
+        private const val NO_TRAILER_RECHECK_MS = 14L * 24 * 3600 * 1000 // glcn: see trailerWorthRechecking
+        private const val ORIGINAL_LANGUAGE_TRAILERS_SINCE = 1_794_164_400_000L // glcn: 2026-11-08 19:00 UTC
 
         /** Stable, re-sync-proof local key (mirrors CustomizeKeys): sourceId + remoteId, or name fallback. */
         fun movieLocalKey(movie: MovieEntity): String = "$TYPE_MOVIE:${movie.sourceId}:${movie.remoteId ?: movie.name}"
