@@ -55,6 +55,10 @@ interface MovieDao {
     @Query("SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY (addedAt IS NULL), addedAt DESC, sortOrder LIMIT :limit")
     suspend fun inCategory(categoryId: Long, limit: Int): List<MovieEntity>
 
+    /** glcn: which of [ids] this profile has already played — they leave the Featured billboard. */
+    @Query("SELECT itemId FROM watch_history WHERE profileId = :profileId AND mediaType = 'MOVIE' AND itemId IN (:ids)")
+    suspend fun watchedAmong(profileId: Long, ids: List<Long>): List<Long>
+
     /** glcn: Home's "Recently added" — only items whose playlist says when they arrived. */
     @Query("SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND addedAt IS NOT NULL ORDER BY addedAt DESC, id DESC LIMIT :limit")
     suspend fun recentlyAdded(sourceIds: List<Long>, limit: Int): List<MovieEntity>

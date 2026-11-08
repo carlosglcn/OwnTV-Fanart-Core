@@ -549,7 +549,14 @@ class HomeFeedReader(
                     tvNow = tvNowAsync.await(),
                     favourites = favLive,
                     favNow = favNowAsync.await(),
-                    movies = recentMoviesAsync.await(),
+                    // glcn: a new film already watched (or started) is no news — it leaves the billboard.
+                    movies = recentMoviesAsync.await().let { films ->
+                        if (films.isEmpty() || HomeRow.FEATURED !in config.visibleOrder) films
+                        else {
+                            val watched = movieDao.watchedAmong(profileId, films.map { it.id }).toHashSet()
+                            films.filterNot { it.id in watched }
+                        }
+                    },
                     series = recentSeriesAsync.await(),
                     enabled = HomeRow.FEATURED in config.visibleOrder,
                 ),
