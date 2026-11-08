@@ -125,4 +125,5 @@ object EpgLogoStore {
  * "what the playlist said".
  */
 val ChannelEntity.displayLogoUrl: String?
-    get() = EpgLogoStore.iconFor(this) ?: logoUrl?.takeIf { it.isNotBlank() } ?: EpgLogoStore.spareFor(this)
+    get() = (EpgLogoStore.iconFor(this) ?: logoUrl?.takeIf { it.isNotBlank() } ?: EpgLogoStore.spareFor(this))
+        .also { ChannelLogoUrls.note(it) }
