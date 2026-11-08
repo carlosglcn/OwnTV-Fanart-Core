@@ -915,6 +915,13 @@
     <string name="glcn_ui_sound_style_wood">Wood</string>
     <string name="glcn_ui_sound_style_bubble">Bubble</string>
     <string name="glcn_remote_next_playlist">Next playlist</string>
+    <string name="glcn_remote_programme_info">Programme info</string>
+    <string name="glcn_deck_widths">Player channel list</string>
+    <string name="glcn_deck_widths_summary">Groups <xliff:g id="groups">%1$d</xliff:g>%% · Channels <xliff:g id="channels">%2$d</xliff:g>%% · Programme <xliff:g id="programme">%3$d</xliff:g>%%</string>
+    <string name="glcn_deck_widths_groups">Groups</string>
+    <string name="glcn_deck_widths_channels">Channels</string>
+    <string name="glcn_deck_widths_programme">Programme</string>
+    <string name="glcn_deck_widths_hint">As a share of the screen; the rest is left for the video. The groups fold away while you browse the channels.</string>
     <string name="glcn_alerts_outside_title">Alerts outside the app</string>
     <string name="glcn_alerts_outside_desc">Reminders and match alerts as notifications when the app is not open. Off: they only appear inside the open app</string>
     <string name="glcn_zap_views_title">Zapping list views</string>

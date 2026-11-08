@@ -42,6 +42,8 @@ enum class RemoteShortcutAction {
     TOGGLE_SUBTITLES,
     // glcn: step through the playlists (all → each one → all), wherever the user is.
     NEXT_PLAYLIST,
+    // glcn: the programme on air in full — picture, synopsis, what follows (the player's ⓘ screen).
+    OPEN_PROGRAMME_INFO,
 }
 
 enum class RemoteShortcutPress { SHORT, LONG }
