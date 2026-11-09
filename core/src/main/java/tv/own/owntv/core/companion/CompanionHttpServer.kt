@@ -362,7 +362,7 @@ class CompanionHttpServer(
             // glcn: the playback report (LOG_DOWNLOAD mode) — PIN required, plain text.
             if (method == "GET" && path == "/report.txt" && mode == CompanionMode.LOG_DOWNLOAD) {
                 val headerPin = headers["x-companion-pin"].orEmpty()
-                if (!requireSyncAuth(queryPin.ifBlank { headerPin })) return sendText(socket, 401, localized(R.string.companion_error_unauthorized))
+                if (syncCaller(queryPin.ifBlank { headerPin }) == null) return sendText(socket, 401, localized(R.string.companion_error_unauthorized))
                 val file = downloadFile
                 val bytes = file?.takeIf { it.exists() }?.let { runCatching { it.readBytes() }.getOrNull() }
                     ?: return sendText(socket, 404, localized(R.string.companion_error_not_found))
