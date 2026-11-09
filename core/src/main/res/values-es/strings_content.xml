@@ -768,4 +768,6 @@
     <string name="glcn_style_kind_drift">Degradado · luces suaves que se mueven</string>
     <string name="glcn_style_kind_gradient">Degradado</string>
     <string name="glcn_style_kind_art">Degradado · toma los colores de la imagen enfocada</string>
+    <string name="glcn_tune_refused_locked">La categoría de este canal está bloqueada. Ábrela antes con tu PIN.</string>
+    <string name="glcn_tune_refused_profile">Este canal no está disponible en este perfil.</string>
 </resources>
