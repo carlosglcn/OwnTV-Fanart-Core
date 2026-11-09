@@ -24,6 +24,7 @@
     <string name="profiles_gate_subtitle">Her profil kendi favorilerini ve geçmişini tutar</string>
     <string name="profiles_wrong_pin">Yanlış PIN — tekrar deneyin</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — PIN\'i girin</string>
+    <string name="profiles_protected_edit">Bir profil kilidi veya ayarlar kilidi var. Değiştirmek için iki PIN’den birini girin.</string>
     <string name="profiles_kids_badge">ÇOCUK</string>
     <string name="profiles_add">Profil ekle</string>
     <string name="profiles_title">Profiller</string>
@@ -202,6 +203,7 @@
     <string name="recording_group_completed">Kaydedildi</string>
     <string name="recording_group_failed">Başarısız</string>
     <string name="recording_group_missed">Kaçırıldı</string>
+    <string name="recording_group_series">Her yayın</string>
     <string name="recording_record">Kaydet</string>
     <string name="recording_stop">Kaydı durdur</string>
     <string name="recording_delete_message">Kaydı ve dosyasını bu cihazdan kaldırır. Bu işlem geri alınamaz.</string>

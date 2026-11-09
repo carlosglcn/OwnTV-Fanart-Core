@@ -24,6 +24,7 @@
     <string name="profiles_gate_subtitle">Każdy profil ma własne ulubione i historię</string>
     <string name="profiles_wrong_pin">Nieprawidłowy PIN — spróbuj ponownie</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — wprowadź PIN</string>
+    <string name="profiles_protected_edit">Ma blokadę profilu lub blokadę ustawień. Wpisz jeden z dwóch PIN-ów, aby go zmienić.</string>
     <string name="profiles_kids_badge">DZIECI</string>
     <string name="profiles_add">Dodaj profil</string>
     <string name="profiles_title">Zarządzanie profilami</string>
@@ -222,6 +223,7 @@
     <string name="recording_group_completed">Nagrane</string>
     <string name="recording_group_failed">Nie powiodło się</string>
     <string name="recording_group_missed">Pominięte</string>
+    <string name="recording_group_series">Każda emisja</string>
     <string name="recording_record">Nagraj</string>
     <string name="recording_stop">Zatrzymaj nagrywanie</string>
     <string name="recording_delete_message">Usuwa nagranie i jego plik z tego urządzenia. Tej operacji nie można cofnąć.</string>

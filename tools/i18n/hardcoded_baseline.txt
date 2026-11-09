@@ -14,7 +14,6 @@
 1	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	5.1 Audio
 1	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	7.1 Audio
 1	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	[\\[(]([^\\])]{1,40})[\\])]
-2	core/src/main/java/tv/own/owntv/core/companion/CompanionController.kt	\0
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionController.kt	Failed to save uploaded playlist
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionController.kt	Saved uploaded playlist (${file.length()} bytes) → ${file.name}
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionController.kt	companion-playlists
@@ -30,6 +29,7 @@
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpProtocol.kt	playlistFileName
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpProtocol.kt	playlist_file
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpProtocol.kt	playlist_file_name
+1	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	\0
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	/serviceconfig
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	^[A-Za-z0-9._-]{8,256}$
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	apiKey
@@ -37,6 +37,7 @@
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	password
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	serverUrl
 1	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	username
+1	core/src/main/java/tv/own/owntv/core/companion/CompanionHttpServer.kt	x-companion-pin
 2	core/src/main/java/tv/own/owntv/core/companion/CompanionMode.kt	\0
 2	core/src/main/java/tv/own/owntv/core/companion/CompanionPayload.kt	\0
 1	core/src/main/java/tv/own/owntv/core/customize/CustomizationStore.kt	${CustomizeKeys.CUSTOM_PREFIX}${UUID.randomUUID()}
@@ -127,6 +128,7 @@
 1	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT * FROM epg_programmes WHERE epgChannelId = :epgChannelId AND startMs <= :now AND stopMs > :now ORDER BY (description IS NOT NULL AND description != '') DESC, startMs DESC LIMIT 1
 1	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT * FROM epg_programmes WHERE imageUrl = :url LIMIT 1
 1	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT title FROM epg_programmes WHERE imageUrl = :url LIMIT 1
+1	core/src/main/java/tv/own/owntv/core/database/dao/FavoriteDao.kt	DELETE FROM favorites WHERE profileId = :profileId
 1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY (addedAt IS NULL), addedAt DESC, sortOrder LIMIT :limit
 1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY (rating IS NULL), rating DESC, sortOrder LIMIT :limit
 1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND addedAt IS NOT NULL ORDER BY addedAt DESC, id DESC LIMIT :limit
@@ -459,11 +461,11 @@
 2	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	status
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	yyyy-MM-dd'T'HH:mm:ssxx
 2	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ACB
-2	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Herreligaen
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Handball-Bundesliga
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Herreligaen
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	K&H
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	K&H Férfi Liga
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	K&H Liga
-1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	K&H férfi liga
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	LIQUI MOLY HBL
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	LNH
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga ACB
@@ -475,10 +477,12 @@
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga húngara de balonmano
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liqui Moly StarLigue
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Machineseeker EHF Champions League
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Moto GP
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	MotoGP
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Mundial F1
+1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Mundial de MotoGP
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Opel HBL
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	StarLigue
-1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Starligue
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	UCI WorldTour
 1	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	UWT
 1	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	handball/khl
@@ -601,7 +605,6 @@
 2	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	final
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	final semifinal semifinales cuartos octavos quarterfinal quarterfinals semifinals
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	finals
-1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	formula
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	masters
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	mens
 1	core/src/main/java/tv/own/owntv/core/sports/WatchMatcher.kt	of

@@ -24,6 +24,7 @@
     <string name="profiles_gate_subtitle">Elk profiel heeft eigen favorieten en een eigen geschiedenis</string>
     <string name="profiles_wrong_pin">Onjuiste PIN — probeer het opnieuw</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — voer PIN in</string>
+    <string name="profiles_protected_edit">Het heeft een profielvergrendeling of een instellingenvergrendeling. Voer een van beide pincodes in om het te wijzigen.</string>
     <string name="profiles_kids_badge">KINDEREN</string>
     <string name="profiles_add">Profiel toevoegen</string>
     <string name="profiles_title">Profielen</string>
@@ -202,6 +203,7 @@
     <string name="recording_group_completed">Opgenomen</string>
     <string name="recording_group_failed">Mislukt</string>
     <string name="recording_group_missed">Gemist</string>
+    <string name="recording_group_series">Elke uitzending</string>
     <string name="recording_record">Opnemen</string>
     <string name="recording_stop">Opname stoppen</string>
     <string name="recording_delete_message">Verwijdert de opname en het bestand ervan van dit apparaat. Dit kan niet ongedaan worden gemaakt.</string>

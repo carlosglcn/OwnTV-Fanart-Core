@@ -67,13 +67,16 @@ object WatchMatcher {
     /** How a programme's text relates to a match. */
     enum class Hit { NONE, PARTIAL, CONFIRMED }
 
-    /** A match prepared once: its sides' and competition's name keys. */
+    /**
+     * A match prepared once: its sides' and competition's name keys. A race has no sides to look for:
+     * once it is over ESPN lists its first two drivers as if they were, and no guide titles a race by them.
+     */
     class Keys(val match: Match) {
-        // glcn: a racing session has no sides — the drivers on its podium are never in the guide's title —
-        // so it is found by its competition alone, also once it is live and ESPN lists the leaders.
-        private val sided = !match.sport.isRace
-        val home: TeamNames.Key? = match.home?.team?.takeIf { sided }?.let(TeamNames::keyOf)
-        val away: TeamNames.Key? = match.away?.team?.takeIf { sided }?.let(TeamNames::keyOf)
+        // glcn: a racing session (cars or bikes) has no sides — the drivers on its podium are never in the guide's
+        // title — so it is found by its competition alone, also once it is live and ESPN lists the leaders.
+        private val sides = if (match.sport.isRace) emptyList() else listOfNotNull(match.home?.team, match.away?.team)
+        val home: TeamNames.Key? = sides.getOrNull(0)?.let(TeamNames::keyOf)
+        val away: TeamNames.Key? = sides.getOrNull(1)?.let(TeamNames::keyOf)
         val competitionNames: List<String> = SportsCatalog.competitionNames(match)
 
         /**
@@ -83,12 +86,8 @@ object WatchMatcher {
          */
         val placeWords: Set<String> = if (!match.sport.isRace) emptySet()
         else TeamNames.tokens(match.venue.orEmpty()).filter { it.length >= 4 && it !in GENERIC_VENUE }.toSet()
-        // "Formula 1" loses its digit in a title, leaving "formula" — which a cartoon's "Amenaza en la fórmula" also holds.
-        // For racing that bare word is no evidence: "F1", or a Grand Prix with its place, are.
-        val league: TeamNames.Key = TeamNames.keyOfName(*competitionNames.toTypedArray()).let { k ->
-            if (match.sport == Sport.RACING) TeamNames.Key(k.variants.filter { it != setOf("formula") }) else k
-        }
-        val broadcasters: List<TeamNames.Key> = match.broadcasts.map { TeamNames.keyOfName(it.name) }
+        val league: CompetitionNames.Key = CompetitionNames.keyOf(competitionNames)
+        val broadcasters: List<CompetitionNames.Key> = match.broadcasts.map { CompetitionNames.broadcasterKey(it.name) }
 
         /**
          * glcn: a guide that names no player ("Final T2026 · Torneo de Shanghai") still says which tournament it is.
@@ -112,11 +111,7 @@ object WatchMatcher {
         val isFinal: Boolean = "final" in TeamNames.tokens(match.subtitle.orEmpty())
 
         /** Words for a channel full-text search: one team's word is enough to find "Frankfurt v Köln". */
-        val searchWords: List<String> = buildList {
-            if (sided) listOfNotNull(match.home?.team, match.away?.team).forEach { t ->
-                addAll(asciiWords(t.shortName)); addAll(asciiWords(t.name))
-            }
-        }.distinct()
+        val searchWords: List<String> = sides.flatMap { t -> asciiWords(t.shortName) + asciiWords(t.name) }.distinct()
     }
 
     /**
@@ -128,17 +123,18 @@ object WatchMatcher {
         val tokens = TeamNames.tokens(title).toSet()
         return (if (keys.home?.foundIn(tokens) == true) 2 else 0) +
             (if (keys.away?.foundIn(tokens) == true) 2 else 0) +
-            (if (keys.league.foundIn(tokens) || keys.tournamentGroups.isNotEmpty() && keys.tournamentGroups.all { g -> tokens.any { it in g } }) 1 else 0)
+            (if (keys.league.foundIn(CompetitionNames.words(title)) || keys.tournamentGroups.isNotEmpty() && keys.tournamentGroups.all { g -> tokens.any { it in g } }) 1 else 0)
     }
 
     /**
      * Both teams, or one team and the competition → confirmed. One team alone → partial, worth reading
-     * the synopsis. A session with no sides (racing) is confirmed by its competition alone.
+     * the synopsis. A session with no sides (racing) is confirmed by its competition alone. [tokens] are
+     * the text's [TeamNames.tokens], [words] its [CompetitionNames.words].
      */
-    fun hit(keys: Keys, tokens: Set<String>): Hit {
+    fun hit(keys: Keys, tokens: Set<String>, words: List<String>): Hit {
         val home = keys.home?.foundIn(tokens) == true
         val away = keys.away?.foundIn(tokens) == true
-        val league = keys.league.foundIn(tokens)
+        val league = keys.league.foundIn(words)
         return when {
             keys.tournamentGroups.isNotEmpty() && keys.tournamentGroups.all { g -> tokens.any { it in g } } &&
                 (if (keys.isFinal) "final" in tokens else tokens.none { it in LATE_ROUNDS }) -> Hit.CONFIRMED
@@ -160,14 +156,17 @@ object WatchMatcher {
     }
 
     /**
-     * A channel that usually carries it: its name carries the competition or a broadcaster ESPN names.
+     * A channel that usually carries it: its name carries the competition, or it is a channel of a
+     * broadcaster ESPN names and nothing else ("PEACOCK EVENT 3", not "APPLE TV+ SERIES 1").
      * Not a channel named for one fixture ("Next | La Clery vs. Vieux Fort South | Premier League"): it
      * shows that fixture, and when it were this one [isEventChannel] has already listed it.
      */
     fun isLikely(keys: Keys, channelName: String): Boolean {
         if (FIXTURE.containsMatchIn(channelName)) return false
-        val tokens = TeamNames.tokens(channelName).toSet()
-        return keys.league.foundIn(tokens) || keys.broadcasters.any { it.foundIn(tokens) }
+        if (keys.league.foundIn(CompetitionNames.words(channelName), channel = true)) return true
+        if (keys.broadcasters.isEmpty()) return false
+        val name = CompetitionNames.words(ProviderTags.parse(channelName).name)
+        return keys.broadcasters.any { it.namesOnly(name) }
     }
 
     /** A playlist's divider row ("##### PREMIER LEAGUE #####"): a heading, never a channel to watch. */

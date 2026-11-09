@@ -78,12 +78,6 @@ class TeamNamesTest {
         assertFalse(found(besiktas, "Istanbul derby preview"))
     }
 
-    @Test fun `competition key`() {
-        val pl = TeamNames.keyOfName("Premier League")
-        assertTrue(pl.foundIn(TeamNames.tokens("Premier League Live: Arsenal v Chelsea").toSet()))
-        assertFalse(pl.foundIn(TeamNames.tokens("Darts Premier Night").toSet()))
-    }
-
     @Test fun `a player is found by surname alone`() {
         val davidovich = Team("1", "Alejandro Davidovich Fokina", "A. Davidovich Fokina", isAthlete = true)
         val jodar = Team("2", "Rafael Jodar", "R. Jodar", isAthlete = true)

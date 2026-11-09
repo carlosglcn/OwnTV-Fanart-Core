@@ -9,9 +9,27 @@
 > in one bolded line of its own (e.g. **Database v46 · Backup v24 · Breaking**). The detail — what,
 > why, files and verification — belongs in the commit message, never here.
 
-## core-1.0.70 — unreleased
+## core-1.0.71 — 2026-11-09
 
-**Database v53 · Backup v26 · Backup: two new playlist fields, each profile's last categories · Moved items keep their place**
+### ✨ New features
+
+- **🔎 Sports: competitions are found by every name they go by — F1, EPL, La Liga, Formel 1 and more**
+- **🎚️ "Show likely channels" in a match page's filter**
+- **🎬 Player: title art for the film or show playing, and a 4K check for the badge**
+- **⏺️ Recordings: every "Record every showing" rule, with its channel logo, for a list with Stop**
+
+### 🐛 Fixes
+
+- **🏁 Sports: Formula 1 no longer matches Formula E, Ligue 1 no longer Ligue 2, Bundesliga no longer 2. Bundesliga**
+- **🏆 Sports: a competition inside a longer name no longer counts (Indian Premier League, CAF Champions League)**
+- **📺 Sports: a broadcaster's unrelated channels are no longer "likely" (Apple TV+ Series)**
+- **🏎️ Sports: a finished race is matched by its competition, not its first two drivers**
+- **📥 Xtream import no longer fails with "Expected a string but was BOOLEAN" (TV #349)**
+- **📐 Fit: films use the display shape on both engines, so anamorphic wide films are no longer stretched (TV #347)**
+
+## core-1.0.70 — 2026-11-07
+
+**Database v53 · Backup v26 · Backup: two new playlist fields, each profile's last categories, Settings lock PINs · Moved items keep their place**
 
 ### ✨ New features
 
@@ -30,8 +48,13 @@
 - **🚀 Start on the last channel in the TV Guide or Live TV** (community PR #49 by @Kevsosmooth)
 - **🏷️ Menu labels: off, when focused or always** (community PR #41 by @Kevsosmooth)
 - **🎤 Voice search** (community PR #42 by @Kevsosmooth)
-- **🔒 Lock a category with the Customize PIN** (community PR #37 by @Kevsosmooth)
-- **🔐 Ask for the PIN to open Settings** (community PR #47 by @Kevsosmooth)
+- **🔒 Lock a category with its own category lock PIN** (community PR #37 by @Kevsosmooth)
+- **🔐 Settings lock: a PIN of its own per profile, optionally for long-press changes too** (community PR #47 by @Kevsosmooth)
+- **🛡️ Protected profiles: new profiles, backups, restores and profile edits respect profile and Settings locks**
+- **🔀 Restore: a profile with the same name asks Merge, Replace or Keep both**
+- **👤 Local sync syncs the profile in use with the one in use on the other device**
+- **🔁 Local auto-sync: paired devices keep each other in step by themselves, with what each one allows** (community PR #56 by @igebara)
+- **👂 Keep auto-sync listening, as a switch (off by default)**
 - **🪟 Picture-in-picture when leaving the app** (community PR #39 by @Kevsosmooth)
 - **🔑 Stalker portals: an optional username and password**
 - **⌨️ Key hints for the Sports Calendar and Leagues tabs**

@@ -24,6 +24,7 @@
     <string name="profiles_gate_subtitle">Profil bakoitzak bere gogokoak eta historia gordetzen ditu</string>
     <string name="profiles_wrong_pin">PIN okerra — saiatu berriro</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — idatzi PINa</string>
+    <string name="profiles_protected_edit">Profil-blokeoa edo ezarpenen blokeoa du. Sartu bi PINetako bat aldatzeko.</string>
     <string name="profiles_kids_badge">HAURRAK</string>
     <string name="profiles_add">Gehitu profila</string>
     <string name="profiles_title">Profilak</string>
@@ -202,6 +203,7 @@
     <string name="recording_group_completed">Grabatuta</string>
     <string name="recording_group_failed">Huts egin dutenak</string>
     <string name="recording_group_missed">Galduak</string>
+    <string name="recording_group_series">Emankizun guztiak</string>
     <string name="recording_record">Grabatu</string>
     <string name="recording_stop">Gelditu grabazioa</string>
     <string name="recording_delete_message">Grabazioa eta haren fitxategia gailu honetatik kentzen ditu. Ezin da desegin.</string>

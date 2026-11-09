@@ -24,6 +24,7 @@
     <string name="profiles_gate_subtitle">Varje profil har egna favoriter och egen historik</string>
     <string name="profiles_wrong_pin">Fel PIN — försök igen</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — ange PIN</string>
+    <string name="profiles_protected_edit">Den har ett profillås eller ett inställningslås. Ange någon av de två PIN-koderna för att ändra den.</string>
     <string name="profiles_kids_badge">BARN</string>
     <string name="profiles_add">Lägg till profil</string>
     <string name="profiles_title">Profiler</string>
@@ -202,6 +203,7 @@
     <string name="recording_group_completed">Inspelat</string>
     <string name="recording_group_failed">Misslyckades</string>
     <string name="recording_group_missed">Missad</string>
+    <string name="recording_group_series">Varje sändning</string>
     <string name="recording_record">Spela in</string>
     <string name="recording_stop">Stoppa inspelningen</string>
     <string name="recording_delete_message">Tar bort inspelningen och dess fil från den här enheten. Det går inte att ångra.</string>

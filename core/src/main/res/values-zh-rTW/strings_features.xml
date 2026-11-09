@@ -24,6 +24,7 @@
     <string name="profiles_gate_subtitle">每個設定檔都有自己的收藏和觀看記錄</string>
     <string name="profiles_wrong_pin">PIN 錯誤——請再試一次</string>
     <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — 輸入 PIN</string>
+    <string name="profiles_protected_edit">它設有使用者檔案鎖或設定鎖。輸入其中任一 PIN 即可變更。</string>
     <string name="profiles_kids_badge">兒童</string>
     <string name="profiles_add">新增使用者檔案</string>
     <string name="profiles_title">使用者檔案</string>
@@ -192,6 +193,7 @@
     <string name="recording_group_completed">已錄影</string>
     <string name="recording_group_failed">失敗</string>
     <string name="recording_group_missed">已錯過</string>
+    <string name="recording_group_series">每一次播出</string>
     <string name="recording_record">錄影</string>
     <string name="recording_stop">停止錄影</string>
     <string name="recording_delete_message">從此裝置移除該錄影及其檔案。此動作無法復原。</string>
