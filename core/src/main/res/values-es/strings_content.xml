@@ -794,4 +794,8 @@
     <string name="glcn_sum_engines">Directo: %1$s · Películas: %2$s</string>
     <string name="glcn_sum_afr">Frecuencia automática: %1$s</string>
     <string name="glcn_sum_preview">Vista previa: %1$s</string>
+    <string name="glcn_sleep_warn_title">Temporizador: se para en %1$d:%2$02d</string>
+    <string name="glcn_sleep_warn_hint">Pulsa cualquier botón para 15 minutos más</string>
+    <string name="glcn_sleep_ended_title">Reproducción detenida por el temporizador</string>
+    <string name="glcn_sleep_ended_hint">Pulsa cualquier botón para volver</string>
 </resources>

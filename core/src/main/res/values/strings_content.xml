@@ -1115,4 +1115,8 @@
     <string name="glcn_sum_engines">Live: %1$s · Movies: %2$s</string>
     <string name="glcn_sum_afr">Auto frame rate: %1$s</string>
     <string name="glcn_sum_preview">Live preview: %1$s</string>
+    <string name="glcn_sleep_warn_title">Sleep timer: stopping in %1$d:%2$02d</string>
+    <string name="glcn_sleep_warn_hint">Press any button for 15 more minutes</string>
+    <string name="glcn_sleep_ended_title">Stopped by the sleep timer</string>
+    <string name="glcn_sleep_ended_hint">Press any button to go back</string>
 </resources>
