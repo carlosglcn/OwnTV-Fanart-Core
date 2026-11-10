@@ -629,7 +629,7 @@
     <string name="settings_browsing_live_categories">Categorías de TV en directo</string>
     <string name="settings_browsing_live_categories_description">Se muestran en TV en directo, la guía de TV, el reproductor y Multivista. Con Todos los canales desactivado, TV en directo se abre en tu primera categoría, o en Favoritos si no tienes ninguna.</string>
     <string name="settings_catchup_player">Reproducir el contenido en diferido con</string>
-    <string name="settings_customize_title">Personalizar categories y elementos</string>
+    <string name="settings_customize_title">Personalizar categorías y elementos</string>
     <string name="settings_customize_pin_locked">Esta pantalla está bloqueada con PIN.</string>
     <string name="settings_customize_wrong_pin">PIN incorrecto — vuelve a intentarlo</string>
     <string name="settings_customize_enter_pin">Introduce el PIN</string>
@@ -649,16 +649,16 @@
     <string name="settings_lock_turn_off">Desactivar</string>
     <string name="settings_search_keywords_settings_lock">bloqueo pin contraseña parental ajustes</string>
     <string name="settings_customize_description">Oculta y vuelve a mostrar canales, películas y series, y cambia el nombre o el orden de las categorías de este perfil. Los cambios se conservan al volver a sincronizar.</string>
-    <string name="settings_customize_new_category_behavior">Comportamiento de las categories nuevas</string>
+    <string name="settings_customize_new_category_behavior">Comportamiento de las categorías nuevas</string>
     <string name="settings_customize_hide">Ocultar</string>
     <string name="settings_customize_show">Mostrar</string>
     <string name="settings_customize_behavior_hide">Ocultar</string>
     <string name="settings_customize_behavior_show">Mostrar</string>
-    <string name="settings_customize_hidden_channels">Channels ocultos</string>
+    <string name="settings_customize_hidden_channels">Canales ocultos</string>
     <string name="settings_customize_hidden_movies">Películas ocultas</string>
     <string name="settings_customize_hidden_series">Series ocultas</string>
     <string name="settings_customize_unhide_description">Vuelve a mostrar un elemento para devolverlo a las listas.</string>
-    <string name="settings_customize_categories">Categories</string>
+    <string name="settings_customize_categories">Categorías</string>
     <string name="settings_customize_empty">Aún no hay categorías en esta sección; añade primero una fuente.</string>
     <string name="settings_customize_range_hide_start">Se ha iniciado la selección de un intervalo. Pulsa Mostrar/Ocultar en el elemento final para seleccionar el intervalo.</string>
     <string name="settings_customize_range_rename_start">Se ha iniciado el intervalo de cambio de nombre. Pulsa Cambiar nombre en el elemento final para seleccionar el intervalo.</string>
@@ -687,7 +687,7 @@
     <string name="settings_customize_filter_all">Todos</string>
     <string name="settings_customize_filter_visible">Visibles</string>
     <string name="settings_customize_filter_hidden">Ocultos</string>
-    <string name="settings_customize_new_categories_button">Categories nuevas: <xliff:g id="label">%1$s</xliff:g> ▾</string>
+    <string name="settings_customize_new_categories_button">Categorías nuevas: <xliff:g id="label">%1$s</xliff:g> ▾</string>
     <string name="settings_customize_restore_defaults">Restaurar valores de las listas de reproducción</string>
     <string name="settings_customize_restore_defaults_title">¿Restaurar <xliff:g id="section">%1$s</xliff:g> en <xliff:g id="playlist">%2$s</xliff:g>\?</string>
     <string name="settings_customize_restore_defaults_description">Las categorías y los elementos ocultos vuelven a mostrarse, se borran los nombres cambiados y el orden personalizado, y los elementos movidos regresan. Se conservan las categorías combinadas, los favoritos y las asociaciones de la guía.</string>
@@ -703,7 +703,7 @@
         <item quantity="many"><xliff:g id="count">%1$d</xliff:g> categorías seleccionadas.</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> categorías seleccionadas.</item>
     </plurals>
-    <string name="settings_customize_hide_show_title">Ocultar o mostrar categories</string>
+    <string name="settings_customize_hide_show_title">Ocultar o mostrar categorías</string>
     <string name="settings_customize_was">antes «<xliff:g id="name">%1$s</xliff:g>»</string>
     <string name="settings_customize_hidden">Oculta</string>
     <string name="settings_customize_unhide">Volver a mostrar</string>
@@ -876,7 +876,7 @@
     <string name="settings_backup_section_sources_desc">Playlists, feeds de EPG y credenciales</string>
     <string name="settings_backup_no_sources_warning">Sin Fuentes, este dispositivo no recibe playlists y no tendrá nada que ver.</string>
     <string name="settings_backup_section_customize">Personalizaciones</string>
-    <string name="settings_backup_section_customize_desc">Categories y channels ocultos, renombrados o reordenados, coincidencias de EPG y nombres personalizados de TMDB</string>
+    <string name="settings_backup_section_customize_desc">Categorías y canales ocultos, renombrados o reordenados, coincidencias de EPG y nombres personalizados de TMDB</string>
     <string name="settings_backup_section_favorites">Favoritos</string>
     <string name="settings_backup_section_favorites_desc">Canales, películas y series marcados como favoritos</string>
     <string name="settings_backup_section_history">Historial de reproducción</string>

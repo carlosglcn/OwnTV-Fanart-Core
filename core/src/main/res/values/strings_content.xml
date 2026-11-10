@@ -1093,4 +1093,16 @@
     <string name="glcn_style_kind_art">Gradient · takes the focused picture\'s colours</string>
     <string name="glcn_tune_refused_locked">This channel\'s category is locked. Open it with your PIN first.</string>
     <string name="glcn_tune_refused_profile">This channel isn\'t available on this profile.</string>
+    <string name="glcn_badge_new">New</string>
+    <string name="glcn_badge_fanart">Fanart</string>
+    <string name="glcn_adv_show">Show advanced settings</string>
+    <plurals name="glcn_adv_more">
+        <item quantity="one">%1$d more: %2$s</item>
+        <item quantity="other">%1$d more: %2$s</item>
+    </plurals>
+    <string name="glcn_adv_heading">Advanced</string>
+    <string name="glcn_adv_hide">Hide advanced settings</string>
+    <string name="glcn_adv_hide_line">Fewer settings in this group; they stay as you left them</string>
+    <string name="glcn_home_bg_title">Home background</string>
+    <string name="glcn_home_bg_desc">The picture behind Home, your own image and how dim it shows</string>
 </resources>
