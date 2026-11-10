@@ -7269,6 +7269,7 @@
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	no video frame rendered (audio plays, no picture)
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	played, then stalled for ${STALL_HANDOFF_MS / 1000}s without recovering
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	provider refuses ExoPlayer's signed segment URLs
+1	log	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	the server answered with an empty stream
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveLadder.kt	ExoPlayer + HLS
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveLadder.kt	ExoPlayer + TS
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveLadder.kt	mpv + HLS
@@ -7497,6 +7498,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	state_changed state=$name playWhenReady=${p?.playWhenReady} isPlaying=${p?.isPlaying}
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	still ${buffered}ms after ${waitedMs}ms
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	stop() — intentional
+1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	stream
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	stream frozen — no progress ${noProgressMs}ms
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	targetDurSec=${playlist.targetDurationUs / 1_000_000.0} windowSec=${playlist.durationUs / 1_000_000.0}
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	targetOffsetSec=${targetOffsetSecs ?: -1}
