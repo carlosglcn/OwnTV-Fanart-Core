@@ -142,6 +142,7 @@ class CatalogSyncWorker(
                     catalogSyncScheduler.enqueueTrendingRefresh(source.id)
                     Log.i(TAG, "Trending refresh enqueued sourceId=${source.id}")
                 }
+                tv.own.owntv.core.repository.SourceGlcnPrefs.succeeded(source.id)
                 Result.success()
             }
             is SyncResult.Failed -> {
@@ -152,6 +153,7 @@ class CatalogSyncWorker(
                     Result.retry()
                 } else {
                     Log.w(TAG, "Sync failed for source ${source.id}: ${result.message}")
+                    tv.own.owntv.core.repository.SourceGlcnPrefs.failed(source.id, result.message) // glcn: told in Playlists
                     Result.failure()
                 }
             }

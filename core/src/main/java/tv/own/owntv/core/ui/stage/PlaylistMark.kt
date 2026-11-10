@@ -19,6 +19,22 @@ data class PlaylistMark(val text: String, val argb: Long) {
          */
         fun of(name: String, index: Int): PlaylistMark = PlaylistMark(textOf(name), Palette[Math.floorMod(index, Palette.size)])
 
+        /**
+         * glcn: the mark of playlist [id] — the user's own colour and tag text when set in Playlists
+         * ([tv.own.owntv.core.repository.SourceGlcnPrefs]), else as [of].
+         */
+        fun forSource(id: Long, name: String, index: Int): PlaylistMark {
+            val prefs = tv.own.owntv.core.repository.SourceGlcnPrefs
+            val colour = prefs.markColour(id)?.let { Palette[Math.floorMod(it, Palette.size)] } ?: Palette[Math.floorMod(index, Palette.size)]
+            return PlaylistMark(prefs.markText(id)?.take(MAX_TEXT)?.uppercase(Locale.ROOT) ?: textOf(name), colour)
+        }
+
+        /** glcn: the colours a mark can take, for choosing one. */
+        val colours: List<Long> get() = Palette
+
+        /** glcn: the longest tag text. */
+        const val MAX_TEXT = 6
+
         internal fun textOf(name: String): String {
             val words = name.split(Regex("[^\\p{L}\\p{N}]+")).filter { it.isNotEmpty() }
             val kept = words.dropWhile { it.equals("IPTV", ignoreCase = true) || it.equals("TV", ignoreCase = true) }

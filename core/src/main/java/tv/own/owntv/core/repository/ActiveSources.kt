@@ -49,7 +49,11 @@ fun activeProfileSources(
             if (pid < 0) {
                 flowOf(ActiveProfileSources(pid, emptyList()))
             } else {
-                combine(sourceDao.observeForProfile(pid), settings.defaultSourceId, settings.activeSourceSet) { srcs, defaultId, set ->
+                combine(
+                    // glcn: a playlist switched off in Playlists is left out everywhere.
+                    combine(sourceDao.observeForProfile(pid), SourceGlcnPrefs.disabled) { all, off -> all.filterNot { it.id in off } },
+                    settings.defaultSourceId, settings.activeSourceSet,
+                ) { srcs, defaultId, set ->
                     val filtered = if (set.isNotEmpty() && srcs.any { it.id in set }) {
                         srcs.filter { it.id in set }
                     } else if (defaultId > 0 && srcs.any { it.id == defaultId }) {
