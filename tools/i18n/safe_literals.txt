@@ -7414,6 +7414,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	load_error status=${code ?: -1} type=${error.javaClass.simpleName}
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	media server not answering
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	media_source inferred=${route.logName} declared=${currentManifestType?.key ?: "-"}
+1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	memory pressure: the preview shows nothing (frames=$frames dropped=$dropped) — let go
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	min=${lc.minBufferMs}ms max=${lc.maxBufferMs}ms latency=${liveBufferSecs ?: -1}
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	mp4v-es
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	mpeg2
