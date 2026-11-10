@@ -1105,4 +1105,14 @@
     <string name="glcn_adv_hide_line">Fewer settings in this group; they stay as you left them</string>
     <string name="glcn_home_bg_title">Home background</string>
     <string name="glcn_home_bg_desc">The picture behind Home, your own image and how dim it shows</string>
+    <string name="glcn_sum_sep">" · "</string>
+    <plurals name="glcn_sum_playlists">
+        <item quantity="one">%1$d playlist</item>
+        <item quantity="other">%1$d playlists</item>
+    </plurals>
+    <string name="glcn_sum_zoom">%1$d %%</string>
+    <string name="glcn_sum_live_layout">Live TV: %1$s</string>
+    <string name="glcn_sum_engines">Live: %1$s · Movies: %2$s</string>
+    <string name="glcn_sum_afr">Auto frame rate: %1$s</string>
+    <string name="glcn_sum_preview">Live preview: %1$s</string>
 </resources>

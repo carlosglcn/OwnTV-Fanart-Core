@@ -783,4 +783,15 @@
     <string name="glcn_adv_hide_line">Menos ajustes en este grupo; se quedan como los dejaste</string>
     <string name="glcn_home_bg_title">Fondo de Inicio</string>
     <string name="glcn_home_bg_desc">La imagen detrás de Inicio, tu propia imagen y cuánto se oscurece</string>
+    <string name="glcn_sum_sep">" · "</string>
+    <plurals name="glcn_sum_playlists">
+        <item quantity="one">%1$d lista</item>
+        <item quantity="many">%1$d listas</item>
+        <item quantity="other">%1$d listas</item>
+    </plurals>
+    <string name="glcn_sum_zoom">%1$d %%</string>
+    <string name="glcn_sum_live_layout">TV en directo: %1$s</string>
+    <string name="glcn_sum_engines">Directo: %1$s · Películas: %2$s</string>
+    <string name="glcn_sum_afr">Frecuencia automática: %1$s</string>
+    <string name="glcn_sum_preview">Vista previa: %1$s</string>
 </resources>
