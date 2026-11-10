@@ -6659,19 +6659,26 @@
 2	json	core/src/main/java/tv/own/owntv/core/trending/TrendingScheduleStore.kt	t
 3	json	core/src/main/java/tv/own/owntv/core/trending/TrendingScheduleStore.kt	y
 1	json	core/src/main/java/tv/own/owntv/core/trending/TrendingScheduleStore.kt	{}
+2	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoArtProvider.kt	.jpg
 1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoArtProvider.kt	.png
+1	mime	core/src/main/java/tv/own/owntv/core/tv/LiveLogoArtProvider.kt	image/jpeg
 1	mime	core/src/main/java/tv/own/owntv/core/tv/LiveLogoArtProvider.kt	image/png
 1	technical	core/src/main/java/tv/own/owntv/core/tv/LiveLogoArtProvider.kt	r
 1	empty	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	\0
 1	technical	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	$aspectRatio|$source
 1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	${destination.name}.tmp
-1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	${key(source, aspectRatio)}.png
+1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	${key(source, aspectRatio, cover)}.${if (cover) "jpg" else "png"}
 1	technical	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	%02x
+1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	.jpg
 1	technical	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	.owntv-live-logo-art
 1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	.png
 1	technical	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	SHA-256
 1	uri	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	content://${context.packageName}$AUTHORITY_SUFFIX/${file.name}
+1	technical	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	cover|$aspectRatio|$source
+1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	jpg
+1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	png
 1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	tv-live-logo-art
+1	technical	core/src/main/java/tv/own/owntv/core/tv/RecentLiveRefreshWorker.kt	recent-live-programme-end
 1	technical	core/src/main/java/tv/own/owntv/core/tv/RecentLiveRefreshWorker.kt	recent-live-refresh
 1	empty	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	\0
 1	log	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	$profileId|${mediaType.name}|$stableKey
