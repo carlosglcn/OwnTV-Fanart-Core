@@ -59,6 +59,10 @@ interface MovieDao {
     @Query("SELECT itemId FROM watch_history WHERE profileId = :profileId AND mediaType = 'MOVIE' AND itemId IN (:ids)")
     suspend fun watchedAmong(profileId: Long, ids: List<Long>): List<Long>
 
+    /** glcn: which of [ids] this profile has finished (≥95 %, or marked watched — the 1/1 sentinel); the ✓ rule. */
+    @Query("SELECT itemId FROM playback_progress WHERE profileId = :profileId AND mediaType = 'MOVIE' AND itemId IN (:ids) AND durationMs > 0 AND positionMs * 100 >= durationMs * 95")
+    suspend fun completedAmong(profileId: Long, ids: List<Long>): List<Long>
+
     /** glcn: Home's "Recently added" — only items whose playlist says when they arrived. */
     @Query("SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND addedAt IS NOT NULL ORDER BY addedAt DESC, id DESC LIMIT :limit")
     suspend fun recentlyAdded(sourceIds: List<Long>, limit: Int): List<MovieEntity>

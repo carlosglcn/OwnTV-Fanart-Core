@@ -1396,6 +1396,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT categoryId, COUNT(*) AS itemCount FROM movies WHERE sourceId = :sourceId AND categoryId IS NOT NULL GROUP BY categoryId
 2	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT id, sourceId, categoryId, name, year, remoteId, sortOrder, canonicalTitle,
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT id, streamUrl FROM movies WHERE sourceId = :sourceId
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT itemId FROM playback_progress WHERE profileId = :profileId AND mediaType = 'MOVIE' AND itemId IN (:ids) AND durationMs > 0 AND positionMs * 100 >= durationMs * 95
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT itemId FROM watch_history WHERE profileId = :profileId AND mediaType = 'MOVIE' AND itemId IN (:ids)
 7	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT m.* FROM movies m
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT m.* FROM movies m INNER JOIN favorites f ON f.itemId = m.id AND f.mediaType = 'MOVIE'
