@@ -51,6 +51,9 @@ interface LiveEngines {
     /** Whether mpv holds a stream (full-screen live, a film, a catch-up). */
     val mpvHasStream: Boolean
 
+    /** glcn: a tune names its channel on the player at once, before either engine has a picture. */
+    fun announce(meta: MediaMeta) {}
+
     fun exoPlay(url: String, muted: Boolean, request: LiveRequest)
     fun exoSetMuted(muted: Boolean)
     fun exoStop()
@@ -112,6 +115,7 @@ class EnginePair(private val exo: LivePreviewEngine, private val mpv: OwnTVPlaye
     override val mpvHasStream: Boolean get() = mpv.hasActiveStream
 
     override fun exoPlay(url: String, muted: Boolean, request: LiveRequest) = exo.play(url, muted, request)
+    override fun announce(meta: MediaMeta) = mpv.announceLive(meta)
 
     override fun exoSetMuted(muted: Boolean) = exo.setMuted(muted)
     override fun exoStop() = exo.stop()

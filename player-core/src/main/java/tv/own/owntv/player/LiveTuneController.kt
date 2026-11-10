@@ -201,6 +201,9 @@ class LiveTuneController(
         previewJob?.cancel()
         cancelLadderJobs()
         current = channel
+        // glcn: the channel's name, logo and an empty set of stream marks go up now. The player's card
+        // kept the previous channel's until the new picture arrived — a second or more on a slow box.
+        engines.announce(host.meta(channel))
         recall.onWatched(channel)
         _previewBlocked.value = false
         val setting = source?.liveEnginePreference

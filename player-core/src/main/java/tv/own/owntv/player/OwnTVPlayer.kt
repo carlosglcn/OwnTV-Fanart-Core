@@ -3127,6 +3127,18 @@ class OwnTVPlayer(
     private fun currentMetaSnapshot() = _currentMeta.value
 
     /**
+     * glcn: a live tune names its channel at once — the card over the video shows the new channel and
+     * none of the previous one's stream marks while the picture is still on its way.
+     */
+    fun announceLive(meta: MediaMeta) {
+        val now = _currentMeta.value
+        if (now.title == meta.title && now.contentKey == meta.contentKey) return
+        _currentMeta.value = titleLogo?.takeIf { it.first == meta.artKey }?.let { meta.copy(titleLogoUrl = it.second) } ?: meta
+        _streamChips.value = emptyList()
+        _videoRes.value = null
+    }
+
+    /**
      * The `.ts` ⇄ `.m3u8` sibling of the item's ORIGINAL URL, or null when there is nothing to swap
      * (no extension, or it is already what we're playing).
      *
