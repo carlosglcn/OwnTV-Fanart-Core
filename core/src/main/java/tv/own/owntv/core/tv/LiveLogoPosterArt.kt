@@ -41,9 +41,13 @@ class LiveLogoPosterArt(
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private val inFlight = ConcurrentHashMap.newKeySet<String>()
 
-    /** The fitted art for [source], if it is on disk and not expired; never touches the network. */
-    fun cached(source: Uri, aspectRatio: Int): Uri? {
-        val file = fileFor(source, aspectRatio)
+    /**
+     * The fitted art for [source], if it is on disk and not expired; never touches the network.
+     * glcn: [cover] fills the canvas instead (a programme's fanart, centre-cropped, as a JPEG), so a launcher
+     * with no network of its own can still show the picture through the provider.
+     */
+    fun cached(source: Uri, aspectRatio: Int, cover: Boolean = false): Uri? {
+        val file = fileFor(source, aspectRatio, cover)
         if (!file.isFile) return null
         if (System.currentTimeMillis() - file.lastModified() > MAX_AGE_MS) return null
         return uriFor(file)
@@ -53,24 +57,24 @@ class LiveLogoPosterArt(
      * Fit every logo in [sources] that is not cached yet, in the background. [onReady] runs once, after
      * the batch, and only if at least one new file was written.
      */
-    fun prepare(sources: List<Uri>, aspectRatio: Int, onReady: suspend () -> Unit) {
-        val missing = sources.distinct().filter { cached(it, aspectRatio) == null && inFlight.add(key(it, aspectRatio)) }
+    fun prepare(sources: List<Uri>, aspectRatio: Int, cover: Boolean = false, onReady: suspend () -> Unit) {
+        val missing = sources.distinct().filter { cached(it, aspectRatio, cover) == null && inFlight.add(key(it, aspectRatio, cover)) }
         if (missing.isEmpty()) return
         scope.launch {
             var wrote = false
             try {
                 for (source in missing) {
-                    if (write(source, aspectRatio)) wrote = true
+                    if (write(source, aspectRatio, cover)) wrote = true
                 }
                 if (wrote) trim()
             } finally {
-                missing.forEach { inFlight.remove(key(it, aspectRatio)) }
+                missing.forEach { inFlight.remove(key(it, aspectRatio, cover)) }
             }
             if (wrote) runCatching { onReady() }
         }
     }
 
-    private fun write(source: Uri, aspectRatio: Int): Boolean {
+    private fun write(source: Uri, aspectRatio: Int, cover: Boolean): Boolean {
         val bytes = runCatching {
             client.newCall(Request.Builder().url(source.toString()).build()).execute().use { response ->
                 if (!response.isSuccessful) return@use null
@@ -80,14 +84,17 @@ class LiveLogoPosterArt(
             }
         }.getOrNull() ?: return false
         val bitmap = decodeCapped(bytes) ?: return false
-        val fitted = runCatching { fitInside(bitmap, aspectRatio) }.getOrNull()
+        val fitted = runCatching { if (cover) fillCanvas(bitmap, aspectRatio) else fitInside(bitmap, aspectRatio) }.getOrNull()
         bitmap.recycle()
         fitted ?: return false
-        val destination = fileFor(source, aspectRatio)
+        val destination = fileFor(source, aspectRatio, cover)
         val temporary = File(directory, "${destination.name}.tmp")
         val written = runCatching {
             directory.mkdirs()
-            temporary.outputStream().use { fitted.compress(Bitmap.CompressFormat.PNG, 100, it) } &&
+            temporary.outputStream().use {
+                if (cover) fitted.compress(Bitmap.CompressFormat.JPEG, COVER_JPEG_QUALITY, it)
+                else fitted.compress(Bitmap.CompressFormat.PNG, 100, it)
+            } &&
                 (!destination.exists() || destination.delete()) &&
                 temporary.renameTo(destination)
         }.getOrDefault(false)
@@ -112,7 +119,8 @@ class LiveLogoPosterArt(
 
     /** Keep the folder bounded: expired files go, then the oldest beyond [MAX_FILES]. */
     private fun trim() {
-        val files = directory.listFiles { f -> f.name.endsWith(".png") }?.sortedByDescending { it.lastModified() } ?: return
+        val files = directory.listFiles { f -> f.name.endsWith(".png") || f.name.endsWith(".jpg") }
+            ?.sortedByDescending { it.lastModified() } ?: return
         val now = System.currentTimeMillis()
         files.forEachIndexed { index, file ->
             if (index >= MAX_FILES || now - file.lastModified() > MAX_AGE_MS) file.delete()
@@ -132,7 +140,8 @@ class LiveLogoPosterArt(
         }
     }
 
-    private fun fileFor(source: Uri, aspectRatio: Int) = File(directory, "${key(source, aspectRatio)}.png")
+    private fun fileFor(source: Uri, aspectRatio: Int, cover: Boolean = false) =
+        File(directory, "${key(source, aspectRatio, cover)}.${if (cover) "jpg" else "png"}")
 
     private fun uriFor(file: File): Uri = "content://${context.packageName}$AUTHORITY_SUFFIX/${file.name}".toUri()
 
@@ -149,12 +158,31 @@ class LiveLogoPosterArt(
         /** The canvas's long side in pixels — plenty for a launcher card, small on disk. */
         internal const val CANVAS_LONG_SIDE = 640
         private const val PADDING_FRACTION = 0.05f
+        private const val COVER_JPEG_QUALITY = 85
 
         internal fun fitInside(source: Bitmap, aspectRatio: Int): Bitmap {
             val canvas = canvasSize(aspectRatio)
             val output = createBitmap(canvas.width, canvas.height)
             val bounds = fitInsideBounds(source.width, source.height, aspectRatio)
             Canvas(output).drawBitmap(source, null, Rect(bounds.left, bounds.top, bounds.right, bounds.bottom), Paint(Paint.FILTER_BITMAP_FLAG))
+            return output
+        }
+
+        /** glcn: [source] scaled to cover the whole canvas and centre-cropped, for a programme's fanart. */
+        internal fun fillCanvas(source: Bitmap, aspectRatio: Int): Bitmap {
+            val canvas = canvasSize(aspectRatio)
+            val output = createBitmap(canvas.width, canvas.height)
+            val scale = maxOf(canvas.width.toFloat() / source.width, canvas.height.toFloat() / source.height)
+            val cropWidth = Math.round(canvas.width / scale).coerceIn(1, source.width)
+            val cropHeight = Math.round(canvas.height / scale).coerceIn(1, source.height)
+            val left = (source.width - cropWidth) / 2
+            val top = (source.height - cropHeight) / 2
+            Canvas(output).drawBitmap(
+                source,
+                Rect(left, top, left + cropWidth, top + cropHeight),
+                Rect(0, 0, canvas.width, canvas.height),
+                Paint(Paint.FILTER_BITMAP_FLAG),
+            )
             return output
         }
 
@@ -191,8 +219,8 @@ class LiveLogoPosterArt(
         }
 
         /** One file per logo URL and card shape — 64 hex characters, which the provider checks. */
-        private fun key(source: Uri, aspectRatio: Int): String = MessageDigest.getInstance("SHA-256")
-            .digest("$aspectRatio|$source".toByteArray())
+        private fun key(source: Uri, aspectRatio: Int, cover: Boolean = false): String = MessageDigest.getInstance("SHA-256")
+            .digest((if (cover) "cover|$aspectRatio|$source" else "$aspectRatio|$source").toByteArray())
             .joinToString("") { "%02x".format(it) }
     }
 }
