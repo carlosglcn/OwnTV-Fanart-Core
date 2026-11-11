@@ -7285,7 +7285,7 @@
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	, init ${initializationDurationMs}ms)
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	, no redirect
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	, redirected ${asked.host} → ${got.host}
-1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	-
+4	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	-
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	.
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	.m3u8
 2	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	.mpd
@@ -7297,7 +7297,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	7.1
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	: $it
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	://
-2	json	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	?
+4	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	?
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	AV1
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	Age
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	Authorization
@@ -7344,9 +7344,12 @@
 1	mime	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	application/vnd.apple.mpegurl
 1	mime	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	application/x-mpegurl
 2	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	audio
+1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	audio decoder failed on the picked track (${error.errorCodeName}) — back to the default track
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	audio decoder released: $decoderName
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	audio decoder: $decoderName ($kind, init ${initializationDurationMs}ms)
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	audio format: ${format.sampleMimeType} ${format.sampleRate}Hz ${format.channelCount}ch
+1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	audio track $aId: ${f.sampleMimeType ?: f.codecs ?: "?"} ${f.channelCount}ch lang=${lang ?: "-"} playable=$playable
+2	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	audio track $id not playable on this device — not selected
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	audio: ${audioSinkError.message ?: audioSinkError.javaClass.simpleName}
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	audioWatchdog: $reason — already stereo PCM, rebuilding without the stereo latch
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	audioWatchdog: $reason — forcing stereo for this session
@@ -7375,6 +7378,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	exo/live: $reason
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	ffmpeg
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	first frame after ${now - t.startedMs}ms${ZapTiming.pressSuffix(sincePress)}
+1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	fps=${f.frameRate} ${f.channelCount}ch ${f.sampleRate}Hz
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	frame hook NOT wired — no video renderer found; picture-freeze detection falls back to the no-progress backstop
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	frame hook send FAILED (${it.message}) — picture-freeze detection falls back to the no-progress backstop
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	frames dropped faster than shown
@@ -7467,6 +7471,7 @@
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	reconnect skipped — the stream came back on its own
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	recovered after the ladder gave up — clearing the error
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	redirected .ts response is HLS — retrying with HlsMediaSource
+1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	refused format: ${f.sampleMimeType ?: "?"} codecs=${f.codecs ?: "-"} ${f.width}x${f.height}
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	release() — intentional
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	releaseDecoderForUhd(): releasing the 4K decoder + surface
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	renderers=unreported

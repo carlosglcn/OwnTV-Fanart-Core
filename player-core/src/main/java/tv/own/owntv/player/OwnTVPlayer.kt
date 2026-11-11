@@ -66,6 +66,8 @@ data class TrackOption(
     val lang: String? = null,
     val typeIndex: Int = -1,
     val labelKind: TrackLabelKind = TrackLabelKind.AUDIO,
+    /** glcn: false for a track this device has no decoder for — listed, marked, never forced on. */
+    val playable: Boolean = true,
 )
 
 /** Image-based subtitle codecs. They carry no text, so the app-drawn (direct render) overlay can't show

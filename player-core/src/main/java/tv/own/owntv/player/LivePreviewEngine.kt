@@ -1443,8 +1443,16 @@ class LivePreviewEngine(
         override fun onPlayerError(error: PlaybackException) {
             android.util.Log.w(LiveDiagnosticsLog.TAG, "ExoPlayer error: ${error.errorCodeName}", error)
             LiveDiagnosticsLog.event("player_error code=${error.errorCodeName} hasPlayed=${tune.hasPlayed}")
+            // glcn: a decoder that refuses names the format it refused — a device limit or something to fix.
+            (error as? androidx.media3.exoplayer.ExoPlaybackException)?.rendererFormat?.let { f ->
+                LiveDiagnosticsLog.event(
+                    "refused format: ${f.sampleMimeType ?: "?"} codecs=${f.codecs ?: "-"} ${f.width}x${f.height} " +
+                        "fps=${f.frameRate} ${f.channelCount}ch ${f.sampleRate}Hz",
+                )
+            }
             // A decoder or audio-output failure while tunneled is the tunnel's; a network one is not.
             if (tunneledNow && error.errorCode in TUNNEL_FAILURE_CODES) { tunnelingFailed(error.errorCodeName); return }
+            if (dropForcedAudioAfter(error)) return
             // mid-stream drop → reconnect, unless a reconnect from the SAME failed prepare is already
             // in flight (ExoPlayer often fires this alongside a STATE_IDLE for one physical failure) or
             // we've already exhausted retries and are waiting on the user/a fresh play().
@@ -1452,7 +1460,9 @@ class LivePreviewEngine(
             // this channel, and reconnecting only fetches the same data again. Measured: corrupt AC-3 frames
             // crashed Media3's reader on every reconnect, one frame then a freeze, for the whole 2-minute
             // ladder. Fail the load so the tune controller can give the channel to mpv.
-            if (tune.hasPlayed && !tune.gaveUp && isContentFailure(error) && ++tune.contentFailures >= CONTENT_FAILURE_LIMIT) {
+            if (tune.hasPlayed && !tune.gaveUp && (isContentFailure(error) || error.errorCode == PlaybackException.ERROR_CODE_DECODER_INIT_FAILED) &&
+                ++tune.contentFailures >= CONTENT_FAILURE_LIMIT
+            ) {
                 tune.contentBroken = true
                 LiveDiagnosticsLog.event("${error.errorCodeName} again after playing — this stream's content is unplayable on ExoPlayer")
                 failLoad("ExoPlayer can't play this stream (${error.errorCodeName})")
@@ -3013,7 +3023,7 @@ class LivePreviewEngine(
         if (!recall.loaded) return
         if (!recall.audioDone && tune.audioTrackList.isNotEmpty()) {
             recall.audioDone = true
-            TrackMemory.audioToSelect(tune.audioTrackList, recall.audio)?.let { applyAudioTrack(it.mpvId) }
+            TrackMemory.audioToSelect(tune.audioTrackList.filter { it.playable }, recall.audio)?.let { applyAudioTrack(it.mpvId) }
         }
         if (!recall.subDone && tune.textTrackList.isNotEmpty()) {
             recall.subDone = true
@@ -3036,6 +3046,10 @@ class LivePreviewEngine(
     }
 
     override fun selectAudio(id: Int) {
+        if (tune.audioTrackList.firstOrNull { it.mpvId == id }?.playable == false) {
+            LiveDiagnosticsLog.event("audio track $id not playable on this device — not selected")
+            return
+        }
         applyAudioTrack(id)
         rememberTrack(audio = true, lang = tune.audioTrackList.firstOrNull { it.mpvId == id }?.lang)
     }
@@ -3043,6 +3057,12 @@ class LivePreviewEngine(
     private fun applyAudioTrack(id: Int) {
         val p = player ?: return
         val sel = tune.audioSelections.firstOrNull { it.id == id } ?: return
+        // glcn: forcing a track no decoder here takes failed the channel — and, remembered, failed it on
+        // every later tune too. It stays in the list, marked, and is never forced on.
+        if (tune.audioTrackList.firstOrNull { it.mpvId == id }?.playable == false) {
+            LiveDiagnosticsLog.event("audio track $id not playable on this device — not selected")
+            return
+        }
         p.trackSelectionParameters = p.trackSelectionParameters.buildUpon()
             .setOverrideForType(androidx.media3.common.TrackSelectionOverride(sel.group, listOf(sel.trackIndex)))
             .build()
@@ -3059,6 +3079,28 @@ class LivePreviewEngine(
             LiveDiagnosticsLog.event("passthrough audio: re-priming the output after the track change")
             runCatching { p.seekTo(p.currentPosition) }
         }
+    }
+
+    /**
+     * glcn: the audio decoder failed while a picked track was forced on: the pick goes, the channel's
+     * remembered language with it, and the stream starts again on the track the player chooses itself —
+     * instead of the reconnect ladder re-forcing the same track until the channel gives up.
+     */
+    private fun dropForcedAudioAfter(error: PlaybackException): Boolean {
+        val p = player ?: return false
+        val audioFailed = (error as? androidx.media3.exoplayer.ExoPlaybackException)?.let {
+            it.type == androidx.media3.exoplayer.ExoPlaybackException.TYPE_RENDERER &&
+                it.rendererFormat?.sampleMimeType?.let(androidx.media3.common.MimeTypes::isAudio) == true
+        } == true
+        if (!audioFailed) return false
+        if (!p.trackSelectionParameters.overrides.keys.any { it.type == androidx.media3.common.C.TRACK_TYPE_AUDIO }) return false
+        LiveDiagnosticsLog.event("audio decoder failed on the picked track (${error.errorCodeName}) — back to the default track")
+        p.trackSelectionParameters = p.trackSelectionParameters.buildUpon()
+            .clearOverridesOfType(androidx.media3.common.C.TRACK_TYPE_AUDIO)
+            .build()
+        trackRecall?.let { recall -> scope.launch { playbackPrefs.forgetAudioLang(recall.key) } }
+        p.prepare()
+        return true
     }
 
     override fun selectSubtitle(id: Int) {
@@ -3123,6 +3165,9 @@ class LivePreviewEngine(
                 androidx.media3.common.C.TRACK_TYPE_AUDIO -> for (i in 0 until group.length) {
                     val f = group.getTrackFormat(i)
                     val lang = f.language?.takeIf { it.isNotBlank() && it != "und" }
+                    // glcn: whether any audio renderer here (the chip, or FFmpeg when it is on) takes this track.
+                    val playable = group.isTrackSupported(i, true)
+                    LiveDiagnosticsLog.event("audio track $aId: ${f.sampleMimeType ?: f.codecs ?: "?"} ${f.channelCount}ch lang=${lang ?: "-"} playable=$playable")
                     audio.add(
                         TrackOption(
                             label = f.label.orEmpty(),
@@ -3131,6 +3176,8 @@ class LivePreviewEngine(
                             lang = lang,
                             typeIndex = aId,
                             labelKind = TrackLabelKind.AUDIO,
+                            codec = f.sampleMimeType,
+                            playable = playable,
                         ),
                     )
                     aSel.add(AudioSel(aId, group.mediaTrackGroup, i)); aId++

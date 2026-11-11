@@ -102,6 +102,11 @@ class PlaybackPrefsStore(
         runCatching { dao.setAudioLang(settings.activeProfileId.first(), trackKey, lang) }
     }
 
+    /** glcn: forget [trackKey]'s audio pick — it named a track this device could not play. */
+    suspend fun forgetAudioLang(trackKey: String) {
+        runCatching { dao.setAudioLang(settings.activeProfileId.first(), trackKey, null) }
+    }
+
     /** Remember a deliberate subtitle pick by its language, or [SUBTITLES_OFF]. */
     suspend fun rememberSubtitleLang(trackKey: String, lang: String) {
         runCatching { dao.setSubtitleLang(settings.activeProfileId.first(), trackKey, lang) }

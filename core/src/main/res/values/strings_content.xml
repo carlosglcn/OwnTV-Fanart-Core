@@ -1119,4 +1119,5 @@
     <string name="glcn_sleep_warn_hint">Press any button for 15 more minutes</string>
     <string name="glcn_sleep_ended_title">Stopped by the sleep timer</string>
     <string name="glcn_sleep_ended_hint">Press any button to go back</string>
+    <string name="glcn_track_unplayable">not supported on this device</string>
 </resources>
