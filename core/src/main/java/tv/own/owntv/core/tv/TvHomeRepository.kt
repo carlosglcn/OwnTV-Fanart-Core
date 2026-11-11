@@ -215,6 +215,8 @@ class TvHomeRepository(
             }
         }
 
+        val fanarts = ArrayList<Uri>()
+        var nextProgrammeEnd = Long.MAX_VALUE
         recentChannels.forEachIndexed { index, channel ->
             val stableKey = launcherPlanner.liveStableKey(channel)
             val row = tvProviderProgramDao.find(profileId, TvProviderSurface.RECENT_LIVE, MediaType.LIVE, stableKey)
@@ -225,8 +227,13 @@ class TvHomeRepository(
                     groupId = stableKey,
                     targetItemId = channel.id,
                 )
-            publishRecentLiveProgram(profileId, channelId, channel, row, index, customizations, now)
+            val onAir = publishRecentLiveProgram(profileId, channelId, channel, row, index, customizations, now)
+            onAir?.fanart?.let { fanarts += it }
+            onAir?.endMs?.takeIf { it > now }?.let { if (it < nextProgrammeEnd) nextProgrammeEnd = it }
         }
+        // glcn: refresh the row right after the first programme in it ends, so the card moves to what airs next
+        // without waiting for the periodic refresh.
+        if (nextProgrammeEnd != Long.MAX_VALUE) RecentLiveRefreshWorker.scheduleAt(context, nextProgrammeEnd)
 
         tvProviderProgramDao.upsert(channelRow.copy(lastPublishedAt = now, lastEngagementAt = now))
         logD("refreshRecentLive profile=$profileId updated channel bookkeeping")
@@ -234,11 +241,16 @@ class TvHomeRepository(
         // Logos not fitted yet were published with their own URL; fit them in the background and
         // publish the row once more when they are ready. Never while the row above was being written.
         val arts = recentChannels.mapNotNull { safeLiveArtUri(it.displayLogoUrl) }
-        liveLogoPosterArt.prepare(arts, TvContractCompat.PreviewProgramColumns.ASPECT_RATIO_16_9) {
+        val republish: suspend () -> Unit = {
             if (settings.androidTvHomeEnabled.first()) {
                 mutex.withLock { refreshRecentLiveLocked(profileId, allowBrowsableRequest = false, force = true) }
             }
         }
+        liveLogoPosterArt.prepare(arts, TvContractCompat.PreviewProgramColumns.ASPECT_RATIO_16_9, onReady = republish)
+        // glcn: the square logo (the card's badge) and the fanart as local files too, served by
+        // LiveLogoArtProvider, for launchers that have no network of their own.
+        liveLogoPosterArt.prepare(arts, TvContractCompat.PreviewProgramColumns.ASPECT_RATIO_1_1, onReady = republish)
+        liveLogoPosterArt.prepare(fanarts, TvContractCompat.PreviewProgramColumns.ASPECT_RATIO_16_9, cover = true, onReady = republish)
     }
 
     private suspend fun syncMovie(profileId: Long, movieId: Long, positionMs: Long, durationMs: Long, force: Boolean = false) {
@@ -554,31 +566,45 @@ class TvHomeRepository(
         index: Int,
         customizations: SectionCustomizations,
         now: Long,
-    ) {
+    ): OnAir? {
         val label = customizations.itemNames[CustomizeKeys.channel(channel)] ?: channel.name
         // glcn: the programme on air now, with its fanart, when the guide has one; otherwise the channel's logo as before.
         val onAir = nowOnAir(channel, customizations, now)
         val art = safeLiveArtUri(channel.displayLogoUrl)
         val fittedArt = art?.let { liveLogoPosterArt.cached(it, TvContractCompat.PreviewProgramColumns.ASPECT_RATIO_16_9) } ?: art
-        val posterArt = onAir?.fanart ?: fittedArt
+        // glcn: the fanart from the local copy once it is ready (the remote URL until then).
+        val localFanart = onAir?.fanart?.let { liveLogoPosterArt.cached(it, TvContractCompat.PreviewProgramColumns.ASPECT_RATIO_16_9, cover = true) }
+        val posterArt = localFanart ?: onAir?.fanart ?: fittedArt
+        val squareLogo = art?.let { liveLogoPosterArt.cached(it, TvContractCompat.PreviewProgramColumns.ASPECT_RATIO_1_1) }
         val stableKey = launcherPlanner.liveStableKey(channel)
         val stableKeyString = launcherPlanner.liveStableKeyString(channel)
         val program = PreviewProgram.Builder()
             .setChannelId(channelId)
             .setType(TvContractCompat.PreviewProgramColumns.TYPE_CHANNEL)
-            .setTitle(if (onAir?.fanart != null) onAir.title else label)
-            .setDescription(if (onAir?.fanart != null) label else channelDaoName(channel))
+            // glcn: the programme's title whenever the guide has one (with or without fanart), the channel's name below it.
+            .setTitle(onAir?.title ?: label)
+            .setDescription(if (onAir != null) label else channelDaoName(channel))
             .setInternalProviderId(platformInternalId(TvProviderSurface.RECENT_LIVE, profileId, MediaType.LIVE, stableKeyString))
             .setIntent(Intent(Intent.ACTION_VIEW, LauncherDeepLink.Live(channel.sourceId, channel.remoteId, channel.name).toUri()))
             .setWeight(RECENT_LIVE_MAX_ITEMS - index)
             .apply { if (posterArt != null) setPosterArtUri(posterArt) }
             .apply { if (posterArt != null) setPosterArtAspectRatio(TvContractCompat.PreviewProgramColumns.ASPECT_RATIO_16_9) }
+            // glcn: the channel's own logo and the programme's times, so a launcher can draw the badge and the progress bar.
+            .apply { if (squareLogo != null) setLogoUri(squareLogo) }
+            .apply {
+                if (onAir?.startMs != null && onAir.endMs != null) {
+                    setStartTimeUtcMillis(onAir.startMs)
+                    setEndTimeUtcMillis(onAir.endMs)
+                }
+            }
             .build()
         logD("persistRecentLive profile=$profileId channelId=$channelId index=$index label=$label row=${row.describe()}")
         persistRecentLiveProgram(row, program, stableKey)
+        return onAir
     }
 
-    private class OnAir(val title: String, val fanart: Uri?)
+    /** glcn: [startMs]/[endMs] in display time (the channel's EPG shift applied), null when the guide gives none. */
+    private class OnAir(val title: String, val fanart: Uri?, val startMs: Long? = null, val endMs: Long? = null)
 
     /** The programme airing now on [channel] and its wide picture; null when the guide has nothing for it. */
     private suspend fun nowOnAir(
@@ -598,7 +624,10 @@ class TvHomeRepository(
                     ?: programmeArt.infoFor(programme)?.backdropUrl
             }.getOrNull()
         }
-        return OnAir(title, safeLiveArtUri(url))
+        val shiftMs = shift * 60_000L
+        val start = programme.startMs.takeIf { it > 0 }?.plus(shiftMs)
+        val end = programme.stopMs.takeIf { it > programme.startMs }?.plus(shiftMs)
+        return OnAir(title, safeLiveArtUri(url), start, end)
     }
 
     private suspend fun persistRecentLiveProgram(row: TvProviderProgramEntity, program: PreviewProgram, stableKey: Long) {

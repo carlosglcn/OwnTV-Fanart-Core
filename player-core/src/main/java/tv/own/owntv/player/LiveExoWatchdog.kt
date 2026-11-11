@@ -75,6 +75,12 @@ class LiveExoWatchdog(
             engine.segmentsRefused.first { it }
             if (stillOurs()) handOver("provider refuses ExoPlayer's signed segment URLs")
         }
+        // glcn: "200 OK" with nothing in it — no point waiting out the opening budget; a moment for a retry, then on.
+        launch {
+            engine.emptyStream.first { it }
+            delay(EMPTY_STREAM_GRACE_MS)
+            if (stillOurs() && engine.state.value != LivePreviewEngine.State.PLAYING) handOver("the server answered with an empty stream")
+        }
 
         // Bounded, because "neither" is a real outcome. A pre-buffer is requested silence: 10s of it
         // means the first frame is *supposed* to be ~10s out, so the deadline moves with it or every
@@ -213,6 +219,9 @@ class LiveExoWatchdog(
          * bouncing those off the faster engine costs more than the extra seconds save.
          */
         const val OPEN_TIMEOUT_MS = 12_000L
+
+        /** glcn: after an empty answer, the time ExoPlayer's own retry gets before mpv takes over. */
+        const val EMPTY_STREAM_GRACE_MS = 2_500L
 
         /**
          * How long a channel that HAS played may stay stalled before it goes to the other engine.

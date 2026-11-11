@@ -328,8 +328,14 @@ class HomeFeedReader(
             }
             val recentMoviesAsync = async {
                 if ((HomeRow.RECENT_MOVIES !in config.visibleOrder && HomeRow.FEATURED !in config.visibleOrder) || movieIds.isEmpty()) emptyList()
-                else movieDao.recentlyAdded(movieIds.toList(), RECENT_VOD_ROW_LIMIT * 2)
+                else movieDao.recentlyAdded(movieIds.toList(), RECENT_VOD_ROW_LIMIT * 3)
                     .filterNot { CustomizeKeys.movie(it) in hidden.movie.hiddenItems || (it.categoryId != null && it.categoryId in hidden.movieCats) }
+                    // glcn: a film already watched (its ✓) is no longer news for this row.
+                    .let { films ->
+                        if (films.isEmpty()) films
+                        else runCatching { movieDao.completedAmong(profileId, films.map { it.id }).toHashSet() }.getOrDefault(emptySet<Long>())
+                            .let { done -> films.filterNot { it.id in done } }
+                    }
                     .take(RECENT_VOD_ROW_LIMIT)
             }
             val recentSeriesAsync = async {
@@ -553,7 +559,8 @@ class HomeFeedReader(
                     movies = recentMoviesAsync.await().let { films ->
                         if (films.isEmpty() || HomeRow.FEATURED !in config.visibleOrder) films
                         else {
-                            val watched = movieDao.watchedAmong(profileId, films.map { it.id }).toHashSet()
+                            val watched = movieDao.watchedAmong(profileId, films.map { it.id }).toHashSet() +
+                                movieDao.completedAmong(profileId, films.map { it.id })
                             films.filterNot { it.id in watched }
                         }
                     },

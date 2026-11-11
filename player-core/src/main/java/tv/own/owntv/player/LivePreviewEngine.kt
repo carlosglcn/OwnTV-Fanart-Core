@@ -114,10 +114,29 @@ class LivePreviewEngine(
      * this engine — a device that hit critical pressure once is likely to again.
      */
     fun onMemoryPressure() {
+        mainHandler.post { checkPreviewUnderPressure() }
         if (memoryPressure) return
         memoryPressure = true
         LiveDiagnosticsLog.event("critical memory pressure — next tune rebuilds with the low-RAM buffer" + (MemoryBreakdown.read()?.let { " · " + it.line() } ?: ""))
     }
+    private val _letGoUnderPressure = kotlinx.coroutines.flow.MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+    /**
+     * glcn: the box is critically short of memory while a muted preview (the guide's, the list's) shows
+     * nothing yet or drops more frames than it shows. Insisting on it is what tipped a SHIELD into a
+     * frozen screen; the screen that owns the preview lets it go and tunes again on the next move.
+     */
+    val letGoUnderPressure: kotlinx.coroutines.flow.SharedFlow<Unit> = _letGoUnderPressure
+
+    private fun checkPreviewUnderPressure() {
+        val p = player ?: return
+        if (!muted || currentUrl == null) return
+        val frames = frameCounter.get()
+        val dropped = (currentDroppedFrames(p) - dropsBaseline).coerceAtLeast(0)
+        if (tune.everRendered && dropped <= frames) return
+        LiveDiagnosticsLog.event("memory pressure: the preview shows nothing (frames=$frames dropped=$dropped) — let go")
+        _letGoUnderPressure.tryEmit(Unit)
+    }
+
     /** The pre-roll this tune should use — zero for a stream already caught unable to satisfy one
      *  ([LiveStreamQuirks.defeatsPreroll]), otherwise the per-playlist override or the global setting. */
     /** The live-edge depth this tune should use: the playlist's override if it set one, else the global
@@ -592,6 +611,11 @@ class LivePreviewEngine(
     /** The provider refuses its own signed segment URLs; ExoPlayer cannot recover, mpv can. One-shot
      *  per load, collected by the ViewModel exactly like [noVideoDetected]. */
     val segmentsRefused: StateFlow<Boolean> = _segmentsRefused
+    private val _emptyStream = MutableStateFlow(false)
+    /** glcn: the server answered this channel's own address with "200 OK" and no body at all — an
+     *  overloaded or rate-limiting restreamer. Waiting the whole opening budget for it only delays the
+     *  next rung; one-shot per load, like [segmentsRefused]. */
+    val emptyStream: StateFlow<Boolean> = _emptyStream
     /** Seconds asked for by the most recent `Retry-After` on this load. Captured by the diagnostic
      *  interceptor because response headers never reach [onPlayerError]. */
     @Volatile private var providerRetryAfterSecs: Int? = null
@@ -1742,7 +1766,7 @@ class LivePreviewEngine(
         diagnostics.start(); diagnostics.markLoad()
         this.muted = muted
         currentUrl = url
-        refusedSegments.clear(); _segmentsRefused.value = false
+        refusedSegments.clear(); _segmentsRefused.value = false; _emptyStream.value = false
         // A new tune supersedes any wait the previous channel was serving (the user zapped away).
         cancelProviderBackOff()
         mainHandler.removeCallbacks(stallWatchdog); mainHandler.removeCallbacks(progressWatchdog); mainHandler.removeCallbacks(fpsFastRefresh)
@@ -3305,6 +3329,12 @@ class LivePreviewEngine(
                     // user hitting that wall has no reason to have turned logging on first.
                     val requested = request.url.toString()
                     val failed = !response.isSuccessful
+                    // glcn: an empty answer for the channel itself (not a playlist, segment or key) — see [emptyStream].
+                    if (!failed && response.body.contentLength() == 0L && HttpDiagnostics.requestRole(requested) == "stream" &&
+                        currentUrl?.toHttpUrlOrNull() == request.url
+                    ) {
+                        _emptyStream.value = true
+                    }
                     val prefix = if (failed || LiveDiagnosticsLog.enabled) {
                         runCatching { response.peekBody(564).bytes() }.getOrDefault(byteArrayOf())
                     } else {

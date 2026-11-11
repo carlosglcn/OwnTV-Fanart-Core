@@ -1396,6 +1396,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT categoryId, COUNT(*) AS itemCount FROM movies WHERE sourceId = :sourceId AND categoryId IS NOT NULL GROUP BY categoryId
 2	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT id, sourceId, categoryId, name, year, remoteId, sortOrder, canonicalTitle,
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT id, streamUrl FROM movies WHERE sourceId = :sourceId
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT itemId FROM playback_progress WHERE profileId = :profileId AND mediaType = 'MOVIE' AND itemId IN (:ids) AND durationMs > 0 AND positionMs * 100 >= durationMs * 95
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT itemId FROM watch_history WHERE profileId = :profileId AND mediaType = 'MOVIE' AND itemId IN (:ids)
 7	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT m.* FROM movies m
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT m.* FROM movies m INNER JOIN favorites f ON f.itemId = m.id AND f.mediaType = 'MOVIE'
@@ -6659,19 +6660,26 @@
 2	json	core/src/main/java/tv/own/owntv/core/trending/TrendingScheduleStore.kt	t
 3	json	core/src/main/java/tv/own/owntv/core/trending/TrendingScheduleStore.kt	y
 1	json	core/src/main/java/tv/own/owntv/core/trending/TrendingScheduleStore.kt	{}
+2	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoArtProvider.kt	.jpg
 1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoArtProvider.kt	.png
+1	mime	core/src/main/java/tv/own/owntv/core/tv/LiveLogoArtProvider.kt	image/jpeg
 1	mime	core/src/main/java/tv/own/owntv/core/tv/LiveLogoArtProvider.kt	image/png
 1	technical	core/src/main/java/tv/own/owntv/core/tv/LiveLogoArtProvider.kt	r
 1	empty	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	\0
 1	technical	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	$aspectRatio|$source
 1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	${destination.name}.tmp
-1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	${key(source, aspectRatio)}.png
+1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	${key(source, aspectRatio, cover)}.${if (cover) "jpg" else "png"}
 1	technical	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	%02x
+1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	.jpg
 1	technical	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	.owntv-live-logo-art
 1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	.png
 1	technical	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	SHA-256
 1	uri	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	content://${context.packageName}$AUTHORITY_SUFFIX/${file.name}
+1	technical	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	cover|$aspectRatio|$source
+1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	jpg
+1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	png
 1	file-path	core/src/main/java/tv/own/owntv/core/tv/LiveLogoPosterArt.kt	tv-live-logo-art
+1	technical	core/src/main/java/tv/own/owntv/core/tv/RecentLiveRefreshWorker.kt	recent-live-programme-end
 1	technical	core/src/main/java/tv/own/owntv/core/tv/RecentLiveRefreshWorker.kt	recent-live-refresh
 1	empty	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	\0
 1	log	core/src/main/java/tv/own/owntv/core/tv/TvHomeRepository.kt	$profileId|${mediaType.name}|$stableKey
@@ -7262,6 +7270,7 @@
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	no video frame rendered (audio plays, no picture)
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	played, then stalled for ${STALL_HANDOFF_MS / 1000}s without recovering
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	provider refuses ExoPlayer's signed segment URLs
+1	log	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	the server answered with an empty stream
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveLadder.kt	ExoPlayer + HLS
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveLadder.kt	ExoPlayer + TS
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveLadder.kt	mpv + HLS
@@ -7410,6 +7419,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	load_error status=${code ?: -1} type=${error.javaClass.simpleName}
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	media server not answering
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	media_source inferred=${route.logName} declared=${currentManifestType?.key ?: "-"}
+1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	memory pressure: the preview shows nothing (frames=$frames dropped=$dropped) — let go
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	min=${lc.minBufferMs}ms max=${lc.maxBufferMs}ms latency=${liveBufferSecs ?: -1}
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	mp4v-es
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	mpeg2
@@ -7495,6 +7505,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	state_changed state=$name playWhenReady=${p?.playWhenReady} isPlaying=${p?.isPlaying}
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	still ${buffered}ms after ${waitedMs}ms
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	stop() — intentional
+1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	stream
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	stream frozen — no progress ${noProgressMs}ms
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	targetDurSec=${playlist.targetDurationUs / 1_000_000.0} windowSec=${playlist.durationUs / 1_000_000.0}
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	targetOffsetSec=${targetOffsetSecs ?: -1}
