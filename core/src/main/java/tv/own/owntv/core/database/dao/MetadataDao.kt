@@ -20,6 +20,10 @@ interface MetadataDao {
      * Batch read — one query for a whole page of grid tiles instead of one per tile. Same reason as
      * [getCaches]: the poster fallback needs every visible item at once, not N suspend round trips.
      */
+    /** glcn (Trakt): the local films matched with confidence to these TMDB ids. */
+    @Query("SELECT * FROM metadata_match WHERE type = 'movie' AND tmdbId IN (:tmdbIds) AND confidence >= :minConfidence")
+    suspend fun movieMatchesFor(tmdbIds: List<Int>, minConfidence: Double): List<MetadataMatchEntity>
+
     @Query("SELECT * FROM metadata_match WHERE localKey IN (:keys)")
     suspend fun getMatches(keys: List<String>): List<MetadataMatchEntity>
 

@@ -800,4 +800,22 @@
     <string name="glcn_sleep_ended_hint">Pulsa cualquier botón para volver</string>
     <string name="glcn_track_unplayable">no compatible con este aparato</string>
     <string name="glcn_track_unplayable_label">%1$s · %2$s</string>
+    <string name="glcn_trakt_title">Trakt</string>
+    <string name="glcn_trakt_row_desc">Lo que terminas va a tu historial de Trakt; tus películas vistas salen con su check y tu lista de pendientes en Inicio</string>
+    <string name="glcn_trakt_not_connected">Sin conectar</string>
+    <string name="glcn_trakt_connected_as">Conectada como %1$s. Las películas y series de Emby o Jellyfin las envía el plugin de Trakt del propio servidor.</string>
+    <string name="glcn_trakt_sync_now">Sincronizar ahora</string>
+    <string name="glcn_trakt_syncing">Sincronizando…</string>
+    <string name="glcn_trakt_sync_line">Tus películas vistas y tu lista de pendientes, desde Trakt</string>
+    <string name="glcn_trakt_sign_out">Desconectar Trakt</string>
+    <string name="glcn_trakt_sign_in_line">En el móvil o el ordenador, abre esta dirección y escribe el código. Esta pantalla sigue sola.</string>
+    <string name="glcn_trakt_signed_in">Listo: este perfil está conectado a Trakt.</string>
+    <string name="glcn_trakt_expired">El código ha caducado. Pide uno nuevo.</string>
+    <string name="glcn_trakt_denied">Trakt ha rechazado el inicio de sesión.</string>
+    <string name="glcn_trakt_failed">No se ha podido conectar con Trakt. Revisa la conexión y vuelve a probar.</string>
+    <string name="glcn_trakt_close">Cerrar</string>
+    <string name="glcn_trakt_retry">Código nuevo</string>
+    <string name="glcn_trakt_cancel">Cancelar</string>
+    <string name="glcn_home_row_trakt">Mi lista de Trakt</string>
+    <string name="glcn_home_row_trakt_description">Las películas de tu lista de pendientes de Trakt que están en tus listas</string>
 </resources>
