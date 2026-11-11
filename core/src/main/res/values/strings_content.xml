@@ -1139,4 +1139,5 @@
     <string name="glcn_trakt_cancel">Cancel</string>
     <string name="glcn_home_row_trakt">My Trakt watchlist</string>
     <string name="glcn_home_row_trakt_description">Films on your Trakt watchlist that are in your playlists</string>
+    <string name="glcn_ghost_season">S%1$d</string>
 </resources>

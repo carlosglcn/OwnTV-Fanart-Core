@@ -818,4 +818,5 @@
     <string name="glcn_trakt_cancel">Cancelar</string>
     <string name="glcn_home_row_trakt">Mi lista de Trakt</string>
     <string name="glcn_home_row_trakt_description">Las películas de tu lista de pendientes de Trakt que están en tus listas</string>
+    <string name="glcn_ghost_season">T%1$d</string>
 </resources>
