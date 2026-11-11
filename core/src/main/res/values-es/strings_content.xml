@@ -799,4 +799,5 @@
     <string name="glcn_sleep_ended_title">Reproducción detenida por el temporizador</string>
     <string name="glcn_sleep_ended_hint">Pulsa cualquier botón para volver</string>
     <string name="glcn_track_unplayable">no compatible con este aparato</string>
+    <string name="glcn_track_unplayable_label">%1$s · %2$s</string>
 </resources>
