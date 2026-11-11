@@ -1119,4 +1119,22 @@
     <string name="glcn_sleep_warn_hint">Press any button for 15 more minutes</string>
     <string name="glcn_sleep_ended_title">Stopped by the sleep timer</string>
     <string name="glcn_sleep_ended_hint">Press any button to go back</string>
+    <string name="glcn_trakt_title">Trakt</string>
+    <string name="glcn_trakt_row_desc">What you finish goes to your Trakt history; your watched films get their check and your watchlist shows on Home</string>
+    <string name="glcn_trakt_not_connected">Not connected</string>
+    <string name="glcn_trakt_connected_as">Connected as %1$s. Films and episodes from Emby or Jellyfin are left to the server\'s own Trakt plugin.</string>
+    <string name="glcn_trakt_sync_now">Sync now</string>
+    <string name="glcn_trakt_syncing">Syncing…</string>
+    <string name="glcn_trakt_sync_line">Your watched films and watchlist, from Trakt</string>
+    <string name="glcn_trakt_sign_out">Sign out of Trakt</string>
+    <string name="glcn_trakt_sign_in_line">On your phone or computer, open this address and type the code. This screen carries on by itself.</string>
+    <string name="glcn_trakt_signed_in">Done: this profile is connected to Trakt.</string>
+    <string name="glcn_trakt_expired">The code has expired. Ask for a new one.</string>
+    <string name="glcn_trakt_denied">Trakt said no to the sign-in.</string>
+    <string name="glcn_trakt_failed">Trakt could not be reached. Check the connection and try again.</string>
+    <string name="glcn_trakt_close">Close</string>
+    <string name="glcn_trakt_retry">New code</string>
+    <string name="glcn_trakt_cancel">Cancel</string>
+    <string name="glcn_home_row_trakt">My Trakt watchlist</string>
+    <string name="glcn_home_row_trakt_description">Films on your Trakt watchlist that are in your playlists</string>
 </resources>

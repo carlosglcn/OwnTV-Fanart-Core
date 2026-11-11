@@ -77,6 +77,10 @@ interface MovieDao {
     @Query("SELECT * FROM movies WHERE sourceId = :sourceId AND remoteId IN (:remoteIds)")
     suspend fun findByRemoteIds(sourceId: Long, remoteIds: List<String>): List<MovieEntity>
 
+    /** glcn (Trakt): films without a provider id, by name — how an M3U film is keyed in the TMDB match table. */
+    @Query("SELECT * FROM movies WHERE sourceId = :sourceId AND remoteId IS NULL AND name IN (:names)")
+    suspend fun findByNamesWithoutRemote(sourceId: Long, names: List<String>): List<MovieEntity>
+
     @Query("SELECT remoteId FROM movies WHERE sourceId = :sourceId AND remoteId IS NOT NULL")
     suspend fun remoteIdsForSource(sourceId: Long): List<String>
 

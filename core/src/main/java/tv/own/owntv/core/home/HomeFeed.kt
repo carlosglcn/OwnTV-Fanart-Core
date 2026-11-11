@@ -199,6 +199,8 @@ data class HomeFeed(
     val sportsNow: List<tv.own.owntv.core.live.SportsNow.Entry> = emptyList(),
     /** glcn: newest arrivals, for playlists that say when an item arrived (Emby, Xtream). */
     val recentMovies: List<MovieEntity> = emptyList(),
+    /** glcn: the Trakt watchlist films found in the playlists. */
+    val traktWatchlist: List<MovieEntity> = emptyList(),
     val recentSeries: List<SeriesEntity> = emptyList(),
     val featured: List<FeaturedItem> = emptyList(),
     val tonight: List<TonightItem> = emptyList(),
@@ -324,6 +326,15 @@ class HomeFeedReader(
                         .find(liveIds.toList(), hidden.live, settings.epgOffsetMinutes.first())
                         .filterNot { isChannelHidden(it.channel, hidden) || isBarChannel(it.channel) }
                         .take(SPORTS_ROW_LIMIT)
+                }.getOrDefault(emptyList())
+            }
+            // glcn: the Trakt watchlist (kept by TraktSync; read again from Trakt at most every half hour, in the background).
+            val traktAsync = async {
+                if (HomeRow.TRAKT_WATCHLIST !in config.visibleOrder) emptyList()
+                else runCatching {
+                    tv.own.owntv.core.trakt.TraktSync.refreshLater(profileId)
+                    tv.own.owntv.core.trakt.TraktSync.watchlistMovies(profileId, RECENT_VOD_ROW_LIMIT)
+                        .filterNot { CustomizeKeys.movie(it) in hidden.movie.hiddenItems || (it.categoryId != null && it.categoryId in hidden.movieCats) }
                 }.getOrDefault(emptyList())
             }
             val recentMoviesAsync = async {
@@ -548,6 +559,7 @@ class HomeFeedReader(
                 favoriteGuide = favoriteGuideAsync.await().let { it.copy(channels = it.channels.map { ch -> names.of(ch) }) },
                 sportsNow = sportsAsync.await(),
                 recentMovies = recentMoviesAsync.await(),
+                traktWatchlist = traktAsync.await(),
                 recentSeries = recentSeriesAsync.await(),
                 featured = buildFeatured(
                     sports = sportsAsync.await(),

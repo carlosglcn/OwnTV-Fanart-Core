@@ -28,7 +28,9 @@ enum class HomeRow {
     STARTING_SOON,
     /** glcn: Trending split by kind — up to ten films / ten series each, off by default (the mixed row stays). */
     TRENDING_MOVIES,
-    TRENDING_SERIES;
+    TRENDING_SERIES,
+    /** glcn: the Trakt account's watchlist films that are in the playlists (only with Trakt signed in). */
+    TRAKT_WATCHLIST;
 
     val implemented: Boolean get() = true
 }
@@ -202,6 +204,6 @@ val GLCN_ORDER: List<HomeRow> = mergeOrder(
     listOf(
         HomeRow.TRENDING, HomeRow.FEATURED, HomeRow.HERO, HomeRow.RECENT_CHANNELS, HomeRow.SPORTS_NOW,
         HomeRow.TONIGHT, HomeRow.RECENT_MOVIES, HomeRow.RECENT_SERIES, HomeRow.FAVORITE_CHANNELS,
-        HomeRow.CONTINUE_MOVIES, HomeRow.CONTINUE_SERIES, HomeRow.FAVORITE_MOVIES, HomeRow.FAVORITE_SERIES, HomeRow.GENRES,
+        HomeRow.CONTINUE_MOVIES, HomeRow.CONTINUE_SERIES, HomeRow.TRAKT_WATCHLIST, HomeRow.FAVORITE_MOVIES, HomeRow.FAVORITE_SERIES, HomeRow.GENRES,
     ),
 )
