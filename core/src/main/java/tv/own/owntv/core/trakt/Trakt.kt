@@ -29,6 +29,8 @@ import java.util.concurrent.TimeUnit
 object Trakt {
     private const val TAG = "Trakt"
     private const val API = "https://api.trakt.tv"
+    /** Trakt's sign-in host; the data API stays on [API]. The old one still answers, so it is the fallback. */
+    private const val AUTH = "https://auth.trakt.tv"
     private const val FILE = "glcn_trakt"
     private val JSON = "application/json".toMediaType()
 
@@ -50,8 +52,20 @@ object Trakt {
         clientSecret = secret.trim()
     }
 
-    /** This build carries Trakt keys. */
-    val available: Boolean get() = clientId.isNotEmpty() && clientSecret.isNotEmpty()
+    /** This build carries the app's Trakt id. The secret is optional: apps made today sign in with PKCE and get none. */
+    val available: Boolean get() = clientId.isNotEmpty()
+
+    /** The client secret, only when this build has one (older Trakt apps); left out otherwise. */
+    private fun JSONObject.withSecret(): JSONObject = apply { if (clientSecret.isNotEmpty()) put("client_secret", clientSecret) }
+
+    /** A sign-in call: on [AUTH], and on [API] when that host cannot be reached or does not know the path. */
+    private fun oauthPost(path: String, body: JSONObject): okhttp3.Response {
+        val rb = body.toString().toRequestBody(JSON)
+        val first = runCatching { http.newCall(Request.Builder().url(AUTH + path).post(rb).build()).execute() }.getOrNull()
+        if (first != null && first.code != 404) return first
+        first?.close()
+        return http.newCall(Request.Builder().url(API + path).post(body.toString().toRequestBody(JSON)).build()).execute()
+    }
 
     private fun prefs() = appContext?.getSharedPreferences(FILE, Context.MODE_PRIVATE)
 
@@ -68,7 +82,18 @@ object Trakt {
 
     // ---- Device sign-in ----------------------------------------------------------------------------------------
 
-    data class DeviceCode(val deviceCode: String, val userCode: String, val url: String, val expiresInS: Int, val intervalS: Int)
+    data class DeviceCode(val deviceCode: String, val userCode: String, val url: String, val expiresInS: Int, val intervalS: Int, val verifier: String)
+
+    /** PKCE for the device sign-in: a random verifier, and its SHA-256 (base64url) as the challenge. */
+    private fun newVerifier(): String {
+        val bytes = ByteArray(32).also { java.security.SecureRandom().nextBytes(it) }
+        return android.util.Base64.encodeToString(bytes, android.util.Base64.URL_SAFE or android.util.Base64.NO_PADDING or android.util.Base64.NO_WRAP)
+    }
+
+    private fun challengeOf(verifier: String): String {
+        val digest = java.security.MessageDigest.getInstance("SHA-256").digest(verifier.toByteArray(Charsets.US_ASCII))
+        return android.util.Base64.encodeToString(digest, android.util.Base64.URL_SAFE or android.util.Base64.NO_PADDING or android.util.Base64.NO_WRAP)
+    }
 
     sealed interface Poll {
         data object Pending : Poll
@@ -81,13 +106,14 @@ object Trakt {
 
     suspend fun startDevice(): DeviceCode? = withContext(Dispatchers.IO) {
         runCatching {
-            val body = JSONObject().put("client_id", clientId).toString()
-            http.newCall(Request.Builder().url("$API/oauth/device/code").post(body.toRequestBody(JSON)).build()).execute().use { r ->
-                if (!r.isSuccessful) return@use null
+            val verifier = newVerifier()
+            val body = JSONObject().put("client_id", clientId).put("code_challenge", challengeOf(verifier)).put("code_challenge_method", "S256")
+            oauthPost("/oauth/device/code", body).use { r ->
+                if (!r.isSuccessful) { Log.w(TAG, "device code → ${r.code}"); return@use null }
                 val j = JSONObject(r.body.string())
                 DeviceCode(
                     j.getString("device_code"), j.getString("user_code"), j.optString("verification_url", "https://trakt.tv/activate"),
-                    j.optInt("expires_in", 600), j.optInt("interval", 5),
+                    j.optInt("expires_in", 600), j.optInt("interval", 5), verifier,
                 )
             }
         }.onFailure { Log.w(TAG, "device code failed", it) }.getOrNull()
@@ -95,8 +121,8 @@ object Trakt {
 
     suspend fun pollDevice(profileId: Long, code: DeviceCode): Poll = withContext(Dispatchers.IO) {
         runCatching {
-            val body = JSONObject().put("code", code.deviceCode).put("client_id", clientId).put("client_secret", clientSecret).toString()
-            http.newCall(Request.Builder().url("$API/oauth/device/token").post(body.toRequestBody(JSON)).build()).execute().use { r ->
+            val body = JSONObject().put("code", code.deviceCode).put("client_id", clientId).put("code_verifier", code.verifier).withSecret()
+            oauthPost("/oauth/device/token", body).use { r ->
                 when (r.code) {
                     200 -> {
                         storeTokens(profileId, JSONObject(r.body.string()))
@@ -138,9 +164,8 @@ object Trakt {
         val refresh = p.getString("$profileId.refresh", null) ?: return null
         return runCatching {
             val body = JSONObject()
-                .put("refresh_token", refresh).put("client_id", clientId).put("client_secret", clientSecret)
-                .put("redirect_uri", "urn:ietf:wg:oauth:2.0:oob").put("grant_type", "refresh_token").toString()
-            http.newCall(Request.Builder().url("$API/oauth/token").post(body.toRequestBody(JSON)).build()).execute().use { r ->
+                .put("refresh_token", refresh).put("client_id", clientId).put("grant_type", "refresh_token").withSecret()
+            oauthPost("/oauth/token", body).use { r ->
                 if (r.code == 401 || r.code == 400) { disconnect(profileId); return@use null }
                 if (!r.isSuccessful) return@use null
                 val j = JSONObject(r.body.string())
