@@ -820,4 +820,5 @@
     <string name="glcn_home_row_trakt_description">Las películas de tu lista de pendientes de Trakt que están en tus listas</string>
     <string name="glcn_ghost_season">T%1$d</string>
     <string name="glcn_trakt_notice">OwnTV Fanart usa Trakt, pero no está respaldado ni certificado por Trakt.</string>
+    <string name="glcn_deck_watching">%1$s · viendo ahora</string>
 </resources>

@@ -1141,4 +1141,5 @@
     <string name="glcn_home_row_trakt_description">Films on your Trakt watchlist that are in your playlists</string>
     <string name="glcn_ghost_season">S%1$d</string>
     <string name="glcn_trakt_notice">OwnTV Fanart uses Trakt but is not endorsed or certified by Trakt.</string>
+    <string name="glcn_deck_watching">%1$s · watching now</string>
 </resources>
