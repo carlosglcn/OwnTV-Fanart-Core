@@ -1142,4 +1142,7 @@
     <string name="glcn_ghost_season">S%1$d</string>
     <string name="glcn_trakt_notice">OwnTV Fanart uses Trakt but is not endorsed or certified by Trakt.</string>
     <string name="glcn_deck_watching">%1$s · watching now</string>
+    <string name="glcn_pill_recording">Recording</string>
+    <string name="glcn_pill_minutes">%1$d min</string>
+    <string name="glcn_pill_reminder">In %1$d min: %2$s · %3$s</string>
 </resources>
