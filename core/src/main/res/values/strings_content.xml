@@ -1145,4 +1145,7 @@
     <string name="glcn_pill_recording">Recording</string>
     <string name="glcn_pill_minutes">%1$d min</string>
     <string name="glcn_pill_reminder">In %1$d min: %2$s · %3$s</string>
+    <string name="glcn_cast_films">With %1$s</string>
+    <string name="glcn_cast_none">No other films with %1$s in your playlists</string>
+    <string name="glcn_cast_pick">Who would you like to see more of?</string>
 </resources>

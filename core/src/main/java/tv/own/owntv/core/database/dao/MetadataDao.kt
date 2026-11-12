@@ -24,6 +24,10 @@ interface MetadataDao {
     @Query("SELECT * FROM metadata_match WHERE type = 'movie' AND tmdbId IN (:tmdbIds) AND confidence >= :minConfidence")
     suspend fun movieMatchesFor(tmdbIds: List<Int>, minConfidence: Double): List<MetadataMatchEntity>
 
+    /** glcn: the TMDB ids of the cached films whose cast names [name] (the cast is stored as JSON, names quoted). */
+    @Query("SELECT tmdbId FROM metadata_cache WHERE type = 'movie' AND castJson LIKE '%\"' || :name || '\"%' LIMIT 200")
+    suspend fun movieTmdbIdsWithCast(name: String): List<Int>
+
     @Query("SELECT * FROM metadata_match WHERE localKey IN (:keys)")
     suspend fun getMatches(keys: List<String>): List<MetadataMatchEntity>
 

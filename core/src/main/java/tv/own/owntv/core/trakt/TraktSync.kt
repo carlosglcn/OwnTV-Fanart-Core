@@ -96,7 +96,7 @@ object TraktSync {
     }
 
     /** TMDB id → a local film matched to it (the match table is keyed "movie:<source>:<provider id or name>"). */
-    private suspend fun moviesFor(tmdbIds: List<Int>): Map<Int, MovieEntity> {
+    suspend fun moviesFor(tmdbIds: List<Int>): Map<Int, MovieEntity> {
         val metadataDao = dep<MetadataDao>() ?: return emptyMap()
         val movieDao = dep<MovieDao>() ?: return emptyMap()
         val matches = tmdbIds.distinct().chunked(CHUNK).flatMap { metadataDao.movieMatchesFor(it, MIN_CONFIDENCE) }
