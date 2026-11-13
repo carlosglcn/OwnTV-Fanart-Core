@@ -828,4 +828,7 @@
     <string name="glcn_cast_none">No hay más películas con %1$s en tus listas</string>
     <string name="glcn_cast_pick">¿De quién quieres ver más?</string>
     <string name="glcn_pi_later">Más tarde</string>
+    <string name="glcn_castpage_films">Sus películas en tus listas</string>
+    <string name="glcn_castpage_wiki_none">Sin artículo en Wikipedia</string>
+    <string name="glcn_castpage_wiki_scan">Escanea para leer más en Wikipedia</string>
 </resources>
