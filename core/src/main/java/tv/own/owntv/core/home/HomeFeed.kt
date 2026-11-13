@@ -302,7 +302,10 @@ class HomeFeedReader(
                 .filterNot { isContinuationHidden(it, hidden) }
             val movies = items.filter { it.kind == LauncherContinuationKind.MOVIE }
             val series = items.filter { it.kind == LauncherContinuationKind.EPISODE }
+            // glcn: one card per channel — the same channel listed twice by the playlist (two groups, an HD copy with the
+            // same name) was watched under both ids and showed up twice, side by side.
             val liveWithTs = recentLiveAsync.await().filterNot { isChannelHidden(it.channel, hidden) }
+                .distinctBy { tv.own.owntv.core.epg.EpgMatcher.normalizeForEpg(it.channel.matchName).ifBlank { it.channel.id.toString() } }
             val live = liveWithTs.map { it.channel }
             val favLive = favouritesAsync.await()
                 .filter { c -> c.sourceId in liveIds }

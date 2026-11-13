@@ -105,6 +105,16 @@ object EpgLogoStore {
     /** The feed icon for [channel], or null when there is none / no feed has logos enabled. */
     fun iconFor(channel: ChannelEntity): String? = lookup(icons, channel)
 
+    private val spareByLogo = java.util.concurrent.ConcurrentHashMap<String, String>()
+
+    /** glcn: a guide's icon to show when the playlist's logo [url] does not load (see displayLogoUrl). */
+    fun spareForLogo(url: String): String? = spareByLogo[url]
+
+    internal fun noteSpare(url: String, spare: String) {
+        if (spareByLogo.size > MAX_SPARES) spareByLogo.clear()
+        spareByLogo[url] = spare
+    }
+
     /** glcn: any guide's icon for [channel] — only asked when the playlist brings no logo. */
     fun spareFor(channel: ChannelEntity): String? = lookup(spareIcons, channel)
         ?: spareByName.takeIf { it.isNotEmpty() }?.get(EpgMatcher.normalizeForEpg(channel.matchName))
@@ -124,6 +134,14 @@ object EpgLogoStore {
  * this everywhere a channel logo is displayed or handed to the player — `logoUrl` alone always means
  * "what the playlist said".
  */
+private const val MAX_SPARES = 8192
+
 val ChannelEntity.displayLogoUrl: String?
-    get() = (EpgLogoStore.iconFor(this) ?: logoUrl?.takeIf { it.isNotBlank() } ?: EpgLogoStore.spareFor(this))
-        .also { ChannelLogoUrls.note(it) }
+    get() {
+        val epg = EpgLogoStore.iconFor(this)
+        val own = logoUrl?.takeIf { it.isNotBlank() }
+        // glcn: when the playlist's own logo is the one shown, a guide's icon for the channel is kept beside it, so a
+        // logo link that turns out broken can fall back to it (EpgLogoStore.spareForLogo) instead of a blank tile.
+        if (epg == null && own != null) EpgLogoStore.spareFor(this)?.takeIf { it != own }?.let { EpgLogoStore.noteSpare(own, it) }
+        return (epg ?: own ?: EpgLogoStore.spareFor(this)).also { ChannelLogoUrls.note(it) }
+    }

@@ -1157,4 +1157,8 @@
     <string name="glcn_castpage_age">%1$d years old</string>
     <string name="glcn_castpage_died">Died %1$s, aged %2$d</string>
     <string name="glcn_on_air_badge">ON AIR</string>
+    <string name="glcn_sort_short_playlist">Playlist</string>
+    <string name="glcn_sort_short_alpha">A–Z</string>
+    <string name="glcn_sort_short_rating">Rating</string>
+    <string name="glcn_sort_short_date">Newest</string>
 </resources>

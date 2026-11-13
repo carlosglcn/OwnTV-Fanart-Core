@@ -836,4 +836,8 @@
     <string name="glcn_castpage_age">%1$d años</string>
     <string name="glcn_castpage_died">Murió el %1$s, a los %2$d años</string>
     <string name="glcn_on_air_badge">EN EMISIÓN</string>
+    <string name="glcn_sort_short_playlist">Lista</string>
+    <string name="glcn_sort_short_alpha">A–Z</string>
+    <string name="glcn_sort_short_rating">Valoración</string>
+    <string name="glcn_sort_short_date">Recientes</string>
 </resources>
