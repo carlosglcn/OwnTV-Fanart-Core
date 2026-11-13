@@ -236,5 +236,23 @@ object Trakt {
         }.sortedByDescending { it.first }.map { it.second }
     }
 
+    /** glcn: a watchlist film — its TMDB id (0 when Trakt has none), title and year, for matching by name too. */
+    data class ListedMovie(val tmdb: Int, val title: String, val year: Int?)
+
+    /** The account's watchlist films, newest on the list first; null when it could not be read. */
+    suspend fun watchlistMovies(profileId: Long): List<ListedMovie>? = withContext(Dispatchers.IO) {
+        val a = get(profileId, "/sync/watchlist/movies") as? JSONArray ?: return@withContext null
+        buildList {
+            for (i in 0 until a.length()) {
+                val o = a.optJSONObject(i) ?: continue
+                val m = o.optJSONObject("movie") ?: continue
+                val title = m.optString("title").trim()
+                if (title.isEmpty()) continue
+                val year = m.optInt("year", 0).takeIf { it > 0 }
+                add(o.optString("listed_at") to ListedMovie(m.optJSONObject("ids")?.optInt("tmdb", 0) ?: 0, title, year))
+            }
+        }.sortedByDescending { it.first }.map { it.second }
+    }
+
     private const val REFRESH_MARGIN_MS = 24 * 60 * 60 * 1000L
 }

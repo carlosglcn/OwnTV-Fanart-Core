@@ -130,6 +130,7 @@
 1	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT title FROM epg_programmes WHERE imageUrl = :url LIMIT 1
 1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY (addedAt IS NULL), addedAt DESC, sortOrder LIMIT :limit
 1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY (rating IS NULL), rating DESC, sortOrder LIMIT :limit
+1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE name LIKE '%' || :title || '%' LIMIT 40
 1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND addedAt IS NOT NULL ORDER BY addedAt DESC, id DESC LIMIT :limit
 1	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT categoryId AS categoryId, COUNT(*) AS count FROM movies WHERE sourceId IN (:sourceIds) AND categoryId IS NOT NULL GROUP BY categoryId ORDER BY count DESC LIMIT :limit
 1	core/src/main/java/tv/own/owntv/core/database/dao/PlaybackPrefsDao.kt	DELETE FROM playback_prefs WHERE zoomMode IS NULL AND volumeBoost IS NULL AND audioDelayMs IS NULL
@@ -665,6 +666,9 @@
 1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🎄
 1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🎭
 1	core/src/main/java/tv/own/owntv/core/theme/Season.kt	🥂
+1	core/src/main/java/tv/own/owntv/core/trakt/TraktSync.kt	(19|20)\\d{2}
+1	core/src/main/java/tv/own/owntv/core/trakt/TraktSync.kt	[(\\[]?\\b(19|20)\\d{2}\\b[)\\]]?
+1	core/src/main/java/tv/own/owntv/core/trakt/TraktSync.kt	\\p{M}+
 1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	${CoreBuildInfo.releaseRepo}|${CoreBuildInfo.releaseTag ?: "latest"}
 1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	ETag
 1	core/src/main/java/tv/own/owntv/core/update/UpdateManager.kt	If-None-Match

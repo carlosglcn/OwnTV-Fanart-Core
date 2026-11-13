@@ -146,6 +146,10 @@ interface MovieDao {
     @Query("SELECT remoteId FROM movies WHERE sourceId = :sourceId AND categoryId IN (:categoryIds) AND remoteId IS NOT NULL")
     suspend fun remoteIdsInCategories(sourceId: Long, categoryIds: List<Long>): List<String>
 
+    /** glcn (Trakt): films whose name contains [title] (any source), for matching a watchlist film by its name. */
+    @Query("SELECT * FROM movies WHERE name LIKE '%' || :title || '%' LIMIT 40")
+    suspend fun findByTitleLike(title: String): List<MovieEntity>
+
     @Query("SELECT * FROM movies WHERE sourceId = :sourceId AND name = :name LIMIT 1")
     suspend fun findByName(sourceId: Long, name: String): MovieEntity?
 

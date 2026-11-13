@@ -61,11 +61,54 @@ object TraktSync {
     /** The watchlist films found in the playlists, newest on the list first (empty when not signed in). */
     suspend fun watchlistMovies(profileId: Long, limit: Int): List<MovieEntity> {
         if (!Trakt.available || !Trakt.connected(profileId)) return emptyList()
-        val ids = prefs()?.getString("$profileId.watchlist", null)?.split(',')?.mapNotNull { it.toIntOrNull() }.orEmpty()
-        if (ids.isEmpty()) return emptyList()
-        val local = moviesFor(ids)
-        return ids.mapNotNull { local[it] }.distinctBy { it.id }.take(limit)
+        val listed = listedFor(profileId)
+        if (listed.isEmpty()) return emptyList()
+        // First by TMDB (films the app has matched), then — for the rest — by name and year, so a film never looked
+        // up on TMDB still shows when its playlist name says what it is.
+        val local = moviesFor(listed.map { it.tmdb }.filter { it > 0 })
+        val movieDao = dep<MovieDao>()
+        val out = ArrayList<MovieEntity>()
+        for (l in listed) {
+            if (out.size >= limit) break
+            val hit = local[l.tmdb] ?: movieDao?.let { byName(it, l) } ?: continue
+            if (out.none { it.id == hit.id }) out += hit
+        }
+        return out
     }
+
+    /** The stored watchlist: titles and years (new form), or bare TMDB ids (before titles were kept). */
+    private fun listedFor(profileId: Long): List<Trakt.ListedMovie> {
+        val p = prefs() ?: return emptyList()
+        p.getString("$profileId.watchlist2", null)?.let { raw ->
+            return runCatching {
+                val a = org.json.JSONArray(raw)
+                (0 until a.length()).mapNotNull { i ->
+                    a.optJSONObject(i)?.let { o -> Trakt.ListedMovie(o.optInt("t"), o.optString("n"), o.optInt("y", 0).takeIf { it > 0 }) }
+                }
+            }.getOrDefault(emptyList())
+        }
+        return p.getString("$profileId.watchlist", null)?.split(',')?.mapNotNull { it.toIntOrNull() }.orEmpty()
+            .map { Trakt.ListedMovie(it, "", null) }
+    }
+
+    /** A local film whose cleaned name is [l]'s title (and whose year, when both have one, is the same). */
+    private suspend fun byName(dao: MovieDao, l: Trakt.ListedMovie): MovieEntity? {
+        if (l.title.length < MIN_TITLE) return null
+        val want = norm(l.title)
+        return runCatching { dao.findByTitleLike(l.title) }.getOrDefault(emptyList()).firstOrNull { m ->
+            val name = tv.own.owntv.core.live.ProviderTags.parse(m.name).name
+            val year = m.year ?: YEAR.find(name)?.value?.toIntOrNull()
+            norm(name.replace(YEAR_PART, " ")) == want && (l.year == null || year == null || year == l.year)
+        }
+    }
+
+    private fun norm(s: String): String =
+        java.text.Normalizer.normalize(s.lowercase(), java.text.Normalizer.Form.NFD)
+            .replace(Regex("\\p{M}+"), "").replace(Regex("[^a-z0-9]+"), " ").trim()
+
+    private val YEAR = Regex("(19|20)\\d{2}")
+    private val YEAR_PART = Regex("[(\\[]?\\b(19|20)\\d{2}\\b[)\\]]?")
+    private const val MIN_TITLE = 2
 
     /** [refresh] in the background, without waiting for it. */
     fun refreshLater(profileId: Long) {
@@ -80,7 +123,11 @@ object TraktSync {
         val last = p.getLong("$profileId.at", 0L)
         if (!force && System.currentTimeMillis() - last < REFRESH_EVERY_MS) return
         p.edit().putLong("$profileId.at", System.currentTimeMillis()).apply()
-        Trakt.watchlistMovieTmdbIds(profileId)?.let { ids -> p.edit().putString("$profileId.watchlist", ids.joinToString(",")).apply() }
+        Trakt.watchlistMovies(profileId)?.let { list ->
+            val a = org.json.JSONArray()
+            list.forEach { l -> a.put(org.json.JSONObject().put("t", l.tmdb).put("n", l.title).apply { l.year?.let { put("y", it) } }) }
+            p.edit().putString("$profileId.watchlist2", a.toString()).apply()
+        }
         val watched = Trakt.watchedMovieTmdbIds(profileId) ?: return
         if (watched.isEmpty()) return
         val progressDao = dep<ProgressDao>() ?: return
