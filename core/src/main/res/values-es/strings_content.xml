@@ -827,4 +827,5 @@
     <string name="glcn_cast_films">Con %1$s</string>
     <string name="glcn_cast_none">No hay más películas con %1$s en tus listas</string>
     <string name="glcn_cast_pick">¿De quién quieres ver más?</string>
+    <string name="glcn_pi_later">Más tarde</string>
 </resources>
