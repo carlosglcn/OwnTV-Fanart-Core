@@ -522,6 +522,7 @@ class LivePreviewEngine(
             val p = player
             val midPlayback = p != null && p.playbackState == Player.STATE_READY && p.playWhenReady
             val kind = if (decoderName.startsWith("ffmpeg", ignoreCase = true)) "FFmpeg" else "device"
+            if (midPlayback) tune.audioSwitchedAtMs = android.os.SystemClock.elapsedRealtime()
             LiveDiagnosticsLog.event(
                 "audio decoder: $decoderName ($kind, init ${initializationDurationMs}ms)" +
                     (" — tracks re-selected during playback".takeIf { midPlayback }.orEmpty()),
@@ -1227,6 +1228,16 @@ class LivePreviewEngine(
             LiveDiagnosticsLog.event("re-buffer flap ($detail) — this stream can't reach its pre-buffer, reopening without one")
             android.util.Log.i(LiveDiagnosticsLog.TAG, "preroll defeated — reopening without pre-buffer ($detail)")
             dropPrerollAndReopen(url)
+            return
+        }
+        // glcn: the channel changed its sound mid-programme (stereo to 5.1, a new codec) and the first blocks came
+        // broken: the stream is fine, the switch is not. Opened again from scratch it starts clean — once.
+        if (url != null && !tune.audioSwitchReopened && now - tune.audioSwitchedAtMs < AUDIO_SWITCH_WINDOW_MS) {
+            tune.audioSwitchReopened = true
+            LiveDiagnosticsLog.event("re-buffer flap ($detail) right after the audio changed format — reopening the channel once")
+            tune.prerollRetunePending = true
+            mainHandler.removeCallbacks(openWatchdog)
+            mainHandler.post { if (currentUrl == url) rebuildForSettingChange() else tune.prerollRetunePending = false }
             return
         }
         LiveDiagnosticsLog.event("re-buffer flap ($detail) with no pre-buffer — giving up on ExoPlayer for this stream")
@@ -4083,6 +4094,9 @@ class LivePreviewEngine(
 internal data class AudioSel(val id: Int, val group: androidx.media3.common.TrackGroup, val trackIndex: Int)
 internal data class TextSel(val id: Int, val group: androidx.media3.common.TrackGroup, val trackIndex: Int)
 
+/** glcn: a re-buffer flap this soon after the audio changed format is the switch's, not the stream's. */
+private const val AUDIO_SWITCH_WINDOW_MS = 15_000L
+
 internal data class TuneState(
     /** Set just before our own stop()/release() touches the player, so the STATE_IDLE that follows is
      *  recognized as a clean, self-caused cancellation rather than an unexpected mid-live drop. */
@@ -4124,6 +4138,10 @@ internal data class TuneState(
     var flapWindowStartPos: Long = 0L,
     /** A no-pre-roll reopen is queued; ignore further flapping until it lands. */
     var prerollRetunePending: Boolean = false,
+    /** glcn: when the audio decoder last changed while the channel was playing (0 = never). */
+    var audioSwitchedAtMs: Long = 0L,
+    /** glcn: the channel was already reopened once after such a change. */
+    var audioSwitchReopened: Boolean = false,
     /** The top-level request ended at an HLS manifest even though the submitted URL looked like raw TS. */
     @field:Volatile var responseWasHls: Boolean = false,
     var forceHlsForCurrentLoad: Boolean = false,
