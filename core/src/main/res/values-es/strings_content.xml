@@ -840,4 +840,20 @@
     <string name="glcn_sort_short_alpha">A–Z</string>
     <string name="glcn_sort_short_rating">Valoración</string>
     <string name="glcn_sort_short_date">Recientes</string>
+    <string name="glcn_castpage_wiki_open">Leer en Wikipedia</string>
+    <string name="glcn_pl_expired">Caducada</string>
+    <string name="glcn_pl_expires_today">Caduca hoy</string>
+    <plurals name="glcn_pl_expires_days">
+        <item quantity="one">Caduca en %1$d día</item>
+        <item quantity="many">Caduca en %1$d días</item>
+        <item quantity="other">Caduca en %1$d días</item>
+    </plurals>
+    <string name="glcn_pl_off">Desactivada</string>
+    <string name="glcn_pl_long_press_note">Mantén pulsada una lista para desactivarla o activarla.</string>
+    <plurals name="glcn_deck_films_count">
+        <item quantity="one">%1$s película</item>
+        <item quantity="many">%1$s películas</item>
+        <item quantity="other">%1$s películas</item>
+    </plurals>
+    <string name="glcn_trakt_open_activate">Abrir trakt.tv/activate (código copiado)</string>
 </resources>

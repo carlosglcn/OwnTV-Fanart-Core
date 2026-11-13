@@ -1161,4 +1161,18 @@
     <string name="glcn_sort_short_alpha">A–Z</string>
     <string name="glcn_sort_short_rating">Rating</string>
     <string name="glcn_sort_short_date">Newest</string>
+    <string name="glcn_castpage_wiki_open">Read on Wikipedia</string>
+    <string name="glcn_pl_expired">Expired</string>
+    <string name="glcn_pl_expires_today">Expires today</string>
+    <plurals name="glcn_pl_expires_days">
+        <item quantity="one">Expires in %1$d day</item>
+        <item quantity="other">Expires in %1$d days</item>
+    </plurals>
+    <string name="glcn_pl_off">Off</string>
+    <string name="glcn_pl_long_press_note">Hold a playlist to switch it off or on.</string>
+    <plurals name="glcn_deck_films_count">
+        <item quantity="one">%1$s film</item>
+        <item quantity="other">%1$s films</item>
+    </plurals>
+    <string name="glcn_trakt_open_activate">Open trakt.tv/activate (code copied)</string>
 </resources>
