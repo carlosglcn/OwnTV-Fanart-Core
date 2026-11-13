@@ -713,7 +713,6 @@
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	audio-spdif=${it.ifEmpty { "off" }}
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	auto
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	demuxer
-1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	failed to create hw uploader|can't find video conversion
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	file-format
 2	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	force
 1	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	host serves raw MPEG-TS — fast probe from now on

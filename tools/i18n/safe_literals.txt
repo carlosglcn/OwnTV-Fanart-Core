@@ -7921,6 +7921,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	exo primary vod
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	exo vod fallback
 2	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	exoplayer
+1	regex	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	failed to create hw uploader|can't find video conversion|_mediacodec: unsupported or unknown profile
 1	regex	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	failed to open|opening failed|could not open|loading failed|was aborted|finished playback
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	false
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	fast

@@ -569,7 +569,8 @@ class OwnTVPlayer(
         /** mpv giving up on the video output for a load ("Could not initialize video chain"). */
         val VIDEO_CHAIN_FAILED_RX = Regex("could not initialize video chain", RegexOption.IGNORE_CASE)
         /** glcn: mpv's words for "software frames, direct-surface output". */
-        val SOFTWARE_ON_DIRECT_RX = Regex("failed to create hw uploader|can't find video conversion", RegexOption.IGNORE_CASE)
+        // glcn: also the hardware decoder refusing the stream's profile outright (MPEG-2 4:2:2 on a SHIELD) — software plays it.
+        val SOFTWARE_ON_DIRECT_RX = Regex("failed to create hw uploader|can't find video conversion|_mediacodec: unsupported or unknown profile", RegexOption.IGNORE_CASE)
         /** FFmpeg's first probe on the copy path: it asks for the surface format, is refused (copy has no
          *  surface by design) and carries on in buffer mode. Not a failure there — only on the direct path. */
         val COPY_PROBE_NOISE_RX = Regex("both surface and native_window are null", RegexOption.IGNORE_CASE)
