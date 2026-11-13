@@ -835,4 +835,5 @@
     <string name="glcn_castpage_born_in">en %1$s</string>
     <string name="glcn_castpage_age">%1$d años</string>
     <string name="glcn_castpage_died">Murió el %1$s, a los %2$d años</string>
+    <string name="glcn_on_air_badge">EN EMISIÓN</string>
 </resources>
