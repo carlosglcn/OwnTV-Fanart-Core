@@ -94,7 +94,7 @@ class SportOnChannels(private val data: WatchData, private val now: () -> Long =
             GuideSport.SNOOKER to setOf("snooker"),
             GuideSport.CYCLING to setOf("radsport", "cycling", "cyclisme", "ciclismo", "bisiklet", "radrennen"),
             GuideSport.TENNIS to setOf("tennis", "tenis", "atp", "wta"),
-            GuideSport.BASKETBALL to setOf("basketball", "basket", "baloncesto", "basketbol", "nba", "euroleague", "bbl"),
+            GuideSport.BASKETBALL to setOf("basketball", "basket", "baloncesto", "basketbol", "nba", "euroleague", "eurocup", "bbl", "primera feb", "lega basket"),
             GuideSport.ICE_HOCKEY to setOf("eishockey", "hockey", "nhl", "del", "hokey"),
             GuideSport.MOTORSPORT to setOf("motorsport", "formel", "formula", "f1", "motogp", "nascar", "indycar", "rallye", "rally", "dtm", "superbike", "grand", "prix"),
             GuideSport.CRICKET to setOf("cricket", "ipl", "odi"),

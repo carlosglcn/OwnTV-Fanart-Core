@@ -2328,6 +2328,8 @@
 1	regex	core/src/main/java/tv/own/owntv/core/live/ProviderTags.kt	^([A-Z]{2,3})\\s*\\|\\s*
 1	regex	core/src/main/java/tv/own/owntv/core/live/ProviderTags.kt	^([A-Z]{2}):\\s*
 1	technical	core/src/main/java/tv/own/owntv/core/live/ProviderTags.kt	⁰¹²³⁴⁵⁶⁷⁸⁹
+1	technical	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	eurocup
+1	technical	core/src/main/java/tv/own/owntv/core/live/SportsNow.kt	primera feb
 4	technical	core/src/main/java/tv/own/owntv/core/live/VodSections.kt	\0
 1	technical	core/src/main/java/tv/own/owntv/core/live/VodSections.kt	$it
 1	technical	core/src/main/java/tv/own/owntv/core/live/VodSections.kt	[^a-z0-9]+
@@ -4050,6 +4052,7 @@
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	ehfcl
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	ehfel
 1	regex	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	estadisticas/(\\d+)/
+1	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	eurocup
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	euroleague
 3	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	final
 1	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	finalizado
@@ -4068,6 +4071,7 @@
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	isLive
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	khl
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	l
+1	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	lega
 3	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	live
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	liveScoreMatches
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	lnh
@@ -4085,6 +4089,7 @@
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	pf
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	points
 2	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	pos
+1	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	primerafeb
 2	technical	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	pts
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	ranking
 1	json	core/src/main/java/tv/own/owntv/core/sports/BasketDataSource.kt	round
@@ -4421,6 +4426,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	ehf
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	eishockey
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	esporte
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	eurocup
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	euroleague
 2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	europa
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	f1
@@ -4453,6 +4459,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	laliga
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	langlauf
 2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	league
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	lega basket
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	leichtathletik
 2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	lig
 2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	liga
@@ -4475,6 +4482,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	pga
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	pokal
 2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	premier
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	primera feb
 2	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	prix
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	radrennen
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportOnChannels.kt	radsport
@@ -4583,6 +4591,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	164205
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	17567
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	180659
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	1FEB
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	2. Bundesliga
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	242041
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	244293
@@ -4618,6 +4627,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Austrian Bundesliga
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Autumn Nations Series
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	BE
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	BKT EuroCup
 2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	BR
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Bangladesh Premier League
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Basketball Bundesliga
@@ -4675,6 +4685,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Daikin HBL
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Daikin StarLigue
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Danish Superliga
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EC
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EFL Championship
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EFL Cup
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EFL League One
@@ -4686,8 +4697,8 @@
 1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EL
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EPCR Challenge Cup
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EPL
-6	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ES
-3	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EU
+7	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ES
+4	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EU
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EURO
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Eliminatorias
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Eliteserien
@@ -4695,7 +4706,10 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	English Premier League
 1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Eredivisie
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Eredivisie Vrouwen
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EuroCup
 1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EuroLeague
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Eurocopa
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Eurocup
 1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Euroleague
 1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Euroliga
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Europa League
@@ -4739,7 +4753,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ICC World Cup
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	IN
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	ISL
-4	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	IT
+5	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	IT
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Indian Premier League
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Indian Super League
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Indy 500
@@ -4755,6 +4769,8 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Kings Cup
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Klub-WM
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Königsklasse
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	LBA
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	LEB Oro
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	LIV Golf
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	LPGA
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	LPGA Tour
@@ -4767,6 +4783,8 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	League Cup
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	League One
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Leagues Cup
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Lega Basket
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Lega Basket Serie A
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Libertadores
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga ASOBAL
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga MX
@@ -4776,6 +4794,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga Profesional
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga Profesional Argentina
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga de Campeones
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Liga italiana de baloncesto
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Ligue 1
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Ligue 2
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Ligue Europa
@@ -4842,6 +4861,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Premiership Rugby
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Primeira Liga
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Primera División
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Primera FEB
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Pro League
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Professional Fighters League
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Roshn Saudi League
@@ -4861,6 +4881,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Serie A
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Serie A Femminile
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Serie A Women
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Serie A de baloncesto
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Serie B
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Serie B Femminile
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Serie BKT
@@ -5121,6 +5142,7 @@
 2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	baseball/mlb
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	basketball/acb
 6	technical	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	basketball/euroleague
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	basketball/lega
 6	json	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	basketball/nba
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	basketball/wnba
 4	technical	core/src/main/java/tv/own/owntv/core/sports/SportsPresets.kt	cricket/all

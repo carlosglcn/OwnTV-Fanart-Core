@@ -98,6 +98,9 @@ object SportsCatalog {
         // glcn: not on ESPN; served by BasketDataSource. Aliases: what guides call them ("Liga Endesa").
         League(Sport.BASKETBALL, BasketDataSource.ACB, "Liga ACB", "ACB", "ES", aliases = listOf("Liga Endesa", "ACB")),
         League(Sport.BASKETBALL, BasketDataSource.EUROLEAGUE, "EuroLeague", "EL", "EU", aliases = listOf("Euroliga", "Turkish Airlines EuroLeague", "Euroleague")),
+        League(Sport.BASKETBALL, BasketDataSource.EUROCUP, "EuroCup", "EC", "EU", aliases = listOf("Eurocopa", "BKT EuroCup", "Eurocup")),
+        League(Sport.BASKETBALL, BasketDataSource.PRIMERA_FEB, "Primera FEB", "1FEB", "ES", aliases = listOf("Primera FEB", "LEB Oro")),
+        League(Sport.BASKETBALL, BasketDataSource.LEGA, "Lega Basket Serie A", "LBA", "IT", aliases = listOf("LBA", "Lega Basket", "Serie A de baloncesto", "Liga italiana de baloncesto")),
         // glcn: handball is not on ESPN either; served by BasketDataSource from the league's own site.
         League(Sport.HANDBALL, BasketDataSource.ASOBAL, "Liga ASOBAL", "ASOBAL", "ES", aliases = listOf("ASOBAL", "Liga Nexus Energia ASOBAL")),
         League(Sport.HANDBALL, BasketDataSource.EHF_CL, "EHF Champions League", "EHF CL", "EU", aliases = listOf("Liga de Campeones EHF", "Machineseeker EHF Champions League")),

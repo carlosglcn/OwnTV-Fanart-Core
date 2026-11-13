@@ -307,6 +307,9 @@ class BasketDataSource(client: OkHttpClient) {
     companion object {
         const val ACB = "acb"
         const val EUROLEAGUE = "euroleague"
+        const val EUROCUP = "eurocup"
+        const val PRIMERA_FEB = "primerafeb"
+        const val LEGA = "lega"
         const val ASOBAL = "asobal"
         const val EHF_CL = "ehfcl"
         const val EHF_EL = "ehfel"
@@ -316,7 +319,7 @@ class BasketDataSource(client: OkHttpClient) {
         const val KHL = "khl"
         const val SNOOKER = "snooker"
         private val EHF_SLUGS = setOf(EHF_CL, EHF_EL)
-        val SLUGS = setOf(ACB, EUROLEAGUE, ASOBAL, EHF_CL, EHF_EL, HBL, LNH, HHL, KHL, SNOOKER)
+        val SLUGS = setOf(ACB, EUROLEAGUE, EUROCUP, PRIMERA_FEB, LEGA, ASOBAL, EHF_CL, EHF_EL, HBL, LNH, HHL, KHL, SNOOKER)
         private const val EHF_LIVE = "https://www.eurohandball.com/umbraco/api/livescoreapi/GetLiveScoreMatches/1069"
         private const val ASOBAL_SITE = "https://www.asobal.es"
         private const val LIVE_CACHE_MS = 30_000L

@@ -52,7 +52,7 @@ class SportsNow(
             "deport", "futbol", "baloncesto", "basket", "tenis", "golf", "motor", "motociclismo",
             "automovilismo", "formula 1", "f1", "motogp", "ciclismo", "rugby", "balonmano", "boxeo",
             "atletismo", "natacion", "voleibol", "padel", "laliga", "liga de campeones", "champions",
-            "europa league", "conference league", "copa del rey", "nba", "euroliga", "euroleague", "acb",
+            "europa league", "conference league", "copa del rey", "nba", "euroliga", "euroleague", "eurocup", "acb", "primera feb",
             "nfl", "ufc", "sport", "wwe", "hipica", "esqui", "dardos", "snooker",
         )
         // glcn: compiled once — the sort compiled one per comparison, and fold runs twice per programme.

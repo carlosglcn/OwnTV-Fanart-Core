@@ -27,7 +27,7 @@ object SportsPresets {
         "FR" to listOf("soccer/fra.1", "soccer/fra.2", "soccer/fra.coupe_de_france") + EUROPE +
             listOf("rugby/270559", "rugby/180659", "rugby/271937", "handball/lnh", "basketball/euroleague") + EHF + MOTOR + TENNIS + CYCLING,
         "IT" to listOf("soccer/ita.1", "soccer/ita.2", "soccer/ita.coppa_italia") + EUROPE +
-            listOf("basketball/euroleague", "rugby/180659") + MOTOR + TENNIS + CYCLING,
+            listOf("basketball/lega", "basketball/euroleague", "rugby/180659") + MOTOR + TENNIS + CYCLING,
         "PT" to listOf("soccer/por.1", "soccer/por.taca.portugal") + EUROPE + EHF + MOTOR,
         "NL" to listOf("soccer/ned.1", "soccer/ned.cup") + EUROPE + MOTOR + TENNIS + CYCLING,
         "BE" to listOf("soccer/bel.1") + EUROPE + MOTOR + TENNIS + CYCLING,
