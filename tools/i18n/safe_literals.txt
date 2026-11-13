@@ -1373,6 +1373,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY sortOrder ASC, name ASC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE id = :id
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE id IN (:ids)
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE name LIKE '%' || :title || '%' LIMIT 40
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId = :sourceId AND name = :name LIMIT 1
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId = :sourceId AND remoteId = :remoteId LIMIT 1
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId = :sourceId AND remoteId IN (:remoteIds)
@@ -6670,9 +6671,12 @@
 2	preference-key	core/src/main/java/tv/own/owntv/core/trakt/TraktSync.kt	$profileId.at
 1	preference-key	core/src/main/java/tv/own/owntv/core/trakt/TraktSync.kt	$profileId.watchlist
 2	technical	core/src/main/java/tv/own/owntv/core/trakt/TraktSync.kt	$profileId.watchlist2
+1	technical	core/src/main/java/tv/own/owntv/core/trakt/TraktSync.kt	(19|20)\\d{2}
 1	technical	core/src/main/java/tv/own/owntv/core/trakt/TraktSync.kt	:kids
 1	log	core/src/main/java/tv/own/owntv/core/trakt/TraktSync.kt	TraktSync
+1	technical	core/src/main/java/tv/own/owntv/core/trakt/TraktSync.kt	[(\\[]?\\b(19|20)\\d{2}\\b[)\\]]?
 1	technical	core/src/main/java/tv/own/owntv/core/trakt/TraktSync.kt	[^a-z0-9]+
+1	technical	core/src/main/java/tv/own/owntv/core/trakt/TraktSync.kt	\\p{M}+
 1	preference-key	core/src/main/java/tv/own/owntv/core/trakt/TraktSync.kt	glcn_trakt_sync
 2	technical	core/src/main/java/tv/own/owntv/core/trakt/TraktSync.kt	n
 2	technical	core/src/main/java/tv/own/owntv/core/trakt/TraktSync.kt	t
