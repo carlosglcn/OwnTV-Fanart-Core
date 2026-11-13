@@ -91,6 +91,12 @@ object TraktSync {
             .map { Trakt.ListedMovie(it, "", null) }
     }
 
+    /** glcn: a local film (any playlist or server) named [title], of [year] when the film's own year is known. */
+    suspend fun filmByTitle(title: String, year: Int?): MovieEntity? {
+        val dao = dep<MovieDao>() ?: return null
+        return byName(dao, Trakt.ListedMovie(0, title, year))
+    }
+
     /** A local film whose cleaned name is [l]'s title (and whose year, when both have one, is the same). */
     private suspend fun byName(dao: MovieDao, l: Trakt.ListedMovie): MovieEntity? {
         if (l.title.length < MIN_TITLE) return null

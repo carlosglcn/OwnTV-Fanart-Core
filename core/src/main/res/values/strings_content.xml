@@ -1152,4 +1152,8 @@
     <string name="glcn_castpage_films">Their films in your playlists</string>
     <string name="glcn_castpage_wiki_none">No Wikipedia article found</string>
     <string name="glcn_castpage_wiki_scan">Scan to read more on Wikipedia</string>
+    <string name="glcn_castpage_born">Born %1$s</string>
+    <string name="glcn_castpage_born_in">in %1$s</string>
+    <string name="glcn_castpage_age">%1$d years old</string>
+    <string name="glcn_castpage_died">Died %1$s, aged %2$d</string>
 </resources>

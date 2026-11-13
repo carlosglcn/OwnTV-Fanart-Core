@@ -831,4 +831,8 @@
     <string name="glcn_castpage_films">Sus películas en tus listas</string>
     <string name="glcn_castpage_wiki_none">Sin artículo en Wikipedia</string>
     <string name="glcn_castpage_wiki_scan">Escanea para leer más en Wikipedia</string>
+    <string name="glcn_castpage_born">Nació el %1$s</string>
+    <string name="glcn_castpage_born_in">en %1$s</string>
+    <string name="glcn_castpage_age">%1$d años</string>
+    <string name="glcn_castpage_died">Murió el %1$s, a los %2$d años</string>
 </resources>
