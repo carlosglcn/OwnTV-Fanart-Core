@@ -16,7 +16,8 @@ object MetadataImages {
 
     /** Cast profile photo (default w185 — TMDB's portrait size, ample for a small card on a TV). */
     fun profile(path: String?, size: String = "w185"): String? =
-        path?.takeIf { it.isNotBlank() }?.let { "${TmdbProvider.IMAGE_BASE}/$size${it.ensureLeadingSlash()}" }
+        // glcn: a whole URL (a Wikipedia photo, for a name read from the guide) is used as it is.
+        path?.takeIf { it.isNotBlank() }?.let { if (it.startsWith("http")) it else "${TmdbProvider.IMAGE_BASE}/$size${it.ensureLeadingSlash()}" }
 
     /** Title/logo URL (default w500). */
     fun logo(path: String?, size: String = "w500"): String? =

@@ -2433,6 +2433,7 @@
 3	url	core/src/main/java/tv/own/owntv/core/metadata/MetadataImages.kt	${TmdbProvider.IMAGE_BASE}/$size${it.ensureLeadingSlash()}
 1	url	core/src/main/java/tv/own/owntv/core/metadata/MetadataImages.kt	/
 1	url	core/src/main/java/tv/own/owntv/core/metadata/MetadataImages.kt	/$this
+1	technical	core/src/main/java/tv/own/owntv/core/metadata/MetadataImages.kt	http
 2	url	core/src/main/java/tv/own/owntv/core/metadata/MetadataImages.kt	w500
 1	url	core/src/main/java/tv/own/owntv/core/metadata/MetadataImages.kt	w780
 1	empty	core/src/main/java/tv/own/owntv/core/metadata/MetadataOverrideStore.kt	\0
