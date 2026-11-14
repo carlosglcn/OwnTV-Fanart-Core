@@ -19,14 +19,25 @@ object Perf {
 
     @Volatile private var t0 = -1L
 
+    /** glcn: this process's start-up, kept for the playback report ("--- start-up ---"). */
+    private val timeline = java.util.concurrent.ConcurrentLinkedQueue<String>()
+
     fun begin() {
         t0 = SystemClock.elapsedRealtime()
         Log.d(TAG, "process-begin @0ms")
+        timeline.add("process-begin @0ms")
     }
 
     fun stamp(label: String) {
         val base = t0
         if (base < 0) return
-        Log.d(TAG, "$label @${SystemClock.elapsedRealtime() - base}ms")
+        val line = "$label @${SystemClock.elapsedRealtime() - base}ms"
+        Log.d(TAG, line)
+        if (timeline.size < TIMELINE_MAX) timeline.add(line)
     }
+
+    /** glcn: the start-up timeline as a report section, or null before [begin]. */
+    fun report(): String? = if (timeline.isEmpty()) null else "--- start-up (this run) ---\n" + timeline.joinToString("\n")
+
+    private const val TIMELINE_MAX = 60
 }
