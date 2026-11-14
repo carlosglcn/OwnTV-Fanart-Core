@@ -1355,6 +1355,7 @@ class LivePreviewEngine(
                 }
                 Player.STATE_READY -> {
                     val resumed = tune.hasPlayed // a READY after first play == recovered from a buffer/stall
+                    tune.readySinceMs = android.os.SystemClock.elapsedRealtime()
                     // A late recovery: the ladder called this channel dead (failLoad) while the reconnect it
                     // had already started was still opening, and that reconnect has now produced a picture.
                     // Leaving gaveUp set would keep the error over a playing channel AND disarm the stall
@@ -1402,9 +1403,22 @@ class LivePreviewEngine(
                         }
                         tune.reconnectPending || tune.gaveUp -> _buffering.value = true
                         else -> {
-                            LiveDiagnosticsLog.event("STATE_ENDED mid-live — treating as stall, reconnecting")
-                            _buffering.value = true
-                            reconnect("ended mid-live")
+                            // glcn: some servers hand a live channel out in pieces — the response simply ends every
+                            // half minute or so. After a good stretch of playing it is that, not a failure: reopen
+                            // at once, and the piece does not count towards giving the channel up.
+                            val nowMs = android.os.SystemClock.elapsedRealtime()
+                            val playedMs = if (tune.readySinceMs > 0L) nowMs - tune.readySinceMs else 0L
+                            if (playedMs >= PIECE_PLAYED_MS) {
+                                LiveDiagnosticsLog.event("STATE_ENDED after ${playedMs / 1000}s of playing — the server ends its responses; reopening at once")
+                                tune.retryCount = 0
+                                tune.failingSinceMs = 0L
+                                _buffering.value = true
+                                reconnect("ended mid-live", immediate = true)
+                            } else {
+                                LiveDiagnosticsLog.event("STATE_ENDED mid-live — treating as stall, reconnecting")
+                                _buffering.value = true
+                                reconnect("ended mid-live")
+                            }
                         }
                     }
                 }
@@ -4095,6 +4109,8 @@ internal data class AudioSel(val id: Int, val group: androidx.media3.common.Trac
 internal data class TextSel(val id: Int, val group: androidx.media3.common.TrackGroup, val trackIndex: Int)
 
 /** glcn: a re-buffer flap this soon after the audio changed format is the switch's, not the stream's. */
+/** glcn: an "end" after this much playing is a server that serves live in pieces, not a dying stream. */
+private const val PIECE_PLAYED_MS = 20_000L
 private const val AUDIO_SWITCH_WINDOW_MS = 15_000L
 
 internal data class TuneState(
@@ -4113,6 +4129,8 @@ internal data class TuneState(
     @field:Volatile var lastVideoDecoderHardware: Boolean? = null,
     var hasPlayed: Boolean = false,
     var retryCount: Int = 0,
+    /** glcn: when this channel last reached READY (0 = not yet) — how long its current response has played. */
+    var readySinceMs: Long = 0L,
     /** Errors after the first frame that say the stream's *content* is unplayable here (see
      *  [LivePreviewEngine.isContentFailure]); reset by sustained playback. */
     var contentFailures: Int = 0,

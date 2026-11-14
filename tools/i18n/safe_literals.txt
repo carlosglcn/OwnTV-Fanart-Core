@@ -7476,6 +7476,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	READY
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	Range
 2	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	Retry-After
+1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	STATE_ENDED after ${playedMs / 1000}s of playing — the server ends its responses; reopening at once
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	STATE_ENDED before first play — no action
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	STATE_ENDED mid-live — treating as stall, reconnecting
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	STATE_IDLE before first play — no action
@@ -7960,7 +7961,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	exo primary vod
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	exo vod fallback
 2	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	exoplayer
-1	regex	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	failed to create hw uploader|can't find video conversion|_mediacodec: unsupported or unknown profile
+1	regex	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	failed to create hw uploader|can't find video conversion|_mediacodec: unsupported or unknown profile|setportmode on output to dynamicanwbuffer failed
 1	regex	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	failed to open|opening failed|could not open|loading failed|was aborted|finished playback
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	false
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	fast

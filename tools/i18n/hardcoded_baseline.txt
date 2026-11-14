@@ -681,6 +681,7 @@
 1	core/src/main/java/tv/own/owntv/core/util/CrashRecorder.kt	· ${if (e.importance <= android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) "foreground" else "background"}
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	body="$failureText"
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder rebuild failed: ${it.message}
+1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	ended mid-live
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	insufficient resource
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	insufficientresources
 1	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	no more instances
