@@ -299,6 +299,10 @@ object PlaybackErrorLog {
      * path is a public Download one that this app may not be able to read back (Android 11's scoped storage), and the
      * phone got an empty report.
      */
+    /** glcn: a section the app adds to the report, with its own "--- … ---" heading; built on the export's thread. */
+    @Volatile
+    var extraSection: ((Context) -> String?)? = null
+
     fun reportText(context: Context): String {
         val appContext = context.applicationContext
         val stamp = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.US)
@@ -331,6 +335,11 @@ object PlaybackErrorLog {
                 e.reason?.let { appendLine("  reason: $it") }
                 e.spec?.let { appendLine("  spec  : $it") }
                 e.raw?.let { appendLine("  raw   : $it") }
+                appendLine()
+            }
+            // glcn: what the app adds (how the live groups are filled, per playlist).
+            extraSection?.let { make -> runCatching { make(appContext) }.getOrNull() }?.takeIf { it.isNotBlank() }?.let {
+                appendLine(it.trimEnd())
                 appendLine()
             }
             // glcn: from the file when there is one, so the lines from before a freeze or a crash are in the report.

@@ -1061,6 +1061,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE categoryId = :categoryId AND name LIKE '%' || :query || '%' ORDER BY sortOrder ASC, name ASC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE categoryId = :categoryId ORDER BY name ASC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE categoryId = :categoryId ORDER BY sortOrder ASC, name ASC
+1	technical	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE categoryId = :categoryId ORDER BY sortOrder ASC, name ASC LIMIT :limit
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE id = :id
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE sourceId = :sourceId AND
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE sourceId = :sourceId AND (sortOrder < :beforeSortOrder OR (sortOrder = :beforeSortOrder AND id < :beforeId)) ORDER BY sortOrder DESC, id DESC LIMIT :limit
@@ -1085,7 +1086,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE sourceId IN (:sourceIds) ORDER BY sourceId ASC, sortOrder ASC, name ASC
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT * FROM channels WHERE sourceId IN (:sourceIds) ORDER BY sourceId ASC, sortOrder ASC, name ASC LIMIT :limit
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT COALESCE(MAX(catchupDays), 0) FROM channels WHERE sourceId IN (:sourceIds) AND catchup = 1
-1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT COUNT(*) FROM channels WHERE categoryId = :categoryId
+2	technical	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT COUNT(*) FROM channels WHERE categoryId = :categoryId
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT COUNT(*) FROM channels WHERE sourceId = :sourceId
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT COUNT(*) FROM channels WHERE sourceId IN (:sourceIds)
 3	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT COUNT(*) FROM channels WHERE sourceId IN (:sourceIds) AND catchup = 1

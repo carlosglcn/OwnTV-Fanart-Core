@@ -363,6 +363,13 @@ interface ChannelDao {
     @Query("SELECT COUNT(*) FROM channels WHERE categoryId = :categoryId")
     fun countByCategory(categoryId: Long): Flow<Int>
 
+    /** glcn: a group's first rows in playlist order, for the playback report's "live groups" section. */
+    @Query("SELECT * FROM channels WHERE categoryId = :categoryId ORDER BY sortOrder ASC, name ASC LIMIT :limit")
+    suspend fun firstInCategory(categoryId: Long, limit: Int): List<ChannelEntity>
+
+    @Query("SELECT COUNT(*) FROM channels WHERE categoryId = :categoryId")
+    suspend fun countInCategoryOnce(categoryId: Long): Int
+
     /** [countByCategory] for every category of [sourceIds] at once — the counts beside each Live TV group. */
     @Query(
         "SELECT categoryId, COUNT(*) AS itemCount FROM channels " +
