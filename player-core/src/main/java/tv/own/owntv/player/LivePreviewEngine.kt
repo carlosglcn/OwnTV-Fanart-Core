@@ -1355,7 +1355,6 @@ class LivePreviewEngine(
                 }
                 Player.STATE_READY -> {
                     val resumed = tune.hasPlayed // a READY after first play == recovered from a buffer/stall
-                    tune.readySinceMs = android.os.SystemClock.elapsedRealtime()
                     // A late recovery: the ladder called this channel dead (failLoad) while the reconnect it
                     // had already started was still opening, and that reconnect has now produced a picture.
                     // Leaving gaveUp set would keep the error over a playing channel AND disarm the stall
@@ -4129,8 +4128,6 @@ internal data class TuneState(
     @field:Volatile var lastVideoDecoderHardware: Boolean? = null,
     var hasPlayed: Boolean = false,
     var retryCount: Int = 0,
-    /** glcn: when this channel last reached READY (0 = not yet) — how long its current response has played. */
-    var readySinceMs: Long = 0L,
     /** Errors after the first frame that say the stream's *content* is unplayable here (see
      *  [LivePreviewEngine.isContentFailure]); reset by sustained playback. */
     var contentFailures: Int = 0,
