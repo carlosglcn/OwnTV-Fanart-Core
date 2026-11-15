@@ -27,9 +27,15 @@ object FfmpegAudioSetting {
         active = saved(context)
     }
 
-    /** The saved choice — what the next start of the app will use. */
+    /**
+     * The saved choice — what the next start of the app will use. glcn: on unless switched off — the engine already
+     * ships FFmpeg, and without it a box with no AC-3 decoder of its own (the SHIELD on stereo output) hears only a
+     * channel's audio-description track.
+     */
     fun saved(context: Context): Boolean =
-        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).getBoolean(KEY_FFMPEG_AUDIO, false)
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).getBoolean(KEY_FFMPEG_AUDIO, DEFAULT_ON)
+
+    private const val DEFAULT_ON = true
 
     /** Saves the choice for the next start. Written synchronously: the caller restarts the app right after. */
     fun save(context: Context, on: Boolean): Boolean =

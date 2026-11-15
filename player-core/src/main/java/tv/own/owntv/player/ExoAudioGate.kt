@@ -13,7 +13,7 @@ import tv.own.owntv.player.ffmpeg.FfmpegLibrary
  * already ships (`libowntvffmpeg.so` in OwnTV_libmpv). It sits **behind** the device's MediaCodec
  * decoders in [OwnTVRenderersFactory], so the TV's chip and passthrough always win; FFmpeg only decodes
  * what the chip cannot (DTS, TrueHD, MP2 on many boxes). Used only while the user's "FFmpeg audio
- * decoder" setting is on ([FfmpegAudioSetting], off by default); off, or on an engine without the
+ * decoder" setting is on ([FfmpegAudioSetting]; glcn: on by default); off, or on an engine without the
  * library, it reports unavailable and ExoPlayer has only the device's decoders.
  */
 @UnstableApi
