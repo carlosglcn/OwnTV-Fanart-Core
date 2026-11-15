@@ -14,6 +14,16 @@ sealed interface LauncherDeepLink {
         override fun toUri(): Uri = Uri.parse("owntvfanart://open/live")
     }
 
+    /** glcn: a film's page (the screensaver's OK on it), not its playback. */
+    data class OpenMovie(val itemId: Long) : LauncherDeepLink {
+        override fun toUri(): Uri = Uri.parse("owntvfanart://open/movie").buildUpon().appendQueryParameter("itemId", itemId.toString()).build()
+    }
+
+    /** glcn: a series' page. */
+    data class OpenSeries(val itemId: Long) : LauncherDeepLink {
+        override fun toUri(): Uri = Uri.parse("owntvfanart://open/series").buildUpon().appendQueryParameter("itemId", itemId.toString()).build()
+    }
+
     data class Movie(
         val sourceId: Long? = null,
         val remoteId: String? = null,
@@ -82,6 +92,8 @@ sealed interface LauncherDeepLink {
                 "text" -> uri.getQueryParameter("q")?.takeIf { it.isNotBlank() }?.let { RemoteText(it.take(RemoteKeys.TEXT_MAX)) }
                 "open" -> when (uri.pathSegments.firstOrNull()) {
                     "live" -> OpenLiveSection
+                    "movie" -> uri.queryLong("itemId")?.let { OpenMovie(it) }
+                    "series" -> uri.queryLong("itemId")?.let { OpenSeries(it) }
                     else -> null
                 }
                 "play" -> when (uri.pathSegments.firstOrNull()) {

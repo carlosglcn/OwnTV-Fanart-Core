@@ -36,6 +36,7 @@ class LauncherLaunchResolver(
             is LauncherDeepLink.Movie -> resolveMovie(profileId, deepLink, movieIds)
             is LauncherDeepLink.Live -> resolveLiveChannel(profileId, deepLink, liveIds)
             LauncherDeepLink.OpenLiveSection -> null
+            is LauncherDeepLink.OpenMovie, is LauncherDeepLink.OpenSeries -> null // glcn: pages, opened by the shell
             is LauncherDeepLink.RemoteKey, is LauncherDeepLink.RemoteText -> null
             is LauncherDeepLink.Episode -> resolveEpisode(profileId, deepLink, seriesIds)
         }
