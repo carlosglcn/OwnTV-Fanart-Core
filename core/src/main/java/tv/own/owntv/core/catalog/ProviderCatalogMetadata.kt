@@ -135,13 +135,33 @@ object ProviderCatalogMetadataParser {
                 t.has("HDR10") && HDR10.containsMatchIn(t.raw) -> add("HDR10")
                 t.has("HDR") && HDR.containsMatchIn(t.raw) -> add("HDR")
             }
-            if (isRemux(t)) add("REMUX")
+            if (t.has("IMAX") && IMAX.containsMatchIn(t.raw)) add("IMAX") // glcn
+            val remux = isRemux(t)
+            if (remux) add("REMUX")
+            // glcn: where the copy comes from, when it is not a Remux (which says it already).
+            else when {
+                t.has("BLU", "BD") && BLURAY.containsMatchIn(t.raw) -> add("BluRay")
+                t.has("WEB") && WEB_DL.containsMatchIn(t.raw) -> add("WEB-DL")
+                t.has("WEB") && WEB_RIP.containsMatchIn(t.raw) -> add("WEBRip")
+            }
             if (t.mayHaveAudio) when {
                 t.mayHaveAtmos && ATMOS.containsMatchIn(t.raw) -> add("ATMOS")
                 t.mayHave71 && SURROUND_7_1.containsMatchIn(t.raw) -> add("7.1")
                 t.mayHave51 && SURROUND_5_1.containsMatchIn(t.raw) -> add("5.1")
             }
+            // glcn: the sound's own format, the best one named.
+            audioCodecBadge(t)?.let(::add)
         }
+    }
+
+    /** glcn: DTS:X, TrueHD, DTS-HD MA, DTS, DD+ — the first the title names, best first. */
+    private fun audioCodecBadge(t: Title): String? = when {
+        t.has("DTS") && DTS_X.containsMatchIn(t.raw) -> "DTS:X"
+        t.has("TRUEHD", "TRUE-HD", "TRUE HD") && TRUEHD.containsMatchIn(t.raw) -> "TrueHD"
+        t.has("DTS") && DTS_HD_MA.containsMatchIn(t.raw) -> "DTS-HD MA"
+        t.has("DTS") && DTS.containsMatchIn(t.raw) -> "DTS"
+        t.has("DDP", "DD+", "EAC3", "E-AC3") && DD_PLUS.containsMatchIn(t.raw) -> "DD+"
+        else -> null
     }
 
     /**
@@ -164,6 +184,16 @@ object ProviderCatalogMetadataParser {
     }
 
     private val REMUX = Regex("""(?i)\bREMUX\b""")
+    // glcn: sources and sound formats a title may name (the title page shows them; posters keep to picture and REMUX).
+    private val IMAX = Regex("""(?i)\bIMAX\b""")
+    private val BLURAY = Regex("""(?i)\b(?:BLU[\s._-]?RAY|BDRIP|BRRIP)\b""")
+    private val WEB_DL = Regex("""(?i)\bWEB[\s._-]?DL\b""")
+    private val WEB_RIP = Regex("""(?i)\bWEB[\s._-]?RIP\b""")
+    private val DTS_X = Regex("""(?i)\bDTS[\s:._-]?X\b""")
+    private val TRUEHD = Regex("""(?i)\bTRUE[\s._-]?HD\b""")
+    private val DTS_HD_MA = Regex("""(?i)\bDTS[\s._-]?HD(?:[\s._-]?MA)?\b""")
+    private val DTS = Regex("""(?i)\bDTS\b""")
+    private val DD_PLUS = Regex("""(?i)(?:\bDDP|\bDD\+|\bE-?AC-?3\b)""")
     private val BRACKETS = Regex("""[\[(]([^\])]{1,40})[\])]""")
     private val REMUX_COMPANIONS = setOf("4K", "UHD", "2160P", "1080P", "FHD", "DV", "DOVI", "HDR", "HDR10", "HDR10+", "8K")
 

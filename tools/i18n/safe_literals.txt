@@ -259,10 +259,12 @@
 7	empty	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	\0
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)(?:\\b5[._ ]1\\b|\\bDDP?\\s*5[._ ]1\\b|\\bAC-?3\\s*5[._ ]1\\b)
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)(?:\\b7[._ ]1\\b|\\bDDP?\\s*7[._ ]1\\b)
+1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)(?:\\bDDP|\\bDD\\+|\\bE-?AC-?3\\b)
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)[|\\[({]\\s*($LANGUAGE_CODES)\\s*[|\\])}]
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\b(?:(?:DOLBY\\s*)?ATMOS|DDP?\\s*[57][._ ]1|AC-?3\\s*5[._ ]1|[257][._ ]0|[57][._ ]1)\\b
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\b(?:4K|UHD|2160P|3840P)\\b
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\b(?:8K|4K|UHD|2160P|3840P|FHD|1080P|HD|720P|SD)\\b
+1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\b(?:BLU[\\s._-]?RAY|BDRIP|BRRIP)\\b
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\b(?:DOLBY\\s*)?ATMOS\\b
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\b(?:DOLBY\\s*VISION|DOVI|DV)\\b
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\b(?:DOLBY\\s*VISION|DOVI|DV|HDR10\\+?|HDR)\\b
@@ -270,10 +272,17 @@
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\b(?:HD|720P)\\b
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\b2[._ ]0\\b
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\b8K\\b
+1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\bDTS[\\s._-]?HD(?:[\\s._-]?MA)?\\b
+1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\bDTS[\\s:._-]?X\\b
+1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\bDTS\\b
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\bHDR10\\+(?!\\w)
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\bHDR10\\b
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\bHDR\\b
+1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\bIMAX\\b
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\bSD\\b
+1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\bTRUE[\\s._-]?HD\\b
+1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\bWEB[\\s._-]?DL\\b
+1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	(?i)\\bWEB[\\s._-]?RIP\\b
 3	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	1080P
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	1080p
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	2 0
@@ -298,21 +307,39 @@
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	7_1
 5	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	8K
 2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	ATMOS
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	BD
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	BLU
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	BluRay
+2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DD+
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DDP
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DE|EN|FR|ES|PT|AR|NL|PL|TR|RU|BG|ZH|HR|CS|DA|ET|FI|EL|HE|HI|HU|ID|JA|KO|LV|LT|MS|NO|FA|RO|SR|SK|SL|SV|TH|UK|VI
 3	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DOLBY
 4	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DOVI
+4	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DTS
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DTS-HD MA
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DTS:X
 6	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	DV
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	Dolby Atmos
 2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	Dolby Vision
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	E-AC3
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	EAC3
 3	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	FHD
 2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	HD
 7	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	HDR
 6	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	HDR10
 7	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	HDR10+
+2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	IMAX
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	R
 4	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	REMUX
 2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	SD
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	TRUE HD
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	TRUE-HD
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	TRUEHD
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	TrueHD
 3	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	UHD
+2	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	WEB
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	WEB-DL
+1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	WEBRip
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	\\s($LANGUAGE_CODES)\\s*$
 1	regex	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	^\\s*($LANGUAGE_CODES)(?=\\s*[|:_-])
 1	technical	core/src/main/java/tv/own/owntv/core/catalog/ProviderCatalogMetadata.kt	__unmatchable_${rawName.hashCode().toUInt().toString(16)}
@@ -5896,6 +5923,10 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	CommunityRating
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Container
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Container,Genres,Overview,CommunityRating,BackdropImageTags,
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DD+
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DTS
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DTS-HD MA
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DTS:X
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DateCreated
 1	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	DateCreated,ProviderIds,RunTimeTicks,UserData,MediaStreams,Studios
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Discovery
@@ -5957,6 +5988,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Subtitle
 3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Tmdb
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	TotalRecordCount
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	TrueHD
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	Type
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	UTC
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	UTF-8
@@ -5988,13 +6020,22 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	atresplayer
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	bbc
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	cuatro
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dd+
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ddp
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	discovery
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	disney
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	disney+
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dolby vision
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dolbyvision
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dovi
-1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	eac3
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dts
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dts hd
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dts x
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dts-hd
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dts-x
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	dts:x
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	e-ac-3
+2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	eac3
 1	locale	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	es
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	f
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	glcn-added
@@ -6026,6 +6067,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	la 2
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	la sexta
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	lasexta
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ma
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	max
 1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	max original
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	mitele
@@ -6047,6 +6089,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	starz
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	telecinco
 2	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	token
+1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	truehd
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	tve
 2	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	user
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	w300

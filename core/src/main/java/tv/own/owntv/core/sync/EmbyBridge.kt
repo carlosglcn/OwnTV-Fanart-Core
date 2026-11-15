@@ -388,6 +388,9 @@ internal object EmbyBridge {
         var picture: String? = null
         var audio: String? = null
         var audioScore = 0
+        // glcn: the best sound format among the tracks (DTS:X, TrueHD, DTS-HD MA, DTS, DD+), shown beside the channels.
+        var codec: String? = null
+        var codecScore = 0
         for (i in 0 until streams.length()) {
             val st = streams.optJSONObject(i) ?: continue
             when (st.optString("Type")) {
@@ -418,10 +421,19 @@ internal object EmbyBridge {
                         else -> 0 to null
                     }
                     if (score > audioScore && mark != null) { audioScore = score; audio = mark }
+                    val (cScore, cMark) = when {
+                        "dts:x" in title || "dts-x" in title || "dts x" in title -> 5 to "DTS:X"
+                        "truehd" in title -> 4 to "TrueHD"
+                        "dts-hd" in title || "dts hd" in title || ("dts" in title && " ma" in title) -> 3 to "DTS-HD MA"
+                        "dts" in title -> 2 to "DTS"
+                        "eac3" in title || "e-ac-3" in title || "dd+" in title || "ddp" in title -> 1 to "DD+"
+                        else -> 0 to null
+                    }
+                    if (cScore > codecScore && cMark != null) { codecScore = cScore; codec = cMark }
                 }
             }
         }
-        val marks = listOfNotNull(picture, audio)
+        val marks = listOfNotNull(picture, audio, codec)
         if (rank == 0 && marks.isEmpty()) return null
         return rank to marks.joinToString(" • ")
     }
