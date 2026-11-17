@@ -344,10 +344,10 @@ interface SeriesDao {
     fun searchHistory(query: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
 
     // glcn: "Keep watching" in Series — shows whose last episode seen is half watched, or finished with another after it.
-    @Query("SELECT s.* " + CONTINUE_SERIES + " ORDER BY last.at DESC")
+    @Query("SELECT s.* " + CONTINUE_SERIES + " ORDER BY lp.lastAt DESC")
     fun pagingContinue(profileId: Long, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
 
-    @Query("SELECT s.* " + CONTINUE_SERIES + " AND s.name LIKE '%' || :query || '%' ORDER BY last.at DESC")
+    @Query("SELECT s.* " + CONTINUE_SERIES + " AND s.name LIKE '%' || :query || '%' ORDER BY lp.lastAt DESC")
     fun searchContinue(query: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
 
     @Query("SELECT COUNT(*) " + CONTINUE_SERIES + " AND (s.categoryId IS NULL OR s.categoryId NOT IN (:excluded))")
@@ -450,12 +450,12 @@ interface SeriesDao {
  * under 95 %), or finished with a later episode in the list — so a new season brings a finished show back.
  */
 private const val CONTINUE_SERIES =
-    "FROM series s INNER JOIN (SELECT e.seriesId AS sid, MAX(p.updatedAt) AS at FROM playback_progress p " +
+    "FROM series s INNER JOIN (SELECT e.seriesId AS sid, MAX(p.updatedAt) AS lastAt FROM playback_progress p " +
         "INNER JOIN episodes e ON e.id = p.itemId WHERE p.profileId = :profileId AND p.mediaType = 'EPISODE' " +
-        "GROUP BY e.seriesId) last ON last.sid = s.id " +
+        "GROUP BY e.seriesId) lp ON lp.sid = s.id " +
         "WHERE s.sourceId IN (:sourceIds) AND EXISTS (SELECT 1 FROM playback_progress p2 " +
         "INNER JOIN episodes e2 ON e2.id = p2.itemId WHERE p2.profileId = :profileId AND p2.mediaType = 'EPISODE' " +
-        "AND e2.seriesId = s.id AND p2.updatedAt = last.at AND (" +
+        "AND e2.seriesId = s.id AND p2.updatedAt = lp.lastAt AND (" +
         "(p2.positionMs >= 10000 AND p2.durationMs > 0 AND p2.positionMs < p2.durationMs * 0.95) OR " +
         "(p2.durationMs > 0 AND p2.positionMs >= p2.durationMs * 0.95 AND EXISTS (SELECT 1 FROM episodes e3 " +
         "WHERE e3.seriesId = s.id AND (e3.seasonNumber > e2.seasonNumber OR " +
