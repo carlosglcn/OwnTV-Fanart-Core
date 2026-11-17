@@ -70,6 +70,10 @@ class LiveEpgReader(
 ) {
     private data class CachedEpg(val at: Long, val data: EpgNowNext)
 
+    /** glcn: whether this answer's programme on air (or, with none, the next one's start) is already behind [now]. */
+    private fun EpgNowNext.passedBy(now: Long): Boolean =
+        this.now?.let { it.stopMs <= now } ?: next?.let { it.startMs <= now } ?: false
+
     /** Written from the IO dispatcher (the now/next fetch) and cleared from Main (EPG mapping/shift
      *  changes), so it cannot be a plain HashMap — concurrent structural modification of one is
      *  undefined, up to a corrupt table or an infinite loop inside `get`. */
@@ -110,7 +114,9 @@ class LiveEpgReader(
     suspend fun nowNext(ch: ChannelEntity, cust: SectionCustomizations, globalShiftMinutes: Int): EpgNowNext? =
         withContext(Dispatchers.IO) {
             val now = System.currentTimeMillis()
-            cache[ch.id]?.takeIf { now - it.at < CACHE_TTL_MS }?.let { return@withContext it.data }
+            // glcn: never an answer whose programme has already ended — the player asks again right when it ends, and
+            // the cached one (up to 5 min old) kept the finished programme on screen as "on air now".
+            cache[ch.id]?.takeIf { now - it.at < CACHE_TTL_MS && !it.data.passedBy(now) }?.let { return@withContext it.data }
 
             // 1) Bulk guide via the effective EPG id (manual match overrides the channel's own id).
             val epgKey = (cust.epgMatchResolver.epgIdFor(ch) ?: ch.epgChannelId)?.trim()?.lowercase()?.takeIf { it.isNotEmpty() }
