@@ -320,6 +320,16 @@ interface MovieDao {
     )
     fun searchHistory(query: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
 
+    // glcn: "Keep watching" in Films — started (10 s or more) and not finished (under 95 %), the latest first.
+    @Query("SELECT m.* " + CONTINUE_MOVIES + " ORDER BY p.updatedAt DESC")
+    fun pagingContinue(profileId: Long, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
+
+    @Query("SELECT m.* " + CONTINUE_MOVIES + " AND m.name LIKE '%' || :query || '%' ORDER BY p.updatedAt DESC")
+    fun searchContinue(query: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
+
+    @Query("SELECT COUNT(*) " + CONTINUE_MOVIES + " AND (m.categoryId IS NULL OR m.categoryId NOT IN (:excluded))")
+    fun countContinue(profileId: Long, sourceIds: List<Long>, excluded: List<Long>): Flow<Int>
+
     @Query(
         "SELECT m.* FROM movies m " +
             "INNER JOIN favorites f ON f.itemId = m.id AND f.mediaType = 'MOVIE' " +
@@ -393,3 +403,9 @@ interface MovieDao {
 
 /** glcn: a category id with its item count. */
 data class GlcnCategoryCount(val categoryId: Long, val count: Int)
+
+/** glcn: the films under way for a profile — the shared FROM/WHERE of [MovieDao.pagingContinue] and its kin. */
+private const val CONTINUE_MOVIES =
+    "FROM movies m INNER JOIN playback_progress p ON p.itemId = m.id AND p.mediaType = 'MOVIE' " +
+        "WHERE p.profileId = :profileId AND m.sourceId IN (:sourceIds) " +
+        "AND p.positionMs >= 10000 AND p.durationMs > 0 AND p.positionMs < p.durationMs * 0.95"

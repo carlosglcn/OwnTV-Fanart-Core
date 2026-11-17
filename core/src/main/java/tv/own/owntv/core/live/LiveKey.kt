@@ -8,6 +8,9 @@ sealed interface LiveKey {
      *  and independent of the guide, so it works for users with no EPG. */
     data object Catchup : LiveKey
     data object All : LiveKey
+    /** glcn: films and shows under way — a film started and not finished, a show with an episode half seen or the
+     *  next one waiting. Movies and Series only; Live TV never offers it. */
+    data object Continue : LiveKey
     data class Folder(val id: Long) : LiveKey
     /** A user-created combined category; [id] is its "custom:<uuid>" customization key. */
     data class Custom(val id: String) : LiveKey
@@ -21,6 +24,7 @@ fun LiveKey.serialize(): String = when (this) {
     LiveKey.History -> "HIST"
     LiveKey.Catchup -> "CATCHUP"
     LiveKey.All -> "ALL"
+    LiveKey.Continue -> "CONTINUE"
     is LiveKey.Folder -> "FOLDER:$id"
     is LiveKey.Custom -> "CUSTOM:$id"
 }
@@ -30,6 +34,7 @@ fun parseLiveKey(s: String): LiveKey? = when {
     s == "HIST" -> LiveKey.History
     s == "CATCHUP" -> LiveKey.Catchup
     s == "ALL" -> LiveKey.All
+    s == "CONTINUE" -> LiveKey.Continue
     s.startsWith("FOLDER:") -> s.removePrefix("FOLDER:").toLongOrNull()?.let { LiveKey.Folder(it) }
     s.startsWith("CUSTOM:") -> LiveKey.Custom(s.removePrefix("CUSTOM:"))
     else -> null

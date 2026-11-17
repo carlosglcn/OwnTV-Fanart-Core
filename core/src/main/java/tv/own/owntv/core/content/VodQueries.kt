@@ -48,6 +48,7 @@ fun moviePagingSource(
             }
             LiveKey.Favorites -> movieDao.pagingFavoritesManual(profileId, ContentOrderEntity.FAV_CONTEXT, ids)
             LiveKey.History -> movieDao.pagingHistory(profileId, ids)
+            LiveKey.Continue -> movieDao.pagingContinue(profileId, ids)
             is LiveKey.Custom ->
                 customCategoryDao.pagingMovies(profileId, key.id, ids, alpha = !playlist)
             is LiveKey.Folder -> {
@@ -66,6 +67,7 @@ fun moviePagingSource(
                 if (dateAdded) movieDao.searchAllDateAdded(query, ids) else movieDao.searchAll(query, ids)
             LiveKey.Favorites -> movieDao.searchFavorites(query, profileId, ids)
             LiveKey.History -> movieDao.searchHistory(query, profileId, ids)
+            LiveKey.Continue -> movieDao.searchContinue(query, profileId, ids)
             is LiveKey.Custom -> customCategoryDao.searchMovies(query, profileId, key.id, ids)
             is LiveKey.Folder ->
                 if (dateAdded) movieDao.searchInCategoryDateAdded(query, key.id)
@@ -100,6 +102,7 @@ fun seriesPagingSource(
             }
             LiveKey.Favorites -> seriesDao.pagingFavoritesManual(profileId, ContentOrderEntity.FAV_CONTEXT, ids)
             LiveKey.History -> seriesDao.pagingHistory(profileId, ids)
+            LiveKey.Continue -> seriesDao.pagingContinue(profileId, ids)
             is LiveKey.Custom ->
                 customCategoryDao.pagingSeries(profileId, key.id, ids, alpha = !playlist)
             is LiveKey.Folder -> {
@@ -118,6 +121,7 @@ fun seriesPagingSource(
                 if (dateAdded) seriesDao.searchAllDateAdded(query, ids) else seriesDao.searchAll(query, ids)
             LiveKey.Favorites -> seriesDao.searchFavorites(query, profileId, ids)
             LiveKey.History -> seriesDao.searchHistory(query, profileId, ids)
+            LiveKey.Continue -> seriesDao.searchContinue(query, profileId, ids)
             is LiveKey.Custom -> customCategoryDao.searchSeries(query, profileId, key.id, ids)
             is LiveKey.Folder ->
                 if (dateAdded) seriesDao.searchInCategoryDateAdded(query, key.id)
@@ -149,6 +153,7 @@ fun movieCountFlow(
             else movieDao.countFavoritesExcluding(profileId, ids, sealed)
         LiveKey.History -> if (sealed.isEmpty()) movieDao.countHistory(profileId, ids)
             else movieDao.countHistoryExcluding(profileId, ids, sealed)
+        LiveKey.Continue -> movieDao.countContinue(profileId, ids, sealed.ifEmpty { listOf(Long.MIN_VALUE) })
         is LiveKey.Custom -> if (sealed.isEmpty()) customCategoryDao.countMembers(profileId, MediaType.MOVIE, key.id, ids)
             else customCategoryDao.countMembersExcluding(profileId, MediaType.MOVIE, key.id, ids, sealed)
         is LiveKey.Folder -> movieDao.countByCategory(key.id)
@@ -175,6 +180,7 @@ fun seriesCountFlow(
             else seriesDao.countFavoritesExcluding(profileId, ids, sealed)
         LiveKey.History -> if (sealed.isEmpty()) seriesDao.countHistory(profileId, ids)
             else seriesDao.countHistoryExcluding(profileId, ids, sealed)
+        LiveKey.Continue -> seriesDao.countContinue(profileId, ids, sealed.ifEmpty { listOf(Long.MIN_VALUE) })
         is LiveKey.Custom -> if (sealed.isEmpty()) customCategoryDao.countMembers(profileId, MediaType.SERIES, key.id, ids)
             else customCategoryDao.countMembersExcluding(profileId, MediaType.SERIES, key.id, ids, sealed)
         is LiveKey.Folder -> seriesDao.countByCategory(key.id)

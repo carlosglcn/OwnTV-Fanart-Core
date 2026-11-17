@@ -38,7 +38,7 @@ fun livePagingSource(
     val playlist = sort == SettingsRepository.SortMode.PLAYLIST
     return if (query.isBlank()) {
         when (key) {
-            LiveKey.All -> if (playlist) channelDao.pagingAllOriginal(ids) else channelDao.pagingAll(ids)
+            LiveKey.All, LiveKey.Continue -> if (playlist) channelDao.pagingAllOriginal(ids) else channelDao.pagingAll(ids)
             LiveKey.Favorites -> channelDao.pagingFavoritesManual(profileId, ContentOrderEntity.FAV_CONTEXT, ids)
             LiveKey.History -> channelDao.pagingHistory(profileId, ids)
             LiveKey.Catchup -> if (playlist) channelDao.pagingCatchupOriginal(ids) else channelDao.pagingCatchup(ids)
@@ -56,7 +56,7 @@ fun livePagingSource(
         }
     } else {
         when (key) {
-            LiveKey.All -> channelDao.searchAll(query, ids)
+            LiveKey.All, LiveKey.Continue -> channelDao.searchAll(query, ids)
             LiveKey.Favorites -> channelDao.searchFavorites(query, profileId, ids)
             LiveKey.History -> channelDao.searchHistory(query, profileId, ids)
             LiveKey.Catchup -> channelDao.searchCatchup(query, ids)
@@ -82,7 +82,7 @@ fun liveCountFlow(
     val ids = sourceIds.ifEmpty { listOf(-1L) }
     val sealed = sealedCats.toList()
     return when (key) {
-        LiveKey.All -> if (hiddenCats.isEmpty()) channelDao.countAll(ids) else channelDao.countAllExcluding(ids, hiddenCats.toList())
+        LiveKey.All, LiveKey.Continue -> if (hiddenCats.isEmpty()) channelDao.countAll(ids) else channelDao.countAllExcluding(ids, hiddenCats.toList())
         LiveKey.Favorites -> if (sealed.isEmpty()) channelDao.countFavorites(profileId, ids)
             else channelDao.countFavoritesExcluding(profileId, ids, sealed)
         LiveKey.History -> if (sealed.isEmpty()) channelDao.countHistory(profileId, ids)
