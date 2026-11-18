@@ -64,6 +64,19 @@ object TimeshiftRules {
     fun reconnectDelayMs(attempt: Int): Long = (1_000L shl (attempt - 1).coerceIn(0, 3))
 
     /**
+     * Times a first connection refused because the account's session is still counted (`458`, or the
+     * `407` some panels' front hosts answer) is tried again, after [reconnectDelayMs] each: 1 + 2 + 4 s,
+     * inside the tune's wait for first data. Measured on a panel that refused a woken copy this way for
+     * ~8 s after the app came back from Home; refusing the copy at once also refused the direct open.
+     */
+    const val SESSION_LIMIT_RETRIES = 3
+
+    /** Whether a failure's text is the panel's "one session" refusal (see [SESSION_LIMIT_RETRIES]). */
+    fun isSessionLimit(why: String): Boolean = SESSION_LIMIT_RX.containsMatchIn(why)
+
+    private val SESSION_LIMIT_RX = Regex("""\b(407|458|460)\b""")
+
+    /**
      * The device has no network (the provider's name cannot be looked up, or there is no route), as
      * opposed to a provider that drops the stream. Such a failure does not spend the reconnect budget:
      * the buffer waits the outage out, as the live engines do, instead of giving the channel up.

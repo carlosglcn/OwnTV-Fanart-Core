@@ -58,4 +58,14 @@ class TimeshiftRulesTest {
         assertFalse(TimeshiftRules.isOffline(java.net.ConnectException("Connection refused")))
         assertFalse(TimeshiftRules.isOffline(java.io.IOException("unexpected end of stream")))
     }
+
+    @Test
+    fun `a first connection refused for a session still in use is worth waiting for`() {
+        assertTrue(TimeshiftRules.isSessionLimit("Received HTTP_PROXY_AUTH (407) code while not using proxy"))
+        assertTrue(TimeshiftRules.isSessionLimit("HTTP 458"))
+        assertTrue(TimeshiftRules.isSessionLimit("HTTP 460"))
+        assertFalse(TimeshiftRules.isSessionLimit("HTTP 404"))
+        assertFalse(TimeshiftRules.isSessionLimit("HTTP 403"))
+        assertFalse(TimeshiftRules.isSessionLimit("timeout after 4580ms"))
+    }
 }

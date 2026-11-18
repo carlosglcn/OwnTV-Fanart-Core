@@ -37,4 +37,26 @@ class VideoQualityTest {
         assertNull(VideoQuality.mpvTrack(tracks, cap = null, pick = null))
         assertNull(VideoQuality.mpvTrack(listOf(1 to 1080, 2 to 0), cap = 720, pick = null))
     }
+
+    // HDR 2160 (1), SDR 2160 (2), SDR 1080 (3), HDR 1080 (4) — "Prefer SDR" allows 2 and 3.
+    private val mixed = listOf(1 to 2160, 2 to 2160, 3 to 1080, 4 to 1080)
+
+    @Test
+    fun `with SDR allowed, a choice is always made inside it, even with no limit or pick`() {
+        assertEquals(2, VideoQuality.mpvTrackWithin(mixed, allowed = setOf(2, 3), cap = null, pick = null))
+        assertEquals(3, VideoQuality.mpvTrackWithin(mixed, allowed = setOf(2, 3), cap = 1080, pick = null))
+        assertEquals(3, VideoQuality.mpvTrackWithin(mixed, allowed = setOf(2, 3), cap = null, pick = 1080))
+    }
+
+    @Test
+    fun `one SDR track among HDR ones is still chosen`() {
+        assertEquals(3, VideoQuality.mpvTrackWithin(mixed, allowed = setOf(3), cap = null, pick = null))
+    }
+
+    @Test
+    fun `nothing allowed, or everything allowed, is the plain choice`() {
+        assertNull(VideoQuality.mpvTrackWithin(mixed, allowed = null, cap = null, pick = null))
+        assertNull(VideoQuality.mpvTrackWithin(mixed, allowed = setOf(1, 2, 3, 4), cap = null, pick = null))
+        assertEquals(3, VideoQuality.mpvTrackWithin(mixed, allowed = setOf(9), cap = 1080, pick = null))
+    }
 }

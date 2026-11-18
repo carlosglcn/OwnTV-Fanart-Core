@@ -85,10 +85,22 @@ class PlaybackEngines(
         }
     }
 
+    /**
+     * The television's live tuner, assigned by the screen that owns it and cleared when that goes. It hears
+     * of Home here, in the same call that stops the engines, so a tune still opening cannot start one again
+     * behind the launcher — and it brings back the full-screen channel it was driving.
+     */
+    var liveTuner: LiveTuneController? = null
+
     /** Television: Home / screensaver / another app. Every engine remembers what it had and frees it. */
     fun onAppBackgrounded() {
+        // First, so no ladder step is left to restart an engine stopped below.
+        val tunerReturns = liveTuner?.onHidden() == true
         player.onAppBackgrounded()
         livePreview.onAppBackgrounded()
+        // The tuner opens its channel again itself, through its ladder and its saved copy; the engine's own
+        // restore would open it a second time, bare.
+        if (tunerReturns) livePreview.discardBackgroundRestore()
         pool.onAppBackgrounded()
         heroPreview?.stop()
     }
@@ -98,6 +110,7 @@ class PlaybackEngines(
         player.onAppForegrounded()
         livePreview.onAppForegrounded()
         pool.onAppForegrounded()
+        liveTuner?.onVisible()
     }
 
     /**
@@ -108,6 +121,7 @@ class PlaybackEngines(
         player.discardBackgroundRestore()
         livePreview.discardBackgroundRestore()
         pool.discardBackgroundRestore()
+        liveTuner?.discardBackgroundRestore()
     }
 
     companion object {

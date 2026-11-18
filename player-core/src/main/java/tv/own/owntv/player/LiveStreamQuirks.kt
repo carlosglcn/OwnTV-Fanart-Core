@@ -1,14 +1,20 @@
 package tv.own.owntv.player
 
 import java.util.concurrent.ConcurrentHashMap
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 /**
  * Per-provider live-stream quirks learned at runtime, shared by both engines.
  *
- * Everything here is **in-memory for the session only** — so a provider that fixes its panel is back
- * to stock behaviour after the next app start. Keyed by `host:port` so a
- * lesson learned on one channel applies immediately to every other channel of the same panel
- * (these faults are panel-wide, not per-channel).
+ * Keyed by `host:port` so a lesson learned on one channel applies immediately to every other channel of
+ * the same panel (these faults are panel-wide, not per-channel). The panel-wide lessons listed in
+ * [ProviderLessons] are also **kept across app starts for up to a week** ([startPersisting]), so the first
+ * tune after a restart goes straight to the path that works instead of paying for the failure again.
+ * Everything else here is in-memory for the session only.
  *
  * Three quirks are tracked:
  *
@@ -68,9 +74,13 @@ object LiveStreamQuirks {
      * twenty seconds with zero dropped frames, then burned all eight reconnects on `407` in six
      * seconds and gave up. The stream was never the problem: the previous socket had not finished
      * closing. Waiting once is the answer here exactly as it is for `458`.
+     *
+     * `460` is the same answer from another panel family: an empty `text/html` body from a Cloudflare
+     * front, measured for about a minute after a phone lost its network mid-play, until the panel let go
+     * of the connection the outage had killed.
      */
     fun isSessionLimit(responseCode: Int): Boolean =
-        responseCode == 458 || responseCode == PlayerErrors.HTTP_PROXY_AUTH
+        responseCode == 458 || responseCode == 460 || responseCode == PlayerErrors.HTTP_PROXY_AUTH
 
     /**
      * Statuses a WAF uses to refuse a request on *who is asking* rather than what was asked for — worth
@@ -132,7 +142,80 @@ object LiveStreamQuirks {
     private val tolerantDemuxStreams = urlLessonSet()
     private val prerollDefeatedStreams = urlLessonSet()
     private val softwareArchiveHosts = ConcurrentHashMap.newKeySet<String>()
+    private val uaBlockingHosts = ConcurrentHashMap.newKeySet<String>()
+    private val untrustedCertificateHosts = ConcurrentHashMap.newKeySet<String>()
     private val providerMessages = ConcurrentHashMap<String, Pair<Int, String>>()
+
+    // --- kept across app starts ---------------------------------------------------------------------
+
+    /** When each panel-wide lesson held now was first learned (wall clock), for its expiry. */
+    private val learnedAt = ConcurrentHashMap<ProviderLessons.Lesson, Long>()
+
+    private fun hostSet(kind: ProviderLessons.Kind): MutableSet<String> = when (kind) {
+        ProviderLessons.Kind.HLS_REDIRECT -> hlsRedirectHosts
+        ProviderLessons.Kind.DASH_REDIRECT -> dashRedirectHosts
+        ProviderLessons.Kind.REFUSES_SEGMENTS -> segmentRefusingHosts
+        ProviderLessons.Kind.SINGLE_SESSION -> singleSessionHosts
+        ProviderLessons.Kind.BLOCKS_DEFAULT_UA -> uaBlockingHosts
+        ProviderLessons.Kind.UNTRUSTED_CERTIFICATE -> untrustedCertificateHosts
+    }
+
+    internal var clock: () -> Long = System::currentTimeMillis
+
+    /** Completes once the stored lessons are in; already complete when nothing is stored (tests). */
+    @Volatile private var loaded = CompletableDeferred(Unit)
+
+    /** Writes the current lessons to storage; null when nothing is kept (tests, before start-up). */
+    @Volatile private var saveLessons: (() -> Unit)? = null
+
+    /**
+     * Load the lessons kept by earlier runs, and keep every later change. Called once per process, at
+     * start-up, before anything can tune: [awaitPersisted] holds a tune until the load is done.
+     *
+     * A lesson learned meanwhile is kept, never overwritten by the load; a write waits for the load, so
+     * it cannot replace the stored lessons with this run's alone.
+     */
+    fun startPersisting(scope: CoroutineScope, read: suspend () -> String, write: suspend (String) -> Unit) {
+        val done = CompletableDeferred<Unit>()
+        loaded = done
+        val writing = Mutex()
+        saveLessons = {
+            scope.launch {
+                done.await()
+                // The snapshot is taken under the lock, so the last write always carries the newest set.
+                writing.withLock { runCatching { write(ProviderLessons.encode(learnedAt.toMap())) } }
+            }
+        }
+        scope.launch {
+            try {
+                val stored = runCatching { read() }.getOrDefault("")
+                val kept = ProviderLessons.decode(stored, clock())
+                kept.forEach { (lesson, at) ->
+                    if (learnedAt.putIfAbsent(lesson, at) == null) hostSet(lesson.kind) += lesson.host
+                }
+                if (kept.isNotEmpty()) {
+                    android.util.Log.i("LiveEngine", "provider lessons kept from earlier runs: ${kept.keys.joinToString { "${it.kind.name.lowercase()} ${it.host}" }}")
+                }
+            } finally {
+                done.complete(Unit)
+            }
+        }
+    }
+
+    /** Wait until the lessons kept by earlier runs are loaded (see [startPersisting]). */
+    suspend fun awaitPersisted() = loaded.await()
+
+    private fun learn(kind: ProviderLessons.Kind, url: String) {
+        val host = hostKey(url)
+        if (!hostSet(kind).add(host)) return
+        learnedAt[ProviderLessons.Lesson(kind, host)] = clock()
+        saveLessons?.invoke()
+    }
+
+    private fun forget(kind: ProviderLessons.Kind, host: String) {
+        hostSet(kind) -= host
+        if (learnedAt.remove(ProviderLessons.Lesson(kind, host)) != null) saveLessons?.invoke()
+    }
 
     /**
      * Record that [url] — and, unless its panel is known to be mixed, every channel on its host — serves
@@ -144,8 +227,7 @@ object LiveStreamQuirks {
      */
     fun rememberHlsRedirect(url: String) {
         hlsRedirectStreams += url
-        val key = hostKey(url)
-        if (key !in mixedHlsHosts) hlsRedirectHosts += key
+        if (hostKey(url) !in mixedHlsHosts) learn(ProviderLessons.Kind.HLS_REDIRECT, url)
     }
 
     /** Whether [url] should open as HLS on what was learned: its own redirect, or its panel's. */
@@ -156,12 +238,12 @@ object LiveStreamQuirks {
      * panel serves plain TS on some channels and redirects others to a manifest, and the host-wide lesson
      * is wrong there: drop it and never learn it again this session. Without this one redirecting
      * channel sent every plain one through a failed HLS open and a failed `.m3u8` retry before mpv played
-     * it. The redirecting channels keep their own lesson.
+     * it. The redirecting channels keep their own lesson. The kept copy goes too.
      */
     fun forgetHlsRedirect(url: String) {
         val key = hostKey(url)
         mixedHlsHosts += key
-        hlsRedirectHosts -= key
+        forget(ProviderLessons.Kind.HLS_REDIRECT, key)
         hlsRedirectStreams -= url
     }
 
@@ -242,7 +324,7 @@ object LiveStreamQuirks {
      * without a panel-wide lesson EVERY channel on it pays its own failed progressive attempt and
      * retry before playing.
      */
-    fun rememberDashRedirect(url: String) { dashRedirectHosts += hostKey(url) }
+    fun rememberDashRedirect(url: String) = learn(ProviderLessons.Kind.DASH_REDIRECT, url)
 
     fun isKnownDashHost(url: String): Boolean = hostKey(url) in dashRedirectHosts
 
@@ -313,7 +395,7 @@ object LiveStreamQuirks {
      * straight on mpv instead of repeating ExoPlayer's dead spinner. Panel-wide because the signing
      * scheme is a property of the panel, not of one channel.
      */
-    fun rememberSegmentRefusal(url: String) { segmentRefusingHosts += hostKey(url) }
+    fun rememberSegmentRefusal(url: String) = learn(ProviderLessons.Kind.REFUSES_SEGMENTS, url)
 
     fun refusesSegments(url: String): Boolean = hostKey(url) in segmentRefusingHosts
 
@@ -325,7 +407,7 @@ object LiveStreamQuirks {
      * whole "mpv works but ExoPlayer doesn't" (and the reverse) symptom. Panel-wide, because the limit is
      * on the *account*, not the channel.
      */
-    fun rememberSessionLimit(url: String) { singleSessionHosts += hostKey(url) }
+    fun rememberSessionLimit(url: String) = learn(ProviderLessons.Kind.SINGLE_SESSION, url)
 
     fun isSingleSession(url: String): Boolean = hostKey(url) in singleSessionHosts
 
@@ -450,6 +532,41 @@ object LiveStreamQuirks {
     fun archiveNeedsSoftware(url: String): Boolean = hostKey(url) in softwareArchiveHosts
 
     /**
+     * Record that this panel refuses [tv.own.owntv.core.network.HttpClient.DEFAULT_USER_AGENT], so every
+     * later request to it — either engine, any channel — starts on the fallback identity.
+     *
+     * Panel-wide, because a WAF rule is configured for the site, not per stream. Kept for a week at most
+     * ([ProviderLessons]): a provider that drops the rule is back to the default identity after that,
+     * which matters because the default is the one most panels actually want.
+     *
+     * Only ever recorded when the user has NOT configured a User-Agent for the source. An explicit
+     * setting is the user's decision and is never second-guessed or overwritten.
+     */
+    fun rememberBlocksDefaultUserAgent(url: String) = learn(ProviderLessons.Kind.BLOCKS_DEFAULT_UA, url)
+
+    fun blocksDefaultUserAgent(url: String): Boolean = hostKey(url) in uaBlockingHosts
+
+    /**
+     * Record that ExoPlayer refused this panel's TLS certificate (self-signed, expired, or for another
+     * name), so later tunes of its channels start on mpv, which plays them, instead of failing each
+     * ExoPlayer rung first. Routing only: "ExoPlayer only" still keeps them on ExoPlayer.
+     */
+    fun rememberUntrustedCertificate(url: String) = learn(ProviderLessons.Kind.UNTRUSTED_CERTIFICATE, url)
+
+    fun distrustsCertificate(url: String): Boolean = hostKey(url) in untrustedCertificateHosts
+
+    /**
+     * Whether [error] — anywhere in its cause chain — is the platform refusing the server's certificate,
+     * rather than a TLS failure of the connection itself (a reset during the handshake says nothing about
+     * the certificate, and must not move a panel's channels to the other engine for a week).
+     */
+    fun isUntrustedCertificate(error: Throwable): Boolean = generateSequence(error) { it.cause }.take(16).any {
+        it is java.security.cert.CertificateException ||
+            it is java.security.cert.CertPathValidatorException ||
+            it is javax.net.ssl.SSLPeerUnverifiedException
+    }
+
+    /**
      * Keep the panel's own explanation of a refusal, so an error screen can quote it verbatim.
      *
      * "Channel limit has been reached. Stop one of your active streams before opening a new channel."
@@ -472,9 +589,14 @@ object LiveStreamQuirks {
     /** Test hook — clears everything. */
     internal fun clearForTest() {
         hlsRedirectHosts.clear(); hlsRedirectStreams.clear(); mixedHlsHosts.clear(); segmentRefusingHosts.clear(); singleSessionHosts.clear()
+        dashRedirectHosts.clear()
         brokenTimestampStreams.clear(); softwareArchiveHosts.clear()
         noHlsVariantStreams.clear(); noHlsVariantMpvStreams.clear(); prerollDefeatedStreams.clear()
         tolerantDemuxStreams.clear()
-        providerMessages.clear()
+        uaBlockingHosts.clear(); providerMessages.clear()
+        untrustedCertificateHosts.clear(); learnedAt.clear()
+        saveLessons = null
+        loaded = CompletableDeferred(Unit)
+        clock = System::currentTimeMillis
     }
 }

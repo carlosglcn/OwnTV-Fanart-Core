@@ -318,4 +318,6 @@
     <string name="player_trailer_blocked_title">Dieser Trailer kann nicht in OwnTV abgespielt werden</string>
     <string name="player_trailer_blocked_body">Der Inhaber erlaubt die Wiedergabe nur auf YouTube.</string>
     <string name="player_trailer_open_youtube">In YouTube öffnen</string>
+    <string name="player_lock_screen">Bildschirm sperren</string>
+    <string name="player_hold_to_unlock">Zum Entsperren gedrückt halten</string>
 </resources>

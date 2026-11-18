@@ -358,4 +358,6 @@
     <string name="glcn_cine_paused">En pausa</string>
     <string name="glcn_cine_chapters">Capítulos</string>
     <string name="glcn_cine_chapter_n">Capítulo %1$d</string>
+    <string name="player_lock_screen">Bloquear pantalla</string>
+    <string name="player_hold_to_unlock">Mantén pulsado para desbloquear</string>
 </resources>

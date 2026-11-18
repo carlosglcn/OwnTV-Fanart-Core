@@ -9,6 +9,38 @@
 > in one bolded line of its own (e.g. **Database v46 · Backup v24 · Breaking**). The detail — what,
 > why, files and verification — belongs in the commit message, never here.
 
+## core-1.0.72 — unreleased
+
+**Database v54**
+
+### ✨ New features
+
+- **📅 TV Guide remembers its own category, per profile** (community PR #86 by @Quad-Plex)
+- **🗂️ Favorites and History show their sort as "Newest first" in both apps** (rebuilt from community PR #85 by @Quad-Plex)
+- **🔒 Phone player: screen lock strings in every language**
+- **🌍 Central Kurdish added to the translation catalogue (#82)**
+
+### 🐛 Fixes
+
+- **⏪ Timeshift: leaving a channel while it is still opening no longer leaves its download running**
+- **⏱️ Timeshift: "Give up after" now counts the wait for the saved copy**
+- **▶️ Timeshift: "Resume" on a channel you came back to no longer freezes after half a minute**
+- **🔀 Live TV: the engine button during an automatic switch no longer starts both engines**
+- **🔁 Live TV: the switch back to ExoPlayer after mpv fails is no longer lost on one-connection providers**
+- **🎬 Films: picking another film during a switch to ExoPlayer no longer starts the previous one over it**
+- **🧩 Multiview: a tile with no decoder left shows its message at once**
+- **📡 Live TV on ExoPlayer: a late retry or answer from the previous tune no longer touches the new one**
+- **🔊 mpv: the stereo fallback reloads safely, and a stopped stream can no longer clear its error message**
+- **🏠 Live TV: pressing Home while a channel opens no longer plays it behind the home screen; it comes back on return**
+- **🌐 mpv: a live channel stopped by a network drop resumes by itself when the network returns**
+- **🔁 Live TV: a channel mpv loses mid-play is tried once on ExoPlayer before the error shows**
+- **🧠 Live TV: what the app learns about a provider is kept for a week, so the first channel after a restart opens the right way**
+- **🔒 Live TV: a provider whose certificate ExoPlayer refuses opens on mpv straight away**
+- **⏪ Timeshift: a channel whose provider still counts the previous connection is saved after a short wait instead of dropped**
+- **📶 Live TV on ExoPlayer: after a network drop, a provider still holding the old connection is waited out instead of giving up**
+- **🎬 Films: a film mpv cannot open now switches to ExoPlayer instead of loading forever**
+- **🌈 "Prefer SDR" now also works on mpv**
+
 ## core-1.0.71 — 2026-11-09
 
 ### ✨ New features

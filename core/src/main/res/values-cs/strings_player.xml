@@ -336,4 +336,6 @@
     <string name="player_trailer_blocked_title">Tento trailer nelze v OwnTV přehrát</string>
     <string name="player_trailer_blocked_body">Vlastník povoluje přehrávání pouze na YouTube.</string>
     <string name="player_trailer_open_youtube">Otevřít v YouTube</string>
+    <string name="player_lock_screen">Zamknout obrazovku</string>
+    <string name="player_hold_to_unlock">Podržením odemknete</string>
 </resources>

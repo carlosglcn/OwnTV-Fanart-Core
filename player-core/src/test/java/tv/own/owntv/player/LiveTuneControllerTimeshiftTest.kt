@@ -90,13 +90,13 @@ class LiveTuneControllerTimeshiftTest {
         override suspend fun watchExo(
             channelName: String,
             stillOurs: () -> Boolean,
-            handOver: suspend (String) -> Unit,
+            handOver: suspend (HandOver) -> Unit,
             onOpened: () -> Unit,
             postponeDeadline: (Long) -> Unit,
             log: (String) -> Unit,
         ) {
             val reason = CompletableDeferred<String?>().also { exoWatch = it }.await()
-            if (reason == null) onOpened() else if (stillOurs()) handOver(reason)
+            if (reason == null) onOpened() else if (stillOurs()) handOver(HandOver(reason))
         }
         override fun mpvPlay(url: String, request: LiveRequest) { mpvHasStream = true; log += "mpv:$url" }
         override fun mpvStop() { mpvHasStream = false }
@@ -105,6 +105,7 @@ class LiveTuneControllerTimeshiftTest {
         override suspend fun awaitMpvOutcome(timeoutMs: Long): MpvOutcome? = withTimeoutOrNull(timeoutMs) {
             CompletableDeferred<MpvOutcome>().await()
         }
+        override suspend fun awaitMpvFailure(): String = CompletableDeferred<String>().await()
         override fun setReconnectProvider(provider: ReconnectUrlProvider?) {}
     }
 
@@ -263,6 +264,32 @@ class LiveTuneControllerTimeshiftTest {
         awaitGiveUp(engines) { log -> log.contains("exo:${ch.streamUrl}") }
         assertTrue("previewed on its direct address: ${engines.log}", engines.log.contains("exo:${ch.streamUrl}"))
         assertNull(c.localTimeshift.value)
+    }
+
+    @Test
+    fun `the wait for a saved copy's first data is charged to the Give up after budget`() = runBlocking {
+        // A provider that accepts the connection and never answers: the copy waits, then is refused.
+        val silent = ServerSocket(0)
+        val held = java.util.concurrent.CopyOnWriteArrayList<java.net.Socket>()
+        thread(isDaemon = true) { while (true) held += runCatching { silent.accept() }.getOrNull() ?: break }
+        try {
+            val engines = Engines()
+            val host = object : LiveTuneController.Host by Host() {
+                override suspend fun globalBudgetSecs() = 3
+                override fun nowMs(): Long = System.nanoTime() / 1_000_000
+            }
+            val c = LiveTuneController(scope, engines, host)
+            c.tune(ChannelEntity(id = 60, sourceId = 1, name = "ch60", streamUrl = "http://127.0.0.1:${silent.localPort}/live/60.ts"))
+            // The wait alone outlasts the 3 s budget, so the tune ends as soon as the copy is refused
+            // instead of 3 s after it.
+            val abandoned = { log: List<String> -> log.any { it.endsWith("-abandon") } }
+            awaitGiveUp(engines) { log -> log.any { it.startsWith("exo:") } || abandoned(log) }
+            repeat(30) { if (!abandoned(engines.log.toList())) delay(50) }
+            assertTrue("given up within the budget, not after another one: ${engines.log}", abandoned(engines.log.toList()))
+        } finally {
+            held.forEach { runCatching { it.close() } }
+            silent.close()
+        }
     }
 
     private companion object {

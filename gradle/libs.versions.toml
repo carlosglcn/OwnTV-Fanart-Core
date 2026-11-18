@@ -81,6 +81,9 @@ junitExt = "1.3.0"
 # every instrumentation test crashed before its first line with ClassNotFoundException on
 # AndroidJUnitRunner — the suite has never actually run.
 androidxTestRunner = "1.7.0"
+# Test-only: Android's framework on the JVM, so the player engines (which need a Context, a settings
+# store and Media3's test player) can be driven by unit tests. Never reaches either app.
+robolectric = "4.18.1"
 
 [libraries]
 # glcn: libass for ExoPlayer — ASS/SSA subtitles drawn as made (styles, positions, animation) without leaving Dolby Vision.
@@ -156,6 +159,9 @@ org-json = { group = "org.json", name = "json", version.ref = "orgJson" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitExt" }
 androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+androidx-media3-test-utils = { group = "androidx.media3", name = "media3-test-utils", version.ref = "media3" }
+androidx-media3-test-utils-robolectric = { group = "androidx.media3", name = "media3-test-utils-robolectric", version.ref = "media3" }
 
 [plugins]
 # :core and :player-core are Android libraries, not applications.

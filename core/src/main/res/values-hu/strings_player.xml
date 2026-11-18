@@ -318,4 +318,6 @@
     <string name="player_trailer_blocked_title">Ez az előzetes nem játszható le az OwnTV-ben</string>
     <string name="player_trailer_blocked_body">A tulajdonosa csak a YouTube-on engedi a lejátszást.</string>
     <string name="player_trailer_open_youtube">Megnyitás a YouTube-on</string>
+    <string name="player_lock_screen">Képernyő zárolása</string>
+    <string name="player_hold_to_unlock">Tartsa lenyomva a feloldáshoz</string>
 </resources>

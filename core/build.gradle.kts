@@ -26,6 +26,8 @@ android {
         minSdk = 26
         consumerProguardFiles("consumer-rules.pro")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // Core's own version, for state that must not outlive the core that wrote it (provider lessons).
+        buildConfigField("String", "CORE_VERSION", "\"${project.version}\"")
     }
 
     buildFeatures {

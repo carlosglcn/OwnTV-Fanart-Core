@@ -327,4 +327,6 @@
     <string name="player_trailer_blocked_title">Este tráiler no se puede reproducir en OwnTV</string>
     <string name="player_trailer_blocked_body">Su propietario solo permite reproducirlo en YouTube.</string>
     <string name="player_trailer_open_youtube">Abrir en YouTube</string>
+    <string name="player_lock_screen">Bloquear pantalla</string>
+    <string name="player_hold_to_unlock">Mantén presionado para desbloquear</string>
 </resources>

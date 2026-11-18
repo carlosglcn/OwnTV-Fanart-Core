@@ -630,4 +630,8 @@
     <string name="glcn_cine_paused">Paused</string>
     <string name="glcn_cine_chapters">Chapters</string>
     <string name="glcn_cine_chapter_n">Chapter %1$d</string>
+    <!-- Translators: Phone player, button in the top bar: locks the screen so touches do nothing until it is unlocked (for watching in bed or handing the phone to a child). -->
+    <string name="player_lock_screen">Lock screen</string>
+    <!-- Translators: Phone player, a small pill shown when the locked screen is tapped: press and hold it to unlock. -->
+    <string name="player_hold_to_unlock">Hold to unlock</string>
 </resources>

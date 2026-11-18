@@ -318,4 +318,6 @@
     <string name="player_trailer_blocked_title">ഈ ട്രെയിലർ OwnTV-യിൽ പ്ലേ ചെയ്യാനാകില്ല</string>
     <string name="player_trailer_blocked_body">ഉടമ YouTube-ൽ മാത്രം പ്ലേ ചെയ്യാൻ അനുവദിക്കുന്നു.</string>
     <string name="player_trailer_open_youtube">YouTube-ൽ തുറക്കുക</string>
+    <string name="player_lock_screen">സ്ക്രീൻ ലോക്ക് ചെയ്യുക</string>
+    <string name="player_hold_to_unlock">അൺലോക്ക് ചെയ്യാൻ അമർത്തിപ്പിടിക്കുക</string>
 </resources>

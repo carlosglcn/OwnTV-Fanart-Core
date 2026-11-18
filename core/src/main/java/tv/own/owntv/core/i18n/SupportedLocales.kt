@@ -678,6 +678,20 @@ object SupportedLocales {
             pickerVisible = true,
             coverage = 100,
         ),
+        SupportedLocale(
+            id = "ckb",
+            languageTag = "ckb",
+            resourceQualifier = "ckb",
+            weblateCode = "ckb",
+            englishName = "Central Kurdish",
+            endonym = "کوردیی ناوەندی",
+            script = "Arab",
+            rtl = true,
+            tier = 2,
+            packaged = false,
+            pickerVisible = false,
+            coverage = 0,
+        ),
     )
 
     /** Rows the in-app picker may show after explicit catalogue promotion and readiness. */

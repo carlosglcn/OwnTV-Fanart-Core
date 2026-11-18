@@ -309,4 +309,6 @@
     <string name="player_trailer_blocked_title">此预告片无法在 OwnTV 中播放</string>
     <string name="player_trailer_blocked_body">所有者只允许在 YouTube 上播放。</string>
     <string name="player_trailer_open_youtube">在 YouTube 中打开</string>
+    <string name="player_lock_screen">锁定屏幕</string>
+    <string name="player_hold_to_unlock">长按解锁</string>
 </resources>

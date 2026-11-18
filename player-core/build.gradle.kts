@@ -34,6 +34,8 @@ android {
         // Mirrors :app and :core — code under test touches android.util.Log / SystemClock and must
         // get defaults rather than "not mocked" crashes.
         unitTests.isReturnDefaultValues = true
+        // The Robolectric engine tests resolve core's strings (the player's error texts).
+        unitTests.isIncludeAndroidResources = true
     }
 
     compileOptions {
@@ -128,4 +130,7 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.media3.test.utils)
+    testImplementation(libs.androidx.media3.test.utils.robolectric)
 }

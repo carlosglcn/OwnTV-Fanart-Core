@@ -327,4 +327,6 @@
     <string name="player_trailer_blocked_title">Cette bande-annonce ne peut pas être lue dans OwnTV</string>
     <string name="player_trailer_blocked_body">Son propriétaire n’autorise sa lecture que sur YouTube.</string>
     <string name="player_trailer_open_youtube">Ouvrir dans YouTube</string>
+    <string name="player_lock_screen">Verrouiller l’écran</string>
+    <string name="player_hold_to_unlock">Maintenir pour déverrouiller</string>
 </resources>

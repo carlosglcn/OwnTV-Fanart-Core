@@ -167,12 +167,30 @@ class LiveTuneController(
     /** When this controller last stopped ExoPlayer, for [awaitExoRelease]. */
     private var exoStoppedAtMs: Long? = null
 
+    /**
+     * Which tune is in charge. Bumped by everything that ends one — a new tune, the engine button, leaving
+     * full screen, a stop, the app being hidden — and compared after every wait, so a step resuming after
+     * its tune was replaced does nothing. Comparing the channel was not enough: the engine button and the
+     * app's return keep the channel and replace the tune.
+     */
+    private var tuneToken = 0
+
+    /** The app is hidden (television only, see [onHidden]): nothing may open an engine until [onVisible]. */
+    private var hidden = false
+
+    /** The full-screen channel to tune again when the app is visible again. */
+    private var retuneOnVisible: ChannelEntity? = null
+
+    /** This tune has already offered a channel mpv lost after playing to ExoPlayer (see [watchMpv]). */
+    private var mpvHandedBack = false
+
     private var tuneJob: Job? = null
     private var previewJob: Job? = null
     private var exoResolveJob: Job? = null
     private var exoWatchJob: Job? = null
     private var mpvOutcomeJob: Job? = null
     private var mpvHandoffJob: Job? = null
+    private var exoHandoffJob: Job? = null
     private var deadlineJob: Job? = null
 
     // --- Entry points -----------------------------------------------------------------------------
@@ -200,12 +218,22 @@ class LiveTuneController(
     suspend fun start(channel: ChannelEntity, source: SourceEntity?, resolved: String? = null) {
         previewJob?.cancel()
         cancelLadderJobs()
+        val token = ++tuneToken
         current = channel
+        if (hidden) {
+            // A tune asked for behind the launcher (a delayed zap landing): it would play there. The
+            // return tunes it.
+            retuneOnVisible = channel
+            engineLog("tune '${channel.name}' while the app is hidden — it opens on return")
+            return
+        }
         // glcn: the channel's name, logo and an empty set of stream marks go up now. The player's card
         // kept the previous channel's until the new picture arrived — a second or more on a slow box.
         engines.announce(host.meta(channel))
         recall.onWatched(channel)
         _previewBlocked.value = false
+        // What earlier runs learned about the panels decides the route; a tune at launch waits for it.
+        LiveStreamQuirks.awaitPersisted()
         val setting = source?.liveEnginePreference
             ?.let { name -> EnginePreference.entries.firstOrNull { it.name == name } }
             ?: host.globalPreference()
@@ -214,19 +242,22 @@ class LiveTuneController(
             pin = host.enginePin(channel),
             drmProtected = channel.drmConfig != null,
             panelRefusesSegments = panelRefusesSegments(channel, source),
+            untrustedCertificate = panelCertificateUntrusted(channel, source),
         )
         engineLog("tune '${channel.name}' -> ${route.why} [${route.preference.name}]")
+        // "Give up after" counts from here: the wait for a saved copy's first data is part of the tune.
+        val startedAtMs = host.nowMs()
         openTimeshift(channel, source, resolved)
-        arm(channel, source, route.preference)
+        arm(channel, source, route.preference, token, startedAtMs)
         when {
-            route.onMpv -> startOnMpv(channel, source, route.why, resolved = resolved)
+            route.onMpv -> startOnMpv(channel, source, route.why, token, resolved = resolved)
             // The preview already found that ExoPlayer can't open this channel. Promoting it put the
             // preview's error on screen for ~1 s while the ladder moved on to mpv: go there directly.
             previewedChannelId == channel.id && engines.exoFailed -> {
                 engineLog("'${channel.name}' — its ExoPlayer preview had already failed; trying the next engine")
-                advance(channel, source, "the ExoPlayer preview had already failed", aboutFormat = false)
+                advance(channel, source, HandOver("the ExoPlayer preview had already failed"), token, aboutFormat = false)
             }
-            else -> startOnExo(channel, source, resolved)
+            else -> startOnExo(channel, source, token, resolved)
         }
     }
 
@@ -264,12 +295,16 @@ class LiveTuneController(
             if (behindLive()) timeshiftWatchingWallMs()?.let { tsFromIndex = session.pieceAt(it) }
         }
         engineLog("engine toggle '${channel.name}' -> ${if (goToMpv) "mpv" else "exoplayer"}")
+        // An automatic hand-over still inside its release wait would otherwise start its engine after
+        // this one starts the other: two engines on one channel.
+        cancelLadderJobs()
+        val token = ++tuneToken
         launch {
             host.pin(channel, goToMpv)
             val source = host.sourceOf(channel.sourceId)
-            arm(channel, source, EnginePreference.onlyOn(goToMpv))
-            if (goToMpv) startOnMpv(channel, source, "user chose compatibility mode")
-            else switchToExo(channel, source)
+            arm(channel, source, EnginePreference.onlyOn(goToMpv), token)
+            if (goToMpv) startOnMpv(channel, source, "user chose compatibility mode", token)
+            else switchToExo(channel, source, token)
         }
     }
 
@@ -302,6 +337,7 @@ class LiveTuneController(
         }
         previewJob?.cancel()
         previewJob = scope.launch {
+            LiveStreamQuirks.awaitPersisted()
             val source = host.sourceOf(channel.sourceId)
             if (host.needsResolve(source)) {
                 if (exoStalkerCmd == channel.streamUrl && !engines.exoFailed) {
@@ -334,6 +370,7 @@ class LiveTuneController(
      * shows its failure.
      */
     suspend fun playTile(engine: LivePreviewEngine, channel: ChannelEntity, muted: Boolean) {
+        LiveStreamQuirks.awaitPersisted()
         val source = host.sourceOf(channel.sourceId)
         val url = if (host.needsResolve(source)) {
             host.resolve(source!!, channel.streamUrl) ?: return
@@ -351,6 +388,7 @@ class LiveTuneController(
     fun detach() {
         tuneJob?.cancel()
         cancelLadderJobs()
+        tuneToken++
         current = null
         _liveOnExo.value = false
     }
@@ -383,6 +421,7 @@ class LiveTuneController(
     fun releaseForArchive() {
         parkTimeshift()
         cancelLadderJobs()
+        tuneToken++
         current = null
         _liveOnExo.value = false
         stopExo()
@@ -394,6 +433,51 @@ class LiveTuneController(
         releaseForArchive()
         engines.mpvStop()
         host.timeshift?.watching(null)
+    }
+
+    /**
+     * Television: the app is hidden (Home, the screensaver, the set switched off) and [PlaybackEngines] is
+     * freeing every engine. The tune in flight and every ladder job stand down — left running, a watcher
+     * that saw its engine stop would climb to the next rung and start it behind the launcher. A full-screen
+     * channel stays [current] and its saved copy is parked, so [onVisible] opens it again (and offers
+     * Resume). Returns whether there is such a channel: its engine then needs no restore of its own.
+     */
+    fun onHidden(): Boolean {
+        if (!hidden) {
+            hidden = true
+            tuneJob?.cancel()
+            previewJob?.cancel()
+            cancelLadderJobs()
+            tuneToken++
+            retuneOnVisible = current
+            current?.let { channel ->
+                parkTimeshift()
+                engineLog("app hidden — '${channel.name}' stopped, it opens again on return")
+            }
+        }
+        return retuneOnVisible != null
+    }
+
+    /**
+     * Television: visible again, after the relock check — a channel it sealed was stopped, which cleared
+     * [current], so it does not come back. Tunes the full-screen channel [onHidden] left, at its live edge
+     * or its saved copy.
+     */
+    fun onVisible() {
+        if (!hidden) return
+        hidden = false
+        val channel = retuneOnVisible ?: return
+        retuneOnVisible = null
+        if (current?.id != channel.id) return
+        host.onBackToLiveEdge()
+        tune(channel)
+    }
+
+    /** Television: forget what [onVisible] would bring back — see [PlaybackEngines.discardBackgroundRestore].
+     *  That caller sends no [onVisible] (the app never left the screen), so the hidden state ends here too. */
+    fun discardBackgroundRestore() {
+        hidden = false
+        retuneOnVisible = null
     }
 
     // --- Local timeshift ---------------------------------------------------------------------
@@ -570,7 +654,8 @@ class LiveTuneController(
         val lostKey = ts?.channelKey
         val channel = current
         clearTimeshift()
-        if (channel != null && (isStillExo(channel) || isStillMpv(channel))) {
+        // Opened again even while the app is hidden: [start] then only remembers it for the return.
+        if (channel != null) {
             engineLog("'${channel.name}' — its saved copy lost the connection ($why); opening it again")
             tune(channel)
             return
@@ -589,7 +674,7 @@ class LiveTuneController(
      * Open [channel] on ExoPlayer and watch it. If ExoPlayer already holds this channel — the preview
      * the user just pressed OK on — it is promoted (unmuted) instead of rebuilt.
      */
-    private suspend fun startOnExo(channel: ChannelEntity, source: SourceEntity?, resolved: String? = null) {
+    private suspend fun startOnExo(channel: ChannelEntity, source: SourceEntity?, token: Int, resolved: String? = null) {
         mpvOutcomeJob?.cancel() // ExoPlayer owns the channel now
         _liveOnExo.value = true
         if (engines.mpvHasStream && singleSessionPanel(channel, source)) {
@@ -597,7 +682,7 @@ class LiveTuneController(
             // the previous channel's socket is the app competing with itself for the only session (458).
             // Wait for mpv to let go first; bounded by mpv's release timeout, and only on such a panel.
             engines.mpvStopAndAwaitRelease()
-            if (!isCurrent(channel)) return // zapped on while mpv released
+            if (!isCurrent(token)) return // zapped on while mpv released
         } else {
             engines.mpvStop() // mpv lets go of the connection and the decoder before ExoPlayer claims either
         }
@@ -613,11 +698,11 @@ class LiveTuneController(
                 engines.exoPlay(local, muted = false, tsRequest ?: request(channel, source))
             }
             host.onEngineStarted()
-            watchExo(channel, source)
+            watchExo(channel, source, token)
             return
         }
         if (host.needsResolve(source)) {
-            startOnExoStalker(channel, source!!, resolved)
+            startOnExoStalker(channel, source!!, token, resolved)
             return
         }
         val url = exoUrlFor(channel, source)
@@ -631,51 +716,51 @@ class LiveTuneController(
             engines.exoPlay(url, muted = false, request(channel, source))
         }
         host.onEngineStarted()
-        watchExo(channel, source)
+        watchExo(channel, source, token)
     }
 
-    private suspend fun startOnExoStalker(channel: ChannelEntity, source: SourceEntity, resolved: String?) {
+    private suspend fun startOnExoStalker(channel: ChannelEntity, source: SourceEntity, token: Int, resolved: String?) {
         if (exoStalkerCmd == channel.streamUrl && resolved == null) {
             engines.exoSetMuted(false) // promote the preview that already holds this command
             setReconnect(channel, source)
             host.onEngineStarted()
-            watchExo(channel, source)
+            watchExo(channel, source, token)
             return
         }
         exoResolveJob?.cancel()
         engines.exoReleaseUhdDecoder()
         if (resolved != null) {
             // Already minted by this tune: start now, so the caller's next line finds the stream there.
-            playExoStalker(channel, source, resolved)
+            playExoStalker(channel, source, token, resolved)
             return
         }
         // Detached: minting is a network call, and a ladder step that got here from a watcher must not
         // die with that watcher when [watchExo] replaces it.
         exoResolveJob = scope.launch {
             val url = host.resolve(source, channel.streamUrl) ?: return@launch
-            if (!isCurrent(channel)) return@launch // zapped away while minting
-            playExoStalker(channel, source, url)
+            if (!isCurrent(token)) return@launch // zapped away while minting
+            playExoStalker(channel, source, token, url)
         }
     }
 
-    private fun playExoStalker(channel: ChannelEntity, source: SourceEntity, url: String) {
+    private fun playExoStalker(channel: ChannelEntity, source: SourceEntity, token: Int, url: String) {
         exoStalkerCmd = channel.streamUrl
         setReconnect(channel, source)
         engines.exoPlay(url, muted = false, request(channel, source))
         host.onEngineStarted()
-        watchExo(channel, source)
+        watchExo(channel, source, token)
     }
 
     /** Put [channel] on ExoPlayer, releasing mpv first when it holds the stream — mpv's stop is
      *  asynchronous, and handing over too early makes the app its own competitor for a session. */
-    private suspend fun switchToExo(channel: ChannelEntity, source: SourceEntity?) {
+    private suspend fun switchToExo(channel: ChannelEntity, source: SourceEntity?, token: Int) {
         host.onBackToLiveEdge()
         if (!_liveOnExo.value) {
             engines.mpvStopAndAwaitRelease()
             delay(OwnTVPlayer.SURFACE_HANDOFF_MS)
-            if (!isCurrent(channel)) return
+            if (!isCurrent(token)) return
         }
-        startOnExo(channel, source)
+        startOnExo(channel, source, token)
     }
 
     /**
@@ -688,6 +773,7 @@ class LiveTuneController(
         channel: ChannelEntity,
         source: SourceEntity?,
         reason: String,
+        token: Int,
         forceTs: Boolean = false,
         resolved: String? = null,
     ) {
@@ -707,7 +793,7 @@ class LiveTuneController(
         exoStalkerCmd = null
         stopExoEngine()
         awaitExoRelease()
-        if (!isCurrent(channel)) {
+        if (!isCurrent(token)) {
             // The only exit that leaves the screen on mpv's surface with nothing loaded. Normal when the
             // user zapped during the release wait; in a support log it tells "abandoned" from "vanished".
             engineLog("mpv handoff for '${channel.name}' abandoned — the channel changed while ExoPlayer released")
@@ -717,7 +803,7 @@ class LiveTuneController(
             setReconnect(null, null)
             engines.mpvPlay(local, tsRequest ?: request(channel, source))
             host.onEngineStarted()
-            watchMpv(channel, source)
+            watchMpv(channel, source, token)
             return
         }
         val stalker = host.needsResolve(source)
@@ -733,11 +819,11 @@ class LiveTuneController(
         // Against the PANEL: the redirect is the provider's, so every later channel starts out knowing.
         if (exoDiscoveredHls) LiveStreamQuirks.rememberHlsRedirect(preferred)
         val url = if (LiveStreamQuirks.isKnownHls(preferred)) LiveStreamQuirks.toHlsUrl(preferred) else preferred
-        if (!isCurrent(channel)) return // zapped away while minting
+        if (!isCurrent(token)) return // zapped away while minting
         setReconnect(if (stalker) channel else null, source)
         engines.mpvPlay(url, request(channel, source))
         host.onEngineStarted()
-        watchMpv(channel, source)
+        watchMpv(channel, source, token)
     }
 
     /**
@@ -762,16 +848,16 @@ class LiveTuneController(
 
     // --- Watchers ---------------------------------------------------------------------------------
 
-    private fun watchExo(channel: ChannelEntity, source: SourceEntity?) {
+    private fun watchExo(channel: ChannelEntity, source: SourceEntity?, token: Int) {
         exoWatchJob?.cancel()
         exoWatchJob = scope.launch {
             engines.watchExo(
                 channelName = channel.name,
                 // A watchdog outlives the tune that armed it; firing after that would stop a stream
                 // nobody complained about.
-                stillOurs = { isStillExo(channel) },
+                stillOurs = { isStillExo(token) },
                 // Into the ladder rather than straight to mpv: the ladder decides what "next" means.
-                handOver = { reason -> advance(channel, source, reason) },
+                handOver = { reason -> advance(channel, source, reason, token) },
                 onOpened = ::standDownAlarm,
                 // A provider back-off is a wait OwnTV agreed to; it is not charged to the budget.
                 postponeDeadline = { ladder.postponeDeadline(it) },
@@ -780,36 +866,57 @@ class LiveTuneController(
         }
     }
 
-    /** mpv runs its own retry and format ladder first, so its deadline is looser than ExoPlayer's. */
-    private fun watchMpv(channel: ChannelEntity, source: SourceEntity?) {
+    /**
+     * mpv runs its own retry and format ladder first, so its deadline is looser than ExoPlayer's.
+     *
+     * After the channel opens, the watch goes on: once mpv's own reconnects are spent it puts its error on
+     * screen and stays there, while ExoPlayer — allowed, and never tried — might still play it. That
+     * channel is offered to ExoPlayer once per tune, with a fresh budget (the opening one is long spent by
+     * then), as ExoPlayer's own after-opening watchdog hands its failures to mpv.
+     */
+    private fun watchMpv(channel: ChannelEntity, source: SourceEntity?, token: Int) {
         mpvOutcomeJob?.cancel()
         mpvOutcomeJob = scope.launch {
             val outcome = engines.awaitMpvOutcome(MPV_OPEN_TIMEOUT_MS)
-            if (!isStillMpv(channel)) return@launch
+            if (!isStillMpv(token)) return@launch
             val reason = when {
-                outcome == null -> "mpv never opened it (${MPV_OPEN_TIMEOUT_MS / 1000}s, no picture and no error)"
+                outcome == null -> HandOver("mpv never opened it (${MPV_OPEN_TIMEOUT_MS / 1000}s, no picture and no error)")
                 outcome.opened -> {
                     engineLog("'${channel.name}' opened on mpv")
                     standDownAlarm()
+                    val failure = engines.awaitMpvFailure()
+                    if (!isStillMpv(token) || mpvHandedBack || !ladder.hasUntried(onMpv = false)) return@launch
+                    mpvHandedBack = true
+                    ladder.restartDeadline(host.nowMs(), armedBudgetMs)
+                    // Not about the format: the stream played, so the other engine goes first.
+                    advance(channel, source, HandOver("mpv lost it after playing: $failure"), token, aboutFormat = false)
                     return@launch
                 }
-                else -> "mpv couldn't play it: ${outcome.error}"
+                else -> HandOver.engineError("mpv couldn't play it", outcome.error)
             }
-            advance(channel, source, reason)
+            advance(channel, source, reason, token)
         }
     }
 
     // --- The ladder -------------------------------------------------------------------------------
 
-    private suspend fun arm(channel: ChannelEntity, source: SourceEntity?, preference: EnginePreference) {
+    private suspend fun arm(
+        channel: ChannelEntity,
+        source: SourceEntity?,
+        preference: EnginePreference,
+        token: Int,
+        /** When this tune began, so time already spent on it is charged to the budget. */
+        startedAtMs: Long = host.nowMs(),
+    ) {
         forceTsFor = null
+        mpvHandedBack = false
         val secs = SourceOverrides.liveTuneTimeoutSecsOf(source) ?: host.globalBudgetSecs()
         armedBudgetMs = if (secs <= 0) LiveLadder.NO_BUDGET else secs * 1000L
-        ladder.arm(channel.streamUrl, preference, budgetMs = armedBudgetMs, nowMs = host.nowMs()) {
+        ladder.arm(channel.streamUrl, preference, budgetMs = armedBudgetMs, nowMs = startedAtMs) {
             // A saved copy is one address; the ladder is only the two engines.
             ts == null && hasHlsAlternative(channel, source)
         }
-        startAlarm(channel)
+        startAlarm(channel, token)
     }
 
     /**
@@ -818,7 +925,7 @@ class LiveTuneController(
      * otherwise run to 59 s. The deadline is re-read on each pass, so a postponement moves the alarm.
      * A channel that opens stands the alarm down — later stalls belong to the watchdogs.
      */
-    private fun startAlarm(channel: ChannelEntity) {
+    private fun startAlarm(channel: ChannelEntity, token: Int) {
         deadlineJob?.cancel()
         deadlineJob = scope.launch {
             while (ladder.owns(channel.streamUrl)) {
@@ -829,7 +936,7 @@ class LiveTuneController(
             // Both gates matter: the ladder can still own a channel the user walked away from, and this
             // alarm stops an engine — on mpv's side the shared player, which may be showing a film.
             if (!ladder.owns(channel.streamUrl)) return@launch
-            if (!isStillExo(channel) && !isStillMpv(channel)) return@launch
+            if (!isCurrent(token)) return@launch
             val detail = "no picture within ${armedBudgetMs / 1000}s of tuning"
             engineLog("'${channel.name}' — giving up: $detail")
             host.recordLadderEvent(_liveOnExo.value, PlayerFailureReason.LIVE_NO_FALLBACK, "'${channel.name}': $detail")
@@ -837,6 +944,7 @@ class LiveTuneController(
             exoResolveJob?.cancel()
             mpvOutcomeJob?.cancel()
             mpvHandoffJob?.cancel()
+            exoHandoffJob?.cancel()
             abandon(channel, detail)
         }
     }
@@ -854,11 +962,13 @@ class LiveTuneController(
     private suspend fun advance(
         channel: ChannelEntity,
         source: SourceEntity?,
-        reason: String,
+        handOver: HandOver,
+        token: Int,
         /** Whether the failure says anything about the stream's format; by default, unless it was a refusal. */
-        aboutFormat: Boolean = !isRequestRefusal(reason),
+        aboutFormat: Boolean = !handOver.refused,
     ) {
-        if (!ladder.owns(channel.streamUrl)) return // a newer tune owns the ladder now
+        val reason = handOver.text
+        if (!isCurrent(token) || !ladder.owns(channel.streamUrl)) return // a newer tune owns the ladder now
         val nowMs = host.nowMs()
         // ExoPlayer played this channel, then found its content unplayable (not a connection problem).
         // The opening budget is long spent by then, which would refuse mpv, the engine most likely to
@@ -907,10 +1017,14 @@ class LiveTuneController(
             // handoff cancels those watchers the moment it takes over — run inline it would cancel itself
             // at its first suspension point: mpv's surface up, mpv never asked to load, a black screen.
             mpvHandoffJob?.cancel()
-            mpvHandoffJob = scope.launch { startOnMpv(channel, source, reason, forceTs = !next.isHls) }
+            mpvHandoffJob = scope.launch { startOnMpv(channel, source, reason, token, forceTs = !next.isHls) }
         } else {
             forceTsFor = if (next.isHls) null else channel.streamUrl
-            switchToExo(channel, source)
+            // Detached for the same reason: ExoPlayer taking over cancels mpv's watcher, and on a
+            // one-connection panel it then waits for mpv's release — inside that watcher it would be
+            // cancelled there, with ExoPlayer never asked to play.
+            exoHandoffJob?.cancel()
+            exoHandoffJob = scope.launch { switchToExo(channel, source, token) }
         }
     }
 
@@ -926,16 +1040,18 @@ class LiveTuneController(
         exoWatchJob?.cancel()
         mpvOutcomeJob?.cancel()
         mpvHandoffJob?.cancel()
+        exoHandoffJob?.cancel()
         deadlineJob?.cancel()
     }
 
     // --- Small helpers ----------------------------------------------------------------------------
 
-    private fun isCurrent(channel: ChannelEntity): Boolean = current?.id == channel.id
+    /** The tune [token] was taken for is still the one in charge (see [tuneToken]). */
+    private fun isCurrent(token: Int): Boolean = token == tuneToken
 
-    private fun isStillExo(channel: ChannelEntity): Boolean = _liveOnExo.value && isCurrent(channel)
+    private fun isStillExo(token: Int): Boolean = _liveOnExo.value && isCurrent(token)
 
-    private fun isStillMpv(channel: ChannelEntity): Boolean = !_liveOnExo.value && isCurrent(channel)
+    private fun isStillMpv(token: Int): Boolean = !_liveOnExo.value && isCurrent(token)
 
     /** The panel allows one stream at a time: it said so at sync (`max_connections = 1`) or was caught
      *  refusing a second session this run. */
@@ -967,8 +1083,8 @@ class LiveTuneController(
     private fun panelRefusesSegments(channel: ChannelEntity, source: SourceEntity?): Boolean =
         !host.needsResolve(source) && LiveStreamQuirks.refusesSegments(channel.playStreamUrl(source))
 
-    private fun isRequestRefusal(reason: String): Boolean =
-        PlayerErrors.httpStatusIn(reason)?.let { LiveStreamQuirks.isRequestRefusal(it) } == true
+    private fun panelCertificateUntrusted(channel: ChannelEntity, source: SourceEntity?): Boolean =
+        !host.needsResolve(source) && LiveStreamQuirks.distrustsCertificate(channel.playStreamUrl(source))
 
     /**
      * Install the Stalker reconnect link on both engines while a Stalker channel plays, so a mid-session
@@ -1097,6 +1213,9 @@ class LiveTuneController(
         /**
          * How long mpv gets to produce a picture before the ladder moves on. Looser than ExoPlayer's:
          * mpv walks its own internal retry and format ladder first.
+         *
+         * With the default "Give up after" (30 s) the tune's alarm ends a silent mpv open before this
+         * does. This bound is the one that acts when the budget is off or set above 35 s.
          */
         const val MPV_OPEN_TIMEOUT_MS = 35_000L
 

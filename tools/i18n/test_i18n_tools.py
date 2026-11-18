@@ -115,6 +115,7 @@ _CATALOGUE_ONLY = [
     _locale("uk", "uk", "uk", "values-uk", tier=2, script="Cyrl", packaged=False, pickerVisible=False),
     _locale("vi", "vi", "vi", "values-vi", tier=2, packaged=False, pickerVisible=False),
     _locale("eu", "eu", "eu", "values-eu", tier=2, packaged=False, pickerVisible=False),
+    _locale("ckb", "ckb", "ckb", "values-ckb", tier=2, script="Arab", rtl=True, packaged=False, pickerVisible=False),
 ]
 _FULL_TIER1.extend(_CATALOGUE_ONLY)
 
@@ -487,7 +488,7 @@ class TestValidateStrings(unittest.TestCase):
         tags = {row["languageTag"] for row in payload["locales"]}
         self.assertNotIn("en-US", tags)
         self.assertNotIn("en-GB", tags)
-        self.assertEqual(len(tags), 43)  # original 24 plus 19 catalogue-only community targets
+        self.assertEqual(len(tags), 44)  # original 24 plus 20 catalogue-only community targets
 
     def test_requested_catalogue_metadata_and_zero_resource_status(self):
         catalogue = json.loads((ROOT / "tools/i18n/locales.json").read_text())
@@ -511,6 +512,7 @@ class TestValidateStrings(unittest.TestCase):
             "uk": ("uk", "uk", "uk", "Ukrainian", "Українська", "Cyrl", False),
             "vi": ("vi", "vi", "vi", "Vietnamese", "Tiếng Việt", "Latn", False),
             "eu": ("eu", "eu", "eu", "Basque", "Euskara", "Latn", False),
+            "ckb": ("ckb", "ckb", "ckb", "Central Kurdish", "کوردیی ناوەندی", "Arab", True),
         }
         by_id = {e["id"]: e for e in catalogue}
         # A catalogue-only language may since have been promoted (tier 1, shipped, with resources).

@@ -16,6 +16,12 @@ sealed interface LiveKey {
     data class Custom(val id: String) : LiveKey
 }
 
+/**
+ * Favorites and History keep their own order in every section — moved items first, then newest added
+ * or last watched — whatever the section's sort is set to, so both apps show the sort as fixed there.
+ */
+val LiveKey.hasFixedOrder: Boolean get() = this == LiveKey.Favorites || this == LiveKey.History
+
 // Persistence for the "remember last category" toggles. Both apps read and write the same stored
 // string, so the encoding lives here: a second copy is a typo away from an app forgetting where the
 // other one left the user. Movies and Series store their selection in the same form.

@@ -879,7 +879,7 @@ class ExoSubtitleEngine(
 
     private val boost = VolumeBoost { android.util.Log.i(TAG, it) }
 
-    /** Called on a ~0.5s tick by [OwnTVPlayer] while active, so the HUD scrubber advances. */
+    /** Called on the player's 1 s tick by [OwnTVPlayer] while active, so the HUD scrubber advances. */
     fun emitPositionDuration() {
         val p = player ?: return
         val dur = p.duration.let { if (it == C.TIME_UNSET) 0L else it }

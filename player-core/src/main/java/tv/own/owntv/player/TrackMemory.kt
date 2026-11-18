@@ -67,3 +67,58 @@ internal object TrackMemory {
         return track?.let { SubtitleAction.Select(it) } ?: SubtitleAction.None
     }
 }
+
+/**
+ * One load's remembered track languages, the same on both engines. Each half is applied once, when both
+ * the answer from the database and that kind's track list are in — whichever arrives last does it. A pick
+ * by the user closes that half too, so a database answer arriving after it cannot undo it.
+ */
+internal class TrackRecall(val key: String) {
+    private var loaded = false
+    private var audio: String? = null
+    private var sub: String? = null
+    var audioDone = false
+    private var subDone = false
+
+    /** The database answered (or the "original language" stood in for it). */
+    fun load(audio: String?, sub: String?) {
+        this.audio = audio
+        this.sub = sub
+        loaded = true
+    }
+
+    /** Apply whichever half is ready. [allowImage]: see [TrackMemory.subtitleAction]. */
+    fun apply(
+        audioTracks: List<TrackOption>,
+        subTracks: List<TrackOption>,
+        allowImage: Boolean,
+        selectAudio: (Int) -> Unit,
+        subtitlesOff: () -> Unit,
+        selectSubtitle: (Int) -> Unit,
+    ) {
+        if (!loaded) return
+        if (!audioDone && audioTracks.isNotEmpty()) {
+            audioDone = true
+            TrackMemory.audioToSelect(audioTracks, audio)?.let { selectAudio(it.mpvId) }
+        }
+        if (!subDone && subTracks.isNotEmpty()) {
+            subDone = true
+            when (val action = TrackMemory.subtitleAction(subTracks, sub, allowImage)) {
+                TrackMemory.SubtitleAction.None -> Unit
+                TrackMemory.SubtitleAction.Off -> subtitlesOff()
+                is TrackMemory.SubtitleAction.Select -> selectSubtitle(action.track.mpvId)
+            }
+        }
+    }
+
+    /**
+     * The user picked a track: that half is closed. Returns the language to store, or null when the track
+     * has none. A picked audio language is also what an engine switch later in this load re-applies.
+     */
+    fun picked(isAudio: Boolean, lang: String?): String? {
+        if (isAudio) audioDone = true else subDone = true
+        if (lang.isNullOrBlank()) return null
+        if (isAudio) audio = lang
+        return lang
+    }
+}

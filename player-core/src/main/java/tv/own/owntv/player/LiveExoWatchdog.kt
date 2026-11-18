@@ -1,5 +1,6 @@
 package tv.own.owntv.player
 
+import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -46,7 +47,7 @@ class LiveExoWatchdog(
      */
     private val stillOurs: () -> Boolean,
     /** Hand the channel to the next rung of the ladder, saying why in words a support log can use. */
-    private val handOver: suspend (reason: String) -> Unit,
+    private val handOver: suspend (HandOver) -> Unit,
     /** The channel produced a picture: the opening budget has been met and its alarm can stand down. */
     private val onOpened: () -> Unit,
     /**
@@ -69,19 +70,25 @@ class LiveExoWatchdog(
         // ExoPlayer never reaches ERROR, while a video track never renders a single frame.
         launch {
             engine.noVideoDetected.first { it }
-            if (stillOurs()) handOver("no video frame rendered (audio plays, no picture)")
+            if (stillOurs()) handOver(HandOver("no video frame rendered (audio plays, no picture)"))
         }
         launch {
             engine.segmentsRefused.first { it }
-            if (stillOurs()) handOver("provider refuses ExoPlayer's signed segment URLs")
+            if (stillOurs()) handOver(HandOver("provider refuses ExoPlayer's signed segment URLs"))
         }
         // glcn: "200 OK" with nothing in it — no point waiting out the opening budget; a moment for a retry, then on.
         launch {
             engine.emptyStream.first { it }
             delay(EMPTY_STREAM_GRACE_MS)
-            if (stillOurs() && engine.state.value != LivePreviewEngine.State.PLAYING) handOver("the server answered with an empty stream")
+            if (stillOurs() && engine.state.value != LivePreviewEngine.State.PLAYING) handOver(HandOver("the server answered with an empty stream"))
         }
+        watchUntilSettled(channelName)
+        // The two listeners above never finish on a healthy channel. Left running they keep this watch
+        // alive after its verdict, and can hand over a channel the ladder has already given up on.
+        coroutineContext.cancelChildren()
+    }
 
+    private suspend fun watchUntilSettled(channelName: String) {
         // Bounded, because "neither" is a real outcome. A pre-buffer is requested silence: 10s of it
         // means the first frame is *supposed* to be ~10s out, so the deadline moves with it or every
         // pre-buffered channel looks stuck.
@@ -96,7 +103,7 @@ class LiveExoWatchdog(
                 }
             }
             if (terminal != null) break
-            if (!stillOurs()) return@coroutineScope
+            if (!stillOurs()) return
             val waits = engine.providerBackOffsSpent
             val waited = engine.providerBackOff.value != null || waits != waitsSeen
             // A decoder rebuild started since the last deadline: the engine is still trying a channel
@@ -113,18 +120,18 @@ class LiveExoWatchdog(
             // simply queued behind a wait we agreed to.
             if (waited) postponeDeadline(openBudgetMs)
         }
-        if (!stillOurs()) return@coroutineScope
+        if (!stillOurs()) return
 
         if (terminal == null) {
-            handOver("ExoPlayer never opened it (${openBudgetMs / 1000}s, no frame and no error)")
-            return@coroutineScope
+            handOver(HandOver("ExoPlayer never opened it (${openBudgetMs / 1000}s, no frame and no error)"))
+            return
         }
         if (terminal == LivePreviewEngine.State.ERROR) {
             // onPlayerError assigns the state before the detail, and a collector can resume inline on
             // Dispatchers.Main.immediate — so yield first, or the detail is always read as null.
             yield()
-            handOver("ExoPlayer error before first frame: ${engine.errorInfo.value?.raw ?: engine.error.value}")
-            return@coroutineScope
+            handOver(HandOver.engineError("ExoPlayer error before first frame", engineDetail()))
+            return
         }
 
         // One unconditional line per tune saying whether ExoPlayer ever opened it. Without this a
@@ -134,14 +141,14 @@ class LiveExoWatchdog(
         onOpened()
         // Give the track list a moment to settle, then route silent streams to the other engine.
         delay(TRACK_SETTLE_MS)
-        if (!stillOurs()) return@coroutineScope
+        if (!stillOurs()) return
         if (engine.audioUnsupported.value) {
-            handOver("no decodable audio track")
-            return@coroutineScope
+            handOver(HandOver("no decodable audio track"))
+            return
         }
         if (engine.videoUnsupported.value && !engine.audioOnly.value) {
-            handOver("no decoder on this device for the video track (audio plays, no picture)")
-            return@coroutineScope
+            handOver(HandOver("no decoder on this device for the video track (audio plays, no picture)"))
+            return
         }
         watchAfterFirstFrame(channelName)
     }
@@ -187,9 +194,9 @@ class LiveExoWatchdog(
             if (recovered == LivePreviewEngine.State.IDLE) return
             yield() // let onPlayerError finish assigning the detail (see the ERROR branch above)
             val reason = if (left == LivePreviewEngine.State.ERROR || recovered != null) {
-                "ExoPlayer gave up mid-stream: ${engine.errorInfo.value?.raw ?: engine.error.value}"
+                HandOver.engineError("ExoPlayer gave up mid-stream", engineDetail())
             } else {
-                "played, then stalled for ${STALL_HANDOFF_MS / 1000}s without recovering"
+                HandOver("played, then stalled for ${STALL_HANDOFF_MS / 1000}s without recovering")
             }
             handOver(reason)
             // Handed over, but with nowhere to go ExoPlayer kept the channel and is still reconnecting.
@@ -201,11 +208,14 @@ class LiveExoWatchdog(
             if (settled == LivePreviewEngine.State.PLAYING) continue
             if (settled == LivePreviewEngine.State.ERROR && engine.contentBroken) {
                 yield() // see the ERROR branch above
-                handOver("ExoPlayer can't play this stream's content: ${engine.errorInfo.value?.raw ?: engine.error.value}")
+                handOver(HandOver.engineError("ExoPlayer can't play this stream's content", engineDetail()))
             }
             return
         }
     }
+
+    /** The engine's own words for its failure: the raw error when it has one, else the typed failure. */
+    private fun engineDetail(): String? = engine.errorInfo.value?.raw ?: engine.error.value?.toString()
 
     companion object {
         /**

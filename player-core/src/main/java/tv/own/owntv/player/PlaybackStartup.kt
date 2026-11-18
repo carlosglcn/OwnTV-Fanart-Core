@@ -21,6 +21,9 @@ import tv.own.owntv.core.timeshift.TimeshiftStorage
 object PlaybackStartup {
 
     fun start(context: Context, scope: CoroutineScope, settings: SettingsRepository) {
+        // What earlier runs learned about providers' panels. First, so a tune at launch finds it loading.
+        val lessons = tv.own.owntv.core.player.ProviderLessonStore(context)
+        LiveStreamQuirks.startPersisting(scope, read = lessons::read, write = lessons::write)
         // Start reading the engines' settings now, so an engine built later is born with them.
         val snapshot = PlaybackSettings.of(settings)
         // Night mode / volume levelling are read by every ExoPlayer audio processor on every buffer.

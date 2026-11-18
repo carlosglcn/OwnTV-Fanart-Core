@@ -66,17 +66,6 @@ interface PlaybackPrefsDao {
         sourceId = tv.own.owntv.core.player.sourceIdOfPinKey(contentKey),
     )
 
-    /** v44: every row written before its `sourceId` column existed learns it from its key. */
-    @Query(
-        "UPDATE playback_prefs SET sourceId = CAST(substr(contentKey, 1, instr(contentKey, ':') - 1) AS INTEGER) " +
-            "WHERE sourceId = -1 AND contentKey GLOB '[0-9]*:*'",
-    )
-    suspend fun fillSourceIds()
-
-    /** The per-item audio delays written before v44, oldest first, for the move to `playback_quirks`. */
-    @Query("SELECT * FROM playback_prefs WHERE audioDelayMs IS NOT NULL ORDER BY updatedAt ASC")
-    suspend fun legacyAudioDelays(): List<PlaybackPrefsEntity>
-
     /** A deleted playlist takes every profile's zoom, volume and track memory for its items with it. */
     @Query("DELETE FROM playback_prefs WHERE sourceId = :sourceId")
     suspend fun deleteBySource(sourceId: Long)
@@ -98,12 +87,8 @@ interface PlaybackPrefsDao {
     @Query("UPDATE playback_prefs SET volumeBoost = NULL")
     suspend fun clearVolumeColumn()
 
-    /** v44: the delays now live in `playback_quirks`; this column is emptied as they move. */
-    @Query("UPDATE playback_prefs SET audioDelayMs = NULL")
-    suspend fun clearAudioDelayColumn()
-
     @Query(
-        "DELETE FROM playback_prefs WHERE zoomMode IS NULL AND volumeBoost IS NULL AND audioDelayMs IS NULL " +
+        "DELETE FROM playback_prefs WHERE zoomMode IS NULL AND volumeBoost IS NULL " +
             "AND audioLang IS NULL AND subtitleLang IS NULL",
     )
     suspend fun dropEmptyRows()

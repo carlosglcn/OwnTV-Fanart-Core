@@ -66,6 +66,21 @@ object VideoQuality {
         val limit = cap ?: return null
         return (sized.filter { it.second <= limit }.maxByOrNull { it.second } ?: sized.minByOrNull { it.second })?.first
     }
+
+    /**
+     * [mpvTrack] kept to the [allowed] tracks ("Prefer SDR": the SDR variants of a stream that has both).
+     * Inside them a track is always chosen — the tallest within [cap] when nothing narrower applies —
+     * because mpv's own choice may be one outside them. Null [allowed], or one that matches none or all of
+     * [tracks], is the plain [mpvTrack].
+     */
+    fun mpvTrackWithin(tracks: List<Pair<Int, Int>>, allowed: Set<Int>?, cap: Int?, pick: Int?): Int? {
+        val pool = allowed?.let { a -> tracks.filter { it.first in a } }
+            ?.takeIf { it.isNotEmpty() && it.size < tracks.size }
+            ?: return mpvTrack(tracks, cap, pick)
+        mpvTrack(pool, cap, pick)?.let { return it }
+        val limit = cap ?: Int.MAX_VALUE
+        return (pool.filter { it.second <= limit }.maxByOrNull { it.second } ?: pool.minByOrNull { it.second })?.first
+    }
 }
 
 /**

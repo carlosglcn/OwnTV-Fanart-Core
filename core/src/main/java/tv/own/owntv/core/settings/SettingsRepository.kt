@@ -695,14 +695,19 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val LIVE_SHOW_CATCHUP_RAIL = booleanPreferencesKey("live_show_catchup_rail")
         val LAST_MOVIES_CATEGORY = stringPreferencesKey("last_movies_category")
         val LAST_SERIES_CATEGORY = stringPreferencesKey("last_series_category")
+        // The TV Guide's own list. Separate from LAST_LIVE_CATEGORY: the Guide is a section of its own and
+        // keeps its own choice unless "TV Guide follows Live TV" is on.
+        val LAST_GUIDE_CATEGORY = stringPreferencesKey("last_guide_category")
         val GUIDE_FOLLOWS_LIVE_CATEGORY = booleanPreferencesKey("guide_follows_live_category")
 
         /**
-         * Written while browsing, so kept in their own store rather than the settings file. These four
+         * Written while browsing, so kept in their own store rather than the settings file. These five
          * are the values the whole device shared; each profile now keeps its own copy beside them
          * (see profilePositionFlow), and these are read only by a profile that has none yet.
          */
-        val POSITIONS: List<Preferences.Key<*>> = listOf(LAST_LIVE_CHANNEL, LAST_LIVE_CATEGORY, LAST_MOVIES_CATEGORY, LAST_SERIES_CATEGORY)
+        val POSITIONS: List<Preferences.Key<*>> = listOf(
+            LAST_LIVE_CHANNEL, LAST_LIVE_CATEGORY, LAST_MOVIES_CATEGORY, LAST_SERIES_CATEGORY, LAST_GUIDE_CATEGORY,
+        )
         // Background picture (Glass & background). bg_image_path holds the absolute path of the image we
         // COPIED into app-private storage (so a USB unplug or source-folder delete never blanks it);
         // blank = no background (feature off, panels stay solid). glass_scope is Glass on (any bit set,
@@ -876,9 +881,12 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     suspend fun setLastMoviesCategory(key: String) = setProfilePosition(Keys.LAST_MOVIES_CATEGORY, key)
     val lastSeriesCategory: Flow<String> = profilePositionFlow(Keys.LAST_SERIES_CATEGORY).map { it ?: "" }
     suspend fun setLastSeriesCategory(key: String) = setProfilePosition(Keys.LAST_SERIES_CATEGORY, key)
+    val lastGuideCategory: Flow<String> = profilePositionFlow(Keys.LAST_GUIDE_CATEGORY).map { it ?: "" }
+    suspend fun setLastGuideCategory(key: String) = setProfilePosition(Keys.LAST_GUIDE_CATEGORY, key)
 
-    // --- "TV Guide follows Live TV's category" (default off: the Guide keeps a category of its own). On,
-    //     the Guide opens on Live TV's remembered category and a category picked there becomes it. ---
+    // --- "TV Guide follows Live TV's category" (default off: the Guide keeps a category of its own,
+    //     remembered per profile like Live TV's). On, the Guide opens on Live TV's remembered category
+    //     and a category picked there becomes it, so the two screens always share one list. ---
     val guideFollowsLiveCategory: Flow<Boolean> = prefsFlow { it[Keys.GUIDE_FOLLOWS_LIVE_CATEGORY] ?: false }
     suspend fun setGuideFollowsLiveCategory(enabled: Boolean) {
         context.dataStore.edit { it[Keys.GUIDE_FOLLOWS_LIVE_CATEGORY] = enabled }
@@ -3593,7 +3601,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
      * it is a Room channel id, so there is nothing here worth carrying.
      */
     private val backupLastCategoryKeys = listOf(
-        Keys.LAST_LIVE_CATEGORY, Keys.LAST_MOVIES_CATEGORY, Keys.LAST_SERIES_CATEGORY,
+        Keys.LAST_LIVE_CATEGORY, Keys.LAST_MOVIES_CATEGORY, Keys.LAST_SERIES_CATEGORY, Keys.LAST_GUIDE_CATEGORY,
     )
 
     private fun isPortableCategoryKey(value: String): Boolean =

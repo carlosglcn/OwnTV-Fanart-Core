@@ -40,6 +40,8 @@ class LiveTuneControllerTest {
         var mpvWatch: CompletableDeferred<MpvOutcome>? = null
         /** Set before the watch opens to fail the channel later, after it has played. */
         var exoLaterFailure: CompletableDeferred<String>? = null
+        /** mpv's release wait runs out with the stream still held (a core stuck in a network read). */
+        var mpvReleaseTimesOut = false
 
         override fun exoPlay(url: String, muted: Boolean, request: LiveRequest) {
             exoUrl = url
@@ -54,15 +56,15 @@ class LiveTuneControllerTest {
         override suspend fun watchExo(
             channelName: String,
             stillOurs: () -> Boolean,
-            handOver: suspend (String) -> Unit,
+            handOver: suspend (HandOver) -> Unit,
             onOpened: () -> Unit,
             postponeDeadline: (Long) -> Unit,
             log: (String) -> Unit,
         ) {
             val d = CompletableDeferred<String?>().also { exoWatch = it }
             val reason = d.await()
-            if (reason == null) onOpened() else if (stillOurs()) handOver(reason)
-            if (reason == null) exoLaterFailure?.let { val r = it.await(); if (stillOurs()) handOver(r) }
+            if (reason == null) onOpened() else if (stillOurs()) handOver(HandOver(reason))
+            if (reason == null) exoLaterFailure?.let { val r = it.await(); if (stillOurs()) handOver(HandOver(r)) }
         }
 
         override fun mpvPlay(url: String, request: LiveRequest) {
@@ -74,6 +76,7 @@ class LiveTuneControllerTest {
             mpvHasStream = false
         }
         override suspend fun mpvStopAndAwaitRelease() {
+            if (mpvReleaseTimesOut) { delay(1_500); return }
             if (mpvHasStream) order += "mpv-released"
             mpvHasStream = false
         }
@@ -82,6 +85,10 @@ class LiveTuneControllerTest {
             val d = CompletableDeferred<MpvOutcome>().also { mpvWatch = it }
             return withTimeoutOrNull(timeoutMs) { d.await() }
         }
+        /** Complete to make mpv fail for good after it opened. */
+        var mpvLaterFailure: CompletableDeferred<String>? = null
+        override suspend fun awaitMpvFailure(): String =
+            CompletableDeferred<String>().also { mpvLaterFailure = it }.await()
         override fun setReconnectProvider(provider: ReconnectUrlProvider?) {}
     }
 
@@ -308,6 +315,41 @@ class LiveTuneControllerTest {
     }
 
     @Test
+    fun `the engine button during an automatic hand-over to mpv leaves only ExoPlayer playing`() = runTest {
+        val engines = FakeEngines()
+        val c = controller(engines, FakeHost(this))
+        c.tune(channel(13))
+        runCurrent()
+        engines.exoWatch!!.complete("boom")
+        runCurrent() // the hand-over to mpv is now waiting for ExoPlayer's decoder
+        assertFalse(c.liveOnExo.value)
+        c.toggleEngine() // reads "on mpv", so it goes back to ExoPlayer
+        advanceTimeBy(5_000)
+        assertTrue(c.liveOnExo.value)
+        assertFalse("the hand-over it replaced must never reach mpv", engines.log.any { it.startsWith("mpv:") })
+        assertEquals(2, engines.log.count { it.startsWith("exo:") })
+    }
+
+    @Test
+    fun `ExoPlayer still gets the channel after mpv fails on a one-session panel that is slow to release`() = runTest {
+        LiveStreamQuirks.clearForTest()
+        try {
+            val engines = FakeEngines().apply { mpvReleaseTimesOut = true }
+            LiveStreamQuirks.rememberSessionLimit(channel(22).streamUrl)
+            val host = FakeHost(this).apply { preference = EnginePreference.MPV_FIRST; budgetSecs = 0 }
+            val c = controller(engines, host)
+            c.tune(channel(22))
+            runCurrent()
+            engines.mpvWatch!!.complete(MpvOutcome(opened = false, error = "nope"))
+            advanceTimeBy(10_000)
+            assertTrue(c.liveOnExo.value)
+            assertTrue("ExoPlayer must be asked to play: ${engines.log}", engines.log.contains("exo:${channel(22).streamUrl}"))
+        } finally {
+            LiveStreamQuirks.clearForTest()
+        }
+    }
+
+    @Test
     fun `a tune on mpv with nothing on ExoPlayer does not wait for a decoder`() = runTest {
         val engines = FakeEngines()
         val host = FakeHost(this).apply { preference = EnginePreference.MPV_FIRST }
@@ -355,6 +397,135 @@ class LiveTuneControllerTest {
             c.tune(channel(20))
             runCurrent()
             assertEquals(listOf("mpv-released", "exo-open"), engines.order)
+        } finally {
+            LiveStreamQuirks.clearForTest()
+        }
+    }
+
+    @Test
+    fun `hiding the app while a channel opens starts no engine, and the return tunes it again`() = runTest {
+        val engines = FakeEngines()
+        val host = FakeHost(this).apply { budgetSecs = 10 }
+        val c = controller(engines, host)
+        c.tune(channel(30))
+        runCurrent()
+        val watch = engines.exoWatch!!
+        assertTrue("a full-screen channel is brought back by the tuner", c.onHidden())
+        engines.exoStop() // the engines free themselves in the same call
+        watch.complete("ExoPlayer never opened it")
+        advanceTimeBy(60_000)
+        assertEquals("nothing may start behind the launcher", listOf("exo:${channel(30).streamUrl}"), engines.log)
+        assertTrue(host.events.isEmpty())
+        c.onVisible()
+        runCurrent()
+        assertEquals(2, engines.log.count { it == "exo:${channel(30).streamUrl}" })
+        assertTrue(c.liveOnExo.value)
+    }
+
+    @Test
+    fun `hiding the app during a hand-over to mpv keeps mpv closed`() = runTest {
+        val engines = FakeEngines()
+        val c = controller(engines, FakeHost(this))
+        c.tune(channel(31))
+        runCurrent()
+        engines.exoWatch!!.complete("boom")
+        runCurrent() // the hand-over to mpv is waiting for ExoPlayer's decoder
+        c.onHidden()
+        advanceTimeBy(5_000)
+        assertFalse(engines.log.any { it.startsWith("mpv:") })
+    }
+
+    @Test
+    fun `a tune asked for while the app is hidden opens only on return`() = runTest {
+        val engines = FakeEngines()
+        val c = controller(engines, FakeHost(this))
+        assertFalse("nothing full screen, nothing to bring back", c.onHidden())
+        c.tune(channel(32))
+        advanceTimeBy(5_000)
+        assertTrue(engines.log.isEmpty())
+        c.onVisible()
+        runCurrent()
+        assertEquals(listOf("exo:${channel(32).streamUrl}"), engines.log)
+    }
+
+    @Test
+    fun `a channel stopped while the app is hidden does not come back`() = runTest {
+        val engines = FakeEngines()
+        val c = controller(engines, FakeHost(this))
+        c.tune(channel(33))
+        runCurrent()
+        c.onHidden()
+        c.stop() // the relock check sealed its category
+        c.onVisible()
+        advanceTimeBy(5_000)
+        assertEquals(1, engines.log.count { it.startsWith("exo:") })
+    }
+
+    @Test
+    fun `the profile gate's discard ends the hidden state`() = runTest {
+        val engines = FakeEngines()
+        val c = controller(engines, FakeHost(this))
+        c.tune(channel(34))
+        runCurrent()
+        c.stop()
+        c.onHidden()
+        c.discardBackgroundRestore()
+        c.tune(channel(35))
+        runCurrent()
+        assertEquals("exo:${channel(35).streamUrl}", engines.log.last())
+    }
+
+    @Test
+    fun `mpv losing a channel after playing offers it to ExoPlayer exactly once`() = runTest {
+        val engines = FakeEngines()
+        val host = FakeHost(this).apply { preference = EnginePreference.MPV_FIRST; budgetSecs = 10 }
+        val c = controller(engines, host)
+        c.tune(channel(36))
+        runCurrent()
+        engines.mpvWatch!!.complete(MpvOutcome(opened = true, error = null))
+        advanceTimeBy(60_000) // long past the opening budget
+        engines.mpvLaterFailure!!.complete("LostConnection")
+        advanceTimeBy(OwnTVPlayer.SURFACE_HANDOFF_MS + 1)
+        assertTrue(c.liveOnExo.value)
+        assertEquals(1, engines.log.count { it.startsWith("exo:") })
+        engines.exoWatch!!.complete("ExoPlayer never opened it")
+        advanceTimeBy(5_000)
+        // Nothing left to try: ExoPlayer's failure stays on screen, with no second trip to mpv.
+        assertEquals("exo-abandon", engines.log.last())
+        assertEquals(1, engines.log.count { it.startsWith("exo:") })
+        assertEquals(1, engines.log.count { it.startsWith("mpv:") })
+    }
+
+    @Test
+    fun `mpv losing a channel the user put on mpv only stays on its error`() = runTest {
+        val engines = FakeEngines()
+        val host = FakeHost(this).apply { preference = EnginePreference.MPV_ONLY }
+        val c = controller(engines, host)
+        c.tune(channel(37))
+        runCurrent()
+        engines.mpvWatch!!.complete(MpvOutcome(opened = true, error = null))
+        runCurrent()
+        engines.mpvLaterFailure!!.complete("LostConnection")
+        advanceTimeBy(5_000)
+        assertFalse(engines.log.any { it.startsWith("exo:") })
+        assertTrue(host.events.isEmpty())
+    }
+
+    @Test
+    fun `a panel whose certificate ExoPlayer refused in an earlier run opens on mpv, once the lessons are loaded`() = runTest {
+        LiveStreamQuirks.clearForTest()
+        try {
+            val stored = CompletableDeferred<String>()
+            LiveStreamQuirks.startPersisting(backgroundScope, read = { stored.await() }, write = {})
+            val engines = FakeEngines()
+            val c = controller(engines, FakeHost(this))
+            c.tune(channel(40))
+            advanceTimeBy(1_000)
+            assertTrue("nothing opens before the lessons are in", engines.log.isEmpty())
+            val host = LiveStreamQuirks.hostKey(channel(40).streamUrl)
+            stored.complete("UNTRUSTED_CERTIFICATE\t$host\t${System.currentTimeMillis()}")
+            runCurrent()
+            assertEquals(listOf("mpv:${channel(40).streamUrl}"), engines.log)
         } finally {
             LiveStreamQuirks.clearForTest()
         }

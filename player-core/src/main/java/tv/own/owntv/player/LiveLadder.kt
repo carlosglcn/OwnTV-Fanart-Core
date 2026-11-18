@@ -56,6 +56,9 @@ class LiveLadder {
 
     fun isSpent(rung: Rung): Boolean = rung in spent
 
+    /** Whether this tune still has an untried rung on mpv ([onMpv]) or on ExoPlayer. */
+    fun hasUntried(onMpv: Boolean): Boolean = order.any { it.onMpv == onMpv && it !in spent }
+
     /**
      * Reset the ladder for a fresh tune of [streamUrl]. Rungs already climbed are forgotten — a new tune
      * is a new chance, including for a channel that ended the last one on its final rung.

@@ -318,4 +318,6 @@
     <string name="player_trailer_blocked_title">Bu fragman OwnTV’de oynatılamıyor</string>
     <string name="player_trailer_blocked_body">Sahibi yalnızca YouTube’da oynatılmasına izin veriyor.</string>
     <string name="player_trailer_open_youtube">YouTube’da aç</string>
+    <string name="player_lock_screen">Ekranı kilitle</string>
+    <string name="player_hold_to_unlock">Kilidi açmak için basılı tutun</string>
 </resources>

@@ -39,6 +39,27 @@ object SdrVariants {
         return sdr.takeIf { hdr && it.isNotEmpty() }
     }
 
+    /**
+     * mpv lists every variant of an HLS stream as its own video track and reports the variant's `BANDWIDTH`
+     * as the track's `hls-bitrate`; [bitrates] is that, by track id. The SDR tracks of a stream that also has
+     * HDR ones, or null when there is nothing to keep (one kind only, or no track matches).
+     */
+    fun sdrTrackIds(playlist: String, bitrates: Map<Int, Long>): Set<Int>? {
+        val sdr = HashSet<Long>()
+        var hdr = false
+        for (raw in playlist.lineSequence()) {
+            val line = raw.trim()
+            if (!line.startsWith("#EXT-X-STREAM-INF:")) continue
+            if (RANGE.find(line)?.groupValues?.get(1)?.uppercase() in HDR_RANGES) {
+                hdr = true
+            } else {
+                BANDWIDTH.find(line)?.groupValues?.get(1)?.toLongOrNull()?.let { sdr += it }
+            }
+        }
+        if (!hdr) return null
+        return bitrates.filterValues { it in sdr }.keys.takeIf { it.isNotEmpty() }
+    }
+
     /** Media3's own parsers, with the HDR variants dropped from a stream that has both while [preferSdr]. */
     @UnstableApi
     class ParserFactory(private val preferSdr: () -> Boolean) : HlsPlaylistParserFactory {
@@ -70,5 +91,7 @@ object SdrVariants {
     }
 
     private val RANGE = Regex("VIDEO-RANGE=\"?([A-Za-z]+)")
+    /** `BANDWIDTH=`, not the `AVERAGE-BANDWIDTH=` beside it. */
+    private val BANDWIDTH = Regex("(?<![A-Z-])BANDWIDTH=(\\d+)")
     private val HDR_RANGES = setOf("PQ", "HLG")
 }

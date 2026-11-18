@@ -43,6 +43,28 @@ class SdrVariantsTest {
         assertNull(SdrVariants.sdrUris("#EXTM3U\n#EXT-X-TARGETDURATION:6\n#EXTINF:6,\nseg1.ts\n"))
     }
 
+    // --- mpv: its video tracks carry the variant's BANDWIDTH as `hls-bitrate` ---------------------
+
+    @Test
+    fun `mpv's SDR tracks are the ones whose bitrate is an SDR variant's`() {
+        val tracks = mapOf(1 to 20_000_000L, 2 to 18_000_000L, 3 to 12_000_000L, 4 to 5_000_000L)
+        assertEquals(setOf(3, 4), SdrVariants.sdrTrackIds(mixed, tracks))
+    }
+
+    @Test
+    fun `AVERAGE-BANDWIDTH is not read as the variant's bandwidth`() {
+        val text = "#EXTM3U\n" +
+            "#EXT-X-STREAM-INF:AVERAGE-BANDWIDTH=7,BANDWIDTH=9,VIDEO-RANGE=PQ\nh.m3u8\n" +
+            "#EXT-X-STREAM-INF:AVERAGE-BANDWIDTH=9,BANDWIDTH=3,VIDEO-RANGE=SDR\ns.m3u8\n"
+        assertEquals(setOf(2), SdrVariants.sdrTrackIds(text, mapOf(1 to 9L, 2 to 3L)))
+    }
+
+    @Test
+    fun `no match, or a stream with one kind, leaves mpv's tracks alone`() {
+        assertNull(SdrVariants.sdrTrackIds(mixed, mapOf(1 to 1L, 2 to 2L)))
+        assertNull(SdrVariants.sdrTrackIds("#EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=1\na.m3u8\n", mapOf(1 to 1L)))
+    }
+
     @Test
     fun `comments and blank lines between the tag and its address are skipped`() {
         val text = "#EXTM3U\r\n#EXT-X-STREAM-INF:BANDWIDTH=9,VIDEO-RANGE=PQ\r\n\r\n#EXT-X-SOMETHING\r\nh.m3u8\r\n" +

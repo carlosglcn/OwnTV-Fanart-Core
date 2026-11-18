@@ -336,4 +336,6 @@
     <string name="player_trailer_blocked_title">Этот трейлер нельзя воспроизвести в OwnTV</string>
     <string name="player_trailer_blocked_body">Владелец разрешает воспроизведение только на YouTube.</string>
     <string name="player_trailer_open_youtube">Открыть в YouTube</string>
+    <string name="player_lock_screen">Заблокировать экран</string>
+    <string name="player_hold_to_unlock">Удерживайте, чтобы разблокировать</string>
 </resources>
