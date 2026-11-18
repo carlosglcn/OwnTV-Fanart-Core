@@ -347,6 +347,8 @@
     <string name="glcn_cine_dv_converted_fel">Dolby Vision (perfil 7 FEL como 8.1, sin la capa de mejora)</string>
     <string name="glcn_cine_dv_converted_mel">Dolby Vision (perfil 7 MEL como 8.1, sin pérdida)</string>
     <string name="glcn_cine_dv_off">HDR10 (Dolby Vision desactivado en Ajustes)</string>
+    <string name="glcn_cine_dv_profile">Dolby Vision perfil %1$s</string>
+    <string name="glcn_cine_dv_base_only">%1$s (este aparato no decodifica Dolby Vision)</string>
     <string name="glcn_cine_sync_audio">Sincronizar audio</string>
     <string name="glcn_cine_subs_more">Sincronía, buscar y archivo</string>
     <string name="glcn_cine_subs_off">Desactivados</string>

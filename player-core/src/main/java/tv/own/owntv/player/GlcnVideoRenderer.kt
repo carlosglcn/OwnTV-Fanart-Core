@@ -33,6 +33,9 @@ internal class GlcnVideoRenderer(
     private var scratch = ByteArray(0)
     private var failures = 0
     private var reportedLayer: DolbyVisionNow.Layer? = null
+    /** glcn: the current track's profile ("8.1"…), kept for every update of [DolbyVisionNow]. */
+    private var dvProfile: String? = null
+    private var dvTrack: Format? = null
 
     override fun supportsFormat(mediaCodecSelector: MediaCodecSelector, format: Format): Int =
         super.supportsFormat(mediaCodecSelector, DoviProfile7.forDecoder(format))
@@ -49,10 +52,13 @@ internal class GlcnVideoRenderer(
         doviConvert = !doviStrip && f != null && DoviProfile7.shouldConvert(f)
         DoviP7.lastLayer = null
         reportedLayer = null
+        dvTrack = f?.takeIf { it.sampleMimeType == MimeTypes.VIDEO_DOLBY_VISION }
+        dvProfile = dvTrack?.let { DoviProfile7.profileName(it) }
         DolbyVisionNow.set(
             dolbyVision = f?.sampleMimeType == MimeTypes.VIDEO_DOLBY_VISION && !doviStrip,
             converted = doviConvert,
             turnedOff = doviStrip,
+            profile = dvProfile,
         )
         if (doviStrip && f != null) {
             formatHolder.format = DoviProfile7.toBaseLayer(f)
@@ -99,12 +105,25 @@ internal class GlcnVideoRenderer(
         }
     }
 
+    // glcn: the decoder chosen says whether Dolby Vision is really decoded — on a box without a Dolby Vision decoder
+    // Media3 plays profile 8 from its HEVC base layer, and the panel said "Dolby Vision" all the same.
+    override fun onCodecInitialized(name: String, configuration: androidx.media3.exoplayer.mediacodec.MediaCodecAdapter.Configuration, initializedTimestampMs: Long, initializationDurationMs: Long) {
+        super.onCodecInitialized(name, configuration, initializedTimestampMs, initializationDurationMs)
+        val track = dvTrack ?: return
+        if (doviStrip) return
+        val decoderMime = codecInfo?.codecMimeType ?: return
+        if (decoderMime == MimeTypes.VIDEO_DOLBY_VISION) return
+        val base = DoviProfile7.baseName(track)
+        DolbyVisionNow.set(dolbyVision = false, converted = false, profile = dvProfile, base = base)
+        LiveDiagnosticsLog.event("Dolby Vision ${dvProfile ?: track.codecs} without a Dolby Vision decoder ($name): played as $base from the base layer")
+    }
+
     /** Once the first RPU has been read: FEL or MEL, for the player's technical panel and the report. */
     private fun reportLayer() {
         val layer = DoviP7.lastLayer ?: return
         if (layer == reportedLayer) return
         reportedLayer = layer
-        DolbyVisionNow.set(dolbyVision = true, converted = true, layer = layer)
+        DolbyVisionNow.set(dolbyVision = true, converted = true, layer = layer, profile = dvProfile)
         LiveDiagnosticsLog.event("Dolby Vision profile 7 enhancement layer: ${layer.name}")
     }
 
@@ -161,6 +180,34 @@ internal object DoviProfile7 {
 
     fun shouldStrip(f: Format): Boolean = dolbyVisionOff && hasHevcBaseLayer(f)
 
+    /**
+     * glcn: the profile as people name it: "5", "7", and profile 8 with its base layer's kind — "8.1" over HDR10,
+     * "8.4" over HLG, "8.2" over SDR (as the stream's colour info says; plain "8" when it says nothing).
+     */
+    fun profileName(f: Format): String? {
+        val c = f.codecs ?: return null
+        if (c.length < 7) return null
+        val p = c.substring(5, 7).toIntOrNull() ?: return null
+        if (p != 8) return p.toString()
+        return when (f.colorInfo?.colorTransfer) {
+            androidx.media3.common.C.COLOR_TRANSFER_ST2084 -> "8.1"
+            androidx.media3.common.C.COLOR_TRANSFER_HLG -> "8.4"
+            androidx.media3.common.C.COLOR_TRANSFER_SDR -> "8.2"
+            else -> "8"
+        }
+    }
+
+    /** glcn: what a Dolby Vision track's base layer is on its own: "HLG", "SDR" or (most often) "HDR10". */
+    fun baseName(f: Format): String = when (f.colorInfo?.colorTransfer) {
+        androidx.media3.common.C.COLOR_TRANSFER_HLG -> BASE_HLG
+        androidx.media3.common.C.COLOR_TRANSFER_SDR -> BASE_SDR
+        else -> BASE_HDR10
+    }
+
+    private const val BASE_HDR10 = "HDR10"
+    private const val BASE_HLG = "HLG"
+    private const val BASE_SDR = "SDR"
+
     /** The same track described as plain HEVC: any HEVC decoder takes it, and the TV gets the base layer's HDR10. */
     fun toBaseLayer(f: Format): Format =
         f.buildUpon().setSampleMimeType(MimeTypes.VIDEO_H265).setCodecs(null).build()
@@ -196,6 +243,13 @@ object DolbyVisionNow {
         val converted: Boolean = false,
         val layer: DolbyVisionNow.Layer? = null,
         val turnedOff: Boolean = false,
+        /** glcn: the track's Dolby Vision profile as people name it ("5", "7", "8.1", "8.4"); null when not known. */
+        val profile: String? = null,
+        /**
+         * glcn: a Dolby Vision track this device has no Dolby Vision decoder for, played from its plain HEVC base
+         * layer — the TV gets [base] ("HDR10", "HLG", "SDR"), not Dolby Vision.
+         */
+        val base: String? = null,
     ) {
         val fel: Boolean get() = layer == DolbyVisionNow.Layer.FEL
         val mel: Boolean get() = layer == DolbyVisionNow.Layer.MEL
@@ -204,7 +258,10 @@ object DolbyVisionNow {
     private val _state = kotlinx.coroutines.flow.MutableStateFlow(State())
     val state: kotlinx.coroutines.flow.StateFlow<State> = _state
 
-    internal fun set(dolbyVision: Boolean, converted: Boolean, layer: DolbyVisionNow.Layer? = null, turnedOff: Boolean = false) {
-        _state.value = State(dolbyVision, converted, layer, turnedOff)
+    internal fun set(
+        dolbyVision: Boolean, converted: Boolean, layer: DolbyVisionNow.Layer? = null, turnedOff: Boolean = false,
+        profile: String? = null, base: String? = null,
+    ) {
+        _state.value = State(dolbyVision, converted, layer, turnedOff, profile, base)
     }
 }

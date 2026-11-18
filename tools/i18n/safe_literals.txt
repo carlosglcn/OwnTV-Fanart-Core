@@ -7416,11 +7416,19 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	.07
 1	protocol	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	07
 2	protocol	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	08
+1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	8
+1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	8.1
+1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	8.2
+1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	8.4
+1	log	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	Dolby Vision ${dvProfile ?: track.codecs} without a Dolby Vision decoder ($name): played as $base from the base layer
 1	log	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	Dolby Vision (${f.codecs}) turned off in Settings: played as plain HEVC (base layer)
 1	log	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	Dolby Vision profile 7 (${f.codecs}) played as profile 8.1 — enhancement layer dropped, RPU rewritten
 1	log	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	Dolby Vision profile 7 enhancement layer: ${layer.name}
 1	log	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	Dolby Vision rewrite failed: ${e.javaClass.simpleName}: ${e.message}
 1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	GlcnVideoRenderer
+1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	HDR10
+1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	HLG
+1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	SDR
 1	protocol	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	dvh1
 1	protocol	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	dvhe
 1	log	player-core/src/main/java/tv/own/owntv/player/HeroPreviewEngine.kt	Hero preview error: ${error.errorCodeName}
