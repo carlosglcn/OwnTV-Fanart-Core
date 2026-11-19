@@ -57,14 +57,19 @@ internal object TrackMemory {
      * What to do with subtitles. [allowImage] is false where a bitmap subtitle would cost an engine
      * handoff (mpv VOD) or cannot be drawn at all (mpv live) — a remembered choice never triggers that.
      */
-    fun subtitleAction(tracks: List<TrackOption>, choice: String?, allowImage: Boolean): SubtitleAction {
+    fun subtitleAction(tracks: List<TrackOption>, choice: String?, allowImage: Boolean, flavour: String? = null): SubtitleAction {
         if (choice.isNullOrBlank()) return SubtitleAction.None
         if (choice == PlaybackPrefsStore.SUBTITLES_OFF) {
             return if (tracks.any { it.selected }) SubtitleAction.Off else SubtitleAction.None
         }
-        if (tracks.any { it.selected && subtitleLanguageMatches(choice, it.lang) }) return SubtitleAction.None
-        val track = tracks.firstOrNull { subtitleLanguageMatches(choice, it.lang) && (allowImage || !it.image) }
-        return track?.let { SubtitleAction.Select(it) } ?: SubtitleAction.None
+        // glcn: among the tracks in that language, the same kind as the one picked — "Español (completos)" again, not
+        // the forced-only "Español (forzados)" listed first; with no kind known, a full one before a forced one.
+        val want = flavour ?: SubtitleFlavour.FULL
+        val inLang = tracks.filter { subtitleLanguageMatches(choice, it.lang) && (allowImage || !it.image) }
+        val best = inLang.firstOrNull { SubtitleFlavour.of(it.label) == want }
+            ?: inLang.firstOrNull { SubtitleFlavour.of(it.label) != SubtitleFlavour.FORCED } ?: inLang.firstOrNull()
+        if (tracks.any { it.selected && subtitleLanguageMatches(choice, it.lang) && (best == null || it.mpvId == best.mpvId) }) return SubtitleAction.None
+        return best?.let { SubtitleAction.Select(it) } ?: SubtitleAction.None
     }
 }
 
@@ -103,7 +108,7 @@ internal class TrackRecall(val key: String) {
         }
         if (!subDone && subTracks.isNotEmpty()) {
             subDone = true
-            when (val action = TrackMemory.subtitleAction(subTracks, sub, allowImage)) {
+            when (val action = TrackMemory.subtitleAction(subTracks, sub, allowImage, SubtitleFlavour.get(key))) {
                 TrackMemory.SubtitleAction.None -> Unit
                 TrackMemory.SubtitleAction.Off -> subtitlesOff()
                 is TrackMemory.SubtitleAction.Select -> selectSubtitle(action.track.mpvId)
@@ -121,4 +126,37 @@ internal class TrackRecall(val key: String) {
         if (isAudio) audio = lang
         return lang
     }
+}
+
+/**
+ * glcn: which kind of subtitle track was picked for an item or a series — full, forced only, or for the deaf — read
+ * from the track's own name ("Español (completos)", "Spanish Forced", "English SDH"). The language alone is what the
+ * database keeps, and with two tracks in one language the first one (often the forced one) came back every episode.
+ * Kept on this device, by the same key as the remembered languages.
+ */
+object SubtitleFlavour {
+    const val FULL = "full"
+    const val FORCED = "forced"
+    const val SDH = "sdh"
+    private const val PREFS = "glcn_sub_flavour"
+    private val FORCED_WORDS = listOf("forz", "forced", "forcé", "forc", "signs")
+    private val SDH_WORDS = listOf("sdh", "sordos", "hearing", "[cc]", "(cc)", "hi)")
+
+    fun of(label: String?): String {
+        val l = label?.lowercase().orEmpty()
+        return when {
+            FORCED_WORDS.any { it in l } -> FORCED
+            SDH_WORDS.any { it in l } -> SDH
+            else -> FULL
+        }
+    }
+
+    private fun prefs() = runCatching {
+        org.koin.core.context.GlobalContext.get().get<android.content.Context>()
+            .getSharedPreferences(PREFS, android.content.Context.MODE_PRIVATE)
+    }.getOrNull()
+
+    fun get(key: String): String? = prefs()?.getString(key, null)
+
+    fun remember(key: String, label: String?) { prefs()?.edit()?.putString(key, of(label))?.apply() }
 }

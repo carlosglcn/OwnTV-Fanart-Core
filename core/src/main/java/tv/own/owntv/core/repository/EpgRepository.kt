@@ -124,11 +124,32 @@ class EpgRepository(
     private suspend fun guideAheadMs(): Long =
         settings.guideDaysToKeep.first().toLong() * 24 * 60 * 60 * 1000
 
+    /** glcn: live categories hidden by hand in every profile (none when any profile shows them). */
+    private suspend fun hiddenEverywhere(): Set<Long> {
+        val profiles = db.profileDao().getAllOnce()
+        if (profiles.isEmpty()) return emptySet()
+        var keys: Set<String>? = null
+        for (p in profiles) {
+            val h = customize.observe(p.id, MediaType.LIVE).first().hiddenCategories
+            keys = keys?.intersect(h) ?: h
+            if (keys.isEmpty()) return emptySet()
+        }
+        val wanted = keys ?: return emptySet()
+        return db.categoryDao().allOfType(MediaType.LIVE)
+            .filter { tv.own.owntv.core.customize.CustomizeKeys.category(it) in wanted }
+            .mapTo(HashSet()) { it.id }
+    }
+
     private suspend fun neededEpgIds(): Set<String>? {
         val ids = HashSet<String>()
         try {
             // glcn: lower-cased again here — SQL LOWER() leaves non-ASCII capitals ("Á", "Ó") as they are.
-            channelDao.allEpgChannelIds().forEach { ids.add(it.trim().lowercase()) }
+            // glcn: the guide of groups hidden in every profile is not kept — with lists of thousands of channels
+            // in dozens of groups, most of the guide was for channels nobody sees, and it weighed on the Guide, Home
+            // and every list. A group shown again gets its guide on the next refresh.
+            val hidden = hiddenEverywhere()
+            (if (hidden.isEmpty()) channelDao.allEpgChannelIds() else channelDao.epgChannelIdsOutside(hidden.toList()))
+                .forEach { ids.add(it.trim().lowercase()) }
         } catch (c: CancellationException) {
             throw c
         } catch (e: NoProgrammesInWindowException) {

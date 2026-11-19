@@ -100,6 +100,10 @@ interface ChannelDao {
     @Query("SELECT DISTINCT LOWER(TRIM(epgChannelId)) FROM channels WHERE epgChannelId IS NOT NULL AND epgChannelId != ''")
     suspend fun allEpgChannelIds(): List<String>
 
+    /** glcn: as [allEpgChannelIds], leaving out channels in [hiddenCategoryIds] (groups hidden in every profile). */
+    @Query("SELECT DISTINCT LOWER(TRIM(epgChannelId)) FROM channels WHERE epgChannelId IS NOT NULL AND epgChannelId != '' AND (categoryId IS NULL OR categoryId NOT IN (:hiddenCategoryIds))")
+    suspend fun epgChannelIdsOutside(hiddenCategoryIds: List<Long>): List<String>
+
     /**
      * Normalised tvg-ids of this source's channels that currently have **no** guide data at all.
      *

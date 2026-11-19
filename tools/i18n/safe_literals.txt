@@ -1065,6 +1065,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/CategoryDao.kt	JOIN sources ON sources.id = categories.sourceId
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/CategoryDao.kt	ORDER BY sources.createdAt ASC, categories.sortOrder ASC, categories.name ASC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/CategoryDao.kt	SELECT * FROM categories WHERE id = :id
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/CategoryDao.kt	SELECT * FROM categories WHERE mediaType = :type
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/CategoryDao.kt	SELECT * FROM categories WHERE sourceId = :sourceId AND mediaType = :type AND remoteId IN (:remoteIds)
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/CategoryDao.kt	SELECT COUNT(*) FROM categories WHERE sourceId IN (:sourceIds) AND mediaType = :type
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/CategoryDao.kt	SELECT categories.* FROM categories
@@ -1136,6 +1137,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT COUNT(*) FROM watch_history h INNER JOIN channels c ON c.id = h.itemId WHERE h.profileId = :profileId
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT DISTINCT LOWER(TRIM(epgChannelId)) FROM channels
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT DISTINCT LOWER(TRIM(epgChannelId)) FROM channels WHERE epgChannelId IS NOT NULL AND epgChannelId != ''
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT DISTINCT LOWER(TRIM(epgChannelId)) FROM channels WHERE epgChannelId IS NOT NULL AND epgChannelId != '' AND (categoryId IS NULL OR categoryId NOT IN (:hiddenCategoryIds))
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT DISTINCT epgChannelId FROM epg_programmes WHERE sourceId IN (:sourceIds)
 6	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT c.* FROM channels c
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT c.* FROM channels c INNER JOIN favorites f ON f.itemId = c.id AND f.mediaType = 'LIVE'
@@ -8612,6 +8614,19 @@
 1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	spa
 1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	sv
 1	locale	player-core/src/main/java/tv/own/owntv/player/Teletext.kt	swe
+1	technical	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	(cc)
+1	technical	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	[cc]
+1	technical	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	forc
+2	technical	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	forced
+1	technical	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	forcé
+1	technical	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	forz
+1	technical	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	full
+1	technical	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	glcn_sub_flavour
+1	technical	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	hearing
+1	technical	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	hi)
+2	technical	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	sdh
+1	technical	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	signs
+1	technical	player-core/src/main/java/tv/own/owntv/player/TrackMemory.kt	sordos
 1	technical	player-core/src/main/java/tv/own/owntv/player/VideoQuality.kt	video/
 1	log	player-core/src/main/java/tv/own/owntv/player/VolumeBoost.kt	volume boost failed: ${it.javaClass.simpleName}
 1	log	player-core/src/main/java/tv/own/owntv/player/VolumeBoost.kt	volume boost unavailable: ${it.javaClass.simpleName}

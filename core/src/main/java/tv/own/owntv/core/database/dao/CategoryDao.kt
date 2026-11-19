@@ -34,6 +34,10 @@ interface CategoryDao {
     @Query("SELECT * FROM categories WHERE id = :id")
     suspend fun getById(id: Long): CategoryEntity?
 
+    /** glcn: every category of [type], all playlists — to tell which ones each profile hides. */
+    @Query("SELECT * FROM categories WHERE mediaType = :type")
+    suspend fun allOfType(type: MediaType): List<CategoryEntity>
+
     @Query("SELECT COUNT(*) FROM categories WHERE sourceId IN (:sourceIds) AND mediaType = :type")
     fun count(sourceIds: List<Long>, type: MediaType): Flow<Int>
 

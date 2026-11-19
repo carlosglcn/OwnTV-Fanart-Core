@@ -5000,8 +5000,13 @@ class OwnTVPlayer(
 
     /** The user picked a subtitle in the HUD — applied, and remembered by language when it took (v44). */
     fun selectSubtitle(mpvId: Int) {
-        val lang = _subTrackList.value.find { it.mpvId == mpvId }?.lang
-        if (applySubtitleTrack(mpvId)) rememberSubtitleLang(lang)
+        val track = _subTrackList.value.find { it.mpvId == mpvId }
+        val lang = track?.lang
+        if (applySubtitleTrack(mpvId)) {
+            rememberSubtitleLang(lang)
+            // glcn: and which of that language's tracks (full / forced / SDH), so the next episode gets the same one.
+            trackRecall?.key?.let { SubtitleFlavour.remember(it, track?.label) }
+        }
     }
 
     /** False when the track could not be shown (a bitmap subtitle on live), so nothing is remembered. */
