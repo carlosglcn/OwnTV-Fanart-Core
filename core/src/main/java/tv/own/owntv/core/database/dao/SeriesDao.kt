@@ -350,6 +350,26 @@ interface SeriesDao {
     @Query("SELECT s.* " + CONTINUE_SERIES + " AND s.name LIKE '%' || :query || '%' ORDER BY lp.lastAt DESC")
     fun searchContinue(query: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
 
+    /** glcn: the first shows under way, for the "Keep watching" strip above the posters. */
+    @Query("SELECT s.* " + CONTINUE_SERIES + " ORDER BY lp.lastAt DESC LIMIT :limit")
+    fun observeContinue(profileId: Long, sourceIds: List<Long>, limit: Int): Flow<List<SeriesEntity>>
+
+    /** glcn: each show's episode seen last, with where it stopped — the strip's "S2 · E5" and its bar. */
+    @Query(
+        "SELECT e.seriesId AS seriesId, e.id AS episodeId, e.seasonNumber AS season, e.episodeNumber AS episode, " +
+            "p.positionMs AS positionMs, p.durationMs AS durationMs FROM playback_progress p " +
+            "INNER JOIN episodes e ON e.id = p.itemId WHERE p.profileId = :profileId AND p.mediaType = 'EPISODE' " +
+            "AND e.seriesId IN (:seriesIds) ORDER BY p.updatedAt DESC",
+    )
+    suspend fun lastSeenEpisodes(profileId: Long, seriesIds: List<Long>): List<SeenEpisode>
+
+    /** glcn: the episode after season [season], episode [episode] of [seriesId], if any. */
+    @Query(
+        "SELECT * FROM episodes WHERE seriesId = :seriesId AND (seasonNumber > :season OR " +
+            "(seasonNumber = :season AND episodeNumber > :episode)) ORDER BY seasonNumber, episodeNumber LIMIT 1",
+    )
+    suspend fun episodeAfter(seriesId: Long, season: Int, episode: Int): EpisodeEntity?
+
     @Query("SELECT COUNT(*) " + CONTINUE_SERIES + " AND (s.categoryId IS NULL OR s.categoryId NOT IN (:excluded))")
     fun countContinue(profileId: Long, sourceIds: List<Long>, excluded: List<Long>): Flow<Int>
 
@@ -460,3 +480,13 @@ private const val CONTINUE_SERIES =
         "(p2.durationMs > 0 AND p2.positionMs >= p2.durationMs * 0.95 AND EXISTS (SELECT 1 FROM episodes e3 " +
         "WHERE e3.seriesId = s.id AND (e3.seasonNumber > e2.seasonNumber OR " +
         "(e3.seasonNumber = e2.seasonNumber AND e3.episodeNumber > e2.episodeNumber))))))"
+
+/** glcn: a show's episode seen last and where it stopped (see [SeriesDao.lastSeenEpisodes]). */
+data class SeenEpisode(
+    val seriesId: Long,
+    val episodeId: Long,
+    val season: Int,
+    val episode: Int,
+    val positionMs: Long,
+    val durationMs: Long,
+)

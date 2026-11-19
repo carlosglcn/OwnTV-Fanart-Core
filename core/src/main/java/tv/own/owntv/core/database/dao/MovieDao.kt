@@ -327,6 +327,10 @@ interface MovieDao {
     @Query("SELECT m.* " + CONTINUE_MOVIES + " AND m.name LIKE '%' || :query || '%' ORDER BY p.updatedAt DESC")
     fun searchContinue(query: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
 
+    /** glcn: the first films under way, for the "Keep watching" strip above the posters. */
+    @Query("SELECT m.* " + CONTINUE_MOVIES + " ORDER BY p.updatedAt DESC LIMIT :limit")
+    fun observeContinue(profileId: Long, sourceIds: List<Long>, limit: Int): Flow<List<MovieEntity>>
+
     @Query("SELECT COUNT(*) " + CONTINUE_MOVIES + " AND (m.categoryId IS NULL OR m.categoryId NOT IN (:excluded))")
     fun countContinue(profileId: Long, sourceIds: List<Long>, excluded: List<Long>): Flow<Int>
 

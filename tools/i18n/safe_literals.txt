@@ -1411,6 +1411,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	ORDER BY (CASE WHEN o.position IS NULL THEN 1 ELSE 0 END), o.position, f.addedAt DESC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	ORDER BY (CASE WHEN o.position IS NULL THEN 1 ELSE 0 END), o.position, f.addedAt DESC LIMIT :limit
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	ORDER BY p.updatedAt DESC
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	ORDER BY p.updatedAt DESC LIMIT :limit
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	ORDER BY sortOrder ASC, name ASC, id ASC
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	ORDER BY sortOrder ASC, name ASC, id ASC LIMIT :limit
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE categoryId = :categoryId AND name LIKE '%' || :query || '%' ORDER BY addedAt DESC, sortOrder DESC, id DESC
@@ -1451,7 +1452,7 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT id, streamUrl FROM movies WHERE sourceId = :sourceId
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT itemId FROM playback_progress WHERE profileId = :profileId AND mediaType = 'MOVIE' AND itemId IN (:ids) AND durationMs > 0 AND positionMs * 100 >= durationMs * 95
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT itemId FROM watch_history WHERE profileId = :profileId AND mediaType = 'MOVIE' AND itemId IN (:ids)
-2	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT m.*
+3	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT m.*
 7	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT m.* FROM movies m
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT m.* FROM movies m INNER JOIN favorites f ON f.itemId = m.id AND f.mediaType = 'MOVIE'
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT m.* FROM movies m INNER JOIN slots sl ON sl.id = m.id ORDER BY sl.slot, sl.grp, sl.tie
@@ -1590,8 +1591,10 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	(e3.seasonNumber = e2.seasonNumber AND e3.episodeNumber > e2.episodeNumber))))))
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	(p2.durationMs > 0 AND p2.positionMs >= p2.durationMs * 0.95 AND EXISTS (SELECT 1 FROM episodes e3
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	(p2.positionMs >= 10000 AND p2.durationMs > 0 AND p2.positionMs < p2.durationMs * 0.95) OR
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	(seasonNumber = :season AND episodeNumber > :episode)) ORDER BY seasonNumber, episodeNumber LIMIT 1
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	AND (categoryId IS NULL OR categoryId NOT IN (:excludedCategoryIds))
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	AND (s.categoryId IS NULL OR s.categoryId NOT IN (:excluded))
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	AND e.seriesId IN (:seriesIds) ORDER BY p.updatedAt DESC
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	AND e2.seriesId = s.id AND p2.updatedAt = lp.lastAt AND (
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	AND f.mediaType = 'SERIES' AND s.sourceId IN (:sourceIds) AND (s.categoryId IS NULL OR s.categoryId NOT IN (:excluded))
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	AND h.mediaType = 'SERIES' AND s.sourceId IN (:sourceIds) AND (s.categoryId IS NULL OR s.categoryId NOT IN (:excluded))
@@ -1607,7 +1610,7 @@
 2	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	FROM series s
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	FROM series s INNER JOIN (SELECT e.seriesId AS sid, MAX(p.updatedAt) AS lastAt FROM playback_progress p
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	GROUP BY e.seriesId) lp ON lp.sid = s.id
-1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	INNER JOIN episodes e ON e.id = p.itemId WHERE p.profileId = :profileId AND p.mediaType = 'EPISODE'
+2	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	INNER JOIN episodes e ON e.id = p.itemId WHERE p.profileId = :profileId AND p.mediaType = 'EPISODE'
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	INNER JOIN episodes e2 ON e2.id = p2.itemId WHERE p2.profileId = :profileId AND p2.mediaType = 'EPISODE'
 3	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	INNER JOIN favorites f ON f.itemId = s.id AND f.mediaType = 'SERIES'
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	INNER JOIN favorites f ON f.itemId = s.id AND f.mediaType = 'SERIES' AND f.profileId = :profileId
@@ -1617,9 +1620,11 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	ORDER BY (CASE WHEN o.position IS NULL THEN 1 ELSE 0 END), o.position, f.addedAt DESC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	ORDER BY (CASE WHEN o.position IS NULL THEN 1 ELSE 0 END), o.position, f.addedAt DESC LIMIT :limit
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	ORDER BY lp.lastAt DESC
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	ORDER BY lp.lastAt DESC LIMIT :limit
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	ORDER BY sortOrder ASC, name ASC, id ASC
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	ORDER BY sortOrder ASC, name ASC, id ASC LIMIT :limit
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM episodes WHERE id = :id
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM episodes WHERE seriesId = :seriesId AND (seasonNumber > :season OR
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM episodes WHERE seriesId = :seriesId AND remoteId = :remoteId LIMIT 1
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM episodes WHERE seriesId = :seriesId AND seasonNumber = :season AND episodeNumber = :episode LIMIT 1
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM episodes WHERE seriesId = :seriesId ORDER BY seasonNumber ASC, episodeNumber ASC
@@ -1658,12 +1663,13 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT categoryId, COUNT(*) AS itemCount FROM series
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT categoryId, COUNT(*) AS itemCount FROM series WHERE sourceId = :sourceId AND categoryId IS NOT NULL GROUP BY categoryId
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT e.id AS id, e.streamUrl AS streamUrl FROM episodes e
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT e.seriesId AS seriesId, e.id AS episodeId, e.seasonNumber AS season, e.episodeNumber AS episode,
 2	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT id, sourceId, categoryId, name, year, remoteId, sortOrder, canonicalTitle,
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT remoteId FROM series WHERE sourceId = :sourceId AND categoryId = :categoryId AND remoteId IS NOT NULL
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT remoteId FROM series WHERE sourceId = :sourceId AND categoryId IN (:categoryIds) AND remoteId IS NOT NULL
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT remoteId FROM series WHERE sourceId = :sourceId AND remoteId IS NOT NULL
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT remoteId, id, contentHash, sortOrder FROM series WHERE sourceId = :sourceId AND remoteId IS NOT NULL
-2	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT s.*
+3	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT s.*
 4	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT s.* FROM series s
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT s.* FROM series s INNER JOIN favorites f ON f.itemId = s.id AND f.mediaType = 'SERIES'
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT s.* FROM series s INNER JOIN slots sl ON sl.id = s.id ORDER BY sl.slot, sl.grp, sl.tie
@@ -1693,6 +1699,7 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	WHERE sourceId = :sourceId AND titleSignature IN (:titleSignatures)
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	WHERE sourceId IN (:sourceIds) AND categoryId IS NOT NULL GROUP BY categoryId
 2	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	WITH base AS (SELECT s.id AS id, s.sortOrder AS so, s.name AS nm, 0 AS mp, o.position AS pos
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	p.positionMs AS positionMs, p.durationMs AS durationMs FROM playback_progress p
 2	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	slots AS (SELECT id, pos - (ROW_NUMBER() OVER (ORDER BY pos, id) - 1) AS slot, 0 AS grp, pos AS tie FROM base WHERE pos IS NOT NULL
 2	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	titleSignature, parsedYear, providerLanguage, qualityRank, advertisedCapabilities FROM series
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesSortOrderDao.kt	AND seriesId NOT IN (SELECT id FROM series)
