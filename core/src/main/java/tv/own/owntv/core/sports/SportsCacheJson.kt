@@ -225,6 +225,7 @@ internal object SportsCacheJson {
     private fun team(t: Team) = JSONObject()
         .put("id", t.id).put("n", t.name).put("sn", t.shortName).put("ab", t.abbreviation)
         .putOpt("lo", t.location).putOpt("img", t.logoUrl).put("at", t.isAthlete).putOpt("co", t.country)
+        .putOpt("c1", t.color).putOpt("c2", t.altColor)
 
     private fun team(o: JSONObject) = Team(
         id = o.getString("id"),
@@ -235,6 +236,8 @@ internal object SportsCacheJson {
         logoUrl = o.optStringOrNull("img"),
         isAthlete = o.optBoolean("at"),
         country = o.optStringOrNull("co"),
+        color = o.optStringOrNull("c1"),
+        altColor = o.optStringOrNull("c2"),
     )
 
     private fun event(e: MatchEvent) = JSONObject()

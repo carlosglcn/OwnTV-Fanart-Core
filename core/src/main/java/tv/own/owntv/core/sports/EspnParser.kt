@@ -384,7 +384,12 @@ internal object EspnParser {
         abbreviation = EspnNameFixes.abbreviation(t.optString("displayName"), t.optString("abbreviation")),
         location = t.optString("location").takeIf { it.isNotEmpty() },
         logoUrl = logo(t.optString("logo").ifEmpty { t.optJSONArray("logos")?.optJSONObject(0)?.optString("href").orEmpty() }),
+        color = hex(t.optString("color")),
+        altColor = hex(t.optString("alternateColor")),
     )
+
+    /** glcn: a colour as ESPN writes it — six hex digits, with or without a #; anything else is no colour. */
+    private fun hex(s: String): String? = s.trim().removePrefix("#").takeIf { it.length == HEX_LENGTH && it.all { c -> c.isDigit() || c.lowercaseChar() in 'a'..'f' } }
 
     private fun athlete(a: JSONObject, fallbackId: String, sport: Sport? = null): Team {
         val name = a.optString("displayName")
@@ -592,3 +597,5 @@ internal object EspnParser {
 
 /** glcn: how much of a live session's order is kept (a full F1 or IndyCar field). */
 private const val LIVE_ORDER_MAX = 30
+
+private const val HEX_LENGTH = 6

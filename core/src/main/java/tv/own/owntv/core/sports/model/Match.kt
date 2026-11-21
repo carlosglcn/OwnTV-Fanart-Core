@@ -16,6 +16,9 @@ data class Team(
     val logoUrl: String? = null,
     val isAthlete: Boolean = false,
     val country: String? = null,
+    /** glcn: the side's own colours as its feed gives them ("004d98", no #): the first and the second. */
+    val color: String? = null,
+    val altColor: String? = null,
 )
 
 /** One period's score: a quarter's points, a set's games (with the tie-break points when one was played). */
