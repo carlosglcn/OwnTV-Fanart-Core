@@ -112,6 +112,7 @@
     <string name="content_no_epg">EPG 없음</string>
     <string name="content_live_day_time_range"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="start">%2$s</xliff:g> – <xliff:g id="stop">%3$s</xliff:g></string>
     <string name="content_catchup">다시보기</string>
+    <string name="content_channel_archive">아카이브</string>
     <string name="content_play_external_short">외부 플레이어에서 재생</string>
     <string name="content_rename">이름 변경</string>
     <string name="content_rename_channel">채널 이름 변경</string>

@@ -120,6 +120,7 @@
     <string name="content_no_epg">EPG yok</string>
     <string name="content_live_day_time_range"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="start">%2$s</xliff:g> – <xliff:g id="stop">%3$s</xliff:g></string>
     <string name="content_catchup">Geri izleme</string>
+    <string name="content_channel_archive">Arşiv</string>
     <string name="content_play_external_short">Harici oynatıcıda oynat</string>
     <string name="content_rename">Yeniden adlandır</string>
     <string name="content_rename_channel">Kanalı yeniden adlandır</string>

@@ -83,6 +83,11 @@
     <string name="settings_player_number_keys_tune">数字キーでチャンネル切替</string>
     <string name="settings_player_number_keys_tune_description">ライブプレーヤーでチャンネル番号を入力</string>
     <string name="settings_help_player_number_keys_tune">全画面のライブプレーヤーでリモコンからチャンネル番号を入力すると、そのチャンネルへ移ります。オフにすると、数字ボタンをリモコンショートカット用に空けておけます。番号の入力には、ライブTVの設定でチャンネル番号もオンにする必要があります。</string>
+    <string name="settings_player_dpad_up_down">十字キーの上/下</string>
+    <string name="settings_player_dpad_up_down_description">ライブプレーヤーで上と下が行う操作</string>
+    <string name="settings_help_player_dpad_up_down">全画面のライブプレーヤーでは、上と下でチャンネルが切り替わります。「操作パネルと最近視聴」を選ぶと下で操作パネルを表示し、上で最近視聴したチャンネルを開きます。「オフ」を選ぶとどちらのボタンも何もしません。CH+ と CH− は常にチャンネルを切り替えます。</string>
+    <string name="settings_player_dpad_zap">チャンネルを切り替え</string>
+    <string name="settings_player_dpad_controls_history">操作パネルと最近視聴</string>
     <string name="settings_player_ok_channel_list">チャンネル一覧</string>
     <string name="settings_player_ok_guide">番組表</string>
     <string name="settings_player_ok_programme_info">番組情報</string>

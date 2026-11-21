@@ -54,9 +54,13 @@ class SourceRepository(
     suspend fun addM3uSource(
         profileId: Long, name: String, url: String, userAgent: String? = null, epgUrl: String? = null,
         httpReferer: String? = null,
+        catchupPreferHls: Boolean = false,
     ): SourceEntity = addAndLink(
         profileId,
-        SourceEntity(name = name, type = SourceType.M3U, url = url, userAgent = userAgent, epgUrl = epgUrl, httpReferer = httpReferer),
+        SourceEntity(
+            name = name, type = SourceType.M3U, url = url, userAgent = userAgent, epgUrl = epgUrl, httpReferer = httpReferer,
+            catchupPreferHls = catchupPreferHls,
+        ),
     )
 
     suspend fun addStalkerSource(

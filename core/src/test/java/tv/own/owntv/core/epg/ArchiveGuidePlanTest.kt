@@ -39,6 +39,9 @@ class ArchiveGuidePlanTest {
         assertEquals(now - week, ArchiveGuidePlan.windowStart(now, 0, week))
     }
 
+    /** The feed holding the channel from [startH] hours ago on, past now. */
+    private fun feedFrom(startH: Long) = listOf((now - startH * h) to (now + 2 * h))
+
     @Test fun `only finished programmes before the feed's oldest one, inside the window`() {
         val listings = listOf(
             p(5 * 24, 5 * 24 - 1),       // older than the archive
@@ -49,20 +52,20 @@ class ArchiveGuidePlanTest {
             p(1, -1),                     // still on
             p(10, 11),                    // stop before start
         )
-        val keep = ArchiveGuidePlan.toStore(listings, now - 24 * h, now - 4 * day, now)
+        val keep = ArchiveGuidePlan.toStore(listings, feedFrom(24), now - 4 * day, now)
         assertEquals(listOf(now - (4 * 24 - 2) * h, now - 30 * h, now - 25 * h), keep.map { it.startMs })
     }
 
     @Test fun `an earlier fill's rows are kept while the schedule says the same`() {
-        val keep = ArchiveGuidePlan.toStore(listOf(p(30, 29), p(29, 28)), now - 24 * h, now - day * 2, now)
+        val keep = ArchiveGuidePlan.toStore(listOf(p(30, 29), p(29, 28)), feedFrom(24), now - day * 2, now)
         assertFalse(ArchiveGuidePlan.changed(keep, listOf(now - 29 * h, now - 30 * h)))
     }
 
     @Test fun `an earlier fill's rows are replaced once the feed's own past moved`() {
         val listings = listOf(p(30, 29), p(29, 28), p(28, 27))
-        val before = ArchiveGuidePlan.toStore(listings, now - 27 * h, now - day * 2, now)
+        val before = ArchiveGuidePlan.toStore(listings, feedFrom(27), now - day * 2, now)
         // The feed now starts an hour earlier: the last stored programme would overlap it.
-        val after = ArchiveGuidePlan.toStore(listings, now - 28 * h, now - day * 2, now)
+        val after = ArchiveGuidePlan.toStore(listings, feedFrom(28), now - day * 2, now)
         assertEquals(listOf(now - 30 * h, now - 29 * h), after.map { it.startMs })
         assertTrue(ArchiveGuidePlan.changed(after, before.map { it.startMs }))
         // Nothing left to store: the stored rows go.
@@ -85,12 +88,26 @@ class ArchiveGuidePlanTest {
 
     @Test fun `untitled and duplicate entries are dropped, the rest sorted`() {
         val listings = listOf(p(28, 27), p(30, 29, " "), p(28, 27, "Repeat"), p(29, 28))
-        val keep = ArchiveGuidePlan.toStore(listings, now - 24 * h, now - day * 2, now)
+        val keep = ArchiveGuidePlan.toStore(listings, feedFrom(24), now - day * 2, now)
         assertEquals(listOf(now - 29 * h, now - 28 * h), keep.map { it.startMs })
         assertEquals("News", keep.last().title)
     }
 
     @Test fun `nothing is added to a channel the feeds have no guide for`() {
-        assertTrue(ArchiveGuidePlan.toStore(listOf(p(3, 2)), null, now - day, now).isEmpty())
+        assertTrue(ArchiveGuidePlan.toStore(listOf(p(3, 2)), emptyList(), now - day, now).isEmpty())
+    }
+
+    @Test fun `a feed that stopped days ago gets its gaps and the recent past filled`() {
+        // The feed holds two stretches and ends 30 hours ago: it was not refreshed since.
+        val feed = listOf((now - 50 * h) to (now - 40 * h), (now - 35 * h) to (now - 30 * h))
+        val listings = listOf(
+            p(45, 44),   // the feed covers it
+            p(38, 36),   // between the feed's two stretches
+            p(30, 29),   // starts where the feed ends
+            p(2, 1),     // the last finished programme
+            p(1, -1),    // still on: the provider's short EPG answers for it
+        )
+        val keep = ArchiveGuidePlan.toStore(listings, feed, now - 3 * day, now)
+        assertEquals(listOf(now - 38 * h, now - 30 * h, now - 2 * h), keep.map { it.startMs })
     }
 }

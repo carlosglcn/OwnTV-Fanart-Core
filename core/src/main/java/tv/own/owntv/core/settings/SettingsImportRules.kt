@@ -35,6 +35,7 @@ internal object SettingsImportRules {
         "mini_player_position" -> v.takeIf { value -> MiniPlayerPosition.entries.any { it.name == value } }
         "player_hold_ok" -> v.takeIf { value -> PlayerHoldOkAction.entries.any { it.name == value } }
         "player_short_ok" -> v.takeIf { value -> PlayerShortOkAction.entries.any { it.name == value } }
+        "player_dpad_up_down" -> v.takeIf { value -> PlayerDpadUpDownAction.entries.any { it.name == value } }
         else -> v
     }
 

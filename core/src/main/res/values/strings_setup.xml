@@ -458,7 +458,7 @@
     <string name="setup_prefer_hls_description_supported">Prioritize HLS (.m3u8) over MPEG-TS for Live TV. Falls back to MPEG-TS if HLS fails. Your provider reports HLS support.</string>
     <!-- Translators: HLS preference description when the provider does not report HLS support. The user may still enable it because some providers under-report support. -->
     <string name="setup_prefer_hls_description_unsupported">Prioritize HLS (.m3u8) over MPEG-TS for Live TV. Falls back to MPEG-TS if HLS fails. Your provider does not report HLS support — you can still try it.</string>
-    <!-- Translators: Toggle label for asking an Xtream source for catch-up programmes as HLS instead of MPEG-TS. HLS stays unchanged. -->
+    <!-- Translators: Toggle label for asking a playlist for catch-up programmes as HLS instead of MPEG-TS. HLS stays unchanged. -->
     <string name="setup_prefer_hls_catchup">Prefer HLS for catch-up</string>
     <!-- Translators: Description of the catch-up HLS preference. HLS, .m3u8 and MPEG-TS are protocol names and stay unchanged. -->
     <string name="setup_prefer_hls_catchup_description">Ask for catch-up programmes as HLS (.m3u8) instead of MPEG-TS. Falls back to MPEG-TS if HLS fails. Only some providers offer catch-up as HLS.</string>

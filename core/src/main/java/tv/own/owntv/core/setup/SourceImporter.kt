@@ -248,6 +248,7 @@ class SourceImporter(
         autoRefresh: PlaylistRefresh = PlaylistRefresh.OFF,
         makeDefault: Boolean = false,
         httpReferer: String = "",
+        catchupPreferHls: Boolean = false,
     ) {
         // A provider's `get.php` "M3U" is an Xtream account; import it as one when the panel agrees.
         // Its M3U export files movies and series under Live TV, and some panels refuse it.
@@ -269,7 +270,8 @@ class SourceImporter(
                 return xtream(
                     name = name, server = link.server, username = link.username, password = link.password,
                     userAgent = userAgent, epgUrl = epgUrl, autoRefresh = autoRefresh,
-                    preferHls = link.preferHls, makeDefault = makeDefault, httpReferer = httpReferer,
+                    preferHls = link.preferHls, catchupPreferHls = catchupPreferHls, makeDefault = makeDefault,
+                    httpReferer = httpReferer,
                 )
             }
         }
@@ -282,6 +284,7 @@ class SourceImporter(
                 userAgent = userAgent.trim().takeIf { it.isNotBlank() },
                 epgUrl = epgUrl.trim().takeIf { it.isNotBlank() },
                 httpReferer = httpReferer.trim().takeIf { it.isNotBlank() },
+                catchupPreferHls = catchupPreferHls,
             )
         }
     }

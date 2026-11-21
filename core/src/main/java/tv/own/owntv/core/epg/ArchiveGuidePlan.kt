@@ -9,8 +9,9 @@ import tv.own.owntv.core.parser.XtEpgEntry
  *
  * Many Xtream providers put about a day of past programmes in `xmltv.php` while their archive keeps
  * up to a week: the recordings exist, the guide cannot reach them. The per-channel schedule lists the
- * whole archive. What it adds only ever extends the guide backwards — the feed's rows are never
- * replaced or overlapped. The rows live in a guide store of their own ([storeId]) and are replaced as
+ * whole archive. What it adds only fills the finished stretches the feeds leave empty — before
+ * their oldest row, between two of them, or after their last one when the feed was not refreshed —
+ * and the feed's rows are never replaced or overlapped. The rows live in a guide store of their own ([storeId]) and are replaced as
  * a whole at each fill ([changed]).
  */
 internal object ArchiveGuidePlan {
@@ -49,20 +50,22 @@ internal object ArchiveGuidePlan {
     }
 
     /**
-     * What to store: finished programmes inside the window that end by [guideStartMs], the oldest
-     * programme the guide feeds hold for the channel. Nothing when the feeds hold nothing for the
-     * channel: its row then comes from the provider's short EPG, which stored past rows would hide.
-     * Duplicates are dropped; sorted by start.
+     * What to store: finished programmes inside the window that overlap none of [feedRows], the
+     * (start, stop) of every programme the guide feeds hold for the channel. A feed that was not
+     * refreshed stops days before now, and the recent past is exactly what catch-up replays most.
+     * Nothing when the feeds hold nothing for the channel: its row then comes from the provider's
+     * short EPG. Duplicates are dropped; sorted by start.
      */
     fun toStore(
         listings: List<XtEpgEntry>,
-        guideStartMs: Long?,
+        feedRows: List<Pair<Long, Long>>,
         windowStartMs: Long,
         nowMs: Long,
     ): List<XtEpgEntry> {
-        if (guideStartMs == null) return emptyList()
+        if (feedRows.isEmpty()) return emptyList()
         return listings.asSequence()
-            .filter { it.startMs in windowStartMs until it.stopMs && it.stopMs <= nowMs && it.stopMs <= guideStartMs }
+            .filter { it.startMs in windowStartMs until it.stopMs && it.stopMs <= nowMs }
+            .filter { entry -> feedRows.none { (start, stop) -> entry.startMs < stop && start < entry.stopMs } }
             .filter { it.title.isNotBlank() }
             .distinctBy { it.startMs }
             .sortedBy { it.startMs }
@@ -71,8 +74,8 @@ internal object ArchiveGuidePlan {
 
     /**
      * Whether the rows an earlier fill stored ([storedStarts]) are to be replaced by [keep]. They are
-     * replaced as a whole rather than added to: the feed's oldest programme moves between two fills,
-     * so rows stored last time may now overlap it or stop short of it, and the provider's schedule
+     * replaced as a whole rather than added to: the feed's rows move between two fills, so rows
+     * stored last time may now overlap them or leave a stretch empty, and the provider's schedule
      * itself moves on.
      */
     fun changed(keep: List<XtEpgEntry>, storedStarts: List<Long>): Boolean =

@@ -5,10 +5,12 @@ import androidx.work.Constraints
 import androidx.work.ExistingWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 class EpgSyncScheduler(private val context: Context) {
@@ -33,6 +35,16 @@ class EpgSyncScheduler(private val context: Context) {
 
         WorkManager.getInstance(context)
             .enqueueUniqueWork(workName(sourceId), policy, request)
+    }
+
+    /**
+     * Queue a sync that reads the guide ids as they are now. One still waiting to start will, so it is
+     * kept; one already running read its channel filter when it started, so this one runs after it.
+     */
+    suspend fun enqueueAfterRunning(sourceId: Long, reason: String, baseProgrammes: Int) {
+        val running = WorkManager.getInstance(context).getWorkInfosForUniqueWorkFlow(workName(sourceId)).first()
+            .any { it.state == WorkInfo.State.RUNNING }
+        enqueueSync(sourceId, reason, baseProgrammes, if (running) ExistingWorkPolicy.APPEND_OR_REPLACE else ExistingWorkPolicy.KEEP)
     }
 
     fun cancelSync(sourceId: Long) {

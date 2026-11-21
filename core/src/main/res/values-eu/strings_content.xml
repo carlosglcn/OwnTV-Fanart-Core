@@ -100,6 +100,7 @@
     <string name="content_no_epg">EPG gabe</string>
     <string name="content_live_day_time_range"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="start">%2$s</xliff:g> – <xliff:g id="stop">%3$s</xliff:g></string>
     <string name="content_catchup">Berrikusi</string>
+    <string name="content_channel_archive">Artxiboa</string>
     <string name="content_play_external_short">Erreproduzitu kanpoko erreproduzigailuan</string>
     <string name="content_rename">Aldatu izena</string>
     <string name="content_rename_channel">Aldatu kanalaren izena</string>

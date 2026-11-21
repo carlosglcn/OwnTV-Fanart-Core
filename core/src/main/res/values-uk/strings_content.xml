@@ -4,6 +4,7 @@
     <string name="content_epg_now_short">Зараз</string>
     <string name="content_programmes_later">Пізніше</string>
     <string name="content_catchup">Архів</string>
+    <string name="content_channel_archive">Архів</string>
     <string name="content_catchup_title">Архів · <xliff:g id="channel">%1$s</xliff:g></string>
     <plurals name="content_downloading_items">
         <item quantity="one">Завантажується <xliff:g id="count">%1$d</xliff:g> елемент</item>

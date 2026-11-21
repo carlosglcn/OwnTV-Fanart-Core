@@ -83,6 +83,11 @@
     <string name="settings_player_number_keys_tune">Zifferntasten wählen Sender</string>
     <string name="settings_player_number_keys_tune_description">Eine Sendernummer im Live-Player eingeben</string>
     <string name="settings_help_player_number_keys_tune">Geben Sie im Live-Player im Vollbild eine Sendernummer auf der Fernbedienung ein, um zu diesem Sender zu springen. Schalten Sie dies aus, um die Zifferntasten für Ihre Fernbedienungs-Kurzbefehle freizuhalten. Für die Eingabe muss außerdem Sendernummern in den Live-TV-Einstellungen eingeschaltet sein.</string>
+    <string name="settings_player_dpad_up_down">Steuerkreuz Hoch/Runter</string>
+    <string name="settings_player_dpad_up_down_description">Was Hoch und Runter im Live-Player tun</string>
+    <string name="settings_help_player_dpad_up_down">Im Live-Player im Vollbild wechseln Hoch und Runter den Sender. Wählen Sie Steuerung und zuletzt gesehen, damit Runter die Steuerung zeigt und Hoch Ihre zuletzt gesehenen Sender öffnet, oder Aus, damit beide Tasten nichts tun. CH+ und CH− wechseln immer den Sender.</string>
+    <string name="settings_player_dpad_zap">Sender wechseln</string>
+    <string name="settings_player_dpad_controls_history">Steuerung und zuletzt gesehen</string>
     <string name="settings_player_ok_channel_list">Senderliste</string>
     <string name="settings_player_ok_guide">Programmübersicht</string>
     <string name="settings_player_ok_programme_info">Sendungsinfo</string>

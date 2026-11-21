@@ -112,6 +112,7 @@
     <string name="content_no_epg">无电子节目指南（EPG）</string>
     <string name="content_live_day_time_range"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="start">%2$s</xliff:g> – <xliff:g id="stop">%3$s</xliff:g></string>
     <string name="content_catchup">回看</string>
+    <string name="content_channel_archive">存档</string>
     <string name="content_play_external_short">在外部播放器中播放</string>
     <string name="content_rename">重命名</string>
     <string name="content_rename_channel">重命名频道</string>

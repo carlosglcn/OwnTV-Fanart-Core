@@ -144,12 +144,15 @@ class ExoSubtitleEngine(
             )
             // One software retry before giving up on this engine. "Audio plays, no frame ever renders"
             // is precisely what a hardware decoder does when it accepts a format it can't actually
-            // handle — and a software decoder usually can. For a catch-up archive it is also the
-            // mid-GOP signature (a software decoder picks up at the next keyframe), so the panel is
-            // remembered and the session's remaining archives open in software straight away.
+            // handle — and a software decoder usually can.
+            //
+            // The panel is not remembered as one whose archives need software: only mpv reads that, and
+            // mpv opens an archive on its copy path, which never hands the decoder the surface. Measured on
+            // the TCL: this engine found no frame on an H.264 archive, and the note then put the next HEVC
+            // 720p50 archive on mpv into software, which plays the same programme in hardware. mpv's own
+            // archive rescue still records the panel when mpv itself shows no picture.
             val url = currentUrl
             if (softwareRungAvailable() && url != null) {
-                if (isArchiveItem) LiveStreamQuirks.rememberArchiveNeedsSoftware(url)
                 android.util.Log.w(TAG, "software rescue: no frame on the hardware decoder, restarting in software decode")
                 onSoftwareRescue?.invoke(url, isArchiveItem)
                 return@NoFrameWatchdog

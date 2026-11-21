@@ -112,6 +112,7 @@
     <string name="content_no_epg">EPGなし</string>
     <string name="content_live_day_time_range"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="start">%2$s</xliff:g> – <xliff:g id="stop">%3$s</xliff:g></string>
     <string name="content_catchup">見逃し配信</string>
+    <string name="content_channel_archive">アーカイブ</string>
     <string name="content_play_external_short">外部プレーヤーで再生</string>
     <string name="content_rename">名前を変更</string>
     <string name="content_rename_channel">チャンネル名を変更</string>

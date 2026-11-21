@@ -649,6 +649,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val PLAYER_SHORT_OK = stringPreferencesKey("player_short_ok")
         val PLAYER_SWAP_CHANNEL_KEYS = booleanPreferencesKey("player_swap_channel_keys")
         val PLAYER_NUMBER_KEYS_TUNE = booleanPreferencesKey("player_number_keys_tune")
+        val PLAYER_DPAD_UP_DOWN = stringPreferencesKey("player_dpad_up_down")
         // Manual panel-width adjustment (v4.3.x): per section (Live/Movies/Series) a master toggle plus
         // one percentage per panel (category rail · item list/grid · preview). 100 = stock width; the
         // three are normalized across the row, so they always fill the screen. See PanelWidths.kt.
@@ -3489,7 +3490,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
             Keys.PREF_AUDIO_LANG, Keys.PREF_SUB_LANG, Keys.SUB_SEARCH_LANGS, Keys.SORT_LIVE, Keys.SORT_GUIDE, Keys.SORT_MOVIES,
             Keys.SORT_SERIES, Keys.RESUME_MODE, Keys.TIMESHIFT_RESUME_MODE, Keys.DOWNLOAD_WATCH_CHOICE, Keys.CATCHUP_TZ, Keys.CATCHUP_PLAYER, Keys.ANIMATION_LEVEL, Keys.VOD_VIEW_MODE, Keys.GUIDE_VIEW,
             Keys.EPISODE_VIEW_MODE, Keys.VOD_LAYOUT, Keys.LIVE_LAYOUT, Keys.LIVE_VIEW, Keys.REMINDER_MODE, Keys.PLAYER_HOLD_OK, Keys.PLAYER_SHORT_OK,
-            Keys.WEATHER_LOCATION, Keys.RECENT_SEARCHES,
+            Keys.PLAYER_DPAD_UP_DOWN, Keys.WEATHER_LOCATION, Keys.RECENT_SEARCHES,
             Keys.CLOCK_TIME_COLOR, Keys.CLOCK_DATE_COLOR, Keys.CLOCK_WEATHER_COLOR,
             // Global proxy — non-secret fields only. The proxy password (Keys.PROXY_PASS) is NEVER part of
             // this whitelist; it is handled separately by BackupManager (encrypted or omitted).

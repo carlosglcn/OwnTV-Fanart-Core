@@ -83,6 +83,11 @@
     <string name="settings_player_number_keys_tune">數字鍵切換頻道</string>
     <string name="settings_player_number_keys_tune_description">在直播播放器中輸入頻道號碼</string>
     <string name="settings_help_player_number_keys_tune">在全螢幕直播播放器中用遙控器輸入頻道號碼即可跳到該頻道。關閉後數字鍵留給遙控器捷徑。輸入號碼還需要在電視直播設定中開啟頻道編號。</string>
+    <string name="settings_player_dpad_up_down">方向鍵上/下</string>
+    <string name="settings_player_dpad_up_down_description">直播播放器中上和下的作用</string>
+    <string name="settings_help_player_dpad_up_down">在全螢幕直播播放器中，上和下用來切換頻道。選擇「控制列和最近觀看」後，按下顯示控制列，按上開啟最近觀看的頻道；選擇「關閉」則兩個按鈕都不會有作用。CH+ 和 CH− 一律切換頻道。</string>
+    <string name="settings_player_dpad_zap">切換頻道</string>
+    <string name="settings_player_dpad_controls_history">控制列和最近觀看</string>
     <string name="settings_player_ok_channel_list">頻道清單</string>
     <string name="settings_player_ok_guide">節目表</string>
     <string name="settings_player_ok_programme_info">節目資訊</string>

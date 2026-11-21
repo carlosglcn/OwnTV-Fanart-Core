@@ -83,6 +83,11 @@
     <string name="settings_player_number_keys_tune">숫자 키로 채널 변경</string>
     <string name="settings_player_number_keys_tune_description">실시간 플레이어에서 채널 번호 입력</string>
     <string name="settings_help_player_number_keys_tune">전체 화면 실시간 플레이어에서 리모컨으로 채널 번호를 입력하면 그 채널로 이동합니다. 끄면 숫자 버튼을 리모컨 바로가기용으로 남겨 둡니다. 번호를 입력하려면 실시간 TV 설정의 채널 번호도 켜져 있어야 합니다.</string>
+    <string name="settings_player_dpad_up_down">방향키 위/아래</string>
+    <string name="settings_player_dpad_up_down_description">라이브 플레이어에서 위와 아래의 동작</string>
+    <string name="settings_help_player_dpad_up_down">전체 화면 라이브 플레이어에서 위와 아래는 채널을 바꿉니다. 컨트롤 및 최근 시청을 선택하면 아래로 컨트롤을 표시하고 위로 최근 시청한 채널을 엽니다. 꺼짐을 선택하면 두 버튼 모두 아무 동작도 하지 않습니다. CH+와 CH−는 항상 채널을 바꿉니다.</string>
+    <string name="settings_player_dpad_zap">채널 변경</string>
+    <string name="settings_player_dpad_controls_history">컨트롤 및 최근 시청</string>
     <string name="settings_player_ok_channel_list">채널 목록</string>
     <string name="settings_player_ok_guide">편성표</string>
     <string name="settings_player_ok_programme_info">프로그램 정보</string>

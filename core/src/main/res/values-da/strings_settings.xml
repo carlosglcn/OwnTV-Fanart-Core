@@ -83,6 +83,11 @@
     <string name="settings_player_number_keys_tune">Taltaster skifter kanal</string>
     <string name="settings_player_number_keys_tune_description">Indtast et kanalnummer i liveafspilleren</string>
     <string name="settings_help_player_number_keys_tune">Indtast et kanalnummer på fjernbetjeningen i liveafspilleren i fuld skærm for at springe til den kanal. Slå dette fra for at holde taltasterne fri til dine fjernbetjeningsgenveje. Indtastning kræver også, at Kanalnumre er slået til i indstillingerne for Live-tv.</string>
+    <string name="settings_player_dpad_up_down">D-pad op/ned</string>
+    <string name="settings_player_dpad_up_down_description">Hvad Op og Ned gør i liveafspilleren</string>
+    <string name="settings_help_player_dpad_up_down">I liveafspilleren i fuld skærm skifter Op og Ned kanal. Vælg Betjening og senest set for at vise betjeningen med Ned og åbne dine senest sete kanaler med Op, eller Fra, så ingen af knapperne gør noget. CH+ og CH− skifter altid kanal.</string>
+    <string name="settings_player_dpad_zap">Skift kanal</string>
+    <string name="settings_player_dpad_controls_history">Betjening og senest set</string>
     <string name="settings_player_ok_channel_list">Kanalliste</string>
     <string name="settings_player_ok_guide">Guide</string>
     <string name="settings_player_ok_programme_info">Programinfo</string>

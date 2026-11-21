@@ -187,7 +187,7 @@ class EpgRepository(
      * Resolved through [tv.own.owntv.core.customize.EpgMatchResolver], not the raw map, so a match
      * made before a playlist was deleted and re-added still protects its history.
      */
-    private suspend fun catchupGuideIds(): Set<String>? {
+    internal suspend fun catchupGuideIds(): Set<String>? {
         val ids = HashSet<String>()
         val catchupChannels = runCatching { channelDao.allCatchupChannels() }.getOrElse {
             Log.w("EpgRepository", "Unable to read catch-up channels — keeping all history this run", it)
@@ -799,9 +799,17 @@ class EpgRepository(
      * have, so a freshly-matched id wasn't stored). Parses each cache file ONCE for the whole id set. Returns
      * false if there's no fresh (≤24h) cache to read — the caller then does a full network re-sync.
      */
-    suspend fun storeProgrammesForIdsFromCache(epgIds: Set<String>): Boolean = withContext(Dispatchers.IO) {
+    suspend fun storeProgrammesForIdsFromCache(epgIds: Set<String>): Boolean {
         val keys = epgIds.map { it.trim().lowercase() }.filterTo(HashSet()) { it.isNotBlank() }
-        if (keys.isEmpty()) return@withContext true
+        return keys.isEmpty() || fillFromCache(keys).isNotEmpty()
+    }
+
+    /**
+     * [storeProgrammesForIdsFromCache] for normalized [keys], returning the ids the cache actually gave
+     * programmes for — empty when there is no fresh cache or it carries none of them.
+     */
+    internal suspend fun fillFromCache(keys: Set<String>): Set<String> = withContext(Dispatchers.IO) {
+        if (keys.isEmpty()) return@withContext emptySet()
         val now = System.currentTimeMillis()
         val from = now - WINDOW_BACK_MS; val to = now + guideAheadMs()
         val pastCutoffFor = pastCutoff(now, from)
@@ -810,7 +818,7 @@ class EpgRepository(
         val files = context.cacheDir.listFiles()
             ?.filter { isUsableEpgCache(it.name, it.length(), it.lastModified(), now, CACHE_TTL_MS) }
             ?: emptyList<java.io.File>()
-        if (files.isEmpty()) return@withContext false // no fresh cache → caller falls back to a network re-sync
+        if (files.isEmpty()) return@withContext emptySet() // no fresh cache → the caller falls back to a network re-sync
         Log.d("EpgRepository", "Cached EPG channel filter ids=${keys.size} files=${files.size}")
 
         val storeFiles = files.mapNotNull { f ->
@@ -840,19 +848,19 @@ class EpgRepository(
             }.onFailure { Log.w("EpgRepository", "cacheFill parse failed storeId=$storeId (other sources unaffected)", it) }
         }
 
-        var insertedTotal = 0
+        val filled = HashSet<String>()
         for ((key, rows) in collected) {
             if (rows.isEmpty()) continue
             epgDao.clearChannelForSources(key, storeIds)
             rows.chunked(QUERY_CHUNK).forEach { epgDao.upsertProgrammes(it) }
-            insertedTotal += rows.size
+            filled += key
         }
-        // Report handled ONLY if the cache actually yielded programmes for a requested id. A fresh cache
-        // that contains none of them (stale file, or a channel whose programmes weren't in the earlier
-        // tee'd download) must fall through to a network re-sync — the match is now persisted, so the
-        // re-sync's channel filter includes it and will fetch the missing schedule. Returning true here
-        // used to leave a just-matched channel permanently empty with no fallback.
-        insertedTotal > 0
+        // Only the ids the cache actually yielded programmes for count as handled. A fresh cache that
+        // contains none of them (stale file, or a channel whose programmes weren't in the earlier tee'd
+        // download) must fall through to a network re-sync — the match is now persisted, so the
+        // re-sync's channel filter includes it and will fetch the missing schedule. Reporting those as
+        // handled used to leave a just-matched channel permanently empty with no fallback.
+        filled
     }
 
     /**
@@ -922,8 +930,8 @@ class EpgRepository(
      *
      * Many `xmltv.php` feeds stop about a day back while the archive keeps up to a week, so most of
      * what catch-up could replay never shows in the guide. One API call for one channel, at most once
-     * every few hours per channel ([ArchiveGuidePlan]). The rows only ever end where the feeds' own
-     * rows begin, and are stored under a guide store of their own ([ArchiveGuidePlan.storeId]): not
+     * every few hours per channel ([ArchiveGuidePlan]). The rows only fill the finished stretches the
+     * feeds' own rows leave empty, and are stored under a guide store of their own ([ArchiveGuidePlan.storeId]): not
      * the playlist's id, whose guide sync would delete them as missing from its feed. Being no EPG
      * source, that store ranks below all of them ([tv.own.owntv.core.epg.GuidePriority]). Each fill
      * replaces the channel's rows there as a whole. Retention keeps them, as the past of every
@@ -953,7 +961,7 @@ class EpgRepository(
                 .partition { it.sourceId == store }
             val keep = ArchiveGuidePlan.toStore(
                 listings,
-                guideStartMs = feeds.minOfOrNull { it.startMs },
+                feedRows = feeds.map { it.startMs to it.stopMs },
                 windowStartMs = from,
                 nowMs = now,
             )

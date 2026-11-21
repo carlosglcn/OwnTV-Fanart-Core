@@ -120,6 +120,7 @@
     <string name="content_no_epg">Nincs EPG</string>
     <string name="content_live_day_time_range"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="start">%2$s</xliff:g> – <xliff:g id="stop">%3$s</xliff:g></string>
     <string name="content_catchup">Visszanézés</string>
+    <string name="content_channel_archive">Archívum</string>
     <string name="content_play_external_short">Lejátszás külső lejátszóban</string>
     <string name="content_rename">Átnevezés</string>
     <string name="content_rename_channel">Csatorna átnevezése</string>

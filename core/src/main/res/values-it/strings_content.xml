@@ -128,6 +128,7 @@
     <string name="content_no_epg">EPG non disponibile</string>
     <string name="content_live_day_time_range"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="start">%2$s</xliff:g> – <xliff:g id="stop">%3$s</xliff:g></string>
     <string name="content_catchup">Visione in differita</string>
+    <string name="content_channel_archive">Archivio</string>
     <string name="content_play_external_short">Riproduci in un player esterno</string>
     <string name="content_rename">Rinomina</string>
     <string name="content_rename_channel">Rinomina canale</string>

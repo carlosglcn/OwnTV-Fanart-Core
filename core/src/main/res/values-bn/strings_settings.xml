@@ -83,6 +83,11 @@
     <string name="settings_player_number_keys_tune">নম্বর বোতাম চ্যানেল বদলায়</string>
     <string name="settings_player_number_keys_tune_description">লাইভ প্লেয়ারে চ্যানেল নম্বর টাইপ করুন</string>
     <string name="settings_help_player_number_keys_tune">সেই চ্যানেলে যেতে ফুল-স্ক্রিন লাইভ প্লেয়ারে রিমোট দিয়ে চ্যানেল নম্বর টাইপ করুন। নম্বর বোতাম আপনার রিমোট শর্টকাটের জন্য ফাঁকা রাখতে এটি বন্ধ করুন। নম্বর টাইপ করতে লাইভ টিভি সেটিংসে চ্যানেল নম্বরও চালু থাকতে হবে।</string>
+    <string name="settings_player_dpad_up_down">ডি-প্যাড উপর/নিচ</string>
+    <string name="settings_player_dpad_up_down_description">লাইভ প্লেয়ারে উপর ও নিচ কী করে</string>
+    <string name="settings_help_player_dpad_up_down">ফুল-স্ক্রিন লাইভ প্লেয়ারে উপর ও নিচ চ্যানেল বদলায়। নিচ দিয়ে কন্ট্রোল দেখাতে আর উপর দিয়ে সম্প্রতি দেখা চ্যানেল খুলতে কন্ট্রোল ও সম্প্রতি দেখা বেছে নিন, অথবা দুটি বোতামই নিষ্ক্রিয় রাখতে বন্ধ বেছে নিন। CH+ ও CH− সবসময় চ্যানেল বদলায়।</string>
+    <string name="settings_player_dpad_zap">চ্যানেল বদলান</string>
+    <string name="settings_player_dpad_controls_history">কন্ট্রোল ও সম্প্রতি দেখা</string>
     <string name="settings_player_ok_channel_list">চ্যানেল তালিকা</string>
     <string name="settings_player_ok_guide">গাইড</string>
     <string name="settings_player_ok_programme_info">অনুষ্ঠানের তথ্য</string>

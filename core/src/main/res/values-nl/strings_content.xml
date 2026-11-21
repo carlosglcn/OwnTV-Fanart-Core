@@ -120,6 +120,7 @@
     <string name="content_no_epg">Geen EPG</string>
     <string name="content_live_day_time_range"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="start">%2$s</xliff:g> – <xliff:g id="stop">%3$s</xliff:g></string>
     <string name="content_catchup">Terugkijken</string>
+    <string name="content_channel_archive">Archief</string>
     <string name="content_play_external_short">Afspelen in externe speler</string>
     <string name="content_rename">Naam wijzigen</string>
     <string name="content_rename_channel">Naam van zender wijzigen</string>

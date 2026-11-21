@@ -120,6 +120,7 @@
     <string name="content_no_epg">EPG নেই</string>
     <string name="content_live_day_time_range"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="start">%2$s</xliff:g> – <xliff:g id="stop">%3$s</xliff:g></string>
     <string name="content_catchup">ক্যাচ-আপ</string>
+    <string name="content_channel_archive">আর্কাইভ</string>
     <string name="content_play_external_short">বাহ্যিক প্লেয়ারে চালান</string>
     <string name="content_rename">নাম বদলান</string>
     <string name="content_rename_channel">চ্যানেলের নাম বদলান</string>

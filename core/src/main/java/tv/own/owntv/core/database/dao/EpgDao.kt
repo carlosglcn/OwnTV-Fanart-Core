@@ -75,6 +75,10 @@ interface EpgDao {
     @Query("SELECT (MAX(stopMs) - MIN(startMs)) / 86400000 FROM epg_programmes WHERE epgChannelId = :epgChannelId")
     suspend fun coverageDays(epgChannelId: String): Int?
 
+    /** Whether any programme of [epgChannelId] (normalized) is on between [from] and [to]. */
+    @Query("SELECT EXISTS(SELECT 1 FROM epg_programmes WHERE epgChannelId = :epgChannelId AND stopMs > :from AND startMs < :to)")
+    suspend fun hasProgrammesBetween(epgChannelId: String, from: Long, to: Long): Boolean
+
     // --- Guide reads: keyed by epgChannelId ALONE ------------------------------------------------
     //
     // None of the four queries below filters by sourceId, and that is the fix for a bug that outlived
@@ -233,6 +237,14 @@ interface EpgDao {
      *  scheduled from now on, so a freshly-matched channel would show an empty guide row. */
     @Query("SELECT COUNT(*) FROM epg_programmes WHERE epgChannelId = :epgChannelId AND stopMs > :now")
     suspend fun countUpcomingForChannel(epgChannelId: String, now: Long): Int
+
+    /** Which of these (normalized) guide ids have any programme stored. */
+    @Query("SELECT DISTINCT epgChannelId FROM epg_programmes WHERE epgChannelId IN (:epgChannelIds)")
+    suspend fun epgIdsWithProgrammes(epgChannelIds: List<String>): List<String>
+
+    /** The guide feeds whose channel list names any of these (normalized) guide ids. */
+    @Query("SELECT DISTINCT sourceId FROM epg_channels WHERE epgChannelId IN (:epgChannelIds)")
+    suspend fun feedsCarrying(epgChannelIds: List<String>): List<Long>
 
 
     /** Live programme count for one source — drives the EPG status shown on the source row. */

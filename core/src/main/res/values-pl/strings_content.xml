@@ -136,6 +136,7 @@
     <string name="content_no_epg">Brak EPG</string>
     <string name="content_live_day_time_range"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="start">%2$s</xliff:g> – <xliff:g id="stop">%3$s</xliff:g></string>
     <string name="content_catchup">Oglądanie wstecz</string>
+    <string name="content_channel_archive">Archiwum</string>
     <string name="content_play_external_short">Odtwórz w odtwarzaczu zewnętrznym</string>
     <string name="content_rename">Zmień nazwę</string>
     <string name="content_rename_channel">Zmień nazwę kanału</string>

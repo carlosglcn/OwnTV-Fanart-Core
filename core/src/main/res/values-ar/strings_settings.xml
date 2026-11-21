@@ -83,6 +83,11 @@
     <string name="settings_player_number_keys_tune">أزرار الأرقام تغيّر القناة</string>
     <string name="settings_player_number_keys_tune_description">اكتب رقم قناة في مشغّل البث المباشر</string>
     <string name="settings_help_player_number_keys_tune">اكتب رقم قناة من جهاز التحكم في مشغّل البث المباشر بملء الشاشة للانتقال إلى تلك القناة. عطّل هذا لترك أزرار الأرقام لاختصارات جهاز التحكم. تتطلب كتابة الرقم أيضًا تفعيل أرقام القنوات في إعدادات البث التلفزيوني المباشر.</string>
+    <string name="settings_player_dpad_up_down">أعلى/أسفل في لوحة الاتجاهات</string>
+    <string name="settings_player_dpad_up_down_description">ما يفعله زرّا أعلى وأسفل في مشغّل البث المباشر</string>
+    <string name="settings_help_player_dpad_up_down">في مشغّل البث المباشر بملء الشاشة، يغيّر زرّا أعلى وأسفل القناة. اختر عناصر التحكم والمشاهدة مؤخرًا ليُظهر زر أسفل عناصر التحكم ويفتح زر أعلى القنوات التي شاهدتها مؤخرًا، أو معطّل كي لا يفعل الزرّان شيئًا. يغيّر CH+ وCH− القناة دائمًا.</string>
+    <string name="settings_player_dpad_zap">تغيير القناة</string>
+    <string name="settings_player_dpad_controls_history">عناصر التحكم والمشاهدة مؤخرًا</string>
     <string name="settings_player_ok_channel_list">قائمة القنوات</string>
     <string name="settings_player_ok_guide">الدليل</string>
     <string name="settings_player_ok_programme_info">معلومات البرنامج</string>

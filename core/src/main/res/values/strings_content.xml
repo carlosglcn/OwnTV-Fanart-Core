@@ -216,6 +216,8 @@
     <string name="content_live_day_time_range"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="start">%2$s</xliff:g> \u2013 <xliff:g id="stop">%3$s</xliff:g></string>
     <!-- Translators: Label for catch-up (time-shifted) playback feature. -->
     <string name="content_catchup">Catch-up</string>
+    <!-- Translators: Label of a channel's archive: the days of past programmes a catch-up channel keeps, each playable from its start. Entry in a channel's menu and button on the player controls; keep it short. -->
+    <string name="content_channel_archive">Archive</string>
     <!-- Translators: Context-menu option to play content in an external player. Shorter variant. -->
     <string name="content_play_external_short">Play in external player</string>
     <!-- Translators: Context-menu option to rename a Live TV channel. -->

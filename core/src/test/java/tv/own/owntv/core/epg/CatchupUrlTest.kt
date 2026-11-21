@@ -144,6 +144,70 @@ class CatchupUrlTest {
         assertNull(CatchupUrl.forM3u("http://x", "flussonic", null, start, end))
     }
 
+    /** `seekable` turns Flussonic's archive into the HLS VOD playlist `index-<start>-<dur>.m3u8`; other types are untouched. */
+    @Test
+    fun forM3u_seekableFlussonicUsesTheVodIndex() {
+        class Row(val live: String, val type: String, val source: String?, val correctionMin: Int, val expected: String?)
+        val rows = listOf(
+            Row("http://x/ch1/mpegts", "flussonic-ts", null, 0, "http://x/ch1/index-1609459200-3600.m3u8"),
+            Row("http://x/ch1/index.ts", "flussonic", null, 0, "http://x/ch1/index-1609459200-3600.m3u8"),
+            Row("http://x/ch1/index.m3u8?token=abc", "flussonic-hls", null, 0, "http://x/ch1/index-1609459200-3600.m3u8?token=abc"),
+            Row("http://x/ch1/index.m3u8", "flussonic", null, 30, "http://x/ch1/index-1609461000-3600.m3u8"),
+            Row("http://x/live.ts", "append", "?utc=\${start}", 0, "http://x/live.ts?utc=1609459200"),
+            Row("http://x", "flussonic", null, 0, null),
+        )
+        for (r in rows) {
+            val msg = "${r.type} ${r.live} correction=${r.correctionMin}"
+            assertEquals(msg, r.expected, CatchupUrl.forM3u(r.live, r.type, r.source, start, end, correctionMin = r.correctionMin, seekable = true))
+        }
+        // Non-Flussonic types give the same URL with and without seekable.
+        assertEquals(
+            CatchupUrl.forM3u("http://x/live.ts", "append", "?utc=\${start}", start, end, seekable = false),
+            CatchupUrl.forM3u("http://x/live.ts", "append", "?utc=\${start}", start, end, seekable = true),
+        )
+    }
+
+    /**
+     * A Flussonic programme gets the VOD playlist only with "Prefer HLS for catch-up" on and the programme
+     * finished; every other case keeps exactly the URL it had before.
+     */
+    @Test
+    fun forSource_flussonicVodOnlyWhenSwitchOnAndFinished() {
+        val xtream = tv.own.owntv.core.parser.XtreamClient(tv.own.owntv.core.network.HttpClient(okhttp3.OkHttpClient()))
+        val m3u = tv.own.owntv.core.database.entity.SourceEntity(name = "t", type = tv.own.owntv.core.model.SourceType.M3U, url = "http://x/list.m3u")
+        val programme = tv.own.owntv.core.database.entity.EpgProgrammeEntity(sourceId = 1, epgChannelId = "c", startMs = start, stopMs = end, title = "p")
+        val utc = TimeZone.getTimeZone("UTC")
+        val onAir = end - 1
+        val finished = end
+        class Row(val live: String, val preferHls: Boolean, val now: Long, val expected: String)
+        val rows = listOf(
+            Row("http://x/ch1/mpegts", false, finished, "http://x/ch1/archive-1609459200-3600.ts"),
+            Row("http://x/ch1/index.m3u8", false, finished, "http://x/ch1/timeshift_abs-1609459200.m3u8"),
+            Row("http://x/ch1/mpegts", true, onAir, "http://x/ch1/archive-1609459200-3600.ts"),
+            Row("http://x/ch1/index.m3u8", true, onAir, "http://x/ch1/timeshift_abs-1609459200.m3u8"),
+            Row("http://x/ch1/mpegts", true, finished, "http://x/ch1/index-1609459200-3600.m3u8"),
+            Row("http://x/ch1/index.m3u8?token=abc", true, finished, "http://x/ch1/index-1609459200-3600.m3u8?token=abc"),
+        )
+        for (r in rows) {
+            val ch = tv.own.owntv.core.database.entity.ChannelEntity(sourceId = 1, name = "c", streamUrl = r.live, catchup = true, catchupType = "flussonic")
+            val out = CatchupUrl.forSource(ch, programme, m3u.copy(catchupPreferHls = r.preferHls), utc, xtream, nowMs = r.now)
+            assertEquals("${r.live} preferHls=${r.preferHls} now=${r.now}", r.expected, out)
+        }
+    }
+
+    /** A refused VOD playlist falls back to the address the switch-off form has, never to an `index-….ts`. */
+    @Test
+    fun flussonicArchiveTs_mapsTheVodPlaylistOnly() {
+        assertEquals("http://x/ch1/archive-1609459200-3600.ts", CatchupUrl.flussonicArchiveTs("http://x/ch1/index-1609459200-3600.m3u8"))
+        assertEquals("http://x/ch1/archive-1609459200-3600.ts?token=abc", CatchupUrl.flussonicArchiveTs("http://x/ch1/index-1609459200-3600.m3u8?token=abc"))
+        assertNull(CatchupUrl.flussonicArchiveTs("http://x/ch1/index.m3u8"))
+        assertNull(CatchupUrl.flussonicArchiveTs("http://x/ch1/timeshift_abs-1609459200.m3u8"))
+        assertNull(CatchupUrl.flussonicArchiveTs("http://panel/timeshift/u/p/60/2021-01-01:00-00/9.m3u8"))
+        assertTrue(CatchupUrl.isFlussonicSlidingWindow("http://x/ch1/timeshift_abs-1609459200.m3u8?token=abc"))
+        assertTrue(!CatchupUrl.isFlussonicSlidingWindow("http://x/ch1/index-1609459200-3600.m3u8"))
+        assertTrue(!CatchupUrl.isFlussonicSlidingWindow("http://panel/timeshift/u/p/60/2021-01-01:00-00/9.m3u8"))
+    }
+
     @Test
     fun forM3u_xcRebuildsTheTimeshiftEndpoint() {
         assertEquals(

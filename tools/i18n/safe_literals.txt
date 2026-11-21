@@ -1317,7 +1317,10 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT COUNT(DISTINCT epgChannelId) FROM epg_programmes WHERE sourceId IN (:sourceIds)
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT DISTINCT epgChannelId FROM epg_programmes LIMIT :limit
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT DISTINCT epgChannelId FROM epg_programmes WHERE epgChannelId IN (:keys) AND startMs > :from AND stopMs > :now
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT DISTINCT epgChannelId FROM epg_programmes WHERE epgChannelId IN (:epgChannelIds)
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT DISTINCT sourceId FROM epg_channels WHERE epgChannelId IN (:epgChannelIds)
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT DISTINCT sourceId FROM epg_channels WHERE epgChannelId IN (:epgChannelIds) AND iconUrl IS NOT NULL AND iconUrl != ''
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT EXISTS(SELECT 1 FROM epg_programmes WHERE epgChannelId = :epgChannelId AND stopMs > :from AND startMs < :to)
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT MAX(id) FROM epg_programmes
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT description FROM epg_programmes WHERE id = :programmeId LIMIT 1
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT epgChannelId FROM epg_channels WHERE sourceId = :sourceId
@@ -2047,7 +2050,9 @@
 1	uri	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	$base?$body
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	${g[1]}/streaming/timeshift.php?username=${g[2]}&password=${g[3]}&stream=${g[4]}
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	${g[1]}/streaming/timeshift.php?username=${queryValue(g[2])}&password=${queryValue(g[3])}&stream=${g[6]}&start=${g[5]}&duration=${g[4]}
+1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	${g[1]}archive-${g[2]}-${g[3]}.ts${g[4]}
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	${prefix}archive-$startS-$durationS.ts$query
+1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	${prefix}index-$startS-$durationS.m3u8$query
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	${prefix}timeshift_abs-$startS.m3u8$query
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	%2B
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	&
@@ -2056,6 +2061,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	+
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	.m3u8
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	.ts
+1	regex	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	/timeshift_abs-\\d+\\.m3u8(?:\\?.*)?$
 1	uri	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	?
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	?$it
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	?utc={utc}&lutc={lutc}
@@ -2064,6 +2070,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	YmdHMS
 1	regex	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	\\$?\\{([A-Za-z_][A-Za-z0-9_-]*)(?::([^}]*))?\\}
 1	regex	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	\\$\\{\\((b|e)\\)([^}]+?)(?::(utc))?\\}
+1	regex	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	^(.*/)index-(\\d+)-(\\d+)\\.m3u8((?:\\?.*)?)$
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	^(.+?)/timeshift/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/.]+)\\.(?:ts|m3u8)$
 1	regex	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	^(https?://[^/]+)/(?:live/)?([^/]+)/([^/]+)/(\\d+)(?:\\.[A-Za-z0-9]+)?$
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	append
@@ -2284,6 +2291,11 @@
 1	log	core/src/main/java/tv/own/owntv/core/epg/GuideCandidates.kt	queryMs=${queriedAt - startedAt} totalMs=${SystemClock.elapsedRealtime() - startedAt}
 1	log	core/src/main/java/tv/own/owntv/core/epg/GuideCandidates.kt	rankMs=${SystemClock.elapsedRealtime() - startedAt}
 3	technical	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\0
+1	log	core/src/main/java/tv/own/owntv/core/epg/GuideMatches.kt	GuideMatches
+1	log	core/src/main/java/tv/own/owntv/core/epg/GuideMatches.kt	guide match fill failed
+1	log	core/src/main/java/tv/own/owntv/core/epg/GuideMatches.kt	guide match ids=${ids.size} fromCache=${filled.size} toFetch=${fetch.size} feeds=$carrying
+1	log	core/src/main/java/tv/own/owntv/core/epg/GuideMatches.kt	guide re-sync not queued feed=$id
+1	protocol	core/src/main/java/tv/own/owntv/core/epg/GuideMatches.kt	match
 1	protocol	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	${snapshot.mediaType.name}:${snapshot.tmdbId}
 1	regex	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	(?i)(^|[^\\p{L}])(hd|fhd|4k|uhd)([^\\p{L}]|$)
 1	protocol	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	1080p FHD
@@ -2400,7 +2412,7 @@
 1	log	core/src/main/java/tv/own/owntv/core/live/GuideReader.kt	guide_row source=stored channelId=${channel.id} key=$epgKey shift=$shift
 1	log	core/src/main/java/tv/own/owntv/core/live/GuideReader.kt	guide_slice channels=${channels.size} keys=${keyed.map { it.second }.distinct().size}
 1	log	core/src/main/java/tv/own/owntv/core/live/GuideReader.kt	rows=${rows.size} totalMs=${SystemClock.elapsedRealtime() - startedAt}
-1	log	core/src/main/java/tv/own/owntv/core/live/GuideReader.kt	rows=${stored.size} collapsed=${collapsed.size}
+1	log	core/src/main/java/tv/own/owntv/core/live/GuideReader.kt	rows=${stored.size} collapsed=${collapsed.size} providerTail=${tail.size}
 1	log	core/src/main/java/tv/own/owntv/core/live/GuideReader.kt	shiftGroups=${keyed.groupBy { it.third }.size} chunks=$chunks rows=$rowsRead
 2	log	core/src/main/java/tv/own/owntv/core/live/GuideReader.kt	totalMs=${SystemClock.elapsedRealtime() - startedAt}
 1	log	core/src/main/java/tv/own/owntv/core/live/LiveArchiveUrls.kt	OwnTVHome
@@ -3882,6 +3894,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/settings/SettingsImportRules.kt	live_latency_mode
 1	technical	core/src/main/java/tv/own/owntv/core/settings/SettingsImportRules.kt	live_rewind_step_sec
 1	technical	core/src/main/java/tv/own/owntv/core/settings/SettingsImportRules.kt	mini_player_position
+1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsImportRules.kt	player_dpad_up_down
 1	technical	core/src/main/java/tv/own/owntv/core/settings/SettingsImportRules.kt	player_hold_ok
 1	technical	core/src/main/java/tv/own/owntv/core/settings/SettingsImportRules.kt	player_short_ok
 1	technical	core/src/main/java/tv/own/owntv/core/settings/SettingsImportRules.kt	seek_step_sec
@@ -4073,6 +4086,7 @@
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	pip_on_back
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	pip_size
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	pip_snap
+1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	player_dpad_up_down
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	player_hold_ok
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	player_number_keys_tune
 1	preference-key	core/src/main/java/tv/own/owntv/core/settings/SettingsRepository.kt	player_short_ok

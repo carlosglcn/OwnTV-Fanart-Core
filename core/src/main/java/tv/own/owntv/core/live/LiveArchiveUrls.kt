@@ -23,7 +23,10 @@ class LiveArchiveUrls(
     private val streamUrlResolver: StreamUrlResolver,
     private val settings: tv.own.owntv.core.settings.SettingsRepository,
 ) {
-    /** The archive URL for [programme] on [ch], or null when it can't be built. */
+    /**
+     * The archive URL for [programme] on [ch], or null when it can't be built. Which form a Flussonic
+     * programme gets is [tv.own.owntv.core.epg.CatchupUrl.forSource]'s rule, shared with the Guide.
+     */
     suspend fun forProgramme(ch: ChannelEntity, programme: EpgProgrammeEntity): String? =
         withContext(Dispatchers.IO) {
             val source = sourceDao.getById(ch.sourceId) ?: return@withContext null

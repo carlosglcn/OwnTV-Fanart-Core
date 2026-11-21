@@ -98,13 +98,24 @@ class GuideReader(
                 .map { EpgShift.apply(it, shift) }
         }
         if (stored.isNotEmpty()) {
-            return@withContext epgSourceStore.priority().resolve(stored).also { collapsed ->
-                CorePerf.log {
-                    "guide_row source=stored channelId=${channel.id} key=$epgKey shift=$shift " +
-                        "rows=${stored.size} collapsed=${collapsed.size} " +
-                        "totalMs=${SystemClock.elapsedRealtime() - startedAt}"
-                }
+            val collapsed = epgSourceStore.priority().resolve(stored)
+            // Stored rows that stop before now — a feed not refreshed, or a catch-up channel's past
+            // filled in from its archive up to the last finished programme — leave the rest of the
+            // window to the provider's short EPG, as an empty window does below. Only its rows after
+            // the stored ones are added, so the two never overlap.
+            val storedEnd = collapsed.maxOf { it.stopMs }
+            val tail = if (storedEnd < System.currentTimeMillis() && storedEnd < to) {
+                liveEpgReader.providerProgrammes(channel, cust, globalShiftMinutes)
+                    .filter { it.startMs >= storedEnd && it.stopMs > from && it.startMs < to }
+            } else {
+                emptyList()
             }
+            CorePerf.log {
+                "guide_row source=stored channelId=${channel.id} key=$epgKey shift=$shift " +
+                    "rows=${stored.size} collapsed=${collapsed.size} providerTail=${tail.size} " +
+                    "totalMs=${SystemClock.elapsedRealtime() - startedAt}"
+            }
+            return@withContext if (tail.isEmpty()) collapsed else collapsed + tail
         }
         // Nothing stored for this channel in this window. That is not the same as nothing being on:
         // the bulk guide can simply stop — a feed that ends at midnight leaves today's daytime blank —

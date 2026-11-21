@@ -83,6 +83,11 @@
     <string name="settings_player_number_keys_tune">Números trocam de canal</string>
     <string name="settings_player_number_keys_tune_description">Digitar um número de canal no player ao vivo</string>
     <string name="settings_help_player_number_keys_tune">Digite um número de canal no controle remoto no player ao vivo em tela cheia para ir até esse canal. Desative para deixar os botões numéricos livres para seus atalhos do controle remoto. Digitar um número também exige Números dos canais ativado nas configurações de TV ao vivo.</string>
+    <string name="settings_player_dpad_up_down">Cima/Baixo do direcional</string>
+    <string name="settings_player_dpad_up_down_description">O que Cima e Baixo fazem no player ao vivo</string>
+    <string name="settings_help_player_dpad_up_down">No player ao vivo em tela cheia, Cima e Baixo trocam de canal. Escolha Controles e vistos recentemente para mostrar os controles com Baixo e abrir os canais vistos recentemente com Cima, ou Desativado para que nenhum dos botões faça nada. CH+ e CH− sempre trocam de canal.</string>
+    <string name="settings_player_dpad_zap">Trocar de canal</string>
+    <string name="settings_player_dpad_controls_history">Controles e vistos recentemente</string>
     <string name="settings_player_ok_channel_list">Lista de canais</string>
     <string name="settings_player_ok_guide">Guia</string>
     <string name="settings_player_ok_programme_info">Informações do programa</string>

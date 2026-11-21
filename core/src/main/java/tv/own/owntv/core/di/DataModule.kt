@@ -446,6 +446,8 @@ val dataModule = module {
     single { UpdateManager(androidContext(), get(), get()) }
     single { CatalogSyncScheduler(androidContext()) }
     single { EpgSyncScheduler(androidContext()) }
+    // customize, epgRepository, epgDao, epgSourceStore, epgSyncScheduler — every guide match, both apps.
+    single { tv.own.owntv.core.epg.GuideMatches(get(), get(), get(), get(), get()) }
     // settings, sourceRepository, profileDao, catalogSyncScheduler, epgSyncScheduler, epgSourceStore,
     // epgDao, importFinalizer, vodResort — the Auto refresh settings, run by both apps on start and resume.
     single { tv.own.owntv.core.sync.AutoRefresh(get(), get(), get(), get(), get(), get(), get(), get(), get()) }

@@ -120,6 +120,7 @@
     <string name="content_no_epg">EPG نییە</string>
     <string name="content_live_day_time_range"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="start">%2$s</xliff:g> – <xliff:g id="stop">%3$s</xliff:g></string>
     <string name="content_catchup">Catch-up</string>
+    <string name="content_channel_archive">ئەرشیف</string>
     <string name="content_play_external_short">پەخشکردن لە لێدەری دەرەکی</string>
     <string name="content_rename">ناوگۆڕین</string>
     <string name="content_rename_channel">ناوگۆڕینی کەناڵ</string>

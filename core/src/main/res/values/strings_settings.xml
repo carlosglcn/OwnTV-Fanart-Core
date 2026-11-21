@@ -167,6 +167,16 @@
     <string name="settings_player_number_keys_tune_description">Type a channel number in the live player</string>
     <!-- Translators: Explanation shown in the panel beside the Settings rows while "Number keys tune channels" has focus. -->
     <string name="settings_help_player_number_keys_tune">Type a channel number on the remote in the full-screen live player to jump to that channel. Turn this off to leave the number buttons free for your remote shortcuts. Typing a number also needs Channel numbers on in the Live TV settings.</string>
+    <!-- Translators: Setting label: what the D-pad Up and Down buttons do in the full-screen live player. -->
+    <string name="settings_player_dpad_up_down">D-pad Up/Down</string>
+    <!-- Translators: One-line description under the "D-pad Up/Down" setting. -->
+    <string name="settings_player_dpad_up_down_description">What Up and Down do in the live player</string>
+    <!-- Translators: Explanation shown in the panel beside the Settings rows while "D-pad Up/Down" has focus. "Recently watched" is the list of channels watched before. -->
+    <string name="settings_help_player_dpad_up_down">In the full-screen live player, Up and Down change channel. Choose Controls and recently watched to show the controls with Down and open your recently watched channels with Up, or Off to make both buttons do nothing. CH+ and CH− always change channel.</string>
+    <!-- Translators: Choice for "D-pad Up/Down": Up and Down change channel. -->
+    <string name="settings_player_dpad_zap">Change channel</string>
+    <!-- Translators: Choice for "D-pad Up/Down": Down shows the player controls, Up opens the recently watched channels. -->
+    <string name="settings_player_dpad_controls_history">Controls and recently watched</string>
     <!-- Translators: Choice for the player's OK button: open the channel list over the video. -->
     <string name="settings_player_ok_channel_list">Channel list</string>
     <!-- Translators: Choice for the player's OK button: open the TV guide (EPG). -->

@@ -2607,7 +2607,10 @@ class OwnTVPlayer(
             // "both engines failed"; same mpv-first single-connection ordering as the preferred-engine path.
             if (attachedSurface == null) return
             android.util.Log.i(TAG, "HUD engine toggle: mpv → ExoPlayer")
-            val pos = if (load.fileLoaded && _position.value > 0) _position.value else load.pendingSeekMs
+            // The same rule as the other direction: a catch-up archive has no Range support, so it restarts
+            // at its beginning. Handed an offset, ExoPlayer waited on it with one input buffer queued until
+            // its no-frame watchdog (12 s) restarted it at 0 — in software, on the TCL.
+            val pos = if (item.archiveThisItem) 0L else if (load.fileLoaded && _position.value > 0) _position.value else load.pendingSeekMs
             // Carry the active subtitle across the switch: session externals are re-seeded into
             // ExoPlayer by startExo — an active external is selected there by label, an embedded pick
             // by its ordinal (via load.pendingExoSub).
@@ -3237,25 +3240,32 @@ class OwnTVPlayer(
      */
     private fun alternateFormatUrl(): String? {
         val base = item.altFormatBaseUrl ?: return null
-        // A refusal — 403, 429, a session limit — is the panel answering the *account*, and the same
-        // answer waits at every URL on it. Swapping the extension can only invent a URL that 404s, so
-        // this rung stays out of the way and lets the real refusal reach the user's screen.
-        val refused = load.lastMpvError?.let { PlayerErrors.httpStatusIn(it) }
-            ?.let { LiveStreamQuirks.isRequestRefusal(it) } == true
-        if (refused) return null
+        if (refusedByAccount()) return null
         return LiveStreamQuirks.alternateFormatUrl(base)?.takeIf { it != currentUrl }
     }
 
     /**
+     * A refusal — 403, 429, a session limit — is the panel answering the *account*, and the same answer
+     * waits at every URL on it. Another address can only invent a URL that 404s, so the format rungs stay
+     * out of the way and let the real refusal reach the user's screen.
+     */
+    private fun refusedByAccount(): Boolean =
+        load.lastMpvError?.let { PlayerErrors.httpStatusIn(it) }?.let { LiveStreamQuirks.isRequestRefusal(it) } == true
+
+    /**
      * The `.ts` address of a catch-up asked for as `.m3u8` (the playlist's "Prefer HLS for catch-up"), once
      * per item; null for anything else. MPEG-TS is the form every timeshift server serves, so it is where an
-     * HLS request that will not open goes back to.
+     * HLS request that will not open goes back to. A Flussonic VOD playlist goes to its `archive-….ts`, the
+     * address it has with the switch off; its sliding window `timeshift_abs-….m3u8` has no MPEG-TS sibling
+     * and gets none. Any other `.m3u8` goes to its `.ts` sibling.
      */
     private fun archiveHlsFallbackUrl(): String? {
         if (isLiveContent || !item.archiveThisItem || item.triedAltFormat) return null
         val base = item.altFormatBaseUrl ?: return null
         if (!base.substringBefore('?').endsWith(".m3u8", ignoreCase = true)) return null
-        return alternateFormatUrl()
+        if (tv.own.owntv.core.epg.CatchupUrl.isFlussonicSlidingWindow(base)) return null
+        val flussonicTs = tv.own.owntv.core.epg.CatchupUrl.flussonicArchiveTs(base) ?: return alternateFormatUrl()
+        return flussonicTs.takeUnless { refusedByAccount() || it == currentUrl }
     }
 
     /**
