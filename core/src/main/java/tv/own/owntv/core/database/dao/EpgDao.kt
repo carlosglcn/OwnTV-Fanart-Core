@@ -222,6 +222,16 @@ interface EpgDao {
     @Query("SELECT DISTINCT epgChannelId FROM epg_programmes WHERE epgChannelId IN (:keys) AND startMs > :from AND stopMs > :now")
     suspend fun keysWithGuideFrom(keys: List<String>, from: Long, now: Long): List<String>
 
+    /**
+     * glcn: what is on now on these guide ids — only what tells its kind (the Guide's "Type" filter). [from] bounds
+     * the read to programmes that began lately, so the (epgChannelId, startMs) index serves it.
+     */
+    @Query(
+        "SELECT epgChannelId, categories, year, lengthMin, episode, startMs, stopMs FROM epg_programmes " +
+            "WHERE epgChannelId IN (:keys) AND startMs > :from AND startMs <= :now AND stopMs > :now",
+    )
+    suspend fun nowKinds(keys: List<String>, from: Long, now: Long): List<NowKindRow>
+
     @Query("SELECT MAX(id) FROM epg_programmes")
     suspend fun newestProgrammeId(): Long?
 
@@ -306,3 +316,14 @@ interface EpgDao {
     @Query("DELETE FROM epg_channels WHERE sourceId = :sourceId")
     suspend fun clearChannelsForSource(sourceId: Long)
 }
+
+/** glcn: one programme on air, reduced to what tells a film from a match from the news. */
+data class NowKindRow(
+    val epgChannelId: String,
+    val categories: String?,
+    val year: Int?,
+    val lengthMin: Int?,
+    val episode: String?,
+    val startMs: Long,
+    val stopMs: Long,
+)
