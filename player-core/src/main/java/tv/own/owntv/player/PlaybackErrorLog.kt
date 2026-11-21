@@ -343,7 +343,16 @@ object PlaybackErrorLog {
                 appendLine()
             }
             // glcn: from the file when there is one, so the lines from before a freeze or a crash are in the report.
-            val live = LiveDiagnosticsLog.tail()?.takeIf { it.isNotBlank() } ?: LiveDiagnosticsLog.snapshot()
+            // The file is only written while diagnostics are on: with them off (after a reinstall, say) it stopped at
+            // the last session and the report showed yesterday's lines for today's failures. What this run holds in
+            // memory and the file does not is added after it.
+            val filed = LiveDiagnosticsLog.tail()?.takeIf { it.isNotBlank() }
+            val fresh = LiveDiagnosticsLog.snapshot()
+            val live = if (filed == null) fresh else {
+                val known = filed.lineSequence().toHashSet()
+                val added = fresh.lineSequence().filter { it.isNotBlank() && it !in known }.toList()
+                if (added.isEmpty()) filed else filed + System.lineSeparator() + added.joinToString(System.lineSeparator())
+            }
             if (live.isNotBlank()) {
                 appendLine("--- live diagnostics (most recent) ---")
                 appendLine(live)
