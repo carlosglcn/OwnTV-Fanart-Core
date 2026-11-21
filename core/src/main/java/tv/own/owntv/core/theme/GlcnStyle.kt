@@ -29,7 +29,14 @@ enum class GlcnStyle(
     /** glcn: how the gradient lives — [MOTION_STILL], [MOTION_DRIFT] (soft lights drifting slowly) or [MOTION_ART]
      *  (taken from the focused picture, over the drifting lights where there is none). */
     val motion: Int = GLCN_MOTION_STILL,
+    /**
+     * glcn: a second accent — with it the style's accent is a gradient ([accentHex] → this) on buttons and bars, and
+     * focus is an outline in that gradient instead of a fill, so the picture under a focused card still shows.
+     */
+    val accent2Hex: String? = null,
 ) {
+    // Brasa: warm graphite, an amber-to-coral accent and outlined focus. First, so a new install opens on it.
+    BRASA(false, "#F5A524", 0xFF121110, 0xFF1B1917, 0xFFF4F1EC, 0xFFB9B2A8, 0xFFD9D3CA, accent2Hex = "#F0603A"),
     // Lumen: clear glass over a near-black or pearl page, one turquoise accent (no other style uses it).
     LUMEN_NOCHE(false, "#4FD1C5", 0xFF06090A, 0xFF111C1C, 0xFFF2F7F6, 0xFFA5B2B0, 0xFFC9D3D1, glass = true),
     LUMEN_DIA(true, "#0E8F86", 0xFFF3F5F2, 0xFFFFFFFF, 0xFF0D1413, 0xFF566663, 0xFF2A3836, glass = true),

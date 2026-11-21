@@ -1316,8 +1316,8 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT COUNT(*) FROM epg_programmes WHERE sourceId IN (:sourceIds)
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT COUNT(DISTINCT epgChannelId) FROM epg_programmes WHERE sourceId IN (:sourceIds)
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT DISTINCT epgChannelId FROM epg_programmes LIMIT :limit
-1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT DISTINCT epgChannelId FROM epg_programmes WHERE epgChannelId IN (:keys) AND startMs > :from AND stopMs > :now
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT DISTINCT epgChannelId FROM epg_programmes WHERE epgChannelId IN (:epgChannelIds)
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT DISTINCT epgChannelId FROM epg_programmes WHERE epgChannelId IN (:keys) AND startMs > :from AND stopMs > :now
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT DISTINCT sourceId FROM epg_channels WHERE epgChannelId IN (:epgChannelIds)
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT DISTINCT sourceId FROM epg_channels WHERE epgChannelId IN (:epgChannelIds) AND iconUrl IS NOT NULL AND iconUrl != ''
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT EXISTS(SELECT 1 FROM epg_programmes WHERE epgChannelId = :epgChannelId AND stopMs > :from AND startMs < :to)
@@ -2290,12 +2290,12 @@
 1	log	core/src/main/java/tv/own/owntv/core/epg/GuideCandidates.kt	namedLimitHit=${named.size >= limit} programmeLimitHit=${withProgrammes.size >= limit}
 1	log	core/src/main/java/tv/own/owntv/core/epg/GuideCandidates.kt	queryMs=${queriedAt - startedAt} totalMs=${SystemClock.elapsedRealtime() - startedAt}
 1	log	core/src/main/java/tv/own/owntv/core/epg/GuideCandidates.kt	rankMs=${SystemClock.elapsedRealtime() - startedAt}
-3	technical	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\0
 1	log	core/src/main/java/tv/own/owntv/core/epg/GuideMatches.kt	GuideMatches
 1	log	core/src/main/java/tv/own/owntv/core/epg/GuideMatches.kt	guide match fill failed
 1	log	core/src/main/java/tv/own/owntv/core/epg/GuideMatches.kt	guide match ids=${ids.size} fromCache=${filled.size} toFetch=${fetch.size} feeds=$carrying
 1	log	core/src/main/java/tv/own/owntv/core/epg/GuideMatches.kt	guide re-sync not queued feed=$id
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/GuideMatches.kt	match
+3	technical	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	\0
 1	protocol	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	${snapshot.mediaType.name}:${snapshot.tmdbId}
 1	regex	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	(?i)(^|[^\\p{L}])(hd|fhd|4k|uhd)([^\\p{L}]|$)
 1	protocol	core/src/main/java/tv/own/owntv/core/home/HomeFeed.kt	1080p FHD
@@ -6866,6 +6866,8 @@
 1	technical	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#4FD1C5
 1	technical	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#5EEAD4
 1	technical	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#67E8F9
+1	technical	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#F0603A
+1	technical	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#F5A524
 1	technical	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#FBBF24
 1	technical	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#FFB199
 1	technical	core/src/main/java/tv/own/owntv/core/theme/Palette.kt	#

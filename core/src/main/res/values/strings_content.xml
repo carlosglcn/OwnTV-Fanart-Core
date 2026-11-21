@@ -817,6 +817,7 @@
     <string name="glcn_setup_home_cinema">The picture of what you point at fills the screen, with its details; the rows below</string>
     <string name="glcn_setup_home_dock">The title large over its picture, and a dock that rises from the bottom with one wide card and narrow ones, a tab for each row</string>
     <string name="glcn_setup_home_panel">The rows on the left and a fixed panel on the right with what you point at</string>
+    <string name="glcn_style_brasa" translatable="false">Brasa</string>
     <string name="glcn_style_lumen_noche" translatable="false">Lumen Noche</string>
     <string name="glcn_style_lumen_dia" translatable="false">Lumen Día</string>
     <string name="glcn_style_atardecer" translatable="false">Atardecer</string>
