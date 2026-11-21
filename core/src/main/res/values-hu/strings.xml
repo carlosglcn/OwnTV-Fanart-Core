@@ -179,4 +179,8 @@
     <string name="shell_now_playing_audio">Hang</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">Elvetés</string>
+    <string name="database_migration_title">Adatbázis-migráció folyamatban</string>
+    <string name="database_migration_body">Ez a verzió új adatbázis-formátumban tárolja a csatornáidat, filmjeidet és sorozataidat. Ez csak egyszer történik meg, és nagy lejátszási listáknál akár 2 percig is tarthat.</string>
+    <string name="database_migration_keep">A lejátszási listáid, kedvenceid és előzményeid megmaradnak. Semmi sem töltődik le újra. Kérjük, ne kapcsold ki a tévét, és ne zárd be az alkalmazást.</string>
+    <string name="database_migration_keep_mobile">A lejátszási listáid, kedvenceid és előzményeid megmaradnak. Semmi sem töltődik le újra. Kérjük, hagyd nyitva az alkalmazást.</string>
 </resources>

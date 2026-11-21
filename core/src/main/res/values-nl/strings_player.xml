@@ -56,6 +56,13 @@
     <string name="player_adjust">AANPASSEN</string>
     <string name="player_search_subtitles">Zoeken op OpenSubtitles</string>
     <string name="player_select_local_subtitle">Lokaal ondertitelingsbestand selecteren</string>
+    <string name="player_subtitle_find_in_folder">Zoeken in map</string>
+    <string name="player_subtitle_folder_title">Ondertitels in map</string>
+    <string name="player_subtitle_folder_choose">Ondertitelmap kiezen</string>
+    <string name="player_subtitle_folder_change">Map wijzigen</string>
+    <string name="player_subtitle_folder_empty">Geen ondertitelbestanden in deze map</string>
+    <string name="player_subtitle_folder_auto">Passende ondertitel automatisch laden</string>
+    <string name="player_subtitle_folder_auto_description">Een film of aflevering zonder eigen ondertitel krijgt het ene bestand hier dat bij de naam past. Passen er meerdere, dan wordt er geen geladen.</string>
     <string name="player_no_tracks">Geen sporen beschikbaar.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · afbeelding</string>
     <string name="player_av_sync">A/V-synchronisatie</string>

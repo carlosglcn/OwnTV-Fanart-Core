@@ -224,9 +224,11 @@
     <string name="setup_prefer_hls_live_tv">Foretræk HLS til Live-tv</string>
     <string name="setup_hide_new_categories">Skjul som standard nye kategorier</string>
     <string name="setup_hide_new_categories_description">Gælder hele profilen: Kategorier, der vises ved fremtidige synkroniseringer, er skjult fra starten. Du kan altid se dem under Tilpas.</string>
-    <string name="setup_prefer_hls_description">Prioriter HLS (.m3u8) frem for MPEG-TS til live-tv. Falder tilbage til MPEG-TS, hvis HLS fejler. Catch-up bruger altid MPEG-TS.</string>
-    <string name="setup_prefer_hls_description_supported">Prioriter HLS (.m3u8) frem for MPEG-TS til live-tv. Falder tilbage til MPEG-TS, hvis HLS fejler. Catch-up bruger altid MPEG-TS. Din udbyder angiver HLS-understøttelse.</string>
-    <string name="setup_prefer_hls_description_unsupported">Prioriter HLS (.m3u8) frem for MPEG-TS til live-tv. Falder tilbage til MPEG-TS, hvis HLS fejler. Catch-up bruger altid MPEG-TS. Din udbyder angiver ikke HLS-understøttelse — du kan stadig prøve det.</string>
+    <string name="setup_prefer_hls_description">Prioriter HLS (.m3u8) frem for MPEG-TS til live-tv. Falder tilbage til MPEG-TS, hvis HLS fejler.</string>
+    <string name="setup_prefer_hls_description_supported">Prioriter HLS (.m3u8) frem for MPEG-TS til live-tv. Falder tilbage til MPEG-TS, hvis HLS fejler. Din udbyder angiver HLS-understøttelse.</string>
+    <string name="setup_prefer_hls_description_unsupported">Prioriter HLS (.m3u8) frem for MPEG-TS til live-tv. Falder tilbage til MPEG-TS, hvis HLS fejler. Din udbyder angiver ikke HLS-understøttelse — du kan stadig prøve det.</string>
+    <string name="setup_prefer_hls_catchup">Foretræk HLS til catch-up</string>
+    <string name="setup_prefer_hls_catchup_description">Hent catch-up-programmer som HLS (.m3u8) i stedet for MPEG-TS. Falder tilbage til MPEG-TS, hvis HLS fejler. Kun nogle udbydere tilbyder catch-up som HLS.</string>
     <string name="setup_hls_test_support">Test HLS-understøttelse</string>
     <string name="setup_hls_testing">Tester HLS…</string>
     <string name="setup_hls_test_failed">Testen mislykkedes: <xliff:g id="reason">%1$s</xliff:g></string>

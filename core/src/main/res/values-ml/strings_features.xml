@@ -340,6 +340,7 @@
     <string name="sports_tab_stats">സ്ഥിതിവിവരം</string>
     <string name="sports_tab_lineups">ലൈനപ്പുകൾ</string>
     <string name="sports_tab_table">പട്ടിക</string>
+    <string name="sports_tab_standings">നില</string>
     <string name="sports_following">പിന്തുടരുന്നു</string>
     <string name="sports_follow">പിന്തുടരുക</string>
     <string name="sports_event_goal">ഗോൾ · <xliff:g id="player">%1$s</xliff:g></string>
@@ -403,6 +404,7 @@
     <string name="sports_playing_now">ഇപ്പോൾ പ്ലേ ചെയ്യുന്നു</string>
     <string name="sports_switch_channel">ചാനൽ മാറ്റുക</string>
     <string name="sports_tab_fixtures">ഫിക്സ്ചറുകൾ</string>
+    <string name="sports_tab_games">മത്സരങ്ങൾ</string>
     <string name="sports_tab_results">ഫലങ്ങൾ</string>
     <string name="sports_tab_scores">സ്കോറുകൾ</string>
     <string name="sports_tab_calendar">കലണ്ടർ</string>
@@ -449,6 +451,10 @@
     <string name="sports_table_lost">തോ</string>
     <string name="sports_table_difference">ഗോ.വ്യ</string>
     <string name="sports_table_points">പോ</string>
+    <string name="sports_table_tied">സ</string>
+    <string name="sports_table_ot_losses">ഓതോ</string>
+    <string name="sports_table_win_percent">ശത</string>
+    <string name="sports_table_games_behind">പി</string>
     <string name="sports_table_form">ഫോം</string>
     <string name="sports_this_matchday">ഈ റൗണ്ട്</string>
     <string name="sports_settings_what">എന്ത് കാണിക്കണം</string>

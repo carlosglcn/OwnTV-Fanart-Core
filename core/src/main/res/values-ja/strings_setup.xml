@@ -221,9 +221,11 @@
     <string name="setup_prefer_hls_live_tv">ライブTVでHLSを優先</string>
     <string name="setup_hide_new_categories">新しいカテゴリをデフォルトで非表示</string>
     <string name="setup_hide_new_categories_description">プロフィール全体の設定です。今後の同期で追加されたカテゴリは、最初は非表示になります。［カスタマイズ］でいつでも確認できます。</string>
-    <string name="setup_prefer_hls_description">ライブTVでは、MPEG-TSよりHLS（.m3u8）を優先します。HLSが失敗した場合はMPEG-TSにフォールバックします。キャッチアップは常にMPEG-TSを使用します。</string>
-    <string name="setup_prefer_hls_description_supported">ライブTVでは、MPEG-TSよりHLS（.m3u8）を優先します。HLSが失敗した場合はMPEG-TSにフォールバックします。キャッチアップは常にMPEG-TSを使用します。プロバイダーはHLSサポートを報告しています。</string>
-    <string name="setup_prefer_hls_description_unsupported">ライブTVでは、MPEG-TSよりHLS（.m3u8）を優先します。HLSが失敗した場合はMPEG-TSにフォールバックします。キャッチアップは常にMPEG-TSを使用します。プロバイダーはHLSサポートを報告していませんが、試すことはできます。</string>
+    <string name="setup_prefer_hls_description">ライブTVでは、MPEG-TSよりHLS（.m3u8）を優先します。HLSが失敗した場合はMPEG-TSにフォールバックします。</string>
+    <string name="setup_prefer_hls_description_supported">ライブTVでは、MPEG-TSよりHLS（.m3u8）を優先します。HLSが失敗した場合はMPEG-TSにフォールバックします。プロバイダーはHLSサポートを報告しています。</string>
+    <string name="setup_prefer_hls_description_unsupported">ライブTVでは、MPEG-TSよりHLS（.m3u8）を優先します。HLSが失敗した場合はMPEG-TSにフォールバックします。プロバイダーはHLSサポートを報告していませんが、試すことはできます。</string>
+    <string name="setup_prefer_hls_catchup">キャッチアップでHLSを優先</string>
+    <string name="setup_prefer_hls_catchup_description">キャッチアップ番組をMPEG-TSではなくHLS（.m3u8）で要求します。HLSが失敗した場合はMPEG-TSにフォールバックします。キャッチアップをHLSで提供しているプロバイダーは一部のみです。</string>
     <string name="setup_hls_test_support">HLSサポートをテスト</string>
     <string name="setup_hls_testing">HLSをテスト中…</string>
     <string name="setup_hls_test_failed">テストに失敗しました: <xliff:g id="reason">%1$s</xliff:g></string>

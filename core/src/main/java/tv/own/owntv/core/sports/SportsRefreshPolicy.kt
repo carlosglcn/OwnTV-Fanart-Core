@@ -3,6 +3,9 @@ package tv.own.owntv.core.sports
 import tv.own.owntv.core.sports.model.Match
 import tv.own.owntv.core.sports.model.MatchState
 import tv.own.owntv.core.sports.model.Sport
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
 
 /**
  * What a screen is showing, and so what it needs kept fresh. A screen holds one while it is visible
@@ -143,13 +146,20 @@ class SportsRefreshPolicy {
             val wake = wakeAt(feeds[feed], want, now) ?: return
             out[feed] = minOf(out[feed] ?: wake, wake)
         }
-        /** A league's scoreboard: at the live setting while live, else at its next kick-off. */
+        /**
+         * A league's scoreboard: at the live setting while live, else at its next kick-off. Both its
+         * days are fetched again once the Eastern day they were fetched on has ended: yesterday's
+         * "tomorrow" is today.
+         */
         fun league(key: String) {
-            val known = feeds[Feed.Scoreboard(key)]?.matches.orEmpty() + feeds[Feed.Scoreboard(key, tomorrow = true)]?.matches.orEmpty()
+            val today = Feed.Scoreboard(key)
+            val next = Feed.Scoreboard(key, tomorrow = true)
+            val known = feeds[today]?.matches.orEmpty() + feeds[next]?.matches.orEmpty()
             when {
-                isLive(known, now) -> want(Feed.Scoreboard(key), Want.Every(liveMs))
-                else -> nextKickoff(known, now)?.let { want(Feed.Scoreboard(key), Want.At(it)) }
+                isLive(known, now) -> want(today, Want.Every(liveMs))
+                else -> nextKickoff(known, now)?.let { want(today, Want.At(it)) }
             }
+            for (feed in listOf(today, next)) feeds[feed]?.fetchedAt?.let { want(feed, Want.At(nextEspnDay(it))) }
         }
 
         /** A league's table, once, where it has one: a cup's is empty every time. */
@@ -236,6 +246,14 @@ class SportsRefreshPolicy {
             AutoRebuild.H8 -> 8
             AutoRebuild.APP_START, AutoRebuild.MANUAL -> 0
         }
+
+        /** ESPN's day is the US Eastern one. */
+        private val ESPN_ZONE: ZoneId = ZoneId.of("America/New_York")
+
+        fun espnDay(at: Long): LocalDate = Instant.ofEpochMilli(at).atZone(ESPN_ZONE).toLocalDate()
+
+        /** When the Eastern day that [at] falls on ends. */
+        fun nextEspnDay(at: Long): Long = espnDay(at).plusDays(1).atStartOfDay(ESPN_ZONE).toInstant().toEpochMilli()
 
         /** Live, or past its kick-off and not yet updated by ESPN. */
         fun isLive(matches: List<Match>, now: Long): Boolean = matches.any {

@@ -340,6 +340,7 @@
     <string name="sports_tab_stats">आँकड़े</string>
     <string name="sports_tab_lineups">लाइन-अप</string>
     <string name="sports_tab_table">अंक तालिका</string>
+    <string name="sports_tab_standings">तालिका</string>
     <string name="sports_following">फ़ॉलो कर रहे हैं</string>
     <string name="sports_follow">फ़ॉलो करें</string>
     <string name="sports_event_goal">गोल · <xliff:g id="player">%1$s</xliff:g></string>
@@ -403,6 +404,7 @@
     <string name="sports_playing_now">अभी चल रहा है</string>
     <string name="sports_switch_channel">चैनल बदलें</string>
     <string name="sports_tab_fixtures">कार्यक्रम</string>
+    <string name="sports_tab_games">मैच</string>
     <string name="sports_tab_results">नतीजे</string>
     <string name="sports_tab_scores">स्कोर</string>
     <string name="sports_tab_calendar">कैलेंडर</string>
@@ -449,6 +451,10 @@
     <string name="sports_table_lost">हा</string>
     <string name="sports_table_difference">अंतर</string>
     <string name="sports_table_points">अंक</string>
+    <string name="sports_table_tied">ड्रॉ</string>
+    <string name="sports_table_ot_losses">ओहा</string>
+    <string name="sports_table_win_percent">प्रति</string>
+    <string name="sports_table_games_behind">पीछे</string>
     <string name="sports_table_form">फ़ॉर्म</string>
     <string name="sports_this_matchday">यह मैचडे</string>
     <string name="sports_settings_what">क्या दिखाएँ</string>

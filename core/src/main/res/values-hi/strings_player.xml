@@ -56,6 +56,13 @@
     <string name="player_adjust">समायोजित करें</string>
     <string name="player_search_subtitles">OpenSubtitles पर खोजें</string>
     <string name="player_select_local_subtitle">स्थानीय सबटाइटल फ़ाइल चुनें</string>
+    <string name="player_subtitle_find_in_folder">फ़ोल्डर में खोजें</string>
+    <string name="player_subtitle_folder_title">फ़ोल्डर के सबटाइटल</string>
+    <string name="player_subtitle_folder_choose">सबटाइटल फ़ोल्डर चुनें</string>
+    <string name="player_subtitle_folder_change">फ़ोल्डर बदलें</string>
+    <string name="player_subtitle_folder_empty">इस फ़ोल्डर में कोई सबटाइटल फ़ाइल नहीं है</string>
+    <string name="player_subtitle_folder_auto">मेल खाने वाला सबटाइटल अपने-आप लोड करें</string>
+    <string name="player_subtitle_folder_auto_description">जिस फ़िल्म या एपिसोड का अपना कोई सबटाइटल नहीं है, उसे यहाँ की वह एकमात्र फ़ाइल मिलती है जो उसके नाम से मेल खाती है। एक से अधिक फ़ाइलें मेल खाएँ तो कोई लोड नहीं होती।</string>
     <string name="player_no_tracks">कोई ट्रैक उपलब्ध नहीं है।</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · चित्र-आधारित</string>
     <string name="player_av_sync">A/V सिंक</string>

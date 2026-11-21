@@ -228,9 +228,11 @@
     <string name="setup_prefer_hls_live_tv">Preferir HLS para la TV en directo</string>
     <string name="setup_hide_new_categories">Ocultar las categorías nuevas de forma predeterminada</string>
     <string name="setup_hide_new_categories_description">Para todo el perfil: las categorías que aparezcan en futuras sincronizaciones estarán ocultas al principio. Puedes verlas cuando quieras en Personalizar.</string>
-    <string name="setup_prefer_hls_description">Prioriza HLS (.m3u8) frente a MPEG-TS para TV en directo. Si HLS falla, se recurre a MPEG-TS. El en diferido siempre usa MPEG-TS.</string>
-    <string name="setup_prefer_hls_description_supported">Prioriza HLS (.m3u8) frente a MPEG-TS para TV en directo. Si HLS falla, se recurre a MPEG-TS. El en diferido siempre usa MPEG-TS. Tu proveedor indica compatibilidad con HLS.</string>
-    <string name="setup_prefer_hls_description_unsupported">Prioriza HLS (.m3u8) frente a MPEG-TS para TV en directo. Si HLS falla, se recurre a MPEG-TS. El en diferido siempre usa MPEG-TS. Tu proveedor no indica compatibilidad con HLS; aun así puedes probarlo.</string>
+    <string name="setup_prefer_hls_description">Prioriza HLS (.m3u8) frente a MPEG-TS para TV en directo. Si HLS falla, se recurre a MPEG-TS.</string>
+    <string name="setup_prefer_hls_description_supported">Prioriza HLS (.m3u8) frente a MPEG-TS para TV en directo. Si HLS falla, se recurre a MPEG-TS. Tu proveedor indica compatibilidad con HLS.</string>
+    <string name="setup_prefer_hls_description_unsupported">Prioriza HLS (.m3u8) frente a MPEG-TS para TV en directo. Si HLS falla, se recurre a MPEG-TS. Tu proveedor no indica compatibilidad con HLS; aun así puedes probarlo.</string>
+    <string name="setup_prefer_hls_catchup">Preferir HLS para el en diferido</string>
+    <string name="setup_prefer_hls_catchup_description">Pide los programas en diferido como HLS (.m3u8) en lugar de MPEG-TS. Si HLS falla, se recurre a MPEG-TS. Solo algunos proveedores ofrecen el en diferido como HLS.</string>
     <string name="setup_hls_test_support">Probar compatibilidad con HLS</string>
     <string name="setup_hls_testing">Probando HLS…</string>
     <string name="setup_hls_test_failed">Prueba fallida: <xliff:g id="reason">%1$s</xliff:g></string>

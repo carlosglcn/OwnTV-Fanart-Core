@@ -324,6 +324,7 @@
     <string name="sports_tab_stats">統計</string>
     <string name="sports_tab_lineups">陣容</string>
     <string name="sports_tab_table">積分榜</string>
+    <string name="sports_tab_standings">排名</string>
     <string name="sports_following">已關注</string>
     <string name="sports_follow">關注</string>
     <string name="sports_event_goal">進球 · <xliff:g id="player">%1$s</xliff:g></string>
@@ -384,6 +385,7 @@
     <string name="sports_playing_now">正在播放</string>
     <string name="sports_switch_channel">切換頻道</string>
     <string name="sports_tab_fixtures">賽程</string>
+    <string name="sports_tab_games">比賽</string>
     <string name="sports_tab_results">賽果</string>
     <string name="sports_tab_scores">比分</string>
     <string name="sports_tab_calendar">行事曆</string>
@@ -430,6 +432,10 @@
     <string name="sports_table_lost">負</string>
     <string name="sports_table_difference">淨勝</string>
     <string name="sports_table_points">積分</string>
+    <string name="sports_table_tied">和</string>
+    <string name="sports_table_ot_losses">延長敗</string>
+    <string name="sports_table_win_percent">勝率</string>
+    <string name="sports_table_games_behind">勝差</string>
     <string name="sports_table_form">近況</string>
     <string name="sports_this_matchday">本輪</string>
     <string name="sports_settings_what">顯示內容</string>

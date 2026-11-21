@@ -132,6 +132,9 @@ data class EpgProgrammeLite(
 /** One programme's synopsis, read only for the programmes the title alone did not match. */
 data class EpgProgrammeText(val id: Long, val description: String?)
 
+/** One programme's title, for the guide title search's case-folded pass — see [tv.own.owntv.core.database.dao.EpgDao.searchTitles]. */
+data class EpgProgrammeTitle(val id: Long, val title: String)
+
 data class EpgHashProjection(
     val id: Long,
     val epgChannelId: String,

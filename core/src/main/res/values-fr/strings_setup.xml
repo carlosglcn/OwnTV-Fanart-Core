@@ -227,9 +227,11 @@
     <string name="setup_prefer_hls_live_tv">Préférer HLS pour la TV en direct</string>
     <string name="setup_hide_new_categories">Masquer les nouvelles catégories par défaut</string>
     <string name="setup_hide_new_categories_description">À l’échelle du profil : les catégories qui apparaissent lors des prochaines synchronisations sont initialement masquées. Retrouvez-les à tout moment dans Personnalisation.</string>
-    <string name="setup_prefer_hls_description">HLS (.m3u8) est prioritaire sur MPEG-TS pour la TV en direct. MPEG-TS sert de secours si HLS échoue. Le rattrapage utilise toujours MPEG-TS.</string>
-    <string name="setup_prefer_hls_description_supported">HLS (.m3u8) est prioritaire sur MPEG-TS pour la TV en direct. MPEG-TS sert de secours si HLS échoue. Le rattrapage utilise toujours MPEG-TS. Votre fournisseur indique prendre en charge HLS.</string>
-    <string name="setup_prefer_hls_description_unsupported">HLS (.m3u8) est prioritaire sur MPEG-TS pour la TV en direct. MPEG-TS sert de secours si HLS échoue. Le rattrapage utilise toujours MPEG-TS. Votre fournisseur n’indique pas prendre en charge HLS — vous pouvez toujours l’essayer.</string>
+    <string name="setup_prefer_hls_description">HLS (.m3u8) est prioritaire sur MPEG-TS pour la TV en direct. MPEG-TS sert de secours si HLS échoue.</string>
+    <string name="setup_prefer_hls_description_supported">HLS (.m3u8) est prioritaire sur MPEG-TS pour la TV en direct. MPEG-TS sert de secours si HLS échoue. Votre fournisseur indique prendre en charge HLS.</string>
+    <string name="setup_prefer_hls_description_unsupported">HLS (.m3u8) est prioritaire sur MPEG-TS pour la TV en direct. MPEG-TS sert de secours si HLS échoue. Votre fournisseur n’indique pas prendre en charge HLS — vous pouvez toujours l’essayer.</string>
+    <string name="setup_prefer_hls_catchup">Préférer HLS pour le rattrapage</string>
+    <string name="setup_prefer_hls_catchup_description">Les programmes en rattrapage sont demandés en HLS (.m3u8) plutôt qu\'en MPEG-TS. MPEG-TS sert de secours si HLS échoue. Seuls certains fournisseurs proposent le rattrapage en HLS.</string>
     <string name="setup_hls_test_support">Tester la prise en charge HLS</string>
     <string name="setup_hls_testing">Test de HLS en cours…</string>
     <string name="setup_hls_test_failed">Échec du test : <xliff:g id="reason">%1$s</xliff:g></string>

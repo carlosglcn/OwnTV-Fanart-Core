@@ -209,4 +209,8 @@
     <string name="shell_now_playing_audio">Dźwięk</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">Odrzuć</string>
+    <string name="database_migration_title">Trwa migracja bazy danych</string>
+    <string name="database_migration_body">Ta wersja zapisuje Twoje kanały, filmy i seriale w nowym formacie bazy danych. Dzieje się to tylko raz i przy dużych playlistach może potrwać do 2 minut.</string>
+    <string name="database_migration_keep">Twoje playlisty, ulubione i historia zostają zachowane. Nic nie jest pobierane ponownie. Nie wyłączaj telewizora i nie zamykaj aplikacji.</string>
+    <string name="database_migration_keep_mobile">Twoje playlisty, ulubione i historia zostają zachowane. Nic nie jest pobierane ponownie. Nie zamykaj aplikacji.</string>
 </resources>

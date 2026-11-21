@@ -224,9 +224,11 @@
     <string name="setup_prefer_hls_live_tv">लाइव टीवी के लिए HLS को प्राथमिकता दें</string>
     <string name="setup_hide_new_categories">नई श्रेणियाँ डिफ़ॉल्ट रूप से छिपाएँ</string>
     <string name="setup_hide_new_categories_description">पूरी प्रोफ़ाइल के लिए: भविष्य के सिंक में दिखाई देने वाली श्रेणियाँ शुरुआत में छिपी रहेंगी। उन्हें कस्टमाइज़ करें में कभी भी देखें।</string>
-    <string name="setup_prefer_hls_description">लाइव टीवी के लिए MPEG-TS के मुकाबले HLS (.m3u8) को प्राथमिकता दें। HLS विफल होने पर MPEG-TS पर वापस आ जाता है। कैच-अप हमेशा MPEG-TS का उपयोग करता है।</string>
-    <string name="setup_prefer_hls_description_supported">लाइव टीवी के लिए MPEG-TS के मुकाबले HLS (.m3u8) को प्राथमिकता दें। HLS विफल होने पर MPEG-TS पर वापस आ जाता है। कैच-अप हमेशा MPEG-TS का उपयोग करता है। आपका प्रदाता HLS समर्थन बताता है।</string>
-    <string name="setup_prefer_hls_description_unsupported">लाइव टीवी के लिए MPEG-TS के मुकाबले HLS (.m3u8) को प्राथमिकता दें। HLS विफल होने पर MPEG-TS पर वापस आ जाता है। कैच-अप हमेशा MPEG-TS का उपयोग करता है। आपका प्रदाता HLS समर्थन नहीं बताता — आप फिर भी इसे आज़मा सकते हैं।</string>
+    <string name="setup_prefer_hls_description">लाइव टीवी के लिए MPEG-TS के मुकाबले HLS (.m3u8) को प्राथमिकता दें। HLS विफल होने पर MPEG-TS पर वापस आ जाता है।</string>
+    <string name="setup_prefer_hls_description_supported">लाइव टीवी के लिए MPEG-TS के मुकाबले HLS (.m3u8) को प्राथमिकता दें। HLS विफल होने पर MPEG-TS पर वापस आ जाता है। आपका प्रदाता HLS समर्थन बताता है।</string>
+    <string name="setup_prefer_hls_description_unsupported">लाइव टीवी के लिए MPEG-TS के मुकाबले HLS (.m3u8) को प्राथमिकता दें। HLS विफल होने पर MPEG-TS पर वापस आ जाता है। आपका प्रदाता HLS समर्थन नहीं बताता — आप फिर भी इसे आज़मा सकते हैं।</string>
+    <string name="setup_prefer_hls_catchup">कैच-अप के लिए HLS को प्राथमिकता दें</string>
+    <string name="setup_prefer_hls_catchup_description">कैच-अप कार्यक्रमों को MPEG-TS के बजाय HLS (.m3u8) के रूप में मांगें। HLS विफल होने पर MPEG-TS पर वापस आ जाता है। केवल कुछ प्रदाता ही कैच-अप को HLS के रूप में देते हैं।</string>
     <string name="setup_hls_test_support">HLS समर्थन जाँचें</string>
     <string name="setup_hls_testing">HLS जाँच हो रही है…</string>
     <string name="setup_hls_test_failed">जाँच विफल रही: <xliff:g id="reason">%1$s</xliff:g></string>

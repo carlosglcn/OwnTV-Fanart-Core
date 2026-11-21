@@ -56,6 +56,13 @@
     <string name="player_adjust">ക്രമീകരിക്കുക</string>
     <string name="player_search_subtitles">OpenSubtitles-ൽ തിരയുക</string>
     <string name="player_select_local_subtitle">ഉപകരണത്തിലെ സബ്‌ടൈറ്റിൽ ഫയൽ തിരഞ്ഞെടുക്കുക</string>
+    <string name="player_subtitle_find_in_folder">ഫോൾഡറിൽ തിരയുക</string>
+    <string name="player_subtitle_folder_title">ഫോൾഡറിലെ സബ്‌ടൈറ്റിലുകൾ</string>
+    <string name="player_subtitle_folder_choose">സബ്‌ടൈറ്റിൽ ഫോൾഡർ തിരഞ്ഞെടുക്കുക</string>
+    <string name="player_subtitle_folder_change">ഫോൾഡർ മാറ്റുക</string>
+    <string name="player_subtitle_folder_empty">ഈ ഫോൾഡറിൽ സബ്‌ടൈറ്റിൽ ഫയലുകളൊന്നുമില്ല</string>
+    <string name="player_subtitle_folder_auto">പൊരുത്തപ്പെടുന്ന സബ്‌ടൈറ്റിൽ സ്വയമേവ ലോഡ് ചെയ്യുക</string>
+    <string name="player_subtitle_folder_auto_description">സ്വന്തമായി സബ്‌ടൈറ്റിൽ ഇല്ലാത്ത സിനിമയ്‌ക്കോ എപ്പിസോഡിനോ അതിന്റെ പേരുമായി പൊരുത്തപ്പെടുന്ന ഇവിടത്തെ ഏക ഫയൽ ലഭിക്കും. ഒന്നിലധികം ഫയലുകൾ പൊരുത്തപ്പെട്ടാൽ ഒന്നും ലോഡ് ചെയ്യില്ല.</string>
     <string name="player_no_tracks">ട്രാക്കുകളൊന്നും ലഭ്യമല്ല.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · ചിത്രം</string>
     <string name="player_av_sync">A/V സമന്വയിപ്പിക്കൽ</string>

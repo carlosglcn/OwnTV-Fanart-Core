@@ -7,6 +7,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import java.util.Locale
 import java.util.Objects
 import tv.own.owntv.core.model.MediaType
 
@@ -49,11 +50,11 @@ data class CategoryEntity(
     indices = [
         Index("epgChannelId"),
         Index(value = ["sourceId", "remoteId"], unique = true),
-        // Composite grid read-indices (v6): A–Z order (ORDER BY name) and playlist/provider order
+        // Composite grid read-indices (v6): A–Z order (ORDER BY nameKey, v56) and playlist/provider order
         // (ORDER BY sortOrder, name), for both the whole-source list and per-category. Mirrors movies/series
         // so all three browse grids (Live/Movies/Series) are index-served in either sort.
-        Index(value = ["sourceId", "name"]),
-        Index(value = ["categoryId", "name"]),
+        Index(value = ["sourceId", "nameKey"]),
+        Index(value = ["categoryId", "nameKey"]),
         Index(value = ["sourceId", "sortOrder", "name"]),
         Index(value = ["categoryId", "sortOrder", "name"]),
         Index(value = ["sourceId", "number"]),
@@ -115,7 +116,18 @@ data class ChannelEntity(
     /** The provider's own name when the playlist's "Clean channel names" changed [name] (v51), so
      *  guide matching keeps seeing what the provider wrote. Null when [name] is that name. */
     val providerName: String? = null,
-)
+) {
+    /** [name] folded for A–Z and search — see [nameKeyOf] (v56). Recomputed by every `copy(name = …)`. */
+    @ColumnInfo(defaultValue = "''")
+    var nameKey: String = nameKeyOf(name)
+}
+
+/**
+ * The form names are sorted and searched by: lowercased with full Unicode case mapping. SQLite's own
+ * `LOWER()`, `LIKE` and `ORDER BY` fold ASCII only, so "один" never found "Один" and A–Z put "arte"
+ * after "ZDFneo". A search query goes through the same function before it reaches `LIKE`.
+ */
+fun nameKeyOf(text: String): String = text.lowercase(Locale.ROOT)
 
 /** The name guide matching compares: the provider's own, not the cleaned display name. */
 val ChannelEntity.matchName: String get() = providerName ?: name
@@ -151,16 +163,16 @@ fun resolveStreamUrl(url: String, source: SourceEntity?): String {
         ForeignKey(entity = SourceEntity::class, parentColumns = ["id"], childColumns = ["sourceId"], onDelete = ForeignKey.CASCADE),
         ForeignKey(entity = CategoryEntity::class, parentColumns = ["id"], childColumns = ["categoryId"], onDelete = ForeignKey.SET_NULL),
     ],
-    // No single-column (sourceId) or (categoryId) index (v52) — see ChannelEntity. (name) stays: the
-    // A–Z list across several playlists would otherwise sort the whole table.
+    // No single-column (sourceId) or (categoryId) index (v52) — see ChannelEntity. (nameKey) stays:
+    // the A–Z list across several playlists would otherwise sort the whole table.
     indices = [
-        Index("name"),
+        Index("nameKey"),
         // Composite (filter + order) indices so the grid's "WHERE sourceId/categoryId ORDER BY name" never
         // falls back to a full temp-B-tree sort of the whole table (100k+ rows → 2–3s) — it seeks + scans.
-        // A–Z order (ORDER BY name) uses the first pair; playlist/provider order (ORDER BY sortOrder, name)
+        // A–Z order (ORDER BY nameKey) uses the first pair; playlist/provider order (ORDER BY sortOrder, name)
         // — the v6 default for Movies/Series/Live — uses the second pair. Both sort paths are index-served.
-        Index(value = ["sourceId", "name"]),
-        Index(value = ["categoryId", "name"]),
+        Index(value = ["sourceId", "nameKey"]),
+        Index(value = ["categoryId", "nameKey"]),
         Index(value = ["sourceId", "sortOrder", "name"]),
         Index(value = ["categoryId", "sortOrder", "name"]),
         Index(value = ["sourceId", "remoteId"], unique = true),
@@ -206,7 +218,11 @@ data class MovieEntity(
     val providerLanguage: String? = null,
     @ColumnInfo(defaultValue = "0") val qualityRank: Int = 0,
     val advertisedCapabilities: String? = null,
-)
+) {
+    /** [name] folded for A–Z and search — see [nameKeyOf] (v56). Recomputed by every `copy(name = …)`. */
+    @ColumnInfo(defaultValue = "''")
+    var nameKey: String = nameKeyOf(name)
+}
 
 @Entity(
     tableName = "series",
@@ -216,11 +232,11 @@ data class MovieEntity(
     ],
     // No single-column (sourceId) or (categoryId) index (v52) — see MovieEntity.
     indices = [
-        Index("name"),
+        Index("nameKey"),
         // Composite (filter + order) indices — see MovieEntity: avoids a full table sort on the Series grid.
-        // A–Z (ORDER BY name) → first pair; playlist/provider (ORDER BY sortOrder, name) → second pair.
-        Index(value = ["sourceId", "name"]),
-        Index(value = ["categoryId", "name"]),
+        // A–Z (ORDER BY nameKey) → first pair; playlist/provider (ORDER BY sortOrder, name) → second pair.
+        Index(value = ["sourceId", "nameKey"]),
+        Index(value = ["categoryId", "nameKey"]),
         Index(value = ["sourceId", "sortOrder", "name"]),
         Index(value = ["categoryId", "sortOrder", "name"]),
         Index(value = ["sourceId", "remoteId"], unique = true),
@@ -262,7 +278,11 @@ data class SeriesEntity(
     val providerLanguage: String? = null,
     @ColumnInfo(defaultValue = "0") val qualityRank: Int = 0,
     val advertisedCapabilities: String? = null,
-)
+) {
+    /** [name] folded for A–Z and search — see [nameKeyOf] (v56). Recomputed by every `copy(name = …)`. */
+    @ColumnInfo(defaultValue = "''")
+    var nameKey: String = nameKeyOf(name)
+}
 
 @Entity(
     tableName = "seasons",

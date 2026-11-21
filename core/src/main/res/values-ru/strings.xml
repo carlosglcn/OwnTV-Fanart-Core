@@ -209,4 +209,8 @@
     <string name="shell_now_playing_audio">Звук</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">Закрыть</string>
+    <string name="database_migration_title">Выполняется миграция базы данных</string>
+    <string name="database_migration_body">Эта версия хранит ваши каналы, фильмы и сериалы в новом формате базы данных. Это происходит только один раз и для больших плейлистов может занять до 2 минут.</string>
+    <string name="database_migration_keep">Ваши плейлисты, избранное и история сохраняются. Ничего не загружается заново. Не выключайте телевизор и не закрывайте приложение.</string>
+    <string name="database_migration_keep_mobile">Ваши плейлисты, избранное и история сохраняются. Ничего не загружается заново. Не закрывайте приложение.</string>
 </resources>

@@ -239,4 +239,8 @@
     <string name="shell_now_playing_audio">صوت</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">تجاهل</string>
+    <string name="database_migration_title">جارٍ ترحيل قاعدة البيانات</string>
+    <string name="database_migration_body">يخزّن هذا الإصدار قنواتك وأفلامك ومسلسلاتك بتنسيق قاعدة بيانات جديد. يحدث هذا مرة واحدة فقط وقد يستغرق حتى دقيقتين مع قوائم التشغيل الكبيرة.</string>
+    <string name="database_migration_keep">تُحفظ قوائم التشغيل والمفضلة والسجل. لن يُعاد تنزيل أي شيء. يُرجى عدم إطفاء التلفزيون أو إغلاق التطبيق.</string>
+    <string name="database_migration_keep_mobile">تُحفظ قوائم التشغيل والمفضلة والسجل. لن يُعاد تنزيل أي شيء. يُرجى إبقاء التطبيق مفتوحًا.</string>
 </resources>

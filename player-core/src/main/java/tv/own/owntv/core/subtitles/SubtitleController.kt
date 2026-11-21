@@ -12,6 +12,7 @@ import org.json.JSONObject
 import tv.own.owntv.core.database.entity.EpisodeEntity
 import tv.own.owntv.core.database.entity.MovieEntity
 import tv.own.owntv.core.database.entity.SeriesEntity
+import tv.own.owntv.core.database.entity.nameKeyOf
 import tv.own.owntv.core.metadata.TitleNormalizer
 import tv.own.owntv.core.settings.SettingsRepository
 import tv.own.owntv.player.OwnTVPlayer
@@ -65,6 +66,8 @@ class SubtitleController(
     // The engine label assigned to each attached file, so a re-attach reuses it rather than
     // generating a fresh (numbered) one — see [rawTrackLabel].
     private val pathToLabel = HashMap<String, String>()
+
+    private val folder = LocalSubtitleFolder(player.appContext)
 
     init {
         // Re-list a title's previously downloaded subtitles whenever its file finishes loading.
@@ -281,9 +284,25 @@ class SubtitleController(
      * UTF-8 copy via the repository, then the same remember/link flow as an OpenSubtitles download
      * so it re-lists on replay and shows in the delete surfaces. No account or network needed.
      */
-    suspend fun applyLocal(file: java.io.File) {
+    suspend fun applyLocal(file: java.io.File) = attachLocal { repository.importLocalFile(file) }
+
+    /** "Find in folder": the chosen folder's subtitles, best match for the item playing first; null with no folder chosen. */
+    suspend fun folderSubtitles(): List<LocalSubtitleFolder.SubtitleFile>? {
+        val location = settings.subtitleFolder.first() ?: return null
+        val files = folder.list(location)
+        val ctx = _current.value ?: return files.sortedBy { nameKeyOf(it.name) }
+        return SubtitleFolderMatch.rank(folderTarget(ctx), files) { it.name }
+    }
+
+    /** A file picked in "Find in folder": the same import, attach and remember as [applyLocal]. */
+    suspend fun applyFromFolder(file: LocalSubtitleFolder.SubtitleFile) =
+        attachLocal { repository.importLocal(file.name, folder.read(file)) }
+
+    private suspend fun attachLocal(import: suspend () -> SubtitleRepository.ResolvedSubtitle) {
         val ctx = _current.value ?: throw NoCurrentItemException()
-        val resolved = repository.importLocalFile(file)
+        val resolved = import()
+        // Another item may have started while the file was read; it is not this one's subtitle.
+        if (_current.value != ctx) throw NoCurrentItemException()
         pathToKey[resolved.path] = resolved.subtitleKey // timing identity, before the attach fires
         player.addExternalSubtitle(
             path = resolved.path,
@@ -338,7 +357,10 @@ class SubtitleController(
         val ctx = _current.value ?: return
         scope.launch {
             val subs = runCatching { repository.restoreForContent(ctx.profileId, ctx.contentKey) }.getOrNull().orEmpty()
-            if (subs.isEmpty()) return@launch
+            if (subs.isEmpty()) {
+                autoLoadFromFolder(ctx)
+                return@launch
+            }
             subs.forEach { pathToKey[it.path] = it.subtitleKey } // timing identities
             // Labels accumulate across the batch, not just against the player: these are all attached
             // in one pass, so the player's list can't yet tell the second Korean sub about the first.
@@ -354,6 +376,28 @@ class SubtitleController(
                 },
             )
         }
+    }
+
+    /**
+     * "Load matching subtitle automatically": an item with no subtitle of its own takes the one file in
+     * the chosen folder that matches it exactly ([SubtitleFolderMatch.isExact]). Two such files — an
+     * English and a German one — are a choice only the viewer can make, so nothing is loaded then.
+     */
+    private suspend fun autoLoadFromFolder(ctx: Context) {
+        if (!settings.subtitleFolderAutoLoad.first()) return
+        val location = settings.subtitleFolder.first() ?: return
+        val target = folderTarget(ctx)
+        val match = runCatching { folder.list(location) }.getOrNull()
+            ?.filter { SubtitleFolderMatch.isExact(target, it.name) }
+            ?.singleOrNull() ?: return
+        if (_current.value != ctx) return
+        runCatching { applyFromFolder(match) }
+            .onFailure { android.util.Log.w(TAG, "folder subtitle not loaded", it) }
+    }
+
+    private fun folderTarget(ctx: Context): SubtitleFolderMatch.Target {
+        val cleaned = TitleNormalizer.normalize(ctx.title)
+        return SubtitleFolderMatch.Target(cleaned.query.ifBlank { ctx.title }, ctx.year ?: cleaned.year, ctx.season, ctx.episode)
     }
 
     // --- delete surfaces (settings screen + per-item long-press) ---
@@ -416,6 +460,8 @@ class SubtitleController(
     }
 
     private companion object {
+        const val TAG = "SubtitleController"
+
         /** OpenSubtitles' region-qualified language codes, e.g. "pt-br", "zh-cn". */
         private val REGION_CODE = Regex("""[a-z]{2}-[a-z]{2}""")
     }

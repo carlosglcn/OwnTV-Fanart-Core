@@ -6,24 +6,23 @@ import java.nio.charset.StandardCharsets
 
 /**
  * Charset normalisation for local subtitle files. Local .srt/.ass
- * files are frequently NOT UTF-8 — Windows-1256 (Arabic), Windows-1252 and ISO-8859 variants are
- * common — and both engines assume UTF-8, so a raw copy would render mojibake. Detection uses
- * juniversalchardet (Mozilla's universalchardet port).
+ * files are frequently NOT UTF-8 — Windows-1252, Windows-1251 and ISO-8859 variants are common — and
+ * both engines assume UTF-8, so a raw copy would render mojibake. Detection uses juniversalchardet
+ * (Mozilla's universalchardet port), which has no Arabic model: a Windows-1256 file is not recognised.
  */
 object SubtitleCharset {
 
     /**
-     * Returns [bytes] as UTF-8 text bytes: already-UTF-8 (or plain ASCII) input is returned as-is
-     * (minus a BOM); anything else is decoded with the detected charset and re-encoded. When
+     * Returns [bytes] as UTF-8 text bytes: valid UTF-8 (or plain ASCII) input is returned as-is (minus
+     * a BOM); anything else is decoded with the detected charset and re-encoded. When
      * detection fails entirely, falls back to Windows-1252 — every byte maps, so worst case a few
      * wrong accents rather than replacement characters everywhere.
      */
     fun toUtf8(bytes: ByteArray): ByteArray {
-        val detected = detect(bytes)
-        val charset = when {
-            detected == null -> if (isValidUtf8(bytes)) StandardCharsets.UTF_8 else charsetOr1252("")
-            else -> charsetOr1252(detected)
-        }
+        // Valid UTF-8 is taken as UTF-8 before the detector is asked: text in a legacy encoding is
+        // practically never valid UTF-8 by accident, while the detector, given a UTF-8 file with only a
+        // few non-ASCII characters, guessed GB18030 and turned every "·" into "路".
+        val charset = if (isValidUtf8(bytes)) StandardCharsets.UTF_8 else charsetOr1252(detect(bytes).orEmpty())
         val body = stripBom(bytes, charset)
         if (charset == StandardCharsets.UTF_8) return body
         return String(body, charset).toByteArray(StandardCharsets.UTF_8)

@@ -453,11 +453,15 @@
     <!-- Translators: Toggle label for preferring HLS streams when an Xtream source offers multiple Live TV formats. -->
     <string name="setup_prefer_hls_live_tv">Prefer HLS for Live TV</string>
     <!-- Translators: Description of the HLS preference. HLS, .m3u8 and MPEG-TS are protocol names and stay unchanged. Catch-up is not affected by this setting. -->
-    <string name="setup_prefer_hls_description">Prioritize HLS (.m3u8) over MPEG-TS for Live TV. Falls back to MPEG-TS if HLS fails. Catch-up always uses MPEG-TS.</string>
+    <string name="setup_prefer_hls_description">Prioritize HLS (.m3u8) over MPEG-TS for Live TV. Falls back to MPEG-TS if HLS fails.</string>
     <!-- Translators: HLS preference description when the provider explicitly reports HLS support. HLS, .m3u8 and MPEG-TS stay unchanged. Catch-up is not affected by this setting. -->
-    <string name="setup_prefer_hls_description_supported">Prioritize HLS (.m3u8) over MPEG-TS for Live TV. Falls back to MPEG-TS if HLS fails. Catch-up always uses MPEG-TS. Your provider reports HLS support.</string>
+    <string name="setup_prefer_hls_description_supported">Prioritize HLS (.m3u8) over MPEG-TS for Live TV. Falls back to MPEG-TS if HLS fails. Your provider reports HLS support.</string>
     <!-- Translators: HLS preference description when the provider does not report HLS support. The user may still enable it because some providers under-report support. -->
-    <string name="setup_prefer_hls_description_unsupported">Prioritize HLS (.m3u8) over MPEG-TS for Live TV. Falls back to MPEG-TS if HLS fails. Catch-up always uses MPEG-TS. Your provider does not report HLS support — you can still try it.</string>
+    <string name="setup_prefer_hls_description_unsupported">Prioritize HLS (.m3u8) over MPEG-TS for Live TV. Falls back to MPEG-TS if HLS fails. Your provider does not report HLS support — you can still try it.</string>
+    <!-- Translators: Toggle label for asking an Xtream source for catch-up programmes as HLS instead of MPEG-TS. HLS stays unchanged. -->
+    <string name="setup_prefer_hls_catchup">Prefer HLS for catch-up</string>
+    <!-- Translators: Description of the catch-up HLS preference. HLS, .m3u8 and MPEG-TS are protocol names and stay unchanged. -->
+    <string name="setup_prefer_hls_catchup_description">Ask for catch-up programmes as HLS (.m3u8) instead of MPEG-TS. Falls back to MPEG-TS if HLS fails. Only some providers offer catch-up as HLS.</string>
 
     <!-- Translators: Button that checks whether an Xtream provider can serve HLS streams. -->
     <string name="setup_hls_test_support">Test HLS support</string>

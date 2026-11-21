@@ -100,7 +100,12 @@ internal class XtreamSyncer(
                     }
                     XtreamStreams(
                         bulk = { add -> xtream.streamLive(s, transform = toChannel, onItem = add, onProgress = SyncSupport.IgnoreByteProgress) },
-                        byCategory = { cat, add -> xtream.streamLive(s, cat.id, transform = toChannel, onItem = add, onProgress = SyncSupport.IgnoreByteProgress) },
+                        // A per-category answer is that category's list, so an item it returns with a
+                        // blank or unknown `category_id` belongs to it, not to no folder at all. The same
+                        // holds for movies and series below.
+                        byCategory = { cat, add ->
+                            xtream.streamLive(s, cat.id, transform = toChannel, onItem = { add(if (it.categoryId == null) it.copy(categoryId = catMap[cat.id]) else it) }, onProgress = SyncSupport.IgnoreByteProgress)
+                        },
                     )
                 },
             ),
@@ -139,7 +144,9 @@ internal class XtreamSyncer(
                         }
                         XtreamStreams(
                             bulk = { add -> xtream.streamVod(s, transform = toMovie, onItem = add, onProgress = SyncSupport.IgnoreByteProgress) },
-                            byCategory = { cat, add -> xtream.streamVod(s, cat.id, transform = toMovie, onItem = add, onProgress = SyncSupport.IgnoreByteProgress) },
+                            byCategory = { cat, add ->
+                                xtream.streamVod(s, cat.id, transform = toMovie, onItem = { add(if (it.categoryId == null) it.copy(categoryId = catMap[cat.id]) else it) }, onProgress = SyncSupport.IgnoreByteProgress)
+                            },
                         )
                     },
                 ),
@@ -180,7 +187,9 @@ internal class XtreamSyncer(
                         }
                         XtreamStreams(
                             bulk = { add -> xtream.streamSeries(s, transform = toSeries, onItem = add, onProgress = SyncSupport.IgnoreByteProgress) },
-                            byCategory = { cat, add -> xtream.streamSeries(s, cat.id, transform = toSeries, onItem = add, onProgress = SyncSupport.IgnoreByteProgress) },
+                            byCategory = { cat, add ->
+                                xtream.streamSeries(s, cat.id, transform = toSeries, onItem = { add(if (it.categoryId == null) it.copy(categoryId = catMap[cat.id]) else it) }, onProgress = SyncSupport.IgnoreByteProgress)
+                            },
                         )
                     },
                 ),

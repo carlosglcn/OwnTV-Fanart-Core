@@ -41,6 +41,9 @@ enum class Sport(val path: String) {
  * [aliases] are the other names guides and channel names use for it ("F1", "Formel 1", "EPL",
  * "La Liga"). [nameMatches] is false when the brand name alone says too little to find it by
  * ("Championship", "Superliga"), so only its aliases are searched.
+ *
+ * [group] is ESPN's division id where the league's scoreboard otherwise answers only its ranked and
+ * televised games (college: 50 is Division I basketball, 80 the top football division).
  */
 data class League(
     val sport: Sport,
@@ -51,6 +54,7 @@ data class League(
     val hasTable: Boolean = true,
     val aliases: List<String> = emptyList(),
     val nameMatches: Boolean = true,
+    val group: Int? = null,
 ) {
     val key: String get() = keyOf(sport, slug)
 

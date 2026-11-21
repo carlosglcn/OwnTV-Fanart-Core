@@ -179,4 +179,8 @@
     <string name="shell_now_playing_audio">Ljud</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">Avvisa</string>
+    <string name="database_migration_title">Databasmigrering pågår</string>
+    <string name="database_migration_body">Den här versionen lagrar dina kanaler, filmer och serier i ett nytt databasformat. Det sker bara en gång och kan ta upp till 2 minuter med stora spellistor.</string>
+    <string name="database_migration_keep">Dina spellistor, favoriter och din historik behålls. Inget laddas ned igen. Stäng inte av tv:n och stäng inte appen.</string>
+    <string name="database_migration_keep_mobile">Dina spellistor, favoriter och din historik behålls. Inget laddas ned igen. Håll appen öppen.</string>
 </resources>

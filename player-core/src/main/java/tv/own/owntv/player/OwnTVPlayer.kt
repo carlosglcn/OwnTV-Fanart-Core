@@ -567,6 +567,7 @@ class OwnTVPlayer(
         const val FROZEN_START_MS = 8_000L         // "playing" with the clock stuck where the picture opened
         const val FROZEN_START_PROOF_MS = 2_000L   // this much progress past the first frame proves playback
         const val ARCHIVE_STALL_MS = 10_000L       // an archive "playing" with its clock stuck this long has stalled
+        const val ARCHIVE_DROP_WINDOW_MS = 20_000L // steady catch-up playback a frame-drop rate is measured over
         // The Exo position emit (500ms) and the fps-chip recheck (1,500ms) used to live here. Both now
         // ride [PlayerHeartbeat]'s shared 1 Hz beat, so neither has an interval of its own any more.
         const val EXO_SUB_DELAY_DEBOUNCE_MS = 350L // settle time before a timing change re-prepares on Exo
@@ -2186,8 +2187,24 @@ class OwnTVPlayer(
     private suspend fun watchArchiveStall(gen: Int) {
         var lastPos = _position.value
         var stillSince = 0L
+        var dropsAtStart: Long? = null
+        var dropsSince = 0L
         while (gen == loadGeneration) {
             delay(1000)
+            // Frames lost, counted over steady playback only: a pause or a refill starts the window again.
+            val tickAt = android.os.SystemClock.elapsedRealtime()
+            if (!_isPlaying.value || _buffering.value) {
+                dropsAtStart = null
+            } else if (dropsAtStart == null) {
+                dropsAtStart = readFrameDrops()
+                dropsSince = tickAt
+            } else if (tickAt - dropsSince >= ARCHIVE_DROP_WINDOW_MS) {
+                val drops = readFrameDrops()
+                if (gen != loadGeneration) return
+                if (drops != null && rescueArchiveDrops(drops - dropsAtStart, tickAt - dropsSince)) return
+                dropsAtStart = drops
+                dropsSince = tickAt
+            }
             val pos = _position.value
             if (pos != lastPos || !_isPlaying.value) {
                 lastPos = pos
@@ -2201,6 +2218,44 @@ class OwnTVPlayer(
                 _archiveStalled.tryEmit(Unit)
                 return
             }
+        }
+    }
+
+    /** Frames mpv has dropped so far on this load, by the output and by the decoder. */
+    private suspend fun readFrameDrops(): Long? = readOnMpv { m ->
+        (m.getPropertyInt("frame-drop-count") ?: 0).toLong() + (m.getPropertyInt("decoder-frame-drop-count") ?: 0)
+    }
+
+    /**
+     * A catch-up that plays but keeps losing frames ([ArchiveDropCheck]). On the copy path the GPU copy is
+     * too slow for this device, so the programme reopens once on the direct hardware path, from its start
+     * (archives have no Range support); the frozen-first-frame watchdog still guards that path. In software
+     * it goes to ExoPlayer, which decodes in hardware. Returns true when playback was moved.
+     */
+    private suspend fun rescueArchiveDrops(dropped: Long, windowMs: Long): Boolean {
+        val (hwdec, fps) = readOnMpv { m -> m.getPropertyString("hwdec-current") to m.getPropertyDouble("container-fps") }
+            ?: return false
+        if (!ArchiveDropCheck.tooMany(dropped, fps ?: Double.NaN, windowMs)) return false
+        val url = currentUrl ?: return false
+        val detail = "catch-up dropped $dropped frames in ${windowMs / 1000}s at ${fps}fps on hwdec='$hwdec'"
+        return when (ArchiveDropCheck.action(hwdec, item.triedDirectAfterDrops)) {
+            ArchiveDropCheck.Action.DIRECT -> {
+                item.triedDirectAfterDrops = true
+                item.forceCopyThisLoad = false
+                android.util.Log.w(TAG, "$detail — reopening on the direct hardware path")
+                LiveDiagnosticsLog.event("$detail — reopening on the direct hardware path")
+                reloadAfterRescue(url, 0L)
+                true
+            }
+            ArchiveDropCheck.Action.EXOPLAYER ->
+                fallbackToExoVod(PlaybackFailure.MpvOpenDecode, mpvStuck = false).also { handed ->
+                    // Only when it happened: an mpv-only engine setting refuses the handover.
+                    if (handed) {
+                        android.util.Log.w(TAG, "$detail — handing to ExoPlayer")
+                        LiveDiagnosticsLog.event("$detail — handing to ExoPlayer")
+                    }
+                }
+            ArchiveDropCheck.Action.NONE -> false
         }
     }
 
@@ -2825,8 +2880,11 @@ class OwnTVPlayer(
             subtitleFontsDir?.let { setOptionString("sub-fonts-dir", it.absolutePath) }
             setOptionString("vo", if (useDirect()) "mediacodec_embed" else "gpu")
             setOptionString("gpu-context", "android")
-            setOptionString("hwdec", if (useDirect()) "mediacodec" else "no")
-            setOptionString("hwdec-codecs", hwdecCodecs)
+            // The current item's decoder, not merely "direct or not": a core rebuilt by a hard reset keeps the
+            // item state, and the next catch-up archive (same copy path, so no reconfig runs) would
+            // otherwise decode in software, which drops frames at 1080p on a TV CPU.
+            setOptionString("hwdec", targetHwdec())
+            setOptionString("hwdec-codecs", hwdecCodecs) // glcn: trimmed to what this device decodes in hardware
             setOptionString("ao", "audiotrack")
             // Surround sound (opt-in, default off): decode Dolby/DTS to MULTICHANNEL LPCM (5.1/7.1) over HDMI. The
             // AudioTrack stays a normal PCM track, so getTimestamp() keeps mpv's audio clock alive and the
@@ -3189,6 +3247,18 @@ class OwnTVPlayer(
     }
 
     /**
+     * The `.ts` address of a catch-up asked for as `.m3u8` (the playlist's "Prefer HLS for catch-up"), once
+     * per item; null for anything else. MPEG-TS is the form every timeshift server serves, so it is where an
+     * HLS request that will not open goes back to.
+     */
+    private fun archiveHlsFallbackUrl(): String? {
+        if (isLiveContent || !item.archiveThisItem || item.triedAltFormat) return null
+        val base = item.altFormatBaseUrl ?: return null
+        if (!base.substringBefore('?').endsWith(".m3u8", ignoreCase = true)) return null
+        return alternateFormatUrl()
+    }
+
+    /**
      * Reopen this stream with FFmpeg's error tolerance on — the rung for a feed mpv's strict demuxer
      * defaults reject outright, and the one that closes most of the "VLC plays it, we don't" gap.
      * Remembered for the session so the same channel doesn't pay the failed strict attempt again.
@@ -3529,10 +3599,11 @@ class OwnTVPlayer(
                         archive = item.archiveThisItem,
                         triedFrozenReset = item.triedFrozenReset,
                         triedOpenReset = item.triedOpenReset,
+                        openTimeoutMs = if (archiveHlsFallbackUrl() != null) FilmWatchdog.ARCHIVE_HLS_OPEN_TIMEOUT_MS else FilmWatchdog.OPEN_TIMEOUT_MS,
                     )
                     // Read off-thread: this loop runs on the main scope, and a blocking JNI read
                     // per tick is exactly what the threading rule at the top of this file forbids.
-                    when (watchdog.step(tick) { readProperty("video-bitrate")?.toLongOrNull()?.let { it > 0 } ?: false }) {
+                    when (val step = watchdog.step(tick) { readProperty("video-bitrate")?.toLongOrNull()?.let { it > 0 } ?: false }) {
                         FilmWatchdog.Step.WAIT -> continue
                         FilmWatchdog.Step.PLAYING -> {
                             // Playing normally. An archive is still watched, for a provider that stops sending.
@@ -3586,7 +3657,20 @@ class OwnTVPlayer(
                             return@launch
                         }
                         FilmWatchdog.Step.SESSION_REFUSED -> return@launch
-                        FilmWatchdog.Step.OPEN_RESET -> {
+                        FilmWatchdog.Step.OPEN_RESET, FilmWatchdog.Step.OPEN_AGAIN -> if (archiveHlsFallbackUrl() != null) {
+                            // A catch-up asked for as HLS that has not opened even in its longer allowance: the
+                            // same address again, or on ExoPlayer, waits on the same slow playlist. Ask for the
+                            // programme as MPEG-TS instead. mpv may be blocked in that read, so it is rebuilt.
+                            val tsInstead = archiveHlsFallbackUrl()!!
+                            item.triedAltFormat = true
+                            android.util.Log.w(TAG, "watchdog T_OPEN — catch-up as HLS did not open in ${elapsed}ms, asking for MPEG-TS")
+                            load.expectingPlayback = false
+                            _buffering.value = true
+                            hardReset()
+                            delay(CORE_RESET_SETTLE_MS)
+                            loadUrl(tsInstead, currentMetaSnapshot(), isLiveContent, 0L, resetRetries = false, isArchive = true)
+                            return@launch
+                        } else if (step == FilmWatchdog.Step.OPEN_RESET) {
                             // Stage 1: demuxer hung during probe — stuck, not just slow.
                             // First strike: reset silently and reload the same item once. The common
                             // trigger is auto-play advancing while the provider still holds the finished
@@ -3605,8 +3689,7 @@ class OwnTVPlayer(
                                 loadUrl(url, currentMetaSnapshot(), isLiveContent, seekMs, resetRetries = false, isArchive = archive)
                             }
                             return@launch
-                        }
-                        FilmWatchdog.Step.OPEN_AGAIN -> {
+                        } else {
                             // The archive ladder's missing rung. The decode-failure branch below already
                             // hands a failing archive to ExoPlayer, but a demuxer that never opens at all only
                             // ever hard-reset mpv, three times, and then showed an error: an archive mpv simply
@@ -5350,6 +5433,9 @@ class OwnTVPlayer(
         when (property) {
             "hwdec-current" -> {
                 android.util.Log.i(TAG, "hwdec-current='$value' (height=${load.currentHeightPx}px, setting=${if (hwDecoding) "on" else "off"})")
+                // Into the exported report too: a frame-drop report said how many frames went, never whether
+                // the picture was decoded in hardware, copied through the GPU, or in software.
+                LiveDiagnosticsLog.event("mpv decoder: hwdec-current='$value'")
                 load.currentHwdec = value
                 enforceDecodeGuard()
             }
@@ -5699,6 +5785,14 @@ class OwnTVPlayer(
                 val hw = getPropertyString("hwdec-current") ?: ""
                 val h = getPropertyInt("height") ?: 0
                 android.util.Log.i(TAG, "decode check: hwdec-current='$hw' height=${h}px direct=${_directRender.value}")
+                val codec = getPropertyString("video-codec")
+                val w = getPropertyInt("width") ?: 0
+                val fps = getPropertyString("container-fps")
+                val vo = getPropertyString("vo")
+                LiveDiagnosticsLog.event(
+                    "mpv decode check: hwdec-current='$hw' codec=$codec size=${w}x$h fps=$fps vo=$vo " +
+                        "direct=${_directRender.value} archive=${item.archiveThisItem}",
+                )
                 // Diagnostics for "video plays like a slideshow": is mpv dropping frames (timing),
                 // is the decoder dropping (too slow), or is the network cache underrunning?
                 android.util.Log.i(
@@ -5821,6 +5915,19 @@ class OwnTVPlayer(
             )
             return
         }
+        // A catch-up asked for as `.m3u8` (the playlist's "Prefer HLS for catch-up") that the timeshift server
+        // refused: ask for the same programme as `.ts` before anything else. mpv answered, so it is not stuck,
+        // and the reset below would hand the HLS address to ExoPlayer, which the same server refuses too.
+        val tsInstead = if (!load.fileLoaded && load.expectingPlayback) archiveHlsFallbackUrl() else null
+        if (tsInstead != null) {
+            item.triedAltFormat = true
+            android.util.Log.w(TAG, "catch-up as HLS refused — asking for MPEG-TS")
+            scope.launch {
+                delay(FALLBACK_RETRY_DELAY_MS)
+                if (gen == loadGeneration) loadUrl(tsInstead, currentMetaSnapshot(), isLiveContent, 0L, resetRetries = false)
+            }
+            return
+        }
         if (shouldHardResetOnEarlyEndFile(load.fileLoaded, load.expectingPlayback, isLiveContent)) {
             android.util.Log.w(TAG, "END_FILE before FILE_LOADED — demuxer rejected file, hard-resetting")
             load.expectingPlayback = false; _buffering.value = false
@@ -5848,11 +5955,15 @@ class OwnTVPlayer(
                 // serves HLS — try the `.m3u8` variant of the same channel before erroring (we
                 // default to `.ts` since it's more widely supported, with this as the safety net).
                 //
-                // Live only, on purpose. An archive is never worth swapping to `.m3u8`: the
-                // timeshift server has no HLS repackager, so the swap can only ever waste a rung
-                // and several seconds in front of the user. Catch-up's alternate is the PHP query
-                // form below, which is a genuinely different endpoint rather than a format guess.
-                val altFormat = if (isLiveContent && !item.triedAltFormat && item.autoRetries >= 1) alternateFormatUrl() else null
+                // An archive is never swapped TO `.m3u8`: many timeshift servers have no HLS
+                // repackager, so that swap would only waste a rung in front of the user. One asked for
+                // as `.m3u8` goes back to `.ts` at once — see [archiveHlsFallbackUrl] — before the PHP
+                // query form below.
+                val altFormat = when {
+                    item.triedAltFormat -> null
+                    isLiveContent -> if (item.autoRetries >= 1) alternateFormatUrl() else null
+                    else -> archiveHlsFallbackUrl()
+                }
                 val catchupAlt =
                     if (!isLiveContent && !item.triedCatchupPhpForm) {
                         tv.own.owntv.core.epg.CatchupUrl.timeshiftPhpAlternate(currentUrl)
@@ -6240,6 +6351,8 @@ internal data class ItemState(
      *  for the 4K file the direct path cannot open at all. */
     @field:Volatile var forceCopyThisLoad: Boolean = false,
     @field:Volatile var triedCopyRescue: Boolean = false,
+    /** A catch-up that dropped too many frames on the copy path was moved to the direct path: once only. */
+    @field:Volatile var triedDirectAfterDrops: Boolean = false,
     /** CEA-608/708 CC text is decoder side data the hardware decoder never surfaces, so the synthetic CC
      *  track stays empty under hwdec. While a CC track is selected we decode in software. */
     @field:Volatile var ccSoftwareOverride: Boolean = false,

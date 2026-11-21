@@ -230,9 +230,11 @@
     <string name="setup_prefer_hls_live_tv">Предпочитать HLS для прямого эфира</string>
     <string name="setup_hide_new_categories">По умолчанию скрывать новые категории</string>
     <string name="setup_hide_new_categories_description">Для всего профиля: категории, появившиеся при последующих синхронизациях, изначально будут скрыты. Их всегда можно найти на экране «Персонализация».</string>
-    <string name="setup_prefer_hls_description">Приоритет HLS (.m3u8) над MPEG-TS для прямого эфира. Если HLS не работает, используется MPEG-TS. Отложенный просмотр всегда использует MPEG-TS.</string>
-    <string name="setup_prefer_hls_description_supported">Приоритет HLS (.m3u8) над MPEG-TS для прямого эфира. Если HLS не работает, используется MPEG-TS. Отложенный просмотр всегда использует MPEG-TS. Ваш провайдер сообщает о поддержке HLS.</string>
-    <string name="setup_prefer_hls_description_unsupported">Приоритет HLS (.m3u8) над MPEG-TS для прямого эфира. Если HLS не работает, используется MPEG-TS. Отложенный просмотр всегда использует MPEG-TS. Ваш провайдер не сообщает о поддержке HLS — вы всё равно можете попробовать.</string>
+    <string name="setup_prefer_hls_description">Приоритет HLS (.m3u8) над MPEG-TS для прямого эфира. Если HLS не работает, используется MPEG-TS.</string>
+    <string name="setup_prefer_hls_description_supported">Приоритет HLS (.m3u8) над MPEG-TS для прямого эфира. Если HLS не работает, используется MPEG-TS. Ваш провайдер сообщает о поддержке HLS.</string>
+    <string name="setup_prefer_hls_description_unsupported">Приоритет HLS (.m3u8) над MPEG-TS для прямого эфира. Если HLS не работает, используется MPEG-TS. Ваш провайдер не сообщает о поддержке HLS — вы всё равно можете попробовать.</string>
+    <string name="setup_prefer_hls_catchup">Предпочитать HLS для отложенного просмотра</string>
+    <string name="setup_prefer_hls_catchup_description">Запрашивать передачи для отложенного просмотра в HLS (.m3u8) вместо MPEG-TS. Если HLS не работает, используется MPEG-TS. Отложенный просмотр в HLS предлагают лишь некоторые провайдеры.</string>
     <string name="setup_hls_test_support">Проверить поддержку HLS</string>
     <string name="setup_hls_testing">Проверка HLS…</string>
     <string name="setup_hls_test_failed">Тест не удался: <xliff:g id="reason">%1$s</xliff:g></string>

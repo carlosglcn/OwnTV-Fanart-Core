@@ -3,6 +3,8 @@ package tv.own.owntv.core.parser
 import okhttp3.OkHttpClient
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import tv.own.owntv.core.database.entity.ChannelEntity
+import tv.own.owntv.core.database.entity.EpgProgrammeEntity
 import tv.own.owntv.core.database.entity.SourceEntity
 import tv.own.owntv.core.epg.CatchupUrl
 import tv.own.owntv.core.model.SourceType
@@ -49,6 +51,27 @@ class XtreamStreamUrlTest {
         assertEquals(
             "http://panel.invalid:8080/streaming/timeshift.php?username=alice&password=a%2Bb%26c%23d&stream=9&start=1970-01-01:00-00&duration=60",
             CatchupUrl.timeshiftPhpAlternate(path),
+        )
+    }
+
+    @Test
+    fun `catch-up asks for HLS only when the playlist's own catch-up switch is on`() {
+        val ch = ChannelEntity(sourceId = 1, name = "c", streamUrl = "x", remoteId = "9", catchup = true)
+        val programme = EpgProgrammeEntity(sourceId = 1, epgChannelId = "c", startMs = 0L, stopMs = 3_600_000L, title = "p")
+        val utc = java.util.TimeZone.getTimeZone("UTC")
+        val plain = source("alice", "s3cret")
+        assertEquals(
+            "http://panel.invalid:8080/timeshift/alice/s3cret/60/1970-01-01:00-00/9.ts",
+            CatchupUrl.forSource(ch, programme, plain, utc, client),
+        )
+        // Live's "Prefer HLS" alone never changes catch-up.
+        assertEquals(
+            "http://panel.invalid:8080/timeshift/alice/s3cret/60/1970-01-01:00-00/9.ts",
+            CatchupUrl.forSource(ch, programme, plain.copy(preferHls = true), utc, client),
+        )
+        assertEquals(
+            "http://panel.invalid:8080/timeshift/alice/s3cret/60/1970-01-01:00-00/9.m3u8",
+            CatchupUrl.forSource(ch, programme, plain.copy(catchupPreferHls = true), utc, client),
         )
     }
 }

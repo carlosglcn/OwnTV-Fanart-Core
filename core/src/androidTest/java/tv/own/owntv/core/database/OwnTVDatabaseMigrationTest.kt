@@ -630,6 +630,148 @@ class OwnTVDatabaseMigrationTest {
         }
     }
 
+    /**
+     * v53 → v54 drops `playback_prefs.audioDelayMs`. A delay still in it moves to the stream's shared
+     * row first: the newest one where two profiles disagree, never over a shared delay set more
+     * recently, a stream-URL key included. A row that remembered only the delay goes; the rest stay.
+     */
+    @Test
+    fun migrateVersion53To54_movesLeftoverDelays_thenDropsTheColumn() {
+        context.deleteDatabase(DB_NAME)
+        val db53 = context.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null)
+        try {
+            executeSchemaQueries(db53, "tv.own.owntv.core.database.OwnTVDatabase/53.json")
+            db53.execSQL("INSERT INTO profiles (id, name, avatarColor, avatarId, isKids, pinHash, createdAt) VALUES (1, 'Primary', 1122867, 7, 0, NULL, 1)")
+            db53.execSQL("INSERT INTO profiles (id, name, avatarColor, avatarId, isKids, pinHash, createdAt) VALUES (2, 'Second', 1122867, 7, 0, NULL, 1)")
+            val insert = "INSERT INTO playback_prefs (profileId, contentKey, zoomMode, volumeBoost, audioDelayMs, updatedAt, sourceId, audioLang, subtitleLang) VALUES "
+            db53.execSQL(insert + "(1, '10:LIVE:a', 'FILL', NULL, 100, 5, 10, NULL, NULL)")
+            db53.execSQL(insert + "(2, '10:LIVE:a', NULL, NULL, 300, 7, 10, NULL, NULL)")
+            db53.execSQL(insert + "(1, '20:MOVIE:b', NULL, NULL, 50, 3, -1, NULL, NULL)")
+            db53.execSQL(insert + "(1, 'http://example.test/1.ts', NULL, NULL, 70, 4, -1, 'de', NULL)")
+            db53.execSQL(
+                "INSERT INTO playback_quirks (contentKey, sourceId, mediaType, enginePin, audioOnly, audioDelayMs, updatedAt) " +
+                    "VALUES ('20:MOVIE:b', 20, 'MOVIE', NULL, NULL, 999, 9)",
+            )
+            db53.version = 53
+        } finally {
+            db53.close()
+        }
+
+        val db = openWithAllMigrations()
+        try {
+            val sqlite = openForAssertions(db)
+            assertEquals(0L, countRows(sqlite, "SELECT COUNT(*) FROM pragma_table_info('playback_prefs') WHERE name = 'audioDelayMs'"))
+            // Profile 1's zoom row and the URL-keyed row with a language stay; the two delay-only rows go.
+            assertCount(sqlite, "playback_prefs", 2)
+            sqlite.prepare("SELECT zoomMode, sourceId FROM playback_prefs WHERE profileId = 1 AND contentKey = '10:LIVE:a'").use {
+                assertTrue(it.step())
+                assertEquals("FILL", it.getText(0))
+                assertEquals(10L, it.getLong(1))
+            }
+            fun quirk(key: String): Triple<Long, String, Long> =
+                sqlite.prepare("SELECT sourceId, mediaType, audioDelayMs FROM playback_quirks WHERE contentKey = ?").use {
+                    it.bindText(1, key)
+                    assertTrue(key, it.step())
+                    Triple(it.getLong(0), it.getText(1), it.getLong(2))
+                }
+            assertEquals(Triple(10L, "LIVE", 300L), quirk("10:LIVE:a"))
+            assertEquals(Triple(20L, "MOVIE", 999L), quirk("20:MOVIE:b"))
+            assertEquals(Triple(-1L, "LIVE", 70L), quirk("http://example.test/1.ts"))
+        } finally {
+            db.close()
+        }
+    }
+
+    /** v54 → v55 adds `sources.catchupPreferHls`, off for a playlist that already exists. */
+    @Test
+    fun migrateVersion54To55_addsCatchupPreferHls_offForExistingPlaylists() {
+        context.deleteDatabase(DB_NAME)
+        val db54 = context.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null)
+        try {
+            executeSchemaQueries(db54, "tv.own.owntv.core.database.OwnTVDatabase/54.json")
+            db54.execSQL(
+                "INSERT INTO sources (id, name, type, url, syncLive, syncMovies, syncSeries, hlsSupported, preferHls, " +
+                    "livePrerollSecs, liveLatencyCustomSecs, maxConnections, maxConnectionsProbedAt, createdAt) " +
+                    "VALUES (1, 'Panel', 'XTREAM', 'http://panel.test', 1, 1, 1, 0, 1, -1, -1, 0, 0, 1)",
+            )
+            db54.version = 54
+        } finally {
+            db54.close()
+        }
+
+        val db = openWithAllMigrations()
+        try {
+            val sqlite = openForAssertions(db)
+            sqlite.prepare("SELECT preferHls, catchupPreferHls FROM sources WHERE id = 1").use {
+                assertTrue(it.step())
+                assertEquals(1L, it.getLong(0))
+                assertEquals(0L, it.getLong(1))
+            }
+        } finally {
+            db.close()
+        }
+    }
+
+    /**
+     * v55 → v56 fills `nameKey` with the Unicode lowercase name, moves the A–Z indexes onto it and puts
+     * the three name FTS tables on `unicode61`, so a lowercase Cyrillic query finds a capitalised name.
+     */
+    @Test
+    fun migrateVersion55To56_fillsNameKeys_andSearchFoldsEveryAlphabet() {
+        seedNamedContent(55)
+        assertNameKeysAfterUpgrade()
+    }
+
+    /** The same upgrade from v54, the schema the last published core shipped. */
+    @Test
+    fun migrateVersion54To56_fillsNameKeys_andSearchFoldsEveryAlphabet() {
+        seedNamedContent(54)
+        assertNameKeysAfterUpgrade()
+    }
+
+    private fun seedNamedContent(version: Int) {
+        context.deleteDatabase(DB_NAME)
+        val old = context.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null)
+        try {
+            executeSchemaQueries(old, "tv.own.owntv.core.database.OwnTVDatabase/$version.json")
+            old.execSQL(
+                "INSERT INTO sources (id, name, type, url, syncLive, syncMovies, syncSeries, hlsSupported, preferHls, " +
+                    "livePrerollSecs, liveLatencyCustomSecs, maxConnections, maxConnectionsProbedAt, createdAt) " +
+                    "VALUES (1, 'Panel', 'XTREAM', 'http://panel.test', 1, 1, 1, 0, 0, -1, -1, 0, 0, 1)",
+            )
+            val channel = "INSERT INTO channels (id, sourceId, name, streamUrl, sortOrder, catchup, catchupDays) VALUES "
+            old.execSQL(channel + "(1, 1, 'ZDFneo', 'http://panel.test/1.ts', 0, 0, 0)")
+            old.execSQL(channel + "(2, 1, 'arte', 'http://panel.test/2.ts', 1, 0, 0)")
+            old.execSQL(channel + "(3, 1, 'Первый Канал', 'http://panel.test/3.ts', 2, 0, 0)")
+            old.execSQL("INSERT INTO movies (id, sourceId, name, streamUrl, sortOrder) VALUES (1, 1, 'ОДИН ДОМА', 'http://panel.test/m.mp4', 0)")
+            old.execSQL("INSERT INTO series (id, sourceId, name, sortOrder) VALUES (1, 1, 'Ἰλιάς', 0)")
+            old.version = version
+        } finally {
+            old.close()
+        }
+    }
+
+    private fun assertNameKeysAfterUpgrade() {
+        val db = openWithAllMigrations()
+        try {
+            val sqlite = openForAssertions(db)
+            fun texts(sql: String): List<String> = sqlite.prepare(sql).use { s ->
+                buildList { while (s.step()) add(s.getText(0)) }
+            }
+            assertEquals(listOf("arte", "zdfneo", "первый канал"), texts("SELECT nameKey FROM channels ORDER BY nameKey"))
+            assertEquals(listOf("один дома"), texts("SELECT nameKey FROM movies"))
+            assertEquals(listOf("ἰλιάς"), texts("SELECT nameKey FROM series"))
+            assertEquals(listOf("Первый Канал"), texts("SELECT name FROM channels WHERE id IN (SELECT rowid FROM channels_fts WHERE channels_fts MATCH 'первый*')"))
+            assertEquals(listOf("ОДИН ДОМА"), texts("SELECT name FROM movies WHERE id IN (SELECT rowid FROM movies_fts WHERE movies_fts MATCH 'один*')"))
+            listOf("index_channels_sourceId_nameKey", "index_channels_categoryId_nameKey", "index_movies_nameKey",
+                "index_movies_sourceId_nameKey", "index_series_categoryId_nameKey").forEach { assertIndexExists(sqlite, it) }
+            listOf("index_channels_sourceId_name", "index_movies_name", "index_series_categoryId_name")
+                .forEach { assertIndexMissing(sqlite, it) }
+        } finally {
+            db.close()
+        }
+    }
+
     @Test
     fun migrateVersion45To46_dropsSoftwareDecode_keepingQuirkRows() {
         context.deleteDatabase(DB_NAME)

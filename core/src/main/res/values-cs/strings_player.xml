@@ -56,6 +56,13 @@
     <string name="player_adjust">UPRAVIT</string>
     <string name="player_search_subtitles">Vyhledat na OpenSubtitles</string>
     <string name="player_select_local_subtitle">Vybrat místní soubor s titulky</string>
+    <string name="player_subtitle_find_in_folder">Najít ve složce</string>
+    <string name="player_subtitle_folder_title">Titulky ve složce</string>
+    <string name="player_subtitle_folder_choose">Vybrat složku s titulky</string>
+    <string name="player_subtitle_folder_change">Změnit složku</string>
+    <string name="player_subtitle_folder_empty">V této složce nejsou žádné soubory s titulky</string>
+    <string name="player_subtitle_folder_auto">Automaticky načíst odpovídající titulky</string>
+    <string name="player_subtitle_folder_auto_description">Film nebo epizoda bez vlastních titulků dostane jediný soubor odsud, který odpovídá jejímu názvu. Pokud odpovídá více souborů, nenačte se žádný.</string>
     <string name="player_no_tracks">Nejsou dostupné žádné stopy.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · obrazové</string>
     <string name="player_av_sync">Synchronizace A/V</string>

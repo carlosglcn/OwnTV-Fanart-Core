@@ -117,6 +117,20 @@
     <string name="player_search_subtitles">Search OpenSubtitles</string>
     <!-- Translators: Option row in the subtitle dialog to open the system file picker for a local subtitle file. -->
     <string name="player_select_local_subtitle">Select local subtitle file</string>
+    <!-- Translators: Option row in the subtitle dialog that lists the subtitle files in a folder the user chose once, best match for the film or episode first. -->
+    <string name="player_subtitle_find_in_folder">Find in folder</string>
+    <!-- Translators: Title of the list of subtitle files found in the user's chosen subtitle folder. -->
+    <string name="player_subtitle_folder_title">Subtitles in folder</string>
+    <!-- Translators: Title of the folder picker used to choose where subtitle files are kept. -->
+    <string name="player_subtitle_folder_choose">Choose subtitle folder</string>
+    <!-- Translators: Button in the folder subtitle list that opens the folder picker again to choose another folder. -->
+    <string name="player_subtitle_folder_change">Change folder</string>
+    <!-- Translators: Message in the folder subtitle list when the chosen folder holds no subtitle files. -->
+    <string name="player_subtitle_folder_empty">No subtitle files in this folder</string>
+    <!-- Translators: Switch in the folder subtitle list. When on, a film or episode with no subtitle loads the matching file from the folder by itself. -->
+    <string name="player_subtitle_folder_auto">Load matching subtitle automatically</string>
+    <!-- Translators: Description under the automatic-loading switch. -->
+    <string name="player_subtitle_folder_auto_description">A film or episode without a subtitle of its own gets the one file here that matches its name. If several match, none is loaded.</string>
     <!-- Translators: Placeholder text in the audio or subtitle track dialog when no tracks are available. -->
     <string name="player_no_tracks">No tracks available.</string>
     <!-- Translators: Track label for image-based subtitle tracks (PGS/VOBSUB/DVB). "label" is the track name or language. -->

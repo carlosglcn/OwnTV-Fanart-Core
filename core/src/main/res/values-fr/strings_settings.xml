@@ -113,12 +113,12 @@
     <string name="settings_show_weather">Afficher la météo</string>
     <string name="settings_show_weather_description">Afficher la météo actuelle dans la barre supérieure.</string>
     <string name="settings_custom_location">Lieu personnalisé</string>
-    <string name="settings_custom_location_description">Remplacez la ville utilisée pour la météo. Laissez ce champ vide pour la détecter automatiquement, ou saisissez une ville (par ex. Londres) ou « lat,lon » (par ex. 51.5,-0.12). Utile avec un VPN, lorsque la détection automatique indique la ville du serveur.</string>
+    <string name="settings_custom_location_description">Remplacez la ville utilisée pour la météo. Laissez ce champ vide pour la détecter automatiquement, ou saisissez une ville (par ex. Paris) ou \"lat,lon\" (par ex. 51.5,-0.12). Utile avec un VPN si la détection automatique indique la ville du serveur.</string>
     <string name="settings_temperature_unit">Unité de température</string>
     <string name="settings_temperature_description">Afficher la température en degrés Celsius ou Fahrenheit.</string>
     <string name="settings_auto">Auto</string>
     <string name="settings_city_latlon">Ville ou lat,lon</string>
-    <string name="settings_location_hint">Laissez ce champ vide pour une détection automatique à partir de votre adresse IP publique. Saisissez une ville (par ex. Londres) ou « lat,lon » (par ex. 51.5,-0.12).</string>
+    <string name="settings_location_hint">Laissez ce champ vide pour une détection automatique à partir de votre adresse IP publique. Saisissez une ville (par ex. Londres) ou \"lat,lon\" (par ex. 51.5,-0.12).</string>
     <string name="settings_metadata">Métadonnées (TMDB)</string>
     <string name="settings_metadata_source">Source des métadonnées</string>
     <string name="settings_metadata_source_description">Choisissez la provenance des informations sur les films et les séries.</string>
@@ -134,7 +134,7 @@
     <string name="settings_allowance_hour">Heure</string>
     <string name="settings_allowance_day">Jour</string>
     <plurals name="settings_allowance_value">
-        <item quantity="one"><xliff:g id="remaining">%1$d</xliff:g> / <xliff:g id="limit">%2$d</xliff:g> restants</item>
+        <item quantity="one"><xliff:g id="remaining">%1$d</xliff:g> / <xliff:g id="limit">%2$d</xliff:g> restant</item>
         <item quantity="many"><xliff:g id="remaining">%1$d</xliff:g> / <xliff:g id="limit">%2$d</xliff:g> restants</item>
         <item quantity="other"><xliff:g id="remaining">%1$d</xliff:g> / <xliff:g id="limit">%2$d</xliff:g> restants</item>
     </plurals>
@@ -158,7 +158,7 @@
     <string name="settings_tmdb_api_key">Clé API TMDB (v3)</string>
     <string name="settings_metadata_empty_title">Saisissez un titre à rechercher.</string>
     <string name="settings_metadata_server_unavailable">Impossible d’atteindre le serveur de métadonnées — vérifiez le réseau, la clé et l’URL.</string>
-    <string name="settings_metadata_no_match">Aucun résultat TMDB pour « <xliff:g id="query">%1$s</xliff:g> ».</string>
+    <string name="settings_metadata_no_match">Aucun résultat TMDB pour \"<xliff:g id="query">%1$s</xliff:g>\".</string>
     <string name="settings_metadata_lookup_failed">Échec de la recherche.</string>
     <string name="settings_metadata_match_result"><xliff:g id="title">%1$s</xliff:g><xliff:g id="year">%2$s</xliff:g> · tmdb #<xliff:g id="id">%3$d</xliff:g></string>
     <string name="settings_metadata_year">(<xliff:g id="year">%1$d</xliff:g>)</string>
@@ -191,10 +191,10 @@
     <string name="settings_playlists_description">Ajouter, resynchroniser ou supprimer des listes de lecture M3U / Xtream</string>
     <string name="settings_epg_sources">Sources EPG</string>
     <string name="settings_epg_sources_nav_description">Ajouter des flux de guide XMLTV au guide des programmes</string>
-    <string name="settings_customize">Personnaliser les catégories et les éléments</string>
+    <string name="settings_customize">Personnaliser catégories et éléments</string>
     <string name="settings_customize_nav_description">Masquer et afficher des éléments, renommer et réorganiser les catégories</string>
     <string name="settings_ch_paging">Raccourcis de la télécommande</string>
-    <string name="settings_ch_paging_description">Attribuez les touches libres à la navigation, la lecture et la consultation. Les touches essentielles restent protégées.</string>
+    <string name="settings_ch_paging_description">Attribuez des boutons de la télécommande en gardant la navigation de base protégée</string>
     <string name="settings_content_menus_title">Menus d’appui long</string>
     <string name="settings_content_menus_description">Réorganisez ou masquez les actions des menus chaînes, films, séries et épisodes</string>
     <string name="settings_content_menus_hint">Appuyez sur OK sur une action pour l\'afficher ou la masquer. Maintenez OK pour la saisir, déplacez-la avec Haut et Bas, puis appuyez de nouveau sur OK pour la déposer.</string>
@@ -203,7 +203,7 @@
     <string name="settings_browsing_description">Mémoriser la dernière catégorie et le dernier élément dans TV en direct, Films et Séries</string>
     <string name="settings_home_root">Écran d’accueil</string>
     <string name="settings_home_root_description">Choisir, réorganiser et filtrer les rangées de l’accueil</string>
-    <string name="settings_metadata_root_description">Affiches, synopsis, distribution et notes pour les films et les séries</string>
+    <string name="settings_metadata_root_description">Affiches, synopsis, distribution et notes pour les Films et les Séries.</string>
     <string name="settings_download_folder">Dossier de téléchargement</string>
     <string name="settings_backup_restore">Sauvegarde et restauration</string>
     <string name="settings_clear_history">Effacer l’historique de visionnage</string>
@@ -363,7 +363,7 @@
     <string name="settings_group_sound_subtitles">Son et sous-titres</string>
     <string name="settings_group_watching_recording">Lecture et enregistrement</string>
     <string name="settings_search_guide_logos">Logos des chaînes du guide</string>
-    <string name="settings_search_keywords_profiles">utilisateurs enfants mode PIN verrouillage compte</string>
+    <string name="settings_search_keywords_profiles">compte protégé par code PIN en mode enfant</string>
     <string name="settings_search_keywords_playlists">M3U Xtream source synchronisation ajouter supprimer</string>
     <string name="settings_search_keywords_epg">XMLTV guide flux programme</string>
     <string name="settings_search_keywords_logos">chaîne logo icône XMLTV guide picon liste de lecture</string>
@@ -491,7 +491,7 @@
     <string name="settings_preferred_audio_language_description">Lit cette piste audio quand le flux la propose. « Langue originale » lit les films et séries dans la langue de leur tournage.</string>
     <string name="settings_open_subtitles">OpenSubtitles</string>
     <string name="settings_open_subtitles_connected">Connecté</string>
-    <string name="settings_open_subtitles_reset_in">Dans <xliff:g id="hours">%1$d</xliff:g> h <xliff:g id="minutes">%2$d</xliff:g> min</string>
+    <string name="settings_open_subtitles_reset_in">Dans <xliff:g id="hours">%1$d</xliff:g>h <xliff:g id="minutes">%2$d</xliff:g>min</string>
     <string name="settings_open_subtitles_description">Connectez-vous pour rechercher et télécharger des sous-titres, et gérer ceux qui ont été téléchargés. Ce réglage est propre à chaque profil et nécessite un compte opensubtitles.com gratuit.</string>
     <string name="settings_open_subtitles_advanced">Options avancées</string>
     <string name="settings_open_subtitles_advanced_description">Utilisez votre propre clé d’API d’application ou un Worker OpenSubtitles auto-hébergé.</string>
@@ -629,7 +629,7 @@
     <string name="settings_browsing_live_categories">Catégories de la TV en direct</string>
     <string name="settings_browsing_live_categories_description">Affichées dans la TV en direct, le guide TV, le lecteur et Multivue. Avec Toutes les chaînes désactivé, la TV en direct s\'ouvre sur votre première catégorie, ou sur Favoris si vous n\'en avez aucune.</string>
     <string name="settings_catchup_player">Lire le rattrapage avec</string>
-    <string name="settings_customize_title">Personnaliser les catégories et les éléments</string>
+    <string name="settings_customize_title">Personnaliser les catégories et éléments</string>
     <string name="settings_customize_pin_locked">Cet écran est verrouillé par PIN.</string>
     <string name="settings_customize_wrong_pin">PIN incorrect — réessayez</string>
     <string name="settings_customize_enter_pin">Saisir le PIN</string>
@@ -1082,7 +1082,7 @@
     <string name="settings_surround_stereo_description">Stéréo uniquement — toujours décoder dans l\'application et envoyer un simple son 2.0. Utilisez ceci avec les haut-parleurs du téléviseur ou une barre de son stéréo, ou si l\'audio est en retard sur l\'image.</string>
     <string name="settings_surround_stereo_description_mobile">Stéréo uniquement — toujours décoder dans l\'application et envoyer un simple son 2.0. Utilisez ceci avec le haut-parleur intégré, un casque ou une barre de son stéréo, ou si l\'audio est en retard sur l\'image.</string>
     <string name="settings_surround_forced_description">Surround — envoyer le Dolby/DTS vers un véritable récepteur 5.1/7.1. Si le son coupe ou saccade, OwnTV revient quand même à la stéréo et vous le signale.</string>
-    <string name="settings_panel_width">Ajustement de la largeur des panneaux</string>
+    <string name="settings_panel_width">Largeur des panneaux</string>
     <string name="settings_panel_width_description">Redimensionnez les panneaux de catégorie, de liste et d\'aperçu dans TV en direct, Films et Séries.</string>
     <string name="settings_vod_layout">Disposition des Films et Séries</string>
     <string name="settings_vod_layout_description">Panneaux séparés, ou une vue cinématographique avec l’image en fond</string>
@@ -1107,11 +1107,11 @@
     <string name="settings_detailed_playback_logging_description">Conservez une trace complète de ce que fait le moteur en direct — chaque syntonisation, repli et reconnexion — dans Logcat et dans le rapport exporté. Laissez ce réglage désactivé sauf si vous traquez un problème ; il ne change jamais la lecture, seulement la quantité d\'informations consignées.</string>
     <string name="settings_live_preroll_playlist_picker">Quelle liste de lecture ?</string>
     <string name="settings_live_preroll_follow">Suivre le paramètre</string>
-    <string name="settings_video_seconds"><xliff:g id="seconds">%1$d</xliff:g> s de vidéo</string>
+    <string name="settings_video_seconds"><xliff:g id="seconds">%1$d</xliff:g>s de vidéo</string>
     <string name="settings_epg_offset_root_description">Décalez tout le guide lorsque les horaires d\'un flux ne correspondent pas à ce qui est réellement diffusé. Une seule chaîne peut être décalée individuellement depuis son menu d\'appui long (TV en direct ou Guide) — c\'est ce qu\'il faut pour les versions Est/Ouest qui partagent un guide.</string>
     <string name="settings_epg_offset_dialog_description">Déplace chaque programme du guide. Utilisez-le lorsque tout le flux est réglé sur la mauvaise horloge ; pour une seule chaîne (une version Est/Ouest qui partage un guide), appuyez longuement sur la chaîne dans TV en direct ou le Guide et définissez son propre décalage à cet endroit.</string>
     <string name="settings_panel_width_summary">Catégorie <xliff:g id="category">%1$d</xliff:g>%% · Liste <xliff:g id="list">%2$d</xliff:g>%% · <xliff:g id="preview_label">%3$s</xliff:g> <xliff:g id="preview">%4$d</xliff:g>%%</string>
-    <string name="settings_panel_width_help">• Les trois panneaux partagent une même rangée, leurs pourcentages doivent donc totaliser 100 %%.\n• Si vous élargissez un panneau, vous devez retirer la même quantité à un autre avant d\'enregistrer.\n• Réinitialiser remet une section aux largeurs standard avec lesquelles cet écran a démarré.\n• Désactiver une section restaure sa mise en page standard sans perdre vos valeurs.\n• Les affiches de films et de séries se réorganisent automatiquement : une liste plus étroite affiche simplement moins d\'éléments par rangée.</string>
+    <string name="settings_panel_width_help">• Les trois panneaux partagent une même rangée, leurs pourcentages doivent donc totaliser 100 %%.\n• Définissez le panneau Aperçu ou Affiche sur 0%% pour le masquer ; les panneaux Catégorie et Liste restent à 10%% ou plus.\n• Si vous élargissez un panneau, vous devez retirer la même quantité à un autre avant d\'enregistrer.\n• Réinitialiser remet une section aux largeurs standard avec lesquelles cet écran a démarré.\n• Désactiver une section restaure sa mise en page standard sans perdre vos valeurs.\n• Les affiches de films et de séries se réorganisent automatiquement : une liste plus étroite affiche simplement moins d\'éléments par rangée.</string>
     <string name="settings_panel_width_preview">Aperçu</string>
     <string name="settings_panel_width_poster">Affiche</string>
     <string name="settings_panel_width_dialog_title"><xliff:g id="section">%1$s</xliff:g> — largeurs de panneau</string>
@@ -1248,16 +1248,16 @@
     <string name="local_sync_merge_note">Vos propres données sont renvoyées ensuite, pour que les deux appareils soient identiques.</string>
     <string name="local_sync_change_profiles">Nouveaux profils: <xliff:g id="count">%1$d</xliff:g></string>
     <string name="local_sync_change_sources">Nouvelles playlists: <xliff:g id="count">%1$d</xliff:g></string>
-    <string name="local_sync_change_favorites">Nouveaux favoris: <xliff:g id="count">%1$d</xliff:g></string>
-    <string name="local_sync_change_history">Nouvelles entrées d\'historique: <xliff:g id="count">%1$d</xliff:g></string>
-    <string name="local_sync_change_resume">Nouvelles positions de reprise: <xliff:g id="count">%1$d</xliff:g></string>
-    <string name="local_sync_change_reorder">Changements d\'ordre: <xliff:g id="count">%1$d</xliff:g></string>
-    <string name="local_sync_change_settings">Paramètres différents: <xliff:g id="count">%1$d</xliff:g></string>
-    <string name="local_sync_change_deletions">Éléments à supprimer: <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_change_favorites">Nouveaux favoris : <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_change_history">Nouvelles entrées d\'historique : <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_change_resume">Nouvelles positions de reprise : <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_change_reorder">Changements d\'ordre : <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_change_settings">Paramètres différents : <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_change_deletions">Éléments à supprimer : <xliff:g id="count">%1$d</xliff:g></string>
     <string name="local_sync_change_customize">Vos personnalisations sont également transférées</string>
     <string name="local_sync_apply">Appliquer</string>
     <string name="local_sync_done">Synchronisation terminée</string>
-    <string name="local_sync_received_items">Éléments reçus: <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_received_items">Éléments reçus : <xliff:g id="count">%1$d</xliff:g></string>
     <string name="local_sync_sent">Vos données ont été envoyées</string>
     <string name="local_sync_failed">Échec de la synchronisation</string>
     <string name="local_sync_error_unreachable">Impossible de joindre cet appareil. Sur celui-ci, ouvrez OwnTV → Plus → Synchronisation locale et activez le mode synchronisation. Les deux appareils doivent être sur le même Wi-Fi.</string>
@@ -1374,7 +1374,7 @@
     <string name="settings_multiview">Multivue</string>
     <string name="settings_multiview_description">Regardez plusieurs chaînes en direct à la fois. Vous décidez du nombre à chaque fois, dans la limite indiquée — chaque vignette utilise une connexion de votre fournisseur.</string>
     <string name="settings_multiview_tiles_max">Nombre maximal de vignettes</string>
-    <string name="settings_multiview_tiles_max_value"><xliff:g id="count">%1$d</xliff:g> max.</string>
+    <string name="settings_multiview_tiles_max_value"><xliff:g id="count">%1$d</xliff:g> max</string>
     <string name="settings_multiview_warning_title">Plus de deux tuiles</string>
     <string name="settings_multiview_warning_description">Trois ou quatre tuiles demandent trois ou quatre connexions à votre fournisseur, et un boîtier TV ne peut décoder qu\'un nombre limité de chaînes à la fois. Si une tuile ne démarre pas, elle en donne la raison et les autres continuent.</string>
     <string name="settings_multiview_keep_two">Garder 2</string>

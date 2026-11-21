@@ -56,6 +56,13 @@
     <string name="player_adjust">BEÁLLÍTÁS</string>
     <string name="player_search_subtitles">Keresés az OpenSubtitles-en</string>
     <string name="player_select_local_subtitle">Helyi feliratfájl kiválasztása</string>
+    <string name="player_subtitle_find_in_folder">Keresés mappában</string>
+    <string name="player_subtitle_folder_title">Feliratok a mappában</string>
+    <string name="player_subtitle_folder_choose">Feliratmappa kiválasztása</string>
+    <string name="player_subtitle_folder_change">Mappa módosítása</string>
+    <string name="player_subtitle_folder_empty">Ebben a mappában nincsenek feliratfájlok</string>
+    <string name="player_subtitle_folder_auto">Egyező felirat automatikus betöltése</string>
+    <string name="player_subtitle_folder_auto_description">Az a film vagy epizód, amelynek nincs saját felirata, az innen származó egyetlen, a nevével egyező fájlt kapja. Ha több egyezik, egyik sem töltődik be.</string>
     <string name="player_no_tracks">Nincs elérhető sáv.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · kép</string>
     <string name="player_av_sync">A/V-szinkron</string>

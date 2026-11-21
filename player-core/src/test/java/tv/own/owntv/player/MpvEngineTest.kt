@@ -133,6 +133,121 @@ class MpvEngineTest {
     }
 
     @Test
+    fun aCatchUpAfterAHardResetStillDecodesInHardware() {
+        h.player.play(C1, isArchive = true)
+        h.settle()
+        assertEquals("an archive opens on the copy path", "mediacodec-copy", h.core.props["hwdec"])
+        // A dead programme (HTTP 404): END_FILE before FILE_LOADED, and mpv is rebuilt.
+        h.core.endFile(MpvEndFileReason.ERROR, -13)
+        h.settle()
+        // The next programme picked inside the reset, as from the catch-up list.
+        h.player.play(C2, isArchive = true)
+        h.advance(OwnTVPlayer.CORE_RESET_SETTLE_MS + 100)
+        h.recreateSurface()
+        assertEquals(listOf(C2), h.core.loads)
+        assertEquals("the rebuilt core keeps the hardware decoder", "mediacodec-copy", h.core.props["hwdec"])
+    }
+
+    @Test
+    fun aCatchUpAskedForAsHlsThatWillNotOpenGoesBackToTs() {
+        h.player.play(H1, isArchive = true)
+        h.settle()
+        assertEquals(listOf(H1), h.core.loads)
+        // The timeshift server has no HLS for this programme: END_FILE before FILE_LOADED.
+        val first = h.core
+        h.core.endFile(MpvEndFileReason.ERROR, -13)
+        h.advance(OwnTVPlayer.FALLBACK_RETRY_DELAY_MS + 100)
+        assertFalse("mpv answered, so it is not rebuilt", first.destroyed)
+        assertEquals("the same programme as .ts", listOf(H1, H1.removeSuffix(".m3u8") + ".ts"), h.core.loads)
+    }
+
+    @Test
+    fun aCatchUpAsHlsIsGivenTimeToOpenThenAskedForAsTs() {
+        h.player.play(H1, isArchive = true)
+        h.settle()
+        // The timeshift server is still building a long programme's playlist: no FILE_LOADED, no END_FILE.
+        h.advance(22_000)
+        val cores = h.cores.size
+        assertEquals("past the usual ten seconds, still waiting on the playlist", listOf(H1), h.core.loads)
+        assertEquals("and mpv was not rebuilt meanwhile", cores, h.cores.size)
+        h.advance(FilmWatchdog.ARCHIVE_HLS_OPEN_TIMEOUT_MS - 22_000 + 2_000)
+        h.advance(OwnTVPlayer.CORE_RESET_SETTLE_MS + 100)
+        h.recreateSurface()
+        assertEquals("a fresh core asks for the programme as .ts", listOf(H1.removeSuffix(".m3u8") + ".ts"), h.core.loads)
+    }
+
+    @Test
+    fun theReportSaysWhichDecoderACatchUpUsed() {
+        h.player.play(C1, isArchive = true)
+        h.settle()
+        h.core.props["video-codec"] = "h264"
+        h.core.props["vo"] = "gpu"
+        h.opened(positionSecs = 0)
+        h.core.property("hwdec-current", "mediacodec-copy")
+        h.advance(OwnTVPlayer.DECODE_CHECK_MS + 500)
+        val report = LiveDiagnosticsLog.snapshot()
+        assertTrue(report, report.contains("mpv decoder: hwdec-current='mediacodec-copy'"))
+        assertTrue(report, report.contains("mpv decode check: hwdec-current="))
+        assertTrue(report, report.contains("vo=gpu direct=false archive=true"))
+    }
+
+    @Test
+    fun aCatchUpLosingFramesOnTheCopyPathReopensOnceOnTheDirectPath() {
+        h.player.play(C1, isArchive = true)
+        h.settle()
+        h.opened(positionSecs = 0)
+        h.core.props["hwdec-current"] = "mediacodec-copy"
+        h.core.props["container-fps"] = 25.0
+        // Five frames in every twenty-five lost, as the copy path did on an Android 11 TV.
+        playFor(seconds = 40, dropsPerSecond = 5) { h.core.loads.size > 1 }
+        assertEquals("reopened once, from the start", listOf(C1, C1), h.core.loads)
+        assertEquals("on the direct hardware path", "mediacodec", h.core.props["hwdec"])
+        assertEquals("mediacodec_embed", h.core.props["vo"])
+        // Still losing frames there: nowhere better to go, so it stays.
+        h.opened(positionSecs = 0)
+        h.core.props["frame-drop-count"] = 0
+        h.core.props["container-fps"] = 25.0
+        playFor(seconds = 60, dropsPerSecond = 5)
+        assertEquals(listOf(C1, C1), h.core.loads)
+    }
+
+    @Test
+    fun aCatchUpLosingAFewFramesStaysWhereItIs() {
+        h.player.play(C1, isArchive = true)
+        h.settle()
+        h.opened(positionSecs = 0)
+        h.core.props["hwdec-current"] = "mediacodec-copy"
+        h.core.props["container-fps"] = 50.0
+        playFor(seconds = 60, dropsPerSecond = 1)
+        assertEquals(listOf(C1), h.core.loads)
+        assertEquals("mediacodec-copy", h.core.props["hwdec"])
+    }
+
+    @Test
+    fun aCatchUpLosingFramesInSoftwareGoesToExoPlayer() {
+        h.player.play(C1, isArchive = true)
+        h.settle()
+        h.opened(positionSecs = 0)
+        h.core.props["hwdec-current"] = "no"
+        h.core.props["container-fps"] = 25.0
+        playFor(seconds = 30, dropsPerSecond = 5) { h.core.stops > 0 }
+        assertEquals("mpv let go of the programme", 1, h.core.stops)
+        assertTrue("and of the surface, for ExoPlayer", h.core.surfaceDetached)
+    }
+
+    /** The programme plays on for [seconds], mpv dropping [dropsPerSecond] frames a second, until [done]. */
+    private fun playFor(seconds: Int, dropsPerSecond: Int, done: () -> Boolean = { false }) {
+        val pos = (h.core.props["time-pos"] as? Number)?.toLong() ?: 0L
+        val drops = (h.core.props["frame-drop-count"] as? Number)?.toInt() ?: 0
+        for (s in 1..seconds) {
+            h.core.props["frame-drop-count"] = drops + s * dropsPerSecond
+            h.core.property("time-pos", pos + s)
+            h.advance(1000)
+            if (done()) return
+        }
+    }
+
+    @Test
     fun filmMpvCanOnlySoftwareDecodeIn4kIsStoppedAndHandedToExoPlayer() {
         h.playFilm(F1)
         h.opened(positionSecs = 0)
@@ -153,5 +268,8 @@ class MpvEngineTest {
         const val B = "http://panel.test/live/u/p/2.ts"
         const val F1 = "http://panel.test/movie/u/p/10.mkv"
         const val F2 = "http://panel.test/movie/u/p/11.mkv"
+        const val C1 = "http://panel.test/timeshift/u/p/30/2026-11-19:09-30/1.ts"
+        const val C2 = "http://panel.test/timeshift/u/p/75/2026-11-19:10-30/2.ts"
+        const val H1 = "http://panel.test/timeshift/u/p/30/2026-11-19:09-30/1.m3u8"
     }
 }

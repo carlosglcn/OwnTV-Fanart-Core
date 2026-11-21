@@ -199,12 +199,12 @@ interface CustomCategoryDao {
      * row keeps its saved position in either order.
      */
     @Query(
-            "WITH base AS (SELECT c.id AS id, c.sortOrder AS so, c.name AS nm, m.position AS mp, o.position AS pos " +
+            "WITH base AS (SELECT c.id AS id, c.sortOrder AS so, c.name AS nm, c.nameKey AS nk, m.position AS mp, o.position AS pos " +
             "FROM channels c INNER JOIN custom_category_members m ON m.itemId = c.id AND m.profileId = :profileId AND m.mediaType = 'LIVE' AND m.contextKey = :contextKey " +
             "LEFT JOIN content_order o ON o.itemId = c.id AND o.profileId = :profileId AND o.mediaType = 'LIVE' AND o.contextKey = :contextKey " +
             "WHERE c.sourceId IN (:sourceIds)), " +
             "slots AS (SELECT id, pos - (ROW_NUMBER() OVER (ORDER BY pos, id) - 1) AS slot, 0 AS grp, pos AS tie FROM base WHERE pos IS NOT NULL " +
-            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nm END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
+            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nk END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
             "SELECT c.* FROM channels c INNER JOIN slots sl ON sl.id = c.id ORDER BY sl.slot, sl.grp, sl.tie",
     )
     fun pagingChannels(profileId: Long, contextKey: String, sourceIds: List<Long>, alpha: Boolean): PagingSource<Int, ChannelEntity>
@@ -212,12 +212,12 @@ interface CustomCategoryDao {
     /** Moved rows keep their saved position; the rest follow [alpha] (A–Z) or the playlist order
      *  around them — the same rule as `placePinned` for categories. */
     @Query(
-            "WITH base AS (SELECT mv.id AS id, mv.sortOrder AS so, mv.name AS nm, m.position AS mp, o.position AS pos " +
+            "WITH base AS (SELECT mv.id AS id, mv.sortOrder AS so, mv.name AS nm, mv.nameKey AS nk, m.position AS mp, o.position AS pos " +
             "FROM movies mv INNER JOIN custom_category_members m ON m.itemId = mv.id AND m.profileId = :profileId AND m.mediaType = 'MOVIE' AND m.contextKey = :contextKey " +
             "LEFT JOIN content_order o ON o.itemId = mv.id AND o.profileId = :profileId AND o.mediaType = 'MOVIE' AND o.contextKey = :contextKey " +
             "WHERE mv.sourceId IN (:sourceIds)), " +
             "slots AS (SELECT id, pos - (ROW_NUMBER() OVER (ORDER BY pos, id) - 1) AS slot, 0 AS grp, pos AS tie FROM base WHERE pos IS NOT NULL " +
-            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nm END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
+            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nk END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
             "SELECT mv.* FROM movies mv INNER JOIN slots sl ON sl.id = mv.id ORDER BY sl.slot, sl.grp, sl.tie",
     )
     fun pagingMovies(profileId: Long, contextKey: String, sourceIds: List<Long>, alpha: Boolean): PagingSource<Int, MovieEntity>
@@ -225,12 +225,12 @@ interface CustomCategoryDao {
     /** Moved rows keep their saved position; the rest follow [alpha] (A–Z) or the playlist order
      *  around them — the same rule as `placePinned` for categories. */
     @Query(
-            "WITH base AS (SELECT s.id AS id, s.sortOrder AS so, s.name AS nm, m.position AS mp, o.position AS pos " +
+            "WITH base AS (SELECT s.id AS id, s.sortOrder AS so, s.name AS nm, s.nameKey AS nk, m.position AS mp, o.position AS pos " +
             "FROM series s INNER JOIN custom_category_members m ON m.itemId = s.id AND m.profileId = :profileId AND m.mediaType = 'SERIES' AND m.contextKey = :contextKey " +
             "LEFT JOIN content_order o ON o.itemId = s.id AND o.profileId = :profileId AND o.mediaType = 'SERIES' AND o.contextKey = :contextKey " +
             "WHERE s.sourceId IN (:sourceIds)), " +
             "slots AS (SELECT id, pos - (ROW_NUMBER() OVER (ORDER BY pos, id) - 1) AS slot, 0 AS grp, pos AS tie FROM base WHERE pos IS NOT NULL " +
-            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nm END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
+            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nk END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
             "SELECT s.* FROM series s INNER JOIN slots sl ON sl.id = s.id ORDER BY sl.slot, sl.grp, sl.tie",
     )
     fun pagingSeries(profileId: Long, contextKey: String, sourceIds: List<Long>, alpha: Boolean): PagingSource<Int, SeriesEntity>
@@ -268,12 +268,12 @@ interface CustomCategoryDao {
     /** Bounded snapshot of a custom category in rail order — the Move session's in-memory reorder. Moved rows keep their saved position; the rest follow
      *  [alpha] (A–Z) or the playlist order around them. */
     @Query(
-            "WITH base AS (SELECT c.id AS id, c.sortOrder AS so, c.name AS nm, m.position AS mp, o.position AS pos " +
+            "WITH base AS (SELECT c.id AS id, c.sortOrder AS so, c.name AS nm, c.nameKey AS nk, m.position AS mp, o.position AS pos " +
             "FROM channels c INNER JOIN custom_category_members m ON m.itemId = c.id AND m.profileId = :profileId AND m.mediaType = 'LIVE' AND m.contextKey = :contextKey " +
             "LEFT JOIN content_order o ON o.itemId = c.id AND o.profileId = :profileId AND o.mediaType = 'LIVE' AND o.contextKey = :contextKey " +
             "WHERE c.sourceId IN (:sourceIds)), " +
             "slots AS (SELECT id, pos - (ROW_NUMBER() OVER (ORDER BY pos, id) - 1) AS slot, 0 AS grp, pos AS tie FROM base WHERE pos IS NOT NULL " +
-            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nm END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
+            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nk END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
             "SELECT c.* FROM channels c INNER JOIN slots sl ON sl.id = c.id ORDER BY sl.slot, sl.grp, sl.tie LIMIT :limit",
     )
     suspend fun snapshotChannels(profileId: Long, contextKey: String, sourceIds: List<Long>, alpha: Boolean, limit: Int): List<ChannelEntity>
@@ -281,12 +281,12 @@ interface CustomCategoryDao {
     /** Moved rows keep their saved position; the rest follow [alpha] (A–Z) or the playlist order
      *  around them — the same rule as `placePinned` for categories. */
     @Query(
-            "WITH base AS (SELECT mv.id AS id, mv.sortOrder AS so, mv.name AS nm, m.position AS mp, o.position AS pos " +
+            "WITH base AS (SELECT mv.id AS id, mv.sortOrder AS so, mv.name AS nm, mv.nameKey AS nk, m.position AS mp, o.position AS pos " +
             "FROM movies mv INNER JOIN custom_category_members m ON m.itemId = mv.id AND m.profileId = :profileId AND m.mediaType = 'MOVIE' AND m.contextKey = :contextKey " +
             "LEFT JOIN content_order o ON o.itemId = mv.id AND o.profileId = :profileId AND o.mediaType = 'MOVIE' AND o.contextKey = :contextKey " +
             "WHERE mv.sourceId IN (:sourceIds)), " +
             "slots AS (SELECT id, pos - (ROW_NUMBER() OVER (ORDER BY pos, id) - 1) AS slot, 0 AS grp, pos AS tie FROM base WHERE pos IS NOT NULL " +
-            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nm END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
+            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nk END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
             "SELECT mv.* FROM movies mv INNER JOIN slots sl ON sl.id = mv.id ORDER BY sl.slot, sl.grp, sl.tie LIMIT :limit",
     )
     suspend fun snapshotMovies(profileId: Long, contextKey: String, sourceIds: List<Long>, alpha: Boolean, limit: Int): List<MovieEntity>
@@ -294,12 +294,12 @@ interface CustomCategoryDao {
     /** Moved rows keep their saved position; the rest follow [alpha] (A–Z) or the playlist order
      *  around them — the same rule as `placePinned` for categories. */
     @Query(
-            "WITH base AS (SELECT s.id AS id, s.sortOrder AS so, s.name AS nm, m.position AS mp, o.position AS pos " +
+            "WITH base AS (SELECT s.id AS id, s.sortOrder AS so, s.name AS nm, s.nameKey AS nk, m.position AS mp, o.position AS pos " +
             "FROM series s INNER JOIN custom_category_members m ON m.itemId = s.id AND m.profileId = :profileId AND m.mediaType = 'SERIES' AND m.contextKey = :contextKey " +
             "LEFT JOIN content_order o ON o.itemId = s.id AND o.profileId = :profileId AND o.mediaType = 'SERIES' AND o.contextKey = :contextKey " +
             "WHERE s.sourceId IN (:sourceIds)), " +
             "slots AS (SELECT id, pos - (ROW_NUMBER() OVER (ORDER BY pos, id) - 1) AS slot, 0 AS grp, pos AS tie FROM base WHERE pos IS NOT NULL " +
-            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nm END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
+            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nk END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
             "SELECT s.* FROM series s INNER JOIN slots sl ON sl.id = s.id ORDER BY sl.slot, sl.grp, sl.tie LIMIT :limit",
     )
     suspend fun snapshotSeries(profileId: Long, contextKey: String, sourceIds: List<Long>, alpha: Boolean, limit: Int): List<SeriesEntity>
@@ -308,26 +308,26 @@ interface CustomCategoryDao {
     @Query(
         "SELECT c.* FROM channels c " +
             "INNER JOIN custom_category_members m ON m.itemId = c.id AND m.profileId = :profileId AND m.mediaType = 'LIVE' AND m.contextKey = :contextKey " +
-            "WHERE c.sourceId IN (:sourceIds) AND c.name LIKE '%' || :query || '%' " +
+            "WHERE c.sourceId IN (:sourceIds) AND c.nameKey LIKE '%' || :key || '%' " +
             "ORDER BY m.position, c.sortOrder, c.name",
     )
-    fun searchChannels(query: String, profileId: Long, contextKey: String, sourceIds: List<Long>): PagingSource<Int, ChannelEntity>
+    fun searchChannels(key: String, profileId: Long, contextKey: String, sourceIds: List<Long>): PagingSource<Int, ChannelEntity>
 
     @Query(
         "SELECT mv.* FROM movies mv " +
             "INNER JOIN custom_category_members m ON m.itemId = mv.id AND m.profileId = :profileId AND m.mediaType = 'MOVIE' AND m.contextKey = :contextKey " +
-            "WHERE mv.sourceId IN (:sourceIds) AND mv.name LIKE '%' || :query || '%' " +
+            "WHERE mv.sourceId IN (:sourceIds) AND mv.nameKey LIKE '%' || :key || '%' " +
             "ORDER BY m.position, mv.sortOrder, mv.name",
     )
-    fun searchMovies(query: String, profileId: Long, contextKey: String, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
+    fun searchMovies(key: String, profileId: Long, contextKey: String, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
 
     @Query(
         "SELECT s.* FROM series s " +
             "INNER JOIN custom_category_members m ON m.itemId = s.id AND m.profileId = :profileId AND m.mediaType = 'SERIES' AND m.contextKey = :contextKey " +
-            "WHERE s.sourceId IN (:sourceIds) AND s.name LIKE '%' || :query || '%' " +
+            "WHERE s.sourceId IN (:sourceIds) AND s.nameKey LIKE '%' || :key || '%' " +
             "ORDER BY m.position, s.sortOrder, s.name",
     )
-    fun searchSeries(query: String, profileId: Long, contextKey: String, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
+    fun searchSeries(key: String, profileId: Long, contextKey: String, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
 }
 
 /**

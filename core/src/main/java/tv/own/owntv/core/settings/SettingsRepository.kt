@@ -549,6 +549,8 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val RESUME_LAST_CHANNEL = booleanPreferencesKey("resume_last_channel")
         val LAST_LIVE_CATEGORY = stringPreferencesKey("last_live_category")
         val RECENT_SEARCHES = stringPreferencesKey("recent_searches")
+        val SUBTITLE_FOLDER = stringPreferencesKey("subtitle_folder")
+        val SUBTITLE_FOLDER_AUTO = booleanPreferencesKey("subtitle_folder_auto_load")
         val LAST_LIVE_CHANNEL = androidx.datastore.preferences.core.longPreferencesKey("last_live_channel")
         val VOD_GRID_COLUMNS = intPreferencesKey("vod_grid_columns")
         val VOD_VIEW_MODE = stringPreferencesKey("vod_view_mode")
@@ -935,24 +937,27 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     }
 
     // --- Search: recent search terms (most-recent first, capped). Stored as one newline-joined string
-    //     so no schema/table is needed; blank entries are ignored on read. ---
-    val recentSearches: Flow<List<String>> = parsedFlow(Keys.RECENT_SEARCHES) { raw ->
-        raw?.split('\n')?.map { it.trim() }?.filter { it.isNotEmpty() } ?: emptyList()
-    }
+    //     so no schema/table is needed; blank entries are ignored on read. Each profile has its own list
+    //     ([recentSearchesKey]) with NO fallback to the old shared one: falling back would keep showing
+    //     one viewer's searches to every other profile, a kids profile included, which is what keeping
+    //     them apart is for. ---
+    val recentSearches: Flow<List<String>> =
+        context.dataStore.data.map { it[recentSearchesKey(it)] }.distinctUntilChanged().map(::parseRecentSearches)
 
     /** Push a query to the top of the recents (case-insensitive dedup), capped at 12 entries. */
     suspend fun addRecentSearch(query: String) {
         val q = query.trim()
         if (q.length < 2) return
         context.dataStore.edit { prefs ->
-            val current = prefs[Keys.RECENT_SEARCHES]?.split('\n')?.map { it.trim() }?.filter { it.isNotEmpty() } ?: emptyList()
+            val key = recentSearchesKey(prefs)
+            val current = parseRecentSearches(prefs[key])
             val next = (listOf(q) + current.filterNot { it.equals(q, ignoreCase = true) }).take(12)
-            prefs[Keys.RECENT_SEARCHES] = next.joinToString("\n")
+            prefs[key] = next.joinToString("\n")
         }
     }
 
     suspend fun clearRecentSearches() {
-        context.dataStore.edit { it.remove(Keys.RECENT_SEARCHES) }
+        context.dataStore.edit { it.remove(recentSearchesKey(it)) }
     }
 
     // --- Appearance: animation level (perf control for low-end boxes) ---
@@ -2511,6 +2516,23 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         context.dataStore.edit { it[activeProfileLangKey(it, PREF_SUB_LANG_PREFIX)] = lang }
     }
 
+    // --- Subtitles from a folder: where "Find in folder" looks, and whether a film or episode that has no
+    //     subtitle of its own takes the one file there that matches it exactly. Both belong to this device:
+    //     the folder is a path or a storage grant that means nothing on another one, so neither is backed up. ---
+
+    /** The chosen subtitle folder — a path, or a document-tree Uri on a phone; null until one is chosen. */
+    val subtitleFolder: Flow<String?> = prefsFlow { it[Keys.SUBTITLE_FOLDER]?.takeIf(String::isNotBlank) }
+
+    suspend fun setSubtitleFolder(location: String) {
+        context.dataStore.edit { it[Keys.SUBTITLE_FOLDER] = location }
+    }
+
+    val subtitleFolderAutoLoad: Flow<Boolean> = prefsFlow { it[Keys.SUBTITLE_FOLDER_AUTO] ?: false }
+
+    suspend fun setSubtitleFolderAutoLoad(enabled: Boolean) {
+        context.dataStore.edit { it[Keys.SUBTITLE_FOLDER_AUTO] = enabled }
+    }
+
     // --- OpenSubtitles search language filter ---
     // Deliberately its own setting rather than reusing [preferredSubLang]: that one picks an EMBEDDED
     // track inside the stream (a 15-language mpv list that has no Greek, among others), which is a
@@ -3087,17 +3109,22 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         context.dataStore.edit { it[Keys.THEME_MODE] = mode.name }
     }
 
+    // Zoom, text size and popup text size are per profile: "<shared key>_<profileId>". A profile that
+    // never chose one follows the shared key, so nobody's size changed with the upgrade; before the first
+    // profile exists (the setup wizard) the shared key is what is written, so every profile starts there.
+    // Both flows follow the active profile, so a profile switch re-sizes the app like any other change.
+
     val uiZoomPercent: Flow<Int> = prefsFlow { prefs ->
-        UiZoom.clamp(prefs[Keys.UI_ZOOM_PCT] ?: UiZoom.DEFAULT)
+        UiZoom.clamp(profileInt(prefs, Keys.UI_ZOOM_PCT) ?: UiZoom.DEFAULT)
     }
 
     suspend fun setUiZoomPercent(percent: Int) {
-        context.dataStore.edit { it[Keys.UI_ZOOM_PCT] = UiZoom.clamp(percent) }
+        context.dataStore.edit { it[profileIntWriteKey(it, Keys.UI_ZOOM_PCT)] = UiZoom.clamp(percent) }
     }
 
     val fontCustomization: Flow<FontCustomization> = prefsFlow { prefs ->
         FontCustomization(
-            sizePercent = UiFontScale.clamp(prefs[Keys.FONT_SIZE_PCT] ?: UiFontScale.DEFAULT),
+            sizePercent = UiFontScale.clamp(profileInt(prefs, Keys.FONT_SIZE_PCT) ?: UiFontScale.DEFAULT),
             mainFamily = AppFontFamily.fromStored(
                 prefs[Keys.MAIN_FONT_FAMILY],
                 AppFontFamily.PLUS_JAKARTA_SANS,
@@ -3107,7 +3134,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
                 AppFontFamily.PLUS_JAKARTA_SANS,
             ),
             popupFontSizePercent = PopupFontScale.clamp(
-                prefs[Keys.POPUP_FONT_SIZE_PCT] ?: PopupFontScale.DEFAULT,
+                profileInt(prefs, Keys.POPUP_FONT_SIZE_PCT) ?: PopupFontScale.DEFAULT,
             ),
             popupSizePercent = PopupSizeScale.clamp(
                 prefs[Keys.POPUP_SIZE_PCT] ?: PopupSizeScale.DEFAULT,
@@ -3118,8 +3145,8 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     /** Saves the staged font dialog in one DataStore transaction, so the app never sees half a preset. */
     suspend fun setFontCustomization(value: FontCustomization) {
         context.dataStore.edit { prefs ->
-            prefs[Keys.FONT_SIZE_PCT] = UiFontScale.clamp(value.sizePercent)
-            prefs[Keys.POPUP_FONT_SIZE_PCT] = PopupFontScale.clamp(value.popupFontSizePercent)
+            prefs[profileIntWriteKey(prefs, Keys.FONT_SIZE_PCT)] = UiFontScale.clamp(value.sizePercent)
+            prefs[profileIntWriteKey(prefs, Keys.POPUP_FONT_SIZE_PCT)] = PopupFontScale.clamp(value.popupFontSizePercent)
             prefs[Keys.POPUP_SIZE_PCT] = PopupSizeScale.clamp(value.popupSizePercent)
             prefs[Keys.MAIN_FONT_FAMILY] = value.mainFamily.name
             prefs[Keys.POPUP_FONT_FAMILY] = value.popupFamily.name
@@ -3935,6 +3962,44 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         }
     }
 
+    // --- Backup: per-profile zoom, text sizes and recent searches ("<shared key>_<profileId>") ---
+
+    /**
+     * Exports { "<profileId>": { "z": zoom, "f": text size, "p": popup text size, "r": "recent\nsearches" } };
+     * a value the profile never set is absent, so after a restore it keeps following the shared one.
+     */
+    suspend fun exportProfileDisplay(): org.json.JSONObject {
+        val out = org.json.JSONObject()
+        context.dataStore.data.first().asMap().forEach { (k, v) ->
+            val (field, shared) = PROFILE_DISPLAY_FIELDS.entries.firstOrNull { k.name.startsWith(it.value + "_") } ?: return@forEach
+            val pid = k.name.removePrefix(shared + "_").takeIf { it.toLongOrNull() != null } ?: return@forEach
+            (out.optJSONObject(pid) ?: org.json.JSONObject().also { out.put(pid, it) }).put(field, v)
+        }
+        return out
+    }
+
+    /** Restores [exportProfileDisplay]'s values only for profile ids in [existingProfileIds], sizes clamped. */
+    suspend fun importProfileDisplay(o: org.json.JSONObject, existingProfileIds: Set<Long>) {
+        context.dataStore.edit { prefs ->
+            o.keys().forEach { key ->
+                val pid = key.toLongOrNull()?.takeIf { it in existingProfileIds } ?: return@forEach
+                val values = o.optJSONObject(key) ?: return@forEach
+                if (values.has("z")) prefs[profileIntKey(Keys.UI_ZOOM_PCT, pid)] = UiZoom.clamp(values.optInt("z"))
+                if (values.has("f")) prefs[profileIntKey(Keys.FONT_SIZE_PCT, pid)] = UiFontScale.clamp(values.optInt("f"))
+                if (values.has("p")) prefs[profileIntKey(Keys.POPUP_FONT_SIZE_PCT, pid)] = PopupFontScale.clamp(values.optInt("p"))
+                if (values.has("r")) prefs[profileRecentSearchesKey(pid)] = values.optString("r")
+            }
+        }
+    }
+
+    /** A deleted profile's zoom, text sizes and recent searches. */
+    suspend fun forgetProfileDisplay(profileId: Long) {
+        context.dataStore.edit { prefs ->
+            listOf(Keys.UI_ZOOM_PCT, Keys.FONT_SIZE_PCT, Keys.POPUP_FONT_SIZE_PCT).forEach { prefs.remove(profileIntKey(it, profileId)) }
+            prefs.remove(profileRecentSearchesKey(profileId))
+        }
+    }
+
     // --- Backup: per-profile "hide new categories" preference (dynamic "hide_new_categories_<id>" keys) ---
 
     /** Exports all per-profile "hide new categories" preferences as { "<profileId>": true/false }. */
@@ -4096,6 +4161,41 @@ internal const val PREF_SUB_LANG_PREFIX = "pref_sub_lang_"
 
 internal fun activeProfileLangKey(prefs: Preferences, prefix: String): Preferences.Key<String> =
     stringPreferencesKey(prefix + (prefs[SettingsRepository.Keys.ACTIVE_PROFILE] ?: -1L))
+
+/** The active profile, or null before the first profile exists (the setup wizard's display step). */
+private fun activeProfileOf(prefs: Preferences): Long? = prefs[SettingsRepository.Keys.ACTIVE_PROFILE]?.takeIf { it >= 0 }
+
+/** [shared]'s own copy for one profile: the same name with the profile id after it. */
+internal fun profileIntKey(shared: Preferences.Key<Int>, profileId: Long): Preferences.Key<Int> =
+    intPreferencesKey("${shared.name}_$profileId")
+
+/** The active profile's own value, else the shared one every profile used before sizes were per profile. */
+internal fun profileInt(prefs: Preferences, shared: Preferences.Key<Int>): Int? =
+    activeProfileOf(prefs)?.let { prefs[profileIntKey(shared, it)] } ?: prefs[shared]
+
+/** Where a size is written: the active profile's own key, or the shared one before any profile exists. */
+internal fun profileIntWriteKey(prefs: Preferences, shared: Preferences.Key<Int>): Preferences.Key<Int> =
+    activeProfileOf(prefs)?.let { profileIntKey(shared, it) } ?: shared
+
+internal fun profileRecentSearchesKey(profileId: Long): Preferences.Key<String> =
+    stringPreferencesKey("${SettingsRepository.Keys.RECENT_SEARCHES.name}_$profileId")
+
+/** The active profile's recent searches — its own list only; the shared key before any profile exists. */
+internal fun recentSearchesKey(prefs: Preferences): Preferences.Key<String> =
+    activeProfileOf(prefs)?.let(::profileRecentSearchesKey) ?: SettingsRepository.Keys.RECENT_SEARCHES
+
+internal fun parseRecentSearches(raw: String?): List<String> =
+    raw?.split('\n')?.map { it.trim() }?.filter { it.isNotEmpty() } ?: emptyList()
+
+/** The per-profile display values in a backup: field there → the shared key's name. */
+private val PROFILE_DISPLAY_FIELDS: Map<String, String> by lazy {
+    mapOf(
+        "z" to SettingsRepository.Keys.UI_ZOOM_PCT.name,
+        "f" to SettingsRepository.Keys.FONT_SIZE_PCT.name,
+        "p" to SettingsRepository.Keys.POPUP_FONT_SIZE_PCT.name,
+        "r" to SettingsRepository.Keys.RECENT_SEARCHES.name,
+    )
+}
 
 /** The active profile's own choice, else the shared setting, else no preference. */
 internal fun profileLang(prefs: Preferences, prefix: String, shared: Preferences.Key<String>): String =

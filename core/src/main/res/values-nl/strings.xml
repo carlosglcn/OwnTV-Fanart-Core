@@ -179,4 +179,8 @@
     <string name="shell_now_playing_audio">Audio</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">Negeren</string>
+    <string name="database_migration_title">Databasemigratie wordt uitgevoerd</string>
+    <string name="database_migration_body">Deze versie slaat je zenders, films en series op in een nieuw databaseformaat. Dit gebeurt maar één keer en kan bij grote playlists tot 2 minuten duren.</string>
+    <string name="database_migration_keep">Je playlists, favorieten en geschiedenis blijven behouden. Er wordt niets opnieuw gedownload. Zet de tv niet uit en sluit de app niet.</string>
+    <string name="database_migration_keep_mobile">Je playlists, favorieten en geschiedenis blijven behouden. Er wordt niets opnieuw gedownload. Houd de app open.</string>
 </resources>

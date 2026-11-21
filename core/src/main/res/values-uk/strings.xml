@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="common_cancel">Скасувати</string>
+    <string name="common_back">Назад</string>
+    <string name="common_save">Зберегти</string>
+    <string name="common_edit">Редагувати</string>
+    <string name="common_delete">Видалити</string>
+    <string name="common_clear">Очистити</string>
+    <string name="common_retry">Повторити</string>
+    <string name="common_create">Створити</string>
+    <string name="common_reset">Скинути</string>
+    <string name="common_done">Готово</string>
+    <string name="common_ok">Гаразд</string>
+    <string name="common_on">Увімкнено</string>
+    <string name="common_off">Вимк.</string>
+    <string name="common_share">Поділитися</string>
+    <string name="common_never">Ніколи</string>
+    <string name="common_exit">Вихід</string>
+    <string name="common_resume">Продовжити</string>
+    <string name="common_start_over">Спочатку</string>
+    <string name="common_name">Ім\'я</string>
+    <string name="common_own_tv_user">Користувач OwnTV</string>
+    <string name="common_proxy">Проксі</string>
+    <string name="common_title">Назва</string>
+    <string name="common_search_hint">Пошук…</string>
+    <string name="common_search">Пошук</string>
+    <string name="common_nav_search">Пошук</string>
+    <string name="common_nav_home">Головна</string>
+    <string name="common_nav_live_tv">ТБ наживо</string>
+    <string name="common_nav_movies">Фільми</string>
+    <string name="common_nav_series">Серіали</string>
+    <string name="common_nav_downloads">Завантаження</string>
+    <string name="common_nav_guide">Програма передач</string>
+    <string name="common_nav_guide_short">Програма передач</string>
+    <string name="common_nav_library">Бібліотека</string>
+    <string name="common_nav_more">Ще</string>
+    <string name="common_cast">Транслювати</string>
+    <string name="common_nav_settings">Налаштування</string>
+    <string name="shell_no_source">Немає джерела</string>
+    <string name="shell_now_playing">Зараз відтворюється</string>
+    <string name="common_number_grouped"><xliff:g id="count">%1$,d</xliff:g></string>
+    <string name="common_percent"><xliff:g id="percent">%1$d</xliff:g>%%</string>
+    <string name="common_timestamp_minutes"><xliff:g id="minutes">%1$d</xliff:g>:<xliff:g id="seconds">%2$02d</xliff:g></string>
+    <string name="common_timestamp_hours"><xliff:g id="hours">%1$d</xliff:g>:<xliff:g id="minutes">%2$02d</xliff:g>:<xliff:g id="seconds">%3$02d</xliff:g></string>
+    <string name="common_resume_position">Ви зупинились на <xliff:g id="position">%1$s</xliff:g>.</string>
+    <string name="common_resume_prompt">Продовжити відтворення?</string>
+    <string name="sync_error_offline">Схоже, ви не в мережі. Перевірте підключення та спробуйте знову.</string>
+    <string name="sync_error_generic">Щось пішло не так. Спробуйте ще раз.</string>
+    <string name="sync_error_timeout">Сервер надто довго не відповідає. Спробуйте ще раз.</string>
+    <string name="sync_error_unreachable">Не вдалося зв’язатися з сервером. Перевірте адресу та підключення до мережі.</string>
+    <string name="sync_error_connection">Не вдалося підключитися до сервера. Можливо, він недоступний або вказано неправильну адресу.</string>
+    <string name="sync_error_interrupted">Сервер перервав завантаження. Спробуйте ще раз.</string>
+    <string name="sync_error_mac">Портал відхилив цю MAC-адресу. Перевірте MAC-адресу (а також дату й час на телевізорі) — або, можливо, закінчився термін дії підписки.</string>
+    <string name="sync_error_invalid_mac">Неправильна MAC-адреса — використовуйте формат AA:BB:CC:DD:EE:FF</string>
+    <string name="sync_counts_separator">"  ·  "</string>
+    <string name="sync_counts_success">Успішно синхронізовано</string>
+    <string name="sync_counts_synced"><xliff:g id="counts">%1$s</xliff:g> синхронізовано</string>
+    <string name="sync_import_warnings">Імпортовано з попередженнями: <xliff:g id="phases">%1$s</xliff:g></string>
+    <string name="sync_warning_phase_error"><xliff:g id="phase">%1$s</xliff:g>: <xliff:g id="message">%2$s</xliff:g></string>
+    <plurals name="sync_warning_catalog_shrink">
+        <item quantity="one">Збережено <xliff:g id="stored">%1$d</xliff:g> наявний елемент — цей імпорт повернув на <xliff:g id="percent">%2$d</xliff:g>%% менше. Синхронізуйте знову або скористайтеся примусовою чистою синхронізацією, якщо постачальник дійсно видалив їх.</item>
+        <item quantity="few">Збережено <xliff:g id="stored">%1$d</xliff:g> наявних елементи — цей імпорт повернув на <xliff:g id="percent">%2$d</xliff:g>%% менше. Синхронізуйте знову або скористайтеся примусовою чистою синхронізацією, якщо постачальник дійсно видалив їх.</item>
+        <item quantity="many">Збережено <xliff:g id="stored">%1$d</xliff:g> наявних елементів — цей імпорт повернув на <xliff:g id="percent">%2$d</xliff:g>%% менше. Синхронізуйте знову або скористайтеся примусовою чистою синхронізацією, якщо постачальник дійсно видалив їх.</item>
+        <item quantity="other">Збережено <xliff:g id="stored">%1$d</xliff:g> наявних елементів — цей імпорт повернув на <xliff:g id="percent">%2$d</xliff:g>%% менше. Синхронізуйте знову або скористайтеся примусовою чистою синхронізацією, якщо постачальник дійсно видалив їх.</item>
+    </plurals>
+    <string name="sync_warning_bulk_truncated">Список постачальника обірвався посередині, тому решту довелося завантажувати по категоріях. Усе на місці, але ця синхронізація тривала довше, ніж зазвичай.</string>
+    <string name="sync_warning_bulk_truncated_partial">Список постачальника обірвався посередині, і не все вдалося відновити. Деякі позиції можуть бути відсутні до наступної синхронізації.</string>
+    <plurals name="sync_warning_page_failures">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> вихідна сторінка не завантажилася; до наступної синхронізації частина контенту може бути відсутньою.</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> вихідні сторінки не завантажилися; до наступної синхронізації частина контенту може бути відсутньою.</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> вихідних сторінок не завантажилися; до наступної синхронізації частина контенту може бути відсутньою.</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> вихідних сторінок не завантажилися; до наступної синхронізації частина контенту може бути відсутньою.</item>
+    </plurals>
+    <string name="sync_remainder_note">Решта каталогу все ще синхронізується у фоновому режимі — ви можете почати перегляд зараз. Прогрес відображається в невеликій панелі внизу екрана.</string>
+    <string name="sync_progress_preparing">Підготовка каталогу</string>
+    <string name="sync_progress_connecting">Підключення до джерела…</string>
+    <string name="sync_progress_syncing">Синхронізація каталогу</string>
+    <string name="sync_progress_percent">Синхронізація: <xliff:g id="percent">%1$d</xliff:g>%%</string>
+    <string name="sync_status_catalog">Синхронізація: <xliff:g id="source">%1$s</xliff:g></string>
+    <string name="sync_status_catalog_with_counts">Синхронізація: <xliff:g id="source">%1$s</xliff:g> · <xliff:g id="counts">%2$s</xliff:g></string>
+    <string name="sync_status_epg">Оновлення програми передач · <xliff:g id="source">%1$s</xliff:g></string>
+    <string name="sync_status_epg_with_counts">Оновлення програми передач · <xliff:g id="source">%1$s</xliff:g> · <xliff:g id="counts">%2$s</xliff:g></string>
+    <string name="sync_status_complete">Синхронізацію завершено · <xliff:g id="source">%1$s</xliff:g></string>
+    <string name="sync_status_complete_with_changes">Синхронізацію завершено · <xliff:g id="source">%1$s</xliff:g> · <xliff:g id="changes">%2$s</xliff:g></string>
+    <string name="sync_status_failed">Помилка синхронізації · <xliff:g id="source">%1$s</xliff:g>: <xliff:g id="reason">%2$s</xliff:g></string>
+    <string name="sync_status_cancelled">Синхронізацію скасовано · <xliff:g id="source">%1$s</xliff:g></string>
+    <string name="sync_status_download">Завантаження <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="sync_status_download_with_progress">Завантаження <xliff:g id="title">%1$s</xliff:g> · <xliff:g id="percent">%2$d</xliff:g>%%</string>
+    <string name="sync_status_download_locked">Завантаження з заблокованої категорії</string>
+    <string name="sync_status_download_locked_with_progress">Завантаження з заблокованої категорії · <xliff:g id="percent">%1$d</xliff:g>%%</string>
+    <string name="sync_status_trending_starting">Синхронізацію завершено · <xliff:g id="source">%1$s</xliff:g> · Формування списку популярного</string>
+    <string name="sync_status_trending_detail_waiting">Очікування відповіді від кандидата TMDB</string>
+    <string name="sync_status_trending_detail_received">Кандидати TMDB · Фільми: <xliff:g id="movies">%1$d</xliff:g> · Серіали: <xliff:g id="series">%2$d</xliff:g></string>
+    <string name="sync_status_trending_detail_preparing">Індекс заголовків провайдера · <xliff:g id="processed">%1$d</xliff:g> / <xliff:g id="total">%2$d</xliff:g></string>
+    <string name="sync_status_trending_detail_movies">Перевірка фільмів: <xliff:g id="checked">%1$d</xliff:g>/<xliff:g id="candidates">%2$d</xliff:g> · збіги: <xliff:g id="matched">%3$d</xliff:g>/<xliff:g id="target">%4$d</xliff:g></string>
+    <string name="sync_status_trending_detail_series">Перевірка серіалів: <xliff:g id="checked">%1$d</xliff:g>/<xliff:g id="candidates">%2$d</xliff:g> · збіги: <xliff:g id="matched">%3$d</xliff:g>/<xliff:g id="target">%4$d</xliff:g></string>
+    <string name="sync_status_trending_detail_selected">Вибрано · Фільми: <xliff:g id="movies">%1$d</xliff:g> · Серіали: <xliff:g id="series">%2$d</xliff:g> · Головна: <xliff:g id="home">%3$d</xliff:g></string>
+    <string name="sync_status_trending_detail_completed">Збіги · Фільми: <xliff:g id="movie_matches">%1$d</xliff:g>/<xliff:g id="movie_candidates">%2$d</xliff:g> · Серіали: <xliff:g id="series_matches">%3$d</xliff:g>/<xliff:g id="series_candidates">%4$d</xliff:g></string>
+    <string name="sync_status_trending_preparing">Підготовка назв провайдерів для швидкого зіставлення</string>
+    <string name="sync_status_trending_matching_movies">Підбір популярних фільмів за вашим провайдером</string>
+    <string name="sync_status_trending_matching_series">Підбір популярних серіалів за вашим провайдером</string>
+    <string name="sync_status_trending_loading_seasons">Завантаження сезонів провайдера</string>
+    <string name="sync_status_trending_detail_loading_seasons">Перевірено серіалів: <xliff:g id="processed">%1$d</xliff:g>/<xliff:g id="total">%2$d</xliff:g></string>
+    <string name="sync_status_trending_preserved">Оновлення популярного контенту недоступне · збережено попередні результати</string>
+    <plurals name="sync_status_trending_received">
+        <item quantity="one">Отримано <xliff:g id="count">%1$d</xliff:g> свіжу популярну позицію</item>
+        <item quantity="few">Отримано <xliff:g id="count">%1$d</xliff:g> свіжі популярні позиції</item>
+        <item quantity="many">Отримано <xliff:g id="count">%1$d</xliff:g> свіжих популярних позицій</item>
+        <item quantity="other">Отримано <xliff:g id="count">%1$d</xliff:g> свіжих популярних позицій</item>
+    </plurals>
+    <plurals name="sync_status_trending_building">
+        <item quantity="one">Формування списку «Зараз популярне» · <xliff:g id="count">%1$d</xliff:g> збіг</item>
+        <item quantity="few">Формування списку «Зараз популярне» · <xliff:g id="count">%1$d</xliff:g> збіги</item>
+        <item quantity="many">Формування списку «Зараз популярне» · <xliff:g id="count">%1$d</xliff:g> збігів</item>
+        <item quantity="other">Формування списку «Зараз популярне» · <xliff:g id="count">%1$d</xliff:g> збігів</item>
+    </plurals>
+    <plurals name="sync_status_trending_publishing">
+        <item quantity="one">Публікація списку «Зараз популярне» · <xliff:g id="count">%1$d</xliff:g> позиція</item>
+        <item quantity="few">Публікація списку «Зараз популярне» · <xliff:g id="count">%1$d</xliff:g> позиції</item>
+        <item quantity="many">Публікація списку «Зараз популярне» · <xliff:g id="count">%1$d</xliff:g> позицій</item>
+        <item quantity="other">Публікація списку «Зараз популярне» · <xliff:g id="count">%1$d</xliff:g> позицій</item>
+    </plurals>
+    <plurals name="sync_status_trending_ready">
+        <item quantity="one">Список «Зараз популярне» готовий · <xliff:g id="count">%1$d</xliff:g> збіг</item>
+        <item quantity="few">Список «Зараз популярне» готовий · <xliff:g id="count">%1$d</xliff:g> збіги</item>
+        <item quantity="many">Список «Зараз популярне» готовий · <xliff:g id="count">%1$d</xliff:g> збігів</item>
+        <item quantity="other">Список «Зараз популярне» готовий · <xliff:g id="count">%1$d</xliff:g> збігів</item>
+    </plurals>
+    <plurals name="sync_status_trending_below_minimum">
+        <item quantity="one">Список «Зараз популярне» приховано · лише <xliff:g id="count">%1$d</xliff:g> збіг</item>
+        <item quantity="few">Список «Зараз популярне» приховано · лише <xliff:g id="count">%1$d</xliff:g> збіги</item>
+        <item quantity="many">Список «Зараз популярне» приховано · лише <xliff:g id="count">%1$d</xliff:g> збігів</item>
+        <item quantity="other">Список «Зараз популярне» приховано · лише <xliff:g id="count">%1$d</xliff:g> збігів</item>
+    </plurals>
+    <string name="sync_phase_live">ТБ у прямому ефірі</string>
+    <string name="sync_phase_movies">Фільми</string>
+    <string name="sync_phase_series">Серіали</string>
+    <plurals name="sync_count_channels">
+        <item quantity="one"><xliff:g id="count">%1$s</xliff:g> канал</item>
+        <item quantity="few"><xliff:g id="count">%1$s</xliff:g> канали</item>
+        <item quantity="many"><xliff:g id="count">%1$s</xliff:g> каналів</item>
+        <item quantity="other"><xliff:g id="count">%1$s</xliff:g> каналів</item>
+    </plurals>
+    <plurals name="sync_count_movies">
+        <item quantity="one"><xliff:g id="count">%1$s</xliff:g> фільм</item>
+        <item quantity="few"><xliff:g id="count">%1$s</xliff:g> фільми</item>
+        <item quantity="many"><xliff:g id="count">%1$s</xliff:g> фільмів</item>
+        <item quantity="other"><xliff:g id="count">%1$s</xliff:g> фільмів</item>
+    </plurals>
+    <plurals name="sync_count_series">
+        <item quantity="one"><xliff:g id="count">%1$s</xliff:g> серіал</item>
+        <item quantity="few"><xliff:g id="count">%1$s</xliff:g> серіали</item>
+        <item quantity="many"><xliff:g id="count">%1$s</xliff:g> серіалів</item>
+        <item quantity="other"><xliff:g id="count">%1$s</xliff:g> серіалів</item>
+    </plurals>
+    <plurals name="sync_count_epg">
+        <item quantity="one"><xliff:g id="count">%1$s</xliff:g> запис EPG</item>
+        <item quantity="few"><xliff:g id="count">%1$s</xliff:g> записи EPG</item>
+        <item quantity="many"><xliff:g id="count">%1$s</xliff:g> записів EPG</item>
+        <item quantity="other"><xliff:g id="count">%1$s</xliff:g> записів EPG</item>
+    </plurals>
+    <plurals name="sync_status_more">
+        <item quantity="one">+<xliff:g id="count">%1$d</xliff:g> синхронізація</item>
+        <item quantity="few">+<xliff:g id="count">%1$d</xliff:g> синхронізації</item>
+        <item quantity="many">+<xliff:g id="count">%1$d</xliff:g> синхронізацій</item>
+        <item quantity="other">+<xliff:g id="count">%1$d</xliff:g> синхронізацій</item>
+    </plurals>
+    <plurals name="sync_categories_added">
+        <item quantity="one">Додано <xliff:g id="count">%1$d</xliff:g> категорію</item>
+        <item quantity="few">Додано <xliff:g id="count">%1$d</xliff:g> категорії</item>
+        <item quantity="many">Додано <xliff:g id="count">%1$d</xliff:g> категорій</item>
+        <item quantity="other">Додано <xliff:g id="count">%1$d</xliff:g> категорій</item>
+    </plurals>
+    <plurals name="sync_categories_removed">
+        <item quantity="one">Видалено <xliff:g id="count">%1$d</xliff:g> категорію</item>
+        <item quantity="few">Видалено <xliff:g id="count">%1$d</xliff:g> категорії</item>
+        <item quantity="many">Видалено <xliff:g id="count">%1$d</xliff:g> категорій</item>
+        <item quantity="other">Видалено <xliff:g id="count">%1$d</xliff:g> категорій</item>
+    </plurals>
+    <string name="sync_error_portal">Не вдалося зв’язатися з порталом. Перевірте URL порталу — зазвичай він закінчується на /c/.</string>
+    <string name="sync_error_session">Сесія порталу завершилася. Спробуйте ще раз.</string>
+    <string name="sync_error_auth">Сервер відхилив ваші дані для входу. Перевірте ім’я користувача та пароль.</string>
+    <string name="sync_error_not_found">Не знайдено на сервері. Перевірте URL.</string>
+    <string name="sync_error_server">Помилка сервера. Будь ласка, спробуйте ще раз пізніше.</string>
+    <string name="sync_error_secure">Не вдалося встановити безпечне з\'єднання — сертифікат сервера може бути недійсним.</string>
+    <string name="sync_error_malformed_guide">Дані програми передач з сервера пошкоджені. Частину з них, можливо, вдалося завантажити — спробуйте ще раз або перевірте URL-адресу EPG.</string>
+    <string name="sync_error_guide_empty">Програма передач зараз порожня. Можливо, провайдер її ще не опублікував — спробуйте ще раз пізніше.</string>
+    <string name="sync_error_guide_no_matching_channels">Жоден канал з цієї програми передач поки не збігається з каналами вашого плейлиста. Відкрийте «Програму передач» та скористайтеся «Автододаванням EPG», щоб зіставити їх за назвою.</string>
+    <string name="common_minutes">Хвилини</string>
+    <string name="common_size_mb"><xliff:g id="size">%1$s</xliff:g> МБ</string>
+    <string name="common_size_gb"><xliff:g id="size">%1$s</xliff:g> ГБ</string>
+    <string name="common_plus">+</string>
+    <string name="common_minus">-</string>
+    <string name="common_hide">Сховати</string>
+    <string name="common_show">Показати</string>
+    <string name="common_qr_code_companion_url">QR-код для URL-адреси компаньйона</string>
+    <string name="shell_rail_profile_line"><xliff:g id="playlist">%1$s</xliff:g> · змінити</string>
+    <string name="shell_rail_detail_last">Останній: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="shell_rail_detail_resume">Продовжити: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="shell_rail_detail_next">Далі: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="shell_rail_detail_episode"><xliff:g id="series">%1$s</xliff:g> <xliff:g id="episode">%2$s</xliff:g></string>
+    <string name="shell_rail_detail_more">Налаштування, обране, резервні копії</string>
+    <plurals name="shell_rail_detail_downloads">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> завантажується · <xliff:g id="progress">%2$s</xliff:g></item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> завантажуються · <xliff:g id="progress">%2$s</xliff:g></item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> завантажуються · <xliff:g id="progress">%2$s</xliff:g></item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> завантажуються · <xliff:g id="progress">%2$s</xliff:g></item>
+    </plurals>
+    <string name="shell_now_playing_audio">Аудіо</string>
+    <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
+    <string name="common_dismiss">Закрити</string>
+    <string name="database_migration_title">Виконується міграція бази даних</string>
+    <string name="database_migration_body">Ця версія зберігає ваші канали, фільми та серіали в новому форматі бази даних. Це відбувається лише один раз і для великих плейлистів може тривати до 2 хвилин.</string>
+    <string name="database_migration_keep">Ваші плейлисти, обране та історія зберігаються. Нічого не завантажується повторно. Не вимикайте телевізор і не закривайте застосунок.</string>
+    <string name="database_migration_keep_mobile">Ваші плейлисти, обране та історія зберігаються. Нічого не завантажується повторно. Не закривайте застосунок.</string>
+</resources>

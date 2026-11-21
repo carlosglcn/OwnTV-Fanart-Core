@@ -620,6 +620,8 @@
     <string name="sports_tab_lineups">Line-ups</string>
     <!-- Translators: Match page and league page tab: the league table (standings). -->
     <string name="sports_tab_table">Table</string>
+    <!-- Translators: League, team and match page tab outside football (soccer): the standings of an American league or another sport, where "Table" is not the usual word. -->
+    <string name="sports_tab_standings">Standings</string>
     <!-- Translators: State of the follow button on a match, team or league page: the user follows it. -->
     <string name="sports_following">Following</string>
     <!-- Translators: Button: follow a team, a player or a league. -->
@@ -737,6 +739,8 @@
     <string name="sports_switch_channel">Switch channel</string>
     <!-- Translators: League page tab: matches still to be played. -->
     <string name="sports_tab_fixtures">Fixtures</string>
+    <!-- Translators: League and team page tab outside football (soccer): games still to be played, where "Fixtures" is not the usual word. -->
+    <string name="sports_tab_games">Games</string>
     <!-- Translators: League page tab: matches already played. -->
     <string name="sports_tab_results">Results</string>
     <!-- Translators: Tab in the Sports header: today's and tomorrow's scores, live. Shown beside Calendar and Leagues, and on the same screen as the Results tab, so it must not read like Results. -->
@@ -829,6 +833,14 @@
     <string name="sports_table_difference">GD</string>
     <!-- Translators: League table column heading: points. Two or three letters. -->
     <string name="sports_table_points">Pts</string>
+    <!-- Translators: Standings column heading in American football: games tied. One to three letters. -->
+    <string name="sports_table_tied">T</string>
+    <!-- Translators: Ice hockey standings column heading: games lost in overtime or a shoot-out, worth one point. Two to four letters. -->
+    <string name="sports_table_ot_losses">OTL</string>
+    <!-- Translators: Standings column heading in basketball, baseball and American football: the share of games won (".750"). Two to four letters. -->
+    <string name="sports_table_win_percent">PCT</string>
+    <!-- Translators: Standings column heading in basketball and baseball: games behind the leader. Two to four letters. -->
+    <string name="sports_table_games_behind">GB</string>
     <!-- Translators: League table column heading: the last five results. -->
     <string name="sports_table_form">Form</string>
     <!-- Translators: League page heading: the current round's matches. -->

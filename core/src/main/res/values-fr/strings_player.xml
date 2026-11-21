@@ -56,6 +56,13 @@
     <string name="player_adjust">AJUSTER</string>
     <string name="player_search_subtitles">Rechercher sur OpenSubtitles</string>
     <string name="player_select_local_subtitle">Sélectionner un fichier de sous-titres local</string>
+    <string name="player_subtitle_find_in_folder">Rechercher dans un dossier</string>
+    <string name="player_subtitle_folder_title">Sous-titres du dossier</string>
+    <string name="player_subtitle_folder_choose">Choisir le dossier de sous-titres</string>
+    <string name="player_subtitle_folder_change">Changer de dossier</string>
+    <string name="player_subtitle_folder_empty">Aucun fichier de sous-titres dans ce dossier</string>
+    <string name="player_subtitle_folder_auto">Charger automatiquement le sous-titre correspondant</string>
+    <string name="player_subtitle_folder_auto_description">Un film ou un épisode sans sous-titres propres reçoit le seul fichier d\'ici qui correspond à son nom. Si plusieurs correspondent, aucun n\'est chargé.</string>
     <string name="player_no_tracks">Aucune piste disponible.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · image</string>
     <string name="player_av_sync">Synchronisation A/V</string>
@@ -69,7 +76,7 @@
     <string name="player_speed_normal">1,0x (normale)</string>
     <string name="player_speed_normal_short">1,0x</string>
     <string name="player_speed"><xliff:g id="speed">%1$s</xliff:g>x</string>
-    <string name="player_next_episode">Épisode suivant dans <xliff:g id="seconds">%1$d</xliff:g> s</string>
+    <string name="player_next_episode">Épisode suivant dans <xliff:g id="seconds">%1$d</xliff:g>s</string>
     <string name="player_play_now">Lire maintenant</string>
     <string name="player_volume">Volume</string>
     <string name="player_unmute">Rétablir le son</string>
@@ -266,10 +273,10 @@
     <string name="player_stream_audio_pcm"><xliff:g id="channels">%1$s</xliff:g> PCM</string>
     <string name="player_stream_multichannel_allowed">multicanal autorisé</string>
     <string name="player_stream_fell_back">repli : <xliff:g id="reason">%1$s</xliff:g></string>
-    <string name="player_stream_preroll_video">préchargement de <xliff:g id="seconds">%1$s</xliff:g> s de vidéo</string>
+    <string name="player_stream_preroll_video">préchargement de <xliff:g id="seconds">%1$s</xliff:g>s de vidéo</string>
     <string name="player_stream_preroll_off">préchargement désactivé</string>
-    <string name="player_stream_depth">profondeur <xliff:g id="seconds">%1$s</xliff:g> s</string>
-    <string name="player_stream_readahead">lecture anticipée <xliff:g id="seconds">%1$s</xliff:g> s</string>
+    <string name="player_stream_depth">profondeur <xliff:g id="seconds">%1$s</xliff:g>s</string>
+    <string name="player_stream_readahead">lecture anticipée <xliff:g id="seconds">%1$s</xliff:g>s</string>
     <string name="player_stream_playlist_override">remplacement de la liste de lecture</string>
     <string name="player_error_hardware_format">Le matériel vidéo de ce téléviseur ne peut pas décoder <xliff:g id="resolution">%1$s</xliff:g> <xliff:g id="codec">%2$s</xliff:g>. Le fichier n\'est pas en cause, mais le téléviseur ne peut pas lire ce format à cette résolution.</string>
     <string name="player_report_saved">Rapport du flux enregistré dans le journal de lecture</string>
@@ -282,7 +289,7 @@
     <string name="player_frame_rate_turn_on">Activer</string>
     <string name="player_reason_live_fallback">La lecture en direct a basculé vers une solution de repli</string>
     <string name="player_reason_live_no_fallback">La lecture en direct a échoué — plus aucune solution de repli disponible</string>
-    <string name="player_provider_retry_after">HTTP <xliff:g id="code">%1$d</xliff:g> : <xliff:g id="reason">%2$s</xliff:g> Nouvelle tentative dans <xliff:g id="seconds">%3$d</xliff:g> s.</string>
+    <string name="player_provider_retry_after">HTTP <xliff:g id="code">%1$d</xliff:g> : <xliff:g id="reason">%2$s</xliff:g> Nouvelle tentative dans <xliff:g id="seconds">%3$d</xliff:g>s.</string>
     <string name="player_provider_busy">Le fournisseur est occupé.</string>
     <string name="player_reconnecting">Flux interrompu. Reconnexion en cours…</string>
     <string name="player_error_data_saver">L’économiseur de données est activé, la diffusion via les données mobiles est donc désactivée. Connectez-vous au Wi-Fi ou désactivez l’économiseur de données dans les réglages.</string>

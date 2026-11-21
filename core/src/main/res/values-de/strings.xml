@@ -179,4 +179,8 @@
     <string name="shell_now_playing_audio">Audio</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">Ignorieren</string>
+    <string name="database_migration_title">Datenbankmigration wird durchgeführt</string>
+    <string name="database_migration_body">Diese Version speichert deine Sender, Filme und Serien in einem neuen Datenbankformat. Das geschieht nur einmal und kann bei großen Playlists bis zu 2 Minuten dauern.</string>
+    <string name="database_migration_keep">Deine Playlists, Favoriten und dein Verlauf bleiben erhalten. Nichts wird neu heruntergeladen. Bitte schalte den Fernseher nicht aus und schließe die App nicht.</string>
+    <string name="database_migration_keep_mobile">Deine Playlists, Favoriten und dein Verlauf bleiben erhalten. Nichts wird neu heruntergeladen. Bitte lass die App geöffnet.</string>
 </resources>

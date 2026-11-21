@@ -56,6 +56,13 @@
     <string name="player_adjust">AJUSTAR</string>
     <string name="player_search_subtitles">Pesquisar no OpenSubtitles</string>
     <string name="player_select_local_subtitle">Selecionar arquivo de legenda local</string>
+    <string name="player_subtitle_find_in_folder">Procurar na pasta</string>
+    <string name="player_subtitle_folder_title">Legendas na pasta</string>
+    <string name="player_subtitle_folder_choose">Escolher pasta de legendas</string>
+    <string name="player_subtitle_folder_change">Trocar pasta</string>
+    <string name="player_subtitle_folder_empty">Nenhum arquivo de legenda nesta pasta</string>
+    <string name="player_subtitle_folder_auto">Carregar automaticamente a legenda correspondente</string>
+    <string name="player_subtitle_folder_auto_description">Um filme ou episódio sem legenda própria recebe o único arquivo daqui que corresponde ao nome dele. Se vários corresponderem, nenhum é carregado.</string>
     <string name="player_no_tracks">Nenhuma faixa disponível.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · imagem</string>
     <string name="player_av_sync">Sincronização A/V</string>

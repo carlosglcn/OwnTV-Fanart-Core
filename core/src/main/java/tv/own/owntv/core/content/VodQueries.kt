@@ -8,6 +8,7 @@ import tv.own.owntv.core.database.dao.SeriesDao
 import tv.own.owntv.core.database.entity.ContentOrderEntity
 import tv.own.owntv.core.database.entity.MovieEntity
 import tv.own.owntv.core.database.entity.SeriesEntity
+import tv.own.owntv.core.database.entity.nameKeyOf
 import tv.own.owntv.core.live.LiveKey
 import tv.own.owntv.core.model.MediaType
 import tv.own.owntv.core.settings.SettingsRepository
@@ -64,14 +65,14 @@ fun moviePagingSource(
     } else {
         when (key) {
             LiveKey.All, LiveKey.Catchup ->
-                if (dateAdded) movieDao.searchAllDateAdded(query, ids) else movieDao.searchAll(query, ids)
-            LiveKey.Favorites -> movieDao.searchFavorites(query, profileId, ids)
-            LiveKey.History -> movieDao.searchHistory(query, profileId, ids)
-            LiveKey.Continue -> movieDao.searchContinue(query, profileId, ids)
-            is LiveKey.Custom -> customCategoryDao.searchMovies(query, profileId, key.id, ids)
+                if (dateAdded) movieDao.searchAllDateAdded(nameKeyOf(query), ids) else movieDao.searchAll(nameKeyOf(query), ids)
+            LiveKey.Favorites -> movieDao.searchFavorites(nameKeyOf(query), profileId, ids)
+            LiveKey.History -> movieDao.searchHistory(nameKeyOf(query), profileId, ids)
+            LiveKey.Continue -> movieDao.searchContinue(nameKeyOf(query), profileId, ids)
+            is LiveKey.Custom -> customCategoryDao.searchMovies(nameKeyOf(query), profileId, key.id, ids)
             is LiveKey.Folder ->
-                if (dateAdded) movieDao.searchInCategoryDateAdded(query, key.id)
-                else movieDao.searchInCategory(query, key.id)
+                if (dateAdded) movieDao.searchInCategoryDateAdded(nameKeyOf(query), key.id)
+                else movieDao.searchInCategory(nameKeyOf(query), key.id)
         }
     }
 }
@@ -118,14 +119,14 @@ fun seriesPagingSource(
     } else {
         when (key) {
             LiveKey.All, LiveKey.Catchup ->
-                if (dateAdded) seriesDao.searchAllDateAdded(query, ids) else seriesDao.searchAll(query, ids)
-            LiveKey.Favorites -> seriesDao.searchFavorites(query, profileId, ids)
-            LiveKey.History -> seriesDao.searchHistory(query, profileId, ids)
-            LiveKey.Continue -> seriesDao.searchContinue(query, profileId, ids)
-            is LiveKey.Custom -> customCategoryDao.searchSeries(query, profileId, key.id, ids)
+                if (dateAdded) seriesDao.searchAllDateAdded(nameKeyOf(query), ids) else seriesDao.searchAll(nameKeyOf(query), ids)
+            LiveKey.Favorites -> seriesDao.searchFavorites(nameKeyOf(query), profileId, ids)
+            LiveKey.History -> seriesDao.searchHistory(nameKeyOf(query), profileId, ids)
+            LiveKey.Continue -> seriesDao.searchContinue(nameKeyOf(query), profileId, ids)
+            is LiveKey.Custom -> customCategoryDao.searchSeries(nameKeyOf(query), profileId, key.id, ids)
             is LiveKey.Folder ->
-                if (dateAdded) seriesDao.searchInCategoryDateAdded(query, key.id)
-                else seriesDao.searchInCategory(query, key.id)
+                if (dateAdded) seriesDao.searchInCategoryDateAdded(nameKeyOf(query), key.id)
+                else seriesDao.searchInCategory(nameKeyOf(query), key.id)
         }
     }
 }

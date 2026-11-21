@@ -164,4 +164,8 @@
     <string name="shell_now_playing_audio">音訊</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">忽略</string>
+    <string name="database_migration_title">正在遷移資料庫</string>
+    <string name="database_migration_body">此版本會以新的資料庫格式儲存你的頻道、電影和影集。此操作只會進行一次，播放清單較大時最多可能需要 2 分鐘。</string>
+    <string name="database_migration_keep">你的播放清單、收藏和觀看記錄都會保留，不會重新下載任何內容。請勿關閉電視或結束應用程式。</string>
+    <string name="database_migration_keep_mobile">你的播放清單、收藏和觀看記錄都會保留，不會重新下載任何內容。請保持應用程式開啟。</string>
 </resources>

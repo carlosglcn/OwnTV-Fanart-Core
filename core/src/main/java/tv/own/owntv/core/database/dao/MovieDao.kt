@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import tv.own.owntv.core.catalog.withProviderCatalogMetadata
 import tv.own.owntv.core.database.entity.ContentHashProjection
 import tv.own.owntv.core.database.entity.MovieEntity
+import tv.own.owntv.core.database.entity.nameKeyOf
 
 /** glcn: an item id with its stream URL — what the Emby watch-state import matches on. */
 data class IdUrlRow(val id: Long, val streamUrl: String)
@@ -150,8 +151,11 @@ interface MovieDao {
     @Query("SELECT * FROM movies WHERE name LIKE '%' || :title || '%' LIMIT 40")
     suspend fun findByTitleLike(title: String): List<MovieEntity>
 
-    @Query("SELECT * FROM movies WHERE sourceId = :sourceId AND name = :name LIMIT 1")
-    suspend fun findByName(sourceId: Long, name: String): MovieEntity?
+    /** Exact name, read through the `(sourceId, nameKey)` index. */
+    suspend fun findByName(sourceId: Long, name: String): MovieEntity? = findByNameByKey(sourceId, nameKeyOf(name), name)
+
+    @Query("SELECT * FROM movies WHERE sourceId = :sourceId AND nameKey = :key AND name = :name LIMIT 1")
+    suspend fun findByNameByKey(sourceId: Long, key: String, name: String): MovieEntity?
 
     @Query("SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND name = :name COLLATE NOCASE ORDER BY sourceId LIMIT 1")
     suspend fun findByNameAny(sourceIds: List<Long>, name: String): MovieEntity?
@@ -159,10 +163,10 @@ interface MovieDao {
     @Query("SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY sortOrder ASC, name ASC")
     fun pagingByCategory(categoryId: Long): PagingSource<Int, MovieEntity>
 
-    @Query("SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY name ASC")
+    @Query("SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY nameKey ASC, name ASC")
     fun pagingByCategoryAlpha(categoryId: Long): PagingSource<Int, MovieEntity>
 
-    @Query("SELECT * FROM movies WHERE sourceId IN (:sourceIds) ORDER BY name ASC")
+    @Query("SELECT * FROM movies WHERE sourceId IN (:sourceIds) ORDER BY nameKey ASC, name ASC")
     fun pagingAll(sourceIds: List<Long>): PagingSource<Int, MovieEntity>
 
     @Query("SELECT * FROM movies WHERE sourceId IN (:sourceIds) ORDER BY sourceId ASC, sortOrder ASC, name ASC")
@@ -184,22 +188,22 @@ interface MovieDao {
     @Query("SELECT * FROM movies WHERE categoryId = :categoryId ORDER BY addedAt DESC, sortOrder DESC, id DESC")
     fun pagingByCategoryDateAdded(categoryId: Long): PagingSource<Int, MovieEntity>
 
-    @Query("SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY addedAt DESC, sortOrder DESC, id DESC")
-    fun searchAllDateAdded(query: String, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
+    @Query("SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND nameKey LIKE '%' || :key || '%' ORDER BY addedAt DESC, sortOrder DESC, id DESC")
+    fun searchAllDateAdded(key: String, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
 
-    @Query("SELECT * FROM movies WHERE categoryId = :categoryId AND name LIKE '%' || :query || '%' ORDER BY addedAt DESC, sortOrder DESC, id DESC")
-    fun searchInCategoryDateAdded(query: String, categoryId: Long): PagingSource<Int, MovieEntity>
+    @Query("SELECT * FROM movies WHERE categoryId = :categoryId AND nameKey LIKE '%' || :key || '%' ORDER BY addedAt DESC, sortOrder DESC, id DESC")
+    fun searchInCategoryDateAdded(key: String, categoryId: Long): PagingSource<Int, MovieEntity>
 
     // --- Manual order (Move) — see ChannelDao for the join shape. ---
     /** Moved rows keep their saved position; the rest follow [alpha] (A–Z) or the playlist order
      *  around them — the same rule as `placePinned` for categories. */
     @Query(
-            "WITH base AS (SELECT m.id AS id, m.sortOrder AS so, m.name AS nm, 0 AS mp, o.position AS pos " +
+            "WITH base AS (SELECT m.id AS id, m.sortOrder AS so, m.name AS nm, m.nameKey AS nk, 0 AS mp, o.position AS pos " +
             "FROM movies m " +
             "LEFT JOIN content_order o ON o.itemId = m.id AND o.profileId = :profileId AND o.mediaType = 'MOVIE' AND o.contextKey = :contextKey " +
             "WHERE m.categoryId = :categoryId), " +
             "slots AS (SELECT id, pos - (ROW_NUMBER() OVER (ORDER BY pos, id) - 1) AS slot, 0 AS grp, pos AS tie FROM base WHERE pos IS NOT NULL " +
-            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nm END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
+            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nk END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
             "SELECT m.* FROM movies m INNER JOIN slots sl ON sl.id = m.id ORDER BY sl.slot, sl.grp, sl.tie",
     )
     fun pagingByCategoryManual(categoryId: Long, profileId: Long, contextKey: String, alpha: Boolean): PagingSource<Int, MovieEntity>
@@ -217,12 +221,12 @@ interface MovieDao {
     /** Moved rows keep their saved position; the rest follow [alpha] (A–Z) or the playlist order
      *  around them — the same rule as `placePinned` for categories. */
     @Query(
-            "WITH base AS (SELECT m.id AS id, m.sortOrder AS so, m.name AS nm, 0 AS mp, o.position AS pos " +
+            "WITH base AS (SELECT m.id AS id, m.sortOrder AS so, m.name AS nm, m.nameKey AS nk, 0 AS mp, o.position AS pos " +
             "FROM movies m " +
             "LEFT JOIN content_order o ON o.itemId = m.id AND o.profileId = :profileId AND o.mediaType = 'MOVIE' AND o.contextKey = :contextKey " +
             "WHERE m.categoryId = :categoryId), " +
             "slots AS (SELECT id, pos - (ROW_NUMBER() OVER (ORDER BY pos, id) - 1) AS slot, 0 AS grp, pos AS tie FROM base WHERE pos IS NOT NULL " +
-            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nm END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
+            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nk END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
             "SELECT m.* FROM movies m INNER JOIN slots sl ON sl.id = m.id ORDER BY sl.slot, sl.grp, sl.tie LIMIT :limit",
     )
     suspend fun snapshotByCategoryManual(categoryId: Long, profileId: Long, contextKey: String, alpha: Boolean, limit: Int): List<MovieEntity>
@@ -284,41 +288,41 @@ interface MovieDao {
 
     @Query(
         "SELECT * FROM movies WHERE sourceId IN (:sourceIds) " +
-            "AND id IN (SELECT rowid FROM movies_fts WHERE movies_fts MATCH :query) ORDER BY name ASC",
+            "AND id IN (SELECT rowid FROM movies_fts WHERE movies_fts MATCH :query) ORDER BY nameKey ASC, name ASC",
     )
     fun search(query: String, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
 
     // --- Inline folder-scoped search (substring) ---
-    @Query("SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY name ASC")
-    fun searchAll(query: String, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
+    @Query("SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND nameKey LIKE '%' || :key || '%' ORDER BY nameKey ASC, name ASC")
+    fun searchAll(key: String, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
 
-    @Query("SELECT * FROM movies WHERE categoryId = :categoryId AND name LIKE '%' || :query || '%' ORDER BY sortOrder ASC, name ASC")
-    fun searchInCategory(query: String, categoryId: Long): PagingSource<Int, MovieEntity>
+    @Query("SELECT * FROM movies WHERE categoryId = :categoryId AND nameKey LIKE '%' || :key || '%' ORDER BY sortOrder ASC, name ASC")
+    fun searchInCategory(key: String, categoryId: Long): PagingSource<Int, MovieEntity>
 
     /** Bounded list for global search (across all of a profile's sources). */
-    @Query("SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY name ASC LIMIT :limit")
-    suspend fun searchList(query: String, sourceIds: List<Long>, limit: Int): List<MovieEntity>
+    @Query("SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND nameKey LIKE '%' || :key || '%' ORDER BY nameKey ASC, name ASC LIMIT :limit")
+    suspend fun searchList(key: String, sourceIds: List<Long>, limit: Int): List<MovieEntity>
 
     /** FTS-backed bounded list for global as-you-type search: index-served prefix-token match instead
      *  of the leading-wildcard LIKE above, which scans all ~170k rows per keystroke. [ftsQuery] must be
      *  a sanitized FTS MATCH expression (see SearchViewModel.ftsQueryFor). */
     @Query(
         "SELECT * FROM movies WHERE sourceId IN (:sourceIds) " +
-            "AND id IN (SELECT rowid FROM movies_fts WHERE movies_fts MATCH :ftsQuery) ORDER BY name ASC LIMIT :limit",
+            "AND id IN (SELECT rowid FROM movies_fts WHERE movies_fts MATCH :ftsQuery) ORDER BY nameKey ASC, name ASC LIMIT :limit",
     )
     suspend fun searchListFts(ftsQuery: String, sourceIds: List<Long>, limit: Int): List<MovieEntity>
 
     @Query(
         "SELECT m.* FROM movies m INNER JOIN favorites f ON f.itemId = m.id AND f.mediaType = 'MOVIE' " +
-            "WHERE f.profileId = :profileId AND m.sourceId IN (:sourceIds) AND m.name LIKE '%' || :query || '%' ORDER BY f.addedAt DESC",
+            "WHERE f.profileId = :profileId AND m.sourceId IN (:sourceIds) AND m.nameKey LIKE '%' || :key || '%' ORDER BY f.addedAt DESC",
     )
-    fun searchFavorites(query: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
+    fun searchFavorites(key: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
 
     @Query(
         "SELECT m.* FROM movies m INNER JOIN watch_history h ON h.itemId = m.id AND h.mediaType = 'MOVIE' " +
-            "WHERE h.profileId = :profileId AND m.sourceId IN (:sourceIds) AND m.name LIKE '%' || :query || '%' ORDER BY h.watchedAt DESC",
+            "WHERE h.profileId = :profileId AND m.sourceId IN (:sourceIds) AND m.nameKey LIKE '%' || :key || '%' ORDER BY h.watchedAt DESC",
     )
-    fun searchHistory(query: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
+    fun searchHistory(key: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, MovieEntity>
 
     // glcn: "Keep watching" in Films — started (10 s or more) and not finished (under 95 %), the latest first.
     @Query("SELECT m.* " + CONTINUE_MOVIES + " ORDER BY p.updatedAt DESC")

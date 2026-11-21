@@ -340,6 +340,7 @@
     <string name="sports_tab_stats">Statisztika</string>
     <string name="sports_tab_lineups">Kezdők</string>
     <string name="sports_tab_table">Tabella</string>
+    <string name="sports_tab_standings">Tabella</string>
     <string name="sports_following">Követed</string>
     <string name="sports_follow">Követés</string>
     <string name="sports_event_goal">Gól · <xliff:g id="player">%1$s</xliff:g></string>
@@ -403,6 +404,7 @@
     <string name="sports_playing_now">Most megy</string>
     <string name="sports_switch_channel">Csatornaváltás</string>
     <string name="sports_tab_fixtures">Program</string>
+    <string name="sports_tab_games">Meccsek</string>
     <string name="sports_tab_results">Eredmények</string>
     <string name="sports_tab_scores">Élő</string>
     <string name="sports_tab_calendar">Naptár</string>
@@ -449,6 +451,10 @@
     <string name="sports_table_lost">V</string>
     <string name="sports_table_difference">GK</string>
     <string name="sports_table_points">P</string>
+    <string name="sports_table_tied">D</string>
+    <string name="sports_table_ot_losses">HV</string>
+    <string name="sports_table_win_percent">Ar</string>
+    <string name="sports_table_games_behind">Hát</string>
     <string name="sports_table_form">Forma</string>
     <string name="sports_this_matchday">Ez a forduló</string>
     <string name="sports_settings_what">Mi látszik</string>

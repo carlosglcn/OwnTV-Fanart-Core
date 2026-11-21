@@ -43,12 +43,19 @@ data class StandingsRow(
     val difference: String,
     val points: Int,
     val note: String? = null,
+    /** Hockey's overtime and shoot-out losses, worth a point each. */
+    val otLosses: Int = 0,
+    /** As ESPN writes them: ".889", and "-" for the leader's games behind. */
+    val winPercent: String = "",
+    val gamesBehind: String = "",
 )
 
 /** A league table; [name] is a conference or group ("Eastern Conference"), or the league's own name. */
 data class StandingsGroup(val name: String, val rows: List<StandingsRow>)
 
-data class StandingsTable(val leagueKey: String, val groups: List<StandingsGroup>)
+data class StandingsTable(val leagueKey: String, val groups: List<StandingsGroup>) {
+    val sport: Sport? get() = Sport.ofPath(leagueKey.substringBefore('/'))
+}
 
 /**
  * One place in a ranking, where a table's won/drawn/lost has no meaning: a driver, an F1 constructor,

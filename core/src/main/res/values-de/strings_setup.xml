@@ -224,9 +224,11 @@
     <string name="setup_prefer_hls_live_tv">HLS für Live-TV bevorzugen</string>
     <string name="setup_hide_new_categories">Neue Kategorien standardmäßig ausblenden</string>
     <string name="setup_hide_new_categories_description">Profilweit: Kategorien, die bei zukünftigen Synchronisierungen erscheinen, sind zunächst ausgeblendet. Du kannst sie jederzeit unter „Anpassung“ anzeigen.</string>
-    <string name="setup_prefer_hls_description">HLS (.m3u8) für Live-TV gegenüber MPEG-TS priorisieren. Falls HLS fehlschlägt, wird auf MPEG-TS zurückgegriffen. Für Catch-up wird immer MPEG-TS verwendet.</string>
-    <string name="setup_prefer_hls_description_supported">HLS (.m3u8) für Live-TV gegenüber MPEG-TS priorisieren. Falls HLS fehlschlägt, wird auf MPEG-TS zurückgegriffen. Für Catch-up wird immer MPEG-TS verwendet. Dein Anbieter meldet HLS-Unterstützung.</string>
-    <string name="setup_prefer_hls_description_unsupported">HLS (.m3u8) für Live-TV gegenüber MPEG-TS priorisieren. Falls HLS fehlschlägt, wird auf MPEG-TS zurückgegriffen. Für Catch-up wird immer MPEG-TS verwendet. Dein Anbieter meldet keine HLS-Unterstützung – du kannst es trotzdem versuchen.</string>
+    <string name="setup_prefer_hls_description">HLS (.m3u8) für Live-TV gegenüber MPEG-TS priorisieren. Falls HLS fehlschlägt, wird auf MPEG-TS zurückgegriffen.</string>
+    <string name="setup_prefer_hls_description_supported">HLS (.m3u8) für Live-TV gegenüber MPEG-TS priorisieren. Falls HLS fehlschlägt, wird auf MPEG-TS zurückgegriffen. Dein Anbieter meldet HLS-Unterstützung.</string>
+    <string name="setup_prefer_hls_description_unsupported">HLS (.m3u8) für Live-TV gegenüber MPEG-TS priorisieren. Falls HLS fehlschlägt, wird auf MPEG-TS zurückgegriffen. Dein Anbieter meldet keine HLS-Unterstützung – du kannst es trotzdem versuchen.</string>
+    <string name="setup_prefer_hls_catchup">HLS für Catch-up bevorzugen</string>
+    <string name="setup_prefer_hls_catchup_description">Catch-up-Sendungen als HLS (.m3u8) statt MPEG-TS anfordern. Falls HLS fehlschlägt, wird auf MPEG-TS zurückgegriffen. Nur manche Anbieter stellen Catch-up als HLS bereit.</string>
     <string name="setup_hls_test_support">HLS-Unterstützung testen</string>
     <string name="setup_hls_testing">HLS wird getestet…</string>
     <string name="setup_hls_test_failed">Test fehlgeschlagen: <xliff:g id="reason">%1$s</xliff:g></string>

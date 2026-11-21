@@ -164,4 +164,8 @@
     <string name="shell_now_playing_audio">오디오</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">닫기</string>
+    <string name="database_migration_title">데이터베이스 마이그레이션 중</string>
+    <string name="database_migration_body">이 버전은 채널, 영화, 시리즈를 새 데이터베이스 형식으로 저장합니다. 한 번만 진행되며 큰 재생목록에서는 최대 2분이 걸릴 수 있습니다.</string>
+    <string name="database_migration_keep">재생목록, 즐겨찾기, 시청 기록은 그대로 유지됩니다. 다시 다운로드하지 않습니다. TV를 끄거나 앱을 닫지 마세요.</string>
+    <string name="database_migration_keep_mobile">재생목록, 즐겨찾기, 시청 기록은 그대로 유지됩니다. 다시 다운로드하지 않습니다. 앱을 열어 두세요.</string>
 </resources>

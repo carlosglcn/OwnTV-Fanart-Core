@@ -56,6 +56,13 @@
     <string name="player_adjust">ضبط</string>
     <string name="player_search_subtitles">بحث في OpenSubtitles</string>
     <string name="player_select_local_subtitle">اختيار ملف ترجمة محلي</string>
+    <string name="player_subtitle_find_in_folder">البحث في مجلد</string>
+    <string name="player_subtitle_folder_title">الترجمات في المجلد</string>
+    <string name="player_subtitle_folder_choose">اختيار مجلد الترجمات</string>
+    <string name="player_subtitle_folder_change">تغيير المجلد</string>
+    <string name="player_subtitle_folder_empty">لا توجد ملفات ترجمة في هذا المجلد</string>
+    <string name="player_subtitle_folder_auto">تحميل الترجمة المطابقة تلقائيًا</string>
+    <string name="player_subtitle_folder_auto_description">الفيلم أو الحلقة التي ليس لها ترجمة خاصة بها تحصل على الملف الوحيد هنا الذي يطابق اسمها. إذا تطابق أكثر من ملف، فلن يُحمَّل أي منها.</string>
     <string name="player_no_tracks">لا توجد مسارات متاحة.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · صورية</string>
     <string name="player_av_sync">مزامنة الصوت/الفيديو</string>

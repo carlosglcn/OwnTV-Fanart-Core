@@ -61,7 +61,7 @@ class EspnSportsSource(client: OkHttpClient) : SportsSource {
             // follow list; the header feed carries every series' matches of the day in one call.
             EspnParser.cricketHeader(league, get("$WEB/apis/v2/scoreboard/header?sport=cricket" + date?.let { "&dates=$it" }.orEmpty()))
         } else {
-            EspnParser.scoreboard(league, get("$SITE/apis/site/v2/sports/${league.sport.path}/${league.slug}/scoreboard" + date?.let { "?dates=$it" }.orEmpty()))
+            EspnParser.scoreboard(league, get(scoreboardUrl(league, date)))
         }
     }
 
@@ -84,7 +84,7 @@ class EspnSportsSource(client: OkHttpClient) : SportsSource {
         // Only football answers for every competition at once (`soccer/all`): league, cups, Europe.
         val slug = if (league.sport == Sport.SOCCER) "all" else league.slug
         val url = "$SITE/apis/site/v2/sports/${league.sport.path}/$slug/teams/$teamId/schedule" + if (fixtures) "?fixture=true" else ""
-        return EspnParser.teamSchedule(league.sport, get(url))
+        return EspnParser.teamSchedule(league, get(url))
     }
 
     override suspend fun summary(match: Match): MatchSummary =
@@ -94,7 +94,7 @@ class EspnSportsSource(client: OkHttpClient) : SportsSource {
         EspnParser.standings(league, get("$SITE/apis/v2/sports/${league.sport.path}/${league.slug}/standings"))
 
     override suspend fun teams(league: League): List<Team> =
-        EspnParser.teams(get("$SITE/apis/site/v2/sports/${league.sport.path}/${league.slug}/teams"))
+        EspnParser.teams(get(teamsUrl(league)))
 
     private suspend fun get(url: String): String = withContext(Dispatchers.IO) {
         val call = http.newCall(Request.Builder().url(url).build())
@@ -109,13 +109,29 @@ class EspnSportsSource(client: OkHttpClient) : SportsSource {
         }
     }
 
-    private companion object {
-        const val SITE = "https://site.api.espn.com"
-        const val WEB = "https://site.web.api.espn.com"
-        const val TIMEOUT_SECONDS = 10L
+    internal companion object {
+        private const val SITE = "https://site.api.espn.com"
+        private const val WEB = "https://site.web.api.espn.com"
+        private const val TIMEOUT_SECONDS = 10L
 
-        /** ESPN pages a scoreboard at 100 events by default; an NBA month is over 200. */
-        const val MONTH_LIMIT = 1000
-        val MONTH: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMM")
+        /**
+         * ESPN pages a scoreboard at 100 events by default; an NBA month is over 200, and a college
+         * Saturday with its whole division over 70. Also the team list's page: it gives 50 by default,
+         * and college basketball alone has 365.
+         */
+        private const val MONTH_LIMIT = 1000
+        private val MONTH: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMM")
+
+        /**
+         * A day's scoreboard. Without [League.group] a college league answers only its ranked and
+         * televised games, about one in eight. The month feed keeps that default: with the whole
+         * division a college basketball month is over 1,000 games and 1.3 MB compressed, cut off anyway.
+         */
+        internal fun scoreboardUrl(league: League, date: String?): String =
+            "$SITE/apis/site/v2/sports/${league.sport.path}/${league.slug}/scoreboard?" +
+                listOfNotNull(date?.let { "dates=$it" }, league.group?.let { "groups=$it" }, "limit=$MONTH_LIMIT").joinToString("&")
+
+        internal fun teamsUrl(league: League): String =
+            "$SITE/apis/site/v2/sports/${league.sport.path}/${league.slug}/teams?limit=$MONTH_LIMIT"
     }
 }

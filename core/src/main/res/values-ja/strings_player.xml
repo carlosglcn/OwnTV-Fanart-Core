@@ -56,6 +56,13 @@
     <string name="player_adjust">調整</string>
     <string name="player_search_subtitles">OpenSubtitlesを検索</string>
     <string name="player_select_local_subtitle">端末内の字幕ファイルを選択</string>
+    <string name="player_subtitle_find_in_folder">フォルダーから探す</string>
+    <string name="player_subtitle_folder_title">フォルダー内の字幕</string>
+    <string name="player_subtitle_folder_choose">字幕フォルダーを選択</string>
+    <string name="player_subtitle_folder_change">フォルダーを変更</string>
+    <string name="player_subtitle_folder_empty">このフォルダーに字幕ファイルがありません</string>
+    <string name="player_subtitle_folder_auto">一致する字幕を自動で読み込む</string>
+    <string name="player_subtitle_folder_auto_description">字幕のない映画やエピソードには、名前が一致するこのフォルダー内の唯一のファイルが読み込まれます。複数が一致する場合は読み込まれません。</string>
     <string name="player_no_tracks">利用可能なトラックはありません。</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · 画像形式</string>
     <string name="player_av_sync">A/V同期</string>

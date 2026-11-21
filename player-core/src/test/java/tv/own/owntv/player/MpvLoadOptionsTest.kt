@@ -59,7 +59,7 @@ class MpvLoadOptionsTest {
             listOf(
                 "stream-lavf-o", "network-timeout", "demuxer-readahead-secs", "cache-secs", "demuxer-max-bytes",
                 "cache-pause-initial", "cache-pause-wait", "correct-pts", "video-sync", "framedrop", "vd-lavc-o",
-                "demuxer-lavf-probesize", "demuxer-lavf-analyzeduration", "demuxer-lavf-o",
+                "demuxer-lavf-probesize", "demuxer-lavf-analyzeduration", "demuxer-lavf-o", "demuxer-lavf-format",
             ),
             MpvLoadOptions.of(input()).options.map { it.first },
         )
@@ -87,6 +87,17 @@ class MpvLoadOptionsTest {
         val r = MpvLoadOptions.of(input(url = "http://panel.example/timeshift/u/p/60/2026-10-21:10-00/1.ts", live = false, archive = true))
         assertFalse(r.trimmed)
         assertEquals("wait_keyframe=1", r.value("vd-lavc-o"))
+        // Probes on past a long GOP to the first SPS, or the hardware decoder opens with no picture size.
+        assertEquals(MpvLoadOptions.ARCHIVE_PROBE_BYTES, r.value("demuxer-lavf-probesize"))
+        assertEquals(MpvLoadOptions.ARCHIVE_ANALYZE_SECS, r.value("demuxer-lavf-analyzeduration"))
+        // An HLS archive keeps the plain full probe: a set analyze time wedges mpv's HLS open.
+        val hls = MpvLoadOptions.of(input(url = "http://panel.example/timeshift/u/p/60/2026-10-21:10-00/1.m3u8", live = false, archive = true))
+        assertEquals("5000000", hls.value("demuxer-lavf-probesize"))
+        assertEquals("0", hls.value("demuxer-lavf-analyzeduration"))
+        // and FFmpeg is told it is HLS rather than reading the slow playlist once more to find out.
+        assertEquals("hls", hls.value("demuxer-lavf-format"))
+        assertEquals("", r.value("demuxer-lavf-format"))
+        assertEquals("", MpvLoadOptions.of(input(url = "http://panel.example/live/u/p/1.m3u8")).value("demuxer-lavf-format"))
         assertTrue(r.bufferLog!!.startsWith("film_buffer"))
     }
 

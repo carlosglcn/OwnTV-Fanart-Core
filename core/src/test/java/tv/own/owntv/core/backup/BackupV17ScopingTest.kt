@@ -150,6 +150,8 @@ class BackupV17ScopingTest {
             "cleanChannelNames", "channelNameStrip",
             // v53: the playlist's "Ignore connection limit" choice.
             "ignoreConnectionLimit",
+            // v55: the playlist's "Prefer HLS for catch-up" choice.
+            "catchupPreferHls",
         )
         // v49 `serverTimeZone`: the Xtream panel's own report, re-read at EVERY sync (unlike a measured
         // `maxConnections`, nothing expensive is lost) and only ever set for Xtream. A restored row

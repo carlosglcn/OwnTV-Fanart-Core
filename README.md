@@ -261,7 +261,7 @@ Contributions, bug reports and ideas are welcome. Two things to know before open
 
 <img src="extras/partner-logos/Weblate_logo.svg" alt="Weblate" width="200">
 
-Core holds every string in the suite, and it speaks 26 languages because people translate it on
+Core holds every string in the suite, and it speaks 28 languages because people translate it on
 [**Weblate**](https://weblate.org/), which hosts the project free of charge for libre software.
 Thank you to Weblate and to every translator who has given OwnTV their language.
 

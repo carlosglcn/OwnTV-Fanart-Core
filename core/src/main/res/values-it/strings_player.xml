@@ -56,6 +56,13 @@
     <string name="player_adjust">REGOLA</string>
     <string name="player_search_subtitles">Cerca su OpenSubtitles</string>
     <string name="player_select_local_subtitle">Seleziona un file di sottotitoli locale</string>
+    <string name="player_subtitle_find_in_folder">Cerca nella cartella</string>
+    <string name="player_subtitle_folder_title">Sottotitoli nella cartella</string>
+    <string name="player_subtitle_folder_choose">Scegli la cartella dei sottotitoli</string>
+    <string name="player_subtitle_folder_change">Cambia cartella</string>
+    <string name="player_subtitle_folder_empty">Nessun file di sottotitoli in questa cartella</string>
+    <string name="player_subtitle_folder_auto">Carica automaticamente il sottotitolo corrispondente</string>
+    <string name="player_subtitle_folder_auto_description">Un film o un episodio senza sottotitoli propri riceve l\'unico file di qui che corrisponde al suo nome. Se ne corrispondono diversi, non ne viene caricato nessuno.</string>
     <string name="player_no_tracks">Nessuna traccia disponibile.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · immagine</string>
     <string name="player_av_sync">Sincronizzazione A/V</string>

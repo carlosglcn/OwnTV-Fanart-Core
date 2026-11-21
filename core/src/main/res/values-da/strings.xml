@@ -179,4 +179,8 @@
     <string name="shell_now_playing_audio">Lyd</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">Afvis</string>
+    <string name="database_migration_title">Udfører databasemigrering</string>
+    <string name="database_migration_body">Denne version gemmer dine kanaler, film og serier i et nyt databaseformat. Det sker kun én gang og kan tage op til 2 minutter med store playlister.</string>
+    <string name="database_migration_keep">Dine playlister, favoritter og historik bevares. Intet hentes igen. Sluk ikke tv\'et, og luk ikke appen.</string>
+    <string name="database_migration_keep_mobile">Dine playlister, favoritter og historik bevares. Intet hentes igen. Hold appen åben.</string>
 </resources>

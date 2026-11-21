@@ -598,9 +598,9 @@
     "endonym": "Українська",
     "script": "Cyrl",
     "rtl": false,
-    "tier": 2,
-    "packaged": false,
-    "pickerVisible": false
+    "tier": 1,
+    "packaged": true,
+    "pickerVisible": true
   },
   {
     "id": "vi",
@@ -640,8 +640,8 @@
     "endonym": "کوردیی ناوەندی",
     "script": "Arab",
     "rtl": true,
-    "tier": 2,
-    "packaged": false,
-    "pickerVisible": false
+    "tier": 1,
+    "packaged": true,
+    "pickerVisible": true
   }
 ]

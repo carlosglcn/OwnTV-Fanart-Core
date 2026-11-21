@@ -340,6 +340,7 @@
     <string name="sports_tab_stats">Estatistikak</string>
     <string name="sports_tab_lineups">Hamaikakoak</string>
     <string name="sports_tab_table">Sailkapena</string>
+    <string name="sports_tab_standings">Sailkapena</string>
     <string name="sports_following">Jarraitzen</string>
     <string name="sports_follow">Jarraitu</string>
     <string name="sports_event_goal">Gola · <xliff:g id="player">%1$s</xliff:g></string>
@@ -403,6 +404,7 @@
     <string name="sports_playing_now">Orain erreproduzitzen</string>
     <string name="sports_switch_channel">Aldatu katea</string>
     <string name="sports_tab_fixtures">Egutegia</string>
+    <string name="sports_tab_games">Partidak</string>
     <string name="sports_tab_results">Emaitzak</string>
     <string name="sports_tab_scores">Zuzenean</string>
     <string name="sports_tab_calendar">Agenda</string>
@@ -449,6 +451,10 @@
     <string name="sports_table_lost">G</string>
     <string name="sports_table_difference">Ald</string>
     <string name="sports_table_points">P</string>
+    <string name="sports_table_tied">B</string>
+    <string name="sports_table_ot_losses">LG</string>
+    <string name="sports_table_win_percent">Ehun</string>
+    <string name="sports_table_games_behind">Atz</string>
     <string name="sports_table_form">Forma</string>
     <string name="sports_this_matchday">Jardunaldi hau</string>
     <string name="sports_settings_what">Zer erakutsi</string>

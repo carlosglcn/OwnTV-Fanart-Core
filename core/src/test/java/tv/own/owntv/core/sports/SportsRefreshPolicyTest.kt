@@ -31,6 +31,38 @@ class SportsRefreshPolicyTest {
     // --- live refresh ---
 
     @Test
+    fun `both days are fetched again once the Eastern day they were fetched on has ended`() {
+        // 2026-11-19 22:00 in New York; that day ends at 05:00 UTC on the 20th.
+        val evening = java.time.Instant.parse("2026-11-20T03:00:00Z").toEpochMilli()
+        val midnight = java.time.Instant.parse("2026-11-20T05:00:00Z").toEpochMilli()
+        val feeds = feeds(
+            Feed.Scoreboard(bl) to fetched(evening, match("1", MatchState.POST, start = evening - hour)),
+            Feed.Scoreboard(bl, tomorrow = true) to fetched(evening, match("2", MatchState.PRE, start = midnight + 20 * hour)),
+        )
+        val before = policy.plan(setOf(Demand.Hub), setOf(bl), feeds, evening + hour)
+        assertEquals(emptySet<Feed>(), before.fetch)
+        assertEquals(midnight, before.nextWakeAt)
+        val after = policy.plan(setOf(Demand.Hub), setOf(bl), feeds, midnight)
+        assertEquals(setOf(Feed.Scoreboard(bl), Feed.Scoreboard(bl, tomorrow = true)), after.fetch)
+        val refetched = feeds(
+            Feed.Scoreboard(bl) to fetched(midnight, match("2", MatchState.PRE, start = midnight + 20 * hour)),
+            Feed.Scoreboard(bl, tomorrow = true) to fetched(midnight),
+        )
+        assertEquals("fetched on the new day: nothing until its kick-off", emptySet<Feed>(), policy.plan(setOf(Demand.Hub), setOf(bl), refetched, midnight + hour).fetch)
+    }
+
+    @Test
+    fun `starting soon lists today first, tomorrow only once today has none left`() {
+        val board = SportsBoard(
+            today = mapOf(bl to listOf(match("done", MatchState.POST, start = t0 - hour), match("tonight", MatchState.PRE, start = t0 + hour))),
+            tomorrow = mapOf(pl to listOf(match("next", MatchState.PRE, start = t0 + 20 * hour, feed = pl), match("tonight", MatchState.PRE, start = t0 + hour))),
+        )
+        assertEquals(listOf("tonight"), board.startingSoon(t0) { true }.map { it.id })
+        assertEquals("today's last one has started", listOf("next"), board.startingSoon(t0 + 2 * hour) { true }.map { it.id })
+        assertEquals("the filter applies to today", listOf("next"), board.startingSoon(t0) { it.feed == pl }.map { it.id })
+    }
+
+    @Test
     fun `hub, a live match - only that league, at the live setting, the quiet one never`() {
         val feeds = feeds(
             Feed.Scoreboard(bl) to fetched(t0, match("1", MatchState.IN)),

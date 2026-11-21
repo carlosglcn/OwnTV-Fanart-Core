@@ -340,6 +340,7 @@
     <string name="sports_tab_stats">İstatistik</string>
     <string name="sports_tab_lineups">Kadrolar</string>
     <string name="sports_tab_table">Puan durumu</string>
+    <string name="sports_tab_standings">Puan durumu</string>
     <string name="sports_following">Takip ediliyor</string>
     <string name="sports_follow">Takip et</string>
     <string name="sports_event_goal">Gol · <xliff:g id="player">%1$s</xliff:g></string>
@@ -403,6 +404,7 @@
     <string name="sports_playing_now">Şimdi oynatılıyor</string>
     <string name="sports_switch_channel">Kanalı değiştir</string>
     <string name="sports_tab_fixtures">Fikstür</string>
+    <string name="sports_tab_games">Maçlar</string>
     <string name="sports_tab_results">Sonuçlar</string>
     <string name="sports_tab_scores">Skorlar</string>
     <string name="sports_tab_calendar">Takvim</string>
@@ -449,6 +451,10 @@
     <string name="sports_table_lost">M</string>
     <string name="sports_table_difference">AV</string>
     <string name="sports_table_points">P</string>
+    <string name="sports_table_tied">B</string>
+    <string name="sports_table_ot_losses">UM</string>
+    <string name="sports_table_win_percent">Oran</string>
+    <string name="sports_table_games_behind">Fark</string>
     <string name="sports_table_form">Form</string>
     <string name="sports_this_matchday">Bu hafta</string>
     <string name="sports_settings_what">Ne gösterilsin</string>

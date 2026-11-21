@@ -12,6 +12,8 @@ import tv.own.owntv.core.database.entity.EpgChannelName
 import tv.own.owntv.core.database.entity.EpgProgrammeEntity
 import tv.own.owntv.core.database.entity.EpgProgrammeLite
 import tv.own.owntv.core.database.entity.EpgProgrammeText
+import tv.own.owntv.core.database.entity.EpgProgrammeTitle
+import tv.own.owntv.core.database.entity.nameKeyOf
 
 /** EPG storage + now/next lookups. Programmes are kept to a rolling window and pruned. */
 @Dao
@@ -146,17 +148,47 @@ interface EpgDao {
     suspend fun programmeSummariesForChannels(epgKeys: List<String>, from: Long, to: Long): List<EpgProgrammeEntity>
 
     /**
-     * Programmes whose title contains [query] and that are on between [from] and [to] — what Search's
-     * "On TV" group is drawn from. Bounded by start time, so it reads through the `(startMs, stopMs)`
-     * index rather than the whole guide.
+     * Programmes whose title contains [query], in any letter case, and that are on between [from] and
+     * [to] — what Search's "On TV" group is drawn from. Bounded by start time, so it reads through the
+     * `(startMs, stopMs)` index rather than the whole guide.
+     *
+     * SQLite's `LIKE` folds ASCII letters only, so a query with any other letter ("один" for "Один")
+     * is matched here instead: the window's titles are read without their rows and compared in their
+     * Unicode lowercase form. The guide keeps no lowercased copy of every title — that would be one
+     * more column written for each of its rows on every guide sync.
      */
+    suspend fun searchTitles(query: String, from: Long, to: Long, limit: Int): List<EpgProgrammeEntity> {
+        if (query.all { it.code < 128 }) return searchTitlesAscii(query, from, to, limit)
+        val key = nameKeyOf(query)
+        val ids = titlesInWindow(from, to).asSequence()
+            .filter { nameKeyOf(it.title).contains(key) }
+            .map { it.id }
+            .take(limit)
+            .toList()
+        return if (ids.isEmpty()) emptyList() else programmeSummariesByIds(ids)
+    }
+
     @Query(
         "SELECT id, sourceId, epgChannelId, startMs, stopMs, title, NULL AS description, 0 AS contentHash, " +
             "NULL AS categories, NULL AS year, NULL AS rating, NULL AS lengthMin, NULL AS episode, NULL AS imageUrl " +
             "FROM epg_programmes WHERE startMs > :from - 86400000 AND startMs < :to AND stopMs > :from " +
             "AND title LIKE '%' || :query || '%' ORDER BY startMs ASC LIMIT :limit",
     )
-    suspend fun searchTitles(query: String, from: Long, to: Long, limit: Int): List<EpgProgrammeEntity>
+    suspend fun searchTitlesAscii(query: String, from: Long, to: Long, limit: Int): List<EpgProgrammeEntity>
+
+    /** Every title on between [from] and [to], in start order — [searchTitles]' case-folded pass. */
+    @Query(
+        "SELECT id, title FROM epg_programmes WHERE startMs > :from - 86400000 AND startMs < :to " +
+            "AND stopMs > :from ORDER BY startMs ASC",
+    )
+    suspend fun titlesInWindow(from: Long, to: Long): List<EpgProgrammeTitle>
+
+    @Query(
+        "SELECT id, sourceId, epgChannelId, startMs, stopMs, title, NULL AS description, 0 AS contentHash, " +
+            "NULL AS categories, NULL AS year, NULL AS rating, NULL AS lengthMin, NULL AS episode " +
+            "FROM epg_programmes WHERE id IN (:ids) ORDER BY startMs ASC",
+    )
+    suspend fun programmeSummariesByIds(ids: List<Long>): List<EpgProgrammeEntity>
 
     /**
      * Every programme *starting* in `[from, to)` and still running after [minStop] — the Sports hub's

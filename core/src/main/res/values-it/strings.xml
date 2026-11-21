@@ -194,4 +194,8 @@
     <string name="shell_now_playing_audio">Audio</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">Ignora</string>
+    <string name="database_migration_title">Migrazione del database in corso</string>
+    <string name="database_migration_body">Questa versione salva canali, film e serie in un nuovo formato di database. Succede una sola volta e può richiedere fino a 2 minuti con playlist grandi.</string>
+    <string name="database_migration_keep">Playlist, preferiti e cronologia vengono conservati. Non viene riscaricato nulla. Non spegnere la TV e non chiudere l\'app.</string>
+    <string name="database_migration_keep_mobile">Playlist, preferiti e cronologia vengono conservati. Non viene riscaricato nulla. Tieni aperta l\'app.</string>
 </resources>

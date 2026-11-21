@@ -27,6 +27,9 @@ class SettingsBackupCoverageTest {
         "tunneling_failed",
         // The latency of this device's own outputs; another device's HDMI or Bluetooth path differs.
         "audio_delay_by_output",
+        // The subtitle folder is a path or a storage grant on this device, meaningless on another one,
+        // and its automatic loading means nothing without it.
+        "subtitle_folder", "subtitle_folder_auto_load",
         "last_backup_at", "last_backup_bytes", "last_backup_encrypted", "last_backup_path",
         // When this device last asked for an update: restoring it elsewhere would claim a check that never ran.
         "last_update_check_at",

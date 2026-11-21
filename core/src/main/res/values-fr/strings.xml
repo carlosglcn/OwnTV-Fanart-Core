@@ -194,4 +194,8 @@
     <string name="shell_now_playing_audio">Audio</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">Ignorer</string>
+    <string name="database_migration_title">Migration de la base de données en cours</string>
+    <string name="database_migration_body">Cette version enregistre vos chaînes, films et séries dans un nouveau format de base de données. Cela n\'arrive qu\'une fois et peut prendre jusqu\'à 2 minutes avec de grandes playlists.</string>
+    <string name="database_migration_keep">Vos playlists, favoris et historique sont conservés. Rien n\'est retéléchargé. N\'éteignez pas le téléviseur et ne fermez pas l\'application.</string>
+    <string name="database_migration_keep_mobile">Vos playlists, favoris et historique sont conservés. Rien n\'est retéléchargé. Gardez l\'application ouverte.</string>
 </resources>

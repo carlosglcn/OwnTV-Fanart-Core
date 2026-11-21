@@ -223,7 +223,10 @@ class RecordingManager(
         if (!channel.catchup) return@withContext null
         val now = System.currentTimeMillis()
         if (!RecordingSchedule.isWithinArchive(programme.stopMs, channel.catchupDays, now)) return@withContext null
-        val url = CatchupUrl.forSource(channel, programme, source, timeZone, xtream) ?: return@withContext null
+        // Always MPEG-TS, whatever the playlist's "Prefer HLS for catch-up" says: the player falls back from a
+        // refused `.m3u8` to `.ts`, the recorder has no such step, and a saved file looks the same either way.
+        val tsSource = source.copy(catchupPreferHls = false)
+        val url = CatchupUrl.forSource(channel, programme, tsSource, timeZone, xtream) ?: return@withContext null
 
         val window = RecordingSchedule.catchUpWindowFor(programme.startMs, programme.stopMs, now)
         schedule(

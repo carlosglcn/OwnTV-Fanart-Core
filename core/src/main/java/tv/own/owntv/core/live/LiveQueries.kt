@@ -10,6 +10,7 @@ import tv.own.owntv.core.database.dao.ChannelDao
 import tv.own.owntv.core.database.dao.CustomCategoryDao
 import tv.own.owntv.core.database.entity.ChannelEntity
 import tv.own.owntv.core.database.entity.ContentOrderEntity
+import tv.own.owntv.core.database.entity.nameKeyOf
 import tv.own.owntv.core.model.MediaType
 import tv.own.owntv.core.settings.SettingsRepository
 
@@ -56,12 +57,12 @@ fun livePagingSource(
         }
     } else {
         when (key) {
-            LiveKey.All, LiveKey.Continue -> channelDao.searchAll(query, ids)
-            LiveKey.Favorites -> channelDao.searchFavorites(query, profileId, ids)
-            LiveKey.History -> channelDao.searchHistory(query, profileId, ids)
-            LiveKey.Catchup -> channelDao.searchCatchup(query, ids)
-            is LiveKey.Custom -> customCategoryDao.searchChannels(query, profileId, key.id, ids)
-            is LiveKey.Folder -> channelDao.searchInCategory(query, key.id)
+            LiveKey.All, LiveKey.Continue -> channelDao.searchAll(nameKeyOf(query), ids)
+            LiveKey.Favorites -> channelDao.searchFavorites(nameKeyOf(query), profileId, ids)
+            LiveKey.History -> channelDao.searchHistory(nameKeyOf(query), profileId, ids)
+            LiveKey.Catchup -> channelDao.searchCatchup(nameKeyOf(query), ids)
+            is LiveKey.Custom -> customCategoryDao.searchChannels(nameKeyOf(query), profileId, key.id, ids)
+            is LiveKey.Folder -> channelDao.searchInCategory(nameKeyOf(query), key.id)
         }
     }
 }

@@ -372,6 +372,7 @@
     <string name="sports_tab_stats">Statystyki</string>
     <string name="sports_tab_lineups">Składy</string>
     <string name="sports_tab_table">Tabela</string>
+    <string name="sports_tab_standings">Tabela</string>
     <string name="sports_following">Obserwujesz</string>
     <string name="sports_follow">Obserwuj</string>
     <string name="sports_event_goal">Gol · <xliff:g id="player">%1$s</xliff:g></string>
@@ -441,6 +442,7 @@
     <string name="sports_playing_now">Teraz odtwarzany</string>
     <string name="sports_switch_channel">Zmień kanał</string>
     <string name="sports_tab_fixtures">Terminarz</string>
+    <string name="sports_tab_games">Mecze</string>
     <string name="sports_tab_results">Wyniki</string>
     <string name="sports_tab_scores">Na żywo</string>
     <string name="sports_tab_calendar">Kalendarz</string>
@@ -487,6 +489,10 @@
     <string name="sports_table_lost">P</string>
     <string name="sports_table_difference">RB</string>
     <string name="sports_table_points">Pkt</string>
+    <string name="sports_table_tied">R</string>
+    <string name="sports_table_ot_losses">PD</string>
+    <string name="sports_table_win_percent">Skut</string>
+    <string name="sports_table_games_behind">Str</string>
     <string name="sports_table_form">Forma</string>
     <string name="sports_this_matchday">Ta kolejka</string>
     <string name="sports_settings_what">Co pokazywać</string>

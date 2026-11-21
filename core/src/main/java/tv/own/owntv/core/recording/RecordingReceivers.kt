@@ -7,6 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 import org.koin.core.context.GlobalContext
 
 /**
@@ -61,8 +62,13 @@ class RecordingBootReceiver : BroadcastReceiver() {
         if (intent.action !in HANDLED) return
         val pending = goAsync()
         scope.launch {
+            // The broadcast is held only for [HOLD_MS]. After an app update this is the first thing to
+            // open the database, so it waits out the whole upgrade, and Android kills a process whose
+            // receiver outlives its window — mid-migration, which rolls the upgrade back to run again.
+            // The re-arm itself carries on after the broadcast is released.
+            val rearm = launch { runCatching { GlobalContext.get().get<RecordingScheduler>().rearmAll() } }
             try {
-                runCatching { GlobalContext.get().get<RecordingScheduler>().rearmAll() }
+                withTimeoutOrNull(HOLD_MS) { rearm.join() }
             } finally {
                 pending.finish()
             }
@@ -70,6 +76,8 @@ class RecordingBootReceiver : BroadcastReceiver() {
     }
 
     private companion object {
+        const val HOLD_MS = 5_000L
+
         val HANDLED = setOf(
             Intent.ACTION_BOOT_COMPLETED,
             Intent.ACTION_MY_PACKAGE_REPLACED,

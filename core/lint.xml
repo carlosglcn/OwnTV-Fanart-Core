@@ -15,6 +15,12 @@
         <ignore path="src/main/res/values-tr/strings_settings.xml" />
     </issue>
 
+    <!-- The FFmpeg audio switch is saved with commit() and its result returned: the app restarts only
+         once the choice is on disk. The KTX edit { } returns nothing, so it cannot say whether it was. -->
+    <issue id="UseKtx">
+        <ignore path="src/main/java/tv/own/owntv/core/player/FfmpegAudioSetting.kt" />
+    </issue>
+
     <!-- Only ever stored as a truncated SHA-256, to tell "this device, reinstalled" from another one. -->
     <issue id="HardwareIds">
         <ignore path="src/main/java/tv/own/owntv/core/backup/DeviceIdentity.kt" />

@@ -56,6 +56,13 @@
     <string name="player_adjust">DOSTOSUJ</string>
     <string name="player_search_subtitles">Wyszukaj w OpenSubtitles</string>
     <string name="player_select_local_subtitle">Wybierz lokalny plik napisów</string>
+    <string name="player_subtitle_find_in_folder">Znajdź w folderze</string>
+    <string name="player_subtitle_folder_title">Napisy w folderze</string>
+    <string name="player_subtitle_folder_choose">Wybierz folder z napisami</string>
+    <string name="player_subtitle_folder_change">Zmień folder</string>
+    <string name="player_subtitle_folder_empty">W tym folderze nie ma plików z napisami</string>
+    <string name="player_subtitle_folder_auto">Automatycznie wczytuj pasujące napisy</string>
+    <string name="player_subtitle_folder_auto_description">Film lub odcinek bez własnych napisów otrzymuje jedyny plik z tego folderu pasujący do jego nazwy. Jeśli pasuje kilka, żaden nie jest wczytywany.</string>
     <string name="player_no_tracks">Brak dostępnych ścieżek.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · graficzne</string>
     <string name="player_av_sync">Synchronizacja A/V</string>

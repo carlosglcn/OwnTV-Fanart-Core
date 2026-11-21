@@ -227,9 +227,11 @@
     <string name="setup_prefer_hls_live_tv">Preferir HLS para TV en vivo</string>
     <string name="setup_hide_new_categories">Ocultar las categorías nuevas de forma predeterminada</string>
     <string name="setup_hide_new_categories_description">En todo el perfil: las categorías que aparezcan en sincronizaciones futuras comenzarán ocultas. Puedes verlas en cualquier momento en Personalizar.</string>
-    <string name="setup_prefer_hls_description">Prioriza HLS (.m3u8) sobre MPEG-TS para TV en vivo. Si HLS falla, usa MPEG-TS. El diferido siempre usa MPEG-TS.</string>
-    <string name="setup_prefer_hls_description_supported">Prioriza HLS (.m3u8) sobre MPEG-TS para TV en vivo. Si HLS falla, usa MPEG-TS. El diferido siempre usa MPEG-TS. Tu proveedor declara soporte de HLS.</string>
-    <string name="setup_prefer_hls_description_unsupported">Prioriza HLS (.m3u8) sobre MPEG-TS para TV en vivo. Si HLS falla, usa MPEG-TS. El diferido siempre usa MPEG-TS. Tu proveedor no declara soporte de HLS — aun así puedes probarlo.</string>
+    <string name="setup_prefer_hls_description">Prioriza HLS (.m3u8) sobre MPEG-TS para TV en vivo. Si HLS falla, usa MPEG-TS.</string>
+    <string name="setup_prefer_hls_description_supported">Prioriza HLS (.m3u8) sobre MPEG-TS para TV en vivo. Si HLS falla, usa MPEG-TS. Tu proveedor declara soporte de HLS.</string>
+    <string name="setup_prefer_hls_description_unsupported">Prioriza HLS (.m3u8) sobre MPEG-TS para TV en vivo. Si HLS falla, usa MPEG-TS. Tu proveedor no declara soporte de HLS — aun así puedes probarlo.</string>
+    <string name="setup_prefer_hls_catchup">Preferir HLS para el diferido</string>
+    <string name="setup_prefer_hls_catchup_description">Pide los programas en diferido como HLS (.m3u8) en lugar de MPEG-TS. Si HLS falla, usa MPEG-TS. Solo algunos proveedores ofrecen el diferido como HLS.</string>
     <string name="setup_hls_test_support">Probar soporte de HLS</string>
     <string name="setup_hls_testing">Probando HLS…</string>
     <string name="setup_hls_test_failed">La prueba falló: <xliff:g id="reason">%1$s</xliff:g></string>

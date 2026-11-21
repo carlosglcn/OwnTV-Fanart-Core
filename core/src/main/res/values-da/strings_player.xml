@@ -56,6 +56,13 @@
     <string name="player_adjust">JUSTER</string>
     <string name="player_search_subtitles">Søg på OpenSubtitles</string>
     <string name="player_select_local_subtitle">Vælg lokal undertekstfil</string>
+    <string name="player_subtitle_find_in_folder">Find i mappe</string>
+    <string name="player_subtitle_folder_title">Undertekster i mappen</string>
+    <string name="player_subtitle_folder_choose">Vælg undertekstmappe</string>
+    <string name="player_subtitle_folder_change">Skift mappe</string>
+    <string name="player_subtitle_folder_empty">Der er ingen undertekstfiler i denne mappe</string>
+    <string name="player_subtitle_folder_auto">Indlæs matchende undertekst automatisk</string>
+    <string name="player_subtitle_folder_auto_description">En film eller et afsnit uden egen undertekst får den ene fil herfra, der matcher navnet. Hvis flere matcher, indlæses ingen.</string>
     <string name="player_no_tracks">Ingen tilgængelige spor.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · billede</string>
     <string name="player_av_sync">A/V-synkronisering</string>

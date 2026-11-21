@@ -227,9 +227,11 @@
     <string name="setup_prefer_hls_live_tv">Preferisci HLS per la TV in diretta</string>
     <string name="setup_hide_new_categories">Nascondi le nuove categorie per impostazione predefinita</string>
     <string name="setup_hide_new_categories_description">Per tutto il profilo: le categorie che appariranno nelle sincronizzazioni future saranno inizialmente nascoste. Puoi visualizzarle in qualsiasi momento in Personalizza.</string>
-    <string name="setup_prefer_hls_description">Preferisci HLS (.m3u8) rispetto a MPEG-TS per la TV in diretta. Torna a MPEG-TS se HLS non funziona. Il catch-up usa sempre MPEG-TS.</string>
-    <string name="setup_prefer_hls_description_supported">Preferisci HLS (.m3u8) rispetto a MPEG-TS per la TV in diretta. Torna a MPEG-TS se HLS non funziona. Il catch-up usa sempre MPEG-TS. Il tuo provider dichiara il supporto HLS.</string>
-    <string name="setup_prefer_hls_description_unsupported">Preferisci HLS (.m3u8) rispetto a MPEG-TS per la TV in diretta. Torna a MPEG-TS se HLS non funziona. Il catch-up usa sempre MPEG-TS. Il tuo provider non dichiara il supporto HLS — puoi comunque provarlo.</string>
+    <string name="setup_prefer_hls_description">Preferisci HLS (.m3u8) rispetto a MPEG-TS per la TV in diretta. Torna a MPEG-TS se HLS non funziona.</string>
+    <string name="setup_prefer_hls_description_supported">Preferisci HLS (.m3u8) rispetto a MPEG-TS per la TV in diretta. Torna a MPEG-TS se HLS non funziona. Il tuo provider dichiara il supporto HLS.</string>
+    <string name="setup_prefer_hls_description_unsupported">Preferisci HLS (.m3u8) rispetto a MPEG-TS per la TV in diretta. Torna a MPEG-TS se HLS non funziona. Il tuo provider non dichiara il supporto HLS — puoi comunque provarlo.</string>
+    <string name="setup_prefer_hls_catchup">Preferisci HLS per il catch-up</string>
+    <string name="setup_prefer_hls_catchup_description">Richiedi i programmi in catch-up come HLS (.m3u8) invece di MPEG-TS. Torna a MPEG-TS se HLS non funziona. Solo alcuni provider offrono il catch-up come HLS.</string>
     <string name="setup_hls_test_support">Testa il supporto HLS</string>
     <string name="setup_hls_testing">Test HLS in corso…</string>
     <string name="setup_hls_test_failed">Test non riuscito: <xliff:g id="reason">%1$s</xliff:g></string>

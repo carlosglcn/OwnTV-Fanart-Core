@@ -340,6 +340,7 @@
     <string name="sports_tab_stats">Statistieken</string>
     <string name="sports_tab_lineups">Opstellingen</string>
     <string name="sports_tab_table">Stand</string>
+    <string name="sports_tab_standings">Stand</string>
     <string name="sports_following">Volgend</string>
     <string name="sports_follow">Volgen</string>
     <string name="sports_event_goal">Doelpunt · <xliff:g id="player">%1$s</xliff:g></string>
@@ -403,6 +404,7 @@
     <string name="sports_playing_now">Speelt nu</string>
     <string name="sports_switch_channel">Zender wisselen</string>
     <string name="sports_tab_fixtures">Programma</string>
+    <string name="sports_tab_games">Wedstrijden</string>
     <string name="sports_tab_results">Uitslagen</string>
     <string name="sports_tab_scores">Live</string>
     <string name="sports_tab_calendar">Kalender</string>
@@ -449,6 +451,10 @@
     <string name="sports_table_lost">V</string>
     <string name="sports_table_difference">DS</string>
     <string name="sports_table_points">Ptn</string>
+    <string name="sports_table_tied">G</string>
+    <string name="sports_table_ot_losses">VNV</string>
+    <string name="sports_table_win_percent">Pct</string>
+    <string name="sports_table_games_behind">Ach</string>
     <string name="sports_table_form">Vorm</string>
     <string name="sports_this_matchday">Deze speelronde</string>
     <string name="sports_settings_what">Wat tonen</string>

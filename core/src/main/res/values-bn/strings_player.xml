@@ -56,6 +56,13 @@
     <string name="player_adjust">সমন্বয় করুন</string>
     <string name="player_search_subtitles">OpenSubtitles-এ অনুসন্ধান করুন</string>
     <string name="player_select_local_subtitle">স্থানীয় সাবটাইটেল ফাইল নির্বাচন করুন</string>
+    <string name="player_subtitle_find_in_folder">ফোল্ডারে খুঁজুন</string>
+    <string name="player_subtitle_folder_title">ফোল্ডারের সাবটাইটেল</string>
+    <string name="player_subtitle_folder_choose">সাবটাইটেল ফোল্ডার নির্বাচন করুন</string>
+    <string name="player_subtitle_folder_change">ফোল্ডার পরিবর্তন করুন</string>
+    <string name="player_subtitle_folder_empty">এই ফোল্ডারে কোনো সাবটাইটেল ফাইল নেই</string>
+    <string name="player_subtitle_folder_auto">মিলে যাওয়া সাবটাইটেল স্বয়ংক্রিয়ভাবে লোড করুন</string>
+    <string name="player_subtitle_folder_auto_description">যে সিনেমা বা পর্বের নিজস্ব কোনো সাবটাইটেল নেই, সেটি এখানে তার নামের সঙ্গে মেলে এমন একমাত্র ফাইলটি পায়। একাধিক ফাইল মিললে কোনোটিই লোড হয় না।</string>
     <string name="player_no_tracks">কোনো ট্র্যাক পাওয়া যায়নি।</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · ছবি</string>
     <string name="player_av_sync">A/V সিঙ্ক</string>

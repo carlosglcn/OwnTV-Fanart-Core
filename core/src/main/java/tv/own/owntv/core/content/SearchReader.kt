@@ -17,6 +17,7 @@ import tv.own.owntv.core.database.entity.ChannelEntity
 import tv.own.owntv.core.database.entity.EpgProgrammeEntity
 import tv.own.owntv.core.database.entity.MovieEntity
 import tv.own.owntv.core.database.entity.SeriesEntity
+import tv.own.owntv.core.database.entity.nameKeyOf
 import tv.own.owntv.core.epg.EpgDedupe
 import tv.own.owntv.core.epg.EpgShift
 import tv.own.owntv.core.live.epgKeyOf
@@ -127,7 +128,7 @@ class SearchReader(
             channels = if (sources.liveSourceIds.isEmpty()) emptyList() else
                 (
                     if (fts != null) channelDao.searchListDetailedFts(fts, sources.liveSourceIds, limit)
-                    else channelDao.searchListDetailed(query, sources.liveSourceIds, limit)
+                    else channelDao.searchListDetailed(nameKeyOf(query), sources.liveSourceIds, limit)
                     )
                     .filter {
                         CustomizeKeys.channel(it.channel) !in custLive.hiddenItems &&
@@ -140,7 +141,7 @@ class SearchReader(
             movies = if (sources.movieSourceIds.isEmpty()) emptyList() else
                 (
                     if (fts != null) movieDao.searchListFts(fts, sources.movieSourceIds, limit)
-                    else movieDao.searchList(query, sources.movieSourceIds, limit)
+                    else movieDao.searchList(nameKeyOf(query), sources.movieSourceIds, limit)
                     )
                     .filter {
                         CustomizeKeys.movie(it) !in custMovie.hiddenItems &&
@@ -150,7 +151,7 @@ class SearchReader(
             series = if (sources.seriesSourceIds.isEmpty()) emptyList() else
                 (
                     if (fts != null) seriesDao.searchListFts(fts, sources.seriesSourceIds, limit)
-                    else seriesDao.searchList(query, sources.seriesSourceIds, limit)
+                    else seriesDao.searchList(nameKeyOf(query), sources.seriesSourceIds, limit)
                     )
                     .filter {
                         CustomizeKeys.series(it) !in custSeries.hiddenItems &&

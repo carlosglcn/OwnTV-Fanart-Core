@@ -324,6 +324,7 @@
     <string name="sports_tab_stats">통계</string>
     <string name="sports_tab_lineups">라인업</string>
     <string name="sports_tab_table">순위</string>
+    <string name="sports_tab_standings">순위</string>
     <string name="sports_following">팔로잉</string>
     <string name="sports_follow">팔로우</string>
     <string name="sports_event_goal">골 · <xliff:g id="player">%1$s</xliff:g></string>
@@ -384,6 +385,7 @@
     <string name="sports_playing_now">재생 중</string>
     <string name="sports_switch_channel">채널 전환</string>
     <string name="sports_tab_fixtures">일정</string>
+    <string name="sports_tab_games">경기</string>
     <string name="sports_tab_results">결과</string>
     <string name="sports_tab_scores">점수</string>
     <string name="sports_tab_calendar">캘린더</string>
@@ -430,6 +432,10 @@
     <string name="sports_table_lost">패</string>
     <string name="sports_table_difference">득실</string>
     <string name="sports_table_points">승점</string>
+    <string name="sports_table_tied">무</string>
+    <string name="sports_table_ot_losses">연장패</string>
+    <string name="sports_table_win_percent">승률</string>
+    <string name="sports_table_games_behind">승차</string>
     <string name="sports_table_form">최근</string>
     <string name="sports_this_matchday">이번 라운드</string>
     <string name="sports_settings_what">표시 항목</string>

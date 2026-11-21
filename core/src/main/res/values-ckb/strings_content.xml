@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="content_downloading_items">
+        <item quantity="one">داگرتنی <xliff:g id="count">%1$d</xliff:g> ئایتم</item>
+        <item quantity="other">داگرتنی <xliff:g id="count">%1$d</xliff:g> ئایتم</item>
+    </plurals>
+    <plurals name="content_queued_items">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> ئایتم لە ڕیزدایە</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> ئایتم لە ڕیزدان</item>
+    </plurals>
+    <plurals name="content_paused_items">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> ئایتم ڕاگیرا</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> ئایتم ڕاگیران</item>
+    </plurals>
+    <string name="content_genre_action">ئەکشن</string>
+    <string name="content_genre_adult">گەورەسالان</string>
+    <string name="content_genre_anime">ئەنیمێ</string>
+    <string name="content_genre_comedy">کۆمیدی</string>
+    <string name="content_genre_documentary">بەڵگەفیلم</string>
+    <string name="content_genre_drama">دراما</string>
+    <string name="content_genre_entertainment">ڕابواردن</string>
+    <string name="content_genre_horror">ترسناک</string>
+    <string name="content_genre_kids">منداڵان</string>
+    <string name="content_genre_movies">فیلمەکان</string>
+    <string name="content_genre_music">مۆسیقا</string>
+    <string name="content_genre_news">هەواڵ</string>
+    <string name="content_genre_other">هی تر</string>
+    <string name="content_genre_religious">ئاینی</string>
+    <string name="content_genre_romance">ڕۆمانسی</string>
+    <string name="content_genre_scifi">خەیاڵی زانستی</string>
+    <string name="content_genre_series">زنجیرەکان</string>
+    <string name="content_genre_sport">وەرزش</string>
+    <string name="content_exit_owntv">دەرچوون لە OwnTV؟</string>
+    <string name="content_exit_confirmation">دڵنیایت دەتەوێت ئەپەکە دابخەیت؟</string>
+    <string name="content_restore_incomplete_title">گەڕاندنەوەیەک تەواو نەبوو</string>
+    <string name="content_restore_incomplete_message">ئەپەکە لە کاتی گەڕاندنەوەی <xliff:g id="description">%1$s</xliff:g> داخرا، بۆیە لەوانەیە هەندێکی نەمابێت. هیچ شتێک نەسڕایەوە — هەمان گەڕاندنەوە دووبارە بکەرەوە لە ڕێکخستنەکان → پاشەکەوت &amp; گەڕاندنەوە بۆ پڕکردنەوەی ئەوەی ماوە.</string>
+    <string name="content_playlist_picker_title">پیشاندانی لیستی پەخش</string>
+    <string name="content_avatar_picker_title">ئاڤاتارەکەت هەڵبژێرە</string>
+    <string name="content_category_browser_title">پۆلەکان</string>
+    <string name="content_channel_overlay_title">کەناڵەکان</string>
+    <string name="content_live_now">ئێستا ڕاستەوخۆ</string>
+    <string name="content_live_next">دواتر ڕاستەوخۆ</string>
+    <string name="content_archive_playing">لە پەخشدایە</string>
+    <string name="content_archive_then">پاشان</string>
+    <string name="content_clock_programme">کاتی بەرنامە</string>
+    <string name="content_clock_current">کاتی ئێستا</string>
+    <string name="content_media_overview">پوختە</string>
+    <string name="content_media_cast">ئەکتەرەکان</string>
+    <string name="content_media_press_back">Back دابگرە بۆ داخستن</string>
+    <string name="content_add_favourite">زیادکردن بۆ دڵخوازەکان</string>
+    <string name="content_remove_favourite">لابردن لە دڵخوازەکان</string>
+    <string name="content_mark_watched">نیشانەکردن وەک سەیرکراو</string>
+    <string name="content_mark_unwatched">نیشانەکردن وەک سەیرنەکراو</string>
+    <string name="content_move">گواستنەوە</string>
+    <string name="content_category_restore_playlist">گەڕاندنەوە بۆ بنەڕەتیی لیستی پەخش</string>
+    <string name="content_category_restore_custom">گەڕاندنەوە بۆ بنەڕەت</string>
+    <string name="content_category_restore_question">ئەمە:</string>
+    <plurals name="content_category_restore_hidden">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> ئایتمی شاراوە دووبارە پیشان دەدرێتەوە</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> ئایتمی شاراوە دووبارە پیشان دەدرێنەوە</item>
+    </plurals>
+    <plurals name="content_category_restore_moved">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> ئایتمی گوازراوە دەگەڕێتەوە</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> ئایتمی گوازراوە دەگەڕێنەوە</item>
+    </plurals>
+    <string name="content_category_restore_order">ڕیزبەندیی تایبەت دەسڕدرێتەوە</string>
+    <string name="content_category_restore_nothing">پۆلەکە پێشتر لەسەر بنەڕەتیی لیستی پەخشە</string>
+    <string name="content_category_lock">قفڵکردن بە PIN</string>
+    <string name="content_category_locked_placeholder">ئەم پۆلە قفڵکراوە</string>
+    <plurals name="content_category_pin_wait">
+        <item quantity="one">PINی هەڵەی زۆر. دوای <xliff:g id="count">%1$d</xliff:g> چرکە دووبارە هەوڵبدەرەوە</item>
+        <item quantity="other">PINی هەڵەی زۆر. دوای <xliff:g id="count">%1$d</xliff:g> چرکە دووبارە هەوڵبدەرەوە</item>
+    </plurals>
+    <string name="content_move_to_category">گواستنەوە بۆ پۆل…</string>
+    <string name="content_remove_from_category">لابردن لەم پۆلە</string>
+    <string name="content_download">داگرتن</string>
+    <string name="content_download_all_episodes">داگرتنی هەموو ئەڵقەکان</string>
+    <plurals name="content_download_episodes_confirm">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> ئەڵقە دابگیردرێت؟</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> ئەڵقە دابگیردرێن؟</item>
+    </plurals>
+    <string name="content_download_episodes_confirm_message">لەسەر ئەم ئامێرە پاشەکەوت دەکرێن و شوێنی کۆگا دەگرن.</string>
+    <string name="content_play">پەخشکردن</string>
+    <string name="content_favorited">لە دڵخوازەکانە</string>
+    <string name="content_favorite">دڵخواز</string>
+    <string name="content_seasons">وەرزەکان</string>
+    <string name="content_episodes">ئەڵقەکان</string>
+    <string name="content_oldest_first">کۆنترین یەکەم</string>
+    <string name="content_newest_first">نوێترین یەکەم</string>
+    <string name="content_delete_subtitles">سڕینەوەی ژێرنووسەکانی OpenSubtitles</string>
+    <string name="content_play_trailer">پەخشکردنی تریلەر</string>
+    <string name="content_refetch_tmdb">نوێکردنەوەی وردەکارییەکان</string>
+    <string name="content_set_tmdb_name">دانانی ناوی TMDB</string>
+    <string name="content_close">داخستن</string>
+    <string name="content_rename_hint">تەنها بۆ ئەم پرۆفایلە. بەتاڵی بهێڵەرەوە بۆ گەڕاندنەوەی ناوی ڕەسەن.</string>
+    <string name="content_no_movies_here">هیچ فیلمێک لێرە نییە.</string>
+    <string name="content_no_series_here">هیچ زنجیرەیەک لێرە نییە.</string>
+    <string name="content_no_episodes">هیچ ئەڵقەیەک بەردەست نییە.</string>
+    <string name="content_episodes_load_failed">نەتوانرا ئەڵقەکان لە دابینکەرەوە بار بکرێن (<xliff:g id="reason">%1$s</xliff:g>).</string>
+    <string name="content_no_movies_found">هیچ فیلمێک نەدۆزرایەوە بۆ “<xliff:g id="query">%1$s</xliff:g>”</string>
+    <plurals name="content_count_movies">
+        <item quantity="one"><xliff:g id="category">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g> فیلم)</item>
+        <item quantity="other"><xliff:g id="category">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g> فیلم)</item>
+    </plurals>
+    <string name="content_provider">دابینکەر</string>
+    <string name="content_provider_name">دابینکەر: <xliff:g id="provider">%1$s</xliff:g></string>
+    <string name="content_no_series_found">هیچ زنجیرەیەک نەدۆزرایەوە بۆ “<xliff:g id="query">%1$s</xliff:g>”</string>
+    <string name="content_reorder_movie">ڕیزکردنەوەی فیلم</string>
+    <string name="content_reorder_series">ڕیزکردنەوەی زنجیرە</string>
+    <string name="content_already_downloaded">پێشتر داگیراوە — مێنووی داگرتنەکان بپشکنە.</string>
+    <string name="content_refetching_tmdb">هێنانەوەی وردەکارییەکانی TMDB…</string>
+    <string name="content_researching_tmdb">دووبارە گەڕان لە TMDB…</string>
+    <string name="content_duration_hours"><xliff:g id="hours">%1$d</xliff:g> کاتژمێر <xliff:g id="minutes">%2$d</xliff:g> خولەک</string>
+    <string name="content_duration_minutes"><xliff:g id="minutes">%1$d</xliff:g> خولەک</string>
+    <string name="content_rating">★ <xliff:g id="rating">%1$.1f</xliff:g></string>
+    <string name="content_metadata_separator">"  •  "</string>
+    <string name="content_season_episode">S<xliff:g id="season">%1$d</xliff:g> · E<xliff:g id="episode">%2$d</xliff:g></string>
+    <string name="content_season_episode_title">S<xliff:g id="season">%1$d</xliff:g> · E<xliff:g id="episode">%2$d</xliff:g> <xliff:g id="title">%3$s</xliff:g></string>
+    <string name="content_season">وەرزی <xliff:g id="season">%1$d</xliff:g></string>
+    <string name="content_no_epg">EPG نییە</string>
+    <string name="content_live_day_time_range"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="start">%2$s</xliff:g> – <xliff:g id="stop">%3$s</xliff:g></string>
+    <string name="content_catchup">Catch-up</string>
+    <string name="content_play_external_short">پەخشکردن لە لێدەری دەرەکی</string>
+    <string name="content_rename">ناوگۆڕین</string>
+    <string name="content_rename_channel">ناوگۆڕینی کەناڵ</string>
+    <string name="content_reorder_channel">ڕیزکردنەوەی کەناڵ</string>
+    <string name="content_hide_channel">شاردنەوەی کەناڵ</string>
+    <string name="content_remove_history">لابردن لە مێژوو</string>
+    <string name="content_no_channels_here">هیچ کەناڵێک لێرە نییە.</string>
+    <string name="content_no_channels_found">هیچ کەناڵێک نەدۆزرایەوە بۆ “<xliff:g id="query">%1$s</xliff:g>”</string>
+    <string name="content_match_epg">هاوتاکردنی EPG</string>
+    <string name="content_catchup_title">Catch-up · <xliff:g id="channel">%1$s</xliff:g></string>
+    <string name="content_rewind_at">گەڕانەوە · <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_catchup_prompt">بەرنامەیەکی تازە هەڵبژێرە بۆ دووبارە پەخشکردنەوە لە سەرەتاوە.</string>
+    <string name="content_catchup_empty">هێشتا داتای ڕێنمای تازە بۆ ئەم کەناڵە نییە — دڵنیابەرەوە EPGـەکەی هاوتا کراوە (درێژ دابگرە لەسەری، یان هاوتاکردنی EPG بەکاربهێنە).</string>
+    <string name="content_catchup_jump">بگەڕێوە بۆ…</string>
+    <string name="content_catchup_jump_prompt">کاتێک هەڵبژێرە بۆ دەستپێکردنی سەیرکردن. پێویستی بە ڕێنما نییە.</string>
+    <string name="content_catchup_jump_exact">کاتی ورد هەڵبژێرە…</string>
+    <string name="content_catchup_jump_hint">OK لەسەر ڕۆژ، کاتژمێر یان خولەکەکە دابگرە، بە سەرەوە و خوارەوە بیگۆڕە، پاشان دووبارە OK دابگرە.</string>
+    <string name="content_catchup_jump_programme_start">سەرەتای “<xliff:g id="title">%1$s</xliff:g>”</string>
+    <string name="content_catchup_jump_programme_start_untitled">سەرەتای بەرنامەکە</string>
+    <string name="content_catchup_jump_programme_start_at">دەستی پێکرد لە <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_epg_match_prompt">کەناڵی ڕێنما هەڵبژێرە بۆ “<xliff:g id="channel">%1$s</xliff:g>”.</string>
+    <string name="content_epg_match_prompt_current">کەناڵی ڕێنما هەڵبژێرە بۆ “<xliff:g id="channel">%1$s</xliff:g>”. ئێستا: <xliff:g id="match">%2$s</xliff:g></string>
+    <string name="content_search_guide_channels">گەڕان لە کەناڵەکانی ڕێنما…</string>
+    <string name="content_no_epg_data">هێشتا داتای EPG نییە — لە ڕێکخستنەکان سەرچاوەیەکی EPG زیاد بکە.</string>
+    <string name="content_no_guide_channels">هیچ کەناڵێکی ڕێنما لەگەڵ “<xliff:g id="query">%1$s</xliff:g>” نەگونجا.</string>
+    <string name="content_clear_match">سڕینەوەی هاوتاکردن</string>
+    <string name="content_live_time_range_plain"><xliff:g id="start">%1$s</xliff:g> – <xliff:g id="stop">%2$s</xliff:g></string>
+    <string name="content_category_favorites">دڵخوازەکان</string>
+    <string name="content_category_history">مێژوو</string>
+    <string name="content_category_all_channels">هەموو کەناڵەکان</string>
+    <string name="content_category_all_movies">هەموو فیلمەکان</string>
+    <string name="content_category_all_series">هەموو زنجیرەکان</string>
+    <string name="content_add_source">زیادکردنی سەرچاوە</string>
+    <string name="content_preview_select_channel">کەناڵێک هەڵبژێرە بۆ پێشبینینی لێرە.</string>
+    <string name="content_offline_banner">تۆ ئۆفلاینیت — پەخش و نوێکردنەوەکان کار ناکەن تا دووبارە پەیوەندی دەکەیتەوە.</string>
+    <string name="content_subtitle_select_file">فایلی ژێرنووسی ناوخۆیی هەڵبژێرە</string>
+    <string name="content_subtitle_load_failed">نەتوانرا فایلی ژێرنووسەکە بار بکرێت.</string>
+    <string name="content_all_playlists">هەموو لیستە پەخشەکان</string>
+    <string name="content_search_categories">گەڕان لە پۆلەکان…</string>
+    <string name="content_action_resume">بەردەوامبوون</string>
+    <string name="content_action_play">پەخشکردن</string>
+    <string name="content_action_last_channel">دوایین کەناڵ</string>
+    <string name="content_progress_percent"><xliff:g id="percent">%1$d</xliff:g>%%</string>
+    <string name="content_live_time_range"><xliff:g id="start">%1$s</xliff:g> – <xliff:g id="end">%2$s</xliff:g></string>
+    <string name="content_live_time_remaining"><xliff:g id="end">%1$s</xliff:g> · <xliff:g id="minutes">%2$d</xliff:g> خولەک ماوە</string>
+    <string name="content_downloads_title">داگرتنەکان</string>
+    <string name="content_downloads_empty">هێشتا هیچ داگرتنێک نییە. فیلمێک یان ئەڵقەیەک بکەرەوە و داگرتن دابگرە.</string>
+    <string name="content_downloads_options">هەڵبژاردنەکانی داگرتن</string>
+    <string name="content_downloads_storage_free"><xliff:g id="free">%1$s</xliff:g> GB چۆڵە لە <xliff:g id="total">%2$s</xliff:g> GB</string>
+    <string name="content_storage_internal">کۆگای ناوخۆ</string>
+    <string name="content_storage_removable">کۆگای لابرداو</string>
+    <string name="content_storage_app">کۆگای ئەپ (پێویستی بە مۆڵەت نییە)</string>
+    <string name="content_storage_choose_folder">بوخچەیەکی تر هەڵبژێرە…</string>
+    <string name="content_storage_chosen_folder">بوخچەی هەڵبژێردراو</string>
+    <string name="content_storage_folder_lost">ئەو بوخچەیە چیتر بەردەست نییە. دووبارە هەڵیبژێرەوە، یان یەکێکی تر هەڵبژێرە.</string>
+    <string name="content_storage_folder_fallback">بوخچەی داگرتنەکەت ئێستا بەردەست نییە، بۆیە داگرتنەکان لە بوخچەی تایبەتی OwnTV پاشەکەوت دەکرێن تا دەگەڕێتەوە.</string>
+    <string name="content_downloads_queued">لە ڕیزدا…</string>
+    <string name="content_downloads_failed_group">شکستخواردوو</string>
+    <string name="content_downloads_play">پەخشکردن</string>
+    <string name="content_downloads_external">دەرەکی</string>
+    <string name="content_downloads_pause">ڕاگرتن</string>
+    <string name="content_downloads_group_downloading">داگرتن</string>
+    <string name="content_downloads_group_on_tv">لەسەر ئەم تیڤییە</string>
+    <string name="content_downloads_group_on_phone">لەسەر ئەم تەلەفۆنە</string>
+    <string name="content_downloads_ready_short">ئامادە</string>
+    <string name="content_downloads_ready">ئامادەیە بۆ سەیرکردن</string>
+    <string name="content_downloads_paused">ڕاگیراوە</string>
+    <string name="content_downloads_file_missing">فایلەکە نەماوە: چیتر لەسەر درایڤەکە نییە</string>
+    <string name="content_downloads_delete_title">سڕینەوەی “<xliff:g id="name">%1$s</xliff:g>”؟</string>
+    <string name="content_downloads_delete_message">فایلەکە لەسەر ئەم ئامێرە لادەبات. دواتر دەکرێت دووبارە دابگیردرێت.</string>
+    <string name="content_downloads_reason_account_busy">هەژمار مژوڵە: پەخشێکی تر پەیوەندییەکە بەکاردەهێنێت</string>
+    <string name="content_downloads_reason_refused">سێرڤەر بەستەرەکەی ڕەتکردەوە</string>
+    <string name="content_downloads_reason_not_found">سێرڤەر چیتر ئەم فایلەی نییە</string>
+    <string name="content_downloads_reason_server_error">هەڵەی سێرڤەر</string>
+    <string name="content_downloads_reason_http">سێرڤەر فایلەکەی نەنارد</string>
+    <string name="content_downloads_reason_connection_lost">پەیوەندی پچڕا</string>
+    <string name="content_downloads_reason_folder">بوخچەی داگرتن بەردەست نییە</string>
+    <string name="content_downloads_reason_no_space">شوێن بەس نییە</string>
+    <string name="content_downloads_reason_too_large">بۆ ئەم درایڤە زۆر گەورەیە: ناتوانێت فایلی سەروو 4 GB هەڵبگرێت. بوخچەیەکی تری داگرتن هەڵبژێرە، یان درایڤەکە بکە بە exFAT</string>
+    <string name="content_downloads_reason_waiting_watching">چاوەڕوانی: کاتێک سەیرکردن دەوەستێنیت دەست پێدەکات</string>
+    <string name="content_downloads_reason_paused_watching">لە کاتی سەیرکردندا ڕاگیراوە</string>
+    <string name="content_downloads_reason_with_code"><xliff:g id="reason">%1$s</xliff:g> (HTTP <xliff:g id="code">%2$d</xliff:g>)</string>
+    <string name="content_download_watch_title">ئەم لیستی پەخشە تەنها یەک پەخش ڕێگە پێدەدات</string>
+    <string name="content_download_watch_body">داگرتنێک لە <xliff:g id="playlist">%1$s</xliff:g> بەکاری دەهێنا، بۆیە ئێستا ڕاگیراوە. سەیر بکە، یان لێدەرەکە دابخە و بەردەوام بە لە داگرتن؟</string>
+    <string name="content_download_watch_watch">ڕاگرتنی داگرتن و سەیرکردن</string>
+    <string name="content_download_watch_keep">بەردەوامبوون لە داگرتن</string>
+    <string name="content_download_watch_remember">دووبارە مەپرسە</string>
+    <string name="content_download_watch_setting">سەیرکردن لە کاتی داگرتندا</string>
+    <string name="content_download_watch_setting_description">بۆ ئەو لیستە پەخشانەی تەنها یەک پەخش ڕێگە دەدەن: کاتێک دەست بە پەخشکردن دەکەیت چی بەسەر داگرتنەکە دێت.</string>
+    <string name="content_download_watch_ask">هەموو جارێک بپرسە</string>
+    <string name="content_download_watch_pause">ڕاگرتنی داگرتن</string>
+    <string name="content_downloads_starts_after">لە ڕیزدا · دوای <xliff:g id="title">%1$s</xliff:g> دەست پێدەکات</string>
+    <string name="content_downloads_speed"><xliff:g id="size">%1$s</xliff:g> MB/s</string>
+    <string name="content_epg_create_profile">پرۆفایلێک دروست بکە بۆ بینینی ڕێنما.</string>
+    <string name="content_epg_filter_hides_all">هەموو کەناڵەکان بەهۆی فلتەری ئێستاوە شاراونەتەوە. ڕیزبەندی بگۆڕە بۆ بینینی ڕێنما.</string>
+    <string name="content_epg_add_playlist">لیستی پەخشێک زیاد بکە بۆ بینینی ڕێنما.</string>
+    <string name="content_epg_no_channels_query">هیچ کەناڵێکی ڕێنما نەدۆزرایەوە بۆ “<xliff:g id="query">%1$s</xliff:g>”.</string>
+    <string name="content_epg_mismatched_ids">داتای ڕێنما پاشەکەوت کراوە، بەڵام ناسنامەی کەناڵەکانی لەگەڵ ناسنامەی EPGی کەناڵەکانت ناگونجێت — لەوانەیە ئەم فیدی EPGـە هی دابینکەرێکی تر بێت.</string>
+    <string name="content_epg_catchup_unavailable">Catch-up بۆ ئەم کەناڵە بەردەست نییە.</string>
+    <string name="content_epg_matched_no_programmes">هاوتاکرا — بەڵام ئەم کەناڵی ڕێنمایە هێشتا هیچ بەرنامەیەکی ئێستای لە فیدی EPG دا نییە.</string>
+    <string name="content_epg_add_playlist_first">سەرەتا لیستی پەخشێک زیاد بکە.</string>
+    <string name="content_epg_no_match_data">هێشتا داتای EPG نییە بۆ هاوتاکردن.</string>
+    <string name="content_epg_all_matched">هەموو شتێک پێشتر هاوتا کراوە.</string>
+    <string name="content_epg_no_match">هیچ هاوتاکردنێکی EPG نەدۆزرایەوە بۆ “<xliff:g id="channel">%1$s</xliff:g>” — بە دەستی هەڵیبژێرە.</string>
+    <plurals name="content_epg_auto_matched_applied">
+        <item quantity="one"><xliff:g id="applied">%1$d</xliff:g> کەناڵ خۆکارانە هاوتا کرا.</item>
+        <item quantity="other"><xliff:g id="applied">%1$d</xliff:g> کەناڵ خۆکارانە هاوتا کران.</item>
+    </plurals>
+    <plurals name="content_epg_auto_matched_review">
+        <item quantity="one"><xliff:g id="review">%1$d</xliff:g> کەناڵ پێویستی بە پێداچوونەوە هەیە.</item>
+        <item quantity="other"><xliff:g id="review">%1$d</xliff:g> کەناڵ پێویستیان بە پێداچوونەوە هەیە.</item>
+    </plurals>
+    <string name="content_epg_auto_matched"><xliff:g id="applied">%1$s</xliff:g> <xliff:g id="review">%2$s</xliff:g></string>
+    <plurals name="content_epg_auto_matched_no_review">
+        <item quantity="one"><xliff:g id="applied">%1$d</xliff:g> کەناڵ خۆکارانە هاوتا کرا.</item>
+        <item quantity="other"><xliff:g id="applied">%1$d</xliff:g> کەناڵ خۆکارانە هاوتا کران.</item>
+    </plurals>
+    <string name="content_epg_title">ڕێنمای تیڤی</string>
+    <string name="content_epg_matching">هاوتاکردن…</string>
+    <string name="content_epg_empty">هیچ EPGێک زیاد نەکراوە.</string>
+    <string name="content_epg_no_guide">ڕێنما نییە.</string>
+    <string name="content_epg_no_programme">لەم کاتەدا هیچ بەرنامەیەک نییە.</string>
+    <string name="content_epg_add_description">سەرچاوەیەکی EPG (XMLTV) زیاد بکە بۆ پڕکردنەوەی ڕێنما بە بەرنامەکان.</string>
+    <string name="content_epg_guide_category">پۆلی ڕێنما</string>
+    <string name="content_epg_search_hint">گەڕان لە کەناڵەکانی ڕێنما…</string>
+    <string name="content_epg_add">زیادکردنی EPG</string>
+    <string name="content_epg_add_favourite">زیادکردن بۆ دڵخوازەکان</string>
+    <string name="content_epg_remove_favourite">لابردن لە دڵخوازەکان</string>
+    <string name="content_epg_jump_now">بازدان بۆ ئێستا</string>
+    <string name="content_epg_include_logos">لۆگۆکانی ڕێنما لەخۆبگرێت</string>
+    <string name="content_epg_review_description">ئەم کەناڵانە بە ناو هاوتا کراون بەڵام گونجاوییەکی دڵنیا نەبوون. ئەوانەی دروستن قبووڵ بکە؛ ئەوانی تر تێپەڕێنە.</string>
+    <string name="content_epg_accept">قبووڵکردن</string>
+    <string name="content_epg_accept_all">قبووڵکردنی هەموو</string>
+    <string name="content_epg_skip">تێپەڕاندن</string>
+    <string name="content_epg_skip_all">تێپەڕاندنی هەموو</string>
+    <string name="content_epg_pick_manually">هەڵبژاردنی EPG بە دەستی</string>
+    <string name="content_epg_time_range"><xliff:g id="start">%1$s</xliff:g> – <xliff:g id="end">%2$s</xliff:g></string>
+    <string name="content_epg_all">هەموو</string>
+    <string name="content_epg_sort_alpha">A–Z</string>
+    <string name="content_epg_sort_provider">دابینکەر</string>
+    <string name="content_epg_sort_catchup">Catch-up</string>
+    <string name="content_epg_sort_favorites">دڵخوازەکان</string>
+    <string name="content_epg_sort_button">ڕیزبەندی: <xliff:g id="label">%1$s</xliff:g></string>
+    <string name="content_epg_match_button">هاوتاکردنی خۆکاری EPG</string>
+    <string name="content_epg_channel_score">→ <xliff:g id="name">%1$s</xliff:g> · <xliff:g id="percent">%2$d</xliff:g>%%</string>
+    <string name="content_epg_bits_separator">" · "</string>
+    <string name="content_epg_watch_start">سەیرکردن لە سەرەتاوە</string>
+    <string name="content_epg_watch_channel">سەیرکردنی کەناڵ</string>
+    <string name="content_epg_favourite">دڵخواز</string>
+    <string name="content_epg_unfavourite">لابردن لە دڵخواز</string>
+    <string name="content_epg_player_choice_description">لە ڕێکخستنەکان › Catch-up هەڵبژاردنێکی هەمیشەیی دابنێ.</string>
+    <string name="content_epg_own_player">لێدەری OwnTV</string>
+    <string name="content_epg_external_player">لێدەری دەرەکی</string>
+    <string name="content_epg_time_offset">جیاوازی کاتی EPG</string>
+    <string name="content_epg_shift_minutes"><xliff:g id="sign">%1$s</xliff:g><xliff:g id="minutes">%2$s</xliff:g> خولەک</string>
+    <string name="content_epg_shift_hours"><xliff:g id="sign">%1$s</xliff:g><xliff:g id="hours">%2$s</xliff:g> کاتژمێر</string>
+    <string name="content_epg_shift_hours_minutes"><xliff:g id="sign">%1$s</xliff:g><xliff:g id="hours">%2$s</xliff:g> کاتژمێر <xliff:g id="minutes">%3$s</xliff:g> خولەک</string>
+    <string name="content_epg_offset_channel_description">گۆڕینی کاتی ڕێنما بۆ “<xliff:g id="channel">%1$s</xliff:g>”. ئەمە بەکاربهێنە کاتێک فیدی ڕۆژهەڵات/ڕۆژاوا ڕێنماکەی لەگەڵ وەشانەکەی تر هاوبەش دەکات — جیاوازی نەرێنی ڕێنماکە پێشتر دەکات.</string>
+    <string name="content_epg_offset_following_global">شوێنکەوتنی جیاوازی گشتی (<xliff:g id="offset">%1$s</xliff:g>)</string>
+    <string name="content_epg_offset_channel_only">تەنها ئەم کەناڵە · گشتی ئەوەیە <xliff:g id="offset">%1$s</xliff:g></string>
+    <string name="content_epg_offset_use_global">بەکارهێنانی گشتی</string>
+    <string name="content_preview_single_stream">پێشبینین کوژاوەیە — دابینکەرەکەت یەک جار تەنها یەک پەخش ڕێگە دەدات</string>
+    <string name="content_playlist_picker_subtitle">لە هەموو شوێنێک جێبەجێ دەبێت و لەبیر دەکرێت</string>
+    <string name="content_playlist_marks_note">کاتێک هەموو لیستە پەخشەکان کراوەیە، هەر ڕیزێک نیشانەی ئەو لیستی پەخشە پیشان دەدات کە لێیەوە هاتووە.</string>
+    <string name="content_action_next_episode">ئەڵقەی دواتر</string>
+    <string name="content_search_in">گەڕان لە <xliff:g id="name">%1$s</xliff:g></string>
+    <string name="content_live_guide_view">دیمەنی ڕێنما</string>
+    <string name="content_key_watch">سەیرکردن</string>
+    <string name="content_key_options">هەڵبژاردنەکان</string>
+    <string name="content_live_groups">گرووپەکان</string>
+    <string name="content_menu_group_watch">سەیرکردن</string>
+    <string name="content_menu_group_channel">کەناڵ</string>
+    <string name="content_menu_group_guide_data">داتای ڕێنما</string>
+    <string name="content_menu_group_organise">ڕێکخستن</string>
+    <string name="content_epg_offset_global_short">گشتی</string>
+    <string name="content_live_groups_country">گرووپەکان · <xliff:g id="country">%1$s</xliff:g></string>
+    <plurals name="content_live_channel_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> کەناڵ</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> کەناڵ</item>
+    </plurals>
+    <string name="content_category_recently_watched">تازە سەیرکراو</string>
+    <string name="content_remind_me">بیرم بخەرەوە</string>
+    <string name="content_remind_before"><xliff:g id="duration">%1$s</xliff:g> پێش</string>
+    <string name="content_key_hold_ok">OK ڕابگرە</string>
+    <string name="content_epg_starts_in">دەست پێدەکات دوای <xliff:g id="duration">%1$s</xliff:g></string>
+    <string name="content_epg_today">ئەمڕۆ</string>
+    <string name="content_epg_tomorrow">سبەینێ</string>
+    <string name="content_epg_yesterday">دوێنێ</string>
+    <string name="content_epg_now_short">ئێستا</string>
+    <string name="content_epg_sort_catchup_first">Catch-up یەکەم</string>
+    <string name="content_epg_sort_favorites_first">دڵخوازەکان یەکەم</string>
+    <string name="content_epg_order_title">ڕیزکردنی کەناڵەکان بەپێی</string>
+    <string name="content_epg_order_hint">جاری داهاتوو بەم شێوەیە دەکرێتەوە</string>
+    <string name="content_epg_category_hint">هەمان لیستی تیڤیی ڕاستەوخۆ</string>
+    <string name="content_menu_group_new">نوێ</string>
+    <string name="content_menu_group_record">تۆمارکردن</string>
+    <string name="content_epg_after_time">دوای <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_reminder_set">بیرخەرەوە دانرا</string>
+    <string name="content_live_list_view">دیمەنی لیست</string>
+    <plurals name="content_epg_channels_matched">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> کەناڵ هاوتا کرا</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> کەناڵ هاوتا کران</item>
+    </plurals>
+    <plurals name="content_epg_review_count">
+        <item quantity="one">پێداچوونەوەی <xliff:g id="count">%1$d</xliff:g> هاوتاکردن</item>
+        <item quantity="other">پێداچوونەوەی <xliff:g id="count">%1$d</xliff:g> هاوتاکردن</item>
+    </plurals>
+    <string name="content_key_browse">گەڕان</string>
+    <string name="content_key_channels">کەناڵەکان</string>
+    <string name="content_key_programmes">بەرنامەکان</string>
+    <string name="content_key_menu">مێنوو</string>
+    <string name="content_key_enter">چوونەژوورەوە</string>
+    <string name="content_key_select">هەڵبژاردن</string>
+    <string name="content_key_unselect">هەڵنەبژاردن</string>
+    <string name="content_key_page">پەڕە</string>
+    <string name="content_history_overlay_hint">ئەو کەناڵانەی دواتر سەیرت کردوون، نوێترین یەکەم</string>
+    <string name="content_watched_duration"><xliff:g id="value">%1$s</xliff:g> سەیرکرا</string>
+    <string name="content_menu_group_show">پیشاندان</string>
+    <string name="content_epg_show_empty">کەناڵەکانی بێ ڕێنما</string>
+    <string name="content_epg_show_preview">پێشبینینی ڤیدیۆ</string>
+    <string name="content_epg_view_timeline">هێڵی کات</string>
+    <string name="content_menu_group_view">دیمەن</string>
+    <string name="content_vod_providers">دابینکەرەکان</string>
+    <string name="content_sort_movies_title">ڕیزکردنی فیلمەکان</string>
+    <string name="content_sort_series_title">ڕیزکردنی زنجیرەکان</string>
+    <string name="content_sort_applies_hint">بۆ هەموو پۆلەکانی ئەم بەشە جێبەجێ دەبێت</string>
+    <string name="content_sort_provider_order">ڕیزبەندی دابینکەر</string>
+    <string name="content_sort_provider_order_hint">ئەو ڕیزبەندییەی لیستی پەخشەکەت بەکاری دەهێنێت</string>
+    <string name="content_sort_rating_hint">بەرزترین یەکەم</string>
+    <string name="content_sort_date_added_hint">نوێترین یەکەم</string>
+    <string name="content_menu_group_library">کتێبخانە</string>
+    <string name="content_menu_group_details">وردەکاری</string>
+    <string name="content_movie_details">وردەکاری فیلم</string>
+    <string name="content_series_details">وردەکاری زنجیرە</string>
+    <plurals name="content_vod_title_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> ناونیشان</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> ناونیشان</item>
+    </plurals>
+    <plurals name="content_vod_series_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> زنجیرە</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> زنجیرە</item>
+    </plurals>
+    <string name="content_resume_episode">بەردەوامبوون <xliff:g id="episode">%1$s</xliff:g></string>
+    <string name="content_play_episode">پەخشکردنی <xliff:g id="episode">%1$s</xliff:g></string>
+    <string name="content_download_season">داگرتنی وەرز</string>
+    <string name="content_episode_order">ڕیزبەندی ئەڵقەکان</string>
+    <string name="content_episode_order_hint">بۆ ئەم زنجیرەیە لەبیر دەکرێت</string>
+    <string name="content_hide_watched_episodes">شاردنەوەی ئەڵقە سەیرکراوەکان</string>
+    <string name="content_episode_watched">سەیرکرا</string>
+    <string name="content_play_from_start">پەخشکردن لە سەرەتاوە</string>
+    <string name="content_episode_details">وردەکاری ئەڵقە</string>
+    <string name="content_season_specials">تایبەتەکان</string>
+    <string name="content_poster_size">قەبارەی پۆستەر</string>
+    <string name="content_vod_more_in">زیاتر لە <xliff:g id="category">%1$s</xliff:g></string>
+    <string name="content_programme_details">وردەکارییەکانی بەرنامە</string>
+    <string name="content_programmes_earlier">پێشتر</string>
+    <string name="content_programmes_later">دواتر</string>
+</resources>

@@ -179,4 +179,8 @@
     <string name="shell_now_playing_audio">Audioa</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">Baztertu</string>
+    <string name="database_migration_title">Datu-basearen migrazioa egiten</string>
+    <string name="database_migration_body">Bertsio honek zure kanalak, filmak eta serieak datu-base formatu berri batean gordetzen ditu. Behin bakarrik gertatzen da eta 2 minutu arte iraun dezake erreprodukzio-zerrenda handiekin.</string>
+    <string name="database_migration_keep">Zure zerrendak, gogokoak eta historia gordetzen dira. Ez da ezer berriro deskargatzen. Mesedez, ez itzali telebista eta ez itxi aplikazioa.</string>
+    <string name="database_migration_keep_mobile">Zure zerrendak, gogokoak eta historia gordetzen dira. Ez da ezer berriro deskargatzen. Mesedez, utzi aplikazioa irekita.</string>
 </resources>

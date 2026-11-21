@@ -46,10 +46,13 @@ class SportsRepositoryTest {
         var maxRunning = 0
         var gate: CompletableDeferred<Unit>? = null
         var failWith: Exception? = null
-        var boards: (League, LocalDate?) -> List<Match> = { _, _ -> emptyList() }
+        var boards: (League, Boolean) -> List<Match> = { _, _ -> emptyList() }
+        var now: () -> Long = { 0L }
 
-        override suspend fun scoreboard(league: League, day: LocalDate?): List<Match> =
-            call(league.key + if (day != null) "+1" else "") { boards(league, day) }
+        override suspend fun scoreboard(league: League, day: LocalDate?): List<Match> {
+            val next = day != null && day > SportsRefreshPolicy.espnDay(now())
+            return call(league.key + if (next) "+1" else "") { boards(league, next) }
+        }
 
         override suspend fun summary(match: Match) = call("summary:${match.key}") { MatchSummary(match, emptyList(), emptyList(), emptyList()) }
         override suspend fun standings(league: League) = call("table:${league.key}") { StandingsTable(league.key, emptyList()) }
@@ -86,7 +89,7 @@ class SportsRepositoryTest {
         dir: File = tmp.newFolder(),
         mode: AutoRebuild = AutoRebuild.MANUAL,
     ) = SportsRepository(
-        source = source,
+        source = source.also { (it as? FakeSource)?.now = { testScheduler.currentTime } },
         policy = SportsRefreshPolicy(),
         followed = followed,
         liveRefreshSeconds = MutableStateFlow(30),
@@ -159,7 +162,7 @@ class SportsRepositoryTest {
     @Test
     fun `a live league is fetched again at the live setting, and polling stops with the last screen`() = runTest {
         advanceTimeBy(hour) // the stored board is an hour old
-        val source = FakeSource().apply { boards = { _, d -> if (d == null) listOf(match("1")) else emptyList() } }
+        val source = FakeSource().apply { boards = { _, next -> if (!next) listOf(match("1")) else emptyList() } }
         val repo = repo(source, dir = stored(mapOf(bl to listOf(match("1")))))
         val screen = open(repo)
         runCurrent()
@@ -202,6 +205,23 @@ class SportsRepositoryTest {
         assertTrue(m.key in repo.board.value.summaries)
         assertTrue(pl in repo.board.value.standings)
         assertEquals(setOf("summary:${m.key}", "table:$pl"), source.calls.toSet())
+    }
+
+    @Test
+    fun `a table an open page asked for comes back after a rebuild that kept only the followed ones`() = runTest {
+        val source = FakeSource()
+        val followed = MutableStateFlow(setOf(bl))
+        val repo = repo(source, followed, mode = AutoRebuild.H1)
+        open(repo)
+        runCurrent()
+        open(repo, Demand.TeamPage(pl))
+        runCurrent()
+        assertTrue("the team page's table", pl in repo.board.value.standings)
+
+        followed.value = setOf(bl, "soccer/esp.1")
+        runCurrent()
+        assertEquals(setOf(bl, "soccer/esp.1"), repo.board.value.builtFor)
+        assertTrue("the team page's table is fetched again", pl in repo.board.value.standings)
     }
 
     @Test

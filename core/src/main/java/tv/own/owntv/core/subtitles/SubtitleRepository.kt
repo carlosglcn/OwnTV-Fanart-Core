@@ -122,30 +122,38 @@ class SubtitleRepository(
         entity.copy(id = id).toResolved()
     }
 
-    /**
-     * Imports a user-picked local subtitle file: normalises the charset to UTF-8
-     * (Windows-125x/ISO-8859 files must render correctly), keeps a managed copy in the
-     * subtitle cache dir (playback never depends on the original path staying alive), and
-     * records a LOCAL cache row. Re-importing a file with the same name reuses the existing copy so
-     * an engine switch or replay never piles up duplicates.
-     */
-    suspend fun importLocalFile(file: File): ResolvedSubtitle = withContext(Dispatchers.IO) {
+    /** [importLocal] for a file the user picked by path. */
+    suspend fun importLocalFile(file: File): ResolvedSubtitle {
         if (!file.isFile) throw IOException()
-        dao.findLocalByFileName(file.name)?.let { existing ->
-            if (File(existing.cachedPath).exists()) {
+        return importLocal(file.name, withContext(Dispatchers.IO) { file.readBytes() })
+    }
+
+    /**
+     * Imports a local subtitle file read as [raw]: normalises the charset to UTF-8 (Windows-125x/ISO-8859
+     * files must render correctly), keeps a managed copy in the subtitle cache dir (playback never depends
+     * on the original staying where it was), and records a LOCAL cache row.
+     *
+     * A copy is reused only when a file of the same [name] has the same content, so an engine switch or a
+     * replay never piles up duplicates, yet two different files that share a name — "English.srt" in one
+     * folder per film — are two subtitles, not one.
+     */
+    suspend fun importLocal(name: String, raw: ByteArray): ResolvedSubtitle = withContext(Dispatchers.IO) {
+        if (raw.isEmpty()) throw IOException()
+        val utf8 = SubtitleCharset.toUtf8(raw)
+        dao.localsByFileName(name).forEach { existing ->
+            val copy = File(existing.cachedPath)
+            if (!copy.exists()) {
+                dao.deleteCache(existing.id)
+            } else if (copy.length() == utf8.size.toLong() && copy.readBytes().contentEquals(utf8)) {
                 dao.touchCache(existing.id, now())
                 return@withContext existing.toResolved()
             }
-            dao.deleteCache(existing.id)
         }
 
-        val raw = file.readBytes()
-        if (raw.isEmpty()) throw IOException()
-        val utf8 = SubtitleCharset.toUtf8(raw)
         // The managed copy gets the NORMALIZED extension (".webvtt" → ".vtt"): both engines pick
         // their parser from the path extension, and only the canonical ones are mapped.
-        val format = normalizeFormat(file.extension)
-        val copy = File(cacheDir, "local_${now()}_${file.nameWithoutExtension}.$format")
+        val format = normalizeFormat(name.substringAfterLast('.', ""))
+        val copy = File(cacheDir, "local_${now()}_${name.substringBeforeLast('.', name)}.$format")
         copy.writeBytes(utf8)
 
         val entity = SubtitleCacheEntity(
@@ -153,9 +161,9 @@ class SubtitleRepository(
             openSubFileId = null,
             language = null,
             languageName = null,
-            releaseName = file.name,
+            releaseName = name,
             format = format,
-            fileName = file.name,
+            fileName = name,
             cachedPath = copy.absolutePath,
             lastUsedAt = now(),
         )

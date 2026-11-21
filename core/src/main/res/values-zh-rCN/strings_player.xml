@@ -56,6 +56,13 @@
     <string name="player_adjust">调整</string>
     <string name="player_search_subtitles">搜索 OpenSubtitles</string>
     <string name="player_select_local_subtitle">选择本地字幕文件</string>
+    <string name="player_subtitle_find_in_folder">在文件夹中查找</string>
+    <string name="player_subtitle_folder_title">文件夹中的字幕</string>
+    <string name="player_subtitle_folder_choose">选择字幕文件夹</string>
+    <string name="player_subtitle_folder_change">更改文件夹</string>
+    <string name="player_subtitle_folder_empty">此文件夹中没有字幕文件</string>
+    <string name="player_subtitle_folder_auto">自动加载匹配的字幕</string>
+    <string name="player_subtitle_folder_auto_description">没有自带字幕的电影或剧集会加载此处与其名称匹配的唯一文件。若有多个文件匹配，则不加载任何文件。</string>
     <string name="player_no_tracks">没有可用轨道。</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · 图像</string>
     <string name="player_av_sync">音视频同步</string>

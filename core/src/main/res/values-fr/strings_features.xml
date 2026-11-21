@@ -110,7 +110,7 @@
     <string name="home_row_continue_movies_description">Films avec une position enregistrée</string>
     <string name="home_row_continue_series_description">Épisodes à reprendre ou à regarder ensuite</string>
     <string name="home_row_recent_description">Chaînes en direct regardées récemment</string>
-    <string name="home_row_favorite_description">Vos chaînes de TV en direct favorites</string>
+    <string name="home_row_favorite_description">Vos chaînes en direct favorites</string>
     <string name="home_row_favorite_movies_description">Vos films favoris</string>
     <string name="home_row_favorite_series_description">Vos séries favorites</string>
     <string name="update_title">Mise à jour de l’application</string>
@@ -142,7 +142,7 @@
     <string name="recovery_backup_hint">Si vous avez un fichier de sauvegarde, vous pouvez réinitialiser l’application, puis restaurer vos données à partir de ce fichier. La réinitialisation supprime tout ce qui est stocké sur cet appareil.</string>
     <string name="recovery_confirm_reset">Confirmer : effacer toutes les données de l’application</string>
     <string name="recovery_reset">Réinitialiser les données de l’application (en dernier recours)</string>
-    <string name="home_row_now_trending">Tendances du moment</string>
+    <string name="home_row_now_trending">Tendances actuelles</string>
     <string name="home_row_trending_description">Affiche de 4 à 10 éléments uniquement lorsque les tendances TMDB correspondent à des films ou séries du catalogue de votre fournisseur.</string>
     <string name="home_trending_style">Disposition des tendances</string>
     <string name="home_trending_style_hero">Fiche détaillée</string>
@@ -356,6 +356,7 @@
     <string name="sports_tab_stats">Stats</string>
     <string name="sports_tab_lineups">Compos</string>
     <string name="sports_tab_table">Classement</string>
+    <string name="sports_tab_standings">Classement</string>
     <string name="sports_following">Suivi</string>
     <string name="sports_follow">Suivre</string>
     <string name="sports_event_goal">But · <xliff:g id="player">%1$s</xliff:g></string>
@@ -422,6 +423,7 @@
     <string name="sports_playing_now">En cours</string>
     <string name="sports_switch_channel">Changer de chaîne</string>
     <string name="sports_tab_fixtures">Calendrier</string>
+    <string name="sports_tab_games">Matchs</string>
     <string name="sports_tab_results">Résultats</string>
     <string name="sports_tab_scores">Scores</string>
     <string name="sports_tab_calendar">Agenda</string>
@@ -468,6 +470,10 @@
     <string name="sports_table_lost">P</string>
     <string name="sports_table_difference">Diff</string>
     <string name="sports_table_points">Pts</string>
+    <string name="sports_table_tied">N</string>
+    <string name="sports_table_ot_losses">DP</string>
+    <string name="sports_table_win_percent">Pct</string>
+    <string name="sports_table_games_behind">Éc</string>
     <string name="sports_table_form">Forme</string>
     <string name="sports_this_matchday">Cette journée</string>
     <string name="sports_settings_what">Contenu affiché</string>

@@ -224,9 +224,11 @@
     <string name="setup_prefer_hls_live_tv">লাইভ টিভির জন্য HLS-কে অগ্রাধিকার দিন</string>
     <string name="setup_hide_new_categories">নতুন বিভাগগুলো ডিফল্টভাবে লুকিয়ে রাখুন</string>
     <string name="setup_hide_new_categories_description">পুরো প্রোফাইলে প্রযোজ্য: ভবিষ্যতের সিঙ্কে আসা বিভাগগুলো শুরুতে লুকানো থাকবে। নিজের মতো সাজানো স্ক্রিনে যেকোনো সময় সেগুলো দেখুন।</string>
-    <string name="setup_prefer_hls_description">লাইভ টিভির জন্য MPEG-TS-এর চেয়ে HLS (.m3u8)-কে অগ্রাধিকার দিন। HLS ব্যর্থ হলে MPEG-TS-এ ফিরে যায়। ক্যাচ-আপ সবসময় MPEG-TS ব্যবহার করে।</string>
-    <string name="setup_prefer_hls_description_supported">লাইভ টিভির জন্য MPEG-TS-এর চেয়ে HLS (.m3u8)-কে অগ্রাধিকার দিন। HLS ব্যর্থ হলে MPEG-TS-এ ফিরে যায়। ক্যাচ-আপ সবসময় MPEG-TS ব্যবহার করে। আপনার প্রদানকারী HLS সমর্থন করে বলে জানায়।</string>
-    <string name="setup_prefer_hls_description_unsupported">লাইভ টিভির জন্য MPEG-TS-এর চেয়ে HLS (.m3u8)-কে অগ্রাধিকার দিন। HLS ব্যর্থ হলে MPEG-TS-এ ফিরে যায়। ক্যাচ-আপ সবসময় MPEG-TS ব্যবহার করে। আপনার প্রদানকারী HLS সমর্থন করে বলে জানায় না — আপনি তবুও এটি চেষ্টা করতে পারেন।</string>
+    <string name="setup_prefer_hls_description">লাইভ টিভির জন্য MPEG-TS-এর চেয়ে HLS (.m3u8)-কে অগ্রাধিকার দিন। HLS ব্যর্থ হলে MPEG-TS-এ ফিরে যায়।</string>
+    <string name="setup_prefer_hls_description_supported">লাইভ টিভির জন্য MPEG-TS-এর চেয়ে HLS (.m3u8)-কে অগ্রাধিকার দিন। HLS ব্যর্থ হলে MPEG-TS-এ ফিরে যায়। আপনার প্রদানকারী HLS সমর্থন করে বলে জানায়।</string>
+    <string name="setup_prefer_hls_description_unsupported">লাইভ টিভির জন্য MPEG-TS-এর চেয়ে HLS (.m3u8)-কে অগ্রাধিকার দিন। HLS ব্যর্থ হলে MPEG-TS-এ ফিরে যায়। আপনার প্রদানকারী HLS সমর্থন করে বলে জানায় না — আপনি তবুও এটি চেষ্টা করতে পারেন।</string>
+    <string name="setup_prefer_hls_catchup">ক্যাচ-আপের জন্য HLS পছন্দ করুন</string>
+    <string name="setup_prefer_hls_catchup_description">ক্যাচ-আপ অনুষ্ঠান MPEG-TS-এর বদলে HLS (.m3u8) হিসেবে চাওয়া হয়। HLS ব্যর্থ হলে MPEG-TS-এ ফিরে যায়। শুধু কিছু প্রদানকারী HLS হিসেবে ক্যাচ-আপ দেয়।</string>
     <string name="setup_hls_test_support">HLS সমর্থন পরীক্ষা করুন</string>
     <string name="setup_hls_testing">HLS পরীক্ষা করা হচ্ছে…</string>
     <string name="setup_hls_test_failed">পরীক্ষা ব্যর্থ হয়েছে: <xliff:g id="reason">%1$s</xliff:g></string>

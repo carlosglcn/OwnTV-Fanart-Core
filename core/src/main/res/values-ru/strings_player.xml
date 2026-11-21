@@ -56,6 +56,13 @@
     <string name="player_adjust">НАСТРОЙКА</string>
     <string name="player_search_subtitles">Поиск в OpenSubtitles</string>
     <string name="player_select_local_subtitle">Выбрать локальный файл субтитров</string>
+    <string name="player_subtitle_find_in_folder">Найти в папке</string>
+    <string name="player_subtitle_folder_title">Субтитры в папке</string>
+    <string name="player_subtitle_folder_choose">Выбрать папку с субтитрами</string>
+    <string name="player_subtitle_folder_change">Сменить папку</string>
+    <string name="player_subtitle_folder_empty">В этой папке нет файлов субтитров</string>
+    <string name="player_subtitle_folder_auto">Автоматически загружать подходящие субтитры</string>
+    <string name="player_subtitle_folder_auto_description">Фильм или серия без собственных субтитров получает единственный файл отсюда, совпадающий с названием. Если совпадает несколько, ничего не загружается.</string>
     <string name="player_no_tracks">Нет доступных дорожек.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · графические</string>
     <string name="player_av_sync">Синхронизация аудио и видео</string>

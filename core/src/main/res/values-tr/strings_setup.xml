@@ -224,9 +224,11 @@
     <string name="setup_prefer_hls_live_tv">Canlı TV için HLS\'yi tercih et</string>
     <string name="setup_hide_new_categories">Yeni kategorileri varsayılan olarak gizle</string>
     <string name="setup_hide_new_categories_description">Profil genelinde: gelecekteki eşitlemelerde görünen kategoriler başlangıçta gizli olur. Bunları istediğiniz zaman Özelleştirme ekranında görebilirsiniz.</string>
-    <string name="setup_prefer_hls_description">Canlı TV için HLS\'yi (.m3u8) MPEG-TS\'ye tercih et. HLS başarısız olursa MPEG-TS\'ye geri döner. Geri izleme her zaman MPEG-TS kullanır.</string>
-    <string name="setup_prefer_hls_description_supported">Canlı TV için HLS\'yi (.m3u8) MPEG-TS\'ye tercih et. HLS başarısız olursa MPEG-TS\'ye geri döner. Geri izleme her zaman MPEG-TS kullanır. Sağlayıcın HLS desteklediğini bildiriyor.</string>
-    <string name="setup_prefer_hls_description_unsupported">Canlı TV için HLS\'yi (.m3u8) MPEG-TS\'ye tercih et. HLS başarısız olursa MPEG-TS\'ye geri döner. Geri izleme her zaman MPEG-TS kullanır. Sağlayıcın HLS desteklediğini bildirmiyor — yine de deneyebilirsin.</string>
+    <string name="setup_prefer_hls_description">Canlı TV için HLS\'yi (.m3u8) MPEG-TS\'ye tercih et. HLS başarısız olursa MPEG-TS\'ye geri döner.</string>
+    <string name="setup_prefer_hls_description_supported">Canlı TV için HLS\'yi (.m3u8) MPEG-TS\'ye tercih et. HLS başarısız olursa MPEG-TS\'ye geri döner. Sağlayıcın HLS desteklediğini bildiriyor.</string>
+    <string name="setup_prefer_hls_description_unsupported">Canlı TV için HLS\'yi (.m3u8) MPEG-TS\'ye tercih et. HLS başarısız olursa MPEG-TS\'ye geri döner. Sağlayıcın HLS desteklediğini bildirmiyor — yine de deneyebilirsin.</string>
+    <string name="setup_prefer_hls_catchup">Geri izlemede HLS\'yi tercih et</string>
+    <string name="setup_prefer_hls_catchup_description">Geri izleme programlarını MPEG-TS yerine HLS (.m3u8) olarak iste. HLS başarısız olursa MPEG-TS\'ye geri döner. Geri izlemeyi HLS olarak yalnızca bazı sağlayıcılar sunar.</string>
     <string name="setup_hls_test_support">HLS desteğini test et</string>
     <string name="setup_hls_testing">HLS test ediliyor…</string>
     <string name="setup_hls_test_failed">Test başarısız oldu: <xliff:g id="reason">%1$s</xliff:g></string>

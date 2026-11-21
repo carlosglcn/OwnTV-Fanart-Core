@@ -89,9 +89,9 @@ data class SourceEntity(
      */
     val hlsSupported: HlsSupport = HlsSupport.UNKNOWN,
     /**
-     * User preference (v23): prioritize .m3u8 streams over .ts for **Live TV only**. Catch-up is
-     * deliberately excluded — the timeshift server serves recordings off disk with no HLS repackager
-     * in front of it, so asking it for `.m3u8` breaks archives on accounts whose live TV is fine.
+     * User preference (v23): prioritize .m3u8 streams over .ts for **Live TV only**. Catch-up has its
+     * own switch, [catchupPreferHls] — many timeshift servers serve recordings off disk with no HLS
+     * repackager in front of them, so tying the two broke archives on accounts whose live TV was fine.
      */
     val preferHls: Boolean = false,
     /**
@@ -174,6 +174,13 @@ data class SourceEntity(
      * backed up. Live tuning's single-session handover still follows [maxConnections].
      */
     @ColumnInfo(defaultValue = "0") val ignoreConnectionLimit: Boolean = false,
+    /**
+     * "Prefer HLS for catch-up" (v55): an Xtream catch-up programme is asked for as `.m3u8` instead of
+     * `.ts`. Separate from [preferHls] and off by default: many timeshift servers have no HLS repackager
+     * and answer `.m3u8` with an error page, while others serve both. The user's choice, so it is
+     * backed up.
+     */
+    @ColumnInfo(defaultValue = "0") val catchupPreferHls: Boolean = false,
 )
 
 /** Many-to-many link letting a source be shared across profiles (hybrid model). */

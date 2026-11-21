@@ -372,6 +372,7 @@
     <string name="sports_tab_stats">Statistiky</string>
     <string name="sports_tab_lineups">Sestavy</string>
     <string name="sports_tab_table">Tabulka</string>
+    <string name="sports_tab_standings">Pořadí</string>
     <string name="sports_following">Sledujete</string>
     <string name="sports_follow">Sledovat</string>
     <string name="sports_event_goal">Gól · <xliff:g id="player">%1$s</xliff:g></string>
@@ -441,6 +442,7 @@
     <string name="sports_playing_now">Právě hraje</string>
     <string name="sports_switch_channel">Přepnout kanál</string>
     <string name="sports_tab_fixtures">Program</string>
+    <string name="sports_tab_games">Zápasy</string>
     <string name="sports_tab_results">Výsledky</string>
     <string name="sports_tab_scores">Živě</string>
     <string name="sports_tab_calendar">Kalendář</string>
@@ -487,6 +489,10 @@
     <string name="sports_table_lost">P</string>
     <string name="sports_table_difference">Skóre</string>
     <string name="sports_table_points">B</string>
+    <string name="sports_table_tied">R</string>
+    <string name="sports_table_ot_losses">PP</string>
+    <string name="sports_table_win_percent">Úsp</string>
+    <string name="sports_table_games_behind">Ztr</string>
     <string name="sports_table_form">Forma</string>
     <string name="sports_this_matchday">Toto kolo</string>
     <string name="sports_settings_what">Co zobrazit</string>

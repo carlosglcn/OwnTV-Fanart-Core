@@ -5,9 +5,26 @@ import org.json.JSONObject
 import tv.own.owntv.core.settings.SettingsImportRules
 import tv.own.owntv.core.sports.model.Sport
 
-/** A team (or athlete, or national side) the profile follows. [id] is ESPN's, unique within [sport]. */
-data class FollowedTeam(val sport: Sport, val id: String, val name: String, val abbreviation: String = "") {
+/**
+ * A team (or athlete, or national side) the profile follows. [id] is ESPN's, unique within [sport].
+ * [league] is the catalogue league it was followed from, when known: a sport's leagues share it (NFL and
+ * college football are both `football`), so without it a college team read as an NFL one and opened the
+ * NFL's page. Not part of [key] — the same team followed from anywhere is still one team.
+ */
+data class FollowedTeam(
+    val sport: Sport,
+    val id: String,
+    val name: String,
+    val abbreviation: String = "",
+    val league: String? = null,
+) {
     val key: String get() = "${sport.path}/$id"
+
+    /**
+     * The name of [league] — "College Football" — or null when it is not known, or is the cricket feed:
+     * that one entry stands for the whole sport, whose own (translated) name the screens show instead.
+     */
+    val leagueName: String? get() = league?.takeIf { it != "cricket/all" }?.let { SportsCatalog.league(it)?.name }
 }
 
 /**
@@ -104,7 +121,7 @@ data class SportsConfig(
         put("sportOrder", JSONArray(sportOrder.map { it.name }))
         put("autoRebuild", autoRebuild.name)
         put("teams", JSONArray().apply {
-            teams.forEach { put(JSONObject().put("s", it.sport.path).put("id", it.id).put("n", it.name).put("ab", it.abbreviation)) }
+            teams.forEach { put(JSONObject().put("s", it.sport.path).put("id", it.id).put("n", it.name).put("ab", it.abbreviation).putOpt("l", it.league)) }
         })
         languages?.let { put("languages", JSONArray(it.toList())) }
         put("countries", JSONArray(countries.toList()))
@@ -160,7 +177,8 @@ data class SportsConfig(
                 teams = objects(o.optJSONArray("teams")).mapNotNull { t ->
                     val sport = Sport.ofPath(t.optString("s")) ?: return@mapNotNull null
                     val id = t.optString("id").takeIf { it.isNotEmpty() } ?: return@mapNotNull null
-                    FollowedTeam(sport, id, t.optString("n"), t.optString("ab"))
+                    val league = t.optString("l").takeIf { SportsCatalog.league(it)?.sport == sport }
+                    FollowedTeam(sport, id, t.optString("n"), t.optString("ab"), league)
                 }.distinctBy { it.key },
                 languages = o.optJSONArray("languages")?.let { SettingsImportRules.sportsCodes(strings(it), length = 2) },
                 countries = SettingsImportRules.sportsCodes(strings(o.optJSONArray("countries")), length = 2),

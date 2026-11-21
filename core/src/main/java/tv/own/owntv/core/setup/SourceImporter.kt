@@ -149,6 +149,7 @@ class SourceImporter(
         movies: SyncScopeChoice = SyncScopeChoice.Now,
         series: SyncScopeChoice = SyncScopeChoice.Now,
         preferHls: Boolean = false,
+        catchupPreferHls: Boolean = false,
         makeDefault: Boolean = false,
         httpReferer: String = "",
     ) {
@@ -168,6 +169,7 @@ class SourceImporter(
                 epgUrl = epgUrl.trim().takeIf { it.isNotBlank() },
                 syncLive = enabled.live, syncMovies = enabled.movies, syncSeries = enabled.series,
                 preferHls = preferHls,
+                catchupPreferHls = catchupPreferHls,
                 httpReferer = httpReferer.trim().takeIf { it.isNotBlank() },
             )
         }

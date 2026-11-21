@@ -340,6 +340,7 @@
     <string name="sports_tab_stats">Statistik</string>
     <string name="sports_tab_lineups">Opstillinger</string>
     <string name="sports_tab_table">Stilling</string>
+    <string name="sports_tab_standings">Stilling</string>
     <string name="sports_following">Følger</string>
     <string name="sports_follow">Følg</string>
     <string name="sports_event_goal">Mål · <xliff:g id="player">%1$s</xliff:g></string>
@@ -403,6 +404,7 @@
     <string name="sports_playing_now">Afspilles nu</string>
     <string name="sports_switch_channel">Skift kanal</string>
     <string name="sports_tab_fixtures">Program</string>
+    <string name="sports_tab_games">Kampe</string>
     <string name="sports_tab_results">Resultater</string>
     <string name="sports_tab_scores">Live</string>
     <string name="sports_tab_calendar">Kalender</string>
@@ -449,6 +451,10 @@
     <string name="sports_table_lost">T</string>
     <string name="sports_table_difference">MF</string>
     <string name="sports_table_points">P</string>
+    <string name="sports_table_tied">U</string>
+    <string name="sports_table_ot_losses">TEF</string>
+    <string name="sports_table_win_percent">Pct</string>
+    <string name="sports_table_games_behind">Bag</string>
     <string name="sports_table_form">Form</string>
     <string name="sports_this_matchday">Denne spillerunde</string>
     <string name="sports_settings_what">Hvad der vises</string>

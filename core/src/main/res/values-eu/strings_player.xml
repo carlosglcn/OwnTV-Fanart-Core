@@ -56,6 +56,13 @@
     <string name="player_adjust">DOITU</string>
     <string name="player_search_subtitles">Bilatu OpenSubtitles-en</string>
     <string name="player_select_local_subtitle">Hautatu tokiko azpititulu-fitxategia</string>
+    <string name="player_subtitle_find_in_folder">Bilatu karpetan</string>
+    <string name="player_subtitle_folder_title">Karpetako azpitituluak</string>
+    <string name="player_subtitle_folder_choose">Aukeratu azpitituluen karpeta</string>
+    <string name="player_subtitle_folder_change">Aldatu karpeta</string>
+    <string name="player_subtitle_folder_empty">Karpeta honetan ez dago azpititulu-fitxategirik</string>
+    <string name="player_subtitle_folder_auto">Kargatu bat datorren azpititulua automatikoki</string>
+    <string name="player_subtitle_folder_auto_description">Azpititulu propiorik ez duen film edo atal batek bere izenarekin bat datorren hemengo fitxategi bakarra jasotzen du. Hainbat bat badatoz, ez da bat ere kargatzen.</string>
     <string name="player_no_tracks">Ez dago pistarik eskuragarri.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · irudia</string>
     <string name="player_av_sync">A/B sinkronizazioa</string>

@@ -236,9 +236,11 @@
     <string name="setup_prefer_hls_live_tv">تفضيل HLS للبث التلفزيوني المباشر</string>
     <string name="setup_hide_new_categories">إخفاء الفئات الجديدة افتراضيًا</string>
     <string name="setup_hide_new_categories_description">على مستوى الملف الشخصي: تبدأ الفئات التي تظهر في عمليات المزامنة المستقبلية مخفية. يمكنك رؤيتها في أي وقت في شاشة التخصيص.</string>
-    <string name="setup_prefer_hls_description">أعطِ الأولوية لـ HLS (.m3u8) على MPEG-TS في تلفزيون مباشر. يتراجع إلى MPEG-TS إذا فشل HLS. تستخدم المشاهدة المتأخرة MPEG-TS دائمًا.</string>
-    <string name="setup_prefer_hls_description_supported">أعطِ الأولوية لـ HLS (.m3u8) على MPEG-TS في تلفزيون مباشر. يتراجع إلى MPEG-TS إذا فشل HLS. تستخدم المشاهدة المتأخرة MPEG-TS دائمًا. يُبلغ مزود الخدمة لديك عن دعم HLS.</string>
-    <string name="setup_prefer_hls_description_unsupported">أعطِ الأولوية لـ HLS (.m3u8) على MPEG-TS في تلفزيون مباشر. يتراجع إلى MPEG-TS إذا فشل HLS. تستخدم المشاهدة المتأخرة MPEG-TS دائمًا. لا يُبلغ مزود الخدمة لديك عن دعم HLS — يمكنك تجربته على أي حال.</string>
+    <string name="setup_prefer_hls_description">أعطِ الأولوية لـ HLS (.m3u8) على MPEG-TS في تلفزيون مباشر. يتراجع إلى MPEG-TS إذا فشل HLS.</string>
+    <string name="setup_prefer_hls_description_supported">أعطِ الأولوية لـ HLS (.m3u8) على MPEG-TS في تلفزيون مباشر. يتراجع إلى MPEG-TS إذا فشل HLS. يُبلغ مزود الخدمة لديك عن دعم HLS.</string>
+    <string name="setup_prefer_hls_description_unsupported">أعطِ الأولوية لـ HLS (.m3u8) على MPEG-TS في تلفزيون مباشر. يتراجع إلى MPEG-TS إذا فشل HLS. لا يُبلغ مزود الخدمة لديك عن دعم HLS — يمكنك تجربته على أي حال.</string>
+    <string name="setup_prefer_hls_catchup">تفضيل HLS للمشاهدة المتأخرة</string>
+    <string name="setup_prefer_hls_catchup_description">اطلب برامج المشاهدة المتأخرة بصيغة HLS (.m3u8) بدلاً من MPEG-TS. يتراجع إلى MPEG-TS إذا فشل HLS. لا يوفّر المشاهدة المتأخرة بصيغة HLS إلا بعض المزوّدين.</string>
     <string name="setup_hls_test_support">اختبر دعم HLS</string>
     <string name="setup_hls_testing">جارٍ اختبار HLS…</string>
     <string name="setup_hls_test_failed">فشل الاختبار: <xliff:g id="reason">%1$s</xliff:g></string>

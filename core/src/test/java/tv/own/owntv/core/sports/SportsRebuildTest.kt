@@ -55,12 +55,14 @@ class SportsRebuildTest {
         var today: (String) -> List<Match> = { emptyList() }
         var tomorrow: (String) -> List<Match> = { emptyList() }
         var failing: Set<String> = emptySet()
+        var now: () -> Long = { 0L }
 
         override suspend fun scoreboard(league: League, day: LocalDate?): List<Match> {
-            val name = league.key + if (day != null) "+1" else ""
+            val next = day != null && day > SportsRefreshPolicy.espnDay(now())
+            val name = league.key + if (next) "+1" else ""
             calls += name
             if (name in failing || league.key in failing) throw SportsHttpException(500)
-            return if (day == null) today(league.key) else tomorrow(league.key)
+            return if (next) tomorrow(league.key) else today(league.key)
         }
 
         override suspend fun summary(match: Match): MatchSummary {
@@ -86,7 +88,7 @@ class SportsRebuildTest {
 
     private fun TestScope.repo(source: SportsSource, followed: MutableStateFlow<Set<String>>, dir: File) =
         SportsRepository(
-            source = source,
+            source = source.also { (it as? Source)?.now = { testScheduler.currentTime } },
             policy = SportsRefreshPolicy(),
             followed = followed,
             liveRefreshSeconds = MutableStateFlow(30),

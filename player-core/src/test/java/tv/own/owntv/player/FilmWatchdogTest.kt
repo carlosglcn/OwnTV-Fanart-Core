@@ -22,8 +22,9 @@ class FilmWatchdogTest {
         archive: Boolean = false,
         triedFrozenReset: Boolean = false,
         triedOpenReset: Boolean = false,
+        openTimeoutMs: Long = FilmWatchdog.OPEN_TIMEOUT_MS,
     ) = FilmWatchdog.Tick(now, elapsedMs, heightPx, positionMs, playing, buffering, fileLoaded, decoderHadTime,
-        noVideoTrack, sessionRefused, archive, triedFrozenReset, triedOpenReset)
+        noVideoTrack, sessionRefused, archive, triedFrozenReset, triedOpenReset, openTimeoutMs)
 
     private val bitrate: suspend () -> Boolean = { true }
     private val noBitrate: suspend () -> Boolean = { false }
@@ -100,5 +101,13 @@ class FilmWatchdogTest {
         val w = FilmWatchdog()
         for (ms in 0L..5_000L step 1_000L) assertEquals(Step.WAIT, w.step(tick(elapsedMs = ms, fileLoaded = ms > 2_000), noBitrate))
         assertFalse(w.openedAtPos >= 0)
+    }
+
+    @Test
+    fun `an open is given its own allowance before stage 1 fires`() = runBlocking {
+        val long = FilmWatchdog.ARCHIVE_HLS_OPEN_TIMEOUT_MS
+        assertEquals(Step.WAIT, FilmWatchdog().step(tick(elapsedMs = 22_000, archive = true, openTimeoutMs = long), bitrate))
+        assertEquals(Step.OPEN_RESET, FilmWatchdog().step(tick(elapsedMs = long + 1, archive = true, openTimeoutMs = long), bitrate))
+        assertEquals(Step.OPEN_RESET, FilmWatchdog().step(tick(elapsedMs = 10_001, archive = true), bitrate))
     }
 }

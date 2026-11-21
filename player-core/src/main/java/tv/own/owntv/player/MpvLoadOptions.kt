@@ -9,6 +9,10 @@ import tv.own.owntv.core.settings.LiveBuffer
  * and frame dropping, and the archive decode option. [OwnTVPlayer] writes [Result.options] in order.
  */
 internal object MpvLoadOptions {
+    /** A catch-up archive's probe: long enough to reach the first keyframe of a long-GOP channel. */
+    const val ARCHIVE_PROBE_BYTES = "30000000"
+    const val ARCHIVE_ANALYZE_SECS = "20"
+
 
     /** Everything a load's options depend on — read from the player and the session quirks by the caller. */
     data class Input(
@@ -150,7 +154,16 @@ internal object MpvLoadOptions {
         // on to the first keyframe; an archive is not zapped, so the extra second is not paid per press.
         val trim = rawTs && !i.forceFullProbe && !i.archive
         val demuxerOptions = OwnTVPlayer.demuxerLavfOptionsFor(trimmedRawTsProbe = trim, tolerant = i.tolerant)
-        if (!trim) {
+        if (i.archive && rawTs) {
+            // An archive also needs to read further than the full probe's default 5 s of stream time: on a
+            // channel whose keyframes are further apart than that (an HEVC news channel), the probe ended
+            // before the first SPS and MediaCodec was configured with width=0/height=0 — refused, so the
+            // archive ran in software. FFmpeg stops as soon as every stream has its parameters, so an
+            // archive that does start near a keyframe opens no later than before. Raw TS only: an HLS
+            // archive keeps the full probe below, because a set analyze time wedges mpv's HLS open.
+            set("demuxer-lavf-probesize", ARCHIVE_PROBE_BYTES)
+            set("demuxer-lavf-analyzeduration", ARCHIVE_ANALYZE_SECS)
+        } else if (!trim) {
             // Full probe — needed for HDR, complete track lists, and to open HLS/other live cleanly. Capping
             // the analyze time (even to 2.5 s) wedges mpv's HLS open on this hardware — it never reaches the
             // decoder — so the full probe is required. This is the ~3–5 s full-screen startup floor for HLS
@@ -166,6 +179,10 @@ internal object MpvLoadOptions {
             set("demuxer-lavf-analyzeduration", "1.0") // ~1s keeps HDR/colorspace detection safe
         }
         set("demuxer-lavf-o", demuxerOptions)
+        // A catch-up asked for as HLS: the timeshift server builds the whole playlist before it answers
+        // (seconds per request on a long programme), so FFmpeg is told the format instead of reading the
+        // address once more to detect it. Set on every load so it never outlives the archive.
+        set("demuxer-lavf-format", if (i.archive && effectiveHls) "hls" else "")
         val diagnostic = "mpv_open hls=$effectiveHls live=${i.live} probe=${if (trim) "trimmed" else "full"} tolerant=${i.tolerant} " +
             "demuxerLavfO=\"$demuxerOptions\" streamLavfO=\"$streamLavfO\""
         return Result(options, effectiveHls, trim, bufferLog, diagnostic)

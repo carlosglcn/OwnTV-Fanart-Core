@@ -33,7 +33,7 @@ val databaseModule = module {
             // Revert path, if 3.x ever misbehaves on a specific device: change this to
             // AndroidSQLiteDriver(). Nothing else in the codebase knows the difference.
             .setDriver(BundledSQLiteDriver())
-            .addMigrations(*OwnTVDatabase.ALL_MIGRATIONS)
+            .addMigrations(*OwnTVDatabase.ALL_MIGRATIONS.map(tv.own.owntv.core.database.DatabaseUpgrade::watch).toTypedArray())
             .addCallback(object : RoomDatabase.Callback() {
                 // Self-heal index/FTS drift on every open (no-op when healthy): an interrupted bulk
                 // import can leave BulkInsertHelper's dropped indexes missing, which is invisible
@@ -88,6 +88,7 @@ val databaseModule = module {
                     // the old Support type is silently skipped — no exception, nothing in CI, and
                     // the PRAGMAs and the schema self-heal simply stop running. This line is the
                     // only thing that makes that failure visible, so it reports what actually ran.
+                    tv.own.owntv.core.database.DatabaseUpgrade.opened()
                     tv.own.owntv.core.util.Perf.stamp(
                         "db-open(sqlite=" + engineVersion + ", journal=" + journal.lowercase() +
                             (if (journalFixed) " forced-wal" else "") +

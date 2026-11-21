@@ -230,9 +230,11 @@
     <string name="setup_prefer_hls_live_tv">Upřednostnit HLS pro živé vysílání</string>
     <string name="setup_hide_new_categories">Ve výchozím nastavení skrývat nové kategorie</string>
     <string name="setup_hide_new_categories_description">V celém profilu: kategorie, které se objeví při budoucích synchronizacích, budou zpočátku skryté. Kdykoli je zobrazíte v části Přizpůsobení.</string>
-    <string name="setup_prefer_hls_description">Upřednostnit HLS (.m3u8) před MPEG-TS pro Živou TV. Pokud HLS selže, použije se MPEG-TS. Zpětné zhlédnutí vždy používá MPEG-TS.</string>
-    <string name="setup_prefer_hls_description_supported">Upřednostnit HLS (.m3u8) před MPEG-TS pro Živou TV. Pokud HLS selže, použije se MPEG-TS. Zpětné zhlédnutí vždy používá MPEG-TS. Váš poskytovatel hlásí podporu HLS.</string>
-    <string name="setup_prefer_hls_description_unsupported">Upřednostnit HLS (.m3u8) před MPEG-TS pro Živou TV. Pokud HLS selže, použije se MPEG-TS. Zpětné zhlédnutí vždy používá MPEG-TS. Váš poskytovatel nehlásí podporu HLS – i tak to můžete vyzkoušet.</string>
+    <string name="setup_prefer_hls_description">Upřednostnit HLS (.m3u8) před MPEG-TS pro Živou TV. Pokud HLS selže, použije se MPEG-TS.</string>
+    <string name="setup_prefer_hls_description_supported">Upřednostnit HLS (.m3u8) před MPEG-TS pro Živou TV. Pokud HLS selže, použije se MPEG-TS. Váš poskytovatel hlásí podporu HLS.</string>
+    <string name="setup_prefer_hls_description_unsupported">Upřednostnit HLS (.m3u8) před MPEG-TS pro Živou TV. Pokud HLS selže, použije se MPEG-TS. Váš poskytovatel nehlásí podporu HLS – i tak to můžete vyzkoušet.</string>
+    <string name="setup_prefer_hls_catchup">Upřednostnit HLS pro zpětné zhlédnutí</string>
+    <string name="setup_prefer_hls_catchup_description">Pořady ze zpětného zhlédnutí se vyžadují jako HLS (.m3u8) místo MPEG-TS. Pokud HLS selže, použije se MPEG-TS. Zpětné zhlédnutí jako HLS nabízejí jen někteří poskytovatelé.</string>
     <string name="setup_hls_test_support">Otestovat podporu HLS</string>
     <string name="setup_hls_testing">Testování HLS…</string>
     <string name="setup_hls_test_failed">Test selhal: <xliff:g id="reason">%1$s</xliff:g></string>

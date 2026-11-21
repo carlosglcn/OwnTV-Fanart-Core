@@ -179,4 +179,8 @@
     <string name="shell_now_playing_audio">Ses</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">Kapat</string>
+    <string name="database_migration_title">Veritabanı taşınıyor</string>
+    <string name="database_migration_body">Bu sürüm kanallarınızı, filmlerinizi ve dizilerinizi yeni bir veritabanı biçiminde saklar. Bu yalnızca bir kez olur ve büyük oynatma listelerinde 2 dakikaya kadar sürebilir.</string>
+    <string name="database_migration_keep">Oynatma listeleriniz, favorileriniz ve geçmişiniz korunur. Hiçbir şey yeniden indirilmez. Lütfen televizyonu kapatmayın ve uygulamayı kapatmayın.</string>
+    <string name="database_migration_keep_mobile">Oynatma listeleriniz, favorileriniz ve geçmişiniz korunur. Hiçbir şey yeniden indirilmez. Lütfen uygulamayı açık tutun.</string>
 </resources>

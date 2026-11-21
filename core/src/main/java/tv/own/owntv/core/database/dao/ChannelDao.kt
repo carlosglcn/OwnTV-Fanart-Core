@@ -10,6 +10,7 @@ import androidx.room.Transaction
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import tv.own.owntv.core.database.entity.ChannelEntity
+import tv.own.owntv.core.database.entity.nameKeyOf
 import tv.own.owntv.core.database.entity.ChannelNumberProjection
 import tv.own.owntv.core.database.entity.ContentHashProjection
 
@@ -62,8 +63,11 @@ interface ChannelDao {
     @Query("SELECT * FROM channels WHERE sourceId = :sourceId AND remoteId = :remoteId LIMIT 1")
     suspend fun findByRemote(sourceId: Long, remoteId: String): ChannelEntity?
 
-    @Query("SELECT * FROM channels WHERE sourceId = :sourceId AND name = :name LIMIT 1")
-    suspend fun findByName(sourceId: Long, name: String): ChannelEntity?
+    /** Exact name, read through the `(sourceId, nameKey)` index. */
+    suspend fun findByName(sourceId: Long, name: String): ChannelEntity? = findByNameByKey(sourceId, nameKeyOf(name), name)
+
+    @Query("SELECT * FROM channels WHERE sourceId = :sourceId AND nameKey = :key AND name = :name LIMIT 1")
+    suspend fun findByNameByKey(sourceId: Long, key: String, name: String): ChannelEntity?
 
     /** glcn: by name across several playlists (a command from another device carries no local id). */
     @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND name = :name COLLATE NOCASE ORDER BY sourceId LIMIT 1")
@@ -142,7 +146,7 @@ interface ChannelDao {
      */
     @Query(
         "SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND epgChannelId IS NOT NULL AND epgChannelId != '' " +
-            "AND (:query = '' OR name LIKE '%' || :query || '%') " +
+            "AND (:key = '' OR nameKey LIKE '%' || :key || '%') " +
             // "channels that have guide data": distinct epgChannelIds present in epg_programmes. The programme
             // table is already pruned to the retained window, so we don't time-filter here — that lets the
             // DISTINCT use the (epgChannelId, startMs) index as a fast skip-scan instead of scanning every
@@ -152,14 +156,14 @@ interface ChannelDao {
             "  SELECT DISTINCT epgChannelId FROM epg_programmes WHERE sourceId IN (:sourceIds)" +
             ") ORDER BY number ASC, name ASC LIMIT :limit",
     )
-    suspend fun channelsWithGuide(sourceIds: List<Long>, query: String, limit: Int): List<ChannelEntity>
+    suspend fun channelsWithGuide(sourceIds: List<Long>, key: String, limit: Int): List<ChannelEntity>
 
     /** Every channel with or without guide data, same order — the TV Guide with Show › Channels without guide on. */
     @Query(
         "SELECT * FROM channels WHERE sourceId IN (:sourceIds) " +
-            "AND (:query = '' OR name LIKE '%' || :query || '%') ORDER BY number ASC, name ASC LIMIT :limit",
+            "AND (:key = '' OR nameKey LIKE '%' || :key || '%') ORDER BY number ASC, name ASC LIMIT :limit",
     )
-    suspend fun channelsForGuide(sourceIds: List<Long>, query: String, limit: Int): List<ChannelEntity>
+    suspend fun channelsForGuide(sourceIds: List<Long>, key: String, limit: Int): List<ChannelEntity>
 
     /** Channels matching these remoteIds (Xtream stream ids) — to resolve smart-matched channels in bulk
      *  without loading the whole channel table. */
@@ -287,10 +291,10 @@ interface ChannelDao {
     @Query("SELECT * FROM channels WHERE categoryId = :categoryId ORDER BY sortOrder ASC, name ASC")
     fun pagingByCategory(categoryId: Long): PagingSource<Int, ChannelEntity>
 
-    @Query("SELECT * FROM channels WHERE categoryId = :categoryId ORDER BY name ASC")
+    @Query("SELECT * FROM channels WHERE categoryId = :categoryId ORDER BY nameKey ASC, name ASC")
     fun pagingByCategoryAlpha(categoryId: Long): PagingSource<Int, ChannelEntity>
 
-    @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) ORDER BY name ASC")
+    @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) ORDER BY nameKey ASC, name ASC")
     fun pagingAll(sourceIds: List<Long>): PagingSource<Int, ChannelEntity>
 
     @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) ORDER BY sourceId ASC, sortOrder ASC, name ASC")
@@ -300,7 +304,7 @@ interface ChannelDao {
     //     rows as ALL, so it needs no sync work and stays correct after every re-sync. Deliberately
     //     independent of the guide: `catchup` comes from the playlist, so these lists are populated
     //     even for a user with no EPG at all (who is exactly the person looking for them).
-    @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND catchup = 1 ORDER BY name ASC")
+    @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND catchup = 1 ORDER BY nameKey ASC, name ASC")
     fun pagingCatchup(sourceIds: List<Long>): PagingSource<Int, ChannelEntity>
 
     @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND catchup = 1 ORDER BY sourceId ASC, sortOrder ASC, name ASC")
@@ -311,12 +315,12 @@ interface ChannelDao {
     /** Moved rows keep their saved position; the rest follow [alpha] (A–Z) or the playlist order
      *  around them — the same rule as `placePinned` for categories. */
     @Query(
-            "WITH base AS (SELECT c.id AS id, c.sortOrder AS so, c.name AS nm, 0 AS mp, o.position AS pos " +
+            "WITH base AS (SELECT c.id AS id, c.sortOrder AS so, c.name AS nm, c.nameKey AS nk, 0 AS mp, o.position AS pos " +
             "FROM channels c " +
             "LEFT JOIN content_order o ON o.itemId = c.id AND o.profileId = :profileId AND o.mediaType = 'LIVE' AND o.contextKey = :contextKey " +
             "WHERE c.categoryId = :categoryId), " +
             "slots AS (SELECT id, pos - (ROW_NUMBER() OVER (ORDER BY pos, id) - 1) AS slot, 0 AS grp, pos AS tie FROM base WHERE pos IS NOT NULL " +
-            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nm END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
+            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nk END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
             "SELECT c.* FROM channels c INNER JOIN slots sl ON sl.id = c.id ORDER BY sl.slot, sl.grp, sl.tie",
     )
     fun pagingByCategoryManual(categoryId: Long, profileId: Long, contextKey: String, alpha: Boolean): PagingSource<Int, ChannelEntity>
@@ -334,12 +338,12 @@ interface ChannelDao {
     /** Bounded snapshot of a folder in manual order, for the Move session's in-memory reorder. Moved rows keep their saved position; the rest follow
      *  [alpha] (A–Z) or the playlist order around them. */
     @Query(
-            "WITH base AS (SELECT c.id AS id, c.sortOrder AS so, c.name AS nm, 0 AS mp, o.position AS pos " +
+            "WITH base AS (SELECT c.id AS id, c.sortOrder AS so, c.name AS nm, c.nameKey AS nk, 0 AS mp, o.position AS pos " +
             "FROM channels c " +
             "LEFT JOIN content_order o ON o.itemId = c.id AND o.profileId = :profileId AND o.mediaType = 'LIVE' AND o.contextKey = :contextKey " +
             "WHERE c.categoryId = :categoryId), " +
             "slots AS (SELECT id, pos - (ROW_NUMBER() OVER (ORDER BY pos, id) - 1) AS slot, 0 AS grp, pos AS tie FROM base WHERE pos IS NOT NULL " +
-            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nm END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
+            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nk END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
             "SELECT c.* FROM channels c INNER JOIN slots sl ON sl.id = c.id ORDER BY sl.slot, sl.grp, sl.tie LIMIT :limit",
     )
     suspend fun snapshotByCategoryManual(categoryId: Long, profileId: Long, contextKey: String, alpha: Boolean, limit: Int): List<ChannelEntity>
@@ -409,33 +413,33 @@ interface ChannelDao {
     // --- Search (FTS4) ---
     @Query(
         "SELECT * FROM channels WHERE sourceId IN (:sourceIds) " +
-            "AND id IN (SELECT rowid FROM channels_fts WHERE channels_fts MATCH :query) ORDER BY name ASC",
+            "AND id IN (SELECT rowid FROM channels_fts WHERE channels_fts MATCH :query) ORDER BY nameKey ASC, name ASC",
     )
     fun search(query: String, sourceIds: List<Long>): PagingSource<Int, ChannelEntity>
 
     // --- Inline folder-scoped search (substring LIKE, matches the user's expectation) ---
-    @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY name ASC")
-    fun searchAll(query: String, sourceIds: List<Long>): PagingSource<Int, ChannelEntity>
+    @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND nameKey LIKE '%' || :key || '%' ORDER BY nameKey ASC, name ASC")
+    fun searchAll(key: String, sourceIds: List<Long>): PagingSource<Int, ChannelEntity>
 
-    @Query("SELECT * FROM channels WHERE categoryId = :categoryId AND name LIKE '%' || :query || '%' ORDER BY sortOrder ASC, name ASC")
-    fun searchInCategory(query: String, categoryId: Long): PagingSource<Int, ChannelEntity>
+    @Query("SELECT * FROM channels WHERE categoryId = :categoryId AND nameKey LIKE '%' || :key || '%' ORDER BY sortOrder ASC, name ASC")
+    fun searchInCategory(key: String, categoryId: Long): PagingSource<Int, ChannelEntity>
 
-    @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND catchup = 1 AND name LIKE '%' || :query || '%' ORDER BY name ASC")
-    fun searchCatchup(query: String, sourceIds: List<Long>): PagingSource<Int, ChannelEntity>
+    @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND catchup = 1 AND nameKey LIKE '%' || :key || '%' ORDER BY nameKey ASC, name ASC")
+    fun searchCatchup(key: String, sourceIds: List<Long>): PagingSource<Int, ChannelEntity>
 
     /** Bounded list for global search (across all of a profile's sources). */
-    @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY name ASC LIMIT :limit")
-    suspend fun searchList(query: String, sourceIds: List<Long>, limit: Int): List<ChannelEntity>
+    @Query("SELECT * FROM channels WHERE sourceId IN (:sourceIds) AND nameKey LIKE '%' || :key || '%' ORDER BY nameKey ASC, name ASC LIMIT :limit")
+    suspend fun searchList(key: String, sourceIds: List<Long>, limit: Int): List<ChannelEntity>
 
     /** Global search with the channel's category name joined in — lets results show "category · #number"
      *  so near-identical feeds (e.g. several "ABC") are distinguishable. */
     @Query(
         "SELECT c.*, cat.name AS categoryName FROM channels c " +
             "LEFT JOIN categories cat ON c.categoryId = cat.id " +
-            "WHERE c.sourceId IN (:sourceIds) AND c.name LIKE '%' || :query || '%' " +
-            "ORDER BY c.name ASC LIMIT :limit",
+            "WHERE c.sourceId IN (:sourceIds) AND c.nameKey LIKE '%' || :key || '%' " +
+            "ORDER BY c.nameKey ASC, c.name ASC LIMIT :limit",
     )
-    suspend fun searchListDetailed(query: String, sourceIds: List<Long>, limit: Int): List<ChannelSearchResult>
+    suspend fun searchListDetailed(key: String, sourceIds: List<Long>, limit: Int): List<ChannelSearchResult>
 
     /** FTS-backed variant of [searchListDetailed] for global as-you-type search (see MovieDao.searchListFts). */
     @Query(
@@ -443,21 +447,21 @@ interface ChannelDao {
             "LEFT JOIN categories cat ON c.categoryId = cat.id " +
             "WHERE c.sourceId IN (:sourceIds) " +
             "AND c.id IN (SELECT rowid FROM channels_fts WHERE channels_fts MATCH :ftsQuery) " +
-            "ORDER BY c.name ASC LIMIT :limit",
+            "ORDER BY c.nameKey ASC, c.name ASC LIMIT :limit",
     )
     suspend fun searchListDetailedFts(ftsQuery: String, sourceIds: List<Long>, limit: Int): List<ChannelSearchResult>
 
     @Query(
         "SELECT c.* FROM channels c INNER JOIN favorites f ON f.itemId = c.id AND f.mediaType = 'LIVE' " +
-            "WHERE f.profileId = :profileId AND c.sourceId IN (:sourceIds) AND c.name LIKE '%' || :query || '%' ORDER BY f.addedAt DESC",
+            "WHERE f.profileId = :profileId AND c.sourceId IN (:sourceIds) AND c.nameKey LIKE '%' || :key || '%' ORDER BY f.addedAt DESC",
     )
-    fun searchFavorites(query: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, ChannelEntity>
+    fun searchFavorites(key: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, ChannelEntity>
 
     @Query(
         "SELECT c.* FROM channels c INNER JOIN watch_history h ON h.itemId = c.id AND h.mediaType = 'LIVE' " +
-            "WHERE h.profileId = :profileId AND c.sourceId IN (:sourceIds) AND c.name LIKE '%' || :query || '%' ORDER BY h.watchedAt DESC",
+            "WHERE h.profileId = :profileId AND c.sourceId IN (:sourceIds) AND c.nameKey LIKE '%' || :key || '%' ORDER BY h.watchedAt DESC",
     )
-    fun searchHistory(query: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, ChannelEntity>
+    fun searchHistory(key: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, ChannelEntity>
 
     // --- Favorites / History (profile-scoped) ---
     @Query(
@@ -470,7 +474,7 @@ interface ChannelDao {
     @Query(
         "SELECT c.* FROM channels c " +
             "INNER JOIN favorites f ON f.itemId = c.id AND f.mediaType = 'LIVE' " +
-            "WHERE f.profileId = :profileId ORDER BY LOWER(c.name) ASC, c.id ASC",
+            "WHERE f.profileId = :profileId ORDER BY c.nameKey ASC, c.id ASC",
     )
     fun favoritesListAlpha(profileId: Long): Flow<List<ChannelEntity>>
 

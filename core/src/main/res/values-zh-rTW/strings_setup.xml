@@ -221,9 +221,11 @@
     <string name="setup_prefer_hls_live_tv">電視直播優先使用 HLS</string>
     <string name="setup_hide_new_categories">預設隱藏新分類</string>
     <string name="setup_hide_new_categories_description">套用至整個使用者檔案：日後同步時出現的新分類一律先設為隱藏。您可隨時在「自訂」中查看。</string>
-    <string name="setup_prefer_hls_description">直播電視優先使用 HLS (.m3u8) 而非 MPEG-TS。若 HLS 失敗則退回 MPEG-TS。回看一律使用 MPEG-TS。</string>
-    <string name="setup_prefer_hls_description_supported">直播電視優先使用 HLS (.m3u8) 而非 MPEG-TS。若 HLS 失敗則退回 MPEG-TS。回看一律使用 MPEG-TS。您的提供者回報支援 HLS。</string>
-    <string name="setup_prefer_hls_description_unsupported">直播電視優先使用 HLS (.m3u8) 而非 MPEG-TS。若 HLS 失敗則退回 MPEG-TS。回看一律使用 MPEG-TS。您的提供者未回報支援 HLS — 您還是可以試試看。</string>
+    <string name="setup_prefer_hls_description">直播電視優先使用 HLS (.m3u8) 而非 MPEG-TS。若 HLS 失敗則退回 MPEG-TS。</string>
+    <string name="setup_prefer_hls_description_supported">直播電視優先使用 HLS (.m3u8) 而非 MPEG-TS。若 HLS 失敗則退回 MPEG-TS。您的提供者回報支援 HLS。</string>
+    <string name="setup_prefer_hls_description_unsupported">直播電視優先使用 HLS (.m3u8) 而非 MPEG-TS。若 HLS 失敗則退回 MPEG-TS。您的提供者未回報支援 HLS — 您還是可以試試看。</string>
+    <string name="setup_prefer_hls_catchup">回看優先使用 HLS</string>
+    <string name="setup_prefer_hls_catchup_description">以 HLS (.m3u8) 而非 MPEG-TS 要求回看節目。若 HLS 失敗則退回 MPEG-TS。僅部分供應商以 HLS 提供回看。</string>
     <string name="setup_hls_test_support">測試 HLS 支援</string>
     <string name="setup_hls_testing">正在測試 HLS…</string>
     <string name="setup_hls_test_failed">測試失敗：<xliff:g id="reason">%1$s</xliff:g></string>

@@ -109,8 +109,8 @@ object SportsCatalog {
         League(Sport.HANDBALL, BasketDataSource.LNH, "StarLigue", "LNH", "FR", aliases = listOf("Daikin StarLigue", "Liqui Moly StarLigue", "Liga francesa de balonmano")),
         League(Sport.HANDBALL, BasketDataSource.HHL, "Herreligaen", "HHL", "DK", aliases = listOf("Betoro Herreligaen", "Liga danesa de balonmano")),
         League(Sport.HANDBALL, BasketDataSource.KHL, "K&H Férfi Liga", "K&H", "HU", aliases = listOf("K&H Liga", "Liga húngara de balonmano")),
-        League(Sport.BASKETBALL, "mens-college-basketball", "NCAA Basketball", "NCAAM", "US", aliases = listOf("College Basketball", "March Madness")),
-        League(Sport.BASKETBALL, "womens-college-basketball", "NCAA Women's Basketball", "NCAAW", "US", aliases = listOf("Women's College Basketball")),
+        League(Sport.BASKETBALL, "mens-college-basketball", "NCAA Basketball", "NCAAM", "US", aliases = listOf("College Basketball", "March Madness"), group = 50),
+        League(Sport.BASKETBALL, "womens-college-basketball", "NCAA Women's Basketball", "NCAAW", "US", aliases = listOf("Women's College Basketball"), group = 50),
         League(Sport.BASKETBALL, "fiba", "FIBA World Cup", aliases = listOf("Basketball World Cup", "Basketball-WM")),
         // Tennis
         League(Sport.TENNIS, "atp", "ATP"),
@@ -134,7 +134,7 @@ object SportsCatalog {
         League(Sport.HOCKEY, "olympics-womens-ice-hockey", "Olympic Women's Ice Hockey"),
         // American football
         League(Sport.FOOTBALL, "nfl", "NFL", country = "US"),
-        League(Sport.FOOTBALL, "college-football", "College Football", "NCAAF", "US", aliases = listOf("NCAAF", "NCAA Football")),
+        League(Sport.FOOTBALL, "college-football", "College Football", "NCAAF", "US", aliases = listOf("NCAAF", "NCAA Football"), group = 80),
         // MMA
         League(Sport.MMA, "ufc", "UFC"),
         League(Sport.MMA, "pfl", "PFL", aliases = listOf("Professional Fighters League")),

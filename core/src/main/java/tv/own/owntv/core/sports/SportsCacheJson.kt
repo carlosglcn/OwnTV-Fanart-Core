@@ -121,7 +121,8 @@ internal object SportsCacheJson {
                 put(JSONObject().put("n", g.name).put("r", JSONArray().apply {
                     g.rows.forEach { r ->
                         put(JSONObject().put("rk", r.rank).put("tm", team(r.team)).put("p", r.played).put("w", r.won).put("d", r.drawn)
-                            .put("l", r.lost).put("f", r.scored).put("a", r.conceded).put("gd", r.difference).put("pt", r.points).putOpt("no", r.note))
+                            .put("l", r.lost).put("f", r.scored).put("a", r.conceded).put("gd", r.difference).put("pt", r.points).putOpt("no", r.note)
+                            .put("ot", r.otLosses).put("pc", r.winPercent).put("gb", r.gamesBehind))
                     }
                 }))
             }
@@ -135,6 +136,7 @@ internal object SportsCacheJson {
                     rank = r.getInt("rk"), team = team(r.getJSONObject("tm")), played = r.getInt("p"), won = r.getInt("w"),
                     drawn = r.getInt("d"), lost = r.getInt("l"), scored = r.getInt("f"), conceded = r.getInt("a"),
                     difference = r.getString("gd"), points = r.getInt("pt"), note = r.optStringOrNull("no"),
+                    otLosses = r.optInt("ot"), winPercent = r.optString("pc"), gamesBehind = r.optString("gb"),
                 )
             })
         },

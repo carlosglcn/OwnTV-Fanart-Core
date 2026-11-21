@@ -56,6 +56,13 @@
     <string name="player_adjust">조정</string>
     <string name="player_search_subtitles">OpenSubtitles 검색</string>
     <string name="player_select_local_subtitle">로컬 자막 파일 선택</string>
+    <string name="player_subtitle_find_in_folder">폴더에서 찾기</string>
+    <string name="player_subtitle_folder_title">폴더의 자막</string>
+    <string name="player_subtitle_folder_choose">자막 폴더 선택</string>
+    <string name="player_subtitle_folder_change">폴더 변경</string>
+    <string name="player_subtitle_folder_empty">이 폴더에 자막 파일이 없습니다</string>
+    <string name="player_subtitle_folder_auto">일치하는 자막 자동으로 불러오기</string>
+    <string name="player_subtitle_folder_auto_description">자체 자막이 없는 영화나 에피소드에는 이름이 일치하는 이 폴더의 파일 하나를 불러옵니다. 여러 파일이 일치하면 아무것도 불러오지 않습니다.</string>
     <string name="player_no_tracks">사용 가능한 트랙이 없습니다.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · 이미지</string>
     <string name="player_av_sync">A/V 동기화</string>

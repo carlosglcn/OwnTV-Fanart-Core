@@ -13,6 +13,7 @@ import tv.own.owntv.core.database.entity.ContentHashProjection
 import tv.own.owntv.core.database.entity.EpisodeEntity
 import tv.own.owntv.core.database.entity.SeasonEntity
 import tv.own.owntv.core.database.entity.SeriesEntity
+import tv.own.owntv.core.database.entity.nameKeyOf
 
 /** Series browsing plus the Show → Season → Episode hierarchy. */
 @Dao
@@ -125,8 +126,11 @@ interface SeriesDao {
     @Query("SELECT remoteId FROM series WHERE sourceId = :sourceId AND categoryId IN (:categoryIds) AND remoteId IS NOT NULL")
     suspend fun remoteIdsInCategories(sourceId: Long, categoryIds: List<Long>): List<String>
 
-    @Query("SELECT * FROM series WHERE sourceId = :sourceId AND name = :name LIMIT 1")
-    suspend fun findSeriesByName(sourceId: Long, name: String): SeriesEntity?
+    /** Exact name, read through the `(sourceId, nameKey)` index. */
+    suspend fun findSeriesByName(sourceId: Long, name: String): SeriesEntity? = findSeriesByNameByKey(sourceId, nameKeyOf(name), name)
+
+    @Query("SELECT * FROM series WHERE sourceId = :sourceId AND nameKey = :key AND name = :name LIMIT 1")
+    suspend fun findSeriesByNameByKey(sourceId: Long, key: String, name: String): SeriesEntity?
 
     @Query("SELECT * FROM series WHERE sourceId IN (:sourceIds) AND name = :name COLLATE NOCASE ORDER BY sourceId LIMIT 1")
     suspend fun findSeriesByNameAny(sourceIds: List<Long>, name: String): SeriesEntity?
@@ -140,10 +144,10 @@ interface SeriesDao {
     @Query("SELECT * FROM series WHERE categoryId = :categoryId ORDER BY sortOrder ASC, name ASC")
     fun pagingByCategory(categoryId: Long): PagingSource<Int, SeriesEntity>
 
-    @Query("SELECT * FROM series WHERE categoryId = :categoryId ORDER BY name ASC")
+    @Query("SELECT * FROM series WHERE categoryId = :categoryId ORDER BY nameKey ASC, name ASC")
     fun pagingByCategoryAlpha(categoryId: Long): PagingSource<Int, SeriesEntity>
 
-    @Query("SELECT * FROM series WHERE sourceId IN (:sourceIds) ORDER BY name ASC")
+    @Query("SELECT * FROM series WHERE sourceId IN (:sourceIds) ORDER BY nameKey ASC, name ASC")
     fun pagingAll(sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
 
     @Query("SELECT * FROM series WHERE sourceId IN (:sourceIds) ORDER BY sourceId ASC, sortOrder ASC, name ASC")
@@ -169,22 +173,22 @@ interface SeriesDao {
     @Query("SELECT * FROM series WHERE categoryId = :categoryId ORDER BY addedAt DESC, sortOrder DESC, id DESC")
     fun pagingByCategoryDateAdded(categoryId: Long): PagingSource<Int, SeriesEntity>
 
-    @Query("SELECT * FROM series WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY addedAt DESC, sortOrder DESC, id DESC")
-    fun searchAllDateAdded(query: String, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
+    @Query("SELECT * FROM series WHERE sourceId IN (:sourceIds) AND nameKey LIKE '%' || :key || '%' ORDER BY addedAt DESC, sortOrder DESC, id DESC")
+    fun searchAllDateAdded(key: String, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
 
-    @Query("SELECT * FROM series WHERE categoryId = :categoryId AND name LIKE '%' || :query || '%' ORDER BY addedAt DESC, sortOrder DESC, id DESC")
-    fun searchInCategoryDateAdded(query: String, categoryId: Long): PagingSource<Int, SeriesEntity>
+    @Query("SELECT * FROM series WHERE categoryId = :categoryId AND nameKey LIKE '%' || :key || '%' ORDER BY addedAt DESC, sortOrder DESC, id DESC")
+    fun searchInCategoryDateAdded(key: String, categoryId: Long): PagingSource<Int, SeriesEntity>
 
     // --- Manual order (Move) — see ChannelDao for the join shape. ---
     /** Moved rows keep their saved position; the rest follow [alpha] (A–Z) or the playlist order
      *  around them — the same rule as `placePinned` for categories. */
     @Query(
-            "WITH base AS (SELECT s.id AS id, s.sortOrder AS so, s.name AS nm, 0 AS mp, o.position AS pos " +
+            "WITH base AS (SELECT s.id AS id, s.sortOrder AS so, s.name AS nm, s.nameKey AS nk, 0 AS mp, o.position AS pos " +
             "FROM series s " +
             "LEFT JOIN content_order o ON o.itemId = s.id AND o.profileId = :profileId AND o.mediaType = 'SERIES' AND o.contextKey = :contextKey " +
             "WHERE s.categoryId = :categoryId), " +
             "slots AS (SELECT id, pos - (ROW_NUMBER() OVER (ORDER BY pos, id) - 1) AS slot, 0 AS grp, pos AS tie FROM base WHERE pos IS NOT NULL " +
-            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nm END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
+            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nk END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
             "SELECT s.* FROM series s INNER JOIN slots sl ON sl.id = s.id ORDER BY sl.slot, sl.grp, sl.tie",
     )
     fun pagingByCategoryManual(categoryId: Long, profileId: Long, contextKey: String, alpha: Boolean): PagingSource<Int, SeriesEntity>
@@ -202,12 +206,12 @@ interface SeriesDao {
     /** Moved rows keep their saved position; the rest follow [alpha] (A–Z) or the playlist order
      *  around them — the same rule as `placePinned` for categories. */
     @Query(
-            "WITH base AS (SELECT s.id AS id, s.sortOrder AS so, s.name AS nm, 0 AS mp, o.position AS pos " +
+            "WITH base AS (SELECT s.id AS id, s.sortOrder AS so, s.name AS nm, s.nameKey AS nk, 0 AS mp, o.position AS pos " +
             "FROM series s " +
             "LEFT JOIN content_order o ON o.itemId = s.id AND o.profileId = :profileId AND o.mediaType = 'SERIES' AND o.contextKey = :contextKey " +
             "WHERE s.categoryId = :categoryId), " +
             "slots AS (SELECT id, pos - (ROW_NUMBER() OVER (ORDER BY pos, id) - 1) AS slot, 0 AS grp, pos AS tie FROM base WHERE pos IS NOT NULL " +
-            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nm END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
+            "UNION ALL SELECT id, ROW_NUMBER() OVER (ORDER BY CASE WHEN :alpha THEN nk END, mp, so, nm) - 1 AS slot, 1 AS grp, 0 AS tie FROM base WHERE pos IS NULL) " +
             "SELECT s.* FROM series s INNER JOIN slots sl ON sl.id = s.id ORDER BY sl.slot, sl.grp, sl.tie LIMIT :limit",
     )
     suspend fun snapshotByCategoryManual(categoryId: Long, profileId: Long, contextKey: String, alpha: Boolean, limit: Int): List<SeriesEntity>
@@ -269,33 +273,33 @@ interface SeriesDao {
 
     @Query(
         "SELECT * FROM series WHERE sourceId IN (:sourceIds) " +
-            "AND id IN (SELECT rowid FROM series_fts WHERE series_fts MATCH :query) ORDER BY name ASC",
+            "AND id IN (SELECT rowid FROM series_fts WHERE series_fts MATCH :query) ORDER BY nameKey ASC, name ASC",
     )
     fun search(query: String, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
 
     // --- Inline folder-scoped search (substring) ---
-    @Query("SELECT * FROM series WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY name ASC")
-    fun searchAll(query: String, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
+    @Query("SELECT * FROM series WHERE sourceId IN (:sourceIds) AND nameKey LIKE '%' || :key || '%' ORDER BY nameKey ASC, name ASC")
+    fun searchAll(key: String, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
 
-    @Query("SELECT * FROM series WHERE categoryId = :categoryId AND name LIKE '%' || :query || '%' ORDER BY sortOrder ASC, name ASC")
-    fun searchInCategory(query: String, categoryId: Long): PagingSource<Int, SeriesEntity>
+    @Query("SELECT * FROM series WHERE categoryId = :categoryId AND nameKey LIKE '%' || :key || '%' ORDER BY sortOrder ASC, name ASC")
+    fun searchInCategory(key: String, categoryId: Long): PagingSource<Int, SeriesEntity>
 
     /** Bounded list for global search (across all of a profile's sources). */
-    @Query("SELECT * FROM series WHERE sourceId IN (:sourceIds) AND name LIKE '%' || :query || '%' ORDER BY name ASC LIMIT :limit")
-    suspend fun searchList(query: String, sourceIds: List<Long>, limit: Int): List<SeriesEntity>
+    @Query("SELECT * FROM series WHERE sourceId IN (:sourceIds) AND nameKey LIKE '%' || :key || '%' ORDER BY nameKey ASC, name ASC LIMIT :limit")
+    suspend fun searchList(key: String, sourceIds: List<Long>, limit: Int): List<SeriesEntity>
 
     /** FTS-backed bounded list for global as-you-type search (see MovieDao.searchListFts). */
     @Query(
         "SELECT * FROM series WHERE sourceId IN (:sourceIds) " +
-            "AND id IN (SELECT rowid FROM series_fts WHERE series_fts MATCH :ftsQuery) ORDER BY name ASC LIMIT :limit",
+            "AND id IN (SELECT rowid FROM series_fts WHERE series_fts MATCH :ftsQuery) ORDER BY nameKey ASC, name ASC LIMIT :limit",
     )
     suspend fun searchListFts(ftsQuery: String, sourceIds: List<Long>, limit: Int): List<SeriesEntity>
 
     @Query(
         "SELECT s.* FROM series s INNER JOIN favorites f ON f.itemId = s.id AND f.mediaType = 'SERIES' " +
-            "WHERE f.profileId = :profileId AND s.sourceId IN (:sourceIds) AND s.name LIKE '%' || :query || '%' ORDER BY f.addedAt DESC",
+            "WHERE f.profileId = :profileId AND s.sourceId IN (:sourceIds) AND s.nameKey LIKE '%' || :key || '%' ORDER BY f.addedAt DESC",
     )
-    fun searchFavorites(query: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
+    fun searchFavorites(key: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
 
     @Query(
         "SELECT s.* FROM series s " +
@@ -339,9 +343,9 @@ interface SeriesDao {
 
     @Query(
         "SELECT s.* FROM series s INNER JOIN watch_history h ON h.itemId = s.id AND h.mediaType = 'SERIES' " +
-            "WHERE h.profileId = :profileId AND s.sourceId IN (:sourceIds) AND s.name LIKE '%' || :query || '%' ORDER BY h.watchedAt DESC",
+            "WHERE h.profileId = :profileId AND s.sourceId IN (:sourceIds) AND s.nameKey LIKE '%' || :key || '%' ORDER BY h.watchedAt DESC",
     )
-    fun searchHistory(query: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
+    fun searchHistory(key: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
 
     // glcn: "Keep watching" in Series — shows whose last episode seen is half watched, or finished with another after it.
     @Query("SELECT s.* " + CONTINUE_SERIES + " ORDER BY lp.lastAt DESC")

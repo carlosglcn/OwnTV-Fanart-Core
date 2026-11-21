@@ -123,6 +123,7 @@ class ProfileManager(
         settings.setStartupChannel(profile.id, null)
         settings.forgetProfilePositions(profile.id)
         settings.forgetProfilePins(profile.id)
+        settings.forgetProfileDisplay(profile.id)
         profileDao.delete(profile)
         if (activeProfileId == profile.id) settings.setActiveProfile(remainingProfileId ?: -1L)
     }

@@ -1,0 +1,1857 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="settings_backup_continue">Далі</string>
+    <string name="settings_sources_refresh_off">Вимкнено</string>
+    <string name="local_sync_title">Локальна синхронізація</string>
+    <string name="settings_catchup">Архів</string>
+    <string name="settings_sort_playlist">Плейлист</string>
+    <string name="settings_sort_alpha">А–Я</string>
+    <string name="settings_sort_rating">Рейтинг</string>
+    <string name="settings_sort_date_added">Дата додавання</string>
+    <string name="settings_mini_player">Мініплеєр</string>
+    <string name="settings_mini_player_description">Невеликий плаваючий плеєр, який з’являється, коли ви закріплюєте канал (PiP) під час перегляду списків. Змінюйте ці параметри тут або на льоту кнопками зміни розміру й переміщення на самому мініплеєрі.</string>
+    <string name="settings_size">Розмір</string>
+    <string name="settings_position">Позиція</string>
+    <string name="settings_home_screen">Головний екран</string>
+    <string name="settings_sections">Розділи</string>
+    <string name="settings_hidden_sections">Приховані розділи залишаються в списку, тож їх можна ввімкнути знову.</string>
+    <string name="settings_keep_watching">Дивитися далі</string>
+    <string name="settings_live_keep_watching">Канали наживо в «Дивитися далі»</string>
+    <string name="settings_live_keep_watching_description">Показувати нещодавно переглянуті канали наживо в головному рядку.</string>
+    <string name="settings_movies_keep_watching">Фільми в «Дивитися далі»</string>
+    <string name="settings_movies_keep_watching_description">Показувати картки продовження фільмів у головному рядку.</string>
+    <string name="settings_series_keep_watching">Серіали в «Дивитися далі»</string>
+    <string name="settings_series_keep_watching_description">Показувати картки продовження епізодів у головному рядку.</string>
+    <string name="settings_hero_preview">Відтворювати відео в головному рядку</string>
+    <string name="settings_hero_preview_description">Через мить показувати відео виділеного елемента. Вимкніть, щоб заощаджувати енергію й пам’ять під час перегляду головної.</string>
+    <string name="settings_android_tv_home">Головний екран Android TV</string>
+    <string name="settings_android_tv_home_description">Показувати «Продовжити перегляд» і нещодавні канали наживо на головному екрані телевізора.</string>
+    <string name="settings_refresh_now">Оновити зараз</string>
+    <string name="settings_refresh_description">Перебудувати картки «Продовжити перегляд» і нещодавні на головному екрані Android TV.</string>
+    <string name="settings_rebuilding">Перебудова…</string>
+    <string name="settings_done_check">Готово ✓</string>
+    <string name="settings_mode"><xliff:g id="mode">%1$s</xliff:g></string>
+    <string name="settings_hidden">Приховано</string>
+    <string name="settings_static">Статична</string>
+    <string name="settings_dynamic">Динамічна</string>
+    <string name="settings_use_proxy">Використовувати проксі</string>
+    <string name="settings_proxy_description">Надсилати весь трафік OwnTV і відтворення через HTTP-проксі.</string>
+    <string name="settings_host">Хост</string>
+    <string name="settings_proxy_host_hint">proxy.example.com</string>
+    <string name="settings_port">Порт</string>
+    <string name="settings_proxy_port_hint">8080</string>
+    <string name="settings_username_optional">Ім’я користувача (необов’язково)</string>
+    <string name="settings_password_optional">Пароль (необов’язково)</string>
+    <string name="settings_test_proxy">Перевірити проксі</string>
+    <string name="settings_testing">Перевірка…</string>
+    <string name="settings_proxy_privacy">Ваш провайдер проксі бачить, до яких серверів ви підключаєтеся, і вміст будь-якого трафіку без HTTPS.</string>
+    <string name="settings_proxy_limitations">Поки що лише HTTP-проксі — SOCKS і проксі для окремих плейлистів ще не підтримуються.</string>
+    <string name="settings_proxy_connected"><xliff:g id="millis">%1$d</xliff:g> мс</string>
+    <string name="settings_proxy_invalid_address">Введіть дійсний хост і порт (1–65535).</string>
+    <string name="settings_proxy_host_unreachable">Не вдається зв’язатися з хостом проксі.</string>
+    <string name="settings_proxy_timed_out">Час очікування з’єднання з проксі минув.</string>
+    <string name="settings_proxy_connection_failed">Не вдалося підключитися до проксі (перевірте хост і порт).</string>
+    <string name="settings_proxy_http">Проксі повернув HTTP <xliff:g id="code">%1$d</xliff:g></string>
+    <string name="settings_proxy_failed">Не вдалося перевірити проксі.</string>
+    <string name="settings_ch_nav_up">CH+ / Перемотка назад (до першого)</string>
+    <string name="settings_ch_nav_up_description">На скільки елементів переходить угору одне натискання CH+/RW. Довге натискання завжди переходить до першого елемента.</string>
+    <string name="settings_ch_nav_down">CH− / Перемотка вперед (до останнього)</string>
+    <string name="settings_ch_nav_down_description">На скільки елементів переходить униз одне натискання CH−/FF. Довге натискання завжди переходить до останнього елемента.</string>
+    <string name="settings_skip_counts">Кількість пропусків</string>
+    <string name="settings_remote_shortcuts">Швидкі команди пульта</string>
+    <string name="settings_remote_shortcuts_description">Призначайте вільні кнопки пульта діям навігації, відтворення й перегляду. Основні кнопки навігації залишаються захищеними.</string>
+    <string name="settings_remote_shortcuts_enabled">Використовувати швидкі команди пульта</string>
+    <string name="settings_remote_shortcuts_enabled_description">Вимкнути всі власні команди, не видаляючи призначень кнопок</string>
+    <string name="settings_remote_shortcuts_assignments">Призначення кнопок</string>
+    <string name="settings_remote_shortcuts_add">Додати швидку команду</string>
+    <string name="settings_remote_shortcuts_add_description">Натисніть або утримуйте вільну кнопку, потім виберіть, що вона має робити</string>
+    <string name="settings_remote_shortcuts_reset">Відновити типові швидкі команди</string>
+    <string name="settings_remote_shortcuts_reset_description">Відновити перегортання CH+/CH− і перемотки; прибрати інші призначення</string>
+    <string name="settings_remote_shortcuts_capture_title">Натисніть кнопку пульта</string>
+    <string name="settings_remote_shortcuts_capture_description">Натисніть коротко для короткої команди або утримуйте до відпускання для довгої. Кнопки «Назад», D-pad, OK, гучності, «Додому» й живлення призначити не можна.</string>
+    <string name="settings_remote_shortcuts_choose_action">Виберіть дію</string>
+    <string name="settings_remote_shortcuts_short_press">Коротке натискання</string>
+    <string name="settings_remote_shortcuts_long_press">Довге натискання</string>
+    <string name="settings_remote_shortcuts_unknown_button">Кнопка пульта <xliff:g id="number">%1$d</xliff:g></string>
+    <string name="settings_remote_shortcuts_help">• За замовчуванням CH+/CH− і перемотка вперед/назад перегортають списки; утримання переходить до першого або останнього елемента.\n• Короткі й довгі натискання можна призначати окремо.\n• Перехід до останнього вимкнено у дуже великих списках «Усі».\n• Довге натискання «Назад» завжди фокусує «Зараз відтворюється» і не може бути перепризначене.\n• Найчастіше призначають червону/зелену/жовту/синю кнопки, цифри, CH+/CH− і перемотку вперед/назад.\n• Кнопки «Назад», D-pad, OK, гучності, «Додому» й живлення залишаються захищеними.\n• Цифрові команди працюють під час перегляду списків; на весь екран введення цифр зберігає пріоритет навігації каналами.</string>
+    <string name="settings_player_buttons">Кнопки плеєра</string>
+    <string name="settings_player_hold_ok">Утримання OK в плеєрі</string>
+    <string name="settings_player_hold_ok_description">Що відкриває утримання OK, коли елементи керування приховано</string>
+    <string name="settings_help_player_hold_ok">Утримуйте OK в повноекранному плеєрі наживо з прихованим керуванням, щоб відкрити список каналів, програму передач або інформацію про передачу. Вимкнено: OK працює як завжди. Поки це ввімкнено, коротке OK спрацьовує, коли ви відпускаєте кнопку. Фільми й епізоди зберігають звичайне OK.</string>
+    <string name="settings_player_short_ok">OK, коли керування приховано</string>
+    <string name="settings_player_short_ok_description">Що робить коротке натискання OK в повноекранному плеєрі</string>
+    <string name="settings_help_player_short_ok">Коротке натискання OK в повноекранному плеєрі показує елементи керування. Виберіть «Список каналів» або «Програма передач», щоб відкривати їх замість цього на каналах наживо; будь-яка інша кнопка, яку не використовує плеєр, і далі показує керування. Фільми й епізоди завжди показують керування.</string>
+    <string name="settings_player_swap_channel_keys">Поміняти місцями канал угору/униз</string>
+    <string name="settings_player_swap_channel_keys_description">CH+ і «Вгору» переходять до попереднього каналу</string>
+    <string name="settings_help_player_swap_channel_keys">Зазвичай CH+ і D-pad «Вгору» переходять до наступного каналу, а CH− і «Вниз» — до попереднього. Увімкніть, щоб поміняти їх місцями під час перегляду, на весь екран і в мініплеєрі. Перегляд списків це не стосується.</string>
+    <string name="settings_player_number_keys_tune">Цифрові кнопки перемикають канали</string>
+    <string name="settings_player_number_keys_tune_description">Вводьте номер каналу в плеєрі наживо</string>
+    <string name="settings_help_player_number_keys_tune">Введіть номер каналу на пульті в повноекранному плеєрі наживо, щоб перейти до цього каналу. Вимкніть, щоб цифрові кнопки лишалися вільними для ваших швидких команд пульта. Для введення номера також має бути ввімкнено «Номери каналів» у налаштуваннях ТБ наживо.</string>
+    <string name="settings_player_ok_channel_list">Список каналів</string>
+    <string name="settings_player_ok_guide">Програма передач</string>
+    <string name="settings_player_ok_programme_info">Інформація про передачу</string>
+    <string name="settings_player_ok_show_controls">Показати керування</string>
+    <string name="settings_remote_button_channel_up">Канал +</string>
+    <string name="settings_remote_button_channel_down">Канал −</string>
+    <string name="settings_remote_button_rewind">Перемотка назад</string>
+    <string name="settings_remote_button_fast_forward">Перемотка вперед</string>
+    <string name="settings_remote_button_previous">Попередній</string>
+    <string name="settings_remote_button_next">Наступний</string>
+    <string name="settings_remote_button_last_channel">Останній канал</string>
+    <string name="settings_remote_button_menu">Меню</string>
+    <string name="settings_remote_button_red">Червона кнопка</string>
+    <string name="settings_remote_button_green">Зелена кнопка</string>
+    <string name="settings_remote_button_yellow">Жовта кнопка</string>
+    <string name="settings_remote_button_blue">Синя кнопка</string>
+    <string name="settings_remote_action_continue">Продовжити останнє переглянуте</string>
+    <string name="settings_remote_action_focus_now_playing">Фокус на «Зараз відтворюється»</string>
+    <string name="settings_remote_action_expand_now_playing">Розгорнути «Зараз відтворюється»</string>
+    <string name="settings_remote_action_mini_player">Перемістити в мініплеєр</string>
+    <string name="settings_remote_action_play_pause">Відтворити або призупинити</string>
+    <string name="settings_remote_action_page_first">Сторінка до перших елементів</string>
+    <string name="settings_remote_action_page_last">Сторінка до останніх елементів</string>
+    <string name="settings_remote_action_jump_first">Перейти до першого елемента</string>
+    <string name="settings_remote_action_jump_last">Перейти до останнього елемента</string>
+    <string name="settings_large_skips_warning">Великі пропуски проскакують короткі списки й можуть здаватися стрибкоподібними на слабких телевізорах.</string>
+    <string name="settings_weather">Погода</string>
+    <string name="settings_show_weather">Показувати погоду</string>
+    <string name="settings_show_weather_description">Показувати поточну погоду у верхній панелі.</string>
+    <string name="settings_custom_location">Власне розташування</string>
+    <string name="settings_custom_location_description">Замінити місто, яке використовується для погоди. Залиште порожнім для автовизначення або введіть місто (наприклад, Лондон) чи «lat,lon» (наприклад, 51.5,-0.12). Корисно з VPN, коли автовизначення показує місто сервера.</string>
+    <string name="settings_temperature_unit">Одиниця температури</string>
+    <string name="settings_temperature_description">Показувати температуру в градусах Цельсія або Фаренгейта.</string>
+    <string name="settings_auto">Авто</string>
+    <string name="settings_city_latlon">Місто або lat,lon</string>
+    <string name="settings_location_hint">Залиште порожнім, щоб визначати за вашою публічною IP-адресою. Введіть місто (наприклад, Лондон) або «lat,lon» (наприклад, 51.5,-0.12).</string>
+    <string name="settings_metadata">Метадані (TMDB)</string>
+    <string name="settings_metadata_source">Джерело метаданих</string>
+    <string name="settings_metadata_source_description">Виберіть, звідки беруться подробиці про фільми та серіали.</string>
+    <string name="settings_metadata_provider_description">Використовувати лише те, що надає ваш плейлист. Без запитів до TMDB.</string>
+    <string name="settings_metadata_provider_tmdb_description">Пріоритет у даних вашого плейлиста; TMDB заповнює прогалини й додає акторів, жанри й тла.</string>
+    <string name="settings_metadata_tmdb_only_description">Надавати перевагу TMDB для кожного поля; повертатися до плейлиста, лише коли в TMDB нічого немає.</string>
+    <string name="settings_metadata_allowance">Ваша спільна квота</string>
+    <string name="settings_metadata_reset_automatic">Скидається автоматично</string>
+    <string name="settings_metadata_library_details">Подробиці бібліотеки</string>
+    <string name="settings_metadata_test_connection">Перевірити поточне з’єднання</string>
+    <string name="settings_allowance_refills">Відновлюється <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="settings_allowance_minute">Хвилина</string>
+    <string name="settings_allowance_hour">Година</string>
+    <string name="settings_allowance_day">День</string>
+    <plurals name="settings_allowance_value">
+        <item quantity="one">Залишилося <xliff:g id="remaining">%1$d</xliff:g> / <xliff:g id="limit">%2$d</xliff:g></item>
+        <item quantity="few">Залишилося <xliff:g id="remaining">%1$d</xliff:g> / <xliff:g id="limit">%2$d</xliff:g></item>
+        <item quantity="many">Залишилося <xliff:g id="remaining">%1$d</xliff:g> / <xliff:g id="limit">%2$d</xliff:g></item>
+        <item quantity="other">Залишилося <xliff:g id="remaining">%1$d</xliff:g> / <xliff:g id="limit">%2$d</xliff:g></item>
+    </plurals>
+    <string name="settings_metadata_active_source">Активне джерело</string>
+    <string name="settings_metadata_shared_worker_description">OwnTV Worker · без налаштування</string>
+    <string name="settings_metadata_connection">З’єднання</string>
+    <string name="settings_metadata_remote_advanced">Отримати розширену інформацію TMDB</string>
+    <string name="settings_metadata_remote_advanced_description">Використовуйте власний ключ API TMDB або власний Worker замість спільного типового.</string>
+    <string name="settings_open_subtitles_advanced">Додаткові параметри</string>
+    <string name="settings_open_subtitles_advanced_description">Використовуйте власний ключ API застосунку або власний Worker OpenSubtitles.</string>
+    <string name="settings_open_subtitles_setup_title">Налаштування OpenSubtitles</string>
+    <string name="settings_open_subtitles_setup_description">Увійдіть за допомогою облікового запису OpenSubtitles.</string>
+    <string name="settings_open_subtitles_setup_remote">Інший пристрій</string>
+    <string name="settings_open_subtitles_setup_remote_description">Заповніть свої дані в браузері на іншому пристрої в тій самій мережі Wi-Fi — телефоні, комп’ютері чи іншому телевізорі.</string>
+    <string name="settings_open_subtitles_setup_local">Ввести тут</string>
+    <string name="settings_open_subtitles_setup_local_description">Введіть свої дані на цьому телевізорі за допомогою пульта.</string>
+    <string name="settings_open_subtitles_api_key">Ключ API застосунку OpenSubtitles</string>
+    <string name="settings_worker_server_url">URL Worker / сервера</string>
+    <string name="settings_shared">Спільний</string>
+    <string name="settings_open_subtitles_access_priority">Залиште обидва порожніми, щоб використовувати спільний Worker OwnTV. URL власного Worker має пріоритет над прямим ключем API. Сесії облікового запису залишаються окремими для кожного профілю.</string>
+    <string name="settings_remove_custom_access">Прибрати власний доступ</string>
+    <string name="settings_metadata_key_label">Ключ</string>
+    <string name="settings_metadata_server_label">Сервер</string>
+    <string name="settings_metadata_clear_advanced_title">Припинити використовувати власний ключ?</string>
+    <string name="settings_metadata_clear_advanced_message">Ваш ключ API TMDB і адресу власного сервера буде видалено з цього пристрою, а OwnTV повернеться до вбудованої спільної служби з її добовою часткою.</string>
+    <string name="settings_metadata_fair_share">Вбудованою службою користуються всі, хто використовує OwnTV. Якщо вичерпано будь-яку хвилинну, годинну чи добову квоту, подробиці TMDB призупиняються до скидання цього вікна; інформація плейлиста продовжує працювати. Власний ключ або Worker знімає цю квоту.</string>
+    <string name="settings_metadata_limit_reached">Добову частку метаданих вичерпано — додайте власний ключ TMDB у «Налаштування → Метадані», щоб зняти це обмеження.</string>
+    <string name="settings_metadata_language">Мова метаданих</string>
+    <string name="settings_metadata_language_description">Мова сюжетів, жанрів і назв із TMDB. Поля, які TMDB не переклав, залишаються англійською. Подробиці кешуються для кожної мови, тож повернення назад миттєве.</string>
+    <string name="settings_metadata_server_description">Залиште обидва порожніми, щоб використовувати вбудований спільний сервер (без налаштування). Введіть власний ключ API TMDB, щоб звертатися до TMDB напряму, або URL власного сервера, щоб користуватися власним проксі чи дзеркалом. URL має пріоритет над ключем.</string>
+    <string name="settings_metadata_key_from_phone">Отримати ключ з іншого пристрою</string>
+    <string name="settings_metadata_key_from_phone_desc">Відкрийте адресу в браузері на будь-якому пристрої — телефоні, комп’ютері чи іншому телевізорі, — увійдіть там у TMDB і надішліть ключ сюди. Нічого вводити пультом не потрібно.</string>
+    <string name="settings_metadata_key_received">Ключ TMDB отримано</string>
+    <string name="settings_tmdb_api_key">Ключ API TMDB (v3)</string>
+    <string name="settings_metadata_empty_title">Введіть назву для пошуку.</string>
+    <string name="settings_metadata_server_unavailable">Не вдалося зв’язатися із сервером метаданих — перевірте мережу, ключ чи URL.</string>
+    <string name="settings_metadata_no_match">Для «<xliff:g id="query">%1$s</xliff:g>» у TMDB нічого не знайдено.</string>
+    <string name="settings_metadata_lookup_failed">Не вдалося виконати пошук.</string>
+    <string name="settings_metadata_match_result"><xliff:g id="title">%1$s</xliff:g><xliff:g id="year">%2$s</xliff:g> · tmdb #<xliff:g id="id">%3$d</xliff:g></string>
+    <string name="settings_metadata_year">(<xliff:g id="year">%1$d</xliff:g>)</string>
+    <string name="settings_lookup_movie">Знайти назву фільму</string>
+    <string name="settings_test_lookup">Перевірити пошук</string>
+    <string name="settings_looking_up">Пошук…</string>
+    <string name="settings_tmdb_attribution">Цей продукт використовує API TMDB, але не схвалений і не сертифікований TMDB.</string>
+    <string name="settings_metadata_provider_only">Лише провайдер</string>
+    <string name="settings_metadata_provider_plus_tmdb">Провайдер + TMDB</string>
+    <string name="settings_metadata_tmdb_only">Лише TMDB</string>
+    <string name="settings_tier_default">Типова спільна служба</string>
+    <string name="settings_tier_key">Ваш ключ TMDB</string>
+    <string name="settings_tier_self_host">Власний сервер</string>
+    <string name="settings_title">Налаштування</string>
+    <string name="settings_quick_live_preview">Перегляд наживо</string>
+    <string name="settings_quick_preview_sound">Звук попереднього перегляду</string>
+    <string name="settings_quick_channel_numbers">Номери каналів</string>
+    <string name="settings_quick_prefer_sdr">Надавати перевагу SDR</string>
+    <string name="settings_quick_autoplay">Автовідтворення</string>
+    <string name="settings_quick_check_update">Перевірити оновлення</string>
+    <string name="settings_row_menu_pin">Закріпити у швидких</string>
+    <string name="settings_row_menu_unpin">Прибрати зі швидких</string>
+    <string name="settings_row_menu_move_up">Перемістити вгору</string>
+    <string name="settings_row_menu_move_down">Перемістити вниз</string>
+    <string name="settings_quick_empty_title">Поки нічого не закріплено</string>
+    <string name="settings_quick_empty_hint">Утримуйте OK на будь-якому налаштуванні й виберіть «Закріпити у швидких».</string>
+    <string name="settings_quick_empty_hint_touch">Утримуйте палець на будь-якому налаштуванні й виберіть «Закріпити у швидких».</string>
+    <plurals name="settings_setting_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> налаштування</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> налаштування</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> налаштувань</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> налаштувань</item>
+    </plurals>
+    <plurals name="settings_match_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> збіг</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> збіги</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> збігів</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> збігів</item>
+    </plurals>
+    <string name="settings_language">Мова</string>
+    <string name="settings_language_description">Мова інтерфейсу застосунку</string>
+    <string name="settings_language_system_default">Системна</string>
+    <string name="settings_language_system_default_description">Відповідає мові пристрою</string>
+    <string name="settings_language_search_hint">Пошук мов…</string>
+    <string name="settings_search_keywords_language">мова локалізація переклад міжнародний language locale translation</string>
+    <string name="settings_language_coverage"><xliff:g id="percent">%1$d</xliff:g>%%</string>
+    <string name="settings_profile_group">Профіль</string>
+    <string name="settings_playlists">Плейлисти</string>
+    <string name="settings_playlists_description">Додавайте, повторно синхронізуйте чи видаляйте плейлисти M3U / Xtream</string>
+    <string name="settings_epg_sources">Джерела EPG</string>
+    <string name="settings_epg_sources_nav_description">Додайте стрічки XMLTV для програми передач</string>
+    <string name="settings_customize">Налаштувати категорії й елементи</string>
+    <string name="settings_customize_nav_description">Приховуйте й показуйте елементи, перейменовуйте й упорядковуйте категорії</string>
+    <string name="settings_ch_paging">Швидкі команди пульта</string>
+    <string name="settings_ch_paging_description">Призначайте вільні кнопки пульта, зберігаючи основну навігацію захищеною</string>
+    <string name="settings_content_menus_title">Меню довгого натискання</string>
+    <string name="settings_content_menus_description">Змінюйте порядок або приховуйте дії в меню каналів, фільмів, серіалів і епізодів</string>
+    <string name="settings_content_menus_hint">Натисніть OK на дії, щоб показати або приховати її. Утримуйте OK, щоб підняти її, потім «Вгору» й «Вниз», щоб перемістити; натисніть OK ще раз, щоб опустити.</string>
+    <string name="settings_content_menus_note">Деякі дії з’являються лише там, де вони застосовні.</string>
+    <string name="settings_browsing_lists">Перегляд і списки</string>
+    <string name="settings_browsing_description">Запам’ятовувати останню категорію й останній елемент у ТБ наживо, фільмах і серіалах</string>
+    <string name="settings_home_root">Головний екран</string>
+    <string name="settings_home_root_description">Вибирайте, упорядковуйте й фільтруйте рядки на головній</string>
+    <string name="settings_metadata_root_description">Постери, сюжети, актори, жанри, рейтинги й тла для фільмів і серіалів.</string>
+    <string name="settings_download_folder">Папка завантажень</string>
+    <string name="settings_backup_restore">Резервне копіювання й відновлення</string>
+    <string name="settings_clear_history">Очистити історію перегляду</string>
+    <string name="settings_appearance_group">Вигляд</string>
+    <string name="settings_theme">Тема</string>
+    <string name="settings_theme_description">Світла, темна або за системою</string>
+    <string name="settings_accent">Акцентний колір</string>
+    <string name="settings_accent_description">Тонуйте інтерфейс — пресети, палітра або hex-код</string>
+    <string name="settings_focus_highlight">Підсвічування фокуса</string>
+    <string name="settings_focus_highlight_description">Колір і товщина рамки навколо вибраного елемента</string>
+    <string name="settings_focus_highlight_chip"><xliff:g id="color">%1$s</xliff:g> · <xliff:g id="thickness">%2$s</xliff:g></string>
+    <string name="settings_focus_thickness">Товщина</string>
+    <string name="settings_focus_width_thin">Тонка</string>
+    <string name="settings_focus_width_normal">Звичайна</string>
+    <string name="settings_focus_width_thick">Товста</string>
+    <string name="settings_focus_width_extra">Дуже товста</string>
+    <string name="settings_focus_highlight_sample">У фокусі</string>
+    <string name="settings_ui_zoom">Масштаб інтерфейсу</string>
+    <string name="settings_ui_zoom_description">Масштабувати весь інтерфейс</string>
+    <string name="settings_font_customization">Налаштування шрифту</string>
+    <string name="settings_font_customization_description">Розмір тексту й шрифти для основного інтерфейсу та спливних вікон</string>
+    <string name="settings_font_size">Розмір шрифту</string>
+    <string name="settings_main_interface_font">Шрифт основного інтерфейсу</string>
+    <string name="settings_popup_font">Шрифт спливних вікон</string>
+    <string name="settings_choose_font">Вибрати шрифт</string>
+    <string name="settings_font_size_range">Налаштуйте текст основного застосунку, не спливних вікон, від <xliff:g id="min">%1$d</xliff:g>%% до <xliff:g id="max">%2$d</xliff:g>%%. Субтитри зберігають власний розмір.</string>
+    <string name="settings_popup_font_size">Розмір шрифту спливних вікон</string>
+    <string name="settings_popup_font_size_description">Змінює текст лише в діалогах і меню</string>
+    <string name="settings_popup_size">Розмір спливних вікон</string>
+    <string name="settings_popup_size_description">Масштабує поля діалогів і меню без зміни розміру їхнього тексту</string>
+    <string name="settings_popup_size_range">Масштаб полів діалогів і меню (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%).</string>
+    <string name="settings_font_preview">Розваги — просто й зручно.</string>
+    <string name="settings_search_keywords_fonts">шрифт розмір тексту гарнітура типографіка спливне вікно читання доступність font text size typeface typography popup reading accessibility</string>
+    <string name="settings_font_system_sans">Системний без засічок</string>
+    <string name="settings_font_monospace">Моноширинний</string>
+    <string name="settings_subtitle_font">Шрифт субтитрів</string>
+    <string name="settings_animations">Анімація</string>
+    <string name="settings_animations_description">Вмикайте чи вимикайте рух інтерфейсу — без анімації швидше на слабших ТБ-приставках</string>
+    <string name="settings_weather_description_root">Погода у верхній панелі: показати чи сховати, власне розташування, Цельсій / Фаренгейт.</string>
+    <string name="settings_playback_group">Відтворення</string>
+    <string name="settings_live_preview_description">Автоматично відтворювати канал, коли на ньому фокус</string>
+    <string name="settings_preview_audio">Звук попереднього перегляду</string>
+    <string name="settings_preview_audio_description">Відтворювати звук у перегляді наживо</string>
+    <string name="settings_preview_on_ok">Спершу OK відтворює у перегляді</string>
+    <string name="settings_preview_on_ok_description">OK відтворює канал у перегляді, повторне OK відкриває його на весь екран</string>
+    <string name="settings_mini_player_root">Мініплеєр</string>
+    <string name="settings_mini_player_root_description">Розмір і позиція закріпленого мініплеєра</string>
+    <string name="settings_prefer_sdr_description">Коли потік пропонує і SDR, і HDR, відтворювати SDR: для телевізора, де HDR виглядає вицвілим або надто темним. Потік лише з HDR залишається HDR. Лише ExoPlayer.</string>
+    <string name="settings_pip_on_leave">Картинка в картинці при виході із застосунку</string>
+    <string name="settings_pip_on_leave_description">Продовжувати відео в невеликому вікні, коли ви натискаєте «Додому»</string>
+    <string name="settings_auto_frame_rate_films">Автоматична частота кадрів для фільмів і серіалів</string>
+    <string name="settings_auto_frame_rate_films_description">Підлаштовувати частоту оновлення телевізора під фільм чи епізод (24/25/50/60 к/с) на весь екран і відновлювати її при виході.</string>
+    <string name="settings_auto_frame_rate_live">Автоматична частота кадрів для ТБ наживо</string>
+    <string name="settings_auto_frame_rate_live_description">Підлаштовувати частоту оновлення телевізора під канал (25/50/60 к/с) на весь екран і відновлювати її при виході. Вимкніть, якщо ваш телевізор чи ресивер шумно повторно узгоджує HDMI при кожній зміні каналу.</string>
+    <string name="settings_afr_pause">Пауза під час перемикання екрана</string>
+    <string name="settings_afr_pause_description">Лише для фільмів. Коли телевізор має повторно синхронізуватися з новим режимом екрана, фільм чекає цей час, щоб початок не загубився за чорним екраном. Плавне перемикання ніколи не робить паузи.</string>
+    <string name="settings_afr_resolution">Підлаштовувати роздільну здатність</string>
+    <string name="settings_afr_resolution_description">Лише для фільмів. Коли режим екрана змінюється для фільму, телевізор також перемикається на його роздільну здатність — 1080p для HD-фільму на 4K-телевізорі — але ніколи не вище за ту, з якої почав. Вимкнено: роздільна здатність не змінюється, а телевізор її масштабує, що зазвичай дає кращу картинку.</string>
+    <string name="settings_auto_frame_rate_warning_suffix">Не рекомендується на цьому телевізорі: до Android 12 частоту не можна змінити плавно.</string>
+    <string name="settings_auto_frame_rate_warning_title">Не рекомендується на цьому телевізорі</string>
+    <string name="settings_auto_frame_rate_warning_title_mobile">Не рекомендується на цьому пристрої</string>
+    <string name="settings_auto_frame_rate_warning_description">Цей пристрій працює на Android <xliff:g id="android_version">%1$s</xliff:g>. До Android 12 телевізор не може повідомити OwnTV, на які частоти оновлення можна перемикатися плавно, тож зміна частоти може на секунду-дві зробити екран чорним, а іноді й кілька разів під час передачі.\n\nРадимо залишити автоматичну частоту кадрів вимкненою. Якщо ваш телевізор перемикається чисто, увімкніть і перевірте: змінити це можна будь-коли.</string>
+    <string name="settings_auto_frame_rate_warning_description_mobile">Цей пристрій працює на Android <xliff:g id="android_version">%1$s</xliff:g>. До Android 12 пристрій не може повідомити OwnTV, на які частоти оновлення можна перемикатися плавно, тож зміна частоти може на секунду-дві зробити екран чорним, а іноді й кілька разів під час передачі.\n\nРадимо залишити автоматичну частоту кадрів вимкненою. Якщо ваш екран перемикається чисто, увімкніть і перевірте: змінити це можна будь-коли.</string>
+    <string name="settings_auto_frame_rate_keep_off">Залишити вимкненим</string>
+    <string name="settings_auto_frame_rate_turn_on_anyway">Усе одно ввімкнути</string>
+    <string name="settings_surround_sound">Об’ємний звук</string>
+    <string name="settings_surround_description_mobile">Декодувати Dolby/DTS в об’ємний звук (5.1/7.1) для справжнього ресивера 5.1/7.1, підключеного до цього пристрою. Залиште вимкненим для вбудованого динаміка, навушників або стереосаундбара — багатоканальний звук може відставати від відео. Якщо звук «пливе», підлаштуйте його в меню «Аудіо» плеєра → Синхронізація A/V.</string>
+    <string name="settings_audio_passthrough">Наскрізна передача Dolby і DTS</string>
+    <string name="settings_audio_passthrough_description">Увімкнено: Dolby і DTS надсилаються на телевізор, саундбар чи ресивер недекодованими, якщо він повідомляє, що може їх відтворити (ExoPlayer). Вимкнено: застосунок декодує їх, і досі як об’ємний звук, якщо «Об’ємний звук» це дозволяє. mpv завжди декодує. Не використовується, поки ввімкнено «Нічний режим» або «Вирівнювання гучності».</string>
+    <string name="settings_ffmpeg_audio">Аудіо FFmpeg для ExoPlayer</string>
+    <string name="settings_ffmpeg_audio_description">Увімкнено: ExoPlayer може також декодувати звук, для якого на пристрої немає декодера, наприклад DTS, TrueHD чи MP2. Власні декодери пристрою все одно мають пріоритет. Вимкнено: ExoPlayer використовує лише декодери пристрою. mpv завжди декодує за допомогою FFmpeg. Зміна перезапускає OwnTV.</string>
+    <string name="settings_line_ffmpeg_audio">Для звуку, який пристрій не може декодувати</string>
+    <string name="settings_ffmpeg_audio_restart_message">Аудіодекодер зміниться після перезапуску OwnTV.</string>
+    <string name="settings_night_mode">Нічний режим</string>
+    <string name="settings_night_mode_description">Приглушує гучні сцени й підсилює тихі діалоги для перегляду на низькій гучності.</string>
+    <string name="settings_volume_leveling">Вирівнювання гучності</string>
+    <string name="settings_volume_leveling_description">Поступово доводить кожен канал і фільм до однакової гучності, щоб перемикання не давало стрибка гучності.</string>
+    <string name="settings_max_video_quality">Максимальна якість відео</string>
+    <string name="settings_max_video_quality_description">Найвища якість зображення, що відтворюється, коли канал чи фільм пропонує кілька. Заощаджує трафік і полегшує роботу декодера.</string>
+    <string name="settings_mobile_data_quality">Максимальна якість у мобільному інтернеті</string>
+    <string name="settings_mobile_data_quality_description">У мережі з обмеженим трафіком відтворює не вище за цю якість. Вимкнено: так само, як через Wi-Fi.</string>
+    <string name="settings_tunneled_playback">Тунельне відтворення (експериментально)</string>
+    <string name="settings_tunneled_playback_description">ТБ наживо в ExoPlayer: власне обладнання телевізора тримає зображення й звук разом, з меншим навантаженням на процесор. Працює лише на деяких телевізорах і сама вимикається, якщо канал із нею не відтворюється. Поки це ввімкнено, синхронізацію звуку не можна підлаштувати.</string>
+    <string name="settings_tunneled_playback_failed">Вимкнено після того, як канал не відтворився з нею на цьому пристрої.</string>
+    <string name="settings_autoplay_next">Автовідтворення наступного епізоду</string>
+    <string name="settings_autoplay_next_description">Коли епізод закінчується, автоматично запускати наступний — і переходити до наступного сезону. Архів теж продовжується до наступної передачі.</string>
+    <plurals name="settings_catchup_supported">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> канал підтримує архів · часовий пояс і плеєр для відтворення архіву</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> канали підтримують архів · часовий пояс і плеєр для відтворення архіву</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> каналів підтримують архів · часовий пояс і плеєр для відтворення архіву</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> каналів підтримують архів · часовий пояс і плеєр для відтворення архіву</item>
+    </plurals>
+    <string name="settings_catchup_unavailable">У цьому плейлисті немає каналів з архівом</string>
+    <string name="settings_device">Пристрій</string>
+    <string name="settings_playback_error_log">Журнал помилок</string>
+    <string name="settings_playback_speed">Швидкість відтворення</string>
+    <string name="settings_player_zoom">Масштаб плеєра</string>
+    <string name="settings_app_group">Застосунок</string>
+    <string name="settings_app_startup">Запуск застосунку</string>
+    <string name="settings_app_startup_description">Що відкриває OwnTV під час запуску</string>
+    <string name="settings_check_updates">Перевірити оновлення</string>
+    <string name="settings_check_updates_description">Отримати останню версію з GitHub Releases</string>
+    <string name="settings_update_startup">Перевіряти оновлення під час запуску</string>
+    <string name="settings_update_startup_description">Шукати нову версію, коли застосунок відкривається</string>
+    <string name="settings_auto_start_boot">Автозапуск під час завантаження</string>
+    <string name="settings_auto_start_boot_description">Відкривати OwnTV, коли телевізор вмикається</string>
+    <string name="settings_auto_start_wake">Автозапуск після пробудження</string>
+    <string name="settings_auto_start_wake_description">Відкривати OwnTV, коли телевізор виходить зі сну</string>
+    <string name="settings_auto_start_needs_overlay">Потрібен дозвіл «Показувати поверх інших застосунків»</string>
+    <string name="settings_about">Про застосунок</string>
+    <string name="settings_live_latency">Затримка наживо</string>
+    <string name="settings_no_settings_match">Жодне налаштування не відповідає «<xliff:g id="query">%1$s</xliff:g>»</string>
+    <string name="settings_search_empty_hint">Введіть назву налаштування</string>
+    <string name="settings_breadcrumb"><xliff:g id="group">%1$s</xliff:g> › <xliff:g id="title">%2$s</xliff:g></string>
+    <string name="settings_startup_home">Головна</string>
+    <string name="settings_startup_last_channel">Останній канал</string>
+    <string name="settings_startup_last_channel_guide">Останній канал · Програма передач</string>
+    <string name="settings_startup_last_channel_live">Останній канал · ТБ наживо</string>
+    <string name="settings_startup_favorites">Наживо · Обране</string>
+    <string name="settings_startup_specific_channel">Конкретний канал</string>
+    <string name="settings_startup_channel_unavailable">Канал запуску недоступний. Відкрито головну.</string>
+    <string name="settings_all_history">Уся історія</string>
+    <string name="settings_choose_history">Виберіть, що видалити для цього профілю. Плейлисти, обране й завантаження не зачіпаються.</string>
+    <string name="settings_clear_history_confirm">Очистити історію: <xliff:g id="scope">%1$s</xliff:g>\?</string>
+    <string name="settings_cannot_undo">Це не можна скасувати.</string>
+    <string name="settings_no">Ні</string>
+    <string name="settings_yes_clear">Так, очистити</string>
+    <string name="settings_presets">Пресети</string>
+    <string name="settings_hex_code">Hex-код</string>
+    <string name="settings_apply">Застосувати</string>
+    <string name="settings_hex_error">Введіть 6 шістнадцяткових цифр, наприклад 52DBC8</string>
+    <string name="settings_color_picker">Вибір кольору</string>
+    <string name="settings_use_color">Використати цей колір</string>
+    <string name="settings_about_version">Версія <xliff:g id="version">%1$s</xliff:g></string>
+    <string name="settings_join_telegram">Приєднуйтеся до нас у Telegram</string>
+    <string name="settings_telegram_qr">QR-код групи Telegram</string>
+    <string name="settings_contributions">Внески, повідомлення про помилки й зірки вітаються на GitHub.</string>
+    <string name="settings_playback_error_description_full">Останній збій і найновіші помилки відтворення (спочатку найновіші). Додайте ці дані, коли повідомляєте про проблему.</string>
+    <string name="settings_loading">Завантаження…</string>
+    <string name="settings_no_playback_errors">Помилок відтворення не записано.</string>
+    <string name="settings_live">Наживо</string>
+    <string name="settings_vod">VOD</string>
+    <string name="settings_clear_log">Очистити журнал</string>
+    <string name="settings_browsing_description_full">До чого повертаються ТБ наживо, фільми й серіали, коли ви повертаєтеся.</string>
+    <string name="settings_catchup_timezone_description">Як надсилаються мітки часу архіву. «Автоматично» використовує часовий пояс, який повідомляє сервер вашого провайдера, або пристрою, якщо провайдер його не повідомляє. Також можна вибрати «Пристрій» або задати зсув самостійно.</string>
+    <string name="settings_manual">Вручну</string>
+    <string name="settings_theme_dark">Темна</string>
+    <string name="settings_theme_light">Світла</string>
+    <string name="settings_theme_system">Системна</string>
+    <string name="settings_accent_teal">Бірюзовий</string>
+    <string name="settings_accent_blue">Синій</string>
+    <string name="settings_accent_violet">Фіолетовий</string>
+    <string name="settings_accent_green">Зелений</string>
+    <string name="settings_accent_amber">Бурштиновий</string>
+    <string name="settings_group_profile">Профіль</string>
+    <string name="settings_group_sources">Джерела й програма передач</string>
+    <string name="settings_group_layout">Макет</string>
+    <string name="settings_group_content_metadata">Вміст і метадані</string>
+    <string name="settings_group_appearance">Вигляд</string>
+    <string name="settings_group_network">Мережа</string>
+    <string name="settings_dns">DNS</string>
+    <string name="settings_group_app">Застосунок</string>
+    <string name="settings_group_summary_profile">Профілі та хто що може дивитися</string>
+    <string name="settings_group_summary_sources">Плейлисти, дані програми передач та їхні годинники</string>
+    <string name="settings_group_summary_appearance">Тема, акцент, скло, рух і розмір тексту</string>
+    <string name="settings_group_summary_layout">Бічна панель, панелі, списки та головний екран</string>
+    <string name="settings_group_summary_content_metadata">Назви, ілюстрації та служби субтитрів</string>
+    <string name="settings_vp_section_sound">Звук</string>
+    <string name="settings_vp_cat_player">Плеєр</string>
+    <string name="settings_vp_cat_picture">Зображення</string>
+    <string name="settings_vp_cat_frame_rate">Частота кадрів</string>
+    <string name="settings_vp_cat_frame_rate_summary">Підлаштувати екран під відео</string>
+    <string name="settings_vp_cat_streaming">Потокове передавання</string>
+    <string name="settings_vp_cat_live_tuning">Налаштування наживо</string>
+    <string name="settings_vp_cat_multiview">Мультиперегляд і мініплеєр</string>
+    <string name="settings_vp_cat_multiview_summary_mobile">Кілька каналів наживо одночасно</string>
+    <string name="settings_vp_cat_languages">Мови й субтитри</string>
+    <string name="settings_group_summary_app">Мова, запуск, оновлення й інформація про застосунок</string>
+    <string name="settings_group_quick">Швидкі</string>
+    <string name="settings_group_summary_quick">Перемикачі, до яких ви звертаєтеся найчастіше</string>
+    <string name="settings_group_sound_subtitles">Звук і субтитри</string>
+    <string name="settings_group_watching_recording">Перегляд і запис</string>
+    <string name="settings_search_guide_logos">Логотипи каналів програми передач</string>
+    <string name="settings_search_keywords_profiles">глядачі діти дитячий режим pin блокування обліковий запис</string>
+    <string name="settings_search_keywords_playlists">m3u xtream джерело синхронізація додати видалити</string>
+    <string name="settings_search_keywords_epg">xmltv програма передач стрічка телепрограма</string>
+    <string name="settings_search_keywords_logos">логотип каналу значок xmltv програма передач picon плейлист</string>
+    <string name="settings_search_keywords_customize">приховати показати перейменувати упорядкувати категорії</string>
+    <string name="settings_search_keywords_ch">канал вгору вниз пропуск сторінка список категорія канал</string>
+    <string name="settings_search_keywords_browsing">запам’ятати позицію прокрутка категорія останній елемент наживо фільми серіали скидання верх</string>
+    <string name="settings_search_keywords_home">рядки головний упорядкувати фільтр</string>
+    <string name="settings_search_keywords_metadata">постери сюжети актори рейтинги</string>
+    <string name="settings_search_keywords_theme">світла темна системна</string>
+    <string name="settings_search_keywords_glass">скло прозорість розмиття матове напівпрозорий фон шпалери</string>
+    <string name="settings_search_keywords_accent">тон палітра hex пресет</string>
+    <string name="settings_search_keywords_focus">фокус рамка межа вибір курсор контур</string>
+    <string name="settings_search_keywords_zoom">масштаб інтерфейс розмір</string>
+    <string name="settings_search_keywords_animation">рух швидше продуктивність</string>
+    <string name="settings_search_keywords_weather">верхня панель чип розташування цельсій фаренгейт</string>
+    <string name="settings_search_keywords_live_preview">автовідтворення фокус канал</string>
+    <string name="settings_search_keywords_sound">звук перегляд наживо</string>
+    <string name="settings_search_keywords_audio">гучність гучно тихо синхронізація губ затримка звукова доріжка мова</string>
+    <string name="settings_search_keywords_channel_numbers">номер каналу пряме налаштування ввід цифр клавіатура цифрова lcn</string>
+    <string name="settings_search_keywords_mini">закріплений pip мініплеєр розмір позиція масштаб відсоток кут перемістити</string>
+    <string name="settings_search_keywords_prefer_sdr">hdr sdr стандартний динамічний діапазон вицвіле темне зображення</string>
+    <string name="settings_search_keywords_afr">afr частота оновлення гц тремтіння 24fps 25fps 50hz 60hz режим екрана підлаштування</string>
+    <string name="settings_search_keywords_surround">dolby dts 5.1 7.1 ресивер аудіо об’ємний звук</string>
+    <string name="settings_search_keywords_autoplay">автовідтворення серіал сезон</string>
+    <string name="settings_search_keywords_catchup">архів часовий пояс зсув catchup зовнішній плеєр vlc mx</string>
+    <string name="settings_search_keywords_video">декодер субтитри синхронізація</string>
+    <string name="settings_search_keywords_recording">запис записи dvr таймер розклад серіал зберегти наживо</string>
+    <string name="settings_search_keywords_subtitle_appearance">субтитри розмір колір позиція прозорість фон непрозорість</string>
+    <string name="settings_search_keywords_latency">буфер наживо затримка низька затримка секунди ближче до ефіру</string>
+    <string name="settings_search_keywords_proxy">http трафік маршрут проксі</string>
+    <string name="settings_search_keywords_dns">домен пошук резолвер doh dns-over-https</string>
+    <string name="settings_search_keywords_startup">запуск відкриття початковий екран</string>
+    <string name="settings_search_keywords_updates">github випуск версія оновлення</string>
+    <string name="settings_search_keywords_update_auto">автооновлення нова версія</string>
+    <string name="settings_search_keywords_auto_start">завантаження живлення пробудження сон очікування автозапуск</string>
+    <string name="settings_language_default">Типова (англійська)</string>
+    <string name="settings_language_device">Мова пристрою</string>
+    <string name="settings_language_arabic">Арабська</string>
+    <string name="settings_language_bulgarian">Болгарська</string>
+    <string name="settings_language_chinese">Китайська</string>
+    <string name="settings_language_croatian">Хорватська</string>
+    <string name="settings_language_czech">Чеська</string>
+    <string name="settings_language_danish">Данська</string>
+    <string name="settings_language_dutch">Нідерландська</string>
+    <string name="settings_language_english">Англійська</string>
+    <string name="settings_language_estonian">Естонська</string>
+    <string name="settings_language_finnish">Фінська</string>
+    <string name="settings_language_french">Французька</string>
+    <string name="settings_language_german">Німецька</string>
+    <string name="settings_language_greek">Грецька</string>
+    <string name="settings_language_hebrew">Іврит</string>
+    <string name="settings_language_hindi">Гінді</string>
+    <string name="settings_language_hungarian">Угорська</string>
+    <string name="settings_language_indonesian">Індонезійська</string>
+    <string name="settings_language_italian">Італійська</string>
+    <string name="settings_language_japanese">Японська</string>
+    <string name="settings_language_korean">Корейська</string>
+    <string name="settings_language_latvian">Латвійська</string>
+    <string name="settings_language_lithuanian">Литовська</string>
+    <string name="settings_language_malay">Малайська</string>
+    <string name="settings_language_norwegian">Норвезька</string>
+    <string name="settings_language_persian">Перська</string>
+    <string name="settings_language_polish">Польська</string>
+    <string name="settings_language_portuguese_brazil">Португальська (Бразилія)</string>
+    <string name="settings_language_portuguese_portugal">Португальська (Португалія)</string>
+    <string name="settings_language_romanian">Румунська</string>
+    <string name="settings_language_russian">Російська</string>
+    <string name="settings_language_serbian">Сербська</string>
+    <string name="settings_language_slovak">Словацька</string>
+    <string name="settings_language_slovenian">Словенська</string>
+    <string name="settings_language_spanish">Іспанська</string>
+    <string name="settings_language_spanish_latam">Іспанська (Латинська Америка)</string>
+    <string name="settings_language_swedish">Шведська</string>
+    <string name="settings_language_thai">Тайська</string>
+    <string name="settings_language_turkish">Турецька</string>
+    <string name="settings_language_original">Мова оригіналу</string>
+    <string name="settings_language_ukrainian">Українська</string>
+    <string name="settings_language_vietnamese">В’єтнамська</string>
+    <string name="settings_hardware_decoding">Апаратне декодування</string>
+    <string name="settings_hardware_decoding_description">Використовувати апаратний декодер телевізора. Вимкніть, якщо деякі потоки гальмують або показують артефакти.</string>
+    <string name="settings_software_decode_above_1080p">Програмне декодування понад 1080p</string>
+    <string name="settings_software_decode_above_1080p_description">Відтворює 4K та інше відео понад 1080p програмно, коли апаратний декодер телевізора вимкнено або він не працює. Потрібен швидкий процесор: на більшості телевізорів гальмує.</string>
+    <string name="settings_movies_series_player">Плеєр фільмів і серіалів</string>
+    <string name="settings_live_tv_player">Плеєр ТБ наживо</string>
+    <string name="settings_engine_order"><xliff:g id="first">%1$s</xliff:g>, потім <xliff:g id="second">%2$s</xliff:g></string>
+    <string name="settings_engine_only">Лише <xliff:g id="engine">%1$s</xliff:g></string>
+    <string name="settings_engine_default"><xliff:g id="option">%1$s</xliff:g> (типово)</string>
+    <string name="settings_reset_player_choices">Скинути збережені вибори плеєра</string>
+    <string name="settings_external_player">Зовнішній плеєр</string>
+    <string name="settings_default_zoom">Типовий масштаб</string>
+    <string name="settings_default_zoom_description">Формат і масштаб, що застосовуються на початку відтворення.</string>
+    <string name="settings_default_volume">Типова гучність</string>
+    <string name="settings_default_volume_description">Гучність, що застосовується на початку відтворення. Понад 100%% тихі потоки підсилюються.</string>
+    <string name="settings_reset_saved_zoom">Скинути збережений масштаб</string>
+    <string name="settings_reset_saved_zoom_description">Зміна масштабу в плеєрі зберігає його для цього каналу, фільму чи епізоду. Скидання змушує все знову дотримуватися типового масштабу.</string>
+    <string name="settings_reset_saved_zoom_confirm">Скинути збережений масштаб?</string>
+    <string name="settings_reset_saved_zoom_confirm_description">Кожен канал, фільм і епізод повернеться до типового масштабу. Збережена гучність зберігається. Окремий масштаб завжди можна задати знову з плеєра.</string>
+    <string name="settings_reset_saved_volume">Скинути збережену гучність</string>
+    <string name="settings_reset_saved_volume_description">Зміна гучності в плеєрі зберігає її для цього каналу, фільму чи епізоду. Скидання змушує все знову дотримуватися типової гучності.</string>
+    <string name="settings_reset_saved_volume_confirm">Скинути збережену гучність?</string>
+    <string name="settings_reset_saved_volume_confirm_description">Кожен канал, фільм і епізод повернеться до типової гучності. Збережений масштаб зберігається. Окремий масштаб завжди можна задати знову з плеєра.</string>
+    <string name="settings_reset_saved_audio_delay">Скинути збережену синхронізацію звуку</string>
+    <string name="settings_reset_saved_audio_delay_description">Вибір «Запам’ятати цю затримку» в плеєрі зберігає синхронізацію звуку для цього каналу, фільму чи епізоду. Скидання змушує все знову дотримуватися налаштування вище.</string>
+    <string name="settings_reset_saved_audio_delay_confirm">Скинути збережену синхронізацію звуку?</string>
+    <string name="settings_reset_saved_audio_delay_confirm_description">Кожен канал, фільм і епізод повернеться до синхронізації звуку вище. Збережені масштаб і гучність зберігаються. Окремі значення завжди можна задати знову з плеєра.</string>
+    <string name="settings_seek_step">Крок перемотки</string>
+    <string name="settings_seek_step_description">На скільки перемотка вперед і назад стрибає у фільмі чи епізоді.</string>
+    <string name="settings_vod_buffer">Буфер фільмів</string>
+    <string name="settings_vod_buffer_description">Наскільки наперед завантажуються фільми, епізоди й архів. «Авто» використовує те, що підходить цьому пристрою. Довший буфер краще переживає погане з’єднання; пам’ять цього пристрою все одно обмежує його, тож фільм з високим бітрейтом може вміщати менше, ніж вибрано.</string>
+    <string name="settings_vod_network_timeout">Тайм-аут мережі</string>
+    <string name="settings_vod_network_timeout_description">Як довго фільми, епізоди й архів чекають на мовчазний сервер, перш ніж з’єднання вважається втраченим. «Авто» зберігає власне очікування кожного плеєра: 60 секунд у mpv, 20 в ExoPlayer.</string>
+    <string name="settings_vod_reconnects">Спроби повторного підключення</string>
+    <string name="settings_vod_reconnects_description">Скільки разів фільм чи епізод, що втратив з’єднання, повторно відкривається з місця зупинки, перш ніж показується помилка. Хвилина стабільного відтворення повертає спроби.</string>
+    <string name="settings_vod_network_auto">Авто</string>
+    <string name="settings_live_rewind_step">Крок перемотки наживо</string>
+    <string name="settings_live_rewind_step_description">На скільки перемотка вперед і назад рухається на каналі наживо: в його архіві або в копії, збереженій функцією «Пауза й перемотка ТБ наживо».</string>
+    <string name="settings_resume_playback">Продовження відтворення</string>
+    <string name="settings_resume_playback_description">Що робити, коли для фільму чи епізоду є збережена позиція.</string>
+    <string name="settings_subtitle_appearance">Вигляд субтитрів</string>
+    <string name="settings_subtitle_appearance_description">Розмір, колір тексту, позиція на екрані й прозорість фону. Поки вимкнено, субтитри зберігають стандартний вигляд — зокрема оформлення, яке мовники вбудовують у субтитри ТБ наживо.</string>
+    <string name="settings_subtitle_size">Розмір субтитрів</string>
+    <string name="settings_subtitle_size_description">Масштабувати текст субтитрів.</string>
+    <string name="settings_preferred_subtitle_language">Бажана мова субтитрів</string>
+    <string name="settings_preferred_language_description">Автоматично вибирати цю доріжку субтитрів, коли вона доступна.</string>
+    <string name="settings_preferred_audio_language_description">Відтворює цю звукову доріжку, коли вона є в потоці. «Мова оригіналу» відтворює фільми й серіали мовою, якою їх створено.</string>
+    <string name="settings_open_subtitles">OpenSubtitles</string>
+    <string name="settings_open_subtitles_connected">Підключено</string>
+    <string name="settings_open_subtitles_reset_in">Через <xliff:g id="hours">%1$d</xliff:g>г <xliff:g id="minutes">%2$d</xliff:g>хв</string>
+    <string name="settings_open_subtitles_description">Увійдіть, щоб шукати й завантажувати субтитри та керувати завантаженими. Для кожного профілю окремо; потрібен безкоштовний обліковий запис opensubtitles.com.</string>
+    <string name="settings_preferred_audio_language">Бажана мова звуку</string>
+    <string name="settings_audio_sync">Синхронізація звуку</string>
+    <string name="settings_audio_sync_description">Зсувайте звук раніше чи пізніше, щоб збігався з відео. Працює з обома плеєрами (mpv і ExoPlayer).</string>
+    <string name="settings_output_audio_delay">Затримка для цього виходу</string>
+    <string name="settings_output_audio_delay_description">Додається до «Синхронізації звуку» і зберігається окремо для кожного виходу — HDMI, саундбара на HDMI ARC, Bluetooth, вбудованих динаміків, навушників. Задавайте її, слухаючи на тому виході, для якого вона призначена.</string>
+    <string name="settings_audio_output_speaker">Вбудовані динаміки</string>
+    <string name="settings_audio_output_other">Навушники або USB</string>
+    <string name="settings_live_tv">ТБ наживо</string>
+    <string name="settings_live_latency_description">Наскільки близько до прямого ефіру відтворювати. Менше означає ближче до ефіру, але менший буфер, тож слабкі потоки можуть гальмувати чи частіше перепідключатися. Застосовується до наступного каналу, який ви відкриєте.</string>
+    <string name="settings_live_latency_bitrate_note">На каналі з дуже високим бітрейтом — особливо 4K — буфер може вміщати менше часу, ніж ви просили, бо кількість відео, яку можна одночасно тримати в пам’яті, обмежена.</string>
+    <string name="settings_channel_numbers">Номери каналів</string>
+    <string name="settings_channel_numbers_description">Показувати номер каналу від провайдера поруч з назвою в списку ТБ наживо, накладці списку каналів і плеєрі — а також вводити номер на пульті під час повноекранного відтворення, щоб одразу перейти на цей канал (OK перемикає одразу, «Назад» скасовує). Вимкнено: усі номери приховано, а цифрові кнопки ігноруються; нічого не втрачається, а повторне ввімкнення повертає їх.</string>
+    <string name="settings_live_left_right_rewinds">«Ліворуч» і «праворуч» перемотують ТБ наживо</string>
+    <string name="settings_live_left_right_rewinds_description">З прихованим керуванням «Ліворуч» і «Праворуч» перемотують назад і вперед на каналах, які можна перемотувати (архів або збережені функцією «Пауза й перемотка ТБ наживо»), замість відкриття списку каналів та історії.</string>
+    <string name="settings_timeshift">Пауза й перемотка ТБ наживо</string>
+    <string name="settings_timeshift_description">Канали без архіву зберігаються на цьому пристрої, поки ви дивитеся їх на весь екран, тож можна ставити паузу й перемотувати. Постійно записує на накопичувач; щонайменше 1 ГБ завжди залишається вільним.</string>
+    <string name="settings_timeshift_window">Довжина перемотки</string>
+    <string name="settings_timeshift_window_description">Як далеко назад можна перемотати канал без архіву.</string>
+    <string name="settings_timeshift_resume">Продовжити збережений канал</string>
+    <string name="settings_timeshift_resume_description">Що відбувається, коли ви повертаєтеся до каналу, збереженого під час вашої відсутності.</string>
+    <string name="settings_diagnostics">Діагностика</string>
+    <string name="settings_measured_stats">Виміряна статистика потоку</string>
+    <string name="settings_measured_stats_description">Показувати к/с, бітрейт і пропущені кадри наживо на накладці з інформацією про потік (вимірюється, поки накладку відкрито, для потоків, що не декларують цих значень). Вимикайте, лише якщо слабкий телевізор гальмує — це ніколи не впливає на саме відео, лише на діагностичні числа.</string>
+    <string name="settings_none_auto">Немає / Авто</string>
+    <string name="settings_view_grid">Сітка</string>
+    <string name="settings_view_list">Список</string>
+    <string name="settings_subtitle_small">Малий</string>
+    <string name="settings_subtitle_normal">Звичайний</string>
+    <string name="settings_subtitle_large">Великий</string>
+    <string name="settings_subtitle_extra_large">Дуже великий</string>
+    <string name="settings_live_latency_low">Низька затримка</string>
+    <string name="settings_live_latency_balanced">Збалансовано</string>
+    <string name="settings_live_latency_stable">Стабільно</string>
+    <string name="settings_live_latency_custom">Власна</string>
+    <string name="settings_low_latency_warning">⚠️ Низька затримка</string>
+    <string name="settings_low_latency_warning_description">Відтворення ближче до прямого ефіру залишає менший буфер. На повільніших з’єднаннях або нестабільних потоках це може спричиняти більше буферизації, гальмування чи перепідключень.\n\nВиберіть «Збалансовано», якщо канал стає ненадійним.</string>
+    <string name="settings_low_latency_understand">Я розумію</string>
+    <string name="settings_custom_live_buffer">Власний буфер наживо</string>
+    <string name="settings_live_buffer_seconds"><xliff:g id="seconds">%1$d</xliff:g>с</string>
+    <string name="settings_audio_delay"><xliff:g id="delay">%1$d</xliff:g> мс</string>
+    <string name="settings_external_player_description">Виберіть, які розділи відкриваються у зовнішньому застосунку.</string>
+    <string name="settings_audio_delay_value"><xliff:g id="delay">%1$d</xliff:g> мс</string>
+    <string name="settings_movies_player_description">mpv (рекомендовано) підтримує найширший набір форматів — звук DTS/TrueHD, незвичні файли. ExoPlayer відтворює деякі потоки, які mpv не може, на певних телевізорах, але не може декодувати звук DTS/TrueHD. Комбіновані варіанти автоматично пробують інший плеєр, коли перший не спрацював; варіанти з одним плеєром цього ніколи не роблять, що заощаджує кілька секунд чорного екрана, якщо другий плеєр на вашому телевізорі ніколи не працює.</string>
+    <string name="settings_movies_player_description_mobile">mpv (рекомендовано) підтримує найширший набір форматів — звук DTS/TrueHD, незвичні файли. ExoPlayer відтворює деякі потоки, які mpv не може, на певних пристроях, але не може декодувати звук DTS/TrueHD. Комбіновані варіанти автоматично пробують інший плеєр, коли перший не спрацював; варіанти з одним плеєром цього ніколи не роблять, що заощаджує кілька секунд чорного екрана, якщо другий плеєр на вашому пристрої ніколи не працює.</string>
+    <string name="settings_live_player_description">ExoPlayer (рекомендовано) відкриває канали значно швидше й єдиний має субтитри наживо. mpv відтворює канали, які ExoPlayer не може, зокрема деякі з незвичним звуком. Комбіновані варіанти автоматично пробують інший плеєр, коли перший не спрацював; варіанти з одним плеєром цього ніколи не роблять, що заощаджує кілька секунд чорного екрана, якщо другий плеєр на вашому телевізорі ніколи не працює. Канал, який ви перемикаєте вручну в плеєрі, у будь-якому разі зберігає ваш вибір.</string>
+    <string name="settings_reset_player_choices_description">Перемикання окремого фільму чи епізоду між mpv і ExoPlayer у плеєрі зберігає цей вибір на наступний раз. Скидання змушує все знову дотримуватися налаштування вище. Збережені вибори для каналів наживо зберігаються.</string>
+    <string name="settings_reset_player_choices_none">Нічого не збережено</string>
+    <plurals name="settings_reset_player_choices_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> збережено</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> збережено</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> збережено</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> збережено</item>
+    </plurals>
+    <string name="settings_reset_player_choices_confirm">Скинути збережені вибори плеєра?</string>
+    <string name="settings_reset_player_choices_confirm_description">Кожен фільм і епізод повернеться до налаштування «Плеєр фільмів і серіалів». Окремий завжди можна перемкнути знову з плеєра.</string>
+    <string name="settings_reset_live_player_choices">Скинути збережені вибори плеєра ТБ наживо</string>
+    <string name="settings_reset_live_player_choices_description">Перемикання каналу між ExoPlayer і mpv у плеєрі зберігає цей вибір для каналу. Скидання змушує кожен канал знову дотримуватися налаштування «Плеєр ТБ наживо». Збережені вибори для фільмів і епізодів зберігаються.</string>
+    <string name="settings_reset_live_player_choices_confirm">Скинути збережені вибори плеєра ТБ наживо?</string>
+    <string name="settings_reset_live_player_choices_confirm_description">Кожен канал повернеться до налаштування «Плеєр ТБ наживо». Окремий завжди можна перемкнути знову з плеєра.</string>
+    <string name="settings_external_player_row_description">Відкривати потоки у зовнішньому застосунку (VLC, MX Player) замість вбудованого плеєра, окремо для кожного розділу. Корисно для потоків, які цей застосунок не може декодувати, або якщо ви надаєте перевагу іншому плеєру. Позиція продовження та попередній/наступний недоступні під час зовнішнього відтворення; потоки, яким потрібен власний User-Agent або referer, можуть не відтворюватися.</string>
+    <string name="settings_resume_always">Завжди продовжувати</string>
+    <string name="settings_resume_ask">Питати про продовження</string>
+    <string name="settings_resume_never">Ніколи не продовжувати</string>
+    <string name="settings_delete_subtitles">Видалити субтитри</string>
+    <string name="settings_delete_all">Видалити все</string>
+    <string name="settings_movies">Фільми</string>
+    <string name="settings_series">Серіали</string>
+    <string name="settings_no_downloaded_subtitles">Немає завантажених субтитрів: <xliff:g id="section">%1$s</xliff:g>.</string>
+    <string name="settings_delete_subtitle">Видалення субтитрів</string>
+    <string name="settings_delete_subtitle_message">Видалити субтитри <xliff:g id="name">%1$s</xliff:g> для «<xliff:g id="title">%2$s</xliff:g>»? Їх можна завантажити знову пізніше.</string>
+    <string name="settings_delete_all_subtitles">Видалити всі субтитри</string>
+    <string name="settings_delete_all_movies">Видалити все для фільмів</string>
+    <string name="settings_delete_all_series">Видалити все для серіалів</string>
+    <string name="settings_section_count"><xliff:g id="section">%1$s</xliff:g> (<xliff:g id="count">%2$d</xliff:g>)</string>
+    <string name="settings_sync_guide_question">Синхронізувати програму передач зараз?</string>
+    <string name="settings_sync_guide_description">Завантажити програму передач (EPG) для «<xliff:g id="source">%1$s</xliff:g>». Це також можна зробити пізніше в «Налаштування → Джерела й програма передач → Джерела EPG».</string>
+    <string name="settings_not_now">Не зараз</string>
+    <string name="settings_sync_now">Синхронізувати зараз</string>
+    <string name="settings_syncing_guide">Синхронізація програми передач…</string>
+    <string name="settings_connecting">З’єднання…</string>
+    <string name="settings_run_background">Виконувати у фоні</string>
+    <string name="settings_guide_synced">Програму передач синхронізовано</string>
+    <string name="settings_guide_sync_failed">Не вдалося синхронізувати програму передач</string>
+    <string name="settings_restore_remote_title">Відновити з іншого пристрою</string>
+    <string name="settings_restore_remote_description">На будь-якому пристрої з браузером у тій самій мережі Wi-Fi — телефоні, комп’ютері чи іншому телевізорі — відскануйте QR-код (або відкрийте URL), введіть цей PIN-код, виберіть файл резервної копії OwnTV і надішліть його. Потім тут ви вибираєте, що відновлювати.</string>
+    <string name="settings_try_again">Повторити спробу</string>
+    <string name="settings_new_pin">Почати знову з новим PIN-кодом</string>
+    <string name="settings_download_remote_title">Завантажити на іншому пристрої</string>
+    <string name="settings_download_remote_description">На будь-якому пристрої з браузером у тій самій мережі Wi-Fi — телефоні, комп’ютері чи іншому телевізорі — відскануйте QR-код (або відкрийте URL), введіть цей PIN-код і завантажте файл резервної копії, щоб зберегти його в безпеці.</string>
+    <string name="settings_preparing_backup">Підготовка резервної копії…</string>
+    <string name="settings_ui_zoom_range">Масштабувати весь інтерфейс (<xliff:g id="min">%1$d</xliff:g>%%–<xliff:g id="max">%2$d</xliff:g>%%).</string>
+    <string name="settings_low_zoom_warning_title">⚠️ Попередження про малий масштаб</string>
+    <string name="settings_low_zoom_warning">Масштаб <xliff:g id="zoom">%1$d</xliff:g>%% показує на екрані значно більше елементів одночасно. На пристроях з обмеженою пам’яттю (наприклад, 2-гігабайтних ТВ-стіках) це може зробити застосунок нестабільним або призвести до збоїв, особливо з великими плейлистами й даними EPG.\n\nНатисніть OK, щоб продовжити, або «Назад», щоб залишитися на <xliff:g id="safe_zoom">%2$d</xliff:g>%%.</string>
+    <string name="settings_low_zoom_warning_mobile">Масштаб <xliff:g id="zoom">%1$d</xliff:g>%% показує на екрані значно більше елементів одночасно. На пристроях з обмеженою пам’яттю це може зробити застосунок нестабільним або призвести до збоїв, особливо з великими плейлистами й даними EPG.\n\nВиберіть «Скасувати», щоб залишитися на <xliff:g id="safe_zoom">%2$d</xliff:g>%%.</string>
+    <string name="settings_low_zoom_accept">Я розумію й приймаю ризик</string>
+    <string name="settings_surface_transparency"><xliff:g id="percent">%1$d</xliff:g>%%</string>
+    <string name="settings_catchup_timezone_automatic">Автоматично</string>
+    <string name="settings_catchup_timezone_device">Пристрій</string>
+    <string name="settings_catchup_player_ask">Завжди питати</string>
+    <string name="settings_catchup_player_internal">Плеєр OwnTV</string>
+    <string name="settings_catchup_player_external">Зовнішній плеєр</string>
+    <string name="settings_download_folder_title">Виберіть папку завантажень</string>
+    <string name="settings_pick_background_title">Виберіть фонове зображення</string>
+    <string name="settings_theme_dialog">Тема</string>
+    <string name="settings_app_startup_dialog">Запуск застосунку</string>
+    <string name="settings_animations_dialog">Анімація</string>
+    <string name="settings_close">Закрити</string>
+    <string name="settings_done">Готово</string>
+    <string name="settings_reset">Скинути</string>
+    <string name="settings_device_details"><xliff:g id="model">%1$s</xliff:g> · <xliff:g id="android">%2$s</xliff:g></string>
+    <string name="settings_history_live">ТБ наживо</string>
+    <string name="settings_history_movies">Фільми</string>
+    <string name="settings_history_series">Серіали</string>
+    <string name="settings_history_all">усе</string>
+    <string name="settings_browsing_last_category">Запам’ятовувати останню категорію</string>
+    <string name="settings_browsing_last_category_description">Повторно відкривати розділ на категорії, яку ви залишили, а не на «Усі».</string>
+    <string name="settings_guide_follows_live">Програма передач слідує за ТБ наживо</string>
+    <string name="settings_guide_follows_live_description">Відкривати програму передач на категорії ТБ наживо.</string>
+    <string name="settings_help_guide_follows_live">Увімкнено: програма передач відкривається на категорії, яку запам’ятовує ТБ наживо, а категорія, вибрана в програмі передач, стає і категорією ТБ наживо. Вимкнено: програма передач зберігає власну категорію.</string>
+    <string name="settings_browsing_last_item">Запам’ятовувати останній елемент</string>
+    <string name="settings_browsing_last_item_description">Кожна категорія зберігає власну позицію прокрутки замість початку зверху. ТБ наживо також відновлює останній канал у фокусі.</string>
+    <string name="settings_browsing_live_categories">Категорії ТБ наживо</string>
+    <string name="settings_browsing_live_categories_description">Показуються в ТБ наживо, програмі передач, плеєрі та мультиперегляді. Якщо «Усі канали» вимкнено, ТБ наживо відкривається на вашій першій категорії або на «Обране», якщо категорій немає.</string>
+    <string name="settings_catchup_player">Відтворювати архів у</string>
+    <string name="settings_customize_title">Налаштувати категорії й елементи</string>
+    <string name="settings_customize_pin_locked">Цей екран захищено PIN-кодом.</string>
+    <string name="settings_customize_wrong_pin">Неправильний PIN-код — спробуйте ще раз</string>
+    <string name="settings_customize_enter_pin">Введіть PIN-код</string>
+    <string name="settings_customize_set_pin">🔒 Задати PIN-код блокування категорій</string>
+    <string name="settings_customize_change_pin">🔒 Змінити PIN-код блокування категорій</string>
+    <string name="settings_customize_remove_pin">Прибрати PIN-код блокування категорій</string>
+    <string name="settings_customize_remove_lock">Прибрати блокування</string>
+    <string name="settings_lock">Блокування налаштувань</string>
+    <string name="settings_lock_description">«Налаштування», «Резервне копіювання й відновлення» та «Локальна синхронізація» запитують власний PIN-код. Кожен профіль задає свій.</string>
+    <string name="settings_line_settings_lock">Власний PIN-код для налаштувань</string>
+    <string name="settings_help_settings_lock">PIN-код для цього профілю, який запитують «Налаштування», «Резервне копіювання й відновлення» та «Локальна синхронізація», перш ніж відкритися. Це не PIN-код профілю й не PIN-код блокування категорій: кожне блокування має свій PIN-код, і жоден не відкриває інше. «Змінити PIN-код» і «Вимкнути» запитують поточний PIN-код налаштувань.</string>
+    <string name="settings_lock_menus">Також блокувати зміни в меню довгого натискання</string>
+    <string name="settings_lock_menus_description">«Сховати», «Перемістити», «Перейменувати», блокування категорії та «Прибрати з історії» теж запитують PIN-код налаштувань. «Обране» та «Відтворити» — ніколи.</string>
+    <string name="settings_line_settings_lock_menus">Зміни довгим натисканням запитують PIN-код налаштувань</string>
+    <string name="settings_help_settings_lock_menus">Коли це ввімкнено, зміни довгим натисканням («Сховати», «Перемістити», «Перейменувати», «Заблокувати категорію» та «Прибрати з історії») спершу запитують PIN-код налаштувань. Один правильний PIN-код відкриває їх, доки ви не вийдете із застосунку чи не перемкнете профіль. Додавання в обране й відтворення ніколи не запитують.</string>
+    <string name="settings_lock_change_pin">Змінити PIN-код</string>
+    <string name="settings_lock_turn_off">Вимкнути</string>
+    <string name="settings_search_keywords_settings_lock">блокування pin пароль батьківський налаштування</string>
+    <string name="settings_customize_description">Приховуйте й показуйте канали, фільми та серіали, а також перейменовуйте чи впорядковуйте категорії для цього профілю. Зберігається після повторних синхронізацій.</string>
+    <string name="settings_customize_new_category_behavior">Поведінка нових категорій</string>
+    <string name="settings_customize_hide">Сховати</string>
+    <string name="settings_customize_show">Показати</string>
+    <string name="settings_customize_behavior_hide">Сховати</string>
+    <string name="settings_customize_behavior_show">Показати</string>
+    <string name="settings_customize_hidden_channels">Приховані канали</string>
+    <string name="settings_customize_hidden_movies">Приховані фільми</string>
+    <string name="settings_customize_hidden_series">Приховані серіали</string>
+    <string name="settings_customize_unhide_description">Покажіть елемент, щоб повернути його до списків.</string>
+    <string name="settings_customize_categories">Категорії</string>
+    <string name="settings_customize_empty">У цьому розділі ще немає категорій — спершу додайте джерело.</string>
+    <string name="settings_customize_range_hide_start">Вибір діапазону розпочато. Натисніть «Показати/Сховати» на останньому елементі, щоб вибрати діапазон.</string>
+    <string name="settings_customize_range_rename_start">Перейменування діапазону розпочато. Натисніть «Перейменувати» на останньому елементі, щоб вибрати діапазон.</string>
+    <string name="settings_customize_range_move_start">Переміщення діапазону розпочато. Натисніть ⤒ ↑ ↓ ⤓ на останньому елементі, щоб перемістити весь діапазон.</string>
+    <string name="settings_customize_span_hide">Вибрати діапазон, щоб сховати чи показати</string>
+    <string name="settings_customize_span_move">Вибрати діапазон для переміщення</string>
+    <string name="settings_customize_move_top">Перемістити вгору списку</string>
+    <string name="settings_customize_move_bottom">Перемістити вниз списку</string>
+    <string name="settings_customize_custom_category">Власна</string>
+    <string name="settings_customize_span_rename">Вибрати діапазон для перейменування</string>
+    <string name="settings_customize_range_hide_start_touch">Вибір діапазону розпочато. Торкніться останнього елемента, потім виберіть «Сховати» або «Показати».</string>
+    <string name="settings_customize_range_move_start_touch">Переміщення діапазону розпочато. Торкніться останнього елемента, потім скористайтеся стрілками, щоб перемістити весь блок.</string>
+    <string name="settings_customize_range_rename_start_touch">Перейменування діапазону розпочато. Торкніться останнього елемента, щоб перейменувати все між ними.</string>
+    <plurals name="settings_customize_range_selected">
+        <item quantity="one">Вибрано <xliff:g id="count">%1$d</xliff:g> категорію. Продовжуйте натискати ⤒ ↑ ↓ ⤓, щоб перемістити її.</item>
+        <item quantity="few">Вибрано <xliff:g id="count">%1$d</xliff:g> категорії. Продовжуйте натискати ⤒ ↑ ↓ ⤓, щоб перемістити їх разом.</item>
+        <item quantity="many">Вибрано <xliff:g id="count">%1$d</xliff:g> категорій. Продовжуйте натискати ⤒ ↑ ↓ ⤓, щоб перемістити їх разом.</item>
+        <item quantity="other">Вибрано <xliff:g id="count">%1$d</xliff:g> категорій. Продовжуйте натискати ⤒ ↑ ↓ ⤓, щоб перемістити їх разом.</item>
+    </plurals>
+    <string name="settings_customize_rename">Перейменувати</string>
+    <string name="settings_customize_rename_category">Перейменувати категорію</string>
+    <string name="settings_customize_rename_or_delete_category">Перейменувати або видалити категорію</string>
+    <string name="settings_customize_new_category">＋ Нова категорія</string>
+    <string name="settings_customize_sort_button">Сортування: <xliff:g id="label">%1$s</xliff:g> ▾</string>
+    <string name="settings_customize_filter_button">Фільтр: <xliff:g id="label">%1$s</xliff:g> ▾</string>
+    <string name="settings_customize_filter_title">Фільтр списку</string>
+    <string name="settings_customize_filter_all">Усі</string>
+    <string name="settings_customize_filter_visible">Видимі</string>
+    <string name="settings_customize_filter_hidden">Приховані</string>
+    <string name="settings_customize_new_categories_button">Нові категорії: <xliff:g id="label">%1$s</xliff:g> ▾</string>
+    <string name="settings_customize_restore_defaults">Повернути стандарт плейлиста</string>
+    <string name="settings_customize_restore_defaults_title">Повернути стандарт плейлиста для розділу <xliff:g id="section">%1$s</xliff:g> у <xliff:g id="playlist">%2$s</xliff:g>\?</string>
+    <string name="settings_customize_restore_defaults_description">Приховані категорії та елементи знову показуються, перейменування й власний порядок очищаються, а переміщені елементи повертаються. Об’єднані категорії, обране й відповідності програми передач зберігаються.</string>
+    <string name="settings_customize_rename_hint">Лише для цього профілю. Залиште порожнім, щоб повернути «<xliff:g id="name">%1$s</xliff:g>».</string>
+    <string name="settings_customize_remove_pin_title">Прибрати PIN-код блокування категорій?</string>
+    <string name="settings_customize_remove_pin_locks">Усі категорії, заблоковані цим PIN-кодом, теж розблоковуються.</string>
+    <string name="settings_customize_remove">Прибрати</string>
+    <string name="settings_customize_confirm_pin">Підтвердьте новий PIN-код</string>
+    <string name="settings_customize_pin_mismatch">PIN-коди не збігаються — введіть знову</string>
+    <string name="settings_customize_new_pin">Введіть новий PIN-код</string>
+    <plurals name="settings_customize_selected_categories">
+        <item quantity="one">Вибрано <xliff:g id="count">%1$d</xliff:g> категорію.</item>
+        <item quantity="few">Вибрано <xliff:g id="count">%1$d</xliff:g> категорії.</item>
+        <item quantity="many">Вибрано <xliff:g id="count">%1$d</xliff:g> категорій.</item>
+        <item quantity="other">Вибрано <xliff:g id="count">%1$d</xliff:g> категорій.</item>
+    </plurals>
+    <string name="settings_customize_hide_show_title">Сховати або показати категорії</string>
+    <string name="settings_customize_was">було «<xliff:g id="name">%1$s</xliff:g>»</string>
+    <string name="settings_customize_hidden">Приховано</string>
+    <string name="settings_customize_unhide">Показати</string>
+    <string name="settings_key_actions">Дії</string>
+    <string name="settings_span_heading">Діапазон / множинний вибір</string>
+    <string name="settings_span_help">Утримуйте OK на «Перемістити», «Перейменувати» чи «Сховати» для першого елемента, потім натисніть те саме на останньому. Усе між ними змінюється разом.</string>
+    <string name="settings_span_ch_help">CH+ / CH− пропускають сторінку. Утримуйте CH+ / CH−, щоб перейти до останнього чи першого елемента.</string>
+    <string name="settings_customize_metadata_separator">"  ·  "</string>
+    <string name="settings_sources_title">Джерела</string>
+    <string name="settings_sources_empty">Джерел ще немає. Додайте джерело M3U або Xtream.</string>
+    <string name="settings_sources_add">Додати джерело</string>
+    <string name="settings_sources_import_failed">Не вдалося імпортувати</string>
+    <string name="settings_sources_importing">Імпорт каталогу…</string>
+    <string name="settings_sources_preparing">Підготовка каталогу</string>
+    <string name="settings_sources_deleting">ВИДАЛЕННЯ…</string>
+    <string name="settings_sources_resync">Синхронізувати знову</string>
+    <string name="settings_sources_delete_title">Видалити «<xliff:g id="name">%1$s</xliff:g>»?</string>
+    <string name="settings_sources_delete_message">Це видаляє джерело та всі його канали, фільми й серіали з кожного профілю.</string>
+    <string name="settings_sources_type_m3u">M3U · <xliff:g id="url">%1$s</xliff:g></string>
+    <string name="settings_sources_type_xtream">Xtream · <xliff:g id="url">%1$s</xliff:g></string>
+    <string name="settings_sources_type_stalker">Stalker · <xliff:g id="url">%1$s</xliff:g></string>
+    <string name="settings_sources_expiry">Спливає <xliff:g id="date">%1$s</xliff:g></string>
+    <string name="settings_sources_test_title">Перевірка джерела</string>
+    <string name="settings_sources_test_ok">З’єднання працює</string>
+    <string name="settings_sources_test_auth">Провайдер відхилив ці дані. Перевірте ім’я користувача, пароль або MAC-адресу.</string>
+    <string name="settings_sources_test_expired">Термін дії цієї підписки минув.</string>
+    <string name="settings_sources_test_unreachable">Не вдалося зв’язатися із сервером. Перевірте адресу й підключення до інтернету.</string>
+    <string name="settings_sources_test_status">Стан: <xliff:g id="status">%1$s</xliff:g></string>
+    <string name="settings_sources_test_connections">Підключення: використовується <xliff:g id="used">%1$d</xliff:g> із <xliff:g id="max">%2$d</xliff:g></string>
+    <string name="settings_sources_test_connections_max">Підключення: до <xliff:g id="max">%1$d</xliff:g> одночасно</string>
+    <string name="settings_sources_test_trial">Пробний обліковий запис</string>
+    <string name="settings_sources_test_expiry_none">Дату спливання не вказано</string>
+    <string name="settings_sources_info">Інфо</string>
+    <string name="settings_sources_clean_names">Назви</string>
+    <string name="settings_sources_clean_names_title">Назви каналів у «<xliff:g id="name">%1$s</xliff:g>»</string>
+    <string name="settings_sources_clean_names_description">Коротші назви каналів на всіх екранах. Програма передач і далі зіставляється за назвами, які надсилає ваш провайдер, а канали, які ви перейменували в «Налаштувати», зберігають вашу назву. Збереження оновлює плейлист.</string>
+    <string name="settings_sources_clean_names_toggle">Очищати назви каналів</string>
+    <string name="settings_sources_clean_names_example">Прибирає префікс країни та позначку якості в кінці: «UK| Новини Один HD» відображається як «Новини Один»</string>
+    <string name="settings_sources_clean_names_custom">Також прибирати</string>
+    <string name="settings_sources_clean_names_custom_hint">Слова через ; наприклад: VIP; Резерв</string>
+    <string name="settings_sources_retest">Перевірити знову</string>
+    <string name="settings_sources_ignore_limit">Ігнорувати ліміт підключень</string>
+    <string name="settings_sources_ignore_limit_on">Ліміт підключень ігнорується: мультиперегляд і записи можуть відкривати більше потоків, ніж повідомляє цей плейлист. Потік, який провайдер відхиляє, все одно повідомить про це.</string>
+    <string name="settings_sources_probe_title">Перевірити цей плейлист?</string>
+    <string name="settings_sources_probe_warning">Багато провайдерів ніколи не повідомляють, скільки каналів можна дивитися одночасно, тож OwnTV з’ясовує це, відкриваючи кілька й дивлячись, які витримають. Усе, що зараз відтворюється, зупиниться, і це може тривати до двох хвилин.</string>
+    <string name="settings_sources_probe_running">Перевірка, скільки каналів дозволяє цей провайдер… (<xliff:g id="current">%1$d</xliff:g> із <xliff:g id="total">%2$d</xliff:g>)</string>
+    <string name="settings_sources_probe_unknown">OwnTV не зміг визначити, скільки каналів дозволяє цей провайдер.</string>
+    <string name="settings_sources_probe_skip">Пропустити</string>
+    <string name="settings_sources_auto_refresh">⟳ <xliff:g id="mode">%1$s</xliff:g></string>
+    <string name="settings_sources_default">ТИПОВИЙ</string>
+    <string name="settings_sources_backup">Копія</string>
+    <string name="settings_sources_details_separator">"  •  "</string>
+    <string name="settings_sources_preparing_detail">Підготовка каталогу</string>
+    <string name="settings_sources_removing_detail">Видалення…</string>
+    <string name="settings_sources_edit">Змінити</string>
+    <string name="settings_sources_delete">Видалити</string>
+    <string name="settings_sources_cancel">Скасувати</string>
+    <string name="settings_sources_try_again">Повторити спробу</string>
+    <string name="settings_sources_import_title">Імпорт завершено</string>
+    <string name="settings_sources_resync_title_full">Повторна синхронізація «<xliff:g id="name">%1$s</xliff:g>»</string>
+    <string name="settings_sources_resync_now_full">Синхронізувати зараз</string>
+    <string name="settings_sources_resync_remove_full">Синхронізувати й прибрати відсутні назви</string>
+    <string name="settings_sources_resync_description">«Синхронізувати зараз» отримує останній каталог і зберігає все, що вже збережено.\n\n«Синхронізувати й прибрати відсутні назви» також дозволяє прибирати назви, яких провайдер більше не вказує. Ваше обране, історія й позиції продовження для назв, що й далі в списку, зберігаються.</string>
+    <string name="settings_sources_refresh_startup">Оновлювати під час запуску</string>
+    <string name="settings_sources_refresh_6h">6 годин</string>
+    <string name="settings_sources_refresh_12h">12 годин</string>
+    <string name="settings_sources_refresh_manual">Власний інтервал…</string>
+    <plurals name="settings_sources_refresh_days">
+        <item quantity="one">Кожен <xliff:g id="count">%1$d</xliff:g> день</item>
+        <item quantity="few">Кожні <xliff:g id="count">%1$d</xliff:g> дні</item>
+        <item quantity="many">Кожні <xliff:g id="count">%1$d</xliff:g> днів</item>
+        <item quantity="other">Кожні <xliff:g id="count">%1$d</xliff:g> днів</item>
+    </plurals>
+    <string name="settings_sources_refresh_days_title">Інтервал оновлення</string>
+    <string name="settings_sources_refresh_days_hint">«Ліворуч» і «праворуч» вибирають кількість днів від 1 до 99.</string>
+    <string name="settings_epg_guide_days">Скільки днів програми передач зберігати</string>
+    <string name="settings_epg_guide_days_hint">«Ліворуч» і «праворуч» вибирають кількість днів від <xliff:g id="min">%1$d</xliff:g> до <xliff:g id="max">%2$d</xliff:g>.</string>
+    <plurals name="settings_epg_guide_days_value">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> день</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> дні</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> днів</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> днів</item>
+    </plurals>
+    <string name="settings_epg_sources_title">Джерела EPG</string>
+    <string name="settings_epg_sources_empty">Джерел EPG ще немає. Додайте посилання XMLTV.</string>
+    <string name="settings_epg_sources_add">Додати джерело EPG</string>
+    <string name="settings_epg_sources_edit">Змінити джерело EPG</string>
+    <string name="settings_epg_sources_add_sync">Додати й синхронізувати</string>
+    <string name="settings_epg_sources_save_sync">Зберегти й синхронізувати</string>
+    <string name="settings_epg_sources_fill_playlist">Заповнити з плейлиста</string>
+    <string name="settings_epg_sources_none_playlist">Жоден з ваших плейлистів не надає URL EPG.</string>
+    <string name="settings_epg_sources_use_logos">Використовувати логотипи каналів цієї програми передач</string>
+    <string name="settings_epg_sources_logos_description">Показувати логотипи з цієї стрічки XMLTV замість логотипів вашого плейлиста. Канали, для яких у цій стрічці немає логотипа, зберігають логотип плейлиста.</string>
+    <string name="settings_epg_sources_name">Назва</string>
+    <string name="settings_epg_sources_url">URL XMLTV</string>
+    <string name="settings_epg_sources_portal_guide">Програма передач із порталу</string>
+    <string name="settings_epg_sources_user_agent">User-Agent (необов’язково)</string>
+    <string name="settings_epg_sources_name_hint">наприклад, Українська програма</string>
+    <string name="settings_epg_sources_url_hint">https://…/epg.xml(.gz)</string>
+    <string name="settings_epg_sources_user_agent_hint">Залиште порожнім для типового</string>
+    <string name="settings_epg_sources_delete_title">Видалити «<xliff:g id="name">%1$s</xliff:g>»?</string>
+    <string name="settings_epg_sources_delete_message">Видаляє це джерело EPG і його дані програми передач. Ваші канали залишаються.</string>
+    <string name="settings_epg_sources_syncing_percent">Синхронізація <xliff:g id="percent">%1$d</xliff:g>%%</string>
+    <plurals name="settings_epg_sources_catchup">
+        <item quantity="one">Архів доступний на <xliff:g id="count">%1$d</xliff:g> каналі.</item>
+        <item quantity="few">Архів доступний на <xliff:g id="count">%1$d</xliff:g> каналах.</item>
+        <item quantity="many">Архів доступний на <xliff:g id="count">%1$d</xliff:g> каналах.</item>
+        <item quantity="other">Архів доступний на <xliff:g id="count">%1$d</xliff:g> каналах.</item>
+    </plurals>
+    <string name="settings_epg_sources_error">⚠ <xliff:g id="error">%1$s</xliff:g></string>
+    <string name="settings_epg_sources_auto_refresh_title">Автооновлення</string>
+    <string name="settings_epg_sources_auto_refresh_description">Вимкнено, під час запуску або коли дані застаріли</string>
+    <string name="settings_epg_sources_not_synced">Ще не синхронізовано</string>
+    <string name="settings_epg_sources_priority">Пріоритет програми передач: <xliff:g id="position">%1$d</xliff:g> із <xliff:g id="total">%2$d</xliff:g>. Коли два джерела містять той самий канал, використовується те, що вище в цьому списку.</string>
+    <string name="settings_epg_refresh_1h">1 година</string>
+    <string name="settings_epg_refresh_3h">3 години</string>
+    <string name="settings_epg_refresh_6h">6 годин</string>
+    <string name="settings_epg_refresh_12h">12 годин</string>
+    <string name="settings_epg_refresh_24h">24 години</string>
+    <string name="settings_epg_refresh_48h">48 годин</string>
+    <string name="settings_epg_sources_deleting">Видалення…</string>
+    <string name="settings_epg_sources_syncing_label">Синхронізація</string>
+    <string name="settings_epg_sources_connecting">З’єднання…</string>
+    <plurals name="settings_epg_sources_status_count_channels">
+        <item quantity="one">Програма передач містить <xliff:g id="channels">%1$d</xliff:g> канал.</item>
+        <item quantity="few">Програма передач містить <xliff:g id="channels">%1$d</xliff:g> канали.</item>
+        <item quantity="many">Програма передач містить <xliff:g id="channels">%1$d</xliff:g> каналів.</item>
+        <item quantity="other">Програма передач містить <xliff:g id="channels">%1$d</xliff:g> каналів.</item>
+    </plurals>
+    <plurals name="settings_epg_sources_status_count_programmes">
+        <item quantity="one">Вона містить <xliff:g id="programmes">%1$d</xliff:g> передачу.</item>
+        <item quantity="few">Вона містить <xliff:g id="programmes">%1$d</xliff:g> передачі.</item>
+        <item quantity="many">Вона містить <xliff:g id="programmes">%1$d</xliff:g> передач.</item>
+        <item quantity="other">Вона містить <xliff:g id="programmes">%1$d</xliff:g> передач.</item>
+    </plurals>
+    <string name="settings_epg_sources_status_count"><xliff:g id="channels">%1$s</xliff:g> <xliff:g id="programmes">%2$s</xliff:g></string>
+    <string name="settings_epg_sources_status_count_with_catchup"><xliff:g id="counts">%1$s</xliff:g> <xliff:g id="catchup">%2$s</xliff:g></string>
+    <string name="settings_epg_sources_status_synced">Синхронізовано, але в часовому вікні не знайдено передач.</string>
+    <string name="settings_epg_sources_status_synced_with_catchup"><xliff:g id="catchup">%1$s</xliff:g></string>
+    <string name="settings_backup_title">Резервне копіювання й відновлення</string>
+    <string name="settings_backup_working">Виконується…</string>
+    <string name="settings_backup_what_backup">Що копіювати</string>
+    <string name="settings_backup_what_restore">Що відновлювати</string>
+    <string name="settings_backup_encrypt_title">Зашифрувати цю копію?</string>
+    <string name="settings_backup_encrypt_message">З паролем резервної копії весь файл шифрується — разом із плейлистами, профілями та збереженими паролями — і нічого в ньому не можна прочитати без цього пароля. Бережіть його: якщо ви його втратите, копію не можна буде відкрити зовсім. Без пароля файл не шифрується, а збережені паролі й PIN-коди в нього не включаються.</string>
+    <string name="settings_backup_export_title">Експортувати резервну копію</string>
+    <string name="settings_backup_restore_title">Відновити резервну копію</string>
+    <string name="settings_backup_password">Пароль резервної копії</string>
+    <string name="settings_backup_enter_password">Введіть пароль резервної копії</string>
+    <string name="settings_backup_wrong_password">Неправильний пароль резервної копії</string>
+    <string name="settings_backup_password_mismatch">Цей пароль не збігся. Спробуйте ще раз або пропустіть, щоб відновити все, крім збережених паролів.</string>
+    <string name="settings_backup_password_encrypted_mismatch">Цей пароль не збігся. Ця резервна копія зашифрована — без пароля, з яким її створено, відкрити її неможливо.</string>
+    <string name="settings_backup_encrypted_description">Ця резервна копія зашифрована. Введіть пароль резервної копії, щоб відкрити її й вибрати, що відновлювати.</string>
+    <string name="settings_backup_saved_passwords_description">Паролі цієї резервної копії зашифровані. Введіть пароль резервної копії, щоб відновити їх, або пропустіть, щоб відновити все інше й ввести паролі пізніше.</string>
+    <string name="settings_backup_choose_folder">Виберіть папку для збереження резервної копії</string>
+    <string name="settings_backup_choose_folder_action">Вибрати папку</string>
+    <string name="settings_backup_pick_file">Виберіть файл резервної копії для відновлення</string>
+    <string name="settings_backup_remote">Інший пристрій</string>
+    <string name="settings_backup_everything">Усе</string>
+    <string name="settings_backup_kids_profile">Дитячий профіль</string>
+    <string name="settings_backup_profile_current">«<xliff:g id="name">%1$s</xliff:g>» (поточний)</string>
+    <string name="settings_backup_profile_locked">«<xliff:g id="name">%1$s</xliff:g>» заблоковано</string>
+    <string name="settings_backup_pin_incorrect">Неправильний PIN-код.</string>
+    <string name="settings_backup_pin_locked">PIN-код заблоковано</string>
+    <string name="settings_backup_unlock">Розблокувати</string>
+    <string name="settings_backup_encrypt_export">Зашифрувати й експортувати</string>
+    <string name="settings_backup_export_unencrypted">Експортувати без шифрування</string>
+    <string name="settings_backup_encrypt_prepare">Зашифрувати й підготувати</string>
+    <string name="settings_backup_prepare_unencrypted">Підготувати без шифрування</string>
+    <string name="settings_backup_restore_action">Відновити</string>
+    <string name="settings_backup_skip_passwords">Пропустити (без паролів)</string>
+    <string name="settings_backup_section_sources">Джерела</string>
+    <string name="settings_backup_section_sources_desc">Плейлисти, стрічки EPG і облікові дані</string>
+    <string name="settings_backup_no_sources_warning">Без «Джерел» цей пристрій не отримає плейлистів і йому нічого буде дивитися.</string>
+    <string name="settings_backup_section_customize">Налаштування вмісту</string>
+    <string name="settings_backup_section_customize_desc">Приховані, перейменовані й упорядковані категорії, канали, відповідності EPG і власні назви TMDB</string>
+    <string name="settings_backup_section_favorites">Обране</string>
+    <string name="settings_backup_section_favorites_desc">Позначені канали, фільми й серіали</string>
+    <string name="settings_backup_section_history">Історія перегляду</string>
+    <string name="settings_backup_section_history_desc">Списки нещодавно переглянутого</string>
+    <string name="settings_backup_section_resume">Позиції продовження</string>
+    <string name="settings_backup_section_resume_desc">Де ви зупинилися у фільмах і епізодах</string>
+    <string name="settings_backup_section_reorder">Ручне впорядкування</string>
+    <string name="settings_backup_section_reorder_desc">Ваші позиції «Перемістити вгору/вниз» для каналів, фільмів і серіалів</string>
+    <string name="settings_backup_section_settings">Налаштування застосунку</string>
+    <string name="settings_backup_section_settings_desc">Тема, акцент, плеєр і параметри макета</string>
+    <string name="settings_backup_device_settings">Налаштування обладнання з іншого пристрою</string>
+    <string name="settings_backup_device_settings_desc">Рушій плеєра, апаратне декодування, частота кадрів, HDR і об’ємний звук. Беріть їх, лише якщо на обох пристроях однакове обладнання.</string>
+    <string name="settings_backup_saved_to">Збережено в <xliff:g id="path">%1$s</xliff:g>.</string>
+    <string name="settings_backup_saved_to_without_passwords">Збережено в <xliff:g id="path">%1$s</xliff:g>. Паролі й PIN-коди не включено.</string>
+    <plurals name="settings_backup_restored">
+        <item quantity="one">Відновлено <xliff:g id="items">%1$d</xliff:g> елемент.</item>
+        <item quantity="few">Відновлено <xliff:g id="items">%1$d</xliff:g> елементи.</item>
+        <item quantity="many">Відновлено <xliff:g id="items">%1$d</xliff:g> елементів.</item>
+        <item quantity="other">Відновлено <xliff:g id="items">%1$d</xliff:g> елементів.</item>
+    </plurals>
+    <string name="settings_backup_restore_resync">Синхронізуйте джерела знову, щоб завантажити вміст.</string>
+    <string name="settings_backup_restore_password_note">Введіть знову всі збережені паролі в «Джерелах» або «Проксі» та всі PIN-коди профілів.</string>
+    <plurals name="settings_backup_skipped_sources">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> джерело пропущено, бо тип його плейлиста не підтримується.</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> джерела пропущено, бо типи їхніх плейлистів не підтримуються.</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> джерел пропущено, бо типи їхніх плейлистів не підтримуються.</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> джерел пропущено, бо типи їхніх плейлистів не підтримуються.</item>
+    </plurals>
+    <string name="settings_backup_export_error">Не вдалося експортувати.</string>
+    <string name="settings_backup_no_file_app">На цьому телефоні немає застосунку, який може зберегти файл. Скористайтеся «Поділитися».</string>
+    <string name="settings_backup_read_error">Не вдалося прочитати файл резервної копії.</string>
+    <string name="settings_backup_import_error">Не вдалося імпортувати.</string>
+    <string name="settings_backup_invalid_locale">Ця резервна копія містила непідтримувану мову застосунку. Відновлення пройшло успішно, але вашу поточну мову збережено.</string>
+    <string name="settings_backup_which_profiles">Які профілі копіювати</string>
+    <string name="settings_backup_selected_profiles">Резервна копія міститиме лише вибрані профілі та їхні дані. Заблоковані профілі потребують свого PIN-коду.</string>
+    <string name="settings_backup_profile_pin_description">Це не ваш поточний профіль. Введіть його PIN-код, щоб включити його до копії — без PIN-коду його дані не копіюватимуться.</string>
+    <string name="settings_backup_profile_clash_title">«<xliff:g id="name">%1$s</xliff:g>» уже є на цьому пристрої</string>
+    <string name="settings_backup_profile_clash_body">У резервній копії є профіль з тим самим ім’ям. Що з ним робити?</string>
+    <string name="settings_backup_profile_merge">Об’єднати з ним</string>
+    <string name="settings_backup_profile_merge_description">Зберігає те, що в ньому є тут, і додає те, що приносить копія.</string>
+    <string name="settings_backup_profile_replace">Замінити його</string>
+    <string name="settings_backup_profile_replace_description">Його обране, історія перегляду, позиції продовження, налаштування вмісту й ручний порядок тут спершу очищаються для частин, що відновлюються.</string>
+    <string name="settings_backup_profile_keep_both">Залишити обидва</string>
+    <string name="settings_backup_profile_keep_both_description">Профіль із копії з’явиться як новий профіль «<xliff:g id="name">%1$s</xliff:g>».</string>
+    <string name="settings_backup_profile_restored_name"><xliff:g id="name">%1$s</xliff:g> (відновлено)</string>
+    <string name="settings_metadata_optional">необов’язково</string>
+    <string name="settings_metadata_test_title">Оппенгеймер</string>
+    <string name="settings_bulk_rename_title">Масове перейменування</string>
+    <plurals name="settings_bulk_rename_selected">
+        <item quantity="one">Вибрано <xliff:g id="count">%1$d</xliff:g> назву. Додайте правила або очистіть її автоматично.</item>
+        <item quantity="few">Вибрано <xliff:g id="count">%1$d</xliff:g> назви. Додайте правила або очистіть їх автоматично.</item>
+        <item quantity="many">Вибрано <xliff:g id="count">%1$d</xliff:g> назв. Додайте правила або очистіть їх автоматично.</item>
+        <item quantity="other">Вибрано <xliff:g id="count">%1$d</xliff:g> назв. Додайте правила або очистіть їх автоматично.</item>
+    </plurals>
+    <string name="settings_bulk_rename_add_rule">✎ Додати правило</string>
+    <string name="settings_bulk_rename_auto_cleanup">✨ Автоочищення</string>
+    <string name="settings_bulk_rename_restore_original">↺ Відновити оригінальні назви</string>
+    <string name="settings_bulk_rename_rules_title">Правила масового перейменування</string>
+    <string name="settings_bulk_rename_rules_description">Правила виконуються згори донизу. Розділяйте кілька значень знаком «;» — «Додати» приймає рівно одне.</string>
+    <string name="settings_bulk_rename_add_single_value_error">«Додати» потребує рівно одного значення — крапка з комою призначена для правил «Прибрати».</string>
+    <string name="settings_bulk_rename_rule_required">Додайте принаймні одне правило.</string>
+    <string name="settings_bulk_rename_rule_type">Тип правила</string>
+    <string name="settings_bulk_rename_action_add">Додати</string>
+    <string name="settings_bulk_rename_action_remove">Прибрати</string>
+    <string name="settings_bulk_rename_where">Де</string>
+    <string name="settings_bulk_rename_before">Перед (префікс)</string>
+    <string name="settings_bulk_rename_after">Після (суфікс)</string>
+    <string name="settings_bulk_rename_rule_value">Значення правила</string>
+    <string name="settings_bulk_rename_value_hint">Розділяйте кілька значень знаком «;» — «Додати» приймає рівно одне.</string>
+    <string name="settings_bulk_rename_value_example">значення;значення;значення</string>
+    <string name="settings_bulk_rename_add_another_rule">＋ Додати ще одне правило</string>
+    <string name="settings_bulk_rename_trim_spaces">Прибирати зайві пробіли</string>
+    <string name="settings_bulk_rename_ignore_case">Не розрізняти великі й малі літери</string>
+    <string name="settings_bulk_rename_review">Перегляд перейменувань</string>
+    <string name="settings_bulk_rename_review_description">Нічого не записується, доки ви не застосуєте рядок — «Готово» записує все застосоване одним кроком.</string>
+    <string name="settings_bulk_rename_blank_rejected">порожню назву відхилено — оригінал збережено</string>
+    <string name="settings_bulk_rename_unchanged">без змін — жодне правило не спрацювало</string>
+    <string name="settings_bulk_rename_result">→ <xliff:g id="name">%1$s</xliff:g></string>
+    <string name="settings_bulk_rename_duplicate">дублікат назви — її вже використовує інший елемент</string>
+    <string name="settings_bulk_rename_apply">Застосувати</string>
+    <string name="settings_bulk_rename_decline">Відхилити</string>
+    <plurals name="settings_bulk_rename_will_change">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> зміниться</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> зміняться</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> зміняться</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> зміняться</item>
+    </plurals>
+    <plurals name="settings_bulk_rename_unchanged_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> без змін</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> без змін</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> без змін</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> без змін</item>
+    </plurals>
+    <plurals name="settings_bulk_rename_duplicates_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> дублікат</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> дублікати</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> дублікатів</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> дублікатів</item>
+    </plurals>
+    <string name="settings_bulk_rename_apply_all">Застосувати все</string>
+    <string name="settings_bulk_rename_decline_all">Відхилити все</string>
+    <string name="settings_bulk_rename_edit_rules">✎ Змінити правила</string>
+    <string name="settings_bulk_rename_restore_title">Відновити оригінальні назви?</string>
+    <string name="settings_bulk_rename_restore_description">Кожна вибрана назва повертається до оригінальної від провайдера. Зачіпається лише цей вибір.</string>
+    <string name="settings_bulk_rename_restore">Відновити</string>
+    <string name="settings_bulk_rename_too_many_title">Забагато елементів</string>
+    <string name="settings_bulk_rename_too_many_description">У цій категорії забагато елементів для одного масового перейменування — перейменовуйте її меншими діапазонами.</string>
+    <string name="settings_bulk_rename_auto_country_provider">Авто: теги країни/провайдера</string>
+    <string name="settings_bulk_rename_auto_quality_codec">Авто: теги якості/кодека будь-де</string>
+    <string name="settings_bulk_rename_auto_emoji_symbols">Авто: емодзі та символи</string>
+    <string name="settings_customize_new_category_title">Нова категорія</string>
+    <string name="settings_customize_new_category_description">Об’єднана категорія для цього профілю — переміщуйте до неї канали, фільми чи серіали.</string>
+    <string name="settings_customize_this_category">ця категорія</string>
+    <string name="settings_customize_sort_categories">Сортувати категорії</string>
+    <string name="settings_customize_delete_category">Видалити «<xliff:g id="name">%1$s</xliff:g>»?</string>
+    <string name="settings_customize_delete_category_description">Об’єднану категорію видалено. Її елементи залишаються у своїх початкових категоріях.</string>
+    <string name="settings_customize_channels_description">Канали в цій категорії — перейменовуйте, упорядковуйте, ховайте чи показуйте.</string>
+    <string name="settings_customize_movies_description">Фільми в цій категорії — упорядковуйте, ховайте чи показуйте.</string>
+    <string name="settings_customize_series_description">Серіали в цій категорії — упорядковуйте, ховайте чи показуйте.</string>
+    <string name="settings_customize_hide_show_items">Сховати або показати елементи</string>
+    <plurals name="settings_customize_selected_items">
+        <item quantity="one">Вибрано <xliff:g id="count">%1$d</xliff:g> елемент.</item>
+        <item quantity="few">Вибрано <xliff:g id="count">%1$d</xliff:g> елементи.</item>
+        <item quantity="many">Вибрано <xliff:g id="count">%1$d</xliff:g> елементів.</item>
+        <item quantity="other">Вибрано <xliff:g id="count">%1$d</xliff:g> елементів.</item>
+    </plurals>
+    <plurals name="settings_customize_move_items_selected">
+        <item quantity="one">Вибрано <xliff:g id="count">%1$d</xliff:g> елемент. Продовжуйте натискати ⤒ ↑ ↓ ⤓, щоб перемістити його.</item>
+        <item quantity="few">Вибрано <xliff:g id="count">%1$d</xliff:g> елементи. Продовжуйте натискати ⤒ ↑ ↓ ⤓, щоб перемістити їх разом.</item>
+        <item quantity="many">Вибрано <xliff:g id="count">%1$d</xliff:g> елементів. Продовжуйте натискати ⤒ ↑ ↓ ⤓, щоб перемістити їх разом.</item>
+        <item quantity="other">Вибрано <xliff:g id="count">%1$d</xliff:g> елементів. Продовжуйте натискати ⤒ ↑ ↓ ⤓, щоб перемістити їх разом.</item>
+    </plurals>
+    <string name="settings_customize_rename_item_hint">Лише для цього профілю. Залиште порожнім, щоб повернути «<xliff:g id="name">%1$s</xliff:g>».</string>
+    <string name="settings_customize_item_was">було «<xliff:g id="name">%1$s</xliff:g>»</string>
+    <string name="settings_customize_rename_items">✎ Перейменувати елементи</string>
+    <string name="settings_customize_move_to">Перемістити до…</string>
+    <string name="settings_customize_back">← Назад</string>
+    <string name="settings_move_category_title">Перемістити до категорії</string>
+    <string name="settings_move_category_description">Елемент залишає «<xliff:g id="name">%1$s</xliff:g>», якщо ви не залишите його там.</string>
+    <string name="settings_move_category_new">＋ Нова категорія…</string>
+    <string name="settings_move_category_keep">Залишити також у «<xliff:g id="name">%1$s</xliff:g>»</string>
+    <string name="settings_move_category_action">Перемістити</string>
+    <string name="settings_dns_description">Використовувати власний DNS-сервер для пошуку доменів</string>
+    <string name="settings_dns_toggle_description">Розв’язувати всі запити доменів OwnTV через власний DNS-сервер.</string>
+    <string name="settings_dns_use_custom">Використовувати власний DNS</string>
+    <string name="settings_dns_server_missing">Власний DNS увімкнено, але сервер не налаштовано. Введіть адресу сервера й виберіть «Зберегти» або вимкніть цю опцію.</string>
+    <string name="settings_dns_server">DNS-сервер</string>
+    <string name="settings_dns_server_hint">8.8.8.8 або https://dns.google/dns-query</string>
+    <string name="settings_dns_test">Перевірити DNS</string>
+    <string name="settings_dns_explanation">Власний DNS може допомогти обійти блокування доменів на рівні провайдера інтернету або забезпечити георозблокування через служби SmartDNS. Рекомендується DNS-over-HTTPS (DoH) — він шифрує ваші запити.</string>
+    <string name="settings_dns_limitations">Це налаштування впливає лише на трафік на основі OkHttp (синхронізація плейлистів, EPG, виклики API, зображення, потоки ExoPlayer). mpv використовує системний розв’язувач і не зачіпається.</string>
+    <string name="settings_dns_resolved">Перевірка пройдена ✓ (<xliff:g id="millis">%1$d</xliff:g> мс)</string>
+    <string name="settings_dns_enter_server">Введіть хост DNS-сервера або URL DoH.</string>
+    <string name="settings_dns_not_reachable">DNS-сервер недоступний.</string>
+    <string name="settings_dns_timed_out">Час очікування DNS-запиту минув.</string>
+    <string name="settings_dns_network_unreachable">Мережа недоступна — перевірте адресу сервера.</string>
+    <string name="settings_dns_connection_refused">З’єднання відхилено — перевірте адресу сервера й порт.</string>
+    <string name="settings_dns_test_failed">Перевірка DNS не вдалася — перевірте адресу сервера.</string>
+    <string name="settings_dns_no_addresses">DNS не повернув адрес для <xliff:g id="host">%1$s</xliff:g>.</string>
+    <string name="settings_subtitle_customize">Налаштувати субтитри</string>
+    <string name="settings_subtitle_customize_off">Вимкнено: субтитри залишаються точно такими, як їх малюють потік і плеєр.</string>
+    <string name="settings_subtitle_preview_stock">Перегляд — стандартний вигляд</string>
+    <string name="settings_subtitle_reset_all">Скинути все</string>
+    <string name="settings_subtitle_color">Колір субтитрів</string>
+    <string name="settings_subtitle_color_default_description">«Типовий» залишає колір потоку й плеєра.</string>
+    <string name="settings_subtitle_color_hex_hint">Введіть 6 шістнадцяткових цифр, наприклад FFEB3B</string>
+    <string name="settings_subtitle_use_default">Використати типовий</string>
+    <string name="settings_subtitle_position">Позиція субтитрів</string>
+    <string name="settings_subtitle_background_transparency">Прозорість фону</string>
+    <string name="settings_subtitle_preview_sample">Швидка руда лисиця</string>
+    <string name="settings_subtitle_customize_description">Увімкніть це, потім змініть лише те, що хочете — усе, що залишиться «Типовим», зберігає стандартний вигляд, зокрема кольори й розміщення, які мовники вбудовують у субтитри ТБ наживо.</string>
+    <string name="settings_subtitle_default">Типовий</string>
+    <string name="settings_subtitle_color_short">Колір</string>
+    <string name="settings_subtitle_color_description">Колір тексту — пресет, вибір або hex-код.</string>
+    <string name="settings_subtitle_position_short">Позиція</string>
+    <string name="settings_subtitle_position_description">Де субтитри розташовані на екрані.</string>
+    <string name="settings_subtitle_background_description">Наскільки суцільна рамка за текстом.</string>
+    <string name="settings_subtitle_hex">Hex</string>
+    <string name="settings_subtitle_position_default_description">«Типовий» залишає розміщення потоку — зокрема там, де мовник ставить прямий підпис. Будь-який інший вибір завжди переважає.</string>
+    <string name="settings_subtitle_background_none">Немає</string>
+    <string name="settings_subtitle_background_solid">Суцільний</string>
+    <string name="settings_subtitle_color_white">Білий</string>
+    <string name="settings_subtitle_color_yellow">Жовтий</string>
+    <string name="settings_subtitle_color_cyan">Блакитний</string>
+    <string name="settings_subtitle_color_green">Зелений</string>
+    <string name="settings_subtitle_color_grey">Сірий</string>
+    <string name="settings_live_preroll">Попередня буферизація потоків наживо</string>
+    <string name="settings_live_preroll_description">Збирати стільки відео, перш ніж канал наживо почне відтворюватися, і знову після гальмування. Це обсяг відео, а не зворотний відлік. Вимкнено: найшвидший можливий старт, що підходить більшості провайдерів. Підвищуйте, лише якщо відтворення справді гальмує: багато провайдерів публікують лише кілька секунд попереду прямого ефіру, і запит більшого обсягу відео, ніж вони надсилають, може погіршити гальмування.</string>
+    <string name="settings_live_tune_timeout">Відмовитися від каналу через</string>
+    <string name="settings_live_tune_timeout_description">Якщо канал наживо до цього часу не показав зображення, OwnTV припиняє спроби й повідомляє вам, замість того щоб залишати чорний екран, поки перебирає всі свої плеєри. «Ніколи» продовжує спроби, що може тривати значно понад хвилину на каналі, який ваш провайдер видалив. Очікування, яких просить ваш провайдер, не враховуються.</string>
+    <string name="settings_live_preroll_per_playlist">Попередня буферизація для плейлиста</string>
+    <string name="settings_live_preroll_per_playlist_description">Замінити налаштування вище для одного плейлиста, зберігаючи швидкість інших плейлистів.</string>
+    <string name="settings_live_engine_per_playlist">Плеєр ТБ наживо для плейлиста</string>
+    <string name="settings_live_engine_per_playlist_description">Замінити налаштування вище для одного плейлиста, для провайдера, канали якого добре обробляє лише один із плеєрів.</string>
+    <string name="settings_live_latency_per_playlist">Затримка наживо для плейлиста</string>
+    <string name="settings_live_latency_per_playlist_description">Замінити налаштування вище для одного плейлиста, для провайдера, якому потрібен глибший або мілкіший буфер, ніж іншим.</string>
+    <string name="settings_catchup_timezone_per_playlist">Часовий пояс архіву для плейлиста</string>
+    <string name="settings_catchup_timezone_per_playlist_description">Замінити часовий пояс вище для одного плейлиста, для провайдера, архів якого працює за іншим годинником.</string>
+    <string name="settings_vod_engine_per_playlist">Плеєр фільмів і серіалів для плейлиста</string>
+    <string name="settings_vod_engine_per_playlist_description">Замінити налаштування вище для одного плейлиста, для провайдера, фільми й епізоди якого добре обробляє лише один із плеєрів.</string>
+    <string name="settings_live_tune_timeout_per_playlist">Відмовитися через, для плейлиста</string>
+    <string name="settings_live_tune_timeout_per_playlist_description">Замінити налаштування вище для одного плейлиста, для провайдера, канали якого повільно запускаються або часто не працюють.</string>
+    <plurals name="settings_live_preroll_overrides">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> задано</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> задано</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> задано</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> задано</item>
+    </plurals>
+    <string name="settings_surround_stereo">Лише стерео</string>
+    <string name="settings_surround_auto_description">Авто — пробувати об’ємний звук Dolby/DTS і автоматично повертатися до стерео, якщо телевізор чи саундбар його не відтворює. Рекомендовано.</string>
+    <string name="settings_surround_auto_description_mobile">Авто — пробувати об’ємний звук Dolby/DTS і автоматично повертатися до стерео, якщо динамік, навушники чи підключений ресивер його не відтворюють. Рекомендовано.</string>
+    <string name="settings_surround_stereo_description">Лише стерео — завжди декодувати в застосунку й надсилати звичайний звук 2.0. Використовуйте це на динаміках телевізора чи стереосаундбарі або якщо звук відстає від зображення.</string>
+    <string name="settings_surround_stereo_description_mobile">Лише стерео — завжди декодувати в застосунку й надсилати звичайний звук 2.0. Використовуйте це для вбудованого динаміка, навушників чи стереосаундбара або якщо звук відстає від зображення.</string>
+    <string name="settings_surround_forced_description">Об’ємний — надсилати Dolby/DTS на справжній ресивер 5.1/7.1. Якщо звук зникає або гальмує, OwnTV усе одно повертається до стерео й повідомляє вам.</string>
+    <string name="settings_panel_width">Ширина панелей</string>
+    <string name="settings_panel_width_description">Змінюйте розмір панелей категорій, списку й попереднього перегляду в ТБ наживо, фільмах і серіалах.</string>
+    <string name="settings_vod_layout">Макет фільмів і серіалів</string>
+    <string name="settings_vod_layout_description">Окремі панелі або один кінематографічний вигляд з ілюстрацією на тлі</string>
+    <string name="settings_vod_layout_screen_description">Виберіть, як розташовано фільми й серіали. ТБ наживо та список епізодів не змінюються.</string>
+    <string name="settings_vod_layout_separate">Окремі панелі</string>
+    <string name="settings_vod_layout_separate_description">Категорії, список назв і попередній перегляд поруч. Включає вигляди «Список» і «Сітка».</string>
+    <string name="settings_vod_layout_cinematic">Кінематографічний</string>
+    <string name="settings_vod_layout_cinematic_description">Ілюстрація вибраної назви заповнює екран, а її подробиці розташовано над сіткою постерів. Лише сітка.</string>
+    <string name="settings_search_keywords_vod_layout">макет кінематографічний тло ілюстрація панелі фільми серіали постер вигляд сітка</string>
+    <string name="settings_panel_width_details_height">Висота подробиць</string>
+    <string name="settings_panel_width_details_hint">Зменште висоту подробиць, щоб помістився ще один рядок постерів; збільшіть для більшого сюжету й акторів.</string>
+    <string name="settings_panel_width_content_area">Область вмісту</string>
+    <string name="settings_guide_width">Ширина стовпців програми передач</string>
+    <string name="settings_guide_width_description">Змінюйте розмір списку каналів і часової шкали EPG у програмі передач.</string>
+    <string name="settings_search_keywords_guide_width">програма передач epg список каналів часова шкала стовпець панель ширина розмір макет</string>
+    <string name="settings_guide_width_summary">Список каналів <xliff:g id="channels">%1$d</xliff:g>%% · Часова шкала EPG <xliff:g id="epg">%2$d</xliff:g>%%</string>
+    <string name="settings_guide_width_help">• Список каналів і часова шкала EPG займають один рядок, тож їхні відсотки мають дорівнювати разом 100%%.\n• Розширення списку каналів показує менше шкали часу одночасно; тривалість передач і масштаб часу не змінюються.\n• Обидва стовпці залишаються на рівні 10%% або більше.\n• «Скинути» повертає 10%% для списку каналів і 90%% для часової шкали EPG.\n• Вимкнення налаштування повертає стандартний макет програми передач без втрати ваших значень.</string>
+    <string name="settings_guide_width_channels">Список каналів</string>
+    <string name="settings_search_keywords_epg_offset">epg програма передач зсув часу часовий пояс схід захід години</string>
+    <string name="settings_search_keywords_panel_width">панель ширина розмір зміна категорія список перегляд постер стовпець макет наживо фільми серіали</string>
+    <string name="settings_search_keywords_live_preroll">попередня буферизація перед відтворенням повторне підвантаження гальмування зависання для плейлиста</string>
+    <string name="settings_detailed_playback_logging">Докладний журнал відтворення</string>
+    <string name="settings_search_keywords_detailed_logging">діагностика докладний трасування logcat налагодження звіт помилка наживо рушій</string>
+    <string name="settings_playback_kind_error">Помилка</string>
+    <string name="settings_playback_kind_event">Подія</string>
+    <string name="settings_playback_kind_report">Звіт</string>
+    <string name="settings_export">Експорт</string>
+    <string name="settings_detailed_playback_logging_description">Вести повний журнал того, що робить рушій наживо — кожне перемикання, перехід на резерв і повторне підключення — у Logcat і в експортованому звіті. Залишайте вимкненим, якщо не шукаєте проблему; це ніколи не змінює відтворення, лише обсяг записаного.</string>
+    <string name="settings_live_preroll_playlist_picker">Який плейлист?</string>
+    <string name="settings_live_preroll_follow">Слідувати налаштуванню</string>
+    <string name="settings_video_seconds"><xliff:g id="seconds">%1$d</xliff:g>с відео</string>
+    <string name="settings_epg_offset_root_description">Зсувайте всю програму передач, коли час у стрічці не збігається з тим, що насправді в ефірі. Окремий канал можна зсунути окремо з меню довгого натискання (ТБ наживо чи програма передач) — це для східної/західної версій, що ділять одну програму.</string>
+    <string name="settings_epg_offset_dialog_description">Зсуває кожну передачу в програмі передач. Використовуйте це, коли вся стрічка йде за хибним годинником; для окремого каналу (східна/західна версія з однією програмою) утримуйте канал у ТБ наживо чи програмі передач і задайте його власний зсув там.</string>
+    <string name="settings_panel_width_summary">Категорії <xliff:g id="category">%1$d</xliff:g>%% · Список <xliff:g id="list">%2$d</xliff:g>%% · <xliff:g id="preview_label">%3$s</xliff:g> <xliff:g id="preview">%4$d</xliff:g>%%</string>
+    <string name="settings_panel_width_help">• Панелі займають один рядок, тож їхні відсотки мають дорівнювати разом 100%%.\n• Задайте для панелі «Перегляд» чи «Постер» 0%%, щоб сховати її; «Категорії» та «Список» залишаються на рівні 10%% або більше.\n• Розширте одну панель, і перед збереженням потрібно забрати стільки ж в іншої.\n• «Скинути» повертає розділ до стандартної ширини, з якою починався цей екран.\n• Вимкнення розділу повертає його стандартний макет без втрати ваших значень.\n• Постери фільмів і серіалів перебудовуються автоматично, тож вужчий список просто показує менше в рядку.</string>
+    <string name="settings_panel_width_preview">Перегляд</string>
+    <string name="settings_panel_width_poster">Постер</string>
+    <string name="settings_panel_width_dialog_title">Ширина панелей: <xliff:g id="section">%1$s</xliff:g></string>
+    <string name="settings_panel_width_customize">Налаштувати панель</string>
+    <string name="settings_panel_width_category">Панель категорій</string>
+    <string name="settings_panel_width_list">Панель списку</string>
+    <string name="settings_panel_width_preview_panel">Панель: <xliff:g id="label">%1$s</xliff:g></string>
+    <string name="settings_panel_width_total">Загальний розмір</string>
+    <string name="settings_panel_width_invalid_total">Загальний розмір — <xliff:g id="total">%1$d</xliff:g>%%. Він має бути 100%% — виправте.</string>
+    <string name="settings_panel_width_disable_preview_title">Вимкнути відео «Перегляд наживо»?</string>
+    <string name="settings_panel_width_disable_preview_description">Відео «Перегляд наживо» зараз увімкнено. Приховування панелі «Перегляд» вимкне відео, і його не можна буде ввімкнути знову, доки ви не задасте панелі «Перегляд» ширину в «Налаштуванні ширини панелей».</string>
+    <string name="settings_live_preview_panel_hidden_title">Відео «Перегляд наживо» недоступне</string>
+    <string name="settings_live_preview_panel_hidden_description">Панель «Перегляд» в ТБ наживо прихована. Задайте їй ширину понад 0%% у «Налаштуванні ширини панелей», перш ніж вмикати відео перегляду.</string>
+    <string name="settings_language_help_translate">Допоможіть перекласти OwnTV вашою мовою</string>
+    <string name="settings_language_contribution_description">Відскануйте QR-код або відкрийте посилання, щоб вибрати будь-яку доступну мову й зробити внесок у всі шість компонентів перекладу OwnTV.</string>
+    <string name="settings_language_request_workflow">Хочете додати мову, якої немає в списку? Спершу відкрийте запит на мову. Супровідник зареєструє її й підготує базові файли перекладу; коли вона з’явиться на Hosted Weblate, ви зможете починати вносити свій внесок.</string>
+    <string name="settings_language_request_new">Запросити нову мову</string>
+    <string name="settings_language_contribution_qr_description">QR-код огляду проєкту перекладу OwnTV</string>
+    <string name="settings_language_contribution_qr_failed">Не вдалося створити QR-код. Скористайтеся посиланням нижче.</string>
+    <string name="settings_language_contribution_copy">Копіювати посилання</string>
+    <string name="settings_language_contribution_copied">Посилання скопійовано</string>
+    <string name="settings_language_contribution_open_failed">Не вдалося відкрити посилання. Скопіюйте його натомість.</string>
+    <string name="settings_language_contribution_copy_failed">Не вдалося скопіювати посилання. Прочитайте або введіть URL, показаний вище.</string>
+    <string name="settings_ambient_glow">Фонове сяйво</string>
+    <string name="settings_ambient_glow_description">Додає сяйво в стилі початкового налаштування до суцільного інтерфейсу</string>
+    <string name="settings_ambient_glow_dialog_description">Додає м’яку акцентну ауру до нескляного інтерфейсу. Повільна пульсація ледь помітно «дихає», коли анімацію ввімкнено.</string>
+    <string name="settings_ambient_glow_effect">Сяйво</string>
+    <string name="settings_ambient_glow_pulse">Повільна пульсація</string>
+    <string name="settings_glass_live_preview">Перегляд наживо</string>
+    <string name="settings_selection_highlight">Підсвічування вибору</string>
+    <string name="settings_selection_highlight_description">Колір і товщина рамки навколо вибраного елемента</string>
+    <string name="settings_background_playback">Відтворення у фоні</string>
+    <string name="settings_background_playback_description">Продовжувати звук після виходу із застосунку</string>
+    <string name="settings_pip">Картинка в картинці</string>
+    <string name="settings_data_saver">Економія трафіку</string>
+    <string name="settings_data_saver_description">Не передавати потік через мобільний інтернет</string>
+    <string name="settings_gesture_sensitivity">Чутливість жестів</string>
+    <string name="settings_downloads_wifi_only">Завантажувати лише через Wi-Fi</string>
+    <string name="settings_downloads_wifi_only_description">Чекати на Wi-Fi замість використання мобільного інтернету</string>
+    <string name="settings_mini_player_style_description">Як відтворення слідує за вами під час перегляду</string>
+    <string name="settings_mini_player_style_floating">Плаваюче вікно</string>
+    <string name="settings_mini_player_style_docked">Закріплена панель</string>
+    <string name="settings_pip_size">Розмір вікна</string>
+    <string name="settings_pip_size_small">Малий</string>
+    <string name="settings_pip_size_medium">Середній</string>
+    <string name="settings_pip_size_large">Великий</string>
+    <string name="settings_pip_snap">Прилипати до країв</string>
+    <string name="settings_audio_on_screen_off">Лише звук, коли екран вимикається</string>
+    <string name="settings_audio_on_mobile_data">Лише звук у мобільному інтернеті</string>
+    <string name="settings_audio_on_mobile_data_description">Починати без зображення, коли немає Wi-Fi</string>
+    <string name="settings_audio_per_channel">Запам’ятовувати «лише звук» для кожного каналу</string>
+    <string name="local_sync_host_hint">На іншому пристрої теж увімкніть режим синхронізації, потім торкніться «Підключити» й виберіть цей.</string>
+    <string name="local_sync_qr_description">QR-код з адресою цього пристрою</string>
+    <string name="local_sync_pin_is">PIN-код: <xliff:g id="pin">%1$s</xliff:g></string>
+    <string name="local_sync_add_device">Знайти пристрій</string>
+    <string name="local_sync_paired_devices">З’єднані пристрої</string>
+    <string name="local_sync_working">Виконується…</string>
+    <string name="local_sync_find_hint">Обидва пристрої мають бути в тій самій мережі Wi-Fi, а на іншому має бути ввімкнено режим синхронізації.</string>
+    <string name="local_sync_searching">Пошук у мережі…</string>
+    <string name="local_sync_found">Знайдено у вашій мережі</string>
+    <string name="local_sync_scan_qr">Відскануйте код</string>
+    <string name="local_sync_scan_qr_description">Наведіть камеру на код на іншому пристрої</string>
+    <string name="local_sync_camera_denied">Без камери пристрій усе одно можна вибрати зі списку або ввести його адресу.</string>
+    <string name="local_sync_manual_address">Або введіть адресу</string>
+    <string name="local_sync_manual_address_label">Адреса</string>
+    <string name="local_sync_enter_pin">Введіть PIN-код</string>
+    <string name="local_sync_enter_pin_description">Введіть шість цифр, показаних на іншому пристрої. Це потрібно зробити лише один раз.</string>
+    <string name="local_sync_pin_label">PIN-код</string>
+    <string name="local_sync_pair">З’єднати</string>
+    <string name="local_sync_send_to">Надіслати на <xliff:g id="device">%1$s</xliff:g></string>
+    <string name="local_sync_send_description">Ваші дані надсилаються туди. Тут нічого не змінюється.</string>
+    <string name="local_sync_receive_from">Отримати з <xliff:g id="device">%1$s</xliff:g></string>
+    <string name="local_sync_receive_description">Його дані надходять сюди. Там нічого не змінюється.</string>
+    <string name="local_sync_merge_with">Об’єднати з <xliff:g id="device">%1$s</xliff:g></string>
+    <string name="local_sync_merge_description">На обох пристроях буде все</string>
+    <string name="local_sync_unpair">Забути цей пристрій</string>
+    <string name="local_sync_unpair_description">Наступного разу знову знадобиться PIN-код</string>
+    <string name="local_sync_what_to_send">Що надсилати</string>
+    <string name="local_sync_what_to_receive">Що отримувати</string>
+    <string name="local_sync_what_to_merge">Що об’єднувати</string>
+    <string name="local_sync_sections_hint">Те саме, що містить резервна копія. Зніміть позначку з усього, що хочете залишити осторонь.</string>
+    <string name="local_sync_everything">Усе</string>
+    <string name="local_sync_confirm_title">Що зміниться</string>
+    <string name="local_sync_confirm_hint">Поки нічого не змінено. Ось що застосування зробить на цьому пристрої.</string>
+    <string name="local_sync_nothing_to_change">На обох пристроях уже те саме. Нічого застосовувати.</string>
+    <string name="local_sync_merge_note">Ваші власні дані надсилаються назад після цього, тож обидва пристрої стануть однаковими.</string>
+    <string name="local_sync_change_profiles">Нових профілів: <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_change_sources">Нових плейлистів: <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_change_favorites">Нового обраного: <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_change_history">Нових записів історії: <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_change_resume">Нових позицій продовження: <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_change_reorder">Змін порядку: <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_change_settings">Налаштувань, що відрізняються: <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_change_deletions">Елементів для видалення: <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_change_customize">Ваші налаштування вмісту теж переносяться</string>
+    <string name="local_sync_apply">Застосувати</string>
+    <string name="local_sync_done">Синхронізацію завершено</string>
+    <string name="local_sync_received_items">Отримано елементів: <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="local_sync_sent">Ваші дані надіслано</string>
+    <string name="local_sync_failed">Не вдалося синхронізувати</string>
+    <string name="local_sync_error_unreachable">Не вдалося зв’язатися з цим пристроєм. На ньому відкрийте OwnTV → Ще → Локальна синхронізація й увімкніть режим синхронізації. Обидва пристрої мають бути в тій самій мережі Wi-Fi.</string>
+    <string name="local_sync_error_unauthorized">Інший пристрій відмовив. Можливо, PIN-код неправильний або він забув цей пристрій.</string>
+    <string name="local_sync_error_bad_payload">Те, що надійшло, не вдалося прочитати. Якщо ви використовували пароль, переконайтеся, що він однаковий на обох пристроях.</string>
+    <string name="local_sync_error_unknown">Щось пішло не так. Спробуйте ще раз.</string>
+    <string name="local_sync_mode">Режим синхронізації</string>
+    <string name="local_sync_connect">Підключити</string>
+    <string name="local_sync_connect_description">Знайти інший пристрій з увімкненим режимом синхронізації</string>
+    <string name="local_sync_last_synced">Остання синхронізація: <xliff:g id="when">%1$s</xliff:g></string>
+    <string name="local_sync_already_paired">Уже з’єднано</string>
+    <string name="local_sync_device_with_code"><xliff:g id="name">%1$s</xliff:g> (<xliff:g id="code">%2$s</xliff:g>)</string>
+    <string name="local_sync_profile_note">Синхронізується лише профіль, що використовується: тут <xliff:g id="profile">%1$s</xliff:g>, з профілем, що використовується на іншому пристрої.</string>
+    <string name="local_auto_sync_title">Автосинхронізація</string>
+    <string name="local_auto_sync_for_device">Що цей пристрій синхронізує з <xliff:g id="device">%1$s</xliff:g> сам і як часто.</string>
+    <string name="local_auto_sync_enable">Автосинхронізація з цим пристроєм</string>
+    <string name="local_auto_sync_enable_hint">Відкрийте «Локальну синхронізацію» й на іншому пристрої: у нього запитують дозвіл.</string>
+    <string name="local_auto_sync_waiting">Очікування дозволу від <xliff:g id="device">%1$s</xliff:g>…</string>
+    <string name="local_auto_sync_declined"><xliff:g id="device">%1$s</xliff:g> не дозволив автосинхронізацію.</string>
+    <string name="local_auto_sync_accept_title">Дозволити автосинхронізацію?</string>
+    <string name="local_auto_sync_accept_body"><xliff:g id="device">%1$s</xliff:g> хоче сам синхронізуватися з цим пристроєм, коли OwnTV відкрито на обох. Надходить лише те, що ви дозволите на цьому пристрої, і будь-який пристрій може це вимкнути.</string>
+    <string name="local_auto_sync_accept">Дозволити</string>
+    <string name="local_auto_sync_decline">Не дозволяти</string>
+    <string name="local_auto_sync_what_to_sync">Що цей пристрій синхронізує</string>
+    <string name="local_auto_sync_when">Як часто</string>
+    <string name="local_auto_sync_timing_immediately">Щоразу, коли відкривається чи закривається будь-який із застосунків</string>
+    <string name="local_auto_sync_timing_daily">Щодня</string>
+    <string name="local_auto_sync_timing_weekly">Щотижня</string>
+    <string name="local_auto_sync_note">Автосинхронізація об’єднує в обидва боки, а видалене залишається видаленим. Кожен пристрій сам вирішує, що пропускати: плейлисти з їхніми обліковими даними та «Налаштування» передаються лише там, де їх позначено.</string>
+    <string name="local_auto_sync_last_run">Остання автосинхронізація: <xliff:g id="when">%1$s</xliff:g></string>
+    <string name="local_auto_sync_their_sections"><xliff:g id="device">%1$s</xliff:g> синхронізує: <xliff:g id="sections">%2$s</xliff:g></string>
+    <string name="local_auto_sync_profiles">Профілі: <xliff:g id="here">%1$s</xliff:g> ↔ <xliff:g id="there">%2$s</xliff:g></string>
+    <string name="local_auto_sync_profile_hint">З’єднує цей профіль, <xliff:g id="profile">%1$s</xliff:g>, з профілем, що використовується на <xliff:g id="device">%2$s</xliff:g>.</string>
+    <string name="local_auto_sync_turned_off">Автосинхронізацію вимкнено на <xliff:g id="device">%1$s</xliff:g></string>
+    <string name="local_auto_sync_unreachable">Не вдалося зв’язатися з <xliff:g id="device">%1$s</xliff:g>, спробуємо ще раз</string>
+    <string name="local_auto_sync_listen">Тримати автосинхронізацію в режимі очікування</string>
+    <string name="local_auto_sync_listen_description">Увімкнено: з’єднані пристрої можуть автосинхронізуватися з цим, коли тут відкрито OwnTV. Вимкнено: лише поки ввімкнено режим синхронізації.</string>
+    <string name="local_auto_sync_listening">Очікування</string>
+    <string name="more_pane_last_backup">Остання резервна копія</string>
+    <string name="more_pane_encrypted">Зашифровано</string>
+    <string name="more_group_your_things">Ваше</string>
+    <string name="more_group_keep_safe">У безпеці</string>
+    <string name="more_profile_switch">Перемкнути</string>
+    <string name="more_fav_movies_series">Фільми й серіали</string>
+    <string name="more_fav_empty_title">Обраного поки немає</string>
+    <string name="more_fav_empty_body">Утримуйте OK на каналі, фільмі чи шоу й виберіть «Додати в обране».</string>
+    <string name="more_fav_empty_body_mobile">Торкніться й утримуйте канал, фільм чи шоу й виберіть «Додати в обране».</string>
+    <string name="more_history_empty">Поки нічого не переглянуто</string>
+    <string name="more_backup_never_title">Резервної копії ще не було</string>
+    <string name="more_backup_never_body"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> і всі налаштування вмісту зберігаються лише на цьому телевізорі.</string>
+    <string name="more_backup_never_body_mobile"><xliff:g id="playlists">%1$s</xliff:g>, <xliff:g id="favorites">%2$s</xliff:g>, <xliff:g id="history">%3$s</xliff:g> і всі налаштування вмісту зберігаються лише на цьому телефоні.</string>
+    <string name="more_backup_now">Створити копію зараз</string>
+    <string name="more_backup_now_body">Збережіть файл на цьому телевізорі або надішліть його на інший пристрій</string>
+    <string name="more_backup_now_body_mobile">Збережіть файл на цьому телефоні або надішліть його на інший пристрій</string>
+    <string name="more_backup_file_tv">Файл на цьому телевізорі</string>
+    <string name="more_backup_file_tv_mobile">Файл на цьому телефоні</string>
+    <string name="more_restore_body">З файлу на цьому телевізорі або з іншого пристрою</string>
+    <string name="more_restore_body_mobile">З файлу на цьому телефоні або з іншого пристрою</string>
+    <string name="more_backup_included">Що включено</string>
+    <string name="more_about_up_to_date">Актуальна версія</string>
+    <string name="more_about_checked">Перевірено <xliff:g id="value">%1$s</xliff:g></string>
+    <string name="more_settings_pin_hint">Утримуйте OK на рядку, щоб закріпити його у швидких</string>
+    <string name="more_settings_search">Шукати в усіх налаштуваннях</string>
+    <string name="settings_card_profile">Глядачі, дитячий режим, PIN-коди</string>
+    <string name="settings_card_sources">Плейлисти, EPG, нагадування, архів</string>
+    <string name="settings_card_appearance">Тема, акцент, скло, текст</string>
+    <string name="settings_card_layout">Навігація, панелі, головна, меню</string>
+    <string name="settings_card_content">Категорії, TMDB, субтитри</string>
+    <string name="settings_card_player">Який плеєр, потокове передавання</string>
+    <string name="settings_card_picture">Декодер, HDR, масштаб, частота кадрів</string>
+    <string name="settings_card_sound">Гучність, об’ємний звук, мови</string>
+    <string name="settings_card_live">Перегляд, перемотка, затримка, запуск</string>
+    <string name="settings_card_watching">Пропуск, продовження, мультиперегляд, запис</string>
+    <string name="settings_card_app">Мова, оновлення, мережа, діагностика</string>
+    <string name="more_sync_description">Діліться своїми даними з іншим пристроєм через Wi-Fi. Нічого не покидає вашу домашню мережу.</string>
+    <string name="more_sync_mode_description">Дозволяє іншим вашим пристроям знаходити цей. Залишається ввімкненим, поки ця сторінка відкрита.</string>
+    <string name="more_sync_unpair">Роз’єднати</string>
+    <string name="more_about_license">GPLv3 · вільне програмне забезпечення з відкритим кодом</string>
+    <string name="more_about_description">Ваш власний IPTV-плеєр для Android TV. Він не надає каналів чи вмісту; ви приносите власні законно доступні джерела.</string>
+    <string name="more_about_description_mobile">Ваш власний IPTV-плеєр для Android. Він не надає каналів чи вмісту; ви приносите власні законно доступні джерела.</string>
+    <string name="more_about_scan">Скануйте телефоном.</string>
+    <string name="more_about_scan_mobile">Скануйте або торкніться, щоб відкрити</string>
+    <plurals name="more_playlist_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> плейлист</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> плейлисти</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> плейлистів</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> плейлистів</item>
+    </plurals>
+    <plurals name="more_count_favorites">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> обраний елемент</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> обрані елементи</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> обраних елементів</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> обраних елементів</item>
+    </plurals>
+    <plurals name="more_count_history">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> запис історії</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> записи історії</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> записів історії</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> записів історії</item>
+    </plurals>
+    <plurals name="more_about_languages">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> мова</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> мови</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> мов</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> мов</item>
+    </plurals>
+    <plurals name="more_settings_pinned_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> закріплено</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> закріплено</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> закріплено</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> закріплено</item>
+    </plurals>
+    <plurals name="more_downloads_running_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> виконується</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> виконуються</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> виконується</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> виконується</item>
+    </plurals>
+    <string name="settings_backup_location">Розташування</string>
+    <string name="settings_multiview">Мультиперегляд</string>
+    <string name="settings_multiview_description">Дивіться кілька каналів наживо одночасно. Щоразу ви вибираєте, скільки саме, до цього ліміту — кожна плитка використовує одне з підключень вашого провайдера.</string>
+    <string name="settings_multiview_tiles_max">Найбільше плиток</string>
+    <string name="settings_multiview_tiles_max_value">Макс. <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="settings_multiview_warning_title">Понад дві плитки</string>
+    <string name="settings_multiview_warning_description">Три чи чотири плитки потребують трьох чи чотирьох підключень від вашого провайдера, а ТВ-приставка може декодувати лише обмежену кількість каналів одночасно. Якщо плитка не може запуститися, вона каже чому, а інші плитки продовжують відтворення.</string>
+    <string name="settings_multiview_keep_two">Залишити 2</string>
+    <string name="settings_multiview_use_anyway">Усе одно використати</string>
+    <string name="settings_app_icon">Значок застосунку</string>
+    <string name="settings_app_icon_summary">Колір значка й логотипа OwnTV</string>
+    <string name="settings_app_icon_sheet_mobile">Як OwnTV виглядає на вашому головному екрані. Застосунок перезапускається один раз.</string>
+    <string name="settings_brand_accent">Логотип акцентного кольору</string>
+    <string name="app_icon_petrol">Петроль</string>
+    <string name="app_icon_sunflower">Соняшник</string>
+    <string name="app_icon_cobalt">Кобальт</string>
+    <string name="app_icon_tomato">Томат</string>
+    <string name="app_icon_board">Табло станції</string>
+    <string name="app_icon_eggshell">Яєчна шкаралупа</string>
+    <string name="app_icon_olive">Оливка</string>
+    <string name="app_icon_olive_cream">Оливка на кремі</string>
+    <string name="app_icon_pixel">Піксель</string>
+    <string name="app_icon_restart_title">Перезапустити OwnTV?</string>
+    <string name="app_icon_restart_message">Ви вибрали новий значок і логотип. Вони набудуть чинності після перезапуску OwnTV.</string>
+    <string name="app_icon_restart_now">Перезапустити зараз</string>
+    <string name="settings_navigation">Навігація</string>
+    <string name="settings_navigation_description">Як поводиться меню ліворуч</string>
+    <string name="settings_nav_floating">Плаваюча</string>
+    <string name="settings_nav_floating_desc">Над вмістом; ховається під час перегляду, ◀ на краю повертає її</string>
+    <string name="settings_nav_docked">Закріплена</string>
+    <string name="settings_nav_docked_desc">Завжди на екрані; вміст звільняє їй місце</string>
+    <string name="settings_nav_hide_after">Ховати через</string>
+    <string name="settings_nav_hide_after_desc">Лише плаваюча: як довго панель чекає після того, як фокус її залишив</string>
+    <string name="settings_nav_widen">Розширювати у фокусі</string>
+    <string name="settings_nav_widen_desc">Закріплена та компактна: показує назви над вмістом, поки панель у фокусі</string>
+    <string name="settings_nav_menu_labels">Підписи меню</string>
+    <string name="settings_nav_menu_labels_desc">Назви розділів поряд зі значками: вимкнено, поки панель у фокусі або завжди</string>
+    <string name="settings_nav_menu_labels_focused">У фокусі</string>
+    <string name="settings_nav_menu_labels_always">Завжди</string>
+    <string name="settings_nav_menu_labels_summary">Підписи: <xliff:g id="choice">%1$s</xliff:g></string>
+    <string name="settings_search_keywords_menu_labels">підписи, назви, текст, лише значки, панель, бічна панель, меню, розширити, широка</string>
+    <string name="settings_nav_menu_items">Пункти меню</string>
+    <string name="settings_nav_menu_items_desc">Динамічна: слідує за вмістом плейлиста · Статична: ви вибираєте їх самі</string>
+    <string name="settings_nav_bar">Панель</string>
+    <string name="settings_nav_labels">Підписи</string>
+    <string name="settings_nav_icons_only">Лише значки</string>
+    <string name="settings_nav_hide_scrolling">Ховати під час прокрутки</string>
+    <string name="settings_nav_hide_scrolling_desc">Панель з’їжджає геть, коли ви прокручуєте вниз, і повертається, коли вгору</string>
+    <string name="settings_sheet_counts">Показувати кількості</string>
+    <string name="settings_sheet_counts_desc">Кількості каналів і назв на аркушах</string>
+    <string name="settings_search_keywords_navigation">панель, бічна панель, меню, навігація, ховати, плаваюча, закріплена, розмір, компактна, широка, довжина, повна висота</string>
+    <string name="settings_breadcrumb_eyebrow"><xliff:g id="section">%1$s</xliff:g> · <xliff:g id="group">%2$s</xliff:g></string>
+    <string name="settings_nav_size_desc">Компактна: значки · Звичайна: назви · Широка: назви й кількості · Дуже широка: з подробицями</string>
+    <string name="settings_nav_size_compact">Компактна</string>
+    <string name="settings_nav_size_normal">Звичайна</string>
+    <string name="settings_nav_size_wide">Широка</string>
+    <string name="settings_nav_size_extra_wide">Дуже широка</string>
+    <string name="settings_nav_length">Довжина</string>
+    <string name="settings_nav_length_desc">За розміром елементів або на всю висоту екрана</string>
+    <string name="settings_nav_length_fit">За елементами</string>
+    <string name="settings_nav_length_full">На всю висоту</string>
+    <string name="settings_nav_hide_after_half">0,5 секунди</string>
+    <plurals name="settings_nav_hide_after_seconds">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> секунда</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> секунди</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> секунд</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> секунд</item>
+    </plurals>
+    <string name="settings_live_layout">Макет ТБ наживо</string>
+    <string name="settings_live_layout_description">Категорії як аркуш або завжди на екрані</string>
+    <string name="settings_live_layout_stage">Сцена</string>
+    <string name="settings_live_layout_stage_description">Натисніть «Ліворуч», щоб відкрити категорії. Список каналів і перегляд займають усю ширину.</string>
+    <string name="settings_live_layout_separate_description">Категорії, список каналів і перегляд поруч.</string>
+    <string name="settings_search_keywords_live_layout">макет тб наживо канали категорії аркуш панелі сцена</string>
+    <string name="settings_panel_width_live_sheet">Аркуш категорій</string>
+    <string name="settings_panel_width_live_sheet_hint">Наскільки широко категорії відкриваються над списком після «Ліворуч». Не входить у 100%%.</string>
+    <string name="settings_panel_width_summary_stage">Аркуш категорій <xliff:g id="sheet">%1$d</xliff:g>%% · Список <xliff:g id="list">%2$d</xliff:g>%% · Перегляд <xliff:g id="preview">%3$d</xliff:g>%%</string>
+    <string name="settings_live_opens_in">ТБ наживо відкривається в</string>
+    <string name="settings_live_opens_in_description">Відкривати ТБ наживо на списку каналів або на сітці програми передач. Кнопка вигляду програми передач у ТБ наживо теж перемикає це.</string>
+    <string name="settings_reminders">Нагадування про передачі</string>
+    <string name="settings_reminders_description">Що відбувається, коли ось-ось почнеться передача, для якої ви встановили нагадування.</string>
+    <string name="settings_reminder_ask">Питати про перемикання</string>
+    <string name="settings_reminder_switch">Перемкнути</string>
+    <string name="settings_reminder_notify">Лише сповіщати</string>
+    <string name="settings_reminder_lead">Час нагадування</string>
+    <string name="settings_reminder_lead_description">За скільки до початку передачі приходить нагадування.</string>
+    <string name="settings_reminder_at_start">На початку</string>
+    <string name="settings_search_keywords_reminders">нагадування нагадати сповіщення передача початок перемкнути</string>
+    <string name="settings_search_keywords_live_opens_in">тб наживо відкривається початок список програма передач сітка вигляд</string>
+    <string name="settings_panel_width_summary_cinematic">Аркуш категорій <xliff:g id="sheet">%1$d</xliff:g>%% · Висота подробиць <xliff:g id="height">%2$d</xliff:g>%%</string>
+    <string name="settings_panel_width_cinematic_sheet_hint">Наскільки широко категорії відкриваються над назвами після «Ліворуч».</string>
+    <string name="settings_key_change">Змінити</string>
+    <string name="settings_key_switch">Перемкнути</string>
+    <string name="settings_key_open">Відкрити</string>
+    <string name="settings_key_unpin">Відкріпити</string>
+    <string name="settings_panel_choices">Варіанти</string>
+    <string name="settings_panel_recommended">Рекомендовано</string>
+    <string name="settings_part_guide_catchup">Програма передач і архів</string>
+    <string name="settings_vp_cat_controls_resume">Керування й продовження</string>
+    <string name="settings_pinned_from">Закріплено з розділу <xliff:g id="group">%1$s</xliff:g></string>
+    <string name="settings_check_now">Перевірити зараз</string>
+    <string name="settings_line_epg_offset">Зсув усієї програми, коли час у стрічці не збігається</string>
+    <string name="settings_line_reminders">Що відбувається, коли настає час нагадування</string>
+    <string name="settings_line_reminder_lead">За скільки приходить нагадування</string>
+    <string name="settings_line_guide_days">На скільки днів уперед зберігається програма</string>
+    <string name="settings_line_catchup">Часовий пояс, за яким працюють архіви</string>
+    <string name="settings_line_catchup_sources">Замінити часовий пояс для одного плейлиста</string>
+    <string name="settings_line_override_playlist">Замінити для одного плейлиста</string>
+    <string name="settings_line_accent">Тонує кнопки, фокус і виділення всюди</string>
+    <string name="settings_line_fonts">Одна гарнітура для інтерфейсу й спливних вікон</string>
+    <string name="settings_line_popup_size">Масштаб діалогів і меню без зміни їхнього тексту</string>
+    <string name="settings_line_animations">Без анімації швидше на слабших ТВ-приставках</string>
+    <string name="settings_line_weather">Погода вгорі праворуч: розташування й °C / °F</string>
+    <string name="settings_line_live_opens_in">Список каналів або сітка програми передач</string>
+    <string name="settings_line_vod_layout">Окремі панелі або один кінематографічний вигляд</string>
+    <string name="settings_line_panel_width">Ширина категорій, списку й перегляду</string>
+    <string name="settings_line_guide_width">Список каналів і часова шкала</string>
+    <string name="settings_line_browsing">Запам’ятовувати останню категорію й елемент</string>
+    <string name="settings_line_home">Вибір, упорядкування й фільтрування рядків</string>
+    <string name="settings_line_content_menus">Змінюйте порядок або ховайте дії в кожному меню</string>
+    <string name="settings_line_remote_shortcuts">Призначайте вільні кнопки пульта</string>
+    <string name="settings_line_customize">Приховування, перейменування, упорядкування</string>
+    <string name="settings_line_metadata">Постери, сюжети, актори й рейтинги для фільмів і серіалів</string>
+    <string name="settings_line_open_subtitles">Пошук і завантаження субтитрів</string>
+    <string name="settings_line_app_icon">Значок запуску</string>
+    <string name="settings_line_brand_accent">Трикутник відтворення логотипа вашого акцентного кольору</string>
+    <string name="settings_line_check_updates">Отримати останню версію з GitHub</string>
+    <string name="settings_line_when_app_opens">Коли застосунок відкривається</string>
+    <string name="settings_line_proxy">Весь трафік через HTTP-проксі</string>
+    <string name="settings_line_dns">Власний DNS-сервер</string>
+    <string name="settings_line_quick_live_preview">Відтворювати канал у фокусі в ТБ наживо</string>
+    <string name="settings_line_preview_sound">Звук у перегляді наживо</string>
+    <string name="settings_line_preview_on_ok">Спершу перегляд, потім на весь екран</string>
+    <string name="settings_line_quick_channel_numbers">Введіть номер на пульті, щоб перемкнути</string>
+    <string name="settings_line_prefer_sdr">SDR, коли потік пропонує обидва</string>
+    <string name="settings_line_quick_autoplay">Запускати наступний епізод самостійно</string>
+    <string name="settings_line_live_engine">Який рушій відкриває канали та резервний</string>
+    <string name="settings_line_saved_live_choices">Канали, які ви перемкнули вручну</string>
+    <string name="settings_line_vod_engine">Який рушій відкриває фільми й епізоди</string>
+    <string name="settings_line_saved_choices">Фільми й епізоди, які ви перемкнули вручну</string>
+    <string name="settings_line_external">VLC, MX Player… для кожного розділу</string>
+    <string name="settings_line_vod_buffer">Наскільки наперед завантажуються фільми</string>
+    <string name="settings_line_vod_timeout">Очікування мовчазного сервера</string>
+    <string name="settings_line_vod_reconnects">Повторно відкрити з місця зупинки</string>
+    <string name="settings_line_hw">Використовувати власний декодер телевізора</string>
+    <string name="settings_line_max_quality">Найвища якість, коли їх кілька</string>
+    <string name="settings_line_tunneled">Експериментально · ТБ наживо в ExoPlayer</string>
+    <string name="settings_line_zoom">Формат і масштаб на початку відтворення</string>
+    <string name="settings_line_saved_zoom">Масштаб, який ви змінили в плеєрі</string>
+    <string name="settings_line_films_only">Лише фільми</string>
+    <string name="settings_line_volume">Понад 100%% тихі потоки підсилюються</string>
+    <string name="settings_line_saved_volume">Гучність, яку ви змінили в плеєрі</string>
+    <string name="settings_line_surround">5.1 і 7.1 так, як їх отримує телевізор</string>
+    <string name="settings_line_passthrough">Недекодовано на телевізор чи саундбар</string>
+    <string name="settings_line_night_mode">Гучні сцени тихіше, діалоги гучніше</string>
+    <string name="settings_line_leveling">Кожен канал з однаковою гучністю</string>
+    <string name="settings_line_audio_sync">Зсув звуку раніше чи пізніше</string>
+    <string name="settings_line_output_audio_delay">Додаткова затримка для виходу, що відтворює зараз</string>
+    <string name="settings_line_saved_audio_sync">Затримки, які ви запам’ятали в плеєрі</string>
+    <string name="settings_line_audio_lang">Відтворює цю доріжку, коли вона є в потоці</string>
+    <string name="settings_line_sub_lang">Вмикати субтитри цією мовою</string>
+    <string name="settings_line_sub_style">Розмір, колір, позиція, фон</string>
+    <string name="settings_title_fonts">Шрифти й розмір тексту</string>
+    <string name="settings_title_saved_live_choices">Збережені вибори плеєра ТБ наживо</string>
+    <string name="settings_title_saved_choices">Збережені вибори плеєра</string>
+    <string name="settings_title_tunneled">Тунельне відтворення</string>
+    <string name="settings_title_saved_zoom">Збережений масштаб</string>
+    <string name="settings_title_saved_volume">Збережена гучність</string>
+    <string name="settings_title_saved_audio_sync">Збережена синхронізація звуку</string>
+    <string name="settings_line_channel_numbers">Номер від провайдера поряд з назвою</string>
+    <string name="settings_line_live_preview">Відтворювати канал у фокусі</string>
+    <string name="settings_line_timeshift">Канали без архіву, збережені під час перегляду</string>
+    <string name="settings_line_timeshift_window">Як далеко назад можна перемотати</string>
+    <string name="settings_line_left_right">З прихованим керуванням</string>
+    <string name="settings_line_latency">Наскільки близько до ефіру відтворювати</string>
+    <string name="settings_line_preroll">Відео, зібране перед запуском каналу</string>
+    <string name="settings_line_tune_timeout">Припинити спроби й повідомити про це</string>
+    <string name="settings_line_seek_step">На скільки стрибає перемотка у фільмі</string>
+    <string name="settings_line_rewind_step">На скільки вона стрибає на каналі наживо</string>
+    <string name="settings_line_resume">Коли для фільму є збережена позиція</string>
+    <string name="settings_line_autoplay">І до наступного сезону</string>
+    <string name="settings_line_tiles">Кожна плитка — окремий потік</string>
+    <string name="settings_line_mini">Розмір і позиція</string>
+    <string name="settings_line_pip">Продовжувати дивитися в невеликому вікні</string>
+    <string name="settings_line_rec_reserve">Ніколи не записувати на всіх підключеннях</string>
+    <string name="settings_line_rec_watching">Не другий потік</string>
+    <string name="settings_line_rec_pre_roll">Перед початком передачі</string>
+    <string name="settings_line_rec_post_roll">Для передач, що затяглися</string>
+    <string name="settings_line_measured_stats">К/с, бітрейт і пропущені кадри наживо</string>
+    <string name="settings_line_logging">Повний журнал для звітів про помилки</string>
+    <string name="settings_help_profiles">Кожен глядач має власне обране, історію перегляду, точки продовження й рядки головної. Дитячий режим показує лише дозволені вами категорії; PIN-код не дає нікому іншому відкрити профіль.</string>
+    <string name="settings_help_playlists">Додайте плейлист із посилання, входу Xtream, порталу Stalker чи файлу, синхронізуйте його знову або видаліть.</string>
+    <string name="settings_help_epg_sources">Додайте стрічку програми передач XMLTV за її посиланням, оновіть її або видаліть. Стрічки заповнюють програму передач і рядки передач у ТБ наживо.</string>
+    <string name="settings_help_guide_days">На скільки днів уперед програма передач зберігає передачі. Менше днів прискорює оновлення програми й зменшує базу даних.</string>
+    <string name="settings_help_catchup_timezone">Архів відтворює передачі з архіву вашого провайдера. «Автоматично» використовує часовий пояс, який повідомляє провайдер, або власний годинник телевізора, якщо він його не повідомляє; виберіть фіксований зсув UTC, якщо архів і далі починається в хибний час. Тут також вибирають, який плеєр використовує архів.</string>
+    <string name="settings_help_theme">Темна — це те, для чого створено OwnTV. «Системна» слідує за власним налаштуванням телевізора, якщо воно є; «Світла» підходить для яскравої кімнати.</string>
+    <string name="settings_help_accent">Тонує кнопки, сяйво фокуса, смуги перебігу й виділення всюди. Виберіть пресет або натисніть OK для палітри й будь-якого hex-коду.</string>
+    <string name="settings_help_focus">Рамка навколо того, що в фокусі. Виберіть її колір і товщину, щоб її легко було простежити з дивана.</string>
+    <string name="settings_help_fonts">Шрифт, що використовується в OwnTV, і наскільки великим малюється текст. Спливні вікна використовують той самий шрифт.</string>
+    <string name="settings_help_popup_size">Робить спливні вікна, меню й діалоги більшими чи меншими загалом. Користуйтеся, коли вікна здаються тісними або закривають забагато екрана.</string>
+    <string name="settings_help_zoom">Масштабує все на екрані. Більший легше читати здалеку; менший вміщує більше. Нижче 85%% ТВ-приставкам з малою пам’яттю може не вистачати пам’яті.</string>
+    <string name="settings_help_animations">Аркуші, меню й фокус рухаються плавно, поки це ввімкнено. Вимкнено: кожна зміна миттєва.</string>
+    <string name="settings_help_weather">Показує температуру й ваше місто поряд з годинником. Задайте розташування вручну, коли автоматичне хибне — наприклад, за VPN, — і виберіть Цельсій чи Фаренгейт.</string>
+    <string name="settings_help_navigation">Плаваюча: меню лежить маленькою капсулою над вмістом і висувається, коли ви рухаєтеся ліворуч. Закріплена: завжди займає власне місце. Розмір задає, скільки вона показує — від самих значків до кількостей і подробиць.</string>
+    <string name="settings_help_live_layout">«Сцена» показує категорії як аркуш, що висувається за ◀, тож список каналів і перегляд отримують місце. «Окремо» тримає категорії на екрані поряд зі списком.</string>
+    <string name="settings_help_vod_layout">«Кінематографічний» показує ілюстрацію вибраної назви за сіткою постерів. «Окремо» показує категорії, назви й подробиці поруч.</string>
+    <string name="settings_help_home">Виберіть, які рядки показує головна й у якому порядку, і як виглядає рядок «Зараз популярне».</string>
+    <string name="settings_help_customize">Ховайте категорії й елементи, які ніколи не дивитеся, давайте категоріям власні назви й розташовуйте їх у своєму порядку. Приховане повертається тут, ніколи не втрачається.</string>
+    <string name="settings_help_app_icon">Значок OwnTV на головному екрані вашого телевізора. Лаунчеру може знадобитися мить, щоб показати зміну.</string>
+    <string name="settings_help_brand_accent">Логотип OwnTV в меню, «Про застосунок» і початковому налаштуванні показує свій трикутник відтворення вашим акцентним кольором. Значок на головному екрані зберігає власні кольори.</string>
+    <string name="settings_help_startup">Що OwnTV показує під час запуску: головну, канал, який ви дивилися останнім, ваше обране або вибраний вами канал.</string>
+    <string name="settings_help_check_updates">Шукає на GitHub новіший OwnTV зараз і пропонує його встановити. Ваші плейлисти, обране й налаштування залишаються як є.</string>
+    <string name="settings_help_update_startup">Шукає нову версію щоразу, коли OwnTV запускається, і повідомляє, коли вона є. Нічого не встановлюється без запиту.</string>
+    <string name="settings_help_auto_start_boot">Відкриває OwnTV самостійно, коли телевізор завантажився, на екрані, вибраному в «Запуску застосунку». Android дозволяє застосунку відкриватися самостійно лише коли йому дозволено показуватися поверх інших застосунків, тож ввімкнення відкриває екран цього дозволу. Деякі телевізори його не пропонують, і тоді автозапуск там не працює.</string>
+    <string name="settings_help_auto_start_wake">Відкриває OwnTV щоразу, коли телевізор прокидається зі сну, також коли ви розбудили його для іншого застосунку. Якщо «Запуск застосунку» відкриває канал, кожне пробудження запускає цей потік. Поки це ввімкнено, OwnTV тримає невелику фонову службу з беззвучним сповіщенням. Як і автозапуск під час завантаження, потребує дозволу показуватися поверх інших застосунків.</string>
+    <string name="settings_help_dns">Розв’язує адреси вашого провайдера за допомогою вибраного вами DNS-сервера замість власного сервера вашої мережі — корисно, коли ваша мережа блокує чи перенаправляє їх.</string>
+    <string name="settings_help_live_engine">ExoPlayer відкриває канали значно швидше й єдиний має субтитри наживо. mpv відтворює канали, які ExoPlayer не може, зокрема з незвичним звуком. Комбіновані варіанти пробують інший плеєр, коли перший не спрацював.</string>
+    <string name="settings_help_hw">Використовує апаратний декодер телевізора: плавне 4K і менше нагрівання. Вимикайте, лише якщо деякі потоки гальмують або показують блоки; тоді працює програмний декодер.</string>
+    <string name="settings_help_volume">Гучність, з якої починає кожен канал, фільм і епізод. Понад 100%% тихі потоки підсилюються. Гучність, змінена в плеєрі, зберігається для цієї назви, доки ви її не скинете.</string>
+    <string name="settings_help_channel_numbers">Показує номер каналу від провайдера поряд з назвою в списку ТБ наживо, накладці списку каналів і плеєрі та дозволяє вводити номер на пульті на весь екран, щоб перейти на цей канал.</string>
+    <string name="settings_help_seek_step">На скільки перемотка вперед і назад стрибає у фільмі чи епізоді одним натисканням. Утримання клавіші продовжує стрибати.</string>
+    <string name="settings_help_zoom_mode">Як зображення заповнює екран на початку відтворення. «За розміром» показує все зображення; інші варіанти заповнюють, розтягують або примушують форму. Масштаб, змінений у плеєрі, зберігається для цієї назви.</string>
+    <string name="settings_help_sub_lang">Субтитри цією мовою вмикаються самі, коли вони є в потоці. Інакше субтитри залишаються вимкненими, доки ви не виберете доріжку в плеєрі.</string>
+    <string name="settings_help_live_preview">Канал у фокусі відтворюється в перегляді поряд зі списком ТБ наживо, тож ви бачите, що йде, перш ніж відкрити. Потрібен макет з місцем для перегляду.</string>
+    <string name="settings_help_preview_audio">Відтворює звук перегляду разом із зображенням. Вимкнено: перегляд тихий.</string>
+    <string name="settings_help_preview_on_ok">Виберіть, де OK на каналі спершу відтворює його в перегляді, а повторне OK на тому ж каналі відкриває його на весь екран. У ТБ наживо перегляд тоді залишається на цьому каналі під час перегляду списку. Де вимкнено, OK одразу відкриває канал на весь екран, а перегляд слідує за виділенням.</string>
+    <string name="settings_help_timeshift_window">Як далеко назад може перемотати «Пауза й перемотка ТБ наживо» на каналі без архіву. Довше зберігає більше каналу в пам’яті цього пристрою.</string>
+    <string name="settings_help_resume">«Питати про продовження» пропонує «Продовжити» або «Почати спочатку», коли для фільму чи епізоду є збережена позиція. «Завжди продовжувати» продовжує з місця зупинки; «Ніколи не продовжувати» починає спочатку.</string>
+    <string name="settings_help_mini">Невеликий плеєр, що тримає канал у куті під час перегляду. Виберіть його розмір і кут, у якому він розташований.</string>
+    <string name="settings_help_pip">Натисніть «Додому» або відкрийте інший застосунок, поки відео відтворюється на весь екран чи в мініплеєрі, і воно продовжить відтворюватися в невеликому вікні над рештою телевізора. Відкрийте OwnTV знову, щоб повернути його на весь екран; закрийте вікно, щоб зупинити відтворення. Мультиперегляд залишається в OwnTV.</string>
+    <string name="settings_key_palette">Палітра</string>
+    <string name="settings_live_preview_note">Зміни показуються тут, поки ви рухаєтеся, ще до виходу з рядка.</string>
+    <string name="settings_synced_at">Синхронізовано <xliff:g id="when">%1$s</xliff:g></string>
+    <string name="settings_profile_in_use">Використовується</string>
+    <string name="settings_profile_kids">Дитячий режим</string>
+    <string name="settings_profile_pin_lock">Блокування PIN-кодом</string>
+    <string name="settings_profile_no_lock">Без блокування</string>
+    <string name="settings_profile_add">Додати профіль</string>
+    <string name="settings_profile_add_line">Глядач із власним обраним, історією й налаштуваннями</string>
+    <plurals name="settings_help_language">
+        <item quantity="one">Мова всіх меню й повідомлень в OwnTV. <xliff:g id="count">%1$d</xliff:g> мова; слідує за власною мовою телевізора, доки ви не виберете.</item>
+        <item quantity="few">Мова всіх меню й повідомлень в OwnTV. <xliff:g id="count">%1$d</xliff:g> мови; слідує за власною мовою телевізора, доки ви не виберете.</item>
+        <item quantity="many">Мова всіх меню й повідомлень в OwnTV. <xliff:g id="count">%1$d</xliff:g> мов; слідує за власною мовою телевізора, доки ви не виберете.</item>
+        <item quantity="other">Мова всіх меню й повідомлень в OwnTV. <xliff:g id="count">%1$d</xliff:g> мов; слідує за власною мовою телевізора, доки ви не виберете.</item>
+    </plurals>
+    <plurals name="settings_profile_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> профіль</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> профілі</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> профілів</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> профілів</item>
+    </plurals>
+    <string name="settings_seg_separate">Окремо</string>
+    <string name="settings_seg_guide">Програма</string>
+    <string name="settings_accent_yours">Ваш</string>
+    <string name="settings_accent_picker_hint">OK на полі чи смузі відтінку, потім стрілки рухають його; OK або «Назад», щоб завершити.</string>
+    <string name="settings_signed_out">Вийшли</string>
+    <plurals name="settings_epg_feed_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> стрічка</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> стрічки</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> стрічок</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> стрічок</item>
+    </plurals>
+    <string name="settings_title_date_time_weather">Дата, час і погода</string>
+    <string name="settings_line_show_weather">Поточна погода у верхній панелі</string>
+    <string name="settings_line_custom_location">Порожньо = автовизначення</string>
+    <string name="settings_line_temperature_unit">Цельсій або Фаренгейт</string>
+    <string name="settings_clock_colors">Кольори</string>
+    <string name="settings_clock_time_color">Колір часу</string>
+    <string name="settings_line_clock_time">Годинник</string>
+    <string name="settings_clock_date_color">Колір дати</string>
+    <string name="settings_line_clock_date">Дата під годинником</string>
+    <string name="settings_clock_weather_color">Колір погоди</string>
+    <string name="settings_line_clock_weather">Температура й місто</string>
+    <string name="settings_clock_color_white">Білий</string>
+    <string name="settings_clock_color_grey">Сірий</string>
+    <string name="settings_clock_color_accent">Акцентний</string>
+    <string name="settings_clock_color_help">OK відкриває вибір кольору (пресети, палітра або hex-код), той самий, що й «Акцентний колір». Перегляд слідує, поки ви рухаєтеся.</string>
+    <string name="settings_key_pick_color">Вибрати колір</string>
+    <string name="settings_line_trending_layout">Як малюється рядок популярного</string>
+    <string name="settings_home_shown">Показано</string>
+    <string name="settings_home_hide_row">Сховати цей рядок</string>
+    <string name="settings_home_show_row">Показати цей рядок</string>
+    <string name="settings_home_move_row">Перемістити (▲ ▼, потім OK)</string>
+    <string name="settings_line_remote_shortcuts_on">Вимкнено зберігає ваші призначення</string>
+    <string name="settings_language_system_help">OwnTV слідує за мовою телевізора (зараз <xliff:g id="language">%1$s</xliff:g>). Виберіть нижче, щоб використовувати її лише в OwnTV.</string>
+    <string name="settings_language_pick_help">Використовувати <xliff:g id="language">%1$s</xliff:g> в OwnTV, яку б мову не було встановлено на телевізорі.</string>
+    <string name="settings_key_use">Використати</string>
+    <string name="settings_line_metadata_source">Звідки беруться подробиці про фільми й серіали</string>
+    <string name="settings_line_metadata_language">Сюжети, жанри й назви з TMDB</string>
+    <string name="settings_line_metadata_advanced">Власний ключ або власний Worker</string>
+    <string name="settings_line_os_advanced">Власний ключ API або Worker</string>
+    <string name="settings_line_os_filter">Лише вибрана вами мова</string>
+    <string name="settings_line_os_search_language">Показується в результатах пошуку</string>
+    <string name="settings_subtitle_delete_help">Видалення звільняє місце; завантажити знову можна з плеєра.</string>
+    <plurals name="settings_home_row_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> рядок</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> рядки</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> рядків</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> рядків</item>
+    </plurals>
+    <plurals name="settings_subtitles_downloaded_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> завантажено</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> завантажено</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> завантажено</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> завантажено</item>
+    </plurals>
+    <plurals name="settings_subtitle_file_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> файл</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> файли</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> файлів</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> файлів</item>
+    </plurals>
+    <string name="settings_line_add_from_phone">Заповніть форму в браузері на іншому пристрої</string>
+    <string name="settings_add_type_here">Ввести тут</string>
+    <string name="settings_line_add_type_here">Xtream, M3U або Stalker пультом</string>
+    <string name="settings_help_add_from_phone">Відкрийте адресу або відскануйте код у браузері на будь-якому пристрої в тій самій мережі Wi-Fi — телефоні, комп’ютері чи іншому телевізорі — заповніть там свій плейлист і надішліть сюди. Набагато швидше, ніж вводити URL пультом.</string>
+    <string name="settings_help_add_type_here">Введіть вхід Xtream, адресу M3U або портал Stalker пультом, потім запустіть імпорт з панелі.</string>
+    <string name="settings_remote_waiting">Очікування іншого пристрою</string>
+    <string name="settings_remote_nothing_yet">Поки нічого не отримано</string>
+    <string name="settings_remote_new_pin">Новий PIN-код</string>
+    <string name="settings_line_remote_new_pin">Якщо цей бачив хтось інший</string>
+    <string name="settings_remote_scan">Відскануйте або відкрийте в браузері</string>
+    <string name="settings_remote_or_open">або відкрийте</string>
+    <string name="settings_remote_details_note">Дані з’являються тут; ви натискаєте «Почати імпорт» пультом.</string>
+    <string name="settings_remote_edit_note">Зміни заповнюють екран редагування; ви натискаєте «Зберегти» пультом.</string>
+    <string name="settings_help_edit_from_phone">Відкриває цей плейлист у браузері на телефоні, планшеті чи комп’ютері в тій самій мережі Wi-Fi. Паролі, MAC-адреси й адреси плейлистів M3U там ніколи не показуються: залиште їх порожніми, щоб зберегти. Те, що ви надсилаєте, заповнює цей екран, і нічого не змінюється, доки ви не натиснете «Зберегти».</string>
+    <string name="settings_key_stop_back">Зупинити й повернутися</string>
+    <string name="settings_source_type">Тип</string>
+    <string name="settings_line_source_type">Xtream, M3U або портал Stalker</string>
+    <string name="settings_choose_local_file">Вибрати локальний файл…</string>
+    <string name="settings_line_local_file">.m3u або .m3u8 на цьому телевізорі</string>
+    <string name="settings_form_optional">Необов’язково</string>
+    <string name="settings_form_field_help">OK відкриває клавіатуру; ▼ переходить до наступного поля.</string>
+    <string name="settings_help_playlist_url">Адреса вашого списку .m3u або .m3u8.</string>
+    <string name="settings_line_fill_from_playlist">Використати адресу програми передач, яку дає плейлист</string>
+    <string name="settings_line_epg_auto_refresh">Підтримувати програму передач актуальною</string>
+    <string name="settings_line_epg_logos">Замість логотипів плейлиста</string>
+    <string name="settings_help_epg_name">Показується в списку програм передач і в «Вибрати EPG вручну».</string>
+    <string name="settings_glass_bg_title">Скло й фон</string>
+    <string name="settings_line_glass_bg">Фон, вигляд зображення, скло</string>
+    <string name="settings_bg_background">Фон</string>
+    <string name="settings_line_bg_background">Що розташовано за кожним екраном</string>
+    <string name="settings_help_bg_background">«Сцена» малює власні м’які кольори OwnTV. «Зображення» показує ваше зображення за кожним екраном. «Простий» — рівна темна заливка.</string>
+    <string name="settings_bg_stage">Сцена</string>
+    <string name="settings_bg_picture">Зображення</string>
+    <string name="settings_bg_plain">Простий</string>
+    <string name="settings_line_bg_picture_none">Виберіть зображення з цього телевізора або з іншого пристрою</string>
+    <string name="settings_line_bg_picture_none_mobile">Виберіть зображення з цього телефона</string>
+    <string name="settings_bg_picture_from_phone"><xliff:g id="file" example="sunset.jpg">%1$s</xliff:g> · з цього телефона</string>
+    <string name="settings_bg_change">Змінити</string>
+    <string name="settings_bg_none">Немає</string>
+    <string name="settings_bg_look">Вигляд зображення</string>
+    <string name="settings_line_bg_look">Чітке, м’яке або темне</string>
+    <string name="settings_bg_sharp">Чітке</string>
+    <string name="settings_bg_soft">М’яке</string>
+    <string name="settings_bg_dark">Темне</string>
+    <string name="settings_bg_sharp_desc">Зображення як є, лише трохи затемнене</string>
+    <string name="settings_bg_soft_desc">Розмите й затемнене; текст завжди читабельний</string>
+    <string name="settings_bg_dark_desc">Здебільшого чорне з натяком на зображення</string>
+    <string name="settings_help_bg_look">Як ваше зображення розташоване за екранами. Рядки й текст малюються прямо на ньому, тож яскраве зображення потребує «М’якого» чи «Темного».</string>
+    <string name="settings_bg_picture_only">Лише зображення</string>
+    <string name="settings_bg_darken">Затемнення</string>
+    <string name="settings_line_bg_darken">Наскільки затемнено зображення</string>
+    <string name="settings_bg_blur">Розмиття</string>
+    <string name="settings_line_bg_blur">Наскільки м’яке зображення</string>
+    <string name="settings_bg_accent_light">Акцентне світло</string>
+    <string name="settings_line_bg_accent_light">Ваш акцентний колір сяє в кутку</string>
+    <string name="settings_glass_section">Скло</string>
+    <string name="settings_line_glass_switch">Панель, аркуші, меню й спливні вікна матові</string>
+    <string name="settings_line_glass_switch_mobile">Панелі, аркуші, меню й спливні вікна матові</string>
+    <string name="settings_help_glass_chrome">Робить матовими плаваючі частини: панель, аркуші категорій, меню, спливні вікна й таблетки зверху. Списки й постери залишаються плоскими.</string>
+    <string name="settings_glass_opacity">Непрозорість скла</string>
+    <string name="settings_line_glass_opacity">Менше показує більше фону</string>
+    <string name="settings_line_glass_reset">Кольори «Сцени», скло ввімкнено, <xliff:g id="percent" example="56%">%1$s</xliff:g></string>
+    <string name="settings_bg_preview_note">ТБ наживо з цим фоном. Зміни показуються, поки ви рухаєтеся.</string>
+    <string name="settings_root_hint_mobile">Утримуйте рядок, щоб закріпити його у швидких</string>
+    <string name="settings_card_layout_mobile">Навігація, головна, списки, меню</string>
+    <string name="settings_card_watching_mobile">Пропуск, продовження, мініплеєр, запис</string>
+    <string name="settings_line_live_preview_mobile">Відтворювати вибраний канал угорі ТБ наживо</string>
+    <string name="settings_line_hw_mobile">Використовувати власний декодер телефона</string>
+    <string name="settings_line_surround_mobile">5.1 і 7.1 так, як їх отримує телефон</string>
+    <string name="settings_line_passthrough_mobile">Недекодовано на підключений ресивер</string>
+    <string name="settings_line_navigation_mobile">Панель знизу: підписи, ховання під час прокрутки, пункти</string>
+    <string name="settings_vod_view_mobile">Вигляд фільмів і серіалів</string>
+    <string name="settings_line_vod_view_mobile">Як відкривається категорія</string>
+    <string name="settings_guide_size_mobile">Розмір програми передач</string>
+    <string name="settings_line_guide_size_mobile">Скільки часу сітка показує одразу</string>
+    <string name="settings_line_download_folder_mobile">Куди потрапляють фільми, епізоди й записи</string>
+    <string name="settings_help_add_from_phone_mobile">Відкрийте адресу або відскануйте код у браузері на будь-якому пристрої в тій самій мережі Wi-Fi — комп’ютері, планшеті чи телевізорі — заповніть там свій плейлист і надішліть сюди. Набагато швидше, ніж вводити URL на телефоні.</string>
+    <string name="settings_line_add_type_here_mobile">Xtream, M3U або Stalker</string>
+    <string name="setup_local_file_hint_mobile">.m3u або .m3u8 на цьому телефоні</string>
+    <plurals name="settings_sources_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> джерело</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> джерела</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> джерел</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> джерел</item>
+    </plurals>
+    <string name="settings_sources_status_default">Типовий</string>
+    <string name="settings_epg_sources_addresses_note">Адреси показано без імені користувача й пароля.</string>
+    <plurals name="settings_customize_categories_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> категорія</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> категорії</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> категорій</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> категорій</item>
+    </plurals>
+    <string name="settings_customize_hold_note_mobile">Утримуйте рядок: «Перейменувати» · «Перемістити» · «Сховати» · або почніть діапазон, щоб змінити багато одразу.</string>
+    <string name="settings_catchup_timezone_label">Часовий пояс</string>
+    <string name="settings_browsing_value_both">Обидва</string>
+    <plurals name="settings_home_rows_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> рядок</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> рядки</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> рядків</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> рядків</item>
+    </plurals>
+    <plurals name="settings_customize_hidden_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> приховано</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> приховано</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> приховано</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> приховано</item>
+    </plurals>
+    <string name="settings_line_quick_channel_numbers_mobile">Введіть номер, щоб перемкнути</string>
+    <string name="settings_line_playlists_mobile">Додавайте, синхронізуйте знову чи видаляйте M3U / Xtream / Stalker</string>
+    <string name="settings_line_accent_mobile">Тонує кнопки, виділення й панелі всюди</string>
+    <string name="settings_line_glass_bg_mobile">Матові панелі й аркуші, фонове зображення</string>
+    <string name="settings_line_popup_size_mobile">Масштаб аркушів і меню без зміни їхнього тексту</string>
+    <string name="settings_line_animations_mobile">Без анімації швидше на старіших телефонах</string>
+    <string name="settings_line_vod_buffer_mobile">Наскільки наперед завантажуються фільми й архів</string>
+    <string name="settings_line_vod_timeout_mobile">Як довго чекати мовчазний сервер</string>
+    <string name="settings_line_vod_reconnects_mobile">Скільки разів повторно відкривається втрачений потік</string>
+    <string name="settings_line_sw_decode_mobile">Понад 1080p програмно, коли апаратний декодер не працює</string>
+    <string name="settings_line_rec_mobile_data_mobile">Вимкнено: запис, що припадає на мобільний інтернет, пропускається</string>
+    <string name="settings_line_pip_mobile">Стискати відео у вікно, коли ви виходите із застосунку</string>
+    <string name="settings_line_pip_size_mobile">Яким великим починається плаваюче вікно</string>
+    <string name="settings_line_pip_snap_mobile">Вікно прилипає до найближчого краю</string>
+    <string name="settings_line_audio_screen_off_mobile">Припинити декодувати відео, якого ніхто не бачить</string>
+    <string name="settings_line_audio_per_channel_mobile">Наступного разу відкривається так само</string>
+    <string name="settings_line_seek_step_mobile">На скільки стрибає одне торкання перемотки вперед чи назад</string>
+    <string name="settings_line_rewind_step_mobile">На скільки стрибає одне торкання на каналі наживо</string>
+    <string name="settings_line_gesture_mobile">Наскільки жест змінює гучність, яскравість чи позицію</string>
+    <string name="settings_line_rec_watching_mobile">Кнопка запису в плеєрі</string>
+    <string name="settings_line_rec_pre_roll_mobile">Починати раніше вказаного початку</string>
+    <string name="settings_line_rec_post_roll_mobile">Продовжувати після вказаного завершення</string>
+    <string name="settings_line_sub_lang_mobile">Автоматично вибирати цю доріжку субтитрів</string>
+    <string name="settings_line_sub_style_mobile">Розмір, шрифт, колір, позиція, фон</string>
+    <string name="settings_customize_short_mobile">Налаштувати</string>
+    <plurals name="settings_epg_line_programmes">
+        <item quantity="one"><xliff:g id="count">%1$s</xliff:g> передача</item>
+        <item quantity="few"><xliff:g id="count">%1$s</xliff:g> передачі</item>
+        <item quantity="many"><xliff:g id="count">%1$s</xliff:g> передач</item>
+        <item quantity="other"><xliff:g id="count">%1$s</xliff:g> передач</item>
+    </plurals>
+    <plurals name="settings_epg_line_catchup">
+        <item quantity="one">архів на <xliff:g id="count">%1$s</xliff:g></item>
+        <item quantity="few">архів на <xliff:g id="count">%1$s</xliff:g></item>
+        <item quantity="many">архів на <xliff:g id="count">%1$s</xliff:g></item>
+        <item quantity="other">архів на <xliff:g id="count">%1$s</xliff:g></item>
+    </plurals>
+</resources>

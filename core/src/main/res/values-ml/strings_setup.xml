@@ -224,9 +224,11 @@
     <string name="setup_prefer_hls_live_tv">തത്സമയ ടിവിക്ക് HLS മുൻഗണന നൽകുക</string>
     <string name="setup_hide_new_categories">പുതിയ വിഭാഗങ്ങൾ ഡിഫോൾട്ടായി മറയ്ക്കുക</string>
     <string name="setup_hide_new_categories_description">പ്രൊഫൈൽ മുഴുവനും: ഭാവിയിലെ സമന്വയിപ്പിക്കലുകളിൽ പ്രത്യക്ഷപ്പെടുന്ന വിഭാഗങ്ങൾ ആദ്യം മറഞ്ഞിരിക്കും. ഇഷ്ടാനുസൃതമാക്കൽ സ്ക്രീനിൽ അവ എപ്പോൾ വേണമെങ്കിലും കാണാം.</string>
-    <string name="setup_prefer_hls_description">ലൈവ് ടിവിക്കായി MPEG-TS-നെക്കാൾ HLS (.m3u8) ന് മുൻഗണന നൽകുക. HLS പരാജയപ്പെട്ടാൽ MPEG-TS-ലേക്ക് മടങ്ങും. ക്യാച്ച്-അപ്പ് എല്ലായ്പ്പോഴും MPEG-TS ഉപയോഗിക്കുന്നു.</string>
-    <string name="setup_prefer_hls_description_supported">ലൈവ് ടിവിക്കായി MPEG-TS-നെക്കാൾ HLS (.m3u8) ന് മുൻഗണന നൽകുക. HLS പരാജയപ്പെട്ടാൽ MPEG-TS-ലേക്ക് മടങ്ങും. ക്യാച്ച്-അപ്പ് എല്ലായ്പ്പോഴും MPEG-TS ഉപയോഗിക്കുന്നു. നിങ്ങളുടെ പ്രൊവൈഡർ HLS പിന്തുണയുണ്ടെന്ന് റിപ്പോർട്ട് ചെയ്യുന്നു.</string>
-    <string name="setup_prefer_hls_description_unsupported">ലൈവ് ടിവിക്കായി MPEG-TS-നെക്കാൾ HLS (.m3u8) ന് മുൻഗണന നൽകുക. HLS പരാജയപ്പെട്ടാൽ MPEG-TS-ലേക്ക് മടങ്ങും. ക്യാച്ച്-അപ്പ് എല്ലായ്പ്പോഴും MPEG-TS ഉപയോഗിക്കുന്നു. നിങ്ങളുടെ പ്രൊവൈഡർ HLS പിന്തുണയുണ്ടെന്ന് റിപ്പോർട്ട് ചെയ്യുന്നില്ല — നിങ്ങൾക്ക് ഇപ്പോഴും ഇത് പരീക്ഷിച്ച് നോക്കാം.</string>
+    <string name="setup_prefer_hls_description">ലൈവ് ടിവിക്കായി MPEG-TS-നെക്കാൾ HLS (.m3u8) ന് മുൻഗണന നൽകുക. HLS പരാജയപ്പെട്ടാൽ MPEG-TS-ലേക്ക് മടങ്ങും.</string>
+    <string name="setup_prefer_hls_description_supported">ലൈവ് ടിവിക്കായി MPEG-TS-നെക്കാൾ HLS (.m3u8) ന് മുൻഗണന നൽകുക. HLS പരാജയപ്പെട്ടാൽ MPEG-TS-ലേക്ക് മടങ്ങും. നിങ്ങളുടെ പ്രൊവൈഡർ HLS പിന്തുണയുണ്ടെന്ന് റിപ്പോർട്ട് ചെയ്യുന്നു.</string>
+    <string name="setup_prefer_hls_description_unsupported">ലൈവ് ടിവിക്കായി MPEG-TS-നെക്കാൾ HLS (.m3u8) ന് മുൻഗണന നൽകുക. HLS പരാജയപ്പെട്ടാൽ MPEG-TS-ലേക്ക് മടങ്ങും. നിങ്ങളുടെ പ്രൊവൈഡർ HLS പിന്തുണയുണ്ടെന്ന് റിപ്പോർട്ട് ചെയ്യുന്നില്ല — നിങ്ങൾക്ക് ഇപ്പോഴും ഇത് പരീക്ഷിച്ച് നോക്കാം.</string>
+    <string name="setup_prefer_hls_catchup">ക്യാച്ച്-അപ്പിനായി HLS-ന് മുൻഗണന നൽകുക</string>
+    <string name="setup_prefer_hls_catchup_description">ക്യാച്ച്-അപ്പ് പരിപാടികൾ MPEG-TS-ന് പകരം HLS (.m3u8) ആയി ആവശ്യപ്പെടുക. HLS പരാജയപ്പെട്ടാൽ MPEG-TS-ലേക്ക് മടങ്ങും. ചില ദാതാക്കൾ മാത്രമേ ക്യാച്ച്-അപ്പ് HLS ആയി നൽകുന്നുള്ളൂ.</string>
     <string name="setup_hls_test_support">HLS പിന്തുണ പരീക്ഷിക്കുക</string>
     <string name="setup_hls_testing">HLS പരീക്ഷിക്കുന്നു…</string>
     <string name="setup_hls_test_failed">പരീക്ഷണം പരാജയപ്പെട്ടു: <xliff:g id="reason">%1$s</xliff:g></string>

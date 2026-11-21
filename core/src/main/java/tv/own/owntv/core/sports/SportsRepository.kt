@@ -35,8 +35,6 @@ import tv.own.owntv.core.sports.model.Ranking
 import tv.own.owntv.core.sports.model.Sport
 import tv.own.owntv.core.sports.model.StandingsTable
 import java.io.File
-import java.time.Instant
-import java.time.ZoneId
 
 /**
  * Everything the sports screens show, as one flow. Every screen reads [board]; what keeps it fresh is
@@ -67,6 +65,17 @@ data class SportsBoard(
         }
         return if (ends.isEmpty()) this else copy(endedAt = endedAt + ends.associate { it.key to now })
     }
+    /**
+     * "Starting soon": today's matches still to start, and tomorrow's only once today has none left,
+     * so a full evening is never pushed out by the next day's games.
+     */
+    fun startingSoon(now: Long, passes: (Match) -> Boolean): List<Match> {
+        fun of(day: Map<String, List<Match>>) =
+            day.values.flatten().distinctBy { it.key }.filter { it.state == MatchState.PRE && it.startMs > now && passes(it) }
+        val listedToday = today.values.flatMapTo(HashSet()) { l -> l.map { it.key } }
+        return of(today).ifEmpty { of(tomorrow).filter { it.key !in listedToday } }
+    }
+
     /** Every match on the board, today's first, each once. */
     val matches: List<Match> get() = (today.values.flatten() + tomorrow.values.flatten()).distinctBy { it.key }
 
@@ -305,7 +314,7 @@ class SportsRepository(
         val now = clock()
         val follow = followed.first()
         val leagues = follow.mapNotNull(SportsCatalog::league)
-        val nextDay = espnToday().plusDays(1)
+        val day = espnToday()
         var done = 0
         var total = leagues.size * 2
         fun step() {
@@ -316,7 +325,7 @@ class SportsRepository(
         val boards = coroutineScope {
             leagues.flatMap { l ->
                 listOf(false, true).map { tomorrow ->
-                    async { Triple(l, tomorrow, attempt { source.scoreboard(l, if (tomorrow) nextDay else null) }.also { step() }) }
+                    async { Triple(l, tomorrow, attempt { source.scoreboard(l, if (tomorrow) day.plusDays(1) else day) }.also { step() }) }
                 }
             }.awaitAll()
         }
@@ -428,7 +437,7 @@ class SportsRepository(
             val matches: List<Match> = when (feed) {
                 is Feed.Scoreboard -> {
                     val league = SportsCatalog.league(feed.leagueKey) ?: throw IllegalArgumentException("not in the catalogue")
-                    val day = if (feed.tomorrow) espnToday().plusDays(1) else null
+                    val day = espnToday().let { if (feed.tomorrow) it.plusDays(1) else it }
                     source.scoreboard(league, day).also { m -> _board.update { b -> b.withScoreboard(feed, m, clock()) } }
                 }
                 is Feed.Summary -> {
@@ -475,8 +484,12 @@ class SportsRepository(
         else b.copy(today = today + (feed.leagueKey to merged), failing = failing - feed)
     }
 
-    /** ESPN's "today" is the US Eastern day; tomorrow's board is the day after that one. */
-    private fun espnToday() = Instant.ofEpochMilli(clock()).atZone(ESPN_ZONE).toLocalDate()
+    /**
+     * ESPN's "today" is the US Eastern day; tomorrow's board is the day after that one. Both are asked
+     * for by date: ESPN's own default day still answers yesterday for some hours after Eastern
+     * midnight, which left the board with yesterday and the day after, and today's games nowhere.
+     */
+    private fun espnToday() = SportsRefreshPolicy.espnDay(clock())
 
     private fun loadCache() {
         if (cacheLoaded) return
@@ -507,6 +520,19 @@ class SportsRepository(
     private fun seed(board: SportsBoard, at: Long, replace: Boolean) {
         fun put(feed: Feed, state: FeedState) {
             if (replace || feed !in states) states[feed] = state
+        }
+        // A rebuild keeps only the followed leagues' tables and the board's own match details. One an open
+        // page fetched for itself (a team in a league not followed) is gone, so it must not stay on record
+        // as fetched: asked for once, it would never be asked for again and the page would stay without it.
+        if (replace) {
+            states.keys.removeAll { f ->
+                when (f) {
+                    is Feed.Standings -> f.leagueKey !in board.standings
+                    is Feed.Rankings -> f.leagueKey !in board.rankings
+                    is Feed.Summary -> f.matchKey !in board.summaries
+                    is Feed.Scoreboard -> false
+                }
+            }
         }
         board.today.forEach { (k, l) -> put(Feed.Scoreboard(k), FeedState(at, at, 0, l)) }
         board.tomorrow.forEach { (k, l) -> put(Feed.Scoreboard(k, tomorrow = true), FeedState(at, at, 0, l)) }
@@ -541,7 +567,6 @@ class SportsRepository(
         const val DROP_AFTER_MS = 5 * 60_000L
         const val CACHE_DIR = "sports"
         const val CACHE_FILE = "board.json"
-        val ESPN_ZONE: ZoneId = ZoneId.of("America/New_York")
     }
 }
 

@@ -230,4 +230,8 @@
     <string name="glcn_category_icons_logos">Logos</string>
     <string name="glcn_accessible_title">Modo accesible</string>
     <string name="glcn_accessible_desc">Para este perfil: letra más grande, foco muy marcado y movimiento tranquilo</string>
+    <string name="database_migration_title">Migrando la base de datos</string>
+    <string name="database_migration_body">Esta versión guarda tus canales, películas y series en un nuevo formato de base de datos. Solo ocurre una vez y puede tardar hasta 2 minutos con listas grandes.</string>
+    <string name="database_migration_keep">Se conservan tus listas, favoritos e historial. No se vuelve a descargar nada. No apagues el televisor ni cierres la aplicación.</string>
+    <string name="database_migration_keep_mobile">Se conservan tus listas, favoritos e historial. No se vuelve a descargar nada. Mantén la aplicación abierta.</string>
 </resources>

@@ -404,6 +404,7 @@
     <string name="sports_tab_stats">الإحصاءات</string>
     <string name="sports_tab_lineups">التشكيلات</string>
     <string name="sports_tab_table">الترتيب</string>
+    <string name="sports_tab_standings">جدول الترتيب</string>
     <string name="sports_following">تتابعه</string>
     <string name="sports_follow">متابعة</string>
     <string name="sports_event_goal">هدف · <xliff:g id="player">%1$s</xliff:g></string>
@@ -479,6 +480,7 @@
     <string name="sports_playing_now">قيد التشغيل</string>
     <string name="sports_switch_channel">تغيير القناة</string>
     <string name="sports_tab_fixtures">المباريات القادمة</string>
+    <string name="sports_tab_games">المباريات</string>
     <string name="sports_tab_results">النتائج</string>
     <string name="sports_tab_scores">مباشر</string>
     <string name="sports_tab_calendar">التقويم</string>
@@ -525,6 +527,10 @@
     <string name="sports_table_lost">خ</string>
     <string name="sports_table_difference">±</string>
     <string name="sports_table_points">ن</string>
+    <string name="sports_table_tied">ت</string>
+    <string name="sports_table_ot_losses">خ.إ</string>
+    <string name="sports_table_win_percent">نسبة</string>
+    <string name="sports_table_games_behind">فارق</string>
     <string name="sports_table_form">الأداء</string>
     <string name="sports_this_matchday">هذه الجولة</string>
     <string name="sports_settings_what">ما يُعرض</string>

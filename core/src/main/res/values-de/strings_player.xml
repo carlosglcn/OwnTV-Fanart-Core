@@ -56,6 +56,13 @@
     <string name="player_adjust">ANPASSEN</string>
     <string name="player_search_subtitles">OpenSubtitles durchsuchen</string>
     <string name="player_select_local_subtitle">Lokale Untertiteldatei auswählen</string>
+    <string name="player_subtitle_find_in_folder">Im Ordner suchen</string>
+    <string name="player_subtitle_folder_title">Untertitel im Ordner</string>
+    <string name="player_subtitle_folder_choose">Untertitelordner auswählen</string>
+    <string name="player_subtitle_folder_change">Ordner ändern</string>
+    <string name="player_subtitle_folder_empty">In diesem Ordner sind keine Untertiteldateien</string>
+    <string name="player_subtitle_folder_auto">Passende Untertitel automatisch laden</string>
+    <string name="player_subtitle_folder_auto_description">Ein Film oder eine Folge ohne eigene Untertitel erhält die eine Datei hier, die zum Namen passt. Passen mehrere, wird keine geladen.</string>
     <string name="player_no_tracks">Keine Spuren verfügbar.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · Bild</string>
     <string name="player_av_sync">A/V-Synchronisierung</string>

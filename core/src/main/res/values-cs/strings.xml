@@ -209,4 +209,8 @@
     <string name="shell_now_playing_audio">Zvuk</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">Zavřít</string>
+    <string name="database_migration_title">Probíhá migrace databáze</string>
+    <string name="database_migration_body">Tato verze ukládá vaše kanály, filmy a seriály v novém formátu databáze. Proběhne to jen jednou a u velkých playlistů to může trvat až 2 minuty.</string>
+    <string name="database_migration_keep">Vaše playlisty, oblíbené a historie zůstanou zachovány. Nic se znovu nestahuje. Nevypínejte prosím televizor ani nezavírejte aplikaci.</string>
+    <string name="database_migration_keep_mobile">Vaše playlisty, oblíbené a historie zůstanou zachovány. Nic se znovu nestahuje. Nechte prosím aplikaci otevřenou.</string>
 </resources>

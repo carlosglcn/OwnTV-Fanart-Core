@@ -164,4 +164,8 @@
     <string name="shell_now_playing_audio">音频</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">忽略</string>
+    <string name="database_migration_title">正在迁移数据库</string>
+    <string name="database_migration_body">此版本会以新的数据库格式保存你的频道、电影和剧集。此操作只进行一次，播放列表较大时最多可能需要 2 分钟。</string>
+    <string name="database_migration_keep">你的播放列表、收藏和观看记录都会保留，不会重新下载任何内容。请不要关闭电视或退出应用。</string>
+    <string name="database_migration_keep_mobile">你的播放列表、收藏和观看记录都会保留，不会重新下载任何内容。请保持应用打开。</string>
 </resources>

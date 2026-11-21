@@ -116,13 +116,10 @@
 1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	SELECT itemId FROM custom_category_members WHERE profileId = :profileId AND mediaType = :type AND contextKey = :contextKey
 1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	SELECT m.profileId AS profileId, m.mediaType AS mediaType, m.itemId AS itemId,
 1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	WHERE c.sourceId = :sourceId OR mv.sourceId = :sourceId OR s.sourceId = :sourceId
-1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	WHERE c.sourceId IN (:sourceIds) AND c.name LIKE '%' || :query || '%'
 1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	WHERE m.profileId = :profileId AND m.mediaType = 'MOVIE' AND m.contextKey = :contextKey
 1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	WHERE m.profileId = :profileId AND m.mediaType = 'SERIES' AND m.contextKey = :contextKey
 1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	WHERE m.profileId = :profileId AND m.mediaType = :type AND m.contextKey = :contextKey
-1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	WHERE mv.sourceId IN (:sourceIds) AND mv.name LIKE '%' || :query || '%'
 1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	WHERE profileId = :profileId AND mediaType = :type AND contextKey IN (:contextKeys) AND (
-1	core/src/main/java/tv/own/owntv/core/database/dao/CustomCategoryDao.kt	WHERE s.sourceId IN (:sourceIds) AND s.name LIKE '%' || :query || '%'
 1	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	FROM epg_programmes WHERE epgChannelId = :epgKey
 1	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	FROM epg_programmes WHERE epgChannelId IN (:epgKeys)
 1	core/src/main/java/tv/own/owntv/core/database/dao/EpgDao.kt	SELECT * FROM epg_programmes WHERE epgChannelId = :epgChannelId AND startMs <= :now AND stopMs > :now ORDER BY (description IS NOT NULL AND description != '') DESC, startMs DESC LIMIT 1

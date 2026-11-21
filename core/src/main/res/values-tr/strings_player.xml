@@ -56,6 +56,13 @@
     <string name="player_adjust">AYARLA</string>
     <string name="player_search_subtitles">OpenSubtitles\'da ara</string>
     <string name="player_select_local_subtitle">Yerel altyazı dosyası seç</string>
+    <string name="player_subtitle_find_in_folder">Klasörde bul</string>
+    <string name="player_subtitle_folder_title">Klasördeki altyazılar</string>
+    <string name="player_subtitle_folder_choose">Altyazı klasörünü seç</string>
+    <string name="player_subtitle_folder_change">Klasörü değiştir</string>
+    <string name="player_subtitle_folder_empty">Bu klasörde altyazı dosyası yok</string>
+    <string name="player_subtitle_folder_auto">Eşleşen altyazıyı otomatik yükle</string>
+    <string name="player_subtitle_folder_auto_description">Kendi altyazısı olmayan bir film ya da bölüm, buradaki adıyla eşleşen tek dosyayı alır. Birden fazla dosya eşleşirse hiçbiri yüklenmez.</string>
     <string name="player_no_tracks">Kullanılabilir parça yok.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · görsel</string>
     <string name="player_av_sync">Ses/görüntü eşitleme</string>

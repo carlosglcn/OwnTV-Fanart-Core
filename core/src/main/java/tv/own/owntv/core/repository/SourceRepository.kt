@@ -39,6 +39,7 @@ class SourceRepository(
         userAgent: String? = null, epgUrl: String? = null,
         syncLive: Boolean = true, syncMovies: Boolean = true, syncSeries: Boolean = true,
         preferHls: Boolean = false,
+        catchupPreferHls: Boolean = false,
         httpReferer: String? = null,
     ): SourceEntity = addAndLink(
         profileId,
@@ -46,7 +47,7 @@ class SourceRepository(
             name = name, type = SourceType.XTREAM, url = serverUrl,
             username = username, password = password, userAgent = userAgent, epgUrl = epgUrl,
             syncLive = syncLive, syncMovies = syncMovies, syncSeries = syncSeries,
-            preferHls = preferHls, httpReferer = httpReferer,
+            preferHls = preferHls, catchupPreferHls = catchupPreferHls, httpReferer = httpReferer,
         ),
     )
 

@@ -17,11 +17,13 @@ class SportsCacheJsonTest {
         val f1 = EspnParser.scoreboard(League(Sport.RACING, "f1", "F1"), fixture("scoreboard_racing_f1.json"))
         val summary = EspnParser.summary(soccer.first(), fixture("summary_soccer_ger1.json"))
         val table = EspnParser.standings(bundesliga, fixture("standings_soccer_ger1.json"))
+        val nba = EspnParser.standings(League(Sport.BASKETBALL, "nba", "NBA"), fixture("standings_basketball_nba.json"))
+        val nhl = EspnParser.standings(League(Sport.HOCKEY, "nhl", "NHL"), fixture("standings_hockey_nhl.json"))
         val board = SportsBoard(
             today = mapOf("soccer/ger.1" to soccer, "tennis/atp" to tennis, "cricket/all" to cricket),
             tomorrow = mapOf("racing/f1" to f1),
             summaries = mapOf(soccer.first().key to summary),
-            standings = mapOf(bundesliga.key to table),
+            standings = mapOf(bundesliga.key to table, nba.leagueKey to nba, nhl.leagueKey to nhl),
             rebuiltAt = 1_000L,
         )
 

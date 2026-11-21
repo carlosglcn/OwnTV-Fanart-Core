@@ -17,7 +17,7 @@
     </plurals>
     <string name="content_genre_action">Action</string>
     <string name="content_genre_adult">Adulte</string>
-    <string name="content_genre_anime">Anime</string>
+    <string name="content_genre_anime">Animé</string>
     <string name="content_genre_comedy">Comédie</string>
     <string name="content_genre_documentary">Documentaire</string>
     <string name="content_genre_drama">Drame</string>
@@ -94,9 +94,9 @@
     <string name="content_episodes">Épisodes</string>
     <string name="content_oldest_first">Du plus ancien au plus récent</string>
     <string name="content_newest_first">Du plus récent au plus ancien</string>
-    <string name="content_delete_subtitles">Supprimer les sous-titres OpenSub</string>
+    <string name="content_delete_subtitles">Supprimer les sous-titres OpenSubtitles</string>
     <string name="content_play_trailer">Lire la bande-annonce</string>
-    <string name="content_refetch_tmdb">Récupérer à nouveau les détails TMDB</string>
+    <string name="content_refetch_tmdb">Mettre à jour les détails</string>
     <string name="content_set_tmdb_name">Définir le nom TMDB</string>
     <string name="content_close">Fermer</string>
     <string name="content_rename_hint">Uniquement pour ce profil. Laissez ce champ vide pour rétablir le nom d’origine.</string>
@@ -118,8 +118,8 @@
     <string name="content_already_downloaded">Déjà téléchargé — consultez le menu Téléchargements.</string>
     <string name="content_refetching_tmdb">Nouvelle récupération des détails TMDB…</string>
     <string name="content_researching_tmdb">Nouvelle recherche sur TMDB…</string>
-    <string name="content_duration_hours"><xliff:g id="hours">%1$d</xliff:g> h <xliff:g id="minutes">%2$d</xliff:g> min</string>
-    <string name="content_duration_minutes"><xliff:g id="minutes">%1$d</xliff:g> min</string>
+    <string name="content_duration_hours"><xliff:g id="hours">%1$d</xliff:g>h <xliff:g id="minutes">%2$d</xliff:g>min</string>
+    <string name="content_duration_minutes"><xliff:g id="minutes">%1$d</xliff:g>min</string>
     <string name="content_rating">★ <xliff:g id="rating">%1$.1f</xliff:g></string>
     <string name="content_metadata_separator">"  •  "</string>
     <string name="content_season_episode">S<xliff:g id="season">%1$d</xliff:g> · E<xliff:g id="episode">%2$d</xliff:g></string>
@@ -292,7 +292,7 @@
     <string name="content_epg_offset_following_global">Suivre le décalage global (<xliff:g id="offset">%1$s</xliff:g>)</string>
     <string name="content_epg_offset_channel_only">Cette chaîne uniquement · le décalage global est <xliff:g id="offset">%1$s</xliff:g></string>
     <string name="content_epg_offset_use_global">Utiliser le décalage global</string>
-    <string name="content_preview_single_stream">Aperçu désactivé — votre fournisseur n\'autorise qu\'un flux à la fois.</string>
+    <string name="content_preview_single_stream">Aperçu désactivé — votre fournisseur n\'autorise qu\'un flux à la fois</string>
     <string name="content_playlist_picker_subtitle">S’applique partout et est mémorisé</string>
     <string name="content_playlist_marks_note">Avec « Toutes les playlists », chaque ligne affiche le badge de la playlist dont elle vient.</string>
     <string name="content_action_next_episode">Épisode suivant</string>

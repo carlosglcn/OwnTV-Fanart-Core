@@ -153,4 +153,17 @@ class SportsConfigTest {
         assertNotEquals(a, b)
         assertEquals(b.leagues, SportsConfig.fromJson(b.toJson().toString()).leagues)
     }
+
+    @Test
+    fun `a followed team keeps the league it was followed from, never one of another sport`() {
+        val college = FollowedTeam(Sport.FOOTBALL, "194", "Ohio State Buckeyes", "OSU", "football/college-football")
+        val back = SportsConfig.fromJson(SportsConfig(teams = listOf(college)).toJson().toString()).teams.single()
+        assertEquals("football/college-football", back.league)
+        assertEquals("College Football", back.leagueName)
+        // A league that is not the team's sport (or not in the catalogue) is dropped, not trusted.
+        val wrong = SportsConfig(teams = listOf(college.copy(league = "hockey/nhl"))).toJson().toString()
+        assertEquals(null, SportsConfig.fromJson(wrong).teams.single().league)
+        // Saved before the field existed: no league.
+        assertEquals(null, SportsConfig.fromJson("""{"teams":[{"s":"football","id":"194","n":"Ohio State Buckeyes"}]}""").teams.single().league)
+    }
 }

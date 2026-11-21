@@ -164,4 +164,8 @@
     <string name="shell_now_playing_audio">音声</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">閉じる</string>
+    <string name="database_migration_title">データベースを移行しています</string>
+    <string name="database_migration_body">このバージョンでは、チャンネル・映画・シリーズを新しいデータベース形式で保存します。この処理は一度だけで、大きなプレイリストでは最大2分かかることがあります。</string>
+    <string name="database_migration_keep">プレイリスト、お気に入り、履歴はそのまま残ります。再ダウンロードは行われません。テレビの電源を切ったり、アプリを閉じたりしないでください。</string>
+    <string name="database_migration_keep_mobile">プレイリスト、お気に入り、履歴はそのまま残ります。再ダウンロードは行われません。アプリを開いたままにしてください。</string>
 </resources>

@@ -179,4 +179,8 @@
     <string name="shell_now_playing_audio">ഓഡിയോ</string>
     <string name="common_weather_degrees_city"><xliff:g id="temperature">%1$d</xliff:g>° <xliff:g id="city">%2$s</xliff:g></string>
     <string name="common_dismiss">ഒഴിവാക്കുക</string>
+    <string name="database_migration_title">ഡാറ്റാബേസ് മൈഗ്രേഷൻ നടക്കുന്നു</string>
+    <string name="database_migration_body">ഈ പതിപ്പ് നിങ്ങളുടെ ചാനലുകളും സിനിമകളും സീരീസുകളും ഒരു പുതിയ ഡാറ്റാബേസ് ഫോർമാറ്റിൽ സൂക്ഷിക്കുന്നു. ഇത് ഒരിക്കൽ മാത്രമേ നടക്കൂ, വലിയ പ്ലേലിസ്റ്റുകളിൽ 2 മിനിറ്റ് വരെ എടുത്തേക്കാം.</string>
+    <string name="database_migration_keep">നിങ്ങളുടെ പ്ലേലിസ്റ്റുകളും പ്രിയപ്പെട്ടവയും ചരിത്രവും നിലനിർത്തും. ഒന്നും വീണ്ടും ഡൗൺലോഡ് ചെയ്യില്ല. ദയവായി ടിവി ഓഫാക്കുകയോ ആപ്പ് അടയ്ക്കുകയോ ചെയ്യരുത്.</string>
+    <string name="database_migration_keep_mobile">നിങ്ങളുടെ പ്ലേലിസ്റ്റുകളും പ്രിയപ്പെട്ടവയും ചരിത്രവും നിലനിർത്തും. ഒന്നും വീണ്ടും ഡൗൺലോഡ് ചെയ്യില്ല. ദയവായി ആപ്പ് തുറന്നുവയ്ക്കുക.</string>
 </resources>

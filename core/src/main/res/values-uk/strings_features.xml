@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="update_later">Відкласти</string>
+    <string name="profiles_pin">PIN-код</string>
+    <string name="profiles_new">Новий профіль</string>
+    <string name="profiles_edit">Редагувати профіль</string>
+    <string name="profiles_name">Ім’я</string>
+    <string name="profiles_name_hint">наприклад, Олексій</string>
+    <string name="profiles_avatar">АВАТАР</string>
+    <string name="profiles_avatar_own_picture">Власне зображення</string>
+    <string name="profiles_kids">Дитячий профіль</string>
+    <string name="profiles_kids_description">Спрощений безпечний перегляд</string>
+    <string name="profiles_allow_downloads">Дозволити завантаження</string>
+    <string name="profiles_allow_downloads_description">Вимкніть, щоб приховати всі кнопки завантаження для цього профілю</string>
+    <string name="profiles_remove_pin">Прибрати PIN-код</string>
+    <string name="profiles_no_pin">Цей профіль відкривається без PIN-коду</string>
+    <string name="profiles_change_pin">Змінити PIN-код (порожньо — без змін)</string>
+    <string name="profiles_optional_pin">PIN-код (необов’язково)</string>
+    <string name="profiles_pin_digits">4–6 цифр</string>
+    <string name="profiles_pin_placeholder">····</string>
+    <string name="profiles_name_taken">Це ім’я вже зайняте — виберіть інше.</string>
+    <string name="profiles_create">Створити</string>
+    <string name="profiles_save">Зберегти</string>
+    <string name="profiles_gate_title">Хто дивиться?</string>
+    <string name="profiles_gate_subtitle">Кожен профіль має власне обране та історію</string>
+    <string name="profiles_wrong_pin">Неправильний PIN-код — спробуйте ще раз</string>
+    <string name="profiles_enter_pin"><xliff:g id="name">%1$s</xliff:g> — введіть PIN-код</string>
+    <string name="profiles_protected_edit">Цей профіль має блокування профілю або блокування налаштувань. Введіть будь-який із двох PIN-кодів, щоб його змінити.</string>
+    <string name="profiles_kids_badge">ДІТИ</string>
+    <string name="profiles_add">Додати профіль</string>
+    <string name="profiles_title">Профілі</string>
+    <string name="profiles_delete_title">Видалити «<xliff:g id="name">%1$s</xliff:g>»?</string>
+    <string name="profiles_delete_message">Видаляє цей профіль, його обране та історію. Джерела зберігаються.</string>
+    <string name="profiles_kids_tag">Дитячий</string>
+    <string name="profiles_locked_tag">Захищено PIN-кодом</string>
+    <string name="search_title">Пошук</string>
+    <string name="search_continue">Продовжити перегляд</string>
+    <string name="search_unwatched">Непереглянуте</string>
+    <string name="search_recent">Нещодавні пошуки</string>
+    <string name="search_nothing_in_list">У «<xliff:g id="list">%1$s</xliff:g>» поки нічого немає.</string>
+    <string name="search_clear">Очистити</string>
+    <string name="search_jump_to">Перейти до</string>
+    <string name="search_open_series">Відкрити серіал</string>
+    <string name="search_movie">Фільм</string>
+    <string name="search_series">Серіал</string>
+    <string name="search_channels">Канали</string>
+    <string name="search_on_tv">Телепередачі</string>
+    <string name="search_go_to_channel">Перейти до каналу</string>
+    <string name="search_go_to_movie">Перейти до фільму</string>
+    <string name="search_clear_recent">Очистити нещодавні пошуки</string>
+    <string name="search_field_hint">Канали, фільми та серіали</string>
+    <string name="search_voice">Голосовий пошук</string>
+    <string name="search_voice_prompt">Назвіть канал, фільм або серіал</string>
+    <string name="search_card_title">Знайдіть усе у своїх плейлистах</string>
+    <string name="search_card_body">Канали, фільми та серіали з усіх плейлистів, які ви показуєте. Виберіть результат, щоб одразу перейти до нього, а потім відтворіть, завантажте або відкрийте його параметри. Телепередачі, що йдуть зараз або будуть пізніше сьогодні, теж знаходяться за назвою.</string>
+    <string name="search_nothing_found">Нічого не знайдено за запитом «<xliff:g id="query">%1$s</xliff:g>»</string>
+    <string name="search_nothing_found_body">Пошук виконується за назвами каналів, фільмів і серіалів у плейлистах, які ви показуєте. У прихованих категоріях пошук не виконується. Телепередачі знаходяться за назвою в завантаженій програмі передач.</string>
+    <string name="search_query_quoted">«<xliff:g id="query">%1$s</xliff:g>»</string>
+    <plurals name="search_result_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> результат</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> результати</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> результатів</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> результатів</item>
+    </plurals>
+    <plurals name="search_all_channels">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> канал</item>
+        <item quantity="few">Усі <xliff:g id="count">%1$d</xliff:g> канали</item>
+        <item quantity="many">Усі <xliff:g id="count">%1$d</xliff:g> каналів</item>
+        <item quantity="other">Усі <xliff:g id="count">%1$d</xliff:g> каналів</item>
+    </plurals>
+    <string name="profiles_default_name">Профіль</string>
+    <string name="launcher_recent_live_title">Нещодавній ефір</string>
+    <string name="launcher_recent_live_description">Нещодавно переглянуті канали наживо</string>
+    <string name="launcher_movie_type">Фільм</string>
+    <string name="launcher_episode_number">Епізод <xliff:g id="episode">%1$d</xliff:g></string>
+    <plurals name="home_library_loading">
+        <item quantity="one">Завантаження бібліотеки · поки що <xliff:g id="count">%1$s</xliff:g> назва</item>
+        <item quantity="few">Завантаження бібліотеки · поки що <xliff:g id="count">%1$s</xliff:g> назви</item>
+        <item quantity="many">Завантаження бібліотеки · поки що <xliff:g id="count">%1$s</xliff:g> назв</item>
+        <item quantity="other">Завантаження бібліотеки · поки що <xliff:g id="count">%1$s</xliff:g> назв</item>
+    </plurals>
+    <string name="home_library_loading_trending">«Зараз популярне» з’явиться, коли бібліотека заповниться.</string>
+    <string name="home_no_preview">Поки що немає що переглядати.</string>
+    <string name="home_no_rows">Усі рядки «Головної» приховано.</string>
+    <string name="home_enable_rows">Увімкніть рядки знову в «Налаштування → Головний екран».</string>
+    <string name="home_start_watching">Почніть дивитися, і тут з’явиться ваша активність.</string>
+    <string name="home_continue_empty">Елементи для продовження перегляду з’являться тут, коли з’явиться історія відтворення.</string>
+    <string name="home_last_watched_now">Востаннє дивилися щойно</string>
+    <plurals name="home_last_watched_minutes">
+        <item quantity="one">Востаннє дивилися <xliff:g id="count">%1$d</xliff:g> хвилину тому</item>
+        <item quantity="few">Востаннє дивилися <xliff:g id="count">%1$d</xliff:g> хвилини тому</item>
+        <item quantity="many">Востаннє дивилися <xliff:g id="count">%1$d</xliff:g> хвилин тому</item>
+        <item quantity="other">Востаннє дивилися <xliff:g id="count">%1$d</xliff:g> хвилин тому</item>
+    </plurals>
+    <plurals name="home_last_watched_hours">
+        <item quantity="one">Востаннє дивилися <xliff:g id="count">%1$d</xliff:g> годину тому</item>
+        <item quantity="few">Востаннє дивилися <xliff:g id="count">%1$d</xliff:g> години тому</item>
+        <item quantity="many">Востаннє дивилися <xliff:g id="count">%1$d</xliff:g> годин тому</item>
+        <item quantity="other">Востаннє дивилися <xliff:g id="count">%1$d</xliff:g> годин тому</item>
+    </plurals>
+    <plurals name="home_last_watched_days">
+        <item quantity="one">Востаннє дивилися <xliff:g id="count">%1$d</xliff:g> день тому</item>
+        <item quantity="few">Востаннє дивилися <xliff:g id="count">%1$d</xliff:g> дні тому</item>
+        <item quantity="many">Востаннє дивилися <xliff:g id="count">%1$d</xliff:g> днів тому</item>
+        <item quantity="other">Востаннє дивилися <xliff:g id="count">%1$d</xliff:g> днів тому</item>
+    </plurals>
+    <string name="home_row_cards">Картки</string>
+    <string name="home_row_now_trending">Зараз популярне</string>
+    <string name="home_row_keep_watching">Дивитися далі</string>
+    <string name="home_row_continue_movies">Продовжити перегляд фільмів</string>
+    <string name="home_row_continue_series">Продовжити перегляд серіалів</string>
+    <string name="home_row_recent_channels">Нещодавні канали</string>
+    <string name="home_row_favorite_channels">Обрані канали</string>
+    <string name="home_row_favorite_movies">Обрані фільми</string>
+    <string name="home_row_favorite_series">Обрані серіали</string>
+    <string name="home_row_on_now">Зараз в ефірі</string>
+    <string name="home_row_hero_description">Велика область попереднього перегляду вгорі</string>
+    <string name="home_row_trending_description">Показує 4–10 позицій, лише якщо популярні в TMDB назви збігаються з фільмами чи серіалами у каталозі вашого провайдера.</string>
+    <string name="home_trending_style">Вигляд популярного</string>
+    <string name="home_trending_style_hero">Детальна картка</string>
+    <string name="home_trending_style_posters">Лише постери</string>
+    <string name="home_trending_rank">№<xliff:g id="rank">%1$d</xliff:g> у популярному · <xliff:g id="section">%2$s</xliff:g></string>
+    <string name="home_trending_in_playlist">У ВАШОМУ ПЛЕЙЛИСТІ</string>
+    <string name="home_trending_style_full_bleed">На весь екран</string>
+    <string name="home_duration_hours_minutes"><xliff:g id="hours">%1$d</xliff:g> год <xliff:g id="minutes">%2$02d</xliff:g> хв</string>
+    <string name="home_time_left">Залишилося <xliff:g id="duration">%1$s</xliff:g></string>
+    <string name="settings_trending_status_off">«Зараз популярне» вимкнено.</string>
+    <string name="settings_trending_status_building">«Зараз популярне» готується після синхронізації провайдера.</string>
+    <string name="settings_trending_status_metadata_disabled">«Зараз популярне» потребує метаданих TMDB. Виберіть «Лише TMDB» або «Провайдер + TMDB».</string>
+    <string name="settings_trending_status_no_vod">«Зараз популярне» приховано, бо в цього провайдера не ввімкнено «Фільми» чи «Серіали».</string>
+    <string name="settings_trending_status_no_matches">«Зараз популярне» приховано, бо жодна назва провайдера не збіглася.</string>
+    <string name="settings_trending_status_failed">Не вдалося оновити «Зараз популярне». Спробуйте синхронізувати провайдера ще раз.</string>
+    <string name="settings_trending_status_waiting">Завершіть синхронізацію провайдера, щоб створити «Зараз популярне».</string>
+    <plurals name="settings_trending_status_below_threshold">
+        <item quantity="one">«Зараз популярне» приховано, бо збіглася лише <xliff:g id="count">%1$d</xliff:g> назва провайдера. Потрібно щонайменше 4.</item>
+        <item quantity="few">«Зараз популярне» приховано, бо збіглися лише <xliff:g id="count">%1$d</xliff:g> назви провайдера. Потрібно щонайменше 4.</item>
+        <item quantity="many">«Зараз популярне» приховано, бо збіглося лише <xliff:g id="count">%1$d</xliff:g> назв провайдера. Потрібно щонайменше 4.</item>
+        <item quantity="other">«Зараз популярне» приховано, бо збіглося лише <xliff:g id="count">%1$d</xliff:g> назв провайдера. Потрібно щонайменше 4.</item>
+    </plurals>
+    <plurals name="settings_trending_status_showing">
+        <item quantity="one">«Зараз популярне» показує <xliff:g id="count">%1$d</xliff:g> відповідну назву.</item>
+        <item quantity="few">«Зараз популярне» показує <xliff:g id="count">%1$d</xliff:g> відповідні назви.</item>
+        <item quantity="many">«Зараз популярне» показує <xliff:g id="count">%1$d</xliff:g> відповідних назв.</item>
+        <item quantity="other">«Зараз популярне» показує <xliff:g id="count">%1$d</xliff:g> відповідних назв.</item>
+    </plurals>
+    <plurals name="settings_trending_status_showing_refresh_failed">
+        <item quantity="one">«Зараз популярне» показує <xliff:g id="count">%1$d</xliff:g> назву з останнього успішного оновлення.</item>
+        <item quantity="few">«Зараз популярне» показує <xliff:g id="count">%1$d</xliff:g> назви з останнього успішного оновлення.</item>
+        <item quantity="many">«Зараз популярне» показує <xliff:g id="count">%1$d</xliff:g> назв з останнього успішного оновлення.</item>
+        <item quantity="other">«Зараз популярне» показує <xliff:g id="count">%1$d</xliff:g> назв з останнього успішного оновлення.</item>
+    </plurals>
+    <string name="home_trending_movie">Фільм</string>
+    <string name="home_trending_series">Серіал</string>
+    <string name="home_trending_provider_match">Збіг із провайдером</string>
+    <string name="home_trending_why_label">ЧОМУ З’ЯВЛЯЄТЬСЯ ЦЕЙ ЕЛЕМЕНТ</string>
+    <string name="home_trending_reason_title">Місце №<xliff:g id="rank">%1$d</xliff:g> в TMDB · <xliff:g id="media_type">%2$s</xliff:g> + збіг із провайдером</string>
+    <string name="home_trending_reason_preferred">Версія провайдера вибраною мовою (<xliff:g id="language">%1$s</xliff:g>) має пріоритет над записами іншими мовами.</string>
+    <string name="home_trending_reason_english">Версії провайдера мовою (<xliff:g id="language">%1$s</xliff:g>) не знайдено, тому вибрано запис провайдера англійською.</string>
+    <string name="home_trending_reason_untagged">Мовного тегу (<xliff:g id="language">%1$s</xliff:g>) чи англійської не знайдено, тому вибрано запис провайдера без тегу.</string>
+    <string name="home_trending_reason_other">Вибрано найближчу відтворювану версію провайдера, бо записів вибраною мовою й англійською не було.</string>
+    <plurals name="home_trending_seasons">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> сезон</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> сезони</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> сезонів</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> сезонів</item>
+    </plurals>
+    <string name="home_trending_play">Відтворити</string>
+    <string name="home_trending_open_episodes">Відкрити епізоди</string>
+    <string name="home_trending_trailer">Трейлер</string>
+    <string name="home_trending_more_details">Докладніше</string>
+    <string name="home_trending_all_versions">Усі версії</string>
+    <string name="home_trending_why_menu">Чому тут цей елемент</string>
+    <string name="home_trending_pause">Пауза</string>
+    <string name="home_trending_unavailable">Ця версія більше недоступна</string>
+    <string name="home_row_continue_movies_description">Фільми зі збереженою позицією</string>
+    <string name="home_row_continue_series_description">Епізоди для продовження або наступні</string>
+    <string name="home_row_recent_description">Канали наживо, які ви нещодавно вмикали</string>
+    <string name="home_row_favorite_description">Ваші обрані канали наживо</string>
+    <string name="home_row_favorite_movies_description">Ваші обрані фільми</string>
+    <string name="home_row_favorite_series_description">Ваші обрані серіали</string>
+    <string name="update_title">Оновлення застосунку</string>
+    <string name="update_checking">Перевірка оновлень…</string>
+    <string name="update_whats_new">Що нового</string>
+    <string name="update_downloading">Завантаження оновлення… <xliff:g id="percent">%1$d</xliff:g>%%</string>
+    <string name="update_available">Доступне оновлення</string>
+    <string name="update_latest">У вас остання версія (v<xliff:g id="version">%1$s</xliff:g>).</string>
+    <string name="update_available_version">Доступна версія <xliff:g id="available">%1$s</xliff:g> (у вас v<xliff:g id="current">%2$s</xliff:g>).</string>
+    <string name="update_installer">Після завершення завантаження відкриється системний інсталятор.</string>
+    <string name="update_now">Оновити зараз</string>
+    <string name="update_try_again">Повторити спробу</string>
+    <string name="update_failed_check">Не вдалося перевірити оновлення.</string>
+    <string name="update_failed_check_http">Сервер оновлень повернув HTTP <xliff:g id="code">%1$s</xliff:g> під час перевірки.</string>
+    <string name="update_no_compatible_apk">У випуску не знайдено пакета оновлення для цього пристрою.</string>
+    <string name="update_invalid_release_response">Сервер оновлень повернув недійсний опис випуску.</string>
+    <string name="update_failed_download">Не вдалося завантажити оновлення, бо мережевий запит не вдався.</string>
+    <string name="update_failed_download_http">Завантаження оновлення повернуло HTTP <xliff:g id="code">%1$s</xliff:g>.</string>
+    <string name="update_empty_download">Сервер оновлень повернув порожній APK.</string>
+    <string name="update_install_failed">Системний інсталятор не зміг відкрити завантажене оновлення.</string>
+    <string name="update_not_enough_space">Недостатньо вільного місця для оновлення. Звільніть приблизно <xliff:g id="size">%1$s</xliff:g> і спробуйте ще раз.</string>
+    <string name="update_damaged_download">Оновлення завантажилося не повністю. Перевірте підключення й спробуйте ще раз.</string>
+    <string name="update_install_rejected">Системний інсталятор відхилив оновлення: <xliff:g id="reason">%1$s</xliff:g></string>
+    <string name="update_ready">OwnTV v<xliff:g id="available">%1$s</xliff:g> готовий (у вас v<xliff:g id="current">%2$s</xliff:g>).</string>
+    <string name="recovery_title">OwnTV не зміг відкрити свою базу даних</string>
+    <string name="recovery_data_safe_full">Ваші профілі, плейлисти, обране та історію НЕ видалено — це збій оновлення бази даних, а дані й досі на цьому пристрої.\n\nПовідомте про це, щоб це можна було виправити, і додайте повідомлення нижче.</string>
+    <string name="recovery_retry">Повторити спробу</string>
+    <string name="recovery_backup_hint">Якщо у вас є файл резервної копії, можна скинути застосунок і потім відновити його. Скидання видаляє все, що зберігається на цьому пристрої.</string>
+    <string name="recovery_confirm_reset">Підтвердьте: стерти всі дані застосунку</string>
+    <string name="recovery_reset">Скинути дані застосунку (крайній захід)</string>
+    <string name="recording_notification_title">Запис</string>
+    <string name="auto_start_notification_channel">Автозапуск після пробудження</string>
+    <string name="auto_start_notification_text">OwnTV відкривається, коли телевізор прокидається</string>
+    <string name="recording_failed_no_space">Зупинено: немає місця</string>
+    <string name="recording_failed_no_connection">Немає вільного підключення від вашого провайдера</string>
+    <string name="recording_failed_clash">Підключення використовував інший запис</string>
+    <string name="recording_failed_network">З’єднання втрачено</string>
+    <string name="recording_failed_unavailable">Канал не відтворювався</string>
+    <string name="recording_failed_channel_gone">Цього каналу більше немає у вашому плейлисті</string>
+    <string name="recording_failed_unknown">Запис не відбувся</string>
+    <string name="recording_title">Записи</string>
+    <string name="recording_empty">Поки що нічого не записано. Натисніть «Записати» на передачі в програмі передач або утримуйте канал, щоб записати його чи запланувати час.</string>
+    <string name="recording_group_now">Записується зараз</string>
+    <string name="recording_group_scheduled">Заплановано</string>
+    <string name="recording_group_completed">Записано</string>
+    <string name="recording_group_failed">Невдало</string>
+    <string name="recording_group_missed">Пропущено</string>
+    <string name="recording_group_series">Кожен показ</string>
+    <string name="recording_record">Записати</string>
+    <string name="recording_stop">Зупинити запис</string>
+    <string name="recording_delete_message">Видаляє запис і його файл із цього пристрою. Це не можна скасувати.</string>
+    <string name="recording_record_series">Записувати кожен показ</string>
+    <string name="recording_stop_series">Припинити запис кожного показу</string>
+    <string name="recording_from_archive">Записати з архіву</string>
+    <string name="recording_schedule">Запланувати запис…</string>
+    <string name="recording_schedule_hint">Виберіть день, початок і кінець. Запис відбудеться, навіть якщо в цього каналу немає програми передач.</string>
+    <string name="recording_schedule_start">Початок</string>
+    <string name="recording_schedule_end">Кінець</string>
+    <string name="recording_schedule_next_day">наступного дня</string>
+    <string name="recording_schedule_past">Цей час уже минув</string>
+    <string name="recording_scheduled_for">Запис відбудеться <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="recording_badge">REC</string>
+    <string name="recording_pill_line">Запис: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="recording_pill_line_locked">Запис із заблокованої категорії</string>
+    <string name="recording_clash_with">Конфлікт із <xliff:g id="programme">%1$s</xliff:g></string>
+    <string name="recording_settings_group">Запис</string>
+    <string name="settings_recording_reserve">Залишати один потік вільним для перегляду</string>
+    <string name="settings_recording_reserve_description">Під час запису одне з підключень вашого провайдера залишається вільним, тож завжди є чим дивитися. Вимкніть, щоб записувати на всіх підключеннях.</string>
+    <string name="settings_recording_pre_roll">Починати раніше</string>
+    <string name="settings_recording_pre_roll_description">Розпочинати запис на цей час раніше за вказаний початок, щоб не втратити початок, якщо програма передач трохи випереджає.</string>
+    <string name="settings_recording_post_roll">Продовжувати після завершення</string>
+    <string name="settings_recording_post_roll_description">Продовжувати запис ще стільки ж після вказаного завершення, щоб не обрізати передачу, яка затяглася.</string>
+    <string name="settings_recording_timers_inexact">Цей пристрій не дозволяє OwnTV встановлювати точні будильники, тому запис може початися на кілька хвилин пізніше. Щоб це компенсувати, записи починаються раніше.</string>
+    <plurals name="recording_minutes">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> хвилина</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> хвилини</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> хвилин</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> хвилин</item>
+    </plurals>
+    <string name="recording_failed_encrypted">Цей канал зашифрований, і його не можна записати</string>
+    <string name="recording_failed_drm">Цей канал захищений DRM, тому його можна дивитися, але не записувати. Захист забезпечує ваш провайдер, а не OwnTV.</string>
+    <string name="recording_failed_metered">Не записано через мобільний інтернет</string>
+    <string name="recording_card_empty_title">Поки що нічого не записано</string>
+    <string name="recording_card_body">Виберіть передачу в «Програмі передач» і натисніть «Записати» або утримуйте канал і заплануйте час. Запис з’явиться тут, навіть коли ви дивитеся щось інше.</string>
+    <string name="recording_open_guide">Відкрити програму передач</string>
+    <plurals name="recording_card_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> запис</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> записи</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> записів</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> записів</item>
+    </plurals>
+    <string name="settings_recording_mobile_data">Записувати через мобільний інтернет</string>
+    <string name="settings_record_watching">Записувати те, що я дивлюся</string>
+    <string name="settings_record_watching_description">Додає в плеєр кнопку запису, яка зберігає канал, що ви дивитеся. Вона отримує канал окремо, тому на час запису використовує одне з підключень вашого провайдера і продовжує запис, навіть якщо ви змінюєте канал або виходите з плеєра.</string>
+    <string name="settings_record_watching_warning_title">Лише одне підключення</string>
+    <string name="settings_record_watching_warning_description">Запис отримує канал вдруге, тож використовує ще одне підключення вашого провайдера. Якщо обліковий запис дозволяє лише одне, запис відхиляється, поки ви дивитеся. Після початку він триває сам: змінюйте канал, виходьте з плеєра, і запис продовжиться до кінця передачі або доки ви не зупините його в «Записах».</string>
+    <string name="settings_record_watching_keep_off">Залишити вимкненим</string>
+    <string name="settings_record_watching_turn_on">Увімкнути</string>
+    <string name="player_recording_conflict">Ваш провайдер дозволяє один потік одночасно, і його використовує запис.</string>
+    <string name="player_keep_watching_stop_recording">Продовжити перегляд (зупиняє запис)</string>
+    <string name="sports_channel_goal_alerts">Сповіщення про голи</string>
+    <string name="sports_channel_live_match">Матч наживо</string>
+    <string name="sports_channel_match_reminders">Нагадування про матчі</string>
+    <string name="sports_score_line"><xliff:g id="home">%1$s</xliff:g> <xliff:g id="home_score">%2$s</xliff:g>–<xliff:g id="away_score">%3$s</xliff:g> <xliff:g id="away">%4$s</xliff:g></string>
+    <string name="sports_pair"><xliff:g id="home">%1$s</xliff:g> – <xliff:g id="away">%2$s</xliff:g></string>
+    <string name="sports_alert_goal">⚽ Гол! <xliff:g id="score">%1$s</xliff:g></string>
+    <string name="sports_alert_wicket">Віккет! <xliff:g id="score">%1$s</xliff:g></string>
+    <string name="sports_alert_red_card">Червона картка · <xliff:g id="score">%1$s</xliff:g></string>
+    <string name="sports_alert_half_time">Перерва · <xliff:g id="score">%1$s</xliff:g></string>
+    <string name="sports_alert_full_time">Кінець матчу · <xliff:g id="score">%1$s</xliff:g></string>
+    <string name="sports_alert_kickoff">Початок · <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_alert_postponed">Перенесено · <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_alert_cancelled">Скасовано · <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_alert_corrected">Рахунок виправлено · <xliff:g id="score">%1$s</xliff:g></string>
+    <string name="sports_alert_detail"><xliff:g id="what">%1$s</xliff:g> · <xliff:g id="competition">%2$s</xliff:g></string>
+    <plurals name="sports_reminder_title">
+        <item quantity="one">Початок за <xliff:g id="minutes">%1$d</xliff:g> хв: <xliff:g id="match">%2$s</xliff:g></item>
+        <item quantity="few">Початок за <xliff:g id="minutes">%1$d</xliff:g> хв: <xliff:g id="match">%2$s</xliff:g></item>
+        <item quantity="many">Початок за <xliff:g id="minutes">%1$d</xliff:g> хв: <xliff:g id="match">%2$s</xliff:g></item>
+        <item quantity="other">Початок за <xliff:g id="minutes">%1$d</xliff:g> хв: <xliff:g id="match">%2$s</xliff:g></item>
+    </plurals>
+    <string name="sports_reminder_on">На <xliff:g id="channel">%1$s</xliff:g></string>
+    <plurals name="sports_reminder_on_more">
+        <item quantity="one">На <xliff:g id="channel">%1$s</xliff:g> і ще <xliff:g id="count">%2$d</xliff:g></item>
+        <item quantity="few">На <xliff:g id="channel">%1$s</xliff:g> і ще <xliff:g id="count">%2$d</xliff:g></item>
+        <item quantity="many">На <xliff:g id="channel">%1$s</xliff:g> і ще <xliff:g id="count">%2$d</xliff:g></item>
+        <item quantity="other">На <xliff:g id="channel">%1$s</xliff:g> і ще <xliff:g id="count">%2$d</xliff:g></item>
+    </plurals>
+    <string name="sports_action_stop_updates">Зупинити оновлення</string>
+    <string name="sports_title">Спорт</string>
+    <plurals name="sports_hub_live">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> наживо</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> наживо</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> наживо</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> наживо</item>
+    </plurals>
+    <plurals name="sports_hub_matches">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> матч</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> матчі</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> матчів</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> матчів</item>
+    </plurals>
+    <string name="sports_scores_espn">Рахунки: ESPN</string>
+    <string name="sports_my_teams">Мої команди</string>
+    <string name="sports_live_now">Зараз наживо</string>
+    <string name="sports_not_on_channels">Немає на ваших каналах</string>
+    <string name="sports_on_channels_now">Спорт на ваших каналах зараз</string>
+    <string name="sports_on_channels_now_mobile">Спорт на ваших каналах</string>
+    <string name="sports_on_channels_now_hint">З вашої програми передач — включає види спорту, яких ESPN не охоплює</string>
+    <string name="sports_starting_soon">Незабаром почнуться</string>
+    <string name="sports_hint_match_page">Сторінка матчу</string>
+    <string name="sports_hint_follow_remind">Стежити · Нагадати</string>
+    <string name="sports_hint_day_matches">Матчі дня</string>
+    <string name="sports_hint_day">День</string>
+    <string name="sports_hint_week">Тиждень</string>
+    <string name="sports_hint_show_score">Показати рахунок</string>
+    <string name="sports_hint_back_to_day">Назад до дня</string>
+    <string name="sports_hint_open_league">Відкрити лігу</string>
+    <string name="sports_hint_sport_chips">Кнопки спорту</string>
+    <string name="sports_hint_league_chips">Кнопки ліг</string>
+    <string name="sports_hint_follow_unfollow">Стежити · Не стежити</string>
+    <string name="sports_reminder_set">Нагадування</string>
+    <string name="sports_until">до <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="sports_set">Сет <xliff:g id="set">%1$d</xliff:g></string>
+    <string name="sports_overs"><xliff:g id="overs">%1$s</xliff:g> овер</string>
+    <string name="sports_empty_nothing">Сьогодні немає матчів у тому, за чим ви стежите</string>
+    <string name="sports_empty_unreachable">Зараз не вдається отримати рахунки. Ваші канали працюють.</string>
+    <string name="sports_paused">Рахунки призупинено — повторна спроба за кілька хвилин</string>
+    <string name="sports_sport_soccer">Футбол</string>
+    <string name="sports_sport_basketball">Баскетбол</string>
+    <string name="sports_sport_tennis">Теніс</string>
+    <string name="sports_sport_cricket">Крикет</string>
+    <string name="sports_sport_hockey">Хокей із шайбою</string>
+    <string name="sports_sport_football">NFL</string>
+    <string name="sports_sport_mma">MMA</string>
+    <string name="sports_sport_baseball">Бейсбол</string>
+    <string name="sports_sport_golf">Гольф</string>
+    <string name="sports_sport_rugby">Регбі</string>
+    <string name="sports_sport_rugby_league">Регбі-ліга</string>
+    <string name="sports_sport_aussie_rules">Австралійський футбол</string>
+    <string name="sports_sport_volleyball">Волейбол</string>
+    <string name="sports_sport_lacrosse">Лакрос</string>
+    <string name="sports_sport_handball">Гандбол</string>
+    <string name="sports_sport_motorsport">Автоспорт</string>
+    <string name="sports_sport_darts">Дартс</string>
+    <string name="sports_sport_snooker">Снукер</string>
+    <string name="sports_sport_cycling">Велоспорт</string>
+    <string name="sports_sport_combat">Єдиноборства</string>
+    <string name="sports_sport_american_football">Американський футбол</string>
+    <string name="sports_sport_athletics">Легка атлетика</string>
+    <string name="sports_sport_winter">Зимові види спорту</string>
+    <string name="sports_sport_other">Спорт</string>
+    <string name="sports_tab_timeline">Хронологія</string>
+    <string name="sports_tab_stats">Статистика</string>
+    <string name="sports_tab_lineups">Склади</string>
+    <string name="sports_tab_table">Таблиця</string>
+    <string name="sports_tab_standings">Таблиця</string>
+    <string name="sports_following">Відстежується</string>
+    <string name="sports_follow">Стежити</string>
+    <string name="sports_event_goal">Гол · <xliff:g id="player">%1$s</xliff:g></string>
+    <string name="sports_event_own_goal">Автогол · <xliff:g id="player">%1$s</xliff:g></string>
+    <string name="sports_event_penalty">Пенальті · <xliff:g id="player">%1$s</xliff:g></string>
+    <string name="sports_event_yellow">Жовта картка · <xliff:g id="player">%1$s</xliff:g></string>
+    <string name="sports_event_red">Червона картка · <xliff:g id="player">%1$s</xliff:g></string>
+    <string name="sports_event_sub">Заміна · <xliff:g id="player_on">%1$s</xliff:g> ↔ <xliff:g id="player_off">%2$s</xliff:g></string>
+    <string name="sports_event_assist">асист <xliff:g id="player">%1$s</xliff:g></string>
+    <string name="sports_event_wicket">Віккет · <xliff:g id="player">%1$s</xliff:g></string>
+    <string name="sports_event_kickoff">Початок матчу</string>
+    <string name="sports_event_half_time">Перерва</string>
+    <string name="sports_event_full_time">Кінець матчу</string>
+    <string name="sports_stat_red_cards">Червоні картки</string>
+    <string name="sports_watch_live">Дивитися наживо</string>
+    <plurals name="sports_watch_live_count">
+        <item quantity="one">Дивитися наживо · <xliff:g id="count">%1$d</xliff:g> канал</item>
+        <item quantity="few">Дивитися наживо · <xliff:g id="count">%1$d</xliff:g> канали</item>
+        <item quantity="many">Дивитися наживо · <xliff:g id="count">%1$d</xliff:g> каналів</item>
+        <item quantity="other">Дивитися наживо · <xliff:g id="count">%1$d</xliff:g> каналів</item>
+    </plurals>
+    <string name="sports_language_first"><xliff:g id="language">%1$s</xliff:g> спершу · із налаштувань</string>
+    <string name="sports_any_country">Будь-яка країна</string>
+    <string name="sports_reason_guide">Програма передач: <xliff:g id="programme">%1$s</xliff:g></string>
+    <string name="sports_reason_event">Канал події · назва збігається з обома командами</string>
+    <string name="sports_reason_pick">Ваш вибір для <xliff:g id="competition">%1$s</xliff:g></string>
+    <string name="sports_reason_likely">Зазвичай показує <xliff:g id="competition">%1$s</xliff:g></string>
+    <string name="sports_confirmed">Підтверджено програмою передач</string>
+    <plurals name="sports_hidden">
+        <item quantity="one">+ <xliff:g id="count">%1$d</xliff:g> приховано фільтрами</item>
+        <item quantity="few">+ <xliff:g id="count">%1$d</xliff:g> приховано фільтрами</item>
+        <item quantity="many">+ <xliff:g id="count">%1$d</xliff:g> приховано фільтрами</item>
+        <item quantity="other">+ <xliff:g id="count">%1$d</xliff:g> приховано фільтрами</item>
+    </plurals>
+    <string name="sports_watch_full_screen">Дивитися на весь екран</string>
+    <string name="sports_preview_another">Переглянути інший канал</string>
+    <string name="sports_always_use">Завжди використовувати для <xliff:g id="competition">%1$s</xliff:g></string>
+    <string name="sports_filter_title">Фільтр каналів</string>
+    <string name="sports_showing_of">Показано <xliff:g id="shown">%1$d</xliff:g> із <xliff:g id="total">%2$d</xliff:g></string>
+    <string name="sports_filter_country">Країна</string>
+    <string name="sports_filter_match">Матч</string>
+    <string name="sports_unknown">Невідомо</string>
+    <string name="sports_any">Будь-який</string>
+    <string name="sports_all_playlists">Усі плейлисти</string>
+    <string name="sports_quality_hd">HD і краще</string>
+    <string name="sports_quality_fhd">FHD і краще</string>
+    <string name="sports_quality_uhd">Лише 4K</string>
+    <string name="sports_only_confirmed">Лише канали, підтверджені програмою передач</string>
+    <string name="sports_only_confirmed_description">Приховати «ймовірні» та запам’ятовані канали</string>
+    <string name="sports_only_confirmed_mobile">Лише підтверджені програмою</string>
+    <string name="sports_remember_filters">Запам’ятати ці фільтри для кожного матчу</string>
+    <string name="sports_remember_filters_description">Зберігається в «Налаштування → Спорт» для цього профілю</string>
+    <string name="sports_remember_filters_mobile">Запам’ятати для кожного матчу</string>
+    <plurals name="sports_show_channels">
+        <item quantity="one">Показати <xliff:g id="count">%1$d</xliff:g> канал</item>
+        <item quantity="few">Показати <xliff:g id="count">%1$d</xliff:g> канали</item>
+        <item quantity="many">Показати <xliff:g id="count">%1$d</xliff:g> каналів</item>
+        <item quantity="other">Показати <xliff:g id="count">%1$d</xliff:g> каналів</item>
+    </plurals>
+    <string name="sports_filter_only_this">Лише цей</string>
+    <string name="sports_filter_toggle">Увімкнути/вимкнути</string>
+    <string name="sports_goal_toast">Гол команді, за якою ви стежите</string>
+    <string name="sports_switch">Перейти</string>
+    <string name="sports_other_channels">Інші канали</string>
+    <string name="sports_other_channels_count">Інші канали · <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="sports_other_channels_title">Інші канали для цього матчу</string>
+    <string name="sports_playing_now">Відтворюється зараз</string>
+    <string name="sports_switch_channel">Перемкнути канал</string>
+    <string name="sports_tab_fixtures">Розклад</string>
+    <string name="sports_tab_games">Матчі</string>
+    <string name="sports_tab_results">Результати</string>
+    <string name="sports_tab_scores">Рахунки</string>
+    <string name="sports_tab_calendar">Календар</string>
+    <string name="sports_tab_leagues">Ліги</string>
+    <string name="sports_previous_month">Попередній місяць</string>
+    <string name="sports_next_month">Наступний місяць</string>
+    <string name="sports_next">Далі: <xliff:g id="match">%1$s</xliff:g></string>
+    <string name="sports_next_badge">Далі</string>
+    <string name="sports_no_table_series">Немає таблиці — серії змінюються щотижня</string>
+    <string name="sports_follow_league">Стежити за лігою</string>
+    <string name="sports_unfollow_league">Не стежити за лігою</string>
+    <string name="sports_no_matches_on">У вашому спорті немає матчів: <xliff:g id="day">%1$s</xliff:g></string>
+    <string name="sports_nothing_on_day">У цей день нічого немає</string>
+    <string name="sports_nothing_in_sport">У цей день немає змагань: <xliff:g id="sport">%1$s</xliff:g></string>
+    <string name="sports_change_leagues_hint">Додати або прибрати ліги можна в «Налаштування → Спорт»</string>
+    <string name="sports_loading_month">Завантаження: <xliff:g id="month">%1$s</xliff:g>…</string>
+    <string name="sports_offline_saved">Показано збережене <xliff:g id="time">%1$s</xliff:g> — не вдалося зв’язатися з ESPN</string>
+    <string name="sports_team_page">Сторінка команди</string>
+    <string name="sports_next_match">Наступний матч</string>
+    <string name="sports_last_five">Останні п’ять</string>
+    <string name="sports_league_position">Позиція в лізі</string>
+    <string name="sports_in_my_teams">У «Моїх командах»</string>
+    <string name="sports_open_match_page">Відкрити сторінку матчу</string>
+    <string name="sports_open_team_page">Відкрити сторінку команди</string>
+    <string name="sports_my_teams_leagues">Ліги, у яких грають ваші команди</string>
+    <string name="sports_tab_drivers">Пілоти</string>
+    <string name="sports_tab_constructors">Конструктори</string>
+    <string name="sports_tab_races">Гонки</string>
+    <string name="sports_tab_rankings">Рейтинги</string>
+    <string name="sports_tab_matches">Матчі</string>
+    <string name="sports_next_race_weekend">Наступний гоночний вікенд</string>
+    <string name="sports_last_weekend">Минулі вихідні</string>
+    <string name="sports_session_practice_1">Практика 1</string>
+    <string name="sports_session_practice_2">Практика 2</string>
+    <string name="sports_session_practice_3">Практика 3</string>
+    <string name="sports_session_sprint_qualifying">Спринт-кваліфікація</string>
+    <string name="sports_session_qualifying">Кваліфікація</string>
+    <string name="sports_session_sprint">Спринт</string>
+    <string name="sports_session_race">Гонка</string>
+    <string name="sports_table_team">Команда</string>
+    <string name="sports_table_played">І</string>
+    <string name="sports_table_won">В</string>
+    <string name="sports_table_drawn">Н</string>
+    <string name="sports_table_lost">П</string>
+    <string name="sports_table_difference">РМ</string>
+    <string name="sports_table_points">О</string>
+    <string name="sports_table_tied">Н</string>
+    <string name="sports_table_ot_losses">ПО</string>
+    <string name="sports_table_win_percent">ВП</string>
+    <string name="sports_table_games_behind">Відст</string>
+    <string name="sports_table_form">Форма</string>
+    <string name="sports_this_matchday">Цей тур</string>
+    <string name="sports_settings_what">Що показувати</string>
+    <string name="sports_show_in_menu">Показувати «Спорт» у меню</string>
+    <string name="sports_show_in_menu_description">Увімкнено за замовчуванням, із плейлистом чи без</string>
+    <string name="sports_leagues">Види спорту та ліги</string>
+    <plurals name="sports_league_count">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> ліга</item>
+        <item quantity="few"><xliff:g id="count">%1$d</xliff:g> ліги</item>
+        <item quantity="many"><xliff:g id="count">%1$d</xliff:g> ліг</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> ліг</item>
+    </plurals>
+    <string name="sports_spoiler_free">Без спойлерів</string>
+    <string name="sports_spoiler_free_description">Приховувати рахунки, доки ви не натиснете OK</string>
+    <string name="sports_spoiler_free_description_mobile">Торкніться рахунку, щоб показати його</string>
+    <string name="sports_settings_watching">Перегляд</string>
+    <string name="sports_languages">Бажані мови коментарів</string>
+    <string name="sports_languages_mobile">Мови коментарів</string>
+    <string name="sports_languages_description">Першими в «Дивитися наживо»</string>
+    <string name="sports_countries">Бажані країни</string>
+    <string name="sports_countries_description">З префіксів каналів, як-от «DE|»</string>
+    <string name="sports_picture_description">Приховати канали нижчої якості</string>
+    <string name="sports_settings_while_watching">Під час перегляду</string>
+    <string name="sports_score_info_bar">Рахунок на інформаційній панелі</string>
+    <string name="sports_score_info_bar_description">Показується лише поки панель відкрита, тож не може зіпсувати гол</string>
+    <string name="sports_score_info_bar_description_mobile">Лише поки панель відкрита</string>
+    <string name="sports_goal_alerts_description">Для моїх команд, поки я дивлюся щось інше</string>
+    <string name="sports_match_reminders_description">Перед початком, із найкращим каналом</string>
+    <string name="sports_remembered_channels">Запам’ятовані канали</string>
+    <string name="sports_remembered_one"><xliff:g id="competition">%1$s</xliff:g> → <xliff:g id="channel">%2$s</xliff:g></string>
+    <plurals name="sports_remembered_summary">
+        <item quantity="one"><xliff:g id="competition">%1$s</xliff:g> → <xliff:g id="channel">%2$s</xliff:g> · ще <xliff:g id="count">%3$d</xliff:g></item>
+        <item quantity="few"><xliff:g id="competition">%1$s</xliff:g> → <xliff:g id="channel">%2$s</xliff:g> · ще <xliff:g id="count">%3$d</xliff:g></item>
+        <item quantity="many"><xliff:g id="competition">%1$s</xliff:g> → <xliff:g id="channel">%2$s</xliff:g> · ще <xliff:g id="count">%3$d</xliff:g></item>
+        <item quantity="other"><xliff:g id="competition">%1$s</xliff:g> → <xliff:g id="channel">%2$s</xliff:g> · ще <xliff:g id="count">%3$d</xliff:g></item>
+    </plurals>
+    <string name="sports_show_likely">Показувати «ймовірні» канали</string>
+    <string name="sports_show_likely_description">Спортивні канали без підтвердження програмою передач</string>
+    <string name="sports_settings_data">Дані</string>
+    <string name="sports_live_refresh">Оновлення наживо</string>
+    <string name="sports_live_refresh_description">Лише поки показано спортивний екран або рахунок</string>
+    <string name="sports_about">Про спортивні дані</string>
+    <string name="sports_about_summary">Рахунки: ESPN · канали: ваш плейлист і програма передач</string>
+    <string name="sports_alerts_when_closed">Сповіщення, коли OwnTV закрито</string>
+    <string name="sports_alerts_when_closed_description">Одноразово запитує дозвіл на сповіщення</string>
+    <string name="sports_alert_me_about">Сповіщати про</string>
+    <string name="sports_kind_goals">Голи та віккети</string>
+    <string name="sports_kind_kickoff_full_time">Початок і кінець матчу</string>
+    <string name="sports_alerts_for">Для</string>
+    <string name="sports_followed_leagues">Відстежувані ліги</string>
+    <string name="sports_followed_leagues_description">Кожен матч, а це може бути багато</string>
+    <string name="sports_live_card">Картка рахунку наживо</string>
+    <string name="sports_live_card_offer">Пропонувати картку рахунку наживо</string>
+    <string name="sports_live_card_description">Оновлюється кожні 30 с до кінця матчу; ви запускаєте її з матчу</string>
+    <string name="sports_alerts_footnote">Коли OwnTV закрито, сповіщення зазвичай надходять протягом хвилини. Якщо телефон довго лежав нерухомо з вимкненим екраном, Android може затримувати їх до 15 хвилин. Картку рахунку наживо не затримує.</string>
+    <string name="sports_search_teams">Шукати команди, гравців, ліги</string>
+    <string name="sports_suggested">Пропозиції на основі того, що ви дивитеся</string>
+    <plurals name="sports_watched_matches">
+        <item quantity="one">Ви дивилися <xliff:g id="count">%1$d</xliff:g> з їхніх матчів</item>
+        <item quantity="few">Ви дивилися <xliff:g id="count">%1$d</xliff:g> з їхніх матчів</item>
+        <item quantity="many">Ви дивилися <xliff:g id="count">%1$d</xliff:g> з їхніх матчів</item>
+        <item quantity="other">Ви дивилися <xliff:g id="count">%1$d</xliff:g> з їхніх матчів</item>
+    </plurals>
+    <string name="sports_league_label">Ліга</string>
+    <string name="sports_no_playlist_title">Додайте плейлист, щоб дивитися матчі</string>
+    <string name="sports_no_playlist_body">Рахунки, таблиці та сповіщення працюють і без нього. З плейлистом OwnTV знаходить кожен канал, що показує цей матч.</string>
+    <string name="sports_add_playlist">Додати плейлист</string>
+    <string name="sports_home_row">Спорт наживо</string>
+    <string name="sports_home_row_description">Відстежувані матчі, поки один іде або ось-ось почнеться</string>
+    <string name="sports_empty_nothing_followed">Ще не вибрано жодного виду спорту чи ліги</string>
+    <string name="sports_empty_choose_in">Виберіть їх у «Налаштування → Застосунок → Спорт → Види спорту та ліги».</string>
+    <string name="sports_load_time_warning">Що більше видів спорту та ліг ви виберете, то довше триватиме завантаження й побудова.</string>
+    <string name="sports_sport_buttons">Кнопки спорту</string>
+    <string name="sports_sport_buttons_mine">Мій спорт</string>
+    <string name="sports_sport_buttons_all">Увесь спорт</string>
+    <string name="sports_sport_buttons_description">Мій спорт: лише вибране вами. Увесь спорт: кожна ліга, яку знає OwnTV, що завантажується довше.</string>
+    <string name="sports_auto_rebuild">Автоматична перебудова</string>
+    <string name="sports_auto_rebuild_description">Як часто рахунки, подробиці матчів і таблиці отримуються знову самі</string>
+    <plurals name="sports_auto_rebuild_hours">
+        <item quantity="one">Кожну <xliff:g id="count">%1$d</xliff:g> годину</item>
+        <item quantity="few">Кожні <xliff:g id="count">%1$d</xliff:g> години</item>
+        <item quantity="many">Кожні <xliff:g id="count">%1$d</xliff:g> годин</item>
+        <item quantity="other">Кожні <xliff:g id="count">%1$d</xliff:g> годин</item>
+    </plurals>
+    <string name="sports_auto_rebuild_app_start">При кожному запуску застосунку</string>
+    <string name="sports_calendar_refresh">Оновлення календаря</string>
+    <string name="sports_calendar_refresh_description">Як часто збережені місяці отримуються знову</string>
+    <plurals name="sports_calendar_refresh_days">
+        <item quantity="one">Кожен <xliff:g id="count">%1$d</xliff:g> день</item>
+        <item quantity="few">Кожні <xliff:g id="count">%1$d</xliff:g> дні</item>
+        <item quantity="many">Кожні <xliff:g id="count">%1$d</xliff:g> днів</item>
+        <item quantity="other">Кожні <xliff:g id="count">%1$d</xliff:g> днів</item>
+    </plurals>
+    <string name="sports_find_channels">Знайти канали</string>
+    <string name="sports_find_channels_description">Шукає в програмі передач і назвах каналів цей матч. У великому плейлисті це може зайняти хвилину.</string>
+    <string name="sports_finding_channels">Пошук у ваших каналах…</string>
+    <string name="sports_strict_filter">Суворе фільтрування</string>
+    <string name="sports_strict_filter_description">Увімкнено: показуються лише канали, що проходять ваші фільтри. Вимкнено: показуються всі канали, спершу ті, що проходять.</string>
+    <string name="sports_rebuilding">Перебудова спорту…</string>
+    <string name="sports_rebuild_failed">Не вдалося оновити спортивні дані</string>
+    <string name="sports_refresh_data_now">Оновити спортивні дані зараз</string>
+    <string name="sports_last_updated">Востаннє оновлено <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="sports_find_channels_from">Канали можна знайти з <xliff:g id="time">%1$s</xliff:g>, за 30 хвилин до початку.</string>
+    <string name="sports_find_channels_ended">Цей матч закінчився, тож каналів для пошуку немає.</string>
+    <string name="sports_tab_broadcasts">Трансляції</string>
+    <string name="sports_broadcasts_guide">У вашій програмі передач</string>
+    <string name="sports_broadcasts_espn">Від ESPN (лише США)</string>
+    <string name="sports_broadcasts_find_first">Скористайтеся «Знайти канали», щоб показати канали з вашої програми передач, які показують цей матч.</string>
+    <string name="sports_broadcasts_none">Немає</string>
+    <string name="sports_move_instructions">▲/▼ — вибір · OK — підняти чи опустити · «Зберегти», коли закінчите</string>
+</resources>

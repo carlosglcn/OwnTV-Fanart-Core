@@ -227,9 +227,11 @@
     <string name="companion_error_missing_fields">Kötelező mezők hiányoznak.</string>
     <string name="setup_invalid_locale">Ez a mentés nem támogatott alkalmazásnyelvet tartalmazott. A visszaállítás sikerült, de a jelenlegi nyelved megmaradt.</string>
     <string name="setup_prefer_hls_live_tv">HLS előnyben részesítése az élő TV-hez</string>
-    <string name="setup_prefer_hls_description">Az élő TV-nél a HLS (.m3u8) élvezzen elsőbbséget az MPEG-TS-sel szemben. Ha a HLS nem működik, MPEG-TS-re vált. A visszanézés mindig MPEG-TS-t használ.</string>
-    <string name="setup_prefer_hls_description_supported">Az élő TV-nél a HLS (.m3u8) élvezzen elsőbbséget az MPEG-TS-sel szemben. Ha a HLS nem működik, MPEG-TS-re vált. A visszanézés mindig MPEG-TS-t használ. A szolgáltatód HLS-támogatást jelez.</string>
-    <string name="setup_prefer_hls_description_unsupported">Az élő TV-nél a HLS (.m3u8) élvezzen elsőbbséget az MPEG-TS-sel szemben. Ha a HLS nem működik, MPEG-TS-re vált. A visszanézés mindig MPEG-TS-t használ. A szolgáltatód nem jelez HLS-támogatást — attól még kipróbálhatod.</string>
+    <string name="setup_prefer_hls_description">Az élő TV-nél a HLS (.m3u8) élvezzen elsőbbséget az MPEG-TS-sel szemben. Ha a HLS nem működik, MPEG-TS-re vált.</string>
+    <string name="setup_prefer_hls_description_supported">Az élő TV-nél a HLS (.m3u8) élvezzen elsőbbséget az MPEG-TS-sel szemben. Ha a HLS nem működik, MPEG-TS-re vált. A szolgáltatód HLS-támogatást jelez.</string>
+    <string name="setup_prefer_hls_description_unsupported">Az élő TV-nél a HLS (.m3u8) élvezzen elsőbbséget az MPEG-TS-sel szemben. Ha a HLS nem működik, MPEG-TS-re vált. A szolgáltatód nem jelez HLS-támogatást — attól még kipróbálhatod.</string>
+    <string name="setup_prefer_hls_catchup">HLS előnyben részesítése visszanézésnél</string>
+    <string name="setup_prefer_hls_catchup_description">A visszanézhető műsorokat MPEG-TS helyett HLS (.m3u8) formátumban kéri. Ha a HLS nem működik, MPEG-TS-re vált. Csak néhány szolgáltató kínál visszanézést HLS formátumban.</string>
     <string name="setup_hls_test_support">HLS-támogatás tesztelése</string>
     <string name="setup_hls_testing">HLS tesztelése…</string>
     <string name="setup_hls_test_failed">A teszt nem sikerült: <xliff:g id="reason">%1$s</xliff:g></string>

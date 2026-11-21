@@ -94,12 +94,21 @@ class EspnParserTest {
     }
 
     @Test
+    fun `team schedule - an American team's games, which name no league, are the league asked for`() {
+        val college = SportsCatalog.league("football/college-football")!!
+        val games = EspnParser.teamSchedule(college, fixture("schedule_football_college_194.json"))
+        assertEquals(3, games.size)
+        assertTrue(games.all { it.feed == "football/college-football" && it.leagueName == "College Football" })
+        assertEquals(listOf(MatchState.POST, MatchState.PRE, MatchState.PRE), games.map { it.state })
+    }
+
+    @Test
     fun `team schedule - fixtures and results, each match in its own competition`() {
-        val fixtures = EspnParser.teamSchedule(Sport.SOCCER, fixture("schedule_soccer_132_fixtures.json"))
+        val fixtures = EspnParser.teamSchedule(SportsCatalog.league("soccer/ger.1")!!, fixture("schedule_soccer_132_fixtures.json"))
         assertEquals(listOf("401884759", "401884754"), fixtures.map { it.id })
         assertTrue(fixtures.all { it.state == MatchState.PRE && it.feed == "soccer/ger.1" })
 
-        val results = EspnParser.teamSchedule(Sport.SOCCER, fixture("schedule_soccer_132_results.json"))
+        val results = EspnParser.teamSchedule(SportsCatalog.league("soccer/ger.1")!!, fixture("schedule_soccer_132_results.json"))
         val leipzig = results.single { it.id == "401884772" }
         assertEquals(MatchState.POST, leipzig.state)
         assertEquals("6", leipzig.home!!.score!!.text)
@@ -281,6 +290,44 @@ class EspnParserTest {
         assertEquals(0, top.lost)
         assertEquals("+10", top.difference)
         assertEquals("Champions League", top.note)
+    }
+
+    @Test
+    fun `standings - each sport's own columns, American leagues ordered by seed`() {
+        fun table(sport: Sport, slug: String, file: String) = EspnParser.standings(League(sport, slug, slug), fixture(file))
+        fun cells(t: tv.own.owntv.core.sports.model.StandingsTable, row: Int = 0) =
+            t.groups.first().rows[row].let { r -> StandingsColumn.of(t.sport).map { it.valueOf(r) } }
+
+        val nhl = table(Sport.HOCKEY, "nhl", "standings_hockey_nhl.json")
+        assertEquals(listOf("Eastern Conference", "Western Conference"), nhl.groups.map { it.name })
+        assertEquals(listOf(StandingsColumn.PLAYED, StandingsColumn.WON, StandingsColumn.LOST, StandingsColumn.OT_LOSSES, StandingsColumn.POINTS), StandingsColumn.of(nhl.sport))
+        assertEquals(listOf("21", "16", "3", "2", "34"), cells(nhl))
+        assertEquals(StandingsColumn.POINTS, StandingsColumn.main(nhl.sport))
+
+        // ESPN lists these worst first; the seed puts them in order.
+        val nba = table(Sport.BASKETBALL, "nba", "standings_basketball_nba.json")
+        assertEquals(listOf(11, 14, 15), nba.groups.first().rows.map { it.rank })
+        assertEquals(listOf("Wizards", "Nets", "Bucks"), nba.groups.first().rows.map { it.team.shortName })
+        assertEquals(listOf("5", "11", ".313", "8"), cells(nba))
+        assertEquals(StandingsColumn.WIN_PERCENT, StandingsColumn.main(nba.sport))
+
+        val nfl = table(Sport.FOOTBALL, "nfl", "standings_football_nfl.json")
+        assertEquals(listOf("8", "1", "0", ".889"), cells(nfl))
+
+        // College repeats each figure for home, away, conference and ranked opponents, and has no losses
+        // figure: the overall ones are read, losses come from the record, the percentage is worked out.
+        val college = table(Sport.FOOTBALL, "college-football", "standings_football_college.json")
+        assertEquals(listOf(2, 3, 4), college.groups.first().rows.map { it.rank })
+        assertEquals(listOf("9", "1", "0", ".900"), cells(college, 0))
+        assertEquals(listOf("7", "3", "0", ".700"), cells(college, 2))
+        assertEquals("", EspnParser.winPercentOf(0, 0, 0))
+        assertEquals("1.000", EspnParser.winPercentOf(4, 0, 0))
+        assertEquals(".750", EspnParser.winPercentOf(2, 0, 2))
+
+        // Rugby names its figures differently from football.
+        val rugby = table(Sport.RUGBY, "267979", "standings_rugby_premiership.json")
+        assertEquals(listOf("5", "4", "0", "1", "+37", "21"), cells(rugby))
+        assertEquals(listOf(1, 2, 3), rugby.groups.first().rows.map { it.rank })
     }
 
     @Test

@@ -56,6 +56,13 @@
     <string name="player_adjust">JUSTER</string>
     <string name="player_search_subtitles">Søk på OpenSubtitles</string>
     <string name="player_select_local_subtitle">Velg lokal undertekstfil</string>
+    <string name="player_subtitle_find_in_folder">Finn i mappe</string>
+    <string name="player_subtitle_folder_title">Undertekster i mappen</string>
+    <string name="player_subtitle_folder_choose">Velg undertekstmappe</string>
+    <string name="player_subtitle_folder_change">Bytt mappe</string>
+    <string name="player_subtitle_folder_empty">Det finnes ingen undertekstfiler i denne mappen</string>
+    <string name="player_subtitle_folder_auto">Last inn samsvarende undertekst automatisk</string>
+    <string name="player_subtitle_folder_auto_description">En film eller episode uten egen undertekst får den ene filen herfra som samsvarer med navnet. Hvis flere samsvarer, lastes ingen inn.</string>
     <string name="player_no_tracks">Ingen tilgjengelige spor.</string>
     <string name="player_image_track"><xliff:g id="label">%1$s</xliff:g> · bilde</string>
     <string name="player_av_sync">A/V-synkronisering</string>

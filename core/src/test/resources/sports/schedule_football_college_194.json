@@ -1,0 +1,4763 @@
+{
+ "events": [
+  {
+   "id": "401858522",
+   "date": "2026-11-14T17:00Z",
+   "name": "Northwestern Wildcats at Ohio State Buckeyes",
+   "shortName": "NU @ OSU",
+   "season": {
+    "year": 2026,
+    "displayName": "2026"
+   },
+   "seasonType": {
+    "id": "2",
+    "type": 2,
+    "name": "Regular Season",
+    "abbreviation": "reg"
+   },
+   "week": {
+    "number": 11,
+    "text": "Week 11"
+   },
+   "timeValid": true,
+   "competitions": [
+    {
+     "id": "401858522",
+     "date": "2026-11-14T17:00Z",
+     "attendance": 101256,
+     "type": {
+      "id": "1",
+      "text": "Standard",
+      "abbreviation": "STD",
+      "slug": "standard",
+      "type": "standard"
+     },
+     "timeValid": true,
+     "neutralSite": false,
+     "boxscoreAvailable": true,
+     "ticketsAvailable": false,
+     "venue": {
+      "fullName": "Ohio Stadium",
+      "address": {
+       "city": "Columbus",
+       "state": "OH",
+       "zipCode": "43210",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "id": "194",
+       "type": "team",
+       "order": 0,
+       "homeAway": "home",
+       "winner": true,
+       "team": {
+        "id": "194",
+        "location": "Ohio State",
+        "nickname": "Ohio State",
+        "abbreviation": "OSU",
+        "displayName": "Ohio State Buckeyes",
+        "shortDisplayName": "Ohio State",
+        "logos": [
+         {
+          "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png",
+          "width": 500,
+          "height": 500,
+          "alt": "",
+          "rel": [
+           "full",
+           "default"
+          ],
+          "lastUpdated": "2025-12-23T01:44Z"
+         },
+         {
+          "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/194.png",
+          "width": 500,
+          "height": 500,
+          "alt": "",
+          "rel": [
+           "full",
+           "dark"
+          ],
+          "lastUpdated": "2025-12-23T01:44Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_on_white_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_white_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_on_black_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_black_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_on_primary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_primary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_on_secondary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_secondary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_black.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_black"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_white.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_white"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_on_white_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_white_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_on_black_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_black_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_on_primary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_primary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_on_secondary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_secondary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_black.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_black"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_white.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_white"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         }
+        ],
+        "links": [
+         {
+          "rel": [
+           "clubhouse",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/_/id/194/ohio-state-buckeyes",
+          "text": "Clubhouse"
+         },
+         {
+          "rel": [
+           "clubhouse",
+           "mobile",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/_/id/194/ohio-state-buckeyes",
+          "text": "Clubhouse"
+         },
+         {
+          "rel": [
+           "roster",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/roster/_/id/194",
+          "text": "Roster"
+         },
+         {
+          "rel": [
+           "roster",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:194&section=roster",
+          "text": "Roster"
+         },
+         {
+          "rel": [
+           "stats",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/stats/_/id/194",
+          "text": "Statistics"
+         },
+         {
+          "rel": [
+           "stats",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:194&section=stats",
+          "text": "Statistics"
+         },
+         {
+          "rel": [
+           "schedule",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/schedule/_/id/194",
+          "text": "Schedule"
+         },
+         {
+          "rel": [
+           "schedule",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:194&section=scores",
+          "text": "Schedule"
+         },
+         {
+          "rel": [
+           "tickets",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.vividseats.com/ohio-state-buckeyes-football-tickets--sports-ncaa-football/performer/630?wsUser=717",
+          "text": "Tickets"
+         },
+         {
+          "rel": [
+           "awards",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/awards/_/team/194",
+          "text": "Awards"
+         }
+        ]
+       },
+       "score": {
+        "value": 28.0,
+        "displayValue": "28"
+       },
+       "leaders": [
+        {
+         "name": "passingLeader",
+         "displayName": "Passing Leader",
+         "abbreviation": "PYDS",
+         "leaders": [
+          {
+           "displayValue": "21/32, 201 YDS, 3 TD, 1 INT",
+           "value": 201.0,
+           "athlete": {
+            "id": "5214646",
+            "lastName": "Fahey",
+            "displayName": "Luke Fahey",
+            "shortName": "L. Fahey",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "rushingLeader",
+         "displayName": "Rushing Leader",
+         "abbreviation": "RYDS",
+         "leaders": [
+          {
+           "displayValue": "20 CAR, 114 YDS, 1 TD",
+           "value": 114.0,
+           "athlete": {
+            "id": "5141517",
+            "lastName": "Jackson",
+            "displayName": "Bo Jackson",
+            "shortName": "B. Jackson",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141517&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141517&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141517&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141517&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141517"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "receivingLeader",
+         "displayName": "Receiving Leader",
+         "abbreviation": "RECYDS",
+         "leaders": [
+          {
+           "displayValue": "11 REC, 117 YDS, 1 TD",
+           "value": 117.0,
+           "athlete": {
+            "id": "5079720",
+            "lastName": "Smith",
+            "displayName": "Jeremiah Smith",
+            "shortName": "J. Smith",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5079720&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5079720&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5079720&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5079720&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5079720"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "passingYards",
+         "displayName": "Passing Yards",
+         "abbreviation": "YDS",
+         "leaders": [
+          {
+           "displayValue": "201",
+           "value": 201.0,
+           "athlete": {
+            "id": "5214646",
+            "lastName": "Fahey",
+            "displayName": "Luke Fahey",
+            "shortName": "L. Fahey",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "rushingYards",
+         "displayName": "Rushing Yards",
+         "abbreviation": "YDS",
+         "leaders": [
+          {
+           "displayValue": "114",
+           "value": 114.0,
+           "athlete": {
+            "id": "5141517",
+            "lastName": "Jackson",
+            "displayName": "Bo Jackson",
+            "shortName": "B. Jackson",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141517&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141517&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141517&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141517&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141517"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "receivingYards",
+         "displayName": "Receiving Yards",
+         "abbreviation": "YDS",
+         "leaders": [
+          {
+           "displayValue": "117",
+           "value": 117.0,
+           "athlete": {
+            "id": "5079720",
+            "lastName": "Smith",
+            "displayName": "Jeremiah Smith",
+            "shortName": "J. Smith",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5079720&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5079720&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5079720&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5079720&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5079720"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "totalTackles",
+         "displayName": "Tackles",
+         "abbreviation": "TOT",
+         "leaders": [
+          {
+           "displayValue": "6",
+           "value": 6.0,
+           "athlete": {
+            "id": "5081821",
+            "lastName": "Jackson Jr.",
+            "displayName": "Kenyatta Jackson Jr.",
+            "shortName": "K. Jackson Jr.",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5081821/kenyatta-jackson-jr"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5081821/kenyatta-jackson-jr"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5081821&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5081821/kenyatta-jackson-jr"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5081821/kenyatta-jackson-jr"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5081821&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5081821/kenyatta-jackson-jr"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5081821&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5081821/kenyatta-jackson-jr"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5081821&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5081821/kenyatta-jackson-jr"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5081821"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "sacks",
+         "displayName": "Sacks",
+         "abbreviation": "SACK",
+         "leaders": [
+          {
+           "displayValue": "2",
+           "value": 2.0,
+           "athlete": {
+            "id": "5081821",
+            "lastName": "Jackson Jr.",
+            "displayName": "Kenyatta Jackson Jr.",
+            "shortName": "K. Jackson Jr.",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5081821/kenyatta-jackson-jr"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5081821/kenyatta-jackson-jr"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5081821&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5081821/kenyatta-jackson-jr"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5081821/kenyatta-jackson-jr"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5081821&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5081821/kenyatta-jackson-jr"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5081821&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5081821/kenyatta-jackson-jr"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5081821&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5081821/kenyatta-jackson-jr"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5081821"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "puntReturns",
+         "displayName": "Punt Returns",
+         "abbreviation": "PR",
+         "leaders": [
+          {
+           "displayValue": "1",
+           "value": 1.0,
+           "athlete": {
+            "id": "4870835",
+            "lastName": "Inniss",
+            "displayName": "Brandon Inniss",
+            "shortName": "B. Inniss",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/4870835/brandon-inniss"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/4870835/brandon-inniss"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:4870835&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/4870835/brandon-inniss"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/4870835/brandon-inniss"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:4870835&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/4870835/brandon-inniss"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:4870835&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/4870835/brandon-inniss"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:4870835&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/4870835/brandon-inniss"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:4870835"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "kickReturns",
+         "displayName": "Kick Returns",
+         "abbreviation": "KR",
+         "leaders": [
+          {
+           "displayValue": "2",
+           "value": 2.0,
+           "athlete": {
+            "id": "5076952",
+            "lastName": "McCuin",
+            "displayName": "Devin McCuin",
+            "shortName": "D. McCuin",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5076952/devin-mccuin"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5076952/devin-mccuin"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5076952&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5076952/devin-mccuin"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5076952/devin-mccuin"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5076952&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5076952/devin-mccuin"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5076952&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5076952/devin-mccuin"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5076952&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5076952/devin-mccuin"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5076952"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "punts",
+         "displayName": "Punts",
+         "abbreviation": "P",
+         "leaders": [
+          {
+           "displayValue": "3",
+           "value": 3.0,
+           "athlete": {
+            "id": "5159957",
+            "lastName": "McGuire",
+            "displayName": "Joe McGuire",
+            "shortName": "J. McGuire",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5159957/joe-mcguire"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5159957/joe-mcguire"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5159957&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5159957/joe-mcguire"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5159957/joe-mcguire"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5159957&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5159957/joe-mcguire"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5159957&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5159957/joe-mcguire"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5159957&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5159957/joe-mcguire"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5159957"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "totalKickingPoints",
+         "displayName": "Kicking Points",
+         "abbreviation": "TP",
+         "leaders": [
+          {
+           "displayValue": "4",
+           "value": 4.0,
+           "athlete": {
+            "id": "5156433",
+            "lastName": "Hawkins",
+            "displayName": "Connor Hawkins",
+            "shortName": "C. Hawkins",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5156433/connor-hawkins"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5156433/connor-hawkins"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5156433&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5156433/connor-hawkins"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5156433/connor-hawkins"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5156433&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5156433/connor-hawkins"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5156433&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5156433/connor-hawkins"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5156433&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5156433/connor-hawkins"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5156433"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "fumbles",
+         "displayName": "Fumbles",
+         "abbreviation": "F",
+         "leaders": [
+          {
+           "displayValue": "1",
+           "value": 1.0,
+           "athlete": {
+            "id": "5141635",
+            "lastName": "Sanchez",
+            "displayName": "Devin Sanchez",
+            "shortName": "D. Sanchez",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5141635/devin-sanchez"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5141635/devin-sanchez"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141635&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5141635/devin-sanchez"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5141635/devin-sanchez"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141635&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5141635/devin-sanchez"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141635&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5141635/devin-sanchez"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141635&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5141635/devin-sanchez"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141635"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "fumblesLost",
+         "displayName": "Fumbles Lost",
+         "abbreviation": "FL",
+         "leaders": [
+          {
+           "displayValue": "1",
+           "value": 1.0,
+           "athlete": {
+            "id": "5141635",
+            "lastName": "Sanchez",
+            "displayName": "Devin Sanchez",
+            "shortName": "D. Sanchez",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5141635/devin-sanchez"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5141635/devin-sanchez"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141635&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5141635/devin-sanchez"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5141635/devin-sanchez"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141635&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5141635/devin-sanchez"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141635&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5141635/devin-sanchez"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141635&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5141635/devin-sanchez"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141635"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "fumblesRecovered",
+         "displayName": "Fumbles Recovered",
+         "abbreviation": "CMP",
+         "leaders": [
+          {
+           "displayValue": "1",
+           "value": 1.0,
+           "athlete": {
+            "id": "5080698",
+            "lastName": "Riggs",
+            "displayName": "Dalton Riggs",
+            "shortName": "D. Riggs",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5080698/dalton-riggs"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5080698/dalton-riggs"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5080698&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5080698/dalton-riggs"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5080698/dalton-riggs"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5080698&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5080698/dalton-riggs"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5080698&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5080698/dalton-riggs"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5080698&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5080698/dalton-riggs"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5080698"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "espnRating",
+         "displayName": "ESPN Rating Leader",
+         "abbreviation": "ESPNRating",
+         "leaders": [
+          {
+           "displayValue": "21-32, 201 YDS, 3 TD, 1 INT",
+           "value": 26.239999771118164,
+           "athlete": {
+            "id": "5214646",
+            "lastName": "Fahey",
+            "displayName": "Luke Fahey",
+            "shortName": "L. Fahey",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "passingTouchdowns",
+         "displayName": "Passing Touchdowns",
+         "abbreviation": "TD",
+         "leaders": [
+          {
+           "displayValue": "3",
+           "value": 3.0,
+           "athlete": {
+            "id": "5214646",
+            "lastName": "Fahey",
+            "displayName": "Luke Fahey",
+            "shortName": "L. Fahey",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "quarterbackRating",
+         "displayName": "Quarterback Rating",
+         "abbreviation": "RAT",
+         "leaders": [
+          {
+           "displayValue": "101.2",
+           "value": 101.1541748046875,
+           "athlete": {
+            "id": "5214646",
+            "lastName": "Fahey",
+            "displayName": "Luke Fahey",
+            "shortName": "L. Fahey",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5214646/luke-fahey"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5214646"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "rushingTouchdowns",
+         "displayName": "Rushing Touchdowns",
+         "abbreviation": "TD",
+         "leaders": [
+          {
+           "displayValue": "1",
+           "value": 1.0,
+           "athlete": {
+            "id": "5141517",
+            "lastName": "Jackson",
+            "displayName": "Bo Jackson",
+            "shortName": "B. Jackson",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141517&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141517&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141517&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141517&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5141517/bo-jackson"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5141517"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "receptions",
+         "displayName": "Receptions",
+         "abbreviation": "REC",
+         "leaders": [
+          {
+           "displayValue": "11",
+           "value": 11.0,
+           "athlete": {
+            "id": "5079720",
+            "lastName": "Smith",
+            "displayName": "Jeremiah Smith",
+            "shortName": "J. Smith",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5079720&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5079720&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5079720&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5079720&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5079720/jeremiah-smith"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5079720"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "receivingTouchdowns",
+         "displayName": "Receiving Touchdowns",
+         "abbreviation": "TD",
+         "leaders": [
+          {
+           "displayValue": "1",
+           "value": 1.0,
+           "athlete": {
+            "id": "5076952",
+            "lastName": "McCuin",
+            "displayName": "Devin McCuin",
+            "shortName": "D. McCuin",
+            "links": [
+             {
+              "rel": [
+               "playercard",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5076952/devin-mccuin"
+             },
+             {
+              "rel": [
+               "stats",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/stats/_/id/5076952/devin-mccuin"
+             },
+             {
+              "rel": [
+               "stats",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5076952&section=stats"
+             },
+             {
+              "rel": [
+               "splits",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/splits/_/id/5076952/devin-mccuin"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/gamelog/_/id/5076952/devin-mccuin"
+             },
+             {
+              "rel": [
+               "gamelog",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5076952&section=gamelog"
+             },
+             {
+              "rel": [
+               "news",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/news/_/id/5076952/devin-mccuin"
+             },
+             {
+              "rel": [
+               "news",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5076952&section=news"
+             },
+             {
+              "rel": [
+               "bio",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/bio/_/id/5076952/devin-mccuin"
+             },
+             {
+              "rel": [
+               "bio",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5076952&section=bio"
+             },
+             {
+              "rel": [
+               "overview",
+               "desktop",
+               "athlete"
+              ],
+              "href": "https://www.espn.com/college-football/player/_/id/5076952/devin-mccuin"
+             },
+             {
+              "rel": [
+               "overview",
+               "sportscenter",
+               "app",
+               "athlete"
+              ],
+              "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~a:5076952"
+             }
+            ]
+           }
+          }
+         ]
+        }
+       ],
+       "record": [
+        {
+         "id": "1",
+         "abbreviation": "Game",
+         "displayName": "Record Year To Date",
+         "shortDisplayName": "YTD",
+         "description": "Overall Record",
+         "type": "total",
+         "displayValue": "7-3"
+        },
+        {
+         "id": "9009",
+         "displayName": "CONF",
+         "shortDisplayName": "CONF",
+         "description": "Conference Record",
+         "type": "vsconf",
+         "displayValue": "5-2"
+        }
+       ],
+       "curatedRank": {
+        "current": 20
+       }
+      },
+      {
+       "id": "77",
+       "type": "team",
+       "order": 1,
+       "homeAway": "away",
+       "winner": false,
+       "team": {
+        "id": "77",
+        "location": "Northwestern",
+        "nickname": "Northwestern",
+        "abbreviation": "NU",
+        "displayName": "Northwestern Wildcats",
+        "shortDisplayName": "Northwestern",
+        "logos": [
+         {
+          "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/77.png",
+          "width": 500,
+          "height": 500,
+          "alt": "",
+          "rel": [
+           "full",
+           "default"
+          ],
+          "lastUpdated": "2026-07-01T04:35Z"
+         },
+         {
+          "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/77.png",
+          "width": 500,
+          "height": 500,
+          "alt": "",
+          "rel": [
+           "full",
+           "dark"
+          ],
+          "lastUpdated": "2026-07-01T04:34Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ca8359bf-52ca-f069-b9c4-bbfbcfc15c64/logos/primary_logo_on_white_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_white_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ca8359bf-52ca-f069-b9c4-bbfbcfc15c64/logos/primary_logo_on_black_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_black_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ca8359bf-52ca-f069-b9c4-bbfbcfc15c64/logos/primary_logo_on_primary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_primary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ca8359bf-52ca-f069-b9c4-bbfbcfc15c64/logos/primary_logo_on_secondary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_secondary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ca8359bf-52ca-f069-b9c4-bbfbcfc15c64/logos/primary_logo_black.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_black"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ca8359bf-52ca-f069-b9c4-bbfbcfc15c64/logos/primary_logo_white.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_white"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ca8359bf-52ca-f069-b9c4-bbfbcfc15c64/logos/secondary_logo_on_white_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_white_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ca8359bf-52ca-f069-b9c4-bbfbcfc15c64/logos/secondary_logo_on_black_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_black_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ca8359bf-52ca-f069-b9c4-bbfbcfc15c64/logos/secondary_logo_on_primary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_primary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ca8359bf-52ca-f069-b9c4-bbfbcfc15c64/logos/secondary_logo_on_secondary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_secondary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ca8359bf-52ca-f069-b9c4-bbfbcfc15c64/logos/secondary_logo_black.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_black"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ca8359bf-52ca-f069-b9c4-bbfbcfc15c64/logos/secondary_logo_white.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_white"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         }
+        ],
+        "links": [
+         {
+          "rel": [
+           "clubhouse",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/_/id/77/northwestern-wildcats",
+          "text": "Clubhouse"
+         },
+         {
+          "rel": [
+           "clubhouse",
+           "mobile",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/_/id/77/northwestern-wildcats",
+          "text": "Clubhouse"
+         },
+         {
+          "rel": [
+           "roster",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/roster/_/id/77",
+          "text": "Roster"
+         },
+         {
+          "rel": [
+           "roster",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:77&section=roster",
+          "text": "Roster"
+         },
+         {
+          "rel": [
+           "stats",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/stats/_/id/77",
+          "text": "Statistics"
+         },
+         {
+          "rel": [
+           "stats",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:77&section=stats",
+          "text": "Statistics"
+         },
+         {
+          "rel": [
+           "schedule",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/schedule/_/id/77",
+          "text": "Schedule"
+         },
+         {
+          "rel": [
+           "schedule",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:77&section=scores",
+          "text": "Schedule"
+         },
+         {
+          "rel": [
+           "tickets",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.vividseats.com/northwestern-wildcats-football-tickets--sports-ncaa-football/performer/617?wsUser=717",
+          "text": "Tickets"
+         },
+         {
+          "rel": [
+           "awards",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/awards/_/team/77",
+          "text": "Awards"
+         }
+        ]
+       },
+       "score": {
+        "value": 19.0,
+        "displayValue": "19"
+       },
+       "record": [
+        {
+         "id": "1",
+         "abbreviation": "Game",
+         "displayName": "Record Year To Date",
+         "shortDisplayName": "YTD",
+         "description": "Overall Record",
+         "type": "total",
+         "displayValue": "6-4"
+        },
+        {
+         "id": "9009",
+         "displayName": "CONF",
+         "shortDisplayName": "CONF",
+         "description": "Conference Record",
+         "type": "vsconf",
+         "displayValue": "3-4"
+        }
+       ],
+       "curatedRank": {
+        "current": 99
+       }
+      }
+     ],
+     "notes": [],
+     "broadcasts": [
+      {
+       "type": {
+        "id": "1",
+        "shortName": "TV"
+       },
+       "market": {
+        "id": "1",
+        "type": "National"
+       },
+       "media": {
+        "shortName": "Fox"
+       },
+       "lang": "en",
+       "region": "us",
+       "partnered": false
+      }
+     ],
+     "status": {
+      "clock": 0.0,
+      "displayClock": "0:00",
+      "period": 4,
+      "type": {
+       "id": "3",
+       "name": "STATUS_FINAL",
+       "state": "post",
+       "completed": true,
+       "description": "Final",
+       "detail": "Final",
+       "shortDetail": "Final"
+      }
+     }
+    }
+   ],
+   "links": [
+    {
+     "language": "en-US",
+     "rel": [
+      "summary",
+      "desktop",
+      "event"
+     ],
+     "href": "https://www.espn.com/college-football/game/_/gameId/401858522/northwestern-ohio-state",
+     "text": "Gamecast",
+     "shortText": "Summary",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "summary",
+      "sportscenter",
+      "app",
+      "event"
+     ],
+     "href": "sportscenter://x-callback-url/showGame?sportName=football&leagueAbbrev=college-football&gameId=401858522",
+     "text": "Gamecast",
+     "shortText": "Summary",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "now",
+      "desktop",
+      "event"
+     ],
+     "href": "https://www.espn.com/college-football/game/_/gameId/401858522",
+     "text": "Now",
+     "shortText": "Now",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "teamstats",
+      "desktop",
+      "event"
+     ],
+     "href": "https://www.espn.com/college-football/matchup?gameId=401858522",
+     "text": "Team Stats",
+     "shortText": "Team Stats",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "boxscore",
+      "desktop",
+      "event"
+     ],
+     "href": "https://www.espn.com/college-football/boxscore/_/gameId/401858522",
+     "text": "Box Score",
+     "shortText": "Box Score",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "boxscore",
+      "sportscenter",
+      "app",
+      "event"
+     ],
+     "href": "sportscenter://x-callback-url/showGame?sportName=football&leagueAbbrev=college-football&gameId=401858522",
+     "text": "Box Score",
+     "shortText": "Box Score",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "gamecast",
+      "desktop",
+      "event"
+     ],
+     "href": "https://www.espn.com/college-football/game/_/gameId/401858522",
+     "text": "Gamecast",
+     "shortText": "Gamecast",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "gamecast",
+      "mobile",
+      "event"
+     ],
+     "href": "http://m.espn.com/college-football/gamecast?gameId=401858522&action=summary",
+     "text": "Gamecast",
+     "shortText": "Gamecast",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "gamecast",
+      "sportscenter",
+      "app",
+      "event"
+     ],
+     "href": "sportscenter://x-callback-url/showGame?sportName=football&leagueAbbrev=college-football&gameId=401858522",
+     "text": "Gamecast",
+     "shortText": "Gamecast",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "recap",
+      "desktop",
+      "event"
+     ],
+     "href": "https://www.espn.com/college-football/recap?gameId=401858522",
+     "text": "Recap",
+     "shortText": "Recap",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "pbp",
+      "desktop",
+      "event"
+     ],
+     "href": "https://www.espn.com/college-football/playbyplay/_/gameId/401858522",
+     "text": "Play-by-Play",
+     "shortText": "Play-by-Play",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "videos",
+      "desktop",
+      "event"
+     ],
+     "href": "https://www.espn.com/college-football/video?gameId=401858522",
+     "text": "Videos",
+     "shortText": "Videos",
+     "isExternal": false,
+     "isPremium": false
+    }
+   ]
+  },
+  {
+   "id": "401858531",
+   "date": "2026-11-21T17:00Z",
+   "name": "Ohio State Buckeyes at Nebraska Cornhuskers",
+   "shortName": "OSU @ NEB",
+   "season": {
+    "year": 2026,
+    "displayName": "2026"
+   },
+   "seasonType": {
+    "id": "2",
+    "type": 2,
+    "name": "Regular Season",
+    "abbreviation": "reg"
+   },
+   "week": {
+    "number": 12,
+    "text": "Week 12"
+   },
+   "timeValid": true,
+   "competitions": [
+    {
+     "id": "401858531",
+     "date": "2026-11-21T17:00Z",
+     "attendance": 0,
+     "type": {
+      "id": "1",
+      "text": "Standard",
+      "abbreviation": "STD",
+      "slug": "standard",
+      "type": "standard"
+     },
+     "timeValid": true,
+     "neutralSite": false,
+     "boxscoreAvailable": false,
+     "ticketsAvailable": true,
+     "venue": {
+      "fullName": "Memorial Stadium (Lincoln, NE)",
+      "address": {
+       "city": "Lincoln",
+       "state": "NE",
+       "zipCode": "68508",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "id": "158",
+       "type": "team",
+       "order": 0,
+       "homeAway": "home",
+       "team": {
+        "id": "158",
+        "location": "Nebraska",
+        "nickname": "Nebraska",
+        "abbreviation": "NEB",
+        "displayName": "Nebraska Cornhuskers",
+        "shortDisplayName": "Nebraska",
+        "logos": [
+         {
+          "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/158.png",
+          "width": 500,
+          "height": 500,
+          "alt": "",
+          "rel": [
+           "full",
+           "default"
+          ],
+          "lastUpdated": "2025-12-23T01:44Z"
+         },
+         {
+          "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/158.png",
+          "width": 500,
+          "height": 500,
+          "alt": "",
+          "rel": [
+           "full",
+           "dark"
+          ],
+          "lastUpdated": "2025-12-23T01:44Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/e9635416-dfc2-d9d6-ff1c-3e0f70ab2d8c/logos/primary_logo_on_white_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_white_color"
+          ],
+          "lastUpdated": "2026-07-23T17:35Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/e9635416-dfc2-d9d6-ff1c-3e0f70ab2d8c/logos/primary_logo_on_black_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_black_color"
+          ],
+          "lastUpdated": "2026-07-23T17:35Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/e9635416-dfc2-d9d6-ff1c-3e0f70ab2d8c/logos/primary_logo_on_primary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_primary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:35Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/e9635416-dfc2-d9d6-ff1c-3e0f70ab2d8c/logos/primary_logo_on_secondary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_secondary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:35Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/e9635416-dfc2-d9d6-ff1c-3e0f70ab2d8c/logos/primary_logo_black.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_black"
+          ],
+          "lastUpdated": "2026-07-23T17:35Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/e9635416-dfc2-d9d6-ff1c-3e0f70ab2d8c/logos/primary_logo_white.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_white"
+          ],
+          "lastUpdated": "2026-07-23T17:35Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/e9635416-dfc2-d9d6-ff1c-3e0f70ab2d8c/logos/secondary_logo_on_white_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_white_color"
+          ],
+          "lastUpdated": "2026-07-23T17:35Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/e9635416-dfc2-d9d6-ff1c-3e0f70ab2d8c/logos/secondary_logo_on_black_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_black_color"
+          ],
+          "lastUpdated": "2026-07-23T17:35Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/e9635416-dfc2-d9d6-ff1c-3e0f70ab2d8c/logos/secondary_logo_on_primary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_primary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:35Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/e9635416-dfc2-d9d6-ff1c-3e0f70ab2d8c/logos/secondary_logo_on_secondary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_secondary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:35Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/e9635416-dfc2-d9d6-ff1c-3e0f70ab2d8c/logos/secondary_logo_black.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_black"
+          ],
+          "lastUpdated": "2026-07-23T17:35Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/e9635416-dfc2-d9d6-ff1c-3e0f70ab2d8c/logos/secondary_logo_white.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_white"
+          ],
+          "lastUpdated": "2026-07-23T17:35Z"
+         }
+        ],
+        "links": [
+         {
+          "rel": [
+           "clubhouse",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/_/id/158/nebraska-cornhuskers",
+          "text": "Clubhouse"
+         },
+         {
+          "rel": [
+           "clubhouse",
+           "mobile",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/_/id/158/nebraska-cornhuskers",
+          "text": "Clubhouse"
+         },
+         {
+          "rel": [
+           "roster",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/roster/_/id/158",
+          "text": "Roster"
+         },
+         {
+          "rel": [
+           "roster",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:158&section=roster",
+          "text": "Roster"
+         },
+         {
+          "rel": [
+           "stats",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/stats/_/id/158",
+          "text": "Statistics"
+         },
+         {
+          "rel": [
+           "stats",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:158&section=stats",
+          "text": "Statistics"
+         },
+         {
+          "rel": [
+           "schedule",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/schedule/_/id/158",
+          "text": "Schedule"
+         },
+         {
+          "rel": [
+           "schedule",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:158&section=scores",
+          "text": "Schedule"
+         },
+         {
+          "rel": [
+           "tickets",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.vividseats.com/nebraska-cornhuskers-football-tickets--sports-ncaa-football/performer/1009?wsUser=717",
+          "text": "Tickets"
+         },
+         {
+          "rel": [
+           "awards",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/awards/_/team/158",
+          "text": "Awards"
+         }
+        ]
+       },
+       "curatedRank": {
+        "current": 99
+       }
+      },
+      {
+       "id": "194",
+       "type": "team",
+       "order": 1,
+       "homeAway": "away",
+       "team": {
+        "id": "194",
+        "location": "Ohio State",
+        "nickname": "Ohio State",
+        "abbreviation": "OSU",
+        "displayName": "Ohio State Buckeyes",
+        "shortDisplayName": "Ohio State",
+        "logos": [
+         {
+          "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png",
+          "width": 500,
+          "height": 500,
+          "alt": "",
+          "rel": [
+           "full",
+           "default"
+          ],
+          "lastUpdated": "2025-12-23T01:44Z"
+         },
+         {
+          "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/194.png",
+          "width": 500,
+          "height": 500,
+          "alt": "",
+          "rel": [
+           "full",
+           "dark"
+          ],
+          "lastUpdated": "2025-12-23T01:44Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_on_white_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_white_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_on_black_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_black_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_on_primary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_primary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_on_secondary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_secondary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_black.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_black"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_white.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_white"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_on_white_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_white_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_on_black_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_black_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_on_primary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_primary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_on_secondary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_secondary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_black.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_black"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_white.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_white"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         }
+        ],
+        "links": [
+         {
+          "rel": [
+           "clubhouse",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/_/id/194/ohio-state-buckeyes",
+          "text": "Clubhouse"
+         },
+         {
+          "rel": [
+           "clubhouse",
+           "mobile",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/_/id/194/ohio-state-buckeyes",
+          "text": "Clubhouse"
+         },
+         {
+          "rel": [
+           "roster",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/roster/_/id/194",
+          "text": "Roster"
+         },
+         {
+          "rel": [
+           "roster",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:194&section=roster",
+          "text": "Roster"
+         },
+         {
+          "rel": [
+           "stats",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/stats/_/id/194",
+          "text": "Statistics"
+         },
+         {
+          "rel": [
+           "stats",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:194&section=stats",
+          "text": "Statistics"
+         },
+         {
+          "rel": [
+           "schedule",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/schedule/_/id/194",
+          "text": "Schedule"
+         },
+         {
+          "rel": [
+           "schedule",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:194&section=scores",
+          "text": "Schedule"
+         },
+         {
+          "rel": [
+           "tickets",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.vividseats.com/ohio-state-buckeyes-football-tickets--sports-ncaa-football/performer/630?wsUser=717",
+          "text": "Tickets"
+         },
+         {
+          "rel": [
+           "awards",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/awards/_/team/194",
+          "text": "Awards"
+         }
+        ]
+       },
+       "curatedRank": {
+        "current": 14
+       }
+      }
+     ],
+     "notes": [],
+     "broadcasts": [
+      {
+       "type": {
+        "id": "1",
+        "shortName": "TV"
+       },
+       "market": {
+        "id": "1",
+        "type": "National"
+       },
+       "media": {
+        "shortName": "Fox"
+       },
+       "lang": "en",
+       "region": "us",
+       "partnered": false
+      },
+      {
+       "type": {
+        "id": "5",
+        "shortName": "Radio"
+       },
+       "market": {
+        "id": "1",
+        "type": "National"
+       },
+       "media": {
+        "shortName": "ERADM"
+       },
+       "lang": "en",
+       "region": "us",
+       "partnered": false
+      }
+     ],
+     "tickets": [
+      {
+       "id": "6170683",
+       "summary": "Tickets as low as $24",
+       "description": "Ohio State Buckeyes at Nebraska Cornhuskers Football",
+       "maxPrice": 3050.0,
+       "startingPrice": 24.0,
+       "numberAvailable": 6254,
+       "totalPostings": 2680,
+       "links": [
+        {
+         "rel": [
+          "tickets",
+          "desktop",
+          "event"
+         ],
+         "href": "https://www.vividseats.com/nebraska-cornhuskers-football-tickets-nebraska-memorial-stadium-9-3-2026--sports-ncaa-football/production/6170683?wsUser=717"
+        },
+        {
+         "rel": [
+          "tickets",
+          "desktop",
+          "venue"
+         ],
+         "href": "https://www.vividseats.com/nebraska-memorial-stadium-tickets/venue/1181?wsUser=717"
+        }
+       ]
+      }
+     ],
+     "status": {
+      "clock": 0.0,
+      "displayClock": "0:00",
+      "period": 0,
+      "type": {
+       "id": "1",
+       "name": "STATUS_SCHEDULED",
+       "state": "pre",
+       "completed": false,
+       "description": "Scheduled",
+       "detail": "Sat, November 21st at 12:00 PM EST",
+       "shortDetail": "11/21 - 12:00 PM EST"
+      }
+     }
+    }
+   ],
+   "links": [
+    {
+     "language": "en-US",
+     "rel": [
+      "summary",
+      "desktop",
+      "event"
+     ],
+     "href": "https://www.espn.com/college-football/game/_/gameId/401858531/ohio-state-nebraska",
+     "text": "Gamecast",
+     "shortText": "Summary",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "summary",
+      "sportscenter",
+      "app",
+      "event"
+     ],
+     "href": "sportscenter://x-callback-url/showGame?sportName=football&leagueAbbrev=college-football&gameId=401858531",
+     "text": "Gamecast",
+     "shortText": "Summary",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "now",
+      "desktop",
+      "event"
+     ],
+     "href": "https://www.espn.com/college-football/game/_/gameId/401858531",
+     "text": "Now",
+     "shortText": "Now",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "preview",
+      "desktop",
+      "event"
+     ],
+     "href": "https://www.espn.com/college-football/preview/_/gameId/401858531",
+     "text": "Preview",
+     "shortText": "Preview",
+     "isExternal": false,
+     "isPremium": false
+    }
+   ]
+  },
+  {
+   "id": "401858540",
+   "date": "2026-11-28T17:00Z",
+   "name": "Michigan Wolverines at Ohio State Buckeyes",
+   "shortName": "MICH @ OSU",
+   "season": {
+    "year": 2026,
+    "displayName": "2026"
+   },
+   "seasonType": {
+    "id": "2",
+    "type": 2,
+    "name": "Regular Season",
+    "abbreviation": "reg"
+   },
+   "week": {
+    "number": 13,
+    "text": "Week 13"
+   },
+   "timeValid": true,
+   "competitions": [
+    {
+     "id": "401858540",
+     "date": "2026-11-28T17:00Z",
+     "attendance": 0,
+     "type": {
+      "id": "1",
+      "text": "Standard",
+      "abbreviation": "STD",
+      "slug": "standard",
+      "type": "standard"
+     },
+     "timeValid": true,
+     "neutralSite": false,
+     "boxscoreAvailable": false,
+     "ticketsAvailable": true,
+     "venue": {
+      "fullName": "Ohio Stadium",
+      "address": {
+       "city": "Columbus",
+       "state": "OH",
+       "zipCode": "43210",
+       "country": "USA"
+      }
+     },
+     "competitors": [
+      {
+       "id": "194",
+       "type": "team",
+       "order": 0,
+       "homeAway": "home",
+       "team": {
+        "id": "194",
+        "location": "Ohio State",
+        "nickname": "Ohio State",
+        "abbreviation": "OSU",
+        "displayName": "Ohio State Buckeyes",
+        "shortDisplayName": "Ohio State",
+        "logos": [
+         {
+          "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png",
+          "width": 500,
+          "height": 500,
+          "alt": "",
+          "rel": [
+           "full",
+           "default"
+          ],
+          "lastUpdated": "2025-12-23T01:44Z"
+         },
+         {
+          "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/194.png",
+          "width": 500,
+          "height": 500,
+          "alt": "",
+          "rel": [
+           "full",
+           "dark"
+          ],
+          "lastUpdated": "2025-12-23T01:44Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_on_white_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_white_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_on_black_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_black_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_on_primary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_primary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_on_secondary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_secondary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_black.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_black"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/primary_logo_white.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_white"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_on_white_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_white_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_on_black_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_black_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_on_primary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_primary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_on_secondary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_secondary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_black.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_black"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/2fc3b71f-8247-22a5-f6da-df3902cbb438/logos/secondary_logo_white.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_white"
+          ],
+          "lastUpdated": "2026-07-23T17:37Z"
+         }
+        ],
+        "links": [
+         {
+          "rel": [
+           "clubhouse",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/_/id/194/ohio-state-buckeyes",
+          "text": "Clubhouse"
+         },
+         {
+          "rel": [
+           "clubhouse",
+           "mobile",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/_/id/194/ohio-state-buckeyes",
+          "text": "Clubhouse"
+         },
+         {
+          "rel": [
+           "roster",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/roster/_/id/194",
+          "text": "Roster"
+         },
+         {
+          "rel": [
+           "roster",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:194&section=roster",
+          "text": "Roster"
+         },
+         {
+          "rel": [
+           "stats",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/stats/_/id/194",
+          "text": "Statistics"
+         },
+         {
+          "rel": [
+           "stats",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:194&section=stats",
+          "text": "Statistics"
+         },
+         {
+          "rel": [
+           "schedule",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/schedule/_/id/194",
+          "text": "Schedule"
+         },
+         {
+          "rel": [
+           "schedule",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:194&section=scores",
+          "text": "Schedule"
+         },
+         {
+          "rel": [
+           "tickets",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.vividseats.com/ohio-state-buckeyes-football-tickets--sports-ncaa-football/performer/630?wsUser=717",
+          "text": "Tickets"
+         },
+         {
+          "rel": [
+           "awards",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/awards/_/team/194",
+          "text": "Awards"
+         }
+        ]
+       },
+       "curatedRank": {
+        "current": 14
+       }
+      },
+      {
+       "id": "130",
+       "type": "team",
+       "order": 1,
+       "homeAway": "away",
+       "team": {
+        "id": "130",
+        "location": "Michigan",
+        "nickname": "Michigan",
+        "abbreviation": "MICH",
+        "displayName": "Michigan Wolverines",
+        "shortDisplayName": "Michigan",
+        "logos": [
+         {
+          "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/130.png",
+          "width": 500,
+          "height": 500,
+          "alt": "",
+          "rel": [
+           "full",
+           "default"
+          ],
+          "lastUpdated": "2026-01-08T23:30Z"
+         },
+         {
+          "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/130.png",
+          "width": 500,
+          "height": 500,
+          "alt": "",
+          "rel": [
+           "full",
+           "dark"
+          ],
+          "lastUpdated": "2025-12-23T01:44Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ea1660a4-aeb8-b9da-7d9f-fcd70d3a0162/logos/primary_logo_on_white_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_white_color"
+          ],
+          "lastUpdated": "2026-07-23T17:33Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ea1660a4-aeb8-b9da-7d9f-fcd70d3a0162/logos/primary_logo_on_black_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_black_color"
+          ],
+          "lastUpdated": "2026-07-23T17:33Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ea1660a4-aeb8-b9da-7d9f-fcd70d3a0162/logos/primary_logo_on_primary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_primary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:33Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ea1660a4-aeb8-b9da-7d9f-fcd70d3a0162/logos/primary_logo_on_secondary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_on_secondary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:33Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ea1660a4-aeb8-b9da-7d9f-fcd70d3a0162/logos/primary_logo_black.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_black"
+          ],
+          "lastUpdated": "2026-07-23T17:33Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ea1660a4-aeb8-b9da-7d9f-fcd70d3a0162/logos/primary_logo_white.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "primary_logo_white"
+          ],
+          "lastUpdated": "2026-07-23T17:33Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ea1660a4-aeb8-b9da-7d9f-fcd70d3a0162/logos/secondary_logo_on_white_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_white_color"
+          ],
+          "lastUpdated": "2026-07-23T17:33Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ea1660a4-aeb8-b9da-7d9f-fcd70d3a0162/logos/secondary_logo_on_black_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_black_color"
+          ],
+          "lastUpdated": "2026-07-23T17:33Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ea1660a4-aeb8-b9da-7d9f-fcd70d3a0162/logos/secondary_logo_on_primary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_primary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:33Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ea1660a4-aeb8-b9da-7d9f-fcd70d3a0162/logos/secondary_logo_on_secondary_color.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_on_secondary_color"
+          ],
+          "lastUpdated": "2026-07-23T17:33Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ea1660a4-aeb8-b9da-7d9f-fcd70d3a0162/logos/secondary_logo_black.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_black"
+          ],
+          "lastUpdated": "2026-07-23T17:33Z"
+         },
+         {
+          "href": "https://a.espncdn.com/guid/ea1660a4-aeb8-b9da-7d9f-fcd70d3a0162/logos/secondary_logo_white.png",
+          "width": 4096,
+          "height": 4096,
+          "alt": "",
+          "rel": [
+           "full",
+           "secondary_logo_white"
+          ],
+          "lastUpdated": "2026-07-23T17:33Z"
+         }
+        ],
+        "links": [
+         {
+          "rel": [
+           "clubhouse",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/_/id/130/michigan-wolverines",
+          "text": "Clubhouse"
+         },
+         {
+          "rel": [
+           "clubhouse",
+           "mobile",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/_/id/130/michigan-wolverines",
+          "text": "Clubhouse"
+         },
+         {
+          "rel": [
+           "roster",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/roster/_/id/130",
+          "text": "Roster"
+         },
+         {
+          "rel": [
+           "roster",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:130&section=roster",
+          "text": "Roster"
+         },
+         {
+          "rel": [
+           "stats",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/stats/_/id/130",
+          "text": "Statistics"
+         },
+         {
+          "rel": [
+           "stats",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:130&section=stats",
+          "text": "Statistics"
+         },
+         {
+          "rel": [
+           "schedule",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/team/schedule/_/id/130",
+          "text": "Schedule"
+         },
+         {
+          "rel": [
+           "schedule",
+           "sportscenter",
+           "app",
+           "team"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:23~t:130&section=scores",
+          "text": "Schedule"
+         },
+         {
+          "rel": [
+           "tickets",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.vividseats.com/michigan-wolverines-football-tickets--sports-ncaa-football/performer/541?wsUser=717",
+          "text": "Tickets"
+         },
+         {
+          "rel": [
+           "awards",
+           "desktop",
+           "team"
+          ],
+          "href": "https://www.espn.com/college-football/awards/_/team/130",
+          "text": "Awards"
+         }
+        ]
+       },
+       "curatedRank": {
+        "current": 99
+       }
+      }
+     ],
+     "notes": [],
+     "broadcasts": [
+      {
+       "type": {
+        "id": "1",
+        "shortName": "TV"
+       },
+       "market": {
+        "id": "1",
+        "type": "National"
+       },
+       "media": {
+        "shortName": "Fox"
+       },
+       "lang": "en",
+       "region": "us",
+       "partnered": false
+      }
+     ],
+     "tickets": [
+      {
+       "id": "6170761",
+       "summary": "Tickets as low as $231",
+       "description": "Michigan Wolverines at Ohio State Buckeyes Football",
+       "maxPrice": 31711.0,
+       "startingPrice": 231.0,
+       "numberAvailable": 8365,
+       "totalPostings": 3042,
+       "links": [
+        {
+         "rel": [
+          "tickets",
+          "desktop",
+          "event"
+         ],
+         "href": "https://www.vividseats.com/ohio-state-buckeyes-football-tickets-ohio-stadium-9-4-2026--sports-ncaa-football/production/6170761?wsUser=717"
+        },
+        {
+         "rel": [
+          "tickets",
+          "desktop",
+          "venue"
+         ],
+         "href": "https://www.vividseats.com/ohio-stadium-tickets/venue/1222?wsUser=717"
+        }
+       ]
+      }
+     ],
+     "status": {
+      "clock": 0.0,
+      "displayClock": "0:00",
+      "period": 0,
+      "type": {
+       "id": "1",
+       "name": "STATUS_SCHEDULED",
+       "state": "pre",
+       "completed": false,
+       "description": "Scheduled",
+       "detail": "Sat, November 28th at 12:00 PM EST",
+       "shortDetail": "11/28 - 12:00 PM EST"
+      }
+     }
+    }
+   ],
+   "links": [
+    {
+     "language": "en-US",
+     "rel": [
+      "summary",
+      "desktop",
+      "event"
+     ],
+     "href": "https://www.espn.com/college-football/game/_/gameId/401858540/michigan-ohio-state",
+     "text": "Gamecast",
+     "shortText": "Summary",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "summary",
+      "sportscenter",
+      "app",
+      "event"
+     ],
+     "href": "sportscenter://x-callback-url/showGame?sportName=football&leagueAbbrev=college-football&gameId=401858540",
+     "text": "Gamecast",
+     "shortText": "Summary",
+     "isExternal": false,
+     "isPremium": false
+    },
+    {
+     "language": "en-US",
+     "rel": [
+      "now",
+      "desktop",
+      "event"
+     ],
+     "href": "https://www.espn.com/college-football/game/_/gameId/401858540",
+     "text": "Now",
+     "shortText": "Now",
+     "isExternal": false,
+     "isPremium": false
+    }
+   ]
+  }
+ ]
+}

@@ -2,6 +2,7 @@ package tv.own.owntv.core.sports
 
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.math.roundToInt
 import tv.own.owntv.core.sports.model.Broadcast
 import tv.own.owntv.core.sports.model.Competitor
 import tv.own.owntv.core.sports.model.FormGame
@@ -171,12 +172,16 @@ internal object EspnParser {
      * its own competition, so a schedule across all of a club's competitions keeps each match's league.
      * The score is an object here (`{value, displayValue}`) rather than the scoreboard's text.
      */
-    fun teamSchedule(sport: Sport, body: String): List<Match> =
+    fun teamSchedule(league: League, body: String): List<Match> =
         objects(JSONObject(body).optJSONArray("events")).mapNotNull { e ->
             runCatching {
-                val league = e.optJSONObject("league")
-                val slug = league?.optString("slug")?.takeIf { it.isNotEmpty() } ?: return@runCatching null
-                val name = league.optString("name").ifEmpty { slug }
+                // A football club's games name their own competition; an American team's (NFL, NBA,
+                // college) name none — they are all [league]'s, the one asked for. Dropping those left
+                // the team page without a single game.
+                val own = e.optJSONObject("league")
+                val slug = own?.optString("slug")?.takeIf { it.isNotEmpty() } ?: league.slug
+                val name = own?.optString("name")?.takeIf { it.isNotEmpty() } ?: if (own == null) league.name else slug
+                val sport = league.sport
                 val c = e.getJSONArray("competitions").getJSONObject(0)
                 objects(c.optJSONArray("competitors")).forEach { side ->
                     side.optJSONObject("score")?.let { side.put("score", it.optString("displayValue")) }
@@ -500,25 +505,53 @@ internal object EspnParser {
     private fun rows(standings: JSONObject?): List<StandingsRow> =
         objects(standings?.optJSONArray("entries")).mapNotNull { e ->
             runCatching {
-                val stats = objects(e.optJSONArray("stats")).associateBy { it.optString("name") }
-                fun int(name: String) = stats[name]?.let { s -> s.optString("displayValue").toIntOrNull() ?: s.optDouble("value", 0.0).toInt() } ?: 0
+                // College tables repeat every figure for home, away, conference and ranked opponents, overall
+                // first: the first of each name is the team's own, a later one (its wins against ranked teams)
+                // is not.
+                val stats = LinkedHashMap<String, JSONObject>()
+                objects(e.optJSONArray("stats")).forEach { stats.putIfAbsent(it.optString("name"), it) }
+                // Rugby names the same figures differently (gamesWon, pointsDifference); the first present wins.
+                fun stat(vararg names: String) = names.firstNotNullOfOrNull { stats[it] }
+                fun int(vararg names: String) = stat(*names)?.let { s -> s.optString("displayValue").toIntOrNull() ?: s.optDouble("value", 0.0).toInt() } ?: 0
+                fun text(vararg names: String) = stat(*names)?.optString("displayValue").orEmpty()
+                // College gives no losses figure, only the overall record ("7-3", "7-3-1").
+                val record = stat("overall")?.optString("summary")?.split('-')?.map { it.trim().toIntOrNull() }
+                    ?.takeIf { it.size in 2..3 && it.all { n -> n != null } }?.map { it!! }
+                val won = if (stat("wins", "gamesWon") == null && record != null) record[0] else int("wins", "gamesWon")
+                val lost = if (stat("losses", "gamesLost") == null && record != null) record[1] else int("losses", "gamesLost")
+                val drawn = if (stat("ties", "gamesDrawn") == null && record != null) record.getOrElse(2) { 0 } else int("ties", "gamesDrawn")
                 StandingsRow(
-                    rank = int("rank"),
+                    // American leagues give no rank, only each team's seed in its conference.
+                    rank = int("rank").takeIf { it > 0 } ?: int("playoffSeed"),
                     team = team(e.getJSONObject("team")),
                     played = int("gamesPlayed"),
-                    won = int("wins"),
-                    drawn = int("ties"),
-                    lost = int("losses"),
+                    won = won,
+                    drawn = drawn,
+                    lost = lost,
                     scored = int("pointsFor"),
                     conceded = int("pointsAgainst"),
-                    difference = stats["pointDifferential"]?.optString("displayValue").orEmpty(),
+                    difference = text("pointDifferential", "pointsDifference"),
                     points = int("points"),
                     note = e.optJSONObject("note")?.optString("description")?.takeIf { it.isNotEmpty() },
+                    otLosses = int("otLosses", "overtimeLosses"),
+                    winPercent = text("winPercent").ifEmpty { winPercentOf(won, lost, drawn) },
+                    gamesBehind = text("gamesBehind"),
                 )
             }.getOrNull()
         }.sortedBy { if (it.rank > 0) it.rank else Int.MAX_VALUE }
 
     // --- helpers ---
+
+    /**
+     * A win percentage written the way ESPN writes its own (".700", "1.000"), for a table that gives none;
+     * a tie counts as half a win. Empty before a game is played.
+     */
+    internal fun winPercentOf(won: Int, lost: Int, tied: Int): String {
+        val games = won + lost + tied
+        if (games == 0) return ""
+        val thousandths = ((won + tied / 2.0) * 1000 / games).roundToInt()
+        return if (thousandths >= 1000) "1.000" else "." + thousandths.toString().padStart(3, '0')
+    }
 
     private fun state(status: JSONObject): MatchState {
         val type = status.optJSONObject("type") ?: return MatchState.PRE

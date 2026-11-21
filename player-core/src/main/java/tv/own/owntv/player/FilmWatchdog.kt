@@ -27,6 +27,8 @@ internal class FilmWatchdog {
         val archive: Boolean,
         val triedFrozenReset: Boolean,
         val triedOpenReset: Boolean,
+        /** How long the demuxer may take to open before stage 1 fires. */
+        val openTimeoutMs: Long = OPEN_TIMEOUT_MS,
     )
 
     enum class Step {
@@ -62,6 +64,18 @@ internal class FilmWatchdog {
 
     private var stillSince = 0L
 
+    companion object {
+        /** Measured on a real panel, a healthy file or archive opens in 1.5–2.1 s. */
+        const val OPEN_TIMEOUT_MS = 10_000L
+
+        /**
+         * A catch-up asked for as HLS: the timeshift server builds the whole playlist before answering —
+         * measured at 4 s for 30 minutes, 6.5 s for an hour and 19–22 s for three — so the usual ten
+         * seconds would give up on every long programme.
+         */
+        const val ARCHIVE_HLS_OPEN_TIMEOUT_MS = 30_000L
+    }
+
     /** [bitrateKnown] is a blocking mpv read, so it is asked only on the tick that reaches stage 2. */
     suspend fun step(t: Tick, bitrateKnown: suspend () -> Boolean): Step {
         if (t.heightPx > 0) {
@@ -80,7 +94,7 @@ internal class FilmWatchdog {
         // bitrate — stage 2's and stage 3's signature. Only stand down once audio is demonstrably progressing.
         if (t.fileLoaded && t.elapsedMs > 5_000 && t.positionMs > 0 && t.noVideoTrack) return Step.NO_VIDEO_TRACK
         if (!t.fileLoaded && t.sessionRefused) return Step.SESSION_REFUSED
-        if (!t.fileLoaded && t.elapsedMs > 10_000) return if (!t.triedOpenReset) Step.OPEN_RESET else Step.OPEN_AGAIN
+        if (!t.fileLoaded && t.elapsedMs > t.openTimeoutMs) return if (!t.triedOpenReset) Step.OPEN_RESET else Step.OPEN_AGAIN
         if (t.fileLoaded && t.elapsedMs > 6_000 && t.decoderHadTime && !bitrateKnown()) return Step.LOADED_NO_METADATA
         if (t.fileLoaded && t.elapsedMs > 7_000 && t.decoderHadTime) return Step.NO_FRAME
         return Step.WAIT

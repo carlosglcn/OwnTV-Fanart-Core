@@ -45,6 +45,10 @@ interface SubtitleDao {
     @Query("SELECT * FROM subtitle_cache WHERE source = 'LOCAL' AND fileName = :fileName LIMIT 1")
     suspend fun findLocalByFileName(fileName: String): SubtitleCacheEntity?
 
+    /** Every local copy made from a file of this name — two different files may share one. */
+    @Query("SELECT * FROM subtitle_cache WHERE source = 'LOCAL' AND fileName = :fileName")
+    suspend fun localsByFileName(fileName: String): List<SubtitleCacheEntity>
+
     @Query("UPDATE subtitle_cache SET lastUsedAt = :now WHERE id = :id")
     suspend fun touchCache(id: Long, now: Long)
 

@@ -230,9 +230,11 @@
     <string name="companion_error_missing_fields">Beharrezko eremuak falta dira.</string>
     <string name="setup_invalid_locale">Babeskopia honek onartzen ez den aplikazio-hizkuntza bat zeukan. Leheneratzeak arrakasta izan du, baina zure uneko hizkuntza mantendu da.</string>
     <string name="setup_prefer_hls_live_tv">Lehenetsi HLS Zuzeneko telebistarako</string>
-    <string name="setup_prefer_hls_description">Lehenetsi HLS (.m3u8) MPEG-TS baino Zuzeneko telebistarako. MPEG-TSra itzultzen da HLSk huts egiten badu. Berrikusteak MPEG-TS erabiltzen du beti.</string>
-    <string name="setup_prefer_hls_description_supported">Lehenetsi HLS (.m3u8) MPEG-TS baino Zuzeneko telebistarako. MPEG-TSra itzultzen da HLSk huts egiten badu. Berrikusteak MPEG-TS erabiltzen du beti. Zure hornitzaileak HLS onartzen duela jakinarazten du.</string>
-    <string name="setup_prefer_hls_description_unsupported">Lehenetsi HLS (.m3u8) MPEG-TS baino Zuzeneko telebistarako. MPEG-TSra itzultzen da HLSk huts egiten badu. Berrikusteak MPEG-TS erabiltzen du beti. Zure hornitzaileak ez du HLS onartzen duenik jakinarazten — hala ere probatu dezakezu.</string>
+    <string name="setup_prefer_hls_description">Lehenetsi HLS (.m3u8) MPEG-TS baino Zuzeneko telebistarako. MPEG-TSra itzultzen da HLSk huts egiten badu.</string>
+    <string name="setup_prefer_hls_description_supported">Lehenetsi HLS (.m3u8) MPEG-TS baino Zuzeneko telebistarako. MPEG-TSra itzultzen da HLSk huts egiten badu. Zure hornitzaileak HLS onartzen duela jakinarazten du.</string>
+    <string name="setup_prefer_hls_description_unsupported">Lehenetsi HLS (.m3u8) MPEG-TS baino Zuzeneko telebistarako. MPEG-TSra itzultzen da HLSk huts egiten badu. Zure hornitzaileak ez du HLS onartzen duenik jakinarazten — hala ere probatu dezakezu.</string>
+    <string name="setup_prefer_hls_catchup">Lehenetsi HLS berrikusteko</string>
+    <string name="setup_prefer_hls_catchup_description">Eskatu berrikusteko saioak HLS (.m3u8) gisa, MPEG-TS-ren ordez. MPEG-TSra itzultzen da HLSk huts egiten badu. Hornitzaile batzuek bakarrik eskaintzen dute berrikustea HLS gisa.</string>
     <string name="setup_hls_test_support">Probatu HLS euskarria</string>
     <string name="setup_hls_testing">HLS probatzen…</string>
     <string name="setup_hls_test_failed">Probak huts egin du: <xliff:g id="reason">%1$s</xliff:g></string>
