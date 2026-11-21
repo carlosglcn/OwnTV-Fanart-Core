@@ -818,6 +818,7 @@
     <string name="glcn_setup_home_dock">The title large over its picture, and a dock that rises from the bottom with one wide card and narrow ones, a tab for each row</string>
     <string name="glcn_setup_home_panel">The rows on the left and a fixed panel on the right with what you point at</string>
     <string name="glcn_style_brasa" translatable="false">Brasa</string>
+    <string name="glcn_style_alba" translatable="false">Alba</string>
     <string name="glcn_style_lumen_noche" translatable="false">Lumen Noche</string>
     <string name="glcn_style_lumen_dia" translatable="false">Lumen Día</string>
     <string name="glcn_style_atardecer" translatable="false">Atardecer</string>
@@ -942,6 +943,7 @@
     <string name="glcn_ui_sound_style_soft">Soft</string>
     <string name="glcn_ui_sound_style_air">Kalimba</string>
     <string name="glcn_ui_sound_style_natural">Natural</string>
+    <string name="glcn_ui_sound_style_ember">Ember</string>
     <string name="glcn_preview_ok_title">Preview with OK</string>
     <string name="glcn_preview_ok_desc">Nothing plays while you move through the list. OK starts the preview of the channel; OK again opens it full screen. Kinder to boxes with little memory.</string>
     <string name="glcn_light_mode_title">Light mode</string>

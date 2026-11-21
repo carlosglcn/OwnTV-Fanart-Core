@@ -354,6 +354,26 @@ interface SeriesDao {
     @Query("SELECT s.* " + CONTINUE_SERIES + " AND s.name LIKE '%' || :query || '%' ORDER BY lp.lastAt DESC")
     fun searchContinue(query: String, profileId: Long, sourceIds: List<Long>): PagingSource<Int, SeriesEntity>
 
+    // glcn: the shelves above All (the Shelves layout). Titles filed under [excluded] (hidden or locked) stay out.
+    @Query(
+        "SELECT * FROM series WHERE sourceId IN (:sourceIds) AND rating >= :floor " +
+            "AND (categoryId IS NULL OR categoryId NOT IN (:excluded)) ORDER BY rating DESC, name ASC LIMIT :limit",
+    )
+    fun observeShelfRated(sourceIds: List<Long>, excluded: List<Long>, floor: Double, limit: Int): Flow<List<SeriesEntity>>
+
+    @Query(
+        "SELECT * FROM series WHERE sourceId IN (:sourceIds) AND COALESCE(year, parsedYear) >= :fromYear " +
+            "AND (categoryId IS NULL OR categoryId NOT IN (:excluded)) ORDER BY addedAt DESC, sortOrder DESC, id DESC LIMIT :limit",
+    )
+    fun observeShelfRecent(sourceIds: List<Long>, excluded: List<Long>, fromYear: Int, limit: Int): Flow<List<SeriesEntity>>
+
+    @Query(
+        "SELECT s.* FROM trending_items t INNER JOIN series s ON s.id = t.providerItemId " +
+            "WHERE t.mediaType = 'SERIES' AND t.sourceId IN (:sourceIds) " +
+            "AND (s.categoryId IS NULL OR s.categoryId NOT IN (:excluded)) ORDER BY t.trendingRank, t.position LIMIT :limit",
+    )
+    fun observeShelfPopular(sourceIds: List<Long>, excluded: List<Long>, limit: Int): Flow<List<SeriesEntity>>
+
     /** glcn: the first shows under way, for the "Keep watching" strip above the posters. */
     @Query("SELECT s.* " + CONTINUE_SERIES + " ORDER BY lp.lastAt DESC LIMIT :limit")
     fun observeContinue(profileId: Long, sourceIds: List<Long>, limit: Int): Flow<List<SeriesEntity>>

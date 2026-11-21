@@ -37,6 +37,8 @@ enum class GlcnStyle(
 ) {
     // Brasa: warm graphite, an amber-to-coral accent and outlined focus. First, so a new install opens on it.
     BRASA(false, "#F5A524", 0xFF121110, 0xFF1B1917, 0xFFF4F1EC, 0xFFB9B2A8, 0xFFD9D3CA, accent2Hex = "#F0603A"),
+    // Alba: Brasa's light sister — warm ivory, an orange-to-raspberry accent and the same outlined focus.
+    ALBA(true, "#E0521B", 0xFFF6F1EA, 0xFFFFFFFF, 0xFF1E1712, 0xFF6A5D52, 0xFF3A2F27, accent2Hex = "#C2255C"),
     // Lumen: clear glass over a near-black or pearl page, one turquoise accent (no other style uses it).
     LUMEN_NOCHE(false, "#4FD1C5", 0xFF06090A, 0xFF111C1C, 0xFFF2F7F6, 0xFFA5B2B0, 0xFFC9D3D1, glass = true),
     LUMEN_DIA(true, "#0E8F86", 0xFFF3F5F2, 0xFFFFFFFF, 0xFF0D1413, 0xFF566663, 0xFF2A3836, glass = true),

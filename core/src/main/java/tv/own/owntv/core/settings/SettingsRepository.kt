@@ -1054,7 +1054,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
 
     /** glcn: the menu sounds' character — 0 classic, 1 crystal, 2 wood, 3 bubble, 4 soft, 5 air. */
     val uiSoundStyle: Flow<Int> = prefsFlow { it[Keys.GLCN_UI_SOUND_STYLE] ?: 0 }
-    suspend fun setUiSoundStyle(style: Int) { context.dataStore.edit { it[Keys.GLCN_UI_SOUND_STYLE] = style.coerceIn(0, 6) } }
+    suspend fun setUiSoundStyle(style: Int) { context.dataStore.edit { it[Keys.GLCN_UI_SOUND_STYLE] = style.coerceIn(0, 7) } }
     suspend fun setUiSounds(level: Int) { context.dataStore.edit { it[Keys.GLCN_UI_SOUNDS] = level.coerceIn(0, 2) } }
 
     /** glcn: a short chime as the app opens (the season's own while a seasonal theme is on). */
@@ -1634,7 +1634,8 @@ class SettingsRepository(private val context: Context, private val localeStore: 
      * is left untouched while it is on, so switching back restores the user's List choice.
      * One setting for both sections: a layout preference is about how the user likes to browse.
      */
-    enum class VodLayout { SEPARATE, CINEMATIC, RUNWAY }
+    // glcn: SHELVES is Cinematic with rows on top of All — best rated, recent releases, popular now.
+    enum class VodLayout { SEPARATE, CINEMATIC, RUNWAY, SHELVES }
     val vodLayout: Flow<VodLayout> = prefsFlow { prefs ->
         prefs[Keys.VOD_LAYOUT]?.let { runCatching { VodLayout.valueOf(it) }.getOrNull() } ?: VodLayout.CINEMATIC
     }
