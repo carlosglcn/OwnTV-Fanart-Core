@@ -80,6 +80,9 @@ data class Match(
     val venue: String? = null,
     val broadcasts: List<Broadcast> = emptyList(),
     val events: List<MatchEvent> = emptyList(),
+    /** glcn: the competition's own mark as its feed gives it — and its version for a dark ground, when there is one. */
+    val leagueLogo: String? = null,
+    val leagueLogoDark: String? = null,
 ) {
     val key: String get() = "${League.keyOf(sport, leagueSlug)}#$id"
     val home: Competitor? get() = competitors.firstOrNull { it.home } ?: competitors.getOrNull(0)

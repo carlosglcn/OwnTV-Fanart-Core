@@ -41,6 +41,11 @@ internal object EspnParser {
         val root = JSONObject(body)
         val leagueName = root.optJSONArray("leagues")?.optJSONObject(0)?.optString("name")?.takeIf { it.isNotEmpty() } ?: league.name
         val events = root.optJSONArray("events") ?: return emptyList()
+        // glcn: the competition's mark (`leagues[0].logos`): the plain one, and the one drawn for a dark ground.
+        val marks = objects(root.optJSONArray("leagues")?.optJSONObject(0)?.optJSONArray("logos"))
+        fun dark(o: JSONObject) = (0 until (o.optJSONArray("rel")?.length() ?: 0)).any { o.optJSONArray("rel")?.optString(it) == "dark" }
+        val mark = (marks.firstOrNull { !dark(it) } ?: marks.firstOrNull())?.optString("href")?.takeIf { it.isNotEmpty() }
+        val markDark = marks.firstOrNull { dark(it) }?.optString("href")?.takeIf { it.isNotEmpty() }
         return objects(events).flatMap { e ->
             runCatching {
                 when (league.sport) {
@@ -50,7 +55,7 @@ internal object EspnParser {
                     else -> listOf(teamMatch(league.sport, league.key, league.slug, leagueName, e, e.getJSONArray("competitions").getJSONObject(0)))
                 }
             }.getOrDefault(emptyList())
-        }
+        }.let { all -> if (mark == null && markDark == null) all else all.map { it.copy(leagueLogo = mark, leagueLogoDark = markDark) } }
     }
 
     /** When the season a scoreboard belongs to started (`leagues[0].season.startDate`); null when ESPN gives none. */

@@ -178,6 +178,7 @@ internal object SportsCacheJson {
         .put("id", m.id).put("sp", m.sport.name).put("f", m.feed).put("ls", m.leagueSlug).put("ln", m.leagueName)
         .put("t0", m.startMs).put("st", m.state.name).put("tx", m.statusText).put("ti", m.title)
         .putOpt("sub", m.subtitle).putOpt("ve", m.venue)
+        .putOpt("lg", m.leagueLogo).putOpt("lgd", m.leagueLogoDark)
         .putOpt("ck", m.clock?.let { JSONObject().put("d", it.display).put("p", it.period).putOpt("ov", it.overs).apply { if (it.halfTime) put("ht", true) } })
         .put("c", JSONArray().apply { m.competitors.forEach { put(competitor(it)) } })
         .put("b", JSONArray().apply { m.broadcasts.forEach { put(JSONObject().put("n", it.name).putOpt("m", it.market)) } })
@@ -199,6 +200,8 @@ internal object SportsCacheJson {
         competitors = objects(o.optJSONArray("c")).map(::competitor),
         broadcasts = objects(o.optJSONArray("b")).map { Broadcast(it.getString("n"), it.optStringOrNull("m")) },
         events = objects(o.optJSONArray("e")).map(::event),
+        leagueLogo = o.optStringOrNull("lg"),
+        leagueLogoDark = o.optStringOrNull("lgd"),
     )
 
     private fun competitor(c: Competitor) = JSONObject()
