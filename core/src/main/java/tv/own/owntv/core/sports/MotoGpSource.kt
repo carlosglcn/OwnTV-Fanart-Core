@@ -53,7 +53,103 @@ class MotoGpSource(client: OkHttpClient) {
         return all.filter { Instant.ofEpochMilli(it.startMs).atZone(zone).toLocalDate() == date }
     }
 
-    fun summary(match: Match): MatchSummary = MatchSummary(match, emptyList(), emptyList(), emptyList())
+    /**
+     * glcn: a session's page. Once it has run, its classification — who finished where, and how far behind — comes
+     * with the match as its competitors, in order. Read from the championship's results feed (a different one from
+     * the calendar's); a session that feed does not know, or has not classified yet, simply has none.
+     */
+    suspend fun summary(match: Match): MatchSummary {
+        val order = runCatching { classificationOf(match) }.getOrElse { if (it is CancellationException) throw it else emptyList() }
+        return MatchSummary(if (order.isEmpty()) match else match.copy(competitors = order), emptyList(), emptyList(), emptyList())
+    }
+
+    /** glcn: the riders' championship. */
+    suspend fun rankings(league: League): Ranking {
+        val now = System.currentTimeMillis()
+        standings?.takeIf { now - it.first < STANDINGS_CACHE_MS }?.let { return Ranking(league.key, it.second) }
+        val (season, category) = ids() ?: throw IllegalArgumentException("no ranking")
+        val rows = objects(JSONObject(get("$BASE/results/standings?seasonUuid=$season&categoryUuid=$category")).optJSONArray("classification"))
+            .mapNotNull { r ->
+                val rider = rider(r.optJSONObject("rider"), r.optJSONObject("team")) ?: return@mapNotNull null
+                tv.own.owntv.core.sports.model.RankingRow(r.optInt("position", 0), rider, r.optDouble("points", 0.0).toInt())
+            }.sortedBy { if (it.rank > 0) it.rank else Int.MAX_VALUE }
+        if (rows.isEmpty()) throw IllegalArgumentException("no ranking")
+        val groups = listOf(tv.own.owntv.core.sports.model.RankingGroup(tv.own.owntv.core.sports.model.RankingKind.DRIVERS, rows))
+        standings = now to groups
+        return Ranking(league.key, groups)
+    }
+
+    private var standings: Pair<Long, List<tv.own.owntv.core.sports.model.RankingGroup>>? = null
+    private var seasonIds: Pair<String, String>? = null
+    private var resultEvents: Pair<Long, List<JSONObject>>? = null
+    private val classified = HashMap<String, Pair<Long, List<tv.own.owntv.core.sports.model.Competitor>>>()
+
+    private fun objects(a: JSONArray?): List<JSONObject> = if (a == null) emptyList() else (0 until a.length()).mapNotNull { a.optJSONObject(it) }
+
+    /** The current season's id and the MotoGP class's, in the results feed. */
+    private suspend fun ids(): Pair<String, String>? {
+        seasonIds?.let { return it }
+        val seasons = objects(runCatching { JSONArray(get("$BASE/results/seasons")) }.getOrNull())
+        val season = (seasons.firstOrNull { it.optBoolean("current") } ?: seasons.firstOrNull())?.optString("id")?.takeIf { it.isNotEmpty() } ?: return null
+        val category = objects(runCatching { JSONArray(get("$BASE/results/categories?seasonUuid=$season")) }.getOrNull())
+            .firstOrNull { it.optString("name").startsWith("MotoGP") }?.optString("id")?.takeIf { it.isNotEmpty() } ?: return null
+        return (season to category).also { seasonIds = it }
+    }
+
+    /** A rider as a side: the name, the number as its short mark, the country's code, the team as its place. */
+    private fun rider(r: JSONObject?, team: JSONObject?): Team? {
+        if (r == null) return null
+        val name = r.optString("full_name").trim().takeIf { it.isNotEmpty() } ?: return null
+        return Team(
+            id = r.optString("id").ifEmpty { name },
+            name = name,
+            shortName = name.substringAfterLast(' '),
+            abbreviation = r.opt("number")?.toString().orEmpty(),
+            location = team?.optString("name")?.takeIf { it.isNotEmpty() },
+            isAthlete = true,
+            country = r.optJSONObject("country")?.optString("iso")?.takeIf { it.isNotEmpty() },
+        )
+    }
+
+    private suspend fun classificationOf(match: Match): List<tv.own.owntv.core.sports.model.Competitor> {
+        val now = System.currentTimeMillis()
+        // Nothing to read before the session has had time to end.
+        if (match.state == MatchState.PRE) return emptyList()
+        classified[match.id]?.takeIf { now - it.first < (if (it.second.isEmpty()) EMPTY_RESULT_MS else CACHE_MS) }?.let { return it.second }
+        val (season, category) = ids() ?: return emptyList()
+        val events = resultEvents?.takeIf { now - it.first < CACHE_MS }?.second
+            ?: objects(runCatching { JSONArray(get("$BASE/results/events?seasonUuid=$season")) }.getOrNull()).also { if (it.isNotEmpty()) resultEvents = now to it }
+        val day = Instant.ofEpochMilli(match.startMs).atZone(java.time.ZoneOffset.UTC).toLocalDate()
+        val event = events.firstOrNull { e ->
+            if (e.optBoolean("test")) return@firstOrNull false
+            val start = runCatching { LocalDate.parse(e.optString("date_start").take(DAY_LENGTH)) }.getOrNull() ?: return@firstOrNull false
+            val end = runCatching { LocalDate.parse(e.optString("date_end").take(DAY_LENGTH)) }.getOrNull() ?: start
+            !day.isBefore(start.minusDays(1)) && !day.isAfter(end.plusDays(1))
+        }?.optString("id")?.takeIf { it.isNotEmpty() } ?: return emptyList()
+        // The session that began when this one did (the two feeds agree on the hour, not on the names).
+        val session = objects(runCatching { JSONArray(get("$BASE/results/sessions?eventUuid=$event&categoryUuid=$category")) }.getOrNull())
+            .mapNotNull { s -> time(s.optString("date"))?.let { at -> s to kotlin.math.abs(at - match.startMs) } }
+            .filter { it.second <= SAME_SESSION_MS }.minByOrNull { it.second }?.first?.optString("id")?.takeIf { it.isNotEmpty() }
+        val rows = if (session == null) emptyList() else objects(
+            (runCatching { JSONObject(get("$BASE/results/session/$session/classification?test=false")) }.getOrNull()
+                ?: runCatching { JSONObject(get("$BASE/results/session/$session/classification")) }.getOrNull())?.optJSONArray("classification"),
+        )
+        val out = rows.mapNotNull { r ->
+            val rider = rider(r.optJSONObject("rider"), r.optJSONObject("team")) ?: return@mapNotNull null
+            val place = r.optInt("position", 0)
+            // The winner's own time (a race) or best lap (practice, qualifying); everyone else's gap to it.
+            val gap = r.optJSONObject("gap")?.optString("first")?.trim().orEmpty()
+            val own = r.optString("time").trim().ifEmpty { r.optJSONObject("best_lap")?.optString("time")?.trim().orEmpty() }
+            val text = when {
+                place == 1 || gap.isEmpty() || gap.trim('0', '.', ':').isEmpty() -> own
+                gap.startsWith("+") || gap.startsWith("-") -> gap
+                else -> "+$gap"
+            }
+            (if (place > 0) place else Int.MAX_VALUE) to tv.own.owntv.core.sports.model.Competitor(rider, home = false, winner = if (place == 1) true else null, score = text.takeIf { it.isNotEmpty() }?.let { tv.own.owntv.core.sports.model.Score(it, null) })
+        }.sortedBy { it.first }.map { it.second }
+        classified[match.id] = now to out
+        return out
+    }
 
     private suspend fun eventsOf(year: Int): List<JSONObject> {
         val now = System.currentTimeMillis()
@@ -139,6 +235,10 @@ class MotoGpSource(client: OkHttpClient) {
         const val SESSIONS_CACHE_MS = 20 * 60_000L
         const val DEFAULT_MS = 45 * 60_000L
         const val MAX_MS = 150 * 60_000L
+        const val STANDINGS_CACHE_MS = 30 * 60_000L
+        const val EMPTY_RESULT_MS = 3 * 60_000L
+        const val SAME_SESSION_MS = 20 * 60_000L
+        const val DAY_LENGTH = 10
     }
 }
 
@@ -204,7 +304,8 @@ class CompositeSportsSource(
         when {
             league.isCycling() -> cycling!!.rankings(league)
             league.isTsdb() && league.slug == BasketDataSource.SNOOKER -> tsdb!!.rankings(league)
-            league.isMotoGp() || league.isTsdb() -> throw IllegalArgumentException("no ranking")
+            league.isMotoGp() -> motoGp.rankings(league)
+            league.isTsdb() -> throw IllegalArgumentException("no ranking")
             else -> espn.rankings(league)
         }
 

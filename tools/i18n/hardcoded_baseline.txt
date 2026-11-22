@@ -436,20 +436,14 @@
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	,
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	FINISHED
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	LIVE
-1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	MotoGP
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	PROGRESS
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	broadcasts
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	category
 2	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	circuit
-1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	country
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	data
-2	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	date_end
-2	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	date_start
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	events
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	https://api.motogp.pulselive.com/motogp/v1
-1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	id
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	motogp
-5	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	name
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	no table
 1	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	shortname
 2	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	status
