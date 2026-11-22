@@ -43,6 +43,7 @@ class MotoGpSource(client: OkHttpClient) {
 
     /** The MotoGP sessions on [day] (today when null), by the device's calendar. */
     suspend fun scoreboard(league: League, day: LocalDate?): List<Match> {
+        CompetitionLogos.refresh(::get) // glcn: MotoGP's logo, among others
         val date = day ?: LocalDate.now(zone)
         val near = eventsOf(date.year).filter { e ->
             val start = dayOf(e.optString("date_start")) ?: return@filter false

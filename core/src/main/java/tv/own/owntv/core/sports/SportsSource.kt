@@ -55,6 +55,7 @@ class EspnSportsSource(client: OkHttpClient) : SportsSource {
 
     override suspend fun scoreboard(league: League, day: LocalDate?): List<Match> {
         if (league.sport == Sport.TENNIS) TennisPhotos.refresh(::get)
+        CompetitionLogos.refresh(::get) // glcn: the logos of the competitions that come without one
         val date = day?.format(DateTimeFormatter.BASIC_ISO_DATE)
         return if (league.sport == Sport.CRICKET) {
             // Cricket series change every few weeks, so ESPN's per-league scoreboards are no use to a
