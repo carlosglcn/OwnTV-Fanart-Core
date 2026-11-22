@@ -65,6 +65,13 @@ class EpgAutoMatcher(
         cust: SectionCustomizations,
         playlistIds: List<Long>,
         maxChannels: Int = MAX_CHANNELS,
+        /**
+         * glcn: for a match nobody asked for (the app's silent run). A channel whose playlist gives it a
+         * `tvg-id` keeps it — the playlist's word is final, even while that guide channel is empty — and a
+         * name match is applied only when it is near certain and carries the same numbers ("La 7" never
+         * becomes "La 1"). Anything less waits for the user's own Auto-match, with its review.
+         */
+        strict: Boolean = false,
     ): AutoMatchOutcome {
         val startedAt = SystemClock.elapsedRealtime()
         val candidates = guideCandidates.all()
@@ -82,7 +89,7 @@ class EpgAutoMatcher(
             val prepared = prepareWithProgrammesFirst(candidates)
             // Narrow before scoring: the scan is channels × candidates, which is millions of
             // comparisons on a full lineup and minutes of spinner on TV silicon if it runs unfiltered.
-            val unmatched = channels.filter { needsMatch(it, cust, idsWithProgrammes) }
+            val unmatched = channels.filter { needsMatch(it, cust, idsWithProgrammes) && (!strict || it.epgChannelId.isNullOrBlank()) }
             val best = EpgMatcher.bestEpgMatchBulk(unmatched.map { it.matchName }, prepared)
 
             val applied = mutableListOf<Pair<String, String>>()
@@ -91,7 +98,13 @@ class EpgAutoMatcher(
             for ((channel, match) in unmatched.zip(best)) {
                 if (match == null) continue
                 val hasProgrammes = hasProgrammesById[match.epgChannelId] == true
-                val confident = match.score >= EpgMatcher.AUTO_THRESHOLD
+                val confident = if (strict) {
+                    match.score >= STRICT_THRESHOLD &&
+                        digitsOf(channel.matchName) == digitsOf(match.displayName.orEmpty())
+                } else {
+                    match.score >= EpgMatcher.AUTO_THRESHOLD
+                }
+                if (strict && !confident) continue
                 when {
                     confident && hasProgrammes -> applied.add(CustomizeKeys.channel(channel) to match.epgChannelId)
                     // Confident, but the guide channel is empty. Applying it would report a success
@@ -169,5 +182,14 @@ class EpgAutoMatcher(
     private companion object {
         /** Upper bound on channels scanned in one run. Matches what both apps already used. */
         const val MAX_CHANNELS = 20_000
+
+        /** glcn: how sure a match nobody asked for has to be. */
+        const val STRICT_THRESHOLD = 0.97
+
+        /** glcn: the numbers in a name, normalized ("La Séptima" → 7), in order. */
+        fun digitsOf(name: String): List<String> =
+            DIGITS.findAll(EpgMatcher.normalizeForEpg(name)).map { it.value.trimStart('0') }.toList()
+
+        val DIGITS = Regex("\\d+")
     }
 }
