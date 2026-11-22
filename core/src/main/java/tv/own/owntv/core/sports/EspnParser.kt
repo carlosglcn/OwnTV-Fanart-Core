@@ -92,7 +92,11 @@ internal object EspnParser {
                 statusText = status.ifEmpty { m.statusText },
             )
         }
-        val updated = fresh?.copy(title = match.title, subtitle = match.subtitle, venue = match.venue, broadcasts = match.broadcasts, events = match.events) ?: match
+        // glcn: the competition's logo comes with the day's list only: the match read by itself keeps the one it had.
+        val updated = fresh?.copy(
+            title = match.title, subtitle = match.subtitle, venue = match.venue, broadcasts = match.broadcasts, events = match.events,
+            leagueLogo = fresh.leagueLogo ?: match.leagueLogo, leagueLogoDark = fresh.leagueLogoDark ?: match.leagueLogoDark,
+        ) ?: match
         return MatchSummary(
             match = updated,
             timeline = objects(root.optJSONArray("keyEvents")).mapNotNull(::timelineEvent),

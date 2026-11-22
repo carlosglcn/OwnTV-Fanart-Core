@@ -87,6 +87,7 @@ class EspnSportsSource(client: OkHttpClient) : SportsSource {
     override suspend fun warm() {
         TennisPhotos.refresh(::get)
         CompetitionLogos.refresh(::get)
+        Venues.refresh(::get)
     }
 
     override suspend fun teamSchedule(league: League, teamId: String, fixtures: Boolean): List<Match> {
