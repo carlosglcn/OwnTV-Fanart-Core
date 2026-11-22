@@ -185,6 +185,9 @@ val dataModule = module {
             dataDir = androidContext().filesDir,
             activity = get(),
             scope = kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.SupervisorJob() + kotlinx.coroutines.Dispatchers.Default),
+            // glcn: its own line of work, off the Default pool — the guide's matching fills that pool for a while after the
+            // app starts, and the stored board, the scores and the logos then waited behind it.
+            dispatcher = kotlinx.coroutines.Dispatchers.IO,
         ).also { repository ->
             // Goal alerts re-arm from every board built — and so start only with the repository, never at launch.
             get<tv.own.owntv.core.sports.MatchAlertScheduler>()

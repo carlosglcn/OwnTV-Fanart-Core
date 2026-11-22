@@ -310,6 +310,8 @@ class CompositeSportsSource(
             else -> espn.rankings(league)
         }
 
+    override suspend fun warm() = espn.warm()
+
     override suspend fun teamSchedule(league: League, teamId: String, fixtures: Boolean): List<Match> =
         when {
             league.isTsdb() -> tsdb!!.teamSchedule(league, teamId, fixtures)

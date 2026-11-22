@@ -11,6 +11,9 @@ object CompetitionLogos {
     @Volatile private var logos: Map<String, String> = emptyMap()
     @Volatile private var readAt = 0L
 
+    /** Goes up each time the file is read, so a card already drawn can take what came. */
+    val version = kotlinx.coroutines.flow.MutableStateFlow(0)
+
     fun of(leagueSlug: String?): String? = leagueSlug?.let { logos[it] }
 
     suspend fun refresh(fetch: suspend (String) -> String) {
@@ -20,6 +23,7 @@ object CompetitionLogos {
         runCatching {
             val leagues = JSONObject(fetch(URL)).optJSONObject("leagues") ?: return
             logos = leagues.keys().asSequence().mapNotNull { k -> leagues.optString(k).takeIf { it.isNotEmpty() }?.let { k to it } }.toMap()
+            version.value++
         }.onFailure { readAt = now - REFRESH_MS + RETRY_MS }
     }
 

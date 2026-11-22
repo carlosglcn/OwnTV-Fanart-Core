@@ -36,6 +36,9 @@ interface SportsSource {
 
     /** [teamId]'s matches in [league]: [fixtures] those to come, else the results. Football reads every competition the club plays. */
     suspend fun teamSchedule(league: League, teamId: String, fixtures: Boolean): List<Match>
+
+    /** glcn: what the cards draw that is no match's own (tournament and competition logos), read ahead of any score. */
+    suspend fun warm() {}
 }
 
 /** A month's matches, and when the season they belong to started (null: ESPN did not say). */
@@ -79,6 +82,11 @@ class EspnSportsSource(client: OkHttpClient) : SportsSource {
         Sport.RACING -> EspnParser.racingStandings(league, get("$SITE/apis/v2/sports/racing/${league.slug}/standings"))
         Sport.TENNIS -> EspnParser.tennisRankings(league, get("$SITE/apis/site/v2/sports/tennis/${league.slug}/rankings"))
         else -> throw IllegalArgumentException("no ranking")
+    }
+
+    override suspend fun warm() {
+        TennisPhotos.refresh(::get)
+        CompetitionLogos.refresh(::get)
     }
 
     override suspend fun teamSchedule(league: League, teamId: String, fixtures: Boolean): List<Match> {

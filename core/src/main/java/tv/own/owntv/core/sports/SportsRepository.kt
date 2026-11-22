@@ -222,6 +222,9 @@ class SportsRepository(
         .onStart {
             demands.update { it + demand }
             scope.launch(serial) { if (engine == null) engine = scope.launch(serial) { run() } }
+            // glcn: the logos no match carries, at once — a stored board is shown without a single fetch, and they
+            // only came with one (a start with nothing to refresh showed the cards without their logos).
+            scope.launch { runCatching { source.warm() } }
         }
         .onCompletion { demands.update { it - demand } }
 

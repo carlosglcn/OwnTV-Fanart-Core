@@ -11,6 +11,9 @@ object TennisPhotos {
     @Volatile private var photos: Map<String, String> = emptyMap()
     @Volatile private var readAt = 0L
 
+    /** Goes up each time the file is read, so a card already drawn can take what came. */
+    val version = kotlinx.coroutines.flow.MutableStateFlow(0)
+
     fun of(playerId: String): String? = photos[playerId]
 
     /**
@@ -41,6 +44,7 @@ object TennisPhotos {
                     if (names.isEmpty() || logo.isEmpty()) null else names to logo
                 }
             }
+            version.value++
             val players = root.optJSONObject("players") ?: return
             photos = players.keys().asSequence().mapNotNull { id -> players.optString(id).takeIf { it.isNotEmpty() }?.let { id to it } }.toMap()
         }.onFailure { readAt = now - REFRESH_MS + RETRY_MS }
