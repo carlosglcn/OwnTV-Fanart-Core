@@ -337,11 +337,6 @@ object PlaybackErrorLog {
                 e.raw?.let { appendLine("  raw   : $it") }
                 appendLine()
             }
-            // glcn: what the app adds (how the live groups are filled, per playlist).
-            extraSection?.let { make -> runCatching { make(appContext) }.getOrNull() }?.takeIf { it.isNotBlank() }?.let {
-                appendLine(it.trimEnd())
-                appendLine()
-            }
             // glcn: from the file when there is one, so the lines from before a freeze or a crash are in the report.
             // The file is only written while diagnostics are on: with them off (after a reinstall, say) it stopped at
             // the last session and the report showed yesterday's lines for today's failures. What this run holds in
@@ -356,6 +351,12 @@ object PlaybackErrorLog {
             if (live.isNotBlank()) {
                 appendLine("--- live diagnostics (most recent) ---")
                 appendLine(live)
+            }
+            // glcn: what the app adds (how the live groups are filled, per playlist) — last: with big playlists it is most
+            // of the report, and a report cut short where it is sent (some chats keep 200 KB) lost the diary after it.
+            extraSection?.let { make -> runCatching { make(appContext) }.getOrNull() }?.takeIf { it.isNotBlank() }?.let {
+                appendLine()
+                appendLine(it.trimEnd())
             }
         }
         return text
