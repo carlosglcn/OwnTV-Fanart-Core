@@ -4,6 +4,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import tv.own.owntv.core.settings.SettingsImportRules
 import tv.own.owntv.core.sports.model.Sport
+import tv.own.owntv.core.sports.model.isRace
 
 /**
  * A team (or athlete, or national side) the profile follows. [id] is ESPN's, unique within [sport].
@@ -107,6 +108,22 @@ data class SportsConfig(
         val l = leagues.indexOf(leagueKey).let { if (it < 0) Int.MAX_VALUE else it }
         return s to l
     }
+
+    /**
+     * glcn: whether [match] is one of "my teams'": a followed side plays it — or, in a race sport, a followed driver or
+     * rider's own series runs it. A session lists who is in it only once it has an order, and often not at all before
+     * it starts, so a driver followed from a series ([FollowedTeam.league]) makes every session of that series theirs.
+     */
+    fun follows(match: tv.own.owntv.core.sports.model.Match): Boolean {
+        if (teams.isEmpty()) return false
+        if (match.competitors.any { c -> teams.any { it.sport == match.sport && it.id == c.team.id } }) return true
+        return match.sport.isRace && teams.any { it.sport == match.sport && it.league != null && (it.league == match.feed || it.league == "${match.sport.path}/${match.leagueSlug}") }
+    }
+
+    /** glcn: the followed drivers or riders in [order] (a session's order, first to last), each with their place. */
+    fun followedIn(sport: Sport, order: List<tv.own.owntv.core.sports.model.Competitor>): List<Pair<Int, tv.own.owntv.core.sports.model.Competitor>> =
+        if (teams.isEmpty()) emptyList()
+        else order.mapIndexedNotNull { i, c -> if (teams.any { it.sport == sport && it.id == c.team.id }) (i + 1) to c else null }
 
     /** The league keys to fetch: every catalogue league with [allSports], else the user's choice. */
     fun followedLeagues(): Set<String> = if (allSports) SportsCatalog.leagues.mapTo(LinkedHashSet()) { it.key } else leagues.toCollection(LinkedHashSet())

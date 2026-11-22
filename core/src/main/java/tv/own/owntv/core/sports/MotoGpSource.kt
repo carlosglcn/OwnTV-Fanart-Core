@@ -16,6 +16,7 @@ import tv.own.owntv.core.sports.model.MatchState
 import tv.own.owntv.core.sports.model.MatchSummary
 import tv.own.owntv.core.sports.model.Ranking
 import tv.own.owntv.core.sports.model.Sport
+import tv.own.owntv.core.sports.model.isRace
 import tv.own.owntv.core.sports.model.StandingsTable
 import tv.own.owntv.core.sports.model.Team
 import java.time.Instant
@@ -286,7 +287,11 @@ class CompositeSportsSource(
 
     override suspend fun teams(league: League): List<Team> =
         when {
-            league.isMotoGp() || league.isCycling() -> emptyList()
+            // glcn: where people compete, not teams, the ones to find and follow are those of its ranking: a tour's
+            // players, a series' drivers or riders (a constructors' table is left out).
+            league.sport == Sport.TENNIS || league.sport.isRace ->
+                rankings(league).groups.filter { it.kind != tv.own.owntv.core.sports.model.RankingKind.CONSTRUCTORS }
+                    .flatMap { g -> g.rows.map { it.team } }.distinctBy { it.id }
             league.isTsdb() -> tsdb!!.teams(league)
             else -> espn.teams(league)
         }

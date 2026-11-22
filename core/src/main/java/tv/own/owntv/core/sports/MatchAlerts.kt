@@ -69,8 +69,7 @@ object MatchAlertDiff {
     fun wants(config: SportsConfig, followedLeagues: Set<String>, match: Match): Boolean {
         val a = config.alerts
         if (!a.enabled) return false
-        val teamKeys = config.teams.map { it.key }.toSet()
-        val mine = a.myTeams && match.competitors.any { FollowedTeam(match.sport, it.team.id, "").key in teamKeys }
+        val mine = a.myTeams && config.follows(match)
         val league = a.followedLeagues && match.feed in followedLeagues
         return mine || league
     }

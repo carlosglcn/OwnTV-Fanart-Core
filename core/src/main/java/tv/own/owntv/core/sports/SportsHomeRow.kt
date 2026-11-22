@@ -19,8 +19,7 @@ object SportsHomeRow {
     private const val STALE_MS = 3 * 60 * 60_000L
 
     fun items(board: SportsBoard, config: SportsConfig, followedLeagues: Set<String>, now: Long): List<Match> {
-        val teamKeys = config.teams.map { it.key }.toSet()
-        fun mine(m: Match) = m.competitors.any { FollowedTeam(m.sport, it.team.id, "").key in teamKeys }
+        fun mine(m: Match) = config.follows(m)
         // A kick-off that has passed while ESPN still says "pre" counts as live, as in the refresh policy,
         // for [STALE_MS]; after that it is a match ESPN never updated, not one to show.
         val followed = board.matches.filter { m ->
