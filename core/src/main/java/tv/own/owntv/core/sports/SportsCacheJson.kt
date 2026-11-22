@@ -32,7 +32,9 @@ import tv.own.owntv.core.sports.model.Team
  */
 internal object SportsCacheJson {
 
-    private const val VERSION = 3
+    // glcn: 4 — sides carry their own colours and matches their competition's logo; a board stored before them
+    // is dropped once and rebuilt, or its cards kept the crest-guessed colours and no logo until the next rebuild.
+    private const val VERSION = 4
 
     /** [board]'s matches, details, tables, rebuild time and follow list; the live flags (failing, paused) are not kept. */
     fun write(board: SportsBoard): String =
