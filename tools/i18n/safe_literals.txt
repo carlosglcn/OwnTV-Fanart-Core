@@ -2116,6 +2116,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	xc
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	xtream
 1	protocol	core/src/main/java/tv/own/owntv/core/epg/CatchupUrl.kt	yyyy-MM-dd:HH-mm
+1	regex	core/src/main/java/tv/own/owntv/core/epg/EpgAutoMatcher.kt	\\d+
 1	log	core/src/main/java/tv/own/owntv/core/epg/EpgAutoMatcher.kt	applied=${applied.size} review=${review.size} withheld=$withheld
 1	log	core/src/main/java/tv/own/owntv/core/epg/EpgAutoMatcher.kt	channels=${channels.size} unmatched=${unmatched.size}
 1	log	core/src/main/java/tv/own/owntv/core/epg/EpgAutoMatcher.kt	epg_automatch candidates=${candidates.size} withProgrammes=${idsWithProgrammes.size}
