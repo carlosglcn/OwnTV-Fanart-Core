@@ -829,6 +829,35 @@
     <string name="glcn_style_nieve" translatable="false">Nieve</string>
     <string name="glcn_style_papel" translatable="false">Papel</string>
     <string name="glcn_style_arena" translatable="false">Arena</string>
+    <string name="glcn_style_ria_noche" translatable="false">Ría Noche</string>
+    <string name="glcn_style_ria_dia" translatable="false">Ría Día</string>
+    <string name="glcn_style_estudio_dia" translatable="false">Estudio Día</string>
+    <string name="glcn_style_neon_dia" translatable="false">Neón Día</string>
+    <string name="glcn_theme_ria" translatable="false">Ría</string>
+    <string name="glcn_theme_brasa" translatable="false">Brasa</string>
+    <string name="glcn_theme_lumen" translatable="false">Lumen</string>
+    <string name="glcn_theme_aurora" translatable="false">Aurora</string>
+    <string name="glcn_theme_crepusculo" translatable="false">Crepúsculo</string>
+    <string name="glcn_theme_estudio" translatable="false">Estudio</string>
+    <string name="glcn_theme_neon" translatable="false">Neón</string>
+    <string name="glcn_theme_vitrina" translatable="false">Vitrina</string>
+    <string name="glcn_look_title">Appearance</string>
+    <string name="glcn_look_desc">Three choices: the theme, when it turns light or dark, and what is behind the screens. Each theme brings its colours, its focus and its background</string>
+    <string name="glcn_look_theme">Theme</string>
+    <string name="glcn_look_mode">Mode</string>
+    <string name="glcn_look_mode_auto">Automatic</string>
+    <string name="glcn_look_mode_dark">Dark</string>
+    <string name="glcn_look_mode_light">Light</string>
+    <string name="glcn_look_mode_auto_desc">Light by day, dark from dusk</string>
+    <string name="glcn_look_backdrop">Background</string>
+    <string name="glcn_look_backdrop_plain">Plain</string>
+    <string name="glcn_look_backdrop_theme">The theme\'s</string>
+    <string name="glcn_look_backdrop_fanart">Fanart</string>
+    <string name="glcn_look_backdrop_fanart_desc">The colours of the picture in focus</string>
+    <string name="glcn_look_customise">Personalise</string>
+    <string name="glcn_look_customise_desc">Accent, focus and sounds — only to change something of the theme</string>
+    <string name="glcn_look_reset">Back to the theme as it comes</string>
+    <string name="glcn_look_older">Other styles (earlier versions)</string>
     <string name="glcn_style_title">Style</string>
     <string name="glcn_style_desc">Colours, page and accent chosen to match. ✦ Glass styles look their best on a stronger device; elsewhere they show without blur</string>
     <string name="glcn_style_kind_dark">Dark</string>

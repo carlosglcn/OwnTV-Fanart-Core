@@ -523,6 +523,8 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         val GLCN_BACK_TO_WINDOW = booleanPreferencesKey("glcn_back_to_window")
         val GLCN_AUTO_SKIP_INTRO = booleanPreferencesKey("glcn_auto_skip_intro")
         val GLCN_STYLE = stringPreferencesKey("glcn_style")
+        val GLCN_STYLE_MODE = intPreferencesKey("glcn_style_mode")
+        val GLCN_BACKDROP = intPreferencesKey("glcn_backdrop")
         val GLCN_REMOTE_V2 = booleanPreferencesKey("glcn_remote_v2")
         val GLCN_REMOTE_V3 = booleanPreferencesKey("glcn_remote_v3")
         val GLCN_UI_SOUNDS_DEFAULT_V2 = booleanPreferencesKey("glcn_ui_sounds_default_v2")
@@ -1095,7 +1097,7 @@ class SettingsRepository(private val context: Context, private val localeStore: 
         Keys.THEME_MODE, Keys.ACCENT, Keys.ACCENT_CUSTOM, Keys.FOCUS_HIGHLIGHT, Keys.GLCN_STYLE,
         Keys.CLOCK_TIME_COLOR, Keys.CLOCK_DATE_COLOR, Keys.CLOCK_WEATHER_COLOR,
     )
-    private val lookIntKeys get() = listOf(Keys.GLASS_SCOPE, Keys.GLASS_ALPHA)
+    private val lookIntKeys get() = listOf(Keys.GLASS_SCOPE, Keys.GLASS_ALPHA, Keys.GLCN_STYLE_MODE, Keys.GLCN_BACKDROP)
 
     private fun encodeLook(p: Preferences): String {
         val o = org.json.JSONObject()
@@ -1113,12 +1115,20 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     /** glcn: apply a ready-made style — its theme, its accent and (glass styles) the translucent surfaces;
      *  null goes back to the user's own choices, keeping what they are now. */
     suspend fun applyGlcnStyle(style: tv.own.owntv.core.theme.GlcnStyle?) {
-        context.dataStore.edit { p ->
-            if (style == null) { p.remove(Keys.GLCN_STYLE); return@edit }
-            val wasGlass = tv.own.owntv.core.theme.GlcnStyle.of(p[Keys.GLCN_STYLE])?.glass == true
+        context.dataStore.edit { p -> putStyle(p, style) }
+    }
+
+    private fun putStyle(p: MutablePreferences, style: tv.own.owntv.core.theme.GlcnStyle?, keepOwnAccent: Boolean = false) {
+        run {
+            if (style == null) { p.remove(Keys.GLCN_STYLE); return@run }
+            val before = tv.own.owntv.core.theme.GlcnStyle.of(p[Keys.GLCN_STYLE])
+            val wasGlass = before?.glass == true
+            // glcn: an accent the user set by hand (Personalise) survives the switch between a theme's two sides.
+            val ownAccent = keepOwnAccent && before != null && tv.own.owntv.core.theme.GlcnTheme.of(before) == tv.own.owntv.core.theme.GlcnTheme.of(style) &&
+                p[Keys.ACCENT_CUSTOM]?.equals(before.accentHex, ignoreCase = true) == false
             p[Keys.GLCN_STYLE] = style.name
             p[Keys.THEME_MODE] = (if (style.light) ThemeMode.LIGHT else ThemeMode.DARK).name
-            p[Keys.ACCENT_CUSTOM] = style.accentHex
+            if (!ownAccent) p[Keys.ACCENT_CUSTOM] = style.accentHex
             style.homeBackdrop?.let { p[Keys.GLCN_HOME_BACKDROP] = it }
             when {
                 style.glass -> p[Keys.GLASS_SCOPE] = tv.own.owntv.core.theme.GlassConfig.ON_BITS
@@ -1126,6 +1136,46 @@ class SettingsRepository(private val context: Context, private val localeStore: 
             }
         }
     }
+    /** glcn: Appearance › Mode — [tv.own.owntv.core.theme.GLCN_MODE_AUTO], DARK or LIGHT; null while never chosen. */
+    val glcnStyleMode: Flow<Int?> = prefsFlow { it[Keys.GLCN_STYLE_MODE] }
+
+    /** glcn: Appearance › Background ([tv.own.owntv.core.theme.GLCN_BACKDROP_THEME] unless chosen). */
+    val glcnBackdrop: Flow<Int> = prefsFlow { it[Keys.GLCN_BACKDROP] ?: tv.own.owntv.core.theme.GLCN_BACKDROP_THEME }
+    suspend fun setGlcnBackdrop(mode: Int) { context.dataStore.edit { it[Keys.GLCN_BACKDROP] = mode.coerceIn(0, 2) } }
+
+    /** glcn: a theme chosen in Appearance — shown on the side the mode asks for (never chosen: its night side). */
+    suspend fun applyGlcnTheme(theme: tv.own.owntv.core.theme.GlcnTheme, nowMs: Long = System.currentTimeMillis()) {
+        context.dataStore.edit { p -> putStyle(p, theme.style(lightFor(p[Keys.GLCN_STYLE_MODE], nowMs, current = null))) }
+    }
+
+    /** glcn: Appearance › Mode; the theme in use turns to the side it asks for at once. */
+    suspend fun setGlcnStyleMode(mode: Int, nowMs: Long = System.currentTimeMillis()) {
+        context.dataStore.edit { p ->
+            p[Keys.GLCN_STYLE_MODE] = mode.coerceIn(0, 2)
+            val now = tv.own.owntv.core.theme.GlcnStyle.of(p[Keys.GLCN_STYLE]) ?: return@edit
+            val theme = tv.own.owntv.core.theme.GlcnTheme.of(now) ?: return@edit
+            val want = theme.style(lightFor(mode, nowMs, now))
+            if (want != now) putStyle(p, want, keepOwnAccent = true)
+        }
+    }
+
+    /** glcn: in automatic mode, the theme's day or night side for this hour — called every few minutes. */
+    suspend fun syncGlcnStyle(nowMs: Long = System.currentTimeMillis()) {
+        val p = context.dataStore.data.first()
+        if (p[Keys.GLCN_STYLE_MODE] != tv.own.owntv.core.theme.GLCN_MODE_AUTO) return
+        val now = tv.own.owntv.core.theme.GlcnStyle.of(p[Keys.GLCN_STYLE]) ?: return
+        val theme = tv.own.owntv.core.theme.GlcnTheme.of(now) ?: return
+        val want = theme.style(tv.own.owntv.core.theme.GlcnTheme.isDay(nowMs))
+        if (want != now) context.dataStore.edit { e -> putStyle(e, want, keepOwnAccent = true) }
+    }
+
+    private fun lightFor(mode: Int?, nowMs: Long, current: tv.own.owntv.core.theme.GlcnStyle?): Boolean = when (mode) {
+        tv.own.owntv.core.theme.GLCN_MODE_AUTO -> tv.own.owntv.core.theme.GlcnTheme.isDay(nowMs)
+        tv.own.owntv.core.theme.GLCN_MODE_LIGHT -> true
+        tv.own.owntv.core.theme.GLCN_MODE_DARK -> false
+        else -> current?.light ?: false
+    }
+
     suspend fun setZapViews(mask: Int) { context.dataStore.edit { it[Keys.GLCN_ZAP_VIEWS] = mask.and(ZapViews.ALL).takeIf { m -> m != 0 } ?: ZapViews.DEFAULT } }
     suspend fun setZapPanel(mode: Int) { context.dataStore.edit { it[Keys.GLCN_ZAP_PANEL] = mode.coerceIn(0, 2) } }
 

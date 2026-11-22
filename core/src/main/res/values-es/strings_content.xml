@@ -859,4 +859,21 @@
         <item quantity="other">%1$s películas</item>
     </plurals>
     <string name="glcn_trakt_open_activate">Abrir trakt.tv/activate (código copiado)</string>
+    <string name="glcn_look_title">Aspecto</string>
+    <string name="glcn_look_desc">Tres decisiones: el tema, cuándo se pone claro u oscuro y qué hay detrás de las pantallas. Cada tema trae sus colores, su foco y su fondo</string>
+    <string name="glcn_look_theme">Tema</string>
+    <string name="glcn_look_mode">Modo</string>
+    <string name="glcn_look_mode_auto">Automático</string>
+    <string name="glcn_look_mode_dark">Oscuro</string>
+    <string name="glcn_look_mode_light">Claro</string>
+    <string name="glcn_look_mode_auto_desc">Claro de día, oscuro al anochecer</string>
+    <string name="glcn_look_backdrop">Fondo</string>
+    <string name="glcn_look_backdrop_plain">Liso</string>
+    <string name="glcn_look_backdrop_theme">Del tema</string>
+    <string name="glcn_look_backdrop_fanart">Fanart</string>
+    <string name="glcn_look_backdrop_fanart_desc">Los colores de la imagen enfocada</string>
+    <string name="glcn_look_customise">Personalizar</string>
+    <string name="glcn_look_customise_desc">Acento, foco y sonidos — solo si quieres cambiar algo del tema</string>
+    <string name="glcn_look_reset">Volver a como viene el tema</string>
+    <string name="glcn_look_older">Otros estilos (de versiones anteriores)</string>
 </resources>
