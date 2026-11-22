@@ -1058,7 +1058,9 @@ class SettingsRepository(private val context: Context, private val localeStore: 
     suspend fun setUiSounds(level: Int) { context.dataStore.edit { it[Keys.GLCN_UI_SOUNDS] = level.coerceIn(0, 2) } }
 
     /** glcn: a short chime as the app opens (the season's own while a seasonal theme is on). */
-    val startupSound: Flow<Boolean> = prefsFlow { it[Keys.GLCN_STARTUP_SOUND] ?: false }
+    // Until the switch is touched it follows the sound pack: Ember (7) comes with an opening tone of its own, the
+    // others open in silence as they always did.
+    val startupSound: Flow<Boolean> = prefsFlow { it[Keys.GLCN_STARTUP_SOUND] ?: (it[Keys.GLCN_UI_SOUND_STYLE] == EMBER_SOUNDS && (it[Keys.GLCN_UI_SOUNDS] ?: 1) > 0) }
     suspend fun setStartupSound(on: Boolean) { context.dataStore.edit { it[Keys.GLCN_STARTUP_SOUND] = on } }
 
     /** glcn: beside the channel list over the player — 0 the programme's picture, 1 the channel's coming schedule. */
@@ -4222,3 +4224,6 @@ object ZapViews {
 
 /** glcn: where each profile's colours are filed — see [SettingsRepository.swapLookForProfile]. */
 private const val LOOK_PREFIX = "glcn_look_"
+
+/** glcn: the Ember sound pack (ui sound style 7). */
+private const val EMBER_SOUNDS = 7
