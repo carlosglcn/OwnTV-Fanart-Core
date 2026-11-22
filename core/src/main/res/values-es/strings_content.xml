@@ -765,6 +765,7 @@
     <string name="glcn_live_banner_ficha">Ficha</string>
     <string name="glcn_live_banner_cine">Cine</string>
     <string name="glcn_live_banner_lateral">Lateral</string>
+    <string name="glcn_style_group_outline">Foco con contorno</string>
     <string name="glcn_style_group_classic">Clásicos</string>
     <string name="glcn_style_group_gradient">Degradados</string>
     <string name="glcn_style_kind_drift">Degradado · luces suaves que se mueven</string>
