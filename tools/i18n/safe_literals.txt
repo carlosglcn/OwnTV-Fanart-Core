@@ -4546,7 +4546,7 @@
 2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	s
 1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	tv.own.owntv.core.action.MATCH_DUE
 2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlertScheduler.kt	w
-2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlerts.kt	\0
+1	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlerts.kt	\0
 2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlerts.kt	a
 2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlerts.kt	aw
 2	technical	core/src/main/java/tv/own/owntv/core/sports/MatchAlerts.kt	h
@@ -5320,6 +5320,7 @@
 1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	wta
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Österreichische Bundesliga
 2	empty	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	\0
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	${match.sport.path}/${match.leagueSlug}
 1	protocol	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	${sport.path}/$id
 4	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	ab
 2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	alerts
@@ -5356,7 +5357,6 @@
 2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	t
 2	json	core/src/main/java/tv/own/owntv/core/sports/SportsConfig.kt	teams
 1	log	core/src/main/java/tv/own/owntv/core/sports/SportsGate.kt	paused
-1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsHomeRow.kt	\0
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsLeagues.kt	${league.key}#$teamId
 1	log	core/src/main/java/tv/own/owntv/core/sports/SportsLeagues.kt	OwnTV-Sports
 1	log	core/src/main/java/tv/own/owntv/core/sports/SportsLeagues.kt	team schedule failed code=${(e as? SportsHttpException)?.code ?: -1} error=${e.javaClass.simpleName}
