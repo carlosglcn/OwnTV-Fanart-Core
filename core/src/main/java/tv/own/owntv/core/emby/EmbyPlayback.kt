@@ -102,6 +102,8 @@ object EmbyPlayback {
                 .url("${ref.api}$path")
                 .header("X-Emby-Token", ref.token)
                 .header("X-Emby-Authorization", "Emby Client=\"OwnTV\", Device=\"OwnTV\", DeviceId=\"owntv-glcn\", Version=\"1.0\", Token=\"${ref.token}\"")
+                // glcn: Jellyfin reads the standard header ("MediaBrowser …"); newer versions turn the Emby ones off.
+                .header("Authorization", "MediaBrowser Client=\"OwnTV\", Device=\"OwnTV\", DeviceId=\"owntv-glcn\", Version=\"1.0\", Token=\"${ref.token}\"")
                 .post(body.toString().toRequestBody("application/json".toMediaType()))
                 .build()
             client.newCall(req).execute().use { r -> if (!r.isSuccessful) Log.w(TAG, "$path → HTTP ${r.code}") }
@@ -125,7 +127,9 @@ object EmbyPlayback {
     /** The user the token belongs to, from the server's list of sessions (this device's). */
     private fun sessionUser(ref: Ref): String? = runCatching {
         val req = Request.Builder().url("${ref.api}/Sessions?DeviceId=$DEVICE_ID")
-            .header("X-Emby-Token", ref.token).get().build()
+            .header("X-Emby-Token", ref.token)
+            .header("Authorization", "MediaBrowser Client=\"OwnTV\", Device=\"OwnTV\", DeviceId=\"$DEVICE_ID\", Version=\"1.0\", Token=\"${ref.token}\"")
+            .get().build()
         client.newCall(req).execute().use { r ->
             if (!r.isSuccessful) return@runCatching null
             val arr = org.json.JSONArray(r.body?.string().orEmpty())

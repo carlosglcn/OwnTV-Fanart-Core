@@ -2043,6 +2043,9 @@
 1	preference-key	core/src/main/java/tv/own/owntv/core/emby/ContinueDismissals.kt	s
 1	url	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${ref.api}/Sessions?DeviceId=$DEVICE_ID
 1	url	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	/Users/$user/PlayedItems/${ref.itemId}
+2	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Authorization
+1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	MediaBrowser Client="OwnTV", Device="OwnTV", DeviceId="$DEVICE_ID", Version="1.0", Token="${ref.token}"
+1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	MediaBrowser Client="OwnTV", Device="OwnTV", DeviceId="owntv-glcn", Version="1.0", Token="${ref.token}"
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	UserId
 3	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	X-Emby-Token
 1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	markPlayed: no user for the item
