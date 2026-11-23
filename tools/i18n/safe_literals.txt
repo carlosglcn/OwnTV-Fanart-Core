@@ -4588,7 +4588,7 @@
 1	json	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	first
 1	json	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	full_name
 1	json	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	gap
-6	json	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	id
+7	json	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	id
 1	json	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	iso
 7	json	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	name
 3	json	core/src/main/java/tv/own/owntv/core/sports/MotoGpSource.kt	no ranking
@@ -6169,8 +6169,10 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/subtitles/SubtitleTrackLabel.kt	·
 1	protocol	core/src/main/java/tv/own/owntv/core/subtitles/SubtitleTrackLabel.kt	…
 1	log	core/src/main/java/tv/own/owntv/core/sync/AutoRefresh.kt	OwnTVHome
+1	technical	core/src/main/java/tv/own/owntv/core/sync/AutoRefresh.kt	UTF-8
 1	technical	core/src/main/java/tv/own/owntv/core/sync/AutoRefresh.kt	auto_refresh
 1	log	core/src/main/java/tv/own/owntv/core/sync/AutoRefresh.kt	checkAutoRefresh epg sourceId=${src.id} mode=$mode — enqueuing
+1	log	core/src/main/java/tv/own/owntv/core/sync/AutoRefresh.kt	checkAutoRefresh epg sourceId=${src.id} — its playlist is switched off, skipped
 1	log	core/src/main/java/tv/own/owntv/core/sync/AutoRefresh.kt	checkAutoRefresh playlist sourceId=${source.id} mode=$mode — enqueuing
 1	log	core/src/main/java/tv/own/owntv/core/sync/AutoRefresh.kt	epgRefill check failed
 1	log	core/src/main/java/tv/own/owntv/core/sync/AutoRefresh.kt	epgRefill sourceId=${src.id} — synced before but guide is empty, re-fetching
@@ -6934,7 +6936,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#00517A
 1	technical	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#0E8F86
 1	technical	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#1A73E8
-1	technical	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#3D8A2B
+1	technical	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#1B8DA8
 1	technical	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#4FD1C5
 1	technical	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#51C6D9
 1	technical	core/src/main/java/tv/own/owntv/core/theme/GlcnStyle.kt	#5EEAD4

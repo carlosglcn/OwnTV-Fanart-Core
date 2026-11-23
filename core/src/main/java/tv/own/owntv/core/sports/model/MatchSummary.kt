@@ -29,6 +29,8 @@ data class MatchSummary(
     val stats: List<StatLine>,
     val lineups: List<Lineup>,
     val form: Map<String, List<FormGame>> = emptyMap(),
+    /** glcn: a race weekend's sessions, in order, this one among them (MotoGP: practice to race); empty elsewhere. */
+    val weekend: List<Match> = emptyList(),
 )
 
 data class StandingsRow(

@@ -39,7 +39,7 @@ enum class GlcnStyle(
     // page with navy ink by day — the green only as a fill there, never as text (it does not read on light).
     RIA_NOCHE(false, "#51C6D9", 0xFF061A26, 0xFF0A2A3C, 0xFFDDE8EA, 0xFF9FB8C2, 0xFFC3D6DC,
         gradient = listOf(0xFF0E5A7A, 0xFF35652A, 0xFF00517A, 0xFF061A26), motion = GLCN_MOTION_DRIFT, accent2Hex = "#8DC63F"),
-    RIA_DIA(true, "#00517A", 0xFFDDE8EA, 0xFFFFFFFF, 0xFF0B2A3A, 0xFF3F5F6E, 0xFF1E3B4A, accent2Hex = "#3D8A2B"),
+    RIA_DIA(true, "#00517A", 0xFFDDE8EA, 0xFFFFFFFF, 0xFF0B2A3A, 0xFF3F5F6E, 0xFF1E3B4A, accent2Hex = "#1B8DA8"),
     // Brasa: warm graphite, an amber-to-coral accent and outlined focus.
     BRASA(false, "#F5A524", 0xFF121110, 0xFF1B1917, 0xFFF4F1EC, 0xFFB9B2A8, 0xFFD9D3CA, accent2Hex = "#F0603A"),
     // Alba: Brasa's light sister — warm ivory, an orange-to-raspberry accent and the same outlined focus.

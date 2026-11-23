@@ -1005,6 +1005,8 @@
     <string name="glcn_pi_hide_technical">Hide technical data</string>
     <string name="glcn_pi_no_guide">The guide has nothing for this channel right now</string>
     <string name="glcn_sports_tab_draw">Draw</string>
+    <!-- Translators: Race page tab: the race weekend's sessions (practice, qualifying, sprint, race) with their times. -->
+    <string name="glcn_sports_tab_weekend">Weekend</string>
     <string name="glcn_sports_draw_loading">Loading the draw…</string>
     <string name="glcn_sports_draw_empty">No draw for this tournament yet</string>
     <string name="glcn_share_log_title">Send the report to your phone</string>

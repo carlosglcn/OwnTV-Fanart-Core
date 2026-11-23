@@ -654,6 +654,7 @@
     <string name="glcn_pi_hide_technical">Ocultar datos técnicos</string>
     <string name="glcn_pi_no_guide">La guía no tiene nada de este canal ahora mismo</string>
     <string name="glcn_sports_tab_draw">Cuadro</string>
+    <string name="glcn_sports_tab_weekend">Fin de semana</string>
     <string name="glcn_sports_draw_loading">Cargando el cuadro…</string>
     <string name="glcn_sports_draw_empty">Aún no hay cuadro de este torneo</string>
     <string name="glcn_share_log_title">Pasar el informe al móvil</string>

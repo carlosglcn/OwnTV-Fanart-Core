@@ -82,7 +82,15 @@ class AutoRefresh(
         // --- EPG sources ---
         val epgModes = settings.epgAutoRefresh.first()
         if (epgModes.isNotEmpty()) {
+            // glcn: a guide made from a playlist (its xmltv.php, its url-tvg) has an Auto refresh of its own, so with the
+            // playlist switched off its guide still downloaded on every start — the "syncs on open" users saw.
+            val playlists = sourceRepository.observeSources(pid).first()
+            val (off, on) = playlists.partition { tv.own.owntv.core.repository.SourceGlcnPrefs.isDisabled(it.id) }
             epgSourceStore.getAll().forEach { src ->
+                if (off.any { guideOf(it, src.url) } && on.none { guideOf(it, src.url) }) {
+                    Log.d(TAG, "checkAutoRefresh epg sourceId=${src.id} — its playlist is switched off, skipped")
+                    return@forEach
+                }
                 val mode = epgModes[src.id] ?: EpgRefresh.OFF
                 if (shouldRefreshEpg(mode, src.lastSyncAt, nowMs, includeStartup)) {
                     val base = epgDao.countForSources(listOf(src.id))
@@ -136,6 +144,20 @@ class AutoRefresh(
         // Marked regardless: a failed check must not retry on every launch forever, and a failed
         // *sync* is already retried by the scheduler's own policy.
         settings.markEpgRefillChecked()
+    }
+
+    /**
+     * glcn: whether the guide at [guideUrl] is [source]'s own: its stored guide address, or a feed on the same server
+     * that names the same account (Xtream's xmltv.php?username=…).
+     */
+    private fun guideOf(source: tv.own.owntv.core.database.entity.SourceEntity, guideUrl: String): Boolean {
+        val own = source.epgUrl?.trim()
+        if (!own.isNullOrEmpty() && own.equals(guideUrl.trim(), ignoreCase = true)) return true
+        val host = runCatching { java.net.URI(source.url.trim()).host }.getOrNull()?.lowercase() ?: return false
+        val guideHost = runCatching { java.net.URI(guideUrl.trim()).host }.getOrNull()?.lowercase() ?: return false
+        if (host != guideHost) return false
+        val user = source.username?.takeIf { it.isNotBlank() } ?: return false
+        return guideUrl.contains(java.net.URLEncoder.encode(user, "UTF-8")) || guideUrl.contains(user)
     }
 
     /**

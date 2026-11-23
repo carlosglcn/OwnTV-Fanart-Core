@@ -62,7 +62,15 @@ class MotoGpSource(client: OkHttpClient) {
      */
     suspend fun summary(match: Match): MatchSummary {
         val order = runCatching { classificationOf(match) }.getOrElse { if (it is CancellationException) throw it else emptyList() }
-        return MatchSummary(if (order.isEmpty()) match else match.copy(competitors = order), emptyList(), emptyList(), emptyList())
+        // The weekend's other sessions are the ones the calendar already read for this event (ids are "<event>-<n>").
+        val eventId = match.id.substringBeforeLast('-')
+        val weekend = (sessions[eventId]?.second ?: runCatching {
+            // Opened from the stored board, before this process read the calendar: the event's sessions once.
+            val league = SportsCatalog.league(match.feed) ?: return@runCatching emptyList()
+            val year = Instant.ofEpochMilli(match.startMs).atZone(zone).year
+            eventsOf(year).firstOrNull { it.optString("id") == eventId }?.let { sessionsOf(league, it) }.orEmpty()
+        }.getOrElse { if (it is CancellationException) throw it else emptyList() }).sortedBy { it.startMs }
+        return MatchSummary(if (order.isEmpty()) match else match.copy(competitors = order), emptyList(), emptyList(), emptyList(), weekend = weekend)
     }
 
     /** glcn: the riders' championship. */
