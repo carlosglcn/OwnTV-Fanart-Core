@@ -169,7 +169,6 @@
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Subtitle
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Type
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	X-Emby-Authorization
-2	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	X-Emby-Token
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	^(https?://.+?)/Videos/([0-9A-Za-z]+)/stream[^?]*\\?(?:.*&)?api_key=([^&]+)
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	application/json
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	ass

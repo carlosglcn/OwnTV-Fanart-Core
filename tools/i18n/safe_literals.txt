@@ -2041,6 +2041,12 @@
 1	preference-key	core/src/main/java/tv/own/owntv/core/emby/ContinueDismissals.kt	glcn_continue_dismissed
 1	preference-key	core/src/main/java/tv/own/owntv/core/emby/ContinueDismissals.kt	m
 1	preference-key	core/src/main/java/tv/own/owntv/core/emby/ContinueDismissals.kt	s
+1	url	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${ref.api}/Sessions?DeviceId=$DEVICE_ID
+1	url	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	/Users/$user/PlayedItems/${ref.itemId}
+1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	UserId
+3	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	X-Emby-Token
+1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	markPlayed: no user for the item
+1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	owntv-glcn
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTmdb.kt	a
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTmdb.kt	f
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTmdb.kt	glcn_emby_tmdb.json
@@ -6323,7 +6329,7 @@
 1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	amazon prime video
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	amc
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	antena 3
-2	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	api
+3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	api
 1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	apple original films
 1	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	apple studios
 2	log	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	apple tv
@@ -6403,10 +6409,10 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	ssa
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	starz
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	telecinco
-2	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	token
+3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	token
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	truehd
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	tve
-2	json	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	user
+3	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	user
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	w300
 1	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	yyyy-MM-dd'T'HH:mm:ss
 2	technical	core/src/main/java/tv/own/owntv/core/sync/EmbyBridge.kt	|

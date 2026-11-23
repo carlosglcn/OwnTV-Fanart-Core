@@ -42,7 +42,10 @@ object TraktSync {
         dep<Context>()?.getSharedPreferences(FILE, Context.MODE_PRIVATE)
 
     fun watchedMovie(profileId: Long, movie: MovieEntity) {
-        if (!Trakt.available || !Trakt.connected(profileId) || EmbyPlayback.isEmbyUrl(movie.streamUrl)) return
+        // glcn: from Emby/Jellyfin it is the server that is told — it marks the film watched, and its Trakt plugin
+        // (if any) passes that on; telling Trakt here as well would count it twice.
+        if (EmbyPlayback.isEmbyUrl(movie.streamUrl)) { EmbyPlayback.markPlayed(movie.streamUrl); return }
+        if (!Trakt.available || !Trakt.connected(profileId)) return
         scope.launch {
             val tmdb = runCatching { dep<MetadataRepository>()?.resolveMovie(movie)?.tmdbId }.getOrNull()?.takeIf { it > 0 } ?: return@launch
             Trakt.addMovieToHistory(profileId, tmdb)
@@ -50,7 +53,8 @@ object TraktSync {
     }
 
     fun watchedEpisode(profileId: Long, series: SeriesEntity, episode: EpisodeEntity) {
-        if (!Trakt.available || !Trakt.connected(profileId) || EmbyPlayback.isEmbyUrl(episode.streamUrl)) return
+        if (EmbyPlayback.isEmbyUrl(episode.streamUrl)) { EmbyPlayback.markPlayed(episode.streamUrl); return }
+        if (!Trakt.available || !Trakt.connected(profileId)) return
         if (episode.seasonNumber <= 0 || episode.episodeNumber <= 0) return
         scope.launch {
             val tmdb = runCatching { dep<MetadataRepository>()?.resolveSeries(series)?.tmdbId }.getOrNull()?.takeIf { it > 0 } ?: return@launch

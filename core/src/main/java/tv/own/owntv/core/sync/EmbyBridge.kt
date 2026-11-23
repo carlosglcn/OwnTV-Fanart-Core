@@ -503,7 +503,18 @@ internal object EmbyBridge {
             mem.remove(key)
             prefs()?.edit()?.remove(diskKey(key))?.apply()
         }
+
+        /** The kept sign-in that holds [token] on [api], if any — in memory or on disk. */
+        fun byToken(api: String, token: String): Session? =
+            mem.values.firstOrNull { it.token == token && it.api == api }
+                ?: prefs()?.all?.values?.firstNotNullOfOrNull { raw ->
+                    runCatching { JSONObject(raw as String).let { Session(it.getString("api"), it.getString("token"), it.getString("user")) } }
+                        .getOrNull()?.takeIf { it.token == token && it.api == api }
+                }
     }
+
+    /** glcn: the user a stream's token was signed in as (for marking an item played), from the kept sign-ins. */
+    fun userFor(api: String, token: String): String? = sessions.byToken(api, token)?.userId
     private const val SESSION_PREFS = "glcn_emby_sessions"
 
     /**

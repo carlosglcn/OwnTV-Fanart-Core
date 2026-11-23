@@ -108,6 +108,33 @@ object EmbyPlayback {
         }.onFailure { Log.w(TAG, "$path failed", it) }
     }
 
+    /**
+     * glcn: OwnTV counts the item watched (an episode in its end credits, say) — the server is told so outright.
+     * Emby only marks an item played from a stopped report past its own share (90 %), which leaving in the credits or
+     * going on to the next episode does not reach; a played mark is also what its Trakt plugin passes on.
+     */
+    fun markPlayed(url: String?) {
+        val ref = parse(url) ?: return
+        scope.launch {
+            val user = tv.own.owntv.core.sync.EmbyBridge.userFor(ref.api, ref.token) ?: sessionUser(ref)
+            if (user == null) { Log.w(TAG, "markPlayed: no user for the item"); return@launch }
+            postNow(ref, "/Users/$user/PlayedItems/${ref.itemId}", JSONObject())
+        }
+    }
+
+    /** The user the token belongs to, from the server's list of sessions (this device's). */
+    private fun sessionUser(ref: Ref): String? = runCatching {
+        val req = Request.Builder().url("${ref.api}/Sessions?DeviceId=$DEVICE_ID")
+            .header("X-Emby-Token", ref.token).get().build()
+        client.newCall(req).execute().use { r ->
+            if (!r.isSuccessful) return@runCatching null
+            val arr = org.json.JSONArray(r.body?.string().orEmpty())
+            (0 until arr.length()).firstNotNullOfOrNull { arr.optJSONObject(it)?.optString("UserId")?.takeIf { u -> u.isNotBlank() } }
+        }
+    }.getOrNull()
+
+    private const val DEVICE_ID = "owntv-glcn"
+
     /** One external subtitle file the server holds for an item. */
     data class Subtitle(val url: String, val title: String, val lang: String?)
 
