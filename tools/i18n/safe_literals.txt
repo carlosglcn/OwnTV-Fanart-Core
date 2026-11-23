@@ -1426,11 +1426,14 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	SELECT tmdbId FROM metadata_cache WHERE type = 'movie' AND castJson LIKE '%"' || :name || '"%' LIMIT 200
 1	technical	core/src/main/java/tv/own/owntv/core/database/dao/MetadataDao.kt	UPDATE metadata_cache SET updatedAt = 0 WHERE trailerKey IS NOT NULL
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	(SELECT rowid FROM movies_fts WHERE movies_fts MATCH :ftsQuery)
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	AND (categoryId IS NULL OR categoryId NOT IN (:excluded)) ORDER BY addedAt DESC, id DESC LIMIT :limit
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	AND (categoryId IS NULL OR categoryId NOT IN (:excluded)) ORDER BY addedAt DESC, sortOrder DESC, id DESC LIMIT :limit
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	AND (categoryId IS NULL OR categoryId NOT IN (:excluded)) ORDER BY rating DESC, name ASC LIMIT :limit
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	AND (categoryId IS NULL OR categoryId NOT IN (:excludedCategoryIds))
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	AND (m.categoryId IS NULL OR m.categoryId NOT IN (:excluded))
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	AND (m.categoryId IS NULL OR m.categoryId NOT IN (:excluded)) ORDER BY t.trendingRank, t.position LIMIT :limit
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	AND (name LIKE '%4K%' OR name LIKE '%UHD%' OR name LIKE '%2160%')))
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	AND (qualityRank >= 4 OR categoryId IN (SELECT id FROM categories WHERE sourceId IN (:sourceIds)
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	AND f.mediaType = 'MOVIE' AND m.sourceId IN (:sourceIds) AND (m.categoryId IS NULL OR m.categoryId NOT IN (:excluded))
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	AND h.mediaType = 'MOVIE' AND m.sourceId IN (:sourceIds) AND (m.categoryId IS NULL OR m.categoryId NOT IN (:excluded))
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	AND id IN (SELECT rowid FROM movies_fts WHERE movies_fts MATCH :ftsQuery) ORDER BY nameKey ASC, name ASC LIMIT :limit
@@ -1449,6 +1452,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	LEFT JOIN watch_history h ON h.itemId = m.id AND h.mediaType = 'MOVIE' AND h.profileId = :profileId
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	ORDER BY (CASE WHEN o.position IS NULL THEN 1 ELSE 0 END), o.position, f.addedAt DESC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	ORDER BY (CASE WHEN o.position IS NULL THEN 1 ELSE 0 END), o.position, f.addedAt DESC LIMIT :limit
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	ORDER BY addedAt DESC, id DESC LIMIT :limit
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	ORDER BY p.updatedAt DESC
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	ORDER BY p.updatedAt DESC LIMIT :limit
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	ORDER BY sortOrder ASC, name ASC, id ASC
@@ -1468,7 +1472,9 @@
 1	technical	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId = :sourceId AND remoteId IS NULL AND name IN (:names)
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId = :sourceId AND titleSignature = '' LIMIT :limit
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds)
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND (categoryId IS NULL OR categoryId NOT IN (:excluded))
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND COALESCE(year, parsedYear) >= :fromYear
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND addedAt >= :since
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND name = :name COLLATE NOCASE ORDER BY sourceId LIMIT 1
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND nameKey LIKE '%' || :key || '%' ORDER BY addedAt DESC, sortOrder DESC, id DESC
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/MovieDao.kt	SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND nameKey LIKE '%' || :key || '%' ORDER BY nameKey ASC, name ASC
@@ -1635,9 +1641,12 @@
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	(p2.durationMs > 0 AND p2.positionMs >= p2.durationMs * 0.95 AND EXISTS (SELECT 1 FROM episodes e3
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	(p2.positionMs >= 10000 AND p2.durationMs > 0 AND p2.positionMs < p2.durationMs * 0.95) OR
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	(seasonNumber = :season AND episodeNumber > :episode)) ORDER BY seasonNumber, episodeNumber LIMIT 1
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	AND (categoryId IS NULL OR categoryId NOT IN (:excluded)) ORDER BY addedAt DESC, id DESC LIMIT :limit
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	AND (categoryId IS NULL OR categoryId NOT IN (:excluded)) ORDER BY addedAt DESC, sortOrder DESC, id DESC LIMIT :limit
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	AND (categoryId IS NULL OR categoryId NOT IN (:excluded)) ORDER BY rating DESC, name ASC LIMIT :limit
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	AND (categoryId IS NULL OR categoryId NOT IN (:excludedCategoryIds))
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	AND (name LIKE '%4K%' OR name LIKE '%UHD%' OR name LIKE '%2160%')))
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	AND (qualityRank >= 4 OR categoryId IN (SELECT id FROM categories WHERE sourceId IN (:sourceIds)
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	AND (s.categoryId IS NULL OR s.categoryId NOT IN (:excluded))
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	AND (s.categoryId IS NULL OR s.categoryId NOT IN (:excluded)) ORDER BY t.trendingRank, t.position LIMIT :limit
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	AND e.seriesId IN (:seriesIds) ORDER BY p.updatedAt DESC
@@ -1665,6 +1674,7 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	LEFT JOIN watch_history h ON h.itemId = s.id AND h.mediaType = 'SERIES' AND h.profileId = :profileId
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	ORDER BY (CASE WHEN o.position IS NULL THEN 1 ELSE 0 END), o.position, f.addedAt DESC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	ORDER BY (CASE WHEN o.position IS NULL THEN 1 ELSE 0 END), o.position, f.addedAt DESC LIMIT :limit
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	ORDER BY addedAt DESC, id DESC LIMIT :limit
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	ORDER BY lp.lastAt DESC
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	ORDER BY lp.lastAt DESC LIMIT :limit
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	ORDER BY sortOrder ASC, name ASC, id ASC
@@ -1687,7 +1697,9 @@
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId = :sourceId AND remoteId = :remoteId LIMIT 1
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId = :sourceId AND titleSignature = '' LIMIT :limit
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds)
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds) AND (categoryId IS NULL OR categoryId NOT IN (:excluded))
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds) AND COALESCE(year, parsedYear) >= :fromYear
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds) AND addedAt >= :since
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds) AND name = :name COLLATE NOCASE ORDER BY sourceId LIMIT 1
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds) AND nameKey LIKE '%' || :key || '%' ORDER BY addedAt DESC, sortOrder DESC, id DESC
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/SeriesDao.kt	SELECT * FROM series WHERE sourceId IN (:sourceIds) AND nameKey LIKE '%' || :key || '%' ORDER BY nameKey ASC, name ASC

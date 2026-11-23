@@ -344,6 +344,22 @@ interface MovieDao {
     )
     fun observeShelfRecent(sourceIds: List<Long>, excluded: List<Long>, fromYear: Int, limit: Int): Flow<List<MovieEntity>>
 
+    /** glcn: what the list added in the last days ([since], ms), the newest first (lists that give no date: none). */
+    @Query(
+        "SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND addedAt >= :since " +
+            "AND (categoryId IS NULL OR categoryId NOT IN (:excluded)) ORDER BY addedAt DESC, id DESC LIMIT :limit",
+    )
+    fun observeShelfAdded(sourceIds: List<Long>, excluded: List<Long>, since: Long, limit: Int): Flow<List<MovieEntity>>
+
+    /** glcn: in 4K or better — by the title's own mark, or filed in a group that says 4K/UHD — the newest first. */
+    @Query(
+        "SELECT * FROM movies WHERE sourceId IN (:sourceIds) AND (categoryId IS NULL OR categoryId NOT IN (:excluded)) " +
+            "AND (qualityRank >= 4 OR categoryId IN (SELECT id FROM categories WHERE sourceId IN (:sourceIds) " +
+            "AND (name LIKE '%4K%' OR name LIKE '%UHD%' OR name LIKE '%2160%'))) " +
+            "ORDER BY addedAt DESC, id DESC LIMIT :limit",
+    )
+    fun observeShelf4k(sourceIds: List<Long>, excluded: List<Long>, limit: Int): Flow<List<MovieEntity>>
+
     @Query(
         "SELECT m.* FROM trending_items t INNER JOIN movies m ON m.id = t.providerItemId " +
             "WHERE t.mediaType = 'MOVIE' AND t.sourceId IN (:sourceIds) " +
