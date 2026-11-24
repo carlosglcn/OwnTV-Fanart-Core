@@ -330,6 +330,12 @@ object PlaybackErrorLog {
                 appendLine(it)
                 appendLine()
             }
+            // glcn: what was sent to Emby/Jellyfin (playing, stopped, watched) and what it answered.
+            tv.own.owntv.core.emby.EmbyPlayback.diaryText().takeIf { it.isNotBlank() }?.let {
+                appendLine("--- emby / jellyfin ---")
+                appendLine(it)
+                appendLine()
+            }
             read(appContext).forEach { e ->
                 appendLine("[${stamp.format(java.util.Date(e.atMs))}] ${e.kind} · ${e.engine} · ${if (e.live) "live" else "vod"}")
                 e.reason?.let { appendLine("  reason: $it") }

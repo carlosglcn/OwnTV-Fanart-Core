@@ -2041,14 +2041,25 @@
 1	preference-key	core/src/main/java/tv/own/owntv/core/emby/ContinueDismissals.kt	glcn_continue_dismissed
 1	preference-key	core/src/main/java/tv/own/owntv/core/emby/ContinueDismissals.kt	m
 1	preference-key	core/src/main/java/tv/own/owntv/core/emby/ContinueDismissals.kt	s
+2	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	\0
+1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	$1=…
+1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	$path item=${ref.itemId} → ${it.javaClass.simpleName}
+1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${path.substringBeforeLast("/${ref.itemId}")} item=${ref.itemId} → ${r.code}
 1	url	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${ref.api}/Sessions?DeviceId=$DEVICE_ID
+1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	(?i)(api_key|ApiKey|X-Emby-Token)=[^&]+
+1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	/${ref.itemId}
+1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	/Progress
 1	url	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	/Users/$user/PlayedItems/${ref.itemId}
+1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	/Videos/
 2	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Authorization
+1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	HH:mm:ss
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	MediaBrowser Client="OwnTV", Device="OwnTV", DeviceId="$DEVICE_ID", Version="1.0", Token="${ref.token}"
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	MediaBrowser Client="OwnTV", Device="OwnTV", DeviceId="owntv-glcn", Version="1.0", Token="${ref.token}"
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	UserId
 3	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	X-Emby-Token
+1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	markPlayed item=${ref.itemId} → no user
 1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	markPlayed: no user for the item
+1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	not read as Emby: ${redact(url)}
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	owntv-glcn
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTmdb.kt	a
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTmdb.kt	f
@@ -8685,6 +8696,7 @@
 1	file-path	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	${Environment.DIRECTORY_DOWNLOADS}/$EXPORT_NAME
 1	sql	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	${MediaStore.MediaColumns.DISPLAY_NAME}=? AND ${MediaStore.MediaColumns.RELATIVE_PATH}=?
 1	sql	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	${MediaStore.MediaColumns._ID} DESC
+1	log	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	--- emby / jellyfin ---
 1	log	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	--- how the app last closed ---
 1	technical	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	--- last crash ---
 1	technical	player-core/src/main/java/tv/own/owntv/player/PlaybackErrorLog.kt	--- live diagnostics (most recent) ---

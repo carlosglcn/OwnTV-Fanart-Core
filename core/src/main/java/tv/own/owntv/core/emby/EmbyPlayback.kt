@@ -65,6 +65,8 @@ object EmbyPlayback {
     fun onUrlChanged(url: String?, position: () -> Long, playing: () -> Boolean) {
         runCatching { EmbyTrickplay.onUrlChanged(url) } // glcn: the seek-bar thumbnails follow the stream
         val next = parse(url)
+        // glcn: a stream that looks like a server's but is not read as one is why nothing would reach it.
+        if (next == null && url != null && url.contains("/Videos/", ignoreCase = true)) note("not read as Emby: ${redact(url)}")
         val prev = current
         if (prev != null && prev == next) return
         if (prev != null) {
@@ -106,9 +108,29 @@ object EmbyPlayback {
                 .header("Authorization", "MediaBrowser Client=\"OwnTV\", Device=\"OwnTV\", DeviceId=\"owntv-glcn\", Version=\"1.0\", Token=\"${ref.token}\"")
                 .post(body.toString().toRequestBody("application/json".toMediaType()))
                 .build()
-            client.newCall(req).execute().use { r -> if (!r.isSuccessful) Log.w(TAG, "$path → HTTP ${r.code}") }
-        }.onFailure { Log.w(TAG, "$path failed", it) }
+            client.newCall(req).execute().use { r ->
+                if (!r.isSuccessful) Log.w(TAG, "$path → HTTP ${r.code}")
+                // Progress every 15 s would fill the diary: only its failures go in.
+                if (!path.endsWith("/Progress") || !r.isSuccessful) note("${path.substringBeforeLast("/${ref.itemId}")} item=${ref.itemId} → ${r.code}")
+            }
+        }.onFailure { Log.w(TAG, "$path failed", it); note("$path item=${ref.itemId} → ${it.javaClass.simpleName}") }
     }
+
+    /** glcn: the last reports sent to the server and what it answered, for the playback report. */
+    private val diary = ArrayDeque<String>()
+
+    private fun note(line: String) = synchronized(diary) {
+        diary.addLast(java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.US).format(java.util.Date()) + " " + line)
+        while (diary.size > DIARY_LINES) diary.removeFirst()
+    }
+
+    /** glcn: the diary as text (empty when nothing went to a server). */
+    fun diaryText(): String = synchronized(diary) { diary.joinToString("\n") }
+
+    /** The address without its key. */
+    private fun redact(url: String): String = url.replace(Regex("""(?i)(api_key|ApiKey|X-Emby-Token)=[^&]+"""), "$1=…").take(200)
+
+    private const val DIARY_LINES = 40
 
     /**
      * glcn: OwnTV counts the item watched (an episode in its end credits, say) — the server is told so outright.
@@ -119,7 +141,7 @@ object EmbyPlayback {
         val ref = parse(url) ?: return
         scope.launch {
             val user = tv.own.owntv.core.sync.EmbyBridge.userFor(ref.api, ref.token) ?: sessionUser(ref)
-            if (user == null) { Log.w(TAG, "markPlayed: no user for the item"); return@launch }
+            if (user == null) { Log.w(TAG, "markPlayed: no user for the item"); note("markPlayed item=${ref.itemId} → no user"); return@launch }
             postNow(ref, "/Users/$user/PlayedItems/${ref.itemId}", JSONObject())
         }
     }
