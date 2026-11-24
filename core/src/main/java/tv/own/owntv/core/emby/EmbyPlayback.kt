@@ -34,6 +34,14 @@ object EmbyPlayback {
 
     private data class Ref(val api: String, val itemId: String, val token: String)
 
+    /**
+     * glcn: the play session the server opened for the item (its PlaybackInfo) — Emby refuses a start or a progress
+     * report without one (HTTP 400), so the item never showed as playing, nor was marked watched, nor reached Trakt.
+     */
+    private data class Play(val sessionId: String, val sourceId: String?)
+
+    @Volatile private var play: Play? = null
+
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private val client by lazy {
         tv.own.owntv.core.network.SharedHttp.builder().connectTimeout(8, TimeUnit.SECONDS).readTimeout(15, TimeUnit.SECONDS).build()
@@ -80,9 +88,11 @@ object EmbyPlayback {
         }
         current = next
         lastPositionMs = 0L
-        if (next == null) return
-        post(next, "/Sessions/Playing", body(next, 0L, paused = false).put("PlayMethod", "DirectPlay").put("CanSeek", true))
+        if (next == null) { play = null; return }
+        play = null
         ticker = scope.launch {
+            play = playbackInfo(next)
+            postNow(next, "/Sessions/Playing", body(next, 0L, paused = false).put("PlayMethod", "DirectPlay").put("CanSeek", true))
             while (isActive) {
                 delay(15_000)
                 val pos = runCatching { position() }.getOrDefault(lastPositionMs)
@@ -97,6 +107,27 @@ object EmbyPlayback {
         .put("ItemId", ref.itemId)
         .put("PositionTicks", positionMs * 10_000L)
         .put("IsPaused", paused)
+        .also { b -> play?.let { p -> b.put("PlaySessionId", p.sessionId); p.sourceId?.let { b.put("MediaSourceId", it) } } }
+
+    /** The server's play session and media source for [ref] (what its own apps ask before playing); a made-up session id if it will not say. */
+    private fun playbackInfo(ref: Ref): Play {
+        val fromServer = runCatching {
+            val user = tv.own.owntv.core.sync.EmbyBridge.userFor(ref.api, ref.token)
+            val req = Request.Builder().url("${ref.api}/Items/${ref.itemId}/PlaybackInfo" + (user?.let { "?UserId=$it" } ?: String()))
+                .header("X-Emby-Token", ref.token)
+                .header("X-Emby-Authorization", "Emby Client=\"OwnTV\", Device=\"OwnTV\", DeviceId=\"$DEVICE_ID\", Version=\"1.0\", Token=\"${ref.token}\"")
+                .post("{}".toRequestBody("application/json".toMediaType()))
+                .build()
+            client.newCall(req).execute().use { r ->
+                if (!r.isSuccessful) { note("PlaybackInfo item=${ref.itemId} → ${r.code}"); return@runCatching null }
+                val o = JSONObject(r.body?.string().orEmpty())
+                val session = o.optString("PlaySessionId").takeIf { it.isNotBlank() } ?: return@runCatching null
+                val source = o.optJSONArray("MediaSources")?.optJSONObject(0)?.optString("Id")?.takeIf { it.isNotBlank() }
+                Play(session, source)
+            }
+        }.getOrNull()
+        return fromServer ?: Play(java.util.UUID.randomUUID().toString().replace("-", ""), null)
+    }
 
     private fun post(ref: Ref, path: String, body: JSONObject) {
         scope.launch { postNow(ref, path, body) }
@@ -115,7 +146,8 @@ object EmbyPlayback {
             client.newCall(req).execute().use { r ->
                 if (!r.isSuccessful) Log.w(TAG, "$path → HTTP ${r.code}")
                 // Progress every 15 s would fill the diary: only its failures go in.
-                if (!path.endsWith("/Progress") || !r.isSuccessful) note("${path.substringBeforeLast("/${ref.itemId}")} item=${ref.itemId} → ${r.code}")
+                val why = if (r.isSuccessful) String() else runCatching { r.body?.string().orEmpty().replace(Regex("\\s+"), " ").take(160) }.getOrDefault(String())
+                if (!path.endsWith("/Progress") || !r.isSuccessful) note("${path.substringBeforeLast("/${ref.itemId}")} item=${ref.itemId} → ${r.code}${if (why.isNotBlank()) " ($why)" else String()}")
             }
         }.onFailure { Log.w(TAG, "$path failed", it); note("$path item=${ref.itemId} → ${it.javaClass.simpleName}") }
     }

@@ -142,6 +142,7 @@
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	$path failed
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	$path → HTTP ${r.code}
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	$title (Emby)
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${path.substringBeforeLast("/${ref.itemId}")} item=${ref.itemId} → ${r.code}${if (why.isNotBlank()) " ($why)" else String()}
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${ref.api}$path
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${ref.api}/Items/${ref.itemId}/Images/Primary?maxWidth=$maxWidth&api_key=${ref.token}
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${ref.api}/Items/${ref.itemId}/PlaybackInfo?api_key=${ref.token}
@@ -156,21 +157,18 @@
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Emby $index
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Emby Client="OwnTV", Device="OwnTV", DeviceId="owntv-glcn", Version="1.0", Token="${ref.token}"
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	EmbyPlayback
-1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Id
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Index
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	IsExternal
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	IsPaused
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	ItemId
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Language
-1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	MediaSources
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	MediaStreams
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	PlayMethod
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	PositionTicks
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Subtitle
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	Type
-1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	X-Emby-Authorization
+1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	\\s+
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	^(https?://.+?)/Videos/([0-9A-Za-z]+)/stream[^?]*\\?(?:.*&)?api_key=([^&]+)
-1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	application/json
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	ass
 4	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	srt
 1	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	ssa
