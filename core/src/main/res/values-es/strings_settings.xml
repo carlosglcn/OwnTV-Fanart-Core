@@ -1279,6 +1279,8 @@
     <string name="local_sync_device_with_code"><xliff:g id="name">%1$s</xliff:g> (<xliff:g id="code">%2$s</xliff:g>)</string>
     <string name="local_sync_profile_note">Solo se sincroniza el perfil en uso: <xliff:g id="profile">%1$s</xliff:g> aquí, con el perfil en uso en el otro dispositivo.</string>
     <string name="local_auto_sync_title">Sincronización automática</string>
+    <string name="auto_sync_title">Sincronizar automáticamente</string>
+    <string name="auto_sync_description">Mientras la app está abierta, mantiene al día favoritos, historial y Seguir viendo con tus dispositivos vinculados.</string>
     <string name="local_auto_sync_for_device">Qué sincroniza este dispositivo por sí solo con <xliff:g id="device">%1$s</xliff:g> y con qué frecuencia.</string>
     <string name="local_auto_sync_enable">Sincronización automática con este dispositivo</string>
     <string name="local_auto_sync_enable_hint">Abre también Sincronización local en el otro dispositivo: se le pedirá que lo permita.</string>
