@@ -67,6 +67,10 @@ object EmbyPlayback {
         val next = parse(url)
         // glcn: a stream that looks like a server's but is not read as one is why nothing would reach it.
         if (next == null && url != null && url.contains("/Videos/", ignoreCase = true)) note("not read as Emby: ${redact(url)}")
+        // Every other stream by its server alone (no path: a list's addresses carry its login) — a film from the server
+        // that shows here as another host is being played from a copy or through a proxy, and the server never hears.
+        else if (next == null && url != null) runCatching { java.net.URI(url).let { "${it.scheme}://${it.host}:${it.port}" } }.getOrNull()?.let { if (it != lastHost) { lastHost = it; note("stream from $it (not a server item)") } }
+        if (next != null) note("stream item=${next.itemId} on ${next.api}")
         val prev = current
         if (prev != null && prev == next) return
         if (prev != null) {
@@ -115,6 +119,8 @@ object EmbyPlayback {
             }
         }.onFailure { Log.w(TAG, "$path failed", it); note("$path item=${ref.itemId} → ${it.javaClass.simpleName}") }
     }
+
+    @Volatile private var lastHost: String? = null
 
     /** glcn: the last reports sent to the server and what it answered, for the playback report. */
     private val diary = ArrayDeque<String>()

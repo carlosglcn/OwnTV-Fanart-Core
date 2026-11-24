@@ -2044,6 +2044,7 @@
 2	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	\0
 1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	$1=…
 1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	$path item=${ref.itemId} → ${it.javaClass.simpleName}
+1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${it.scheme}://${it.host}:${it.port}
 1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${path.substringBeforeLast("/${ref.itemId}")} item=${ref.itemId} → ${r.code}
 1	url	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	${ref.api}/Sessions?DeviceId=$DEVICE_ID
 1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	(?i)(api_key|ApiKey|X-Emby-Token)=[^&]+
@@ -2061,6 +2062,8 @@
 1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	markPlayed: no user for the item
 1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	not read as Emby: ${redact(url)}
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	owntv-glcn
+1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	stream from $it (not a server item)
+1	log	core/src/main/java/tv/own/owntv/core/emby/EmbyPlayback.kt	stream item=${next.itemId} on ${next.api}
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTmdb.kt	a
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTmdb.kt	f
 1	technical	core/src/main/java/tv/own/owntv/core/emby/EmbyTmdb.kt	glcn_emby_tmdb.json
