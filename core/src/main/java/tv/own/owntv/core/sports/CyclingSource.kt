@@ -24,8 +24,10 @@ import java.time.ZoneId
 import java.util.concurrent.TimeUnit
 
 /**
- * glcn: road cycling — the UCI WorldTour — from carlosglcn/owntv-sports-data (cycling.json, built from
- * procyclingstats.com). Every stage of a stage race, and every one-day race, is one entry on the board: the race
+ * glcn: stage races from carlosglcn/owntv-sports-data, all in one shape — road cycling (the UCI WorldTour,
+ * cycling.json, from procyclingstats.com), the Dakar (dakar.json, its race centre: one race per category, cars and
+ * bikes) and the World Rally Championship (wrc.json, from Wikipedia: each rally one entry, its winner once run).
+ * Cycling: Every stage of a stage race, and every one-day race, is one entry on the board: the race
  * as its title, the stage and its route under it, the first three once it is over. The ranking is the general
  * classification of the stage race on now, or of the last one run.
  */
@@ -33,11 +35,17 @@ class CyclingSource(client: OkHttpClient) {
 
     private val http = client.newBuilder().callTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS).build()
     private val zone get() = ZoneId.systemDefault()
-    private var cache: Pair<Long, JSONObject>? = null
+    private val cache = HashMap<String, Pair<Long, JSONObject>>()
+    /** A rally runs over days: when each entry ends (by id), for the days it covers. */
+    private val ends = HashMap<String, Long>()
 
     suspend fun scoreboard(league: League, day: LocalDate?): List<Match> {
         val date = day ?: LocalDate.now(zone)
-        return stages(league).filter { Instant.ofEpochMilli(it.startMs).atZone(zone).toLocalDate() == date }
+        return stages(league).filter { m ->
+            val first = Instant.ofEpochMilli(m.startMs).atZone(zone).toLocalDate()
+            val last = ends[m.id]?.let { Instant.ofEpochMilli(it).atZone(zone).toLocalDate() } ?: first
+            !date.isBefore(first) && !date.isAfter(last)
+        }
     }
 
     suspend fun month(league: League, month: YearMonth): MonthBoard =
@@ -46,12 +54,20 @@ class CyclingSource(client: OkHttpClient) {
     fun summary(match: Match) = MatchSummary(match, emptyList(), emptyList(), emptyList())
 
     suspend fun rankings(league: League): Ranking {
-        val races = races()
+        val races = races(league)
         val now = System.currentTimeMillis()
+        // The rally championship's standings are the season's, not a race's.
+        if (league.slug == WRC) return seasonRanking(league)
         // The stage race on now, else the latest one that has a classification.
         val race = races.filter { !it.optBoolean("oneday") && (it.optJSONArray("gc")?.length() ?: 0) > 0 && it.optLong("start") <= now }
             .maxByOrNull { it.optLong("start") } ?: return Ranking(league.key, emptyList())
-        val gc = race.optJSONArray("gc") ?: JSONArray()
+        return gcRanking(league, race.optJSONArray("gc") ?: JSONArray(), nameOf(race))
+    }
+
+    private suspend fun seasonRanking(league: League): Ranking =
+        gcRanking(league, feed(league).optJSONArray("gc") ?: JSONArray(), feed(league).optInt("season").takeIf { it > 0 }?.let { "${league.abbreviation} $it" })
+
+    private fun gcRanking(league: League, gc: JSONArray, title: String?): Ranking {
         val rows = (0 until gc.length()).mapNotNull { i ->
             val r = gc.optJSONObject(i) ?: return@mapNotNull null
             val name = r.optString("name").ifEmpty { return@mapNotNull null }
@@ -63,32 +79,47 @@ class CyclingSource(client: OkHttpClient) {
                 note = r.optString("gap").ifEmpty { null },
             )
         }
-        return Ranking(league.key, if (rows.isEmpty()) emptyList() else listOf(RankingGroup(RankingKind.PLAYERS, rows, title = race.optString("name").ifEmpty { null })))
+        return Ranking(league.key, if (rows.isEmpty()) emptyList() else listOf(RankingGroup(if (league.sport == Sport.RACING) RankingKind.DRIVERS else RankingKind.PLAYERS, rows, title = title)))
     }
 
-    private suspend fun races(): List<JSONObject> {
-        val root = feed()
+    /** The race's name in the user's language when the feed has it (the Dakar's "Coches", "Motos"). */
+    private fun nameOf(race: JSONObject): String =
+        race.optJSONObject("names")?.optString(lang)?.takeIf { it.isNotEmpty() } ?: race.optString("name")
+
+    private fun local(o: JSONObject, key: String): String =
+        o.optString("${key}_$lang").takeIf { it.isNotEmpty() && !o.isNull("${key}_$lang") } ?: o.optString(key)
+
+    private val lang get() = java.util.Locale.getDefault().language
+
+    private suspend fun races(league: League): List<JSONObject> {
+        val root = feed(league)
         val list = root.optJSONArray("races") ?: return emptyList()
-        return (0 until list.length()).mapNotNull { list.optJSONObject(it) }
+        val cat = DAKAR_CATS[league.slug]
+        return (0 until list.length()).mapNotNull { list.optJSONObject(it) }.filter { cat == null || it.optString("cat") == cat }
     }
 
     private suspend fun stages(league: League): List<Match> {
         val now = System.currentTimeMillis()
-        return races().flatMap { race ->
+        return races(league).flatMap { race ->
             val stages = race.optJSONArray("stages") ?: return@flatMap emptyList()
-            val name = race.optString("name")
+            val name = nameOf(race)
             val oneDay = race.optBoolean("oneday")
             (0 until stages.length()).mapNotNull { i ->
                 val s = stages.optJSONObject(i) ?: return@mapNotNull null
                 val start = s.optLong("start").takeIf { it > 0 } ?: return@mapNotNull null
+                val end = s.optLong("end").takeIf { it > start }
+                end?.let { ends[s.optString("id")] = it }
                 val state = when (s.optString("status")) {
                     "final" -> MatchState.POST
                     "live" -> MatchState.IN
-                    else -> if (now >= start + LIVE_MS) MatchState.POST else if (now >= start) MatchState.IN else MatchState.PRE
+                    else -> if (now >= (end ?: (start + LIVE_MS))) MatchState.POST else if (now >= start) MatchState.IN else MatchState.PRE
                 }
                 val route = listOfNotNull(s.optString("frm").takeIf { it.isNotEmpty() && !s.isNull("frm") },
                     s.optString("to").takeIf { it.isNotEmpty() && !s.isNull("to") }).joinToString(" – ")
-                val label = s.optString("label").takeIf { it.isNotEmpty() }
+                val label = local(s, "label").takeIf { it.isNotEmpty() }
+                // A rally's surface and its number of special stages (WRC).
+                val surface = local(s, "surface").takeIf { it.isNotEmpty() && !s.isNull("surface") }
+                val specials = s.optString("ss").takeIf { it.isNotEmpty() && !s.isNull("ss") }?.let { "$it SS" }
                 val tt = s.optString("tt").takeIf { it.isNotEmpty() && !s.isNull("tt") }
                 val km = s.optDouble("km").takeIf { !it.isNaN() && it > 0 }
                 val top = s.optJSONArray("top") ?: JSONArray()
@@ -102,7 +133,7 @@ class CyclingSource(client: OkHttpClient) {
                 }
                 Match(
                     id = s.optString("id"),
-                    sport = Sport.CYCLING,
+                    sport = league.sport,
                     feed = league.key,
                     leagueSlug = league.slug,
                     leagueName = name,
@@ -110,8 +141,8 @@ class CyclingSource(client: OkHttpClient) {
                     state = state,
                     statusText = if (state == MatchState.POST) podium.firstOrNull()?.team?.name.orEmpty() else "",
                     title = name,
-                    subtitle = listOfNotNull(if (oneDay) null else label, tt, route.ifEmpty { null }).joinToString(" · ").ifEmpty { null },
-                    venue = listOfNotNull(km?.let { String.format(java.util.Locale.getDefault(), "%.1f km", it) }, profileText(s.optString("profile"))).joinToString(" · ").ifEmpty { null },
+                    subtitle = listOfNotNull(if (oneDay && league.sport == Sport.CYCLING) null else label, tt, route.ifEmpty { null }).joinToString(" · ").ifEmpty { null },
+                    venue = listOfNotNull(surface, specials, km?.let { String.format(java.util.Locale.getDefault(), "%.1f km", it) }, profileText(s.optString("profile"))).joinToString(" · ").ifEmpty { null },
                     competitors = podium,
                 )
             }
@@ -125,23 +156,37 @@ class CyclingSource(client: OkHttpClient) {
         else -> null
     }
 
-    private suspend fun feed(): JSONObject {
+    private suspend fun feed(league: League): JSONObject {
+        val url = when {
+            league.slug in DAKAR_CATS -> DAKAR_URL
+            league.slug == WRC -> WRC_URL
+            else -> URL
+        }
         val now = System.currentTimeMillis()
-        cache?.takeIf { now - it.first < CACHE_MS }?.let { return it.second }
+        cache[url]?.takeIf { now - it.first < CACHE_MS }?.let { return it.second }
         val body = withContext(Dispatchers.IO) {
-            http.newCall(Request.Builder().url(URL).build()).execute().use { r ->
+            http.newCall(Request.Builder().url(url).build()).execute().use { r ->
                 if (!r.isSuccessful) throw SportsHttpException(r.code)
                 r.body.string()
             }
         }
         val root = JSONObject(body)
-        cache = now to root
+        cache[url] = now to root
         return root
     }
 
     companion object {
         const val WORLD_TOUR = "uwt"
+        const val DAKAR_CARS = "dakar-cars"
+        const val DAKAR_BIKES = "dakar-bikes"
+        const val WRC = "wrc"
+        /** The rally leagues this source serves (Motorsport); cycling is every Sport.CYCLING league. */
+        val RALLY = setOf(DAKAR_CARS, DAKAR_BIKES, WRC)
+        /** Each Dakar league's category in the race centre. */
+        private val DAKAR_CATS = mapOf(DAKAR_CARS to "A", DAKAR_BIKES to "M")
         private const val URL = "https://raw.githubusercontent.com/carlosglcn/owntv-sports-data/main/cycling.json"
+        private const val DAKAR_URL = "https://raw.githubusercontent.com/carlosglcn/owntv-sports-data/main/dakar.json"
+        private const val WRC_URL = "https://raw.githubusercontent.com/carlosglcn/owntv-sports-data/main/wrc.json"
         private const val TIMEOUT_SECONDS = 10L
         private const val CACHE_MS = 10 * 60_000L
         /** A stage with no result this long after its start is taken as over. */

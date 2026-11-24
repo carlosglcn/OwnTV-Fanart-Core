@@ -121,6 +121,10 @@ object SportsCatalog {
         League(Sport.RACING, "f1", "Formula 1", "F1", aliases = listOf("F1", "Formula One", "Formel 1", "Formule 1", "Fórmula 1", "Formula Uno", "Mundial F1")),
         // glcn: not on ESPN; served by MotoGpSource.
         League(Sport.RACING, CompositeSportsSource.MOTOGP, "MotoGP", aliases = listOf("Moto GP", "Mundial de MotoGP")),
+        // glcn: not on ESPN; served by CyclingSource (owntv-sports-data's dakar.json and wrc.json).
+        League(Sport.RACING, CyclingSource.DAKAR_CARS, "Dakar Rally · Cars", "Dakar", hasTable = false, aliases = listOf("Dakar", "Rally Dakar", "Rally Dakar 2027")),
+        League(Sport.RACING, CyclingSource.DAKAR_BIKES, "Dakar Rally · Bikes", "Dakar", hasTable = false, aliases = listOf("Dakar", "Rally Dakar", "Dakar motos")),
+        League(Sport.RACING, CyclingSource.WRC, "World Rally Championship", "WRC", hasTable = false, aliases = listOf("WRC", "Mundial de Rallies", "Campeonato del Mundo de Rallies", "Rally WRC")),
         // glcn: not on ESPN; served by CyclingSource.
         League(Sport.CYCLING, CyclingSource.WORLD_TOUR, "UCI WorldTour", "UWT", hasTable = false),
         League(Sport.SNOOKER, BasketDataSource.SNOOKER, "World Snooker Tour", "WST", hasTable = false, aliases = listOf("Snooker", "WST")),

@@ -4359,7 +4359,11 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/CompetitionNames.kt	uhd
 1	technical	core/src/main/java/tv/own/owntv/core/sports/CompetitionNames.kt	ß
 1	empty	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	\0
+1	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	$it SS
+2	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	${key}_$lang
+1	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	${league.abbreviation} $it
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	%.1f km
+1	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	A
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Amstel Gold Race
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Flecha Valona
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Giro de Italia
@@ -4367,6 +4371,7 @@
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Itzulia
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	La Vuelta
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Lieja-Bastoña-Lieja
+1	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	M
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Milán-San Remo
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	París-Niza
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	París-Roubaix
@@ -4380,23 +4385,34 @@
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Vuelta a Suiza
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	Vuelta al País Vasco
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	amstel
+1	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	cat
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	catalunya
+1	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	dakar-bikes
+1	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	dakar-cars
+1	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	end
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	final
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	flat
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	flèche wallonne
 2	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	frm
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	gap
-2	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	gc
+3	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	gc
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	hills-flat
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	hills-uphill
 1	url	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	https://raw.githubusercontent.com/carlosglcn/owntv-sports-data/main/cycling.json
-1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	id
+1	url	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	https://raw.githubusercontent.com/carlosglcn/owntv-sports-data/main/dakar.json
+1	url	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	https://raw.githubusercontent.com/carlosglcn/owntv-sports-data/main/wrc.json
+2	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	id
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	il lombardia
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	itzulia
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	km
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	label
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	live
 1	json	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	liège-bastogne-liège
+1	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	names
+1	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	season
+2	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	ss
+2	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	surface
+1	technical	core/src/main/java/tv/own/owntv/core/sports/CyclingSource.kt	wrc
 7	empty	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	\0
 1	json	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	#
 1	technical	core/src/main/java/tv/own/owntv/core/sports/EspnParser.kt	$id-$i
@@ -4929,6 +4945,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	CEV Champions League
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	CH
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Campeonato Brasileiro
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Campeonato del Mundo de Rallies
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Carabao Cup
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Caribbean Premier League
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Champions Cup
@@ -4964,6 +4981,10 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	DP World Tour
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Daikin HBL
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Daikin StarLigue
+4	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Dakar
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Dakar Rally · Bikes
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Dakar Rally · Cars
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Dakar motos
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Danish Superliga
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EC
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	EFL Championship
@@ -5091,6 +5112,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Major League Soccer
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	March Madness
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Mundial de Clubes
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Mundial de Rallies
 2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	NASCAR
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	NASCAR Craftsman Truck Series
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	NASCAR Cup Series
@@ -5144,6 +5166,9 @@
 2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Primera FEB
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Pro League
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Professional Fighters League
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Rally Dakar
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Rally Dakar 2027
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Rally WRC
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Roshn Saudi League
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Rugby Championship
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Rugby League World Cup
@@ -5215,6 +5240,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Vrouwen Eredivisie
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	WM-Qualifikation
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	WNBA
+2	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	WRC
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	WSL
 2	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	WST
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	WTA
@@ -5240,6 +5266,7 @@
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	World Cup Qualifying – Concacaf
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	World Cup Qualifying – UEFA
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	World Cup of Darts
+1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	World Rally Championship
 1	json	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	World Snooker Tour
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	Zweite Bundesliga
 1	technical	core/src/main/java/tv/own/owntv/core/sports/SportsCatalog.kt	afc.asian.cup

@@ -260,7 +260,7 @@ class CompositeSportsSource(
     private val openF1: OpenF1Source? = null,
     private val cycling: CyclingSource? = null,
 ) : SportsSource {
-    private fun League.isCycling() = cycling != null && sport == Sport.CYCLING
+    private fun League.isCycling() = cycling != null && (sport == Sport.CYCLING || slug in CyclingSource.RALLY)
     private fun League.isMotoGp() = slug == MOTOGP
     private fun League.isTsdb() = tsdb != null && slug in BasketDataSource.SLUGS
 
@@ -274,7 +274,7 @@ class CompositeSportsSource(
 
     override suspend fun summary(match: Match): MatchSummary =
         when {
-            match.sport == Sport.CYCLING && cycling != null -> cycling.summary(match)
+            (match.sport == Sport.CYCLING || match.leagueSlug in CyclingSource.RALLY) && cycling != null -> cycling.summary(match)
             match.leagueSlug == MOTOGP -> motoGp.summary(match)
             match.leagueSlug in BasketDataSource.SLUGS -> tsdb!!.summary(match)
             else -> espn.summary(match).let { base ->
