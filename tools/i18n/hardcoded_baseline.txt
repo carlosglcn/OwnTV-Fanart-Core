@@ -329,6 +329,7 @@
 2	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	m3u8
 1	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	ts
 1	core/src/main/java/tv/own/owntv/core/parser/XtreamClient.kt	user_output_formats
+1	core/src/main/java/tv/own/owntv/core/player/ExternalPlayerLauncher.kt	DEPRECATION
 1	core/src/main/java/tv/own/owntv/core/recording/RecordingScheduler.kt	owntvfanart://recording/$id
 10	core/src/main/java/tv/own/owntv/core/reminder/HabitRules.kt	\0
 1	core/src/main/java/tv/own/owntv/core/reminder/HabitRules.kt	$channelId:$startMs

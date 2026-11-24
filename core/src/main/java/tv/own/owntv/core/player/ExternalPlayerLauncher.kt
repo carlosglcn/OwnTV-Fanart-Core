@@ -27,8 +27,9 @@ import tv.own.owntv.core.i18n.LocaleStore
 // A film's resume point goes along as "position" (ms) — MX Player reads it as an int, VLC as a long
 // with an int fallback, so the int form serves both.
 //
-// Limitations: extras are best-effort (an unknown player may still ignore them); where the user
-// stopped is not read back (that needs an Activity result), and there is no prev/next queue.
+// Limitations: extras are best-effort (an unknown player may still ignore them) and there is no
+// prev/next queue. glcn: where the user stopped is read back when the caller asks (onResult) and the
+// activity has registered its result hook — VLC and MX Player answer it; other players may not.
 class ExternalPlayerLauncher(private val context: Context) {
 
     // Open url externally. Returns true if an external app was actually launched.
@@ -42,6 +43,9 @@ class ExternalPlayerLauncher(private val context: Context) {
         httpHeaders: String? = null,
         /** Where to start, in ms — the item's saved resume point; 0 plays from the beginning. */
         startPositionMs: Long = 0L,
+        /** glcn: where the person stopped, read back when the player closes (VLC, MX Player and the players that
+         *  answer the same way). Needs the activity's result hook ([resultStarter]); without it, launched as before. */
+        onResult: ((Outcome) -> Unit)? = null,
     ): Boolean {
         val uri = uriFor(url)
         if (uri == null) {
@@ -63,6 +67,19 @@ class ExternalPlayerLauncher(private val context: Context) {
             if (startPositionMs > 0) intent.putExtra("position", startPositionMs.coerceAtMost(Int.MAX_VALUE.toLong()).toInt())
 
             if (context.packageManager.queryIntentActivities(intent, 0).isEmpty()) continue
+            // glcn: started for a result, the player hands back where it stopped (VLC always does then; MX Player
+            // wants return_result). The system's "Open with" window forwards the result, so Always still works.
+            val starter = resultStarter
+            if (onResult != null && starter != null) {
+                intent.flags = intent.flags and Intent.FLAG_ACTIVITY_NEW_TASK.inv()
+                intent.putExtra(EXTRA_RETURN_RESULT, true)
+                pending = onResult
+                launchedAt = android.os.SystemClock.elapsedRealtime()
+                val started = runCatching { starter(intent) }.getOrDefault(false)
+                if (started) return true
+                pending = null
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
             // The intent itself, never Intent.createChooser: only the system's own "Open with" window
             // offers Just once / Always, so a user can make one player the default.
             return startActivity(intent)
@@ -149,7 +166,49 @@ class ExternalPlayerLauncher(private val context: Context) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
-    private companion object {
+    /** glcn: what a player said when it closed. [finished] = it played to the end. */
+    data class Outcome(val positionMs: Long, val durationMs: Long, val finished: Boolean)
+
+    companion object {
+        /** glcn: set by the activity — starts an intent for a result; null while there is no activity. */
+        @Volatile var resultStarter: ((Intent) -> Boolean)? = null
+        @Volatile private var pending: ((Outcome) -> Unit)? = null
+        @Volatile private var launchedAt = 0L
+
+        /**
+         * glcn: the player closed. VLC answers extra_position / extra_duration (ms, long); MX Player position /
+         * duration (ms, int) and end_by. VLC gives no "ended" flag, and at the end its position can come back as
+         * 0: a position of 0 after the time the item lasts counts as played to the end.
+         */
+        fun deliver(data: Intent?) {
+            val callback = pending ?: return
+            pending = null
+            val extras = data?.extras ?: return
+            val position = longOf(extras, EXTRA_VLC_POSITION) ?: longOf(extras, EXTRA_MX_POSITION) ?: -1L
+            val duration = longOf(extras, EXTRA_VLC_DURATION) ?: longOf(extras, EXTRA_MX_DURATION) ?: -1L
+            val elapsed = android.os.SystemClock.elapsedRealtime() - launchedAt
+            val endBy = extras.getString(EXTRA_MX_END_BY)
+            val finished = endBy == MX_END_COMPLETION ||
+                (duration > 0 && position >= duration - END_SLACK_MS) ||
+                (duration > 0 && position <= 0 && elapsed >= duration * 9 / 10)
+            if (duration <= 0 && !finished) return
+            runCatching { callback(Outcome(position.coerceAtLeast(0L), duration, finished)) }
+        }
+
+        private fun longOf(b: Bundle, key: String): Long? {
+            if (!b.containsKey(key)) return null
+            @Suppress("DEPRECATION")
+            return when (val v = b.get(key)) { is Long -> v; is Int -> v.toLong(); else -> null }
+        }
+
+        private const val EXTRA_RETURN_RESULT = "return_result"
+        private const val EXTRA_VLC_POSITION = "extra_position"
+        private const val EXTRA_VLC_DURATION = "extra_duration"
+        private const val EXTRA_MX_POSITION = "position"
+        private const val EXTRA_MX_DURATION = "duration"
+        private const val EXTRA_MX_END_BY = "end_by"
+        private const val MX_END_COMPLETION = "playback_completion"
+        private const val END_SLACK_MS = 2_000L
         /** URL schemes handed to the external player as-is (everything else is a local file path). */
         val NETWORK_SCHEMES = setOf("http", "https", "rtsp", "rtmp", "udp", "mms")
 
