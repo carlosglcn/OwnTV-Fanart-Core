@@ -115,6 +115,8 @@ object SportsCatalog {
         // Tennis
         League(Sport.TENNIS, "atp", "ATP"),
         League(Sport.TENNIS, "wta", "WTA"),
+        // glcn: nations, not players: served by BasketDataSource (davis.json, from the Finals' Wikipedia article).
+        League(Sport.TENNIS, BasketDataSource.DAVIS, "Davis Cup", "DC", hasTable = false, aliases = listOf("Copa Davis", "Davis Cup Finals", "Davis Cup Final 8", "Coppa Davis")),
         // Cricket
         League(Sport.CRICKET, CRICKET_ALL, "Cricket"),
         // Motorsport

@@ -255,6 +255,11 @@ class SportsRepository(
      */
     suspend fun tennisDraw(match: Match): List<DrawRound> {
         if (match.sport != tv.own.owntv.core.sports.model.Sport.TENNIS) return emptyList()
+        // glcn: a Davis Cup tie's draw is its own rubbers, as the file gave them.
+        if (match.leagueSlug == BasketDataSource.DAVIS) {
+            val rubbers = BasketDataSource.rubbers(match)
+            return if (rubbers.isEmpty()) emptyList() else listOf(DrawRound(match.subtitle.orEmpty(), rubbers))
+        }
         val event = match.subtitle?.substringBefore(" · ").orEmpty()
         val key = match.feed + "|" + match.leagueName + "|" + event
         drawCache[key]?.takeIf { clock() - it.first < DRAW_CACHE_MS }?.let { return it.second }

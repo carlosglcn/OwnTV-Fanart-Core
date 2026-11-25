@@ -297,10 +297,10 @@ class CompositeSportsSource(
         when {
             // glcn: where people compete, not teams, the ones to find and follow are those of its ranking: a tour's
             // players, a series' drivers or riders (a constructors' table is left out).
+            league.isTsdb() -> tsdb!!.teams(league)
             league.sport == Sport.TENNIS || league.sport.isRace ->
                 rankings(league).groups.filter { it.kind != tv.own.owntv.core.sports.model.RankingKind.CONSTRUCTORS }
                     .flatMap { g -> g.rows.map { it.team } }.distinctBy { it.id }
-            league.isTsdb() -> tsdb!!.teams(league)
             else -> espn.teams(league)
         }
 

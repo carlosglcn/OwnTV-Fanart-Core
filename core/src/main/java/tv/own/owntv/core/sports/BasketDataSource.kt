@@ -225,7 +225,16 @@ class BasketDataSource(client: OkHttpClient) {
                 country = t.optString("country").takeIf { it.isNotEmpty() && !t.isNull("country") },
             )
         }
-        val byId = teams.associateBy { it.id }
+        // glcn: a nation (the Davis Cup) is named in the viewer's language, from its ISO code.
+        val named = teams.map { t ->
+            val iso = teamsArray?.let { arr -> (0 until arr.length()).map { arr.optJSONObject(it) }.firstOrNull { it?.optString("id") == t.id } }
+                ?.optString("nation").orEmpty()
+            if (iso.length != 2) t else {
+                val local = java.util.Locale(String(), iso).getDisplayCountry(java.util.Locale.getDefault()).takeIf { it.isNotBlank() && it != iso } ?: t.name
+                t.copy(name = local, shortName = local)
+            }
+        }
+        val byId = named.associateBy { it.id }
         val matchesArray = root.optJSONArray("matches")
         val matches = (0 until (matchesArray?.length() ?: 0)).mapNotNull { i ->
             matchesArray!!.optJSONObject(i)?.let { toMatch(league, it, byId, now) }
@@ -249,7 +258,12 @@ class BasketDataSource(client: OkHttpClient) {
             val team = byId[r.optString("team")] ?: return@mapNotNull null
             tv.own.owntv.core.sports.model.RankingRow(r.optInt("pos", i + 1), team, r.optInt("points"))
         }
-        return Feed(teams, matches, groups, ranking)
+        if (league.slug == DAVIS) for (i in 0 until (matchesArray?.length() ?: 0)) {
+            val m = matchesArray!!.optJSONObject(i) ?: continue
+            val tie = matches.firstOrNull { it.id == m.optString("id") } ?: continue
+            rubberCache[tie.id] = rubbersOf(tie, m)
+        }
+        return Feed(named, matches, groups, ranking)
     }
 
     private fun toMatch(league: League, m: JSONObject, byId: Map<String, Team>, now: Long): Match? {
@@ -288,7 +302,8 @@ class BasketDataSource(client: OkHttpClient) {
             },
             title = home.name + " v " + away.name,
             // glcn: a phase name where the competition has one ("Fase de grupos · Grupo A"), else the round.
-            subtitle = m.optString("stage").takeIf { it.isNotEmpty() && !m.isNull("stage") } ?: m.optInt("round").takeIf { it > 0 }?.let { "Round $it" },
+            subtitle = stageOf(m) ?: m.optInt("round").takeIf { it > 0 }?.let { "Round $it" },
+            venue = m.optString("venue").takeIf { it.isNotEmpty() && !m.isNull("venue") },
             clock = when {
                 state != MatchState.IN -> null
                 league.sport == Sport.HANDBALL -> periodText.takeIf { it.isNotEmpty() }?.let { MatchClock(display = it, period = 0) }
@@ -302,6 +317,51 @@ class BasketDataSource(client: OkHttpClient) {
             broadcasts = (0 until (channels?.length() ?: 0)).mapNotNull { channels!!.optString(it).takeIf { n -> n.isNotEmpty() } }
                 .map { Broadcast(it) },
         )
+    }
+
+    /** glcn: the phase in the viewer's language when the file gives it ("stage_es"). */
+    private fun stageOf(m: JSONObject): String? {
+        val es = m.optString("stage_es").takeIf { it.isNotEmpty() && !m.isNull("stage_es") }
+        val en = m.optString("stage").takeIf { it.isNotEmpty() && !m.isNull("stage") }
+        return if (es != null && java.util.Locale.getDefault().language == SPANISH) es else en
+    }
+
+    /** glcn: one tie's rubbers as tennis matches: each side a player (or a doubles pair) of its nation, sets as periods. */
+    private fun rubbersOf(tie: Match, m: JSONObject): List<Match> {
+        val list = m.optJSONArray("rubbers") ?: return emptyList()
+        val spanish = java.util.Locale.getDefault().language == SPANISH
+        return (0 until list.length()).mapNotNull { i ->
+            val r = list.optJSONObject(i) ?: return@mapNotNull null
+            fun names(key: String) = r.optJSONArray(key)?.let { a -> (0 until a.length()).mapNotNull { a.optString(it).takeIf { n -> n.isNotEmpty() } } }.orEmpty()
+            fun sets(key: String) = r.optJSONArray(key)?.let { a -> (0 until a.length()).map { tv.own.owntv.core.sports.model.PeriodScore(a.optInt(it)) } }.orEmpty()
+            val p1 = names("p1"); val p2 = names("p2")
+            if (p1.isEmpty() || p2.isEmpty()) return@mapNotNull null
+            val s1 = sets("s1"); val s2 = sets("s2")
+            // Sets won: a set counts once its games are decided (6–4, 7–6), not while it is being played.
+            val pairs = s1.zip(s2).map { (a, b) -> a.value to b.value }
+            val won1 = pairs.count { (a, b) -> a > b && maxOf(a, b) >= SET_GAMES }
+            val won2 = pairs.count { (a, b) -> b > a && maxOf(a, b) >= SET_GAMES }
+            val winner = if (r.isNull("winner")) 0 else r.optInt("winner")
+            val played = s1.isNotEmpty() || s2.isNotEmpty()
+            val state = when {
+                winner != 0 -> MatchState.POST
+                played -> MatchState.IN
+                tie.state == MatchState.POST -> MatchState.POST
+                else -> MatchState.PRE
+            }
+            fun side(names: List<String>, nation: Competitor?, sets: List<tv.own.owntv.core.sports.model.PeriodScore>, setsWon: Int, home: Boolean, won: Boolean) = Competitor(
+                team = Team(id = names.joinToString(PAIR), name = names.joinToString(PAIR), shortName = names.joinToString(PAIR) { it.substringAfterLast(' ') },
+                    isAthlete = true, country = nation?.team?.name),
+                home = home, winner = if (winner != 0) won else null,
+                score = if (played) Score(setsWon.toString(), setsWon, sets) else null,
+            )
+            val label = r.optString(if (spanish) "label_es" else "label").ifEmpty { r.optString("label") }
+            tie.copy(
+                id = tie.id + "-r" + i, state = state, statusText = if (state == MatchState.POST) "FT" else null.orEmpty(), clock = null,
+                title = p1.joinToString(PAIR) + " v " + p2.joinToString(PAIR), subtitle = label,
+                competitors = listOf(side(p1, tie.home, s1, won1, true, winner == 1), side(p2, tie.away, s2, won2, false, winner == 2)),
+            )
+        }
     }
 
     companion object {
@@ -318,8 +378,16 @@ class BasketDataSource(client: OkHttpClient) {
         const val HHL = "hhl"
         const val KHL = "khl"
         const val SNOOKER = "snooker"
+        const val DAVIS = "davis"
+        private val rubberCache = java.util.concurrent.ConcurrentHashMap<String, List<Match>>()
+
+        /** glcn: a Davis Cup tie's rubbers (singles and doubles), each a tennis match between players, as last read. */
+        fun rubbers(match: Match): List<Match> = rubberCache[match.id].orEmpty()
+        private const val SPANISH = "es"
+        private const val PAIR = " / "
+        private const val SET_GAMES = 6
         private val EHF_SLUGS = setOf(EHF_CL, EHF_EL)
-        val SLUGS = setOf(ACB, EUROLEAGUE, EUROCUP, PRIMERA_FEB, LEGA, ASOBAL, EHF_CL, EHF_EL, HBL, LNH, HHL, KHL, SNOOKER)
+        val SLUGS = setOf(ACB, EUROLEAGUE, EUROCUP, PRIMERA_FEB, LEGA, ASOBAL, EHF_CL, EHF_EL, HBL, LNH, HHL, KHL, SNOOKER, DAVIS)
         private const val EHF_LIVE = "https://www.eurohandball.com/umbraco/api/livescoreapi/GetLiveScoreMatches/1069"
         private const val ASOBAL_SITE = "https://www.asobal.es"
         private const val LIVE_CACHE_MS = 30_000L
