@@ -330,7 +330,7 @@ class BasketDataSource(client: OkHttpClient) {
     private fun rubbersOf(tie: Match, m: JSONObject): List<Match> {
         val list = m.optJSONArray("rubbers") ?: return emptyList()
         val spanish = java.util.Locale.getDefault().language == SPANISH
-        return (0 until list.length()).mapNotNull { i ->
+        val rubbers = (0 until list.length()).mapNotNull { i ->
             val r = list.optJSONObject(i) ?: return@mapNotNull null
             fun names(key: String) = r.optJSONArray(key)?.let { a -> (0 until a.length()).mapNotNull { a.optString(it).takeIf { n -> n.isNotEmpty() } } }.orEmpty()
             fun sets(key: String) = r.optJSONArray(key)?.let { a -> (0 until a.length()).map { tv.own.owntv.core.sports.model.PeriodScore(a.optInt(it)) } }.orEmpty()
@@ -362,6 +362,10 @@ class BasketDataSource(client: OkHttpClient) {
                 competitors = listOf(side(p1, tie.home, s1, won1, true, winner == 1), side(p2, tie.away, s2, won2, false, winner == 2)),
             )
         }
+        // A tie under way: the first rubber not yet won is the one on court, even before the article has its first set.
+        if (tie.state != MatchState.IN) return rubbers
+        val now = rubbers.indexOfFirst { it.state != MatchState.POST }
+        return if (now < 0) rubbers else rubbers.mapIndexed { i, r -> if (i == now) r.copy(state = MatchState.IN) else r }
     }
 
     companion object {
