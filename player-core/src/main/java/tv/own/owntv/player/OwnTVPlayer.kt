@@ -3477,7 +3477,7 @@ class OwnTVPlayer(
         val toneMap = meta.hdr && !isLive && !isArchive && !drmProtected && !displayShowsHdr()
         val startOnExo = if (drmProtected) true else pinnedToExo ?: (if (toneMap) false else null) ?: fileHint ?: !vodEngine.startsOnMpv
         // glcn: a 4K / HDR / Dolby Vision film is about to take a lot of memory at once — the app frees its extras first.
-        if (!isLive && !isArchive && (meta.hdr || pick == tv.own.owntv.core.player.EngineHint.Pick.EXO)) HeavyPlayback.starting()
+        if (!isLive && !isArchive && (meta.hdr || pick == tv.own.owntv.core.player.EngineHint.Pick.EXO)) HeavyPlayback.starting() else HeavyPlayback.ordinary()
         if (pinnedToExo == null && !drmProtected && fileHint != null && fileHint != !vodEngine.startsOnMpv) {
             val why = when (pick) {
                 tv.own.owntv.core.player.EngineHint.Pick.EXO_FOR_SOUND -> "ExoPlayer (Atmos / TrueHD / DTS-HD to the receiver)"

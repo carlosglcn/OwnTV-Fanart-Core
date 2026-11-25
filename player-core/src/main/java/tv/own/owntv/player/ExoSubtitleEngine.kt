@@ -437,13 +437,15 @@ class ExoSubtitleEngine(
         val wantStereo = !AudioOutputPolicy.allowsMultichannel(surroundMode)
         val wantNetwork = NetworkBuild(filmBufferSecs, filmTimeoutSecs, filmTargetBytes())
         val wantPassthrough = passthroughAllowed
-        if (player != null && (builtForSoftware != softwarePreferred || builtForStereo != wantStereo || builtForNetwork != wantNetwork || builtForPassthrough != wantPassthrough)) {
+        // glcn: a 4K / HDR film gets a player without libass (HeavyPlayback.active), any other one with it.
+        val wantAss = !HeavyPlayback.active
+        if (player != null && (builtForSoftware != softwarePreferred || builtForStereo != wantStereo || builtForNetwork != wantNetwork || builtForPassthrough != wantPassthrough || builtForAss != wantAss)) {
             android.util.Log.i(TAG, "rebuilding ExoPlayer for ${if (softwarePreferred) "software" else "hardware"} decode, ${if (wantStereo) "stereo" else "device"} audio")
             player?.release()
             boost.release() // bound to the outgoing player's audio session
             player = null
         }
-        val p = player ?: build().also { player = it; builtForSoftware = softwarePreferred; builtForStereo = wantStereo; builtForNetwork = wantNetwork; builtForPassthrough = wantPassthrough }
+        val p = player ?: build(wantAss).also { player = it; builtForSoftware = softwarePreferred; builtForStereo = wantStereo; builtForNetwork = wantNetwork; builtForPassthrough = wantPassthrough; builtForAss = wantAss }
         // Both are plain setters, so a cached player picks up a setting changed since it was built —
         // no rebuild needed for either (unlike the renderer factory and the audio sink above).
         p.setVideoChangeFrameRateStrategy(
@@ -624,6 +626,7 @@ class ExoSubtitleEngine(
     /** Whether the cached player's audio sink was pinned to stereo PCM. See the rebuild check in `start`. */
     private var builtForStereo = false
     private var builtForPassthrough = true
+    private var builtForAss = true
 
     /** What the cached player's network side was built with. See the rebuild check in `start`. */
     private var builtForNetwork = NetworkBuild(0, 0, 0)
@@ -681,7 +684,7 @@ class ExoSubtitleEngine(
         return SmartBuffer.exoTargetBytes(filmBufferSecs, budget, targetBufferBytes(tierSecs * 1000), tierSecs, lastFilmBitrateBps, heapClassMb)
     }
 
-    private fun build(): ExoPlayer {
+    private fun build(withAss: Boolean = true): ExoPlayer {
         // OkHttp for the stream itself, wrapped in DefaultDataSource so file:// URIs (side-loaded
         // external subtitle files in app storage) route to FileDataSource — the bare OkHttp factory
         // can't open them, and Media3 swallows a side-loaded subtitle's load failure silently (the
@@ -754,17 +757,23 @@ class ExoSubtitleEngine(
         // glcn: libass — ASS/SSA tracks are drawn as made (fonts, colours, positions, animation) on a layer the
         // app hangs on its SubtitleView, instead of as plain text. The video path is untouched (Dolby Vision stays).
         _assHandler.value?.release()
-        val ass = io.github.peerless2012.ass.media.AssHandler(
+        _assHandler.value = null
+        val ass = if (withAss) io.github.peerless2012.ass.media.AssHandler(
             io.github.peerless2012.ass.media.type.AssRenderType.OVERLAY_OPEN_GL,
             io.github.peerless2012.ass.media.AssHandlerConfig(maxRenderPixels = ASS_MAX_RENDER_PIXELS),
-        )
-        val assParsers = io.github.peerless2012.ass.media.parser.AssSubtitleParserFactory(ass)
-        val assExtractors = extractors.withAssMkvSupport(assParsers, ass)
+        ) else null
+        val assParsers = ass?.let { io.github.peerless2012.ass.media.parser.AssSubtitleParserFactory(it) }
+        val sources = if (ass != null && assParsers != null) {
+            DefaultMediaSourceFactory(dataSource, extractors.withAssMkvSupport(assParsers, ass)).setSubtitleParserFactory(assParsers)
+        } else {
+            DefaultMediaSourceFactory(dataSource, extractors)
+        }
+        if (ass == null) android.util.Log.i(TAG, "4K / HDR film: ExoPlayer without libass, subtitles as plain text")
         return ExoPlayer.Builder(context)
-            .setRenderersFactory(renderers.withAssSupport(ass))
+            .setRenderersFactory(if (ass != null) renderers.withAssSupport(ass) else renderers)
             .setMediaSourceFactory(
                 SdrHlsRouting(
-                    DefaultMediaSourceFactory(dataSource, assExtractors).setSubtitleParserFactory(assParsers),
+                    sources,
                     androidx.media3.exoplayer.hls.HlsMediaSource.Factory(dataSource)
                         .setPlaylistParserFactory(SdrVariants.ParserFactory { true }),
                 ) { preferSdr }.setDrmSessionManagerProvider(tv.own.owntv.core.drm.InlineClearKeyDrmProvider),
@@ -784,8 +793,10 @@ class ExoSubtitleEngine(
                 )
                 addListener(listener); addAnalyticsListener(analytics); addAnalyticsListener(audioWatchdog)
                 setVideoFrameMetadataListener(frameRateListener)
-                ass.init(this)
-                _assHandler.value = ass
+                if (ass != null) {
+                    ass.init(this)
+                    _assHandler.value = ass
+                }
             }
     }
 
