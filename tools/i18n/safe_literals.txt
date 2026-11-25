@@ -7802,6 +7802,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	GlcnVideoRenderer
 1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	HDR10
 1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	HLG
+1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	OMX.amlogic.
 1	technical	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	SDR
 1	protocol	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	dvh1
 1	protocol	player-core/src/main/java/tv/own/owntv/player/GlcnVideoRenderer.kt	dvhe

@@ -127,6 +127,14 @@ internal class GlcnVideoRenderer(
         LiveDiagnosticsLog.event("Dolby Vision profile 7 enhancement layer: ${layer.name}")
     }
 
+    // glcn: Amlogic's OMX decoders (KM9PRO and other S905 boxes) kept from one channel to the next show three frames
+    // and then freeze, with the sound going on ("frames stuck at 3"); a decoder made new for the channel plays.
+    // A fresh one costs about 0.1 s per zap there, nothing elsewhere.
+    override fun canReuseCodec(codecInfo: MediaCodecInfo, oldFormat: Format, newFormat: Format): DecoderReuseEvaluation =
+        if (codecInfo.name.startsWith(AMLOGIC_OMX)) {
+            DecoderReuseEvaluation(codecInfo.name, oldFormat, newFormat, DecoderReuseEvaluation.REUSE_RESULT_NO, DecoderReuseEvaluation.DISCARD_REASON_WORKAROUND)
+        } else super.canReuseCodec(codecInfo, oldFormat, newFormat)
+
     // Only a codec still to be started is refused the stand-in: a running one keeps being moved, because
     // releasing it instead costs a black screen until the next keyframe (up to 2 s measured on the TCL).
     override fun shouldUsePlaceholderSurface(codecInfo: MediaCodecInfo): Boolean =
@@ -138,6 +146,7 @@ internal class GlcnVideoRenderer(
 
     private companion object {
         const val TAG = "GlcnVideoRenderer"
+        const val AMLOGIC_OMX = "OMX.amlogic."
     }
 }
 
