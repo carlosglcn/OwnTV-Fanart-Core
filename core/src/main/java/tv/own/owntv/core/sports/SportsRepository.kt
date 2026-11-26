@@ -258,7 +258,8 @@ class SportsRepository(
         // glcn: a Davis Cup tie's draw is its own rubbers, as the file gave them.
         if (match.leagueSlug == BasketDataSource.DAVIS) {
             val rubbers = BasketDataSource.rubbers(match)
-            return if (rubbers.isEmpty()) emptyList() else listOf(DrawRound(match.subtitle.orEmpty(), rubbers))
+            // Before the order of play is out: each nation's nominated team.
+            return if (rubbers.isEmpty()) BasketDataSource.squads(match) else listOf(DrawRound(match.subtitle.orEmpty(), rubbers))
         }
         val event = match.subtitle?.substringBefore(" · ").orEmpty()
         val key = match.feed + "|" + match.leagueName + "|" + event
