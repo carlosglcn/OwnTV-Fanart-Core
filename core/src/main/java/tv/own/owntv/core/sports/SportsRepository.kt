@@ -220,6 +220,8 @@ class SportsRepository(
      */
     fun observe(demand: Demand): Flow<SportsBoard> = board
         .onStart {
+            // glcn: a board left in memory for hours: what was live then is not shown as live now (see LIVE_TRUST_MS).
+            kotlinx.coroutines.withContext(serial) { dropStaleLive() }
             demands.update { it + demand }
             scope.launch(serial) { if (engine == null) engine = scope.launch(serial) { run() } }
             // glcn: the logos no match carries, at once — a stored board is shown without a single fetch, and they
@@ -227,6 +229,18 @@ class SportsRepository(
             scope.launch { runCatching { source.warm() } }
         }
         .onCompletion { demands.update { it - demand } }
+
+    /** glcn: live matches of a scoreboard not read for [LIVE_TRUST_MS] leave the board until the next read brings them back. */
+    private fun dropStaleLive() {
+        val now = clock()
+        fun stale(key: String, tomorrow: Boolean) = (states[Feed.Scoreboard(key, tomorrow)]?.fetchedAt ?: 0L) < now - LIVE_TRUST_MS
+        _board.update { b ->
+            if (b.matches.none { it.isLive }) b else b.copy(
+                today = b.today.mapValues { (k, l) -> if (stale(k, false)) l.filterNot { it.isLive } else l },
+                tomorrow = b.tomorrow.mapValues { (k, l) -> if (stale(k, true)) l.filterNot { it.isLive } else l },
+            )
+        }
+    }
 
     /**
      * The app has started and finished its own startup work: rebuild once if Auto rebuild says the
@@ -504,7 +518,14 @@ class SportsRepository(
         if (cacheLoaded) return
         cacheLoaded = true
         val text = runCatching { cacheFile.takeIf { it.isFile }?.readText() }.getOrNull() ?: return
-        val stored = SportsCacheJson.read(text)?.let { SportsWindow.prune(it, clock()) } ?: return
+        val read = SportsCacheJson.read(text)?.let { SportsWindow.prune(it, clock()) } ?: return
+        // glcn: a match that was live when the file was written long ago is not shown as live now (yesterday's
+        // handball at 6–1 "LIVE" for a blink on opening Sports): it is left out until the fresh read says how it stands.
+        val old = clock() - (read.rebuiltAt ?: 0L) > LIVE_TRUST_MS
+        val stored = if (!old) read else read.copy(
+            today = read.today.mapValues { (_, l) -> l.filterNot { it.isLive } },
+            tomorrow = read.tomorrow.mapValues { (_, l) -> l.filterNot { it.isLive } },
+        )
         // Only fills what is still empty: a fetch that finished first is newer than the file.
         _board.update { b ->
             b.copy(
@@ -582,6 +603,8 @@ class SportsRepository(
 /** glcn: one round of a tennis draw ("Quarterfinal") and its matches. */
 data class DrawRound(val name: String, val matches: List<Match>)
 
+/** glcn: how long a saved board's live matches are still believed live. */
+private const val LIVE_TRUST_MS = 10 * 60_000L
 private const val DRAW_CACHE_MS = 10 * 60_000L
 /** A Grand Slam runs two weeks; the first round is at most this far before the match the draw was opened from. */
 private const val DRAW_LOOKBACK_DAYS = 13L
