@@ -62,7 +62,7 @@ object XmltvParser {
                 when (parser.name) {
                     // A single bad <channel>/<programme> is skipped, not fatal — keep parsing the rest.
                     "channel" -> if (readChannel(parser, onChannel, metrics, normalizedFilter, seenChannelIds)) channels++
-                    "programme" -> if (readProgramme(parser, onProgramme, metrics, normalizedFilter)) programmes++
+                    "programme" -> if (readProgramme(parser, onProgramme, metrics, normalizedFilter, colours)) programmes++
                 }
                 val items = channels + programmes + metrics.skippedProgrammes + metrics.duplicateChannelsSkipped
                 if (items > 0 && items % STREAM_LOG_ITEM_STEP == 0) {
