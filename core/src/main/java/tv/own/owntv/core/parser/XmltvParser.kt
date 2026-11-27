@@ -32,6 +32,8 @@ object XmltvParser {
         onChannel: suspend (id: String, displayName: String?, iconUrl: String?) -> Unit,
         onProgramme: suspend (channelId: String, startMs: Long, stopMs: Long, title: String, description: String?, details: EpgDetails) -> Unit,
         channelFilter: Set<String>? = null,
+        /** glcn: notes the colours a Kodi-style guide painted its text with; the markup itself always comes off. */
+        colours: KodiMarkup.Seen? = null,
     ) {
         val startedAt = SystemClock.elapsedRealtime()
         var lastLogAt = startedAt
@@ -205,6 +207,7 @@ object XmltvParser {
         onProgramme: suspend (String, Long, Long, String, String?, EpgDetails) -> Unit,
         metrics: ParseMetrics,
         channelFilter: Set<String>?,
+        colours: KodiMarkup.Seen?,
     ): Boolean {
         val parseStart = SystemClock.elapsedRealtime()
         val ctx = currentCoroutineContext()
@@ -233,8 +236,8 @@ object XmltvParser {
                 ctx.ensureActive()
                 when (parser.next()) {
                     XmlPullParser.START_TAG -> when (parser.name) {
-                        "title" -> if (title.isBlank()) title = readText(parser).trim()
-                        "desc" -> if (desc == null) desc = EpgText.clean(readText(parser))
+                        "title" -> if (title.isBlank()) title = KodiMarkup.title(readText(parser).trim(), colours)
+                        "desc" -> if (desc == null) desc = KodiMarkup.text(EpgText.clean(readText(parser)), colours)
                         else -> (details ?: DetailReader().also { details = it }).start(parser)
                     }
                     XmlPullParser.END_TAG -> when (parser.name) {

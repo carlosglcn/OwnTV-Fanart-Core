@@ -3228,6 +3228,34 @@
 1	regex	core/src/main/java/tv/own/owntv/core/parser/EpgText.kt	(\\\\r\\\\n|\\\\n|\\\\r)+
 1	regex	core/src/main/java/tv/own/owntv/core/parser/EpgText.kt	[ \\t]{2,}
 1	technical	core/src/main/java/tv/own/owntv/core/parser/EpgText.kt	\\t
+1	technical	core/src/main/java/tv/own/owntv/core/parser/GuideText.kt	TSE
+1	technical	core/src/main/java/tv/own/owntv/core/parser/GuideText.kt	·
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	#
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	/
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	B
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	CAPITALIZE
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	COLOR
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	CR
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	I
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	LIGHT
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	LOWERCASE
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	UPPERCASE
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	blueviolet=8a2be2 darkviolet=9400d3 mediumpurple=9370db royalblue=4169e1 dodgerblue=1e90ff
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	cornflowerblue=6495ed mediumblue=0000cd darkblue=00008b midnightblue=191970 turquoise=40e0d0
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	crimson=dc143c firebrick=b22222 darkred=8b0000 orangered=ff4500 darkorange=ff8c00 coral=ff7f50
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	darkgreen=006400 yellowgreen=9acd32 greenyellow=adff2f chartreuse=7fff00 lawngreen=7cfc00
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	deepskyblue=00bfff skyblue=87ceeb lightskyblue=87cefa lightblue=add8e6 steelblue=4682b4
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	gold=ffd700 goldenrod=daa520 darkgoldenrod=b8860b tomato=ff6347 teal=008080 lime=00ff00 limegreen=32cd32
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	gray=808080 grey=808080 lightgray=d3d3d3 lightgrey=d3d3d3 darkgray=a9a9a9 darkgrey=a9a9a9 dimgray=696969
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	magenta=ff00ff fuchsia=ff00ff slateblue=6a5acd cadetblue=5f9ea0 cyan=00ffff aqua=00ffff silver=c0c0c0
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	maroon=800000 purple=800080 navy=000080 olive=808000 pink=ffc0cb hotpink=ff69b4 deeppink=ff1493
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	mediumseagreen=3cb371 springgreen=00ff7f lightgreen=90ee90 palegreen=98fb98 forestgreen=228b22
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	mediumturquoise=48d1cc darkturquoise=00ced1 aquamarine=7fffd4 darkcyan=008b8b seagreen=2e8b57
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	olivedrab=6b8e23 beige=f5f5dc wheat=f5deb3 tan=d2b48c chocolate=d2691e sienna=a0522d brown=a52a2a
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	peru=cd853f sandybrown=f4a460 lightyellow=ffffe0 ivory=fffff0 lavender=e6e6fa slategray=708090
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	salmon=fa8072 lightsalmon=ffa07a khaki=f0e68c violet=ee82ee orchid=da70d6 plum=dda0dd indigo=4b0082
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	slategrey=708090 lightslategray=778899 darkslategray=2f4f4f darkslateblue=483d8b mediumslateblue=7b68ee
+1	technical	core/src/main/java/tv/own/owntv/core/parser/KodiMarkup.kt	white=ffffff black=000000 red=ff0000 green=008000 blue=0000ff yellow=ffff00 orange=ffa500
 1	empty	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	\0
 1	protocol	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	#
 1	technical	core/src/main/java/tv/own/owntv/core/parser/M3uParser.kt	#EXTHTTP:
@@ -3879,6 +3907,7 @@
 1	protocol	core/src/main/java/tv/own/owntv/core/repository/EpgRepository.kt	stalker://
 1	log	core/src/main/java/tv/own/owntv/core/repository/EpgRepository.kt	windowBackH=${WINDOW_BACK_MS / 3_600_000} windowAheadH=${aheadMs / 3_600_000}
 1	technical	core/src/main/java/tv/own/owntv/core/repository/EpisodeMerge.kt	s${seasonNumber}e$episodeNumber
+1	technical	core/src/main/java/tv/own/owntv/core/repository/GuideColours.kt	glcn_guide_colours
 1	technical	core/src/main/java/tv/own/owntv/core/repository/SeriesRepository.kt	\0
 1	technical	core/src/main/java/tv/own/owntv/core/repository/SeriesRepository.kt	${season.id}:$epNo
 1	log	core/src/main/java/tv/own/owntv/core/repository/SeriesRepository.kt	${source.type} episode load failed seriesId=${series.id}

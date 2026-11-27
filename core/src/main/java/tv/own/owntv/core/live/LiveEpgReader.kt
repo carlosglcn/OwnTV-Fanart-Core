@@ -317,7 +317,7 @@ class LiveEpgReader(
                     // glcn: the same programme [nowNext] calls on air — the one that started last of those
                     // covering now, when a guide lists two that overlap (the row and the banner disagreed).
                     ?.filter { at in it.startMs until it.stopMs }?.maxByOrNull { it.startMs }
-                    ?.let { result[channelId] = XtEpgEntry(it.title, null, it.startMs + delta, it.stopMs + delta) }
+                    ?.let { result[channelId] = XtEpgEntry(it.title, null, it.startMs + delta, it.stopMs + delta, sourceId = it.sourceId) }
             }
         }
         // Second pass: whatever the preview pane has already resolved for a channel the stored guide
@@ -463,4 +463,4 @@ class LiveEpgReader(
 
 /** A stored programme as a schedule row; its id lets a screen open the full programme (details, synopsis). */
 internal fun EpgProgrammeEntity.toXt() =
-    XtEpgEntry(title = title, description = description, startMs = startMs, stopMs = stopMs, programmeId = id)
+    XtEpgEntry(title = title, description = description, startMs = startMs, stopMs = stopMs, programmeId = id, sourceId = sourceId)

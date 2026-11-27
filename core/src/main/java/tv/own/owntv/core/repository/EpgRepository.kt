@@ -422,6 +422,8 @@ class EpgRepository(
         }
         // One per sync: drops a feed's second copy of a programme before it is written (FeedDedupe).
         val feedDedupe = FeedDedupe()
+        // glcn: what a Kodi-style guide painted its text with (the markup itself comes off in the parser).
+        val guideColours = tv.own.owntv.core.parser.KodiMarkup.Seen()
         // The past is accepted only where retention would keep it: the recent past everywhere, the
         // whole archive window for catch-up channels. Accepting a week of history for every channel
         // and deleting it after the sync meant re-inserting all of it on every sync.
@@ -503,9 +505,11 @@ class EpgRepository(
                                 }
                             },
                             channelFilter = needed,
+                            colours = guideColours,
                         )
                     }
                 }
+                if (guideColours.any || processedCount > 0) GuideColours.learnt(storeId, guideColours)
                 if (buffer.isNotEmpty()) {
                     val batchSize = buffer.size
                     storeProgrammes(buffer.toList())
