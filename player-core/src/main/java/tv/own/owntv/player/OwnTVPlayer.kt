@@ -76,6 +76,9 @@ private val BITMAP_SUB_CODECS = setOf(
     "hdmv_pgs_subtitle", "pgssub", "dvd_subtitle", "dvdsub", "vobsub", "dvb_subtitle", "dvbsub", "xsub",
 )
 
+/** glcn: teletext subtitle tracks as mpv names them: listed, but mpv's own build cannot decode them. */
+private val TELETEXT_CODECS = setOf("dvb_teletext", "teletext")
+
 /** Metadata shown in the player HUD (breadcrumb path, year, channel logo). */
 @Immutable
 data class MediaMeta(
@@ -5115,6 +5118,13 @@ class OwnTVPlayer(
             notifyActiveSubtitle(track)
             return true
         }
+        // glcn: teletext subtitles (page 888 — Movistar+, RTVE, Mediaset) on a live channel: mpv lists the track but
+        // cannot draw it, so it was "on" with nothing on screen. ExoPlayer reads teletext (see Teletext): the channel
+        // goes over to it, with the subtitle switched on there.
+        if (isLiveContent && !exoActive && track?.codec?.lowercase() in TELETEXT_CODECS) {
+            val go = onLiveTeletextPick
+            if (go != null) { go(track?.lang); return false }
+        }
         // Image subtitle on a VOD → hand playback to ExoPlayer (it draws bitmap subs on its own layer).
         if (track?.image == true) {
             if (!isLiveContent) {
@@ -5192,6 +5202,9 @@ class OwnTVPlayer(
     /** Set by the subtitle layer; fired after a VOD file finishes loading so previously downloaded
      *  subtitles can be re-listed. Runs on the main thread. */
     var onVodFileLoaded: (() -> Unit)? = null
+
+    /** glcn: a teletext subtitle was picked on a live channel playing on mpv ([lang]: the track's language, if it has one). */
+    var onLiveTeletextPick: ((lang: String?) -> Unit)? = null
 
     /**
      * Re-attach previously downloaded subtitles WITHOUT changing the current selection (they show in

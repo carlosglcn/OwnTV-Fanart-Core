@@ -8448,6 +8448,7 @@
 1	log	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	drops=${m.getPropertyString("frame-drop-count")}
 2	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	duration
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	dvb_subtitle
+1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	dvb_teletext
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	dvbsub
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	dvd_subtitle
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	dvdsub
@@ -8650,6 +8651,7 @@
 1	file-path	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	subtitle-fonts
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	surround failsafe: $reason (est-vf-fps=$vfps container-fps=$cfps) — falling back to stereo
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	target-colorspace-hint
+1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	teletext
 4	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	time-pos
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	tls-verify
 1	technical	player-core/src/main/java/tv/own/owntv/player/OwnTVPlayer.kt	tone-mapping

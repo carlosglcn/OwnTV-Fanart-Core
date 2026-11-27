@@ -289,6 +289,10 @@ class LivePreviewEngine(
     @Volatile private var prefAudioLang: String = ""
     @Volatile private var prefSubLang: String = ""
 
+    /** glcn: set before a channel is handed over from mpv for its subtitles — the language picked there ("" for any);
+     *  the next stream that lists subtitle tracks switches one on, once. */
+    @Volatile var subtitlesWantedOnce: String? = null
+
     /** Settings → Picture → Default zoom, applied to every new tune. */
     @Volatile private var defaultZoom: ZoomMode = ZoomMode.FIT
 
@@ -3224,6 +3228,15 @@ class LivePreviewEngine(
         applyMute()
         tune.audioTrackList = audio; tune.audioSelections = aSel; _audioCount.value = audio.size
         tune.textTrackList = text; tune.textSelections = tSel; _subCount.value = text.size
+        // glcn: the channel was brought here from mpv for its teletext subtitles: switch them on as soon as the stream
+        // lists them — the track in the language picked there, else the first.
+        subtitlesWantedOnce?.let { lang ->
+            val pick = text.firstOrNull { lang.isNotEmpty() && it.lang.equals(lang, ignoreCase = true) } ?: text.firstOrNull()
+            if (pick != null) {
+                subtitlesWantedOnce = null
+                applySubtitleTrack(pick.mpvId)
+            }
+        }
         applyRememberedTracks()
         if (tv.own.owntv.core.CoreBuildInfo.debug) {
             LiveDiagnosticsLog.event(
