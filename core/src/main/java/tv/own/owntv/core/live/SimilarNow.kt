@@ -8,8 +8,8 @@ import tv.own.owntv.core.database.entity.EpgProgrammeEntity
 import java.text.Normalizer
 
 /**
- * glcn: "You may like" — programmes on the guide soon (on air now or starting within the next hours) that
- * share the genre of the one in focus, best match first. Judged from the guide's categories; a programme
+ * glcn: "You may like" — programmes on air now, then those starting within the hour, that
+ * share the genre of the one in focus, best match first within each. Judged from the guide's categories; a programme
  * with none falls back to nothing, so the row simply does not show.
  */
 class SimilarNow(
@@ -62,7 +62,9 @@ class SimilarNow(
             }
         }
         return scored
-            .sortedWith(compareByDescending<Pair<Int, Entry>> { it.first }.thenBy { it.second.programme.startMs })
+            // glcn: what can be watched right now always comes first, best match first; only then what starts within
+            // the hour, soonest first — a programme three hours away no longer stands before one already on.
+            .sortedWith(compareBy<Pair<Int, Entry>> { it.second.programme.startMs > now }.thenByDescending { it.first }.thenBy { it.second.programme.startMs })
             .map { it.second }
             .distinctBy { fold(it.programme.title) }
             .take(limit)
@@ -79,7 +81,7 @@ class SimilarNow(
         /** A channel's name without its provider tag or quality, so La 2 HD and La 2 SD are one family. */
         fun family(name: String): String =
             QUALITY_WORDS.replace(fold(ProviderTags.parse(name).name), "").replace(NON_ALNUM, "")
-        private const val AHEAD_MS = 4 * 3_600_000L
+        private const val AHEAD_MS = 3_600_000L
 
         /** Genres too broad to say anything ("Series", "Movie"…): they never count as a match on their own. */
         private val GENERIC = setOf(
