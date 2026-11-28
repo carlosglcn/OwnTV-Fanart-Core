@@ -48,7 +48,11 @@ class SportOnChannels(private val data: WatchData, private val now: () -> Long =
 
     private suspend fun readNow(matches: List<Match>): Map<GuideSport, List<GuideSportItem>> {
         val t = now()
-        val keys = matches.map { WatchMatcher.Keys(it) }
+        // glcn: only for a match still to be played or on — a programme the guide ties to one that is over is still
+        // on air (MotoGP's qualifying hour outlasts its first session, filed as finished): the hub then listed it
+        // nowhere, neither as a live match nor here.
+        val keys = matches.filter { it.state == tv.own.owntv.core.sports.model.MatchState.PRE || it.state == tv.own.owntv.core.sports.model.MatchState.IN }
+            .map { WatchMatcher.Keys(it) }
         val candidates = data.programmes(t - LOOKBACK_MS, t + SOON_MS, minStop = t).mapNotNull { p ->
             val tokens = TeamNames.tokens(p.title).toSet()
             val words = CompetitionNames.words(p.title)
