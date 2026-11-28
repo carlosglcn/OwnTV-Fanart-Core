@@ -539,7 +539,10 @@ class SportsRepository(
                 endedAt = stored.endedAt + b.endedAt,
             )
         }
-        seed(stored, stored.rebuiltAt ?: clock(), replace = false)
+        // glcn: the refresh is told what the file held, live matches included. Told only what is shown, it saw nothing
+        // live in those leagues and no kick-off to come, so it never read them again: a match under way when the app
+        // was restarted (a Davis Cup tie, after an update) stayed off the board until the next rebuild, hours later.
+        seed(read, read.rebuiltAt ?: clock(), replace = false)
         stored.rebuiltAt?.let { at -> activity.rebuiltAt.update { maxOf(it ?: 0L, at) } }
     }
 
