@@ -59,6 +59,14 @@ interface ChannelDao {
     @Query("SELECT * FROM channels WHERE id = :id")
     suspend fun getById(id: Long): ChannelEntity?
 
+    /** glcn: which of [ids] still exist — a favourite whose channel went with its playlist (portable favourites). */
+    @Query("SELECT id FROM channels WHERE id IN (:ids)")
+    suspend fun glcnExisting(ids: List<Long>): List<Long>
+
+    /** glcn: every channel's portable identity (guide id and name), to find a lost favourite in another playlist. */
+    @Query("SELECT id, name, epgChannelId, sourceId, number FROM channels")
+    suspend fun glcnIdentities(): List<GlcnChannelIdentity>
+
     // --- Stable-key lookups (Backup & Restore resolution: content ids change on re-sync) ---
     @Query("SELECT * FROM channels WHERE sourceId = :sourceId AND remoteId = :remoteId LIMIT 1")
     suspend fun findByRemote(sourceId: Long, remoteId: String): ChannelEntity?
@@ -542,3 +550,6 @@ interface ChannelDao {
         limit: Int,
     ): Flow<List<ChannelWithWatchedAt>>
 }
+
+/** glcn: what stays the same about a channel from one playlist to another. */
+data class GlcnChannelIdentity(val id: Long, val name: String, val epgChannelId: String?, val sourceId: Long, val number: Int?)

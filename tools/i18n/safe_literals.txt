@@ -1180,6 +1180,8 @@
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT c.*, cat.name AS categoryName FROM channels c
 2	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT c.*, h.watchedAt FROM channels c
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT categoryId, COUNT(*) AS itemCount FROM channels
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT id FROM channels WHERE id IN (:ids)
+1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT id, name, epgChannelId, sourceId, number FROM channels
 1	sql	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT id, remoteId, sortOrder, number FROM channels WHERE sourceId = :sourceId ORDER BY sortOrder ASC, id ASC
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT remoteId FROM channels WHERE sourceId = :sourceId AND categoryId IN (:categoryIds) AND remoteId IS NOT NULL
 1	room-schema	core/src/main/java/tv/own/owntv/core/database/dao/ChannelDao.kt	SELECT remoteId FROM channels WHERE sourceId = :sourceId AND remoteId IS NOT NULL
