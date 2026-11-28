@@ -81,6 +81,17 @@ class SkipSegmentController(
     val buttonShow: StateFlow<tv.own.owntv.core.skip.SkipButtonShow> =
         choices.map { it.buttonShow }.stateIn(scope, SharingStarted.Eagerly, tv.own.owntv.core.skip.SkipButtonShow.DEFAULT)
 
+    /**
+     * glcn: whether any times are known for the item playing. The app's own fallback (an intro or credits chapter in
+     * the file, a jump learned for the series) stands in only while this is false — never two buttons.
+     */
+    val hasTimes: StateFlow<Boolean> =
+        loaded.map { it?.segments?.isNotEmpty() == true }.stateIn(scope, SharingStarted.Eagerly, false)
+
+    /** glcn: the viewer's choice for intros and for end credits, which that fallback follows too. */
+    val introMode: StateFlow<SkipMode> = choices.map { it.intro }.stateIn(scope, SharingStarted.Eagerly, SkipMode.DEFAULT)
+    val creditsMode: StateFlow<SkipMode> = choices.map { it.credits }.stateIn(scope, SharingStarted.Eagerly, SkipMode.DEFAULT)
+
     private val _skipped = MutableSharedFlow<SkipKind>(extraBufferCapacity = 4)
     /** A part was skipped automatically — for the short "Skipped" notice. */
     val skipped: SharedFlow<SkipKind> = _skipped
