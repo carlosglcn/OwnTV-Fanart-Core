@@ -176,9 +176,35 @@ class TeletextPayloadReaderFactory(private val delegate: TsPayloadReader.Factory
     override fun createPayloadReader(streamType: Int, esInfo: TsPayloadReader.EsInfo): TsPayloadReader? {
         if (streamType == -1 || streamType == 0x06) {
             val pages = Teletext.subtitlePages(esInfo.descriptorBytes)
-            if (pages.isNotEmpty()) return PesReader(TeletextReader(pages))
+            if (pages.isNotEmpty()) return AfterTheClock(PesReader(TeletextReader(pages)))
         }
-        return delegate.createPayloadReader(streamType, esInfo)
+        val reader = delegate.createPayloadReader(streamType, esInfo)
+        return if (reader != null && esInfo.dvbSubtitleInfos.isNotEmpty()) AfterTheClock(reader) else reader
+    }
+}
+
+/**
+ * glcn: a subtitle stream never sets the channel's clock. Every stream of a channel shares one clock, set to zero
+ * by whichever packet with a timestamp comes first. On some channels (Antena 3 UHD) the subtitles' timestamps run
+ * many seconds ahead of the picture's — the UHD encoder delays picture and sound, the subtitles pass straight
+ * through — so when a subtitle packet happened to come first, every frame of the picture counted as "before the
+ * start": decoded, never shown ("in=495 out=0 skippedOut=492"), and the channel never opened on ExoPlayer. Whether
+ * it did was down to which packet arrived first. The subtitles now wait until picture or sound has set the clock.
+ */
+@OptIn(UnstableApi::class)
+private class AfterTheClock(private val inner: TsPayloadReader) : TsPayloadReader {
+    private var clock: TimestampAdjuster? = null
+
+    override fun init(timestampAdjuster: TimestampAdjuster, extractorOutput: ExtractorOutput, idGenerator: TsPayloadReader.TrackIdGenerator) {
+        clock = timestampAdjuster
+        inner.init(timestampAdjuster, extractorOutput, idGenerator)
+    }
+
+    override fun seek() = inner.seek()
+
+    override fun consume(data: ParsableByteArray, flags: Int) {
+        if (clock?.timestampOffsetUs == C.TIME_UNSET) return
+        inner.consume(data, flags)
     }
 }
 
