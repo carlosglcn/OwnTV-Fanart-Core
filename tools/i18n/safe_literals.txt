@@ -7996,6 +7996,7 @@
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	ExoPlayer error before first frame
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	ExoPlayer gave up mid-stream
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	ExoPlayer never opened it (${openBudgetMs / 1000}s, no frame and no error)
+1	log	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	exo open stalled ·
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	no decodable audio track
 1	json	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	no decoder on this device for the video track (audio plays, no picture)
 1	log	player-core/src/main/java/tv/own/owntv/player/LiveExoWatchdog.kt	no video frame rendered (audio plays, no picture)
@@ -8098,6 +8099,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	avc
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	buffer stopped growing at ${buffered}ms
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	buffered but never started playing ($detail)
+1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	buffered=${p.totalBufferedDuration}ms pos=${p.currentPosition}ms state=${p.playbackState}
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	buffering stalled
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	building tunneled player (N19)
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	connection pool evict failed: ${it.javaClass.simpleName}
@@ -8108,6 +8110,7 @@
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder exhausted: no MediaCodec instance available
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder failed before first frame ($why) — rebuild ${tune.decoderRebuilds} in ${delayMs}ms
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder failure before first frame — rebuild ${tune.decoderRebuilds} in ${delayMs}ms
+1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	decoder in=${c?.queuedInputBufferCount ?: -1} skippedIn=${c?.skippedInputBufferCount ?: -1} out=${c?.renderedOutputBufferCount ?: -1}
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	device
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	discontinuitySeq=${manifest.mediaPlaylist.discontinuitySequence}
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	distinct segments on this load
@@ -8163,6 +8166,7 @@
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	network revalidated
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	no data for ${failingSecs}s; gave up after ${tune.retryCount} reconnects
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	no picture after ${now - tune.readySinceMs}ms
+1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	no player
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	no response from ${HttpClient.redactHost(host)} within ${RESPONSE_DEADLINE_MS}ms — request abandoned ($misses in a row)
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	not built
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	open stalled
@@ -8232,6 +8236,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	server=${response.header("Server").orEmpty()} xcache=${response.header("X-Cache").orEmpty()}
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	setCookie=${response.headers("Set-Cookie").size}
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	setMuted engine=$engineId muted=$m
+1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	skippedOut=${c?.skippedOutputBufferCount ?: -1} dropped=${c?.droppedBufferCount ?: -1} toKeyframe=${c?.droppedToKeyframeCount ?: -1} ·
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	software
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	software decoder for ${format.height}p while software decoding above 1080p is off — failing the load
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	software decoding above 1080p is off
@@ -8258,6 +8263,7 @@
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	url=${HttpClient.redactUrl(url)}
 1	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	variants=${mv.variants.size} audios=${mv.audios.size} subs=${mv.subtitles.size}
 2	technical	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	video
+1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	video ${f?.sampleMimeType} ${f?.codecs} ${f?.width}x${f?.height} @${f?.frameRate} color=${f?.colorInfo?.toLogString()} ·
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	video decoder: $decoderName (
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	video surface attached (${id(s)}), decoder ${if (player == null) "not built" else "running"}
 1	log	player-core/src/main/java/tv/own/owntv/player/LivePreviewEngine.kt	video surface detached (${id(previous!!)})

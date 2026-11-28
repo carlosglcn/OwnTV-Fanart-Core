@@ -123,6 +123,8 @@ class LiveExoWatchdog(
         if (!stillOurs()) return
 
         if (terminal == null) {
+            // glcn: what the decoder had been given and had produced by then, so a report says why (see openStallDetail).
+            runCatching { LiveDiagnosticsLog.event("exo open stalled · " + engine.openStallDetail()) }
             handOver(HandOver("ExoPlayer never opened it (${openBudgetMs / 1000}s, no frame and no error)"))
             return
         }

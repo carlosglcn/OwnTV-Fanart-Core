@@ -625,6 +625,21 @@ class LivePreviewEngine(
      *  this moves, so the attempt made *after* a wait gets a full deadline of its own instead of
      *  inheriting the seconds left over from the refused one. */
     val providerBackOffsSpent: Int get() = tune.providerBackOffs
+
+    /**
+     * glcn: where an open that never drew a frame got stuck, for the report: what reached the decoder and what came
+     * out of it. Nothing queued = no start point (keyframe) ever arrived; queued but nothing out = the decoder took
+     * the data and gave no picture; out but not shown = frames held back by their timestamps.
+     */
+    fun openStallDetail(): String {
+        val p = player ?: return "no player"
+        val c = p.videoDecoderCounters?.also { it.ensureUpdated() }
+        val f = p.videoFormat
+        return "video ${f?.sampleMimeType} ${f?.codecs} ${f?.width}x${f?.height} @${f?.frameRate} color=${f?.colorInfo?.toLogString()} · " +
+            "decoder in=${c?.queuedInputBufferCount ?: -1} skippedIn=${c?.skippedInputBufferCount ?: -1} out=${c?.renderedOutputBufferCount ?: -1} " +
+            "skippedOut=${c?.skippedOutputBufferCount ?: -1} dropped=${c?.droppedBufferCount ?: -1} toKeyframe=${c?.droppedToKeyframeCount ?: -1} · " +
+            "buffered=${p.totalBufferedDuration}ms pos=${p.currentPosition}ms state=${p.playbackState}"
+    }
     private val _stalledSinceMs = MutableStateFlow<Long?>(null)
     /** See [PlaybackEngine.stalledSinceMs]. Set when a channel that has played stops, cleared when it plays
      *  again, is stopped, or ends in an error. */
