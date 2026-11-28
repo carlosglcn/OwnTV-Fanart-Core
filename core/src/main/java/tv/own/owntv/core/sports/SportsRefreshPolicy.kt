@@ -160,6 +160,11 @@ class SportsRefreshPolicy {
                 else -> nextKickoff(known, now)?.let { want(today, Want.At(it)) }
             }
             for (feed in listOf(today, next)) feeds[feed]?.fetchedAt?.let { want(feed, Want.At(nextEspnDay(it))) }
+            // glcn: with nothing live and no kick-off known, today's scoreboard is still read again every IDLE_REREAD_MS
+            // while a screen shows it. A match missing from the stored board (one dropped as stale at a restart, then
+            // saved without it) had no way back before the next rebuild, hours later: Home showed the Davis Cup on
+            // air while Sports listed nothing.
+            feeds[today]?.fetchedAt?.let { want(today, Want.At(it + IDLE_REREAD_MS)) }
         }
 
         /** A league's table, once, where it has one: a cup's is empty every time. */
@@ -225,6 +230,8 @@ class SportsRefreshPolicy {
         val LIVE_SECONDS_CHOICES = listOf(30, 60, 90, 120)
 
         const val MIN_AGE_MS = 10_000L
+        /** glcn: how often a followed league with nothing live is read again while it is on screen. */
+        const val IDLE_REREAD_MS = 20 * 60_000L
         const val PAUSE_MS = 15 * 60_000L
         val BACKOFF_MS = longArrayOf(30_000L, 60_000L, 120_000L, 300_000L)
 
