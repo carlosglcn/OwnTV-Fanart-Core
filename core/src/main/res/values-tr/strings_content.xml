@@ -49,6 +49,8 @@
     <string name="content_media_press_back">Kapatmak için Geri\'ye basın</string>
     <string name="content_add_favourite">Favorilere ekle</string>
     <string name="content_remove_favourite">Favorilerden kaldır</string>
+    <string name="content_favourite_added_named">Favorilere eklendi: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="content_favourite_removed_named">Favorilerden kaldırıldı: <xliff:g id="title">%1$s</xliff:g></string>
     <string name="content_mark_watched">İzlendi olarak işaretle</string>
     <string name="content_mark_unwatched">İzlenmedi olarak işaretle</string>
     <string name="content_move">Taşı</string>
@@ -218,7 +220,7 @@
     <string name="content_epg_filter_hides_all">Geçerli filtre tüm kanalları gizliyor. Rehberi görmek için sıralamayı değiştirin.</string>
     <string name="content_epg_add_playlist">Rehberi görmek için bir oynatma listesi ekleyin.</string>
     <string name="content_epg_no_channels_query">“<xliff:g id="query">%1$s</xliff:g>” için rehber kanalı bulunamadı.</string>
-    <string name="content_epg_mismatched_ids">Rehber verileri kayıtlı ancak kanal kimlikleri kanallarınızın EPG kimlikleriyle eşleşmiyor — bu EPG akışı farklı bir sağlayıcının kanal listesine ait olabilir.</string>
+    <string name="content_epg_mismatched_ids">Rehber verileri kayıtlı ancak kanal kimlikleri kanallarınızın EPG kimlikleriyle eşleşmiyor. “EPG\'yi otomatik eşleştir” seçeneğini kullanın, ardından hâlâ rehberi olmayan her kanalı menüsündeki “EPG\'yi eşleştir” seçeneğiyle eşleştirin.</string>
     <string name="content_epg_catchup_unavailable">Bu kanal için geri izleme kullanılamıyor.</string>
     <string name="content_epg_matched_no_programmes">Eşleştirildi — ancak bu rehber kanalının EPG akışında henüz güncel program yok.</string>
     <string name="content_epg_add_playlist_first">Önce bir oynatma listesi ekleyin.</string>
@@ -379,4 +381,10 @@
     <string name="content_poster_size">Afiş boyutu</string>
     <string name="content_vod_more_in"><xliff:g id="category">%1$s</xliff:g> kategorisinde daha fazlası</string>
     <string name="content_live_next_label">SIRADA · <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_check_theintrodb">TheIntroDB’yi denetle</string>
+    <string name="theintrodb_check_found">TheIntroDB’de şunların süreleri var: <xliff:g id="parts">%1$s</xliff:g></string>
+    <string name="theintrodb_check_none">TheIntroDB bu başlığı tanıyor ama henüz süresi yok.</string>
+    <string name="theintrodb_check_unlisted">TheIntroDB bu başlığı henüz listelemiyor.</string>
+    <string name="theintrodb_check_no_tmdb">Bu başlık TMDB ile eşleşmedi, bu yüzden TheIntroDB denetlenemez. “TMDB adını ayarla” bunu düzeltebilir.</string>
+    <string name="theintrodb_check_tmdb_id">TMDB kimliği <xliff:g id="id">%1$d</xliff:g></string>
 </resources>

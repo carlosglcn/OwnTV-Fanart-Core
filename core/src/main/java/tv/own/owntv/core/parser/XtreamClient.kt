@@ -7,6 +7,7 @@ import android.util.JsonToken
 import android.util.Log
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
+import tv.own.owntv.core.content.EpisodeStills
 import tv.own.owntv.core.database.entity.SourceEntity
 import tv.own.owntv.core.network.HttpClient
 import java.io.InputStream
@@ -36,6 +37,8 @@ data class XtEpisode(
     val id: String, val seasonNumber: Int, val episodeNumber: Int, val title: String, val containerExt: String?,
     /** When it first aired, epoch ms — the panel's `releasedate`/`air_date`, or its `added` stamp. */
     val airDateMs: Long? = null,
+    /** The panel's picture of the episode — `info.movie_image`, else `cover_big` / `stream_icon`. */
+    val imageUrl: String? = null,
 )
 data class XtSeriesInfo(val episodes: List<XtEpisode>)
 
@@ -388,6 +391,7 @@ class XtreamClient(private val http: HttpClient) {
         var season = seasonFallback
         var airDate: Long? = null
         var added: Long? = null
+        val images = HashMap<String, String>(2)
         var pending = firstName
         while (pending != null || reader.hasNext()) {
             val name = pending ?: reader.nextName()
@@ -404,30 +408,42 @@ class XtreamClient(private val http: HttpClient) {
                 "release_date", "releaseDate", "releasedate", "air_date", "airdate" ->
                     airDate = firstOf(airDate, parseEpisodeDate(reader.nextStringOrNull()))
                 "added" -> added = reader.nextStringOrNull()?.toLongOrNull()?.takeIf { it > 0 }?.times(1000)
-                "info" -> airDate = firstOf(airDate, readEpisodeInfoDate(reader))
+                // A few panels put the picture on the episode itself rather than in `info`.
+                in EPISODE_IMAGE_KEYS -> readImage(reader, name, images)
+                "info" -> airDate = firstOf(airDate, readEpisodeInfo(reader, images))
                 else -> reader.skipValue()
             }
         }
         reader.endObject()
+        val image = EPISODE_IMAGE_KEYS.firstNotNullOfOrNull { images[it] }
         // Keep a missing provider title empty. The Compose episode renderer supplies a localized
         // episode-number fallback; storing English here would freeze the device language in the DB.
-        id?.let { out.add(XtEpisode(it, season, epNum, title.trim(), ext, airDate ?: added)) }
+        id?.let { out.add(XtEpisode(it, season, epNum, title.trim(), ext, airDate ?: added, image)) }
     }
 
-    /** The `info` sub-object of an episode — read for its air date, everything else skipped. */
-    private fun readEpisodeInfoDate(reader: JsonReader): Long? {
+    /**
+     * The `info` sub-object of an episode — read for its air date (returned) and its pictures (into
+     * [images]), everything else skipped.
+     */
+    private fun readEpisodeInfo(reader: JsonReader, images: MutableMap<String, String>): Long? {
         if (reader.peek() != JsonToken.BEGIN_OBJECT) { reader.skipValue(); return null }
         var date: Long? = null
         reader.beginObject()
         while (reader.hasNext()) {
-            when (reader.nextName()) {
+            when (val name = reader.nextName()) {
                 "release_date", "releaseDate", "releasedate", "air_date", "airdate" ->
                     date = firstOf(date, parseEpisodeDate(reader.nextStringOrNull()))
+                in EPISODE_IMAGE_KEYS -> readImage(reader, name, images)
                 else -> reader.skipValue()
             }
         }
         reader.endObject()
         return date
+    }
+
+    /** One picture field: kept under its [key] when it is a usable URL and that key has none yet. */
+    private fun readImage(reader: JsonReader, key: String, images: MutableMap<String, String>) {
+        EpisodeStills.urlOrNull(reader.nextStringOrNull())?.let { images.putIfAbsent(key, it) }
     }
 
     /**
@@ -1084,6 +1100,9 @@ class XtreamClient(private val http: HttpClient) {
         const val CATEGORY_MAX_ATTEMPTS = 3
         /** A show's episode list — see [getSeriesInfo]. */
         const val SERIES_INFO_MAX_ATTEMPTS = 2
+
+        /** An episode's picture fields, in the order they are preferred. */
+        val EPISODE_IMAGE_KEYS = listOf("movie_image", "cover_big", "stream_icon")
         /** Enough of an HLS response to see `#EXTM3U` (or that an HTML error page came instead). */
         const val HLS_PROBE_BYTES = 512
         val YOUTUBE_ID = Regex("[A-Za-z0-9_-]{11}")

@@ -79,6 +79,28 @@ class XtreamSeriesInfoParseTest {
     }
 
     @Test
+    fun `the episode picture comes from info movie_image first, then cover_big, then stream_icon`() {
+        val episodes = parse(
+            """{"episodes":{"1":[
+                {"id":"1","info":{"stream_icon":"http://p/s1.jpg","movie_image":"http://p/m1.jpg","release_date":"2020-01-01"}},
+                {"id":"2","info":{"cover_big":"https://p/c2.jpg"},"stream_icon":"http://p/s2.jpg"},
+                {"id":"3","stream_icon":"http://p/s3.jpg","title":"C"},
+                {"id":"4","info":{"movie_image":""}},
+                {"id":"5","info":{"movie_image":"/images/e5.jpg"}},
+                {"id":"6","info":{"movie_image":null,"cover_big":false}}
+            ]}}""",
+        )
+        assertEquals(listOf("1", "2", "3", "4", "5", "6"), episodes.map { it.id })
+        assertEquals(
+            listOf("http://p/m1.jpg", "https://p/c2.jpg", "http://p/s3.jpg", null, null, null),
+            episodes.map { it.imageUrl },
+        )
+        // Reading the picture does not disturb the fields around it.
+        assertEquals(day("2020-01-01"), episodes[0].airDateMs)
+        assertEquals("C", episodes[2].title)
+    }
+
+    @Test
     fun `a fractional or oversized episode number reads as none instead of failing the show`() {
         val episodes = parse(
             """{"episodes":{"1":[

@@ -44,6 +44,8 @@ enum class RemoteShortcutAction {
     NEXT_PLAYLIST,
     // glcn: the programme on air in full — picture, synopsis, what follows (the player's ⓘ screen).
     OPEN_PROGRAMME_INFO,
+    /** Upstream: record a channel from now (or stop it), or download a film, an episode, or a whole show. */
+    RECORD_OR_DOWNLOAD,
 }
 
 enum class RemoteShortcutPress { SHORT, LONG }

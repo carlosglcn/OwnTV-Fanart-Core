@@ -61,6 +61,8 @@
     <string name="content_media_press_back">اضغط على رجوع للإغلاق</string>
     <string name="content_add_favourite">إضافة إلى المفضّلة</string>
     <string name="content_remove_favourite">إزالة من المفضّلة</string>
+    <string name="content_favourite_added_named">أُضيف إلى المفضّلة: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="content_favourite_removed_named">أُزيل من المفضّلة: <xliff:g id="title">%1$s</xliff:g></string>
     <string name="content_mark_watched">وضع علامة «تمت المشاهدة»</string>
     <string name="content_mark_unwatched">وضع علامة «لم تتم المشاهدة»</string>
     <string name="content_move">نقل</string>
@@ -250,7 +252,7 @@
     <string name="content_epg_filter_hides_all">كل القنوات مخفية بسبب عامل التصفية الحالي. غيّر الترتيب لعرض الدليل.</string>
     <string name="content_epg_add_playlist">أضف قائمة تشغيل لعرض دليل البرامج.</string>
     <string name="content_epg_no_channels_query">لم يتم العثور على قنوات في دليل البرامج لـ «<xliff:g id="query">%1$s</xliff:g>».</string>
-    <string name="content_epg_mismatched_ids">بيانات دليل البرامج مخزنة، لكن معرّفات قنواتها لا تطابق معرّفات دليل البرامج الإلكتروني لقنواتك — قد تكون خلاصة دليل البرامج الإلكتروني هذه تابعة لقائمة قنوات مزوّد آخر.</string>
+    <string name="content_epg_mismatched_ids">بيانات دليل البرامج مخزنة، لكن معرّفات قنواتها لا تطابق معرّفات دليل البرامج الإلكتروني لقنواتك. استخدم «مطابقة دليل البرامج الإلكتروني تلقائيًا»، ثم طابِق كل قناة لا تزال بلا دليل عبر «مطابقة دليل البرامج الإلكتروني» في قائمتها.</string>
     <string name="content_epg_catchup_unavailable">مشاهدة البث الفائت غير متاحة لهذه القناة.</string>
     <string name="content_epg_matched_no_programmes">تمت المطابقة — لكن قناة دليل البرامج هذه لا تتضمن حاليًا أي برامج في خلاصة دليل البرامج الإلكتروني.</string>
     <string name="content_epg_add_playlist_first">أضف قائمة تشغيل أولًا.</string>
@@ -443,4 +445,10 @@
     <string name="content_poster_size">حجم الملصقات</string>
     <string name="content_vod_more_in">المزيد في <xliff:g id="category">%1$s</xliff:g></string>
     <string name="content_live_next_label">التالي · <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_check_theintrodb">التحقق من TheIntroDB</string>
+    <string name="theintrodb_check_found">لدى TheIntroDB أوقات لـ: <xliff:g id="parts">%1$s</xliff:g></string>
+    <string name="theintrodb_check_none">يعرف TheIntroDB هذا العنوان لكن ليس لديه أوقات له بعد.</string>
+    <string name="theintrodb_check_unlisted">لا يدرج TheIntroDB هذا العنوان بعد.</string>
+    <string name="theintrodb_check_no_tmdb">هذا العنوان غير مطابق مع TMDB، لذا لا يمكن التحقق من TheIntroDB. يمكن لـ «تعيين اسم TMDB» إصلاح ذلك.</string>
+    <string name="theintrodb_check_tmdb_id">معرّف TMDB <xliff:g id="id">%1$d</xliff:g></string>
 </resources>

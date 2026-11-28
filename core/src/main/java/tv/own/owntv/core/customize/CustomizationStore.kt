@@ -361,12 +361,17 @@ class CustomizationStore(private val context: Context, private val locks: Catego
         }
     }
 
-    /** Merge-restore (backup): overwrites only the provided keys, keeping every other profile's
-     *  customizations untouched (restore must never wipe profiles that aren't in the file). */
+    /** Merge-restore (backup) and local sync: overwrites only the provided keys, keeping every other
+     *  profile's customizations untouched (restore must never wipe profiles that aren't in the file).
+     *  A category lock already here is kept even when the incoming blob has none. */
     suspend fun mergeAll(entries: Map<String, String>) {
         if (entries.isEmpty()) return
         context.customizeStore.edit { prefs ->
-            entries.forEach { (k, v) -> if (k.startsWith("cust_")) prefs[stringPreferencesKey(k)] = v }
+            entries.forEach { (k, v) ->
+                if (!k.startsWith("cust_")) return@forEach
+                val key = stringPreferencesKey(k)
+                prefs[key] = CustomizationJson.keepingLocks(prefs[key], v)
+            }
         }
     }
 }

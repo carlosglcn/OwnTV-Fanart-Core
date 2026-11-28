@@ -53,4 +53,29 @@ class CustomizationJsonTest {
     fun `a section holding only a lock is not empty`() {
         assertFalse(SectionCustomizations(lockedCategories = setOf("1:adult")).isEmpty)
     }
+
+    @Test
+    fun `a merged section without locks keeps the locks already here`() {
+        val here = CustomizationJson.serialize(SectionCustomizations(lockedCategories = setOf("1:adult")))
+        val incoming = CustomizationJson.serialize(SectionCustomizations(hiddenCategories = setOf("1:news")))
+        val merged = CustomizationJson.parse(CustomizationJson.keepingLocks(here, incoming))
+        assertEquals(setOf("1:adult"), merged.lockedCategories)
+        assertEquals(setOf("1:news"), merged.hiddenCategories)
+    }
+
+    @Test
+    fun `a merged section adds its own locks to the ones here`() {
+        val here = CustomizationJson.serialize(SectionCustomizations(lockedCategories = setOf("1:adult")))
+        val incoming = CustomizationJson.serialize(SectionCustomizations(lockedCategories = setOf("custom:abc")))
+        val merged = CustomizationJson.parse(CustomizationJson.keepingLocks(here, incoming))
+        assertEquals(setOf("1:adult", "custom:abc"), merged.lockedCategories)
+    }
+
+    @Test
+    fun `with no locks here the incoming section is written as it is`() {
+        val incoming = CustomizationJson.serialize(SectionCustomizations(lockedCategories = setOf("1:adult")))
+        assertEquals(incoming, CustomizationJson.keepingLocks(null, incoming))
+        val unlocked = CustomizationJson.serialize(SectionCustomizations(hiddenCategories = setOf("1:news")))
+        assertEquals(incoming, CustomizationJson.keepingLocks(unlocked, incoming))
+    }
 }

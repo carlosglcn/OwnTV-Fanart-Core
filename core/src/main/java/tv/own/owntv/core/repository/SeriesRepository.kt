@@ -3,6 +3,7 @@ package tv.own.owntv.core.repository
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import tv.own.owntv.core.content.EpisodeStills
 import tv.own.owntv.core.database.dao.SeriesDao
 import tv.own.owntv.core.database.dao.SourceDao
 import tv.own.owntv.core.database.entity.EpisodeEntity
@@ -97,6 +98,19 @@ class SeriesRepository(
     }
 
     /**
+     * Loads the episodes of the shows that synced history or resume records are waiting on (see
+     * [tv.own.owntv.core.backup.UserDataResolver.showsWithPendingEpisodes]); each load resolves the
+     * records as it lands. One show at a time and a handful at most: this runs after a sync from
+     * another device, and a provider is not asked for a whole library on its behalf.
+     */
+    suspend fun loadEpisodesForPendingRecords() {
+        for (id in userData.showsWithPendingEpisodes(MAX_PENDING_SHOWS)) {
+            val show = seriesDao.getSeriesById(id) ?: continue
+            loadEpisodes(show)
+        }
+    }
+
+    /**
      * Writes a fetched list over the stored one, preserving the row id of every episode that
      * survives — see [planEpisodeMerge]. Rebuilding the rows wholesale would detach watch history,
      * resume positions and next-episode autoplay on every single refresh.
@@ -118,7 +132,7 @@ class SeriesRepository(
 
     private suspend fun fetchXtreamEpisodes(series: SeriesEntity, source: SourceEntity, remoteId: String): List<EpisodeEntity> {
         val info = xtream.getSeriesInfo(source, remoteId)
-        return info.episodes.map { e ->
+        val rows = info.episodes.map { e ->
             EpisodeEntity(
                 seriesId = series.id,
                 seasonId = null,
@@ -129,9 +143,14 @@ class SeriesRepository(
                 containerExt = e.containerExt,
                 remoteId = e.id,
                 airDateMs = e.airDateMs,
+                imageUrl = e.imageUrl,
             )
         }
+        return EpisodeStills.keepOwn(rows, series.showArt())
     }
+
+    /** The show's own pictures, which a panel's episode picture must differ from to count as a still. */
+    private fun SeriesEntity.showArt(): Set<String> = setOfNotNull(posterUrl, backdropUrl)
 
     /**
      * Stalker: the show's seasons come from paged `get_ordered_list&movie_id=<remoteId>`,
@@ -267,6 +286,7 @@ class SeriesRepository(
                         streamUrl = StalkerClient.vodEpisodeRef(remoteId, season.id, ep.id),
                         containerExt = null,
                         remoteId = ep.id,
+                        imageUrl = ep.imageUrl,
                     )
                 )
             }
@@ -275,7 +295,7 @@ class SeriesRepository(
             TAG,
             "stalker vod tree episodes seriesId=${series.id} remoteId=$remoteId seasons=${seasons.size} episodes=${episodes.size}",
         )
-        return episodes
+        return EpisodeStills.keepOwn(episodes, series.showArt())
     }
 
     /**
@@ -287,6 +307,9 @@ class SeriesRepository(
 
     private companion object {
         const val TAG = "SeriesRepository"
+
+        /** Shows loaded after one sync for the records waiting on them. */
+        const val MAX_PENDING_SHOWS = 8
 
         /** Safety cap on season paging (a show never has hundreds of season pages). */
         const val MAX_SEASON_PAGES = 20

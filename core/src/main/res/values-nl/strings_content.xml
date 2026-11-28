@@ -49,6 +49,8 @@
     <string name="content_media_press_back">Druk op Terug om te sluiten</string>
     <string name="content_add_favourite">Toevoegen aan favorieten</string>
     <string name="content_remove_favourite">Uit favorieten verwijderen</string>
+    <string name="content_favourite_added_named">Toegevoegd aan favorieten: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="content_favourite_removed_named">Uit favorieten verwijderd: <xliff:g id="title">%1$s</xliff:g></string>
     <string name="content_mark_watched">Markeren als bekeken</string>
     <string name="content_mark_unwatched">Markeren als niet bekeken</string>
     <string name="content_move">Verplaatsen</string>
@@ -218,7 +220,7 @@
     <string name="content_epg_filter_hides_all">Alle zenders worden verborgen door het huidige filter. Wijzig de sortering om de gids te zien.</string>
     <string name="content_epg_add_playlist">Voeg een afspeellijst toe om de programmagids te bekijken.</string>
     <string name="content_epg_no_channels_query">Geen gidszenders gevonden voor “<xliff:g id="query">%1$s</xliff:g>”.</string>
-    <string name="content_epg_mismatched_ids">Er zijn gidsgegevens opgeslagen, maar de zender-ID\'s komen niet overeen met de EPG-ID\'s van je zenders — deze EPG-feed hoort mogelijk bij het zenderaanbod van een andere aanbieder.</string>
+    <string name="content_epg_mismatched_ids">Er zijn gidsgegevens opgeslagen, maar de zender-ID\'s komen niet overeen met de EPG-ID\'s van je zenders. Gebruik “EPG automatisch koppelen” en koppel daarna elke zender die nog geen gids heeft met “EPG koppelen” in het menu van die zender.</string>
     <string name="content_epg_catchup_unavailable">Terugkijken is niet beschikbaar voor deze zender.</string>
     <string name="content_epg_matched_no_programmes">Gekoppeld — maar deze gidszender bevat nog geen actuele programma\'s in de EPG-feed.</string>
     <string name="content_epg_add_playlist_first">Voeg eerst een afspeellijst toe.</string>
@@ -379,4 +381,10 @@
     <string name="content_poster_size">Postergrootte</string>
     <string name="content_vod_more_in">Meer in <xliff:g id="category">%1$s</xliff:g></string>
     <string name="content_live_next_label">HIERNA · <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_check_theintrodb">TheIntroDB controleren</string>
+    <string name="theintrodb_check_found">TheIntroDB heeft tijden voor: <xliff:g id="parts">%1$s</xliff:g></string>
+    <string name="theintrodb_check_none">TheIntroDB kent deze titel, maar heeft er nog geen tijden voor.</string>
+    <string name="theintrodb_check_unlisted">TheIntroDB vermeldt deze titel nog niet.</string>
+    <string name="theintrodb_check_no_tmdb">Deze titel is niet aan TMDB gekoppeld, dus TheIntroDB kan niet worden gecontroleerd. ‘TMDB-naam instellen’ kan dat herstellen.</string>
+    <string name="theintrodb_check_tmdb_id">TMDB-ID <xliff:g id="id">%1$d</xliff:g></string>
 </resources>

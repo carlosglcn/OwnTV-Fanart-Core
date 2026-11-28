@@ -90,6 +90,10 @@
     <string name="content_add_favourite">Add to Favorites</string>
     <!-- Translators: Context-menu option to remove a movie/series/channel from Favorites. -->
     <string name="content_remove_favourite">Remove from Favorites</string>
+    <!-- Translators: Short notice after the remote's Favorite shortcut added a channel, film or show. %1$s is its name. -->
+    <string name="content_favourite_added_named">Added to Favorites: <xliff:g id="title">%1$s</xliff:g></string>
+    <!-- Translators: Short notice after the remote's Favorite shortcut removed a channel, film or show. %1$s is its name. -->
+    <string name="content_favourite_removed_named">Removed from Favorites: <xliff:g id="title">%1$s</xliff:g></string>
     <!-- Translators: Context-menu option to mark a movie/episode as watched. -->
     <string name="content_mark_watched">Mark as watched</string>
     <!-- Translators: Context-menu option to mark a movie/episode as unwatched. -->
@@ -416,8 +420,8 @@
     <string name="content_epg_add_playlist">Add a playlist to see the guide.</string>
     <!-- Translators: Empty-state message when the EPG channel search returns no results. "query" is the search text. -->
     <string name="content_epg_no_channels_query">No guide channels found for \u201c<xliff:g id="query">%1$s</xliff:g>\u201d.</string>
-    <!-- Translators: Warning message when EPG data exists but channel IDs don\'t match. -->
-    <string name="content_epg_mismatched_ids">Guide data is stored, but its channel ids don\'t match your channels\' EPG ids \u2014 this EPG feed may belong to a different provider lineup.</string>
+    <!-- Translators: Shown in the guide when guide data exists but none of its channel ids match the channels in view. Auto-match EPG and Match EPG are the names of two buttons: use this language\'s translations of those two strings. -->
+    <string name="content_epg_mismatched_ids">Guide data is stored, but its channel ids don\'t match your channels\' EPG ids. Use Auto-match EPG, then match any channel still without a guide with Match EPG in its menu.</string>
     <!-- Translators: Status message when a channel has no catch-up support. -->
     <string name="content_epg_catchup_unavailable">Catch-up isn\'t available for this channel.</string>
     <!-- Translators: Status message when a channel is matched to EPG but no programmes are in the feed yet. -->
@@ -1213,4 +1217,16 @@
         <item quantity="other">%1$s films</item>
     </plurals>
     <string name="glcn_trakt_open_activate">Open trakt.tv/activate (code copied)</string>
+    <!-- Translators: Long-press menu action on a film, series or episode: asks TheIntroDB whether it has skip times. TheIntroDB is a service name. -->
+    <string name="content_check_theintrodb">Check TheIntroDB</string>
+    <!-- Translators: Result of Check TheIntroDB. 'parts' is a list such as 'Intro • End credits'. -->
+    <string name="theintrodb_check_found">TheIntroDB has skip times for: <xliff:g id="parts">%1$s</xliff:g></string>
+    <!-- Translators: Result of Check TheIntroDB when no times were submitted yet. -->
+    <string name="theintrodb_check_none">TheIntroDB knows this title but has no skip times for it yet.</string>
+    <!-- Translators: Result of Check TheIntroDB when the title is not in TheIntroDB at all. -->
+    <string name="theintrodb_check_unlisted">TheIntroDB doesn’t list this title yet.</string>
+    <!-- Translators: Result of Check TheIntroDB when the title has no TMDB match. 'Set TMDB name' is another action in the same menu. -->
+    <string name="theintrodb_check_no_tmdb">This title isn’t matched with TMDB, so TheIntroDB can’t be checked. Set TMDB name can fix the match.</string>
+    <!-- Translators: The title's TMDB identifier shown in the Check TheIntroDB result, e.g. 'TMDB ID 1399'. -->
+    <string name="theintrodb_check_tmdb_id">TMDB ID <xliff:g id="id">%1$d</xliff:g></string>
 </resources>

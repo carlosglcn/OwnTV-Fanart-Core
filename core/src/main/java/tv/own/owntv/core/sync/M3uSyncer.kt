@@ -16,6 +16,7 @@ import tv.own.owntv.core.database.dao.SourceDao
 import tv.own.owntv.core.database.entity.CategoryEntity
 import tv.own.owntv.core.database.entity.ChannelEntity
 import tv.own.owntv.core.database.entity.EpisodeEntity
+import tv.own.owntv.core.content.EpisodeStills
 import tv.own.owntv.core.database.entity.MovieEntity
 import tv.own.owntv.core.database.entity.SeasonEntity
 import tv.own.owntv.core.database.entity.SeriesEntity
@@ -306,22 +307,23 @@ internal class M3uSyncer(
                     seasonNumbers.map { n -> SeasonEntity(seriesId = seriesId, seasonNumber = n, name = n.toString()) },
                 )
                 val seasonIdByNumber = seasonNumbers.zip(seasonIds).toMap()
-                seriesDao.upsertEpisodes(
-                    show.episodes.map { ep ->
-                        EpisodeEntity(
-                            seriesId = seriesId,
-                            seasonId = seasonIdByNumber[ep.season],
-                            seasonNumber = ep.season,
-                            episodeNumber = ep.episode,
-                            name = ep.title,
-                            streamUrl = ep.streamUrl,
-                            httpHeaders = ep.httpHeaders,
-                            drmConfig = ep.drmConfig,
-                            manifestType = ep.manifestType,
-                            plot = ep.plot,
-                        )
-                    },
-                )
+                val rows = show.episodes.map { ep ->
+                    EpisodeEntity(
+                        seriesId = seriesId,
+                        seasonId = seasonIdByNumber[ep.season],
+                        seasonNumber = ep.season,
+                        episodeNumber = ep.episode,
+                        name = ep.title,
+                        streamUrl = ep.streamUrl,
+                        httpHeaders = ep.httpHeaders,
+                        drmConfig = ep.drmConfig,
+                        manifestType = ep.manifestType,
+                        imageUrl = ep.logo,
+                        plot = ep.plot, // glcn
+                    )
+                }
+                // The show's poster is its first entry's logo; never repeated as an episode's picture.
+                seriesDao.upsertEpisodes(EpisodeStills.keepOwn(rows, setOfNotNull(EpisodeStills.urlOrNull(show.logo))))
                 return show.episodes.size
             }
 
@@ -460,6 +462,7 @@ internal class M3uSyncer(
                                 drmConfig = DrmConfig.encode(e.drm),
                                 manifestType = ManifestType.encode(e.manifestType),
                                 plot = e.extra["glcn-plot"],
+                                logo = EpisodeStills.urlOrNull(e.logo),
                             ),
                         )
                         pendingEpisodeRows++
@@ -608,6 +611,8 @@ internal class M3uSyncer(
         val drmConfig: String? = null,
         val manifestType: String? = null,
         val plot: String? = null,
+        /** The entry's own `tvg-logo`, a candidate for the episode's picture. */
+        val logo: String? = null,
     )
 
     internal data class ParsedM3uEpisode(val show: String, val season: Int, val episode: Int, val title: String?)
@@ -715,14 +720,21 @@ internal class M3uSyncer(
         /** Order-sensitive hash of a show's episode list, folded into the series content hash. */
         private fun episodesHash(show: M3uShowAccumulator): Int =
             show.episodes.fold(0) { acc, ep ->
-                // httpHeaders, drmConfig and manifestType folded only when present, so playlists without
-                // per-item headers, DRM or a declared container keep the hashes they already have and
-                // don't rewrite on first sync.
+                // httpHeaders, drmConfig, manifestType and logo folded only when present, so playlists
+                // without per-item headers, DRM, a declared container or episode logos keep the hashes
+                // they already have and don't rewrite on first sync.
                 val base = Objects.hash(ep.season, ep.episode, ep.title, ep.streamUrl)
                 val withHeaders = if (ep.httpHeaders == null) base else Objects.hash(base, ep.httpHeaders)
                 val withDrm = if (ep.drmConfig == null) withHeaders else Objects.hash(withHeaders, ep.drmConfig)
                 val withManifest = if (ep.manifestType == null) withDrm else Objects.hash(withDrm, ep.manifestType)
-                31 * acc + if (ep.plot == null) withManifest else Objects.hash(withManifest, ep.plot)
+                // glcn: our plot and upstream's logo, each folded only when present — an entry with one of them keeps the
+                // hash it had before the other existed.
+                31 * acc + when {
+                    ep.plot == null && ep.logo == null -> withManifest
+                    ep.logo == null -> Objects.hash(withManifest, ep.plot)
+                    ep.plot == null -> Objects.hash(withManifest, ep.logo)
+                    else -> Objects.hash(withManifest, ep.plot, ep.logo)
+                }
             }
     }
 }

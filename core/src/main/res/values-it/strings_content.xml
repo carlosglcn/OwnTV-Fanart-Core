@@ -52,6 +52,8 @@
     <string name="content_media_press_back">Premi Indietro per chiudere</string>
     <string name="content_add_favourite">Aggiungi ai preferiti</string>
     <string name="content_remove_favourite">Rimuovi dai preferiti</string>
+    <string name="content_favourite_added_named">Aggiunto ai preferiti: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="content_favourite_removed_named">Rimosso dai preferiti: <xliff:g id="title">%1$s</xliff:g></string>
     <string name="content_mark_watched">Segna come visto</string>
     <string name="content_mark_unwatched">Segna come non visto</string>
     <string name="content_move">Sposta</string>
@@ -226,7 +228,7 @@
     <string name="content_epg_filter_hides_all">Il filtro attuale nasconde tutti i canali. Cambia l’ordinamento per vedere la guida.</string>
     <string name="content_epg_add_playlist">Aggiungi una playlist per visualizzare la guida.</string>
     <string name="content_epg_no_channels_query">Nessun canale della guida trovato per “<xliff:g id="query">%1$s</xliff:g>”.</string>
-    <string name="content_epg_mismatched_ids">I dati della guida sono memorizzati, ma gli ID dei relativi canali non corrispondono agli ID EPG dei tuoi canali — questo flusso EPG potrebbe appartenere all\'offerta di canali di un altro fornitore.</string>
+    <string name="content_epg_mismatched_ids">I dati della guida sono memorizzati, ma gli ID dei relativi canali non corrispondono agli ID EPG dei tuoi canali. Usa “Associa automaticamente EPG”, poi associa ogni canale ancora senza guida con “Associa EPG” nel suo menu.</string>
     <string name="content_epg_catchup_unavailable">La visione in differita non è disponibile per questo canale.</string>
     <string name="content_epg_matched_no_programmes">Associazione effettuata — ma questo canale della guida non ha ancora programmi correnti nel flusso EPG.</string>
     <string name="content_epg_add_playlist_first">Aggiungi prima una playlist.</string>
@@ -395,4 +397,10 @@
     <string name="content_poster_size">Dimensione locandine</string>
     <string name="content_vod_more_in">Altro in <xliff:g id="category">%1$s</xliff:g></string>
     <string name="content_live_next_label">SUCCESSIVO · <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_check_theintrodb">Controlla TheIntroDB</string>
+    <string name="theintrodb_check_found">TheIntroDB ha i tempi per: <xliff:g id="parts">%1$s</xliff:g></string>
+    <string name="theintrodb_check_none">TheIntroDB conosce questo titolo ma non ha ancora tempi.</string>
+    <string name="theintrodb_check_unlisted">TheIntroDB non elenca ancora questo titolo.</string>
+    <string name="theintrodb_check_no_tmdb">Questo titolo non è associato a TMDB, quindi TheIntroDB non può essere controllato. “Imposta nome TMDB” può correggerlo.</string>
+    <string name="theintrodb_check_tmdb_id">ID TMDB <xliff:g id="id">%1$d</xliff:g></string>
 </resources>

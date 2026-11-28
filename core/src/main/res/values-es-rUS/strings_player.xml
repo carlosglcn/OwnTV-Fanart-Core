@@ -8,6 +8,7 @@
     <string name="player_zoom_original">Original (1:1)</string>
     <string name="player_zoom_force_16_9">Forzar 16:9</string>
     <string name="player_zoom_force_4_3">Forzar 4:3</string>
+    <string name="player_zoom_force_20_9">Forzar 20:9</string>
     <string name="player_mini_top_left">Arriba a la izquierda</string>
     <string name="player_mini_top_center">Arriba al centro</string>
     <string name="player_mini_top_right">Arriba a la derecha</string>
@@ -336,4 +337,15 @@
     <string name="player_trailer_open_youtube">Abrir en YouTube</string>
     <string name="player_lock_screen">Bloquear pantalla</string>
     <string name="player_hold_to_unlock">Mantén presionado para desbloquear</string>
+    <string name="player_skip_intro">Omitir intro</string>
+    <string name="player_skip_recap">Omitir resumen</string>
+    <string name="player_skip_credits">Omitir créditos</string>
+    <string name="player_skip_preview">Omitir avance</string>
+    <string name="player_skipped_intro">Intro omitida</string>
+    <string name="player_skipped_recap">Resumen omitido</string>
+    <string name="player_skipped_credits">Créditos omitidos</string>
+    <string name="player_skipped_preview">Avance omitido</string>
+    <string name="player_watch_credits">Ver créditos</string>
+    <string name="player_keep_credits">Presiona cualquier tecla para ver los créditos</string>
+    <string name="player_keep_credits_mobile">Toca para ver los créditos</string>
 </resources>

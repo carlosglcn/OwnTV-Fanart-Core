@@ -729,6 +729,42 @@ class OwnTVDatabaseMigrationTest {
         assertNameKeysAfterUpgrade()
     }
 
+    /** v56 → v57 adds `episodes.imageUrl`, empty for an episode that already exists; the row is kept. */
+    @Test
+    fun migrateVersion56To57_addsEpisodeImageUrl_keepingEpisodes() {
+        context.deleteDatabase(DB_NAME)
+        val db56 = context.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null)
+        try {
+            executeSchemaQueries(db56, "tv.own.owntv.core.database.OwnTVDatabase/56.json")
+            db56.execSQL(
+                "INSERT INTO sources (id, name, type, url, syncLive, syncMovies, syncSeries, hlsSupported, preferHls, " +
+                    "livePrerollSecs, liveLatencyCustomSecs, maxConnections, maxConnectionsProbedAt, createdAt) " +
+                    "VALUES (1, 'Panel', 'XTREAM', 'http://panel.test', 1, 1, 1, 0, 0, -1, -1, 0, 0, 1)",
+            )
+            db56.execSQL("INSERT INTO series (id, sourceId, name, sortOrder) VALUES (1, 1, 'Show', 0)")
+            db56.execSQL(
+                "INSERT INTO episodes (id, seriesId, seasonNumber, episodeNumber, name, streamUrl, remoteId) " +
+                    "VALUES (7, 1, 1, 2, 'Two', 'http://panel.test/e.mkv', '702')",
+            )
+            db56.version = 56
+        } finally {
+            db56.close()
+        }
+
+        val db = openWithAllMigrations()
+        try {
+            val sqlite = openForAssertions(db)
+            sqlite.prepare("SELECT name, remoteId, imageUrl FROM episodes WHERE id = 7").use {
+                assertTrue(it.step())
+                assertEquals("Two", it.getText(0))
+                assertEquals("702", it.getText(1))
+                assertTrue(it.isNull(2))
+            }
+        } finally {
+            db.close()
+        }
+    }
+
     private fun seedNamedContent(version: Int) {
         context.deleteDatabase(DB_NAME)
         val old = context.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="content_epg_match_button">Автододавання EPG</string>
+    <string name="content_epg_match_button">Автозіставлення EPG</string>
     <string name="content_epg_now_short">Зараз</string>
     <string name="content_programmes_later">Пізніше</string>
     <string name="content_catchup">Архів</string>
@@ -61,6 +61,8 @@
     <string name="content_media_press_back">Натисніть «Назад», щоб закрити</string>
     <string name="content_add_favourite">Додати в обране</string>
     <string name="content_remove_favourite">Прибрати з обраного</string>
+    <string name="content_favourite_added_named">Додано в обране: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="content_favourite_removed_named">Прибрано з обраного: <xliff:g id="title">%1$s</xliff:g></string>
     <string name="content_mark_watched">Позначити як переглянуте</string>
     <string name="content_mark_unwatched">Позначити як непереглянуте</string>
     <string name="content_move">Перемістити</string>
@@ -237,7 +239,7 @@
     <string name="content_epg_filter_hides_all">Усі канали приховано поточним фільтром. Змініть сортування, щоб побачити програму передач.</string>
     <string name="content_epg_add_playlist">Додайте плейлист, щоб побачити програму передач.</string>
     <string name="content_epg_no_channels_query">Каналів програми передач за запитом «<xliff:g id="query">%1$s</xliff:g>» не знайдено.</string>
-    <string name="content_epg_mismatched_ids">Дані програми передач збережено, але ідентифікатори їхніх каналів не збігаються з EPG-ідентифікаторами ваших каналів — цей EPG-потік, імовірно, належить до іншого набору каналів провайдера.</string>
+    <string name="content_epg_mismatched_ids">Дані програми передач збережено, але ідентифікатори їхніх каналів не збігаються з EPG-ідентифікаторами ваших каналів. Скористайтеся «Автозіставлення EPG», а потім зіставте кожен канал, який досі без програми, через «Зіставити EPG» у його меню.</string>
     <string name="content_epg_catchup_unavailable">Архів недоступний для цього каналу.</string>
     <string name="content_epg_matched_no_programmes">Зіставлено, але в EPG-потоці для цього каналу ще немає поточних передач.</string>
     <string name="content_epg_add_playlist_first">Спершу додайте плейлист.</string>
@@ -410,4 +412,10 @@
     <string name="content_season_specials">Спеціальні</string>
     <string name="content_poster_size">Розмір постера</string>
     <string name="content_vod_more_in">Ще в <xliff:g id="category">%1$s</xliff:g></string>
+    <string name="content_check_theintrodb">Перевірити TheIntroDB</string>
+    <string name="theintrodb_check_found">У TheIntroDB є час для: <xliff:g id="parts">%1$s</xliff:g></string>
+    <string name="theintrodb_check_none">TheIntroDB знає цю назву, але часу для неї поки немає.</string>
+    <string name="theintrodb_check_unlisted">У TheIntroDB цієї назви поки немає.</string>
+    <string name="theintrodb_check_no_tmdb">Назву не зіставлено з TMDB, тому перевірити TheIntroDB не можна. Виправити це може «Задати назву TMDB».</string>
+    <string name="theintrodb_check_tmdb_id">ID TMDB <xliff:g id="id">%1$d</xliff:g></string>
 </resources>

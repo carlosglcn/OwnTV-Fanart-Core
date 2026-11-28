@@ -49,6 +49,8 @@
     <string name="content_media_press_back">Tryk på Tilbage for at lukke</string>
     <string name="content_add_favourite">Føj til favoritter</string>
     <string name="content_remove_favourite">Fjern fra favoritter</string>
+    <string name="content_favourite_added_named">Føjet til favoritter: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="content_favourite_removed_named">Fjernet fra favoritter: <xliff:g id="title">%1$s</xliff:g></string>
     <string name="content_mark_watched">Markér som set</string>
     <string name="content_mark_unwatched">Markér som ikke set</string>
     <string name="content_move">Flyt</string>
@@ -218,7 +220,7 @@
     <string name="content_epg_filter_hides_all">Alle kanaler er skjult af det aktuelle filter. Skift sortering for at se guiden.</string>
     <string name="content_epg_add_playlist">Tilføj en afspilningsliste for at se programguiden.</string>
     <string name="content_epg_no_channels_query">Der blev ikke fundet nogen kanaler i programguiden for “<xliff:g id="query">%1$s</xliff:g>”.</string>
-    <string name="content_epg_mismatched_ids">Programguidedata er gemt, men deres kanal-id\'er matcher ikke dine kanalers EPG-id\'er — dette EPG-feed tilhører muligvis en anden kanalpakke fra udbyderen.</string>
+    <string name="content_epg_mismatched_ids">Programguidedata er gemt, men deres kanal-id\'er matcher ikke dine kanalers EPG-id\'er. Brug “Match EPG automatisk”, og match derefter hver kanal, der stadig mangler en guide, med “Match EPG” i dens menu.</string>
     <string name="content_epg_catchup_unavailable">Arkiv er ikke tilgængeligt for denne kanal.</string>
     <string name="content_epg_matched_no_programmes">Matchet — men denne kanal i programguiden har endnu ingen aktuelle programmer i EPG-feedet.</string>
     <string name="content_epg_add_playlist_first">Tilføj først en afspilningsliste.</string>
@@ -379,4 +381,10 @@
     <string name="content_poster_size">Plakatstørrelse</string>
     <string name="content_vod_more_in">Mere i <xliff:g id="category">%1$s</xliff:g></string>
     <string name="content_live_next_label">NÆSTE · <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_check_theintrodb">Tjek TheIntroDB</string>
+    <string name="theintrodb_check_found">TheIntroDB har tider for: <xliff:g id="parts">%1$s</xliff:g></string>
+    <string name="theintrodb_check_none">TheIntroDB kender titlen, men har endnu ingen tider.</string>
+    <string name="theintrodb_check_unlisted">TheIntroDB har endnu ikke denne titel.</string>
+    <string name="theintrodb_check_no_tmdb">Titlen er ikke knyttet til TMDB, så TheIntroDB kan ikke tjekkes. »Angiv TMDB-navn« kan rette det.</string>
+    <string name="theintrodb_check_tmdb_id">TMDB-id <xliff:g id="id">%1$d</xliff:g></string>
 </resources>

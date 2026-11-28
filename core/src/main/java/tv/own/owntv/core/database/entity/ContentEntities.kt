@@ -339,6 +339,11 @@ data class EpisodeEntity(
      * long before episode nine hundred.
      */
     val airDateMs: Long? = null,
+    /**
+     * The provider's own picture of this episode, or null (v57). Only a picture that belongs to this
+     * episode alone is kept — see [tv.own.owntv.core.content.EpisodeStills].
+     */
+    val imageUrl: String? = null,
 )
 
 /**

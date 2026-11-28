@@ -46,6 +46,8 @@
     <string name="content_media_press_back">按返回键关闭</string>
     <string name="content_add_favourite">添加到收藏夹</string>
     <string name="content_remove_favourite">从收藏夹中移除</string>
+    <string name="content_favourite_added_named">已添加到收藏夹：<xliff:g id="title">%1$s</xliff:g></string>
+    <string name="content_favourite_removed_named">已从收藏夹中移除：<xliff:g id="title">%1$s</xliff:g></string>
     <string name="content_mark_watched">标记为已观看</string>
     <string name="content_mark_unwatched">标记为未观看</string>
     <string name="content_move">移动</string>
@@ -210,7 +212,7 @@
     <string name="content_epg_filter_hides_all">当前筛选条件隐藏了所有频道。更改排序方式即可查看节目单。</string>
     <string name="content_epg_add_playlist">添加播放列表以查看节目指南。</string>
     <string name="content_epg_no_channels_query">未找到与“<xliff:g id="query">%1$s</xliff:g>”相关的节目指南频道。</string>
-    <string name="content_epg_mismatched_ids">节目指南数据已存储，但其中的频道 ID 与您的频道电子节目指南（EPG）ID 不匹配——此电子节目指南（EPG）数据源可能属于其他服务提供商的频道阵容。</string>
+    <string name="content_epg_mismatched_ids">节目指南数据已存储，但其中的频道 ID 与您的频道电子节目指南（EPG）ID 不匹配。请使用“自动匹配电子节目指南（EPG）”，然后在仍没有节目指南的频道菜单中选择“匹配电子节目指南（EPG）”进行匹配。</string>
     <string name="content_epg_catchup_unavailable">此频道不支持回看。</string>
     <string name="content_epg_matched_no_programmes">已匹配——但此节目指南频道的电子节目指南（EPG）数据源中暂时没有当前节目。</string>
     <string name="content_epg_add_playlist_first">请先添加播放列表。</string>
@@ -363,4 +365,10 @@
     <string name="content_poster_size">海报大小</string>
     <string name="content_vod_more_in"><xliff:g id="category">%1$s</xliff:g> 中的更多内容</string>
     <string name="content_live_next_label">接下来 · <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_check_theintrodb">检查 TheIntroDB</string>
+    <string name="theintrodb_check_found">TheIntroDB 有以下时间：<xliff:g id="parts">%1$s</xliff:g></string>
+    <string name="theintrodb_check_none">TheIntroDB 收录了此作品，但还没有时间。</string>
+    <string name="theintrodb_check_unlisted">TheIntroDB 尚未收录此作品。</string>
+    <string name="theintrodb_check_no_tmdb">此作品未与 TMDB 匹配，因此无法检查 TheIntroDB。“设置 TMDB 名称”可修正匹配。</string>
+    <string name="theintrodb_check_tmdb_id">TMDB ID <xliff:g id="id">%1$d</xliff:g></string>
 </resources>

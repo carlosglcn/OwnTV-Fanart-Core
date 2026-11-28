@@ -46,6 +46,8 @@
     <string name="content_media_press_back">按下返回鍵以關閉</string>
     <string name="content_add_favourite">加入我的最愛</string>
     <string name="content_remove_favourite">從我的最愛中移除</string>
+    <string name="content_favourite_added_named">已加入我的最愛：<xliff:g id="title">%1$s</xliff:g></string>
+    <string name="content_favourite_removed_named">已從我的最愛中移除：<xliff:g id="title">%1$s</xliff:g></string>
     <string name="content_mark_watched">標示為已觀看</string>
     <string name="content_mark_unwatched">標示為未觀看</string>
     <string name="content_move">移動</string>
@@ -210,7 +212,7 @@
     <string name="content_epg_filter_hides_all">目前的篩選條件隱藏了所有頻道。變更排序方式即可查看節目表。</string>
     <string name="content_epg_add_playlist">新增播放清單以查看節目表。</string>
     <string name="content_epg_no_channels_query">找不到與「<xliff:g id="query">%1$s</xliff:g>」相關的節目表頻道。</string>
-    <string name="content_epg_mismatched_ids">節目表資料已儲存，但其頻道 ID 與您頻道的電子節目表 ID 不符——此電子節目表資訊源可能屬於其他供應商的頻道陣容。</string>
+    <string name="content_epg_mismatched_ids">節目表資料已儲存，但其頻道 ID 與您頻道的電子節目表 ID 不符。請使用「自動配對電子節目表」，再從仍沒有節目表的頻道選單中選擇「配對電子節目表」進行配對。</string>
     <string name="content_epg_catchup_unavailable">此頻道無法使用回看。</string>
     <string name="content_epg_matched_no_programmes">已配對——但此節目表頻道的電子節目表資訊源目前尚無節目。</string>
     <string name="content_epg_add_playlist_first">請先新增播放清單。</string>
@@ -363,4 +365,10 @@
     <string name="content_poster_size">海報大小</string>
     <string name="content_vod_more_in"><xliff:g id="category">%1$s</xliff:g> 中的更多內容</string>
     <string name="content_live_next_label">接下來 · <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_check_theintrodb">檢查 TheIntroDB</string>
+    <string name="theintrodb_check_found">TheIntroDB 有以下時間：<xliff:g id="parts">%1$s</xliff:g></string>
+    <string name="theintrodb_check_none">TheIntroDB 收錄了此作品，但尚無時間。</string>
+    <string name="theintrodb_check_unlisted">TheIntroDB 尚未收錄此作品。</string>
+    <string name="theintrodb_check_no_tmdb">此作品未與 TMDB 配對，因此無法檢查 TheIntroDB。「設定 TMDB 名稱」可修正配對。</string>
+    <string name="theintrodb_check_tmdb_id">TMDB ID <xliff:g id="id">%1$d</xliff:g></string>
 </resources>

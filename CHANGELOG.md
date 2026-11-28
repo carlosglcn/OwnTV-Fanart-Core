@@ -9,9 +9,27 @@
 > in one bolded line of its own (e.g. **Database v46 · Backup v24 · Breaking**). The detail — what,
 > why, files and verification — belongs in the commit message, never here.
 
-## core-1.0.72 — unreleased
+## core-1.0.73 — unreleased
 
-**Database v56 · Backup v28**
+### ✨ New features
+
+- **⏭️ Skip intro, recap, end credits and preview, from TheIntroDB**
+- **🎬 End credits start the next-episode countdown and count as watched**
+- **🔑 TheIntroDB settings: per-part choice, skip button timing, optional API key with daily quota, key from the phone**
+- **🔍 "Check TheIntroDB" in the film, series and episode long-press menus**
+- **❤️ Remote shortcuts "Add or remove favorite" and "Record or download"** (rebuilt from community PR #95 by @Pax24fr)
+- **🔐 DRM: the newer Kodi `drm` and `drm_legacy` playlist lines (ahXN00/OwnTV#393)**
+
+### 🐛 Fixes
+
+- **🎬 Stalker films: the film's file is linked first, as a MAG box does (ahXN00/OwnTV#390)**
+- **🔄 Local sync: an episode watched on the other device reaches Continue Watching without opening the show (ahXN00/OwnTV#394)**
+- **🛟 "Restore did not finish" no longer flashes during a local sync (ahXN00/OwnTV#394)**
+- **🌐 Update check asks again when GitHub briefly fails**
+
+## core-1.0.72 — 2026-11-22
+
+**Database v57 · Backup v28**
 
 ### ✨ New features
 
@@ -28,10 +46,14 @@
 - **📂 Subtitles: "Find in folder" and "Load matching subtitle automatically"**
 - **⏳ "Performing database migration" screen while an update converts the database**
 - **🎮 Player buttons: choose what D-pad Up/Down do in the live player** (community PR ahXN00/OwnTV#382 by @Pax24fr)
+- **🖼️ Episodes keep the provider's own picture (ahXN00/OwnTV#367)**
+- **🖥️ Player zoom: Force 20:9** (ahXN00/OwnTV#378)
 
 ### 🐛 Fixes
 
+- **🔒 A Merge restore or a local sync no longer removes a category lock**
 - **📼 Catch-up: no more frame drops after a programme that failed to open**
+- **📅 Guide: the "ids don't match" notice says to use Auto-match EPG, then Match EPG**
 - **📼 Catch-up: HEVC programmes decode in hardware**
 - **🗂️ Xtream: items a category request returns without a category land in that category**
 - **🔤 Local subtitles: UTF-8 files no longer read as Chinese**

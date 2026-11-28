@@ -133,10 +133,17 @@ data class PlaylistItem(
 @Immutable
 data class NavState(val hasPrev: Boolean, val hasNext: Boolean)
 
-/** Video scaling modes exposed in the player's zoom menu. */
-enum class ZoomMode(@param:androidx.annotation.StringRes val labelRes: Int) {
+/**
+ * Video scaling modes exposed in the player's zoom menu. [forcedAspect] is the picture shape (w/h) a
+ * Force mode shows the video at, letterboxed to fit; null for the modes that follow the video's own
+ * shape. Force 20:9 is for wide films stored squeezed into a 16:9 frame, which no zoom can undo.
+ */
+enum class ZoomMode(@param:androidx.annotation.StringRes val labelRes: Int, val forcedAspect: Float? = null) {
     FIT(tv.own.owntv.core.R.string.player_zoom_fit_screen), FILL(tv.own.owntv.core.R.string.player_zoom_fill_crop), STRETCH(tv.own.owntv.core.R.string.player_zoom_stretch),
-    ORIGINAL(tv.own.owntv.core.R.string.player_zoom_original), FORCE_16_9(tv.own.owntv.core.R.string.player_zoom_force_16_9), FORCE_4_3(tv.own.owntv.core.R.string.player_zoom_force_4_3),
+    ORIGINAL(tv.own.owntv.core.R.string.player_zoom_original),
+    FORCE_16_9(tv.own.owntv.core.R.string.player_zoom_force_16_9, 16f / 9f),
+    FORCE_4_3(tv.own.owntv.core.R.string.player_zoom_force_4_3, 4f / 3f),
+    FORCE_20_9(tv.own.owntv.core.R.string.player_zoom_force_20_9, 20f / 9f),
 }
 
 /**
@@ -1409,6 +1416,12 @@ class OwnTVPlayer(
         item.autoNextCancelled = true // once: the natural end that may still come must not advance a second time
         advanceAfterNaturalEndUnchecked()
     }
+
+    /** True once the viewer cancelled this item's automatic advance (the card's Cancel / Watch credits). */
+    val autoNextCancelled: Boolean get() = item.autoNextCancelled
+
+    /** A catch-up or live-rewind archive programme is loaded — never a film or an episode. */
+    val isArchiveItem: Boolean get() = item.archiveThisItem
 
     // Emitted when the LAST item of an episode queue finishes naturally and auto-play is on, so the
     // series ViewModel can continue into the next season (it has the full series; the player only has
@@ -4019,6 +4032,17 @@ class OwnTVPlayer(
     fun seekBy(deltaMs: Long) {
         if (exoActive) { exoEngine?.seekBy(deltaMs); return }
         if (initialized) mpvAsync { command(arrayOf("seek", (deltaMs / 1000).toString(), "relative")) }
+    }
+
+    /**
+     * Jump to an exact point of the playing film or episode — the end of an intro, recap or preview
+     * being skipped. Exact on both engines (mpv's absolute seek, ExoPlayer's default): a skip lands
+     * once, and a keyframe snap could put the viewer seconds back inside the part they just skipped.
+     */
+    fun seekTo(positionMs: Long) {
+        if (isLiveContent) return
+        if (exoActive) { exoEngine?.seekTo(positionMs); return }
+        if (initialized) mpvAsync { command(MpvLoadCommand.seekTo(positionMs.coerceAtLeast(0))) }
     }
 
     fun setSpeed(speed: Double) {

@@ -12,6 +12,7 @@ import kotlinx.coroutines.withContext
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import tv.own.owntv.core.content.EpisodeStills
 import java.io.FilterInputStream
 import java.io.IOException
 import java.io.File
@@ -126,8 +127,11 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
      */
     data class VodSeason(val id: String, val number: Int?, val name: String?)
 
-    /** An episode row of a [VodSeason]: `series_number` is its number, `series_name` its own title. */
-    data class VodEpisode(val id: String, val number: Int?, val title: String?)
+    /**
+     * An episode row of a [VodSeason]: `series_number` is its number, `series_name` its own title,
+     * `screenshot_uri` its picture.
+     */
+    data class VodEpisode(val id: String, val number: Int?, val title: String?, val imageUrl: String? = null)
 
     /** Where a [VodEpisode]'s file is listed: the parts of a [vodEpisodeRef]. */
     data class VodEpisodeRef(val movieId: String, val seasonId: String, val episodeId: String)
@@ -498,7 +502,10 @@ open class StalkerClient(okHttpClient: OkHttpClient) {
         return request(url, mac, token, userAgent) { reader ->
             readScalarPage(reader) { f ->
                 val id = f["id"]?.takeIf { it.isNotBlank() } ?: return@readScalarPage null
-                VodEpisode(id, f["series_number"]?.trim()?.toIntOrNull(), f["series_name"]?.takeIf { it.isNotBlank() })
+                VodEpisode(
+                    id, f["series_number"]?.trim()?.toIntOrNull(), f["series_name"]?.takeIf { it.isNotBlank() },
+                    EpisodeStills.urlOrNull(absoluteArt(f["screenshot_uri"], apiBase)),
+                )
             }
         }
     }

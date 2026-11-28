@@ -15,6 +15,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -136,17 +137,11 @@ class UpdateManager(
                     .apply { if (token != null) header(AUTH_HEADER, BEARER + token) }
                     .apply { if (cachedEtag != null && !cachedBody.isNullOrBlank()) header("If-None-Match", cachedEtag) }
                     .build()
-                client.newCall(request).execute().use { resp ->
-                    val body = when {
-                        resp.code == 304 && !cachedBody.isNullOrBlank() -> cachedBody
-                        // A private repository answers 404 to a wrong token, not 401.
-                        CoreBuildInfo.releaseNeedsToken && resp.code in TOKEN_REFUSED -> throw TokenNeededException(rejected = true)
-                        !resp.isSuccessful -> throw CheckHttpException(resp.code)
-                        else -> resp.body.string().also { fresh ->
-                            val etag = resp.header("ETag")
-                            if (etag != null && fresh.isNotBlank()) {
-                                cache.edit().putString("etag:$cacheKey", etag).putString("body:$cacheKey", fresh).apply()
-                            }
+                run {
+                    // glcn: the cached answer (304), a refused token and the ETag are handled inside, around upstream's retry.
+                    val body = latestReleaseBody(request, cachedBody) { etag, fresh ->
+                        if (etag != null && fresh.isNotBlank()) {
+                            cache.edit().putString("etag:$cacheKey", etag).putString("body:$cacheKey", fresh).apply()
                         }
                     }
                     if (body.isBlank()) throw InvalidReleaseResponseException()
@@ -182,6 +177,33 @@ class UpdateManager(
                 Log.w(TAG, "update check failed: ${error.message}", error)
                 _state.value = State.Failed(failureFor(error, checking = true))
             }
+        }
+    }
+
+    /**
+     * The latest-release answer. A 5xx is GitHub itself briefly failing — it happens for a few
+     * seconds at a time — so it is asked again before the user is shown the code; anything else
+     * (a 403 rate limit, a 404) would answer the same again and fails at once.
+     */
+    private suspend fun latestReleaseBody(request: Request, cachedBody: String?, onFresh: (etag: String?, body: String) -> Unit): String {
+        var attempt = 0
+        while (true) {
+            val (code, retryAfter, body) = client.newCall(request).execute().use { resp ->
+                val answer = when {
+                    // glcn: "not modified" — the answer kept from last time stands (and costs none of GitHub's allowance).
+                    resp.code == 304 && !cachedBody.isNullOrBlank() -> cachedBody
+                    // glcn: a private repository answers 404 to a wrong token, not 401.
+                    CoreBuildInfo.releaseNeedsToken && resp.code in TOKEN_REFUSED -> throw TokenNeededException(rejected = true)
+                    resp.isSuccessful -> resp.body.string().also { onFresh(resp.header("ETag"), it) }
+                    else -> null
+                }
+                Triple(resp.code, resp.header("Retry-After"), answer)
+            }
+            if (body != null) return body
+            val wait = checkRetryDelayMs(code, retryAfter, attempt) ?: throw CheckHttpException(code)
+            Log.i(TAG, "update check got HTTP $code — asking again in $wait ms")
+            delay(wait)
+            attempt++
         }
     }
 
@@ -364,5 +386,22 @@ class UpdateManager(
         private const val BEARER = "Bearer "
         private const val OCTET_STREAM = "application/octet-stream"
         private val TOKEN_REFUSED = setOf(401, 403, 404)
+
+        /** Two more tries after the first answer, so a short outage costs a few seconds, not a failure. */
+        private const val CHECK_RETRIES = 2
+        private const val CHECK_RETRY_BASE_MS = 1_500L
+        /** A `Retry-After` longer than this is not waited out behind a "Checking…" card. */
+        private const val CHECK_RETRY_MAX_MS = 10_000L
+
+        /**
+         * How long to wait before asking again after HTTP [code] on try [attempt] (0 = the first), or
+         * null to give up: only a 5xx is retried, at most [CHECK_RETRIES] times, after the server's own
+         * `Retry-After` seconds when it gives them, else a growing pause.
+         */
+        internal fun checkRetryDelayMs(code: Int, retryAfter: String?, attempt: Int): Long? {
+            if (code !in 500..599 || attempt >= CHECK_RETRIES) return null
+            val asked = retryAfter?.trim()?.toLongOrNull()?.takeIf { it >= 0 }?.times(1_000)
+            return (asked ?: (CHECK_RETRY_BASE_MS * (attempt + 1))).coerceAtMost(CHECK_RETRY_MAX_MS)
+        }
     }
 }

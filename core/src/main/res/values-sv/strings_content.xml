@@ -49,6 +49,8 @@
     <string name="content_media_press_back">Tryck på Tillbaka för att stänga</string>
     <string name="content_add_favourite">Lägg till som favorit</string>
     <string name="content_remove_favourite">Ta bort från favoriter</string>
+    <string name="content_favourite_added_named">Tillagd som favorit: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="content_favourite_removed_named">Borttagen från favoriter: <xliff:g id="title">%1$s</xliff:g></string>
     <string name="content_mark_watched">Markera som sedd</string>
     <string name="content_mark_unwatched">Markera som osedd</string>
     <string name="content_move">Flytta</string>
@@ -218,7 +220,7 @@
     <string name="content_epg_filter_hides_all">Det aktuella filtret döljer alla kanaler. Ändra sorteringen för att se guiden.</string>
     <string name="content_epg_add_playlist">Lägg till en spellista för att se programguiden.</string>
     <string name="content_epg_no_channels_query">Inga kanaler i programguiden hittades för ”<xliff:g id="query">%1$s</xliff:g>”.</string>
-    <string name="content_epg_mismatched_ids">Programguidedata har sparats, men kanal-id:na matchar inte kanalernas EPG-id:n — det här EPG-flödet kan tillhöra en annan leverantörs kanalutbud.</string>
+    <string name="content_epg_mismatched_ids">Programguidedata har sparats, men kanal-id:na matchar inte kanalernas EPG-id:n. Använd ”Matcha EPG automatiskt” och matcha sedan varje kanal som fortfarande saknar guide med ”Matcha EPG” i dess meny.</string>
     <string name="content_epg_catchup_unavailable">Tv-arkiv är inte tillgängligt för den här kanalen.</string>
     <string name="content_epg_matched_no_programmes">Matchad — men den här kanalen i programguiden har ännu inga aktuella program i EPG-flödet.</string>
     <string name="content_epg_add_playlist_first">Lägg till en spellista först.</string>
@@ -379,4 +381,10 @@
     <string name="content_poster_size">Storlek på omslagsbilder</string>
     <string name="content_vod_more_in">Mer i <xliff:g id="category">%1$s</xliff:g></string>
     <string name="content_live_next_label">NÄSTA · <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_check_theintrodb">Kontrollera TheIntroDB</string>
+    <string name="theintrodb_check_found">TheIntroDB har tider för: <xliff:g id="parts">%1$s</xliff:g></string>
+    <string name="theintrodb_check_none">TheIntroDB känner till titeln men har inga tider än.</string>
+    <string name="theintrodb_check_unlisted">TheIntroDB har inte den här titeln än.</string>
+    <string name="theintrodb_check_no_tmdb">Titeln är inte kopplad till TMDB, så TheIntroDB kan inte kontrolleras. ”Ange TMDB-namn” kan rätta det.</string>
+    <string name="theintrodb_check_tmdb_id">TMDB-id <xliff:g id="id">%1$d</xliff:g></string>
 </resources>

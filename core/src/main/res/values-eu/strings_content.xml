@@ -49,6 +49,8 @@
     <string name="content_media_press_back">Sakatu Atzera ixteko</string>
     <string name="content_add_favourite">Gehitu gogokoetara</string>
     <string name="content_remove_favourite">Kendu gogokoetatik</string>
+    <string name="content_favourite_added_named">Gogokoetara gehituta: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="content_favourite_removed_named">Gogokoetatik kenduta: <xliff:g id="title">%1$s</xliff:g></string>
     <string name="content_mark_watched">Markatu ikusitako gisa</string>
     <string name="content_mark_unwatched">Markatu ikusi gabeko gisa</string>
     <string name="content_move">Mugitu</string>
@@ -166,7 +168,7 @@
     <string name="content_epg_filter_hides_all">Kanal guztiak ezkutatuta daude uneko iragazkiaren ondorioz. Aldatu ordenatzea gida ikusteko.</string>
     <string name="content_epg_add_playlist">Gehitu erreprodukzio-zerrenda bat gida ikusteko.</string>
     <string name="content_epg_no_channels_query">Ez da gida-kanalik aurkitu “<xliff:g id="query">%1$s</xliff:g>” bilaketarako.</string>
-    <string name="content_epg_mismatched_ids">Gidaren datuak gordeta daude, baina haien kanal-IDak ez datoz bat zure kanalen EPG IDekin — baliteke EPG jario hau beste hornitzaile baten kanal-sortari dagokion izatea.</string>
+    <string name="content_epg_mismatched_ids">Gidaren datuak gordeta daude, baina haien kanal-IDak ez datoz bat zure kanalen EPG IDekin. Erabili “Parekatu EPGa automatikoki”, eta gero parekatu oraindik gidarik gabe dagoen kanal bakoitza bere menuko “Parekatu EPGa” aukerarekin.</string>
     <string name="content_epg_catchup_unavailable">Berrikustea ez dago erabilgarri kanal honetarako.</string>
     <string name="content_epg_matched_no_programmes">Parekatuta — baina gida-kanal honek ez du oraindik uneko programarik EPG jarioan.</string>
     <string name="content_epg_add_playlist_first">Gehitu erreprodukzio-zerrenda bat lehenik.</string>
@@ -379,4 +381,10 @@
     <string name="content_poster_size">Posterren tamaina</string>
     <string name="content_vod_more_in">Gehiago hemen: <xliff:g id="category">%1$s</xliff:g></string>
     <string name="content_live_next_label">HURRENGOA · <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_check_theintrodb">Egiaztatu TheIntroDB</string>
+    <string name="theintrodb_check_found">TheIntroDBk denborak ditu hauentzat: <xliff:g id="parts">%1$s</xliff:g></string>
+    <string name="theintrodb_check_none">TheIntroDBk izenburu hau ezagutzen du, baina oraindik ez du denborarik.</string>
+    <string name="theintrodb_check_unlisted">TheIntroDBk ez du oraindik izenburu hau.</string>
+    <string name="theintrodb_check_no_tmdb">Izenburu hau ez dago TMDBrekin lotuta, beraz ezin da TheIntroDB egiaztatu. «Ezarri TMDB izena» aukerak konpon dezake.</string>
+    <string name="theintrodb_check_tmdb_id">TMDB IDa <xliff:g id="id">%1$d</xliff:g></string>
 </resources>

@@ -49,6 +49,8 @@
     <string name="content_media_press_back">അടയ്ക്കാൻ Back അമർത്തുക</string>
     <string name="content_add_favourite">പ്രിയപ്പെട്ടവയിലേക്ക് ചേർക്കുക</string>
     <string name="content_remove_favourite">പ്രിയപ്പെട്ടവയിൽ നിന്ന് നീക്കുക</string>
+    <string name="content_favourite_added_named">പ്രിയപ്പെട്ടവയിലേക്ക് ചേർത്തു: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="content_favourite_removed_named">പ്രിയപ്പെട്ടവയിൽ നിന്ന് നീക്കി: <xliff:g id="title">%1$s</xliff:g></string>
     <string name="content_mark_watched">കണ്ടതായി അടയാളപ്പെടുത്തുക</string>
     <string name="content_mark_unwatched">കാണാത്തതായി അടയാളപ്പെടുത്തുക</string>
     <string name="content_move">നീക്കുക</string>
@@ -218,7 +220,7 @@
     <string name="content_epg_filter_hides_all">നിലവിലെ ഫിൽട്ടർ എല്ലാ ചാനലുകളും മറയ്ക്കുന്നു. ഗൈഡ് കാണാൻ ക്രമം മാറ്റുക.</string>
     <string name="content_epg_add_playlist">ഗൈഡ് കാണാൻ ഒരു പ്ലേലിസ്റ്റ് ചേർക്കുക.</string>
     <string name="content_epg_no_channels_query">“<xliff:g id="query">%1$s</xliff:g>” എന്നതിനായി പരിപാടികളുടെ ഗൈഡിലെ ചാനലുകളൊന്നും കണ്ടെത്തിയില്ല.</string>
-    <string name="content_epg_mismatched_ids">ഗൈഡ് ഡാറ്റ സംഭരിച്ചിട്ടുണ്ട്, എന്നാൽ അതിലെ ചാനൽ ഐഡികൾ നിങ്ങളുടെ ചാനലുകളുടെ EPG ഐഡികളുമായി പൊരുത്തപ്പെടുന്നില്ല — ഈ EPG ഫീഡ് മറ്റൊരു സേവനദാതാവിന്റെ ചാനൽ നിരയുടേതായിരിക്കാം.</string>
+    <string name="content_epg_mismatched_ids">ഗൈഡ് ഡാറ്റ സംഭരിച്ചിട്ടുണ്ട്, എന്നാൽ അതിലെ ചാനൽ ഐഡികൾ നിങ്ങളുടെ ചാനലുകളുടെ EPG ഐഡികളുമായി പൊരുത്തപ്പെടുന്നില്ല. “EPG സ്വയമേവ പൊരുത്തപ്പെടുത്തുക” ഉപയോഗിക്കുക, തുടർന്ന് ഇപ്പോഴും ഗൈഡ് ഇല്ലാത്ത ചാനലുകൾ അവയുടെ മെനുവിലെ “EPG പൊരുത്തപ്പെടുത്തുക” ഉപയോഗിച്ച് പൊരുത്തപ്പെടുത്തുക.</string>
     <string name="content_epg_catchup_unavailable">ഈ ചാനലിൽ ക്യാച്ച്-അപ്പ് ലഭ്യമല്ല.</string>
     <string name="content_epg_matched_no_programmes">പൊരുത്തപ്പെടുത്തി — എന്നാൽ ഈ ഗൈഡ് ചാനലിനായി നിലവിലെ പരിപാടികളൊന്നും EPG ഫീഡിൽ ഇതുവരെ ലഭ്യമല്ല.</string>
     <string name="content_epg_add_playlist_first">ആദ്യം ഒരു പ്ലേലിസ്റ്റ് ചേർക്കുക.</string>
@@ -379,4 +381,10 @@
     <string name="content_poster_size">പോസ്റ്റർ വലുപ്പം</string>
     <string name="content_vod_more_in"><xliff:g id="category">%1$s</xliff:g>-ൽ കൂടുതൽ</string>
     <string name="content_live_next_label">അടുത്തത് · <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_check_theintrodb">TheIntroDB പരിശോധിക്കുക</string>
+    <string name="theintrodb_check_found">TheIntroDB-ൽ ഇവയുടെ സമയം ഉണ്ട്: <xliff:g id="parts">%1$s</xliff:g></string>
+    <string name="theintrodb_check_none">TheIntroDB-ക്ക് ഈ ശീർഷകം അറിയാം, പക്ഷേ ഇതുവരെ സമയമില്ല.</string>
+    <string name="theintrodb_check_unlisted">TheIntroDB-ൽ ഈ ശീർഷകം ഇതുവരെ ഇല്ല.</string>
+    <string name="theintrodb_check_no_tmdb">ഈ ശീർഷകം TMDB-യുമായി പൊരുത്തപ്പെടുത്തിയിട്ടില്ല, അതിനാൽ TheIntroDB പരിശോധിക്കാനാവില്ല. “TMDB പേര് സജ്ജീകരിക്കുക” ഇത് ശരിയാക്കാം.</string>
+    <string name="theintrodb_check_tmdb_id">TMDB ID <xliff:g id="id">%1$d</xliff:g></string>
 </resources>

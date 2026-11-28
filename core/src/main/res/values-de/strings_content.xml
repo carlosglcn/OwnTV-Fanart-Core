@@ -49,6 +49,8 @@
     <string name="content_media_press_back">Zum Schließen Zurück drücken</string>
     <string name="content_add_favourite">Zu Favoriten hinzufügen</string>
     <string name="content_remove_favourite">Aus Favoriten entfernen</string>
+    <string name="content_favourite_added_named">Zu Favoriten hinzugefügt: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="content_favourite_removed_named">Aus Favoriten entfernt: <xliff:g id="title">%1$s</xliff:g></string>
     <string name="content_mark_watched">Als angesehen markieren</string>
     <string name="content_mark_unwatched">Als nicht angesehen markieren</string>
     <string name="content_move">Verschieben</string>
@@ -218,7 +220,7 @@
     <string name="content_epg_filter_hides_all">Der aktuelle Filter blendet alle Sender aus. Ändere die Sortierung, um das Programm zu sehen.</string>
     <string name="content_epg_add_playlist">Füge eine Wiedergabeliste hinzu, um die Programmübersicht anzuzeigen.</string>
     <string name="content_epg_no_channels_query">Keine Sender der Programmübersicht für „<xliff:g id="query">%1$s</xliff:g>“ gefunden.</string>
-    <string name="content_epg_mismatched_ids">EPG-Daten sind gespeichert, aber ihre Sender-IDs stimmen nicht mit den EPG-IDs deiner Sender überein — diese EPG-Daten stammen möglicherweise vom Senderangebot eines anderen Anbieters.</string>
+    <string name="content_epg_mismatched_ids">EPG-Daten sind gespeichert, aber ihre Sender-IDs stimmen nicht mit den EPG-IDs deiner Sender überein. Nutze „EPG automatisch zuordnen“ und ordne danach jeden Sender, der noch keine Programmdaten hat, über „EPG zuordnen“ in seinem Menü zu.</string>
     <string name="content_epg_catchup_unavailable">Catch-up ist für diesen Sender nicht verfügbar.</string>
     <string name="content_epg_matched_no_programmes">Zugeordnet — aber dieser EPG-Sender enthält derzeit noch keine Sendungen in den EPG-Daten.</string>
     <string name="content_epg_add_playlist_first">Füge zuerst eine Wiedergabeliste hinzu.</string>
@@ -379,4 +381,10 @@
     <string name="content_poster_size">Postergröße</string>
     <string name="content_vod_more_in">Mehr in <xliff:g id="category">%1$s</xliff:g></string>
     <string name="content_live_next_label">ALS NÄCHSTES · <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_check_theintrodb">TheIntroDB prüfen</string>
+    <string name="theintrodb_check_found">TheIntroDB hat Zeiten für: <xliff:g id="parts">%1$s</xliff:g></string>
+    <string name="theintrodb_check_none">TheIntroDB kennt diesen Titel, hat aber noch keine Zeiten dafür.</string>
+    <string name="theintrodb_check_unlisted">TheIntroDB führt diesen Titel noch nicht.</string>
+    <string name="theintrodb_check_no_tmdb">Dieser Titel ist nicht mit TMDB verknüpft, daher kann TheIntroDB nicht geprüft werden. „TMDB-Namen festlegen“ kann das beheben.</string>
+    <string name="theintrodb_check_tmdb_id">TMDB-ID <xliff:g id="id">%1$d</xliff:g></string>
 </resources>

@@ -52,6 +52,8 @@
     <string name="content_media_press_back">Prima Voltar para fechar</string>
     <string name="content_add_favourite">Adicionar aos favoritos</string>
     <string name="content_remove_favourite">Remover dos favoritos</string>
+    <string name="content_favourite_added_named">Adicionado aos favoritos: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="content_favourite_removed_named">Removido dos favoritos: <xliff:g id="title">%1$s</xliff:g></string>
     <string name="content_mark_watched">Marcar como visto</string>
     <string name="content_mark_unwatched">Marcar como não visto</string>
     <string name="content_move">Mover</string>
@@ -226,7 +228,7 @@
     <string name="content_epg_filter_hides_all">Todos os canais estão ocultos pelo filtro atual. Altere a ordenação para ver o guia.</string>
     <string name="content_epg_add_playlist">Adicione uma lista de reprodução para ver o guia de programação.</string>
     <string name="content_epg_no_channels_query">Não foram encontrados canais do guia para “<xliff:g id="query">%1$s</xliff:g>”.</string>
-    <string name="content_epg_mismatched_ids">Os dados do guia estão guardados, mas os respetivos IDs de canal não correspondem aos IDs de EPG dos seus canais — esta fonte de EPG poderá pertencer à grelha de outro fornecedor.</string>
+    <string name="content_epg_mismatched_ids">Os dados do guia estão guardados, mas os respetivos IDs de canal não correspondem aos IDs de EPG dos seus canais. Use “Associar EPG automaticamente” e, depois, associe cada canal que continue sem guia com “Associar EPG” no respetivo menu.</string>
     <string name="content_epg_catchup_unavailable">Os programas em diferido não estão disponíveis neste canal.</string>
     <string name="content_epg_matched_no_programmes">Associado — mas este canal do guia ainda não tem programas atuais na fonte de EPG.</string>
     <string name="content_epg_add_playlist_first">Adicione primeiro uma lista de reprodução.</string>
@@ -395,4 +397,10 @@
     <string name="content_poster_size">Tamanho dos cartazes</string>
     <string name="content_vod_more_in">Mais em <xliff:g id="category">%1$s</xliff:g></string>
     <string name="content_live_next_label">SEGUINTE · <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_check_theintrodb">Verificar TheIntroDB</string>
+    <string name="theintrodb_check_found">O TheIntroDB tem tempos para: <xliff:g id="parts">%1$s</xliff:g></string>
+    <string name="theintrodb_check_none">O TheIntroDB conhece este título, mas ainda não tem tempos.</string>
+    <string name="theintrodb_check_unlisted">O TheIntroDB ainda não inclui este título.</string>
+    <string name="theintrodb_check_no_tmdb">Este título não está associado ao TMDB, por isso o TheIntroDB não pode ser verificado. «Definir nome TMDB» pode corrigir isso.</string>
+    <string name="theintrodb_check_tmdb_id">ID TMDB <xliff:g id="id">%1$d</xliff:g></string>
 </resources>

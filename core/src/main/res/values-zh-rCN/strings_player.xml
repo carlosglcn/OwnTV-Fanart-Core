@@ -8,6 +8,7 @@
     <string name="player_zoom_original">原始尺寸（1:1）</string>
     <string name="player_zoom_force_16_9">强制 16:9</string>
     <string name="player_zoom_force_4_3">强制 4:3</string>
+    <string name="player_zoom_force_20_9">强制 20:9</string>
     <string name="player_mini_top_left">左上</string>
     <string name="player_mini_top_center">顶部居中</string>
     <string name="player_mini_top_right">右上</string>
@@ -318,4 +319,15 @@
     <string name="player_trailer_open_youtube">在 YouTube 中打开</string>
     <string name="player_lock_screen">锁定屏幕</string>
     <string name="player_hold_to_unlock">长按解锁</string>
+    <string name="player_skip_intro">跳过片头</string>
+    <string name="player_skip_recap">跳过前情提要</string>
+    <string name="player_skip_credits">跳过片尾</string>
+    <string name="player_skip_preview">跳过预告</string>
+    <string name="player_skipped_intro">已跳过片头</string>
+    <string name="player_skipped_recap">已跳过前情提要</string>
+    <string name="player_skipped_credits">已跳过片尾</string>
+    <string name="player_skipped_preview">已跳过预告</string>
+    <string name="player_watch_credits">观看片尾</string>
+    <string name="player_keep_credits">按任意键观看片尾</string>
+    <string name="player_keep_credits_mobile">点按观看片尾</string>
 </resources>

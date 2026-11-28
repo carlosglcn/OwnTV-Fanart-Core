@@ -52,6 +52,8 @@
     <string name="content_media_press_back">Presiona Atrás para cerrar</string>
     <string name="content_add_favourite">Agregar a Favoritos</string>
     <string name="content_remove_favourite">Eliminar de Favoritos</string>
+    <string name="content_favourite_added_named">Agregado a Favoritos: <xliff:g id="title">%1$s</xliff:g></string>
+    <string name="content_favourite_removed_named">Eliminado de Favoritos: <xliff:g id="title">%1$s</xliff:g></string>
     <string name="content_mark_watched">Marcar como visto</string>
     <string name="content_mark_unwatched">Marcar como no visto</string>
     <string name="content_move">Mover</string>
@@ -226,7 +228,7 @@
     <string name="content_epg_filter_hides_all">El filtro actual oculta todos los canales. Cambia el orden para ver la guía.</string>
     <string name="content_epg_add_playlist">Agrega una lista de reproducción para ver la guía.</string>
     <string name="content_epg_no_channels_query">No se encontraron canales de la guía para “<xliff:g id="query">%1$s</xliff:g>”.</string>
-    <string name="content_epg_mismatched_ids">Los datos de la guía están almacenados, pero sus ID de canal no coinciden con los ID de EPG de tus canales; es posible que esta fuente de EPG corresponda a la oferta de canales de otro proveedor.</string>
+    <string name="content_epg_mismatched_ids">Hay datos de la guía almacenados, pero sus ID de canal no coinciden con los ID de EPG de tus canales. Usa “Asociar EPG automáticamente” y luego asocia cada canal que siga sin guía con “Asociar EPG” en su menú.</string>
     <string name="content_epg_catchup_unavailable">La TV en diferido no está disponible para este canal.</string>
     <string name="content_epg_matched_no_programmes">Vinculado, pero este canal de la guía aún no tiene programas actuales en la fuente de EPG.</string>
     <string name="content_epg_add_playlist_first">Primero agrega una lista de reproducción.</string>
@@ -395,4 +397,10 @@
     <string name="content_poster_size">Tamaño de los pósteres</string>
     <string name="content_vod_more_in">Más en <xliff:g id="category">%1$s</xliff:g></string>
     <string name="content_live_next_label">SIGUIENTE · <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="content_check_theintrodb">Consultar TheIntroDB</string>
+    <string name="theintrodb_check_found">TheIntroDB tiene tiempos de: <xliff:g id="parts">%1$s</xliff:g></string>
+    <string name="theintrodb_check_none">TheIntroDB conoce este título pero todavía no tiene tiempos.</string>
+    <string name="theintrodb_check_unlisted">TheIntroDB todavía no incluye este título.</string>
+    <string name="theintrodb_check_no_tmdb">Este título no está asociado con TMDB, así que no se puede consultar TheIntroDB. “Definir nombre de TMDB” puede corregirlo.</string>
+    <string name="theintrodb_check_tmdb_id">ID de TMDB <xliff:g id="id">%1$d</xliff:g></string>
 </resources>

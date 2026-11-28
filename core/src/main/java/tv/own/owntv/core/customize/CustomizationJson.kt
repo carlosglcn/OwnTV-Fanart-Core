@@ -45,6 +45,20 @@ internal object CustomizationJson {
         )
     }.toString()
 
+    /**
+     * [incoming] to be written over [existing], with every category lock [existing] holds kept. A
+     * restore's Merge or a local sync writes whole section blobs, so a file or a device with no locks
+     * would otherwise unlock a parent's category without a word. Only an unlock with the PIN removes
+     * one; a lock the incoming side holds is added.
+     */
+    fun keepingLocks(existing: String?, incoming: String): String {
+        val held = parse(existing).lockedCategories
+        if (held.isEmpty()) return incoming
+        val next = parse(incoming)
+        if (next.lockedCategories.containsAll(held)) return incoming
+        return serialize(next.copy(lockedCategories = next.lockedCategories + held))
+    }
+
     private fun JSONArray?.toStringList(): List<String> =
         if (this == null) emptyList() else (0 until length()).map { getString(it) }
 
